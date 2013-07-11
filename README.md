@@ -29,7 +29,7 @@ Setup
 -------------
 To setup your project, follow these steps:
 
- 1. In you project, open the "Package Manager Console" (Tools -> Library Package Manager -> Package Manager Console)
+ 1. In you project, open the "Package Manager Console" (Tools → Library Package Manager → Package Manager Console)
  2. enter `Install-Package Algolia.Search` in the Package Manager Console
  2. Initialize the client with your ApplicationID, API-Key and list of hostnames (you can find all of them on your Algolia account)
 
