@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Algolia</authors>
+    <owners>Algolia</owners>
+    <licenseUrl>https://github.com/algolia/algoliasearch-client-csharp/blob/master/LICENSE.TXT</licenseUrl>
+    <projectUrl>https://github.com/algolia/algoliasearch-client-csharp</projectUrl>
+    <iconUrl>http://www.algolia.com/download/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Algolia Search API Client for C#</description>
+    <releaseNotes>First public release of C# API client for Algolia Search service.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>Search Engine Service Instant Typo-Tolerance Realtime</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\Algolia.Search.xml" target="lib\portable-win+net45+sl40+wp71" />
+  </files>
+</package>

@@ -1,7 +1,7 @@
 Algolia Search API Client for C#
 ==================
 
-This C# client let you easily use the Algolia Search API from your App.
+This C# client let you easily use the Algolia Search API from your App (Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store).
 The service is currently in Beta, you can request an invite on our [website](http://www.algolia.com/pricing/).
 
 Table of Content
@@ -29,7 +29,8 @@ Setup
 -------------
 To setup your project, follow these steps:
 
- 1. Add the algoliasearch-client-charp to your project
+ 1. In you project, open the "Package Manager Console" (Tools -> Library Package Manager -> Package Manager Console)
+ 2. enter `Install-Package Algolia.Search` in the Package Manager Console
  2. Initialize the client with your ApplicationID, API-Key and list of hostnames (you can find all of them on your Algolia account)
 
 ```csharp
