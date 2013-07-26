@@ -233,7 +233,9 @@ namespace Algolia.Search
         ///     We have four available criteria: 
         ///       - typo (sort according to number of typos), 
         ///       - geo: (sort according to decreassing distance when performing a geo-location based search),
-        ///       - position (sort according to the matching attribute), 
+        ///       - proximity: sort according to the proximity of query words in hits, 
+        ///       - attribute: sort according to the order of attributes defined by **attributesToIndex**,
+        ///       - exact: sort according to the number of words that are matched identical to query word (and not as a prefix),
         ///       - custom which is user defined
         ///     (the standard order is ["typo", "geo", position", "custom"])
         ///  - queryType: select how the query words are interpreted:

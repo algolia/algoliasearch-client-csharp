@@ -237,8 +237,9 @@ You can retrieve all settings using the `GetSettings` function. The result will 
   * **geo**: sort according to decreasing distance when performing a geo-location based search,
   * **proximity**: sort according to the proximity of query words in hits, 
   * **attribute**: sort according to the order of attributes defined by **attributesToIndex**,
+  * **exact**: sort according to the number of words that are matched identical to query word (and not as a prefix),
   * **custom**: sort according to a user defined formula set in **customRanking** attribute.
-  <br/>The default order is `["typo", "geo", "proximity", "attribute", "custom"]`. We strongly recommend to keep this configuration.
+  <br/>The default order is `["typo", "geo", "proximity", "attribute", "exact", "custom"]`. We strongly recommend to keep this configuration.
  * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
  For example `"customRanking" => ["desc(population)", "asc(name)"]`
  * **queryType**: select how the query words are interpreted:
