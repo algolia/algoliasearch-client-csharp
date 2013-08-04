@@ -52,6 +52,33 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="applicationId">the application ID you have in your admin interface</param>
         /// <param name="apiKey">a valid API key for the service</param>
+        public AlgoliaClient(string applicationId, string apiKey)
+        {
+            if (string.IsNullOrWhiteSpace(applicationId))
+                throw new ArgumentOutOfRangeException("applicationId", "An application Id is requred.");
+
+            if (string.IsNullOrWhiteSpace(apiKey))
+                throw new ArgumentOutOfRangeException("apiKey", "An API key is required.");
+
+            IEnumerable<string> allHosts = new string[] {applicationId + "-1.algolia.io",
+                                                         applicationId + "-2.algolia.io",
+                                                         applicationId + "-3.algolia.io"};
+            _applicationId = applicationId;
+            _apiKey = apiKey;
+
+            // randomize elements of hostsArray (act as a kind of load-balancer)
+            _hosts = allHosts.OrderBy(s => Guid.NewGuid());
+
+            HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
+            HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
+            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
+        /// <summary>
+        ///Algolia Search initialization
+        /// </summary>
+        /// <param name="applicationId">the application ID you have in your admin interface</param>
+        /// <param name="apiKey">a valid API key for the service</param>
         /// <param name="hosts">the list of hosts that you have received for the service</param>
         public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts)
         {

@@ -31,15 +31,12 @@ To setup your project, follow these steps:
 
  1. In you project, open the "Package Manager Console" (Tools → Library Package Manager → Package Manager Console)
  2. Enter `Install-Package Algolia.Search` in the Package Manager Console
- 2. Initialize the client with your ApplicationID, API-Key and list of hostnames (you can find all of them on your Algolia account)
+ 2. Initialize the client with your ApplicationID and API-Key (you can find all of them on your Algolia account)
 
 ```csharp
 using Algolia.Search;
 
-AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey", 
-                                         new string[] { "YouHostName-1.algolia.io",
-                                                        "YouHostName-2.algolia.io",
-                                                        "YouHostName-3.algolia.io"});
+AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey");
 ```
 
 
