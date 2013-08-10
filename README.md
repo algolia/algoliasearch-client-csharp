@@ -44,35 +44,43 @@ Quick Start
 -------------
 This quick start is a 30 seconds tutorial where you can discover how to index and search objects.
 
-Without any prior-configuration, you can index the 1000 world's biggest cities in the ```cities``` index with the following code:
+Without any prior-configuration, you can index [500 contacts](https://github.com/algolia/algoliasearch-client-csharp/blob/master/contacts.json) in the ```contacts``` index with the following code:
 ```csharp
 // Load JSON file
-StreamReader re = File.OpenText("1000-cities.json");
+StreamReader re = File.OpenText("contacts.json");
 JsonTextReader reader = new JsonTextReader(re);
-JObject jsonObject = JObject.Load(reader);
+JArray batch = JArray.Load(reader);
 // Add objects 
-Index index = client.InitIndex("cities");
-await index.AddObjects((JArray)jsonObject["objects"]);
-```
-The [1000-cities.json](https://github.com/algolia/algoliasearch-client-csharp/blob/master/1000-cities.json) file contains city names extracted from [Geonames](http://www.geonames.org).
-
-You can then start to search for a city name (even with typos):
-```csharp
-JObject res = await index.Search(new Query("san fran"));
-System.Diagnostics.Debug.WriteLine(res["hits"]);
-res = await index.Search(new Query("loz qngel"));
-System.Diagnostics.Debug.WriteLine(res["hits"]);
+Index index = client.InitIndex("contacts");
+await index.AddObjects(batch);
 ```
 
-Settings can be customized to tune the index behavior. For example you can add a custom sort by population to the already good out-of-the-box relevance to raise bigger cities above smaller ones. To update the settings, use the following code:
+You can then start to search for a contact firstname, lastname, company, ... (even with typos):
 ```csharp
-await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(population)"", ""asc(name)""]}"));
+// search by firstname
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimmie")));
+// search a firstname with typo
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimie")));
+// search for a company
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("california paint")));
+// search for a firstname & company
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimmie paint")));
 ```
 
-And then search for all cities that start with an "s":
+Settings can be customized to tune the search behavior. For example you can add a custom sort by number of followers to the already good out-of-the-box relevance:
 ```csharp
-var res = await index.Search(new Query("s"));
-System.Diagnostics.Debug.WriteLine(res["hits"]);
+await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+```
+You can also configure the list of attributes you want to index by order of importance (first = most important):
+```csharp
+await index.SetSettings(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstname"",
+                                                                ""company"", ""email"", ""city""]}"));
+```
+
+Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
+```csharp
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("or")));
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jim")));
 ```
 
 Search
@@ -100,11 +108,11 @@ You can use the following optional arguments on Query class:
 
 
 ```csharp
-Index index = client.InitIndex("MyIndexName");
+Index index = client.InitIndex("contacts");
 res = await index.Search(new Query("query string"));
 System.Diagnostics.Debug.WriteLine(res);
 res = await index.Search(new Query("query string").
-    SetAttributesToRetrieve(new string[] {"population"}).
+    SetAttributesToRetrieve(new string[] {"firstname","lastname"}).
     SetNbHitsPerPage(50));
 System.Diagnostics.Debug.WriteLine(res);
 ```
@@ -113,29 +121,57 @@ The server response will look like:
 
 ```javascript
 {
-    "hits":[
-            { "name": "Betty Jane Mccamey",
-              "company": "Vita Foods Inc.",
-              "email": "betty@mccamey.com",
-              "objectID": "6891Y2usk0",
-              "_highlightResult": {"name": {"value": "Betty <em>Jan</em>e Mccamey", "matchLevel": "full"}, 
-                                   "company": {"value": "Vita Foods Inc.", "matchLevel": "none"},
-                                   "email": {"value": "betty@mccamey.com", "matchLevel": "none"} }
-            },
-            { "name": "Gayla Geimer Dan", 
-              "company": "Ortman Mccain Co", 
-              "email": "gayla@geimer.com", 
-              "objectID": "ap78784310" 
-              "_highlightResult": {"name": {"value": "Gayla Geimer <em>Dan</em>", "matchLevel": "full" },
-                                   "company": {"value": "Ortman Mccain Co", "matchLevel": "none" },
-                                   "email": {"highlighted": "gayla@geimer.com", "matchLevel": "none" } }
-            }],
-    "page":0,
-    "nbHits":2,
-    "nbPages":1,
-    "hitsPerPage:":20,
-    "processingTimeMS":1,
-    "query":"jan"
+  "hits": [
+    {
+      "firstname": "Jimmie",
+      "lastname": "Barninger",
+      "company": "California Paint & Wlpaper Str",
+      "address": "Box #-4038",
+      "city": "Modesto",
+      "county": "Stanislaus",
+      "state": "CA",
+      "zip": "95352",
+      "phone": "209-525-7568",
+      "fax": "209-525-4389",
+      "email": "jimmie@barninger.com",
+      "web": "http://www.jimmiebarninger.com",
+      "followers": 3947,
+      "objectID": "433",
+      "_highlightResult": {
+        "firstname": {
+          "value": "<em>Jimmie</em>",
+          "matchLevel": "partial"
+        },
+        "lastname": {
+          "value": "Barninger",
+          "matchLevel": "none"
+        },
+        "company": {
+          "value": "California <em>Paint</em> & Wlpaper Str",
+          "matchLevel": "partial"
+        },
+        "address": {
+          "value": "Box #-4038",
+          "matchLevel": "none"
+        },
+        "city": {
+          "value": "Modesto",
+          "matchLevel": "none"
+        },
+        "email": {
+          "value": "<em>jimmie</em>@barninger.com",
+          "matchLevel": "partial"
+        }
+      }
+    }
+  ],
+  "page": 0,
+  "nbHits": 1,
+  "nbPages": 1,
+  "hitsPerPage": 20,
+  "processingTimeMS": 1,
+  "query": "jimmie paint",
+  "params": "query=jimmie+paint&"
 }
 ```
 
@@ -153,16 +189,16 @@ Objects are schema less, you don't need any configuration to start indexing. The
 Example with automatic `objectID` assignement:
 
 ```csharp
-var res = await index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", 
-                                                 ""population"":805235}"));
+var res = await index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                                 ""lastname"":""Barninger""}"));
 System.Diagnostics.Debug.WriteLine("objectID=" + res["objectID"]);           
 ```
 
 Example with manual `objectID` assignement:
 
 ```charp
-var res = await index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", 
-                                                 ""population"":805235}"), "myID");
+var res = await index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                                 ""lastname"":""Barninger""}"), "myID");
 System.Diagnostics.Debug.WriteLine("objectID=" + res["objectID"]);
 ```
 
@@ -177,15 +213,16 @@ You have two options to update an existing object:
 Example to replace all the content of an existing object:
 
 ```csharp
-await index.SaveObject(JObject.Parse(@"{""name"":""Los Angeles"", 
-                                        ""population"":3792621, 
+await index.SaveObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                        ""lastname"":""Barninger"", 
+                                        ""city"":""New York"",
                                         ""objectID"":""myID""}"));
 ```
 
-Example to update only the population attribute of an existing object:
+Example to update only the city attribute of an existing object:
 
 ```csharp
-await index.PartialUpdateObject(JObject.Parse(@"{""population"":3792621, 
+await index.PartialUpdateObject(JObject.Parse(@"{""city"":""San Francisco"", 
                                                  ""objectID"":""myID""}"));
 ```
 
@@ -198,11 +235,11 @@ You can easily retrieve an object using its `objectID` and optionnaly a list of 
 // Retrieves all attributes
 var res = await index.GetObject("myID");
 System.Diagnostics.Debug.WriteLine(res);
-// Retrieves name and population attributes
-res = await index.GetObject("myID", new String[] {"name", "population"});
+// Retrieves firstname and lastname attributes
+res = await index.GetObject("myID", new String[] {"firstname", "lastname"});
 System.Diagnostics.Debug.WriteLine(res);
-// Retrieves only the name attribute
-res = await index.GetObject("myID", new String[] { "name" });
+// Retrieves only the firstname attribute
+res = await index.GetObject("myID", new String[] { "firstname" });
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
@@ -252,7 +289,7 @@ System.Diagnostics.Debug.WriteLine(res);
 ```
 
 ```csharp
-await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(population)"", ""asc(name)""]}"));
+await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```
 
 List indexes
@@ -269,7 +306,7 @@ Delete an index
 You can delete an index using its name:
 
 ```php
-await client.DeleteIndex("cities");
+await client.DeleteIndex("contacts");
 ```
 
 Wait indexing
@@ -279,8 +316,8 @@ All write operations return a `taskID` when the job is securely stored on our in
 
 For example, to wait for indexing of a new object:
 ```csharp
-var res = await index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", 
-                                                 ""population"":805235}"), "myID");
+var res = await index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                                 ""lastname"":""Barninger""}"), "myID");
 await index.WaitTask(res["taskID"].ToString());
 ```
 
@@ -297,10 +334,10 @@ We expose two methods to perform batch:
 Example using automatic `objectID` assignement:
 ```csharp
 List<JObject> objs = new List<JObject>();
-objs.Add(JObject.Parse(@"{""name"":""San Francisco"", 
-                          ""population"":805235}"));
-objs.Add(JObject.Parse(@"{""name"":""Los Angeles"", 
-                          ""population"":3792621}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
+                          ""lastname"":""Speach""}"));
 var res = await index.AddObjects(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```
@@ -308,12 +345,12 @@ System.Diagnostics.Debug.WriteLine(res);
 Example with user defined `objectID` (add or update):
 ```csharp
 List<JObject> objs = new List<JObject>();
-objs.Add(JObject.Parse(@"{""name"":""San Francisco"", 
-                          ""population"": 805235,
-                          ""objectID"":""SFO""}"));
-objs.Add(JObject.Parse(@"{""name"":""Los Angeles"", 
-                          ""population"": 3792621,
-                          ""objectID"": ""LA""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger"",
+                          ""objectID"":""myID1""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
+                          ""lastname"":""Speach"",
+                          ""objectID"": ""myID2""}"));
 var res = await index.SaveObjects(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```
