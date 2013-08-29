@@ -31,7 +31,7 @@ To setup your project, follow these steps:
 
  1. In you project, open the "Package Manager Console" (Tools → Library Package Manager → Package Manager Console)
  2. Enter `Install-Package Algolia.Search` in the Package Manager Console
- 2. Initialize the client with your ApplicationID and API-Key (you can find all of them on your Algolia account)
+ 3. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
 
 ```csharp
 using Algolia.Search;
