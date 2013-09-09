@@ -166,6 +166,8 @@ namespace Algolia.Search
         /// <returns>return an object containing a "deletedAt" attribute.</returns>
         public Task<JObject> DeleteObject(string objectID)
         {
+            if (string.IsNullOrWhiteSpace(objectID))
+                throw new ArgumentOutOfRangeException("objectID", "objectID is required.");
             return _client.ExecuteRequest("DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)));
         }
 
