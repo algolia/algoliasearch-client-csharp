@@ -126,6 +126,48 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Move an existing index.
+        /// </summary>
+        /// <param name="srcIndexName"> the name of index to copy.</param>
+        /// <param name="dstIndexName"> the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).</param>
+        public Task<JObject> MoveIndex(string srcIndexName, string dstIndexName)
+        {
+            Dictionary<string, object> operation = new Dictionary<string, object>();
+            operation["operation"] = "move";
+            operation["destination"] = dstIndexName;
+            return ExecuteRequest("POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation);
+        }
+    
+        /// <summary>
+        /// Copy an existing index.
+        /// </summary>
+        /// <param name="srcIndexName"> the name of index to copy.</param>
+        /// <param name="dstIndexName"> the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).</param>
+        public Task<JObject> CopyIndex(string srcIndexName, string dstIndexName)
+        {
+            Dictionary<string, object> operation = new Dictionary<string, object>();
+            operation["operation"] = "copy";
+            operation["destination"] = dstIndexName;
+            return ExecuteRequest("POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation); 	
+        }
+    
+        /// <summary>
+        /// Return 10 last log entries.
+        /// </summary>
+        public Task<JObject> GetLogs() {
+    	    return ExecuteRequest("GET", "/1/logs");
+        }
+
+        /// <summary>
+        /// Return last logs entries.
+        /// </summary>
+        /// <param name="offset"> Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
+        /// <param name="length"> Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
+        public Task<JObject> GetLogs(int offset, int length) {
+    	    return ExecuteRequest("GET", String.Format("/1/logs?offset={0}&length={1}", offset, length));
+        }
+
+        /// <summary>
         /// Get the index object initialized (no server call needed for initialization).
         /// </summary>
         /// <param name="indexName">the name of index</param>

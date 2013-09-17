@@ -196,6 +196,18 @@ namespace Algolia.Search
             return this;
         }
 
+        /// <summary>
+        /// Add a list of numeric filters separated by a comma.
+        /// The syntax of one filter is `attributeName` followed by `operand` and `value`.
+        /// Suported operand are <, <=, =, > and >=
+        /// You can have multiple conditions on one attribute like for example "numerics=price>100,price<1000"
+        /// </summary>
+        public Query SetNumerics(string value)
+        {
+            this.numerics = value;
+            return this;
+        }
+
         public string GetQueryString() {
             string stringBuilder = "";
         
@@ -268,6 +280,12 @@ namespace Algolia.Search
                 stringBuilder += "tags=";
                 stringBuilder += Uri.EscapeDataString(tags);
             }
+            if (numerics != null) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "numerics=";
+                stringBuilder += Uri.EscapeDataString(numerics);
+            }
             if (insideBoundingBox != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -310,6 +328,7 @@ namespace Algolia.Search
         private int page;
         private int hitsPerPage;
         private string tags;
+        private string numerics;
         private string insideBoundingBox;
         private string aroundLatLong;
         private string query;
