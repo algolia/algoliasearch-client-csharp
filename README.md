@@ -428,9 +428,9 @@ The move command is particulary usefull is you want to update a big index atomic
 
 ```java
 // Rename MyNewIndex in MyIndex
-client.MoveIndex("MyNewIndex", "MyIndex");
+await client.MoveIndex("MyNewIndex", "MyIndex");
 // Copy MyNewIndex in MyIndex
-client.CopyIndex("MyNewIndex", "MyIndex");
+await client.CopyIndex("MyNewIndex", "MyIndex");
 ```
 
 Logs
@@ -453,7 +453,7 @@ You can retrieve log of your last 1000 API calls and you can navigate into them 
 
 ```java
 // Get last 10 log entries
-client.GetLogs();
+await client.GetLogs();
 // Get last 100 log entries
-client.GetLogs(0, 100);
+await client.GetLogs(0, 100);
 ```
