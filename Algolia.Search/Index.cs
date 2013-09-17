@@ -223,7 +223,7 @@ namespace Algolia.Search
         ///  - attributesToSnippet: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords').
         ///    By default no snippet is computed.
         ///  - attributesToIndex: (array of strings) the list of fields you want to index. 
-        ///    By default all textual attributes of your objects are indexed, but you should update it to get optimal 
+        ///    By default all textual and numerical attributes of your objects are indexed, but you should update it to get optimal 
         ///    results. This parameter has two important uses:
         ///       - Limit the attributes to index. 
         ///         For example if you store a binary image in base64, you want to store it in the index but you 
