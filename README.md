@@ -426,7 +426,7 @@ The move command is particulary usefull is you want to update a big index atomic
  1. Import your database in a new index using [batches](#batch-writes). We will call this new index `MyNewIndex`
  1. Rename `MyNewIndex` in `MyIndex` using the move command. This will automatically override the old index and new queries will be served on this index.
 
-```java
+```csharp
 // Rename MyNewIndex in MyIndex
 await client.MoveIndex("MyNewIndex", "MyIndex");
 // Copy MyNewIndex in MyIndex
@@ -451,7 +451,7 @@ You can retrieve log of your last 1000 API calls and you can navigate into them 
  * ***offset***: Specify the first entry to retrieve (0-based, 0 is the most recent log entry). Default to 0.
  * ***length***: Specify the maximum number of entries to retrieve starting at offset. Default to 10. Maximum allowed value: 1000.
 
-```java
+```csharp
 // Get last 10 log entries
 await client.GetLogs();
 // Get last 100 log entries
