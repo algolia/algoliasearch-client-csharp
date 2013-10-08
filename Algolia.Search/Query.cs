@@ -248,13 +248,13 @@ namespace Algolia.Search
             if (minWordSizeForApprox1 != 3) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "minWordSizeForApprox1=";
+                stringBuilder += "minWordSizefor1Typo=";
                 stringBuilder += minWordSizeForApprox1.ToString();
             }
             if (minWordSizeForApprox2 != 7) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "minWordSizeForApprox2=";
+                stringBuilder += "minWordSizefor2Typos=";
                 stringBuilder += minWordSizeForApprox2.ToString();
             }
             if (getRankingInfo) {

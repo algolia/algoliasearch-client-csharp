@@ -215,8 +215,8 @@ namespace Algolia.Search
         /// Set settings for this index.
         /// </summary>
         /// <param name="settings">the settings object that can contains :
-        ///  - minWordSizeForApprox1 (integer) the minimum number of characters to accept one typo (default = 3)
-        ///  - minWordSizeForApprox2: (integer) the minimum number of characters to accept two typos (default = 7)
+        ///  - minWordSizefor1Typo (integer) the minimum number of characters to accept one typo (default = 3)
+        ///  - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default = 7)
         ///  - hitsPerPage: (integer) the number of hits per page (default = 10)
         ///  - attributesToRetrieve: (array of strings) default list of attributes to retrieve for objects
         ///  - attributesToHighlight: (array of strings) default list of attributes to highlight.
