@@ -32,11 +32,11 @@ namespace Algolia.Search
         public enum QueryType
         {
             /// <summary>
-            /// All query words are interpreted as prefixes (default behavior).
+            /// All query words are interpreted as prefixes.
             /// </summary>
             PREFIX_ALL,
             /// <summary>
-            /// Only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
+            /// Only the last word is interpreted as a prefix (default behavior).
             /// </summary>
             PREFIX_LAST,
             /// <summary>
@@ -53,7 +53,7 @@ namespace Algolia.Search
             page = 0;
             hitsPerPage = 20;
             this.query = query;
-            queryType = QueryType.PREFIX_ALL;
+            queryType = QueryType.PREFIX_LAST;
         }
 
         public Query()
@@ -63,7 +63,7 @@ namespace Algolia.Search
             getRankingInfo = false;
             page = 0;
             hitsPerPage = 20;
-            queryType = QueryType.PREFIX_ALL;
+            queryType = QueryType.PREFIX_LAST;
         }
 
         /// <summary>
@@ -303,12 +303,11 @@ namespace Algolia.Search
             }
             switch (queryType) {
             case QueryType.PREFIX_ALL:
-            	break;
-            case QueryType.PREFIX_LAST:
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "queryType=prefixLast";
-
+                stringBuilder += "queryType=prefixAll";
+            	break;
+            case QueryType.PREFIX_LAST:
             	break;
             case QueryType.PREFIX_NONE:
                 if (stringBuilder.Length > 0)

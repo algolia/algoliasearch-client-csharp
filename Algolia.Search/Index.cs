@@ -231,6 +231,9 @@ namespace Algolia.Search
         ///       - Control part of the ranking (see the ranking parameter for full explanation). 
         ///         Matches in attributes at the beginning of the list will be considered more important than matches 
         ///         in attributes further down the list.
+        ///         In one attribute, matching text at the beginning of the attribute will be considered more important than text after, 
+        ///         you can disable this behavior if you add your attribute inside `unordered(AttributeName)`, for example 
+        ///          `attributesToIndex:["title", "unordered(text)"]`.
         ///  - ranking: (array of strings) controls the way results are sorted. 
         ///     We have four available criteria: 
         ///       - typo (sort according to number of typos), 
@@ -241,8 +244,8 @@ namespace Algolia.Search
         ///       - custom which is user defined
         ///     (the standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"])
         ///  - queryType: select how the query words are interpreted:
-        ///       - prefixAll: all query words are interpreted as prefixes (default behavior).
-        ///       - prefixLast: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
+        ///       - prefixAll: all query words are interpreted as prefixes.
+        ///       - prefixLast: only the last word is interpreted as a prefix (default behavior).
         ///       - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
         ///  - customRanking: (array of strings) lets you specify part of the ranking. 
         ///    The syntax of this condition is an array of strings containing attributes prefixed 
