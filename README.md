@@ -100,7 +100,9 @@ You can use the following optional arguments on Query class:
  * **GetRankingInfo**: if set, the result hits will contain ranking information in _rankingInfo attribute.
  * **SetPage**: *(pagination parameter)* page to retrieve (zero base).<br/>Defaults to 0.
  * **SetNbHitsPerPage**: *(pagination parameter)* number of hits per page.<br/>Defaults to 10.
- * **AroundLatitudeLongitude**: search for entries around a given latitude/longitude.<br/>You specify the maximum distance in meters with the **radius** parameter (in meters).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+ * **AroundLatitudeLongitude(float, float, int)**: search for entries around a given latitude/longitude.<br/>You specify the maximum distance in meters with the **radius** parameter (in meters).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+  * **AroundLatitudeLongitude(flot, float, int, int)**: search for entries around a given latitude/longitude with a given precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
+
  * **InsideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle.<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
  * **SetQueryType**: select how the query words are interpreted:
   * **PREFIX_ALL**: all query words are interpreted as prefixes,
