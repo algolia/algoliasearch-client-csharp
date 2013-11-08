@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
+    <version>1.4.0.0</version>
+    <title>Algolia Search API Client for C#</title>
     <authors>Algolia</authors>
     <owners>Algolia</owners>
     <licenseUrl>https://github.com/algolia/algoliasearch-client-csharp/blob/master/LICENSE.TXT</licenseUrl>

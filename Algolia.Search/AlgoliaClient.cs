@@ -215,12 +215,16 @@ namespace Algolia.Search
         ///   - settings : allows to get index settings (https only)
         ///   - editSettings : allows to change index settings (https only)</param>
         /// <param name="validity">the number of seconds after which the key will be automatically removed (0 means no time limit for this key)</param>
+        /// <param name="maxQueriesPerIPPerHour"> Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).</param>
+        /// <param name="maxHitsPerQuery"> Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited) </param>
         /// <returns>Return an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> AddUserKey(IEnumerable<string> acls, int validity = 0)
+        public Task<JObject> AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
         {
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
             content["validity"] = validity;
+            content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
+            content["maxHitsPerQuery"] = maxHitsPerQuery;
             return ExecuteRequest("POST", "/1/keys", content);
         }
 

@@ -203,7 +203,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="tags"></param>
         /// <returns></returns>
-        public Query SetTags(string tags)
+        public Query SetTagsFilter(string tags)
         {
             this.tags = tags;
             return this;
@@ -215,10 +215,38 @@ namespace Algolia.Search
         /// Suported operand are <, <=, =, > and >=
         /// You can have multiple conditions on one attribute like for example "numerics=price>100,price<1000"
         /// </summary>
-        public Query SetNumerics(string value)
+        public Query SetNumericsFilter(string value)
         {
             this.numerics = value;
             return this;
+        }
+
+        /**
+         * Set the list of words that should be considered as optional when found in the query. 
+         * @param words The list of optional words, comma separated.
+         */
+        public Query SetOptionalWords(string words)
+        {
+            this.optionalWords = words;
+            return this;
+        }
+
+        /**
+         * Filter the query by a list of facets. Each facet is encoded as `attributeName:value`. For example: `["category:Book","author:John%20Doe"].
+         */
+        public Query SetFacetsFilter(IEnumerable<string> facets) {
+    	    this.facetsFilter = facets;
+    	    return this;
+        }
+
+        /**
+         * List of object attributes that you want to use for faceting. <br/>
+         * Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. 
+         * You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
+         */
+        public Query SetFacets(IEnumerable<string> facets) {
+    	    this.facets = facets;
+    	    return this;
         }
 
         public string GetQueryString() {
@@ -252,6 +280,41 @@ namespace Algolia.Search
                 stringBuilder += "attributesToSnippet=";
                 bool first = true;
                 foreach (string attr in this.attributesToSnippet) {
+                    if (!first)
+                        stringBuilder += ',';
+                    stringBuilder += Uri.EscapeDataString(attr);
+                    first = false;
+                }
+            }
+            if (facets != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "facets=";
+                bool first = true;
+                foreach (string attr in this.facets)
+                {
+                    if (!first)
+                        stringBuilder += ',';
+                    stringBuilder += Uri.EscapeDataString(attr);
+                    first = false;
+                }
+            }
+            if (facetsFilter != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "facetsFilter=";
+                stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(facetsFilter);
+            }
+            if (attributesToSnippet != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "attributesToSnippet=";
+                bool first = true;
+                foreach (string attr in this.attributesToSnippet)
+                {
                     if (!first)
                         stringBuilder += ',';
                     stringBuilder += Uri.EscapeDataString(attr);
@@ -314,6 +377,14 @@ namespace Algolia.Search
                 stringBuilder += "query=";
                 stringBuilder += Uri.EscapeDataString(query);
             }
+            if (optionalWords != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "optionalWords=";
+                stringBuilder += Uri.EscapeDataString(optionalWords);
+            }
+
             switch (queryType) {
             case QueryType.PREFIX_ALL:
                 if (stringBuilder.Length > 0)
@@ -344,6 +415,9 @@ namespace Algolia.Search
         private string insideBoundingBox;
         private string aroundLatLong;
         private string query;
+        private string optionalWords;
         private QueryType queryType;
+        private IEnumerable<string> facets;
+        private IEnumerable<string> facetsFilter;
     }
 }

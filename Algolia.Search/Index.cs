@@ -212,44 +212,58 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Delete the index content without removing settings and index specific API keys.
+        /// </summary>
+        public Task<JObject> ClearIndex()
+        {
+            Dictionary<string, object> obj = new Dictionary<string, object>();
+            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/clear", _urlIndexName, obj));
+        }
+
+        /// <summary>
         /// Set settings for this index.
         /// </summary>
         /// <param name="settings">the settings object that can contains :
-        ///  - minWordSizefor1Typo (integer) the minimum number of characters to accept one typo (default = 3)
-        ///  - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default = 7)
-        ///  - hitsPerPage: (integer) the number of hits per page (default = 10)
-        ///  - attributesToRetrieve: (array of strings) default list of attributes to retrieve for objects
-        ///  - attributesToHighlight: (array of strings) default list of attributes to highlight.
-        ///  - attributesToSnippet: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords').
-        ///    By default no snippet is computed.
-        ///  - attributesToIndex: (array of strings) the list of fields you want to index. 
-        ///    By default all textual and numerical attributes of your objects are indexed, but you should update it to get optimal 
-        ///    results. This parameter has two important uses:
-        ///       - Limit the attributes to index. 
-        ///         For example if you store a binary image in base64, you want to store it in the index but you 
-        ///         don't want to use the base64 string for search.
-        ///       - Control part of the ranking (see the ranking parameter for full explanation). 
-        ///         Matches in attributes at the beginning of the list will be considered more important than matches 
-        ///         in attributes further down the list.
-        ///         In one attribute, matching text at the beginning of the attribute will be considered more important than text after, 
-        ///         you can disable this behavior if you add your attribute inside `unordered(AttributeName)`, for example 
-        ///          `attributesToIndex:["title", "unordered(text)"]`.
-        ///  - ranking: (array of strings) controls the way results are sorted. 
-        ///     We have four available criteria: 
-        ///       - typo (sort according to number of typos), 
-        ///       - geo: (sort according to decreassing distance when performing a geo-location based search),
-        ///       - proximity: sort according to the proximity of query words in hits, 
-        ///       - attribute: sort according to the order of attributes defined by **attributesToIndex**,
-        ///       - exact: sort according to the number of words that are matched identical to query word (and not as a prefix),
-        ///       - custom which is user defined
-        ///     (the standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"])
-        ///  - queryType: select how the query words are interpreted:
-        ///       - prefixAll: all query words are interpreted as prefixes.
-        ///       - prefixLast: only the last word is interpreted as a prefix (default behavior).
-        ///       - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
-        ///  - customRanking: (array of strings) lets you specify part of the ranking. 
-        ///    The syntax of this condition is an array of strings containing attributes prefixed 
-        ///    by asc (ascending order) or desc (descending order) operator.</param>
+        ///  - minWordSizefor1Typo: (integer) the minimum number of characters to accept one typo (default = 3).
+        ///  - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default = 7).
+        ///  - hitsPerPage: (integer) the number of hits per page (default = 10).
+        ///  - attributesToRetrieve: (array of strings) default list of attributes to retrieve in objects. 
+        ///    If set to null, all attributes are retrieved.
+        ///  - attributesToHighlight: (array of strings) default list of attributes to highlight. 
+        ///    If set to null, all indexed attributes are highlighted.
+        ///  - attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is attributeName:nbWords).
+        ///    By default no snippet is computed. If set to null, no snippet is computed.
+        ///  - attributesToIndex: (array of strings) the list of fields you want to index.
+        ///    If set to null, all textual and numerical attributes of your objects are indexed, but you should update it to get optimal results.
+        ///    This parameter has two important uses:
+        ///      - Limit the attributes to index: For example if you store a binary image in base64, you want to store it and be able to 
+        ///        retrieve it but you don't want to search in the base64 string.
+        ///      - Control part of the ranking*: (see the ranking parameter for full explanation) Matches in attributes at the beginning of 
+        ///        the list will be considered more important than matches in attributes further down the list. 
+        ///        In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable 
+        ///        this behavior if you add your attribute inside `unordered(AttributeName)`, for example attributesToIndex: ["title", "unordered(text)"].
+        ///  - attributesForFaceting: (array of strings) The list of fields you want to use for faceting. 
+        ///    All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
+        ///  - ranking: (array of strings) controls the way results are sorted.
+        ///    We have six available criteria: 
+        ///     - typo: sort according to number of typos,
+        ///     - geo: sort according to decreassing distance when performing a geo-location based search,
+        ///     - proximity: sort according to the proximity of query words in hits,
+        ///     - attribute: sort according to the order of attributes defined by attributesToIndex,
+        ///     - exact: sort according to the number of words that are matched identical to query word (and not as a prefix),
+        ///     - custom: sort according to a user defined formula set in **customRanking** attribute.
+        ///    The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
+        ///  - customRanking: (array of strings) lets you specify part of the ranking.
+        ///    The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
+        ///    For example `"customRanking" => ["desc(population)", "asc(name)"]`  
+        ///  - queryType: Select how the query words are interpreted, it can be one of the following value:
+        ///    - prefixAll: all query words are interpreted as prefixes,
+        ///    - prefixLast: only the last word is interpreted as a prefix (default behavior),
+        ///    - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
+        ///  - highlightPreTag: (string) Specify the string that is inserted before the highlighted parts in the query result (default to "<em>").
+        ///  - highlightPostTag: (string) Specify the string that is inserted after the highlighted parts in the query result (default to "</em>").
+        ///  - optionalWords: (array of strings) Specify a list of words that should be considered as optional when found in the query.
+        /// </param>
         public Task<JObject> SetSettings(JObject settings)
         {
             return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/settings", _urlIndexName), settings);
@@ -290,12 +304,16 @@ namespace Algolia.Search
         ///   - settings : allows to get index settings (https only)
         ///   - editSettings : allows to change index settings (https only)</param>
         /// <param name="validity">the number of seconds after which the key will be automatically removed (0 means no time limit for this key)</param>
+        /// <param name="maxQueriesPerIPPerHour"> Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).</param>
+        /// <param name="maxHitsPerQuery"> Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited) </param>
         /// <returns>Return an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> AddUserKey(IEnumerable<string> acls, int validity = 0)
+        public Task<JObject> AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
         {
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
             content["validity"] = validity;
+            content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
+            content["maxHitsPerQuery"] = maxHitsPerQuery;
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), content);
         }
     }
