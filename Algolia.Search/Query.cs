@@ -203,7 +203,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="tags"></param>
         /// <returns></returns>
-        public Query SetTagsFilter(string tags)
+        public Query SetTagFilters(string tags)
         {
             this.tags = tags;
             return this;
@@ -215,7 +215,7 @@ namespace Algolia.Search
         /// Suported operand are <, <=, =, > and >=
         /// You can have multiple conditions on one attribute like for example "numerics=price>100,price<1000"
         /// </summary>
-        public Query SetNumericsFilter(string value)
+        public Query SetNumericFilters(string value)
         {
             this.numerics = value;
             return this;
@@ -234,8 +234,8 @@ namespace Algolia.Search
         /**
          * Filter the query by a list of facets. Each facet is encoded as `attributeName:value`. For example: `["category:Book","author:John%20Doe"].
          */
-        public Query SetFacetsFilter(IEnumerable<string> facets) {
-    	    this.facetsFilter = facets;
+        public Query SetFacetFilters(IEnumerable<string> facets) {
+    	    this.facetFilters = facets;
     	    return this;
         }
 
@@ -253,7 +253,7 @@ namespace Algolia.Search
             string stringBuilder = "";
         
             if (attributes != null) {
-                stringBuilder += "attributes=";
+                stringBuilder += "attributesToRetrieve=";
                 bool first = true;
                 foreach (string attr in this.attributes) {
                     if (!first)
@@ -300,12 +300,12 @@ namespace Algolia.Search
                     first = false;
                 }
             }
-            if (facetsFilter != null)
+            if (facetFilters != null)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "facetsFilter=";
-                stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(facetsFilter);
+                stringBuilder += "facetFilters=";
+                stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(facetFilters);
             }
             if (attributesToSnippet != null)
             {
@@ -353,13 +353,13 @@ namespace Algolia.Search
             if (tags != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "tags=";
+                stringBuilder += "tagFilters=";
                 stringBuilder += Uri.EscapeDataString(tags);
             }
             if (numerics != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "numerics=";
+                stringBuilder += "numericFilters=";
                 stringBuilder += Uri.EscapeDataString(numerics);
             }
             if (insideBoundingBox != null) {
@@ -418,6 +418,6 @@ namespace Algolia.Search
         private string optionalWords;
         private QueryType queryType;
         private IEnumerable<string> facets;
-        private IEnumerable<string> facetsFilter;
+        private IEnumerable<string> facetFilters;
     }
 }
