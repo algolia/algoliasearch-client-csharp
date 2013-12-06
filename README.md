@@ -38,6 +38,7 @@ Table of Content
 1. [Batch writes](#batch-writes)
 1. [Security / User API Keys](#security--user-api-keys)
 1. [Copy or rename an index](#copy-or-rename-an-index)
+1. [Backup / Retrieve all index content](#backup--retrieve-all-index-content)
 1. [Logs](#logs)
 
 Setup
@@ -273,7 +274,9 @@ You can retrieve all settings using the `GetSettings` function. The result will 
   * **geo**: sort according to decreassing distance when performing a geo-location based search,
   * **proximity**: sort according to the proximity of query words in hits,
   * **attribute**: sort according to the order of attributes defined by attributesToIndex,
-  * **exact**: sort according to the number of words that are matched identical to query word (and not as a prefix),
+  * **exact**: 
+    * if the user query contains one word: sort objects having an attribute that is exactly the query word before others. For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV show starting by the v letter before it.
+    * if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
   * **custom**: sort according to a user defined formula set in **customRanking** attribute.<br/>The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
  * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
 For example `"customRanking" => ["desc(population)", "asc(name)"]`  
@@ -342,6 +345,7 @@ You may want to perform multiple operations with one API call to reduce latency.
 We expose two methods to perform batch:
  * `AddObjects`: add an array of object using automatic `objectID` assignement
  * `SaveObjects`: add or update an array of object that contains an `objectID` attribute
+ * `PartialUpdateObjects`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
 
 Example using automatic `objectID` assignement:
 ```csharp
@@ -367,6 +371,17 @@ var res = await index.SaveObjects(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
+Example that update only the `firstname` attribute:
+```csharp
+List<JObject> objs = new List<JObject>();
+objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""objectID"":""myID1""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
+                          ""objectID"": ""myID2""}"));
+var res = await index.PartialUpdateObjects(objs);
+System.Diagnostics.Debug.WriteLine(res);
+```
+
 Security / User API Keys
 -------------
 
@@ -384,6 +399,7 @@ keys = await index.ListUserKeys();
 
 Each key is defined by a set of rights that specify the authorized actions. The different rights are:
  * **search**: allows to search,
+ * **browse**: allow to retrieve all index content via the browse API,
  * **addObject**: allows to add/update an object in the index,
  * **deleteObject**: allows to delete an existing object,
  * **deleteIndex**: allows to delete index content,
@@ -450,6 +466,19 @@ The move command is particularly useful is you want to update a big index atomic
 ```csharp
 // Rename MyNewIndex in MyIndex (and overwrite it)
 await client.MoveIndex("MyNewIndex", "MyIndex");
+```
+
+Backup / Retrieve all index content
+-------------
+
+You can retrieve all index content for backup purpose of for analytics using the browse method. 
+This method retrieve 1000 objects by API call and support pagination.
+
+```csharp
+// Get first page
+await index.Browse(0);
+// Get second page
+await index.Browse(1);
 ```
 
 Logs

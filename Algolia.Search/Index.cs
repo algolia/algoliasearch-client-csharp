@@ -128,6 +128,27 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Partially Override the content of several objects
+        /// </summary>
+        /// <param name="objects">contains an array of objects to update (each object must contains a objectID attribute).</param>
+        /// <returns>return an object containing an "objectIDs" attribute (array of string)</returns>
+        public Task<JObject> PartialUpdateObjects(IEnumerable<JObject> objects)
+        {
+            List<object> requests = new List<object>();
+            foreach (JObject obj in objects)
+            {
+                Dictionary<string, object> request = new Dictionary<string, object>();
+                request["action"] = "partialUpdateObject";
+                request["objectID"] = obj["objectID"];
+                request["body"] = obj;
+                requests.Add(request);
+            }
+            Dictionary<string, object> batch = new Dictionary<string, object>();
+            batch["requests"] = requests;
+            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
+        }
+
+        /// <summary>
         /// Override the content of object.
         /// </summary>
         /// <param name="obj">contains the object to save, the object must contains an objectID attribute.</param>
@@ -209,6 +230,22 @@ namespace Algolia.Search
         public Task<JObject> GetSettings()
         {
             return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/settings", _urlIndexName));
+        }
+
+        /// <summary>
+        ///  Browse all index content
+        /// </summary>
+        public Task<JObject> Browse(int page)
+        {
+            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/browse?page={1}", _urlIndexName, page));
+        }
+
+        /// <summary>
+        ///  Browse all index content
+        /// </summary>
+        public Task<JObject> Browse(int page, int hitsPerPage)
+        {
+            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/browse?page={1}&hitsPerPage={2}", _urlIndexName, page, hitsPerPage));
         }
 
         /// <summary>
