@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.6.0.0</version>
+    <version>1.7.0.0</version>
     <title>Algolia Search API Client for C#</title>
     <authors>Algolia</authors>
     <owners>Algolia</owners>

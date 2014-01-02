@@ -50,6 +50,7 @@ namespace Algolia.Search
             minWordSizeForApprox1 = 3;
             minWordSizeForApprox2 = 7;
             getRankingInfo = false;
+            distinct = false;
             page = 0;
             hitsPerPage = 20;
             this.query = query;
@@ -61,6 +62,7 @@ namespace Algolia.Search
             minWordSizeForApprox1 = 3;
             minWordSizeForApprox2 = 7;
             getRankingInfo = false;
+            distinct = false;
             page = 0;
             hitsPerPage = 20;
             queryType = QueryType.PREFIX_LAST;
@@ -136,6 +138,20 @@ namespace Algolia.Search
         public Query GetRankingInfo(bool enabled)
         {
             getRankingInfo = enabled;
+            return this;
+        }
+
+        /**
+         * 
+         * @param If set to true, enable the distinct feature (disabled by default) if the attributeForDistinct index setting is set. 
+         *   This feature is similar to the SQL "distinct" keyword: when enabled in a query with the distinct=1 parameter, 
+         *   all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. 
+         *   For example, if the chosen attribute is show_name and several hits have the same value for show_name, then only the best 
+         *   one is kept and others are removed.
+         */
+        public Query EnableDistinct(bool enabled)
+        {
+            distinct = enabled;
             return this;
         }
 
@@ -338,6 +354,12 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "getRankingInfo=1";
             }
+            if (distinct)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "distinct=1";
+            }
             if (page > 0) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -408,6 +430,7 @@ namespace Algolia.Search
         private int minWordSizeForApprox1;
         private int minWordSizeForApprox2;
         private bool getRankingInfo;
+        private bool distinct;
         private int page;
         private int hitsPerPage;
         private string tags;
