@@ -3,6 +3,8 @@ Algolia Search API Client for C#
 
 
 
+
+
 [Algolia Search](http://www.algolia.com) is a search API that provides hosted full-text, numerical and faceted search.
 Algolia’s Search API makes it easy to deliver a great search experience in your apps & websites providing:
 
@@ -15,7 +17,9 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
  * 99.99% SLA
  * first-class data security
 
-This C# client let you easily use the Algolia Search API from your App. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)
+This C# client let you easily use the Algolia Search API from your App. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
+(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)
+
 
 
 
@@ -25,14 +29,13 @@ Table of Content
 
 1. [Setup](#setup)
 1. [Quick Start](#quick-start)
-
+1. [Online documentation](#online-documentation)
 
 **Commands reference**
 
-1. [Search](#search)
-
 1. [Add a new object](#add-a-new-object-in-the-index)
 1. [Update an object](#update-an-existing-object-in-the-index)
+1. [Search](#search)
 1. [Get an object](#get-an-object)
 1. [Delete an object](#delete-an-object)
 1. [Index settings](#index-settings)
@@ -48,9 +51,14 @@ Table of Content
 
 
 
+
+
 Setup
 -------------
 To setup your project, follow these steps:
+
+
+
 
  1. In you project, open the "Package Manager Console" (Tools → Library Package Manager → Package Manager Console)
  2. Enter `Install-Package Algolia.Search` in the Package Manager Console
@@ -61,6 +69,8 @@ using Algolia.Search;
 
 AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey");
 ```
+
+
 
 Quick Start
 -------------
@@ -110,108 +120,28 @@ System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jim")));
 
 
 
-Search
--------------
- **Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits: (i) your users get a better response time by avoiding to go through your servers, and (ii) it will offload your servers of unnecessary tasks.
+Online Documentation
+----------------
 
-To perform a search, you just need to initialize the index and perform a call to the search function.
-
-You can use the following optional arguments on Query class:
-
-### Query parameters
-
-#### Full Text Search parameters
-
- * **SetQueryString**: (string) The instant-search query string, all words of the query are interpreted as prefixes (for example "John Mc" will match "John Mccamey" and "Johnathan Mccamey"). If no query parameter is set, retrieves all objects.
- * **SetQueryType**: select how the query words are interpreted, it can be one of the following value:
-  * **PREFIX_ALL**: all query words are interpreted as prefixes,
-  * **PREFIX_LAST**: only the last word is interpreted as a prefix (default behavior),
-  * **PREFIX_NONE**: no query word is interpreted as a prefix. This option is not recommended.
- * **SetOptionalWords**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
- * **SetMinWordSizeToAllowOneTypo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
- * **SetMinWordSizeToAllowTwoTypos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
-
-#### Pagination parameters
-
- * **SetPage**: (integer) Pagination parameter used to select the page to retrieve.<br/>Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set `page=9`
- * **SetNbHitsPerPage**: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
-
-#### Geo-search parameters
-
- * **AroundLatitudeLongitude(float, float, int)**: search for entries around a given latitude/longitude.<br/>You specify the maximum distance in meters with the **radius** parameter (in meters).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
- * **AroundLatitudeLongitude(flot, float, int, int)**: search for entries around a given latitude/longitude with a given precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
-
- * **InsideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `insideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)`.<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
-
-#### Parameters to control results content
-
- * **SetAttributesToRetrieve**: The list of object attributes you want to retrieve (let you minimize the answer size). By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
- * **SetAttributesToHighlight**: The list of attributes you want to highlight according to the query. If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
-  * **full**: if all the query terms were found in the attribute,
-  * **partial**: if only some of the query terms were found,
-  * **none**: if none of the query terms were found.
- * **SetAttributesToSnippet**: The list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). By default no snippet is computed.
- * **GetRankingInfo**: if set to true, the result hits will contain ranking information in **_rankingInfo** attribute.
+Check our [online documentation](http://www.algolia.com/doc):
+ * [Initial Import](http://www.algolia.com/doc#InitialImport)
+ * [Ranking &amp; Relevance](http://www.algolia.com/doc#RankingRelevance)
+ * [Settings](http://www.algolia.com/doc#Settings)
+ * [Search](http://www.algolia.com/doc#Search)
+ * [Incremental Updates](http://www.algolia.com/doc#IncrementalUpdates)
+ * [Reindexing](http://www.algolia.com/doc#Reindexing)
+ * [Numeric-Search](http://www.algolia.com/doc#Numeric-Search)
+ * [Category-Search](http://www.algolia.com/doc#Category-Search)
+ * [Faceting](http://www.algolia.com/doc#Faceting)
+ * [Geo-Search](http://www.algolia.com/doc#Geo-Search)
+ * [Security](http://www.algolia.com/doc#Security)
+ * [Indexing Several Types](http://www.algolia.com/doc#IndexingSeveralTypes)
+ * [REST API](http://www.algolia.com/doc/rest)
 
 
-#### Numeric search parameters
- * **SetNumericFilters**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. 
- You can have multiple conditions on one attribute like for example `numericFilters=price>100,price<1000`. You can also use a string array encoding (for example `numericFilters: ["price>100","price<1000"]`).
 
-#### Category search parameters
- * **SetTagFilters**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`). 
 
-#### Faceting parameters
- * **SetFaceFilters**: filter the query by a list of facets. Facets are separated by commas and each facet is encoded as `attributeName:value`. For example: `facetFilters=category:Book,author:John%20Doe`. You can also use a string array encoding (for example `["category:Book","author:John%20Doe"]`).
- * **SetFacets**: List of object attributes that you want to use for faceting. <br/>Attributes are separated with a comma (for example `"category,author"` ). You can also use a JSON string array encoding (for example `["category","author"]` ). Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
 
-#### Distinct parameter
- * **EnableDistinct**: If set to YES, enable the distinct feature (disabled by default) if the `attributeForDistinct` index setting is set. This feature is similar to the SQL "distinct" keyword: when enabled in a query with the `distinct=1` parameter, all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed.
-
-```csharp
-Index index = client.InitIndex("contacts");
-res = await index.Search(new Query("query string"));
-System.Diagnostics.Debug.WriteLine(res);
-res = await index.Search(new Query("query string").
-    SetAttributesToRetrieve(new string[] {"firstname","lastname"}).
-    SetNbHitsPerPage(50));
-System.Diagnostics.Debug.WriteLine(res);
-```
-
-The server response will look like:
-
-```javascript
-{
-  "hits": [
-    {
-      "firstname": "Jimmie",
-      "lastname": "Barninger",
-      "objectID": "433",
-      "_highlightResult": {
-        "firstname": {
-          "value": "<em>Jimmie</em>",
-          "matchLevel": "partial"
-        },
-        "lastname": {
-          "value": "Barninger",
-          "matchLevel": "none"
-        },
-        "company": {
-          "value": "California <em>Paint</em> & Wlpaper Str",
-          "matchLevel": "partial"
-        }
-      }
-    }
-  ],
-  "page": 0,
-  "nbHits": 1,
-  "nbPages": 1,
-  "hitsPerPage": 20,
-  "processingTimeMS": 1,
-  "query": "jimmie paint",
-  "params": "query=jimmie+paint&attributesToRetrieve=firstname,lastname&hitsPerPage=50"
-}
-```
 
 
 Add a new object in the Index
@@ -263,6 +193,109 @@ Example to update only the city attribute of an existing object:
 ```csharp
 await index.PartialUpdateObject(JObject.Parse(@"{""city"":""San Francisco"", 
                                                  ""objectID"":""myID""}"));
+```
+
+Search
+-------------
+ **Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits: (i) your users get a better response time by avoiding to go through your servers, and (ii) it will offload your servers of unnecessary tasks.
+
+To perform a search, you just need to initialize the index and perform a call to the search function.
+
+You can use the following optional arguments on Query class:
+
+### Query parameters
+
+#### Full Text Search parameters
+
+ * **SetQueryString**: (string) The instant-search query string, all words of the query are interpreted as prefixes (for example "John Mc" will match "John Mccamey" and "Johnathan Mccamey"). If no query parameter is set, retrieves all objects.
+ * **SetQueryType**: select how the query words are interpreted, it can be one of the following value:
+  * **PREFIX_ALL**: all query words are interpreted as prefixes,
+  * **PREFIX_LAST**: only the last word is interpreted as a prefix (default behavior),
+  * **PREFIX_NONE**: no query word is interpreted as a prefix. This option is not recommended.
+ * **SetOptionalWords**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
+ * **SetMinWordSizeToAllowOneTypo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
+ * **SetMinWordSizeToAllowTwoTypos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+
+#### Pagination parameters
+
+ * **SetPage**: (integer) Pagination parameter used to select the page to retrieve.<br/>Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set `page=9`
+ * **SetNbHitsPerPage**: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
+
+#### Geo-search parameters
+
+ * **AroundLatitudeLongitude(float, float, int)**: search for entries around a given latitude/longitude.<br/>You specify the maximum distance in meters with the **radius** parameter (in meters).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+ * **AroundLatitudeLongitude(flot, float, int, int)**: search for entries around a given latitude/longitude with a given precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
+
+ * **InsideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `insideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)`).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+
+#### Parameters to control results content
+
+ * **SetAttributesToRetrieve**: The list of object attributes you want to retrieve (let you minimize the answer size). By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
+ * **SetAttributesToHighlight**: The list of attributes you want to highlight according to the query. If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
+  * **full**: if all the query terms were found in the attribute,
+  * **partial**: if only some of the query terms were found,
+  * **none**: if none of the query terms were found.
+ * **SetAttributesToSnippet**: The list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). By default no snippet is computed.
+ * **GetRankingInfo**: if set to true, the result hits will contain ranking information in **_rankingInfo** attribute.
+
+
+#### Numeric search parameters
+ * **SetNumericFilters**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. 
+ You can have multiple conditions on one attribute like for example `numericFilters=price>100,price<1000`. You can also use a string array encoding (for example `numericFilters: ["price>100","price<1000"]`).
+
+#### Category search parameters
+ * **SetTagFilters**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`). 
+
+#### Faceting parameters
+ * **SetFaceFilters**: filter the query by a list of facets. Facets are separated by commas and each facet is encoded as `attributeName:value`. To OR facets, you must add parentheses. For example: `facetFilters=(category:Book,category:Movie),author:John%20Doe`. You can also use a string array encoding (for example `[["category:Book","category:Movie"],"author:John%20Doe"]`).
+ * **SetFacets**: List of object attributes that you want to use for faceting. <br/>Attributes are separated with a comma (for example `"category,author"` ). You can also use a JSON string array encoding (for example `["category","author"]` ). Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
+
+#### Distinct parameter
+ * **EnableDistinct**: If set to YES, enable the distinct feature (disabled by default) if the `attributeForDistinct` index setting is set. This feature is similar to the SQL "distinct" keyword: when enabled in a query with the `distinct=1` parameter, all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed.
+
+```csharp
+Index index = client.InitIndex("contacts");
+res = await index.Search(new Query("query string"));
+System.Diagnostics.Debug.WriteLine(res);
+res = await index.Search(new Query("query string").
+    SetAttributesToRetrieve(new string[] {"firstname","lastname"}).
+    SetNbHitsPerPage(50));
+System.Diagnostics.Debug.WriteLine(res);
+```
+
+The server response will look like:
+
+```javascript
+{
+  "hits": [
+    {
+      "firstname": "Jimmie",
+      "lastname": "Barninger",
+      "objectID": "433",
+      "_highlightResult": {
+        "firstname": {
+          "value": "<em>Jimmie</em>",
+          "matchLevel": "partial"
+        },
+        "lastname": {
+          "value": "Barninger",
+          "matchLevel": "none"
+        },
+        "company": {
+          "value": "California <em>Paint</em> & Wlpaper Str",
+          "matchLevel": "partial"
+        }
+      }
+    }
+  ],
+  "page": 0,
+  "nbHits": 1,
+  "nbPages": 1,
+  "hitsPerPage": 20,
+  "processingTimeMS": 1,
+  "query": "jimmie paint",
+  "params": "query=jimmie+paint&attributesToRetrieve=firstname,lastname&hitsPerPage=50"
+}
 ```
 
 Get an object
