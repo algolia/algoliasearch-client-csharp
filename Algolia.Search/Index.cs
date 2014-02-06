@@ -253,8 +253,7 @@ namespace Algolia.Search
         /// </summary>
         public Task<JObject> ClearIndex()
         {
-            Dictionary<string, object> obj = new Dictionary<string, object>();
-            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/clear", _urlIndexName, obj));
+            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/clear", _urlIndexName));
         }
 
         /// <summary>
