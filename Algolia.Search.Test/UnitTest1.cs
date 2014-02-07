@@ -516,6 +516,7 @@ namespace Algolia.Search.Test
             query.GetRankingInfo(true);
             query.SetAttributesToRetrieve(attr);
             query.SetAttributesToSnippet(attr);
+            query.SetMaxValuesPerFacets(1);
             query.InsideBoundingBox(0, 0, 100, 100);
             query.AroundLatitudeLongitude(0, 0, 2000000000, 100);
             string[] facetFilter = { "_tags:people" };

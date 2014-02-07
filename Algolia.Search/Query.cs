@@ -52,6 +52,7 @@ namespace Algolia.Search
             getRankingInfo = false;
             distinct = false;
             page = 0;
+            maxValuesPerFacets = 0;
             hitsPerPage = 20;
             this.query = query;
             queryType = QueryType.PREFIX_LAST;
@@ -64,6 +65,7 @@ namespace Algolia.Search
             getRankingInfo = false;
             distinct = false;
             page = 0;
+            maxValuesPerFacets = 0;
             hitsPerPage = 20;
             queryType = QueryType.PREFIX_LAST;
         }
@@ -255,6 +257,12 @@ namespace Algolia.Search
     	    return this;
         }
 
+        public Query SetMaxValuesPerFacets(int numbers)
+        {
+            this.maxValuesPerFacets = numbers;
+            return this;
+        }
+
         /**
          * List of object attributes that you want to use for faceting. <br/>
          * Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. 
@@ -322,6 +330,13 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "facetFilters=";
                 stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(facetFilters);
+            }
+            if (maxValuesPerFacets != 0)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "maxValuesPerFacet=";
+                stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(maxValuesPerFacets);
             }
             if (attributesToSnippet != null)
             {
@@ -442,5 +457,6 @@ namespace Algolia.Search
         private QueryType queryType;
         private IEnumerable<string> facets;
         private IEnumerable<string> facetFilters;
+        private int maxValuesPerFacets;
     }
 }
