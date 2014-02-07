@@ -2,8 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Test
@@ -14,7 +14,7 @@ namespace Algolia.Search.Test
     {
         private static string _testApplicationID = "";
         private static string _testApiKey = "";
-        private static string[] _hosts = new string[] { "localhost.algolia.com:8080", "" };
+        
         private AlgoliaClient _client;
         private Algolia.Search.Index _index;
 
@@ -52,7 +52,9 @@ namespace Algolia.Search.Test
         [TestCleanup]
         public void TestCleanup()
         {
+            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
             _client = null;
+
         }
 
         [TestMethod]
@@ -183,7 +185,7 @@ namespace Algolia.Search.Test
             var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""à/go/?à""}"));
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.GetObject("à/go/?à");
-            Assert.AreEqual("1", res["objectID"]);
+            Assert.AreEqual("à/go/?à", res["objectID"]);
             Assert.AreEqual("Jimmie", res["firstname"]);
         }
 
@@ -194,8 +196,24 @@ namespace Algolia.Search.Test
             await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""à/go/?à""}"));
             var task = await _index.DeleteObject("à/go/?à");
             await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            Query query = new Query();
+            query.SetQueryString("");
+            var res = await _index.Search(query);
             Assert.AreEqual(0, res["nbHits"]);
+        }
+
+        [TestMethod]
+        public async Task TestDeleteObjectWithoutID()
+        {
+            await clearTest();
+            await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""à/go/?à""}"));
+            try
+            {
+                var task = await _index.DeleteObject("");
+                Assert.Fail();
+            }
+            catch (Exception)
+            { }
         }
 
         [TestMethod]
@@ -238,6 +256,10 @@ namespace Algolia.Search.Test
             var res = await _index.Browse(0);
             Assert.AreEqual(1, res["nbHits"]);
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            res = await _index.Browse(0, 1);
+            Assert.AreEqual(1, res["nbHits"]);
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+
         }
 
         [TestMethod]
@@ -245,6 +267,8 @@ namespace Algolia.Search.Test
         {
             var res = await _client.GetLogs();
             Assert.IsTrue(((JArray)res["logs"]).Count > 0);
+            res = await _client.GetLogs(0, 1);
+            Assert.AreEqual(1, ((JArray)res["logs"]).Count);
         }
 
         [TestMethod]
@@ -254,7 +278,7 @@ namespace Algolia.Search.Test
             // Add one object to be sure the test will not fail because index is empty
             var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
-            res = await _index.Search(new Query("san fran"));
+            res = await _index.Search(new Query());
             Assert.AreEqual("San Francisco", res["hits"][0]["name"]);
         }
 
@@ -365,13 +389,146 @@ namespace Algolia.Search.Test
         public async Task TaskACL()
         {
             await clearTest();
-            var res = await _client.AddUserKey(new String[] { "search" });
-            Assert.IsFalse(string.IsNullOrWhiteSpace(res["key"].ToString()));
-            var task = await _client.DeleteUserKey(res["key"].ToString());
+            var key = await _client.AddUserKey(new String[] { "search" });
+            Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
+            var getKey = await _client.GetUserKeyACL(key["key"].ToString());
+            Assert.AreEqual(key["key"], getKey["value"]);
+            var keys = await _client.ListUserKeys();
+            Assert.IsTrue(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
+            var task = await _client.DeleteUserKey(key["key"].ToString());
+            keys = await _client.ListUserKeys();
+            Assert.IsFalse(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
 
-            res = await _index.AddUserKey(new String[] { "search" });
-            Assert.IsFalse(string.IsNullOrWhiteSpace(res["key"].ToString()));
-            task = await _index.DeleteUserKey(res["key"].ToString());
+            key = await _index.AddUserKey(new String[] { "search" });
+            Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
+            getKey = await _index.GetUserKeyACL(key["key"].ToString());
+            Assert.AreEqual(key["key"], getKey["value"]);
+            keys = await _index.ListUserKeys();
+            Assert.IsTrue(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
+            task = await _index.DeleteUserKey(key["key"].ToString());
+            keys = await _index.ListUserKeys();
+            Assert.IsFalse(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
+        }
+
+        [TestMethod]
+        public void BadClientCreation()
+        {
+            string[] _hosts = new string[] { "localhost.algolia.com:8080", "" };
+            try
+            {
+                new AlgoliaClient("", _testApiKey);
+                Assert.Fail();
+            }
+            catch (Exception)
+            { }
+            try
+            {
+                new AlgoliaClient(_testApplicationID, "");
+                Assert.Fail();
+            }
+            catch (Exception)
+            { }
+            try
+            {
+                new AlgoliaClient(_testApplicationID, "", _hosts);
+                Assert.Fail();
+            }
+            catch (Exception)
+            { }
+            try
+            {
+                new AlgoliaClient("", _testApiKey, _hosts);
+                Assert.Fail();
+            }
+            catch (Exception)
+            { }
+            try
+            {
+                var badClient = new AlgoliaClient(_testApplicationID, _testApiKey, null);
+                Assert.Fail();
+            }
+            catch (Exception)
+            { }
+            try
+            {
+                var badClient = new AlgoliaClient(_testApplicationID, _testApiKey, _hosts);
+                badClient.ListIndexes();
+                Assert.Fail();
+            }
+            catch (Exception)
+            { }
+        }
+
+        [TestMethod]
+        public async Task TestBigQueryAll()
+        {
+            await clearTest();
+            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
+                , ""Age"":42, ""lastname"":""Barninger"", ""_tags"": ""people""
+                , ""_geoloc"":{""lat"":0.853409, ""lng"":0.348800}}"));
+            await _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
+            await _index.WaitTask(task["taskID"].ToString());
+            Query query = new Query("Jimmie");
+            query.SetPage(0);
+            query.SetOptionalWords("J");
+            query.SetNbHitsPerPage(1);
+            string[] attr = { "firstname" };
+            query.SetAttributesToHighlight(attr);
+            query.SetMinWordSizeToAllowOneTypo(1);
+            query.SetMinWordSizeToAllowTwoTypos(2);
+            query.EnableDistinct(true);
+            query.GetRankingInfo(true);
+            query.SetAttributesToRetrieve(attr);
+            query.SetAttributesToSnippet(attr);
+            query.InsideBoundingBox(0, 0, 100, 100);
+            query.AroundLatitudeLongitude(0, 0, 2000000000);
+            string[] facetFilter = { "_tags:people" };
+            string[] facets = { "_tags" };
+            query.SetFacetFilters(facetFilter);
+            query.SetFacets(facets);
+            query.SetTagFilters("people");
+            query.SetNumericFilters("Age>=42");
+            query.SetQueryType(Query.QueryType.PREFIX_ALL);
+            var res = await _index.Search(query);
+            Assert.AreEqual(1, res["nbHits"]);
+            Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"]);
+            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+        }
+
+        [TestMethod]
+        public async Task TestBigQueryNone()
+        {
+            await clearTest();
+            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
+                , ""Age"":42, ""lastname"":""Barninger"", ""_tags"": ""people""
+                , ""_geoloc"":{""lat"":0.853409, ""lng"":0.348800}}"));
+            await _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
+            await _index.WaitTask(task["taskID"].ToString());
+            Query query = new Query("Jimmie");
+            query.SetPage(0);
+            query.SetOptionalWords("J");
+            query.SetNbHitsPerPage(1);
+            string[] attr = { "firstname" };
+            query.SetAttributesToHighlight(attr);
+            query.SetMinWordSizeToAllowOneTypo(1);
+            query.SetMinWordSizeToAllowTwoTypos(2);
+            query.EnableDistinct(true);
+            query.GetRankingInfo(true);
+            query.SetAttributesToRetrieve(attr);
+            query.SetAttributesToSnippet(attr);
+            query.InsideBoundingBox(0, 0, 100, 100);
+            query.AroundLatitudeLongitude(0, 0, 2000000000, 100);
+            string[] facetFilter = { "_tags:people" };
+            string[] facets = { "_tags" };
+            query.SetFacetFilters(facetFilter);
+            query.SetFacets(facets);
+            query.SetTagFilters("people");
+            query.SetNumericFilters("Age>=42");
+            query.SetQueryType(Query.QueryType.PREFIX_NONE);
+            var res = await _index.Search(query);
+            Assert.AreEqual(1, res["nbHits"]);
+            Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"]);
+            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
     }
 }
