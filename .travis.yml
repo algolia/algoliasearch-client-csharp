@@ -1,8 +1,17 @@
-language: c
- 
-install:
- - sudo apt-get install mono-devel mono-gmcs nunit-console
-    
+language: objective-c
+
+before_install:
+ - wget "http://download.xamarin.com/MonoFrameworkMDK/Macx86/MonoFramework-MDK-${MONO_VERSION}.macos10.xamarin.x86.pkg"
+ - sudo installer -pkg "MonoFramework-MDK-${MONO_VERSION}.macos10.xamarin.x86.pkg" -target /
 script:
- - EnableNuGetPackageRestore=true xbuild Algolia.Search/Algolia.Search.csproj 
- - EnableNuGetPackageRestore=true xbuild Algolia.Search.Test/Algolia.Search.Test.csproj 
+- mono --runtime=v4.0 .nuget/NuGet.exe restore
+- EnableNuGetPackageRestore=true xbuild Algolia.Search/Algolia.Search.csproj
+- EnableNuGetPackageRestore=true xbuild Algolia.Search.Test/Algolia.Search.Test.csproj
+- mono --runtime=v4.0 packages/NUnit.Runners.2.6.3/tools/nunit-console.exe Algolia.Search.Test/bin/Debug/Algolia.Search.Test.dll
+env:
+  global:
+  - secure: pumR4EpwFjyM7JLGhjr/+8yoYR850A9yJMOM4AarR6X0elz/sLEidSgU5udJPjevQsmODXWA9W8ekRg4QxIDLRlU8xnsVPc6Mh8R74UeazFPBCgPRYTWd3HlGDXAq4ri5owPlsx4Q0h4YxqXrRZU+zs0BNfZWxPBj4NzTpQCZ8M=
+  - secure: KpDj3EyCwuy/kGjJ4DyL7AuB1ywpXymIESj33nRVdBkMEgM/l7gdVVmEly0hu3UJRp4T2QeMYbjuUpVl9JSS0od+bNDU+Fq0peTXcnqgOyuOuuKx4m3lYEq1GYbfgiTA9U/T/RqGfvBWo6rhlSq4/MLLHU1UYHXvkE3BH0UN3VY=
+  matrix:
+  - MONO_VERSION="3.2.5"
+
