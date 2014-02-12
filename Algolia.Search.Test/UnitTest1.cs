@@ -53,7 +53,7 @@ namespace NUnit.Framework.Test
         [TearDown]
         public void TestCleanup()
         {
-            //_client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
             _client = null;
 
         }
