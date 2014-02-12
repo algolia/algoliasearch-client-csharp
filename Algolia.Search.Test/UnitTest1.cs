@@ -1,22 +1,23 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Algolia.Search;
 
-namespace Algolia.Search.Test
+namespace NUnit.Framework.Test
 {
 
-    [TestClass]
+    [TestFixture]
     public class AlgoliaClientTest
     {
         private static string _testApplicationID = "";
         private static string _testApiKey = "";
         
         private AlgoliaClient _client;
-        private Algolia.Search.Index _index;
+        private Index _index;
 
         public static string safe_name(string name)
         {
@@ -40,7 +41,7 @@ namespace Algolia.Search.Test
             }
         }
 
-        [TestInitialize]
+        [SetUp]
         public void TestInitialize()
         {
             _testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
@@ -49,26 +50,26 @@ namespace Algolia.Search.Test
             _index = _client.InitIndex(safe_name("àlgol?à-csharp"));
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TestCleanup()
         {
-            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            //_client.DeleteIndex(safe_name("àlgol?à-csharp"));
             _client = null;
 
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestAddObject()
         {
             await clearTest();
             var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.Search(new Query(""));
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestSaveObject()
         {
             await clearTest();
@@ -77,11 +78,11 @@ namespace Algolia.Search.Test
             task = await _index.SaveObject(JObject.Parse(@"{""firstname"":""Robert"", ""lastname"":""Barninger"", ""objectID"":""à/go/?à""}"));
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.Search(new Query(""));
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Robert", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Robert", res["hits"][0]["firstname"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestPartialUpdateObject()
         {
             await clearTest();
@@ -90,11 +91,11 @@ namespace Algolia.Search.Test
             task = await _index.SaveObject(JObject.Parse(@"{""firstname"":""Robert"", ""objectID"":""à/go/?à""}"));
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.Search(new Query(""));
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Robert", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Robert", res["hits"][0]["firstname"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TaskAddObjects()
         {
             await clearTest();
@@ -106,11 +107,11 @@ namespace Algolia.Search.Test
             var task = await _index.AddObjects(objs);
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.Search(new Query(""));
-            Assert.AreEqual(2, res["nbHits"]);
-            Assert.AreEqual("Roger", res["hits"][0]["firstname"]);
+            Assert.AreEqual(2, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Roger", res["hits"][0]["firstname"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TaskSaveObjects()
         {
             await clearTest();
@@ -128,11 +129,11 @@ namespace Algolia.Search.Test
             var task = await _index.SaveObjects(objs);
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.Search(new Query(""));
-            Assert.AreEqual(2, res["nbHits"]);
-            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            Assert.AreEqual(2, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TaskPartialUpdateObjects()
         {
             await clearTest();
@@ -148,8 +149,8 @@ namespace Algolia.Search.Test
             var task = await _index.PartialUpdateObjects(objs);
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.Search(new Query(""));
-            Assert.AreEqual(2, res["nbHits"]);
-            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            Assert.AreEqual(2, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
         }
 
         public Boolean IsPresent(JArray array, string attribute, string value)
@@ -162,15 +163,15 @@ namespace Algolia.Search.Test
             return false;
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestDeleteIndex()
         {
             await clearTest();
             var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.Search(new Query(""));
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             res = await _client.ListIndexes();
             Assert.IsTrue(IsPresent((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
             await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
@@ -178,18 +179,18 @@ namespace Algolia.Search.Test
             Assert.IsFalse(IsPresent((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestGetObject()
         {
             await clearTest();
             var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""à/go/?à""}"));
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.GetObject("à/go/?à");
-            Assert.AreEqual("à/go/?à", res["objectID"]);
-            Assert.AreEqual("Jimmie", res["firstname"]);
+            Assert.AreEqual("à/go/?à", res["objectID"].ToString());
+            Assert.AreEqual("Jimmie", res["firstname"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestDeleteObject()
         {
             await clearTest();
@@ -199,10 +200,10 @@ namespace Algolia.Search.Test
             Query query = new Query();
             query.SetQueryString("");
             var res = await _index.Search(query);
-            Assert.AreEqual(0, res["nbHits"]);
+            Assert.AreEqual(0, res["nbHits"].ToObject<int>());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestDeleteObjectWithoutID()
         {
             await clearTest();
@@ -216,7 +217,7 @@ namespace Algolia.Search.Test
             { }
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestCopyIndex()
         {
             var index = _client.InitIndex(safe_name("àlgol?à-csharp2"));
@@ -225,12 +226,12 @@ namespace Algolia.Search.Test
             await _index.WaitTask(task["taskID"].ToString());
             task = await _client.CopyIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
             var res = await index.Search(new Query(""));
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             await _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestMoveIndex()
         {
             var index = _client.InitIndex(safe_name("àlgol?à-csharp2"));
@@ -240,29 +241,29 @@ namespace Algolia.Search.Test
             task = await _client.MoveIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
             
             var res = await index.Search(new Query(""));
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             res = await _client.ListIndexes();
             Assert.IsFalse(IsPresent((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
             await _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestBrowse()
         {
             await clearTest();
             var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
             await _index.WaitTask(task["taskID"].ToString());
             var res = await _index.Browse(0);
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             res = await _index.Browse(0, 1);
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
 
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestLogs()
         {
             var res = await _client.GetLogs();
@@ -271,7 +272,7 @@ namespace Algolia.Search.Test
             Assert.AreEqual(1, ((JArray)res["logs"]).Count);
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestSearch()
         {
             await clearTest();
@@ -279,30 +280,30 @@ namespace Algolia.Search.Test
             var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
             res = await _index.Search(new Query());
-            Assert.AreEqual("San Francisco", res["hits"][0]["name"]);
+            Assert.AreEqual("San Francisco", res["hits"][0]["name"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestSettings()
         {
             await clearTest();
             var res = await _index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(population)"", ""asc(name)""]}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
             res = await _index.GetSettings();
-            System.Diagnostics.Debug.WriteLine(res);
+            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestAddObject2()
         {
             await clearTest();
             var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
             res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
-            Assert.AreEqual("myID", res["objectID"]);
+            Assert.AreEqual("myID", res["objectID"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestUpdate()
         {
             await clearTest();
@@ -315,7 +316,7 @@ namespace Algolia.Search.Test
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
         }
 
-        [TestMethod]
+        [Test]
         public async Task TaskGetObject()
         {
             await clearTest();
@@ -324,20 +325,20 @@ namespace Algolia.Search.Test
             await _index.WaitTask(res["taskID"].ToString());
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
             res = await _index.GetObject("myID");
-            Assert.AreEqual("San Francisco", res["name"]);
-            Assert.AreEqual(805235, res["population"]);
-            Assert.AreEqual("myID", res["objectID"]);
+            Assert.AreEqual("San Francisco", res["name"].ToString());
+            Assert.AreEqual(805235, res["population"].ToObject<int>());
+            Assert.AreEqual("myID", res["objectID"].ToString());
             res = await _index.GetObject("myID", new String[] {"name", "population"});
-            Assert.AreEqual("San Francisco", res["name"]);
-            Assert.AreEqual(805235, res["population"]);
-            Assert.AreEqual("myID", res["objectID"]);
+            Assert.AreEqual("San Francisco", res["name"].ToString());
+            Assert.AreEqual(805235, res["population"].ToObject<int>());
+            Assert.AreEqual("myID", res["objectID"].ToString());
             res = await _index.GetObject("myID", new String[] { "name" });
             Assert.AreEqual(null, res["population"]);
-            Assert.AreEqual("San Francisco", res["name"]);
-            Assert.AreEqual("myID", res["objectID"]);
+            Assert.AreEqual("San Francisco", res["name"].ToString());
+            Assert.AreEqual("myID", res["objectID"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public async Task TaskDeleteObject()
         {
             await clearTest();
@@ -348,7 +349,7 @@ namespace Algolia.Search.Test
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["deletedAt"].ToString()));
         }
 
-        [TestMethod]
+        [Test]
         public async Task TaskBatch()
         {
             await clearTest();
@@ -371,7 +372,7 @@ namespace Algolia.Search.Test
             Assert.AreEqual(objectIDs.Count, 2);
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestListIndexes()
         {
             await clearTest();
@@ -385,7 +386,7 @@ namespace Algolia.Search.Test
             }
         }
 
-        [TestMethod]
+        [Test]
         public async Task TaskACL()
         {
             await clearTest();
@@ -410,7 +411,7 @@ namespace Algolia.Search.Test
             Assert.IsFalse(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
         }
 
-        [TestMethod]
+        [Test]
         public void BadClientCreation()
         {
             string[] _hosts = new string[] { "localhost.algolia.com:8080", "" };
@@ -459,7 +460,7 @@ namespace Algolia.Search.Test
             { }
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestBigQueryAll()
         {
             await clearTest();
@@ -490,12 +491,12 @@ namespace Algolia.Search.Test
             query.SetNumericFilters("Age>=42");
             query.SetQueryType(Query.QueryType.PREFIX_ALL);
             var res = await _index.Search(query);
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
             await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
 
-        [TestMethod]
+        [Test]
         public async Task TestBigQueryNone()
         {
             await clearTest();
@@ -527,8 +528,8 @@ namespace Algolia.Search.Test
             query.SetNumericFilters("Age>=42");
             query.SetQueryType(Query.QueryType.PREFIX_NONE);
             var res = await _index.Search(query);
-            Assert.AreEqual(1, res["nbHits"]);
-            Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"]);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
             await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
     }
