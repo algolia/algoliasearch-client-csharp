@@ -193,6 +193,27 @@ namespace Algolia.Search
             return _client.ExecuteRequest("DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)));
         }
 
+        /// <summary>
+        /// Delete several objects.
+        /// </summary>
+        /// <param name="objects">contains an array of objectIDs to delete.</param>
+        public Task<JObject> DeleteObjects(IEnumerable<String> objects)
+        {
+            List<object> requests = new List<object>();
+            foreach (object id in objects)
+            {
+                Dictionary<string, object> request = new Dictionary<string, object>();
+                Dictionary<string, object> obj = new Dictionary<string, object>();
+                obj["objectID"] = id;
+                request["action"] = "deleteObject";
+                request["body"] = obj;
+                requests.Add(request);
+            }
+            Dictionary<string, object> batch = new Dictionary<string, object>();
+            batch["requests"] = requests;
+            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
+        }
+
 
         /// <summary>
         /// Search inside the index.
