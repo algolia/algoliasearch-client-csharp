@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using NUnit.Framework;
 using System;
-using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -153,7 +152,27 @@ namespace NUnit.Framework.Test
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
         }
 
-        public Boolean IsPresent(JArray array, string attribute, string value)
+        [Test]
+        public async Task TaskDeleteObjects()
+        {
+            await clearTest();
+            List<JObject> objs = new List<JObject>();
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+                          ""lastname"":""Barninger"", ""objectID"": ""à/go/?à""}"));
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+                          ""lastname"":""Speach"", ""objectID"": ""à/go/?à2""}"));
+            var task = await _index.AddObjects(objs);
+            await _index.WaitTask(task["taskID"].ToString());
+            List<String> ids = new List<string>();
+            ids.Add("à/go/?à");
+            ids.Add("à/go/?à2");
+            task = await _index.DeleteObjects(ids);
+            await _index.WaitTask(task["taskID"].ToString());
+            var res = await _index.Search(new Query(""));
+            Assert.AreEqual(0, res["nbHits"].ToObject<int>());
+        }
+
+        public Boolean Include(JArray array, string attribute, string value)
         {
             for (int i = 0; i < array.Count; ++i)
             {
@@ -162,7 +181,7 @@ namespace NUnit.Framework.Test
             }
             return false;
         }
-
+        
         [Test]
         public async Task TestDeleteIndex()
         {
@@ -173,10 +192,10 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             res = await _client.ListIndexes();
-            Assert.IsTrue(IsPresent((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
+            Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
             await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
             res = await _client.ListIndexes();
-            Assert.IsFalse(IsPresent((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
+            Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
         }
 
         [Test]
@@ -239,12 +258,13 @@ namespace NUnit.Framework.Test
             var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
             await _index.WaitTask(task["taskID"].ToString());
             task = await _client.MoveIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
-            
+            await index.WaitTask(task["taskID"].ToString());
             var res = await index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             res = await _client.ListIndexes();
-            Assert.IsFalse(IsPresent((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
+            Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp2")));
+            Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
             await _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
         }
 
@@ -395,20 +415,20 @@ namespace NUnit.Framework.Test
             var getKey = await _client.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
             var keys = await _client.ListUserKeys();
-            Assert.IsTrue(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
+            Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
             var task = await _client.DeleteUserKey(key["key"].ToString());
             keys = await _client.ListUserKeys();
-            Assert.IsFalse(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
+            Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
 
             key = await _index.AddUserKey(new String[] { "search" });
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
             getKey = await _index.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
             keys = await _index.ListUserKeys();
-            Assert.IsTrue(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
+            Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
             task = await _index.DeleteUserKey(key["key"].ToString());
             keys = await _index.ListUserKeys();
-            Assert.IsFalse(IsPresent((JArray)keys["keys"], "value", key["key"].ToString()));
+            Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
         }
 
         [Test]
