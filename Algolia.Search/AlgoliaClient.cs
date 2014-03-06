@@ -104,6 +104,26 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// This method allows to query multiple indexes with one API call
+        /// </summary>
+        /// <param name="queries">List of query per index</param>
+        /// <returns></returns>
+        public Task<JObject> MultipleQueries(List<IndexQuery> queries)
+        {
+            List<Dictionary<string, object>> body = new List<Dictionary<string, object>>();
+            foreach (IndexQuery indexQuery in queries) {
+                Dictionary<string, object> request = new Dictionary<string,object>();
+                request.Add("indexName", indexQuery.Index);
+                request.Add("params", indexQuery.Query.GetQueryString());
+                body.Add(request);
+            }
+            Dictionary<string, object> requests = new Dictionary<string, object>();
+            requests.Add("requests", body);
+            return ExecuteRequest("POST", "/1/indexes/*/queries", requests);
+
+        }
+
+        /// <summary>
         /// List all existing indexes.
         /// </summary>
         /// <returns>an object in the form:
@@ -238,6 +258,27 @@ namespace Algolia.Search
                 }
                 return _httpClient;
             }
+        }
+
+
+        /// <summary>
+        /// <summary>
+        /// Generate a secured and public API Key from a list of tagFilters and an
+        /// optional user token identifying the current user
+        /// </summary>
+        /// <param name="privateApiKey">your private API Key</param>
+        /// <param name="tagFilter">the list of tags applied to the query (used as security)</param>
+        /// <param name="userToken">an optional token identifying the current user</param>
+        /// <returns></returns>
+        public Task<JObject> GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
+        {
+            return null;
+            
+        }
+
+        public Task<JObject> GenerateSecuredApiKey(String privateApiKey, String[] tagFilter, String userToken = null)
+        {
+            return GenerateSecuredApiKey(privateApiKey, String.Join(",", tagFilter), userToken);
         }
 
         public async Task<JObject> ExecuteRequest(string method, string requestUrl, object content = null)
