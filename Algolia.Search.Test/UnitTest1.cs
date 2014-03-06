@@ -552,5 +552,20 @@ namespace NUnit.Framework.Test
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
             await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
+
+        [Test]
+        public async Task TestMultipleQueries()
+        {
+            await clearTest();
+            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
+            await _index.WaitTask(task["taskID"].ToString());
+            var indexQuery = new List<IndexQuery>();
+            indexQuery.Add(new IndexQuery(safe_name("àlgol?à-csharp"), new Query("")));
+            var res = await _client.MultipleQueries(indexQuery);
+            Assert.AreEqual(1, res["results"].ToObject<JArray>().Count);
+            Assert.AreEqual(1, res["results"][0]["hits"].ToObject<JArray>().Count);
+            Assert.AreEqual("Jimmie", res["results"][0]["hits"][0]["firstname"].ToString());
+            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+        }
     }
 }
