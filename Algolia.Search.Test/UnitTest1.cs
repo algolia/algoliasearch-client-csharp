@@ -534,6 +534,7 @@ namespace NUnit.Framework.Test
             query.SetMinWordSizeToAllowOneTypo(1);
             query.SetMinWordSizeToAllowTwoTypos(2);
             query.EnableDistinct(true);
+            query.EnableAdvancedSyntax(true);
             query.GetRankingInfo(true);
             query.SetAttributesToRetrieve(attr);
             query.SetAttributesToSnippet(attr);

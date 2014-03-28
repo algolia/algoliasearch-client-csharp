@@ -253,13 +253,28 @@ namespace Algolia.Search
          * Filter the query by a list of facets. Each facet is encoded as `attributeName:value`. For example: `["category:Book","author:John%20Doe"].
          */
         public Query SetFacetFilters(IEnumerable<string> facets) {
-    	    this.facetFilters = facets;
+            this.facetFilters = String.Join(",", facets, 0, -1);
     	    return this;
+        }
+
+        public Query SetFacetFilters(string facets)
+        {
+            this.facetFilters = facets;
+            return this;
         }
 
         public Query SetMaxValuesPerFacets(int numbers)
         {
             this.maxValuesPerFacets = numbers;
+            return this;
+        }
+
+        /**
+         * 
+         */
+        public Query EnableAdvancedSyntax(bool enabled)
+        {
+            this.advancedSyntax = enabled;
             return this;
         }
 
@@ -375,6 +390,12 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "distinct=1";
             }
+            if (advancedSyntax)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "advancedSyntax=1";
+            }
             if (page > 0) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -446,6 +467,7 @@ namespace Algolia.Search
         private int minWordSizeForApprox2;
         private bool getRankingInfo;
         private bool distinct;
+        private bool advancedSyntax;
         private int page;
         private int hitsPerPage;
         private string tags;
@@ -456,7 +478,7 @@ namespace Algolia.Search
         private string optionalWords;
         private QueryType queryType;
         private IEnumerable<string> facets;
-        private IEnumerable<string> facetFilters;
+        private string facetFilters;
         private int maxValuesPerFacets;
     }
 }
