@@ -312,7 +312,7 @@ namespace Algolia.Search
                         JObject obj = JObject.Parse(serializedJSON);
                         return obj;
                     }
-                    else
+                    else if (responseMsg.StatusCode != HttpStatusCode.BadRequest && responseMsg.StatusCode != HttpStatusCode.Forbidden && responseMsg.StatusCode != HttpStatusCode.NotFound)
                     {
                         string serializedJSON = await responseMsg.Content.ReadAsStringAsync();
                         
