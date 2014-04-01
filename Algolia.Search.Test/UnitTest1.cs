@@ -410,6 +410,9 @@ namespace NUnit.Framework.Test
         public async Task TaskACL()
         {
             await clearTest();
+            // Add one object to be sure the test will not fail because index is empty
+            var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+            await _index.WaitTask(res["taskID"].ToString());
             var key = await _client.AddUserKey(new String[] { "search" });
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
             var getKey = await _client.GetUserKeyACL(key["key"].ToString());
