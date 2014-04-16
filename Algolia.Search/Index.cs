@@ -124,6 +124,10 @@ namespace Algolia.Search
         /// <returns>return an object containing an "updatedAt" attribute.</returns>
         public Task<JObject> PartialUpdateObject(JObject partialObject)
         {
+            if (partialObject["objectID"] == null)
+            {
+                throw new AlgoliaException("objectID is missing");
+            }
             string objectID = (string)partialObject["objectID"];
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/{1}/partial", _urlIndexName, Uri.EscapeDataString(objectID)), partialObject);
         }
@@ -140,6 +144,10 @@ namespace Algolia.Search
             {
                 Dictionary<string, object> request = new Dictionary<string, object>();
                 request["action"] = "partialUpdateObject";
+                if (obj["objectID"] == null)
+                {
+                    throw new AlgoliaException("objectID is missing");
+                }
                 request["objectID"] = obj["objectID"];
                 request["body"] = obj;
                 requests.Add(request);
@@ -156,6 +164,10 @@ namespace Algolia.Search
         /// <returns>return an object containing an "updatedAt" attribute.</returns>
         public Task<JObject> SaveObject(JObject obj)
         {
+            if (obj["objectID"] == null)
+            {
+                throw new AlgoliaException("objectID is missing");
+            }
             string objectID = (string)obj["objectID"];
             return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), obj);
         }
@@ -172,6 +184,10 @@ namespace Algolia.Search
             {
                 Dictionary<string, object> request = new Dictionary<string, object>();
                 request["action"] = "updateObject";
+                if (obj["objectID"] == null)
+                {
+                    throw new AlgoliaException("objectID is missing");
+                }
                 request["objectID"] = obj["objectID"];
                 request["body"] = obj;
                 requests.Add(request);

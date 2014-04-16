@@ -172,6 +172,72 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(0, res["nbHits"].ToObject<int>());
         }
 
+        [Test]
+        public async Task TestMissingObjectIDPartialUpdateObject()
+        {
+            await clearTest();
+            JObject obj = new JObject();
+            try
+            {
+                await _index.PartialUpdateObject(obj);
+            }
+            catch (AlgoliaException)
+            {
+                return;
+            }
+            Assert.True(false);
+        }
+
+        [Test]
+        public async Task TestMissingObjectIDPartialUpdateObjects()
+        {
+            await clearTest();
+            List<JObject> objs = new List<JObject>();
+            objs.Add(new JObject());
+            try
+            {
+                await _index.PartialUpdateObjects(objs);
+            }
+            catch (AlgoliaException)
+            {
+                return;
+            }
+            Assert.True(false);
+        }
+
+        [Test]
+        public async Task TestMissingObjectIDSaveObject()
+        {
+            await clearTest();
+            JObject obj = new JObject();
+            try
+            {
+                await _index.SaveObject(obj);
+            }
+            catch (AlgoliaException)
+            {
+                return;
+            }
+            Assert.True(false);
+        }
+
+        [Test]
+        public async Task TestMissingObjectIDSaveObjects()
+        {
+            await clearTest();
+            List<JObject> objs = new List<JObject>();
+            objs.Add(new JObject());
+            try
+            {
+                await _index.SaveObjects(objs);
+            }
+            catch (AlgoliaException)
+            {
+                return;
+            }
+            Assert.True(false);
+        }
+
         public Boolean Include(JArray array, string attribute, string value)
         {
             for (int i = 0; i < array.Count; ++i)
