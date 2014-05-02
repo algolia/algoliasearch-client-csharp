@@ -56,6 +56,7 @@ namespace Algolia.Search
             hitsPerPage = 20;
             this.query = query;
             queryType = QueryType.PREFIX_LAST;
+            analytics = synonyms = replaceSynonyms = true;
         }
 
         public Query()
@@ -68,6 +69,7 @@ namespace Algolia.Search
             maxValuesPerFacets = 0;
             hitsPerPage = 20;
             queryType = QueryType.PREFIX_LAST;
+            analytics = synonyms = replaceSynonyms = true;
         }
 
         /// <summary>
@@ -154,6 +156,33 @@ namespace Algolia.Search
         public Query EnableDistinct(bool enabled)
         {
             distinct = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false, this query will not be taken into account in analytics feature. Default to true.
+        /// </summary>
+        public Query EnableAnalytics(bool enabled)
+        {
+            analytics = enabled;
+            return this;
+        }
+
+        /// <summary>
+        ///  If set to false, this query will not use synonyms defined in configuration. Default to true.
+        /// </summary>
+        public Query EnableSynonyms(bool enabled)
+        {
+            synonyms = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false, words matched via synonyms expansion will not be replaced by the matched synonym in highlight result. Default to true.
+        /// </summary>
+        public Query EnableReplaceSynonymsInHighlight(bool enabled)
+        {
+            replaceSynonyms = enabled;
             return this;
         }
 
@@ -390,6 +419,24 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "distinct=1";
             }
+            if (analytics)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "analytics=1";
+            }
+            if (synonyms)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "synonyms=1";
+            }
+            if (replaceSynonyms)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "replaceSynonymsInHighlight=1";
+            }
             if (advancedSyntax)
             {
                 if (stringBuilder.Length > 0)
@@ -468,6 +515,9 @@ namespace Algolia.Search
         private bool getRankingInfo;
         private bool distinct;
         private bool advancedSyntax;
+        private bool analytics;
+        private bool synonyms;
+        private bool replaceSynonyms;
         private int page;
         private int hitsPerPage;
         private string tags;
