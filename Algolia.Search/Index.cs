@@ -238,10 +238,15 @@ namespace Algolia.Search
         {
             string paramsString = q.GetQueryString();
             if (paramsString.Length > 0)
-                return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}?{1}", _urlIndexName, paramsString));
+            {
+                Dictionary<string, object> body = new Dictionary<string, object>();
+                body["params"] = paramsString;
+                return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/query", _urlIndexName), body);
+            }
             else
+            {
                 return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}", _urlIndexName));
-
+            }
         }
 
         /// <summary>
