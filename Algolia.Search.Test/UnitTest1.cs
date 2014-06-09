@@ -572,6 +572,7 @@ namespace NUnit.Framework.Test
             query.SetMinWordSizeToAllowTwoTypos(2);
             query.EnableDistinct(true);
             query.GetRankingInfo(true);
+            query.EnableTyposOnNumericTokens(false);
             query.SetAttributesToRetrieve(attr);
             query.SetAttributesToSnippet(attr);
             query.InsideBoundingBox(0, 0, 100, 100);
@@ -609,6 +610,7 @@ namespace NUnit.Framework.Test
             query.EnableDistinct(true);
             query.EnableAdvancedSyntax(true);
             query.GetRankingInfo(true);
+            query.EnableTypoTolerance(false);
             query.SetAttributesToRetrieve(attr);
             query.SetAttributesToSnippet(attr);
             query.SetMaxValuesPerFacets(1);
