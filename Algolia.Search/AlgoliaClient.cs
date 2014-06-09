@@ -315,7 +315,6 @@ namespace Algolia.Search
                     else if (responseMsg.StatusCode != HttpStatusCode.BadRequest && responseMsg.StatusCode != HttpStatusCode.Forbidden && responseMsg.StatusCode != HttpStatusCode.NotFound)
                     {
                         string serializedJSON = await responseMsg.Content.ReadAsStringAsync();
-                        
                         JObject obj = JObject.Parse(serializedJSON);
                         string message = (string)obj["message"];
                         throw new AlgoliaException(message);
@@ -324,6 +323,10 @@ namespace Algolia.Search
                 catch (AlgoliaException)
                 {
                     throw;
+                }
+                catch (HttpRequestException)
+                {
+                    continue;
                 }
                 catch (Exception ex)
                 {
