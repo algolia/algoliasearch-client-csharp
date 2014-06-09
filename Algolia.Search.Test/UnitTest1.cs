@@ -480,22 +480,26 @@ namespace NUnit.Framework.Test
             var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
             await _index.WaitTask(res["taskID"].ToString());
             var key = await _client.AddUserKey(new String[] { "search" });
+            System.Threading.Thread.Sleep(300);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
             var getKey = await _client.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
             var keys = await _client.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
             var task = await _client.DeleteUserKey(key["key"].ToString());
+            System.Threading.Thread.Sleep(300);
             keys = await _client.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
 
             key = await _index.AddUserKey(new String[] { "search" });
+            System.Threading.Thread.Sleep(300);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
             getKey = await _index.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
             keys = await _index.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
             task = await _index.DeleteUserKey(key["key"].ToString());
+            System.Threading.Thread.Sleep(300);
             keys = await _index.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
         }
