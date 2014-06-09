@@ -56,7 +56,7 @@ namespace Algolia.Search
             hitsPerPage = 20;
             this.query = query;
             queryType = QueryType.PREFIX_LAST;
-            analytics = synonyms = replaceSynonyms = true;
+            analytics = synonyms = replaceSynonyms = typoTolerance = allowTyposOnNumericTokens = true;
         }
 
         public Query()
@@ -69,7 +69,7 @@ namespace Algolia.Search
             maxValuesPerFacets = 0;
             hitsPerPage = 20;
             queryType = QueryType.PREFIX_LAST;
-            analytics = synonyms = replaceSynonyms = true;
+            analytics = synonyms = replaceSynonyms = typoTolerance = allowTyposOnNumericTokens = true;
         }
 
         /// <summary>
@@ -183,6 +183,24 @@ namespace Algolia.Search
         public Query EnableReplaceSynonymsInHighlight(bool enabled)
         {
             replaceSynonyms = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false, disable typo-tolerance. Default to true.
+        /// </summary>
+        public Query EnableTypoTolerance(bool enabled)
+        {
+            typoTolerance = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false, disable typo-tolerance on numeric tokens. Default to true.
+        /// </summary> 
+        public Query EnableTyposOnNumericTokens(bool enabled)
+        {
+            allowTyposOnNumericTokens = enabled;
             return this;
         }
 
@@ -437,6 +455,18 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "replaceSynonymsInHighlight=1";
             }
+            if (!typoTolerance)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "typoTolerance=false";
+            }
+            if (!allowTyposOnNumericTokens)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "allowTyposOnNumericTokens=false";
+            }
             if (advancedSyntax)
             {
                 if (stringBuilder.Length > 0)
@@ -518,6 +548,8 @@ namespace Algolia.Search
         private bool analytics;
         private bool synonyms;
         private bool replaceSynonyms;
+        private bool typoTolerance;
+        private bool allowTyposOnNumericTokens;
         private int page;
         private int hitsPerPage;
         private string tags;
