@@ -215,15 +215,17 @@ You can use the following optional arguments on Query class:
   * **PREFIX_ALL**: all query words are interpreted as prefixes,
   * **PREFIX_LAST**: only the last word is interpreted as a prefix (default behavior),
   * **PREFIX_NONE**: no query word is interpreted as a prefix. This option is not recommended.
- * **SetOptionalWords**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
+ * **EnableTypoTolerance**: if set to false, disable the typo-tolerance. Defaults to true.
  * **SetMinWordSizeToAllowOneTypo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
  * **SetMinWordSizeToAllowTwoTypos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+ * **EnableTyposOnNumericTokens**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to true.
  * **EnableAdvancedSyntax**: Enable the advanced query syntax. Defaults to 0 (false).
     * **Phrase query**: a phrase query defines a particular sequence of terms. A phrase query is build by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo-tolerance is _disabled_ on phrase queries.
     * **Prohibit operator**: The prohibit operator excludes records that contain the term after the `-` symbol. For example `search -engine` will retrieve records containing `search` but not `engine`.
  * **EnableAnalytics**: If set to false, this query will not be taken into account in analytics feature. Default to true.
  * **EnableSynonyms**: If set to false, this query will not use synonyms defined in configuration. Default to true.
  * **EnableReplaceSynonymsInHighlight**: If set to false, words matched via synonyms expansion will not be replaced by the matched synonym in highlight result. Default to true.
+ * **SetOptionalWords**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
 
 #### Pagination parameters
 
