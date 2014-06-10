@@ -300,7 +300,7 @@ namespace Algolia.Search
          * Filter the query by a list of facets. Each facet is encoded as `attributeName:value`. For example: `["category:Book","author:John%20Doe"].
          */
         public Query SetFacetFilters(IEnumerable<string> facets) {
-            this.facetFilters = String.Join(",", facets, 0, -1);
+            this.facetFilters = string.Join(",", facets);
     	    return this;
         }
 
@@ -391,7 +391,7 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "facetFilters=";
-                stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(facetFilters);
+                stringBuilder += Uri.EscapeDataString(facetFilters);
             }
             if (maxValuesPerFacets != 0)
             {
