@@ -1,4 +1,5 @@
-﻿/*
+﻿using Newtonsoft.Json.Linq;
+/*
  * Copyright (c) 2013 Algolia
  * http://www.algolia.com/
  * 
@@ -307,6 +308,12 @@ namespace Algolia.Search
         public Query SetFacetFilters(string facets)
         {
             this.facetFilters = facets;
+            return this;
+        }
+
+        public Query SetFacetFilters(JArray facets)
+        {
+            this.facetFilters = Newtonsoft.Json.JsonConvert.SerializeObject(facets);
             return this;
         }
 
