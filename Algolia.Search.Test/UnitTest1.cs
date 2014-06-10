@@ -259,7 +259,8 @@ namespace NUnit.Framework.Test
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             res = await _client.ListIndexes();
             Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
-            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            task = await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            await _index.WaitTask(task["taskID"].ToObject<String>());
             res = await _client.ListIndexes();
             Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
         }
@@ -310,6 +311,7 @@ namespace NUnit.Framework.Test
             var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
             await _index.WaitTask(task["taskID"].ToString());
             task = await _client.CopyIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
+            await _index.WaitTask(task["taskID"].ToString());
             var res = await index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
@@ -363,9 +365,11 @@ namespace NUnit.Framework.Test
         {
             await clearTest();
             // Add one object to be sure the test will not fail because index is empty
-            var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
-            res = await _index.Search(new Query());
+            var task = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
+            await _index.WaitTask(task["taskID"].ToObject<String>());
+            Assert.IsFalse(string.IsNullOrWhiteSpace(task["objectID"].ToString()));
+            var res = await _index.Search(new Query());
+            Assert.AreEqual("1", res["nbHits"].ToObject<String>());
             Assert.AreEqual("San Francisco", res["hits"][0]["name"].ToString());
         }
 
@@ -375,6 +379,7 @@ namespace NUnit.Framework.Test
             await clearTest();
             var res = await _index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(population)"", ""asc(name)""]}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
+            await _index.WaitTask(res["taskID"].ToObject<String>());
             res = await _index.GetSettings();
             await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
@@ -505,7 +510,7 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public void BadClientCreation()
+        public async void BadClientCreation()
         {
             string[] _hosts = new string[] { "localhost.algolia.com:8080", "" };
             try
@@ -546,7 +551,7 @@ namespace NUnit.Framework.Test
             try
             {
                 var badClient = new AlgoliaClient(_testApplicationID, _testApiKey, _hosts);
-                badClient.ListIndexes();
+                await badClient.ListIndexes();
                 Assert.Fail();
             }
             catch (Exception)
@@ -642,6 +647,30 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(1, res["results"][0]["hits"].ToObject<JArray>().Count);
             Assert.AreEqual("Jimmie", res["results"][0]["hits"][0]["firstname"].ToString());
             await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+        }
+
+        [Test]
+        public async Task TestFacets()
+        {
+            await clearTest();
+            await _index.SetSettings(JObject.Parse(@"{""attributesForFacetting"":[""city"", ""stars"", ""facilites""]}"));
+            JObject task = await _index.AddObjects(new JObject[] {
+                JObject.Parse(@"{""name"": ""Hotel A"", ""stars"":""*"", ""facilities"":[""wifi"", ""bath"", ""spa""], ""city"": ""Paris""}"),
+                JObject.Parse(@"{""name"": ""Hotel B"", ""stars"":""*"", ""facilities"":[""wifi""], ""city"": ""Paris""}"),
+                JObject.Parse(@"{""name"": ""Hotel C"", ""stars"":""**"", ""facilities"":[""bath""], ""city"": ""San Francisco""}"),
+                JObject.Parse(@"{""name"": ""Hotel D"", ""stars"":""****"", ""facilities"":[""spa""], ""city"": ""Paris""}"),
+                JObject.Parse(@"{""name"": ""Hotel E"", ""stars"":""****"", ""facilities"":[""spa""], ""city"": ""New York""}")
+            });
+            await _index.WaitTask((task["taskID"].ToString()));
+            JObject res = await _index.Search(new Query().SetFacetFilters(new String[] { "stars:****", "city:Paris" }).SetFacets(new String[] { "stars" }));
+            Assert.AreEqual("1", res["nbHits"].ToString());
+            Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
+            res = await _index.Search(new Query().SetFacetFilters("[\"stars:****\",\"city:Paris\"]").SetFacets(new String[] { "stars" }));
+            Assert.AreEqual("1", res["nbHits"].ToString());
+            Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
+            res = await _index.Search(new Query().SetFacetFilters(JArray.Parse(@"[""stars:****"",""city:Paris""]")).SetFacets(new String[] { "stars" }));
+            Assert.AreEqual("1", res["nbHits"].ToString());
+            Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
         }
     }
 }
