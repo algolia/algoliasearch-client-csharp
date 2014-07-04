@@ -562,11 +562,10 @@ namespace NUnit.Framework.Test
         public async Task TestBigQueryAll()
         {
             await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
+            await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
                 , ""Age"":42, ""lastname"":""Barninger"", ""_tags"": ""people""
                 , ""_geoloc"":{""lat"":0.853409, ""lng"":0.348800}}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            task = await _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
+            var task = await _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
             await _index.WaitTask(task["taskID"].ToString());
             Query query = new Query("Jimmie");
             query.SetPage(0);
@@ -600,10 +599,10 @@ namespace NUnit.Framework.Test
         public async Task TestBigQueryNone()
         {
             await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
+            await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
                 , ""Age"":42, ""lastname"":""Barninger"", ""_tags"": ""people""
                 , ""_geoloc"":{""lat"":0.853409, ""lng"":0.348800}}"));
-            await _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
+            var task = await _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
             await _index.WaitTask(task["taskID"].ToString());
             Query query = new Query("Jimmie");
             query.SetPage(0);
