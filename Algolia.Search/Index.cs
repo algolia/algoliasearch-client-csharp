@@ -118,6 +118,26 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Get several objects from this index
+        /// </summary>
+        /// <param name="objectIDs">the array of unique identifier of objects to retrieve</param>
+        /// <returns></returns> 
+        public Task<JObject> GetObjects(IEnumerable<String> objectIDs)
+        {
+            JArray requests = new JArray();
+            foreach (String id in objectIDs)
+            {
+                JObject request = new JObject();
+                request.Add("indexName", this._indexName);
+                request.Add("objectID", id);
+                requests.Add(request);
+            }
+            JObject body = new JObject();
+            body.Add("requests", requests);
+            return _client.ExecuteRequest("POST", "/1/indexes/*/objects", body);
+        }
+
+        /// <summary>
         /// Update partially an object (only update attributes passed in argument).
         /// </summary>
         /// <param name="partialObject">contains the object attributes to override, the object must contains an objectID attribute</param>
@@ -230,6 +250,29 @@ namespace Algolia.Search
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
 
+        /// <summary>
+        /// Delete all objects matching a query
+        /// </summary>
+        /// <param name="query">the query.</param>
+        async public Task DeleteByQuery(Query query)
+        {
+            query.SetAttributesToRetrieve(new string[]{"objectID"});
+            query.SetNbHitsPerPage(1000);
+
+            JObject result = await this.Search(query);
+            int i = 0;
+            while (result["nbHits"].ToObject<int>() != 0)
+            {
+                string[] requests = new string[result["nbHits"].ToObject<int>()];
+                foreach (JObject hit in result["hits"])
+                {
+                    requests[i++] =  hit["objectID"].ToObject<string>();
+                }
+                var task = await this.DeleteObjects(requests);
+                await this.WaitTask(task["taskID"].ToObject<String>());
+                result = await this.Search(query);
+            }
+        }
 
         /// <summary>
         /// Search inside the index.

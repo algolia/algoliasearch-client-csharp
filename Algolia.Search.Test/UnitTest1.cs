@@ -173,6 +173,21 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
+        public async Task TaskDeleteByQuery()
+        {
+            await clearTest();
+            List<JObject> objs = new List<JObject>();
+            objs.Add(JObject.Parse(@"{""name"":""San Francisco""}"));
+            objs.Add(JObject.Parse(@"{""name"":""San Jose""}"));
+            objs.Add(JObject.Parse(@"{""name"":""Washington""}"));
+            var task = await _index.AddObjects(objs);
+            await _index.WaitTask(task["taskID"].ToString());
+            await _index.DeleteByQuery(new Query("San"));
+            var res = await _index.Search(new Query(""));
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+        }
+
+        [Test]
         public async Task TestMissingObjectIDPartialUpdateObject()
         {
             await clearTest();
@@ -274,6 +289,18 @@ namespace NUnit.Framework.Test
             var res = await _index.GetObject("àlgol?à");
             Assert.AreEqual("àlgol?à", res["objectID"].ToString());
             Assert.AreEqual("Jimmie", res["firstname"].ToString());
+        }
+
+        [Test]
+        public async Task TestGetObjects()
+        {
+            await clearTest();
+            await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""objectID"":""1""}"));
+            var task = await _index.AddObject(JObject.Parse(@"{""name"":""Los Angeles"", ""objectID"":""2""}"));
+            await _index.WaitTask(task["taskID"].ToString());
+            var res = await _index.GetObjects(new string[2]{"1", "2"});
+            Assert.AreEqual("San Francisco", res["results"][0]["name"].ToString());
+            Assert.AreEqual("Los Angeles", res["results"][1]["name"].ToString());
         }
 
         [Test]
