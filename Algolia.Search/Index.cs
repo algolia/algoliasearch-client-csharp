@@ -260,9 +260,9 @@ namespace Algolia.Search
             query.SetNbHitsPerPage(1000);
 
             JObject result = await this.Search(query);
-            int i = 0;
             while (result["nbHits"].ToObject<int>() != 0)
             {
+                int i = 0;
                 JArray hits = (JArray)result["hits"];
                 string[] requests = new string[hits.Count];
                 foreach (JObject hit in hits)
