@@ -263,8 +263,9 @@ namespace Algolia.Search
             int i = 0;
             while (result["nbHits"].ToObject<int>() != 0)
             {
-                string[] requests = new string[result["nbHits"].ToObject<int>()];
-                foreach (JObject hit in result["hits"])
+                JArray hits = (JArray)result["hits"];
+                string[] requests = new string[hits.Count];
+                foreach (JObject hit in hits)
                 {
                     requests[i++] =  hit["objectID"].ToObject<string>();
                 }
