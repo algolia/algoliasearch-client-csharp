@@ -444,23 +444,23 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "distinct=1";
             }
-            if (analytics)
+            if (!analytics)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "analytics=1";
+                stringBuilder += "analytics=0";
             }
-            if (synonyms)
+            if (!synonyms)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "synonyms=1";
+                stringBuilder += "synonyms=0";
             }
-            if (replaceSynonyms)
+            if (!replaceSynonyms)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "replaceSynonymsInHighlight=1";
+                stringBuilder += "replaceSynonymsInHighlight=0";
             }
             if (!typoTolerance)
             {
