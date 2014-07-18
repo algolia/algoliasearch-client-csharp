@@ -39,6 +39,7 @@ Table of Content
 1. [Search](#search)
 1. [Get an object](#get-an-object)
 1. [Delete an object](#delete-an-object)
+1. [Delete by query](#delete-by-query)
 1. [Index settings](#index-settings)
 1. [List indexes](#list-indexes)
 1. [Delete an index](#delete-an-index)
@@ -235,7 +236,7 @@ You can use the following optional arguments on Query class:
 #### Geo-search parameters
 
  * **AroundLatitudeLongitude(float, float, int)**: search for entries around a given latitude/longitude.<br/>You specify the maximum distance in meters with the **radius** parameter (in meters).<br/>At indexing, you should specify geoloc of an object with the `_geoloc` attribute (in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `)
- * **AroundLatitudeLongitude(flot, float, int, int)**: search for entries around a given latitude/longitude with a given precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
+ * **AroundLatitudeLongitude(float, float, int, int)**: search for entries around a given latitude/longitude with a given precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
 
  * **InsideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `insideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)`).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
 
@@ -317,6 +318,29 @@ The server response will look like:
 ```
 
 
+Multi-queries
+--------------
+
+You can send multiple queries with a single API call using a batch of queries:
+
+```csharp
+// perform 3 queries in a single API call:
+//  - 1st query targets index `categories`
+//  - 2nd and 3rd queries target index `products`
+
+var indexQueries = new List<IndexQuery>();
+
+indexQuery.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPerPage(3)));
+indexQuery.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetTagFilters("promotion"));
+indexQuery.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
+
+var res = await _client.MultipleQueries(indexQuery);
+
+System.Diagnostics.Debug.WriteLine(res["results"]);
+```
+
+
+
 
 
 
@@ -337,6 +361,12 @@ res = await index.GetObject("myID", new String[] { "firstname" });
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
+You can also retrieve a set of objects:
+
+```csharp
+res = await index.GetObjects(new String[] {"myID1", "myID2"});
+```
+
 Delete an object
 -------------
 
@@ -345,6 +375,18 @@ You can delete an object using its `objectID`:
 ```csharp
 await index.DeleteObject("myID");
 ```
+
+
+Delete by query
+-------------
+
+You can delete all objects matching a single query with the following code. Internally, the API client performs the query, delete all matching hits, wait until the deletions have been applied and so on.
+
+```csharp
+Query query = /* [ ... ] */;
+index.DeleteByQuery(query);
+```
+
 
 Index Settings
 -------------
@@ -356,6 +398,8 @@ You can retrieve all settings using the `GetSettings` function. The result will 
  * **attributesToIndex**: (array of strings) the list of fields you want to index.<br/>If set to null, all textual and numerical attributes of your objects are indexed, but you should update it to get optimal results.<br/>This parameter has two important uses:
   * *Limit the attributes to index*.<br/>For example if you store a binary image in base64, you want to store it and be able to retrieve it but you don't want to search in the base64 string.
   * *Control part of the ranking*.<br/>(see the ranking parameter for full explanation) Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable this behavior if you add your attribute inside `unordered(AttributeName)`, for example `attributesToIndex: ["title", "unordered(text)"]`.
+**Notes**: All numerical attributes are automatically indexed as numerical filters. If you don't need filtering on some of your numerical attributes, please consider sending them as strings to speed up the indexing.<br/>
+You can decide to have the same priority for two attributes by passing them in the same string using comma as separator. For example `title` and `alternative_title` have the same priority in this example, which is different than text priority: `attributesToIndex:["title,alternative_title", "text"]`
  * **attributesForFaceting**: (array of strings) The list of fields you want to use for faceting. All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
  * **attributeForDistinct**: The attribute name used for the `Distinct` feature. This feature is similar to the SQL "distinct" keyword: when enabled in query with the `distinct=1` parameter, all hits containing a duplicate value for this attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed. **Note**: This feature is disabled if the query string is empty and there isn't any `tagFilters`, nor any `facetFilters`, nor any `numericFilters` parameters.
  * **ranking**: (array of strings) controls the way results are sorted.<br/>We have nine available criteria: 
