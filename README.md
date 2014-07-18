@@ -39,6 +39,7 @@ Table of Content
 1. [Search](#search)
 1. [Get an object](#get-an-object)
 1. [Delete an object](#delete-an-object)
+1. [Delete by query](#delete-by-query)
 1. [Index settings](#index-settings)
 1. [List indexes](#list-indexes)
 1. [Delete an index](#delete-an-index)
@@ -317,6 +318,29 @@ The server response will look like:
 ```
 
 
+Multi-queries
+--------------
+
+You can send multiple queries with a single API call using a batch of queries:
+
+```csharp
+// perform 3 queries in a single API call:
+//  - 1st query targets index `categories`
+//  - 2nd and 3rd queries target index `products`
+
+var indexQueries = new List<IndexQuery>();
+
+indexQuery.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPerPage(3)));
+indexQuery.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetTagFilters("promotion"));
+indexQuery.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
+
+var res = await _client.MultipleQueries(indexQuery);
+
+System.Diagnostics.Debug.WriteLine(res["results"]);
+```
+
+
+
 
 
 
@@ -351,6 +375,18 @@ You can delete an object using its `objectID`:
 ```csharp
 await index.DeleteObject("myID");
 ```
+
+
+Delete by query
+-------------
+
+You can delete all objects matching a single query with the following code. Internally, the API client performs the query, delete all matching hits, wait until the deletions have been applied and so on.
+
+```csharp
+Query query = /* [ ... ] */;
+index.DeleteByQuery(query);
+```
+
 
 Index Settings
 -------------
