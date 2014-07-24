@@ -323,9 +323,21 @@ namespace Algolia.Search
             return this;
         }
 
+
         /**
-         * 
+         * <summary>
+         * List of attributes you want to use for textual search (must be a subset of the attributesToIndex 
+         * index setting). Attributes are separated with a comma (for example @"name,address").
+         * You can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")).
+         * By default, all attributes specified in attributesToIndex settings are used to search.
+         * </summary>
          */
+        public Query RestrictSearchableAttributes(String attributes)
+        {
+            this.restrictSearchableAttributes = attributes;
+            return this;
+        }
+
         public Query EnableAdvancedSyntax(bool enabled)
         {
             this.advancedSyntax = enabled;
@@ -526,7 +538,13 @@ namespace Algolia.Search
                 stringBuilder += "optionalWords=";
                 stringBuilder += Uri.EscapeDataString(optionalWords);
             }
-
+            if (restrictSearchableAttributes != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "restrictSearchableAttributes=";
+                stringBuilder += Uri.EscapeDataString(restrictSearchableAttributes);
+            }
             switch (queryType) {
             case QueryType.PREFIX_ALL:
                 if (stringBuilder.Length > 0)
@@ -569,5 +587,6 @@ namespace Algolia.Search
         private IEnumerable<string> facets;
         private string facetFilters;
         private int maxValuesPerFacets;
+        private string restrictSearchableAttributes;
     }
 }
