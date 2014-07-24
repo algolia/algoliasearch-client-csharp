@@ -73,7 +73,7 @@ namespace Algolia.Search
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-
+ 
         /// <summary>
         ///Algolia Search initialization
         /// </summary>
@@ -101,6 +101,27 @@ namespace Algolia.Search
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
+        /*
+         * <summary>
+         * Add security tag header (see http://www.algolia.com/doc/guides/csharp#SecurityUser for more details)
+         * </summary>
+         */
+        public void SetSecurityTags(string tag)
+        {
+            HttpClient.DefaultRequestHeaders.Add("X-Algolia-TagFilters", tag);
+        }
+
+        /*
+         * <summary>
+         * Add user-token header (see http://www.algolia.com/doc/guides/csharp#SecurityUser for more details)
+         * </summary>
+         */
+
+        public void SetUserToken(string userToken)
+        {
+            HttpClient.DefaultRequestHeaders.Add("X-Algolia-UserToken", userToken);
         }
 
         /// <summary>
