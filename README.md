@@ -3,8 +3,6 @@ Algolia Search API Client for C#
 
 
 
-
-
 [Algolia Search](http://www.algolia.com) is a search API that provides hosted full-text, numerical and faceted search.
 Algolia’s Search API makes it easy to deliver a great search experience in your apps & websites providing:
 
@@ -19,18 +17,18 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
 
 This C# client let you easily use the Algolia Search API from your App. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
 (Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)
-
 [![Build Status](https://travis-ci.org/algolia/algoliasearch-client-csharp.svg?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-csharp)
 
 
 
 Table of Content
--------------
+================
 **Get started**
 
 1. [Setup](#setup)
 1. [Quick Start](#quick-start)
-1. [Online documentation](#online-documentation)
+1. [Online documentation](#documentation)
+1. [Tutorials](#tutorials)
 
 **Commands reference**
 
@@ -126,25 +124,33 @@ System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jim")));
 
 
 
-Online Documentation
-----------------
+Documentation
+================
 
-Check our [online documentation](http://www.algolia.com/doc):
- * [Initial Import](http://www.algolia.com/doc#InitialImport)
- * [Ranking &amp; Relevance](http://www.algolia.com/doc#RankingRelevance)
- * [Settings](http://www.algolia.com/doc#Settings)
- * [Search](http://www.algolia.com/doc#Search)
- * [Incremental Updates](http://www.algolia.com/doc#IncrementalUpdates)
- * [Reindexing](http://www.algolia.com/doc#Reindexing)
- * [Numeric-Search](http://www.algolia.com/doc#Numeric-Search)
- * [Category-Search](http://www.algolia.com/doc#Category-Search)
- * [Faceting](http://www.algolia.com/doc#Faceting)
- * [Geo-Search](http://www.algolia.com/doc#Geo-Search)
- * [Security](http://www.algolia.com/doc#Security)
- * [Indexing Several Types](http://www.algolia.com/doc#IndexingSeveralTypes)
+Check our [online documentation](http://www.algolia.com/doc/guides/csharp):
+ * [Initial Import](http://www.algolia.com/doc/guides/csharp#InitialImport)
+ * [Ranking &amp; Relevance](http://www.algolia.com/doc/guides/csharp#RankingRelevance)
+ * [Indexing](http://www.algolia.com/doc/guides/csharp#Indexing)
+ * [Search](http://www.algolia.com/doc/guides/csharp#Search)
+ * [Sorting](http://www.algolia.com/doc/guides/csharp#Sorting)
+ * [Filtering](http://www.algolia.com/doc/guides/csharp#Filtering)
+ * [Faceting](http://www.algolia.com/doc/guides/csharp#Faceting)
+ * [Geo-Search](http://www.algolia.com/doc/guides/csharp#Geo-Search)
+ * [Security](http://www.algolia.com/doc/guides/csharp#Security)
  * [REST API](http://www.algolia.com/doc/rest)
 
+Tutorials
+================
 
+Check our [tutorials](http://www.algolia.com/doc/tutorials):
+ * [Searchbar with auto-completion](http://www.algolia.com/doc/tutorials/auto-complete)
+ * [Searchbar with multi-categories auto-completion](http://www.algolia.com/doc/tutorials/multi-auto-complete)
+ * [Instant-search](http://www.algolia.com/doc/tutorials/instant-search)
+
+
+
+Commands reference
+==================
 
 
 
