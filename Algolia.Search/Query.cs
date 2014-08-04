@@ -249,6 +249,33 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Search for entries around a given latitude/longitude (using IP geolocation).
+        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// </summary>
+        /// <param name="radius">set the maximum distance in meters.</param>
+        /// <returns></returns>
+        public Query AroundLatitudeLongitudeViaIP(int radius)
+        {
+            aroundLatLong = "aroundRadius=" + radius;
+	        aroundLatLongViaIP = true;
+            return this;
+        }
+
+        /// <summary>
+        /// Search for entries around a given latitude/longitude (using IP geolocation).
+        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// </summary>
+        /// <param name="radius">set the maximum distance in meters.</param>
+        /// <param name="precision">set the precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).</param>
+        /// <returns></returns>
+        public Query AroundLatitudeLongitudeViaIP(int radius, int precision)
+        {
+            aroundLatLong = "aroundRadius=" + radius + "&aroundPrecision=" + precision;
+	    aroundLatLongViaIP = true;
+            return this;
+        }
+
+        /// <summary>
         /// Search for entries inside a given area defined by the two extreme points of a rectangle.
         /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
         /// </summary>
@@ -525,6 +552,11 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += aroundLatLong;
             }
+	    if (aroundLatLongViaIP) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "aroundLatLngViaIP=true";
+	    }
             if (query != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -581,6 +613,7 @@ namespace Algolia.Search
         private string numerics;
         private string insideBoundingBox;
         private string aroundLatLong;
+        private bool aroundLatLongViaIP;
         private string query;
         private string optionalWords;
         private QueryType queryType;
