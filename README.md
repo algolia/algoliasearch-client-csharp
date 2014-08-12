@@ -154,16 +154,16 @@ System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jim")));
 Documentation
 ================
 
-Check our [online documentation](http://www.algolia.com/doc/guides/csharp):
- * [Initial Import](http://www.algolia.com/doc/guides/csharp#InitialImport)
- * [Ranking &amp; Relevance](http://www.algolia.com/doc/guides/csharp#RankingRelevance)
- * [Indexing](http://www.algolia.com/doc/guides/csharp#Indexing)
- * [Search](http://www.algolia.com/doc/guides/csharp#Search)
- * [Sorting](http://www.algolia.com/doc/guides/csharp#Sorting)
- * [Filtering](http://www.algolia.com/doc/guides/csharp#Filtering)
- * [Faceting](http://www.algolia.com/doc/guides/csharp#Faceting)
- * [Geo-Search](http://www.algolia.com/doc/guides/csharp#Geo-Search)
- * [Security](http://www.algolia.com/doc/guides/csharp#Security)
+Check our [online documentation](http://www.algolia.com/doc/csharp):
+ * [Initial Import](http://www.algolia.com/doc/csharp#InitialImport)
+ * [Ranking &amp; Relevance](http://www.algolia.com/doc/csharp#RankingRelevance)
+ * [Indexing](http://www.algolia.com/doc/csharp#Indexing)
+ * [Search](http://www.algolia.com/doc/csharp#Search)
+ * [Sorting](http://www.algolia.com/doc/csharp#Sorting)
+ * [Filtering](http://www.algolia.com/doc/csharp#Filtering)
+ * [Faceting](http://www.algolia.com/doc/csharp#Faceting)
+ * [Geo-Search](http://www.algolia.com/doc/csharp#Geo-Search)
+ * [Security](http://www.algolia.com/doc/csharp#Security)
  * [REST API](http://www.algolia.com/doc/rest)
 
 Tutorials
