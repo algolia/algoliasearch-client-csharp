@@ -61,7 +61,7 @@ namespace Algolia.Search
         /// <param name="content">Represent your object that you want to add in the index.</param>
         /// <param name="objectId">Optional. an objectID you want to attribute to this object (if the attribute already exist the old object will be overwrite)</param>
         /// <returns>An object that contains an "objectID" attribute.</returns>
-        public Task<JObject> AddObject(object content, string objectId = null)
+        public Task<JObject> AddObjectAsync(object content, string objectId = null)
         {
             if (string.IsNullOrWhiteSpace(objectId))
             {
@@ -72,13 +72,20 @@ namespace Algolia.Search
                 return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectId)), content);
             }
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.AddObjectAsync"/>
+        /// </summary>
+        public JObject AddObject(object content, string objectId = null)
+        {
+            return AddObjectAsync(content, objectId).Result;
+        }
 
         /// <summary>
         /// Add several objects.
         /// </summary>
         /// <param name="objects">contains an array of objects to add. If the object contains an objectID.</param>
         /// <returns>return an object containing an "objectIDs" attribute (array of string)</returns>
-        public Task<JObject> AddObjects(IEnumerable<object> objects)
+        public Task<JObject> AddObjectsAsync(IEnumerable<object> objects)
         {
             List<object> requests = new List<object>();
             foreach (object obj in objects) {
@@ -91,6 +98,13 @@ namespace Algolia.Search
             batch["requests"] = requests;
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.AddObjectsAsync"/>
+        /// </summary>
+        public JObject AddObjects(IEnumerable<object> objects)
+        {
+            return AddObjectsAsync(objects).Result;
+        }
 
         /// <summary>
         /// Get an object from this index
@@ -98,7 +112,7 @@ namespace Algolia.Search
         /// <param name="objectID">the unique identifier of the object to retrieve</param>
         /// <param name="attributesToRetrieve"> if set, contains the list of attributes to retrieve</param>
         /// <returns></returns>
-        public Task<JObject> GetObject(string objectID, IEnumerable<string> attributesToRetrieve = null)
+        public Task<JObject> GetObjectAsync(string objectID, IEnumerable<string> attributesToRetrieve = null)
         {
             if (attributesToRetrieve == null)
             {
@@ -116,13 +130,20 @@ namespace Algolia.Search
                 return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/{1}?attributes={2}", _urlIndexName, Uri.EscapeDataString(objectID), attributes));
             }
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.GetObjectAsync"/>
+        /// </summary>
+        public JObject GetObject(string objectID, IEnumerable<string> attributesToRetrieve = null)
+        {
+            return GetObjectAsync(objectID, attributesToRetrieve).Result;
+        }
 
         /// <summary>
         /// Get several objects from this index
         /// </summary>
         /// <param name="objectIDs">the array of unique identifier of objects to retrieve</param>
         /// <returns></returns> 
-        public Task<JObject> GetObjects(IEnumerable<String> objectIDs)
+        public Task<JObject> GetObjectsAsync(IEnumerable<String> objectIDs)
         {
             JArray requests = new JArray();
             foreach (String id in objectIDs)
@@ -136,13 +157,20 @@ namespace Algolia.Search
             body.Add("requests", requests);
             return _client.ExecuteRequest("POST", "/1/indexes/*/objects", body);
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.GetObjectsAsync"/>
+        /// </summary>
+        public JObject GetObjects(IEnumerable<String> objectIDs)
+        {
+            return GetObjectsAsync(objectIDs).Result;
+        }
 
         /// <summary>
         /// Update partially an object (only update attributes passed in argument).
         /// </summary>
         /// <param name="partialObject">contains the object attributes to override, the object must contains an objectID attribute</param>
         /// <returns>return an object containing an "updatedAt" attribute.</returns>
-        public Task<JObject> PartialUpdateObject(JObject partialObject)
+        public Task<JObject> PartialUpdateObjectAsync(JObject partialObject)
         {
             if (partialObject["objectID"] == null)
             {
@@ -151,13 +179,20 @@ namespace Algolia.Search
             string objectID = (string)partialObject["objectID"];
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/{1}/partial", _urlIndexName, Uri.EscapeDataString(objectID)), partialObject);
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.PartialUpdateObjectAsync"/>
+        /// </summary>
+        public JObject PartialUpdateObject(JObject partialObject)
+        {
+            return PartialUpdateObjectAsync(partialObject).Result;
+        }
 
         /// <summary>
         /// Partially Override the content of several objects
         /// </summary>
         /// <param name="objects">contains an array of objects to update (each object must contains a objectID attribute).</param>
         /// <returns>return an object containing an "objectIDs" attribute (array of string)</returns>
-        public Task<JObject> PartialUpdateObjects(IEnumerable<JObject> objects)
+        public Task<JObject> PartialUpdateObjectsAsync(IEnumerable<JObject> objects)
         {
             List<object> requests = new List<object>();
             foreach (JObject obj in objects)
@@ -176,13 +211,20 @@ namespace Algolia.Search
             batch["requests"] = requests;
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.PartialUpdateObjectsAsync"/>
+        /// </summary>
+        public JObject PartialUpdateObjects(IEnumerable<JObject> objects)
+        {
+            return PartialUpdateObjectsAsync(objects).Result;
+        }
 
         /// <summary>
         /// Override the content of object.
         /// </summary>
         /// <param name="obj">contains the object to save, the object must contains an objectID attribute.</param>
         /// <returns>return an object containing an "updatedAt" attribute.</returns>
-        public Task<JObject> SaveObject(JObject obj)
+        public Task<JObject> SaveObjectAsync(JObject obj)
         {
             if (obj["objectID"] == null)
             {
@@ -191,13 +233,20 @@ namespace Algolia.Search
             string objectID = (string)obj["objectID"];
             return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), obj);
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.SaveObjectAsync"/>
+        /// </summary>
+        public JObject SaveObject(JObject obj)
+        {
+            return SaveObjectAsync(obj).Result;
+        }
 
         /// <summary>
         /// Override the content of several objects.
         /// </summary>
         /// <param name="objects">contains an array of objects to update (each object must contains a objectID attribute).</param>
         /// <returns>return an object containing an "objectIDs" attribute (array of string)</returns>
-        public Task<JObject> SaveObjects(IEnumerable<JObject> objects)
+        public Task<JObject> SaveObjectsAsync(IEnumerable<JObject> objects)
         {
             List<object> requests = new List<object>();
             foreach (JObject obj in objects)
@@ -216,24 +265,38 @@ namespace Algolia.Search
             batch["requests"] = requests;
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.SaveObjectsAsync"/>
+        /// </summary>
+        public JObject SaveObjects(IEnumerable<JObject> objects)
+        {
+            return SaveObjectsAsync(objects).Result;
+        }
 
         /// <summary>
         /// Delete an object from the index.
         /// </summary>
         /// <param name="objectID">the unique identifier of object to delete.</param>
         /// <returns>return an object containing a "deletedAt" attribute.</returns>
-        public Task<JObject> DeleteObject(string objectID)
+        public Task<JObject> DeleteObjectAsync(string objectID)
         {
             if (string.IsNullOrWhiteSpace(objectID))
                 throw new ArgumentOutOfRangeException("objectID", "objectID is required.");
             return _client.ExecuteRequest("DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)));
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.DeleteObjectAsync"/>
+        /// </summary>
+        public JObject DeleteObject(string objectID)
+        {
+            return DeleteObjectAsync(objectID).Result;
         }
 
         /// <summary>
         /// Delete several objects.
         /// </summary>
         /// <param name="objects">contains an array of objectIDs to delete.</param>
-        public Task<JObject> DeleteObjects(IEnumerable<String> objects)
+        public Task<JObject> DeleteObjectsAsync(IEnumerable<String> objects)
         {
             List<object> requests = new List<object>();
             foreach (object id in objects)
@@ -249,17 +312,24 @@ namespace Algolia.Search
             batch["requests"] = requests;
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.DeleteObjectsAsync"/>
+        /// </summary>
+        public JObject DeleteObjects(IEnumerable<String> objects)
+        {
+            return DeleteObjectsAsync(objects).Result;
+        }
 
         /// <summary>
         /// Delete all objects matching a query
         /// </summary>
         /// <param name="query">the query.</param>
-        async public Task DeleteByQuery(Query query)
+        async public Task DeleteByQueryAsync(Query query)
         {
             query.SetAttributesToRetrieve(new string[]{"objectID"});
             query.SetNbHitsPerPage(1000);
 
-            JObject result = await this.Search(query);
+            JObject result = await this.SearchAsync(query);
             while (result["nbHits"].ToObject<int>() != 0)
             {
                 int i = 0;
@@ -269,16 +339,23 @@ namespace Algolia.Search
                 {
                     requests[i++] =  hit["objectID"].ToObject<string>();
                 }
-                var task = await this.DeleteObjects(requests);
-                await this.WaitTask(task["taskID"].ToObject<String>());
-                result = await this.Search(query);
+                var task = await this.DeleteObjectsAsync(requests);
+                await this.WaitTaskAsync(task["taskID"].ToObject<String>());
+                result = await this.SearchAsync(query);
             }
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.DeleteByQueryAsync"/>
+        /// </summary>
+        public void DeleteByQuery(Query query)
+        {
+            DeleteByQueryAsync(query).Wait();
         }
 
         /// <summary>
         /// Search inside the index.
         /// </summary>
-        public Task<JObject> Search(Query q)
+        public Task<JObject> SearchAsync(Query q)
         {
             string paramsString = q.GetQueryString();
             if (paramsString.Length > 0)
@@ -292,13 +369,20 @@ namespace Algolia.Search
                 return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}", _urlIndexName));
             }
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.SearchAsync"/>
+        /// </summary>
+        public JObject Search(Query q)
+        {
+            return SearchAsync(q).Result;
+        }
 
         /// <summary>
         /// Wait the publication of a task on the server. 
         /// All server task are asynchronous and you can check with this method that the task is published.
         /// </summary>
         /// <param name="taskID">the id of the task returned by server.</param>
-        async public Task WaitTask(string taskID)
+        async public Task WaitTaskAsync(string taskID)
         {
             while (true)
             {
@@ -309,38 +393,69 @@ namespace Algolia.Search
                 await TaskEx.Delay(1000);
             }
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.WaitTaskAsync"/>
+        /// </summary>
+        public void WaitTask(String taskID)
+        {
+            WaitTaskAsync(taskID).Wait();
+        }
 
         /// <summary>
         /// Get settings of this index.
         /// </summary>
         /// <returns>an object containing settings.</returns>
-        public Task<JObject> GetSettings()
+        public Task<JObject> GetSettingsAsync()
         {
             return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/settings", _urlIndexName));
         }
-
         /// <summary>
-        ///  Browse all index content
+        /// Synchronously call <see cref="Index.GetSettingsAsync"/>
         /// </summary>
-        public Task<JObject> Browse(int page)
+        public JObject GetSettings()
         {
-            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/browse?page={1}", _urlIndexName, page));
+            return GetSettingsAsync().Result;
         }
 
         /// <summary>
         ///  Browse all index content
         /// </summary>
-        public Task<JObject> Browse(int page, int hitsPerPage)
+        public Task<JObject> BrowseAsync(int page = 0, int hitsPerPage = 1000)
         {
-            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/browse?page={1}&hitsPerPage={2}", _urlIndexName, page, hitsPerPage));
+            string param = "";
+            if (page != 0)
+                param += string.Format("?page={0}", page);
+
+            if (hitsPerPage != 1000)
+            {
+                if (param.Length == 0)
+                    param += string.Format("?hitsPerPage={0}", hitsPerPage);
+                else
+                    param += string.Format("&hitsPerPage={0}", hitsPerPage);
+            }
+            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/browse{1}", _urlIndexName, param));
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.BrowseAsync"/>
+        /// </summary>
+        public JObject Browse(int page = 0, int hitsPerPage = 1000)
+        {
+            return BrowseAsync(page, hitsPerPage).Result;
         }
 
         /// <summary>
         /// Delete the index content without removing settings and index specific API keys.
         /// </summary>
-        public Task<JObject> ClearIndex()
+        public Task<JObject> ClearIndexAsync()
         {
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/clear", _urlIndexName));
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.ClearIndexAsync"/>
+        /// </summary>
+        public JObject ClearIndex()
+        {
+            return ClearIndexAsync().Result;
         }
 
         /// <summary>
@@ -387,33 +502,62 @@ namespace Algolia.Search
         ///  - highlightPostTag: (string) Specify the string that is inserted after the highlighted parts in the query result (default to "</em>").
         ///  - optionalWords: (array of strings) Specify a list of words that should be considered as optional when found in the query.
         /// </param>
-        public Task<JObject> SetSettings(JObject settings)
+        public Task<JObject> SetSettingsAsync(JObject settings)
         {
             return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/settings", _urlIndexName), settings);
         }
+        /// <summary>
+        /// Synchronously call <see cref="Index.SetSettingsAsync"/>
+        /// </summary>
+        public JObject SetSettings(JObject settings)
+        {
+            return SetSettingsAsync(settings).Result;
+        }
+
 
         /// <summary>
         /// List all existing user keys associated to this index with their associated ACLs.
         /// </summary>
-        public Task<JObject> ListUserKeys()
+        public Task<JObject> ListUserKeysAsync()
         {
             return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/keys", _urlIndexName));
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.ListUserKeysAsync"/>
+        /// </summary>
+        public JObject ListUserKeys()
+        {
+            return ListUserKeysAsync().Result;
         }
 
         /// <summary>
         /// Get ACL of a user key associated to this index.
         /// </summary>
-        public Task<JObject> GetUserKeyACL(string key)
+        public Task<JObject> GetUserKeyACLAsync(string key)
         {
             return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key));
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.GetUserKeyACLAsync"/>
+        /// </summary>
+        public JObject GetUserKeyACL(string key)
+        {
+            return GetUserKeyACLAsync(key).Result;
         }
 
         /// <summary>
         /// Delete an existing user key associated to this index.
         /// </summary>
-        public Task<JObject> DeleteUserKey(string key)
+        public Task<JObject> DeleteUserKeyAsync(string key)
         {
             return _client.ExecuteRequest("DELETE", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key));
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.DeleteUserKeyAsync"/>
+        /// </summary>
+        public JObject DeleteUserKey(string key)
+        {
+            return DeleteUserKeyAsync(key).Result;
         }
 
         /// <summary>
@@ -430,7 +574,7 @@ namespace Algolia.Search
         /// <param name="maxQueriesPerIPPerHour"> Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).</param>
         /// <param name="maxHitsPerQuery"> Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited) </param>
         /// <returns>Return an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public Task<JObject> AddUserKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
         {
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
@@ -438,6 +582,13 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), content);
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.AddUserKeyAsync"/>
+        /// </summary>
+        public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        {
+            return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).Result;
         }
     }
 }

@@ -28,11 +28,11 @@ namespace NUnit.Framework.Test
             return name + "_travis-" + id[id.Length - 1];
         }
 
-        public async Task clearTest()
+        public void clearTest()
         {
             try
             {
-                await _index.ClearIndex();
+                _index.ClearIndex();
             }
             catch (Exception)
             {
@@ -58,143 +58,143 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public async Task TestAddObject()
+        public void TestAddObject()
         {
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
         }
 
         [Test]
-        public async Task TestSaveObject()
+        public void TestSaveObject()
         {
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"), "àlgol?à");
-            await _index.WaitTask(task["taskID"].ToString());
-            task = await _index.SaveObject(JObject.Parse(@"{""firstname"":""Robert"", ""lastname"":""Barninger"", ""objectID"":""àlgol?à""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"), "àlgol?à");
+            _index.WaitTask(task["taskID"].ToString());
+            task = _index.SaveObject(JObject.Parse(@"{""firstname"":""Robert"", ""lastname"":""Barninger"", ""objectID"":""àlgol?à""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Robert", res["hits"][0]["firstname"].ToString());
         }
 
         [Test]
-        public async Task TestPartialUpdateObject()
+        public void TestPartialUpdateObject()
         {
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"), "àlgol?à");
-            await _index.WaitTask(task["taskID"].ToString());
-            task = await _index.SaveObject(JObject.Parse(@"{""firstname"":""Robert"", ""objectID"":""àlgol?à""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"), "àlgol?à");
+            _index.WaitTask(task["taskID"].ToString());
+            task = _index.SaveObject(JObject.Parse(@"{""firstname"":""Robert"", ""objectID"":""àlgol?à""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Robert", res["hits"][0]["firstname"].ToString());
         }
 
         [Test]
-        public async Task TaskAddObjects()
+        public void TaskAddObjects()
         {
-            await clearTest();
+            clearTest();
             List<JObject> objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
                           ""lastname"":""Barninger""}"));
             objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
                           ""lastname"":""Speach""}"));
-            var task = await _index.AddObjects(objs);
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            var task = _index.AddObjects(objs);
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(2, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Roger", res["hits"][0]["firstname"].ToString());
         }
 
         [Test]
-        public async Task TaskSaveObjects()
+        public void TaskSaveObjects()
         {
-            await clearTest();
+            clearTest();
             List<JObject> objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
                           ""lastname"":""Barninger"", ""objectID"":""à/go/?à1""}"));
             objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
                           ""lastname"":""Speach"", ""objectID"":""à/go/?à2""}"));
-            await _index.AddObjects(objs);
+            _index.AddObjects(objs);
             objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
                           ""lastname"":""Barninger"", ""objectID"":""à/go/?à1""}"));
             objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
                           ""lastname"":""Speach"", ""objectID"":""à/go/?à2""}"));
-            var task = await _index.SaveObjects(objs);
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            var task = _index.SaveObjects(objs);
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(2, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
         }
 
         [Test]
-        public async Task TaskPartialUpdateObjects()
+        public void TaskPartialUpdateObjects()
         {
-            await clearTest();
+            clearTest();
             List<JObject> objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
                           ""lastname"":""Barninger"", ""objectID"":""à/go/?à1""}"));
             objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
                           ""lastname"":""Speach"", ""objectID"":""à/go/?à2""}"));
-            await _index.AddObjects(objs);
+            _index.AddObjects(objs);
             objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", ""objectID"":""à/go/?à1""}"));
             objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", ""objectID"":""à/go/?à2""}"));
-            var task = await _index.PartialUpdateObjects(objs);
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            var task = _index.PartialUpdateObjects(objs);
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(2, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
         }
 
         [Test]
-        public async Task TaskDeleteObjects()
+        public void TaskDeleteObjects()
         {
-            await clearTest();
+            clearTest();
             List<JObject> objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
                           ""lastname"":""Barninger"", ""objectID"": ""à/go/?à""}"));
             objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
                           ""lastname"":""Speach"", ""objectID"": ""à/go/?à2""}"));
-            var task = await _index.AddObjects(objs);
-            await _index.WaitTask(task["taskID"].ToString());
+            var task = _index.AddObjects(objs);
+            _index.WaitTask(task["taskID"].ToString());
             List<String> ids = new List<string>();
             ids.Add("à/go/?à");
             ids.Add("à/go/?à2");
-            task = await _index.DeleteObjects(ids);
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            task = _index.DeleteObjects(ids);
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(0, res["nbHits"].ToObject<int>());
         }
 
         [Test]
-        public async Task TaskDeleteByQuery()
+        public void TaskDeleteByQuery()
         {
-            await clearTest();
+            clearTest();
             List<JObject> objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""name"":""San Francisco""}"));
             objs.Add(JObject.Parse(@"{""name"":""San Jose""}"));
             objs.Add(JObject.Parse(@"{""name"":""Washington""}"));
-            var task = await _index.AddObjects(objs);
-            await _index.WaitTask(task["taskID"].ToString());
-            await _index.DeleteByQuery(new Query("San"));
-            var res = await _index.Search(new Query(""));
+            var task = _index.AddObjects(objs);
+            _index.WaitTask(task["taskID"].ToString());
+            _index.DeleteByQuery(new Query("San"));
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
         }
 
         [Test]
-        public async Task TestMissingObjectIDPartialUpdateObject()
+        public void TestMissingObjectIDPartialUpdateObject()
         {
-            await clearTest();
+            clearTest();
             JObject obj = new JObject();
             try
             {
-                await _index.PartialUpdateObject(obj);
+                _index.PartialUpdateObject(obj);
             }
             catch (AlgoliaException)
             {
@@ -204,14 +204,14 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public async Task TestMissingObjectIDPartialUpdateObjects()
+        public void TestMissingObjectIDPartialUpdateObjects()
         {
-            await clearTest();
+            clearTest();
             List<JObject> objs = new List<JObject>();
             objs.Add(new JObject());
             try
             {
-                await _index.PartialUpdateObjects(objs);
+                _index.PartialUpdateObjects(objs);
             }
             catch (AlgoliaException)
             {
@@ -221,13 +221,13 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public async Task TestMissingObjectIDSaveObject()
+        public void TestMissingObjectIDSaveObject()
         {
-            await clearTest();
+            clearTest();
             JObject obj = new JObject();
             try
             {
-                await _index.SaveObject(obj);
+                _index.SaveObject(obj);
             }
             catch (AlgoliaException)
             {
@@ -237,14 +237,14 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public async Task TestMissingObjectIDSaveObjects()
+        public void TestMissingObjectIDSaveObjects()
         {
-            await clearTest();
+            clearTest();
             List<JObject> objs = new List<JObject>();
             objs.Add(new JObject());
             try
             {
-                await _index.SaveObjects(objs);
+                _index.SaveObjects(objs);
             }
             catch (AlgoliaException)
             {
@@ -264,66 +264,66 @@ namespace NUnit.Framework.Test
         }
         
         [Test]
-        public async Task TestDeleteIndex()
+        public void TestDeleteIndex()
         {
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Search(new Query(""));
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
-            res = await _client.ListIndexes();
+            res = _client.ListIndexes();
             Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
-            task = await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
-            await _index.WaitTask(task["taskID"].ToObject<String>());
-            res = await _client.ListIndexes();
+            task = _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _index.WaitTask(task["taskID"].ToObject<String>());
+            res = _client.ListIndexes();
             Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
         }
 
         [Test]
-        public async Task TestGetObject()
+        public void TestGetObject()
         {
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""àlgol?à""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.GetObject("àlgol?à");
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""àlgol?à""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.GetObject("àlgol?à");
             Assert.AreEqual("àlgol?à", res["objectID"].ToString());
             Assert.AreEqual("Jimmie", res["firstname"].ToString());
         }
 
         [Test]
-        public async Task TestGetObjects()
+        public void TestGetObjects()
         {
-            await clearTest();
-            await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""objectID"":""1""}"));
-            var task = await _index.AddObject(JObject.Parse(@"{""name"":""Los Angeles"", ""objectID"":""2""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.GetObjects(new string[2]{"1", "2"});
+            clearTest();
+            _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""objectID"":""1""}"));
+            var task = _index.AddObject(JObject.Parse(@"{""name"":""Los Angeles"", ""objectID"":""2""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.GetObjects(new string[2]{"1", "2"});
             Assert.AreEqual("San Francisco", res["results"][0]["name"].ToString());
             Assert.AreEqual("Los Angeles", res["results"][1]["name"].ToString());
         }
 
         [Test]
-        public async Task TestDeleteObject()
+        public void TestDeleteObject()
         {
-            await clearTest();
-            await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""àlgol?à""}"));
-            var task = await _index.DeleteObject("àlgol?à");
-            await _index.WaitTask(task["taskID"].ToString());
+            clearTest();
+            _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""àlgol?à""}"));
+            var task = _index.DeleteObject("àlgol?à");
+            _index.WaitTask(task["taskID"].ToString());
             Query query = new Query();
             query.SetQueryString("");
-            var res = await _index.Search(query);
+            var res = _index.Search(query);
             Assert.AreEqual(0, res["nbHits"].ToObject<int>());
         }
 
         [Test]
-        public async Task TestDeleteObjectWithoutID()
+        public void TestDeleteObjectWithoutID()
         {
-            await clearTest();
-            await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""à/go/?à""}"));
+            clearTest();
+            _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""à/go/?à""}"));
             try
             {
-                var task = await _index.DeleteObject("");
+                var task = _index.DeleteObject("");
                 Assert.Fail();
             }
             catch (Exception)
@@ -331,151 +331,151 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public async Task TestCopyIndex()
+        public void TestCopyIndex()
         {
             var index = _client.InitIndex(safe_name("àlgol?à-csharp2"));
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            task = await _client.CopyIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await index.Search(new Query(""));
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            task = _client.CopyIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
-            await _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
+            _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
         }
 
         [Test]
-        public async Task TestMoveIndex()
+        public void TestMoveIndex()
         {
             var index = _client.InitIndex(safe_name("àlgol?à-csharp2"));
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            task = await _client.MoveIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
-            await index.WaitTask(task["taskID"].ToString());
-            var res = await index.Search(new Query(""));
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            task = _client.MoveIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
+            index.WaitTask(task["taskID"].ToString());
+            var res = index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
-            res = await _client.ListIndexes();
+            res = _client.ListIndexes();
             Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp2")));
             Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
-            await _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
+            _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
         }
 
         [Test]
-        public async Task TestBrowse()
+        public void TestBrowse()
         {
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
-            await _index.WaitTask(task["taskID"].ToString());
-            var res = await _index.Browse(0);
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Browse(0);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
-            res = await _index.Browse(0, 1);
+            res = _index.Browse(0, 1);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
 
         }
 
         [Test]
-        public async Task TestLogs()
+        public void TestLogs()
         {
-            var res = await _client.GetLogs();
+            var res = _client.GetLogs();
             Assert.IsTrue(((JArray)res["logs"]).Count > 0);
-            res = await _client.GetLogs(0, 1);
+            res = _client.GetLogs(0, 1);
             Assert.AreEqual(1, ((JArray)res["logs"]).Count);
         }
 
         [Test]
-        public async Task TestSearch()
+        public void TestSearch()
         {
-            await clearTest();
+            clearTest();
             // Add one object to be sure the test will not fail because index is empty
-            var task = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
-            await _index.WaitTask(task["taskID"].ToObject<String>());
+            var task = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
+            _index.WaitTask(task["taskID"].ToObject<String>());
             Assert.IsFalse(string.IsNullOrWhiteSpace(task["objectID"].ToString()));
-            var res = await _index.Search(new Query());
+            var res = _index.Search(new Query());
             Assert.AreEqual("1", res["nbHits"].ToObject<String>());
             Assert.AreEqual("San Francisco", res["hits"][0]["name"].ToString());
         }
 
         [Test]
-        public async Task TestSettings()
+        public void TestSettings()
         {
-            await clearTest();
-            var res = await _index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(population)"", ""asc(name)""]}"));
+            clearTest();
+            var res = _index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(population)"", ""asc(name)""]}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
-            await _index.WaitTask(res["taskID"].ToObject<String>());
-            res = await _index.GetSettings();
-            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _index.WaitTask(res["taskID"].ToObject<String>());
+            res = _index.GetSettings();
+            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
 
         [Test]
-        public async Task TestAddObject2()
+        public void TestAddObject2()
         {
-            await clearTest();
-            var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
+            clearTest();
+            var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
-            res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+            res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
             Assert.AreEqual("myID", res["objectID"].ToString());
         }
 
         [Test]
-        public async Task TestUpdate()
+        public void TestUpdate()
         {
-            await clearTest();
-            var res = await _index.SaveObject(JObject.Parse(@"{""name"":""Los Angeles"", 
+            clearTest();
+            var res = _index.SaveObject(JObject.Parse(@"{""name"":""Los Angeles"", 
                                                               ""population"":3792621, 
                                                               ""objectID"":""myID""}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
-            res = await _index.PartialUpdateObject(JObject.Parse(@"{""population"":3792621, 
+            res = _index.PartialUpdateObject(JObject.Parse(@"{""population"":3792621, 
                                                                    ""objectID"":""myID""}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
         }
 
         [Test]
-        public async Task TaskGetObject()
+        public void TaskGetObject()
         {
-            await clearTest();
+            clearTest();
             // Add one object to be sure the test will not fail because index is empty
-            var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
-            await _index.WaitTask(res["taskID"].ToString());
+            var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+            _index.WaitTask(res["taskID"].ToString());
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
-            res = await _index.GetObject("myID");
+            res = _index.GetObject("myID");
             Assert.AreEqual("San Francisco", res["name"].ToString());
             Assert.AreEqual(805235, res["population"].ToObject<int>());
             Assert.AreEqual("myID", res["objectID"].ToString());
-            res = await _index.GetObject("myID", new String[] {"name", "population"});
+            res = _index.GetObject("myID", new String[] {"name", "population"});
             Assert.AreEqual("San Francisco", res["name"].ToString());
             Assert.AreEqual(805235, res["population"].ToObject<int>());
             Assert.AreEqual("myID", res["objectID"].ToString());
-            res = await _index.GetObject("myID", new String[] { "name" });
+            res = _index.GetObject("myID", new String[] { "name" });
             Assert.AreEqual(null, res["population"]);
             Assert.AreEqual("San Francisco", res["name"].ToString());
             Assert.AreEqual("myID", res["objectID"].ToString());
         }
 
         [Test]
-        public async Task TaskDeleteObject()
+        public void TaskDeleteObject()
         {
-            await clearTest();
+            clearTest();
             // Add one object to be sure the test will not fail because index is empty
-            var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
-            await _index.WaitTask(res["taskID"].ToString());
-            res = await _index.DeleteObject("myID");
+            var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+            _index.WaitTask(res["taskID"].ToString());
+            res = _index.DeleteObject("myID");
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["deletedAt"].ToString()));
         }
 
         [Test]
-        public async Task TaskBatch()
+        public void TaskBatch()
         {
-            await clearTest();
+            clearTest();
             
             List<JObject> objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
             objs.Add(JObject.Parse(@"{""name"":""Los Angeles"", ""population"":3792621}"));
-            var res = await _index.AddObjects(objs);
+            var res = _index.AddObjects(objs);
             JArray objectIDs = (JArray)res["objectIDs"];
             Assert.AreEqual(objectIDs.Count, 2);
             List<JObject> objs2 = new List<JObject>();
@@ -485,18 +485,18 @@ namespace NUnit.Framework.Test
             objs2.Add(JObject.Parse(@"{""name"":""Los Angeles"", 
                           ""population"": 3792621,
                           ""objectID"": ""LA""}"));
-            res = await _index.SaveObjects(objs2);
+            res = _index.SaveObjects(objs2);
             objectIDs = (JArray)res["objectIDs"];
             Assert.AreEqual(objectIDs.Count, 2);
         }
 
         [Test]
-        public async Task TestListIndexes()
+        public void TestListIndexes()
         {
-            await clearTest();
+            clearTest();
             try
             {
-                var result = await _client.ListIndexes();
+                var result = _client.ListIndexes();
                 Assert.IsFalse(string.IsNullOrWhiteSpace(result["items"].ToString()));
             }
             catch (ArgumentOutOfRangeException)
@@ -505,39 +505,39 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public async Task TaskACL()
+        public void TaskACL()
         {
-            await clearTest();
+            clearTest();
             // Add one object to be sure the test will not fail because index is empty
-            var res = await _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
-            await _index.WaitTask(res["taskID"].ToString());
-            var key = await _client.AddUserKey(new String[] { "search" });
+            var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+            _index.WaitTask(res["taskID"].ToString());
+            var key = _client.AddUserKey(new String[] { "search" });
             System.Threading.Thread.Sleep(3000);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
-            var getKey = await _client.GetUserKeyACL(key["key"].ToString());
+            var getKey = _client.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
-            var keys = await _client.ListUserKeys();
+            var keys = _client.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
-            var task = await _client.DeleteUserKey(key["key"].ToString());
+            var task = _client.DeleteUserKey(key["key"].ToString());
             System.Threading.Thread.Sleep(3000);
-            keys = await _client.ListUserKeys();
+            keys = _client.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
 
-            key = await _index.AddUserKey(new String[] { "search" });
+            key = _index.AddUserKey(new String[] { "search" });
             System.Threading.Thread.Sleep(3000);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
-            getKey = await _index.GetUserKeyACL(key["key"].ToString());
+            getKey = _index.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
-            keys = await _index.ListUserKeys();
+            keys = _index.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
-            task = await _index.DeleteUserKey(key["key"].ToString());
+            task = _index.DeleteUserKey(key["key"].ToString());
             System.Threading.Thread.Sleep(3000);
-            keys = await _index.ListUserKeys();
+            keys = _index.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
         }
 
         [Test]
-        public async void BadClientCreation()
+        public void BadClientCreation()
         {
             string[] _hosts = new string[] { "localhost.algolia.com:8080", "" };
             try
@@ -578,7 +578,7 @@ namespace NUnit.Framework.Test
             try
             {
                 var badClient = new AlgoliaClient(_testApplicationID, _testApiKey, _hosts);
-                await badClient.ListIndexes();
+                badClient.ListIndexes();
                 Assert.Fail();
             }
             catch (Exception)
@@ -586,14 +586,14 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public async Task TestBigQueryAll()
+        public void TestBigQueryAll()
         {
-            await clearTest();
-            await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
+            clearTest();
+            _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
                 , ""Age"":42, ""lastname"":""Barninger"", ""_tags"": ""people""
                 , ""_geoloc"":{""lat"":0.853409, ""lng"":0.348800}}"));
-            var task = await _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
-            await _index.WaitTask(task["taskID"].ToString());
+            var task = _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
+            _index.WaitTask(task["taskID"].ToString());
             Query query = new Query("Jimmie");
             query.SetPage(0);
             query.SetOptionalWords("J");
@@ -616,21 +616,21 @@ namespace NUnit.Framework.Test
             query.SetTagFilters("people");
             query.SetNumericFilters("Age>=42");
             query.SetQueryType(Query.QueryType.PREFIX_ALL);
-            var res = await _index.Search(query);
+            var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
-            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
 
         [Test]
-        public async Task TestBigQueryNone()
+        public void TestBigQueryNone()
         {
-            await clearTest();
-            await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
+            clearTest();
+            _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
                 , ""Age"":42, ""lastname"":""Barninger"", ""_tags"": ""people""
                 , ""_geoloc"":{""lat"":0.853409, ""lng"":0.348800}}"));
-            var task = await _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
-            await _index.WaitTask(task["taskID"].ToString());
+            var task = _index.SetSettings(JObject.Parse(@"{""attributesForFaceting"": [""_tags""]}"));
+            _index.WaitTask(task["taskID"].ToString());
             Query query = new Query("Jimmie");
             query.SetPage(0);
             query.SetOptionalWords("J");
@@ -655,47 +655,47 @@ namespace NUnit.Framework.Test
             query.SetTagFilters("people");
             query.SetNumericFilters("Age>=42");
             query.SetQueryType(Query.QueryType.PREFIX_NONE);
-            var res = await _index.Search(query);
+            var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
-            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
 
         [Test]
-        public async Task TestMultipleQueries()
+        public void TestMultipleQueries()
         {
-            await clearTest();
-            var task = await _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
-            await _index.WaitTask(task["taskID"].ToString());
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
+            _index.WaitTask(task["taskID"].ToString());
             var indexQuery = new List<IndexQuery>();
             indexQuery.Add(new IndexQuery(safe_name("àlgol?à-csharp"), new Query("")));
-            var res = await _client.MultipleQueries(indexQuery);
+            var res = _client.MultipleQueries(indexQuery);
             Assert.AreEqual(1, res["results"].ToObject<JArray>().Count);
             Assert.AreEqual(1, res["results"][0]["hits"].ToObject<JArray>().Count);
             Assert.AreEqual("Jimmie", res["results"][0]["hits"][0]["firstname"].ToString());
-            await _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
 
         [Test]
-        public async Task TestFacets()
+        public void TestFacets()
         {
-            await clearTest();
-            await _index.SetSettings(JObject.Parse(@"{""attributesForFacetting"":[""city"", ""stars"", ""facilites""]}"));
-            JObject task = await _index.AddObjects(new JObject[] {
+            clearTest();
+            _index.SetSettings(JObject.Parse(@"{""attributesForFacetting"":[""city"", ""stars"", ""facilites""]}"));
+            JObject task = _index.AddObjects(new JObject[] {
                 JObject.Parse(@"{""name"": ""Hotel A"", ""stars"":""*"", ""facilities"":[""wifi"", ""bath"", ""spa""], ""city"": ""Paris""}"),
                 JObject.Parse(@"{""name"": ""Hotel B"", ""stars"":""*"", ""facilities"":[""wifi""], ""city"": ""Paris""}"),
                 JObject.Parse(@"{""name"": ""Hotel C"", ""stars"":""**"", ""facilities"":[""bath""], ""city"": ""San Francisco""}"),
                 JObject.Parse(@"{""name"": ""Hotel D"", ""stars"":""****"", ""facilities"":[""spa""], ""city"": ""Paris""}"),
                 JObject.Parse(@"{""name"": ""Hotel E"", ""stars"":""****"", ""facilities"":[""spa""], ""city"": ""New York""}")
             });
-            await _index.WaitTask((task["taskID"].ToString()));
-            JObject res = await _index.Search(new Query().SetFacetFilters(new String[] { "stars:****", "city:Paris" }).SetFacets(new String[] { "stars" }));
+            _index.WaitTask((task["taskID"].ToString()));
+            JObject res = _index.Search(new Query().SetFacetFilters(new String[] { "stars:****", "city:Paris" }).SetFacets(new String[] { "stars" }));
             Assert.AreEqual("1", res["nbHits"].ToString());
             Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
-            res = await _index.Search(new Query().SetFacetFilters("[\"stars:****\",\"city:Paris\"]").SetFacets(new String[] { "stars" }));
+            res = _index.Search(new Query().SetFacetFilters("[\"stars:****\",\"city:Paris\"]").SetFacets(new String[] { "stars" }));
             Assert.AreEqual("1", res["nbHits"].ToString());
             Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
-            res = await _index.Search(new Query().SetFacetFilters(JArray.Parse(@"[""stars:****"",""city:Paris""]")).SetFacets(new String[] { "stars" }));
+            res = _index.Search(new Query().SetFacetFilters(JArray.Parse(@"[""stars:****"",""city:Paris""]")).SetFacets(new String[] { "stars" }));
             Assert.AreEqual("1", res["nbHits"].ToString());
             Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
         }

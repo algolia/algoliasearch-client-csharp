@@ -46,33 +46,6 @@ namespace Algolia.Search
         private string               _applicationId;
         private string               _apiKey;
         private HttpClient           _httpClient;
-
-        /// <summary>
-        ///Algolia Search initialization
-        /// </summary>
-        /// <param name="applicationId">the application ID you have in your admin interface</param>
-        /// <param name="apiKey">a valid API key for the service</param>
-        public AlgoliaClient(string applicationId, string apiKey)
-        {
-            if (string.IsNullOrWhiteSpace(applicationId))
-                throw new ArgumentOutOfRangeException("applicationId", "An application Id is requred.");
-
-            if (string.IsNullOrWhiteSpace(apiKey))
-                throw new ArgumentOutOfRangeException("apiKey", "An API key is required.");
-
-            IEnumerable<string> allHosts = new string[] {applicationId + "-1.algolia.io",
-                                                         applicationId + "-2.algolia.io",
-                                                         applicationId + "-3.algolia.io"};
-            _applicationId = applicationId;
-            _apiKey = apiKey;
-
-            // randomize elements of hostsArray (act as a kind of load-balancer)
-            _hosts = allHosts.OrderBy(s => Guid.NewGuid());
-
-            HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
-            HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
  
         /// <summary>
         ///Algolia Search initialization
@@ -80,7 +53,7 @@ namespace Algolia.Search
         /// <param name="applicationId">the application ID you have in your admin interface</param>
         /// <param name="apiKey">a valid API key for the service</param>
         /// <param name="hosts">the list of hosts that you have received for the service</param>
-        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts)
+        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null)
         {
             if(string.IsNullOrWhiteSpace(applicationId))
                 throw new ArgumentOutOfRangeException("applicationId","An application Id is requred.");
@@ -88,8 +61,13 @@ namespace Algolia.Search
             if (string.IsNullOrWhiteSpace(apiKey))
                 throw new ArgumentOutOfRangeException("apiKey", "An API key is required.");
 
+            if (hosts == null)
+                hosts = new string[] {applicationId + "-1.algolia.io",
+                                      applicationId + "-2.algolia.io",
+                                      applicationId + "-3.algolia.io"};
+            
             IEnumerable<string> allHosts = hosts as string[] ?? hosts.ToArray();
-            if (hosts == null || !allHosts.Any())
+            if (!allHosts.Any())
                 throw new ArgumentOutOfRangeException("hosts", "At least one host is requred");
 
             _applicationId = applicationId;
@@ -129,7 +107,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="queries">List of query per index</param>
         /// <returns></returns>
-        public Task<JObject> MultipleQueries(List<IndexQuery> queries)
+        public Task<JObject> MultipleQueriesAsync(List<IndexQuery> queries)
         {
             List<Dictionary<string, object>> body = new List<Dictionary<string, object>>();
             foreach (IndexQuery indexQuery in queries) {
@@ -145,15 +123,30 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.MultipleQueriesAsync"/>
+        /// </summary>
+        public JObject MultipleQueries(List<IndexQuery> queries)
+        {
+            return MultipleQueriesAsync(queries).Result;
+        }
+
+        /// <summary>
         /// List all existing indexes.
         /// </summary>
         /// <returns>an object in the form:
         ///    {"items": [ {"name": "contacts", "createdAt": "2013-01-18T15:33:13.556Z"},
         ///                {"name": "notes", "createdAt": "2013-01-18T15:33:13.556Z"} ] }
         /// </returns>
-        public Task<JObject> ListIndexes()
+        public Task<JObject> ListIndexesAsync()
         {
             return ExecuteRequest("GET", "/1/indexes/");
+        }
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.ListIndexesAsync"/> 
+        /// </summary>
+        public JObject ListIndexes()
+        {
+            return ListIndexesAsync().Result;
         }
 
         /// <summary>
@@ -161,9 +154,17 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="indexName">the name of index to delete</param>
         /// <returns>an object containing a "deletedAt" attribute</returns>
-        public Task<JObject> DeleteIndex(string indexName)
+        public Task<JObject> DeleteIndexAsync(string indexName)
         {
             return ExecuteRequest("DELETE", "/1/indexes/" + Uri.EscapeDataString(indexName));
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.DeleteIndexAsync"/> 
+        /// </summary>
+        public JObject DeleteIndex(string indexName)
+        {
+            return DeleteIndexAsync(indexName).Result;
         }
 
         /// <summary>
@@ -171,12 +172,19 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="srcIndexName"> the name of index to copy.</param>
         /// <param name="dstIndexName"> the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).</param>
-        public Task<JObject> MoveIndex(string srcIndexName, string dstIndexName)
+        public Task<JObject> MoveIndexAsync(string srcIndexName, string dstIndexName)
         {
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "move";
             operation["destination"] = dstIndexName;
             return ExecuteRequest("POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation);
+        }
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.MoveIndexAsync"/>
+        /// </summary>
+        public JObject MoveIndex(string srcIndexName, string dstIndexName)
+        {
+            return MoveIndexAsync(srcIndexName, dstIndexName).Result;
         }
     
         /// <summary>
@@ -184,19 +192,19 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="srcIndexName"> the name of index to copy.</param>
         /// <param name="dstIndexName"> the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).</param>
-        public Task<JObject> CopyIndex(string srcIndexName, string dstIndexName)
+        public Task<JObject> CopyIndexAsync(string srcIndexName, string dstIndexName)
         {
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "copy";
             operation["destination"] = dstIndexName;
             return ExecuteRequest("POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation); 	
         }
-    
         /// <summary>
-        /// Return 10 last log entries.
+        /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
         /// </summary>
-        public Task<JObject> GetLogs() {
-    	    return ExecuteRequest("GET", "/1/logs");
+        public JObject CopyIndex(string srcIndexName, string dstIndexName)
+        {
+            return CopyIndexAsync(srcIndexName, dstIndexName).Result;
         }
 
         /// <summary>
@@ -204,8 +212,34 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="offset"> Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length"> Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
-        public Task<JObject> GetLogs(int offset, int length) {
-    	    return ExecuteRequest("GET", String.Format("/1/logs?offset={0}&length={1}", offset, length));
+        /// <param name="onlyErrors"> If set to true, the answer contains only API calls with error.</param>
+        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, bool onlyErrors = false) {
+            string param = "";
+            if (offset != 0)
+                param += string.Format("?offset={0}", offset);
+
+            if (length != 10)
+            {
+                if (param.Length == 0)
+                    param += string.Format("?length={0}", length);
+                else
+                    param += string.Format("&length={0}", length);
+            }
+            if (onlyErrors)
+            {
+                if (param.Length == 0)
+                    param += string.Format("?onlyErrors={0}", onlyErrors);
+                else
+                    param += string.Format("&onlyErrors={0}", onlyErrors);
+            }
+    	    return ExecuteRequest("GET", String.Format("/1/logs{0}", param));
+        }
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.GetLogsAsync"/>
+        /// </summary>
+        public JObject GetLogs(int offset = 0, int length = 10, bool onlyErrors = false)
+        {
+            return GetLogsAsync(offset, length).Result;
         }
 
         /// <summary>
@@ -222,27 +256,48 @@ namespace Algolia.Search
         /// List all existing user keys with their associated ACLs.
         /// </summary>
         /// <returns>An object containing the list of keys.</returns>
-        public Task<JObject> ListUserKeys()
+        public Task<JObject> ListUserKeysAsync()
         {
             return ExecuteRequest("GET", "/1/keys");
+        }
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.ListUserKeysAsync"/> 
+        /// </summary>
+        public JObject ListUserKeys()
+        {
+            return ListUserKeysAsync().Result;
         }
 
         /// <summary>
         /// Get ACL of an existing user key.
         /// </summary>
         /// <returns>return an object with an "acls" array containing an array of string with rights.</returns>
-        public Task<JObject> GetUserKeyACL(string key)
+        public Task<JObject> GetUserKeyACLAsync(string key)
         {
             return ExecuteRequest("GET", "/1/keys/" + key);
+        }
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.GetUserKeyACLAsync"/> 
+        /// </summary>
+        public JObject GetUserKeyACL(string key)
+        {
+            return GetUserKeyACLAsync(key).Result;
         }
 
         /// <summary>
         /// Delete an existing user key.
         /// </summary>
         /// <returns>return an object with a "deleteAt" attribute.</returns>
-        public Task<JObject> DeleteUserKey(string key)
+        public Task<JObject> DeleteUserKeyAsync(string key)
         {
             return ExecuteRequest("DELETE", "/1/keys/" + key);
+        }
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.DeleteUserKeyAsync"/> 
+        /// </summary>
+        public JObject DeleteUserKey(string key)
+        {
+            return DeleteUserKeyAsync(key).Result;
         }
 
         /// <summary>
@@ -259,7 +314,7 @@ namespace Algolia.Search
         /// <param name="maxQueriesPerIPPerHour"> Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).</param>
         /// <param name="maxHitsPerQuery"> Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited) </param>
         /// <returns>Return an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public Task<JObject> AddUserKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
         {
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
@@ -267,6 +322,13 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             return ExecuteRequest("POST", "/1/keys", content);
+        }
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.AddUserKeyAsync"/>
+        /// </summary>
+        public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        {
+            return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).Result;
         }
 
         protected HttpClient HttpClient
@@ -291,12 +353,12 @@ namespace Algolia.Search
         /// <param name="tagFilter">the list of tags applied to the query (used as security)</param>
         /// <param name="userToken">an optional token identifying the current user</param>
         /// <returns></returns>
-        public Task<JObject> GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
+        public JObject GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
         {
             throw new NotImplementedException("The method GenerateSecuredApiKey isn't implemented.");
         }
 
-        public Task<JObject> GenerateSecuredApiKey(String privateApiKey, String[] tagFilter, String userToken = null)
+        public JObject GenerateSecuredApiKey(String privateApiKey, String[] tagFilter, String userToken = null)
         {
             return GenerateSecuredApiKey(privateApiKey, String.Join(",", tagFilter), userToken);
         }
