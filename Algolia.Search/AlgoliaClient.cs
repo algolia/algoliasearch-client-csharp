@@ -293,9 +293,7 @@ namespace Algolia.Search
         /// <returns></returns>
         public Task<JObject> GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
         {
-
-            return null;
-            
+            throw new NotImplementedException("The method GenerateSecuredApiKey isn't implemented.");
         }
 
         public Task<JObject> GenerateSecuredApiKey(String privateApiKey, String[] tagFilter, String userToken = null)
