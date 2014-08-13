@@ -89,36 +89,56 @@ JsonTextReader reader = new JsonTextReader(re);
 JArray batch = JArray.Load(reader);
 // Add objects 
 Index index = client.InitIndex("contacts");
-await index.AddObjects(batch);
+index.AddObjects(batch);
+// Asynchronous
+// await index.AddObjectsAsync(batch);
 ```
 
 You can then start to search for a contact firstname, lastname, company, ... (even with typos):
 ```csharp
 // search by firstname
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimmie")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie")));
 // search a firstname with typo
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimie")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimie")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimie")));
 // search for a company
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("california paint")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("california paint")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("california paint")));
 // search for a firstname & company
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimmie paint")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie paint")));
 ```
 
 Settings can be customized to tune the search behavior. For example you can add a custom sort by number of followers to the already good out-of-the-box relevance:
 ```csharp
-await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+// Asynchronous
+// await index.SetSettingsAsync(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```
 
 You can also configure the list of attributes you want to index by order of importance (first = most important):
 ```csharp
-await index.SetSettings(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstname"",
-                                                                ""company"", ""email"", ""city""]}"));
+index.SetSettings(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstname"",
+                                                          ""company"", ""email"", ""city""]}"));
+// Asynchronous
+//await index.SetSettingsAsync(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstname"",
+//                                                                     ""company"", ""email"", ""city""]}"));
 ```
 
 Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
 ```csharp
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("or")));
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jim")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("or")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("or")));
+
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("jim")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jim")));
 ```
 
 
@@ -166,7 +186,6 @@ Check our [online documentation](http://www.algolia.com/doc/guides/csharp):
  * [Security](http://www.algolia.com/doc/guides/csharp#Security)
  * [REST API](http://www.algolia.com/doc/rest)
 
-
 Tutorials
 ================
 
@@ -198,16 +217,23 @@ Objects are schema less, you don't need any configuration to start indexing. The
 Example with automatic `objectID` assignement:
 
 ```csharp
-var res = await index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                                                 ""lastname"":""Barninger""}"));
+var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                           ""lastname"":""Barninger""}"));
+// Asynchronous
+// var res = await index.AddObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                                         ""lastname"":""Barninger""}"));
+
 System.Diagnostics.Debug.WriteLine("objectID=" + res["objectID"]);           
 ```
 
 Example with manual `objectID` assignement:
 
 ```charp
-var res = await index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                                                 ""lastname"":""Barninger""}"), "myID");
+var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                           ""lastname"":""Barninger""}"), "myID");
+// Asynchronous
+// var res = await index.AddObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
+//                                                       ""lastname"":""Barninger""}"), "myID");
 System.Diagnostics.Debug.WriteLine("objectID=" + res["objectID"]);
 ```
 
@@ -222,17 +248,25 @@ You have two options to update an existing object:
 Example to replace all the content of an existing object:
 
 ```csharp
-await index.SaveObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                                        ""lastname"":""Barninger"", 
-                                        ""city"":""New York"",
-                                        ""objectID"":""myID""}"));
+index.SaveObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                  ""lastname"":""Barninger"", 
+                                  ""city"":""New York"",
+                                  ""objectID"":""myID""}"));
+// Asynchronous
+// await index.SaveObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
+//                                              ""lastname"":""Barninger"", 
+//                                              ""city"":""New York"",
+//                                              ""objectID"":""myID""}"));
 ```
 
 Example to update only the city attribute of an existing object:
 
 ```csharp
-await index.PartialUpdateObject(JObject.Parse(@"{""city"":""San Francisco"", 
-                                                 ""objectID"":""myID""}"));
+index.PartialUpdateObject(JObject.Parse(@"{""city"":""San Francisco"", 
+                                           ""objectID"":""myID""}"));
+// Asynchronous
+// await index.PartialUpdateObjectAsync(JObject.Parse(@"{""city"":""San Francisco"", 
+//                                                       ""objectID"":""myID""}"));
 ```
 
 
@@ -323,11 +357,17 @@ You can also use a string array encoding (for example `numericFilters: ["price>1
 
 ```csharp
 Index index = client.InitIndex("contacts");
-res = await index.Search(new Query("query string"));
+res = index.Search(new Query("query string"));
+// Asynchronous
+// res = await index.SearchAsync(new Query("query string"));
 System.Diagnostics.Debug.WriteLine(res);
-res = await index.Search(new Query("query string").
+res = index.Search(new Query("query string").
     SetAttributesToRetrieve(new string[] {"firstname","lastname"}).
     SetNbHitsPerPage(50));
+// Asynchronous
+// res = await index.SearchAsync(new Query("query string").
+//    SetAttributesToRetrieve(new string[] {"firstname","lastname"}).
+//    SetNbHitsPerPage(50));
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
@@ -383,7 +423,9 @@ indexQuery.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPe
 indexQuery.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetTagFilters("promotion"));
 indexQuery.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
 
-var res = await _client.MultipleQueries(indexQuery);
+var res = _client.MultipleQueries(indexQuery);
+// Asynchronous
+// var res = await _client.MultipleQueriesAsync(indexQuery);
 
 System.Diagnostics.Debug.WriteLine(res["results"]);
 ```
@@ -400,20 +442,28 @@ You can easily retrieve an object using its `objectID` and optionnaly a list of 
 
 ```csharp
 // Retrieves all attributes
-var res = await index.GetObject("myID");
+var res = index.GetObject("myID");
+// Asynchronous
+// var res = await index.GetObjectAsync("myID");
 System.Diagnostics.Debug.WriteLine(res);
 // Retrieves firstname and lastname attributes
-res = await index.GetObject("myID", new String[] {"firstname", "lastname"});
+res = index.GetObject("myID", new String[] {"firstname", "lastname"});
+// Asynchronous
+// res = await index.GetObjectAsync("myID", new String[] {"firstname", "lastname"});
 System.Diagnostics.Debug.WriteLine(res);
 // Retrieves only the firstname attribute
-res = await index.GetObject("myID", new String[] { "firstname" });
+res = index.GetObject("myID", new String[] { "firstname" });
+// Asynchronous
+// res = await index.GetObjectAsync("myID", new String[] { "firstname" });
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
 You can also retrieve a set of objects:
 
 ```csharp
-res = await index.GetObjects(new String[] {"myID1", "myID2"});
+res = index.GetObjects(new String[] {"myID1", "myID2"});
+// Asynchronous
+// res = await index.GetObjectsAsync(new String[] {"myID1", "myID2"});
 ```
 
 Delete an object
@@ -422,7 +472,9 @@ Delete an object
 You can delete an object using its `objectID`:
 
 ```csharp
-await index.DeleteObject("myID");
+index.DeleteObject("myID");
+// Asynchronous
+// await index.DeleteObjectAsync("myID");
 ```
 
 
@@ -434,6 +486,8 @@ You can delete all objects matching a single query with the following code. Inte
 ```csharp
 Query query = /* [ ... ] */;
 index.DeleteByQuery(query);
+// Asynchronous
+// await index.DeleteByQueryAsync(query);
 ```
 
 
@@ -498,12 +552,16 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
 You can easily retrieve settings or update them:
 
 ```csharp
-var res = await index.GetSettings();
+var res = index.GetSettings();
+// Asynchronous
+// var res = await index.GetSettingsAsync();
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
 ```csharp
-await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+// Asynchronous
+await index.SetSettingsAsync(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```
 
 List indices
@@ -511,7 +569,9 @@ List indices
 You can list all your indices with their associated information (number of entries, disk size, etc.) with the `listIndexes` method:
 
 ```csharp
-var result = await client.ListIndexes();
+var result = client.ListIndexes();
+// Asynchronous
+// var result = await client.ListIndexesAsync();
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
@@ -520,7 +580,9 @@ Delete an index
 You can delete an index using its name:
 
 ```csharp
-await client.DeleteIndex("contacts");
+client.DeleteIndex("contacts");
+// Asynchronous
+// await client.DeleteIndexAsync("contacts");
 ```
 
 Clear an index
@@ -528,7 +590,9 @@ Clear an index
 You can delete the index content without removing settings and index specific API keys with the clearIndex command:
 
 ```csharp
-await index.ClearIndex();
+index.ClearIndex();
+// Asynchronous
+// await index.ClearIndexAsync();
 ```
 
 Wait indexing
@@ -538,9 +602,14 @@ All write operations return a `taskID` when the job is securely stored on our in
 
 For example, to wait for indexing of a new object:
 ```csharp
-var res = await index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                                                 ""lastname"":""Barninger""}"), "myID");
-await index.WaitTask(res["taskID"].ToString());
+var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                           ""lastname"":""Barninger""}"), "myID");
+// Asynchronous
+// var res = await index.AddObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
+//                                                       ""lastname"":""Barninger""}"), "myID");
+index.WaitTask(res["taskID"].ToString());
+// Asynchronous
+// await index.WaitTaskAsync(res["taskID"].ToString());
 ```
 
 
@@ -563,7 +632,9 @@ objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
                           ""lastname"":""Barninger""}"));
 objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
                           ""lastname"":""Speach""}"));
-var res = await index.AddObjects(objs);
+var res = index.AddObjects(objs);
+// Asynchronous
+// var res = await index.AddObjectsAsync(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
@@ -576,7 +647,9 @@ objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
 objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
                           ""lastname"":""Speach"",
                           ""objectID"": ""myID2""}"));
-var res = await index.SaveObjects(objs);
+var res = index.SaveObjects(objs);
+// Asynchronous
+var res = await index.SaveObjectsAsync(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
@@ -585,7 +658,9 @@ Example that delete a set of records:
 List<string> ids = new List<string>();
 ids.Add(@"myID1");
 ids.Add(@"myID2");
-var res = await index.DeleteObjects(ids);
+var res = index.DeleteObjects(ids);
+// Asynchronous
+// var res = await index.DeleteObjectsAsync(ids);
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
@@ -596,7 +671,9 @@ objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
                           ""objectID"":""myID1""}"));
 objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
                           ""objectID"": ""myID2""}"));
-var res = await index.PartialUpdateObjects(objs);
+var res = index.PartialUpdateObjects(objs);
+// Asynchronous
+// var res = await index.PartialUpdateObjectsAsync(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
@@ -612,9 +689,13 @@ These API keys can be restricted to a set of operations or/and restricted to a g
 To list existing keys, you can use `listUserKeys` method:
 ```csharp
 // Lists global API Keys
-var keys = await client.ListUserKeys();
+var keys = client.ListUserKeys();
+// Asynchronous
+// var keys = await client.ListUserKeysAsync();
 // Lists API Keys that can access only to this index
-keys = await index.ListUserKeys();
+keys = index.ListUserKeys();
+// Asynchronous
+// keys = await index.ListUserKeysAsync();
 ```
 
 Each key is defined by a set of rights that specify the authorized actions. The different rights are:
@@ -629,10 +710,14 @@ Each key is defined by a set of rights that specify the authorized actions. The 
 Example of API Key creation:
 ```csharp
 // Creates a new global API key that can only perform search actions
-var res = await client.AddUserKey(new String[] { "search" });
+var res = client.AddUserKey(new String[] { "search" });
+// Asynchronous
+// var res = await client.AddUserKeyAsync(new String[] { "search" });
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 // Creates a new API key that can only perform search action on this index
-res = await index.AddUserKey(new String[] { "search" });
+res = index.AddUserKey(new String[] { "search" });
+// Asynchronous
+// res = await index.AddUserKeyAsync(new String[] { "search" });
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 ```
 
@@ -646,27 +731,40 @@ You can also create an API Key with advanced restrictions:
 
 ```csharp
 // Creates a new global API key that is valid for 300 seconds
-var res = await client.AddUserKey(new String[] { "search" }, 300, 0, 0);
+var res = client.AddUserKey(new String[] { "search" }, 300, 0, 0);
+// Asynchronous
+// var res = await client.AddUserKeyAsync(new String[] { "search" }, 300, 0, 0);
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 // Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-res = await index.AddUserKey(new String[] { "search" }, 300, 100, 20);
+res = index.AddUserKey(new String[] { "search" }, 300, 100, 20);
+// Asynchronous
+// res = await index.AddUserKeyAsync(new String[] { "search" }, 300, 100, 20);
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 ```
 
 Get the rights of a given key:
 ```csharp
 // Gets the rights of a global key
-var res = await client.GetUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
+var res = client.GetUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
+// Asynchronous
+// var res = await client.GetUserKeyACLAsync("f420238212c54dcfad07ea0aa6d5c45f");
+
 // Gets the rights of an index specific key
-res = await index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
+res = index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
+// Asynchronous
+// res = await index.GetUserKeyACLAsync("71671c38001bf3ac857bc82052485107");
 ```
 
 Delete an existing key:
 ```csharp
 // Deletes a global key
-await client.DeleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
+client.DeleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
+// Asynchronous
+// await client.DeleteUserKeyAsync("f420238212c54dcfad07ea0aa6d5c45f");
 // Deletes an index specific key
-await index.DeleteUserKey("71671c38001bf3ac857bc82052485107");
+  index.DeleteUserKey("71671c38001bf3ac857bc82052485107");
+// Asynchronous
+// await index.DeleteUserKeyAsync("71671c38001bf3ac857bc82052485107");
 ```
 
 
@@ -679,9 +777,13 @@ You can easily copy or rename an existing index using the `copy` and `move` comm
 
 ```csharp
 // Rename MyIndex in MyIndexNewName
-await client.MoveIndex("MyIndex", "MyIndexNewName");
+client.MoveIndex("MyIndex", "MyIndexNewName");
+// Asynchronous
+// await client.MoveIndexAsync("MyIndex", "MyIndexNewName");
 // Copy MyIndex in MyIndexCopy
-await client.CopyIndex("MyIndex", "MyIndexCopy");
+client.CopyIndex("MyIndex", "MyIndexCopy");
+// Asynchronous
+await client.CopyIndexAsync("MyIndex", "MyIndexCopy");
 ```
 
 The move command is particularly useful is you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you just have to:
@@ -690,7 +792,9 @@ The move command is particularly useful is you want to update a big index atomic
 
 ```csharp
 // Rename MyNewIndex in MyIndex (and overwrite it)
-await client.MoveIndex("MyNewIndex", "MyIndex");
+client.MoveIndex("MyNewIndex", "MyIndex");
+// Asynchronous
+// await client.MoveIndexAsync("MyNewIndex", "MyIndex");
 ```
 
 Backup / Retrieve all index content
@@ -701,9 +805,13 @@ This method retrieve 1000 objects by API call and support pagination.
 
 ```csharp
 // Get first page
-await index.Browse(0);
+index.Browse(0);
+// Asynchronous
+// await index.BrowseAsync(0);
 // Get second page
-await index.Browse(1);
+index.Browse(1);
+// Asynchronous
+// await index.BrowseAsync(1);
 ```
 
 Logs
@@ -726,9 +834,13 @@ You can retrieve the logs of your last 1000 API calls and browse them using the 
 
 ```csharp
 // Get last 10 log entries
-await client.GetLogs();
+client.GetLogs();
+// Asynchronous
+// await client.GetLogsAsync();
 // Get last 100 log entries
-await client.GetLogs(0, 100);
+client.GetLogs(0, 100);
+// Asynchronous
+// await client.GetLogsAsync(0, 100);
 ```
 
 
