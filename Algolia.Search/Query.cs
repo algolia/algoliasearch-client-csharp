@@ -46,17 +46,35 @@ namespace Algolia.Search
             PREFIX_NONE
         }
 
+        public enum RemoveWordsIfNoResult
+        {
+            /// <summary>
+            /// No specific processing is done when a query does not return any result.
+            /// </summary>
+            NONE,
+            /// <summary>
+            /// When a query does not return any result, the final word will be removed until there is results.
+            /// </summary>
+            LAST_WORDS,
+            /// <summary>
+            /// When a query does not return any result, the first word will be removed until there is results.
+            /// </summary>
+            FIRST_WORDS
+        }
+
         public Query(String query)
         {
             minWordSizeForApprox1 = 3;
             minWordSizeForApprox2 = 7;
             getRankingInfo = false;
             distinct = false;
+            
             page = 0;
             maxValuesPerFacets = 0;
             hitsPerPage = 20;
             this.query = query;
             queryType = QueryType.PREFIX_LAST;
+            removeWordsIfNoResult = RemoveWordsIfNoResult.NONE;
             analytics = synonyms = replaceSynonyms = typoTolerance = allowTyposOnNumericTokens = true;
         }
 
@@ -70,6 +88,7 @@ namespace Algolia.Search
             maxValuesPerFacets = 0;
             hitsPerPage = 20;
             queryType = QueryType.PREFIX_LAST;
+            removeWordsIfNoResult = RemoveWordsIfNoResult.NONE;
             analytics = synonyms = replaceSynonyms = typoTolerance = allowTyposOnNumericTokens = true;
         }
 
@@ -79,6 +98,15 @@ namespace Algolia.Search
         public Query SetQueryType(QueryType type)
         {
             this.queryType = type;
+            return this;
+        }
+
+        /// <summary>
+        /// Select the spécific processing for the query
+        /// </summary>
+        public Query SetRemoveWordsIfNoResult(RemoveWordsIfNoResult type)
+        {
+            this.removeWordsIfNoResult = type;
             return this;
         }
 
@@ -577,6 +605,21 @@ namespace Algolia.Search
                 stringBuilder += "restrictSearchableAttributes=";
                 stringBuilder += Uri.EscapeDataString(restrictSearchableAttributes);
             }
+            switch (removeWordsIfNoResult)
+            {
+                case RemoveWordsIfNoResult.NONE:
+                    break;
+                case RemoveWordsIfNoResult.FIRST_WORDS:
+                    if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                    stringBuilder += "removeWordsIfNoResult=FirstWords";
+                    break;
+                case RemoveWordsIfNoResult.LAST_WORDS:
+                    if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                    stringBuilder += "removeWordsIfNoResult=LastWords";
+                    break;
+            }
             switch (queryType) {
             case QueryType.PREFIX_ALL:
                 if (stringBuilder.Length > 0)
@@ -617,6 +660,7 @@ namespace Algolia.Search
         private string query;
         private string optionalWords;
         private QueryType queryType;
+        private RemoveWordsIfNoResult removeWordsIfNoResult;
         private IEnumerable<string> facets;
         private string facetFilters;
         private int maxValuesPerFacets;

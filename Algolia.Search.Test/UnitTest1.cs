@@ -603,6 +603,7 @@ namespace NUnit.Framework.Test
             query.SetMinWordSizeToAllowOneTypo(1);
             query.SetMinWordSizeToAllowTwoTypos(2);
             query.EnableDistinct(true);
+            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.FIRST_WORDS);
             query.GetRankingInfo(true);
             query.EnableTyposOnNumericTokens(false);
             query.SetAttributesToRetrieve(attr);
@@ -655,6 +656,7 @@ namespace NUnit.Framework.Test
             query.SetTagFilters("people");
             query.SetNumericFilters("Age>=42");
             query.SetQueryType(Query.QueryType.PREFIX_NONE);
+            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.LAST_WORDS);
             var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
