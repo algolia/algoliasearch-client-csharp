@@ -32,6 +32,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using RichardSzalay.MockHttp;
 
 namespace Algolia.Search
 {
@@ -42,10 +43,11 @@ namespace Algolia.Search
     /// </summary>
     public class AlgoliaClient
     {
-        private IEnumerable<string>  _hosts;
-        private string               _applicationId;
-        private string               _apiKey;
-        private HttpClient           _httpClient;
+        private IEnumerable<string>    _hosts;
+        private string                 _applicationId;
+        private string                 _apiKey;
+        private HttpClient             _httpClient;
+        private MockHttpMessageHandler _mock;
  
         /// <summary>
         ///Algolia Search initialization
@@ -53,7 +55,7 @@ namespace Algolia.Search
         /// <param name="applicationId">the application ID you have in your admin interface</param>
         /// <param name="apiKey">a valid API key for the service</param>
         /// <param name="hosts">the list of hosts that you have received for the service</param>
-        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null)
+        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null, MockHttpMessageHandler mock = null)
         {
             if(string.IsNullOrWhiteSpace(applicationId))
                 throw new ArgumentOutOfRangeException("applicationId","An application Id is requred.");
@@ -72,6 +74,8 @@ namespace Algolia.Search
 
             _applicationId = applicationId;
             _apiKey = apiKey;
+
+            _mock = mock;
 
             // randomize elements of hostsArray (act as a kind of load-balancer)
             _hosts = allHosts.OrderBy(s => Guid.NewGuid());
@@ -101,6 +105,7 @@ namespace Algolia.Search
         {
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-UserToken", userToken);
         }
+        
 
         /// <summary>
         /// This method allows to query multiple indexes with one API call
@@ -337,7 +342,10 @@ namespace Algolia.Search
             {
                 if (_httpClient == null)
                 {
-                    _httpClient = new HttpClient();
+                    if (_mock == null)
+                        _httpClient = new HttpClient();
+                    else
+                        _httpClient = new HttpClient(_mock);
                 }
                 return _httpClient;
             }

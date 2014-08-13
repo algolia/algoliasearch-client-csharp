@@ -55,6 +55,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RichardSzalay.MockHttp">
+      <HintPath>..\packages\RichardSzalay.MockHttp.1.0.1\lib\net45\RichardSzalay.MockHttp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
@@ -84,6 +87,7 @@
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MockTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Algolia.Search\Algolia.Search.csproj">
