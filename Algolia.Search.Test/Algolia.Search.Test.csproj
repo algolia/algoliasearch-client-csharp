@@ -49,6 +49,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="RichardSzalay.MockHttp">
       <HintPath>..\packages\RichardSzalay.MockHttp.1.0.1\lib\net45\RichardSzalay.MockHttp.dll</HintPath>
     </Reference>
@@ -82,6 +86,10 @@
     <Compile Include="MockTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Algolia.Search.NET4.0\Algolia.Search.NET4.0.csproj">
+      <Project>{92f40d0b-236d-46a0-9dff-1e3634f1e718}</Project>
+      <Name>Algolia.Search.NET4.0</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Algolia.Search\Algolia.Search.csproj">
       <Project>{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}</Project>
       <Name>Algolia.Search</Name>
