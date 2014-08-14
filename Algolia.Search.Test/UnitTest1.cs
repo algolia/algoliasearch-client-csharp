@@ -703,11 +703,11 @@ namespace NUnit.Framework.Test
             Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
         }
 
-        /*[Test]
+        [Test]
         public void TestGenerateSecuredApiKey()
         {
             String hmac = "1fd74b206c64fb49fdcd7a5f3004356cd3bdc9d9aba8733656443e64daafc417";
             Assert.AreEqual(hmac, new AlgoliaClientWrapper("test", "test").GenerateSecuredApiKey("my_api_key", "(public,user1)"));
-        }*/
+        }
     }
 }
