@@ -1,13 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RichardSzalay.MockHttp;
-using System.Net.Http;
-using System.Net;
+﻿using Algolia.Search;
 using Newtonsoft.Json.Linq;
+using RichardSzalay.MockHttp;
+using System.Net;
+using System.Net.Http;
 
-namespace Algolia.Search.Test
+namespace NUnit.Framework.Test
 {
-    [TestClass]
+    [TestFixture]
     public class MockTest
     {
 
@@ -100,7 +99,7 @@ namespace Algolia.Search.Test
             return mockHttp;
         }
 
-        [TestMethod]
+        [Test]
         public void TestClientWithMock()
         {
             var client = new AlgoliaClient("test", "test", null, getEmptyHandler());
