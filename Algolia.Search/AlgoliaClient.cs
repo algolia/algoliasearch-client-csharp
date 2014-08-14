@@ -361,14 +361,14 @@ namespace Algolia.Search
         /// <param name="tagFilter">the list of tags applied to the query (used as security)</param>
         /// <param name="userToken">an optional token identifying the current user</param>
         /// <returns></returns>
-        public JObject GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
+        public virtual string GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
         {
             throw new NotImplementedException("The method GenerateSecuredApiKey isn't implemented.");
         }
 
-        public JObject GenerateSecuredApiKey(String privateApiKey, String[] tagFilter, String userToken = null)
+        public string GenerateSecuredApiKey(String privateApiKey, String[] tagFilter, String userToken = null)
         {
-            return GenerateSecuredApiKey(privateApiKey, String.Join(",", tagFilter), userToken);
+            return GenerateSecuredApiKey(privateApiKey, "(" + String.Join(",", tagFilter) + ")", userToken);
         }
 
         public async Task<JObject> ExecuteRequest(string method, string requestUrl, object content = null)
