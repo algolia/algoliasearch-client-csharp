@@ -324,6 +324,7 @@ namespace NUnit.Framework.Test
             try
             {
                 var task = _index.DeleteObject("");
+                _index.WaitTask(task["taskID"].ToString());
                 Assert.Fail();
             }
             catch (Exception)
@@ -518,7 +519,7 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(key["key"], getKey["value"]);
             var keys = _client.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
-            var task = _client.DeleteUserKey(key["key"].ToString());
+            _client.DeleteUserKey(key["key"].ToString());
             System.Threading.Thread.Sleep(3000);
             keys = _client.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
@@ -530,7 +531,7 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(key["key"], getKey["value"]);
             keys = _index.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
-            task = _index.DeleteUserKey(key["key"].ToString());
+            _index.DeleteUserKey(key["key"].ToString());
             System.Threading.Thread.Sleep(3000);
             keys = _index.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
@@ -702,11 +703,11 @@ namespace NUnit.Framework.Test
             Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
         }
 
-        [Test]
+        /*[Test]
         public void TestGenerateSecuredApiKey()
         {
             String hmac = "1fd74b206c64fb49fdcd7a5f3004356cd3bdc9d9aba8733656443e64daafc417";
             Assert.AreEqual(hmac, new AlgoliaClientWrapper("test", "test").GenerateSecuredApiKey("my_api_key", "(public,user1)"));
-        }
+        }*/
     }
 }
