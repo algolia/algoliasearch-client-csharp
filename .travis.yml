@@ -6,6 +6,7 @@ before_install:
 script:
 - mono --runtime=v4.0 .nuget/NuGet.exe restore
 - EnableNuGetPackageRestore=true xbuild Algolia.Search/Algolia.Search.csproj
+- EnableNuGetPackageRestore=true xbuild Algolia.Search.NET4.0/Algolia.Search.NET4.0.csproj
 - EnableNuGetPackageRestore=true xbuild Algolia.Search.Test/Algolia.Search.Test.csproj
 - mono --runtime=v4.0 packages/NUnit.Runners.2.6.3/tools/nunit-console.exe Algolia.Search.Test/bin/Debug/Algolia.Search.Test.dll
 env:
