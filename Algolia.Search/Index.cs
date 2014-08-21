@@ -77,7 +77,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject AddObject(object content, string objectId = null)
         {
-            return AddObjectAsync(content, objectId).Result;
+            return AddObjectAsync(content, objectId).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject AddObjects(IEnumerable<object> objects)
         {
-            return AddObjectsAsync(objects).Result;
+            return AddObjectsAsync(objects).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject GetObject(string objectID, IEnumerable<string> attributesToRetrieve = null)
         {
-            return GetObjectAsync(objectID, attributesToRetrieve).Result;
+            return GetObjectAsync(objectID, attributesToRetrieve).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject GetObjects(IEnumerable<String> objectIDs)
         {
-            return GetObjectsAsync(objectIDs).Result;
+            return GetObjectsAsync(objectIDs).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject PartialUpdateObject(JObject partialObject)
         {
-            return PartialUpdateObjectAsync(partialObject).Result;
+            return PartialUpdateObjectAsync(partialObject).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject PartialUpdateObjects(IEnumerable<JObject> objects)
         {
-            return PartialUpdateObjectsAsync(objects).Result;
+            return PartialUpdateObjectsAsync(objects).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject SaveObject(JObject obj)
         {
-            return SaveObjectAsync(obj).Result;
+            return SaveObjectAsync(obj).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -270,7 +270,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject SaveObjects(IEnumerable<JObject> objects)
         {
-            return SaveObjectsAsync(objects).Result;
+            return SaveObjectsAsync(objects).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject DeleteObject(string objectID)
         {
-            return DeleteObjectAsync(objectID).Result;
+            return DeleteObjectAsync(objectID).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -317,7 +317,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject DeleteObjects(IEnumerable<String> objects)
         {
-            return DeleteObjectsAsync(objects).Result;
+            return DeleteObjectsAsync(objects).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -329,7 +329,7 @@ namespace Algolia.Search
             query.SetAttributesToRetrieve(new string[]{"objectID"});
             query.SetNbHitsPerPage(1000);
 
-            JObject result = await this.SearchAsync(query);
+            JObject result = await this.SearchAsync(query).ConfigureAwait(_client.getContinueOnCapturedContext());
             while (result["nbHits"].ToObject<int>() != 0)
             {
                 int i = 0;
@@ -339,9 +339,9 @@ namespace Algolia.Search
                 {
                     requests[i++] =  hit["objectID"].ToObject<string>();
                 }
-                var task = await this.DeleteObjectsAsync(requests);
-                await this.WaitTaskAsync(task["taskID"].ToObject<String>());
-                result = await this.SearchAsync(query);
+                var task = await this.DeleteObjectsAsync(requests).ConfigureAwait(_client.getContinueOnCapturedContext());
+                await this.WaitTaskAsync(task["taskID"].ToObject<String>()).ConfigureAwait(_client.getContinueOnCapturedContext());
+                result = await this.SearchAsync(query).ConfigureAwait(_client.getContinueOnCapturedContext());
             }
         }
         /// <summary>
@@ -349,7 +349,7 @@ namespace Algolia.Search
         /// </summary>
         public void DeleteByQuery(Query query)
         {
-            DeleteByQueryAsync(query).Wait();
+            DeleteByQueryAsync(query).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -374,7 +374,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject Search(Query q)
         {
-            return SearchAsync(q).Result;
+            return SearchAsync(q).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -386,11 +386,11 @@ namespace Algolia.Search
         {
             while (true)
             {
-                JObject obj = await _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/task/{1}", _urlIndexName, taskID));
+                JObject obj = await _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/task/{1}", _urlIndexName, taskID)).ConfigureAwait(_client.getContinueOnCapturedContext());
                 string status = (string)obj["status"];
                 if (status.Equals("published"))
                     return;
-                await TaskEx.Delay(1000);
+                await TaskEx.Delay(1000).ConfigureAwait(_client.getContinueOnCapturedContext());
             }
         }
         /// <summary>
@@ -398,7 +398,7 @@ namespace Algolia.Search
         /// </summary>
         public void WaitTask(String taskID)
         {
-            WaitTaskAsync(taskID).Wait();
+            WaitTaskAsync(taskID).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -414,7 +414,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject GetSettings()
         {
-            return GetSettingsAsync().Result;
+            return GetSettingsAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject Browse(int page = 0, int hitsPerPage = 1000)
         {
-            return BrowseAsync(page, hitsPerPage).Result;
+            return BrowseAsync(page, hitsPerPage).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -455,7 +455,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject ClearIndex()
         {
-            return ClearIndexAsync().Result;
+            return ClearIndexAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -511,7 +511,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject SetSettings(JObject settings)
         {
-            return SetSettingsAsync(settings).Result;
+            return SetSettingsAsync(settings).GetAwaiter().GetResult();
         }
 
 
@@ -527,7 +527,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject ListUserKeys()
         {
-            return ListUserKeysAsync().Result;
+            return ListUserKeysAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -542,7 +542,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject GetUserKeyACL(string key)
         {
-            return GetUserKeyACLAsync(key).Result;
+            return GetUserKeyACLAsync(key).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -557,7 +557,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject DeleteUserKey(string key)
         {
-            return DeleteUserKeyAsync(key).Result;
+            return DeleteUserKeyAsync(key).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -588,7 +588,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
         {
-            return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).Result;
+            return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
         }
     }
 }

@@ -48,6 +48,7 @@ namespace Algolia.Search
         private string                 _apiKey;
         private HttpClient             _httpClient;
         private MockHttpMessageHandler _mock;
+        private bool                   _continueOnCapturedContext;
  
         /// <summary>
         ///Algolia Search initialization
@@ -83,6 +84,22 @@ namespace Algolia.Search
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _continueOnCapturedContext = true;
+        }
+
+        /*
+         * <summary>
+         * Configure the await in the library. Usefull to avoid a deadlock with ASP.NET project
+         * </summary>
+         */
+        public void ConfigureAwait(bool continueOnCapturedContext)
+        {
+            _continueOnCapturedContext = continueOnCapturedContext;
+        }
+
+        public bool getContinueOnCapturedContext()
+        {
+            return _continueOnCapturedContext;
         }
 
         /*
@@ -132,7 +149,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject MultipleQueries(List<IndexQuery> queries)
         {
-            return MultipleQueriesAsync(queries).Result;
+            return MultipleQueriesAsync(queries).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -151,7 +168,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject ListIndexes()
         {
-            return ListIndexesAsync().Result;
+            return ListIndexesAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -169,7 +186,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject DeleteIndex(string indexName)
         {
-            return DeleteIndexAsync(indexName).Result;
+            return DeleteIndexAsync(indexName).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -189,7 +206,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject MoveIndex(string srcIndexName, string dstIndexName)
         {
-            return MoveIndexAsync(srcIndexName, dstIndexName).Result;
+            return MoveIndexAsync(srcIndexName, dstIndexName).GetAwaiter().GetResult();
         }
     
         /// <summary>
@@ -209,7 +226,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject CopyIndex(string srcIndexName, string dstIndexName)
         {
-            return CopyIndexAsync(srcIndexName, dstIndexName).Result;
+            return CopyIndexAsync(srcIndexName, dstIndexName).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -244,7 +261,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject GetLogs(int offset = 0, int length = 10, bool onlyErrors = false)
         {
-            return GetLogsAsync(offset, length).Result;
+            return GetLogsAsync(offset, length).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -270,7 +287,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject ListUserKeys()
         {
-            return ListUserKeysAsync().Result;
+            return ListUserKeysAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -286,7 +303,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject GetUserKeyACL(string key)
         {
-            return GetUserKeyACLAsync(key).Result;
+            return GetUserKeyACLAsync(key).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -302,7 +319,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject DeleteUserKey(string key)
         {
-            return DeleteUserKeyAsync(key).Result;
+            return DeleteUserKeyAsync(key).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -333,7 +350,7 @@ namespace Algolia.Search
         /// </summary>
         public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
         {
-            return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).Result;
+            return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
         }
 
         protected HttpClient HttpClient
@@ -382,29 +399,29 @@ namespace Algolia.Search
                     switch (method)
                     {
                         case "GET":
-                            responseMsg = await HttpClient.GetAsync(url);
+                            responseMsg = await HttpClient.GetAsync(url).ConfigureAwait(_continueOnCapturedContext);
                             break;
                         case "POST":
                             HttpContent postcontent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                            responseMsg = await HttpClient.PostAsync(url, postcontent);
+                            responseMsg = await HttpClient.PostAsync(url, postcontent).ConfigureAwait(_continueOnCapturedContext);
                             break;
                         case "PUT":
                             HttpContent putContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                            responseMsg = await HttpClient.PutAsync(url, putContent);
+                            responseMsg = await HttpClient.PutAsync(url, putContent).ConfigureAwait(_continueOnCapturedContext);
                             break;
                         case "DELETE":
-                            responseMsg = await HttpClient.DeleteAsync(url);
+                            responseMsg = await HttpClient.DeleteAsync(url).ConfigureAwait(_continueOnCapturedContext);
                             break;
                     }
                     if (responseMsg.IsSuccessStatusCode)
                     {
-                        string serializedJSON = await responseMsg.Content.ReadAsStringAsync();
+                        string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
                         JObject obj = JObject.Parse(serializedJSON);
                         return obj;
                     }
                     else if (responseMsg.StatusCode == HttpStatusCode.BadRequest || responseMsg.StatusCode == HttpStatusCode.Forbidden || responseMsg.StatusCode == HttpStatusCode.NotFound)
                     {
-                        string serializedJSON = await responseMsg.Content.ReadAsStringAsync();
+                        string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
                         JObject obj = JObject.Parse(serializedJSON);
                         string message = (string)obj["message"];
                         throw new AlgoliaException(message);
