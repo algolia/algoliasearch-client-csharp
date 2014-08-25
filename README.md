@@ -70,6 +70,12 @@ using Algolia.Search;
 AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey");
 ```
 
+**Note**: If you're using Algolia in an ASP.NET project you might experience some deadlocks while using our asynchronous API. You can fix it by calling the following method:
+
+```csharp
+client.ConfigureAwait(false);
+```
+
 
 
 
@@ -185,6 +191,7 @@ Check our [online documentation](http://www.algolia.com/doc/guides/csharp):
  * [Geo-Search](http://www.algolia.com/doc/guides/csharp#Geo-Search)
  * [Security](http://www.algolia.com/doc/guides/csharp#Security)
  * [REST API](http://www.algolia.com/doc/rest)
+
 
 Tutorials
 ================
