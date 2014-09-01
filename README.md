@@ -300,12 +300,12 @@ You can use the following optional arguments on Query class:
   * **PREFIX_LAST**: only the last word is interpreted as a prefix (default behavior),
   * **PREFIX_NONE**: no query word is interpreted as a prefix. This option is not recommended.
  * **SetRemoveWordsIfNoResult**: This option to select a strategy to avoid having an empty result page. There is three different option:
-  * **LAST_WORDS**: when a query does not return any result, the final word will be removed until there is results,
-  * **FIRST_WORDS**: when a query does not return any result, the first word will be removed until there is results,
+  * **LAST_WORDS**: when a query does not return any result, the last word will be added as optional (the process is repeated with n-1 word, n-2 word, ... until there is results),
+  * **FIRST_WORDS**: when a query does not return any result, the first word will be added as optional (the process is repeated with second word, third word, ... until there is results),
   * **NONE**: No specific processing is done when a query does not return any result (default behavior).
  * **EnableTypoTolerance**: if set to false, disable the typo-tolerance. Defaults to true.
- * **SetMinWordSizeToAllowOneTypo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
- * **SetMinWordSizeToAllowTwoTypos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+ * **SetMinWordSizeToAllowOneTypo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 4.
+ * **SetMinWordSizeToAllowTwoTypos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 8.
  * **EnableTyposOnNumericTokens**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to true.
  * **RestrictSearchableAttributes** List of attributes you want to use for textual search (must be a subset of the `attributesToIndex` index setting). Attributes are separated with a comma (for example `"name,address"`), you can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")). By default, all attributes specified in `attributesToIndex` settings are used to search.
  * **EnableAdvancedSyntax**: Enable the advanced query syntax. Defaults to 0 (false).
@@ -550,8 +550,8 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
   For example `"altCorrections": [ { "word" : "foot", "correction": "feet", "nbTypos": 1}, { "word": "feet", "correction": "foot", "nbTypos": 1}].`
 
 #### Default query parameters (can be overwrite by query)
- * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 3).
- * **minWordSizefor2Typos**: (integer) the minimum number of characters to accept two typos (default = 7).
+ * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 4).
+ * **minWordSizefor2Typos**: (integer) the minimum number of characters to accept two typos (default = 8).
  * **hitsPerPage**: (integer) the number of hits per page (default = 10).
  * **attributesToRetrieve**: (array of strings) default list of attributes to retrieve in objects. If set to null, all attributes are retrieved.
  * **attributesToHighlight**: (array of strings) default list of attributes to highlight. If set to null, all indexed attributes are highlighted.
