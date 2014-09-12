@@ -506,7 +506,7 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public void TaskACL()
+        public void TaskACLClient()
         {
             clearTest();
             // Add one object to be sure the test will not fail because index is empty
@@ -519,18 +519,34 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(key["key"], getKey["value"]);
             var keys = _client.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
+            _client.UpdateUserKey(key["key"].ToString(), new String[] { "addObject" });
+            System.Threading.Thread.Sleep(3000);
+            getKey = _client.GetUserKeyACL(key["key"].ToString());
+            Assert.AreEqual((string)getKey["acl"][0], "addObject");
             _client.DeleteUserKey(key["key"].ToString());
             System.Threading.Thread.Sleep(3000);
             keys = _client.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
+        }
 
-            key = _index.AddUserKey(new String[] { "search" });
+        [Test]
+        public void TaskACLIndex()
+        {
+            clearTest();
+            // Add one object to be sure the test will not fail because index is empty
+            var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+            _index.WaitTask(res["taskID"].ToString());
+            var key = _index.AddUserKey(new String[] { "search" });
             System.Threading.Thread.Sleep(3000);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
-            getKey = _index.GetUserKeyACL(key["key"].ToString());
+            var getKey = _index.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
-            keys = _index.ListUserKeys();
+            var keys = _index.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
+            _index.UpdateUserKey(key["key"].ToString(), new String[] { "addObject" });
+            System.Threading.Thread.Sleep(3000);
+            getKey = _index.GetUserKeyACL(key["key"].ToString());
+            Assert.AreEqual((string)getKey["acl"][0], "addObject");
             _index.DeleteUserKey(key["key"].ToString());
             System.Threading.Thread.Sleep(3000);
             keys = _index.ListUserKeys();

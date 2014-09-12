@@ -583,12 +583,45 @@ namespace Algolia.Search
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), content);
         }
+
         /// <summary>
         /// Synchronously call <see cref="Index.AddUserKeyAsync"/>
         /// </summary>
         public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
         {
             return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Update a user key associated to this index.
+        /// </summary>
+        /// <param name="acls">the list of ACL for this key. Defined by an array of strings that can contains the following values:
+        ///   - search: allow to search (https and http)
+        ///   - addObject: allows to add/update an object in the index (https only)
+        ///   - deleteObject : allows to delete an existing object (https only)
+        ///   - deleteIndex : allows to delete index content (https only)
+        ///   - settings : allows to get index settings (https only)
+        ///   - editSettings : allows to change index settings (https only)</param>
+        /// <param name="validity">the number of seconds after which the key will be automatically removed (0 means no time limit for this key)</param>
+        /// <param name="maxQueriesPerIPPerHour"> Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).</param>
+        /// <param name="maxHitsPerQuery"> Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited) </param>
+        /// <returns>Return an object with a "key" string attribute containing the new key.</returns>
+        public Task<JObject> UpdateUserKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        {
+            Dictionary<string, object> content = new Dictionary<string, object>();
+            content["acl"] = acls;
+            content["validity"] = validity;
+            content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
+            content["maxHitsPerQuery"] = maxHitsPerQuery;
+            return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), content);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.UpdateUserKeyAsync"/>
+        /// </summary>
+        public JObject UpdateUserKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        {
+            return UpdateUserKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
         }
     }
 }
