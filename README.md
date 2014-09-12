@@ -753,6 +753,19 @@ res = index.AddUserKey(new String[] { "search" }, 300, 100, 20);
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 ```
 
+Update the rights of an existing key:
+```csharp
+// Update an existing global API key that is valid for 300 seconds
+var res = client.UpdateUserKey("myAPIKey", new String[] { "search" }, 300, 0, 0);
+// Asynchronous
+// var res = await client.UpdateUserKeyAsync("myAPIKey", new String[] { "search" }, 300, 0, 0);
+System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
+// Update an existing index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
+res = index.UpdateUserKey("myAPIKey", new String[] { "search" }, 300, 100, 20);
+// Asynchronous
+// res = await index.UpdateUserKeyAsync("myAPIKey", new String[] { "search" }, 300, 100, 20);
+System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
+```
 Get the rights of a given key:
 ```csharp
 // Gets the rights of a global key
