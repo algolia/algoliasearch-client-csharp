@@ -67,6 +67,7 @@ namespace Algolia.Search
             minWordSizeForApprox1 = 3;
             minWordSizeForApprox2 = 7;
             getRankingInfo = false;
+            ignorePlural = false;
             distinct = false;
             
             page = 0;
@@ -83,6 +84,7 @@ namespace Algolia.Search
             minWordSizeForApprox1 = 3;
             minWordSizeForApprox2 = 7;
             getRankingInfo = false;
+            ignorePlural = false;
             distinct = false;
             page = 0;
             maxValuesPerFacets = 0;
@@ -171,6 +173,15 @@ namespace Algolia.Search
         public Query GetRankingInfo(bool enabled)
         {
             getRankingInfo = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true, plural won't be considered as a typo (for example car/cars will be considered as equals). Default to false.
+        /// </summary>
+        public Query IgnorePlural(bool enabled)
+        {
+            ignorePlural = enabled;
             return this;
         }
 
@@ -505,6 +516,11 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "getRankingInfo=1";
             }
+            if (ignorePlural) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "ignorePlural=true";
+            }
             if (distinct)
             {
                 if (stringBuilder.Length > 0)
@@ -643,6 +659,7 @@ namespace Algolia.Search
         private int minWordSizeForApprox1;
         private int minWordSizeForApprox2;
         private bool getRankingInfo;
+        private bool ignorePlural;
         private bool distinct;
         private bool advancedSyntax;
         private bool analytics;
