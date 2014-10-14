@@ -29,10 +29,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using RichardSzalay.MockHttp;
+using System.Reflection;
 
 namespace Algolia.Search
 {
@@ -83,6 +83,7 @@ namespace Algolia.Search
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
+            HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + Assembly.GetExecutingAssembly().FullName.Split(',')[1].Split('=')[1]);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _continueOnCapturedContext = true;
         }
@@ -121,6 +122,16 @@ namespace Algolia.Search
         public void SetUserToken(string userToken)
         {
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-UserToken", userToken);
+        }
+
+        /*
+         * <summrary>
+         * Allow to set custom header
+         * </summary>
+         */
+        public void SetExtraHeader(string key, string value)
+        {
+            HttpClient.DefaultRequestHeaders.Add(key, value);
         }
         
 
