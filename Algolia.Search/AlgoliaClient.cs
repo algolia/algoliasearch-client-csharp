@@ -434,53 +434,63 @@ namespace Algolia.Search
 
         public async Task<JObject> ExecuteRequest(string method, string requestUrl, object content = null)
         {
+            Dictionary<string, string> errors = new Dictionary<string,string>();
             foreach (string host in _hosts)
             {
                 try
                 {
-                    string url = string.Format("https://{0}{1}", host, requestUrl);
-                    HttpResponseMessage responseMsg = null;
-                    switch (method)
+                    try
                     {
-                        case "GET":
-                            responseMsg = await HttpClient.GetAsync(url).ConfigureAwait(_continueOnCapturedContext);
-                            break;
-                        case "POST":
-                            HttpContent postcontent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                            responseMsg = await HttpClient.PostAsync(url, postcontent).ConfigureAwait(_continueOnCapturedContext);
-                            break;
-                        case "PUT":
-                            HttpContent putContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                            responseMsg = await HttpClient.PutAsync(url, putContent).ConfigureAwait(_continueOnCapturedContext);
-                            break;
-                        case "DELETE":
-                            responseMsg = await HttpClient.DeleteAsync(url).ConfigureAwait(_continueOnCapturedContext);
-                            break;
+                        string url = string.Format("https://{0}{1}", host, requestUrl);
+                        HttpResponseMessage responseMsg = null;
+                        switch (method)
+                        {
+                            case "GET":
+                                responseMsg = await HttpClient.GetAsync(url).ConfigureAwait(_continueOnCapturedContext);
+                                break;
+                            case "POST":
+                                HttpContent postcontent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
+                                responseMsg = await HttpClient.PostAsync(url, postcontent).ConfigureAwait(_continueOnCapturedContext);
+                                break;
+                            case "PUT":
+                                HttpContent putContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
+                                responseMsg = await HttpClient.PutAsync(url, putContent).ConfigureAwait(_continueOnCapturedContext);
+                                break;
+                            case "DELETE":
+                                responseMsg = await HttpClient.DeleteAsync(url).ConfigureAwait(_continueOnCapturedContext);
+                                break;
+                        }
+                        if (responseMsg.IsSuccessStatusCode)
+                        {
+                            string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
+                            JObject obj = JObject.Parse(serializedJSON);
+                            return obj;
+                        }
+                        else if (responseMsg.StatusCode == HttpStatusCode.BadRequest || responseMsg.StatusCode == HttpStatusCode.Forbidden || responseMsg.StatusCode == HttpStatusCode.NotFound)
+                        {
+                            string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
+                            JObject obj = JObject.Parse(serializedJSON);
+                            string message = (string)obj["message"];
+                            throw new AlgoliaException(message);
+                        }
+                        else
+                        {
+                            errors.Add(host, responseMsg.ReasonPhrase);
+                        }
                     }
-                    if (responseMsg.IsSuccessStatusCode)
+                    catch (Exception ex)
                     {
-                        string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
-                        JObject obj = JObject.Parse(serializedJSON);
-                        return obj;
+                        errors.Add(host, ex.Message);
                     }
-                    else if (responseMsg.StatusCode == HttpStatusCode.BadRequest || responseMsg.StatusCode == HttpStatusCode.Forbidden || responseMsg.StatusCode == HttpStatusCode.NotFound)
-                    {
-                        string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
-                        JObject obj = JObject.Parse(serializedJSON);
-                        string message = (string)obj["message"];
-                        throw new AlgoliaException(message);
-                    }
+
                 }
                 catch (AlgoliaException)
                 {
                     throw;
                 }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("AlgoliaClient exception: " + ex.ToString());
-                }
+                
             }
-            throw new AlgoliaException("Hosts unreachable.");
+            throw new AlgoliaException("Hosts unreachable: " + string.Join(", ", errors.Select(x => x.Key + "=" + x.Value).ToArray()));
         }
     }
 }
