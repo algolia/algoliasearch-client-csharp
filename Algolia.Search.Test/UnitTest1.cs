@@ -4,6 +4,7 @@ using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Collections;
 using Algolia.Search;
 
 namespace NUnit.Framework.Test
@@ -724,6 +725,55 @@ namespace NUnit.Framework.Test
         {
             String hmac = "1fd74b206c64fb49fdcd7a5f3004356cd3bdc9d9aba8733656443e64daafc417";
             Assert.AreEqual(hmac, new AlgoliaClientWrapper("test", "test").GenerateSecuredApiKey("my_api_key", "(public,user1)"));
+        }
+
+        [Test]
+        public void TestDisjunctiveFaceting()
+        {
+            clearTest();
+            _index.SetSettings(JObject.Parse(@"{""attributesForFacetting"": [""city"", ""stars"", ""facilities""]}"));
+            JObject task = _index.AddObjects(new JObject[]{
+                JObject.Parse(@"{""name"":""Hotel A"", ""stars"":""*"", ""facilities"":[""wifi"", ""bath"", ""spa""], ""city"":""Paris""}"),
+                JObject.Parse(@"{""name"":""Hotel B"", ""stars"":""*"", ""facilities"":[""wifi""], ""city"":""Paris""}"),
+                JObject.Parse(@"{""name"":""Hotel C"", ""stars"":""**"", ""facilities"":[""bath""], ""city"":""San Fancisco""}"),
+                JObject.Parse(@"{""name"":""Hotel D"", ""stars"":""****"", ""facilities"":[""spa""], ""city"":""Paris""}"),
+                JObject.Parse(@"{""name"":""Hotel E"", ""stars"":""****"", ""facilities"":[""spa""], ""city"":""New York""}")
+            });
+            _index.WaitTask((task["taskID"].ToString()));
+            Dictionary<string, IEnumerable<string>> refinements = new Dictionary<string, IEnumerable<string>>();
+            JObject answer = _index.SearchDisjunctiveFaceting(new Query("h").SetFacets(new string[] { "city" }), new string[] { "stars", "facilities" });
+            Assert.AreEqual(5, answer["nbHits"].ToObject<int>());
+            Assert.AreEqual(1, answer["facets"].ToObject<JObject>().Count);
+            Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>().Count);
+
+            refinements.Add("stars", new string[] { "*" });
+            answer = _index.SearchDisjunctiveFaceting(new Query("h").SetFacets(new string[] { "city" }), new string[] { "stars", "facilities" }, refinements);
+            Assert.AreEqual(2, answer["nbHits"].ToObject<int>());
+            Assert.AreEqual(1, answer["facets"].ToObject<JObject>().Count);
+            Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>().Count);
+            Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["*"].ToObject<int>());
+            Assert.AreEqual(1, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["**"].ToObject<int>());
+            Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["****"].ToObject<int>());
+
+            refinements.Clear();
+            refinements.Add("stars", new string[] { "*" });
+            refinements.Add("city", new string[] { "Paris" });
+            answer = _index.SearchDisjunctiveFaceting(new Query("h").SetFacets(new string[] { "city" }), new string[] { "stars", "facilities" }, refinements);
+            Assert.AreEqual(2, answer["nbHits"].ToObject<int>());
+            Assert.AreEqual(1, answer["facets"].ToObject<JObject>().Count);
+            Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>().Count);
+            Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["*"].ToObject<int>());
+            Assert.AreEqual(1, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["****"].ToObject<int>());
+
+            refinements.Clear();
+            refinements.Add("stars", new string[] { "*", "****" });
+            refinements.Add("city", new string[] { "Paris" });
+            answer = _index.SearchDisjunctiveFaceting(new Query("h").SetFacets(new string[] { "city" }), new string[] { "stars", "facilities" }, refinements);
+            Assert.AreEqual(3, answer["nbHits"].ToObject<int>());
+            Assert.AreEqual(1, answer["facets"].ToObject<JObject>().Count);
+            Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>().Count);
+            Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["*"].ToObject<int>());
+            Assert.AreEqual(1, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["****"].ToObject<int>());
         }
     }
 }

@@ -623,5 +623,126 @@ namespace Algolia.Search
         {
             return UpdateUserKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
         }
+
+        /// <summary>
+        /// Perform a search with disjunctive facets generating as many queries as number of disjunctive facets
+        /// @param query the query
+        /// @param disjunctiveFacets the array of disjunctive facets
+        /// @param refinements Dictionary<string, IEnumerable<string>> representing the current refinements
+        ///     ex: { "my_facet1" => ["my_value1", "my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }
+        /// </summary>
+        public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
+        {
+            if (refinements == null)
+                refinements = new Dictionary<string, IEnumerable<string>>();
+            Dictionary<string, IEnumerable<string>> disjunctiveRefinements = new Dictionary<string,IEnumerable<string>>();
+            foreach (string key in refinements.Keys) {
+                if (disjunctiveFacets.Contains(key))
+                {
+                    disjunctiveRefinements.Add(key, refinements[key]);
+                }
+            }
+
+            // build queries
+            List<IndexQuery> queries = new List<IndexQuery>();
+            // hits + regular facets query
+            List<string> filters = new List<string>();
+            foreach (string key in refinements.Keys)
+            {
+                string or = "(";
+                bool first = true;
+                foreach (string value in refinements[key])
+                {
+                    if (disjunctiveRefinements.ContainsKey(key))
+                    {
+                        // disjunctive refinements are ORed
+                        if (!first)
+                            or += ',';
+                        first = false;
+                        or += String.Format("{0}:{1}", key, value);
+                    }
+                    else
+                    {
+                        filters.Add(String.Format("{0}:{1}", key, value));
+                    }
+                }
+                // Add or
+                if (disjunctiveRefinements.ContainsKey(key))
+                {
+                    filters.Add(or + ')');
+                }
+            }
+
+            
+            queries.Add(new IndexQuery(_indexName, query.clone().SetFacetFilters(filters)));
+            // one query per disjunctive facet (use all refinements but the current one + histPerPage=1 + single facet)
+            foreach (string disjunctiveFacet in disjunctiveFacets)
+            {
+                filters = new List<string>();
+                foreach (string key in refinements.Keys)
+                {
+                    if (disjunctiveFacet.Equals(key))
+                        continue;
+                    string or = "(";
+                    bool first = true;
+                    foreach (string value in refinements[key])
+                    {
+                        if (disjunctiveRefinements.ContainsKey(key))
+                        {
+                            // disjunctive refinements are ORed
+                            if (!first)
+                                or += ',';
+                            first = false;
+                            or += String.Format("{0}:{1}", key, value);
+                        }
+                        else
+                        {
+                            filters.Add(String.Format("{0}:{1}", key, value));
+                        }
+                    }
+                    // Add or
+                    if (disjunctiveRefinements.ContainsKey(key))
+                    {
+                        filters.Add(or + ')');
+                    }
+                }
+                queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(1).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[]{disjunctiveFacet}).SetFacetFilters(filters)));
+            }
+        
+            JObject answers = _client.MultipleQueries(queries);
+
+            // aggregate answers
+            // first answer stores the hits + regular facets
+            JObject aggregatedAnswer = answers["results"].ToObject<JArray>()[0].ToObject<JObject>();
+            JObject disjunctiveFacetsJSON = new JObject();
+            bool first2 = true;
+            foreach (JToken answer in answers["results"].ToObject<JArray>())
+            {
+                if (first2)
+                {
+                    first2 = false;
+                    continue;
+                }
+                JObject a = answer.ToObject<JObject>();
+                foreach (KeyValuePair<string, JToken> elt in a["facets"].ToObject<JObject>())
+                {
+                    // Add the facet to the disjunctive facet hash
+                    disjunctiveFacetsJSON.Add(elt.Key, elt.Value);
+                    // concatenate missing refinements
+                    if (!disjunctiveRefinements.ContainsKey(elt.Key))
+                        continue;
+                    foreach (string refine in disjunctiveRefinements[elt.Key])
+                    {
+                        if (disjunctiveFacetsJSON[elt.Key].ToObject<JObject>()[refine] == null)
+                        {
+                            disjunctiveFacetsJSON[elt.Key].ToObject<JObject>().Add(refine, 0);
+                        }
+                    }
+
+                }
+            }
+            aggregatedAnswer.Add("disjunctiveFacets", disjunctiveFacetsJSON.ToObject<JToken>());
+            return aggregatedAnswer;
+        }
     }
 }

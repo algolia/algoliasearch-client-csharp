@@ -94,6 +94,41 @@ namespace Algolia.Search
             analytics = synonyms = replaceSynonyms = typoTolerance = allowTyposOnNumericTokens = true;
         }
 
+        public Query clone()
+        {
+            Query q = new Query();
+            q.advancedSyntax = advancedSyntax;
+            q.allowTyposOnNumericTokens = allowTyposOnNumericTokens;
+            q.analytics = analytics;
+            q.aroundLatLong = aroundLatLong;
+            q.aroundLatLongViaIP = aroundLatLongViaIP;
+            q.attributes = attributes;
+            q.attributesToHighlight = attributesToHighlight;
+            q.attributesToSnippet = attributesToSnippet;
+            q.distinct = distinct;
+            q.facetFilters = facetFilters;
+            q.facets = facets;
+            q.getRankingInfo = getRankingInfo;
+            q.hitsPerPage = hitsPerPage;
+            q.ignorePlural = ignorePlural;
+            q.insideBoundingBox = insideBoundingBox;
+            q.maxValuesPerFacets = maxValuesPerFacets;
+            q.minWordSizeForApprox1 = minWordSizeForApprox1;
+            q.minWordSizeForApprox2 = minWordSizeForApprox2;
+            q.numerics = numerics;
+            q.optionalWords = optionalWords;
+            q.page = page;
+            q.query = query;
+            q.queryType = queryType;
+            q.removeWordsIfNoResult = removeWordsIfNoResult;
+            q.replaceSynonyms = replaceSynonyms;
+            q.restrictSearchableAttributes = restrictSearchableAttributes;
+            q.synonyms = synonyms;
+            q.tags = tags;
+            q.typoTolerance = typoTolerance;
+            return q;
+        }
+
         /// <summary>
         /// Select how the query words are interpreted.
         /// </summary>
@@ -432,6 +467,8 @@ namespace Algolia.Search
                     stringBuilder += Uri.EscapeDataString(attr);
                     first = false;
                 }
+                if (this.attributesToSnippet.Count() == 0)
+                    stringBuilder += "[]";
             }
             if (attributesToHighlight != null) {
                 if (stringBuilder.Length > 0)
@@ -444,6 +481,8 @@ namespace Algolia.Search
                     stringBuilder += Uri.EscapeDataString(attr);
                     first = false;
                 }
+                if (this.attributesToSnippet.Count() == 0)
+                    stringBuilder += "[]";
             }
             if (attributesToSnippet != null) {
                 if (stringBuilder.Length > 0)
@@ -456,6 +495,8 @@ namespace Algolia.Search
                     stringBuilder += Uri.EscapeDataString(attr);
                     first = false;
                 }
+                if (this.attributesToSnippet.Count() == 0)
+                    stringBuilder += "[]";
             }
             if (facets != null)
             {
@@ -471,7 +512,7 @@ namespace Algolia.Search
                     first = false;
                 }
             }
-            if (facetFilters != null)
+            if (facetFilters != null && facetFilters.Length > 0)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
