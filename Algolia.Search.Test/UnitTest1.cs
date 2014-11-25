@@ -25,8 +25,8 @@ namespace NUnit.Framework.Test
             {
                 return name;
             }
-            String[] id = Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER").Split('.');
-            return name + "_travis-" + id[id.Length - 1];
+            //String[] id = Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER").Split('.');
+            return name + "_travis-" + Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER");
         }
 
         public void clearTest()
