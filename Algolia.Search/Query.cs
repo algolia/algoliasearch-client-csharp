@@ -467,7 +467,7 @@ namespace Algolia.Search
                     stringBuilder += Uri.EscapeDataString(attr);
                     first = false;
                 }
-                if (this.attributesToSnippet.Count() == 0)
+                if (this.attributes.Count() == 0)
                     stringBuilder += "[]";
             }
             if (attributesToHighlight != null) {
@@ -481,7 +481,7 @@ namespace Algolia.Search
                     stringBuilder += Uri.EscapeDataString(attr);
                     first = false;
                 }
-                if (this.attributesToSnippet.Count() == 0)
+                if (this.attributesToHighlight.Count() == 0)
                     stringBuilder += "[]";
             }
             if (attributesToSnippet != null) {
