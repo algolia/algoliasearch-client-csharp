@@ -65,9 +65,9 @@ namespace Algolia.Search
                 throw new ArgumentOutOfRangeException("apiKey", "An API key is required.");
 
             if (hosts == null)
-                hosts = new string[] {applicationId + "-1.algolia.io",
-                                      applicationId + "-2.algolia.io",
-                                      applicationId + "-3.algolia.io"};
+                hosts = new string[] {applicationId + "-1.algolia.net",
+                                      applicationId + "-2.algolia.net",
+                                      applicationId + "-3.algolia.net"};
             
             IEnumerable<string> allHosts = hosts as string[] ?? hosts.ToArray();
             if (!allHosts.Any())
