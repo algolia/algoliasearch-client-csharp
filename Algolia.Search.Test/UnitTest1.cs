@@ -514,18 +514,18 @@ namespace NUnit.Framework.Test
             var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
             _index.WaitTask(res["taskID"].ToString());
             var key = _client.AddUserKey(new String[] { "search" });
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
             var getKey = _client.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
             var keys = _client.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
             _client.UpdateUserKey(key["key"].ToString(), new String[] { "addObject" });
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
             getKey = _client.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
             _client.DeleteUserKey(key["key"].ToString());
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
             keys = _client.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
         }
@@ -538,18 +538,18 @@ namespace NUnit.Framework.Test
             var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
             _index.WaitTask(res["taskID"].ToString());
             var key = _index.AddUserKey(new String[] { "search" });
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
             var getKey = _index.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
             var keys = _index.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
             _index.UpdateUserKey(key["key"].ToString(), new String[] { "addObject" });
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
             getKey = _index.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
             _index.DeleteUserKey(key["key"].ToString());
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
             keys = _index.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
         }
