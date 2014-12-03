@@ -1,0 +1,325 @@
+Changelog
+=========
+
+2.4.0 (2014-11-30)
+------------------
+
+- Bump to 2.4.0. [Xavier Grand]
+
+- Increase sleep. [Xavier Grand]
+
+- Switch to .net. [Xavier Grand]
+
+- Fix multiple travis builds in parallel. [Xavier Grand]
+
+2.3.3 (2014-11-25)
+------------------
+
+- Bump to 2.3.3. [Xavier Grand]
+
+- Fix Query.cs. [Xavier Grand]
+
+2.3.2 (2014-11-24)
+------------------
+
+- Bump to 2.3.2. [Xavier Grand]
+
+- Add Disjunctive Faceting. [Xavier Grand]
+
+2.3.1 (2014-10-22)
+------------------
+
+- Bump to 2.3.1. [Xavier Grand]
+
+- Improve retrying. [Xavier Grand]
+
+2.3.0 (2014-10-14)
+------------------
+
+- Add setExtraHeader and set the User-Agent. [Xavier Grand]
+
+2.2.0 (2014-09-14)
+------------------
+
+- Version 2.2. [Julien Lemoine]
+
+- Add the documentation about the update of an APIKey. [Xavier Grand]
+
+- Added update key. [Xavier Grand]
+
+- Updated default typoTolerance setting & updated removedWordsIfNoResult
+  documentation. [Julien Lemoine]
+
+- Add a note about the ConfigureAwait. [Xavier Grand]
+
+- Allow to configure the await. [Xavier Grand]
+
+- Update the assembly version to 2.0.0. [Xavier Grand]
+
+- Add missing reference. [Xavier Grand]
+
+- Update target of Algolia.Search.Test. [Xavier Grand]
+
+- Merge branch 'master' of https://github.com/algolia/algoliasearch-
+  client-csharp. [Xavier Grand]
+
+- Remove useless reference. [Xavier Grand]
+
+- Trying to fix build on travis v4. [Xavier Grand]
+
+- Trying to fix build on travis v3. [Xavier Grand]
+
+- Add the new project in the configuration file of travis. [Xavier
+  Grand]
+
+- Trying to fix build on travis v2. [Xavier Grand]
+
+- Trying to fix build on travis. [Xavier Grand]
+
+- Resolve #5: Add a wrapper for the method GenerateSecuredApiKey.
+  [Xavier Grand]
+
+- Change the unit testing framework. [Xavier Grand]
+
+- Add documentation about removeWordsIfNoResult. [Xavier Grand]
+
+- Update snippet. [Xavier Grand]
+
+2.0.0 (2014-08-13)
+------------------
+
+- Added support of removeWordsIfNoResults. [Xavier Grand]
+
+- Merge branch 'master' of https://github.com/algolia/algoliasearch-
+  client-csharp. [Xavier Grand]
+
+- Resolve #7: Add ability to mock AlgoliaClient. [Xavier Grand]
+
+- Resolve #6: Rename method names following TAP name convention. [Xavier
+  Grand]
+
+- Throw an exception in the not implemented method GenerateSecuredApiKey
+  #5. [Xavier Grand]
+
+- Update dependencies. [Xavier Grand]
+
+- Added aroundLatLngViaIP documentation. [Julien Lemoine]
+
+1.16.0 (2014-08-04)
+-------------------
+
+- Added aroundLatitudeLongitudeViaIP. [Julien Lemoine]
+
+- Add notes about the JS API client. [Sylvain UTARD]
+
+- Add tutorial links + minor enhancements. [Sylvain UTARD]
+
+- Added documentation of suffix/prefix index name matching in API key.
+  [Julien Lemoine]
+
+- Change the cluster. [Xavier Grand]
+
+- Fixed doc. [Julien Lemoine]
+
+1.15.0 (2014-07-24)
+-------------------
+
+- Added RestrictSearchableAttribute doc. [Julien Lemoine]
+
+- Added RestrictSearchableAttributes : [Julien Lemoine]
+
+1.14.0 (2014-07-24)
+-------------------
+
+- Added SetSecurityTags & setUserToken methods. [Julien Lemoine]
+
+- Merge branch 'master' of https://github.com/algolia/algoliasearch-
+  client-csharp. [Xavier Grand]
+
+- Fix analytics, synonyms and replace synonums. [Xavier Grand]
+
+- Fix travis. [Xavier Grand]
+
+- Trying to fix travis. [Xavier Grand]
+
+- Add DeleteByQuery and GetObjects. [Xavier Grand]
+
+- Add missing waitTask. [Xavier Grand]
+
+- Fix test-suite. [Xavier Grand]
+
+- Added disableTypoToleranceOn & altCorrections index settings. [Julien
+  Lemoine]
+
+1.12.0 (2014-06-10)
+-------------------
+
+- Add a new facet filters helper. [Xavier Grand]
+
+- Fix retry. [Xavier Grand]
+
+- Add test for facetting and some minor fixes. [Xavier Grand]
+
+- Merge pull request #4 from james-andrewsmith/FacetFilter-Fixes.
+  [Xavier Grand]
+
+  Facet Filter Fixes
+
+- Add tests for typo tolerance parametter. [Xavier Grand]
+
+- Fix ACL tests. [Xavier Grand]
+
+- Fix retry for an host unreachable. [Xavier Grand]
+
+- Fix query with huge parametters. [Xavier Grand]
+
+- Add typoTolerance & allowsTyposOnNumericTokens query parameters.
+  [Xavier Grand]
+
+- Add typoTolerance & allowsTyposOnNumericTokens query parameters.
+  [Sylvain UTARD]
+
+- Documentation: Added words ranking parameter. [Julien Lemoine]
+
+- Added asc(attributeName) & desc(attributeName) documentation in index
+  settings. [Julien Lemoine]
+
+- Updated synonyms examples. [Xavier Grand]
+
+- Fix typo. [Xavier Grand]
+
+- Add a note about distinct and the empty queries. [Xavier Grand]
+
+1.11.0 (2014-05-02)
+-------------------
+
+- Added EnableSynonyms, EnableAnalytics &
+  EnableReplaceSynonymsInHighlight. [Julien Lemoine]
+
+- Added analytics,synonyms,enableSynonymsInHighlight query parameters.
+  [Julien Lemoine]
+
+- Test if the objectID exists. [Xavier Grand]
+
+- Add badge of travis. [Xavier Grand]
+
+- Trying to fix travis (simplify tests) [Xavier Grand]
+
+- New numericFilters documentation. [Julien Lemoine]
+
+- Improve handling f http errors. [Xavier Grand]
+
+- Fix test ACL. [Xavier Grand]
+
+- Add advanced syntax. [Xavier Grand]
+
+1.10.0 (2014-03-27)
+-------------------
+
+- Update README.md. [Xavier Grand]
+
+- Add test on MultipleQueries. [Xavier Grand]
+
+- Add MultipleQueries. [Xavier Grand]
+
+- Added DeleteObjects. [Xavier Grand]
+
+- Trying to add Travis CI. [Xavier Grand]
+
+- Uncomment the deletion of the index. [Xavier Grand]
+
+- Switched to NUnit. [Xavier Grand]
+
+- Updated Nuget.exe. [Xavier Grand]
+
+- Trying to add Travis CI. [Xavier Grand]
+
+- Added a new feature : maxValuesPerFacet. [Xavier Grand]
+
+- Updated dependencies. [Xavier Grand]
+
+- Improved test suite v2. [Xavier Grand]
+
+- Improved test suite. [Xavier Grand]
+
+- Updated README. [Sylvain UTARD]
+
+- Fixed typo (output of doc generator) Added documentation of slaves.
+  [Julien Lemoine]
+
+1.7.0 (2014-01-02)
+------------------
+
+- Added support of distinct feature. [Julien Lemoine]
+
+- Fixed copy/paste error. [Julien Lemoine]
+
+- Improved readability of search & settings parameters. [Julien Lemoine]
+
+1.6.0 (2013-12-06)
+------------------
+
+- Released version 1.6.0 Added Browse() method Added
+  partialUpdateObjects() method. [Julien Lemoine]
+
+- Fixed typo. [Julien Lemoine]
+
+1.5.0 (2013-11-08)
+------------------
+
+- Version 1.5.0. [Julien Lemoine]
+
+1.4.0 (2013-11-08)
+------------------
+
+- Documented new features. Version 1.4.0. [Julien Lemoine]
+
+- Improve move & copy doc. [Nicolas Dessaigne]
+
+- New method that expose geoPrecision in aroundLatLng. [Julien Lemoine]
+
+- Renamed parameter to configure typo tolerance. [Julien Lemoine]
+
+- QueryType=prefixLast by default documented unordered(attributeName)
+  [Julien Lemoine]
+
+- Moved numerics close to tags in doc other minor corrections. [Nicolas
+  Dessaigne]
+
+- Updated attributesToIndes doc. [Julien Lemoine]
+
+- Fixed numeric doc. [Julien Lemoine]
+
+- Fixed language. [Julien Lemoine]
+
+- Added missing await keywords. [Julien Lemoine]
+
+- Documented new features: move/copy/numerics/logs. [Julien Lemoine]
+
+- Added support of new features: move/copy/numerics/logs. [Julien
+  Lemoine]
+
+- Added a check to avoid empty objectID. [Julien Lemoine]
+
+- Added "your account" link. [Julien Lemoine]
+
+- Correction. [Nicolas Dessaigne]
+
+- Replaced cities par contacts. [Julien Lemoine]
+
+- New constructor that automatically set hostnames. [Julien Lemoine]
+
+- Updated ranking doc. [Julien Lemoine]
+
+- Updated Ranking doc. [Julien Lemoine]
+
+- Fixed typo. [Julien Lemoine]
+
+- Added right arrow character. [Julien Lemoine]
+
+- Added Nuget package and updated documentation. [Julien Lemoine]
+
+- Initial import of Algolia search c# client based on Christopher Maneu
+  client. [Julien Lemoine]
+
+
