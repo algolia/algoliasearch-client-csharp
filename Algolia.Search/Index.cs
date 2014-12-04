@@ -631,7 +631,7 @@ namespace Algolia.Search
         /// @param refinements Dictionary<string, IEnumerable<string>> representing the current refinements
         ///     ex: { "my_facet1" => ["my_value1", "my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }
         /// </summary>
-        public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
+        async public Task<JObject> SearchDisjunctiveFacetingAsync(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
         {
             if (refinements == null)
                 refinements = new Dictionary<string, IEnumerable<string>>();
@@ -709,7 +709,7 @@ namespace Algolia.Search
                 queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(1).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[]{disjunctiveFacet}).SetFacetFilters(filters)));
             }
         
-            JObject answers = _client.MultipleQueries(queries);
+            JObject answers = await _client.MultipleQueriesAsync(queries).ConfigureAwait(_client.getContinueOnCapturedContext());
 
             // aggregate answers
             // first answer stores the hits + regular facets
@@ -743,6 +743,14 @@ namespace Algolia.Search
             }
             aggregatedAnswer.Add("disjunctiveFacets", disjunctiveFacetsJSON.ToObject<JToken>());
             return aggregatedAnswer;
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.UpdateUserKeyAsync"/>
+        /// </summary>
+        public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
+        {
+            return SearchDisjunctiveFacetingAsync(query, disjunctiveFacets, refinements).GetAwaiter().GetResult();
         }
     }
 }
