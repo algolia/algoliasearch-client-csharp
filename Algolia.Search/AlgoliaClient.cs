@@ -240,13 +240,37 @@ namespace Algolia.Search
             return CopyIndexAsync(srcIndexName, dstIndexName).GetAwaiter().GetResult();
         }
 
+        public enum LogType
+        {
+            /// <summary>
+            /// all build logs
+            /// </summary>
+            LOG_BUILD,
+            /// <summary>
+            /// all query logs
+            /// </summary>
+            LOG_QUERY,
+            /// <summary>
+            /// all error logs
+            /// </summary>
+            LOG_ERROR,
+            /// <summary>
+            /// all logs
+            /// </summary>
+            LOG_ALL
+        }
+
         /// <summary>
         /// Return last logs entries.
         /// </summary>
         /// <param name="offset"> Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length"> Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
         /// <param name="onlyErrors"> If set to true, the answer contains only API calls with error.</param>
-        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, bool onlyErrors = false) {
+        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, bool onlyErrors = false)
+        {
+            return GetLogsAsync(offset, length, onlyErrors ? LogType.LOG_ERROR : LogType.LOG_ALL);
+        }
+        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, LogType logType = LogType.LOG_ALL) {
             string param = "";
             if (offset != 0)
                 param += string.Format("?offset={0}", offset);
@@ -258,12 +282,28 @@ namespace Algolia.Search
                 else
                     param += string.Format("&length={0}", length);
             }
-            if (onlyErrors)
+            if (logType != LogType.LOG_ALL)
             {
+                string type = "";
+                switch (logType)
+                {
+                    case LogType.LOG_BUILD:
+                        type = "build";
+                        break;
+                    case LogType.LOG_QUERY:
+                        type = "query";
+                        break;
+                    case LogType.LOG_ERROR:
+                        type = "error";
+                        break;
+                    case LogType.LOG_ALL:
+                        type = "all";
+                        break;
+                }
                 if (param.Length == 0)
-                    param += string.Format("?onlyErrors={0}", onlyErrors);
+                    param += string.Format("?onlyErrors={0}", type);
                 else
-                    param += string.Format("&onlyErrors={0}", onlyErrors);
+                    param += string.Format("&onlyErrors={0}", type);
             }
     	    return ExecuteRequest("GET", String.Format("/1/logs{0}", param));
         }
@@ -272,7 +312,11 @@ namespace Algolia.Search
         /// </summary>
         public JObject GetLogs(int offset = 0, int length = 10, bool onlyErrors = false)
         {
-            return GetLogsAsync(offset, length).GetAwaiter().GetResult();
+            return GetLogsAsync(offset, length, onlyErrors).GetAwaiter().GetResult();
+        }
+        public JObject GetLogs(int offset, int length, LogType logType)
+        {
+            return GetLogsAsync(offset, length, logType).GetAwaiter().GetResult();
         }
 
         /// <summary>

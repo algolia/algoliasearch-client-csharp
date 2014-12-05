@@ -385,7 +385,7 @@ namespace NUnit.Framework.Test
         {
             var res = _client.GetLogs();
             Assert.IsTrue(((JArray)res["logs"]).Count > 0);
-            res = _client.GetLogs(0, 1);
+            res = _client.GetLogs(0, 1, false);
             Assert.AreEqual(1, ((JArray)res["logs"]).Count);
         }
 
