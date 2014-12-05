@@ -62,6 +62,26 @@ namespace Algolia.Search
             FIRST_WORDS
         }
 
+        public enum TypoTolerance
+        {
+            /// <summary>
+            /// the typo-tolerance is enabled and all matching hits are retrieved. (Default behavior)
+            /// </summary>
+            TYPO_TRUE,
+            /// <summary>
+            /// the typo-tolerance is disabled.
+            /// </summary>
+            TYPO_FALSE,
+            /// <summary>
+            ///  only keep the results with the minimum number of typos.
+            /// </summary>
+            TYPO_MIN,
+            /// <summary>
+            /// hits matching with 2 typos are not retrieved if there are some matching without typos.
+            /// </summary>
+            TYPO_STRICT
+        }
+
         public Query(String query)
         {
             minWordSizeForApprox1 = 3;
@@ -76,7 +96,8 @@ namespace Algolia.Search
             this.query = query;
             queryType = QueryType.PREFIX_LAST;
             removeWordsIfNoResult = RemoveWordsIfNoResult.NONE;
-            analytics = synonyms = replaceSynonyms = typoTolerance = allowTyposOnNumericTokens = true;
+            analytics = synonyms = replaceSynonyms = allowTyposOnNumericTokens = true;
+            typoTolerance = TypoTolerance.TYPO_TRUE;
         }
 
         public Query()
@@ -91,7 +112,8 @@ namespace Algolia.Search
             hitsPerPage = 20;
             queryType = QueryType.PREFIX_LAST;
             removeWordsIfNoResult = RemoveWordsIfNoResult.NONE;
-            analytics = synonyms = replaceSynonyms = typoTolerance = allowTyposOnNumericTokens = true;
+            analytics = synonyms = replaceSynonyms = allowTyposOnNumericTokens = true;
+            typoTolerance = TypoTolerance.TYPO_TRUE;
         }
 
         public Query clone()
@@ -266,7 +288,23 @@ namespace Algolia.Search
         /// </summary>
         public Query EnableTypoTolerance(bool enabled)
         {
-            typoTolerance = enabled;
+            if (enabled)
+            {
+                typoTolerance = TypoTolerance.TYPO_TRUE;
+            }
+            else
+            {
+                typoTolerance = TypoTolerance.TYPO_FALSE;
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// This option allows you to control the number of typos in the result set.
+        /// </summary>
+        public Query SetTypoTolerance(TypoTolerance typoTolerance)
+        {
+            this.typoTolerance = typoTolerance;
             return this;
         }
 
@@ -586,11 +624,25 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "replaceSynonymsInHighlight=0";
             }
-            if (!typoTolerance)
+            if (typoTolerance != TypoTolerance.TYPO_TRUE)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "typoTolerance=false";
+                stringBuilder += "typoTolerance=";
+                switch (typoTolerance) {
+                    case TypoTolerance.TYPO_FALSE:
+                        stringBuilder += "false";
+                        break;
+                    case TypoTolerance.TYPO_MIN:
+                        stringBuilder += "min";
+                        break;
+                    case TypoTolerance.TYPO_STRICT:
+                        stringBuilder += "strict";
+                        break;
+                    case TypoTolerance.TYPO_TRUE:
+                        stringBuilder += "true";
+                        break;
+                }
             }
             if (!allowTyposOnNumericTokens)
             {
@@ -706,7 +758,7 @@ namespace Algolia.Search
         private bool analytics;
         private bool synonyms;
         private bool replaceSynonyms;
-        private bool typoTolerance;
+        private TypoTolerance typoTolerance;
         private bool allowTyposOnNumericTokens;
         private int page;
         private int hitsPerPage;
