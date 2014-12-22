@@ -438,6 +438,49 @@ namespace Algolia.Search
             return UpdateUserKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Generate a secured and public API Key from a list of tagFilters and an
+        /// optional user token identifying the current user
+        /// </summary>
+        /// <param name="privateApiKey">your private API Key</param>
+        /// <param name="tagFilter">the list of tags applied to the query (used as security)</param>
+        /// <param name="userToken">an optional token identifying the current user</param>
+        /// <returns></returns>
+        public string GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
+        {
+            string msg = tagFilter;
+            if (!string.IsNullOrWhiteSpace(userToken))
+            {
+                msg += userToken;
+            }
+            return Hmac(privateApiKey, msg);
+        }
+
+        private string Hmac(string key, string msg)
+        {
+            var keyMaterial = StringToAscii(key);
+            var data = StringToAscii(msg);
+
+            var algorithm = WinRTCrypto.MacAlgorithmProvider.OpenAlgorithm(MacAlgorithm.HmacSha256);
+
+            var hasher = algorithm.CreateHash(keyMaterial);
+            hasher.Append(data);
+
+            return hasher.GetValueAndReset().Aggregate("", (s, e) => s + String.Format("{0:x2}", e), s => s);
+        }
+
+        private byte[] StringToAscii(string s)
+        {
+            byte[] retval = new byte[s.Length];
+            for (int ix = 0; ix < s.Length; ++ix)
+            {
+                char ch = s[ix];
+                if (ch <= 0x7f) retval[ix] = (byte)ch;
+                else retval[ix] = (byte)'?';
+            }
+            return retval;
+        }
+
         protected HttpClient HttpClient
         {
             get
@@ -448,25 +491,6 @@ namespace Algolia.Search
                 }
                 return _httpClient;
             }
-        }
-
-        /// <summary>
-        /// <summary>
-        /// Generate a secured and public API Key from a list of tagFilters and an
-        /// optional user token identifying the current user
-        /// </summary>
-        /// <param name="privateApiKey">your private API Key</param>
-        /// <param name="tagFilter">the list of tags applied to the query (used as security)</param>
-        /// <param name="userToken">an optional token identifying the current user</param>
-        /// <returns></returns>
-        public virtual string GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
-        {
-            throw new NotImplementedException("The method GenerateSecuredApiKey isn't implemented.");
-        }
-
-        public string GenerateSecuredApiKey(String privateApiKey, String[] tagFilter, String userToken = null)
-        {
-            return GenerateSecuredApiKey(privateApiKey, "(" + String.Join(",", tagFilter) + ")", userToken);
         }
 
         public async Task<JObject> ExecuteRequest(string method, string requestUrl, object content = null)
