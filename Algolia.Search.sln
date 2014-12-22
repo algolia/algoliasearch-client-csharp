@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algolia.Search", "Algolia.Search\Algolia.Search.csproj", "{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algolia.Search.Test", "Algolia.Search.Test\Algolia.Search.Test.csproj", "{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}"
@@ -10,31 +12,43 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2DE307
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algolia.Search.NET4.0", "Algolia.Search.NET4.0\Algolia.Search.NET4.0.csproj", "{92F40D0B-236D-46A0-9DFF-1E3634F1E718}"
-	ProjectSection(ProjectDependencies) = postProject
-		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70} = {693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Release|ARM.ActiveCfg = Release|Any CPU
+		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Release|x64.ActiveCfg = Release|Any CPU
+		{693A4ED3-63CA-41A9-B3B5-06B4D52A5C70}.Release|x86.ActiveCfg = Release|Any CPU
 		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92F40D0B-236D-46A0-9DFF-1E3634F1E718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92F40D0B-236D-46A0-9DFF-1E3634F1E718}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92F40D0B-236D-46A0-9DFF-1E3634F1E718}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92F40D0B-236D-46A0-9DFF-1E3634F1E718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Release|x64.ActiveCfg = Release|Any CPU
+		{6943D1F8-3E73-4D8B-83F4-534314A1B2BC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = 1c0ed16e-2ab5-4b23-8b99-f1a0ed8858b1
 	EndGlobalSection
 EndGlobal

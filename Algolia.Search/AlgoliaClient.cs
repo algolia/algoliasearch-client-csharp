@@ -31,8 +31,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using RichardSzalay.MockHttp;
 using System.Reflection;
+using PCLCrypto;
 
 namespace Algolia.Search
 {
@@ -47,7 +47,6 @@ namespace Algolia.Search
         private string                 _applicationId;
         private string                 _apiKey;
         private HttpClient             _httpClient;
-        private MockHttpMessageHandler _mock;
         private bool                   _continueOnCapturedContext;
  
         /// <summary>
@@ -56,7 +55,7 @@ namespace Algolia.Search
         /// <param name="applicationId">the application ID you have in your admin interface</param>
         /// <param name="apiKey">a valid API key for the service</param>
         /// <param name="hosts">the list of hosts that you have received for the service</param>
-        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null, MockHttpMessageHandler mock = null)
+        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null)
         {
             if(string.IsNullOrWhiteSpace(applicationId))
                 throw new ArgumentOutOfRangeException("applicationId","An application Id is requred.");
@@ -75,8 +74,6 @@ namespace Algolia.Search
 
             _applicationId = applicationId;
             _apiKey = apiKey;
-
-            _mock = mock;
 
             // randomize elements of hostsArray (act as a kind of load-balancer)
             _hosts = allHosts.OrderBy(s => Guid.NewGuid());
@@ -447,15 +444,11 @@ namespace Algolia.Search
             {
                 if (_httpClient == null)
                 {
-                    if (_mock == null)
-                        _httpClient = new HttpClient();
-                    else
-                        _httpClient = new HttpClient(_mock);
+                    _httpClient = new HttpClient();
                 }
                 return _httpClient;
             }
         }
-
 
         /// <summary>
         /// <summary>
