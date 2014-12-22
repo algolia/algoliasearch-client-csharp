@@ -31,6 +31,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using RichardSzalay.MockHttp;
 using System.Reflection;
 using PCLCrypto;
 
@@ -43,22 +44,23 @@ namespace Algolia.Search
     /// </summary>
     public class AlgoliaClient
     {
-        private IEnumerable<string>    _hosts;
-        private string                 _applicationId;
-        private string                 _apiKey;
-        private HttpClient             _httpClient;
-        private bool                   _continueOnCapturedContext;
- 
+        private IEnumerable<string> _hosts;
+        private string _applicationId;
+        private string _apiKey;
+        private HttpClient _httpClient;
+        private MockHttpMessageHandler _mock;
+        private bool _continueOnCapturedContext;
+
         /// <summary>
         /// Algolia Search initialization
         /// </summary>
         /// <param name="applicationId">The application ID you have in your admin interface</param>
         /// <param name="apiKey">A valid API key for the service</param>
         /// <param name="hosts">The list of hosts that you have received for the service</param>
-        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null)
+        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null, MockHttpMessageHandler mock = null)
         {
-            if(string.IsNullOrWhiteSpace(applicationId))
-                throw new ArgumentOutOfRangeException("applicationId","An application Id is required.");
+            if (string.IsNullOrWhiteSpace(applicationId))
+                throw new ArgumentOutOfRangeException("applicationId", "An application Id is required.");
 
             if (string.IsNullOrWhiteSpace(apiKey))
                 throw new ArgumentOutOfRangeException("apiKey", "An API key is required.");
@@ -67,13 +69,15 @@ namespace Algolia.Search
                 hosts = new string[] {applicationId + "-1.algolia.net",
                                       applicationId + "-2.algolia.net",
                                       applicationId + "-3.algolia.net"};
-            
+
             IEnumerable<string> allHosts = hosts as string[] ?? hosts.ToArray();
             if (!allHosts.Any())
                 throw new ArgumentOutOfRangeException("hosts", "At least one host is required");
 
             _applicationId = applicationId;
             _apiKey = apiKey;
+
+            _mock = mock;
 
             // randomize elements of hostsArray (act as a kind of load-balancer)
             _hosts = allHosts.OrderBy(s => Guid.NewGuid());
@@ -126,7 +130,7 @@ namespace Algolia.Search
         {
             HttpClient.DefaultRequestHeaders.Add(key, value);
         }
-        
+
 
         /// <summary>
         /// This method allows querying multiple indexes with one API call
@@ -136,8 +140,9 @@ namespace Algolia.Search
         public Task<JObject> MultipleQueriesAsync(List<IndexQuery> queries)
         {
             List<Dictionary<string, object>> body = new List<Dictionary<string, object>>();
-            foreach (IndexQuery indexQuery in queries) {
-                Dictionary<string, object> request = new Dictionary<string,object>();
+            foreach (IndexQuery indexQuery in queries)
+            {
+                Dictionary<string, object> request = new Dictionary<string, object>();
                 request.Add("indexName", indexQuery.Index);
                 request.Add("params", indexQuery.Query.GetQueryString());
                 body.Add(request);
@@ -222,7 +227,7 @@ namespace Algolia.Search
         {
             return MoveIndexAsync(srcIndexName, dstIndexName).GetAwaiter().GetResult();
         }
-    
+
         /// <summary>
         /// Copy an existing index.
         /// </summary>
@@ -233,7 +238,7 @@ namespace Algolia.Search
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "copy";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest("POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation); 	
+            return ExecuteRequest("POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
@@ -282,7 +287,7 @@ namespace Algolia.Search
         /// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length">Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
         /// <param name="logType">Specify the type of logs to include.</param>
-        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, LogType logType = LogType.LOG_ALL) 
+        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, LogType logType = LogType.LOG_ALL)
         {
             string param = "";
             if (offset != 0)
@@ -318,7 +323,7 @@ namespace Algolia.Search
                 else
                     param += string.Format("&onlyErrors={0}", type);
             }
-    	    return ExecuteRequest("GET", String.Format("/1/logs{0}", param));
+            return ExecuteRequest("GET", String.Format("/1/logs{0}", param));
         }
 
         /// <summary>
@@ -544,6 +549,10 @@ namespace Algolia.Search
             {
                 if (_httpClient == null)
                 {
+                    if (_mock == null)
+                        _httpClient = new HttpClient();
+                    else
+                        _httpClient = new HttpClient(_mock);
                     _httpClient = new HttpClient();
                 }
                 return _httpClient;
@@ -552,7 +561,7 @@ namespace Algolia.Search
 
         public async Task<JObject> ExecuteRequest(string method, string requestUrl, object content = null)
         {
-            Dictionary<string, string> errors = new Dictionary<string,string>();
+            Dictionary<string, string> errors = new Dictionary<string, string>();
             foreach (string host in _hosts)
             {
                 try
@@ -606,7 +615,7 @@ namespace Algolia.Search
                 {
                     throw;
                 }
-                
+
             }
             throw new AlgoliaException("Hosts unreachable: " + string.Join(", ", errors.Select(x => x.Key + "=" + x.Value).ToArray()));
         }
