@@ -80,7 +80,7 @@ namespace Algolia.Search
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + Assembly.GetExecutingAssembly().FullName.Split(',')[1].Split('=')[1]);
+            HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _continueOnCapturedContext = true;
         }
