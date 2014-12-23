@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>2.4.1</version>
+    <version>2.5.1</version>
     <title>Algolia Search API Client for C#</title>
     <authors>Algolia</authors>
     <owners>Algolia</owners>
@@ -11,11 +11,11 @@
     <iconUrl>http://www.algolia.com/download/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Algolia Search API Client for C#</description>
-    <releaseNotes>First public release of C# API client for Algolia Search service.</releaseNotes>
+    <releaseNotes>Changed to single project to support .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Search Engine Service Instant Typo-Tolerance Realtime</tags>
   </metadata>
   <files>
-    <file src="bin\Release\Algolia.Search.xml" target="lib\portable-win+net45+sl40+wp71" />
+    <file src="bin\Release\Algolia.Search.xml" target="lib\portable-net40+win+wpa81" />
   </files>
 </package>
