@@ -95,7 +95,8 @@ namespace NUnit.Framework.Test
             //Get last logs
             mockHttp.When(HttpMethod.Get, "*/1/logs").Respond(HttpStatusCode.OK, "application/json", "{\"logs\":[]}");
             
-            mockHttp.FallbackResponse = new HttpResponseMessage(HttpStatusCode.BadRequest);
+            mockHttp.Fallback.WithAny().Respond(HttpStatusCode.BadRequest);
+
             return mockHttp;
         }
 
