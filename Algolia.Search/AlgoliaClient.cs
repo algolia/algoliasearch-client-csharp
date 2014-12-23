@@ -57,6 +57,7 @@ namespace Algolia.Search
         /// <param name="applicationId">The application ID you have in your admin interface</param>
         /// <param name="apiKey">A valid API key for the service</param>
         /// <param name="hosts">The list of hosts that you have received for the service</param>
+        /// <param name="mock">Mocking object for controlling HTTP message handler</param>
         public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null, MockHttpMessageHandler mock = null)
         {
             if (string.IsNullOrWhiteSpace(applicationId))
@@ -98,6 +99,10 @@ namespace Algolia.Search
             _continueOnCapturedContext = continueOnCapturedContext;
         }
 
+        /// <summary>
+        /// Get the context
+        /// </summary>
+        /// <returns></returns>
         public bool getContinueOnCapturedContext()
         {
             return _continueOnCapturedContext;
@@ -250,6 +255,9 @@ namespace Algolia.Search
             return CopyIndexAsync(srcIndexName, dstIndexName).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// The type of log
+        /// </summary>
         public enum LogType
         {
             /// <summary>
@@ -327,7 +335,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.GetLogsAsync"/>
+        /// Synchronously call <see cref="AlgoliaClient.GetLogsAsync(int, int, bool)"/>
         /// </summary>
         /// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length">Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
@@ -338,7 +346,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.GetLogsAsync"/>
+        /// Synchronously call <see cref="AlgoliaClient.GetLogsAsync(int, int, Algolia.Search.AlgoliaClient.LogType)"/>
         /// </summary>
         /// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length">Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
@@ -438,7 +446,6 @@ namespace Algolia.Search
 
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.AddUserKeyAsync"/>
-        /// </summary>
         /// </summary>
         /// <param name="acls">The list of ACL for this key. Defined by an array of strings that can contains the following values:
         ///   - search: allow searching (https and http)
@@ -543,6 +550,9 @@ namespace Algolia.Search
             return retval;
         }
 
+        /// <summary>
+        /// Main HTTP client
+        /// </summary>
         protected HttpClient HttpClient
         {
             get
@@ -558,6 +568,13 @@ namespace Algolia.Search
             }
         }
 
+        /// <summary>
+        /// Used to execute the search request
+        /// </summary>
+        /// <param name="method">HTTP method</param>
+        /// <param name="requestUrl">URL to request</param>
+        /// <param name="content">The content</param>
+        /// <returns></returns>
         public async Task<JObject> ExecuteRequest(string method, string requestUrl, object content = null)
         {
             Dictionary<string, string> errors = new Dictionary<string, string>();

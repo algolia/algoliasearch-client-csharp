@@ -388,7 +388,7 @@ namespace Algolia.Search
         /// <summary>
         /// Search inside the index.
         /// </summary>
-        /// <param name="query">The query.</param>
+        /// <param name="q">The query.</param>
         public Task<JObject> SearchAsync(Query q)
         {
             string paramsString = q.GetQueryString();
@@ -407,7 +407,7 @@ namespace Algolia.Search
         /// <summary>
         /// Synchronously call <see cref="Index.SearchAsync"/>.
         /// </summary>
-        /// <param name="query">The query.</param>
+        /// <param name="q">The query.</param>
         public JObject Search(Query q)
         {
             return SearchAsync(q).GetAwaiter().GetResult();
@@ -675,11 +675,10 @@ namespace Algolia.Search
 
         /// <summary>
         /// Perform a search with disjunctive facets generating as many queries as number of disjunctive facets
-        /// @param query the query
-        /// @param disjunctiveFacets the array of disjunctive facets
-        /// @param refinements Dictionary<string, IEnumerable<string>> representing the current refinements
-        ///     ex: { "my_facet1" => ["my_value1", "my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }
         /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="disjunctiveFacets">The array of disjunctive facets.</param>
+        /// <param name="refinements">The current refinements. Example: { "my_facet1" => ["my_value1", "my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }.</param>
         async public Task<JObject> SearchDisjunctiveFacetingAsync(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
         {
             if (refinements == null)

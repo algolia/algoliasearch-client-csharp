@@ -28,8 +28,14 @@ using System.Text;
 
 namespace Algolia.Search
 {
+    /// <summary>
+    /// Builder of queries.
+    /// </summary>
     public class Query
     {
+        /// <summary>
+        /// The type of query.
+        /// </summary>
         public enum QueryType
         {
             /// <summary>
@@ -46,6 +52,9 @@ namespace Algolia.Search
             PREFIX_NONE
         }
 
+        /// <summary>
+        /// Remove words if no result.
+        /// </summary>
         public enum RemoveWordsIfNoResult
         {
             /// <summary>
@@ -62,6 +71,9 @@ namespace Algolia.Search
             FIRST_WORDS
         }
 
+        /// <summary>
+        /// Typo tolerance.
+        /// </summary>
         public enum TypoTolerance
         {
             /// <summary>
@@ -82,6 +94,10 @@ namespace Algolia.Search
             TYPO_STRICT
         }
 
+        /// <summary>
+        /// Create a new query.
+        /// </summary>
+        /// <param name="query">The query.</param>
         public Query(String query)
         {
             minWordSizeForApprox1 = 3;
@@ -100,6 +116,9 @@ namespace Algolia.Search
             typoTolerance = TypoTolerance.TYPO_TRUE;
         }
 
+        /// <summary>
+        /// Create a new query.
+        /// </summary>
         public Query()
         {
             minWordSizeForApprox1 = 3;
@@ -116,6 +135,10 @@ namespace Algolia.Search
             typoTolerance = TypoTolerance.TYPO_TRUE;
         }
 
+        /// <summary>
+        /// Clone this query to a new query.
+        /// </summary>
+        /// <returns>The cloned query.</returns>
         public Query clone()
         {
             Query q = new Query();
@@ -161,7 +184,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Select the spécific processing for the query
+        /// Select the spécific processing for the query.
         /// </summary>
         public Query SetRemoveWordsIfNoResult(RemoveWordsIfNoResult type)
         {
@@ -178,10 +201,11 @@ namespace Algolia.Search
             return this;
         }
 
-        /**
-         * Specify the list of attribute names to retrieve. 
-         * By default all attributes are retrieved.
-         */
+        /// <summary>
+        /// Specify the list of attribute names to retrieve.
+        /// </summary>
+        /// <param name="attributes">The attributes to retrieve.</param>
+        /// <returns>Query for the attributes.</returns>
         public Query SetAttributesToRetrieve(IEnumerable<string> attributes)
         {
             this.attributes = attributes;
@@ -189,8 +213,10 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Specify the list of attribute names to highlight. By default indexed attributes are highlighted.
+        /// Specify the list of attribute names to highlight.
         /// </summary>
+        /// <param name="attributes">The attributes to highlight.</param>
+        /// <returns>Query for the attributes.</returns>
         public Query SetAttributesToHighlight(IEnumerable<string> attributes)
         {
             this.attributesToHighlight = attributes;
@@ -200,6 +226,8 @@ namespace Algolia.Search
         /// <summary>
         /// Specify the list of attribute names to Snippet alongside the number of words to return (syntax is 'attributeName:nbWords'). By default no snippet is computed.
         /// </summary>
+        /// <param name="attributes">The attributes to Snippet.</param>
+        /// <returns>Query for the attributes.</returns>
         public Query SetAttributesToSnippet(IEnumerable<string> attributes)
         {
             this.attributesToSnippet = attributes;
@@ -225,7 +253,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// if set, the result hits will contain ranking information in _rankingInfo attribute.
+        /// If set, the result hits will contain ranking information in _rankingInfo attribute.
         /// </summary>
         public Query GetRankingInfo(bool enabled)
         {
@@ -234,7 +262,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// If set to true, plural won't be considered as a typo (for example car/cars will be considered as equals). Default to false.
+        /// If set to true, plural won't be considered as a typo (for example car/cars will be considered as equals). Defaults to false.
         /// </summary>
         public Query IgnorePlural(bool enabled)
         {
@@ -242,14 +270,14 @@ namespace Algolia.Search
             return this;
         }
 
-        /**
-         * 
-         * @param If set to true, enable the distinct feature (disabled by default) if the attributeForDistinct index setting is set. 
-         *   This feature is similar to the SQL "distinct" keyword: when enabled in a query with the distinct=1 parameter, 
-         *   all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. 
-         *   For example, if the chosen attribute is show_name and several hits have the same value for show_name, then only the best 
-         *   one is kept and others are removed.
-         */
+        /// <summary>
+        /// This feature is similar to the SQL "distinct" keyword: when enabled in a query with the distinct=1 parameter, 
+        /// all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. 
+        /// For example, if the chosen attribute is show_name and several hits have the same value for show_name, then only the best 
+        /// one is kept and others are removed.
+        /// </summary>
+        /// <param name="enabled">If set to true, enable the distinct feature (disabled by default) if the attributeForDistinct index setting is set.</param>
+        /// <returns></returns>
         public Query EnableDistinct(bool enabled)
         {
             distinct = enabled;
@@ -339,6 +367,8 @@ namespace Algolia.Search
         /// Search for entries around a given latitude/longitude. 
         /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
         /// </summary>
+        /// <param name="latitude">The latitude</param>
+        /// <param name="longitude">The longitude</param>
         /// <param name="radius">set the maximum distance in meters.</param>
         /// <returns></returns>
         public Query AroundLatitudeLongitude(float latitude, float longitude, int radius)
@@ -351,6 +381,8 @@ namespace Algolia.Search
         /// Search for entries around a given latitude/longitude. 
         /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
         /// </summary>
+        /// <param name="latitude">The latitude</param>
+        /// <param name="longitude">The longitude</param>
         /// <param name="radius">set the maximum distance in meters.</param>
         /// <param name="precision">set the precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).</param>
         /// <returns></returns>
@@ -417,8 +449,8 @@ namespace Algolia.Search
         /// <summary>
         /// Add a list of numeric filters separated by a comma.
         /// The syntax of one filter is `attributeName` followed by `operand` and `value`.
-        /// Suported operand are <, <=, =, > and >=
-        /// You can have multiple conditions on one attribute like for example "numerics=price>100,price<1000"
+        /// Suported operand are &lt;, &lt;=, =, &gt; and &gt;=
+        /// You can have multiple conditions on one attribute like for example `numerics=price&gt;100,price&lt;1000`
         /// </summary>
         public Query SetNumericFilters(string value)
         {
@@ -426,73 +458,96 @@ namespace Algolia.Search
             return this;
         }
 
-        /**
-         * Set the list of words that should be considered as optional when found in the query. 
-         * @param words The list of optional words, comma separated.
-         */
+        /// <summary>
+        /// Set the list of words that should be considered as optional when found in the query.
+        /// </summary>
+        /// <param name="words">The list of optional words, comma separated.</param>
+        /// <returns></returns>
         public Query SetOptionalWords(string words)
         {
             this.optionalWords = words;
             return this;
         }
 
-        /**
-         * Filter the query by a list of facets. Each facet is encoded as `attributeName:value`. For example: `["category:Book","author:John%20Doe"].
-         */
+        /// <summary>
+        /// Filter the query by a list of facets.
+        /// </summary>
+        /// <param name="facets">Each facet is encoded as `attributeName:value`. For example: `["category:Book","author:John%20Doe"].</param>
+        /// <returns></returns>
         public Query SetFacetFilters(IEnumerable<string> facets) {
             this.facetFilters = string.Join(",", facets);
     	    return this;
         }
 
+        /// <summary>
+        /// Filter the query by a facet.
+        /// </summary>
+        /// <param name="facets">The facet is encoded as `attributeName:value`.</param>
+        /// <returns></returns>
         public Query SetFacetFilters(string facets)
         {
             this.facetFilters = facets;
             return this;
         }
 
+        /// <summary>
+        /// Filter the query by a list of facets.
+        /// </summary>
+        /// <param name="facets">Each facet is encoded as `attributeName:value`. For example: `["category:Book","author:John%20Doe"].</param>
+        /// <returns></returns>
         public Query SetFacetFilters(JArray facets)
         {
             this.facetFilters = Newtonsoft.Json.JsonConvert.SerializeObject(facets);
             return this;
         }
 
+        /// <summary>
+        /// Set the max value per facet.
+        /// </summary>
+        /// <param name="numbers">The number to limit it by.</param>
+        /// <returns></returns>
         public Query SetMaxValuesPerFacets(int numbers)
         {
             this.maxValuesPerFacets = numbers;
             return this;
         }
 
-
-        /**
-         * <summary>
-         * List of attributes you want to use for textual search (must be a subset of the attributesToIndex 
-         * index setting). Attributes are separated with a comma (for example @"name,address").
-         * You can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")).
-         * By default, all attributes specified in attributesToIndex settings are used to search.
-         * </summary>
-         */
+        /// <summary>
+        /// List of attributes you want to use for textual search (must be a subset of the attributesToIndex index setting).
+        /// </summary>
+        /// <param name="attributes">Attributes are separated with a comma (for example @"name,address"). You can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")). By default, all attributes specified in attributesToIndex settings are used to search.</param>
+        /// <returns></returns>
         public Query RestrictSearchableAttributes(String attributes)
         {
             this.restrictSearchableAttributes = attributes;
             return this;
         }
 
+        /// <summary>
+        /// Allows enabling of advanced syntax.
+        /// </summary>
+        /// <param name="enabled">Turn it on or off</param>
+        /// <returns></returns>
         public Query EnableAdvancedSyntax(bool enabled)
         {
             this.advancedSyntax = enabled;
             return this;
         }
 
-        /**
-         * List of object attributes that you want to use for faceting. <br/>
-         * Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. 
-         * You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
-         */
+        /// <summary>
+        /// Set the object attributes that you want to use for faceting.
+        /// </summary>
+        /// <param name="facets">List of object attributes that you want to use for faceting. Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.</param>
+        /// <returns></returns>
         public Query SetFacets(IEnumerable<string> facets) {
     	    this.facets = facets;
     	    return this;
         }
 
+        /// <summary>
+        /// Get out the query as a string
+        /// </summary>
+        /// <returns></returns>
         public string GetQueryString() {
             string stringBuilder = "";
         
