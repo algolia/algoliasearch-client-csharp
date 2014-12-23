@@ -21,12 +21,12 @@ namespace NUnit.Framework.Test
 
         public static string safe_name(string name)
         {
-            if (Environment.GetEnvironmentVariable("TRAVIS") == null)
+            if (Environment.GetEnvironmentVariable("APPVEYOR") == null)
             {
                 return name;
             }
             //String[] id = Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER").Split('.');
-            return name + "_travis-" + Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER");
+            return name + "appveyor-" + Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER");
         }
 
         public void clearTest()
