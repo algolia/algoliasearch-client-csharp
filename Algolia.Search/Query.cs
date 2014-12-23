@@ -401,7 +401,7 @@ namespace Algolia.Search
         public Query AroundLatitudeLongitudeViaIP(int radius)
         {
             aroundLatLong = "aroundRadius=" + radius;
-	        aroundLatLongViaIP = true;
+            aroundLatLongViaIP = true;
             return this;
         }
 
@@ -415,7 +415,7 @@ namespace Algolia.Search
         public Query AroundLatitudeLongitudeViaIP(int radius, int precision)
         {
             aroundLatLong = "aroundRadius=" + radius + "&aroundPrecision=" + precision;
-	    aroundLatLongViaIP = true;
+        aroundLatLongViaIP = true;
             return this;
         }
 
@@ -476,7 +476,7 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query SetFacetFilters(IEnumerable<string> facets) {
             this.facetFilters = string.Join(",", facets);
-    	    return this;
+            return this;
         }
 
         /// <summary>
@@ -540,8 +540,8 @@ namespace Algolia.Search
         /// <param name="facets">List of object attributes that you want to use for faceting. Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.</param>
         /// <returns></returns>
         public Query SetFacets(IEnumerable<string> facets) {
-    	    this.facets = facets;
-    	    return this;
+            this.facets = facets;
+            return this;
         }
 
         /// <summary>
@@ -744,11 +744,11 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += aroundLatLong;
             }
-	    if (aroundLatLongViaIP) {
+        if (aroundLatLongViaIP) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "aroundLatLngViaIP=true";
-	    }
+        }
             if (query != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -789,14 +789,14 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "queryType=prefixAll";
-            	break;
+                break;
             case QueryType.PREFIX_LAST:
-            	break;
+                break;
             case QueryType.PREFIX_NONE:
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "queryType=prefixNone";
-            	break;
+                break;
             }
             return stringBuilder;
         }
