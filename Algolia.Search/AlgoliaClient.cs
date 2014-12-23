@@ -553,7 +553,6 @@ namespace Algolia.Search
                         _httpClient = new HttpClient();
                     else
                         _httpClient = new HttpClient(_mock);
-                    _httpClient = new HttpClient();
                 }
                 return _httpClient;
             }
