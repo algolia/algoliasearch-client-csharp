@@ -44,7 +44,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlgoliaClientWrapper.cs" />
     <Compile Include="AlgoliaException.cs" />
     <Compile Include="AlgoliaClient.cs" />
     <Compile Include="Index.cs" />
