@@ -17,7 +17,7 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
 
 This C# client let you easily use the Algolia Search API from your App. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
 Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.
-[![Build status](https://ci.appveyor.com/api/projects/status/x1p7vd9gtlvp4kcs?svg=true)](https://ci.appveyor.com/project/scottksmith95/algoliasearch-client-csharp-632)
+[![Build status](https://ci.appveyor.com/api/projects/status/ee272nyd3hsn18bn?svg=true)](https://ci.appveyor.com/project/Algolia/algoliasearch-client-csharp)
 
 
 
