@@ -66,22 +66,30 @@ namespace Algolia.Search
             if (string.IsNullOrWhiteSpace(apiKey))
                 throw new ArgumentOutOfRangeException("apiKey", "An API key is required.");
 
-            if (hosts == null)
+            if (hosts != null && hosts.Count() == 0)
+                throw new ArgumentOutOfRangeException("hosts", "At least one host is required.");
+
+            if (hosts != null)
+            {
+                foreach (var host in hosts)
+                {
+                    if (string.IsNullOrWhiteSpace(host))
+                        throw new ArgumentOutOfRangeException("hosts", "Each host is required.");
+                }
+            }
+            else
+            {
                 hosts = new string[] {applicationId + "-1.algolia.net",
                                       applicationId + "-2.algolia.net",
                                       applicationId + "-3.algolia.net"};
-
-            IEnumerable<string> allHosts = hosts as string[] ?? hosts.ToArray();
-            if (!allHosts.Any())
-                throw new ArgumentOutOfRangeException("hosts", "At least one host is required");
+            }
 
             _applicationId = applicationId;
             _apiKey = apiKey;
-
             _mock = mock;
 
             // randomize elements of hostsArray (act as a kind of load-balancer)
-            _hosts = allHosts.OrderBy(s => Guid.NewGuid());
+            _hosts = hosts.OrderBy(s => Guid.NewGuid());
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
