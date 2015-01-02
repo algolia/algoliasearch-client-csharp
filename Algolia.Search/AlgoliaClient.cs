@@ -437,6 +437,10 @@ namespace Algolia.Search
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         public Task<JObject> AddUserKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
         {
+            if (indexes == null)
+            {
+                indexes = new string[0] { };
+            }
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
             content["validity"] = validity;
@@ -484,6 +488,10 @@ namespace Algolia.Search
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         public Task<JObject> UpdateUserKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
         {
+            if (indexes == null)
+            {
+                indexes = new string[0]{};
+            }
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
             content["validity"] = validity;
@@ -511,7 +519,7 @@ namespace Algolia.Search
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         public JObject UpdateUserKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
         {
-            return UpdateUserKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
+            return UpdateUserKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes).GetAwaiter().GetResult();
         }
 
         /// <summary>
