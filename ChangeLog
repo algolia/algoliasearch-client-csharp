@@ -1,15 +1,10 @@
 Changelog
 =========
 
-
-2.5.1 (2015-01-02)
+3.0.0 (2015-01-02)
 ------------------
 
 - Add the index names restriction parameter for the add and update ACL methods
-
-2.5.0 (2014-12-23)
-------------------
-
 - Removed separate .NET 4.0 Project
 - Added GenerateSecuredApiKey to Portable Class Library
 - Now supports .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android

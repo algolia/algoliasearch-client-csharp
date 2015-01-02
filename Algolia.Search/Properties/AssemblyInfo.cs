@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Algolia")]
 [assembly: AssemblyProduct("Algolia.Search")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
@@ -31,6 +31,6 @@ using System.Runtime.InteropServices;
 
 internal class AssemblyInfo
 {
-    public const string AssemblyVersion = "2.5.1";
-    public const string AssemblyFileVersion = "2.5.1";
+    public const string AssemblyVersion = "3.0.0";
+    public const string AssemblyFileVersion = "3.0.0";
 }
