@@ -44,7 +44,7 @@ namespace Algolia.Search
     /// </summary>
     public class AlgoliaClient
     {
-        private IEnumerable<string> _hosts;
+        private string[] _hosts;
         private string _applicationId;
         private string _apiKey;
         private HttpClient _httpClient;
@@ -89,12 +89,15 @@ namespace Algolia.Search
             _mock = mock;
 
             // randomize elements of hostsArray (act as a kind of load-balancer)
-            _hosts = hosts.OrderBy(s => Guid.NewGuid());
+            _hosts = hosts.OrderBy(s => Guid.NewGuid()).ToArray();
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
             HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpClient.Timeout = TimeSpan.FromSeconds(30);
+
             _continueOnCapturedContext = true;
         }
 
@@ -599,8 +602,12 @@ namespace Algolia.Search
         /// <returns></returns>
         public async Task<JObject> ExecuteRequest(string method, string requestUrl, object content = null)
         {
+            // Operate on host list copy so we can handle bad hosts
+            var hostsCopy = new string[_hosts.Length];
+            _hosts.CopyTo(hostsCopy, 0);
+
             Dictionary<string, string> errors = new Dictionary<string, string>();
-            foreach (string host in _hosts)
+            foreach (string host in hostsCopy)
             {
                 try
                 {
@@ -645,6 +652,9 @@ namespace Algolia.Search
                     }
                     catch (Exception ex)
                     {
+                        // Move bad host to end of list
+                        RotateLeft(_hosts, 1);
+
                         errors.Add(host, ex.Message);
                     }
 
@@ -656,6 +666,14 @@ namespace Algolia.Search
 
             }
             throw new AlgoliaException("Hosts unreachable: " + string.Join(", ", errors.Select(x => x.Key + "=" + x.Value).ToArray()));
+        }
+
+        void RotateLeft(string[] array, int places)
+        {
+            var temp = new string[places];
+            Array.Copy(array, 0, temp, 0, places);
+            Array.Copy(array, places, array, 0, array.Length - places);
+            Array.Copy(temp, 0, array, array.Length - places, places);
         }
     }
 }
