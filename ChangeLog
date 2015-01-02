@@ -1,6 +1,12 @@
 Changelog
 =========
 
+
+2.5.1 (2015-01-02)
+------------------
+
+- Add the index names restriction parameter for the add and update ACL methods
+
 2.5.0 (2014-12-23)
 ------------------
 
