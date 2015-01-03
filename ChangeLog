@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.0.1 (2015-01-03)
+------------------
+- Fix multi-arch issue (version 3.0.0 was not installable on most architecture)
+- Added read timeout of 30s and put a host and the end of the list in case of error
+	
 3.0.0 (2015-01-02)
 ------------------
 
