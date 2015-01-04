@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.0.2 (2015-01-04)
+- Added Windows Phone 8.1 support
+
 3.0.1 (2015-01-03)
 ------------------
 - Fix multi-arch issue (version 3.0.0 was not installable on most architecture)
