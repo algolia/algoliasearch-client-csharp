@@ -31,7 +31,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using RichardSzalay.MockHttp;
 using System.Reflection;
 using PCLCrypto;
 
@@ -48,7 +47,7 @@ namespace Algolia.Search
         private string _applicationId;
         private string _apiKey;
         private HttpClient _httpClient;
-        private MockHttpMessageHandler _mock;
+        private HttpMessageHandler _mock;
         private bool _continueOnCapturedContext;
 
         /// <summary>
@@ -58,7 +57,7 @@ namespace Algolia.Search
         /// <param name="apiKey">A valid API key for the service</param>
         /// <param name="hosts">The list of hosts that you have received for the service</param>
         /// <param name="mock">Mocking object for controlling HTTP message handler</param>
-        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null, MockHttpMessageHandler mock = null)
+        public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null, HttpMessageHandler mock = null)
         {
             if (string.IsNullOrWhiteSpace(applicationId))
                 throw new ArgumentOutOfRangeException("applicationId", "An application Id is required.");
