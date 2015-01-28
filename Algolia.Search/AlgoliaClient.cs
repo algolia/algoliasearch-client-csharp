@@ -97,7 +97,7 @@ namespace Algolia.Search
 
             HttpClient.Timeout = TimeSpan.FromSeconds(30);
 
-            _continueOnCapturedContext = true;
+            _continueOnCapturedContext = false;
         }
 
         /// <summary>
