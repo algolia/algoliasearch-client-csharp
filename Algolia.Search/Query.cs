@@ -68,7 +68,12 @@ namespace Algolia.Search
             /// <summary>
             /// When a query does not return any result, the first word will be removed until there is results.
             /// </summary>
-            FIRST_WORDS
+            FIRST_WORDS,
+            /// <summary>
+            /// When a query does not return any result, a second trial will be made with all words as optional (which is equivalent to transforming the AND operand between query terms in a OR operand) 
+            /// </summary>
+            ALL_OPTIONAL
+
         }
 
         /// <summary>
@@ -782,6 +787,11 @@ namespace Algolia.Search
                     if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                     stringBuilder += "removeWordsIfNoResult=LastWords";
+                    break;
+                case RemoveWordsIfNoResult.ALL_OPTIONAL:
+                    if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                    stringBuilder += "removeWordsIfNoResult=allOptional";
                     break;
             }
             switch (queryType) {
