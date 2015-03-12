@@ -754,7 +754,7 @@ namespace Algolia.Search
                         filters.Add(or + ')');
                     }
                 }
-                queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(1).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[]{disjunctiveFacet}).SetFacetFilters(filters)));
+                queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(0).EnableAnalytics(false).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[]{disjunctiveFacet}).SetFacetFilters(filters)));
             }
         
             JObject answers = await _client.MultipleQueriesAsync(queries).ConfigureAwait(_client.getContinueOnCapturedContext());
