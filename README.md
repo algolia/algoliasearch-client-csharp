@@ -503,13 +503,13 @@ You can send multiple queries with a single API call using a batch of queries:
 
 var indexQueries = new List<IndexQuery>();
 
-indexQuery.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPerPage(3)));
-indexQuery.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetTagFilters("promotion"));
-indexQuery.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
+indexQueries.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPerPage(3)));
+indexQueries.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetTagFilters("promotion"));
+indexQueries.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
 
-var res = _client.MultipleQueries(indexQuery);
+var res = _client.MultipleQueries(indexQueries);
 // Asynchronous
-// var res = await _client.MultipleQueriesAsync(indexQuery);
+// var res = await _client.MultipleQueriesAsync(indexQueries);
 
 System.Diagnostics.Debug.WriteLine(res["results"]);
 ```
