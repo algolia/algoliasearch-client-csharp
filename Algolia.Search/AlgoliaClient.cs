@@ -43,12 +43,15 @@ namespace Algolia.Search
     /// </summary>
     public class AlgoliaClient
     {
-        private string[] _hosts;
+        private string[] _readHosts;
+        private string[] _writeHosts;
         private string _applicationId;
         private string _apiKey;
         private HttpClient _httpClient;
         private HttpMessageHandler _mock;
         private bool _continueOnCapturedContext;
+        private TimeSpan _searchTimeout;
+        private TimeSpan _writeTimeout;
 
         /// <summary>
         /// Algolia Search initialization
@@ -75,12 +78,18 @@ namespace Algolia.Search
                     if (string.IsNullOrWhiteSpace(host))
                         throw new ArgumentOutOfRangeException("hosts", "Each host is required.");
                 }
+                _readHosts = _writeHosts = hosts.ToArray();
             }
             else
             {
-                hosts = new string[] {applicationId + "-1.algolia.net",
-                                      applicationId + "-2.algolia.net",
-                                      applicationId + "-3.algolia.net"};
+                _readHosts = new string[] {applicationId + "-dsn.algolia.net",
+                                      applicationId + "-1.algolianet.com",
+                                      applicationId + "-2.algolianet.com",
+                                      applicationId + "-3.algolianet.com"};
+                _writeHosts = new string[] {applicationId + ".algolia.net",
+                                      applicationId + "-1.algolianet.com",
+                                      applicationId + "-2.algolianet.com",
+                                      applicationId + "-3.algolianet.com"};
             }
 
             _applicationId = applicationId;
@@ -88,14 +97,15 @@ namespace Algolia.Search
             _mock = mock;
 
             // randomize elements of hostsArray (act as a kind of load-balancer)
-            _hosts = hosts.OrderBy(s => Guid.NewGuid()).ToArray();
+            
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
             HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpClient.Timeout = TimeSpan.FromSeconds(30);
+            _searchTimeout = TimeSpan.FromSeconds(5);
+            _writeTimeout = TimeSpan.FromSeconds(30);
 
             _continueOnCapturedContext = false;
         }
@@ -116,6 +126,15 @@ namespace Algolia.Search
         public bool getContinueOnCapturedContext()
         {
             return _continueOnCapturedContext;
+        }
+
+        /// <summary>
+        /// Set the read timeout for the search and for the build operation 
+        /// </summary>
+        public void setTimeout(int searchTimeout, int writeTimeout)
+        {
+            this._searchTimeout = TimeSpan.FromSeconds(searchTimeout);
+            this._writeTimeout = TimeSpan.FromSeconds(writeTimeout);
         }
 
         /// <summary>
@@ -164,7 +183,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> requests = new Dictionary<string, object>();
             requests.Add("requests", body);
-            return ExecuteRequest("POST", "/1/indexes/*/queries", requests);
+            return ExecuteRequest(callType.Search, "POST", "/1/indexes/*/queries", requests);
 
         }
 
@@ -187,7 +206,7 @@ namespace Algolia.Search
         /// </returns>
         public Task<JObject> ListIndexesAsync()
         {
-            return ExecuteRequest("GET", "/1/indexes/");
+            return ExecuteRequest(callType.Read, "GET", "/1/indexes/");
         }
 
         /// <summary>
@@ -209,7 +228,7 @@ namespace Algolia.Search
         /// <returns>An object containing a "deletedAt" attribute</returns>
         public Task<JObject> DeleteIndexAsync(string indexName)
         {
-            return ExecuteRequest("DELETE", "/1/indexes/" + Uri.EscapeDataString(indexName));
+            return ExecuteRequest(callType.Write, "DELETE", "/1/indexes/" + Uri.EscapeDataString(indexName));
         }
 
         /// <summary>
@@ -231,7 +250,7 @@ namespace Algolia.Search
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "move";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest("POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation);
+            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.MoveIndexAsync"/>
@@ -253,7 +272,7 @@ namespace Algolia.Search
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "copy";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest("POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation);
+            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
@@ -341,7 +360,7 @@ namespace Algolia.Search
                 else
                     param += string.Format("&onlyErrors={0}", type);
             }
-            return ExecuteRequest("GET", String.Format("/1/logs{0}", param));
+            return ExecuteRequest(callType.Write, "GET", String.Format("/1/logs{0}", param));
         }
 
         /// <summary>
@@ -382,7 +401,7 @@ namespace Algolia.Search
         /// <returns>An object containing the list of keys.</returns>
         public Task<JObject> ListUserKeysAsync()
         {
-            return ExecuteRequest("GET", "/1/keys");
+            return ExecuteRequest(callType.Read, "GET", "/1/keys");
         }
 
         /// <summary>
@@ -400,7 +419,7 @@ namespace Algolia.Search
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
         public Task<JObject> GetUserKeyACLAsync(string key)
         {
-            return ExecuteRequest("GET", "/1/keys/" + key);
+            return ExecuteRequest(callType.Read, "GET", "/1/keys/" + key);
         }
 
         /// <summary>
@@ -418,7 +437,7 @@ namespace Algolia.Search
         /// <returns>Returns an object with a "deleteAt" attribute.</returns>
         public Task<JObject> DeleteUserKeyAsync(string key)
         {
-            return ExecuteRequest("DELETE", "/1/keys/" + key);
+            return ExecuteRequest(callType.Write, "DELETE", "/1/keys/" + key);
         }
 
         /// <summary>
@@ -457,7 +476,7 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             content["indexes"] = indexes;
-            return ExecuteRequest("POST", "/1/keys", content);
+            return ExecuteRequest(callType.Write, "POST", "/1/keys", content);
         }
 
         /// <summary>
@@ -508,7 +527,7 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             content["indexes"] = indexes;
-            return ExecuteRequest("PUT", "/1/keys/" + key, content);
+            return ExecuteRequest(callType.Write, "PUT", "/1/keys/" + key, content);
         }
 
         /// <summary>
@@ -592,6 +611,12 @@ namespace Algolia.Search
             }
         }
 
+        public enum callType {
+            Search,
+            Write,
+            Read
+        };
+
         /// <summary>
         /// Used to execute the search request
         /// </summary>
@@ -599,14 +624,29 @@ namespace Algolia.Search
         /// <param name="requestUrl">URL to request</param>
         /// <param name="content">The content</param>
         /// <returns></returns>
-        public async Task<JObject> ExecuteRequest(string method, string requestUrl, object content = null)
+        public async Task<JObject> ExecuteRequest(callType type, string method, string requestUrl, object content = null)
         {
-            // Operate on host list copy so we can handle bad hosts
-            var hostsCopy = new string[_hosts.Length];
-            _hosts.CopyTo(hostsCopy, 0);
+            string[] hosts = null;
+            if (type == callType.Write)
+            {
+                hosts = _writeHosts;
+                _httpClient.Timeout = _writeTimeout;
+            }
+            else
+            {
+                hosts = _readHosts;
+                if (type == callType.Read)
+                {
+                    _httpClient.Timeout = _writeTimeout;
+                }
+                else
+                {
+                    _httpClient.Timeout = _searchTimeout;
+                }
+            }
 
             Dictionary<string, string> errors = new Dictionary<string, string>();
-            foreach (string host in hostsCopy)
+            foreach (string host in hosts)
             {
                 try
                 {
@@ -651,9 +691,6 @@ namespace Algolia.Search
                     }
                     catch (Exception ex)
                     {
-                        // Move bad host to end of list
-                        RotateLeft(_hosts, 1);
-
                         errors.Add(host, ex.Message);
                     }
 
@@ -665,14 +702,6 @@ namespace Algolia.Search
 
             }
             throw new AlgoliaException("Hosts unreachable: " + string.Join(", ", errors.Select(x => x.Key + "=" + x.Value).ToArray()));
-        }
-
-        void RotateLeft(string[] array, int places)
-        {
-            var temp = new string[places];
-            Array.Copy(array, 0, temp, 0, places);
-            Array.Copy(array, places, array, 0, array.Length - places);
-            Array.Copy(temp, 0, array, array.Length - places, places);
         }
     }
 }

@@ -65,11 +65,11 @@ namespace Algolia.Search
         {
             if (string.IsNullOrWhiteSpace(objectId))
             {
-                return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}", _urlIndexName), content);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}", _urlIndexName), content);
             }
             else
             {
-                return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectId)), content);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectId)), content);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Algolia.Search
         {
             if (attributesToRetrieve == null)
             {
-                return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)));
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)));
             }
             else
             {
@@ -134,7 +134,7 @@ namespace Algolia.Search
                         attributes += ",";
                     attributes += Uri.EscapeDataString(attr);
                 }
-                return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/{1}?attributes={2}", _urlIndexName, Uri.EscapeDataString(objectID), attributes));
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}?attributes={2}", _urlIndexName, Uri.EscapeDataString(objectID), attributes));
             }
         }
 
@@ -166,7 +166,7 @@ namespace Algolia.Search
             }
             JObject body = new JObject();
             body.Add("requests", requests);
-            return _client.ExecuteRequest("POST", "/1/indexes/*/objects", body);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", "/1/indexes/*/objects", body);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Algolia.Search
                 throw new AlgoliaException("objectID is missing");
             }
             string objectID = (string)partialObject["objectID"];
-            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/{1}/partial", _urlIndexName, Uri.EscapeDataString(objectID)), partialObject);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/{1}/partial", _urlIndexName, Uri.EscapeDataString(objectID)), partialObject);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace Algolia.Search
                 throw new AlgoliaException("objectID is missing");
             }
             string objectID = (string)obj["objectID"];
-            return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), obj);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), obj);
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace Algolia.Search
         {
             if (string.IsNullOrWhiteSpace(objectID))
                 throw new ArgumentOutOfRangeException("objectID", "objectID is required.");
-            return _client.ExecuteRequest("DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)));
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)));
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch);
         }
 
         /// <summary>
@@ -396,11 +396,11 @@ namespace Algolia.Search
             {
                 Dictionary<string, object> body = new Dictionary<string, object>();
                 body["params"] = paramsString;
-                return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/query", _urlIndexName), body);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Search, "POST", string.Format("/1/indexes/{0}/query", _urlIndexName), body);
             }
             else
             {
-                return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}", _urlIndexName));
+                return _client.ExecuteRequest(AlgoliaClient.callType.Search, "GET", string.Format("/1/indexes/{0}", _urlIndexName));
             }
         }
 
@@ -421,7 +421,7 @@ namespace Algolia.Search
         {
             while (true)
             {
-                JObject obj = await _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/task/{1}", _urlIndexName, taskID)).ConfigureAwait(_client.getContinueOnCapturedContext());
+                JObject obj = await _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/task/{1}", _urlIndexName, taskID)).ConfigureAwait(_client.getContinueOnCapturedContext());
                 string status = (string)obj["status"];
                 if (status.Equals("published"))
                     return;
@@ -444,7 +444,7 @@ namespace Algolia.Search
         /// <returns>An object containing the settings.</returns>
         public Task<JObject> GetSettingsAsync()
         {
-            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/settings", _urlIndexName));
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/settings", _urlIndexName));
         }
 
         /// <summary>
@@ -474,7 +474,7 @@ namespace Algolia.Search
                 else
                     param += string.Format("&hitsPerPage={0}", hitsPerPage);
             }
-            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/browse{1}", _urlIndexName, param));
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse{1}", _urlIndexName, param));
         }
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace Algolia.Search
         /// </summary>
         public Task<JObject> ClearIndexAsync()
         {
-            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/clear", _urlIndexName));
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/clear", _urlIndexName));
         }
 
         /// <summary>
@@ -549,7 +549,7 @@ namespace Algolia.Search
         /// </param>
         public Task<JObject> SetSettingsAsync(JObject settings)
         {
-            return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/settings", _urlIndexName), settings);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/settings", _urlIndexName), settings);
         }
 
         /// <summary>
@@ -565,7 +565,7 @@ namespace Algolia.Search
         /// </summary>
         public Task<JObject> ListUserKeysAsync()
         {
-            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/keys", _urlIndexName));
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys", _urlIndexName));
         }
 
         /// <summary>
@@ -581,7 +581,7 @@ namespace Algolia.Search
         /// </summary>
         public Task<JObject> GetUserKeyACLAsync(string key)
         {
-            return _client.ExecuteRequest("GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key));
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key));
         }
 
         /// <summary>
@@ -597,7 +597,7 @@ namespace Algolia.Search
         /// </summary>
         public Task<JObject> DeleteUserKeyAsync(string key)
         {
-            return _client.ExecuteRequest("DELETE", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key));
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key));
         }
 
         /// <summary>
@@ -629,7 +629,7 @@ namespace Algolia.Search
             content["validity"] = validity;
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
-            return _client.ExecuteRequest("POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), content);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), content);
         }
 
         /// <summary>
@@ -662,7 +662,7 @@ namespace Algolia.Search
             content["validity"] = validity;
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
-            return _client.ExecuteRequest("PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), content);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), content);
         }
 
         /// <summary>
