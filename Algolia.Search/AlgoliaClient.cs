@@ -47,7 +47,8 @@ namespace Algolia.Search
         private string[] _writeHosts;
         private string _applicationId;
         private string _apiKey;
-        private HttpClient _httpClient;
+        private HttpClient _searchHttpClient;
+        private HttpClient _buildHttpClient;
         private HttpMessageHandler _mock;
         private bool _continueOnCapturedContext;
         private TimeSpan _searchTimeout;
@@ -104,8 +105,8 @@ namespace Algolia.Search
             HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            _searchTimeout = TimeSpan.FromSeconds(5);
-            _writeTimeout = TimeSpan.FromSeconds(30);
+            _searchHttpClient.Timeout = TimeSpan.FromSeconds(5);
+            _buildHttpClient.Timeout = TimeSpan.FromSeconds(30);
 
             _continueOnCapturedContext = false;
         }
@@ -129,12 +130,13 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Set the read timeout for the search and for the build operation 
+        /// Set the read timeout for the search and for the build operation
+        /// This method should be called before any api call.
         /// </summary>
         public void setTimeout(int searchTimeout, int writeTimeout)
         {
-            this._searchTimeout = TimeSpan.FromSeconds(searchTimeout);
-            this._writeTimeout = TimeSpan.FromSeconds(writeTimeout);
+            _searchHttpClient.Timeout = TimeSpan.FromSeconds(searchTimeout);
+            _buildHttpClient.Timeout = TimeSpan.FromSeconds(writeTimeout);
         }
 
         /// <summary>
@@ -600,14 +602,32 @@ namespace Algolia.Search
         {
             get
             {
-                if (_httpClient == null)
+                if (_buildHttpClient == null)
                 {
                     if (_mock == null)
-                        _httpClient = new HttpClient();
+                        _buildHttpClient = new HttpClient();
                     else
-                        _httpClient = new HttpClient(_mock);
+                        _buildHttpClient = new HttpClient(_mock);
                 }
-                return _httpClient;
+                return _buildHttpClient;
+            }
+        }
+
+        /// <summary>
+        /// Search HTTP client
+        /// </summary>
+        protected HttpClient SearchHttpClient
+        {
+            get
+            {
+                if (_searchHttpClient == null)
+                {
+                    if (_mock == null)
+                        _searchHttpClient = new HttpClient();
+                    else
+                        _searchHttpClient = new HttpClient(_mock);
+                }
+                return _searchHttpClient;
             }
         }
 
@@ -627,21 +647,22 @@ namespace Algolia.Search
         public async Task<JObject> ExecuteRequest(callType type, string method, string requestUrl, object content = null)
         {
             string[] hosts = null;
+            HttpClient client = null;
             if (type == callType.Write)
             {
                 hosts = _writeHosts;
-                _httpClient.Timeout = _writeTimeout;
+                client = _buildHttpClient;
             }
             else
             {
                 hosts = _readHosts;
                 if (type == callType.Read)
                 {
-                    _httpClient.Timeout = _writeTimeout;
+                    client = _buildHttpClient;
                 }
                 else
                 {
-                    _httpClient.Timeout = _searchTimeout;
+                    client = _searchHttpClient;
                 }
             }
 
