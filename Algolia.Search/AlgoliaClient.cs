@@ -51,8 +51,6 @@ namespace Algolia.Search
         private HttpClient _buildHttpClient;
         private HttpMessageHandler _mock;
         private bool _continueOnCapturedContext;
-        private TimeSpan _searchTimeout;
-        private TimeSpan _writeTimeout;
 
         /// <summary>
         /// Algolia Search initialization
