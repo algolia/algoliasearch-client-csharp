@@ -105,8 +105,13 @@ namespace Algolia.Search
             HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            _searchHttpClient.Timeout = TimeSpan.FromSeconds(5);
-            _buildHttpClient.Timeout = TimeSpan.FromSeconds(30);
+            SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
+            SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
+            SearchHttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
+            SearchHttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            SearchHttpClient.Timeout = TimeSpan.FromSeconds(5);
+            HttpClient.Timeout = TimeSpan.FromSeconds(30);
 
             _continueOnCapturedContext = false;
         }
@@ -135,8 +140,8 @@ namespace Algolia.Search
         /// </summary>
         public void setTimeout(int searchTimeout, int writeTimeout)
         {
-            _searchHttpClient.Timeout = TimeSpan.FromSeconds(searchTimeout);
-            _buildHttpClient.Timeout = TimeSpan.FromSeconds(writeTimeout);
+            SearchHttpClient.Timeout = TimeSpan.FromSeconds(searchTimeout);
+            HttpClient.Timeout = TimeSpan.FromSeconds(writeTimeout);
         }
 
         /// <summary>
@@ -146,6 +151,7 @@ namespace Algolia.Search
         public void SetSecurityTags(string tag)
         {
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-TagFilters", tag);
+            SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-TagFilters", tag);
         }
 
         /// <summary>
@@ -155,6 +161,7 @@ namespace Algolia.Search
         public void SetUserToken(string userToken)
         {
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-UserToken", userToken);
+            SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-UserToken", userToken);
         }
 
         /// <summary>
@@ -165,6 +172,7 @@ namespace Algolia.Search
         public void SetExtraHeader(string key, string value)
         {
             HttpClient.DefaultRequestHeaders.Add(key, value);
+            SearchHttpClient.DefaultRequestHeaders.Add(key, value);
         }
 
 
@@ -678,18 +686,18 @@ namespace Algolia.Search
                         switch (method)
                         {
                             case "GET":
-                                responseMsg = await HttpClient.GetAsync(url).ConfigureAwait(_continueOnCapturedContext);
+                                responseMsg = await client.GetAsync(url).ConfigureAwait(_continueOnCapturedContext);
                                 break;
                             case "POST":
                                 HttpContent postcontent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                                responseMsg = await HttpClient.PostAsync(url, postcontent).ConfigureAwait(_continueOnCapturedContext);
+                                responseMsg = await client.PostAsync(url, postcontent).ConfigureAwait(_continueOnCapturedContext);
                                 break;
                             case "PUT":
                                 HttpContent putContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                                responseMsg = await HttpClient.PutAsync(url, putContent).ConfigureAwait(_continueOnCapturedContext);
+                                responseMsg = await client.PutAsync(url, putContent).ConfigureAwait(_continueOnCapturedContext);
                                 break;
                             case "DELETE":
-                                responseMsg = await HttpClient.DeleteAsync(url).ConfigureAwait(_continueOnCapturedContext);
+                                responseMsg = await client.DeleteAsync(url).ConfigureAwait(_continueOnCapturedContext);
                                 break;
                         }
                         if (responseMsg.IsSuccessStatusCode)
