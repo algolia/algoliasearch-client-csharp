@@ -173,13 +173,13 @@ namespace Algolia.Search
             SearchHttpClient.DefaultRequestHeaders.Add(key, value);
         }
 
-
         /// <summary>
         /// This method allows querying multiple indexes with one API call
         /// </summary>
         /// <param name="queries">List of queries per index</param>
+        /// <param name="strategy">Strategy applied on the sequence of queries</param>
         /// <returns></returns>
-        public Task<JObject> MultipleQueriesAsync(List<IndexQuery> queries)
+        public Task<JObject> MultipleQueriesAsync(List<IndexQuery> queries, string strategy = "none")
         {
             List<Dictionary<string, object>> body = new List<Dictionary<string, object>>();
             foreach (IndexQuery indexQuery in queries)
@@ -191,7 +191,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> requests = new Dictionary<string, object>();
             requests.Add("requests", body);
-            return ExecuteRequest(callType.Search, "POST", "/1/indexes/*/queries", requests);
+            return ExecuteRequest(callType.Search, "POST", "/1/indexes/*/queries?strategy=" + strategy, requests);
 
         }
 
@@ -200,9 +200,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="queries">List of queries per index</param>
         /// <returns></returns>
-        public JObject MultipleQueries(List<IndexQuery> queries)
+        public JObject MultipleQueries(List<IndexQuery> queries, string strategy = "none")
         {
-            return MultipleQueriesAsync(queries).GetAwaiter().GetResult();
+            return MultipleQueriesAsync(queries, strategy).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -460,6 +460,44 @@ namespace Algolia.Search
         /// <summary>
         /// Create a new user key.
         /// </summary>
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// can contains the following values:
+        ///   - acl: array of string
+        ///   - indices: array of string
+        ///   - validity: int
+        ///   - referers: array of string
+        ///   - description: string
+        ///   - maxHitsPerQuery: integer
+        ///   - queryParameters: string
+        ///   - maxQueriesPerIPPerHour: integer
+        /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
+        public Task<JObject> AddUserKeyAsync(Dictionary<string, object> parameters)
+        {
+            return ExecuteRequest(callType.Write, "POST", "/1/keys", parameters);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.AddUserKeyAsync"/>
+        /// </summary>
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// can contains the following values:
+        ///   - acl: array of string
+        ///   - indices: array of string
+        ///   - validity: int
+        ///   - referers: array of string
+        ///   - description: string
+        ///   - maxHitsPerQuery: integer
+        ///   - queryParameters: string
+        ///   - maxQueriesPerIPPerHour: integer
+        /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
+        public JObject AddUserKey(Dictionary<string, object> parameters)
+        {
+            return AddUserKeyAsync(parameters).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Create a new user key.
+        /// </summary>
         /// <param name="acls">The list of ACL for this key. Defined by an array of strings that can contains the following values:
         ///   - search: allow searching (https and http)
         ///   - addObject: allow adding/updating an object in the index (https only)
@@ -484,7 +522,7 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             content["indexes"] = indexes;
-            return ExecuteRequest(callType.Write, "POST", "/1/keys", content);
+            return AddUserKeyAsync(content);
         }
 
         /// <summary>
@@ -505,6 +543,46 @@ namespace Algolia.Search
         public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
         {
             return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Update a user key.
+        /// </summary>
+        /// <param name="key">The user key</param>
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// can contains the following values:
+        ///   - acl: array of string
+        ///   - indices: array of string
+        ///   - validity: int
+        ///   - referers: array of string
+        ///   - description: string
+        ///   - maxHitsPerQuery: integer
+        ///   - queryParameters: string
+        ///   - maxQueriesPerIPPerHour: integer
+        /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
+        public Task<JObject> UpdateUserKeyAsync(string key, Dictionary<string, object> parameters)
+        {
+            return ExecuteRequest(callType.Write, "PUT", "/1/keys/" + key, parameters);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.UpdateUserKeyAsync"/>
+        /// </summary>
+        /// <param name="key">The user key</param>
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// can contains the following values:
+        ///   - acl: array of string
+        ///   - indices: array of string
+        ///   - validity: int
+        ///   - referers: array of string
+        ///   - description: string
+        ///   - maxHitsPerQuery: integer
+        ///   - queryParameters: string
+        ///   - maxQueriesPerIPPerHour: integer
+        /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
+        public JObject UpdateUserKey(string key, Dictionary<string, object> parameters)
+        {
+            return UpdateUserKeyAsync(key, parameters).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -535,7 +613,7 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             content["indexes"] = indexes;
-            return ExecuteRequest(callType.Write, "PUT", "/1/keys/" + key, content);
+            return UpdateUserKeyAsync(key, content);
         }
 
         /// <summary>
@@ -557,6 +635,18 @@ namespace Algolia.Search
         public JObject UpdateUserKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
         {
             return UpdateUserKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Generates a secured and public API Key from a query parameters and an optional user token identifying the current user
+        /// </summary>
+        /// <param name="privateApiKey">Your private API Key</param>
+        /// <param name="query">The query parameters applied to the query (used as security)</param>
+        /// <param name="userToken">An optional token identifying the current user</param>
+        /// <returns></returns>
+        public string GenerateSecuredApiKey(String privateApiKey, Query query, String userToken = null)
+        {
+            return GenerateSecuredApiKey(privateApiKey, query.ToString(), userToken);
         }
 
         /// <summary>

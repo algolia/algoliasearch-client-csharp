@@ -611,6 +611,32 @@ namespace Algolia.Search
         /// <summary>
         /// Create a new user key associated with this index.
         /// </summary>
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// can contains the following values:
+        ///   - acl: array of string
+        ///   - validity: int
+        ///   - referers: array of string
+        ///   - description: string
+        ///   - maxHitsPerQuery: integer
+        ///   - queryParameters: string
+        ///   - maxQueriesPerIPPerHour: integer
+        /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
+        public Task<JObject> AddUserKeyAsync(Dictionary<string, object> parameters)
+        {
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), parameters);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.AddUserKeyAsync"/>.
+        /// </summary>
+        public JObject AddUserKey(Dictionary<string, object> parameters)
+        {
+            return AddUserKeyAsync(parameters).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Create a new user key associated with this index.
+        /// </summary>
         /// <param name="acls">The list of ACL for this key. Defined by an array of strings that can contains the following values:
         ///   - search: allow searching (https and http)
         ///   - addObject: allow adding/updating an object in the index (https only)
@@ -629,7 +655,7 @@ namespace Algolia.Search
             content["validity"] = validity;
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), content);
+            return AddUserKeyAsync(content);
         }
 
         /// <summary>
@@ -638,6 +664,33 @@ namespace Algolia.Search
         public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
         {
             return AddUserKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Update a user key associated to this index.
+        /// </summary>
+        /// <param name="key">The user key</param>
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// can contains the following values:
+        ///   - acl: array of string
+        ///   - validity: int
+        ///   - referers: array of string
+        ///   - description: string
+        ///   - maxHitsPerQuery: integer
+        ///   - queryParameters: string
+        ///   - maxQueriesPerIPPerHour: integer
+        /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
+        public Task<JObject> UpdateUserKeyAsync(string key, Dictionary<string, object> parameters)
+        {
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), parameters);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.UpdateUserKeyAsync"/>.
+        /// </summary>
+        public JObject UpdateUserKey(string key, Dictionary<string, object> parameters)
+        {
+            return UpdateUserKeyAsync(key, parameters).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -662,7 +715,7 @@ namespace Algolia.Search
             content["validity"] = validity;
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), content);
+            return UpdateUserKeyAsync(key, content);
         }
 
         /// <summary>
