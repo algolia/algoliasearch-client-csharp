@@ -638,6 +638,30 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Send a batch targeting multiple indices
+        /// </summary>
+        /// <param name="actions">An array of action to send.</param>
+        /// <returns>An object containing an "objectIDs" attribute (array of string) and a dictionary for the taskIDs.</returns>
+        public Task<JObject> BatchAsync(IEnumerable<object> requests)
+        {
+            Dictionary<string, object> batch = new Dictionary<string, object>();
+            batch["requests"] = requests;
+            return ExecuteRequest(AlgoliaClient.callType.Write, "POST", "/1/indexes/*/batch", batch);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.BatchAsync"/>
+        /// </summary>
+        /// <param name="actions">An array of action to send.</param>
+        /// <returns>An object containing an "objectIDs" attribute (array of string) and a dictionary for the taskIDs.</returns>
+        public JObject Batch(IEnumerable<object> requests)
+        {
+            return BatchAsync(requests).GetAwaiter().GetResult();
+        }
+
+
+
+        /// <summary>
         /// Generates a secured and public API Key from a query parameters and an optional user token identifying the current user
         /// </summary>
         /// <param name="privateApiKey">Your private API Key</param>

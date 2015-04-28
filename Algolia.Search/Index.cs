@@ -417,7 +417,7 @@ namespace Algolia.Search
         /// Check to see if the asynchronous server task is complete.
         /// </summary>
         /// <param name="taskID">The id of the task returned by server.</param>
-        async public Task WaitTaskAsync(string taskID)
+        async public Task WaitTaskAsync(string taskID, int timeToWait = 100)
         {
             while (true)
             {
@@ -425,7 +425,10 @@ namespace Algolia.Search
                 string status = (string)obj["status"];
                 if (status.Equals("published"))
                     return;
-                await TaskEx.Delay(1000).ConfigureAwait(_client.getContinueOnCapturedContext());
+                await TaskEx.Delay(timeToWait).ConfigureAwait(_client.getContinueOnCapturedContext());
+                timeToWait *= 2;
+                if (timeToWait > 10000)
+                    timeToWait = 10000;
             }
         }
 
@@ -433,9 +436,9 @@ namespace Algolia.Search
         /// Synchronously call <see cref="Index.WaitTaskAsync"/>.
         /// </summary>
         /// <param name="taskID">The id of the task returned by server.</param>
-        public void WaitTask(String taskID)
+        public void WaitTask(String taskID, int timeToWait = 100)
         {
-            WaitTaskAsync(taskID).GetAwaiter().GetResult();
+            WaitTaskAsync(taskID, timeToWait).GetAwaiter().GetResult();
         }
 
         /// <summary>

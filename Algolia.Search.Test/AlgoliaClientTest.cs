@@ -174,6 +174,22 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
+        public void TaskBatchMultipleIndexes()
+        {
+            clearTest();
+            List<JObject> objs = new List<JObject>();
+            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", 
+                          ""lastname"":""Barninger""}}"));
+            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", 
+                          ""lastname"":""Speach""}"));
+            var task = _client.Batch(objs);
+            _index.WaitTask(task["taskID"][safe_name("àlgol?à-csharp")].ToString());
+            var res = _index.Search(new Query(""));
+            Assert.AreEqual(2, res["nbHits"].ToObject<int>());
+            Assert.AreEqual("Roger", res["hits"][0]["firstname"].ToString());
+        }
+
+        [Test]
         public void TaskDeleteByQuery()
         {
             clearTest();
