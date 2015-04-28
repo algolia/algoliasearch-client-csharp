@@ -178,10 +178,8 @@ namespace NUnit.Framework.Test
         {
             clearTest();
             List<JObject> objs = new List<JObject>();
-            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", 
-                          ""lastname"":""Barninger""}}"));
-            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", 
-                          ""lastname"":""Speach""}"));
+            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Barninger""}}"));
+            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Speach""}}"));
             var task = _client.Batch(objs);
             _index.WaitTask(task["taskID"][safe_name("àlgol?à-csharp")].ToString());
             var res = _index.Search(new Query(""));
