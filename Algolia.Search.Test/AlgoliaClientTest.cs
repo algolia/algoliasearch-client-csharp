@@ -571,7 +571,7 @@ namespace NUnit.Framework.Test
         [Test]
         public void BadIndexName()
         {
-            var ind = _client.InitIndex("../");
+            var ind = _client.InitIndex("&&");
             try
             {
                 ind.ClearIndex();
