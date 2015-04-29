@@ -569,6 +569,21 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
+        public void BadIndexName()
+        {
+            var ind = _client.InitIndex("../");
+            try
+            {
+                ind.ClearIndex();
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual(e, new AlgoliaException("indexName is not valid"));
+            }
+        }
+
+        [Test]
         public void BadClientCreation()
         {
             string[] _hosts = new string[] { "localhost.algolia.com:8080", "" };
