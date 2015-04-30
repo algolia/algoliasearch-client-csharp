@@ -33,6 +33,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using PCLCrypto;
+using Newtonsoft.Json;
 
 namespace Algolia.Search
 {
@@ -818,17 +819,33 @@ namespace Algolia.Search
                             JObject obj = JObject.Parse(serializedJSON);
                             return obj;
                         }
-                        else if (responseMsg.StatusCode == HttpStatusCode.BadRequest || responseMsg.StatusCode == HttpStatusCode.Forbidden || responseMsg.StatusCode == HttpStatusCode.NotFound)
-                        {
-                            string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
-                            JObject obj = JObject.Parse(serializedJSON);
-                            string message = responseMsg.StatusCode.ToString() + ":" + obj["message"];
-                            throw new AlgoliaException(message);
-                        }
                         else
                         {
-                            errors.Add(host + '(' + responseMsg.StatusCode.ToString() + ')', responseMsg.ReasonPhrase);
+                            string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
+                            string message = "Internal Error";
+                            string status = "0";
+                            try
+                            {
+                                JObject obj = JObject.Parse(serializedJSON);
+                                message = obj["message"].ToString();
+                                status = obj["status"].ToString();
+                                if (obj["status"].ToObject<int>() / 100 == 4)
+                                {
+                                    throw new AlgoliaException(message);
+                                }
+                            }
+                            catch (JsonReaderException)
+                            {
+                                message = responseMsg.ReasonPhrase;
+                                status = "0";
+                            }
+                            
+                            errors.Add(host + '(' + status + ')', message);
                         }
+                    }
+                    catch (AlgoliaException)
+                    {
+                        throw;
                     }
                     catch (Exception ex)
                     {

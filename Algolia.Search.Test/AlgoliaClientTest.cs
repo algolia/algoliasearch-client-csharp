@@ -579,7 +579,23 @@ namespace NUnit.Framework.Test
             }
             catch (Exception e)
             {
-                Assert.AreEqual(e, new AlgoliaException("indexName is not valid"));
+                Assert.AreEqual(new AlgoliaException("indexName is not valid").Message, e.Message);
+            }
+        }
+
+        [Test]
+        public void NetworkIssue()
+        {
+            try
+            {
+                new AlgoliaClient(_testApiKey, _testApiKey).ListIndexes(); // Should not find APIKEY.algolia.net
+
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.Message);
+                Assert.True(e.Message.StartsWith("Hosts unreachable:"));
             }
         }
 
