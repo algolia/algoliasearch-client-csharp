@@ -822,12 +822,12 @@ namespace Algolia.Search
                         {
                             string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
                             JObject obj = JObject.Parse(serializedJSON);
-                            string message = (string)obj["message"];
+                            string message = responseMsg.StatusCode.ToString() + ":" + obj["message"];
                             throw new AlgoliaException(message);
                         }
                         else
                         {
-                            errors.Add(host, responseMsg.ReasonPhrase);
+                            errors.Add(host + '(' + responseMsg.StatusCode.ToString() + ')', responseMsg.ReasonPhrase);
                         }
                     }
                     catch (Exception ex)
