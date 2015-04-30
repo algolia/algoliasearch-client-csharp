@@ -782,6 +782,10 @@ namespace Algolia.Search
             // one query per disjunctive facet (use all refinements but the current one + histPerPage=1 + single facet)
             foreach (string disjunctiveFacet in disjunctiveFacets)
             {
+                if (!refinements.ContainsKey(disjunctiveFacet))
+                {
+                    continue; //No need to compute the count, it's already done by the main query
+                }
                 filters = new List<string>();
                 foreach (string key in refinements.Keys)
                 {
