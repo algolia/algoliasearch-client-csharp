@@ -1,6 +1,16 @@
 Changelog
 =========
 
+3.1.1 (2015-05-04)
+------------------
+- Fix retry logic to handle new error codes
+- Add new methods to add/update api key
+- Add batch method to target multiple indices
+- Add strategy parameter for the multipleQueries
+- Add new method to generate secured api key from query parameters
+- Update dependencies
+
+
 3.1.0 (2015-04-10)
 ------------------
 - Added new retry logic
