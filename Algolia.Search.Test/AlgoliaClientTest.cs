@@ -594,7 +594,6 @@ namespace NUnit.Framework.Test
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine(e.Message);
                 Assert.True(e.Message.StartsWith("Hosts unreachable:"));
             }
         }
