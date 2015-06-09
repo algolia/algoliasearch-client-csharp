@@ -395,6 +395,21 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
+        public void TestBrowseAll()
+        {
+            clearTest();
+            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.BrowseAll(new Query());
+            JArray hits = new JArray();
+            foreach (var hit in res) {
+                hits.Add(hit);
+            }
+            Assert.AreEqual(1, hits.Count);
+            Assert.AreEqual("Jimmie", hits[0]["firstname"].ToString());
+        }
+
+        [Test]
         public void TestLogs()
         {
             var res = _client.GetLogs();

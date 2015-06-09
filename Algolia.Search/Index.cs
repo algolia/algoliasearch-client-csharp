@@ -32,6 +32,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections;
 
 namespace Algolia.Search
 {
@@ -41,7 +42,7 @@ namespace Algolia.Search
     /// </summary>
     public class Index
     {
-        private AlgoliaClient  _client;
+        protected AlgoliaClient  _client;
         private string         _indexName;
         private string         _urlIndexName;
 
@@ -488,6 +489,135 @@ namespace Algolia.Search
         public JObject Browse(int page = 0, int hitsPerPage = 1000)
         {
             return BrowseAsync(page, hitsPerPage).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        ///  Browse all index contents.
+        /// </summary>
+        /// <param name="q">The query parameters for the browse.</param>
+        /// <param name="cursor">The cursor to start the browse can be empty.</param>
+        public Task<JObject> BrowseFromAsync(Query q, string cursor)
+        {
+            string cursorParam = "";
+            if (cursor != null && cursor.Length > 0)
+            {
+                cursorParam = string.Format("&cursor={0}", cursor);
+            }
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}{2}", _urlIndexName, q.GetQueryString(), cursorParam));
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.BrowseFromAsync"/>.
+        /// </summary>
+        /// <param name="q">The query parameters for the browse.</param>
+        /// <param name="cursor">The cursor to start the browse can be empty.</param>
+        public JObject BrowseFrom(Query q, string cursor)
+        {
+            return BrowseFromAsync(q, cursor).GetAwaiter().GetResult();
+        }
+
+        public class IndexIterator : IEnumerable<JObject> {
+
+            Index index;
+            Query query;
+            string cursor;
+
+            public IndexIterator(Index ind, Query q, string cursor)
+            {
+                this.index = ind;
+                this.query = q;
+                this.cursor = cursor;
+            }
+
+            public IEnumerator<JObject> GetEnumerator()
+            {
+                return new IndexEnumerator(index, query, cursor);
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return new IndexEnumerator(index, query, cursor);
+            }
+        }
+
+        public class IndexEnumerator : IEnumerator<JObject>
+        {
+            Index index;
+            JObject answer;
+            int pos;
+            string cursor;
+            Query query;
+            JObject hit;
+
+            public IndexEnumerator(Index ind, Query q, string cursor)
+            {
+                this.index = ind;
+                this.query = q;
+                this.cursor = cursor;
+                Reset();
+            }
+
+            private void LoadNextPage() {
+                pos = 0;
+                string cursor = GetCursor();
+                answer = index.BrowseFromAsync(query, cursor).GetAwaiter().GetResult();
+            }
+
+            public string GetCursor()
+            {
+                return answer["cursor"].ToObject<string>();
+            }
+
+            public JObject Current
+            {
+                get { return hit; }
+            }
+
+            object IEnumerator.Current
+            {
+                get { return hit; }
+            }
+
+            public bool MoveNext()
+            {
+                while (true) {
+                    if (pos < ((JArray)answer["hits"]).Count())
+                    {
+                        hit = ((JArray)answer["hits"])[pos++].ToObject<JObject>();
+                        return true;
+                    }
+                    if (answer["cursor"] != null && answer["cursor"].ToObject<string>().Length > 0)
+                    {
+                        LoadNextPage();
+                        continue;
+                    }
+                    return false;
+                }
+            }
+
+            public void Reset()
+            {
+                pos = 0;
+                answer = new JObject();
+                answer.Add("cursor", cursor);
+                LoadNextPage();
+            }
+
+            public void Dispose()
+            {
+                // Nothing to do
+            }
+        }
+
+        
+
+        /// <summary>
+        ///  Browse all index contents.
+        /// </summary>
+        /// <param name="q">The query parameters for the browse.</param>
+        public IndexIterator BrowseAll(Query q)
+        {
+            return new IndexIterator(this, q, "");
         }
 
         /// <summary>
