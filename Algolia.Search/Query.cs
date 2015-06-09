@@ -111,6 +111,7 @@ namespace Algolia.Search
             ignorePlural = false;
             distinct = false;
             
+            minProximity = 1;
             page = 0;
             maxValuesPerFacets = 0;
             hitsPerPage = 20;
@@ -132,6 +133,7 @@ namespace Algolia.Search
             ignorePlural = false;
             distinct = false;
             page = 0;
+            minProximity = 1;
             maxValuesPerFacets = 0;
             hitsPerPage = 20;
             queryType = QueryType.PREFIX_LAST;
@@ -203,6 +205,27 @@ namespace Algolia.Search
         public Query SetQueryString(string query)
         {
             this.query = query;
+            return this;
+        }
+
+        /// <summary>
+        /// Configure the precision of the proximity ranking criterion. By default, the minimum (and best) proximity value distance between 2 matching words is 1. Setting it to 2 (or 3) would allow 1 (or 2) words to be found between the matching words without degrading the proximity ranking value.
+        ///
+        /// Considering the query "javascript framework", if you set minProximity=2 the records "JavaScript framework" and "JavaScript charting framework" will get the same proximity score, even if the second one contains a word between the 2 matching words. Default to 1.
+        /// </summary>
+        public Query SetMinProximity(int value)
+        {
+            this.minProximity = value;
+            return this;
+        }
+
+        /// <summary>
+        /// Specify the string that is inserted before/after the highlighted parts in the query result (default to "<em>" / "</em>").
+        /// </summary>
+        public Query SetHighlightingTags(string preTag, string postTag)
+        {
+            this.highlightPreTag = preTag;
+            this.highlightPostTag = postTag;
             return this;
         }
 
@@ -749,11 +772,25 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += aroundLatLong;
             }
-        if (aroundLatLongViaIP) {
+            if (aroundLatLongViaIP) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "aroundLatLngViaIP=true";
-        }
+            }
+            if (minProximity > 1) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "minProximity=";
+                stringBuilder += minProximity.ToString();
+            }
+            if (highlightPreTag != null && highlightPostTag != null) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "highlightPreTag=";   
+                stringBuilder += highlightPreTag;
+                stringBuilder += "highlightPostTag=";   
+                stringBuilder += highlightPostTag;
+            }
             if (query != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -833,6 +870,9 @@ namespace Algolia.Search
         private string aroundLatLong;
         private bool aroundLatLongViaIP;
         private string query;
+        private string highlightPreTag;
+        private string highlightPostTag;
+        private int minProximity;
         private string optionalWords;
         private QueryType queryType;
         private RemoveWordsIfNoResult removeWordsIfNoResult;

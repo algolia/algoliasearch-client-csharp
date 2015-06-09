@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.1.2 (2015-06-03)
+------------------
+- Added SetMinProximity support on query
+- Added SetHighlightingTags support on query
+
 3.1.1 (2015-05-04)
 ------------------
 - Fix retry logic to handle new error codes
