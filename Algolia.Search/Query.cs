@@ -109,7 +109,7 @@ namespace Algolia.Search
             minWordSizeForApprox2 = 7;
             getRankingInfo = false;
             ignorePlural = false;
-            distinct = false;
+            distinct = 0;
             
             minProximity = 1;
             page = 0;
@@ -131,7 +131,7 @@ namespace Algolia.Search
             minWordSizeForApprox2 = 7;
             getRankingInfo = false;
             ignorePlural = false;
-            distinct = false;
+            distinct = 0;
             page = 0;
             minProximity = 1;
             maxValuesPerFacets = 0;
@@ -308,7 +308,18 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query EnableDistinct(bool enabled)
         {
-            distinct = enabled;
+            distinct = enabled ? 1 : 0;
+            return this;
+        }
+
+        /// <summary>
+        /// This feature is similar to the distinct just before but instead of keeping the best value per value of attributeForDistinct, it allows to keep N values.
+        /// </summary>
+        /// <param name="nbHitsToKeep">Specify the maximum number of hits to keep for each distinct value
+        /// <returns></returns>
+        public Query EnableDistinct(int nbHitsToKeep)
+        {
+            distinct = nbHitsToKeep;
             return this;
         }
 
@@ -683,11 +694,12 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "ignorePlural=true";
             }
-            if (distinct)
+            if (distinct > 0)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "distinct=1";
+                stringBuilder += "distinct=";
+		stringBuilder += distinct.ToString();
             }
             if (!analytics)
             {
@@ -788,7 +800,7 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "highlightPreTag=";   
                 stringBuilder += highlightPreTag;
-                stringBuilder += "highlightPostTag=";   
+                stringBuilder += "&highlightPostTag=";   
                 stringBuilder += highlightPostTag;
             }
             if (query != null) {
@@ -855,7 +867,7 @@ namespace Algolia.Search
         private int minWordSizeForApprox2;
         private bool getRankingInfo;
         private bool ignorePlural;
-        private bool distinct;
+        private int distinct;
         private bool advancedSyntax;
         private bool analytics;
         private bool synonyms;
