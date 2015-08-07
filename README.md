@@ -10,6 +10,8 @@
 Our C# client lets you easily use the [Algolia Search API](https://www.algolia.com/doc/rest_api) from your App. It wraps the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
 
 Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.
+
+
 [![Build status](https://ci.appveyor.com/api/projects/status/r4c5ld2wh6bkvu7s?svg=true)](https://ci.appveyor.com/project/Algolia/algoliasearch-client-csharp)
 
 
@@ -50,7 +52,6 @@ Table of Contents
 Setup
 -------------
 To setup your project, follow these steps:
-
 
 
 
@@ -922,6 +923,7 @@ client.MoveIndex("MyNewIndex", "MyIndex");
 // await client.MoveIndexAsync("MyNewIndex", "MyIndex");
 ```
 
+
 Backup / Retrieve of all index content
 -------------
 
@@ -938,6 +940,8 @@ IndexIterator it = index.BrowseAll(new Query("text"));
 // Retrieve the next cursor from the browse method
 System.Diagnostics.Debug.WriteLine(index.BrowseFrom(new Query("text"), null)["cursor"]);
 ```
+
+
 
 Logs
 -------------
