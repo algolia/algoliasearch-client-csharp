@@ -105,21 +105,7 @@ namespace Algolia.Search
         /// <param name="query">The query.</param>
         public Query(String query)
         {
-            minWordSizeForApprox1 = 3;
-            minWordSizeForApprox2 = 7;
-            getRankingInfo = false;
-            ignorePlural = false;
-            distinct = 0;
-            
-            minProximity = 1;
-            page = 0;
-            maxValuesPerFacets = 0;
-            hitsPerPage = 20;
             this.query = query;
-            queryType = QueryType.PREFIX_LAST;
-            removeWordsIfNoResult = RemoveWordsIfNoResult.NONE;
-            analytics = synonyms = replaceSynonyms = allowTyposOnNumericTokens = true;
-            typoTolerance = TypoTolerance.TYPO_TRUE;
         }
 
         /// <summary>
@@ -127,19 +113,6 @@ namespace Algolia.Search
         /// </summary>
         public Query()
         {
-            minWordSizeForApprox1 = 3;
-            minWordSizeForApprox2 = 7;
-            getRankingInfo = false;
-            ignorePlural = false;
-            distinct = 0;
-            page = 0;
-            minProximity = 1;
-            maxValuesPerFacets = 0;
-            hitsPerPage = 20;
-            queryType = QueryType.PREFIX_LAST;
-            removeWordsIfNoResult = RemoveWordsIfNoResult.NONE;
-            analytics = synonyms = replaceSynonyms = allowTyposOnNumericTokens = true;
-            typoTolerance = TypoTolerance.TYPO_TRUE;
         }
 
         /// <summary>
@@ -651,12 +624,12 @@ namespace Algolia.Search
                 stringBuilder += "facetFilters=";
                 stringBuilder += Uri.EscapeDataString(facetFilters);
             }
-            if (maxValuesPerFacets != 0)
+            if (maxValuesPerFacets.HasValue)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "maxValuesPerFacet=";
-                stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(maxValuesPerFacets);
+                stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(maxValuesPerFacets.Value);
             }
             if (attributesToSnippet != null)
             {
@@ -672,54 +645,59 @@ namespace Algolia.Search
                     first = false;
                 }
             }
-            if (minWordSizeForApprox1 != 3) {
+            if (minWordSizeForApprox1.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "minWordSizefor1Typo=";
-                stringBuilder += minWordSizeForApprox1.ToString();
+                stringBuilder += minWordSizeForApprox1.HasValue.ToString();
             }
-            if (minWordSizeForApprox2 != 7) {
+            if (minWordSizeForApprox2.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "minWordSizefor2Typos=";
-                stringBuilder += minWordSizeForApprox2.ToString();
+                stringBuilder += minWordSizeForApprox2.HasValue.ToString();
             }
-            if (getRankingInfo) {
+            if (getRankingInfo.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "getRankingInfo=1";
+                stringBuilder += "getRankingInfo=";
+                stringBuilder += getRankingInfo.Value ? "true" : "false";
             }
-            if (ignorePlural) {
+            if (ignorePlural.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "ignorePlural=true";
+                stringBuilder += "ignorePlural=";
+                stringBuilder += ignorePlural.Value ? "true" : "false";
             }
-            if (distinct > 0)
+            if (distinct.HasValue)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "distinct=";
-		stringBuilder += distinct.ToString();
+		        stringBuilder += distinct.Value.ToString();
             }
-            if (!analytics)
+            if (analytics.HasValue)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "analytics=0";
+                stringBuilder += "analytics=";
+                stringBuilder += analytics.Value ? "true" : "false";
             }
-            if (!synonyms)
+            if (synonyms.HasValue)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "synonyms=0";
+                stringBuilder += "synonyms=";
+                stringBuilder += synonyms.Value ? "true" : "false";
             }
-            if (!replaceSynonyms)
+            if (replaceSynonyms.HasValue)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "replaceSynonymsInHighlight=0";
+                stringBuilder += "replaceSynonymsInHighlight=";
+                stringBuilder += replaceSynonyms.Value ? "true" : "false";
             }
-            if (typoTolerance != TypoTolerance.TYPO_TRUE)
+            if (typoTolerance.HasValue)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -739,29 +717,31 @@ namespace Algolia.Search
                         break;
                 }
             }
-            if (!allowTyposOnNumericTokens)
+            if (allowTyposOnNumericTokens.HasValue)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "allowTyposOnNumericTokens=false";
+                stringBuilder += "allowTyposOnNumericTokens=";
+                stringBuilder += allowTyposOnNumericTokens.Value ? "true" : "false";
             }
-            if (advancedSyntax)
+            if (advancedSyntax.HasValue)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "advancedSyntax=1";
+                stringBuilder += "advancedSyntax=";
+                stringBuilder += advancedSyntax.Value ? "1" : "0";
             }
-            if (page > 0) {
+            if (page.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "page=";
-                stringBuilder += page.ToString();
+                stringBuilder += page.Value.ToString();
             }
-            if (hitsPerPage != 20 && hitsPerPage > 0) {
+            if (hitsPerPage.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "hitsPerPage=";
-                stringBuilder += hitsPerPage.ToString();
+                stringBuilder += hitsPerPage.Value.ToString();
             }
             if (tags != null) {
                 if (stringBuilder.Length > 0)
@@ -784,16 +764,17 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += aroundLatLong;
             }
-            if (aroundLatLongViaIP) {
+            if (aroundLatLongViaIP.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
-                stringBuilder += "aroundLatLngViaIP=true";
+                stringBuilder += "aroundLatLngViaIP=";
+                stringBuilder += aroundLatLongViaIP.Value ? "true" : "false";
             }
-            if (minProximity > 1) {
+            if (minProximity.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "minProximity=";
-                stringBuilder += minProximity.ToString();
+                stringBuilder += minProximity.Value.ToString();
             }
             if (highlightPreTag != null && highlightPostTag != null) {
                 if (stringBuilder.Length > 0)
@@ -823,39 +804,52 @@ namespace Algolia.Search
                 stringBuilder += "restrictSearchableAttributes=";
                 stringBuilder += Uri.EscapeDataString(restrictSearchableAttributes);
             }
-            switch (removeWordsIfNoResult)
+            if (removeWordsIfNoResult.HasValue)
             {
-                case RemoveWordsIfNoResult.NONE:
-                    break;
-                case RemoveWordsIfNoResult.FIRST_WORDS:
-                    if (stringBuilder.Length > 0)
-                    stringBuilder += '&';
-                    stringBuilder += "removeWordsIfNoResult=FirstWords";
-                    break;
-                case RemoveWordsIfNoResult.LAST_WORDS:
-                    if (stringBuilder.Length > 0)
-                    stringBuilder += '&';
-                    stringBuilder += "removeWordsIfNoResult=LastWords";
-                    break;
-                case RemoveWordsIfNoResult.ALL_OPTIONAL:
-                    if (stringBuilder.Length > 0)
-                    stringBuilder += '&';
-                    stringBuilder += "removeWordsIfNoResult=allOptional";
-                    break;
+                switch (removeWordsIfNoResult)
+                {
+                    case RemoveWordsIfNoResult.NONE:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "removeWordsIfNoResult=None";
+                        break;
+                    case RemoveWordsIfNoResult.FIRST_WORDS:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "removeWordsIfNoResult=FirstWords";
+                        break;
+                    case RemoveWordsIfNoResult.LAST_WORDS:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "removeWordsIfNoResult=LastWords";
+                        break;
+                    case RemoveWordsIfNoResult.ALL_OPTIONAL:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "removeWordsIfNoResult=allOptional";
+                        break;
+                }
             }
-            switch (queryType) {
-            case QueryType.PREFIX_ALL:
-                if (stringBuilder.Length > 0)
-                    stringBuilder += '&';
-                stringBuilder += "queryType=prefixAll";
-                break;
-            case QueryType.PREFIX_LAST:
-                break;
-            case QueryType.PREFIX_NONE:
-                if (stringBuilder.Length > 0)
-                    stringBuilder += '&';
-                stringBuilder += "queryType=prefixNone";
-                break;
+            if (queryType.HasValue)
+            {
+                switch (queryType)
+                {
+                    case QueryType.PREFIX_ALL:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "queryType=prefixAll";
+                        break;
+                    case QueryType.PREFIX_LAST:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "queryType=prefixLast";
+                        break;
+                    case QueryType.PREFIX_NONE:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "queryType=prefixNone";
+                        break;
+                }
             }
             return stringBuilder;
         }
@@ -863,34 +857,34 @@ namespace Algolia.Search
         private IEnumerable<string> attributes;
         private IEnumerable<string> attributesToHighlight;
         private IEnumerable<string> attributesToSnippet;
-        private int minWordSizeForApprox1;
-        private int minWordSizeForApprox2;
-        private bool getRankingInfo;
-        private bool ignorePlural;
-        private int distinct;
-        private bool advancedSyntax;
-        private bool analytics;
-        private bool synonyms;
-        private bool replaceSynonyms;
-        private TypoTolerance typoTolerance;
-        private bool allowTyposOnNumericTokens;
-        private int page;
-        private int hitsPerPage;
+        private int? minWordSizeForApprox1;
+        private int? minWordSizeForApprox2;
+        private bool? getRankingInfo;
+        private bool? ignorePlural;
+        private int? distinct;
+        private bool? advancedSyntax;
+        private bool? analytics;
+        private bool? synonyms;
+        private bool? replaceSynonyms;
+        private TypoTolerance? typoTolerance;
+        private bool? allowTyposOnNumericTokens;
+        private int? page;
+        private int? hitsPerPage;
         private string tags;
         private string numerics;
         private string insideBoundingBox;
         private string aroundLatLong;
-        private bool aroundLatLongViaIP;
+        private bool? aroundLatLongViaIP;
         private string query;
         private string highlightPreTag;
         private string highlightPostTag;
-        private int minProximity;
+        private int? minProximity;
         private string optionalWords;
-        private QueryType queryType;
-        private RemoveWordsIfNoResult removeWordsIfNoResult;
+        private QueryType? queryType;
+        private RemoveWordsIfNoResult? removeWordsIfNoResult;
         private IEnumerable<string> facets;
         private string facetFilters;
-        private int maxValuesPerFacets;
+        private int? maxValuesPerFacets;
         private string restrictSearchableAttributes;
     }
 }
