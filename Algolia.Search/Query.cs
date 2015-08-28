@@ -649,13 +649,13 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "minWordSizefor1Typo=";
-                stringBuilder += minWordSizeForApprox1.HasValue.ToString();
+                stringBuilder += minWordSizeForApprox1.Value.ToString();
             }
             if (minWordSizeForApprox2.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "minWordSizefor2Typos=";
-                stringBuilder += minWordSizeForApprox2.HasValue.ToString();
+                stringBuilder += minWordSizeForApprox2.Value.ToString();
             }
             if (getRankingInfo.HasValue) {
                 if (stringBuilder.Length > 0)
