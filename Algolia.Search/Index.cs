@@ -359,7 +359,10 @@ namespace Algolia.Search
         async public Task DeleteByQueryAsync(Query query)
         {
             query.SetAttributesToRetrieve(new string[]{"objectID"});
+            query.SetAttributesToHighlight(new string[]{});
+            query.SetAttributesToSnippet(new string[] {});
             query.SetNbHitsPerPage(1000);
+            query.EnableDistinct(false); // force distinct=false to improve performances
 
             JObject result = await this.SearchAsync(query).ConfigureAwait(_client.getContinueOnCapturedContext());
             while (result["nbHits"].ToObject<int>() != 0)
