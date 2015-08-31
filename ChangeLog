@@ -1,6 +1,10 @@
 Changelog
 =========
 
+3.1.7 (2015-08-31)
+------------------
+- Fixed bug with the DeleteByQuery, it now uses the same HTTP layer for the query and the waitTask
+
 3.1.6 (2015-08-30)
 ------------------
 - Fixed a bug in DeleteByQuery and distinct>1
