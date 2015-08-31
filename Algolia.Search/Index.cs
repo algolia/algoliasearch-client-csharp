@@ -364,7 +364,7 @@ namespace Algolia.Search
             query.SetNbHitsPerPage(1000);
             query.EnableDistinct(false); // force distinct=false to improve performances
 
-            JObject result = await this.SearchAsync(query).ConfigureAwait(_client.getContinueOnCapturedContext());
+            JObject result = await this.BrowseFromAsync(query, null).ConfigureAwait(_client.getContinueOnCapturedContext());
             while (result["nbHits"].ToObject<int>() != 0)
             {
                 int i = 0;
