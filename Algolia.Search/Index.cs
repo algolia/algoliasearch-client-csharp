@@ -365,7 +365,7 @@ namespace Algolia.Search
             query.EnableDistinct(false); // force distinct=false to improve performances
 
             JObject result = await this.BrowseFromAsync(query, null).ConfigureAwait(_client.getContinueOnCapturedContext());
-            while (result["nbHits"].ToObject<int>() != 0)
+            while (((JArray)result["hits"]).Count != 0)
             {
                 int i = 0;
                 JArray hits = (JArray)result["hits"];
