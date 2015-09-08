@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.3.0 (2015-09-08)
+------------------
+
+- Add new parameter in the batched partial update method to avoid the automatic creation of the object.
+
 3.2.0 (2015-09-08)
 ------------------
 
