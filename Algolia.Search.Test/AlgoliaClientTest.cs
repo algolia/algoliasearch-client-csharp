@@ -88,11 +88,21 @@ namespace NUnit.Framework.Test
             clearTest();
             var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"), "àlgol?à");
             _index.WaitTask(task["taskID"].ToString());
-            task = _index.SaveObject(JObject.Parse(@"{""firstname"":""Robert"", ""objectID"":""àlgol?à""}"));
+            task = _index.PartialUpdateObject(JObject.Parse(@"{""firstname"":""Robert"", ""objectID"":""àlgol?à""}"));
             _index.WaitTask(task["taskID"].ToString());
             var res = _index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Robert", res["hits"][0]["firstname"].ToString());
+        }
+
+        [Test]
+        public void TestPartialUpdateObjectNoCreate()
+        {
+            clearTest();
+            var task = _index.PartialUpdateObject(JObject.Parse(@"{""firstname"":""Robert"", ""objectID"":""àlgol?à""}"), false);
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
+            Assert.AreEqual(0, res["nbHits"].ToObject<int>());
         }
 
         [Test]

@@ -185,14 +185,19 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="partialObject">The object attributes to override (must contains an objectID attribute).</param>
         /// <returns>An object containing an "updatedAt" attribute.</returns>
-        public Task<JObject> PartialUpdateObjectAsync(JObject partialObject)
+        public Task<JObject> PartialUpdateObjectAsync(JObject partialObject, bool createIfNotExists = true)
         {
+            string queryParam = "";
             if (partialObject["objectID"] == null)
             {
                 throw new AlgoliaException("objectID is missing");
             }
+            if (!createIfNotExists)
+            {
+                queryParam = "?createIfNotExists=false";
+            }
             string objectID = (string)partialObject["objectID"];
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/{1}/partial", _urlIndexName, Uri.EscapeDataString(objectID)), partialObject);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/{1}/partial{2}", _urlIndexName, Uri.EscapeDataString(objectID), queryParam), partialObject);
         }
 
         /// <summary>
@@ -200,9 +205,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="partialObject">The object attributes to override (must contains an objectID attribute).</param>
         /// <returns>An object containing an "updatedAt" attribute.</returns>
-        public JObject PartialUpdateObject(JObject partialObject)
+        public JObject PartialUpdateObject(JObject partialObject, bool createIfNotExists = true)
         {
-            return PartialUpdateObjectAsync(partialObject).GetAwaiter().GetResult();
+            return PartialUpdateObjectAsync(partialObject, createIfNotExists).GetAwaiter().GetResult();
         }
 
         /// <summary>
