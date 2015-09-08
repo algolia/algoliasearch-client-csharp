@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.2.0 (2015-09-08)
+------------------
+
+- Add new parameter in the partial update method to avoid the automatic creation of the object.
+
 3.1.7 (2015-08-31)
 ------------------
 - Fixed bug with the DeleteByQuery, it now uses the same HTTP layer for the query and the waitTask
