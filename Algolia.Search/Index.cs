@@ -215,13 +215,18 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objects">An array of objects to update (each object must contain an objectID attribute).</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string).</returns>
-        public Task<JObject> PartialUpdateObjectsAsync(IEnumerable<JObject> objects)
+        public Task<JObject> PartialUpdateObjectsAsync(IEnumerable<JObject> objects, bool createIfNotExists = true)
         {
+            string action = "partialUpdateObject";
+            if (!createIfNotExists)
+            {
+                action = "partialUpdateObjectNoCreate";
+            }
             List<object> requests = new List<object>();
             foreach (JObject obj in objects)
             {
                 Dictionary<string, object> request = new Dictionary<string, object>();
-                request["action"] = "partialUpdateObject";
+                request["action"] = action;
                 if (obj["objectID"] == null)
                 {
                     throw new AlgoliaException("objectID is missing");
@@ -240,9 +245,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objects">An array of objects to update (each object must contain an objectID attribute).</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string).</returns>
-        public JObject PartialUpdateObjects(IEnumerable<JObject> objects)
+        public JObject PartialUpdateObjects(IEnumerable<JObject> objects, bool createIfNotExists = true)
         {
-            return PartialUpdateObjectsAsync(objects).GetAwaiter().GetResult();
+            return PartialUpdateObjectsAsync(objects, createIfNotExists).GetAwaiter().GetResult();
         }
 
         /// <summary>

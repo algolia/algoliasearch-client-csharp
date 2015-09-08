@@ -164,6 +164,19 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
+        public void TaskPartialUpdateObjectsNoCreate()
+        {
+            clearTest();
+            var objs = new List<JObject>();
+            objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", ""objectID"":""à/go/?à1""}"));
+            objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", ""objectID"":""à/go/?à2""}"));
+            var task = _index.PartialUpdateObjects(objs, false);
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
+            Assert.AreEqual(0, res["nbHits"].ToObject<int>());
+        }
+
+        [Test]
         public void TaskDeleteObjects()
         {
             clearTest();
