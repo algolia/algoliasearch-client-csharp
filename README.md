@@ -281,6 +281,10 @@ index.PartialUpdateObject(JObject.Parse(@"{""city"":""San Francisco"",
 // Asynchronous
 // await index.PartialUpdateObjectAsync(JObject.Parse(@"{""city"":""San Francisco"", 
 //                                                       ""objectID"":""myID""}"));
+
+// You can avoid the automatic creation of the object by specifying false for the second parameter:
+index.PartialUpdateObject(JObject.Parse(@"{""city"":""San Francisco"", 
+                                           ""objectID"":""myID""}"), false);
 ```
 
 Example to add a tag:
