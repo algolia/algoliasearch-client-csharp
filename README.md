@@ -327,6 +327,9 @@ index.PartialUpdateObject(JObject.Parse(@"{""price"":{""value"": 42, ""_operatio
 //                                                       ""objectID"":""myID""}"));
 ```
 
+Note: Here we are incrementing the value by `42`. To increment just by one, put
+`value:1`.
+
 Example to decrement a numeric value:
 
 ```csharp
@@ -336,6 +339,9 @@ index.PartialUpdateObject(JObject.Parse(@"{""price"":{""value"": 42, ""_operatio
 // await index.PartialUpdateObjectAsync(JObject.Parse(@"{""price"":{""value"": 42, ""_operation"": ""Decrement"" }, 
 //                                                       ""objectID"":""myID""}"));
 ```
+
+Note: Here we are decrementing the value by `42`. To decrement just by one, put
+`value:1`.
 
 Search
 -------------
