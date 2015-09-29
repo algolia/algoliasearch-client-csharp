@@ -1,6 +1,15 @@
 Changelog
 =========
 
+3.3.1 (2015-09-30)
+------------------
+	
+- Added support of multiple bounding box for geo-search
+- Added support of polygon for geo-search
+- Added support of automatic radius computation for geo-search
+- Added support of disableTypoToleranceOnAttributes
+	       
+	
 3.3.0 (2015-09-08)
 ------------------
 
