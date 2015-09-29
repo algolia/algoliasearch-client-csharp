@@ -672,7 +672,6 @@ namespace Algolia.Search
                 if (this.attributesToHighlight.Count() == 0)
                     stringBuilder += "[]";
             }
-            }
             if (noTypoToleranceOn != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
