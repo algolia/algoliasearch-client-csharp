@@ -726,7 +726,7 @@ namespace Algolia.Search
                 if (_buildHttpClient == null)
                 {
                     if (_mock == null)
-                        _buildHttpClient = new HttpClient();
+                        _buildHttpClient = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
                     else
                         _buildHttpClient = new HttpClient(_mock);
                 }
@@ -744,7 +744,7 @@ namespace Algolia.Search
                 if (_searchHttpClient == null)
                 {
                     if (_mock == null)
-                        _searchHttpClient = new HttpClient();
+                        _searchHttpClient = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
                     else
                         _searchHttpClient = new HttpClient(_mock);
                 }
