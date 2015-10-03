@@ -129,6 +129,7 @@ namespace Algolia.Search
             q.aroundLatLongViaIP = aroundLatLongViaIP;
             q.attributes = attributes;
             q.attributesToHighlight = attributesToHighlight;
+            q.noTypoToleranceOn = noTypoToleranceOn;
             q.attributesToSnippet = attributesToSnippet;
             q.distinct = distinct;
             q.facetFilters = facetFilters;
@@ -137,6 +138,7 @@ namespace Algolia.Search
             q.hitsPerPage = hitsPerPage;
             q.ignorePlural = ignorePlural;
             q.insideBoundingBox = insideBoundingBox;
+            q.insidePolygon = insidePolygon;
             q.maxValuesPerFacets = maxValuesPerFacets;
             q.minWordSizeForApprox1 = minWordSizeForApprox1;
             q.minWordSizeForApprox2 = minWordSizeForApprox2;
@@ -152,6 +154,8 @@ namespace Algolia.Search
             q.tags = tags;
             q.typoTolerance = typoTolerance;
             q.filters = filters;
+            q.aroundRadius = aroundRadius;
+            q.aroundPrecision = aroundPrecision;
             return q;
         }
 
@@ -211,6 +215,16 @@ namespace Algolia.Search
         public Query SetAttributesToRetrieve(IEnumerable<string> attributes)
         {
             this.attributes = attributes;
+            return this;
+        }
+
+        /// <summary>
+        /// List of attributes on which you want to disable typo tolerance (must be a subset of the attributesToIndex index setting).
+        /// </summary>
+        /// <param name="attributes">The list of attributes.</param>
+        public Query DisableTypoToleranceOnAttributes(IEnumerable<string> attributes)
+        {
+            this.noTypoToleranceOn = attributes;
             return this;
         }
 
@@ -377,6 +391,19 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Search for entries around a given latitude/longitude with an automatic guessing of the radius depending of the area density 
+        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// </summary>
+        /// <param name="latitude">The latitude</param>
+        /// <param name="longitude">The longitude</param>
+        /// <returns></returns>
+        public Query AroundLatitudeLongitude(float latitude, float longitude)
+        {
+            aroundLatLong = "aroundLatLng=" + latitude + "," + longitude;
+            return this;
+        }
+
+        /// <summary>
         /// Search for entries around a given latitude/longitude. 
         /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
         /// </summary>
@@ -386,7 +413,20 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query AroundLatitudeLongitude(float latitude, float longitude, int radius)
         {
-            aroundLatLong = "aroundLatLng=" + latitude + "," + longitude + "&aroundRadius=" + radius;
+            aroundLatLong = "aroundLatLng=" + latitude + "," + longitude;
+            aroundRadius = radius;
+            return this;
+        }
+
+        /// <summary>
+        /// Search for entries around a given latitude/longitude (using IP geolocation) with an automatic radius depending of the density of the area
+        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// </summary>
+        /// <param name="radius">set the maximum distance in meters.</param>
+        /// <returns></returns>
+        public Query AroundLatitudeLongitudeViaIP()
+        {
+            aroundLatLongViaIP = true;
             return this;
         }
 
@@ -401,7 +441,9 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query AroundLatitudeLongitude(float latitude, float longitude, int radius, int precision)
         {
-            aroundLatLong = "aroundLatLng=" + latitude + "," + longitude + "&aroundRadius=" + radius + "&aroundPrecision=" + precision;
+            aroundLatLong = "aroundLatLng=" + latitude + "," + longitude;
+            aroundRadius = radius;
+            aroundPrecision = precision;
             return this;
         }
 
@@ -413,7 +455,7 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query AroundLatitudeLongitudeViaIP(int radius)
         {
-            aroundLatLong = "aroundRadius=" + radius;
+            aroundRadius = radius;
             aroundLatLongViaIP = true;
             return this;
         }
@@ -427,14 +469,18 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query AroundLatitudeLongitudeViaIP(int radius, int precision)
         {
-            aroundLatLong = "aroundRadius=" + radius + "&aroundPrecision=" + precision;
-        aroundLatLongViaIP = true;
+            aroundRadius = radius;
+            aroundPrecision = precision;
+            aroundLatLongViaIP = true;
             return this;
         }
 
         /// <summary>
         /// Search for entries inside a given area defined by the two extreme points of a rectangle.
-        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form "_geoloc":{"lat":48.853409, "lng":2.348800} or 
+        /// "_geoloc":[{"lat":48.853409, "lng":2.348800},{"lat":48.547456, "lng":2.972075}] if you have several geo-locations in your record).
+        /// 
+        /// You can use several bounding boxes (OR) by calling this method several times.        
         /// </summary>
         /// <param name="latitudeP1"></param>
         /// <param name="longitudeP1"></param>
@@ -443,7 +489,44 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query InsideBoundingBox(float latitudeP1, float longitudeP1, float latitudeP2, float longitudeP2)
         {
-            insideBoundingBox = "insideBoundingBox=" + latitudeP1 + "," + longitudeP1 + "," + latitudeP2 + "," + longitudeP2;
+            if (insideBoundingBox != null) {
+                insideBoundingBox += latitudeP1 + "," + longitudeP1 + "," + latitudeP2 + "," + longitudeP2;
+            } else {
+                insideBoundingBox = "insideBoundingBox=" + latitudeP1 + "," + longitudeP1 + "," + latitudeP2 + "," + longitudeP2;
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Add a point to the polygon of geo-search (requires a minimum of three points to define a valid polygon)
+        /// At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form "_geoloc":{"lat":48.853409, "lng":2.348800} or 
+        /// "_geoloc":[{"lat":48.853409, "lng":2.348800},{"lat":48.547456, "lng":2.972075}] if you have several geo-locations in your record).
+        /// </summary>
+        public Query AddInsidePolygon(float latitude, float longitude)
+        {
+            if (insidePolygon != null) {
+                insidePolygon += latitude + "," + longitude;
+            } else {
+                insidePolygon = "insidePolygon=" + latitude + "," + longitude;
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Change the radius or around latitude/longitude query
+        /// <summary>
+        public Query SetAroundRadius(int radius)
+        {
+            aroundRadius = radius;
+            return this;
+        }
+
+        /// <summary>
+        /// Change the precision or around latitude/longitude query
+        /// <summary>
+        public Query setAroundPrecision(int precision)
+        {
+            aroundPrecision = precision;
             return this;
         }
 
@@ -463,7 +546,7 @@ namespace Algolia.Search
         /// <summary>
         /// Filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
         /// Note: at indexing, tags should be added in the _tags attribute of objects (for example {"_tags":["tag1","tag2"]} )
-        /// </summary>
+        /// <summary>
         /// <param name="tags"></param>
         /// <returns></returns>
         public Query SetTagFilters(string tags)
@@ -603,6 +686,21 @@ namespace Algolia.Search
                 if (this.attributesToHighlight.Count() == 0)
                     stringBuilder += "[]";
             }
+            if (noTypoToleranceOn != null) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "disableTypoToleranceOnAttributes=";
+                bool first = true;
+                foreach (string attr in this.noTypoToleranceOn) {
+                    if (!first)
+                        stringBuilder += ',';
+                    stringBuilder += Uri.EscapeDataString(attr);
+                    first = false;
+                }
+                if (this.noTypoToleranceOn.Count() == 0)
+                    stringBuilder += "[]";
+            }
+            
             if (attributesToSnippet != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -665,6 +763,19 @@ namespace Algolia.Search
                     stringBuilder += Uri.EscapeDataString(attr);
                     first = false;
                 }
+            }
+            if (aroundRadius.HasValue) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "aroundRadius=";
+                stringBuilder += aroundRadius.Value.ToString();
+
+            }
+            if (aroundPrecision.HasValue) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "aroundPrecision=";
+                stringBuilder += aroundPrecision.Value.ToString();
             }
             if (minWordSizeForApprox1.HasValue) {
                 if (stringBuilder.Length > 0)
@@ -784,6 +895,10 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += aroundLatLong;
+            } else if (insidePolygon != null) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += insidePolygon;
             }
             if (aroundLatLongViaIP.HasValue) {
                 if (stringBuilder.Length > 0)
@@ -877,8 +992,11 @@ namespace Algolia.Search
 
         private IEnumerable<string> attributes;
         private IEnumerable<string> attributesToHighlight;
+        private IEnumerable<string> noTypoToleranceOn;
         private IEnumerable<string> attributesToSnippet;
         private int? minWordSizeForApprox1;
+        private int? aroundPrecision;
+        private int? aroundRadius;
         private int? minWordSizeForApprox2;
         private bool? getRankingInfo;
         private bool? ignorePlural;
@@ -895,6 +1013,7 @@ namespace Algolia.Search
         private string tags;
         private string numerics;
         private string insideBoundingBox;
+        private string insidePolygon;
         private string aroundLatLong;
         private bool? aroundLatLongViaIP;
         private string query;
