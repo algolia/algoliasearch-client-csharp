@@ -151,6 +151,7 @@ namespace Algolia.Search
             q.synonyms = synonyms;
             q.tags = tags;
             q.typoTolerance = typoTolerance;
+            q.filters = filters;
             return q;
         }
 
@@ -447,6 +448,19 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Filter the query with numeric, facet or/and tag filters. The syntax is a SQL like syntax, you can use the OR and AND keywords.
+        /// The syntax for the underlying numeric, facet and tag filters is the same than in the other filters:
+        /// available=1 AND (category:Book OR NOT category:Ebook) AND public
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        public Query SetFilters(string filters)
+        {
+            this.filters = filters;
+            return this;
+        }
+
+        /// <summary>
         /// Filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
         /// Note: at indexing, tags should be added in the _tags attribute of objects (for example {"_tags":["tag1","tag2"]} )
         /// </summary>
@@ -623,6 +637,13 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "facetFilters=";
                 stringBuilder += Uri.EscapeDataString(facetFilters);
+            }
+            if (filters != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "filters=";
+                stringBuilder += Uri.EscapeDataString(filters);
             }
             if (maxValuesPerFacets.HasValue)
             {
@@ -870,6 +891,7 @@ namespace Algolia.Search
         private bool? allowTyposOnNumericTokens;
         private int? page;
         private int? hitsPerPage;
+        private string filters;
         private string tags;
         private string numerics;
         private string insideBoundingBox;

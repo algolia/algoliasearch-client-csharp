@@ -800,6 +800,9 @@ namespace NUnit.Framework.Test
             res = _index.Search(new Query().SetFacetFilters(JArray.Parse(@"[""stars:****"",""city:Paris""]")).SetFacets(new String[] { "stars" }));
             Assert.AreEqual("1", res["nbHits"].ToString());
             Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
+            res = _index.Search(new Query().SetFilters("stars:**** AND city:Paris").SetFacets(new String[] { "stars" }));
+            Assert.AreEqual("1", res["nbHits"].ToString());
+            Assert.AreEqual("Hotel D", res["hits"][0]["name"].ToString());
         }
 
         [Test]
