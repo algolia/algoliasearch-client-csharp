@@ -671,7 +671,7 @@ namespace Algolia.Search
         /// <returns></returns>
         public string GenerateSecuredApiKey(String privateApiKey, Query query, String userToken = null)
         {
-            return GenerateSecuredApiKey(privateApiKey, query.ToString(), userToken);
+            return GenerateSecuredApiKey(privateApiKey, query.GetQueryString(), userToken);
         }
 
         /// <summary>
