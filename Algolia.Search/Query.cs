@@ -123,6 +123,7 @@ namespace Algolia.Search
         {
             Query q = new Query();
             q.advancedSyntax = advancedSyntax;
+	    q.removeStopWords = removeStopWords;
             q.allowTyposOnNumericTokens = allowTyposOnNumericTokens;
             q.analytics = analytics;
             q.aroundLatLong = aroundLatLong;
@@ -146,6 +147,7 @@ namespace Algolia.Search
             q.optionalWords = optionalWords;
             q.page = page;
             q.query = query;
+	    q.similarQuery = similarQuery;
             q.queryType = queryType;
             q.removeWordsIfNoResult = removeWordsIfNoResult;
             q.replaceSynonyms = replaceSynonyms;
@@ -185,6 +187,15 @@ namespace Algolia.Search
             this.query = query;
             return this;
         }
+
+        /// <summary>
+        /// Set the full text similar query.
+        /// </summary>
+        public Query SetSimilarQueryString(string query)
+        {
+            this.similarQuery = query;
+            return this;
+	}
 
         /// <summary>
         /// Configure the precision of the proximity ranking criterion. By default, the minimum (and best) proximity value distance between 2 matching words is 1. Setting it to 2 (or 3) would allow 1 (or 2) words to be found between the matching words without degrading the proximity ranking value.
@@ -643,6 +654,18 @@ namespace Algolia.Search
             return this;
         }
 
+
+        /// <summary>
+        /// Allows enabling of stop words removal.
+        /// </summary>
+        /// <param name="enabled">Turn it on or off</param>
+        /// <returns></returns>
+        public Query EnableRemoveStopWordsAdvancedSyntax(bool enabled)
+        {
+            this.removeStopWords = enabled;
+            return this;
+        }
+
         /// <summary>
         /// Set the object attributes that you want to use for faceting.
         /// </summary>
@@ -863,6 +886,13 @@ namespace Algolia.Search
                 stringBuilder += "advancedSyntax=";
                 stringBuilder += advancedSyntax.Value ? "1" : "0";
             }
+            if (removeStopWords.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "removeStopWords=";
+                stringBuilder += removeStopWords.Value ? "1" : "0";
+            }
             if (page.HasValue) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -926,6 +956,13 @@ namespace Algolia.Search
                 stringBuilder += "query=";
                 stringBuilder += Uri.EscapeDataString(query);
             }
+            if (similarQuery != null) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "similarQuery=";
+                stringBuilder += Uri.EscapeDataString(similarQuery);
+            }
+
             if (optionalWords != null)
             {
                 if (stringBuilder.Length > 0)
@@ -1002,6 +1039,7 @@ namespace Algolia.Search
         private bool? ignorePlural;
         private int? distinct;
         private bool? advancedSyntax;
+        private bool? removeStopWords;
         private bool? analytics;
         private bool? synonyms;
         private bool? replaceSynonyms;
@@ -1017,6 +1055,7 @@ namespace Algolia.Search
         private string aroundLatLong;
         private bool? aroundLatLongViaIP;
         private string query;
+        private string similarQuery;
         private string highlightPreTag;
         private string highlightPostTag;
         private int? minProximity;
