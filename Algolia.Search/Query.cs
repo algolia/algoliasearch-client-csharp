@@ -660,7 +660,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="enabled">Turn it on or off</param>
         /// <returns></returns>
-        public Query EnableRemoveStopWordsAdvancedSyntax(bool enabled)
+        public Query EnableRemoveStopWords(bool enabled)
         {
             this.removeStopWords = enabled;
             return this;

@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.3.3 (2015-10-13)
+- Fixed a typo in EnableRemoveStopWords method
+	
 3.3.2 (2015-10-12)
 ------------------
 - Added remove stop words query parameter
