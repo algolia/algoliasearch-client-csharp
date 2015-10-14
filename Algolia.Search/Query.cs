@@ -667,11 +667,33 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Limit the search from a referer pattern. Only works on HTTPS
+        /// </summary>
+        /// <param name="facets">List of referers used to limit the search on a website.</param>
+        /// <returns></returns>
+        public Query SetReferers(string referers) {
+            this.referers = referers;
+            return this;
+        }
+
+        /// <summary>
+        /// Set the key used for the rate-limit
+        /// </summary>
+        /// <param name="userToken">Identifier used for the rate-limit</param>
+        /// <returns></returns>
+        public Query SetUserToken(string userToken)
+        {
+            this.userToken = userToken;
+            return this;
+        }
+
+        /// <summary>
         /// Set the object attributes that you want to use for faceting.
         /// </summary>
         /// <param name="facets">List of object attributes that you want to use for faceting. Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.</param>
         /// <returns></returns>
-        public Query SetFacets(IEnumerable<string> facets) {
+        public Query SetFacets(IEnumerable<string> facets)
+        {
             this.facets = facets;
             return this;
         }
@@ -1024,6 +1046,20 @@ namespace Algolia.Search
                         break;
                 }
             }
+            if (userToken != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "userToken=";
+                stringBuilder +=  Uri.EscapeDataString(userToken);
+            }
+            if (referers != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "referer=";
+                stringBuilder +=  Uri.EscapeDataString(referers);
+            }
             return stringBuilder;
         }
 
@@ -1066,5 +1102,7 @@ namespace Algolia.Search
         private string facetFilters;
         private int? maxValuesPerFacets;
         private string restrictSearchableAttributes;
+        private string userToken;
+        private string referers;
     }
 }

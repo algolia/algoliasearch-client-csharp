@@ -55,7 +55,6 @@ namespace NUnit.Framework.Test
         {
             _client.DeleteIndex(safe_name("àlgol?à-csharp"));
             _client = null;
-
         }
 
         [Test]
@@ -808,8 +807,9 @@ namespace NUnit.Framework.Test
         [Test]
         public void TestGenerateSecuredApiKey()
         {
-            String hmac = "1fd74b206c64fb49fdcd7a5f3004356cd3bdc9d9aba8733656443e64daafc417";
-            Assert.AreEqual(hmac, new AlgoliaClient("test", "test").GenerateSecuredApiKey("my_api_key", "(public,user1)"));
+            Assert.AreEqual("ZmI5YjQ5N2U3YjFkYjcxYTQ2YjE4OWFmNWUxNmVlNmVlNDkzNzYyYTFlYmE5NThhNjhhN2I5ZjhhN2NkYWNmMnRhZ0ZpbHRlcnM9KHB1YmxpYyUyQ3VzZXIxKQ==", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", "(public,user1)"));
+            Assert.AreEqual("ZmI5YjQ5N2U3YjFkYjcxYTQ2YjE4OWFmNWUxNmVlNmVlNDkzNzYyYTFlYmE5NThhNjhhN2I5ZjhhN2NkYWNmMnRhZ0ZpbHRlcnM9KHB1YmxpYyUyQ3VzZXIxKQ==", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", new Query().SetTagFilters("(public,user1)")));
+            Assert.AreEqual("MjgzZDFkNjliM2UwNGQ1MTBiODY0MTAwZjAyNjgxN2MzZmVhNTBkY2JkMzE5ODRhNmVjNzE0MGVlOTE0ZjVmZXRhZ0ZpbHRlcnM9KHB1YmxpYyUyQ3VzZXIxKSZ1c2VyVG9rZW49NDI=", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", new Query().SetTagFilters("(public,user1)").SetUserToken("42")));
         }
 
         [Test]
