@@ -1,4 +1,4 @@
-# Algolia Search API Client for C#
+# Algolia Search API Client for C# #
 
 
 
