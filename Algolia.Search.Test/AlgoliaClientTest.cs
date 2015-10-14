@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections;
 using Algolia.Search;
+using System.Threading;
 
 namespace NUnit.Framework.Test
 {
@@ -859,6 +860,23 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>().Count);
             Assert.AreEqual(2, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["*"].ToObject<int>());
             Assert.AreEqual(1, answer["disjunctiveFacets"].ToObject<JObject>()["stars"].ToObject<JObject>()["****"].ToObject<int>());
+        }
+
+        [Test]
+        public void TestCancellationToken()
+        {
+            CancellationTokenSource ct = new CancellationTokenSource();
+            Task<JObject> task = _client.ListIndexesAsync(ct.Token);
+            ct.Cancel();
+            try
+            {
+                task.GetAwaiter().GetResult();
+                Assert.Fail("Should thow an error");
+            }
+            catch (OperationCanceledException)
+            {
+                // Pass
+            }
         }
     }
 }
