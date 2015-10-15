@@ -688,7 +688,15 @@ namespace Algolia.Search
         /// <returns></returns>
         public string GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
         {
-            return GenerateSecuredApiKey(privateApiKey, new Query().SetTagFilters(tagFilter), userToken);
+            if (!tagFilter.Contains("="))
+                return GenerateSecuredApiKey(privateApiKey, new Query().SetTagFilters(tagFilter), userToken);
+            else
+            {
+                if (userToken != null && userToken.Length > 0)
+                    tagFilter = string.Format("{0}&userToken={1}", tagFilter, Uri.EscapeDataString(userToken));
+                byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", Hmac(privateApiKey, tagFilter), tagFilter));
+                return System.Convert.ToBase64String(content);
+            }
         }
 
         private string Hmac(string key, string msg)
