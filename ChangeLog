@@ -1,6 +1,10 @@
 Changelog
 =========
 
+3.4.0 (2015-10-16)
+- Added new secured api key
+- Added cancellation token
+
 3.3.3 (2015-10-13)
 - Fixed a typo in EnableRemoveStopWords method
 	

@@ -31,6 +31,6 @@ using System.Runtime.InteropServices;
 
 internal class AssemblyInfo
 {
-    public const string AssemblyVersion = "3.3.3";
-    public const string AssemblyFileVersion = "3.3.3";
+    public const string AssemblyVersion = "3.4.0";
+    public const string AssemblyFileVersion = "3.4.0";
 }
