@@ -515,7 +515,7 @@ namespace Algolia.Search
             string cursorParam = "";
             if (cursor != null && cursor.Length > 0)
             {
-                cursorParam = string.Format("&cursor={0}", cursor);
+                cursorParam = string.Format("&cursor={0}",  Uri.EscapeDataString(cursor));
             }
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}{2}", _urlIndexName, q.GetQueryString(), cursorParam), null, token);
         }
