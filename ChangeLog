@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.4.1 (2015-11-11)
+3.4.2 (2015-11-11)
 - Fixed a bug in the browse method when the cursor contains a '+'
 
 3.4.0 (2015-10-16)
