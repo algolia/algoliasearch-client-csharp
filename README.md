@@ -22,6 +22,7 @@ Table of Contents
 
 1. [Setup](#setup)
 1. [Quick Start](#quick-start)
+
 1. [Online documentation](#documentation)
 1. [Tutorials](#tutorials)
 
@@ -52,6 +53,7 @@ Table of Contents
 Setup
 -------------
 To setup your project, follow these steps:
+
 
 
 
@@ -174,6 +176,8 @@ function searchCallback(err, content) {
 }
 </script>
 ```
+
+
 
 
 
@@ -374,7 +378,6 @@ You can use the following optional arguments on Query class:
   * **NONE**: No specific processing is done when a query does not return any results (default behavior).
  * **SetMinWordSizeToAllowOneTypo**: The minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 4.
  * **SetMinWordSizeToAllowTwoTypos**: The minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 8.
- * **EnableTyposOnNumericTokens**: If set to false, it disables typo tolerance on numeric tokens (numbers). Defaults to false.
  * **SetTypoTolerance**: This option allows you to control the number of typos in the result set:
   * **TYPO_TRUE**: The typo tolerance is enabled and all matching hits are retrieved (default behavior).
   * **TYPO_FALSE**: The typo tolerance is disabled. For example, if one result matches without typos, then all results with typos will be hidden.
@@ -668,7 +671,7 @@ You can decide to have the same priority for two attributes by passing them in t
  * **advancedSyntax**: Enable the advanced query syntax. Defaults to 0 (false).
 
   * **Phrase query:** a phrase query defines a particular sequence of terms. A phrase query is build by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo-tolerance is disabled on phrase queries.
-  
+
   * **Prohibit operator:** The prohibit operator excludes records that contain the term after the `-` symbol. For example `search -engine` will retrieve records containing `search` but not `engine`.
  * **replaceSynonymsInHighlight**: (boolean) If set to false, words matched via synonyms expansion will not be replaced by the matched synonym in the highlighted result. Default to true.
  * **maxValuesPerFacet**: (integer) Limit the number of facet values returned for each facet. For example: `maxValuesPerFacet=10` will retrieve max 10 values per facet.
@@ -1031,11 +1034,24 @@ client.MoveIndex("MyNewIndex", "MyIndex");
 Backup / Retrieve of all index content
 -------------
 
-You can retrieve all index content for backup purposes or for SEO using the browse method.
-This method can retrieve up to 1,000 objects per call and supports full text search and filters but the distinct feature is not available
-Unlike the search method, the sort by typo, proximity, geo distance and matched words is not applied, the hits are only sorted by numeric attributes specified in the ranking and the custom ranking.
+The `search` method cannot return more than 1,000 results. If you need to
+retrieve all the content of your index (for backup, SEO purposes or for running
+a script on it), you should use the `browse` method instead. This method lets
+you retrieve objects beyond the 1,000 limit.
 
-You can browse the index:
+This method is optimized for speed. To make it fast, distinct, typo-tolerance,
+word proximity, geo distance and number of matched words are disabled. Results
+are still returned ranked by attributes and custom ranking.
+
+
+It will return a `cursor` alongside your data, that you can then use to retrieve
+the next chunk of your records.
+
+You can specify custom parameters (like `page` or `hitsPerPage`) on your first
+`browse` call, and these parameters will then be included in the `cursor`. Note
+that it is not possible to access records beyond the 1,000th on the first call.
+
+Example:
 
 ```csharp
 // Iterate with a filter over the index
@@ -1044,6 +1060,7 @@ IndexIterator it = index.BrowseAll(new Query("text"));
 // Retrieve the next cursor from the browse method
 System.Diagnostics.Debug.WriteLine(index.BrowseFrom(new Query("text"), null)["cursor"]);
 ```
+
 
 
 
@@ -1080,6 +1097,8 @@ client.GetLogs(0, 100);
 // Asynchronous
 // await client.GetLogsAsync(0, 100);
 ```
+
+
 
 
 
