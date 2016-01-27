@@ -219,6 +219,15 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Specify the string that is used as an ellipsis indicator when a snippet is truncated (defaults to the empty string).
+        /// </summary>
+        public Query SetSnippetEllipsisText(string snippetEllipsisText)
+        {
+            this.snippetEllipsisText = snippetEllipsisText;
+            return this;
+        }
+
+        /// <summary>
         /// Specify the list of attribute names to retrieve.
         /// </summary>
         /// <param name="attributes">The attributes to retrieve.</param>
@@ -972,6 +981,12 @@ namespace Algolia.Search
                 stringBuilder += "&highlightPostTag=";   
                 stringBuilder += highlightPostTag;
             }
+            if (snippetEllipsisText != null) {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "snippetEllipsisText=";
+                stringBuilder += Uri.EscapeDataString(snippetEllipsisText);
+            }
             if (query != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -1094,6 +1109,7 @@ namespace Algolia.Search
         private string similarQuery;
         private string highlightPreTag;
         private string highlightPostTag;
+        private string snippetEllipsisText;
         private int? minProximity;
         private string optionalWords;
         private QueryType? queryType;

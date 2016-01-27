@@ -421,6 +421,7 @@ You can use the following optional arguments on Query class:
  * **SetAttributesToSnippet**: The list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). By default, no snippet is computed.
  * **GetRankingInfo**: If set to true, the result hits will contain ranking information in the **_rankingInfo** attribute.
  * **SetHighlightPreTag**: (string, string) Specify the string that is inserted before the highlighted parts in the query result (defaults to "&lt;em&gt;") and the string that is inserted after the highlighted parts in the query result (defaults to "&lt;/em&gt;")..
+ * **SetSnippetEllipsisText**: (string) String used as an ellipsis indicator when a snippet is truncated (defaults to empty).
 
 
 #### Numeric Search Parameters
