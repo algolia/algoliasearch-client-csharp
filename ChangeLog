@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.4.3 (2016-02-05)
+- Added new SetSnippetEllipsisText query parameter to configure snippet ellipsis text
+	
 3.4.2 (2015-11-11)
 - Fixed a bug in the browse method when the cursor contains a '+'
 
