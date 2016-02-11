@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.4.4 (2016-02-10)
+- Allow to set a timeout lower than 1s
+
 3.4.3 (2016-02-05)
 - Added new SetSnippetEllipsisText query parameter to configure snippet ellipsis text
 	
