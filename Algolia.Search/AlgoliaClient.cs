@@ -138,7 +138,7 @@ namespace Algolia.Search
         /// Set the read timeout for the search and for the build operation
         /// This method should be called before any api call.
         /// </summary>
-        public void setTimeout(int searchTimeout, int writeTimeout)
+        public void setTimeout(double searchTimeout, double writeTimeout)
         {
             SearchHttpClient.Timeout = TimeSpan.FromSeconds(searchTimeout);
             HttpClient.Timeout = TimeSpan.FromSeconds(writeTimeout);
