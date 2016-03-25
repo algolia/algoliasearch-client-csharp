@@ -740,6 +740,7 @@ namespace NUnit.Framework.Test
             query.SetAttributesToHighlight(attr);
             query.SetMinWordSizeToAllowOneTypo(1);
             query.SetMinWordSizeToAllowTwoTypos(2);
+            query.SetAnalyticsTags(new string[]{"tagIt"});
             query.EnableDistinct(true);
             query.EnableAdvancedSyntax(true);
             query.GetRankingInfo(true);

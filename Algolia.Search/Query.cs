@@ -126,6 +126,7 @@ namespace Algolia.Search
 	    q.removeStopWords = removeStopWords;
             q.allowTyposOnNumericTokens = allowTyposOnNumericTokens;
             q.analytics = analytics;
+            q.analyticsTags = analyticsTags;
             q.aroundLatLong = aroundLatLong;
             q.aroundLatLongViaIP = aroundLatLongViaIP;
             q.attributes = attributes;
@@ -337,6 +338,15 @@ namespace Algolia.Search
         public Query EnableAnalytics(bool enabled)
         {
             analytics = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// Tag the query with the specified identifiers
+        /// </summary>
+        public Query SetAnalyticsTags(IEnumerable<String> tags)
+        {
+            analyticsTags = tags;
             return this;
         }
 
@@ -869,6 +879,18 @@ namespace Algolia.Search
                 stringBuilder += "analytics=";
                 stringBuilder += analytics.Value ? "true" : "false";
             }
+            if (analyticsTags != null)
+            {
+                stringBuilder += "analyticsTags=";
+                bool first = true;
+                foreach (string attr in this.analyticsTags)
+                {
+                    if (!first)
+                        stringBuilder += ',';
+                    stringBuilder += Uri.EscapeDataString(attr);
+                    first = false;
+                }
+            }
             if (synonyms.HasValue)
             {
                 if (stringBuilder.Length > 0)
@@ -1082,6 +1104,7 @@ namespace Algolia.Search
         private IEnumerable<string> attributesToHighlight;
         private IEnumerable<string> noTypoToleranceOn;
         private IEnumerable<string> attributesToSnippet;
+        private IEnumerable<string> analyticsTags;
         private int? minWordSizeForApprox1;
         private int? aroundPrecision;
         private int? aroundRadius;
