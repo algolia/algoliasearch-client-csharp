@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.5.0 (2016-03-25)
+- Added analyticsTags query parameter
+
 3.4.4 (2016-02-10)
 - Allow to set a timeout lower than 1s
 
