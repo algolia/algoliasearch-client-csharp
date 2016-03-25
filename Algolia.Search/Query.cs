@@ -881,6 +881,8 @@ namespace Algolia.Search
             }
             if (analyticsTags != null)
             {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
                 stringBuilder += "analyticsTags=";
                 bool first = true;
                 foreach (string attr in this.analyticsTags)
