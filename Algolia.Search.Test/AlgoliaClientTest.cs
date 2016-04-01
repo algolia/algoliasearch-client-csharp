@@ -962,5 +962,26 @@ namespace NUnit.Framework.Test
                 }
             }
         }
+
+        [Test]
+        public void TestSynonyms()
+        {
+            clearTest();
+            var res = _index.AddObject(JObject.Parse(@"{""name"":""589 Howard St., San Francisco""}"));
+            res = _index.BatchSynonyms(JArray.Parse(@"[{""objectID"":""city"", ""type"": ""synonym"", ""synonyms"":[""San Francisco"", ""SF""]}, {""objectID"":""street"", ""type"":""altCorrection1"", ""word"":""Street"", ""corrections"":[""St""]}]"));
+            _index.WaitTask(res["taskID"].ToString());
+            res = _index.GetSynonym("city");
+            Assert.AreEqual("city", res["objectID"].ToObject<string>());
+            res = _index.Search(new Query("Howard Street SF"));
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            res = _index.DeleteSynonyms("street");
+            _index.WaitTask(res["taskID"].ToString());
+            res = _index.SearchSynonyms("", Index.SynonymType.SYNONYM, 0, 5);
+            Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            res = _index.ClearSynonyms();
+            _index.WaitTask(res["taskID"].ToString());
+            res = _index.SearchSynonyms("", Index.SynonymType.ALL, 0, 5);
+            Assert.AreEqual(0, res["nbHits"].ToObject<int>());
+        }
     }
 }
