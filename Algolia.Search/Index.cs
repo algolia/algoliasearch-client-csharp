@@ -1008,14 +1008,9 @@ namespace Algolia.Search
         {
             SYNONYM,
             SYNONYM_ONEWAY,
-            SYNONYM_TWOWAY,
             PLACEHOLDER,
             ALTCORRECTION_1,
             ALTCORRECTION_2,
-            ALTCORRECTION_NWAY_1,
-            ALTCORRECTION_NWAY_2,
-            ALTCORRECTION_TWOWAY_1,
-            ALTCORRECTION_TWOWAY_2,
             ALL
         }
 
