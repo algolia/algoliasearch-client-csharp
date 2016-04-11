@@ -462,7 +462,7 @@ namespace Algolia.Search
         /// <returns>An object containing the settings.</returns>
         public Task<JObject> GetSettingsAsync(CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/settings", _urlIndexName), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/settings?getVersion=2", _urlIndexName), null, token);
         }
 
         /// <summary>
