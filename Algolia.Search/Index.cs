@@ -1181,7 +1181,7 @@ namespace Algolia.Search
         /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
         public Task<JObject> SaveSynonymAsync(string objectID, object content, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?orwardToSlaves={2}", _urlIndexName, objectID, forwardToSlaves ? "true" : "false"), content, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToSlaves={2}", _urlIndexName,  Uri.EscapeDataString(objectID), forwardToSlaves ? "true" : "false"), content, token);
         }
 
         /// <summary>
