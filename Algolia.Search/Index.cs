@@ -1010,8 +1010,7 @@ namespace Algolia.Search
             SYNONYM_ONEWAY,
             PLACEHOLDER,
             ALTCORRECTION_1,
-            ALTCORRECTION_2,
-            ALL
+            ALTCORRECTION_2
         }
 
         private string SynonymsTypeToString(SynonymType type) {

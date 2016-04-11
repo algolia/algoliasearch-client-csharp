@@ -974,13 +974,13 @@ namespace NUnit.Framework.Test
             Assert.AreEqual("city", res["objectID"].ToObject<string>());
             res = _index.Search(new Query("Howard Street SF"));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
-            res = _index.DeleteSynonyms("street");
+            res = _index.DeleteSynonym("street");
             _index.WaitTask(res["taskID"].ToString());
-            res = _index.SearchSynonyms("", Index.SynonymType.SYNONYM, 0, 5);
+            res = _index.SearchSynonyms("", new Index.SynonymType[] {Index.SynonymType.SYNONYM }, 0, 5);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             res = _index.ClearSynonyms();
             _index.WaitTask(res["taskID"].ToString());
-            res = _index.SearchSynonyms("", Index.SynonymType.ALL, 0, 5);
+            res = _index.SearchSynonyms("", new Index.SynonymType[] {}, 0, 5);
             Assert.AreEqual(0, res["nbHits"].ToObject<int>());
         }
     }
