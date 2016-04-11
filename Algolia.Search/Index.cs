@@ -1036,11 +1036,16 @@ namespace Algolia.Search
         /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<SynonymType> types, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<SynonymType>? types = null, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
         {
-            string[] typesStr = new string[types.Count()];
-            for (int i = 0; i< types.Count(); ++i) {
-                typesStr[i] = SynonymsTypeToString(types.ElementAt(i));
+            string[] typesStr = null;
+            if (types.HasValue)
+            {
+                typesStr = new string[types.Value.Count()];
+                for (int i = 0; i < types.Value.Count(); ++i)
+                {
+                    typesStr[i] = SynonymsTypeToString(types.Value.ElementAt(i));
+                }
             }
             return SearchSynonymsAsync(query, typesStr, page, hitsPerPage, token);
         }
@@ -1051,7 +1056,7 @@ namespace Algolia.Search
         /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public JObject SearchSynonyms(string query, IEnumerable<SynonymType> types, int? page = null, int? hitsPerPage = null)
+        public JObject SearchSynonyms(string query, IEnumerable<SynonymType>? types = null, int? page = null, int? hitsPerPage = null)
         {
 
             return SearchSynonymsAsync(query, types, page, hitsPerPage).GetAwaiter().GetResult();
@@ -1063,17 +1068,20 @@ namespace Algolia.Search
         /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<string> types, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<string>? types = null, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
         {
             Dictionary<string, object> body = new Dictionary<string, object>();
             body["query"] = query;
-            string typeStr = string.Join(",", types);
-            if (typeStr != null)
-                body["type"] = typeStr;
+            if (types.HasValue)
+            {
+                string typeStr = string.Join(",", types);
+                if (typeStr != null)
+                    body["type"] = typeStr;
+            }
             if (page.HasValue)
-                body["page"] = page;
+                body["page"] = page.Value;
             if (hitsPerPage.HasValue)
-                body["hitsPerPage"] = hitsPerPage;
+                body["hitsPerPage"] = hitsPerPage.Value;
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/synonyms/search", _urlIndexName), body, token);
         }
 
@@ -1084,7 +1092,7 @@ namespace Algolia.Search
         /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public JObject SearchSynonyms(string query, IEnumerable<string> types, int? page = null, int? hitsPerPage = null)
+        public JObject SearchSynonyms(string query, IEnumerable<string>? types = null, int? page = null, int? hitsPerPage = null)
         {
 
             return SearchSynonymsAsync(query, types, page, hitsPerPage).GetAwaiter().GetResult();
