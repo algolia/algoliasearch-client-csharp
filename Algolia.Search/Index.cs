@@ -1025,22 +1025,12 @@ namespace Algolia.Search
                     return "synonym";
                 case SynonymType.SYNONYM_ONEWAY:
                     return "oneWaySynonym";
-                case SynonymType.SYNONYM_TWOWAY:
-                    return "twoWaySynonym";
                 case SynonymType.PLACEHOLDER:
                     return "placeholder";
                 case SynonymType.ALTCORRECTION_1:
                     return "altCorrection1";
                 case SynonymType.ALTCORRECTION_2:
                     return "altCorrection2";
-                case SynonymType.ALTCORRECTION_NWAY_1:
-                    return "altCorrectionNWay1";
-                case SynonymType.ALTCORRECTION_NWAY_2:
-                    return "altCorrectionNWay2";
-                case SynonymType.ALTCORRECTION_TWOWAY_1:
-                    return "altCorrectionTwoWay1";
-                case SynonymType.ALTCORRECTION_TWOWAY_2:
-                    return "altCorrectionTwoWay2";
             }
             return null;
         }
@@ -1049,14 +1039,41 @@ namespace Algolia.Search
         /// Search/Browse all synonyms
         /// </summary>
         /// <param name="query">The query string</param>
-        /// <param name="type">Specify the type</param>
+        /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public Task<JObject> SearchSynonymsAsync(string query, SynonymType type, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<SynonymType> types, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
         {
-             Dictionary<string, object> body = new Dictionary<string, object>();
+            string[] typesStr = new string[types.Count()];
+            for (int i = 0; i< types.Count(); ++i) {
+                typesStr[i] = SynonymsTypeToString(types.ElementAt(i));
+            }
+            return SearchSynonymsAsync(query, typesStr, page, hitsPerPage, token);
+        }
+        /// <summary>
+        /// Synchronously call <see cref="Index.SearchSynonymsAsync"/>.
+        /// </summary>
+        /// <param name="query">The query string</param>
+        /// <param name="types">Specify the types</param>
+        /// <param name="page">The page to fetch</param>
+        /// <param name="hitsPerPage">number of synonyms to fetch</param>
+        public JObject SearchSynonyms(string query, IEnumerable<SynonymType> types, int? page = null, int? hitsPerPage = null)
+        {
+
+            return SearchSynonymsAsync(query, types, page, hitsPerPage).GetAwaiter().GetResult();
+        }
+        /// <summary>
+        /// Search/Browse all synonyms
+        /// </summary>
+        /// <param name="query">The query string</param>
+        /// <param name="types">Specify the types</param>
+        /// <param name="page">The page to fetch</param>
+        /// <param name="hitsPerPage">number of synonyms to fetch</param>
+        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<string> types, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
+        {
+            Dictionary<string, object> body = new Dictionary<string, object>();
             body["query"] = query;
-            string typeStr = SynonymsTypeToString(type);
+            string typeStr = string.Join(",", types);
             if (typeStr != null)
                 body["type"] = typeStr;
             if (page.HasValue)
@@ -1070,30 +1087,31 @@ namespace Algolia.Search
         /// Synchronously call <see cref="Index.SearchSynonymsAsync"/>.
         /// </summary>
         /// <param name="query">The query string</param>
-        /// <param name="type">Specify the type</param>
+        /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public JObject SearchSynonyms(string query, SynonymType type, int? page = null, int? hitsPerPage = null)
+        public JObject SearchSynonyms(string query, IEnumerable<string> types, int? page = null, int? hitsPerPage = null)
         {
-            return SearchSynonymsAsync(query, type, page, hitsPerPage).GetAwaiter().GetResult();
+
+            return SearchSynonymsAsync(query, types, page, hitsPerPage).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Get one synonym
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
-        public Task<JObject> GetSynonymsAsync(string objectID, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetSynonymAsync(string objectID, CancellationToken token = default(CancellationToken))
         {
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/synonyms/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), null, token);
         }
 
         /// <summary>
-        /// Synchronously call <see cref="Index.GetSynonymsAsync"/>.
+        /// Synchronously call <see cref="Index.GetSynonymAsync"/>.
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
         public JObject GetSynonym(string objectID)
         {
-            return GetSynonymsAsync(objectID).GetAwaiter().GetResult();
+            return GetSynonymAsync(objectID).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1101,19 +1119,19 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
         /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public Task<JObject> DeleteSynonymsAsync(string objectID, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteSynonymAsync(string objectID, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
         {
             return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToSlaves={2}", _urlIndexName, Uri.EscapeDataString(objectID), forwardToSlaves ? "true" : "false"), null, token);
         }
 
         /// <summary>
-        /// Synchronously call <see cref="Index.DeleteSynonymsAsync"/>.
+        /// Synchronously call <see cref="Index.DeleteSynonymAsync"/>.
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
         /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public JObject DeleteSynonyms(string objectID, bool forwardToSlaves = false)
+        public JObject DeleteSynonym(string objectID, bool forwardToSlaves = false)
         {
-            return DeleteSynonymsAsync(objectID, forwardToSlaves).GetAwaiter().GetResult();
+            return DeleteSynonymAsync(objectID, forwardToSlaves).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1155,21 +1173,24 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Search/Browse all synonyms
+        /// Update one synonym
+        /// <param name="objectID">The objectID of the synonym</param>
+        /// <param name="content">The new content of this synonym</param>
+        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
         /// </summary>
         /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public Task<JObject> SetSynonymsAsync(string objectID, object content, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SaveSynonymAsync(string objectID, object content, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
         {
             return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?orwardToSlaves={2}", _urlIndexName, objectID, forwardToSlaves ? "true" : "false"), content, token);
         }
 
         /// <summary>
-        /// Synchronously call <see cref="Index.BrowseFromAsync"/>.
+        /// Synchronously call <see cref="Index.SaveSynonymAsync"/>.
         /// </summary>
         /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public JObject SetSynonyms(string objectID, object content, bool forwardToSlaves = false, bool replaceExistingSynonyms = false)
+        public JObject SaveSynonym(string objectID, object content, bool forwardToSlaves = false, bool replaceExistingSynonyms = false)
         {
-            return SetSynonymsAsync(objectID, content, forwardToSlaves).GetAwaiter().GetResult();
+            return SaveSynonymAsync(objectID, content, forwardToSlaves).GetAwaiter().GetResult();
         }
     }
 }
