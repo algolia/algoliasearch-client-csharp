@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.6.0 (2016-04-12)
+- Added way to specify custom query parameter for a query
+
 3.5.0 (2016-03-25)
 - Added analyticsTags query parameter
 
