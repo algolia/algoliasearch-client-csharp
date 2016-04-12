@@ -717,6 +717,7 @@ namespace NUnit.Framework.Test
             query.SetTagFilters("people");
             query.SetNumericFilters("Age>=42");
             query.SetQueryType(Query.QueryType.PREFIX_ALL);
+            query.AddCustomParameter("facets", "_tags");
             var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());

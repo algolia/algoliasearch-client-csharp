@@ -106,6 +106,7 @@ namespace Algolia.Search
         public Query(String query)
         {
             this.query = query;
+            customParameters = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -113,6 +114,7 @@ namespace Algolia.Search
         /// </summary>
         public Query()
         {
+            customParameters = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -159,6 +161,7 @@ namespace Algolia.Search
             q.filters = filters;
             q.aroundRadius = aroundRadius;
             q.aroundPrecision = aroundPrecision;
+            q.customParameters = customParameters;
             return q;
         }
 
@@ -718,6 +721,18 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Add a custom query parameter
+        /// </summary>
+        /// <param name="name">The name of the custom parameter</param>
+        /// <param name="value">The associated value</param>
+        /// <returns></returns>
+        public Query AddCustomParameter(string name, string value)
+        {
+            this.customParameters.Add(name, value);
+            return this;
+        }
+
+        /// <summary>
         /// Get out the query as a string
         /// </summary>
         /// <returns></returns>
@@ -1099,9 +1114,21 @@ namespace Algolia.Search
                 stringBuilder += "referer=";
                 stringBuilder +=  Uri.EscapeDataString(referers);
             }
+            if (customParameters.Count > 0)
+            {
+                foreach (KeyValuePair<string, string> elt in customParameters)
+                {
+                    if (stringBuilder.Length > 0)
+                        stringBuilder += '&';
+                    stringBuilder += elt.Key;
+                    stringBuilder += "=";
+                    stringBuilder += Uri.EscapeDataString(elt.Value);
+                }
+            }
             return stringBuilder;
         }
 
+        private IDictionary<string, string> customParameters;
         private IEnumerable<string> attributes;
         private IEnumerable<string> attributesToHighlight;
         private IEnumerable<string> noTypoToleranceOn;
