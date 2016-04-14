@@ -855,9 +855,13 @@ namespace Algolia.Search
                     {
                         throw;
                     }
-                    catch (OperationCanceledException)
+                    catch (TaskCanceledException e)
                     {
-                        throw;
+                        if (token.IsCancellationRequested)
+                        {
+                            throw e;
+                        }
+                        errors.Add(host, "Timeout expired");
                     }
                     catch (Exception ex)
                     {

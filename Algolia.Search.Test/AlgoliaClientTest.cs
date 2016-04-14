@@ -876,9 +876,34 @@ namespace NUnit.Framework.Test
                 task.GetAwaiter().GetResult();
                 Assert.Fail("Should thow an error");
             }
-            catch (OperationCanceledException)
+            catch (TaskCanceledException)
             {
                 // Pass
+            }
+        }
+
+        [Test]
+        public void TestTimeoutHandling()
+        {
+            _client.setTimeout(0.001, 0.001);
+            try
+            {
+                _client.ListIndexes();
+                _client = new AlgoliaClient(_testApplicationID, _testApiKey);
+                _index = _client.InitIndex(safe_name("àlgol?à-csharp"));
+                Assert.Fail("Should throw an error");
+            } 
+            catch (AlgoliaException)
+            {
+                // Reset 
+                _client = new AlgoliaClient(_testApplicationID, _testApiKey);
+                _index = _client.InitIndex(safe_name("àlgol?à-csharp"));
+            }
+            catch (OperationCanceledException)
+            {
+                _client = new AlgoliaClient(_testApplicationID, _testApiKey);
+                _index = _client.InitIndex(safe_name("àlgol?à-csharp"));
+                Assert.Fail("Should throw an AlgoliaException");
             }
         }
     }
