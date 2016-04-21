@@ -2083,7 +2083,7 @@ Example:
 
 ```csharp
 // Iterate with a filter over the index
-IndexIterator it = index.BrowseAll(new Query("toto"));
+IndexIterator it = index.BrowseAll(new Query("titi"));
 
 // Retrieve the next cursor from the browse method
 System.Diagnostics.Debug.WriteLine(index.BrowseFrom(new Query("text"), null)["cursor"]);
