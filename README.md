@@ -2082,7 +2082,7 @@ that it is not possible to access records beyond the 1,000th on the first call.
 Example:
 
 ```csharp
-// Iterate with a filter over the index
+// Iterates with a filter over the index
 IndexIterator it = index.BrowseAll(new Query("text"));
 
 // Retrieve the next cursor from the browse method
