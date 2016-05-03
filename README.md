@@ -1974,7 +1974,7 @@ objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
 objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
                           ""lastname"":""Speach""}"));
 var res = index.AddObjects(objs);
-// Asynchronous
+// Asynchronous call
 // var res = await index.AddObjectsAsync(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```
