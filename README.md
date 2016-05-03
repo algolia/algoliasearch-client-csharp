@@ -1945,7 +1945,7 @@ For example, to wait for indexing of a new object:
 ```csharp
 var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
                                            ""lastname"":""Barninger""}"), "myID");
-// Asynchronous call
+// Asynchronous
 // var res = await index.AddObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
 //                                                       ""lastname"":""Barninger""}"), "myID");
 index.WaitTask(res["taskID"].ToString());
