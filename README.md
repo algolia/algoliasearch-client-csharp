@@ -232,7 +232,7 @@ Example with automatic `objectID` assignment:
 ```csharp
 var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
                                            ""lastname"":""Barninger""}"));
-// Asynchronous call
+// Asynchronous
 // var res = await index.AddObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
                                                          ""lastname"":""Barninger""}"));
 
@@ -1945,7 +1945,7 @@ For example, to wait for indexing of a new object:
 ```csharp
 var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
                                            ""lastname"":""Barninger""}"), "myID");
-// Asynchronous call
+// Asynchronous
 // var res = await index.AddObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
 //                                                       ""lastname"":""Barninger""}"), "myID");
 index.WaitTask(res["taskID"].ToString());
@@ -2082,7 +2082,7 @@ that it is not possible to access records beyond the 1,000th on the first call.
 Example:
 
 ```csharp
-// Iterates with a filter over the index
+// Iterate with a filter over the index
 IndexIterator it = index.BrowseAll(new Query("text"));
 
 // Retrieve the next cursor from the browse method
