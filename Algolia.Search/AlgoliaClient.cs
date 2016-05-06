@@ -127,6 +127,7 @@ namespace Algolia.Search
         public string[] getHosts(string baseHost, IEnumerable<string> hosts)
         {
             var result = new List<string> { baseHost };
+            //shuffling all but not the first one
             var shuffledHosts = _arrayUtils.Shuffle(hosts);
             result.AddRange(shuffledHosts);
             return result.ToArray();
