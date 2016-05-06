@@ -22,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,11 +29,12 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Threading;
 using PCLCrypto;
 using Newtonsoft.Json;
-using System.Threading;
+using Newtonsoft.Json.Linq;
+using Algolia.Search.Utils;
 
 namespace Algolia.Search
 {
@@ -53,6 +53,7 @@ namespace Algolia.Search
         private HttpClient _buildHttpClient;
         private HttpMessageHandler _mock;
         private bool _continueOnCapturedContext;
+        private ArrayUtils<string> _arrayUtils;
 
         /// <summary>
         /// Algolia Search initialization
@@ -83,22 +84,23 @@ namespace Algolia.Search
             }
             else
             {
-                _readHosts = new string[] {applicationId + "-dsn.algolia.net",
-                                      applicationId + "-1.algolianet.com",
-                                      applicationId + "-2.algolianet.com",
-                                      applicationId + "-3.algolianet.com"};
-                _writeHosts = new string[] {applicationId + ".algolia.net",
-                                      applicationId + "-1.algolianet.com",
-                                      applicationId + "-2.algolianet.com",
-                                      applicationId + "-3.algolianet.com"};
+                _arrayUtils = new ArrayUtils<string>();
+
+                var baseReadHosts = applicationId + "-dsn.algolia.net";
+                var shuffledReadHosts = new List<string> { applicationId + "-1.algolianet.com", applicationId + "-2.algolianet.com", applicationId + "-3.algolianet.com" };
+                _readHosts = getHosts(baseReadHosts, shuffledReadHosts);
+
+                var baseWriteHosts = applicationId + ".algolia.net";
+                var shuffledWriteHosts = new List<string> { applicationId + "-1.algolianet.com", applicationId + "-2.algolianet.com", applicationId + "-3.algolianet.com" };
+                _writeHosts = getHosts(baseWriteHosts, shuffledWriteHosts);
+
             }
 
             _applicationId = applicationId;
             _apiKey = apiKey;
             _mock = mock;
-
             // randomize elements of hostsArray (act as a kind of load-balancer)
-            
+
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
@@ -114,6 +116,20 @@ namespace Algolia.Search
             HttpClient.Timeout = TimeSpan.FromSeconds(30);
 
             _continueOnCapturedContext = false;
+        }
+
+        /// <summary>
+        /// return the hosts array with the last 3 elements shuffled
+        /// </summary>
+        /// <param name="baseHost"></param>
+        /// <param name="hosts"></param>
+        /// <returns></returns>
+        public string[] getHosts(string baseHost, IEnumerable<string> hosts)
+        {
+            var result = new List<string> { baseHost };
+            var shuffledHosts = _arrayUtils.Shuffle(hosts);
+            result.AddRange(shuffledHosts);
+            return result.ToArray();
         }
 
         /// <summary>
