@@ -232,7 +232,7 @@ Example with automatic `objectID` assignment:
 ```csharp
 var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
                                            ""lastname"":""Barninger""}"));
-// Asynchronous
+// Asynchronous call
 // var res = await index.AddObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
                                                          ""lastname"":""Barninger""}"));
 
