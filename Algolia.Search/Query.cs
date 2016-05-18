@@ -24,7 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Globalization;
 
 namespace Algolia.Search
 {
@@ -432,7 +432,7 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query AroundLatitudeLongitude(float latitude, float longitude)
         {
-            aroundLatLong = "aroundLatLng=" + latitude + "," + longitude;
+            aroundLatLong = "aroundLatLng=" + latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
             return this;
         }
 
@@ -446,7 +446,7 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query AroundLatitudeLongitude(float latitude, float longitude, int radius)
         {
-            aroundLatLong = "aroundLatLng=" + latitude + "," + longitude;
+            aroundLatLong = "aroundLatLng=" + latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
             aroundRadius = radius;
             return this;
         }
@@ -474,7 +474,7 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query AroundLatitudeLongitude(float latitude, float longitude, int radius, int precision)
         {
-            aroundLatLong = "aroundLatLng=" + latitude + "," + longitude;
+            aroundLatLong = "aroundLatLng=" + latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
             aroundRadius = radius;
             aroundPrecision = precision;
             return this;
@@ -523,9 +523,9 @@ namespace Algolia.Search
         public Query InsideBoundingBox(float latitudeP1, float longitudeP1, float latitudeP2, float longitudeP2)
         {
             if (insideBoundingBox != null) {
-                insideBoundingBox += latitudeP1 + "," + longitudeP1 + "," + latitudeP2 + "," + longitudeP2;
+                insideBoundingBox += latitudeP1.ToString(CultureInfo.InvariantCulture) + "," + longitudeP1.ToString(CultureInfo.InvariantCulture) + "," + latitudeP2.ToString(CultureInfo.InvariantCulture) + "," + longitudeP2.ToString(CultureInfo.InvariantCulture);
             } else {
-                insideBoundingBox = "insideBoundingBox=" + latitudeP1 + "," + longitudeP1 + "," + latitudeP2 + "," + longitudeP2;
+                insideBoundingBox = "insideBoundingBox=" + latitudeP1.ToString(CultureInfo.InvariantCulture) + "," + longitudeP1.ToString(CultureInfo.InvariantCulture) + "," + latitudeP2.ToString(CultureInfo.InvariantCulture) + "," + longitudeP2.ToString(CultureInfo.InvariantCulture);
             }
             return this;
         }
@@ -538,9 +538,9 @@ namespace Algolia.Search
         public Query AddInsidePolygon(float latitude, float longitude)
         {
             if (insidePolygon != null) {
-                insidePolygon += latitude + "," + longitude;
+                insidePolygon += latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
             } else {
-                insidePolygon = "insidePolygon=" + latitude + "," + longitude;
+                insidePolygon = "insidePolygon=" + latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
             }
             return this;
         }
