@@ -906,5 +906,23 @@ namespace NUnit.Framework.Test
                 Assert.Fail("Should throw an AlgoliaException");
             }
         }
+
+        [Test]
+        public void TestDnsTimeout()
+        {
+            var hosts = new List<string> {
+                _testApplicationID + "-dsn.algolia.biz",
+                _testApplicationID + "-dsn.algolia.net",
+                _testApplicationID + "-1.algolianet.com",
+                _testApplicationID + "-2.algolianet.com",
+                _testApplicationID + "-3.algolianet.com"
+            };
+
+            var _client = new AlgoliaClient(_testApplicationID, _testApiKey, hosts);
+            _client.setTimeout(0.5, 0.5);
+            var startTime = DateTime.Now;
+            var index = _client.ListIndexes();
+            Assert.IsTrue(startTime.AddSeconds(0.5) < DateTime.Now);
+        }
     }
 }
