@@ -590,18 +590,18 @@ namespace NUnit.Framework.Test
             var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
             _index.WaitTask(res["taskID"].ToString());
             var key = _index.AddUserKey(new String[] { "search" });
-            System.Threading.Thread.Sleep(5000);
+            WaitKey(_index, key);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
             var getKey = _index.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
             var keys = _index.ListUserKeys();
             Assert.IsTrue(Include((JArray)keys["keys"], "value", key["key"].ToString()));
             _index.UpdateUserKey(key["key"].ToString(), new String[] { "addObject" });
-            System.Threading.Thread.Sleep(5000);
+            WaitKey(_index, key, "addObject");
             getKey = _index.GetUserKeyACL(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
             _index.DeleteUserKey(key["key"].ToString());
-            System.Threading.Thread.Sleep(5000);
+            WaitKeyMissing(_index, key);
             keys = _index.ListUserKeys();
             Assert.IsFalse(Include((JArray)keys["keys"], "value", key["key"].ToString()));
         }
@@ -923,6 +923,44 @@ namespace NUnit.Framework.Test
             var startTime = DateTime.Now;
             var index = _client.ListIndexes();
             Assert.IsTrue(startTime.AddSeconds(0.5) < DateTime.Now);
+        }
+
+        private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
+        {
+            var isUpdate = !string.IsNullOrEmpty(updatedACL);
+            for (var i = 0; i <= 10; i++)
+            {
+                try
+                {
+                    var key = index.GetUserKeyACL(newIndexKey["key"].ToString());
+                    if ( isUpdate && key["acl"][0].ToString() != updatedACL)
+                    {
+                        throw new Exception();
+                    }
+                    return;
+                }
+                catch (Exception e)
+                {
+                    Thread.Sleep(1000);
+                    continue;
+                }
+            }
+        }
+
+        private void WaitKeyMissing(Index index, JObject newIndexKey)
+        {
+            for (var i = 0; i <= 10; i++)
+            {
+                try
+                {
+                    var key = index.GetUserKeyACL(newIndexKey["key"].ToString());
+                    Thread.Sleep(1000);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
+            }
         }
     }
 }
