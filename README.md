@@ -1187,7 +1187,7 @@ You can send multiple queries with a single API call using a batch of queries:
 var indexQueries = new List<IndexQuery>();
 
 indexQueries.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPerPage(3)));
-indexQueries.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetTagFilters("promotion"));
+indexQueries.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetFilters("promotion"));
 indexQueries.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
 
 var res = _client.MultipleQueries(indexQueries);
@@ -2334,7 +2334,7 @@ You may have a single index containing **per user** data. In that case, all reco
 ```java
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
-String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetTagFilters("user_42"));
+String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("user_42"));
 ```
 
 This public API key can then be used in your JavaScript code as follow:
@@ -2359,7 +2359,7 @@ You can mix rate limits and secured API keys by setting a `userToken` query para
 ```java
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
-String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetTagFilters("user_42").SetUserToken("42"));
+String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("user_42").SetUserToken("42"));
 ```
 
 This public API key can then be used in your JavaScript code as follow:
