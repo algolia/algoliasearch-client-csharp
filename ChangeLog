@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.6.3 (2016-05-02)
+- New synonims endpoints
+
 3.6.2 (2016-05-19)
 - Shuffling array of hosts
 - InvariantCulture on Float string conversion
