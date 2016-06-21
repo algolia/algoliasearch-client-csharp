@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using Algolia.Search.Models;
 
 namespace Algolia.Search
 {
@@ -680,11 +681,11 @@ namespace Algolia.Search
         /// <summary>
         /// Allows enabling of stop words removal.
         /// </summary>
-        /// <param name="enabled">Turn it on or off</param>
+        /// <param name="enabled">Turn it on or/off or providing a list of keywords</param>
         /// <returns></returns>
-        public Query EnableRemoveStopWords(bool enabled)
+        public Query EnableRemoveStopWords(IEnabledRemoveStopWords enabled)
         {
-            this.removeStopWords = enabled;
+            this.removeStopWords = enabled.GetValue();
             return this;
         }
 
@@ -956,12 +957,12 @@ namespace Algolia.Search
                 stringBuilder += "advancedSyntax=";
                 stringBuilder += advancedSyntax.Value ? "1" : "0";
             }
-            if (removeStopWords.HasValue)
+            if (!String.IsNullOrEmpty(removeStopWords))
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "removeStopWords=";
-                stringBuilder += removeStopWords.Value ? "1" : "0";
+                stringBuilder += removeStopWords;
             }
             if (page.HasValue) {
                 if (stringBuilder.Length > 0)
@@ -1142,7 +1143,7 @@ namespace Algolia.Search
         private bool? ignorePlural;
         private int? distinct;
         private bool? advancedSyntax;
-        private bool? removeStopWords;
+        private string removeStopWords;
         private bool? analytics;
         private bool? synonyms;
         private bool? replaceSynonyms;
