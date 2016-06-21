@@ -466,6 +466,17 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
+        public void TestSettingsWithSlaves()
+        {
+            clearTest();
+            var res = _index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(population)"", ""asc(name)""]}"), true);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
+            _index.WaitTask(res["taskID"].ToObject<String>());
+            res = _index.GetSettings();
+            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+        }
+
+        [Test]
         public void TestAddObject2()
         {
             clearTest();
