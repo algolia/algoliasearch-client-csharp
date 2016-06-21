@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections;
 using Algolia.Search;
 using System.Threading;
+using Algolia.Search.Models;
 
 namespace NUnit.Framework.Test
 {
@@ -737,11 +738,13 @@ namespace NUnit.Framework.Test
             query.SetPage(0);
             query.SetOptionalWords("J");
             query.SetNbHitsPerPage(1);
+
+            query.SetAroundRadius(new AllRadiusInt());
             string[] attr = { "firstname" };
             query.SetAttributesToHighlight(attr);
             query.SetMinWordSizeToAllowOneTypo(1);
             query.SetMinWordSizeToAllowTwoTypos(2);
-            query.SetAnalyticsTags(new string[]{"tagIt"});
+            query.SetAnalyticsTags(new string[] { "tagIt" });
             query.EnableDistinct(true);
             query.EnableAnalytics(true);
             query.EnableAdvancedSyntax(true);
