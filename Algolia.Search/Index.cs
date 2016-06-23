@@ -694,17 +694,21 @@ namespace Algolia.Search
         ///  - highlightPostTag: (string) Specify the string that is inserted after the highlighted parts in the query result (default to "</em>").
         ///  - optionalWords: (array of strings) Specify a list of words that should be considered as optional when found in the query.
         /// </param>
-        public Task<JObject> SetSettingsAsync(JObject settings, CancellationToken token = default(CancellationToken))
+        /// <param name="forwardToSlaves">Forward the operation to the slavse indices</param>
+        public Task<JObject> SetSettingsAsync(JObject settings, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/settings", _urlIndexName), settings, token);
+            string changeSettingsPath = forwardToSlaves
+                ? string.Format("/1/indexes/{0}/settings?forwardToSlaves={1}", _urlIndexName, forwardToSlaves.ToString().ToLower())
+                : string.Format("/1/indexes/{0}/settings", _urlIndexName);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", changeSettingsPath, settings, token);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.SetSettingsAsync"/>.
         /// </summary>
-        public JObject SetSettings(JObject settings)
+        public JObject SetSettings(JObject settings, bool forwardToSlaves = false)
         {
-            return SetSettingsAsync(settings).GetAwaiter().GetResult();
+            return SetSettingsAsync(settings, forwardToSlaves).GetAwaiter().GetResult();
         }
 
         /// <summary>
