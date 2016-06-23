@@ -424,6 +424,23 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Set the the parameter that controls how the `exact` ranking criterion is computed when the query contains one word
+        /// </summary>
+        public Query ExactOnSingleWordQuery(string singleWordQuery)
+        {
+            this.exactOnSingleWordQuery = singleWordQuery;
+            return this;
+        }
+
+        /// <summary>
+        ///Specify the list of approximation that should be considered as an exact match in the ranking formula
+        /// </summary>
+        public Query AlternativesAsExact(string altExact)
+        {
+            this.alternativesAsExact = altExact;
+            return this;
+        }
+        /// <summary>
         /// Search for entries around a given latitude/longitude with an automatic guessing of the radius depending of the area density 
         /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
         /// </summary>
@@ -1046,6 +1063,23 @@ namespace Algolia.Search
                 stringBuilder += "optionalWords=";
                 stringBuilder += Uri.EscapeDataString(optionalWords);
             }
+
+            if (!String.IsNullOrEmpty(exactOnSingleWordQuery))
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "exactOnSingleWordQuery=";
+                stringBuilder += exactOnSingleWordQuery;
+            }
+
+            if (!String.IsNullOrEmpty(alternativesAsExact))
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "alternativesAsExact=";
+                stringBuilder += alternativesAsExact;
+            }
+
             if (restrictSearchableAttributes != null)
             {
                 if (stringBuilder.Length > 0)
@@ -1134,6 +1168,8 @@ namespace Algolia.Search
         private IEnumerable<string> noTypoToleranceOn;
         private IEnumerable<string> attributesToSnippet;
         private IEnumerable<string> analyticsTags;
+        private string exactOnSingleWordQuery;
+        private string alternativesAsExact;
         private int? minWordSizeForApprox1;
         private int? aroundPrecision;
         private int? aroundRadius;
