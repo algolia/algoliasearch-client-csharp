@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using Algolia.Search.Models;
 
 namespace Algolia.Search
 {
@@ -461,11 +462,25 @@ namespace Algolia.Search
         /// <param name="longitude">The longitude</param>
         /// <param name="radius">set the maximum distance in meters.</param>
         /// <returns></returns>
-        public Query AroundLatitudeLongitude(float latitude, float longitude, int radius)
+        public Query AroundLatitudeLongitude(float latitude, float longitude, IAllRadius radius)
         {
             aroundLatLong = "aroundLatLng=" + latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
-            aroundRadius = radius;
+            aroundRadius = radius.GetValue();
             return this;
+        }
+
+        /// <summary>
+        ///(BACKWARD COMPATIBILITY)Search for entries around a given latitude/longitude. 
+        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// </summary>
+        /// <param name="latitude">The latitude</param>
+        /// <param name="longitude">The longitude</param>
+        /// <param name="radius">set the maximum distance in meters.</param>
+        /// <returns></returns>
+        public Query AroundLatitudeLongitude(float latitude, float longitude, int radius)
+        {
+            var allRadius = new AllRadiusInt { Radius = radius };
+            return AroundLatitudeLongitude(latitude, longitude, allRadius);
         }
 
         /// <summary>
@@ -489,12 +504,27 @@ namespace Algolia.Search
         /// <param name="radius">set the maximum distance in meters.</param>
         /// <param name="precision">set the precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).</param>
         /// <returns></returns>
-        public Query AroundLatitudeLongitude(float latitude, float longitude, int radius, int precision)
+        public Query AroundLatitudeLongitude(float latitude, float longitude, IAllRadius radius, int precision)
         {
             aroundLatLong = "aroundLatLng=" + latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
-            aroundRadius = radius;
+            aroundRadius = radius.GetValue();
             aroundPrecision = precision;
             return this;
+        }
+
+        /// <summary>
+        /// (BACKWARD COMPATIBILITY)Search for entries around a given latitude/longitude. 
+        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// </summary>
+        /// <param name="latitude">The latitude</param>
+        /// <param name="longitude">The longitude</param>
+        /// <param name="radius">set the maximum distance in meters.</param>
+        /// <param name="precision">set the precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).</param>
+        /// <returns></returns>
+        public Query AroundLatitudeLongitude(float latitude, float longitude, int radius, int precision)
+        {
+            var allRadius = new AllRadiusInt { Radius = radius };
+            return AroundLatitudeLongitude(latitude, longitude, allRadius, precision);
         }
 
         /// <summary>
@@ -503,11 +533,23 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="radius">set the maximum distance in meters.</param>
         /// <returns></returns>
-        public Query AroundLatitudeLongitudeViaIP(int radius)
+        public Query AroundLatitudeLongitudeViaIP(IAllRadius radius)
         {
-            aroundRadius = radius;
+            aroundRadius = radius.GetValue();
             aroundLatLongViaIP = true;
             return this;
+        }
+
+        /// <summary>
+        ///(BACKWARD COMPATIBILITY) Search for entries around a given latitude/longitude (using IP geolocation).
+        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// </summary>
+        /// <param name="radius">set the maximum distance in meters.</param>
+        /// <returns></returns>
+        public Query AroundLatitudeLongitudeViaIP(int radius)
+        {
+            var allRadius = new AllRadiusInt { Radius = radius };
+            return AroundLatitudeLongitudeViaIP(allRadius);
         }
 
         /// <summary>
@@ -517,12 +559,25 @@ namespace Algolia.Search
         /// <param name="radius">set the maximum distance in meters.</param>
         /// <param name="precision">set the precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).</param>
         /// <returns></returns>
-        public Query AroundLatitudeLongitudeViaIP(int radius, int precision)
+        public Query AroundLatitudeLongitudeViaIP(IAllRadius radius, int precision)
         {
-            aroundRadius = radius;
+            aroundRadius = radius.GetValue();
             aroundPrecision = precision;
             aroundLatLongViaIP = true;
             return this;
+        }
+
+        /// <summary>
+        /// (BACKWARD COMPATIBILITY) Search for entries around a given latitude/longitude (using IP geolocation).
+        /// Note: at indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+        /// </summary>
+        /// <param name="radius">set the maximum distance in meters.</param>
+        /// <param name="precision">set the precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).</param>
+        /// <returns></returns>
+        public Query AroundLatitudeLongitudeViaIP(int radius, int precision)
+        {
+            var allRadius = new AllRadiusInt { Radius = radius };
+            return AroundLatitudeLongitudeViaIP(radius, precision);
         }
 
         /// <summary>
@@ -565,10 +620,19 @@ namespace Algolia.Search
         /// <summary>
         /// Change the radius or around latitude/longitude query
         /// <summary>
+        public Query SetAroundRadius(IAllRadius radius)
+        {
+            aroundRadius = radius.GetValue();
+            return this;
+        }
+
+        /// <summary>
+        /// (BACKWARD COMPATIBILITY) Change the radius or around latitude/longitude query
+        /// <summary>
         public Query SetAroundRadius(int radius)
         {
-            aroundRadius = radius;
-            return this;
+            var allRadius = new AllRadiusInt { Radius = radius };
+            return SetAroundRadius(allRadius);
         }
 
         /// <summary>
@@ -697,12 +761,23 @@ namespace Algolia.Search
         /// <summary>
         /// Allows enabling of stop words removal.
         /// </summary>
-        /// <param name="enabled">Turn it on or off</param>
+        /// <param name="enabled">Turn it on or/off or providing a list of keywords</param>
+        /// <returns></returns>
+        public Query EnableRemoveStopWords(IEnabledRemoveStopWords enabled)
+        {
+            this.removeStopWords = enabled.GetValue();
+            return this;
+        }
+
+        /// <summary>
+        /// Allows enabling of stop words removal.
+        /// </summary>
+        /// <param name="enabled">Turn it on or/off or providing a list of keywords</param>
         /// <returns></returns>
         public Query EnableRemoveStopWords(bool enabled)
         {
-            this.removeStopWords = enabled;
-            return this;
+            var removeStopWord = new EnabledRemoveStopWordsBool { Enabled = enabled };
+           return EnableRemoveStopWords(removeStopWord);
         }
 
         /// <summary>
@@ -860,11 +935,11 @@ namespace Algolia.Search
                     first = false;
                 }
             }
-            if (aroundRadius.HasValue) {
+            if (!String.IsNullOrEmpty(aroundRadius)) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "aroundRadius=";
-                stringBuilder += aroundRadius.Value.ToString();
+                stringBuilder += aroundRadius;
 
             }
             if (aroundPrecision.HasValue) {
@@ -973,12 +1048,12 @@ namespace Algolia.Search
                 stringBuilder += "advancedSyntax=";
                 stringBuilder += advancedSyntax.Value ? "1" : "0";
             }
-            if (removeStopWords.HasValue)
+            if (!String.IsNullOrEmpty(removeStopWords))
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "removeStopWords=";
-                stringBuilder += removeStopWords.Value ? "1" : "0";
+                stringBuilder += removeStopWords;
             }
             if (page.HasValue) {
                 if (stringBuilder.Length > 0)
@@ -1172,13 +1247,13 @@ namespace Algolia.Search
         private string alternativesAsExact;
         private int? minWordSizeForApprox1;
         private int? aroundPrecision;
-        private int? aroundRadius;
+        private string aroundRadius;
         private int? minWordSizeForApprox2;
         private bool? getRankingInfo;
         private bool? ignorePlural;
         private int? distinct;
         private bool? advancedSyntax;
-        private bool? removeStopWords;
+        private string removeStopWords;
         private bool? analytics;
         private bool? synonyms;
         private bool? replaceSynonyms;
