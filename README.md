@@ -823,9 +823,7 @@ You can use the following optional arguments on Query class:
 
 ## Geo-search Parameters
 <table><tbody>
-  
-
-    
+      
     <tr>
       <td valign='top'>
         <div class='client-readme-param-container'>
@@ -836,7 +834,9 @@ You can use the following optional arguments on Query class:
         </div>
       </td>
       <td class='client-readme-param-content'>
-        <p>Search for entries around a given latitude/longitude.<br/>The maximum distance is automatically guessed depending of the density of the area but you also manually specify the maximum distance in meters with the <code>radius</code> parameter.<br/>At indexing, you should specify the geo location of an object with the <code>_geoloc</code> attribute in the form <code>{&quot;_geoloc&quot;:{&quot;lat&quot;:48.853409, &quot;lng&quot;:2.348800}}</code>.</p>
+        <p>Search for entries around a given latitude/longitude.<br/>The maximum distance is automatically guessed depending of the density of the area but you also manually specify the maximum distance in meters with the radius parameter.
+      <br/> The radius can be either an integer <code>var yourRadius = new AllRadiusInt { Radius = radius };</code> or a string &quot;all&quot; <code>var yourRadius = new AllRadiusString();</code> and it will compute the geo distance without filtering in a geo area, this option will be faster than specifying a big integer
+      <br/>At indexing, you should specify the geo location of an object with the <code>_geoloc</code> attribute in the form <code>{&quot;_geoloc&quot;:{&quot;lat&quot;:48.853409, &quot;lng&quot;:2.348800}}</code>.</p>
 
       </td>
     </tr>
@@ -847,13 +847,15 @@ You can use the following optional arguments on Query class:
       <td valign='top'>
         <div class='client-readme-param-container'>
           <div class='client-readme-param-container-inner'>
-            <div class='client-readme-param-name'><code>AroundLatitudeLongitude(float, float, int, int)</code></div>
+            <div class='client-readme-param-name'><code>AroundLatitudeLongitude(float, float, IAllRadius, int)</code></div>
             
           </div>
         </div>
       </td>
       <td class='client-readme-param-content'>
-        <p>Search for entries around a given latitude/longitude with a given precision for ranking. For example, if you set aroundPrecision=100, the distances will be considered by ranges of 100m, for example all distances 0 and 100m will be considered as identical for the &quot;geo&quot; ranking parameter.</p>
+        <p>Search for entries around a given latitude/longitude/radius with a given precision for ranking.<br/> The radius can be either an integer <code>var yourRadius = new AllRadiusInt { Radius = radius };</code>
+          or a string &quot;all&quot; <code>var yourRadius = new AllRadiusString();</code> and it will compute the geo distance without filtering in a geo area, this option will be faster than specifying a big integer.
+          Regarding the precision, for example, if you set aroundPrecision=100, the distances will be considered by ranges of 100m, for example all distances 0 and 100m will be considered as identical for the &quot;geo&quot; ranking parameter.</p>
 
       </td>
     </tr>
