@@ -830,30 +830,17 @@ You can use the following optional arguments on Query class:
       <td valign='top'>
         <div class='client-readme-param-container'>
           <div class='client-readme-param-container-inner'>
-            <div class='client-readme-param-name'><code>AroundLatitudeLongitude(float, float)</code></div>
-            <div class="client-readme-param-meta"><div><em>Type: <strong>float,float</strong></em></div></div>
-          </div>
-        </div>
-      </td>
-      <td class='client-readme-param-content'>
-        <p>Search for entries around a given latitude/longitude.<br/>The maximum distance is automatically guessed depending of the density of the area but you also manually specify the maximum distance in meters with the <code>radius</code> parameter.<br/>At indexing, you should specify the geo location of an object with the <code>_geoloc</code> attribute in the form <code>{&quot;_geoloc&quot;:{&quot;lat&quot;:48.853409, &quot;lng&quot;:2.348800}}</code>.</p>
-
-      </td>
-    </tr>
-    
-
-    
-    <tr>
-      <td valign='top'>
-        <div class='client-readme-param-container'>
-          <div class='client-readme-param-container-inner'>
-            <div class='client-readme-param-name'><code>AroundLatitudeLongitude(float, float, int, int)</code></div>
+            <div class='client-readme-param-name'><code>aroundLatLng</code></div>
             
           </div>
         </div>
       </td>
       <td class='client-readme-param-content'>
-        <p>Search for entries around a given latitude/longitude with a given precision for ranking. For example, if you set aroundPrecision=100, the distances will be considered by ranges of 100m, for example all distances 0 and 100m will be considered as identical for the &quot;geo&quot; ranking parameter.</p>
+        <p>Search for entries around a given latitude/longitude (specified as two floats separated by a comma).<br/>For example, <code>aroundLatLng=47.316669,5.016670</code>.</p>
+
+<p>By default the maximum distance is automatically guessed based on the density of the area but you can specify it manually in meters with the <strong>aroundRadius</strong> parameter. The precision for ranking can be set with <strong>aroundPrecision</strong> parameter. For example, if you set aroundPrecision=100, the distances will be considered by ranges of 100m, for example all distances 0 and 100m will be considered as identical for the &quot;geo&quot; ranking parameter.<br/><br/>When <strong>aroundRadius</strong> is not set, the radius is computed automatically using the density of the area, you can retrieve the computed radius in the <strong>automaticRadius</strong> attribute of the answer, you can also use the <strong>minimumAroundRadius</strong> query parameter to specify a minimum radius in meters for the automatic computation of <strong>aroundRadius</strong>.</p>
+
+<p>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form <code>&quot;_geoloc&quot;:{&quot;lat&quot;:48.853409, &quot;lng&quot;:2.348800}</code> or <code>&quot;_geoloc&quot;:[{&quot;lat&quot;:48.853409, &quot;lng&quot;:2.348800},{&quot;lat&quot;:48.547456, &quot;lng&quot;:2.972075}]</code> if you have several geo-locations in your record).</p>
 
       </td>
     </tr>
