@@ -636,7 +636,8 @@ You can use the following optional arguments on Query class:
 <li><p><code>queryType=prefixAll</code> means all query terms are prefix, stop words won’t be removed</p></li>
 </ul>
 
-<p>This parameter is useful when you have a query in natural language like “what is a record?”. In this case, before executing the query, we will remove “what”, “is” and “a” in order to just search for “record”. This removal will remove false positive because of stop words, especially when combined with optional words. For most use cases, it is better to not use this feature as people search by keywords on search engines.</p>
+<p>This parameter is useful when you have a query in natural language like “what is a record?”. In this case, before executing the query, we will remove “what”, “is” and “a” in order to just search for “record”. This removal will remove false positive because of stop words, especially when combined with optional words. For most use cases, it is better to not use this feature as people search by keywords on search engines.
+        You can either use <code>new EnabledRemoveStopWordsList(&quot;your comma separated list of languages&quot;)</code> as parameter, or a boolean.</p>
 
       </td>
     </tr>
