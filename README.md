@@ -1341,6 +1341,15 @@ index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 await index.SetSettingsAsync(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```
 
+## Slave settings
+
+You can forward all settings updates to the slaves of an index by using the `forwardToSlaves` option:
+
+```csharp
+index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"), true);
+// Asynchronous
+await index.SetSettingsAsync(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"), true);
+```
 
 ## Indexing parameters
 
