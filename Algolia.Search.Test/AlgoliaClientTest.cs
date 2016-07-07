@@ -718,6 +718,8 @@ namespace NUnit.Framework.Test
             query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.FIRST_WORDS);
             query.GetRankingInfo(true);
             query.EnableTyposOnNumericTokens(false);
+            query.SetOffset(0);
+            query.SetLength(1);
             query.SetAttributesToRetrieve(attr);
             query.SetAttributesToSnippet(attr);
             query.InsideBoundingBox(0, 0, 90, 90);
@@ -753,6 +755,8 @@ namespace NUnit.Framework.Test
             query.SetAroundRadius(new AllRadiusInt());
             string[] attr = { "firstname" };
             query.SetAttributesToHighlight(attr);
+            query.SetOffset(0);
+            query.SetLength(1);
             query.SetMinWordSizeToAllowOneTypo(1);
             query.SetMinWordSizeToAllowTwoTypos(2);
             query.SetAnalyticsTags(new string[] { "tagIt" });

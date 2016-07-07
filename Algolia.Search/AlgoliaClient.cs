@@ -210,7 +210,8 @@ namespace Algolia.Search
             }
             Dictionary<string, object> requests = new Dictionary<string, object>();
             requests.Add("requests", body);
-            return ExecuteRequest(callType.Search, "POST", "/1/indexes/*/queries?strategy=" + strategy, requests, token);
+            requests.Add("strategy", strategy);
+            return ExecuteRequest(callType.Search, "POST", "/1/indexes/*/queries", requests, token);
 
         }
 

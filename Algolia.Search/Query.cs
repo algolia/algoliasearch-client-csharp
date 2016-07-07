@@ -141,6 +141,8 @@ namespace Algolia.Search
             q.facets = facets;
             q.getRankingInfo = getRankingInfo;
             q.hitsPerPage = hitsPerPage;
+            q.offset = offset;
+            q.length = length;
             q.ignorePlural = ignorePlural;
             q.insideBoundingBox = insideBoundingBox;
             q.insidePolygon = insidePolygon;
@@ -421,6 +423,24 @@ namespace Algolia.Search
         public Query SetNbHitsPerPage(int nbHitsPerPage)
         {
             this.hitsPerPage = nbHitsPerPage;
+            return this;
+        }
+
+        /// <summary>
+        /// Set the offset for the pagination.
+        /// </summary>
+        public Query SetOffset(int? offset)
+        {
+            this.offset = offset;
+            return this;
+        }
+
+        /// <summary>
+        /// Set the length for the pagination.
+        /// </summary>
+        public Query SetLength(int? length)
+        {
+            this.length = length;
             return this;
         }
 
@@ -1067,6 +1087,20 @@ namespace Algolia.Search
                 stringBuilder += "hitsPerPage=";
                 stringBuilder += hitsPerPage.Value.ToString();
             }
+            if (length.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "length=";
+                stringBuilder += length.Value.ToString();
+            }
+            if (offset.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "offset=";
+                stringBuilder += offset.Value.ToString();
+            }
             if (tags != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -1261,6 +1295,8 @@ namespace Algolia.Search
         private bool? allowTyposOnNumericTokens;
         private int? page;
         private int? hitsPerPage;
+        private int? offset;
+        private int? length;
         private string filters;
         private string tags;
         private string numerics;
