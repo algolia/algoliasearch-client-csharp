@@ -1,6 +1,10 @@
 Changelog
 =========
 
+3.6.5 (2016-07-07)
+- Support to length and offset
+- Fix strategy multiple query
+
 3.6.4 (2016-06-23)
 - Support to removeStopWords and radius
 - Support to exactOnSingleWordQuery and alternativesAsExact
