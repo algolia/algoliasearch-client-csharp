@@ -356,7 +356,8 @@ Parameters that can also be used in a setSettings also have the `indexing` [scop
 
 **Geo-Search**
 
-- [aroundLatLng](#aroundlatlng) `search`
+- [AroundLatitudeLongitude(float, float)](#aroundlatitudelongitude) `search`
+- [AroundLatitudeLongitude(float, float, IAllRadius, int)](#aroundlatitudelongitude) `search`
 
 - [AroundLatitudeLongitudeViaIP()](#aroundlatitudelongitudeviaip) `search`
 - [AroundLatitudeLongitudeViaIP(int, int)](#aroundlatitudelongitudeviaip) `search`
@@ -760,7 +761,8 @@ They are three scopes:
 
 **Geo-Search**
 
-- [aroundLatLng](#aroundlatlng) `search`
+- [AroundLatitudeLongitude(float, float)](#aroundlatitudelongitude) `search`
+- [AroundLatitudeLongitude(float, float, IAllRadius, int)](#aroundlatitudelongitude) `search`
 - [AroundLatitudeLongitudeViaIP()](#aroundlatitudelongitudeviaip) `search`
 - [AroundLatitudeLongitudeViaIP(int, int)](#aroundlatitudelongitudeviaip) `search`
 
@@ -1165,31 +1167,32 @@ Use `+#` to be able to search Google+ or C#.
 ### Geo-Search
 
 
-
-#### aroundLatLng
+#### AroundLatitudeLongitude(float, float)
 
 - scope: `search`
-- type: `string`
+- type: `float, float`
 
-Search for entries around a given latitude/longitude (specified as two floats separated by a comma).
+Search for entries around a given latitude/longitude.
+<br/>
+The maximum distance is automatically guessed depending of the
+density of the area but you also manually specify the maximum distance in meters with the radius parameter.
+<br/>
+The radius can be either an integer `var yourRadius = new AllRadiusInt { Radius = radius };` or a string "all" `var yourRadius = new AllRadiusString();`
+<br/>
+At indexing, you should specify the geo location of an object with the `_geoloc` attribute in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `.
 
-For example, `aroundLatLng=47.316669,5.016670`.
+#### AroundLatitudeLongitude(float, float, IAllRadius, int)
 
-- By default the maximum distance is automatically guessed based on the density of the area
-but you can specify it manually in meters with the **aroundRadius** parameter.
-The precision for ranking can be set with **aroundPrecision** parameter.
-- If you set aroundPrecision=100, the distances will be considered by ranges of 100m.
-- For example all distances 0 and 100m will be considered as identical for the "geo" ranking parameter.
+- scope: `search`
+- type: `float, float, IAllRadius, int`
 
-When **aroundRadius** is not set, the radius is computed automatically using the density of the area,
-you can retrieve the computed radius in the **automaticRadius** attribute of the answer,
-you can also use the **minimumAroundRadius** query parameter to specify a minimum radius in meters
-for the automatic computation of **aroundRadius**.
+Search for entries around a given latitude/longitude/radius with a given precision for ranking.
+<br/>
+The radius can be either an integer `var yourRadius = new AllRadiusInt { Radius = radius };`
+or a string "all" `var yourRadius = new AllRadiusString();`
+Regarding the precision, for example, if you set aroundPrecision=100, the distances will be considered by ranges of 100m,
+for example all distances 0 and 100m will be considered as identical for the "geo" ranking parameter.
 
-At indexing, you should specify geoloc of an object with the _geoloc attribute
-(in the form `"_geoloc":{"lat":48.853409, "lng":2.348800}`
-or `"_geoloc":[{"lat":48.853409, "lng":2.348800},{"lat":48.547456, "lng":2.972075}]`
-if you have several geo-locations in your record).
 
 
 
