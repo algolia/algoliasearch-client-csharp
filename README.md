@@ -65,6 +65,7 @@ Manage Indices
 1. [Move an index](#move-index---moveindex)
 
 Api Keys
+
 1. [Generate API keys](#generate-key---generatesecuredapikey)
 
 Advanced
@@ -1818,6 +1819,8 @@ System.Diagnostics.Debug.WriteLine(index.BrowseFrom(new Query("text"), null)["cu
 ```
 
 
+
+
 ### List api keys - `ListApiKeys`
 
 To list existing keys, you can use:
@@ -2055,8 +2058,6 @@ res = index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
 // Asynchronous
 // res = await index.GetUserKeyACLAsync("71671c38001bf3ac857bc82052485107");
 ```
-
-
 
 ### Multiple queries - `MultipleQueries`
 
