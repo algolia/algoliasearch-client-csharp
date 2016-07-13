@@ -2,17 +2,19 @@
 
 # Algolia Search API Client for C# #
 
-<!--/NO_HTML-->
 
 
 
 
 
-<!--NO_HTML-->
+
+
+
+
 
 [Algolia Search](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
 
-<!--/NO_HTML-->
+
 
 Our C# client lets you easily use the [Algolia Search API](https://www.algolia.com/doc/rest) from your App. It wraps the [Algolia Search REST API](https://www.algolia.com/doc/rest).
 
@@ -24,7 +26,6 @@ Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Wind
 
 
 
-<!--NO_HTML-->
 
 Table of Contents
 -----------------
@@ -85,9 +86,6 @@ Advanced
 1. [Get Logs](#get-logs---getlogs)
 
 
-<!--/NO_HTML-->
-
-<!--NO_HTML-->
 
 Guides & Tutorials
 ================
@@ -106,13 +104,14 @@ Check our [online guides](https://www.algolia.com/doc):
  * [REST API](https://www.algolia.com/doc/rest)
 
 
+
+
+
+
+
+
+
 <!--/NO_HTML-->
-
-
-
-
-
-
 
 
 
@@ -583,7 +582,7 @@ index.DeleteByQuery(query);
 
 
 
-### Wait for an indexing operation - `WaitTask`
+### Wait for operations - `WaitTask`
 
 All write operations in Algolia are asynchronous by design.
 
