@@ -1810,12 +1810,14 @@ This method saves a single synonym record into the index.
 In this example, we specify true to forward the creation to slave indices.
 By default the behavior is to save only on the specified index.
 
+```csharp
 index.SaveSynonym(
     "a-unique-identifier",
     JObject.parse(
         @"{ ""objectID"": ""a-unique-identifier"", ""type"": ""synonym"", ""synonyms"": [""car"", ""vehicle"", ""auto""] }"
     ),
     true);
+```
 
 ### Batch synonyms - `batchSynonyms`
 
@@ -1828,6 +1830,7 @@ You should always use replaceExistingSynonyms to atomically replace all synonyms
 on a production index. This is the only way to ensure the index always
 has a full list of synonyms to use during the indexing of the new list.
 
+```csharp
 index.BatchSynonyms(
     new object[] {
         JObject.parse(
@@ -1840,6 +1843,7 @@ index.BatchSynonyms(
    true,
    true
 );
+```
 
 ### Editing Synonyms
 
@@ -1858,7 +1862,9 @@ Use the normal index delete method to delete synonyms,
 specifying the objectID of the synonym record you want to delete.
 Forward the deletion to slave indices by setting the forwardToSlaves parameter to true.
 
+```csharp
 index.BatchSynonyms(new object[] {JObject.parse(@"{ ""objectID"": ""a-unique-identifier"", ""type"": ""synonym"", ""synonyms"": [""car"", ""vehicle"", ""auto""] }"), JObject.parse(@"{ ""objectID"": ""another-unique-identifier"", ""type"": ""synonym"", ""synonyms"": [""street"", ""st""] }")}, true, true);
+```
 
 ### Clear all synonyms - `clearSynonyms`
 
@@ -1870,17 +1876,21 @@ at all.
 To atomically replace all synonyms of an index,
 use the batch method with the replaceExistingSynonyms parameter set to true.
 
+```csharp
 // Clear synonyms and forward to slaves
 index.ClearSynonyms(true);
+```
 
 ### Get synonym - `getSynonym`
 
 Search for synonym records by their objectID or by the text they contain.
 Both methods are covered here.
 
+```csharp
 var synonym: Future[Synonym] = client.execute {
 	get synonym "a-unique-identifier" from "index_name"
 }
+```
 
 ### Search synonyms - `searchSynonyms`
 
@@ -1892,8 +1902,10 @@ Accepted search parameters:
 - page: the page to fetch when browsing through several pages of results. This value is zero-based.
 hitsPerPage: the number of synonyms to return for each call. The default value is 100.
 
+```csharp
 // Searching for "street" in synonyms and one-way synonyms; fetch the second page with 10 hits per page
 JObject results = index.SearchSynonyms("street", new Index.SynonymType[] {Index.SynonymType.SYNONYM, Index.SynonymType.SYNONYM_ONEWAY }, 1, 10);
+```
 
 
 
