@@ -8,7 +8,6 @@
 
 
 
-
 [Algolia Search](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
 
 
@@ -86,7 +85,7 @@ Advanced
 1. [Wait for operations](#wait-for-operations---waittask)
 1. [Multiple queries](#multiple-queries---multiplequeries)
 1. [Delete by query](#delete-by-query---deletebyquery)
-1. [Backup / Export an index](#backup-)-export-an-index---browse)
+1. [Backup / Export an index](#backup--export-an-index---browse)
 1. [List api keys](#list-api-keys---listapikeys)
 1. [Add user key](#add-user-key---adduserkey)
 1. [Update user key](#update-user-key---updateuserkey)
@@ -126,9 +125,7 @@ Check our [online guides](https://www.algolia.com/doc):
 
 ## Getting Started
 
-### Install and init - `InitIndex`
-
-To setup your project, follow these steps:
+### Install and init- `InitIndex`
 
 
 
@@ -262,7 +259,7 @@ function searchCallback(err, content) {
 
 ## Search
 
-### Search in an index - `Search`
+### Search in an index- `Search`
 
 
 **Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
@@ -270,11 +267,7 @@ function searchCallback(err, content) {
   * It will offload unnecessary tasks from your servers.
 
 
-
-
 To perform a search, you only need to initialize the index and perform a call to the search function.
-
-
 
 The search query allows only to retrieve 1000 hits, if you need to retrieve more than 1000 hits for seo, you can use [Backup / Retrieve all index content](#backup--export-an-index)
 
@@ -338,62 +331,62 @@ Here is the list of parameters you can use with the search method (`search` [sco
 Parameters that can also be used in a setSettings also have the `indexing` [scope](#scope)
 
 **Search**
-- [SetQueryString](#setquerystring) `search`
+- [SetQueryString](setquerystring) `search`
 
 **Attributes**
-- [attributesToRetrieve](#attributestoretrieve) `settings`, `search`
+- [attributesToRetrieve](attributestoretrieve) `settings`, `search`
 
 **Filtering / Faceting**
-- [filters](#filters) `search`
-- [facets](#facets) `search`
-- [maxValuesPerFacet](#maxvaluesperfacet) `settings`, `search`
+- [filters](filters) `search`
+- [facets](facets) `search`
+- [maxValuesPerFacet](maxvaluesperfacet) `settings`, `search`
 
 **Highlighting / Snippeting**
-- [attributesToHighlight](#attributestohighlight) `settings`, `search`
-- [attributesToSnippet](#attributestosnippet) `settings`, `search`
-- [highlightPreTag](#highlightpretag) `settings`, `search`
-- [highlightPostTag](#highlightposttag) `settings`, `search`
-- [snippetEllipsisText](#snippetellipsistext) `settings`, `search`
+- [attributesToHighlight](attributestohighlight) `settings`, `search`
+- [attributesToSnippet](attributestosnippet) `settings`, `search`
+- [highlightPreTag](highlightpretag) `settings`, `search`
+- [highlightPostTag](highlightposttag) `settings`, `search`
+- [snippetEllipsisText](snippetellipsistext) `settings`, `search`
 
 **Pagination**
-- [page](#page) `search`
-- [hitsPerPage](#hitsperpage) `settings`, `search`
+- [page](page) `search`
+- [hitsPerPage](hitsperpage) `settings`, `search`
 
 **Typos**
-- [minWordSizefor1Typo](#minwordsizefor1typo) `settings`, `search`
-- [minWordSizefor2Typos](#minwordsizefor2typos) `settings`, `search`
-- [typoTolerance](#typotolerance) `settings`, `search`
-- [allowTyposOnNumericTokens](#allowtyposonnumerictokens) `settings`, `search`
-- [ignorePlurals](#ignoreplurals) `settings`, `search`
-- [disableTypoToleranceOnAttributes](#disabletypotoleranceonattributes) `settings`, `search`
+- [minWordSizefor1Typo](minwordsizefor1typo) `settings`, `search`
+- [minWordSizefor2Typos](minwordsizefor2typos) `settings`, `search`
+- [typoTolerance](typotolerance) `settings`, `search`
+- [allowTyposOnNumericTokens](allowtyposonnumerictokens) `settings`, `search`
+- [ignorePlurals](ignoreplurals) `settings`, `search`
+- [disableTypoToleranceOnAttributes](disabletypotoleranceonattributes) `settings`, `search`
 
 **Geo-Search**
-- [AroundLatitudeLongitude(float, float)](#aroundlatitudelongitude%28float%2c+float%29) `search`
-- [AroundLatitudeLongitude(float, float, IAllRadius, int)](#aroundlatitudelongitude%28float%2c+float%2c+iallradius%2c+int%29) `search`
-- [AroundLatitudeLongitudeViaIP()](#aroundlatitudelongitudeviaip%28%29) `search`
-- [AroundLatitudeLongitudeViaIP(int, int)](#aroundlatitudelongitudeviaip%28int%2c+int%29) `search`
+- [AroundLatitudeLongitude(float, float)](aroundlatitudelongitudefloat,-float) `search`
+- [AroundLatitudeLongitude(float, float, IAllRadius, int)](aroundlatitudelongitudefloat,-float,-iallradius,-int) `search`
+- [AroundLatitudeLongitudeViaIP()](aroundlatitudelongitudeviaip) `search`
+- [AroundLatitudeLongitudeViaIP(int, int)](aroundlatitudelongitudeviaipint,-int) `search`
 
 
 **Query Strategy**
-- [queryType](#querytype) `settings`, `search`
-- [removeWordsIfNoResults](#removewordsifnoresults) `settings`, `search`
-- [EnableAdvancedSyntax](#enableadvancedsyntax) `settings`, `search`
-- [optionalWords](#optionalwords) `settings`, `search`
-- [EnableRemoveStopWords](#enableremovestopwords) `settings`, `search`
-- [ExactOnSingleWordQuery](#exactonsinglewordquery) `settings`, `search`
-- [AlternativesAsExact](#alternativesasexact) `settings`, `search`
+- [queryType](querytype) `settings`, `search`
+- [removeWordsIfNoResults](removewordsifnoresults) `settings`, `search`
+- [EnableAdvancedSyntax](enableadvancedsyntax) `settings`, `search`
+- [optionalWords](optionalwords) `settings`, `search`
+- [EnableRemoveStopWords](enableremovestopwords) `settings`, `search`
+- [ExactOnSingleWordQuery](exactonsinglewordquery) `settings`, `search`
+- [AlternativesAsExact](alternativesasexact) `settings`, `search`
 
 **Advanced**
-- [EnableDistinct](#enabledistinct) `settings`, `search`
-- [rankingInfo](#rankinginfo) `search`
-- [numericFilters (deprecated)](#numericfilters+%28deprecated%29) `search`
-- [tagFilters (deprecated)](#tagfilters+%28deprecated%29) `search`
-- [facetFilters (deprecated)](#facetfilters+%28deprecated%29) `search`
-- [EnableAnalytics](#enableanalytics) `settings`, `search`
+- [EnableDistinct](enabledistinct) `settings`, `search`
+- [rankingInfo](rankinginfo) `search`
+- [numericFilters (deprecated)](numericfilters-deprecated) `search`
+- [tagFilters (deprecated)](tagfilters-deprecated) `search`
+- [facetFilters (deprecated)](facetfilters-deprecated) `search`
+- [EnableAnalytics](enableanalytics) `settings`, `search`
 
 <!--/PARAMETERS_LINK-->
 
-### Find by IDs - `getObjects`
+### Find by IDs- `getObjects`
 
 You can easily retrieve an object using its `objectID` and optionally specify a comma separated list of attributes you want:
 
@@ -428,7 +421,7 @@ res = index.GetObjects(new String[] {"myID1", "myID2"});
 
 ## Indexing
 
-### Add objects - `AddObjects`
+### Add objects- `AddObjects`
 
 Each entry in an index has a unique identifier called `objectID`. There are two ways to add an entry to the index:
 
@@ -462,7 +455,7 @@ System.Diagnostics.Debug.WriteLine("objectID=" + res["objectID"]);
 ```
 
 
-### Update objects - `SaveObjects`
+### Update objects- `SaveObjects`
 
 You have three options when updating an existing object:
 
@@ -484,7 +477,7 @@ index.SaveObject(JObject.Parse(@"{""firstname"":""Jimmie"",
 //                                              ""objectID"":""myID""}"));
 ```
 
-### Partial update - `PartialUpdateObjects`
+### Partial update- `PartialUpdateObjects`
 
 You have many ways to update an object's attributes:
 
@@ -566,7 +559,7 @@ Note: Here we are decrementing the value by `42`. To decrement just by one, put
 `value:1`.
 
 
-### Delete objects - `DeleteObjects`
+### Delete objects- `DeleteObjects`
 
 You can delete an object using its `objectID`:
 
@@ -576,8 +569,7 @@ index.DeleteObject("myID");
 // await index.DeleteObjectAsync("myID");
 ```
 
-
-### Delete by query - `deleteByQuery`
+### Delete by query- `deleteByQuery`
 
 You can delete all objects matching a single query with the following code. Internally, the API client performs the query, deletes all matching hits, and waits until the deletions have been applied.
 
@@ -591,9 +583,7 @@ index.DeleteByQuery(query);
 // await index.DeleteByQueryAsync(query);
 ```
 
-
-
-### Wait for operations - `WaitTask`
+### Wait for operations- `WaitTask`
 
 All write operations in Algolia are asynchronous by design.
 
@@ -622,7 +612,7 @@ the biggest `taskID`.
 
 ## Settings
 
-### Get settings - `GetSettings`
+### Get settings- `GetSettings`
 
 You can retrieve settings:
 
@@ -633,7 +623,7 @@ var res = index.GetSettings();
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
-### Set settings - `SetSettings`
+### Set settings- `SetSettings`
 
 ```csharp
 index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
@@ -663,56 +653,56 @@ Here is the list of parameters you can use with the set settings method (`indexi
 Parameters that can be override at search time also have the `indexing` [scope](#scope)
 
 **Attributes**
-- [attributesToIndex](#attributestoindex) `settings`
-- [attributesForFaceting](#attributesforfaceting) `settings`
-- [attributesToRetrieve](#attributestoretrieve) `settings`, `search`
-- [unretrievableAttributes](#unretrievableattributes) `settings`
+- [attributesToIndex](attributestoindex) `settings`
+- [attributesForFaceting](attributesforfaceting) `settings`
+- [attributesToRetrieve](attributestoretrieve) `settings`, `search`
+- [unretrievableAttributes](unretrievableattributes) `settings`
 
 **Ranking**
-- [ranking](#ranking) `settings`
-- [customRanking](#customranking) `settings`
-- [slaves](#slaves) `settings`
+- [ranking](ranking) `settings`
+- [customRanking](customranking) `settings`
+- [slaves](slaves) `settings`
 
 **Filtering / Faceting**
-- [maxValuesPerFacet](#maxvaluesperfacet) `settings`, `search`
+- [maxValuesPerFacet](maxvaluesperfacet) `settings`, `search`
 
 **Highlighting / Snippeting**
-- [attributesToHighlight](#attributestohighlight) `settings`, `search`
-- [attributesToSnippet](#attributestosnippet) `settings`, `search`
-- [highlightPreTag](#highlightpretag) `settings`, `search`
-- [highlightPostTag](#highlightposttag) `settings`, `search`
-- [snippetEllipsisText](#snippetellipsistext) `settings`, `search`
+- [attributesToHighlight](attributestohighlight) `settings`, `search`
+- [attributesToSnippet](attributestosnippet) `settings`, `search`
+- [highlightPreTag](highlightpretag) `settings`, `search`
+- [highlightPostTag](highlightposttag) `settings`, `search`
+- [snippetEllipsisText](snippetellipsistext) `settings`, `search`
 
 **Pagination**
-- [hitsPerPage](#hitsperpage) `settings`, `search`
+- [hitsPerPage](hitsperpage) `settings`, `search`
 
 **Typos**
-- [minWordSizefor1Typo](#minwordsizefor1typo) `settings`, `search`
-- [minWordSizefor2Typos](#minwordsizefor2typos) `settings`, `search`
-- [typoTolerance](#typotolerance) `settings`, `search`
-- [allowTyposOnNumericTokens](#allowtyposonnumerictokens) `settings`, `search`
-- [ignorePlurals](#ignoreplurals) `settings`, `search`
-- [disableTypoToleranceOnAttributes](#disabletypotoleranceonattributes) `settings`, `search`
-- [separatorsToIndex](#separatorstoindex) `settings`
+- [minWordSizefor1Typo](minwordsizefor1typo) `settings`, `search`
+- [minWordSizefor2Typos](minwordsizefor2typos) `settings`, `search`
+- [typoTolerance](typotolerance) `settings`, `search`
+- [allowTyposOnNumericTokens](allowtyposonnumerictokens) `settings`, `search`
+- [ignorePlurals](ignoreplurals) `settings`, `search`
+- [disableTypoToleranceOnAttributes](disabletypotoleranceonattributes) `settings`, `search`
+- [separatorsToIndex](separatorstoindex) `settings`
 
 **Query Strategy**
-- [queryType](#querytype) `settings`, `search`
-- [removeWordsIfNoResults](#removewordsifnoresults) `settings`, `search`
-- [EnableAdvancedSyntax](#enableadvancedsyntax) `settings`, `search`
-- [optionalWords](#optionalwords) `settings`, `search`
-- [EnableRemoveStopWords](#enableremovestopwords) `settings`, `search`
-- [disablePrefixOnAttributes](#disableprefixonattributes) `settings`
-- [disableExactOnAttributes](#disableexactonattributes) `settings`
-- [ExactOnSingleWordQuery](#exactonsinglewordquery) `settings`, `search`
-- [AlternativesAsExact](#alternativesasexact) `settings`, `search`
+- [queryType](querytype) `settings`, `search`
+- [removeWordsIfNoResults](removewordsifnoresults) `settings`, `search`
+- [EnableAdvancedSyntax](enableadvancedsyntax) `settings`, `search`
+- [optionalWords](optionalwords) `settings`, `search`
+- [EnableRemoveStopWords](enableremovestopwords) `settings`, `search`
+- [disablePrefixOnAttributes](disableprefixonattributes) `settings`
+- [disableExactOnAttributes](disableexactonattributes) `settings`
+- [ExactOnSingleWordQuery](exactonsinglewordquery) `settings`, `search`
+- [AlternativesAsExact](alternativesasexact) `settings`, `search`
 
 **Advanced**
-- [attributeForDistinct](#attributefordistinct) `settings`
-- [EnableDistinct](#enabledistinct) `settings`, `search`
-- [numericAttributesToIndex](#numericattributestoindex) `settings`
-- [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
-- [altCorrections](#altcorrections) `settings`
-- [placeholders](#placeholders) `settings`
+- [attributeForDistinct](attributefordistinct) `settings`
+- [EnableDistinct](enabledistinct) `settings`, `search`
+- [numericAttributesToIndex](numericattributestoindex) `settings`
+- [allowCompressionOfIntegerArray](allowcompressionofintegerarray) `settings`
+- [altCorrections](altcorrections) `settings`
+- [placeholders](placeholders) `settings`
 
 <!--/PARAMETERS_LINK-->
 
@@ -735,77 +725,77 @@ They are three scopes:
 #### Parameters List
 
 **Search**
-- [SetQueryString](#setquerystring) `search`
+- [SetQueryString](setquerystring) `search`
 
 **Attributes**
-- [attributesToIndex](#attributestoindex) `settings`
-- [attributesForFaceting](#attributesforfaceting) `settings`
-- [attributesToRetrieve](#attributestoretrieve) `settings`, `search`
-- [unretrievableAttributes](#unretrievableattributes) `settings`
-- [attributesToRetrieve](#attributestoretrieve) `settings`, `search`
+- [attributesToIndex](attributestoindex) `settings`
+- [attributesForFaceting](attributesforfaceting) `settings`
+- [attributesToRetrieve](attributestoretrieve) `settings`, `search`
+- [unretrievableAttributes](unretrievableattributes) `settings`
+- [attributesToRetrieve](attributestoretrieve) `settings`, `search`
 
 
 **Ranking**
-- [ranking](#ranking) `settings`
-- [customRanking](#customranking) `settings`
-- [slaves](#slaves) `settings`
+- [ranking](ranking) `settings`
+- [customRanking](customranking) `settings`
+- [slaves](slaves) `settings`
 
 **Filtering / Faceting**
-- [filters](#filters) `search`
-- [facets](#facets) `search`
-- [maxValuesPerFacet](#maxvaluesperfacet) `settings`, `search`
+- [filters](filters) `search`
+- [facets](facets) `search`
+- [maxValuesPerFacet](maxvaluesperfacet) `settings`, `search`
 
 **Highlighting / Snippeting**
-- [attributesToHighlight](#attributestohighlight) `settings`, `search`
-- [attributesToSnippet](#attributestosnippet) `settings`, `search`
-- [highlightPreTag](#highlightpretag) `settings`, `search`
-- [highlightPostTag](#highlightposttag) `settings`, `search`
-- [snippetEllipsisText](#snippetellipsistext) `settings`, `search`
+- [attributesToHighlight](attributestohighlight) `settings`, `search`
+- [attributesToSnippet](attributestosnippet) `settings`, `search`
+- [highlightPreTag](highlightpretag) `settings`, `search`
+- [highlightPostTag](highlightposttag) `settings`, `search`
+- [snippetEllipsisText](snippetellipsistext) `settings`, `search`
 
 **Pagination**
-- [page](#page) `search`
-- [hitsPerPage](#hitsperpage) `settings`, `search`
+- [page](page) `search`
+- [hitsPerPage](hitsperpage) `settings`, `search`
 
 **Typos**
-- [minWordSizefor1Typo](#minwordsizefor1typo) `settings`, `search`
-- [minWordSizefor2Typos](#minwordsizefor2typos) `settings`, `search`
-- [typoTolerance](#typotolerance) `settings`, `search`
-- [allowTyposOnNumericTokens](#allowtyposonnumerictokens) `settings`, `search`
-- [ignorePlurals](#ignoreplurals) `settings`, `search`
-- [disableTypoToleranceOnAttributes](#disabletypotoleranceonattributes) `settings`, `search`
-- [separatorsToIndex](#separatorstoindex) `settings`
+- [minWordSizefor1Typo](minwordsizefor1typo) `settings`, `search`
+- [minWordSizefor2Typos](minwordsizefor2typos) `settings`, `search`
+- [typoTolerance](typotolerance) `settings`, `search`
+- [allowTyposOnNumericTokens](allowtyposonnumerictokens) `settings`, `search`
+- [ignorePlurals](ignoreplurals) `settings`, `search`
+- [disableTypoToleranceOnAttributes](disabletypotoleranceonattributes) `settings`, `search`
+- [separatorsToIndex](separatorstoindex) `settings`
 
 **Geo-Search**
 
-- [AroundLatitudeLongitude(float, float)](#aroundlatitudelongitude%28float%2c+float%29) `search`
-- [AroundLatitudeLongitude(float, float, IAllRadius, int)](#aroundlatitudelongitude%28float%2c+float%2c+iallradius%2c+int%29) `search`
-- [AroundLatitudeLongitudeViaIP()](#aroundlatitudelongitudeviaip%28%29) `search`
-- [AroundLatitudeLongitudeViaIP(int, int)](#aroundlatitudelongitudeviaip%28int%2c+int%29) `search`
+- [AroundLatitudeLongitude(float, float)](aroundlatitudelongitudefloat,-float) `search`
+- [AroundLatitudeLongitude(float, float, IAllRadius, int)](aroundlatitudelongitudefloat,-float,-iallradius,-int) `search`
+- [AroundLatitudeLongitudeViaIP()](aroundlatitudelongitudeviaip) `search`
+- [AroundLatitudeLongitudeViaIP(int, int)](aroundlatitudelongitudeviaipint,-int) `search`
 
 
 **Query Strategy**
-- [queryType](#querytype) `settings`, `search`
-- [removeWordsIfNoResults](#removewordsifnoresults) `settings`, `search`
-- [EnableAdvancedSyntax](#enableadvancedsyntax) `settings`, `search`
-- [optionalWords](#optionalwords) `settings`, `search`
-- [EnableRemoveStopWords](#enableremovestopwords) `settings`, `search`
-- [disablePrefixOnAttributes](#disableprefixonattributes) `settings`
-- [disableExactOnAttributes](#disableexactonattributes) `settings`
-- [ExactOnSingleWordQuery](#exactonsinglewordquery) `settings`, `search`
-- [AlternativesAsExact](#alternativesasexact) `settings`, `search`
+- [queryType](querytype) `settings`, `search`
+- [removeWordsIfNoResults](removewordsifnoresults) `settings`, `search`
+- [EnableAdvancedSyntax](enableadvancedsyntax) `settings`, `search`
+- [optionalWords](optionalwords) `settings`, `search`
+- [EnableRemoveStopWords](enableremovestopwords) `settings`, `search`
+- [disablePrefixOnAttributes](disableprefixonattributes) `settings`
+- [disableExactOnAttributes](disableexactonattributes) `settings`
+- [ExactOnSingleWordQuery](exactonsinglewordquery) `settings`, `search`
+- [AlternativesAsExact](alternativesasexact) `settings`, `search`
 
 **Advanced**
-- [attributeForDistinct](#attributefordistinct) `settings`
-- [EnableDistinct](#enabledistinct) `settings`, `search`
-- [rankingInfo](#rankinginfo) `search`
-- [numericAttributesToIndex](#numericattributestoindex) `settings`
-- [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
-- [numericFilters (deprecated)](#numericfilters+%28deprecated%29) `search`
-- [tagFilters (deprecated)](#tagfilters+%28deprecated%29) `search`
-- [facetFilters (deprecated)](#facetfilters+%28deprecated%29) `search`
-- [EnableAnalytics](#enableanalytics) `settings`, `search`
-- [altCorrections](#altcorrections) `settings`
-- [placeholders](#placeholders) `settings`
+- [attributeForDistinct](attributefordistinct) `settings`
+- [EnableDistinct](enabledistinct) `settings`, `search`
+- [rankingInfo](rankinginfo) `search`
+- [numericAttributesToIndex](numericattributestoindex) `settings`
+- [allowCompressionOfIntegerArray](allowcompressionofintegerarray) `settings`
+- [numericFilters (deprecated)](numericfilters-deprecated) `search`
+- [tagFilters (deprecated)](tagfilters-deprecated) `search`
+- [facetFilters (deprecated)](facetfilters-deprecated) `search`
+- [EnableAnalytics](enableanalytics) `settings`, `search`
+- [altCorrections](altcorrections) `settings`
+- [placeholders](placeholders) `settings`
 
 ### Search
 
@@ -1668,7 +1658,7 @@ To create an index, you need to perform any indexing operation like:
 - set settings
 - add object
 
-### List indices - `listIndexes`
+### List indices- `listIndexes`
 
 You can list all your indices along with their associated information (number of entries, disk size, etc.) with the `listIndexes` method:
 
@@ -1682,7 +1672,7 @@ System.Diagnostics.Debug.WriteLine(res);
 
 
 
-### Delete index - `deleteIndex`
+### Delete index- `deleteIndex`
 
 You can delete an index using its name:
 
@@ -1693,7 +1683,7 @@ client.DeleteIndex("contacts");
 ```
 
 
-### Clear index - `ClearIndex`
+### Clear index- `ClearIndex`
 You can delete the index contents without removing settings and index specific API keys by using the clearIndex command:
 
 ```csharp
@@ -1703,7 +1693,7 @@ index.ClearIndex();
 ```
 
 
-### Copy index - `CopyIndex`
+### Copy index- `CopyIndex`
 
 You can easily copy or rename an existing index using the `copy` and `move` commands.
 **Note**: Move and copy commands overwrite the destination index.
@@ -1720,7 +1710,7 @@ await client.CopyIndexAsync("MyIndex", "MyIndexCopy");
 ```
 
 
-### Move index - `MoveIndex` 
+### Move index- `MoveIndex` 
 
 The move command is particularly useful if you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you only need to:
  1. Import your database into a new index using [batches](#batch-writes). Let's call this new index `MyNewIndex`.
@@ -1745,7 +1735,7 @@ The **admin** API key provides full control of all your indices. *The admin API 
 You can also generate user API keys to control security.
 These API keys can be restricted to a set of operations or/and restricted to a given index.
 
-### Generate key - `GenerateSecuredApiKey`
+### Generate key- `GenerateSecuredApiKey`
 
 You may have a single index containing **per user** data. In that case, all records should be tagged with their associated `user_id` in order to add a `tagFilters=user_42` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
 
@@ -1803,7 +1793,7 @@ index.search('another query', function(err, content) {
 
 ## Synonyms
 
-### Save synonym - `saveSynonym`
+### Save synonym- `saveSynonym`
 
 This method saves a single synonym record into the index.
 
@@ -1819,7 +1809,7 @@ index.SaveSynonym(
     true);
 ```
 
-### Batch synonyms - `batchSynonyms`
+### Batch synonyms- `batchSynonyms`
 
 Use the batch method to create a large number of synonyms at once,
 forward them to slave indices if desired,
@@ -1856,7 +1846,7 @@ false is the default value).
 Otherwise, the entire synonym list will be replaced only partially with the records
 in the batch update.
 
-### Delete Synonyms - `delete_synonyms`
+### Delete Synonyms- `delete_synonyms`
 
 Use the normal index delete method to delete synonyms,
 specifying the objectID of the synonym record you want to delete.
@@ -1866,7 +1856,7 @@ Forward the deletion to slave indices by setting the forwardToSlaves parameter t
 index.BatchSynonyms(new object[] {JObject.parse(@"{ ""objectID"": ""a-unique-identifier"", ""type"": ""synonym"", ""synonyms"": [""car"", ""vehicle"", ""auto""] }"), JObject.parse(@"{ ""objectID"": ""another-unique-identifier"", ""type"": ""synonym"", ""synonyms"": [""street"", ""st""] }")}, true, true);
 ```
 
-### Clear all synonyms - `clearSynonyms`
+### Clear all synonyms- `clearSynonyms`
 
 This is a convenience method to delete all synonyms at once.
 It should not be used on a production index to then push a new list of synonyms:
@@ -1881,7 +1871,7 @@ use the batch method with the replaceExistingSynonyms parameter set to true.
 index.ClearSynonyms(true);
 ```
 
-### Get synonym - `getSynonym`
+### Get synonym- `getSynonym`
 
 Search for synonym records by their objectID or by the text they contain.
 Both methods are covered here.
@@ -1892,7 +1882,7 @@ var synonym: Future[Synonym] = client.execute {
 }
 ```
 
-### Search synonyms - `searchSynonyms`
+### Search synonyms- `searchSynonyms`
 
 Search for synonym records similar to how you’d search normally.
 
@@ -1911,14 +1901,14 @@ JObject results = index.SearchSynonyms("street", new Index.SynonymType[] {Index.
 
 ## Advanced
 
-### Custom batch - `Batch`
+### Custom batch- `Batch`
 
 You may want to perform multiple operations with one API call to reduce latency.
 We expose four methods to perform batch operations:
- * Add objects - `AddObjects`: Add an array of objects using automatic `objectID` assignment.
- * Update objects - `SaveObjects`: Add or update an array of objects that contains an `objectID` attribute.
- * Delete objects - `DeleteObjects`: Delete an array of objectIDs.
- * Partial update - `PartialUpdateObjects`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
+ * Add objects- `AddObjects`: Add an array of objects using automatic `objectID` assignment.
+ * Update objects- `SaveObjects`: Add or update an array of objects that contains an `objectID` attribute.
+ * Delete objects- `DeleteObjects`: Delete an array of objectIDs.
+ * Partial update- `PartialUpdateObjects`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
 
 Example using automatic `objectID` assignment:
 ```csharp
@@ -1985,7 +1975,7 @@ The attribute **action** can have these values:
 - partialUpdateObjectNoCreate
 - deleteObject
 
-### Backup / Export an index - `Browse`
+### Backup / Export an index- `Browse`
 
 The `search` method cannot return more than 1,000 results. If you need to
 retrieve all the content of your index (for backup, SEO purposes or for running
@@ -2017,7 +2007,7 @@ System.Diagnostics.Debug.WriteLine(index.BrowseFrom(new Query("text"), null)["cu
 
 
 
-### List api keys - `ListApiKeys`
+### List api keys- `ListApiKeys`
 
 To list existing keys, you can use:
 
@@ -2043,7 +2033,7 @@ Each key is defined by a set of permissions that specify the authorized actions.
  * **analytics**: Allowed to retrieve analytics through the analytics API.
  * **listIndexes**: Allowed to list all accessible indexes.
 
-### Add user key - `AddUserKey`
+### Add user key- `AddUserKey`
 
 To create API keys:
 
@@ -2197,7 +2187,7 @@ res = index.AddUserKey(param);
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 ```
 
-### Update user key - `UpdateUserKey`
+### Update user key- `UpdateUserKey`
 
 To update the permissions of an existing key:
 ```csharp
@@ -2225,7 +2215,7 @@ res = index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
 // res = await index.GetUserKeyACLAsync("71671c38001bf3ac857bc82052485107");
 ```
 
-### Delete user key - `DeleteUserKey`
+### Delete user key- `DeleteUserKey`
 To delete an existing key:
 ```csharp
 // Deletes a global key
@@ -2238,7 +2228,7 @@ client.DeleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
 // await index.DeleteUserKeyAsync("71671c38001bf3ac857bc82052485107");
 ```
 
-### Get key permissions - `getUserKeyACL`
+### Get key permissions- `getUserKeyACL`
 
 
 
@@ -2255,7 +2245,7 @@ res = index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
 // res = await index.GetUserKeyACLAsync("71671c38001bf3ac857bc82052485107");
 ```
 
-### Multiple queries - `multipleQueries`
+### Multiple queries- `multipleQueries`
 
 You can send multiple queries with a single API call using a batch of queries:
 
@@ -2285,7 +2275,7 @@ You can specify a `strategy` parameter to optimize your multiple queries:
 
 
 
-### Get Logs - `getLogs`
+### Get Logs- `getLogs`
 
 You can retrieve the latest logs via this API. Each log entry contains:
  * Timestamp in ISO-8601 format
@@ -2396,9 +2386,6 @@ Everything that can be done using the REST API can be done using those clients.
 
 The REST API lets your interact directly with Algolia platforms from anything that can send an HTTP request
 [Go to the REST API doc](https://algolia.com/doc/rest)
-
-
-
 
 
 
