@@ -1368,7 +1368,7 @@ This syntax allow to do two things:
 #### optionalWords
 
 - scope: `settings`, `search`
-- type: `array of string`
+- type: `array of strings`
 - default: `[]`
 
 
@@ -1408,7 +1408,7 @@ You can either use `new EnabledRemoveStopWordsList("your comma separated list of
 #### disablePrefixOnAttributes
 
 - scope: `settings`
-- type: `array of string`
+- type: `array of strings`
 - default: `[]`
 
 
@@ -1422,7 +1422,7 @@ This setting is useful on attributes that contain string that should not be matc
 #### disableExactOnAttributes
 
 - scope: `settings`
-- type: `array of string`
+- type: `array of strings`
 - default: `[]`
 
 
