@@ -36,7 +36,8 @@ Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Wind
 
 Getting started
 
-1. [Install and init](#install-and-init---initindex)
+1. [Install](#install)
+1. [Init index](#init-index---initindex)
 
 Search
 
@@ -125,14 +126,18 @@ Check our [online guides](https://www.algolia.com/doc):
 
 ## Getting Started
 
-### Install and init - `InitIndex`
+### Install
 
 
 
 
  1. In you project, open the "Package Manager Console" (Tools → Library Package Manager → Package Manager Console)
  2. Enter `Install-Package Algolia.Search` in the Package Manager Console
- 3. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
+
+
+### Init index - `InitIndex`
+
+To initialize the client you need your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit)
 
 ```csharp
 using Algolia.Search;
@@ -145,7 +150,6 @@ AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey");
 ```csharp
 client.ConfigureAwait(false);
 ```
-
 
 
 
