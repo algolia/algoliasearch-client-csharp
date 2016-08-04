@@ -747,6 +747,10 @@ index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 await index.SetSettingsAsync(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```
 
+**Warning**
+
+Performance wise, it's better to do a `SetSettings` before pushing the data
+
 #### Slave settings
 
 You can forward all settings updates to the slaves of an index by using the `forwardToSlaves` option:
@@ -1869,7 +1873,7 @@ The MoveIndex method will overwrite the destination index, and delete the tempor
 
 **Warning**
 
-The MoveIndex` operation will override all settings of the destination,
+The MoveIndex operation will override all settings of the destination,
 There is one exception for the [slaves](#slaves) parameter which is not impacted.
 
 For example, if you want to fully update your index `MyIndex` every night, we recommend the following process:
