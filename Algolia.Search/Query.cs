@@ -630,7 +630,7 @@ namespace Algolia.Search
         public Query AddInsidePolygon(float latitude, float longitude)
         {
             if (insidePolygon != null) {
-                insidePolygon += latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
+                insidePolygon += "," + latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
             } else {
                 insidePolygon = "insidePolygon=" + latitude.ToString(CultureInfo.InvariantCulture) + "," + longitude.ToString(CultureInfo.InvariantCulture);
             }
