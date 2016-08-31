@@ -343,6 +343,19 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
+        public void TestGetObjectsWithAttribute()
+        {
+            clearTest();
+            _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""objectID"":""1"", ""nickname"":""SF""}"));
+            var task = _index.AddObject(JObject.Parse(@"{""name"":""Los Angeles"", ""objectID"":""2"", ""nickname"":""SanF""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.GetObjects(new string[2] { "1", "2" }, new List<string> { "nickname" });
+            Assert.AreEqual("SF", res["results"][0]["nickname"].ToString());
+            Assert.AreEqual("SanF", res["results"][1]["nickname"].ToString());
+            Assert.IsEmpty(res["results"][1]["name"]);
+        }
+
+        [Test]
         public void TestDeleteObject()
         {
             clearTest();
@@ -714,6 +727,8 @@ namespace NUnit.Framework.Test
             query.SetAttributesToHighlight(attr);
             query.SetMinWordSizeToAllowOneTypo(1);
             query.SetMinWordSizeToAllowTwoTypos(2);
+            query.AddInsidePolygon(0.01F, 0.1F);
+            query.AddInsidePolygon(0.02F, 0.4F);
             query.EnableDistinct(true);
             query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.FIRST_WORDS);
             query.GetRankingInfo(true);
