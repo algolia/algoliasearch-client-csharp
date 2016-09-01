@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.6.6 (2016-09-01)
+- Support to attributeToRetrieve in GetObjects
+
 3.6.5 (2016-07-07)
 - Support to length and offset
 - Fix strategy multiple query
