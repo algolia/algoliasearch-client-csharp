@@ -136,7 +136,7 @@ namespace Algolia.Search
                         attributes += ",";
                     attributes += Uri.EscapeDataString(attr);
                 }
-                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}?attributes={2}", _urlIndexName, Uri.EscapeDataString(objectID), attributes), null, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}?attributesToRetrieve={2}", _urlIndexName, Uri.EscapeDataString(objectID), attributes), null, token);
             }
         }
 
@@ -172,6 +172,37 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Get several objects from this index.
+        /// </summary>
+        /// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
+        /// <returns></returns> 
+        public Task<JObject> GetObjectsAsync(IEnumerable<String> objectIDs, IEnumerable<string> attributesToRetrieve, CancellationToken token = default(CancellationToken))
+        {
+            JArray requests = new JArray();
+            var attributes = "";
+            foreach (string attr in attributesToRetrieve)
+            {
+                if (attributes.Length > 0) {
+                    attributes += ",";
+                    attributes += attr;
+                }
+            }
+
+            foreach (String id in objectIDs)
+            {
+                JObject request = new JObject();
+                request.Add("indexName", this._indexName);
+                request.Add("objectID", id);
+                request.Add("attributesToRetrieve", attributes);
+                requests.Add(request);
+            }
+
+            JObject body = new JObject();
+            body.Add("requests", requests);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", "/1/indexes/*/objects", body, token);
+        }
+
+        /// <summary>
         /// Synchronously call <see cref="Index.GetObjectsAsync"/>.
         /// </summary>
         /// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
@@ -179,6 +210,17 @@ namespace Algolia.Search
         public JObject GetObjects(IEnumerable<String> objectIDs)
         {
             return GetObjectsAsync(objectIDs).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.GetObjectsWithAttributesAsync"/>.
+        /// </summary>
+        /// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
+        /// <param name="attributesToRetrieve">list of attributes to retrieve.</param>
+        /// <returns></returns> 
+        public JObject GetObjects(IEnumerable<String> objectIDs, IEnumerable<string> attributesToRetrieve)
+        {
+            return GetObjectsAsync(objectIDs, attributesToRetrieve).GetAwaiter().GetResult();
         }
 
         /// <summary>
