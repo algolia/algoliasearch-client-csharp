@@ -99,6 +99,7 @@ Advanced
 ## Guides & Tutorials
 
 Check our [online guides](https://www.algolia.com/doc):
+
  * [Data Formatting](https://www.algolia.com/doc/indexing/formatting-your-data)
  * [Import and Synchronize data](https://www.algolia.com/doc/indexing/import-synchronize-data/csharp)
  * [Autocomplete](https://www.algolia.com/doc/search/auto-complete)
@@ -138,7 +139,7 @@ Check our [online guides](https://www.algolia.com/doc):
 
 ### Init index - `InitIndex`
 
-To initialize the client you need your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit)
+To initialize the client, you need your **Application ID** and **API Key**. You can find both of them on [your Algolia account](https://www.algolia.com/api-keys).
 
 ```csharp
 using Algolia.Search;
@@ -174,6 +175,7 @@ index.AddObjects(batch);
 ```
 
 You can now search for contacts using firstname, lastname, company, etc. (even with typos):
+
 ```csharp
 // search by firstname
 System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie")));
@@ -194,6 +196,7 @@ System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
 ```
 
 Settings can be customized to tune the search behavior. For example, you can add a custom sort by number of followers to the already great built-in relevance:
+
 ```csharp
 index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 // Asynchronous
@@ -201,6 +204,7 @@ index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```
 
 You can also configure the list of attributes you want to index by order of importance (first = most important):
+
 ```csharp
 index.SetSettings(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstname"",
                                                           ""company"", ""email"", ""city""]}"));
@@ -210,6 +214,7 @@ index.SetSettings(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstn
 ```
 
 Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
+
 ```csharp
 System.Diagnostics.Debug.WriteLine(index.Search(new Query("or")));
 // Asynchronous
@@ -381,11 +386,11 @@ The server response will look like:
 
 - `nbHits` (integer): Number of hits that the search query matched.
 
-- `page` (integer): Index of the current page (zero-based). See the [`page`](#page) search parameter.
+- `page` (integer): Index of the current page (zero-based). See the [`page`](#page) search parameter. *Note: Not returned if you use `offset`/`length` for pagination.*
 
-- `hitsPerPage` (integer): Maximum number of hits returned per page. See the [`hitsPerPage`](#hitsperpage) search parameter.
+- `hitsPerPage` (integer): Maximum number of hits returned per page. See the [`hitsPerPage`](#hitsperpage) search parameter. *Note: Not returned if you use `offset`/`length` for pagination.*
 
-- `nbPages` (integer): Number of pages corresponding to the number of hits. Basically, `ceil(nbHits / hitsPerPage)`.
+- `nbPages` (integer): Number of pages corresponding to the number of hits. Basically, `ceil(nbHits / hitsPerPage)`. *Note: Not returned if you use `offset`/`length` for pagination.*
 
 - `processingTimeMS` (integer): Time that the server took to process the request, in milliseconds. *Note: This does not include network time.*
 
@@ -405,7 +410,7 @@ When [`getRankingInfo`](#getrankinginfo) is set to `true`, the following additio
 
 - `serverUsed` (string): Actual host name of the server that processed the request. (Our DNS supports automatic failover and load balancing, so this may differ from the host name used in the request.)
 
-- `parsedQuery` (string): The query string that will be searched, after normalization.
+- `parsedQuery` (string): The query string that will be searched, after normalization. Normalization includes removing stop words (if [EnableRemoveStopWords](#enableremovestopwords) is enabled), and transforming portions of the query string into phrase queries (see [EnableAdvancedSyntax](#enableadvancedsyntax)).
 
 - `timeoutCounts` (boolean): Whether a timeout was hit when computing the facet counts. When `true`, the counts will be interpolated (i.e. approximate). See also `exhaustiveFacetsCount`.
 
@@ -443,28 +448,38 @@ Here is the list of parameters you can use with the search method (`search` [sco
 Parameters that can also be used in a setSettings also have the `indexing` [scope](#scope)
 
 **Search**
+
 - [SetQueryString](#setquerystring) `search`
 
 **Attributes**
+
 - [attributesToRetrieve](#attributestoretrieve) `settings`, `search`
+- [restrictSearchableAttributes](#restrictsearchableattributes) `search`
 
 **Filtering / Faceting**
+
 - [filters](#filters) `search`
 - [facets](#facets) `search`
 - [maxValuesPerFacet](#maxvaluesperfacet) `settings`, `search`
 
 **Highlighting / Snippeting**
+
 - [attributesToHighlight](#attributestohighlight) `settings`, `search`
 - [attributesToSnippet](#attributestosnippet) `settings`, `search`
 - [highlightPreTag](#highlightpretag) `settings`, `search`
 - [highlightPostTag](#highlightposttag) `settings`, `search`
 - [snippetEllipsisText](#snippetellipsistext) `settings`, `search`
+- [restrictHighlightAndSnippetArrays](#restricthighlightandsnippetarrays) `settings`, `search`
 
 **Pagination**
+
 - [page](#page) `search`
 - [hitsPerPage](#hitsperpage) `settings`, `search`
+- [offset](#offset) `search`
+- [length](#length) `search`
 
 **Typos**
+
 - [minWordSizefor1Typo](#minwordsizefor1typo) `settings`, `search`
 - [minWordSizefor2Typos](#minwordsizefor2typos) `settings`, `search`
 - [typoTolerance](#typotolerance) `settings`, `search`
@@ -473,30 +488,83 @@ Parameters that can also be used in a setSettings also have the `indexing` [scop
 - [disableTypoToleranceOnAttributes](#disabletypotoleranceonattributes) `settings`, `search`
 
 **Geo-Search**
+
 - [AroundLatitudeLongitude(float, float)](#aroundlatitudelongitudefloat-float) `search`
 - [AroundLatitudeLongitude(float, float, IAllRadius, int)](#aroundlatitudelongitudefloat-float-iallradius-int) `search`
 - [AroundLatitudeLongitudeViaIP()](#aroundlatitudelongitudeviaip) `search`
 - [AroundLatitudeLongitudeViaIP(int, int)](#aroundlatitudelongitudeviaipint-int) `search`
-
+- [aroundRadius](#aroundradius) `search`
+- [aroundPrecision](#aroundprecision) `search`
+- [minimumAroundRadius](#minimumaroundradius) `search`
+- [InsideBoundingBox](#insideboundingbox) `search`
+- [InsidePolygon](#insidepolygon) `search`
 
 **Query Strategy**
+
 - [queryType](#querytype) `settings`, `search`
 - [removeWordsIfNoResults](#removewordsifnoresults) `settings`, `search`
 - [EnableAdvancedSyntax](#enableadvancedsyntax) `settings`, `search`
 - [optionalWords](#optionalwords) `settings`, `search`
 - [EnableRemoveStopWords](#enableremovestopwords) `settings`, `search`
+- [disableExactOnAttributes](#disableexactonattributes) `settings`, `search`
 - [ExactOnSingleWordQuery](#exactonsinglewordquery) `settings`, `search`
 - [AlternativesAsExact](#alternativesasexact) `settings`, `search`
 
 **Advanced**
+
 - [EnableDistinct](#enabledistinct) `settings`, `search`
 - [getRankingInfo](#getrankinginfo) `search`
 - [numericFilters (deprecated)](#numericfilters-deprecated) `search`
 - [tagFilters (deprecated)](#tagfilters-deprecated) `search`
 - [facetFilters (deprecated)](#facetfilters-deprecated) `search`
 - [EnableAnalytics](#enableanalytics) `search`
+- [analyticsTags](#analyticstags) `search`
+- [synonyms](#synonyms) `search`
+- [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `search`, `settings`
+- [minProximity](#minproximity) `search`, `settings`
 
 <!--/PARAMETERS_LINK-->
+
+### Multiple queries - `multipleQueries`
+
+You can send multiple queries with a single API call using a batch of queries:
+
+```csharp
+// perform 3 queries in a single API call:
+//  - 1st query targets index `categories`
+//  - 2nd and 3rd queries target index `products`
+
+var indexQueries = new List<IndexQuery>();
+
+indexQueries.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPerPage(3)));
+indexQueries.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetFilters("_tags:promotion"));
+indexQueries.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
+
+var res = _client.MultipleQueries(indexQueries);
+// Asynchronous
+// var res = await _client.MultipleQueriesAsync(indexQueries);
+
+System.Diagnostics.Debug.WriteLine(res["results"]);
+```
+
+You can specify a `strategy` parameter to optimize your multiple queries:
+
+- `none`: Execute the sequence of queries until the end.
+- `stopIfEnoughMatches`: Execute the sequence of queries until the number of hits is reached by the sum of hits.
+
+#### Response
+
+The resulting JSON contains the following fields:
+
+- `results` (array): The results for each request, in the order they were submitted. The contents are the same as in [Search in an index](#search-in-an-index---search).
+
+    Each result also includes the following additional fields:
+
+    - `index` (string): The name of the targeted index.
+
+    - `processed` (boolean, optional): *Note: Only returned when `strategy` is `stopIfEnoughmatches`.* Whether the query was processed.
+
+
 
 ### Find by IDs - `getObjects`
 
@@ -710,6 +778,7 @@ The actual insert and indexing will be done after replying to your code.
 You can wait for a task to complete using the `waitTask` method on the `taskID` returned by a write operation.
 
 For example, to wait for indexing of a new object:
+
 ```csharp
 var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
                                            ""lastname"":""Barninger""}"), "myID");
@@ -723,6 +792,7 @@ index.WaitTask(res["taskID"].ToString());
 
 If you want to ensure multiple objects have been indexed, you only need to check
 the biggest `taskID`.
+
 
 ## Settings
 
@@ -773,20 +843,24 @@ Here is the list of parameters you can use with the set settings method (`indexi
 Parameters that can be overridden at search time also have the `search` [scope](#scope)
 
 **Attributes**
+
 - [attributesToIndex](#attributestoindex) `settings`
 - [attributesForFaceting](#attributesforfaceting) `settings`
 - [attributesToRetrieve](#attributestoretrieve) `settings`, `search`
 - [unretrievableAttributes](#unretrievableattributes) `settings`
 
 **Ranking**
+
 - [ranking](#ranking) `settings`
 - [customRanking](#customranking) `settings`
 - [slaves](#slaves) `settings`
 
 **Filtering / Faceting**
+
 - [maxValuesPerFacet](#maxvaluesperfacet) `settings`, `search`
 
 **Highlighting / Snippeting**
+
 - [attributesToHighlight](#attributestohighlight) `settings`, `search`
 - [attributesToSnippet](#attributestosnippet) `settings`, `search`
 - [highlightPreTag](#highlightpretag) `settings`, `search`
@@ -794,9 +868,11 @@ Parameters that can be overridden at search time also have the `search` [scope](
 - [snippetEllipsisText](#snippetellipsistext) `settings`, `search`
 
 **Pagination**
+
 - [hitsPerPage](#hitsperpage) `settings`, `search`
 
 **Typos**
+
 - [minWordSizefor1Typo](#minwordsizefor1typo) `settings`, `search`
 - [minWordSizefor2Typos](#minwordsizefor2typos) `settings`, `search`
 - [typoTolerance](#typotolerance) `settings`, `search`
@@ -806,6 +882,7 @@ Parameters that can be overridden at search time also have the `search` [scope](
 - [separatorsToIndex](#separatorstoindex) `settings`
 
 **Query Strategy**
+
 - [queryType](#querytype) `settings`, `search`
 - [removeWordsIfNoResults](#removewordsifnoresults) `settings`, `search`
 - [EnableAdvancedSyntax](#enableadvancedsyntax) `settings`, `search`
@@ -817,6 +894,7 @@ Parameters that can be overridden at search time also have the `search` [scope](
 - [AlternativesAsExact](#alternativesasexact) `settings`, `search`
 
 **Advanced**
+
 - [attributeForDistinct](#attributefordistinct) `settings`
 - [EnableDistinct](#enabledistinct) `settings`, `search`
 - [numericAttributesToIndex](#numericattributestoindex) `settings`
@@ -837,6 +915,7 @@ Each parameter in this page has a scope. Depending on the scope, you can use the
 and/or the `search` method
 
 They are three scopes:
+
 - `settings`: The setting can only be used in the `setSettings` method
 - `search`: The setting can only be used in the `search` method
 - `settings` `search`: The setting can be used in the `setSettings` method and be override in the`search` method
@@ -845,26 +924,31 @@ They are three scopes:
 #### Parameters List
 
 **Search**
+
 - [SetQueryString](#setquerystring) `search`
 
 **Attributes**
-- [attributesForFaceting](#attributesforfaceting) `settings`
-- [attributesToIndex](#attributestoindex) `settings`
-- [attributesToRetrieve](#attributestoretrieve) `settings`, `search`
-- [unretrievableAttributes](#unretrievableattributes) `settings`
 
+- [attributesToIndex](#attributestoindex) `settings`
+- [attributesForFaceting](#attributesforfaceting) `settings`
+- [unretrievableAttributes](#unretrievableattributes) `settings`
+- [attributesToRetrieve](#attributestoretrieve) `settings`, `search`
+- [restrictSearchableAttributes](#restrictsearchableattributes) `search`
 
 **Ranking**
+
 - [ranking](#ranking) `settings`
 - [customRanking](#customranking) `settings`
 - [slaves](#slaves) `settings`
 
 **Filtering / Faceting**
+
 - [filters](#filters) `search`
 - [facets](#facets) `search`
 - [maxValuesPerFacet](#maxvaluesperfacet) `settings`, `search`
 
 **Highlighting / Snippeting**
+
 - [attributesToHighlight](#attributestohighlight) `settings`, `search`
 - [attributesToSnippet](#attributestosnippet) `settings`, `search`
 - [highlightPreTag](#highlightpretag) `settings`, `search`
@@ -873,10 +957,14 @@ They are three scopes:
 - [restrictHighlightAndSnippetArrays](#restricthighlightandsnippetarrays) `settings`, `search`
 
 **Pagination**
+
 - [page](#page) `search`
 - [hitsPerPage](#hitsperpage) `settings`, `search`
+- [offset](#offset) `search`
+- [length](#length) `search`
 
 **Typos**
+
 - [minWordSizefor1Typo](#minwordsizefor1typo) `settings`, `search`
 - [minWordSizefor2Typos](#minwordsizefor2typos) `settings`, `search`
 - [typoTolerance](#typotolerance) `settings`, `search`
@@ -891,9 +979,14 @@ They are three scopes:
 - [AroundLatitudeLongitude(float, float, IAllRadius, int)](#aroundlatitudelongitudefloat-float-iallradius-int) `search`
 - [AroundLatitudeLongitudeViaIP()](#aroundlatitudelongitudeviaip) `search`
 - [AroundLatitudeLongitudeViaIP(int, int)](#aroundlatitudelongitudeviaipint-int) `search`
-
+- [aroundRadius](#aroundradius) `search`
+- [aroundPrecision](#aroundprecision) `search`
+- [minimumAroundRadius](#minimumaroundradius) `search`
+- [InsideBoundingBox](#insideboundingbox) `search`
+- [InsidePolygon](#insidepolygon) `search`
 
 **Query Strategy**
+
 - [queryType](#querytype) `settings`, `search`
 - [removeWordsIfNoResults](#removewordsifnoresults) `settings`, `search`
 - [EnableAdvancedSyntax](#enableadvancedsyntax) `settings`, `search`
@@ -905,6 +998,7 @@ They are three scopes:
 - [AlternativesAsExact](#alternativesasexact) `settings`, `search`
 
 **Advanced**
+
 - [attributeForDistinct](#attributefordistinct) `settings`
 - [EnableDistinct](#enabledistinct) `settings`, `search`
 - [getRankingInfo](#getrankinginfo) `search`
@@ -914,8 +1008,12 @@ They are three scopes:
 - [tagFilters (deprecated)](#tagfilters-deprecated) `search`
 - [facetFilters (deprecated)](#facetfilters-deprecated) `search`
 - [EnableAnalytics](#enableanalytics) `search`
-- [altCorrections](#altcorrections) `settings`
+- [analyticsTags](#analyticstags) `search`
+- [synonyms](#synonyms) `search`
+- [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `search`, `settings`
 - [placeholders](#placeholders) `settings`
+- [altCorrections](#altcorrections) `settings`
+- [minProximity](#minproximity) `search`, `settings`
 
 ### Search
 
@@ -943,21 +1041,16 @@ If set to null, all textual and numerical attributes of your objects are indexed
 Make sure you updated this setting to get optimal results.
 
 This parameter has two important uses:
-* **Limit the attributes to index**.
-<br/>For example, if you store the URL of a picture, you want to store it and be able to retrieve it,
-but you probably don't want to search in the URL.
-* **Control part of the ranking**.
-<br/> Matches in attributes at the beginning of the list will be considered more important than matches in attributes
-further down the list.
-In one attribute, matching text at the beginning of the attribute will be considered more important than text after.
-You can disable this behavior if you add your attribute inside `unordered(AttributeName)`.
-For example, `attributesToIndex: ["title", "unordered(text)"]`.
-You can decide to have the same priority for two attributes
-by passing them in the same string using a comma as a separator.
-For example `title` and `alternative_title` have the same priority in this example,
-which is different than text priority: `attributesToIndex:["title,alternative_title", "text"]`.
-To get a full description of how the Ranking works, you can have a look at our
-[Ranking guide](https://www.algolia.com/doc/relevance/ranking).
+
+1. **Limit the attributes to index.** For example, if you store the URL of a picture, you want to store it and be able to retrieve it, but you probably don't want to search in the URL.
+
+2. **Control part of the ranking.** The contents of the `attributesToIndex` parameter impacts ranking in two complementary ways:
+
+    First, the order in which attributes are listed defines their ranking priority: matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. To assign the same priority to several attributes, pass them within the same string, separated by commas. For example, by specifying `["title,"alternative_title", "text"]`, `title` and `alternative_title` will have the same priority, but a higher priority than `text`.
+
+    Then, within the same attribute, matches near the beginning of the text will be considered more important than matches near the end. You can disable this behavior by wrapping your attribute name inside an `unordered()` modifier. For example, `["title", "unordered(text)"]` will consider all positions inside the `text` attribute as equal, but positions inside the `title` attribute will still matter.
+
+**Note:** To get a full description of how the ranking works, you can have a look at our [Ranking guide](https://www.algolia.com/doc/guides/relevance/ranking).
 
 
 #### attributesForFaceting
@@ -967,9 +1060,9 @@ To get a full description of how the Ranking works, you can have a look at our
 - default: `null`
 
 
-The list of fields you want to use for faceting.
-All strings in the attribute selected for faceting are extracted and added as a facet.
-If set to null, no attribute is used for faceting.
+The list of attributes you want to use for faceting.
+All strings within these attributes will be extracted and added as facets.
+If set to `null`, no attribute is used for faceting.
 
 
 #### unretrievableAttributes
@@ -981,9 +1074,9 @@ If set to null, no attribute is used for faceting.
 
 The list of attributes that cannot be retrieved at query time.
 This feature allows you to have attributes that are used for indexing
-and/or ranking but cannot be retrieved
+and/or ranking but cannot be retrieved.
 
-**Warning**: for testing purposes, this setting is ignored when you're using the ADMIN API Key.
+**Warning**: For testing purposes, this setting is ignored when you're using the **admin** API key.
 
 #### attributesToRetrieve
 
@@ -999,7 +1092,7 @@ You can also use a string array encoding (for example `["name","address"]` ).
 By default, all attributes are retrieved.
 You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
 
-`objectID` is always retrieved even when not specified.
+**Note:** `objectID` is always retrieved, even when not specified.
 
 
 #### restrictSearchableAttributes
@@ -1040,8 +1133,8 @@ We have nine available criterion:
 * `asc(attributeName)`: Sort according to a numeric attribute using ascending order. `attributeName` can be the name of any numeric attribute in your records (integer, double or boolean).
 * `desc(attributeName)`: Sort according to a numeric attribute using descending order. `attributeName` can be the name of any numeric attribute in your records (integer, double or boolean).
 
-<br/>To get a full description of how the Ranking works,
-you can have a look at our [Ranking guide](https://www.algolia.com/doc/relevance/ranking).
+To get a full description of how the Ranking works,
+you can have a look at our [Ranking guide](https://www.algolia.com/doc/guides/relevance/ranking).
 
 #### customRanking
 
@@ -1058,7 +1151,7 @@ prefixed by the asc (ascending order) or desc (descending order) operator.
 For example, `"customRanking" => ["desc(population)", "asc(name)"]`.
 
 To get a full description of how the Custom Ranking works,
-you can have a look at our [Ranking guide](https://www.algolia.com/doc/relevance/ranking).
+you can have a look at our [Ranking guide](https://www.algolia.com/doc/guides/relevance/ranking).
 
 #### slaves
 
@@ -1100,18 +1193,19 @@ the filter applies to `_tags`.
 For example: `public OR user_42` will translate to `_tags:public OR _tags:user_42`.
 
 The list of keywords is:
+
 * `OR`: create a disjunctive filter between two filters.
 * `AND`: create a conjunctive filter between two filters.
 * `TO`: used to specify a range for a numeric filter.
 * `NOT`: used to negate a filter. The syntax with the `-` isn’t allowed.
 
-*Note*: To specify a value with spaces or with a value equal to a keyword, it's possible to add quotes.
+**Note:** To specify a value with spaces or with a value equal to a keyword, it's possible to add quotes.
 
-**Warning:**
+**Warnings:**
 
-* Like for the other filters (for performance reasons), it's not possible to have FILTER1 OR (FILTER2 AND FILTER3).
-* It's not possible to mix different categories of filters inside an OR like: num=3 OR tag1 OR facet:value
-* It's not possible to negate a group, it's only possible to negate a filter:  NOT(FILTER1 OR (FILTER2) is not allowed.
+* Like for the other filters (for performance reasons), it's not possible to have `FILTER1 OR (FILTER2 AND FILTER3)`.
+* It is not possible to mix different categories of filters inside an OR like: `num=3 OR tag1 OR facet:value`.
+* It is not possible to negate a group; only individual filters can be negated:  `NOT(FILTER1 OR (FILTER2))` is not allowed.
 
 
 #### facets
@@ -1132,17 +1226,15 @@ and their associated count for the current query.
 
 If you have defined in your **[attributesForFaceting](#attributesforfaceting)**:
 
-['category', 'author', 'nb_views', 'nb_downloads']
+```
+["category", "author", "nb_views", "nb_downloads"]
+```
 
-But for the current search want to retrieve only facet values for `category` and `author`.
+... but, for the current search, you want to retrieve facet values only for `category` and `author`, then you can specify:
 
-You can specify your attributes coma separated.
-
-For this example:  `"category,author"`.
-
-You can also use JSON string array encoding.
-
-For this example: `["category","author"]`.
+```
+["category", "author"]
+```
 
 **Warnings**
 
@@ -1161,6 +1253,10 @@ the attribute `exhaustiveFacetsCount` in the response is true when the count is 
 Limit the number of facet values returned for each facet.
 
 For example, `maxValuesPerFacet=10` will retrieve a maximum of 10 values per facet.
+
+**Warnings**
+
+- The engine has a hard limit on the `maxValuesPerFacet` of `1000`. Any value above that will be interpreted by the engine as being `1000`.
 
 ### Highlighting / Snippeting
 
@@ -1182,6 +1278,7 @@ By default, all indexed attributes are highlighted (as long as they are strings)
 You can use `*` if you want to highlight all attributes.
 
 A matchLevel is returned for each highlighted attribute and can contain:
+
 * `full`: If all the query terms were found in the attribute.
 * `partial`: If only some of the query terms were found.
 * `none`: If none of the query terms were found.
@@ -1226,7 +1323,8 @@ Specify the string that is inserted after the highlighted parts in the query res
 
 
 String used as an ellipsis indicator when a snippet is truncated.
-Defaults to an empty string for all accounts created before 10/2/2016, and to … (UTF-8 U+2026) for accounts created after that date.
+
+**Note:** Defaults to an empty string for all accounts created before 10/2/2016, and to `…` (U+2026) for accounts created after that date.
 
 #### restrictHighlightAndSnippetArrays
 
@@ -1247,8 +1345,8 @@ If set to true, restrict arrays in highlights and snippets to items that matched
 
 
 Pagination parameter used to select the page to retrieve.
-<br>
-Page is zero based and defaults to 0. Thus, to retrieve the 10th page you need to set `page=9`.
+
+**Warning:** Page is zero based. Thus, to retrieve the 10th page, you need to set `page=9`.
 
 #### hitsPerPage
 
@@ -1257,7 +1355,29 @@ Page is zero based and defaults to 0. Thus, to retrieve the 10th page you need t
 - default: `20`
 
 
-Pagination parameter used to select the number of hits per page. Defaults to 20.
+Pagination parameter used to select the number of hits per page.
+
+#### offset
+
+- scope: `search`
+- type: `integer`
+- default: `null`
+
+
+Offset of the first hit to return (zero-based).
+
+**Warning:** In most cases, `page`/`hitsPerPage` is the recommended method for pagination; `offset`/`length` is reserved for advanced use.
+
+#### length
+
+- scope: `search`
+- type: `integer`
+- default: `null`
+
+
+Number of hits to return.
+
+**Warning:** In most cases, `page`/`hitsPerPage` is the recommended method for pagination; `offset`/`length` is reserved for advanced use.
 
 ### Typos
 
@@ -1336,11 +1456,40 @@ Specify the separators (punctuation characters) to index.
 
 By default, separators are not indexed.
 
-Use `+#` to be able to search Google+ or C#.
+**Example:** Use `+#` to be able to search for "Google+" or "C#".
 
 
 
 ### Geo-Search
+
+Geo search requires that you provide at least one geo location in each record at indexing time, under the `_geoloc` attribute. Each location must be an object with two numeric `lat` and `lng` attributes. You may specify either one location:
+
+```
+{
+  "_geoloc": {
+    "lat": 48.853409,
+    "lng": 2.348800
+  }
+}
+```
+
+... or an array of locations:
+
+```
+{
+  "_geoloc": [
+    {
+      "lat": 48.853409,
+      "lng": 2.348800
+    },
+    {
+      "lat": 48.547456,
+      "lng": 2.972075
+    }
+  ]
+}
+```
+
 
 
 #### AroundLatitudeLongitude(float, float)
@@ -1351,13 +1500,11 @@ Use `+#` to be able to search Google+ or C#.
 
 
 Search for entries around a given latitude/longitude.
-<br/>
+
 The maximum distance is automatically guessed depending of the
 density of the area but you also manually specify the maximum distance in meters with the radius parameter.
-<br/>
+
 The radius can be either an integer `var yourRadius = new AllRadiusInt { Radius = radius };` or a string "all" `var yourRadius = new AllRadiusString();`
-<br/>
-At indexing, you should specify the geo location of an object with the `_geoloc` attribute in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `.
 
 #### AroundLatitudeLongitude(float, float, IAllRadius, int)
 
@@ -1367,7 +1514,7 @@ At indexing, you should specify the geo location of an object with the `_geoloc`
 
 
 Search for entries around a given latitude/longitude/radius with a given precision for ranking.
-<br/>
+
 The radius can be either an integer `var yourRadius = new AllRadiusInt { Radius = radius };`
 or a string "all" `var yourRadius = new AllRadiusString();`
 Regarding the precision, for example, if you set aroundPrecision=100, the distances will be considered by ranges of 100m,
@@ -1391,9 +1538,6 @@ The radius is automatically guessed based on density
 but you can also specify it manually with
 the `radius` parameter (optional)
 
-At indexing, you should specify the geo location of an object with the `_geoloc` attribute
-in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `.
-
 #### AroundLatitudeLongitudeViaIP(int, int)
 
 - scope: `search`
@@ -1404,30 +1548,51 @@ in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `.
 Search for entries around a latitude/longitude automatically computed from user IP address
 with a given precision for ranking.
 
-For example:
-- if you set precision=100, two objects that are a distance of less than 100 meters
+**Example:** if you set precision=100, two objects that are a distance of less than 100 meters
 will be considered as identical for the "geo" ranking parameter.
 
 
 
+#### aroundRadius
+
+- scope: `search`
+- type: `integer`, `"all"`
+- default: `null`
+
+
+Control the radius associated with a geo search. Defined in meters.
+
+If not set, the radius is computed automatically using the density of the area. You can retrieve the computed radius in the `automaticRadius` attribute of the response. You can also specify a minimum value for the automatic radius by using the `minimumAroundRadius` query parameter. You can specify `aroundRadius=all` if you want to compute the geo distance without filtering in a geo area; this option will be faster than specifying a big integer value.
+
+#### aroundPrecision
+
+- scope: `search`
+- type: `integer`
+- default: `null`
+
+
+Control the precision of a geo search. Defined in meters. For example, if you set `aroundPrecision=100`, two objects that are in the range 0-99m will be considered as identical in the ranking for the `geo` ranking parameter (same for 100-199, 200-299, … ranges).
+
+#### minimumAroundRadius
+
+- scope: `search`
+- type: `integer`
+- default: `null`
+
+
+Define the minimum radius used for a geo search when `aroundRadius` is not set. The radius is computed automatically using the density of the area. You can retrieve the computed radius in the `automaticRadius` attribute of the answer.
+
 #### InsideBoundingBox
 
 - scope: `search`
-- type: `boolean`
-- default: `false`
+- type: `string`
+- default: `null`
 
 
 Search entries inside a given area defined by the two extreme points of a rectangle
 (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).
 For example:
 - `InsideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)`
-
-
-At indexing, you should specify geoloc of an object with the _geoloc attribute
-(in the form `"_geoloc":{"lat":48.853409, "lng":2.348800}`
-or `"_geoloc":[{"lat":48.853409, "lng":2.348800},{"lat":48.547456, "lng":2.972075}]`
-if you have several geo-locations in your record).
-
 
 You can use several bounding boxes (OR) by passing more than 4 values.
 For example: instead of having 4 values you can pass 8 to search inside the UNION of two bounding boxes.
@@ -1444,12 +1609,6 @@ Search entries inside a given area defined by a set of points
 
 For example:
 `InsidePolygon(47.3165, 4.9665, 47.3424, 5.0201, 47.32, 4.98)`).
-
-
-At indexing, you should specify geoloc of an object with the _geoloc attribute
-(in the form `"_geoloc":{"lat":48.853409, "lng":2.348800}`
-or `"_geoloc":[{"lat":48.853409, "lng":2.348800},{"lat":48.547456, "lng":2.972075}]`
-if you have several geo-locations in your record).
 
 
 ### Query Strategy
@@ -1478,6 +1637,7 @@ No query word is interpreted as a prefix. This option is not recommended.
 
 This option is used to select a strategy in order to avoid having an empty result page.
 There are four different options:
+
 - `LAST_WORDS`:
 When a query does not return any results, the last word will be added as optional.
 The process is repeated with n-1 word, n-2 word, ... until there are results.
@@ -1501,6 +1661,7 @@ No specific processing is done when a query does not return any results (default
 Enables the advanced query syntax.
 
 This syntax allow to do two things:
+
 * **Phrase query**: A phrase query defines a particular sequence of terms. A phrase query is built by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo tolerance is _disabled_ on phrase queries.
 * **Prohibit operator**: The prohibit operator excludes records that contain the term after the `-` symbol. For example, `search -engine` will retrieve records containing `search` but not `engine`.
 
@@ -1576,7 +1737,8 @@ List of attributes on which you want to disable the computation of `exact` crite
 - default: `attribute`
 
 
-This parameter control how the `exact` ranking criterion is computed when the query contains one word. There is three different values:
+This parameter control how the `exact` ranking criterion is computed when the query contains one word. There are three different values:
+
 * `none`: no exact on single word query
 * `word`: exact set to 1 if the query word is found in the record. The query word needs to have at least 3 chars and not be part of our stop words dictionary
 * `attribute` (default): exact set to 1 if there is an attribute containing a string equals to the query
@@ -1657,7 +1819,8 @@ All numerical attributes are automatically indexed as numerical filters
 (allowing filtering operations like `<` and `<=`).
 If you don't need filtering on some of your numerical attributes,
 you can specify this list to speed up the indexing.
-<br/> If you only need to filter on a numeric value with the operator '=',
+
+If you only need to filter on a numeric value with the `=` operator,
 you can speed up the indexing by specifying the attribute with `equalOnly(AttributeName)`.
 The other operators will be disabled.
 
@@ -1755,6 +1918,33 @@ For example, `[["category:Book","category:Movie"],"author:John%20Doe"]`.
 
 If set to false, this query will not be taken into account in the analytics feature.
 
+#### analyticsTags
+
+- scope: `search`
+- type: `array of strings`
+- default: `null`
+
+
+If set, tag your query with the specified identifiers. Tags can then be used in the Analytics to analyze a subset of searches only.
+
+#### synonyms
+
+- scope: `search`
+- type: `boolean`
+- default: `true`
+
+
+If set to `false`, the search will not use the synonyms defined for the targeted index.
+
+#### replaceSynonymsInHighlight
+
+- scope: `search`, `settings`
+- type: `boolean`
+- default: `true`
+
+
+If set to `false`, words matched via synonym expansion will not be replaced by the matched synonym in the highlighted result.
+
 #### placeholders
 
 - scope: `settings`
@@ -1772,6 +1962,7 @@ would allow it to be able to match all street numbers. We use the `< >` tag synt
 to define placeholders in an attribute.
 
 For example:
+
 * Push a record with the placeholder:
 `{ "name" : "Apple Store", "address" : "&lt;streetnumber&gt; Opera street, Paris" }`.
 * Configure the placeholder in your index settings:
@@ -1787,13 +1978,32 @@ For example:
 Specify alternative corrections that you want to consider.
 
 Each alternative correction is described by an object containing three attributes:
-* **word**: The word to correct.
-* **correction**: The corrected word.
-* **nbTypos** The number of typos (1 or 2) that will be considered for the ranking algorithm (1 typo is better than 2 typos).
+
+* `word` (string): The word to correct.
+* `correction` (string): The corrected word.
+* `nbTypos` (integer): The number of typos (1 or 2) that will be considered for the ranking algorithm (1 typo is better than 2 typos).
 
 For example:
 
-`"altCorrections": [ { "word" : "foot", "correction": "feet", "nbTypos": 1 }, { "word": "feet", "correction": "foot", "nbTypos": 1 } ]`.
+```
+"altCorrections": [
+  { "word" : "foot", "correction": "feet", "nbTypos": 1 },
+  { "word": "feet", "correction": "foot", "nbTypos": 1 }
+]
+```
+
+#### minProximity
+
+- scope: `search`, `settings`
+- type: `integer`
+- default: `1`
+
+
+Configure the precision of the `proximity` ranking criterion. By default, the minimum (and best) proximity value distance between 2 matching words is 1. Setting it to 2 (or 3) would allow 1 (or 2) words to be found between the matching words without degrading the proximity ranking value.
+
+Considering the query *“javascript framework”*, if you set `minProximity=2`, the records *“JavaScript framework”* and *“JavaScript charting framework”* will get the same proximity score, even if the second contains a word between the two matching words.
+
+**Note:** the maximum `minProximity` that can be set is 7. Any higher value will disable the `proximity` criterion from the ranking formula.
 
 
 ## Manage Indices
@@ -1832,7 +2042,8 @@ client.DeleteIndex("contacts");
 
 
 ### Clear index - `ClearIndex`
-You can delete the index contents without removing settings and index specific API keys by using the clearIndex command:
+
+You can delete the index contents without removing settings and index specific API keys by using the `clearIndex` command:
 
 ```csharp
 index.ClearIndex();
@@ -1844,7 +2055,8 @@ index.ClearIndex();
 ### Copy index - `CopyIndex`
 
 You can copy an existing index using the `copy` command.
-**Note**: The copy command will overwrite the destination index.
+
+**Warning**: The copy command will overwrite the destination index.
 
 ```csharp
 // Copy MyIndex in MyIndexCopy
@@ -1877,6 +2089,7 @@ The MoveIndex operation will override all settings of the destination,
 There is one exception for the [slaves](#slaves) parameter which is not impacted.
 
 For example, if you want to fully update your index `MyIndex` every night, we recommend the following process:
+
  1. Get settings and synonyms from the old index using [Get settings](#get-settings---getsettings)
   and [Get synonym](#get-synonym---getsynonym).
  1. Apply settings and synonyms to the temporary index `MyTmpIndex`, (this will create the `MyTmpIndex` index)
@@ -1896,22 +2109,57 @@ For example, if you want to fully update your index `MyIndex` every night, we re
 
 ## Api Keys
 
-The **admin** API key provides full control of all your indices. *The admin API key should always be kept secure; do NOT use it from outside your back-end.*
+### Overview
 
-You can also generate user API keys to control security.
-These API keys can be restricted to a set of operations or/and restricted to a given index.
+When creating your Algolia Account, you'll notice there are 3 different API Keys:
+
+- **Admin API Key** - it provides full control of all your indices.
+*The admin API key should always be kept secure;
+do NOT give it to anybody; do NOT use it from outside your back-end as it will
+allow the person who has it to query/change/delete data*
+
+- **Search-Only API Key** - It allows you to search on every indices.
+
+- **Monitoring API Key** - It allows you to access the [Monitoring API](https://www.algolia.com/doc/rest-api/monitoring)
+
+#### Other types of API keys
+
+The *Admin API Key* and *Search-Only API Key* both have really large scope and sometimes you want to give a key to
+someone that have restricted permissions, can it be an index, a rate limit, a validity limit, ...
+
+To address those use-cases we have two differents type of keys:
+
+- **Secured API Keys**
+
+When you need to restrict the scope of the *Search Key*, we recommend to use *Secured API Key*.
+You can generate them on the fly (without any call to the API)
+from the *Search Only API Key* or any search *User Key* using the [Generate key](#generate-key---generatesecuredapikey) method
+
+- **User API Keys**
+
+If *Secured API Keys* does not meet your requirements, you can make use of *User keys*.
+Managing and especially creating those keys requires a call to the API.
+
+We have several methods to manage them:
+- [Add user key](#add-user-key---adduserkey)
+- [Update user key](#update-user-key---updateuserkey)
+- [Delete user key](#delete-user-key---deleteuserkey)
+- [List api keys](#list-api-keys---listapikeys)
+- [Get key permissions](#get-key-permissions---getuserkeyacl)
 
 ### Generate key - `GenerateSecuredApiKey`
 
-You may have a single index containing **per user** data. In that case, all records should be tagged with their associated `user_id` in order to add a `tagFilters=user_42` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
+When you need to restrict the scope of the *Search Key*, we recommend to use *Secured API Key*.
+from the *Search Only API Key* or any search *User Key* using the [Generate key](#generate-key---generatesecuredapikey) method
 
-```java
-// generate a public API key for user 42. Here, records are tagged with:
-//  - 'user_XXXX' if they are visible by user XXXX
-String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("_tags:user_42"));
-```
+There is a few things to know about about *Secured API Keys*
+- They always need to be generated **on your backend** using one of our API Client 
+- You can generate them on the fly (without any call to the API)
+- They will not appear on the dashboard as they are generated without any call to the API
+- The key you use to generate it **needs to become private** and you should not use it in your frontend.
+- The generated secured API key **will inherit any restriction from the search key it has been generated from**
 
-This public API key can then be used in your JavaScript code as follow:
+You can then use the key in your frontend code
 
 ```js
 var client = algoliasearch('YourApplicationID', '<%= public_api_key %>');
@@ -1928,29 +2176,74 @@ index.search('something', function(err, content) {
 });
 ```
 
-You can mix rate limits and secured API keys by setting a `userToken` query parameter at API key generation time. When set, a unique user will be identified by her `IP + user_token` instead of only by her `IP`. This allows you to restrict a single user to performing a maximum of `N` API calls per hour, even if she shares her `IP` with another user.
+#### Filters
+
+Every filter set in the API key will always be applied. On top of that [filters](#filters) can be applied
+in the query parameters.
+
+```java
+// generate a public API key for user 42. Here, records are tagged with:
+//  - 'user_XXXX' if they are visible by user XXXX
+String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("_tags:user_42"));
+```
+
+**Warning**:
+
+If you set filters in the key `groups:admin`, and `groups:press OR groups:visitors` in the query parameters,
+this will be equivalent to `groups:admin AND (groups:press OR groups:visitors)`
+
+##### Having one API Key per User
+
+One of the usage of secured API keys, is to have allow users to see only part of an index, when this index
+contains the data of all users.
+In that case, you can tag all records with their associated `user_id` in order to add a `user_id=42` filter when
+generating the *Secured API Key* to retrieve only what a user is tagged in.
+
+**Warning**
+If you're generating *Secured API Keys* using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js) in your frontend,
+it will result in a security breach since the user is able to modify the `tagFilters` you've set
+by modifying the code from the browser.
+
+#### Valid Until
+
+You can set a Unix timestamp used to define the expiration date of the API key
+
+
+
+#### Index Restriction
+
+You can restrict the key to a list of index names allowed for the secured API key
+
+```java
+# generate a public API key that is restricted to 'index1' and 'index2':
+restrictIndices = new List<String>();
+restrictIndices.add('index1');
+restrictIndices.add('index2');
+String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetRestrictIndices(restrictIndices));
+```
+
+#### Rate Limiting
+
+If you want to rate limit a secured API Key, the API key you generate the secured api key from need to be rate-limited.
+You can do that either via the dashboard or via the API using the
+[Add user key](#add-user-key---adduserkey) or [Update user key](#update-user-key---updateuserkey) method
+
+##### User Rate Limiting
+
+By default the rate limits will only use the `IP`.
+
+This can be an issue when several of your end users are using the same IP.
+To avoid that, you can set a `userToken` query parameter when generating the key.
+
+When set, a unique user will be identified by his `IP + user_token` instead of only by his `IP`.
+
+This allows you to restrict a single user to performing a maximum of `N` API calls per hour,
+even if he shares his `IP` with another user.
 
 ```java
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
 String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("_tags:user_42").SetUserToken("42"));
-```
-
-This public API key can then be used in your JavaScript code as follow:
-
-```js
-var client = algoliasearch('YourApplicationID', '<%= public_api_key %>');
-
-var index = client.initIndex('indexName')
-
-index.search('another query', function(err, content) {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  console.log(content);
-});
 ```
 
 
@@ -2071,12 +2364,14 @@ JObject results = index.SearchSynonyms("street", new Index.SynonymType[] {Index.
 
 You may want to perform multiple operations with one API call to reduce latency.
 We expose four methods to perform batch operations:
- * Add objects - `AddObjects`: Add an array of objects using automatic `objectID` assignment.
- * Update objects - `SaveObjects`: Add or update an array of objects that contains an `objectID` attribute.
- * Delete objects - `DeleteObjects`: Delete an array of objectIDs.
- * Partial update - `PartialUpdateObjects`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
+
+* Add objects - `AddObjects`: Add an array of objects using automatic `objectID` assignment.
+* Update objects - `SaveObjects`: Add or update an array of objects that contains an `objectID` attribute.
+* Delete objects - `DeleteObjects`: Delete an array of objectIDs.
+* Partial update - `PartialUpdateObjects`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
 
 Example using automatic `objectID` assignment:
+
 ```csharp
 List<JObject> objs = new List<JObject>();
 objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
@@ -2090,6 +2385,7 @@ System.Diagnostics.Debug.WriteLine(res);
 ```
 
 Example with user defined `objectID` (add or update):
+
 ```csharp
 List<JObject> objs = new List<JObject>();
 objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
@@ -2105,6 +2401,7 @@ System.Diagnostics.Debug.WriteLine(res);
 ```
 
 Example that deletes a set of records:
+
 ```csharp
 List<string> ids = new List<string>();
 ids.Add(@"myID1");
@@ -2116,6 +2413,7 @@ System.Diagnostics.Debug.WriteLine(res);
 ```
 
 Example that updates only the `firstname` attribute:
+
 ```csharp
 List<JObject> objs = new List<JObject>();
 objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
@@ -2134,7 +2432,9 @@ If you have one index per user, you may want to perform a batch operations acros
 We expose a method to perform this type of batch:
 
 
+
 The attribute **action** can have these values:
+
 - addObject
 - updateObject
 - partialUpdateObject
@@ -2230,15 +2530,16 @@ keys = index.ListUserKeys();
 ```
 
 Each key is defined by a set of permissions that specify the authorized actions. The different permissions are:
- * **search**: Allowed to search.
- * **browse**: Allowed to retrieve all index contents via the browse API.
- * **addObject**: Allowed to add/update an object in the index.
- * **deleteObject**: Allowed to delete an existing object.
- * **deleteIndex**: Allowed to delete index content.
- * **settings**: allows to get index settings.
- * **editSettings**: Allowed to change index settings.
- * **analytics**: Allowed to retrieve analytics through the analytics API.
- * **listIndexes**: Allowed to list all accessible indexes.
+
+* **search**: Allowed to search.
+* **browse**: Allowed to retrieve all index contents via the browse API.
+* **addObject**: Allowed to add/update an object in the index.
+* **deleteObject**: Allowed to delete an existing object.
+* **deleteIndex**: Allowed to delete index content.
+* **settings**: allows to get index settings.
+* **editSettings**: Allowed to change index settings.
+* **analytics**: Allowed to retrieve analytics through the analytics API.
+* **listIndexes**: Allowed to list all accessible indexes.
 
 ### Add user key - `AddUserKey`
 
@@ -2397,6 +2698,7 @@ System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 ### Update user key - `UpdateUserKey`
 
 To update the permissions of an existing key:
+
 ```csharp
 // Update an existing global API key that is valid for 300 seconds
 var res = client.UpdateUserKey("myAPIKey", new String[] { "search" }, 300, 0, 0, new string[]{"dev_*"});
@@ -2409,7 +2711,9 @@ res = index.UpdateUserKey("myAPIKey", new String[] { "search" }, 300, 100, 20, n
 // res = await index.UpdateUserKeyAsync("myAPIKey", new String[] { "search" }, 300, 100, 20, new string[]{"dev_*"});
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 ```
+
 To get the permissions of a given key:
+
 ```csharp
 // Gets the rights of a global key
 var res = client.GetUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
@@ -2423,7 +2727,9 @@ res = index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
 ```
 
 ### Delete user key - `DeleteUserKey`
+
 To delete an existing key:
+
 ```csharp
 // Deletes a global key
 client.DeleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
@@ -2440,6 +2746,7 @@ client.DeleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
 
 
 To get the permissions of a given key:
+
 ```csharp
 // Gets the rights of a global key
 var res = client.GetUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
@@ -2452,59 +2759,19 @@ res = index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
 // res = await index.GetUserKeyACLAsync("71671c38001bf3ac857bc82052485107");
 ```
 
-### Multiple queries - `multipleQueries`
-
-You can send multiple queries with a single API call using a batch of queries:
-
-```csharp
-// perform 3 queries in a single API call:
-//  - 1st query targets index `categories`
-//  - 2nd and 3rd queries target index `products`
-
-var indexQueries = new List<IndexQuery>();
-
-indexQueries.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPerPage(3)));
-indexQueries.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetFilters("_tags:promotion"));
-indexQueries.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
-
-var res = _client.MultipleQueries(indexQueries);
-// Asynchronous
-// var res = await _client.MultipleQueriesAsync(indexQueries);
-
-System.Diagnostics.Debug.WriteLine(res["results"]);
-```
-
-You can specify a `strategy` parameter to optimize your multiple queries:
-- `none`: Execute the sequence of queries until the end.
-- `stopIfEnoughMatches`: Execute the sequence of queries until the number of hits is reached by the sum of hits.
-
-#### Response
-
-The resulting JSON contains the following fields:
-
-- `results` (array): The results for each request, in the order they were submitted. The contents are the same as in [Search in an index](#search-in-an-index---search).
-
-    Each result also includes the following additional fields:
-
-    - `index` (string): The name of the targeted index.
-
-    - `processed` (boolean, optional): *Note: Only returned when `strategy` is `stopIfEnoughmatches`.* Whether the query was processed.
-
-
-
-
 ### Get Logs - `getLogs`
 
 You can retrieve the latest logs via this API. Each log entry contains:
- * Timestamp in ISO-8601 format
- * Client IP
- * Request Headers (API Key is obfuscated)
- * Request URL
- * Request method
- * Request body
- * Answer HTTP code
- * Answer body
- * SHA1 ID of entry
+
+* Timestamp in ISO-8601 format
+* Client IP
+* Request Headers (API Key is obfuscated)
+* Request URL
+* Request method
+* Request body
+* Answer HTTP code
+* Answer body
+* SHA1 ID of entry
 
 You can retrieve the logs of your last 1,000 API calls and browse them using the offset/length parameters:
 
@@ -2604,6 +2871,7 @@ Everything that can be done using the REST API can be done using those clients.
 
 The REST API lets your interact directly with Algolia platforms from anything that can send an HTTP request
 [Go to the REST API doc](https://algolia.com/doc/rest)
+
 
 
 
