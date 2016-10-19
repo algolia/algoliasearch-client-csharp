@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.6.7 (2016-10-19)
+- Fixing project configuration
+
 3.6.6 (2016-09-01)
 - Support to attributeToRetrieve in GetObjects
 
