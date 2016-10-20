@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.6.8 (2016-10-20)
+- Changing Project release configuration
+- Adding support to restrictSources and restrictIndices
+- Adding support to SearchFacet
+
 3.6.7 (2016-10-19)
 - Fixing project configuration
 
