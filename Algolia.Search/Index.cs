@@ -1240,5 +1240,35 @@ namespace Algolia.Search
         {
             return SaveSynonymAsync(objectID, content, forwardToSlaves).GetAwaiter().GetResult();
         }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.SearchForFacetsAsync"/>.
+        /// </summary>
+        /// <param name="facetName">Name of the facet</param>
+        /// <param name="facetQuery">Current query</param>
+        /// <param name="queryParams">Optional query parameter</param>
+        public JObject SearchForFacets(string facetName, string facetQuery, Query queryParams = null)
+        {
+            return SearchForFacetsAsync(facetName, facetQuery, queryParams).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Search for facets async
+        /// </summary>
+        /// <param name="facetName">Name of the facet</param>
+        /// <param name="facetQuery">Current Query</param>
+        /// <param name="queryParams">Optional query parameter</param>
+        public Task<JObject> SearchForFacetsAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken))
+        {
+            if(queryParams == null)
+            {
+                queryParams = new Query();
+            }
+            queryParams.AddCustomParameter("facetQuery", facetQuery);
+            string paramsString = queryParams.GetQueryString();
+            Dictionary<string, object> body = new Dictionary<string, object>();
+            body["params"] = paramsString;
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token);
+        }
     }
 }
