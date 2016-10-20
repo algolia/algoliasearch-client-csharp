@@ -822,6 +822,28 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Restrict an API key to a list of indices
+        /// </summary>
+        /// <param name="indices"></param>
+        /// <returns></returns>
+        public Query SetRestrictIndices(IEnumerable<string> indices)
+        {
+            this.restrictIndices = indices;
+            return this;
+        }
+
+        /// <summary>
+        /// Restrict an API key to a specific IPv4
+        /// </summary>
+        /// <param name="sources"></param>
+        /// <returns></returns>
+        public Query SetRestrictSources(string sources)
+        {
+            this.restrictSources = sources;
+            return this;
+        }
+
+        /// <summary>
         /// Set the object attributes that you want to use for faceting.
         /// </summary>
         /// <param name="facets">List of object attributes that you want to use for faceting. Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.</param>
@@ -1250,6 +1272,27 @@ namespace Algolia.Search
                 stringBuilder += "userToken=";
                 stringBuilder +=  Uri.EscapeDataString(userToken);
             }
+            if (restrictIndices != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "restrictIndices=";
+                bool first = true;
+                foreach (string attr in this.facets)
+                {
+                    if (!first)
+                        stringBuilder += ',';
+                    stringBuilder += Uri.EscapeDataString(attr);
+                    first = false;
+                }
+            }
+            if (restrictSources != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "restrictSources=";
+                stringBuilder += Uri.EscapeDataString(restrictSources);
+            }
             if (referers != null)
             {
                 if (stringBuilder.Length > 0)
@@ -1318,6 +1361,8 @@ namespace Algolia.Search
         private int? maxValuesPerFacets;
         private string restrictSearchableAttributes;
         private string userToken;
+        private IEnumerable<string> restrictIndices;
+        private string restrictSources;
         private string referers;
     }
 }
