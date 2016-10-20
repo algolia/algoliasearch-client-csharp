@@ -1030,12 +1030,12 @@ namespace NUnit.Framework.Test
                 JObject.Parse(@"{""name"": ""Hotel E"", ""stars"":""****"", ""facilities"":[""spa""], ""city"": ""New York"", ""rooms"": 125}")
             });
             _index.WaitTask((task["taskID"].ToString()));
-            var res = _index.SearchForFacets("city", "pari");
+            var res = _index.SearchFacet("city", "pari");
             Assert.AreEqual(1, res["facetHits"].ToObject<JArray>().Count);
 
             string[] facetFilter = { "facilities:wifi" };
             var query = new Query().SetFacetFilters(facetFilter).SetNumericFilters("rooms>200");
-            res = _index.SearchForFacets("city", "pari", query);
+            res = _index.SearchFacet("city", "pari", query);
             Assert.AreEqual(1, res["facetHits"].ToObject<JArray>().Count);
         }
     }
