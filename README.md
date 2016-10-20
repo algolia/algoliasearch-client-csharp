@@ -48,7 +48,7 @@ Indexing
 
 1. [Add objects](#add-objects---addobjects)
 1. [Update objects](#update-objects---saveobjects)
-1. [Partial update](#partial-update---partialupdateobjects)
+1. [Partial update objects](#partial-update-objects---partialupdateobjects)
 1. [Delete objects](#delete-objects---deleteobjects)
 
 Settings
@@ -396,7 +396,7 @@ The server response will look like:
 
 - `query` (string): An echo of the query text. See the [`query`](#query) search parameter.
 
-- `queryAfterRemoval` (string, optional): *Note: Only returned when [`removeWordsIfNoResults`](#removewordsifnoresults) is set.* A markup text indicating which parts of the original query have been removed in order to retrieve a non-empty result set. The removed parts are surrounded by `<em>` tags.
+- `queryAfterRemoval` (string, optional): *Note: Only returned when [`removeWordsIfNoResults`](#removewordsifnoresults) is set to `lastWords` or `firstWords`.* A markup text indicating which parts of the original query have been removed in order to retrieve a non-empty result set. The removed parts are surrounded by `<em>` tags.
 
 - `params` (string, URL-encoded): An echo of all search parameters.
 
@@ -607,25 +607,43 @@ res = index.GetObjects(new String[] {"myID1", "myID2"});
 
 Each entry in an index has a unique identifier called `objectID`. There are two ways to add an entry to the index:
 
- 1. Using automatic `objectID` assignment. You will be able to access it in the answer.
- 2. Supplying your own `objectID`.
+ 1. Supplying your own `objectID`.
+ 2. Using automatic `objectID` assignment. You will be able to access it in the answer.
 
 You don't need to explicitly create an index, it will be automatically created the first time you add an object.
 Objects are schema less so you don't need any configuration to start indexing. If you wish to configure things, the settings section provides details about advanced settings.
 
-Example with automatic `objectID` assignment:
+Example with automatic `objectID` assignments:
 
 ```csharp
-var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                                           ""lastname"":""Barninger""}"));
+List<JObject> objs = new List<JObject>();
+objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
+                          ""lastname"":""Speach""}"));
+var res = index.AddObjects(objs);
 // Asynchronous
-// var res = await index.AddObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                                                         ""lastname"":""Barninger""}"));
-
-System.Diagnostics.Debug.WriteLine("objectID=" + res["objectID"]);           
+// var res = await index.AddObjectsAsync(objs);
+System.Diagnostics.Debug.WriteLine(res);
 ```
 
-Example with manual `objectID` assignment:
+Example with manual `objectID` assignments:
+
+```csharp
+List<JObject> objs = new List<JObject>();
+objs.Add(JObject.Parse(@"{""objectID"":""1"",
+                          ""firstname"":""Jimmie"",
+                          ""lastname"":""Barninger""}"));
+objs.Add(JObject.Parse(@"{""objectID"":""2"",
+                          ""firstname"":""Warren"",
+                          ""lastname"":""Speach""}"));
+var res = index.AddObjects(objs);
+// Asynchronous
+// var res = await index.AddObjectsAsync(objs);
+System.Diagnostics.Debug.WriteLine(res);
+```
+
+To add a single object, use the `[Add object](#add-object---addobject)` method:
 
 ```csharp
 var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"",
@@ -636,7 +654,6 @@ var res = index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"",
 System.Diagnostics.Debug.WriteLine("objectID=" + res["objectID"]);
 ```
 
-
 ### Update objects - `SaveObjects`
 
 You have three options when updating an existing object:
@@ -645,7 +662,23 @@ You have three options when updating an existing object:
  2. Replace only some attributes.
  3. Apply an operation to some attributes.
 
-Example on how to replace all attributes of an existing object:
+Example on how to replace all attributes existing objects:
+
+```csharp
+List<JObject> objs = new List<JObject>();
+objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger"",
+                          ""objectID"":""myID1""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
+                          ""lastname"":""Speach"",
+                          ""objectID"": ""myID2""}"));
+var res = index.SaveObjects(objs);
+// Asynchronous
+var res = await index.SaveObjectsAsync(objs);
+System.Diagnostics.Debug.WriteLine(res);
+```
+
+To update a single object, you can use the `[Update object](#update-object---saveobject) method:
 
 ```csharp
 index.SaveObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
@@ -659,7 +692,8 @@ index.SaveObject(JObject.Parse(@"{""firstname"":""Jimmie"",
 //                                              ""objectID"":""myID""}"));
 ```
 
-### Partial update - `PartialUpdateObjects`
+
+### Partial update objects - `PartialUpdateObjects`
 
 You have many ways to update an object's attributes:
 
@@ -740,10 +774,36 @@ index.PartialUpdateObject(JObject.Parse(@"{""price"":{""value"": 42, ""_operatio
 Note: Here we are decrementing the value by `42`. To decrement just by one, put
 `value:1`.
 
+To partial update multiple objects using one API call, you can use the `[Partial update objects](#partial-update-objects---partialupdateobjects)` method:
+
+```csharp
+List<JObject> objs = new List<JObject>();
+objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""objectID"":""myID1""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
+                          ""objectID"": ""myID2""}"));
+var res = index.PartialUpdateObjects(objs);
+// Asynchronous
+// var res = await index.PartialUpdateObjectsAsync(objs);
+System.Diagnostics.Debug.WriteLine(res);
+```
+
 
 ### Delete objects - `DeleteObjects`
 
-You can delete an object using its `objectID`:
+You can delete objects using their `objectID`:
+
+```csharp
+List<string> ids = new List<string>();
+ids.Add(@"myID1");
+ids.Add(@"myID2");
+var res = index.DeleteObjects(ids);
+// Asynchronous
+// var res = await index.DeleteObjectsAsync(ids);
+System.Diagnostics.Debug.WriteLine(res);
+```
+
+To delete a single object, you can use the `[Delete object](#delete-object---deleteobject)` method:
 
 ```csharp
 index.DeleteObject("myID");
@@ -2246,6 +2306,12 @@ even if he shares his `IP` with another user.
 String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("_tags:user_42").SetUserToken("42"));
 ```
 
+#### Network restriction
+
+For more protection against API key leaking and reuse you can restrict the key to be valid only from specific IPv4 networks
+
+
+
 
 
 
@@ -2363,68 +2429,6 @@ JObject results = index.SearchSynonyms("street", new Index.SynonymType[] {Index.
 ### Custom batch - `Batch`
 
 You may want to perform multiple operations with one API call to reduce latency.
-We expose four methods to perform batch operations:
-
-* Add objects - `AddObjects`: Add an array of objects using automatic `objectID` assignment.
-* Update objects - `SaveObjects`: Add or update an array of objects that contains an `objectID` attribute.
-* Delete objects - `DeleteObjects`: Delete an array of objectIDs.
-* Partial update - `PartialUpdateObjects`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
-
-Example using automatic `objectID` assignment:
-
-```csharp
-List<JObject> objs = new List<JObject>();
-objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Barninger""}"));
-objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
-                          ""lastname"":""Speach""}"));
-var res = index.AddObjects(objs);
-// Asynchronous
-// var res = await index.AddObjectsAsync(objs);
-System.Diagnostics.Debug.WriteLine(res);
-```
-
-Example with user defined `objectID` (add or update):
-
-```csharp
-List<JObject> objs = new List<JObject>();
-objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Barninger"",
-                          ""objectID"":""myID1""}"));
-objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
-                          ""lastname"":""Speach"",
-                          ""objectID"": ""myID2""}"));
-var res = index.SaveObjects(objs);
-// Asynchronous
-var res = await index.SaveObjectsAsync(objs);
-System.Diagnostics.Debug.WriteLine(res);
-```
-
-Example that deletes a set of records:
-
-```csharp
-List<string> ids = new List<string>();
-ids.Add(@"myID1");
-ids.Add(@"myID2");
-var res = index.DeleteObjects(ids);
-// Asynchronous
-// var res = await index.DeleteObjectsAsync(ids);
-System.Diagnostics.Debug.WriteLine(res);
-```
-
-Example that updates only the `firstname` attribute:
-
-```csharp
-List<JObject> objs = new List<JObject>();
-objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""objectID"":""myID1""}"));
-objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
-                          ""objectID"": ""myID2""}"));
-var res = index.PartialUpdateObjects(objs);
-// Asynchronous
-// var res = await index.PartialUpdateObjectsAsync(objs);
-System.Diagnostics.Debug.WriteLine(res);
-```
 
 
 
