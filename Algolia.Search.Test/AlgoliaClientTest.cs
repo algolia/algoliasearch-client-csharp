@@ -1016,5 +1016,27 @@ namespace NUnit.Framework.Test
             res = _index.SearchSynonyms("", new Index.SynonymType[] {}, 0, 5);
             Assert.AreEqual(0, res["nbHits"].ToObject<int>());
         }
+
+        [Test]
+        public void SearchForFacets()
+        {
+            clearTest();
+            _index.SetSettings(JObject.Parse(@"{""attributesForFacetting"":[""searchable(city)"", ""facilities""]}"));
+            JObject task = _index.AddObjects(new JObject[] {
+                JObject.Parse(@"{""name"": ""Hotel A"", ""stars"":""*"", ""facilities"":[""wifi"", ""bath"", ""spa""], ""city"": ""Paris"", ""rooms"": 10}"),
+                JObject.Parse(@"{""name"": ""Hotel B"", ""stars"":""*"", ""facilities"":[""bath""], ""city"": ""Paris"", ""rooms"": 50}"),
+                JObject.Parse(@"{""name"": ""Hotel C"", ""stars"":""**"", ""facilities"":[""bath""], ""city"": ""San Francisco"", ""rooms"": 3}"),
+                JObject.Parse(@"{""name"": ""Hotel D"", ""stars"":""****"", ""facilities"":[""wifi""], ""city"": ""Paris"", ""rooms"": 300}"),
+                JObject.Parse(@"{""name"": ""Hotel E"", ""stars"":""****"", ""facilities"":[""spa""], ""city"": ""New York"", ""rooms"": 125}")
+            });
+            _index.WaitTask((task["taskID"].ToString()));
+            var res = _index.SearchForFacets("city", "pari");
+            Assert.AreEqual(1, res["facetHits"].ToObject<JArray>().Count);
+
+            string[] facetFilter = { "facilities:wifi" };
+            var query = new Query().SetFacetFilters(facetFilter).SetNumericFilters("rooms>200");
+            res = _index.SearchForFacets("city", "pari", query);
+            Assert.AreEqual(1, res["facetHits"].ToObject<JArray>().Count);
+        }
     }
 }
