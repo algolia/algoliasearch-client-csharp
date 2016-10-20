@@ -2241,7 +2241,7 @@ index.search('something', function(err, content) {
 Every filter set in the API key will always be applied. On top of that [filters](#filters) can be applied
 in the query parameters.
 
-```java
+```csharp
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
 String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("_tags:user_42"));
@@ -2268,18 +2268,23 @@ by modifying the code from the browser.
 
 You can set a Unix timestamp used to define the expiration date of the API key
 
-
+```csharp
+# generate a public API key that is valid for 1 hour:
+string date = (DateTime.UtcNow.AddHours(1) - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString(CultureInfo.InvariantCulture);
+var validUntil = Math.Round(Double.Parse(date, CultureInfo.InvariantCulture)).ToString();
+string publicKey = client.GenerateSecuredApiKey("YourSearchOnlyApiKey", new Query().AddCustomParameter("validUntil", unix));
+```
 
 #### Index Restriction
 
 You can restrict the key to a list of index names allowed for the secured API key
 
-```java
+```csharp
 # generate a public API key that is restricted to 'index1' and 'index2':
 restrictIndices = new List<String>();
-restrictIndices.add('index1');
-restrictIndices.add('index2');
-String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetRestrictIndices(restrictIndices));
+restrictIndices.Add('index1');
+restrictIndices.Add('index2');
+String publicKey = client.GenerateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetRestrictIndices(restrictIndices));
 ```
 
 #### Rate Limiting
@@ -2300,17 +2305,19 @@ When set, a unique user will be identified by his `IP + user_token` instead of o
 This allows you to restrict a single user to performing a maximum of `N` API calls per hour,
 even if he shares his `IP` with another user.
 
-```java
+```csharp
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
-String publicKey = client.generateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("_tags:user_42").SetUserToken("42"));
+string publicKey = client.GenerateSecuredApiKey("SearchOnlyApiKeyKeptPrivate", new Query().SetFilters("_tags:user_42").SetUserToken("42"));
 ```
 
 #### Network restriction
 
 For more protection against API key leaking and reuse you can restrict the key to be valid only from specific IPv4 networks
 
-
+```java
+string publicKey = client.GenerateSecuredApiKey("YourSearchOnlyApiKey", new Query().setRestrictSources("192.168.1.0/24"));
+```
 
 
 
