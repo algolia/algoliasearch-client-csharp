@@ -1242,14 +1242,14 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="Index.SearchForFacetsAsync"/>.
+        /// Synchronously call <see cref="Index.SearchFacetAsync"/>.
         /// </summary>
         /// <param name="facetName">Name of the facet</param>
         /// <param name="facetQuery">Current query</param>
         /// <param name="queryParams">Optional query parameter</param>
-        public JObject SearchForFacets(string facetName, string facetQuery, Query queryParams = null)
+        public JObject SearchFacet(string facetName, string facetQuery, Query queryParams = null)
         {
-            return SearchForFacetsAsync(facetName, facetQuery, queryParams).GetAwaiter().GetResult();
+            return SearchFacetAsync(facetName, facetQuery, queryParams).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1258,7 +1258,7 @@ namespace Algolia.Search
         /// <param name="facetName">Name of the facet</param>
         /// <param name="facetQuery">Current Query</param>
         /// <param name="queryParams">Optional query parameter</param>
-        public Task<JObject> SearchForFacetsAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchFacetAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken))
         {
             if(queryParams == null)
             {
