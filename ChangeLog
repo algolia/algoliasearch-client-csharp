@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.6.9 (2016-10-28)
+- Adding support to comma separated list of language for ignorePlural
+
 3.6.8 (2016-10-20)
 - Changing Project release configuration
 - Adding support to restrictSources and restrictIndices
