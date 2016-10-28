@@ -725,6 +725,7 @@ namespace NUnit.Framework.Test
             query.SetNbHitsPerPage(1);
             string[] attr = { "firstname" };
             query.SetAttributesToHighlight(attr);
+            query.IgnorePlural(new IgnorePluralList { Ignored = "af,ar" });
             query.SetMinWordSizeToAllowOneTypo(1);
             query.SetMinWordSizeToAllowTwoTypos(2);
             query.AddInsidePolygon(0.01F, 0.1F);

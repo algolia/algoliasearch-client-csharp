@@ -50,6 +50,7 @@
     <Compile Include="IndexHelper.cs" />
     <Compile Include="IndexQuery.cs" />
     <Compile Include="Models\AllRadius.cs" />
+    <Compile Include="Models\IgnorePlurals.cs" />
     <Compile Include="Models\RemoveStopWords.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />

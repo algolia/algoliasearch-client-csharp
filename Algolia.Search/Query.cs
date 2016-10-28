@@ -307,9 +307,18 @@ namespace Algolia.Search
         /// <summary>
         /// If set to true, plural won't be considered as a typo (for example car/cars will be considered as equals). Defaults to false.
         /// </summary>
-        public Query IgnorePlural(bool enabled)
+        public Query IgnorePlural(bool ignorePluralsBool)
         {
-            ignorePlural = enabled;
+            var ignorePlurals = new IgnorePluralsBool { Ignored = ignorePluralsBool };
+            return IgnorePlural(ignorePlurals);
+        }
+
+        /// <summary>
+        /// ignorePlural accept a comma separated string of languages "af,ar,az"
+        /// </summary>
+        public Query IgnorePlural(IIgnorePlurals ignorePlurals)
+        {
+            this.ignorePlural = ignorePlurals.GetValue();
             return this;
         }
 
@@ -1008,12 +1017,15 @@ namespace Algolia.Search
                 stringBuilder += "getRankingInfo=";
                 stringBuilder += getRankingInfo.Value ? "true" : "false";
             }
-            if (ignorePlural.HasValue) {
+
+            if (!String.IsNullOrEmpty(ignorePlural))
+            {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "ignorePlural=";
-                stringBuilder += ignorePlural.Value ? "true" : "false";
+                stringBuilder += ignorePlural;
             }
+
             if (distinct.HasValue)
             {
                 if (stringBuilder.Length > 0)
@@ -1327,7 +1339,7 @@ namespace Algolia.Search
         private string aroundRadius;
         private int? minWordSizeForApprox2;
         private bool? getRankingInfo;
-        private bool? ignorePlural;
+        private string ignorePlural;
         private int? distinct;
         private bool? advancedSyntax;
         private string removeStopWords;
