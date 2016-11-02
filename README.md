@@ -338,6 +338,8 @@ The server response will look like:
 
 #### Fields
 
+<!--PARAMETERS_LINK-->
+
 - `hits` (array): The hits returned by the search, sorted according to the ranking formula.
 
     Hits are made of the JSON objects that you stored in the index; therefore, they are mostly schema-less. However, Algolia does enrich them with a few additional fields:
@@ -440,6 +442,7 @@ When [`facets`](#facets) is non-empty, the following additional fields are retur
 
 - `exhaustiveFacetsCount` (boolean): Whether the counts are exhaustive (`true`) or approximate (`false`). *Note: When using [`distinct`](#distinct), the facet counts cannot be exhaustive.*
 
+<!--/PARAMETERS_LINK-->
 
 ### Search Parameters
 
