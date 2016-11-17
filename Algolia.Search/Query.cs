@@ -1290,7 +1290,7 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "restrictIndices=";
                 bool first = true;
-                foreach (string attr in this.facets)
+                foreach (string attr in this.restrictIndices)
                 {
                     if (!first)
                         stringBuilder += ',';
