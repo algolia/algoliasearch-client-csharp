@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.6.10 (2016-11-17)
+- Fix issue on restrictIndices
+
 3.6.9 (2016-10-28)
 - Adding support to comma separated list of language for ignorePlural
 
