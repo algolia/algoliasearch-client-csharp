@@ -35,6 +35,7 @@ using PCLCrypto;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Utils;
+using Algolia.Search.Models;
 
 namespace Algolia.Search
 {
@@ -54,6 +55,9 @@ namespace Algolia.Search
         private HttpMessageHandler _mock;
         private bool _continueOnCapturedContext;
         private ArrayUtils<string> _arrayUtils;
+        private Dictionary<string, HostStatus> _readHostsStatus = new Dictionary<string, HostStatus>();
+        private Dictionary<string, HostStatus> _writeHostsStatus = new Dictionary<string, HostStatus>();
+        public int _dsnInternalTimeout = 60*5;
 
         /// <summary>
         /// Algolia Search initialization
@@ -93,7 +97,6 @@ namespace Algolia.Search
                 var baseWriteHosts = applicationId + ".algolia.net";
                 var shuffledWriteHosts = new List<string> { applicationId + "-1.algolianet.com", applicationId + "-2.algolianet.com", applicationId + "-3.algolianet.com" };
                 _writeHosts = getHosts(baseWriteHosts, shuffledWriteHosts);
-
             }
 
             _applicationId = applicationId;
@@ -131,6 +134,35 @@ namespace Algolia.Search
             var shuffledHosts = _arrayUtils.Shuffle(hosts);
             result.AddRange(shuffledHosts);
             return result.ToArray();
+        }
+
+        public HostStatus getHostStatus(bool up)
+        {
+            return new HostStatus { Up = up, LastModified = DateTime.Now };
+        }
+
+        public string[] filterOnActiveHosts(string[] _hosts, bool isQuery)
+        {
+
+            var validHosts = new List<string> { };
+            var statusHosts = isQuery ? _readHostsStatus : _writeHostsStatus;
+            foreach (var host in _hosts)
+            {
+                if(statusHosts.ContainsKey(host))
+                {
+                    var canRetry = (DateTime.Now - statusHosts[host].LastModified).TotalSeconds > _dsnInternalTimeout;
+                    if (statusHosts[host].Up || canRetry)
+                    {
+                        validHosts.Add(host);
+                    }
+                } else
+                {
+                    validHosts.Add(host);
+                }
+               
+            }
+
+            return validHosts.Count > 0 ? validHosts.ToArray() : _hosts;
         }
 
         /// <summary>
@@ -795,22 +827,15 @@ namespace Algolia.Search
         {
             string[] hosts = null;
             HttpClient client = null;
-            if (type == callType.Write)
+            if (type == callType.Search)
             {
-                hosts = _writeHosts;
-                client = _buildHttpClient;
+                hosts = filterOnActiveHosts(_readHosts, true);
+                client = _searchHttpClient;
             }
             else
             {
-                hosts = _readHosts;
-                if (type == callType.Read)
-                {
-                    client = _buildHttpClient;
-                }
-                else
-                {
-                    client = _searchHttpClient;
-                }
+                hosts = filterOnActiveHosts(_writeHosts, false);
+                client = _buildHttpClient;
             }
 
             Dictionary<string, string> errors = new Dictionary<string, string>();
@@ -843,6 +868,13 @@ namespace Algolia.Search
                         {
                             string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
                             JObject obj = JObject.Parse(serializedJSON);
+                            if(type == callType.Search)
+                            {
+                                _readHostsStatus[host] = getHostStatus(true);
+                            } else
+                            {
+                                _writeHostsStatus[host] = getHostStatus(true);
+                            }
                             return obj;
                         }
                         else
@@ -871,6 +903,14 @@ namespace Algolia.Search
                     }
                     catch (AlgoliaException)
                     {
+                        if (type == callType.Search)
+                        {
+                            _readHostsStatus[host] = getHostStatus(false);
+                        }
+                        else
+                        {
+                            _writeHostsStatus[host] = getHostStatus(false);
+                        }
                         throw;
                     }
                     catch (TaskCanceledException e)
@@ -879,10 +919,26 @@ namespace Algolia.Search
                         {
                             throw e;
                         }
+                        if (type == callType.Search)
+                        {
+                            _readHostsStatus[host] = getHostStatus(false);
+                        }
+                        else
+                        {
+                            _writeHostsStatus[host] = getHostStatus(false);
+                        }
                         errors.Add(host, "Timeout expired");
                     }
                     catch (Exception ex)
                     {
+                        if (type == callType.Search)
+                        {
+                            _readHostsStatus[host] = getHostStatus(false);
+                        }
+                        else
+                        {
+                            _writeHostsStatus[host] = getHostStatus(false);
+                        }
                         errors.Add(host, ex.Message);
                     }
 

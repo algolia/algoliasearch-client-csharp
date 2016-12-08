@@ -8,6 +8,11 @@ using System.Collections;
 using Algolia.Search;
 using System.Threading;
 using Algolia.Search.Models;
+using RichardSzalay.MockHttp;
+using System.Net.Http;
+using System.Net;
+using System.Net.Http.Headers;
+
 
 namespace NUnit.Framework.Test
 {
@@ -953,10 +958,10 @@ namespace NUnit.Framework.Test
             };
 
             var _client = new AlgoliaClient(_testApplicationID, _testApiKey, hosts);
-            _client.setTimeout(0.5, 0.5);
+            _client.setTimeout(1, 1);
             var startTime = DateTime.Now;
             var index = _client.ListIndexes();
-            Assert.IsTrue(startTime.AddSeconds(0.5) < DateTime.Now);
+            Assert.IsTrue(startTime.AddSeconds(1) < DateTime.Now);
         }
 
         private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
@@ -1038,6 +1043,32 @@ namespace NUnit.Framework.Test
             var query = new Query().SetFacetFilters(facetFilter).SetNumericFilters("rooms>200");
             res = _index.SearchFacet("city", "pari", query);
             Assert.AreEqual(1, res["facetHits"].ToObject<JArray>().Count);
+        }
+
+        [Test]
+        public void TestRetryStrategy_Build()
+        {
+            var applicationId = "test";
+            var mockHttp = new MockHttpMessageHandler();
+            var hosts = new string[] { applicationId + "-1.algolianet.com", applicationId + "-2.algolianet.com" };
+
+            mockHttp.When(HttpMethod.Get, "https://" + hosts[0] + "/1/indexes/").Respond(HttpStatusCode.RequestTimeout);
+            mockHttp.When(HttpMethod.Get, "https://" + hosts[0] + "/1/indexes/test/settings").Respond("application/json", "{\"fromFirstHost\":[]}");
+            mockHttp.When(HttpMethod.Get, "https://" + hosts[0] + "/1/indexes/test/browse").Respond("application/json", "{\"fromFirstHost\":[]}");
+
+            mockHttp.When(HttpMethod.Get, "https://" + hosts[1] + "/1/indexes/").Respond("application/json", "{\"fromSecondHost\":[]}");
+            mockHttp.When(HttpMethod.Get, "https://" + hosts[1] + "/1/indexes/test/settings").Respond("application/json", "{\"fromSecondHost\":[]}");
+            mockHttp.When(HttpMethod.Get, "https://" + hosts[1] + "/1/indexes/test/browse").Respond("application/json", "{\"fromSecondHost\":[]}");
+
+            var client = new AlgoliaClient("test", "test", hosts, mockHttp);
+            client._dsnInternalTimeout = 2;
+            Assert.AreEqual(JObject.Parse("{\"fromSecondHost\":[]}").ToString(), client.ListIndexes().ToString());
+
+            //first host back up again but no retry because lastModified < _dsnInternalTimeout, stick with second host
+            Assert.AreEqual(JObject.Parse("{\"fromSecondHost\":[]}").ToString(), client.InitIndex("test").GetSettings().ToString());
+            Thread.Sleep(10000);
+            //lastModified > _dsnInternalTimeout, retry on first host
+            Assert.AreEqual(JObject.Parse("{\"fromFirstHost\":[]}").ToString(), client.InitIndex("test").Browse().ToString());
         }
     }
 }
