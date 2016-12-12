@@ -136,7 +136,7 @@ namespace Algolia.Search
             return result.ToArray();
         }
 
-        public HostStatus getHostStatus(bool up)
+        public HostStatus setHostStatus(bool up)
         {
             return new HostStatus { Up = up, LastModified = DateTime.Now };
         }
@@ -834,7 +834,9 @@ namespace Algolia.Search
             }
             else
             {
-                hosts = filterOnActiveHosts(_writeHosts, false);
+                hosts = type == callType.Read
+                    ? filterOnActiveHosts(_readHosts, true)
+                    : filterOnActiveHosts(_writeHosts, false);
                 client = _buildHttpClient;
             }
 
@@ -868,12 +870,12 @@ namespace Algolia.Search
                         {
                             string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
                             JObject obj = JObject.Parse(serializedJSON);
-                            if(type == callType.Search)
+                            if(type == callType.Search || type == callType.Read)
                             {
-                                _readHostsStatus[host] = getHostStatus(true);
+                                _readHostsStatus[host] = setHostStatus(true);
                             } else
                             {
-                                _writeHostsStatus[host] = getHostStatus(true);
+                                _writeHostsStatus[host] = setHostStatus(true);
                             }
                             return obj;
                         }
@@ -903,13 +905,13 @@ namespace Algolia.Search
                     }
                     catch (AlgoliaException)
                     {
-                        if (type == callType.Search)
+                        if (type == callType.Search || type == callType.Read)
                         {
-                            _readHostsStatus[host] = getHostStatus(false);
+                            _readHostsStatus[host] = setHostStatus(false);
                         }
                         else
                         {
-                            _writeHostsStatus[host] = getHostStatus(false);
+                            _writeHostsStatus[host] = setHostStatus(false);
                         }
                         throw;
                     }
@@ -919,25 +921,25 @@ namespace Algolia.Search
                         {
                             throw e;
                         }
-                        if (type == callType.Search)
+                        if (type == callType.Search || type == callType.Read)
                         {
-                            _readHostsStatus[host] = getHostStatus(false);
+                            _readHostsStatus[host] = setHostStatus(false);
                         }
                         else
                         {
-                            _writeHostsStatus[host] = getHostStatus(false);
+                            _writeHostsStatus[host] = setHostStatus(false);
                         }
                         errors.Add(host, "Timeout expired");
                     }
                     catch (Exception ex)
                     {
-                        if (type == callType.Search)
+                        if (type == callType.Search || type == callType.Read)
                         {
-                            _readHostsStatus[host] = getHostStatus(false);
+                            _readHostsStatus[host] = setHostStatus(false);
                         }
                         else
                         {
-                            _writeHostsStatus[host] = getHostStatus(false);
+                            _writeHostsStatus[host] = setHostStatus(false);
                         }
                         errors.Add(host, ex.Message);
                     }
