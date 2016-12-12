@@ -49,6 +49,7 @@
     <Compile Include="Index.cs" />
     <Compile Include="IndexHelper.cs" />
     <Compile Include="IndexQuery.cs" />
+    <Compile Include="Models\HostStatus.cs" />
     <Compile Include="Models\AllRadius.cs" />
     <Compile Include="Models\IgnorePlurals.cs" />
     <Compile Include="Models\RemoveStopWords.cs" />
