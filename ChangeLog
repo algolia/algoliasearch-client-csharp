@@ -1,6 +1,10 @@
 Changelog
 =========
 
+3.7.0 (2016-12-12)
+- Fix Naming SearchForFacetValues
+- Implement new DSN retry strategy
+
 3.6.10 (2016-11-17)
 - Fix issue on restrictIndices
 
