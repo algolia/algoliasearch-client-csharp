@@ -1242,7 +1242,18 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="Index.SearchFacetAsync"/>.
+        /// Synchronously call <see cref="Index.SearchForFacetValuestAsync"/>.
+        /// </summary>
+        /// <param name="facetName">Name of the facet</param>
+        /// <param name="facetQuery">Current query</param>
+        /// <param name="queryParams">Optional query parameter</param>
+        public JObject SearchForFacetValues(string facetName, string facetQuery, Query queryParams = null)
+        {
+            return SearchForFacetValuesAsync(facetName, facetQuery, queryParams).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        ///= kept for backward compatibility - Synchronously call <see cref="Index.SearchFacetAsync"/>.
         /// </summary>
         /// <param name="facetName">Name of the facet</param>
         /// <param name="facetQuery">Current query</param>
@@ -1261,6 +1272,25 @@ namespace Algolia.Search
         public Task<JObject> SearchFacetAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken))
         {
             if(queryParams == null)
+            {
+                queryParams = new Query();
+            }
+            queryParams.AddCustomParameter("facetQuery", facetQuery);
+            string paramsString = queryParams.GetQueryString();
+            Dictionary<string, object> body = new Dictionary<string, object>();
+            body["params"] = paramsString;
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token);
+        }
+
+        /// <summary>
+        /// Search for facets async = kept for backward compatibility
+        /// </summary>
+        /// <param name="facetName">Name of the facet</param>
+        /// <param name="facetQuery">Current Query</param>
+        /// <param name="queryParams">Optional query parameter</param>
+        public Task<JObject> SearchForFacetValuesAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken))
+        {
+            if (queryParams == null)
             {
                 queryParams = new Query();
             }
