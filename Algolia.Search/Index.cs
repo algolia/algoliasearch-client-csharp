@@ -705,7 +705,7 @@ namespace Algolia.Search
         ///    If set to null, all indexed attributes are highlighted.
         ///  - attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is attributeName:nbWords).
         ///    By default no snippet is computed. If set to null, no snippet is computed.
-        ///  - attributesToIndex: (array of strings) the list of fields you want to index.
+        ///  - searchableAttributes(formerly attributesToIndex): (array of strings) the list of fields you want to index.
         ///    If set to null, all textual and numerical attributes of your objects are indexed, but you should update it to get optimal results.
         ///    This parameter has two important uses:
         ///      - Limit the attributes to index: For example if you store a binary image in base64, you want to store it and be able to 
@@ -713,7 +713,7 @@ namespace Algolia.Search
         ///      - Control part of the ranking*: (see the ranking parameter for full explanation) Matches in attributes at the beginning of 
         ///        the list will be considered more important than matches in attributes further down the list. 
         ///        In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable 
-        ///        this behavior if you add your attribute inside `unordered(AttributeName)`, for example attributesToIndex: ["title", "unordered(text)"].
+        ///        this behavior if you add your attribute inside `unordered(AttributeName)`, for example searchableAttributes: ["title", "unordered(text)"].
         ///  - attributesForFaceting: (array of strings) The list of fields you want to use for faceting. 
         ///    All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
         ///  - ranking: (array of strings) controls the way results are sorted.
@@ -721,7 +721,7 @@ namespace Algolia.Search
         ///     - typo: sort according to number of typos,
         ///     - geo: sort according to decreassing distance when performing a geo-location based search,
         ///     - proximity: sort according to the proximity of query words in hits,
-        ///     - attribute: sort according to the order of attributes defined by attributesToIndex,
+        ///     - attribute: sort according to the order of attributes defined by searchableAttributes,
         ///     - exact: sort according to the number of words that are matched identical to query word (and not as a prefix),
         ///     - custom: sort according to a user defined formula set in **customRanking** attribute.
         ///    The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
@@ -736,11 +736,11 @@ namespace Algolia.Search
         ///  - highlightPostTag: (string) Specify the string that is inserted after the highlighted parts in the query result (default to "</em>").
         ///  - optionalWords: (array of strings) Specify a list of words that should be considered as optional when found in the query.
         /// </param>
-        /// <param name="forwardToSlaves">Forward the operation to the slavse indices</param>
-        public Task<JObject> SetSettingsAsync(JObject settings, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
+        public Task<JObject> SetSettingsAsync(JObject settings, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
         {
-            string changeSettingsPath = forwardToSlaves
-                ? string.Format("/1/indexes/{0}/settings?forwardToSlaves={1}", _urlIndexName, forwardToSlaves.ToString().ToLower())
+            string changeSettingsPath = forwardToReplicas
+                ? string.Format("/1/indexes/{0}/settings?forwardToReplicas={1}", _urlIndexName, forwardToReplicas.ToString().ToLower())
                 : string.Format("/1/indexes/{0}/settings", _urlIndexName);
             return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", changeSettingsPath, settings, token);
         }
@@ -748,9 +748,9 @@ namespace Algolia.Search
         /// <summary>
         /// Synchronously call <see cref="Index.SetSettingsAsync"/>.
         /// </summary>
-        public JObject SetSettings(JObject settings, bool forwardToSlaves = false)
+        public JObject SetSettings(JObject settings, bool forwardToReplicas = false)
         {
-            return SetSettingsAsync(settings, forwardToSlaves).GetAwaiter().GetResult();
+            return SetSettingsAsync(settings, forwardToReplicas).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1166,79 +1166,78 @@ namespace Algolia.Search
         /// Delete one synonym
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
-        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public Task<JObject> DeleteSynonymAsync(string objectID, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
+        public Task<JObject> DeleteSynonymAsync(string objectID, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToSlaves={2}", _urlIndexName, Uri.EscapeDataString(objectID), forwardToSlaves ? "true" : "false"), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName, Uri.EscapeDataString(objectID), forwardToReplicas ? "true" : "false"), null, token);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.DeleteSynonymAsync"/>.
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
-        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public JObject DeleteSynonym(string objectID, bool forwardToSlaves = false)
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
+        public JObject DeleteSynonym(string objectID, bool forwardToReplicas = false)
         {
-            return DeleteSynonymAsync(objectID, forwardToSlaves).GetAwaiter().GetResult();
+            return DeleteSynonymAsync(objectID, forwardToReplicas).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Delete all synonym set
         /// </summary>
-        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public Task<JObject> ClearSynonymsAsync(bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
+        public Task<JObject> ClearSynonymsAsync(bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/clear?forwardToSlaves={1}", _urlIndexName, forwardToSlaves ? "true" : "false"), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/clear?forwardToReplicas={1}", _urlIndexName, forwardToReplicas ? "true" : "false"), null, token);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.BrowseFromAsync"/>.
         /// </summary>
-        /// <param name="forwardToSlaves">Forward the operation to the slave indices</param>
-        public JObject ClearSynonyms(bool forwardToSlaves = false)
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
+        public JObject ClearSynonyms(bool forwardToReplicas = false)
         {
-            return ClearSynonymsAsync(forwardToSlaves).GetAwaiter().GetResult();
+            return ClearSynonymsAsync(forwardToReplicas).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Add or Replace a list of synonyms 
         /// </summary>
-        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
         /// <param name="replaceExistingSynonyms">Replace the existing synonyms with this batch</param>
-        public Task<JObject> BatchSynonymsAsync(IEnumerable<object> objects, bool forwardToSlaves = false, bool replaceExistingSynonyms = false, CancellationToken token = default(CancellationToken))
+        public Task<JObject> BatchSynonymsAsync(IEnumerable<object> objects, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/batch?replaceExistingSynonyms={1}&forwardToSlaves={2}", _urlIndexName, replaceExistingSynonyms ? "true" : "false", forwardToSlaves ? "true" : "false"), objects, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/batch?replaceExistingSynonyms={1}&forwardToReplicas={2}", _urlIndexName, replaceExistingSynonyms ? "true" : "false", forwardToReplicas ? "true" : "false"), objects, token);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.BatchSynonymsAsync"/>.
         /// </summary>
-        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
         /// <param name="replaceExistingSynonyms">Replace the existing synonyms with this batch</param>
-        public JObject BatchSynonyms(IEnumerable<object> objects, bool forwardToSlaves = false, bool replaceExistingSynonyms = false)
+        public JObject BatchSynonyms(IEnumerable<object> objects, bool forwardToReplicas = false, bool replaceExistingSynonyms = false)
         {
-            return BatchSynonymsAsync(objects, forwardToSlaves, replaceExistingSynonyms).GetAwaiter().GetResult();
+            return BatchSynonymsAsync(objects, forwardToReplicas, replaceExistingSynonyms).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Update one synonym
+        /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
         /// <param name="content">The new content of this synonym</param>
-        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        /// </summary>
-        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public Task<JObject> SaveSynonymAsync(string objectID, object content, bool forwardToSlaves = false, CancellationToken token = default(CancellationToken))
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
+        public Task<JObject> SaveSynonymAsync(string objectID, object content, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToSlaves={2}", _urlIndexName,  Uri.EscapeDataString(objectID), forwardToSlaves ? "true" : "false"), content, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName,  Uri.EscapeDataString(objectID), forwardToReplicas ? "true" : "false"), content, token);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.SaveSynonymAsync"/>.
         /// </summary>
-        /// <param name="forwardToSlave">Forward the operation to the slave indices</param>
-        public JObject SaveSynonym(string objectID, object content, bool forwardToSlaves = false, bool replaceExistingSynonyms = false)
+        /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
+        public JObject SaveSynonym(string objectID, object content, bool forwardToReplicas = false, bool replaceExistingSynonyms = false)
         {
-            return SaveSynonymAsync(objectID, content, forwardToSlaves).GetAwaiter().GetResult();
+            return SaveSynonymAsync(objectID, content, forwardToReplicas).GetAwaiter().GetResult();
         }
 
         /// <summary>

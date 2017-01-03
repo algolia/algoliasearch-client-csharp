@@ -51,7 +51,7 @@ namespace NUnit.Framework.Test
             mockHttp.When(HttpMethod.Post, "*/1/indexes/{indexName}/batch").Respond(HttpStatusCode.OK, "application/json", "{\"taskID\":1,\"objectIDs\":[]}");
 
             //Get index settings
-            mockHttp.When(HttpMethod.Get, "*/1/indexes/{indexName}/settings").Respond(HttpStatusCode.OK, "application/json", "{\"minWordSizefor1Typo\": 3,\"minWordSizefor2Typos\": 7,\"hitsPerPage\": 20,\"attributesToIndex\": null,\"attributesToRetrieve\": null,\"attributesToSnippet\": null,\"attributesToHighlight\": null,\"ranking\": [\"typo\",\"geo\",\"proximity\",\"attribute\",\"custom\"],\"customRanking\": null,\"separatorsToIndex\": \"\",\"queryType\": \"prefixAll\"}");
+            mockHttp.When(HttpMethod.Get, "*/1/indexes/{indexName}/settings").Respond(HttpStatusCode.OK, "application/json", "{\"minWordSizefor1Typo\": 3,\"minWordSizefor2Typos\": 7,\"hitsPerPage\": 20,\"searchableAttributes\": null,\"attributesToRetrieve\": null,\"attributesToSnippet\": null,\"attributesToHighlight\": null,\"ranking\": [\"typo\",\"geo\",\"proximity\",\"attribute\",\"custom\"],\"customRanking\": null,\"separatorsToIndex\": \"\",\"queryType\": \"prefixAll\"}");
 
             //Browse index content
             mockHttp.When(HttpMethod.Get, "*/1/indexes/{indexName}/browse").Respond(HttpStatusCode.OK, "application/json", "{\"hits\":[],\"page\":0,\"nbHits\":0,\"nbPages\":0,\"ProcessingTimeMS\":1,\"query\":\"\",\"params\":\"\"}");
