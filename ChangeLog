@@ -1,6 +1,10 @@
 Changelog
 =========
 
+3.7.1 (2017-01-03)
+- Rename attributesToIndex to searchableAttributes
+= Rename forwardToSlaves to forwardToReplicas
+
 3.7.0 (2016-12-12)
 - Fix Naming SearchForFacetValues
 - Implement new DSN retry strategy
