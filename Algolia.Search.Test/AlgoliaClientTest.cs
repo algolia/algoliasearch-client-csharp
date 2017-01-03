@@ -485,7 +485,7 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public void TestSettingsWithSlaves()
+        public void TestSettingsWithReplicas()
         {
             clearTest();
             var res = _index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(population)"", ""asc(name)""]}"), true);
