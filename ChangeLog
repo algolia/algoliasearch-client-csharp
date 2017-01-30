@@ -1,6 +1,9 @@
 Changelog
 =========
 
+3.7.2 (2017-01-30)
+- Support for responseFields
+
 3.7.1 (2017-01-03)
 - Rename attributesToIndex to searchableAttributes
 = Rename forwardToSlaves to forwardToReplicas
