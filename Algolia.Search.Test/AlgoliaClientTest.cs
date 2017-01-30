@@ -743,6 +743,7 @@ namespace NUnit.Framework.Test
             query.SetLength(1);
             query.SetAttributesToRetrieve(attr);
             query.SetAttributesToSnippet(attr);
+            query.SetFieldsToRetrieve(new string[] { "hits", "nbHits" });
             query.InsideBoundingBox(0, 0, 90, 90);
             query.AroundLatitudeLongitude(0, 0, 2000000000);
             string[] facetFilter = { "_tags:people" };
@@ -755,6 +756,7 @@ namespace NUnit.Framework.Test
             query.AddCustomParameter("facets", "_tags");
             var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
+            Assert.AreEqual(null, res["query"]);
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
             _client.DeleteIndex(safe_name("àlgol?à-csharp"));
         }
