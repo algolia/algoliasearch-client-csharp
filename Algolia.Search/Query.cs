@@ -136,6 +136,7 @@ namespace Algolia.Search
             q.attributesToHighlight = attributesToHighlight;
             q.noTypoToleranceOn = noTypoToleranceOn;
             q.attributesToSnippet = attributesToSnippet;
+            q.responseFields = responseFields;
             q.distinct = distinct;
             q.facetFilters = facetFilters;
             q.facets = facets;
@@ -274,6 +275,17 @@ namespace Algolia.Search
         public Query SetAttributesToSnippet(IEnumerable<string> attributes)
         {
             this.attributesToSnippet = attributes;
+            return this;
+        }
+
+        /// <summary>
+        /// Choose which fields the response will contain
+        /// </summary>
+        /// <param name="fields">Fields to retrieve</param>
+        /// <returns>Query for the attributes.</returns>
+        public Query SetFieldsToRetrieve(IEnumerable<string> fields)
+        {
+            this.responseFields = fields;
             return this;
         }
 
@@ -986,6 +998,23 @@ namespace Algolia.Search
                     first = false;
                 }
             }
+            if (responseFields != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "responseFields=";
+                bool first = true;
+                foreach (string attr in this.responseFields)
+                {
+                    if (!first)
+                        stringBuilder += ',';
+                    stringBuilder += Uri.EscapeDataString(attr);
+                    first = false;
+                }
+                if (this.responseFields.Count() == 0)
+                    stringBuilder += "[]";
+            }
+
             if (!String.IsNullOrEmpty(aroundRadius)) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
@@ -1331,6 +1360,7 @@ namespace Algolia.Search
         private IEnumerable<string> attributesToHighlight;
         private IEnumerable<string> noTypoToleranceOn;
         private IEnumerable<string> attributesToSnippet;
+        private IEnumerable<string> responseFields;
         private IEnumerable<string> analyticsTags;
         private string exactOnSingleWordQuery;
         private string alternativesAsExact;
