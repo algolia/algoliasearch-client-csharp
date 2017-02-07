@@ -138,6 +138,7 @@ namespace Algolia.Search
             q.attributesToSnippet = attributesToSnippet;
             q.responseFields = responseFields;
             q.distinct = distinct;
+            q.facetingAfterDistinct = facetingAfterDistinct;
             q.facetFilters = facetFilters;
             q.facets = facets;
             q.getRankingInfo = getRankingInfo;
@@ -345,6 +346,20 @@ namespace Algolia.Search
         public Query EnableDistinct(bool enabled)
         {
             distinct = enabled ? 1 : 0;
+            return this;
+        }
+
+        /// <summary>
+        /// Force faceting to be applied after de-duplication, 
+        /// When using the distinct setting in combination with faceting, facet counts may be higher than expected. 
+        /// This is because the engine computes faceting before applying de-duplication (distinct)
+        /// https://www.algolia.com/doc/rest-api/search/#facetingafterdistinct
+        /// </summary>
+        /// <param name="enabled">If set to true, enable the facetingAfterDistinct feature (disabled by default)</param>
+        /// <returns></returns>
+        public Query EnableFacetingAfterDistinct(bool enabled)
+        {
+            facetingAfterDistinct = enabled ? 1 : 0;
             return this;
         }
 
@@ -1062,6 +1077,15 @@ namespace Algolia.Search
                 stringBuilder += "distinct=";
 		        stringBuilder += distinct.Value.ToString();
             }
+
+            if (facetingAfterDistinct.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "facetingAfterDistinct=";
+                stringBuilder += facetingAfterDistinct.Value.ToString();
+            }
+
             if (analytics.HasValue)
             {
                 if (stringBuilder.Length > 0)
@@ -1371,6 +1395,7 @@ namespace Algolia.Search
         private bool? getRankingInfo;
         private string ignorePlural;
         private int? distinct;
+        private int? facetingAfterDistinct;
         private bool? advancedSyntax;
         private string removeStopWords;
         private bool? analytics;
