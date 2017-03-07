@@ -416,9 +416,9 @@ namespace Algolia.Search
                         break;
                 }
                 if (param.Length == 0)
-                    param += string.Format("?onlyErrors={0}", type);
+                    param += string.Format("?type={0}", type);
                 else
-                    param += string.Format("&onlyErrors={0}", type);
+                    param += string.Format("&type={0}", type);
             }
             return ExecuteRequest(callType.Write, "GET", String.Format("/1/logs{0}", param), null, token);
         }
