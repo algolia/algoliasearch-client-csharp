@@ -3,17 +3,17 @@
  * http://www.algolia.com/
  * Based on the first version developed by Christopher Maneu under the same license:
  *  https://github.com/cmaneu/algoliasearch-client-csharp
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,13 +29,13 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Reflection;
 using System.Threading;
-using PCLCrypto;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Utils;
 using Algolia.Search.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Algolia.Search
 {
@@ -107,12 +107,12 @@ namespace Algolia.Search
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
+            //HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            SearchHttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
+            //SearchHttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
             SearchHttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             SearchHttpClient.Timeout = TimeSpan.FromSeconds(5);
@@ -159,7 +159,7 @@ namespace Algolia.Search
                 {
                     validHosts.Add(host);
                 }
-               
+
             }
 
             return validHosts.Count > 0 ? validHosts.ToArray() : _hosts;
@@ -270,7 +270,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.ListIndexesAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.ListIndexesAsync"/>
         /// </summary>
         /// <returns>An object in the form:
         ///    {"items": [ {"name": "contacts", "createdAt": "2013-01-18T15:33:13.556Z"},
@@ -292,7 +292,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.DeleteIndexAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.DeleteIndexAsync"/>
         /// </summary>
         /// <returns>An object containing a "deletedAt" attribute</returns>
         public JObject DeleteIndex(string indexName)
@@ -335,7 +335,7 @@ namespace Algolia.Search
             return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation, token);
         }
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/>
         /// </summary>
         /// <param name="srcIndexName">The name of index to copy.</param>
         /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
@@ -475,7 +475,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/>
         /// </summary>
         /// <returns>An object containing the list of keys.</returns>
         [Obsolete("ListUserKeys is deprecated, please use ListApiKeys instead.")]
@@ -485,7 +485,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/>
         /// </summary>
         /// <returns>An object containing the list of keys.</returns>
         public JObject ListApiKeys()
@@ -513,7 +513,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/>
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
         [Obsolete("GetUserKeyACL is deprecated, please use GetApiKeyACL instead.")]
@@ -523,7 +523,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/>
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
         public JObject GetApiKeyACL(string key)
@@ -551,7 +551,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/>
         /// </summary>
         /// <returns>Returns an object with a "deleteAt" attribute.</returns>
         [Obsolete("DeleteUserKey is deprecated, please use DeleteApiKey instead.")]
@@ -561,7 +561,7 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/> 
+        /// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/>
         /// </summary>
         /// <returns>Returns an object with a "deleteAt" attribute.</returns>
         public JObject DeleteApiKey(string key)
@@ -572,7 +572,7 @@ namespace Algolia.Search
         /// <summary>
         /// Create a new user key.
         /// </summary>
-        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
         /// can contains the following values:
         ///   - acl: array of string
         ///   - indices: array of string
@@ -592,7 +592,7 @@ namespace Algolia.Search
         /// <summary>
         /// Create a new api key.
         /// </summary>
-        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
         /// can contains the following values:
         ///   - acl: array of string
         ///   - indices: array of string
@@ -611,7 +611,7 @@ namespace Algolia.Search
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.AddApiKeyAsync"/>
         /// </summary>
-        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
         /// can contains the following values:
         ///   - acl: array of string
         ///   - indices: array of string
@@ -631,7 +631,7 @@ namespace Algolia.Search
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.AddApiKeyAsync"/>
         /// </summary>
-        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
         /// can contains the following values:
         ///   - acl: array of string
         ///   - indices: array of string
@@ -753,7 +753,7 @@ namespace Algolia.Search
         /// Update a user key.
         /// </summary>
         /// <param name="key">The user key</param>
-        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
         /// can contains the following values:
         ///   - acl: array of string
         ///   - indices: array of string
@@ -774,7 +774,7 @@ namespace Algolia.Search
         /// Update an api key.
         /// </summary>
         /// <param name="key">The user key</param>
-        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
         /// can contains the following values:
         ///   - acl: array of string
         ///   - indices: array of string
@@ -794,7 +794,7 @@ namespace Algolia.Search
         /// Synchronously call <see cref="AlgoliaClient.UpdateApiKeyAsync"/>
         /// </summary>
         /// <param name="key">The user key</param>
-        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
         /// can contains the following values:
         ///   - acl: array of string
         ///   - indices: array of string
@@ -815,7 +815,7 @@ namespace Algolia.Search
         /// Synchronously call <see cref="AlgoliaClient.UpdateApiKeyAsync"/>
         /// </summary>
         /// <param name="key">The user key</param>
-        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+        /// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
         /// can contains the following values:
         ///   - acl: array of string
         ///   - indices: array of string
@@ -973,7 +973,8 @@ namespace Algolia.Search
             if (userToken != null)
                 query.SetUserToken(userToken);
             string queryStr = query.GetQueryString();
-            byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", Hmac(privateApiKey, queryStr), queryStr));
+            var hash = Hmac(privateApiKey, queryStr);
+            byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", hash, queryStr));
             return System.Convert.ToBase64String(content);
         }
 
@@ -990,36 +991,44 @@ namespace Algolia.Search
                 return GenerateSecuredApiKey(privateApiKey, new Query().SetTagFilters(tagFilter), userToken);
             else
             {
-                if (userToken != null && userToken.Length > 0)
+                if (!string.IsNullOrEmpty(userToken))
+                {
                     tagFilter = string.Format("{0}&userToken={1}", tagFilter, Uri.EscapeDataString(userToken));
-                byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", Hmac(privateApiKey, tagFilter), tagFilter));
+                }
+
+                var hash = Hmac(privateApiKey, tagFilter);
+                byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", hash, tagFilter));
                 return System.Convert.ToBase64String(content);
             }
         }
 
-        private string Hmac(string key, string msg)
+        private string Hmac(string key, string data)
         {
-            var keyMaterial = StringToAscii(key);
-            var data = StringToAscii(msg);
-
-            var algorithm = WinRTCrypto.MacAlgorithmProvider.OpenAlgorithm(MacAlgorithm.HmacSha256);
-
-            var hasher = algorithm.CreateHash(keyMaterial);
-            hasher.Append(data);
-
-            return hasher.GetValueAndReset().Aggregate("", (s, e) => s + String.Format("{0:x2}", e), s => s);
+            return HmacSha256(key, data);
         }
 
-        private byte[] StringToAscii(string s)
+        public string HmacSHA256(string key, string data)
         {
-            byte[] retval = new byte[s.Length];
-            for (int ix = 0; ix < s.Length; ++ix)
+            string hash;
+            ASCIIEncoding encoder = new ASCIIEncoding();
+            Byte[] code = encoder.GetBytes(key);
+            using (HMACSHA256 hmac = new HMACSHA256(code))
             {
-                char ch = s[ix];
-                if (ch <= 0x7f) retval[ix] = (byte)ch;
-                else retval[ix] = (byte)'?';
+                Byte[] hmBytes = hmac.ComputeHash(encoder.GetBytes(data));
+                hash = ToHexString(hmBytes);
             }
-            return retval;
+            return hash;
+
+        }
+
+        public static string ToHexString(byte[] array)
+        {
+            StringBuilder hex = new StringBuilder(array.Length * 2);
+            foreach (byte b in array)
+            {
+                hex.AppendFormat("{0:x2}", b);
+            }
+            return hex.ToString();
         }
 
         /// <summary>
@@ -1147,7 +1156,7 @@ namespace Algolia.Search
                                 message = responseMsg.ReasonPhrase;
                                 status = "0";
                             }
-                            
+
                             errors.Add(host + '(' + status + ')', message);
                         }
                     }
