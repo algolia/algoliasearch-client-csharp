@@ -23,7 +23,7 @@ namespace Algolia.Search
             : base(client, indexName)
         {
             // Save
-            _client = client;
+            base.Client = client;
             _indexName = indexName;
             _objectIdField = objectIdField;
         }
@@ -44,7 +44,7 @@ namespace Algolia.Search
             var tempIndexName = _indexName + "_temp";
 
             // Use the temp index
-            var tempIndex = _client.InitIndex(tempIndexName);
+            var tempIndex = base.Client.InitIndex(tempIndexName);
 
             // Setup array to store objects to index
             var toIndex = new List<JObject>();
@@ -83,7 +83,7 @@ namespace Algolia.Search
             Task.WaitAll(taskList.ToArray());
 
             // Overwrite main index with temp index
-            return await _client.MoveIndexAsync(tempIndexName, _indexName);
+            return await base.Client.MoveIndexAsync(tempIndexName, _indexName);
         }
 
         /// <summary>
@@ -275,7 +275,7 @@ namespace Algolia.Search
         /// </summary>
         public AlgoliaClient Client
         {
-            get { return _client; }
+            get { return base.Client; }
         }
 
         /// <summary>

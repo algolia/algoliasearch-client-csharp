@@ -588,7 +588,7 @@ namespace Algolia.Search.Test
         }
 
         [Test]
-        public void TaskACLClient()
+        public void TaskAclClient()
         {
             clearTest();
             // Add one object to be sure the test will not fail because index is empty
@@ -603,10 +603,10 @@ namespace Algolia.Search.Test
             System.Threading.Thread.Sleep(5000);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
 
-            var getKey = _client.GetUserKeyACL(key["key"].ToString());
+            var getKey = _client.GetUserKeyAcl(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
 
-            getKey = _client.GetApiKeyACL(key["key"].ToString());
+            getKey = _client.GetApiKeyAcl(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
 
             var keys = _client.ListUserKeys();
@@ -618,10 +618,10 @@ namespace Algolia.Search.Test
             _client.UpdateApiKey(key["key"].ToString(), new String[] { "addObject" });
             System.Threading.Thread.Sleep(5000);
 
-            getKey = _client.GetUserKeyACL(key["key"].ToString());
+            getKey = _client.GetUserKeyAcl(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
 
-            getKey = _client.GetApiKeyACL(key["key"].ToString());
+            getKey = _client.GetApiKeyAcl(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
 
             _client.DeleteApiKey(key["key"].ToString());
@@ -632,7 +632,7 @@ namespace Algolia.Search.Test
         }
 
         [Test]
-        public void TaskACLIndex()
+        public void TaskAclIndex()
         {
             clearTest();
             // Add one object to be sure the test will not fail because index is empty
@@ -647,10 +647,10 @@ namespace Algolia.Search.Test
             WaitKey(_index, key);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
 
-            var getKey = _index.GetUserKeyACL(key["key"].ToString());
+            var getKey = _index.GetUserKeyAcl(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
 
-            getKey = _index.GetApiKeyACL(key["key"].ToString());
+            getKey = _index.GetApiKeyAcl(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
 
             var keys = _index.ListUserKeys();
@@ -662,10 +662,10 @@ namespace Algolia.Search.Test
             _index.UpdateApiKey(key["key"].ToString(), new String[] { "addObject" });
             WaitKey(_index, key, "addObject");
 
-            getKey = _index.GetUserKeyACL(key["key"].ToString());
+            getKey = _index.GetUserKeyAcl(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
 
-            getKey = _index.GetApiKeyACL(key["key"].ToString());
+            getKey = _index.GetApiKeyAcl(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
 
             _index.DeleteApiKey(key["key"].ToString());
@@ -775,7 +775,7 @@ namespace Algolia.Search.Test
             query.AddInsidePolygon(0.01F, 0.1F);
             query.AddInsidePolygon(0.02F, 0.4F);
             query.EnableDistinct(true);
-            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.FIRST_WORDS);
+            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.FirstWords);
             query.GetRankingInfo(true);
             query.EnableTyposOnNumericTokens(false);
             query.SetOffset(0);
@@ -791,7 +791,7 @@ namespace Algolia.Search.Test
             query.SetFacets(facets);
             query.SetTagFilters("people");
             query.SetNumericFilters("Age>=42");
-            query.SetQueryType(Query.QueryType.PREFIX_ALL);
+            query.SetQueryType(Query.QueryType.PrefixAll);
             query.AddCustomParameter("facets", "_tags");
             var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
@@ -838,8 +838,8 @@ namespace Algolia.Search.Test
             query.SetFacets(facets);
             query.SetTagFilters("people");
             query.SetNumericFilters("Age>=42");
-            query.SetQueryType(Query.QueryType.PREFIX_NONE);
-            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.LAST_WORDS);
+            query.SetQueryType(Query.QueryType.PrefixNone);
+            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.LastWords);
             var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
@@ -965,7 +965,7 @@ namespace Algolia.Search.Test
         [Test]
         public void TestTimeoutHandling()
         {
-            _client.setTimeout(0.001, 0.001);
+            _client.SetTimeout(0.001, 0.001);
             try
             {
                 _client.ListIndexes();
@@ -999,21 +999,21 @@ namespace Algolia.Search.Test
             };
 
             var _client = new AlgoliaClient(_testApplicationID, _testApiKey, hosts);
-            _client.setTimeout(1, 1);
+            _client.SetTimeout(1, 1);
             var startTime = DateTime.Now;
             var index = _client.ListIndexes();
             Assert.IsTrue(startTime.AddSeconds(1) < DateTime.Now);
         }
 
-        private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
+        private void WaitKey(Index index, JObject newIndexKey, string updatedAcl = null)
         {
-            var isUpdate = !string.IsNullOrEmpty(updatedACL);
+            var isUpdate = !string.IsNullOrEmpty(updatedAcl);
             for (var i = 0; i <= 10; i++)
             {
                 try
                 {
-                    var key = index.GetApiKeyACL(newIndexKey["key"].ToString());
-                    if ( isUpdate && key["acl"][0].ToString() != updatedACL)
+                    var key = index.GetApiKeyAcl(newIndexKey["key"].ToString());
+                    if ( isUpdate && key["acl"][0].ToString() != updatedAcl)
                     {
                         throw new Exception();
                     }
@@ -1033,7 +1033,7 @@ namespace Algolia.Search.Test
             {
                 try
                 {
-                    var key = index.GetApiKeyACL(newIndexKey["key"].ToString());
+                    var key = index.GetApiKeyAcl(newIndexKey["key"].ToString());
                     Thread.Sleep(1000);
                 }
                 catch (Exception e)
@@ -1056,7 +1056,7 @@ namespace Algolia.Search.Test
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             res = _index.DeleteSynonym("street");
             _index.WaitTask(res["taskID"].ToString());
-            res = _index.SearchSynonyms("", new Index.SynonymType[] {Index.SynonymType.SYNONYM }, 0, 5);
+            res = _index.SearchSynonyms("", new Index.SynonymType[] {Index.SynonymType.Synonym }, 0, 5);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             res = _index.ClearSynonyms();
             _index.WaitTask(res["taskID"].ToString());
@@ -1102,7 +1102,7 @@ namespace Algolia.Search.Test
             mockHttp.When(HttpMethod.Get, "https://" + hosts[1] + "/1/indexes/test/browse").Respond("application/json", "{\"fromSecondHost\":[]}");
 
             var client = new AlgoliaClient("test", "test", hosts, mockHttp);
-            client._dsnInternalTimeout = 2;
+            client.DsnInternalTimeout = 2;
             Assert.AreEqual(JObject.Parse("{\"fromSecondHost\":[]}").ToString(), client.ListIndexes().ToString());
 
             //first host back up again but no retry because lastModified < _dsnInternalTimeout, stick with second host
