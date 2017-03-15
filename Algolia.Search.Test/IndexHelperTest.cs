@@ -1,13 +1,8 @@
-﻿using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Collections;
-using Algolia.Search;
 
-namespace NUnit.Framework.Test
+namespace Algolia.Search.Test
 {
     [TestFixture]
     public class IndexHelperTest
@@ -39,16 +34,16 @@ namespace NUnit.Framework.Test
         [SetUp]
         public void TestInitialize()
         {
-            var testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
-            var testApplicationID = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
+            var testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY") ?? "MY-ALGOLIA-API-KEY";
+            var testApplicationID = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID") ?? "MY-ALGOLIA-APPLICATION-ID";
             _client = new AlgoliaClient(testApplicationID, testApiKey);
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"));
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"));
         }
 
         [TearDown]
         public void TestCleanup()
         {
-            _client.DeleteIndex(GetSafeName("àlgol?à-csharp"));
+            _client.DeleteIndex(GetSafeName("algolia-csharp"));
             _client = null;
 
         }
@@ -114,9 +109,9 @@ namespace NUnit.Framework.Test
             var models = BuildTestModelList(8966);
             task = _indexHelper.OverwriteIndex(models);
             _indexHelper.WaitTask(task["taskID"].ToString());
-            
+
             var res = _indexHelper.Search(new Query(""));
-            
+
             Assert.AreEqual(8966, res["nbHits"].ToObject<int>());
             Assert.AreEqual("FirstName999", res["hits"][0]["FirstName"].ToString());
             Assert.AreEqual("999", res["hits"][0]["objectID"].ToString());
@@ -134,9 +129,9 @@ namespace NUnit.Framework.Test
             var models = BuildTestModelList(8966);
             task = _indexHelper.OverwriteIndex(models, 10000);
             _indexHelper.WaitTask(task["taskID"].ToString());
-            
+
             var res = _indexHelper.Search(new Query(""));
-            
+
             Assert.AreEqual(8966, res["nbHits"].ToObject<int>());
             Assert.AreEqual("FirstName999", res["hits"][0]["FirstName"].ToString());
             Assert.AreEqual("999", res["hits"][0]["objectID"].ToString());
@@ -146,7 +141,7 @@ namespace NUnit.Framework.Test
         public void TestOverwriteIndexObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);
@@ -155,9 +150,9 @@ namespace NUnit.Framework.Test
             var models = BuildTestModelList();
             task = _indexHelper.OverwriteIndex(models);
             _indexHelper.WaitTask(task["taskID"].ToString());
-            
+
             var res = _indexHelper.Search(new Query(""));
-            
+
             Assert.AreEqual(4, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Sylvain", res["hits"][0]["FirstName"].ToString());
             Assert.AreEqual("8", res["hits"][0]["objectID"].ToString());
@@ -236,7 +231,7 @@ namespace NUnit.Framework.Test
         public void TestSaveObjectsObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);
@@ -276,7 +271,7 @@ namespace NUnit.Framework.Test
         public void TestSaveObjectObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);
@@ -398,7 +393,7 @@ namespace NUnit.Framework.Test
         public void TestDeleteObjectsObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);
@@ -466,7 +461,7 @@ namespace NUnit.Framework.Test
         public void TestDeleteObjectObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);

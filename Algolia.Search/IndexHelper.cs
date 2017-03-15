@@ -1,5 +1,4 @@
-﻿using Algolia.Search;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,7 +10,6 @@ namespace Algolia.Search
     /// <typeparam name="T">The type of data for the index.</typeparam>
     public class IndexHelper<T> : Index
     {
-        private readonly AlgoliaClient _client;
         private readonly string _indexName;
         private readonly string _objectIdField;
 
@@ -145,7 +143,7 @@ namespace Algolia.Search
                 taskList.Add(base.SaveObjectsAsync(toIndex));
 
             // Wait for all tasks to be done
-            return await TaskEx.WhenAll(taskList);
+            return await Task.WhenAll(taskList);
         }
 
         /// <summary>
@@ -231,7 +229,7 @@ namespace Algolia.Search
                 taskList.Add(base.DeleteObjectsAsync(toIndex));
 
             // Wait for all tasks to be done
-            return await TaskEx.WhenAll(taskList);
+            return await Task.WhenAll(taskList);
         }
 
         /// <summary>
