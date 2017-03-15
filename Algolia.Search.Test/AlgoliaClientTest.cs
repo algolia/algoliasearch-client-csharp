@@ -2,19 +2,15 @@
 using NUnit.Framework;
 using System;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Collections;
-using Algolia.Search;
 using System.Threading;
 using Algolia.Search.Models;
 using RichardSzalay.MockHttp;
 using System.Net.Http;
 using System.Net;
-using System.Net.Http.Headers;
 
 
-namespace NUnit.Framework.Test
+namespace Algolia.Search.Test
 {
 
     [TestFixture]
@@ -22,7 +18,7 @@ namespace NUnit.Framework.Test
     {
         private static string _testApplicationID = "";
         private static string _testApiKey = "";
-        
+
         private AlgoliaClient _client;
         private Index _index;
 
@@ -48,19 +44,22 @@ namespace NUnit.Framework.Test
             }
         }
 
+        /// <summary>
+        /// To run  manually from your machine set the right hand side of the null operator for key and application id to a test instance in algolia.
+        /// </summary>
         [SetUp]
         public void TestInitialize()
         {
-            _testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
-            _testApplicationID = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
+            _testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY") ?? "MY-ALGOLIA-API-KEY";
+            _testApplicationID = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID") ?? "MY-ALGOLIA-APPLICATION-ID";
             _client = new AlgoliaClient(_testApplicationID, _testApiKey);
-            _index = _client.InitIndex(safe_name("àlgol?à-csharp"));
+            _index = _client.InitIndex(safe_name("algolia-csharp"));
         }
 
         [TearDown]
         public void TestCleanup()
         {
-            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("algolia-csharp"));
             _client = null;
         }
 
@@ -116,9 +115,9 @@ namespace NUnit.Framework.Test
         {
             clearTest();
             List<JObject> objs = new List<JObject>();
-            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"",
                           ""lastname"":""Barninger""}"));
-            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"",
                           ""lastname"":""Speach""}"));
             var task = _index.AddObjects(objs);
             _index.WaitTask(task["taskID"].ToString());
@@ -132,15 +131,15 @@ namespace NUnit.Framework.Test
         {
             clearTest();
             List<JObject> objs = new List<JObject>();
-            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"",
                           ""lastname"":""Barninger"", ""objectID"":""à/go/?à1""}"));
-            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"",
                           ""lastname"":""Speach"", ""objectID"":""à/go/?à2""}"));
             _index.AddObjects(objs);
             objs = new List<JObject>();
-            objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
                           ""lastname"":""Barninger"", ""objectID"":""à/go/?à1""}"));
-            objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
                           ""lastname"":""Speach"", ""objectID"":""à/go/?à2""}"));
             var task = _index.SaveObjects(objs);
             _index.WaitTask(task["taskID"].ToString());
@@ -154,9 +153,9 @@ namespace NUnit.Framework.Test
         {
             clearTest();
             List<JObject> objs = new List<JObject>();
-            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"",
                           ""lastname"":""Barninger"", ""objectID"":""à/go/?à1""}"));
-            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"",
                           ""lastname"":""Speach"", ""objectID"":""à/go/?à2""}"));
             _index.AddObjects(objs);
             objs = new List<JObject>();
@@ -187,9 +186,9 @@ namespace NUnit.Framework.Test
         {
             clearTest();
             List<JObject> objs = new List<JObject>();
-            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"",
                           ""lastname"":""Barninger"", ""objectID"": ""à/go/?à""}"));
-            objs.Add(JObject.Parse(@"{""firstname"":""Roger"", 
+            objs.Add(JObject.Parse(@"{""firstname"":""Roger"",
                           ""lastname"":""Speach"", ""objectID"": ""à/go/?à2""}"));
             var task = _index.AddObjects(objs);
             _index.WaitTask(task["taskID"].ToString());
@@ -207,10 +206,10 @@ namespace NUnit.Framework.Test
         {
             clearTest();
             List<JObject> objs = new List<JObject>();
-            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Barninger""}}"));
-            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Speach""}}"));
+            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("algolia-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Barninger""}}"));
+            objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + safe_name("algolia-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Speach""}}"));
             var task = _client.Batch(objs);
-            _index.WaitTask(task["taskID"][safe_name("àlgol?à-csharp")].ToString());
+            _index.WaitTask(task["taskID"][safe_name("algolia-csharp")].ToString());
             var res = _index.Search(new Query(""));
             Assert.AreEqual(2, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Roger", res["hits"][0]["firstname"].ToString());
@@ -306,7 +305,7 @@ namespace NUnit.Framework.Test
             }
             return false;
         }
-        
+
         [Test]
         public void TestDeleteIndex()
         {
@@ -317,11 +316,11 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             res = _client.ListIndexes();
-            Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
-            task = _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("algolia-csharp")));
+            task = _client.DeleteIndex(safe_name("algolia-csharp"));
             _index.WaitTask(task["taskID"].ToObject<String>());
             res = _client.ListIndexes();
-            Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
+            Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("algolia-csharp")));
         }
 
         [Test]
@@ -391,34 +390,34 @@ namespace NUnit.Framework.Test
         [Test]
         public void TestCopyIndex()
         {
-            var index = _client.InitIndex(safe_name("àlgol?à-csharp2"));
+            var index = _client.InitIndex(safe_name("algolia-csharp2"));
             clearTest();
             var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
             _index.WaitTask(task["taskID"].ToString());
-            task = _client.CopyIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
+            task = _client.CopyIndex(safe_name("algolia-csharp"), safe_name("algolia-csharp2"));
             _index.WaitTask(task["taskID"].ToString());
             var res = index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
-            _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
+            _client.DeleteIndex(safe_name("algolia-csharp2"));
         }
 
         [Test]
         public void TestMoveIndex()
         {
-            var index = _client.InitIndex(safe_name("àlgol?à-csharp2"));
+            var index = _client.InitIndex(safe_name("algolia-csharp2"));
             clearTest();
             var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
             _index.WaitTask(task["taskID"].ToString());
-            task = _client.MoveIndex(safe_name("àlgol?à-csharp"), safe_name("àlgol?à-csharp2"));
+            task = _client.MoveIndex(safe_name("algolia-csharp"), safe_name("algolia-csharp2"));
             index.WaitTask(task["taskID"].ToString());
             var res = index.Search(new Query(""));
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie", res["hits"][0]["firstname"].ToString());
             res = _client.ListIndexes();
-            Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp2")));
-            Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("àlgol?à-csharp")));
-            _client.DeleteIndex(safe_name("àlgol?à-csharp2"));
+            Assert.IsTrue(Include((JArray)res["items"], "name", safe_name("algolia-csharp2")));
+            Assert.IsFalse(Include((JArray)res["items"], "name", safe_name("algolia-csharp")));
+            _client.DeleteIndex(safe_name("algolia-csharp2"));
         }
 
         [Test]
@@ -481,7 +480,7 @@ namespace NUnit.Framework.Test
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
             _index.WaitTask(res["taskID"].ToObject<String>());
             res = _index.GetSettings();
-            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("algolia-csharp"));
         }
 
         [Test]
@@ -492,7 +491,7 @@ namespace NUnit.Framework.Test
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
             _index.WaitTask(res["taskID"].ToObject<String>());
             res = _index.GetSettings();
-            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("algolia-csharp"));
         }
 
         [Test]
@@ -509,11 +508,11 @@ namespace NUnit.Framework.Test
         public void TestUpdate()
         {
             clearTest();
-            var res = _index.SaveObject(JObject.Parse(@"{""name"":""Los Angeles"", 
-                                                              ""population"":3792621, 
+            var res = _index.SaveObject(JObject.Parse(@"{""name"":""Los Angeles"",
+                                                              ""population"":3792621,
                                                               ""objectID"":""myID""}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
-            res = _index.PartialUpdateObject(JObject.Parse(@"{""population"":3792621, 
+            res = _index.PartialUpdateObject(JObject.Parse(@"{""population"":3792621,
                                                                    ""objectID"":""myID""}"));
             Assert.IsFalse(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
         }
@@ -555,7 +554,7 @@ namespace NUnit.Framework.Test
         public void TaskBatch()
         {
             clearTest();
-            
+
             List<JObject> objs = new List<JObject>();
             objs.Add(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
             objs.Add(JObject.Parse(@"{""name"":""Los Angeles"", ""population"":3792621}"));
@@ -563,10 +562,10 @@ namespace NUnit.Framework.Test
             JArray objectIDs = (JArray)res["objectIDs"];
             Assert.AreEqual(objectIDs.Count, 2);
             List<JObject> objs2 = new List<JObject>();
-            objs2.Add(JObject.Parse(@"{""name"":""San Francisco"", 
+            objs2.Add(JObject.Parse(@"{""name"":""San Francisco"",
                           ""population"": 805235,
                           ""objectID"":""SFO""}"));
-            objs2.Add(JObject.Parse(@"{""name"":""Los Angeles"", 
+            objs2.Add(JObject.Parse(@"{""name"":""Los Angeles"",
                           ""population"": 3792621,
                           ""objectID"": ""LA""}"));
             res = _index.SaveObjects(objs2);
@@ -589,7 +588,7 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public void TaskACLClient()
+        public void TaskAclClient()
         {
             clearTest();
             // Add one object to be sure the test will not fail because index is empty
@@ -604,10 +603,10 @@ namespace NUnit.Framework.Test
             System.Threading.Thread.Sleep(5000);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
 
-            var getKey = _client.GetUserKeyACL(key["key"].ToString());
+            var getKey = _client.GetUserKeyAcl(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
 
-            getKey = _client.GetApiKeyACL(key["key"].ToString());
+            getKey = _client.GetApiKeyAcl(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
 
             var keys = _client.ListUserKeys();
@@ -619,10 +618,10 @@ namespace NUnit.Framework.Test
             _client.UpdateApiKey(key["key"].ToString(), new String[] { "addObject" });
             System.Threading.Thread.Sleep(5000);
 
-            getKey = _client.GetUserKeyACL(key["key"].ToString());
+            getKey = _client.GetUserKeyAcl(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
 
-            getKey = _client.GetApiKeyACL(key["key"].ToString());
+            getKey = _client.GetApiKeyAcl(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
 
             _client.DeleteApiKey(key["key"].ToString());
@@ -633,7 +632,7 @@ namespace NUnit.Framework.Test
         }
 
         [Test]
-        public void TaskACLIndex()
+        public void TaskAclIndex()
         {
             clearTest();
             // Add one object to be sure the test will not fail because index is empty
@@ -648,10 +647,10 @@ namespace NUnit.Framework.Test
             WaitKey(_index, key);
             Assert.IsFalse(string.IsNullOrWhiteSpace(key["key"].ToString()));
 
-            var getKey = _index.GetUserKeyACL(key["key"].ToString());
+            var getKey = _index.GetUserKeyAcl(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
 
-            getKey = _index.GetApiKeyACL(key["key"].ToString());
+            getKey = _index.GetApiKeyAcl(key["key"].ToString());
             Assert.AreEqual(key["key"], getKey["value"]);
 
             var keys = _index.ListUserKeys();
@@ -663,10 +662,10 @@ namespace NUnit.Framework.Test
             _index.UpdateApiKey(key["key"].ToString(), new String[] { "addObject" });
             WaitKey(_index, key, "addObject");
 
-            getKey = _index.GetUserKeyACL(key["key"].ToString());
+            getKey = _index.GetUserKeyAcl(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
 
-            getKey = _index.GetApiKeyACL(key["key"].ToString());
+            getKey = _index.GetApiKeyAcl(key["key"].ToString());
             Assert.AreEqual((string)getKey["acl"][0], "addObject");
 
             _index.DeleteApiKey(key["key"].ToString());
@@ -776,7 +775,7 @@ namespace NUnit.Framework.Test
             query.AddInsidePolygon(0.01F, 0.1F);
             query.AddInsidePolygon(0.02F, 0.4F);
             query.EnableDistinct(true);
-            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.FIRST_WORDS);
+            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.FirstWords);
             query.GetRankingInfo(true);
             query.EnableTyposOnNumericTokens(false);
             query.SetOffset(0);
@@ -792,13 +791,13 @@ namespace NUnit.Framework.Test
             query.SetFacets(facets);
             query.SetTagFilters("people");
             query.SetNumericFilters("Age>=42");
-            query.SetQueryType(Query.QueryType.PREFIX_ALL);
+            query.SetQueryType(Query.QueryType.PrefixAll);
             query.AddCustomParameter("facets", "_tags");
             var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual(null, res["query"]);
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
-            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("algolia-csharp"));
         }
 
         [Test]
@@ -839,12 +838,12 @@ namespace NUnit.Framework.Test
             query.SetFacets(facets);
             query.SetTagFilters("people");
             query.SetNumericFilters("Age>=42");
-            query.SetQueryType(Query.QueryType.PREFIX_NONE);
-            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.LAST_WORDS);
+            query.SetQueryType(Query.QueryType.PrefixNone);
+            query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.LastWords);
             var res = _index.Search(query);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             Assert.AreEqual("Jimmie J", res["hits"][0]["firstname"].ToString());
-            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("algolia-csharp"));
         }
 
         [Test]
@@ -854,12 +853,12 @@ namespace NUnit.Framework.Test
             var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
             _index.WaitTask(task["taskID"].ToString());
             var indexQuery = new List<IndexQuery>();
-            indexQuery.Add(new IndexQuery(safe_name("àlgol?à-csharp"), new Query("")));
+            indexQuery.Add(new IndexQuery(safe_name("algolia-csharp"), new Query("")));
             var res = _client.MultipleQueries(indexQuery);
             Assert.AreEqual(1, res["results"].ToObject<JArray>().Count);
             Assert.AreEqual(1, res["results"][0]["hits"].ToObject<JArray>().Count);
             Assert.AreEqual("Jimmie", res["results"][0]["hits"][0]["firstname"].ToString());
-            _client.DeleteIndex(safe_name("àlgol?à-csharp"));
+            _client.DeleteIndex(safe_name("algolia-csharp"));
         }
 
         [Test]
@@ -892,9 +891,9 @@ namespace NUnit.Framework.Test
         [Test]
         public void TestGenerateSecuredApiKey()
         {
-            Assert.AreEqual("ZmI5YjQ5N2U3YjFkYjcxYTQ2YjE4OWFmNWUxNmVlNmVlNDkzNzYyYTFlYmE5NThhNjhhN2I5ZjhhN2NkYWNmMnRhZ0ZpbHRlcnM9KHB1YmxpYyUyQ3VzZXIxKQ==", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", "(public,user1)"));
-            Assert.AreEqual("ZmI5YjQ5N2U3YjFkYjcxYTQ2YjE4OWFmNWUxNmVlNmVlNDkzNzYyYTFlYmE5NThhNjhhN2I5ZjhhN2NkYWNmMnRhZ0ZpbHRlcnM9KHB1YmxpYyUyQ3VzZXIxKQ==", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", new Query().SetTagFilters("(public,user1)")));
-            Assert.AreEqual("MjgzZDFkNjliM2UwNGQ1MTBiODY0MTAwZjAyNjgxN2MzZmVhNTBkY2JkMzE5ODRhNmVjNzE0MGVlOTE0ZjVmZXRhZ0ZpbHRlcnM9KHB1YmxpYyUyQ3VzZXIxKSZ1c2VyVG9rZW49NDI=", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", new Query().SetTagFilters("(public,user1)").SetUserToken("42")));
+            Assert.AreEqual("MDZkNWNjNDY4M2MzMDA0NmUyNmNkZjY5OTMzYjVlNmVlMTk1NTEwMGNmNTVjZmJhMmIwOTIzYjdjMTk2NTFiMnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjk=", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", "(public,user1)"));
+            Assert.AreEqual("MDZkNWNjNDY4M2MzMDA0NmUyNmNkZjY5OTMzYjVlNmVlMTk1NTEwMGNmNTVjZmJhMmIwOTIzYjdjMTk2NTFiMnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjk=", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", new Query().SetTagFilters("(public,user1)")));
+            Assert.AreEqual("OGYwN2NlNTdlOGM2ZmM4MjA5NGM0ZmYwNTk3MDBkNzMzZjQ0MDI3MWZjNTNjM2Y3YTAzMWM4NTBkMzRiNTM5YnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjkmdXNlclRva2VuPTQy", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", new Query().SetTagFilters("(public,user1)").SetUserToken("42")));
         }
 
         [Test]
@@ -966,24 +965,24 @@ namespace NUnit.Framework.Test
         [Test]
         public void TestTimeoutHandling()
         {
-            _client.setTimeout(0.001, 0.001);
+            _client.SetTimeout(0.001, 0.001);
             try
             {
                 _client.ListIndexes();
                 _client = new AlgoliaClient(_testApplicationID, _testApiKey);
-                _index = _client.InitIndex(safe_name("àlgol?à-csharp"));
+                _index = _client.InitIndex(safe_name("algolia-csharp"));
                 Assert.Fail("Should throw an error");
-            } 
+            }
             catch (AlgoliaException)
             {
-                // Reset 
+                // Reset
                 _client = new AlgoliaClient(_testApplicationID, _testApiKey);
-                _index = _client.InitIndex(safe_name("àlgol?à-csharp"));
+                _index = _client.InitIndex(safe_name("algolia-csharp"));
             }
             catch (OperationCanceledException)
             {
                 _client = new AlgoliaClient(_testApplicationID, _testApiKey);
-                _index = _client.InitIndex(safe_name("àlgol?à-csharp"));
+                _index = _client.InitIndex(safe_name("algolia-csharp"));
                 Assert.Fail("Should throw an AlgoliaException");
             }
         }
@@ -1000,21 +999,21 @@ namespace NUnit.Framework.Test
             };
 
             var _client = new AlgoliaClient(_testApplicationID, _testApiKey, hosts);
-            _client.setTimeout(1, 1);
+            _client.SetTimeout(1, 1);
             var startTime = DateTime.Now;
             var index = _client.ListIndexes();
             Assert.IsTrue(startTime.AddSeconds(1) < DateTime.Now);
         }
 
-        private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
+        private void WaitKey(Index index, JObject newIndexKey, string updatedAcl = null)
         {
-            var isUpdate = !string.IsNullOrEmpty(updatedACL);
+            var isUpdate = !string.IsNullOrEmpty(updatedAcl);
             for (var i = 0; i <= 10; i++)
             {
                 try
                 {
-                    var key = index.GetApiKeyACL(newIndexKey["key"].ToString());
-                    if ( isUpdate && key["acl"][0].ToString() != updatedACL)
+                    var key = index.GetApiKeyAcl(newIndexKey["key"].ToString());
+                    if ( isUpdate && key["acl"][0].ToString() != updatedAcl)
                     {
                         throw new Exception();
                     }
@@ -1034,7 +1033,7 @@ namespace NUnit.Framework.Test
             {
                 try
                 {
-                    var key = index.GetApiKeyACL(newIndexKey["key"].ToString());
+                    var key = index.GetApiKeyAcl(newIndexKey["key"].ToString());
                     Thread.Sleep(1000);
                 }
                 catch (Exception e)
@@ -1057,7 +1056,7 @@ namespace NUnit.Framework.Test
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             res = _index.DeleteSynonym("street");
             _index.WaitTask(res["taskID"].ToString());
-            res = _index.SearchSynonyms("", new Index.SynonymType[] {Index.SynonymType.SYNONYM }, 0, 5);
+            res = _index.SearchSynonyms("", new Index.SynonymType[] {Index.SynonymType.Synonym }, 0, 5);
             Assert.AreEqual(1, res["nbHits"].ToObject<int>());
             res = _index.ClearSynonyms();
             _index.WaitTask(res["taskID"].ToString());
@@ -1103,7 +1102,7 @@ namespace NUnit.Framework.Test
             mockHttp.When(HttpMethod.Get, "https://" + hosts[1] + "/1/indexes/test/browse").Respond("application/json", "{\"fromSecondHost\":[]}");
 
             var client = new AlgoliaClient("test", "test", hosts, mockHttp);
-            client._dsnInternalTimeout = 2;
+            client.DsnInternalTimeout = 2;
             Assert.AreEqual(JObject.Parse("{\"fromSecondHost\":[]}").ToString(), client.ListIndexes().ToString());
 
             //first host back up again but no retry because lastModified < _dsnInternalTimeout, stick with second host

@@ -1,10 +1,10 @@
-﻿using Algolia.Search;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 using RichardSzalay.MockHttp;
 using System.Net;
 using System.Net.Http;
 
-namespace NUnit.Framework.Test
+namespace Algolia.Search.Test
 {
     [TestFixture]
     public class MockTest
@@ -94,7 +94,7 @@ namespace NUnit.Framework.Test
 
             //Get last logs
             mockHttp.When(HttpMethod.Get, "*/1/logs").Respond(HttpStatusCode.OK, "application/json", "{\"logs\":[]}");
-            
+
             mockHttp.Fallback.WithAny().Respond(HttpStatusCode.BadRequest);
 
             return mockHttp;

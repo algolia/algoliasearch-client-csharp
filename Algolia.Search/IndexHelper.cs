@@ -1,5 +1,4 @@
-﻿using Algolia.Search;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,7 +10,6 @@ namespace Algolia.Search
     /// <typeparam name="T">The type of data for the index.</typeparam>
     public class IndexHelper<T> : Index
     {
-        private readonly AlgoliaClient _client;
         private readonly string _indexName;
         private readonly string _objectIdField;
 
@@ -25,7 +23,7 @@ namespace Algolia.Search
             : base(client, indexName)
         {
             // Save
-            _client = client;
+            base.Client = client;
             _indexName = indexName;
             _objectIdField = objectIdField;
         }
@@ -46,7 +44,7 @@ namespace Algolia.Search
             var tempIndexName = _indexName + "_temp";
 
             // Use the temp index
-            var tempIndex = _client.InitIndex(tempIndexName);
+            var tempIndex = base.Client.InitIndex(tempIndexName);
 
             // Setup array to store objects to index
             var toIndex = new List<JObject>();
@@ -85,7 +83,7 @@ namespace Algolia.Search
             Task.WaitAll(taskList.ToArray());
 
             // Overwrite main index with temp index
-            return await _client.MoveIndexAsync(tempIndexName, _indexName);
+            return await base.Client.MoveIndexAsync(tempIndexName, _indexName);
         }
 
         /// <summary>
@@ -145,7 +143,7 @@ namespace Algolia.Search
                 taskList.Add(base.SaveObjectsAsync(toIndex));
 
             // Wait for all tasks to be done
-            return await TaskEx.WhenAll(taskList);
+            return await Task.WhenAll(taskList);
         }
 
         /// <summary>
@@ -231,7 +229,7 @@ namespace Algolia.Search
                 taskList.Add(base.DeleteObjectsAsync(toIndex));
 
             // Wait for all tasks to be done
-            return await TaskEx.WhenAll(taskList);
+            return await Task.WhenAll(taskList);
         }
 
         /// <summary>
@@ -277,7 +275,7 @@ namespace Algolia.Search
         /// </summary>
         public AlgoliaClient Client
         {
-            get { return _client; }
+            get { return base.Client; }
         }
 
         /// <summary>
