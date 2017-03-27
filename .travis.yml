@@ -1,0 +1,11 @@
+language: csharp
+sudo: required
+dist: trusty
+mono: none
+dotnet: 1.0.1
+script:
+ - dotnet restore && dotnet build
+env:
+  global:
+  - secure: dScxAee5Ge3BEG+g5oTbhfqnpGnx7hJS5n2Dnr3M8AKUpTxO2Y+XGUBNquPPM2Uw0O2DhBIXE6apwElJBxBEWTn7FB0WtsQ8Ei1d+AXM/B10Tw+mPTp9a6jd8vORtAaJo6ku7/ePoUVnP2cIGSdoAIlN2WX8TVC4WH45df3dGmM=
+  - secure: seqywn/J3Fe6LhbQAdB6SQDjXvMdBPSylqlO2ERtM2KrOBHl6zQlZtUAUHriWcATEFnAXY7LguUOWG9lzEG6tAhqRVCvL0TcF7kfcE2p4UwPCCjSKwjujNgIFmjjovFgYrNoccAbjGELq8hLYTnf22KmIRlz8+yYfhPTmi6457s=
