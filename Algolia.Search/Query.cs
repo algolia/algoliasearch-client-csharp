@@ -761,8 +761,7 @@ namespace Algolia.Search
         /// <returns></returns>
         public Query SetFacetFilters(IEnumerable<string> facets)
         {
-            this.facetFilters = string.Join(",", facets);
-            this.facetFilters = string.Format("[{0}]", this.facetFilters);
+            this.facetFilters = string.Join(",", facets);            
             return this;
         }
 

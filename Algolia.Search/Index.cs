@@ -1154,8 +1154,10 @@ namespace Algolia.Search
                 }
             }
 
+            string facetFilters = string.Join(",", filters);
+            facetFilters = string.Format("[{0}]", facetFilters);
 
-            queries.Add(new IndexQuery(_indexName, query.clone().SetFacetFilters(filters)));
+            queries.Add(new IndexQuery(_indexName, query.clone().SetFacetFilters(facetFilters)));
             // one query per disjunctive facet (use all refinements but the current one + histPerPage=1 + single facet)
             foreach (string disjunctiveFacet in disjunctiveFacets)
             {
@@ -1187,7 +1189,11 @@ namespace Algolia.Search
                         filters.Add(or + ']');
                     }
                 }
-                queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(0).EnableAnalytics(false).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[] { disjunctiveFacet }).SetFacetFilters(filters)));
+
+                facetFilters = string.Join(",", filters);
+                facetFilters = string.Format("[{0}]", facetFilters);
+
+                queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(0).EnableAnalytics(false).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[] { disjunctiveFacet }).SetFacetFilters(facetFilters)));
             }
 
             JObject answers = await _client.MultipleQueriesAsync(queries).ConfigureAwait(_client.getContinueOnCapturedContext());
