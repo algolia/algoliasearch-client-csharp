@@ -43,9 +43,9 @@ namespace Algolia.Search
     /// </summary>
     public class Index
     {
-        protected AlgoliaClient  _client;
-        private string         _indexName;
-        private string         _urlIndexName;
+        protected AlgoliaClient _client;
+        private string _indexName;
+        private string _urlIndexName;
 
         /// <summary>
         /// Index initialization (You should not call this constructor yourself).
@@ -94,7 +94,8 @@ namespace Algolia.Search
         public Task<JObject> AddObjectsAsync(IEnumerable<object> objects, CancellationToken token = default(CancellationToken))
         {
             List<object> requests = new List<object>();
-            foreach (object obj in objects) {
+            foreach (object obj in objects)
+            {
                 Dictionary<string, object> request = new Dictionary<string, object>();
                 request["action"] = "addObject";
                 request["body"] = obj;
@@ -182,7 +183,8 @@ namespace Algolia.Search
             var attributes = "";
             foreach (string attr in attributesToRetrieve)
             {
-                if (attributes.Length > 0) {
+                if (attributes.Length > 0)
+                {
                     attributes += ",";
                     attributes += attr;
                 }
@@ -411,9 +413,9 @@ namespace Algolia.Search
         /// <param name="query">The query.</param>
         async public Task DeleteByQueryAsync(Query query)
         {
-            query.SetAttributesToRetrieve(new string[]{"objectID"});
-            query.SetAttributesToHighlight(new string[]{});
-            query.SetAttributesToSnippet(new string[] {});
+            query.SetAttributesToRetrieve(new string[] { "objectID" });
+            query.SetAttributesToHighlight(new string[] { });
+            query.SetAttributesToSnippet(new string[] { });
             query.SetNbHitsPerPage(1000);
             query.EnableDistinct(false); // force distinct=false to improve performances
 
@@ -425,7 +427,7 @@ namespace Algolia.Search
                 string[] requests = new string[hits.Count];
                 foreach (JObject hit in hits)
                 {
-                    requests[i++] =  hit["objectID"].ToObject<string>();
+                    requests[i++] = hit["objectID"].ToObject<string>();
                 }
                 var task = await this.DeleteObjectsAsync(requests).ConfigureAwait(_client.getContinueOnCapturedContext());
                 await this.WaitTaskAsync(task["taskID"].ToObject<String>()).ConfigureAwait(_client.getContinueOnCapturedContext());
@@ -557,7 +559,7 @@ namespace Algolia.Search
             string cursorParam = "";
             if (cursor != null && cursor.Length > 0)
             {
-                cursorParam = string.Format("&cursor={0}",  Uri.EscapeDataString(cursor));
+                cursorParam = string.Format("&cursor={0}", Uri.EscapeDataString(cursor));
             }
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}{2}", _urlIndexName, q.GetQueryString(), cursorParam), null, token);
         }
@@ -572,7 +574,8 @@ namespace Algolia.Search
             return BrowseFromAsync(q, cursor).GetAwaiter().GetResult();
         }
 
-        public class IndexIterator : IEnumerable<JObject> {
+        public class IndexIterator : IEnumerable<JObject>
+        {
 
             Index index;
             Query query;
@@ -613,7 +616,8 @@ namespace Algolia.Search
                 Reset();
             }
 
-            private void LoadNextPage() {
+            private void LoadNextPage()
+            {
                 pos = 0;
                 string cursor = GetCursor();
                 answer = index.BrowseFromAsync(query, cursor).GetAwaiter().GetResult();
@@ -636,7 +640,8 @@ namespace Algolia.Search
 
             public bool MoveNext()
             {
-                while (true) {
+                while (true)
+                {
                     if (pos < ((JArray)answer["hits"]).Count())
                     {
                         hit = ((JArray)answer["hits"])[pos++].ToObject<JObject>();
@@ -665,7 +670,7 @@ namespace Algolia.Search
             }
         }
 
-        
+
 
         /// <summary>
         ///  Browse all index contents.
@@ -1110,8 +1115,9 @@ namespace Algolia.Search
         {
             if (refinements == null)
                 refinements = new Dictionary<string, IEnumerable<string>>();
-            Dictionary<string, IEnumerable<string>> disjunctiveRefinements = new Dictionary<string,IEnumerable<string>>();
-            foreach (string key in refinements.Keys) {
+            Dictionary<string, IEnumerable<string>> disjunctiveRefinements = new Dictionary<string, IEnumerable<string>>();
+            foreach (string key in refinements.Keys)
+            {
                 if (disjunctiveFacets.Contains(key))
                 {
                     disjunctiveRefinements.Add(key, refinements[key]);
@@ -1124,7 +1130,7 @@ namespace Algolia.Search
             List<string> filters = new List<string>();
             foreach (string key in refinements.Keys)
             {
-                string or = "(";
+                string or = "[";
                 bool first = true;
                 foreach (string value in refinements[key])
                 {
@@ -1134,21 +1140,21 @@ namespace Algolia.Search
                         if (!first)
                             or += ',';
                         first = false;
-                        or += String.Format("{0}:{1}", key, value);
+                        or += String.Format("\"{0}:{1}\"", key, value);
                     }
                     else
                     {
-                        filters.Add(String.Format("{0}:{1}", key, value));
+                        filters.Add(String.Format("\"{0}:{1}\"", key, value));
                     }
                 }
                 // Add or
                 if (disjunctiveRefinements.ContainsKey(key))
                 {
-                    filters.Add(or + ')');
+                    filters.Add(or + ']');
                 }
             }
 
-            
+
             queries.Add(new IndexQuery(_indexName, query.clone().SetFacetFilters(filters)));
             // one query per disjunctive facet (use all refinements but the current one + histPerPage=1 + single facet)
             foreach (string disjunctiveFacet in disjunctiveFacets)
@@ -1158,7 +1164,7 @@ namespace Algolia.Search
                 {
                     if (disjunctiveFacet.Equals(key))
                         continue;
-                    string or = "(";
+                    string or = "[";
                     bool first = true;
                     foreach (string value in refinements[key])
                     {
@@ -1168,22 +1174,22 @@ namespace Algolia.Search
                             if (!first)
                                 or += ',';
                             first = false;
-                            or += String.Format("{0}:{1}", key, value);
+                            or += String.Format("\"{0}:{1}\"", key, value);
                         }
                         else
                         {
-                            filters.Add(String.Format("{0}:{1}", key, value));
+                            filters.Add(String.Format("\"{0}:{1}\"", key, value));
                         }
                     }
                     // Add or
                     if (disjunctiveRefinements.ContainsKey(key))
                     {
-                        filters.Add(or + ')');
+                        filters.Add(or + ']');
                     }
                 }
-                queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(0).EnableAnalytics(false).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[]{disjunctiveFacet}).SetFacetFilters(filters)));
+                queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(0).EnableAnalytics(false).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[] { disjunctiveFacet }).SetFacetFilters(filters)));
             }
-        
+
             JObject answers = await _client.MultipleQueriesAsync(queries).ConfigureAwait(_client.getContinueOnCapturedContext());
 
             // aggregate answers
@@ -1240,8 +1246,10 @@ namespace Algolia.Search
             ALTCORRECTION_2
         }
 
-        private string SynonymsTypeToString(SynonymType type) {
-            switch (type) {
+        private string SynonymsTypeToString(SynonymType type)
+        {
+            switch (type)
+            {
                 case SynonymType.SYNONYM:
                     return "synonym";
                 case SynonymType.SYNONYM_ONEWAY:
@@ -1409,7 +1417,7 @@ namespace Algolia.Search
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
         public Task<JObject> SaveSynonymAsync(string objectID, object content, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName,  Uri.EscapeDataString(objectID), forwardToReplicas ? "true" : "false"), content, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName, Uri.EscapeDataString(objectID), forwardToReplicas ? "true" : "false"), content, token);
         }
 
         /// <summary>
@@ -1451,7 +1459,7 @@ namespace Algolia.Search
         /// <param name="queryParams">Optional query parameter</param>
         public Task<JObject> SearchFacetAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken))
         {
-            if(queryParams == null)
+            if (queryParams == null)
             {
                 queryParams = new Query();
             }
