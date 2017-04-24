@@ -814,7 +814,7 @@ namespace NUnit.Framework.Test
             query.SetPage(0);
             query.SetOptionalWords("J");
             query.SetNbHitsPerPage(1);
-
+            query.EnablePercentileComputation(true);
             query.SetAroundRadius(new AllRadiusInt());
             string[] attr = { "firstname" };
             query.SetAttributesToHighlight(attr);
