@@ -130,6 +130,7 @@ namespace Algolia.Search
             q.allowTyposOnNumericTokens = allowTyposOnNumericTokens;
             q.analytics = analytics;
             q.analyticsTags = analyticsTags;
+            q.percentileComputation = percentileComputation;
             q.aroundLatLong = aroundLatLong;
             q.aroundLatLongViaIP = aroundLatLongViaIP;
             q.attributes = attributes;
@@ -346,6 +347,17 @@ namespace Algolia.Search
         public Query EnableDistinct(bool enabled)
         {
             distinct = enabled ? 1 : 0;
+            return this;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="enabled"></param>When true, the API records the processing time of the search query and includes it when computing the 90% and 99% percentiles, available in your Algolia dashboard.
+        /// <returns></returns>
+        public Query EnablePercentileComputation(bool enabled)
+        {
+            percentileComputation = enabled;
             return this;
         }
 
@@ -1093,6 +1105,15 @@ namespace Algolia.Search
                 stringBuilder += "analytics=";
                 stringBuilder += analytics.Value ? "true" : "false";
             }
+
+            if (percentileComputation.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "percentileComputation=";
+                stringBuilder += percentileComputation.Value ? "true" : "false";
+            }
+
             if (analyticsTags != null)
             {
                 if (stringBuilder.Length > 0)
@@ -1403,6 +1424,7 @@ namespace Algolia.Search
         private bool? replaceSynonyms;
         private TypoTolerance? typoTolerance;
         private bool? allowTyposOnNumericTokens;
+        private bool? percentileComputation;
         private int? page;
         private int? hitsPerPage;
         private int? offset;
