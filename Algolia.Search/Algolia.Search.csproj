@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">   
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="4.0">   
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Description>Algolia Search API Client for C#</Description>
@@ -17,35 +17,15 @@
         <Version>3.8.0</Version>
         <AssemblyVersion>3.8.0</AssemblyVersion>
         <FileVersion>3.8.0.0</FileVersion>
-        <TargetFrameworks>net45;net462;netstandard1.3;netstandard1.6;netcoreapp1.0;netcoreapp1.1</TargetFrameworks>
+        <TargetFrameworks>net46;net462;netstandard1.3;netstandard1.6;netcoreapp1.0;netcoreapp1.1</TargetFrameworks>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     </PropertyGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
-    </ItemGroup>
-	
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
-    </ItemGroup>
-	
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
-    </ItemGroup>
-	
+	<PropertyGroup>
+		<GenerateAssemblyInfo>true
+		</GenerateAssemblyInfo>
+	</PropertyGroup> 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
         <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
-    </ItemGroup>
-	
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <Reference Include="System" />
-        <Reference Include="System.Net.Http" />
-        <Reference Include="System.Security.Cryptography" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
