@@ -2,17 +2,12 @@ language: csharp
 sudo: required
 dist: trusty
 mono: none
-dotnet: 1.0.0-preview2-003121
-os: Visual Studio 2015
-addons:
-  apt:
-    sources:
-    - sourceline: 'deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main'
-      key_url: 'https://apt-mo.trafficmanager.net/keys/microsoft.asc'
-    packages:
-    - dotnet-dev-1.0.1
+dotnet: 1.0.1-preview2-003121
+install:
+- dotnet restore
 script:
- - dotnet restore && dotnet build
+ - dotnet build
+ - nuget restore ./Algolia.Search.Test && dotnet test Algolia.Search.Test/Algolia.Search.Test.csproj
 env:
   global:
   - secure: dScxAee5Ge3BEG+g5oTbhfqnpGnx7hJS5n2Dnr3M8AKUpTxO2Y+XGUBNquPPM2Uw0O2DhBIXE6apwElJBxBEWTn7FB0WtsQ8Ei1d+AXM/B10Tw+mPTp9a6jd8vORtAaJo6ku7/ePoUVnP2cIGSdoAIlN2WX8TVC4WH45df3dGmM=
