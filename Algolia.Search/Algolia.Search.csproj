@@ -16,10 +16,11 @@
         <Version>3.8.0</Version>
         <AssemblyVersion>3.8.0</AssemblyVersion>
         <FileVersion>3.8.0.0</FileVersion>
-        <TargetFrameworks>net46;net462;netstandard1.3;netstandard1.6;netcoreapp1.0;netcoreapp1.1</TargetFrameworks>
+        <TargetFrameworks>net46;netcoreapp1.1;netcoreapp1.0;netstandard1.6;</TargetFrameworks>
     </PropertyGroup>
     <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-        <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+      <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">

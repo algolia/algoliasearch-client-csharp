@@ -362,17 +362,6 @@ namespace Algolia.Search
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="enabled"></param>When true, the API records the processing time of the search query and includes it when computing the 90% and 99% percentiles, available in your Algolia dashboard.
-        /// <returns></returns>
-        public Query EnablePercentileComputation(bool enabled)
-        {
-            percentileComputation = enabled;
-            return this;
-        }
-
-        /// <summary>
         /// Force faceting to be applied after de-duplication, 
         /// When using the distinct setting in combination with faceting, facet counts may be higher than expected. 
         /// This is because the engine computes faceting before applying de-duplication (distinct)

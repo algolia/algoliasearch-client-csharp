@@ -36,7 +36,6 @@ using Algolia.Search.Utils;
 using Algolia.Search.Models;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace Algolia.Search
 {
