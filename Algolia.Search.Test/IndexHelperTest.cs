@@ -76,7 +76,7 @@ namespace Algolia.Search.Test
         public void TestOverwriteIndexObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);
@@ -166,7 +166,7 @@ namespace Algolia.Search.Test
         public void TestSaveObjectsObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);
@@ -328,7 +328,7 @@ namespace Algolia.Search.Test
         public void TestDeleteObjectsObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);
@@ -396,7 +396,7 @@ namespace Algolia.Search.Test
         public void TestDeleteObjectObjectId()
         {
             ClearTest();
-            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"), "TestModelId");
+            _indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"), "TestModelId");
 
             var model = BuildTestModel();
             var task = _indexHelper.SaveObject(model);
