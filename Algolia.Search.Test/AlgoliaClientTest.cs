@@ -779,7 +779,7 @@ namespace Algolia.Search.Test
 			Assert.Equal("Hotel D", res["hits"][0]["name"].ToString());
 		}
 
-		//fixme
+		[Fact]
 		public void TestGenerateSecuredApiKey()
 		{
 			Assert.Equal("ZmI5YjQ5N2U3YjFkYjcxYTQ2YjE4OWFmNWUxNmVlNmVlNDkzNzYyYTFlYmE5NThhNjhhN2I5ZjhhN2NkYWNmMnRhZ0ZpbHRlcnM9KHB1YmxpYyUyQ3VzZXIxKQ==", _client.GenerateSecuredApiKey("182634d8894831d5dbce3b3185c50881", "(public,user1)"));
