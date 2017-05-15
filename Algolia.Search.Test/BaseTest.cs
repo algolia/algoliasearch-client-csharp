@@ -28,7 +28,6 @@ namespace Algolia.Search.Test
 				return name;
 			}
 			//String[] id = Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER").Split('.');
-			Console.WriteLine(name + "appveyor-" + Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER"));
 			return name + "appveyor-" + Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER");
 		}
 
