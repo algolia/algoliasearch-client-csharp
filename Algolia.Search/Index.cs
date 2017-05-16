@@ -55,7 +55,7 @@ namespace Algolia.Search
         {
             _client = client;
             _indexName = indexName;
-            _urlIndexName = Uri.EscapeDataString(indexName);
+            _urlIndexName = WebUtility.UrlEncode(indexName);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Algolia.Search
             }
             else
             {
-                return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectId)), content, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectId)), content, token);
             }
         }
 
@@ -126,7 +126,7 @@ namespace Algolia.Search
         {
             if (attributesToRetrieve == null)
             {
-                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), null, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token);
             }
             else
             {
@@ -135,9 +135,9 @@ namespace Algolia.Search
                 {
                     if (attributes.Length > 0)
                         attributes += ",";
-                    attributes += Uri.EscapeDataString(attr);
+                    attributes += WebUtility.UrlEncode(attr);
                 }
-                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}?attributesToRetrieve={2}", _urlIndexName, Uri.EscapeDataString(objectID), attributes), null, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}?attributesToRetrieve={2}", _urlIndexName, WebUtility.UrlEncode(objectID), attributes), null, token);
             }
         }
 
@@ -241,7 +241,7 @@ namespace Algolia.Search
                 queryParam = "?createIfNotExists=false";
             }
             string objectID = (string)partialObject["objectID"];
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/{1}/partial{2}", _urlIndexName, Uri.EscapeDataString(objectID), queryParam), partialObject, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/{1}/partial{2}", _urlIndexName, WebUtility.UrlEncode(objectID), queryParam), partialObject, token);
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace Algolia.Search
                 throw new AlgoliaException("objectID is missing");
             }
             string objectID = (string)obj["objectID"];
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), obj, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), obj, token);
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace Algolia.Search
         {
             if (string.IsNullOrWhiteSpace(objectID))
                 throw new ArgumentOutOfRangeException("objectID", "objectID is required.");
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token);
         }
 
         /// <summary>
@@ -558,7 +558,7 @@ namespace Algolia.Search
             string cursorParam = "";
             if (cursor != null && cursor.Length > 0)
             {
-                cursorParam = string.Format("&cursor={0}",  Uri.EscapeDataString(cursor));
+                cursorParam = string.Format("&cursor={0}",  WebUtility.UrlEncode(cursor));
             }
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}{2}", _urlIndexName, q.GetQueryString(), cursorParam), null, token);
         }
@@ -1332,7 +1332,7 @@ namespace Algolia.Search
         /// <param name="objectID">The objectID of the synonym</param>
         public Task<JObject> GetSynonymAsync(string objectID, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/synonyms/{1}", _urlIndexName, Uri.EscapeDataString(objectID)), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/synonyms/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token);
         }
 
         /// <summary>
@@ -1351,7 +1351,7 @@ namespace Algolia.Search
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
         public Task<JObject> DeleteSynonymAsync(string objectID, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName, Uri.EscapeDataString(objectID), forwardToReplicas ? "true" : "false"), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas ? "true" : "false"), null, token);
         }
 
         /// <summary>
@@ -1410,7 +1410,7 @@ namespace Algolia.Search
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
         public Task<JObject> SaveSynonymAsync(string objectID, object content, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName,  Uri.EscapeDataString(objectID), forwardToReplicas ? "true" : "false"), content, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName,  WebUtility.UrlEncode(objectID), forwardToReplicas ? "true" : "false"), content, token);
         }
 
         /// <summary>

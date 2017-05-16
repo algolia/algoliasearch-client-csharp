@@ -288,7 +288,7 @@ namespace Algolia.Search
         /// <returns>An object containing a "deletedAt" attribute</returns>
         public Task<JObject> DeleteIndexAsync(string indexName, CancellationToken token = default(CancellationToken))
         {
-            return ExecuteRequest(callType.Write, "DELETE", "/1/indexes/" + Uri.EscapeDataString(indexName), null, token);
+            return ExecuteRequest(callType.Write, "DELETE", "/1/indexes/" + WebUtility.UrlEncode(indexName), null, token);
         }
 
         /// <summary>
@@ -310,7 +310,7 @@ namespace Algolia.Search
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "move";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation, token);
+            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.MoveIndexAsync"/>
@@ -332,7 +332,7 @@ namespace Algolia.Search
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "copy";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation, token);
+            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
@@ -993,7 +993,7 @@ namespace Algolia.Search
             else
             {
                 if (userToken != null && userToken.Length > 0)
-                    tagFilter = string.Format("{0}&userToken={1}", tagFilter, Uri.EscapeDataString(userToken));
+                    tagFilter = string.Format("{0}&userToken={1}", tagFilter, WebUtility.UrlEncode(userToken));
                 byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", Hmac(privateApiKey, tagFilter), tagFilter));
                 return System.Convert.ToBase64String(content);
             }
