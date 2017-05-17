@@ -17,8 +17,8 @@ namespace Algolia.Search.Test
 			_testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
 			_testApplicationID = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
 			_client = new AlgoliaClient(_testApplicationID, _testApiKey);
-			_index = _client.InitIndex(GetSafeName("algolia-csharp"));
-			_indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("algolia-csharp"));
+			_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
+			_indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"));
 		}
 
         public static string GetSafeName(string name)
@@ -45,7 +45,7 @@ namespace Algolia.Search.Test
 
 		public void TestCleanup()
 		{
-			_client.DeleteIndex(GetSafeName("algolia-csharp"));
+			_client.DeleteIndex(GetSafeName("àlgol?à-csharp"));
 			_client = null;
 
 		}

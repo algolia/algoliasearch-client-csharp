@@ -110,10 +110,10 @@ namespace Algolia.Search.Test
 		{
 			ClearTest();
 			List<JObject> objs = new List<JObject>();
-			objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + GetSafeName("algolia-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Barninger""}}"));
-			objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + GetSafeName("algolia-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Speach""}}"));
+			objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + GetSafeName("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Barninger""}}"));
+			objs.Add(JObject.Parse(@"{""action"":""addObject"", ""indexName"": """ + GetSafeName("àlgol?à-csharp") + @""", ""body"": {""firstname"":""Roger"", ""lastname"":""Speach""}}"));
 			var task = _client.Batch(objs);
-			_index.WaitTask(task["taskID"][GetSafeName("algolia-csharp")].ToString());
+			_index.WaitTask(task["taskID"][GetSafeName("àlgol?à-csharp")].ToString());
 			var res = _index.Search(new Query(""));
 			Assert.Equal(2, res["nbHits"].ToObject<int>());
 			Assert.Equal("Roger", res["hits"][0]["firstname"].ToString());
@@ -220,11 +220,11 @@ namespace Algolia.Search.Test
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
 			Assert.Equal("Jimmie", res["hits"][0]["firstname"].ToString());
 			res = _client.ListIndexes();
-			Assert.True(Include((JArray)res["items"], "name", GetSafeName("algolia-csharp")));
-			task = _client.DeleteIndex(GetSafeName("algolia-csharp"));
+			Assert.True(Include((JArray)res["items"], "name", GetSafeName("àlgol?à-csharp")));
+			task = _client.DeleteIndex(GetSafeName("àlgol?à-csharp"));
 			_index.WaitTask(task["taskID"].ToObject<String>());
 			res = _client.ListIndexes();
-			Assert.False(Include((JArray)res["items"], "name", GetSafeName("algolia-csharp")));
+			Assert.False(Include((JArray)res["items"], "name", GetSafeName("àlgol?à-csharp")));
 		}
 
 		[Fact]
@@ -295,34 +295,34 @@ namespace Algolia.Search.Test
 		[Fact]
 		public void TestCopyIndex()
 		{
-			var index = _client.InitIndex(GetSafeName("algolia-csharp2"));
+			var index = _client.InitIndex(GetSafeName("àlgol?à-csharp2"));
 			ClearTest();
 			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
 			_index.WaitTask(task["taskID"].ToString());
-			task = _client.CopyIndex(GetSafeName("algolia-csharp"), GetSafeName("algolia-csharp2"));
+			task = _client.CopyIndex(GetSafeName("àlgol?à-csharp"), GetSafeName("àlgol?à-csharp2"));
 			_index.WaitTask(task["taskID"].ToString());
 			var res = index.Search(new Query(""));
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
 			Assert.Equal("Jimmie", res["hits"][0]["firstname"].ToString());
-			_client.DeleteIndex(GetSafeName("algolia-csharp2"));
+			_client.DeleteIndex(GetSafeName("àlgol?à-csharp2"));
 		}
 
 		[Fact]
 		public void TestMoveIndex()
 		{
-			var index = _client.InitIndex(GetSafeName("algolia-csharp2"));
+			var index = _client.InitIndex(GetSafeName("àlgol?à-csharp2"));
 			ClearTest();
 			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
 			_index.WaitTask(task["taskID"].ToString());
-			task = _client.MoveIndex(GetSafeName("algolia-csharp"), GetSafeName("algolia-csharp2"));
+			task = _client.MoveIndex(GetSafeName("àlgol?à-csharp"), GetSafeName("àlgol?à-csharp2"));
 			index.WaitTask(task["taskID"].ToString());
 			var res = index.Search(new Query(""));
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
 			Assert.Equal("Jimmie", res["hits"][0]["firstname"].ToString());
 			res = _client.ListIndexes();
-			Assert.True(Include((JArray)res["items"], "name", GetSafeName("algolia-csharp2")));
-			Assert.False(Include((JArray)res["items"], "name", GetSafeName("algolia-csharp")));
-			_client.DeleteIndex(GetSafeName("algolia-csharp2"));
+			Assert.True(Include((JArray)res["items"], "name", GetSafeName("àlgol?à-csharp2")));
+			Assert.False(Include((JArray)res["items"], "name", GetSafeName("àlgol?à-csharp")));
+			_client.DeleteIndex(GetSafeName("àlgol?à-csharp2"));
 		}
 
 		[Fact]
@@ -386,7 +386,7 @@ namespace Algolia.Search.Test
 			Assert.False(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
 			_index.WaitTask(res["taskID"].ToObject<String>());
 			res = _index.GetSettings();
-			_client.DeleteIndex(GetSafeName("algolia-csharp"));
+			_client.DeleteIndex(GetSafeName("àlgol?à-csharp"));
 		}
 
 		[Fact]
@@ -397,7 +397,7 @@ namespace Algolia.Search.Test
 			Assert.False(string.IsNullOrWhiteSpace(res["updatedAt"].ToString()));
 			_index.WaitTask(res["taskID"].ToObject<String>());
 			res = _index.GetSettings();
-			_client.DeleteIndex(GetSafeName("algolia-csharp"));
+			_client.DeleteIndex(GetSafeName("àlgol?à-csharp"));
 		}
 
 		[Fact]
@@ -688,7 +688,7 @@ namespace Algolia.Search.Test
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
 			Assert.Equal(null, res["query"]);
 			Assert.Equal("Jimmie J", res["hits"][0]["firstname"].ToString());
-			_client.DeleteIndex(GetSafeName("algolia-csharp"));
+			_client.DeleteIndex(GetSafeName("àlgol?à-csharp"));
 		}
 
 		[Fact]
@@ -734,7 +734,7 @@ namespace Algolia.Search.Test
 			var res = _index.Search(query);
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
 			Assert.Equal("Jimmie J", res["hits"][0]["firstname"].ToString());
-			_client.DeleteIndex(GetSafeName("algolia-csharp"));
+			_client.DeleteIndex(GetSafeName("àlgol?à-csharp"));
 		}
 
 		[Fact]
@@ -744,12 +744,12 @@ namespace Algolia.Search.Test
 			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger""}"));
 			_index.WaitTask(task["taskID"].ToString());
 			var indexQuery = new List<IndexQuery>();
-			indexQuery.Add(new IndexQuery(GetSafeName("algolia-csharp"), new Query("")));
+			indexQuery.Add(new IndexQuery(GetSafeName("àlgol?à-csharp"), new Query("")));
 			var res = _client.MultipleQueries(indexQuery);
 			Assert.Equal(1, res["results"].ToObject<JArray>().Count);
 			Assert.Equal(1, res["results"][0]["hits"].ToObject<JArray>().Count);
 			Assert.Equal("Jimmie", res["results"][0]["hits"][0]["firstname"].ToString());
-			_client.DeleteIndex(GetSafeName("algolia-csharp"));
+			_client.DeleteIndex(GetSafeName("àlgol?à-csharp"));
 		}
 
 		[Fact]
@@ -861,22 +861,22 @@ namespace Algolia.Search.Test
 				_client.ListIndexes();
 				_client = new AlgoliaClient(_testApplicationID, _testApiKey);
                 Assert.Throws<Exception>(() => {
-					_index = _client.InitIndex(GetSafeName("algolia-csharp"));
+					_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
                 });
 			}
 			catch (AlgoliaException)
 			{
 				// Reset 
 				_client = new AlgoliaClient(_testApplicationID, _testApiKey);
-				_index = _client.InitIndex(GetSafeName("algolia-csharp"));
+				_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
 			}
 			catch (OperationCanceledException)
 			{
 				_client = new AlgoliaClient(_testApplicationID, _testApiKey);
-				_index = _client.InitIndex(GetSafeName("algolia-csharp"));
+				_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
                 Assert.Throws<AlgoliaException>(() =>
 				{
-					_index = _client.InitIndex(GetSafeName("algolia-csharp"));
+					_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
 				});
 			}
 		}
