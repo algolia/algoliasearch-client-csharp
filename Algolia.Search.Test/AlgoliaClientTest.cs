@@ -694,6 +694,7 @@ namespace Algolia.Search.Test
 		[Fact]
 		public void TestBigQueryNone()
 		{
+            Console.WriteLine(GetSafeName("àlgol?à-csharp"));
 			ClearTest();
 			_index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
                 , ""Age"":42, ""lastname"":""Barninger"", ""_tags"": ""people""
