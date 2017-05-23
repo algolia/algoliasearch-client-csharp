@@ -107,12 +107,12 @@ namespace Algolia.Search
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 3.8.0");
+            HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 4.0.0");
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            SearchHttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 3.8.0");
+            SearchHttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 4.0.0");
             SearchHttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             SearchHttpClient.Timeout = TimeSpan.FromSeconds(5);
