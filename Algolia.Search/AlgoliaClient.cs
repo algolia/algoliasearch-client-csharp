@@ -1,27 +1,27 @@
 ﻿/*
- * Copyright (c) 2013 Algolia
- * http://www.algolia.com/
- * Based on the first version developed by Christopher Maneu under the same license:
- *  https://github.com/cmaneu/algoliasearch-client-csharp
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+* Copyright (c) 2013 Algolia
+* http://www.algolia.com/
+* Based on the first version developed by Christopher Maneu under the same license:
+*  https://github.com/cmaneu/algoliasearch-client-csharp
+* 
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+* 
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,13 +29,13 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Reflection;
 using System.Threading;
-using PCLCrypto;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Utils;
 using Algolia.Search.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Algolia.Search
 {
@@ -107,12 +107,12 @@ namespace Algolia.Search
 
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
+            HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 3.8.0");
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            SearchHttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp " + AssemblyInfo.AssemblyVersion);
+            SearchHttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 3.8.0");
             SearchHttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             SearchHttpClient.Timeout = TimeSpan.FromSeconds(5);
@@ -288,7 +288,7 @@ namespace Algolia.Search
         /// <returns>An object containing a "deletedAt" attribute</returns>
         public Task<JObject> DeleteIndexAsync(string indexName, CancellationToken token = default(CancellationToken))
         {
-            return ExecuteRequest(callType.Write, "DELETE", "/1/indexes/" + Uri.EscapeDataString(indexName), null, token);
+            return ExecuteRequest(callType.Write, "DELETE", "/1/indexes/" + WebUtility.UrlEncode(indexName), null, token);
         }
 
         /// <summary>
@@ -310,7 +310,7 @@ namespace Algolia.Search
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "move";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation, token);
+            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.MoveIndexAsync"/>
@@ -332,7 +332,7 @@ namespace Algolia.Search
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "copy";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", Uri.EscapeDataString(srcIndexName)), operation, token);
+            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
@@ -970,11 +970,13 @@ namespace Algolia.Search
         /// <returns></returns>
         public string GenerateSecuredApiKey(String privateApiKey, Query query, String userToken = null)
         {
-            if (userToken != null)
-                query.SetUserToken(userToken);
-            string queryStr = query.GetQueryString();
-            byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", Hmac(privateApiKey, queryStr), queryStr));
-            return System.Convert.ToBase64String(content);
+			if (userToken != null)
+				query.SetUserToken(userToken);
+
+			string queryStr = query.GetQueryString();
+			var hash = Hmac(privateApiKey, queryStr);
+			byte[] content = Encoding.UTF8.GetBytes(string.Format("{0}{1}", hash, queryStr));
+			return Convert.ToBase64String(content);
         }
 
         /// <summary>
@@ -991,36 +993,40 @@ namespace Algolia.Search
             else
             {
                 if (userToken != null && userToken.Length > 0)
-                    tagFilter = string.Format("{0}&userToken={1}", tagFilter, Uri.EscapeDataString(userToken));
+                    tagFilter = string.Format("{0}&userToken={1}", tagFilter, WebUtility.UrlEncode(userToken));
                 byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", Hmac(privateApiKey, tagFilter), tagFilter));
                 return System.Convert.ToBase64String(content);
             }
         }
 
-        private string Hmac(string key, string msg)
-        {
-            var keyMaterial = StringToAscii(key);
-            var data = StringToAscii(msg);
+		private string Hmac(string key, string data)
+		{
+			return HmacSha256(key, data);
+		}
 
-            var algorithm = WinRTCrypto.MacAlgorithmProvider.OpenAlgorithm(MacAlgorithm.HmacSha256);
+		public string HmacSha256(string key, string data)
+		{
+			string hash;
+			ASCIIEncoding encoder = new ASCIIEncoding();
+			byte[] code = encoder.GetBytes(key);
+			using (HMACSHA256 hmac = new HMACSHA256(code))
+			{
+				byte[] hmBytes = hmac.ComputeHash(encoder.GetBytes(data));
+				hash = ToHexString(hmBytes);
+			}
+			return hash;
 
-            var hasher = algorithm.CreateHash(keyMaterial);
-            hasher.Append(data);
+		}
 
-            return hasher.GetValueAndReset().Aggregate("", (s, e) => s + String.Format("{0:x2}", e), s => s);
-        }
-
-        private byte[] StringToAscii(string s)
-        {
-            byte[] retval = new byte[s.Length];
-            for (int ix = 0; ix < s.Length; ++ix)
-            {
-                char ch = s[ix];
-                if (ch <= 0x7f) retval[ix] = (byte)ch;
-                else retval[ix] = (byte)'?';
-            }
-            return retval;
-        }
+		public static string ToHexString(byte[] array)
+		{
+			StringBuilder hex = new StringBuilder(array.Length * 2);
+			foreach (byte b in array)
+			{
+				hex.AppendFormat("{0:x2}", b);
+			}
+			return hex.ToString();
+		}
 
         /// <summary>
         /// Main HTTP client

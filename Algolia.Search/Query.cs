@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 using Algolia.Search.Models;
+using System.Net;
 
 namespace Algolia.Search
 {
@@ -927,7 +928,7 @@ namespace Algolia.Search
                 foreach (string attr in this.attributes) {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
                 if (this.attributes.Count() == 0)
@@ -941,7 +942,7 @@ namespace Algolia.Search
                 foreach (string attr in this.attributesToHighlight) {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
                 if (this.attributesToHighlight.Count() == 0)
@@ -955,7 +956,7 @@ namespace Algolia.Search
                 foreach (string attr in this.noTypoToleranceOn) {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
                 if (this.noTypoToleranceOn.Count() == 0)
@@ -970,7 +971,7 @@ namespace Algolia.Search
                 foreach (string attr in this.attributesToSnippet) {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
                 if (this.attributesToSnippet.Count() == 0)
@@ -986,7 +987,7 @@ namespace Algolia.Search
                 {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
             }
@@ -995,14 +996,14 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "facetFilters=";
-                stringBuilder += Uri.EscapeDataString(facetFilters);
+                stringBuilder += WebUtility.UrlEncode(facetFilters);
             }
             if (filters != null)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "filters=";
-                stringBuilder += Uri.EscapeDataString(filters);
+                stringBuilder += WebUtility.UrlEncode(filters);
             }
             if (maxValuesPerFacets.HasValue)
             {
@@ -1021,7 +1022,7 @@ namespace Algolia.Search
                 {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
             }
@@ -1035,7 +1036,7 @@ namespace Algolia.Search
                 {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
                 if (this.responseFields.Count() == 0)
@@ -1124,7 +1125,7 @@ namespace Algolia.Search
                 {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
             }
@@ -1213,13 +1214,13 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "tagFilters=";
-                stringBuilder += Uri.EscapeDataString(tags);
+                stringBuilder += WebUtility.UrlEncode(tags);
             }
             if (numerics != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "numericFilters=";
-                stringBuilder += Uri.EscapeDataString(numerics);
+                stringBuilder += WebUtility.UrlEncode(numerics);
             }
             if (insideBoundingBox != null) {
                 if (stringBuilder.Length > 0)
@@ -1258,19 +1259,19 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "snippetEllipsisText=";
-                stringBuilder += Uri.EscapeDataString(snippetEllipsisText);
+                stringBuilder += WebUtility.UrlEncode(snippetEllipsisText);
             }
             if (query != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "query=";
-                stringBuilder += Uri.EscapeDataString(query);
+                stringBuilder += WebUtility.UrlEncode(query);
             }
             if (similarQuery != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "similarQuery=";
-                stringBuilder += Uri.EscapeDataString(similarQuery);
+                stringBuilder += WebUtility.UrlEncode(similarQuery);
             }
 
             if (optionalWords != null)
@@ -1278,7 +1279,7 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "optionalWords=";
-                stringBuilder += Uri.EscapeDataString(optionalWords);
+                stringBuilder += WebUtility.UrlEncode(optionalWords);
             }
 
             if (!String.IsNullOrEmpty(exactOnSingleWordQuery))
@@ -1302,7 +1303,7 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "restrictSearchableAttributes=";
-                stringBuilder += Uri.EscapeDataString(restrictSearchableAttributes);
+                stringBuilder += WebUtility.UrlEncode(restrictSearchableAttributes);
             }
             if (removeWordsIfNoResult.HasValue)
             {
@@ -1356,7 +1357,7 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "userToken=";
-                stringBuilder +=  Uri.EscapeDataString(userToken);
+                stringBuilder +=  WebUtility.UrlEncode(userToken);
             }
             if (restrictIndices != null)
             {
@@ -1368,7 +1369,7 @@ namespace Algolia.Search
                 {
                     if (!first)
                         stringBuilder += ',';
-                    stringBuilder += Uri.EscapeDataString(attr);
+                    stringBuilder += WebUtility.UrlEncode(attr);
                     first = false;
                 }
             }
@@ -1377,14 +1378,14 @@ namespace Algolia.Search
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "restrictSources=";
-                stringBuilder += Uri.EscapeDataString(restrictSources);
+                stringBuilder += WebUtility.UrlEncode(restrictSources);
             }
             if (referers != null)
             {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "referer=";
-                stringBuilder +=  Uri.EscapeDataString(referers);
+                stringBuilder +=  WebUtility.UrlEncode(referers);
             }
             if (customParameters.Count > 0)
             {
@@ -1394,7 +1395,7 @@ namespace Algolia.Search
                         stringBuilder += '&';
                     stringBuilder += elt.Key;
                     stringBuilder += "=";
-                    stringBuilder += Uri.EscapeDataString(elt.Value);
+                    stringBuilder += WebUtility.UrlEncode(elt.Value);
                 }
             }
             return stringBuilder;

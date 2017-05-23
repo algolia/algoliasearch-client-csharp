@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Algolia.Search
 {
@@ -13,7 +10,7 @@ namespace Algolia.Search
         /// <summary>
         /// Get or set the index name.
         /// </summary>
-        public String Index { get; set; }
+        public string Index { get; set; }
 
         /// <summary>
         /// Get or set the query.
@@ -25,7 +22,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="index">The name of the index.</param>
         /// <param name="query">The query.</param>
-        public IndexQuery(String index, Query query)
+        public IndexQuery(string index, Query query)
         {
             this.Index = index;
             this.Query = query;
