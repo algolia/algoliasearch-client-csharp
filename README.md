@@ -44,7 +44,9 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 
 ## Supported platforms
 
-Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.
+- .NET 4.0, .NET 4.5 by using `v3` version.
+- .NET 4.6+ by using latest `v4` version.
+- .NET Core 1.0+ using latest `v4` version.
 
 ## Install
 
