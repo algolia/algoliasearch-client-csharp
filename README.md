@@ -27,12 +27,21 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 1. **[Quick Start](#quick-start)**
 
     * [Initialize the client](#initialize-the-client)
-    * [Push data](#push-data)
-    * [Search](#search)
-    * [Configure](#configure)
-    * [Frontend search](#frontend-search)
+
+1. **[Push data](#push-data)**
+
+
+1. **[Search](#search)**
+
+
+1. **[Configure](#configure)**
+
+
+1. **[Frontend search](#frontend-search)**
+
 
 1. **[Getting Help](#getting-help)**
+
 
 
 
@@ -42,14 +51,21 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 
 
 
+
 ## Supported platforms
 
-Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.
+Compatibilities:
+  * `.NET Framework 4.6`
+  * `.NET Framework 4.6.2`
+  * `.NET Core 1.0`
+  * `.NET Core 1.1`
+  * `.NETStandard 1.6`
+  * `.NETStandard 1.3`
 
 ## Install
 
-1. In you project, open the "Package Manager Console" (Tools → Library Package Manager → Package Manager Console)
-2. Enter `Install-Package Algolia.Search` in the Package Manager Console
+* in you project, open the `Package Manager Console` (`Tools` → `Library Package Manager` → `Package Manager Console`)
+* enter `Install-Package Algolia.Search` in the `Package Manager Console`
 
 ## Quick Start
 
@@ -57,16 +73,16 @@ In 30 seconds, this quick start tutorial will show you how to index and search o
 
 ### Initialize the client
 
-You first need to initialize the client. For that you need your **Application ID** and **API Key**.
-You can find both of them on [your Algolia account](https://www.algolia.com/api-keys).
+To begin, you will need to initialize the client. In order to do this you will need your **Application ID** and **API Key**.
+You can find both on [your Algolia account](https://www.algolia.com/api-keys).
 
 ```csharp
 AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey")
 ```
 
-### Push data
+## Push data
 
-Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/algoliasearch-client-csharp/blob/master/contacts.json) in the ```contacts``` index using the following code:
+Without any prior configuration, you can start indexing [500 contacts](https://raw.githubusercontent.com/algolia/datasets-public/master/contacts.json) in the ```contacts``` index using the following code:
 ```csharp
 // Load JSON file
 StreamReader re = File.OpenText("contacts.json");
@@ -79,9 +95,9 @@ index.AddObjects(batch);
 // await index.AddObjectsAsync(batch);
 ```
 
-### Search
+## Search
 
-You can now search for contacts using firstname, lastname, company, etc. (even with typos):
+You can now search for contacts using `firstname`, `lastname`, `company`, etc. (even with typos):
 
 ```csharp
 // search by firstname
@@ -102,9 +118,9 @@ System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
 // System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie paint")));
 ```
 
-### Configure
+## Configure
 
-Settings can be customized to tune the search behavior. For example, you can add a custom sort by number of followers to the already great built-in relevance:
+Settings can be customized to fine tune the search behavior. For example, you can add a custom sort by number of followers to further enhance the built-in relevance:
 
 ```csharp
 index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
@@ -112,10 +128,10 @@ index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 // await index.SetSettingsAsync(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```
 
-You can also configure the list of attributes you want to index by order of importance (first = most important):
+You can also configure the list of attributes you want to index by order of importance (most important first).
 
-**Note:** Since the engine is designed to suggest results as you type, you'll generally search by prefix.
-In this case the order of attributes is very important to decide which hit is the best:
+**Note:** The Algolia engine is designed to suggest results as you type, which means you'll generally search by prefix.
+In this case, the order of attributes is very important to decide which hit is the best:
 
 ```csharp
 index.SetSettings(JObject.Parse(@"{""searchableAttributes"":[""lastname"", ""firstname"",
@@ -125,12 +141,12 @@ index.SetSettings(JObject.Parse(@"{""searchableAttributes"":[""lastname"", ""fir
 //                                                                     ""company"", ""email"", ""city""]}"));
 ```
 
-### Frontend search
+## Frontend search
 
 **Note:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-javascript) to perform queries.
 
-It brings two benefits:
-  * Your users get a better response time by not going through your servers
+Benefits of using our JavaScript client:
+  * End users experience a faster response time by not going through your servers
   * It will offload unnecessary tasks from your servers
 
 ```html
