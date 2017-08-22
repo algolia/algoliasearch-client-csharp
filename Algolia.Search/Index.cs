@@ -34,6 +34,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Threading;
+using Algolia.Search.Models;
 
 
 namespace Algolia.Search
@@ -64,15 +65,15 @@ namespace Algolia.Search
         /// <param name="content">The object you want to add to the index.</param>
         /// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
         /// <returns>An object that contains an "objectID" attribute.</returns>
-        public Task<JObject> AddObjectAsync(object content, string objectId = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> AddObjectAsync(object content, string objectId = null, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             if (string.IsNullOrWhiteSpace(objectId))
             {
-                return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}", _urlIndexName), content, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}", _urlIndexName), content, token, requestOptions);
             }
             else
             {
-                return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectId)), content, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectId)), content, token, requestOptions);
             }
         }
 
@@ -82,9 +83,9 @@ namespace Algolia.Search
         /// <param name="content">The object you want to add to the index.</param>
         /// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
         /// <returns>An object that contains an "objectID" attribute.</returns>
-        public JObject AddObject(object content, string objectId = null)
+        public JObject AddObject(object content, string objectId = null, RequestOptions requestOptions = null)
         {
-            return AddObjectAsync(content, objectId).GetAwaiter().GetResult();
+            return AddObjectAsync(content, objectId, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objects">An array of objects to add. If the objects contains objectIDs, they will be used.</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string).</returns>
-        public Task<JObject> AddObjectsAsync(IEnumerable<object> objects, CancellationToken token = default(CancellationToken))
+        public Task<JObject> AddObjectsAsync(IEnumerable<object> objects, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             List<object> requests = new List<object>();
             foreach (object obj in objects) {
@@ -103,7 +104,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token, requestOptions);
         }
 
         /// <summary>
@@ -111,9 +112,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objects">An array of objects to add. If the objects contains objectIDs, they will be used.</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string).</returns>
-        public JObject AddObjects(IEnumerable<object> objects)
+        public JObject AddObjects(IEnumerable<object> objects, RequestOptions requestOptions = null)
         {
-            return AddObjectsAsync(objects).GetAwaiter().GetResult();
+            return AddObjectsAsync(objects, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -122,11 +123,11 @@ namespace Algolia.Search
         /// <param name="objectID">The unique identifier of the object to retrieve.</param>
         /// <param name="attributesToRetrieve">Optional list of attributes to retrieve.</param>
         /// <returns></returns>
-        public Task<JObject> GetObjectAsync(string objectID, IEnumerable<string> attributesToRetrieve = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetObjectAsync(string objectID, IEnumerable<string> attributesToRetrieve = null, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             if (attributesToRetrieve == null)
             {
-                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token, requestOptions);
             }
             else
             {
@@ -137,7 +138,7 @@ namespace Algolia.Search
                         attributes += ",";
                     attributes += WebUtility.UrlEncode(attr);
                 }
-                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}?attributesToRetrieve={2}", _urlIndexName, WebUtility.UrlEncode(objectID), attributes), null, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}?attributesToRetrieve={2}", _urlIndexName, WebUtility.UrlEncode(objectID), attributes), null, token, requestOptions);
             }
         }
 
@@ -147,9 +148,9 @@ namespace Algolia.Search
         /// <param name="objectID">The unique identifier of the object to retrieve.</param>
         /// <param name="attributesToRetrieve">Optional list of attributes to retrieve.</param>
         /// <returns></returns>
-        public JObject GetObject(string objectID, IEnumerable<string> attributesToRetrieve = null)
+        public JObject GetObject(string objectID, IEnumerable<string> attributesToRetrieve = null, RequestOptions requestOptions = null)
         {
-            return GetObjectAsync(objectID, attributesToRetrieve).GetAwaiter().GetResult();
+            return GetObjectAsync(objectID, attributesToRetrieve, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -157,7 +158,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
         /// <returns></returns> 
-        public Task<JObject> GetObjectsAsync(IEnumerable<String> objectIDs, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetObjectsAsync(IEnumerable<String> objectIDs, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             JArray requests = new JArray();
             foreach (String id in objectIDs)
@@ -169,7 +170,7 @@ namespace Algolia.Search
             }
             JObject body = new JObject();
             body.Add("requests", requests);
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", "/1/indexes/*/objects", body, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", "/1/indexes/*/objects", body, token, requestOptions);
         }
 
         /// <summary>
@@ -177,7 +178,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
         /// <returns></returns> 
-        public Task<JObject> GetObjectsAsync(IEnumerable<String> objectIDs, IEnumerable<string> attributesToRetrieve, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetObjectsAsync(IEnumerable<String> objectIDs, IEnumerable<string> attributesToRetrieve, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             JArray requests = new JArray();
             var attributes = "";
@@ -200,7 +201,7 @@ namespace Algolia.Search
 
             JObject body = new JObject();
             body.Add("requests", requests);
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", "/1/indexes/*/objects", body, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", "/1/indexes/*/objects", body, token, requestOptions);
         }
 
         /// <summary>
@@ -208,9 +209,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
         /// <returns></returns> 
-        public JObject GetObjects(IEnumerable<String> objectIDs)
+        public JObject GetObjects(IEnumerable<String> objectIDs, RequestOptions requestOptions = null)
         {
-            return GetObjectsAsync(objectIDs).GetAwaiter().GetResult();
+            return GetObjectsAsync(objectIDs, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -219,9 +220,9 @@ namespace Algolia.Search
         /// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
         /// <param name="attributesToRetrieve">list of attributes to retrieve.</param>
         /// <returns></returns> 
-        public JObject GetObjects(IEnumerable<String> objectIDs, IEnumerable<string> attributesToRetrieve)
+        public JObject GetObjects(IEnumerable<String> objectIDs, IEnumerable<string> attributesToRetrieve, RequestOptions requestOptions = null)
         {
-            return GetObjectsAsync(objectIDs, attributesToRetrieve).GetAwaiter().GetResult();
+            return GetObjectsAsync(objectIDs, attributesToRetrieve, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -229,7 +230,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="partialObject">The object attributes to override (must contains an objectID attribute).</param>
         /// <returns>An object containing an "updatedAt" attribute.</returns>
-        public Task<JObject> PartialUpdateObjectAsync(JObject partialObject, bool createIfNotExists = true, CancellationToken token = default(CancellationToken))
+        public Task<JObject> PartialUpdateObjectAsync(JObject partialObject, bool createIfNotExists = true, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             string queryParam = "";
             if (partialObject["objectID"] == null)
@@ -241,7 +242,7 @@ namespace Algolia.Search
                 queryParam = "?createIfNotExists=false";
             }
             string objectID = (string)partialObject["objectID"];
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/{1}/partial{2}", _urlIndexName, WebUtility.UrlEncode(objectID), queryParam), partialObject, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/{1}/partial{2}", _urlIndexName, WebUtility.UrlEncode(objectID), queryParam), partialObject, token, requestOptions);
         }
 
         /// <summary>
@@ -249,9 +250,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="partialObject">The object attributes to override (must contains an objectID attribute).</param>
         /// <returns>An object containing an "updatedAt" attribute.</returns>
-        public JObject PartialUpdateObject(JObject partialObject, bool createIfNotExists = true)
+        public JObject PartialUpdateObject(JObject partialObject, bool createIfNotExists = true, RequestOptions requestOptions = null)
         {
-            return PartialUpdateObjectAsync(partialObject, createIfNotExists).GetAwaiter().GetResult();
+            return PartialUpdateObjectAsync(partialObject, createIfNotExists, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -259,7 +260,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objects">An array of objects to update (each object must contain an objectID attribute).</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string).</returns>
-        public Task<JObject> PartialUpdateObjectsAsync(IEnumerable<JObject> objects, bool createIfNotExists = true, CancellationToken token = default(CancellationToken))
+        public Task<JObject> PartialUpdateObjectsAsync(IEnumerable<JObject> objects, bool createIfNotExists = true, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             string action = "partialUpdateObject";
             if (!createIfNotExists)
@@ -281,7 +282,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token, requestOptions);
         }
 
         /// <summary>
@@ -289,9 +290,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objects">An array of objects to update (each object must contain an objectID attribute).</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string).</returns>
-        public JObject PartialUpdateObjects(IEnumerable<JObject> objects, bool createIfNotExists = true)
+        public JObject PartialUpdateObjects(IEnumerable<JObject> objects, bool createIfNotExists = true, RequestOptions requestOptions = null)
         {
-            return PartialUpdateObjectsAsync(objects, createIfNotExists).GetAwaiter().GetResult();
+            return PartialUpdateObjectsAsync(objects, createIfNotExists, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -299,14 +300,14 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="obj">The object to save (must contain an objectID attribute).</param>
         /// <returns>An object containing an "updatedAt" attribute.</returns>
-        public Task<JObject> SaveObjectAsync(JObject obj, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SaveObjectAsync(JObject obj, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             if (obj["objectID"] == null)
             {
                 throw new AlgoliaException("objectID is missing");
             }
             string objectID = (string)obj["objectID"];
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), obj, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), obj, token, requestOptions);
         }
 
         /// <summary>
@@ -314,9 +315,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="obj">The object to save (must contain an objectID attribute).</param>
         /// <returns>An object containing an "updatedAt" attribute.</returns>
-        public JObject SaveObject(JObject obj)
+        public JObject SaveObject(JObject obj, RequestOptions requestOptions = null)
         {
-            return SaveObjectAsync(obj).GetAwaiter().GetResult();
+            return SaveObjectAsync(obj, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -324,7 +325,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objects">An array of objects to update (each object must contain an objectID attribute).</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string).</returns>
-        public Task<JObject> SaveObjectsAsync(IEnumerable<JObject> objects, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SaveObjectsAsync(IEnumerable<JObject> objects, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             List<object> requests = new List<object>();
             foreach (JObject obj in objects)
@@ -341,7 +342,7 @@ namespace Algolia.Search
             }
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token, requestOptions);
         }
 
         /// <summary>
@@ -349,9 +350,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objects">An array of objects to update (each object must contain an objectID attribute).</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string).</returns>
-        public JObject SaveObjects(IEnumerable<JObject> objects)
+        public JObject SaveObjects(IEnumerable<JObject> objects, RequestOptions requestOptions = null)
         {
-            return SaveObjectsAsync(objects).GetAwaiter().GetResult();
+            return SaveObjectsAsync(objects, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -359,11 +360,11 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objectID">The unique identifier of the object to delete.</param>
         /// <returns>An object containing a "deletedAt" attribute.</returns>
-        public Task<JObject> DeleteObjectAsync(string objectID, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteObjectAsync(string objectID, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             if (string.IsNullOrWhiteSpace(objectID))
                 throw new ArgumentOutOfRangeException("objectID", "objectID is required.");
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token, requestOptions);
         }
 
         /// <summary>
@@ -371,16 +372,16 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objectID">The unique identifier of the object to delete.</param>
         /// <returns>An object containing a "deletedAt" attribute.</returns>
-        public JObject DeleteObject(string objectID)
+        public JObject DeleteObject(string objectID, RequestOptions requestOptions = null)
         {
-            return DeleteObjectAsync(objectID).GetAwaiter().GetResult();
+            return DeleteObjectAsync(objectID, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Delete several objects.
         /// </summary>
         /// <param name="objects">An array of objectIDs to delete.</param>
-        public Task<JObject> DeleteObjectsAsync(IEnumerable<String> objects, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteObjectsAsync(IEnumerable<String> objects, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             List<object> requests = new List<object>();
             foreach (object id in objects)
@@ -394,23 +395,23 @@ namespace Algolia.Search
             }
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.DeleteObjectsAsync"/>.
         /// </summary>
         /// <param name="objects">An array of objectIDs to delete.</param>
-        public JObject DeleteObjects(IEnumerable<String> objects)
+        public JObject DeleteObjects(IEnumerable<String> objects, RequestOptions requestOptions = null)
         {
-            return DeleteObjectsAsync(objects).GetAwaiter().GetResult();
+            return DeleteObjectsAsync(objects, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Delete all objects matching a query.
         /// </summary>
         /// <param name="query">The query.</param>
-        async public Task DeleteByQueryAsync(Query query)
+        async public Task DeleteByQueryAsync(Query query, RequestOptions requestOptions = null)
         {
             query.SetAttributesToRetrieve(new string[]{"objectID"});
             query.SetAttributesToHighlight(new string[]{});
@@ -418,7 +419,7 @@ namespace Algolia.Search
             query.SetNbHitsPerPage(1000);
             query.EnableDistinct(false); // force distinct=false to improve performances
 
-            JObject result = await this.BrowseFromAsync(query, null).ConfigureAwait(_client.getContinueOnCapturedContext());
+            JObject result = await this.BrowseFromAsync(query, null, default(CancellationToken), requestOptions).ConfigureAwait(_client.getContinueOnCapturedContext());
             while (((JArray)result["hits"]).Count != 0)
             {
                 int i = 0;
@@ -430,7 +431,7 @@ namespace Algolia.Search
                 }
                 var task = await this.DeleteObjectsAsync(requests).ConfigureAwait(_client.getContinueOnCapturedContext());
                 await this.WaitTaskAsync(task["taskID"].ToObject<String>()).ConfigureAwait(_client.getContinueOnCapturedContext());
-                result = await this.SearchAsync(query).ConfigureAwait(_client.getContinueOnCapturedContext());
+                result = await this.SearchAsync(query, default(CancellationToken), requestOptions).ConfigureAwait(_client.getContinueOnCapturedContext());
             }
         }
 
@@ -438,27 +439,27 @@ namespace Algolia.Search
         /// Synchronously call <see cref="Index.DeleteByQueryAsync"/>.
         /// </summary>
         /// <param name="query">The query.</param>
-        public void DeleteByQuery(Query query)
+        public void DeleteByQuery(Query query, RequestOptions requestOptions = null)
         {
-            DeleteByQueryAsync(query).GetAwaiter().GetResult();
+            DeleteByQueryAsync(query, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Search inside the index.
         /// </summary>
         /// <param name="q">The query.</param>
-        public Task<JObject> SearchAsync(Query q, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchAsync(Query q, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             string paramsString = q.GetQueryString();
             if (paramsString.Length > 0)
             {
                 Dictionary<string, object> body = new Dictionary<string, object>();
                 body["params"] = paramsString;
-                return _client.ExecuteRequest(AlgoliaClient.callType.Search, "POST", string.Format("/1/indexes/{0}/query", _urlIndexName), body, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Search, "POST", string.Format("/1/indexes/{0}/query", _urlIndexName), body, token, requestOptions);
             }
             else
             {
-                return _client.ExecuteRequest(AlgoliaClient.callType.Search, "GET", string.Format("/1/indexes/{0}", _urlIndexName), null, token);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Search, "GET", string.Format("/1/indexes/{0}", _urlIndexName), null, token, requestOptions);
             }
         }
 
@@ -466,20 +467,20 @@ namespace Algolia.Search
         /// Synchronously call <see cref="Index.SearchAsync"/>.
         /// </summary>
         /// <param name="q">The query.</param>
-        public JObject Search(Query q)
+        public JObject Search(Query q, RequestOptions requestOptions = null)
         {
-            return SearchAsync(q).GetAwaiter().GetResult();
+            return SearchAsync(q, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Check to see if the asynchronous server task is complete.
         /// </summary>
         /// <param name="taskID">The id of the task returned by server.</param>
-        async public Task WaitTaskAsync(string taskID, int timeToWait = 100, CancellationToken token = default(CancellationToken))
+        async public Task WaitTaskAsync(string taskID, int timeToWait = 100, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             while (true)
             {
-                JObject obj = await _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/task/{1}", _urlIndexName, taskID), null, token).ConfigureAwait(_client.getContinueOnCapturedContext());
+                JObject obj = await _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/task/{1}", _urlIndexName, taskID), null, token, requestOptions).ConfigureAwait(_client.getContinueOnCapturedContext());
                 string status = (string)obj["status"];
                 if (status.Equals("published"))
                     return;
@@ -494,27 +495,27 @@ namespace Algolia.Search
         /// Synchronously call <see cref="Index.WaitTaskAsync"/>.
         /// </summary>
         /// <param name="taskID">The id of the task returned by server.</param>
-        public void WaitTask(String taskID, int timeToWait = 100)
+        public void WaitTask(String taskID, int timeToWait = 100, RequestOptions requestOptions = null)
         {
-            WaitTaskAsync(taskID, timeToWait).GetAwaiter().GetResult();
+            WaitTaskAsync(taskID, timeToWait, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Get the index settings.
         /// </summary>
         /// <returns>An object containing the settings.</returns>
-        public Task<JObject> GetSettingsAsync(CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetSettingsAsync(CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/settings?getVersion=2", _urlIndexName), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/settings?getVersion=2", _urlIndexName), null, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.GetSettingsAsync"/>.
         /// </summary>
         /// <returns>An object containing the settings.</returns>
-        public JObject GetSettings()
+        public JObject GetSettings(RequestOptions requestOptions = null)
         {
-            return GetSettingsAsync().GetAwaiter().GetResult();
+            return GetSettingsAsync(default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -522,7 +523,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="page">The page number to browse.</param>
         /// <param name="hitsPerPage">The number of hits per page.</param>
-        public Task<JObject> BrowseAsync(int page = 0, int hitsPerPage = 1000, CancellationToken token = default(CancellationToken))
+        public Task<JObject> BrowseAsync(int page = 0, int hitsPerPage = 1000, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             string param = "";
             if (page != 0)
@@ -535,7 +536,7 @@ namespace Algolia.Search
                 else
                     param += string.Format("&hitsPerPage={0}", hitsPerPage);
             }
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse{1}", _urlIndexName, param), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse{1}", _urlIndexName, param), null, token, requestOptions);
         }
 
         /// <summary>
@@ -543,9 +544,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="page">The page number to browse.</param>
         /// <param name="hitsPerPage">The number of hits per page.</param>
-        public JObject Browse(int page = 0, int hitsPerPage = 1000)
+        public JObject Browse(int page = 0, int hitsPerPage = 1000, RequestOptions requestOptions = null)
         {
-            return BrowseAsync(page, hitsPerPage).GetAwaiter().GetResult();
+            return BrowseAsync(page, hitsPerPage, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -553,14 +554,14 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="q">The query parameters for the browse.</param>
         /// <param name="cursor">The cursor to start the browse can be empty.</param>
-        public Task<JObject> BrowseFromAsync(Query q, string cursor, CancellationToken token = default(CancellationToken))
+        public Task<JObject> BrowseFromAsync(Query q, string cursor, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             string cursorParam = "";
             if (cursor != null && cursor.Length > 0)
             {
                 cursorParam = string.Format("&cursor={0}",  WebUtility.UrlEncode(cursor));
             }
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}{2}", _urlIndexName, q.GetQueryString(), cursorParam), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}{2}", _urlIndexName, q.GetQueryString(), cursorParam), null, token, requestOptions);
         }
 
         /// <summary>
@@ -568,9 +569,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="q">The query parameters for the browse.</param>
         /// <param name="cursor">The cursor to start the browse can be empty.</param>
-        public JObject BrowseFrom(Query q, string cursor)
+        public JObject BrowseFrom(Query q, string cursor, RequestOptions requestOptions = null)
         {
-            return BrowseFromAsync(q, cursor).GetAwaiter().GetResult();
+            return BrowseFromAsync(q, cursor, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         public class IndexIterator : IEnumerable<JObject> {
@@ -672,7 +673,7 @@ namespace Algolia.Search
         ///  Browse all index contents.
         /// </summary>
         /// <param name="q">The query parameters for the browse.</param>
-        public IndexIterator BrowseAll(Query q)
+        public IndexIterator BrowseAll(Query q, RequestOptions requestOptions = null)
         {
             return new IndexIterator(this, q, "");
         }
@@ -680,17 +681,17 @@ namespace Algolia.Search
         /// <summary>
         /// Delete the index contents without removing settings and index specific API keys.
         /// </summary>
-        public Task<JObject> ClearIndexAsync(CancellationToken token = default(CancellationToken))
+        public Task<JObject> ClearIndexAsync(CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/clear", _urlIndexName), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/clear", _urlIndexName), null, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.ClearIndexAsync"/>.
         /// </summary>
-        public JObject ClearIndex()
+        public JObject ClearIndex(RequestOptions requestOptions = null)
         {
-            return ClearIndexAsync().GetAwaiter().GetResult();
+            return ClearIndexAsync(default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -738,122 +739,122 @@ namespace Algolia.Search
         ///  - optionalWords: (array of strings) Specify a list of words that should be considered as optional when found in the query.
         /// </param>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-        public Task<JObject> SetSettingsAsync(JObject settings, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SetSettingsAsync(JObject settings, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             string changeSettingsPath = forwardToReplicas
                 ? string.Format("/1/indexes/{0}/settings?forwardToReplicas={1}", _urlIndexName, forwardToReplicas.ToString().ToLower())
                 : string.Format("/1/indexes/{0}/settings", _urlIndexName);
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", changeSettingsPath, settings, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", changeSettingsPath, settings, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.SetSettingsAsync"/>.
         /// </summary>
-        public JObject SetSettings(JObject settings, bool forwardToReplicas = false)
+        public JObject SetSettings(JObject settings, bool forwardToReplicas = false, RequestOptions requestOptions = null)
         {
-            return SetSettingsAsync(settings, forwardToReplicas).GetAwaiter().GetResult();
+            return SetSettingsAsync(settings, forwardToReplicas, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// List all user keys associated with this index along with their associated ACLs.
         /// </summary>
         [Obsolete("ListUserKeysAsync is deprecated, please use ListApiKeysAsync instead.")]
-        public Task<JObject> ListUserKeysAsync(CancellationToken token = default(CancellationToken))
+        public Task<JObject> ListUserKeysAsync(CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys", _urlIndexName), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys", _urlIndexName), null, token, requestOptions);
         }
 
         /// <summary>
         /// List all api keys associated with this index along with their associated ACLs.
         /// </summary>
-        public Task<JObject> ListApiKeysAsync(CancellationToken token = default(CancellationToken))
+        public Task<JObject> ListApiKeysAsync(CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys", _urlIndexName), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys", _urlIndexName), null, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.ListApiKeysAsync"/>.
         /// </summary>
         [Obsolete("ListUserKeys is deprecated, please use ListApiKeys instead.")]
-        public JObject ListUserKeys()
+        public JObject ListUserKeys(RequestOptions requestOptions = null)
         {
-            return ListApiKeysAsync().GetAwaiter().GetResult();
+            return ListApiKeysAsync(default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.ListApiKeysAsync"/>.
         /// </summary>
-        public JObject ListApiKeys()
+        public JObject ListApiKeys(RequestOptions requestOptions = null)
         {
-            return ListApiKeysAsync().GetAwaiter().GetResult();
+            return ListApiKeysAsync(default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Get ACL of a user key associated with this index.
         /// </summary>
         [Obsolete("GetUserKeyACLAsync is deprecated, please use GetUserApiACLAsync instead.")]
-        public Task<JObject> GetUserKeyACLAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetUserKeyACLAsync(string key, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token, requestOptions);
         }
 
         /// <summary>
         /// Get ACL of an api key associated with this index.
         /// </summary>
-        public Task<JObject> GetApiKeyACLAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetApiKeyACLAsync(string key, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.GetUserKeyACLAsync"/>.
         /// </summary>
         [Obsolete("GetUserKeyACL is deprecated, please use GetApiKeyACL instead.")]
-        public JObject GetUserKeyACL(string key)
+        public JObject GetUserKeyACL(string key, RequestOptions requestOptions = null)
         {
-            return GetApiKeyACLAsync(key).GetAwaiter().GetResult();
+            return GetApiKeyACLAsync(key, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.GetApiKeyACLAsync"/>.
         /// </summary>
-        public JObject GetApiKeyACL(string key)
+        public JObject GetApiKeyACL(string key, RequestOptions requestOptions = null)
         {
-            return GetApiKeyACLAsync(key).GetAwaiter().GetResult();
+            return GetApiKeyACLAsync(key, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Delete an existing user key associated with this index.
         /// </summary>
         [Obsolete("DeleteUserKeyAsync is deprecated, please use DeleteApiKeyAsync instead.")]
-        public Task<JObject> DeleteUserKeyAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteUserKeyAsync(string key, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token, requestOptions);
         }
 
         /// <summary>
         /// Delete an existing api key associated with this index.
         /// </summary>
-        public Task<JObject> DeleteApiKeyAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteApiKeyAsync(string key, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.DeleteApiKeyAsync"/>.
         /// </summary>
         [Obsolete("DeleteUserKey is deprecated, please use DeleteApiKey instead.")]
-        public JObject DeleteUserKey(string key)
+        public JObject DeleteUserKey(string key, RequestOptions requestOptions = null)
         {
-            return DeleteApiKeyAsync(key).GetAwaiter().GetResult();
+            return DeleteApiKeyAsync(key, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.DeleteApiKeyAsync"/>.
         /// </summary>
-        public JObject DeleteApiKey(string key)
+        public JObject DeleteApiKey(string key, RequestOptions requestOptions = null)
         {
-            return DeleteApiKeyAsync(key).GetAwaiter().GetResult();
+            return DeleteApiKeyAsync(key, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -870,9 +871,9 @@ namespace Algolia.Search
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("AddUserKeyAsync is deprecated, please use AddApiKeyAsync instead.")]
-        public Task<JObject> AddUserKeyAsync(Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken))
+        public Task<JObject> AddUserKeyAsync(Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), parameters, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), parameters, token, requestOptions);
         }
 
         /// <summary>
@@ -888,26 +889,26 @@ namespace Algolia.Search
         ///   - queryParameters: string
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> AddApiKeyAsync(Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken))
+        public Task<JObject> AddApiKeyAsync(Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), parameters, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/keys", _urlIndexName), parameters, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.AddApiKeyAsync"/>.
         /// </summary>
         [Obsolete("AddUserKey is deprecated, please use AddApiKey instead.")]
-        public JObject AddUserKey(Dictionary<string, object> parameters)
+        public JObject AddUserKey(Dictionary<string, object> parameters, RequestOptions requestOptions = null)
         {
-            return AddApiKeyAsync(parameters).GetAwaiter().GetResult();
+            return AddApiKeyAsync(parameters, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.AddApiKeyAsync"/>.
         /// </summary>
-        public JObject AddApiKey(Dictionary<string, object> parameters)
+        public JObject AddApiKey(Dictionary<string, object> parameters, RequestOptions requestOptions = null)
         {
-            return AddApiKeyAsync(parameters).GetAwaiter().GetResult();
+            return AddApiKeyAsync(parameters, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -925,14 +926,14 @@ namespace Algolia.Search
         /// <param name="maxHitsPerQuery">Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited).</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("AddUserKeyAsync is deprecated, please use AddApiKeyAsync instead.")]
-        public Task<JObject> AddUserKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public Task<JObject> AddUserKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, RequestOptions requestOptions = null)
         {
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
             content["validity"] = validity;
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
-            return AddApiKeyAsync(content);
+            return AddApiKeyAsync(content, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
@@ -949,31 +950,31 @@ namespace Algolia.Search
         /// <param name="maxQueriesPerIPPerHour">Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).</param>
         /// <param name="maxHitsPerQuery">Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited).</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> AddApiKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public Task<JObject> AddApiKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, RequestOptions requestOptions = null)
         {
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
             content["validity"] = validity;
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
-            return AddApiKeyAsync(content);
+            return AddApiKeyAsync(content, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.AddApiKeyAsync"/>.
         /// </summary>
         [Obsolete("AddUserKey is deprecated, please use AddApiKey instead.")]
-        public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, RequestOptions requestOptions = null)
         {
-            return AddApiKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
+            return AddApiKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.AddApiKeyAsync"/>.
         /// </summary>
-        public JObject AddApiKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public JObject AddApiKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, RequestOptions requestOptions = null)
         {
-            return AddApiKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
+            return AddApiKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -991,9 +992,9 @@ namespace Algolia.Search
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("UpdateUserKeyAsync is deprecated, please use UpdateApiKeyAsync instead.")]
-        public Task<JObject> UpdateUserKeyAsync(string key, Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken))
+        public Task<JObject> UpdateUserKeyAsync(string key, Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), parameters, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), parameters, token, requestOptions);
         }
 
 
@@ -1011,26 +1012,26 @@ namespace Algolia.Search
         ///   - queryParameters: string
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> UpdateApiKeyAsync(string key, Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken))
+        public Task<JObject> UpdateApiKeyAsync(string key, Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), parameters, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), parameters, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.UpdateApiKeyAsync"/>.
         /// </summary>
         [Obsolete("UpdateUserKey is deprecated, please use UpdateApiKey instead.")]
-        public JObject UpdateUserKey(string key, Dictionary<string, object> parameters)
+        public JObject UpdateUserKey(string key, Dictionary<string, object> parameters, RequestOptions requestOptions = null)
         {
-            return UpdateApiKeyAsync(key, parameters).GetAwaiter().GetResult();
+            return UpdateApiKeyAsync(key, parameters, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.UpdateApiKeyAsync"/>.
         /// </summary>
-        public JObject UpdateApiKey(string key, Dictionary<string, object> parameters)
+        public JObject UpdateApiKey(string key, Dictionary<string, object> parameters, RequestOptions requestOptions = null)
         {
-            return UpdateApiKeyAsync(key, parameters).GetAwaiter().GetResult();
+            return UpdateApiKeyAsync(key, parameters, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1049,14 +1050,14 @@ namespace Algolia.Search
         /// <param name="maxHitsPerQuery">Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited).</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("UpdateUserKeyAsync is deprecated, please use UpdateApiKeyAsync instead.")]
-        public Task<JObject> UpdateUserKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public Task<JObject> UpdateUserKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, RequestOptions requestOptions = null)
         {
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
             content["validity"] = validity;
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
-            return UpdateApiKeyAsync(key, content);
+            return UpdateApiKeyAsync(key, content, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
@@ -1074,31 +1075,31 @@ namespace Algolia.Search
         /// <param name="maxQueriesPerIPPerHour">Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).</param>
         /// <param name="maxHitsPerQuery">Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited).</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> UpdateApiKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public Task<JObject> UpdateApiKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, RequestOptions requestOptions = null)
         {
             Dictionary<string, object> content = new Dictionary<string, object>();
             content["acl"] = acls;
             content["validity"] = validity;
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
-            return UpdateApiKeyAsync(key, content);
+            return UpdateApiKeyAsync(key, content, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.UpdateApiKeyAsync"/>.
         /// </summary>
         [Obsolete("UpdateUserKey is deprecated, please use UpdateApiKey instead.")]
-        public JObject UpdateUserKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public JObject UpdateUserKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, RequestOptions requestOptions = null)
         {
-            return UpdateApiKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
+            return UpdateApiKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.UpdateApiKeyAsync"/>.
         /// </summary>
-        public JObject UpdateApiKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0)
+        public JObject UpdateApiKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, RequestOptions requestOptions = null)
         {
-            return UpdateApiKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery).GetAwaiter().GetResult();
+            return UpdateApiKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1107,7 +1108,7 @@ namespace Algolia.Search
         /// <param name="query">The query.</param>
         /// <param name="disjunctiveFacets">The array of disjunctive facets.</param>
         /// <param name="refinements">The current refinements. Example: { "my_facet1" => ["my_value1", "my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }.</param>
-        async public Task<JObject> SearchDisjunctiveFacetingAsync(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
+        async public Task<JObject> SearchDisjunctiveFacetingAsync(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null, RequestOptions requestOptions = null)
         {
             if (refinements == null)
                 refinements = new Dictionary<string, IEnumerable<string>>();
@@ -1185,7 +1186,7 @@ namespace Algolia.Search
                 queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(0).EnableAnalytics(false).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[]{disjunctiveFacet}).SetFacetFilters(filters)));
             }
         
-            JObject answers = await _client.MultipleQueriesAsync(queries).ConfigureAwait(_client.getContinueOnCapturedContext());
+            JObject answers = await _client.MultipleQueriesAsync(queries, "none", default(CancellationToken), requestOptions).ConfigureAwait(_client.getContinueOnCapturedContext());
 
             // aggregate answers
             // first answer stores the hits + regular facets
@@ -1224,9 +1225,9 @@ namespace Algolia.Search
         /// <summary>
         /// Synchronously call <see cref="Index.UpdateUserKeyAsync"/>.
         /// </summary>
-        public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
+        public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null, RequestOptions requestOptions = null)
         {
-            return SearchDisjunctiveFacetingAsync(query, disjunctiveFacets, refinements).GetAwaiter().GetResult();
+            return SearchDisjunctiveFacetingAsync(query, disjunctiveFacets, refinements, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1264,7 +1265,7 @@ namespace Algolia.Search
         /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<SynonymType> types = null, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<SynonymType> types = null, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             string[] typesStr = null;
             if (types != null)
@@ -1275,7 +1276,7 @@ namespace Algolia.Search
                     typesStr[i] = SynonymsTypeToString(types.ElementAt(i));
                 }
             }
-            return SearchSynonymsAsync(query, typesStr, page, hitsPerPage, token);
+            return SearchSynonymsAsync(query, typesStr, page, hitsPerPage, token, requestOptions);
         }
         /// <summary>
         /// Synchronously call <see cref="Index.SearchSynonymsAsync"/>.
@@ -1284,10 +1285,9 @@ namespace Algolia.Search
         /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public JObject SearchSynonyms(string query, IEnumerable<SynonymType> types = null, int? page = null, int? hitsPerPage = null)
+        public JObject SearchSynonyms(string query, IEnumerable<SynonymType> types = null, int? page = null, int? hitsPerPage = null, RequestOptions requestOptions = null)
         {
-
-            return SearchSynonymsAsync(query, types, page, hitsPerPage).GetAwaiter().GetResult();
+            return SearchSynonymsAsync(query, types, page, hitsPerPage, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
         /// <summary>
         /// Search/Browse all synonyms
@@ -1296,7 +1296,7 @@ namespace Algolia.Search
         /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<string> types = null, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchSynonymsAsync(string query, IEnumerable<string> types = null, int? page = null, int? hitsPerPage = null, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             Dictionary<string, object> body = new Dictionary<string, object>();
             body["query"] = query;
@@ -1310,7 +1310,7 @@ namespace Algolia.Search
                 body["page"] = page.Value;
             if (hitsPerPage.HasValue)
                 body["hitsPerPage"] = hitsPerPage.Value;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/synonyms/search", _urlIndexName), body, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/synonyms/search", _urlIndexName), body, token, requestOptions);
         }
 
         /// <summary>
@@ -1320,28 +1320,27 @@ namespace Algolia.Search
         /// <param name="types">Specify the types</param>
         /// <param name="page">The page to fetch</param>
         /// <param name="hitsPerPage">number of synonyms to fetch</param>
-        public JObject SearchSynonyms(string query, IEnumerable<string> types = null, int? page = null, int? hitsPerPage = null)
+        public JObject SearchSynonyms(string query, IEnumerable<string> types = null, int? page = null, int? hitsPerPage = null, RequestOptions requestOptions = null)
         {
-
-            return SearchSynonymsAsync(query, types, page, hitsPerPage).GetAwaiter().GetResult();
+            return SearchSynonymsAsync(query, types, page, hitsPerPage, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Get one synonym
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
-        public Task<JObject> GetSynonymAsync(string objectID, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetSynonymAsync(string objectID, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/synonyms/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/synonyms/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.GetSynonymAsync"/>.
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
-        public JObject GetSynonym(string objectID)
+        public JObject GetSynonym(string objectID, RequestOptions requestOptions = null)
         {
-            return GetSynonymAsync(objectID).GetAwaiter().GetResult();
+            return GetSynonymAsync(objectID, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1349,9 +1348,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-        public Task<JObject> DeleteSynonymAsync(string objectID, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteSynonymAsync(string objectID, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas ? "true" : "false"), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas ? "true" : "false"), null, token, requestOptions);
         }
 
         /// <summary>
@@ -1359,27 +1358,27 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="objectID">The objectID of the synonym</param>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-        public JObject DeleteSynonym(string objectID, bool forwardToReplicas = false)
+        public JObject DeleteSynonym(string objectID, bool forwardToReplicas = false, RequestOptions requestOptions = null)
         {
-            return DeleteSynonymAsync(objectID, forwardToReplicas).GetAwaiter().GetResult();
+            return DeleteSynonymAsync(objectID, forwardToReplicas, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Delete all synonym set
         /// </summary>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-        public Task<JObject> ClearSynonymsAsync(bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
+        public Task<JObject> ClearSynonymsAsync(bool forwardToReplicas = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/clear?forwardToReplicas={1}", _urlIndexName, forwardToReplicas ? "true" : "false"), null, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/clear?forwardToReplicas={1}", _urlIndexName, forwardToReplicas ? "true" : "false"), null, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.BrowseFromAsync"/>.
         /// </summary>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-        public JObject ClearSynonyms(bool forwardToReplicas = false)
+        public JObject ClearSynonyms(bool forwardToReplicas = false, RequestOptions requestOptions = null)
         {
-            return ClearSynonymsAsync(forwardToReplicas).GetAwaiter().GetResult();
+            return ClearSynonymsAsync(forwardToReplicas, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1387,9 +1386,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
         /// <param name="replaceExistingSynonyms">Replace the existing synonyms with this batch</param>
-        public Task<JObject> BatchSynonymsAsync(IEnumerable<object> objects, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, CancellationToken token = default(CancellationToken))
+        public Task<JObject> BatchSynonymsAsync(IEnumerable<object> objects, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/batch?replaceExistingSynonyms={1}&forwardToReplicas={2}", _urlIndexName, replaceExistingSynonyms ? "true" : "false", forwardToReplicas ? "true" : "false"), objects, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/batch?replaceExistingSynonyms={1}&forwardToReplicas={2}", _urlIndexName, replaceExistingSynonyms ? "true" : "false", forwardToReplicas ? "true" : "false"), objects, token, requestOptions);
         }
 
         /// <summary>
@@ -1397,9 +1396,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
         /// <param name="replaceExistingSynonyms">Replace the existing synonyms with this batch</param>
-        public JObject BatchSynonyms(IEnumerable<object> objects, bool forwardToReplicas = false, bool replaceExistingSynonyms = false)
+        public JObject BatchSynonyms(IEnumerable<object> objects, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null)
         {
-            return BatchSynonymsAsync(objects, forwardToReplicas, replaceExistingSynonyms).GetAwaiter().GetResult();
+            return BatchSynonymsAsync(objects, forwardToReplicas, replaceExistingSynonyms, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1408,18 +1407,18 @@ namespace Algolia.Search
         /// <param name="objectID">The objectID of the synonym</param>
         /// <param name="content">The new content of this synonym</param>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-        public Task<JObject> SaveSynonymAsync(string objectID, object content, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SaveSynonymAsync(string objectID, object content, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName,  WebUtility.UrlEncode(objectID), forwardToReplicas ? "true" : "false"), content, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName,  WebUtility.UrlEncode(objectID), forwardToReplicas ? "true" : "false"), content, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="Index.SaveSynonymAsync"/>.
         /// </summary>
         /// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-        public JObject SaveSynonym(string objectID, object content, bool forwardToReplicas = false, bool replaceExistingSynonyms = false)
+        public JObject SaveSynonym(string objectID, object content, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null)
         {
-            return SaveSynonymAsync(objectID, content, forwardToReplicas).GetAwaiter().GetResult();
+            return SaveSynonymAsync(objectID, content, forwardToReplicas, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1428,9 +1427,9 @@ namespace Algolia.Search
         /// <param name="facetName">Name of the facet</param>
         /// <param name="facetQuery">Current query</param>
         /// <param name="queryParams">Optional query parameter</param>
-        public JObject SearchForFacetValues(string facetName, string facetQuery, Query queryParams = null)
+        public JObject SearchForFacetValues(string facetName, string facetQuery, Query queryParams = null, RequestOptions requestOptions = null)
         {
-            return SearchForFacetValuesAsync(facetName, facetQuery, queryParams).GetAwaiter().GetResult();
+            return SearchForFacetValuesAsync(facetName, facetQuery, queryParams, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1439,9 +1438,9 @@ namespace Algolia.Search
         /// <param name="facetName">Name of the facet</param>
         /// <param name="facetQuery">Current query</param>
         /// <param name="queryParams">Optional query parameter</param>
-        public JObject SearchFacet(string facetName, string facetQuery, Query queryParams = null)
+        public JObject SearchFacet(string facetName, string facetQuery, Query queryParams = null, RequestOptions requestOptions = null)
         {
-            return SearchFacetAsync(facetName, facetQuery, queryParams).GetAwaiter().GetResult();
+            return SearchFacetAsync(facetName, facetQuery, queryParams, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1450,7 +1449,7 @@ namespace Algolia.Search
         /// <param name="facetName">Name of the facet</param>
         /// <param name="facetQuery">Current Query</param>
         /// <param name="queryParams">Optional query parameter</param>
-        public Task<JObject> SearchFacetAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchFacetAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             if(queryParams == null)
             {
@@ -1460,7 +1459,7 @@ namespace Algolia.Search
             string paramsString = queryParams.GetQueryString();
             Dictionary<string, object> body = new Dictionary<string, object>();
             body["params"] = paramsString;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token, requestOptions);
         }
 
         /// <summary>
@@ -1469,7 +1468,7 @@ namespace Algolia.Search
         /// <param name="facetName">Name of the facet</param>
         /// <param name="facetQuery">Current Query</param>
         /// <param name="queryParams">Optional query parameter</param>
-        public Task<JObject> SearchForFacetValuesAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> SearchForFacetValuesAsync(string facetName, string facetQuery, Query queryParams = null, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             if (queryParams == null)
             {
@@ -1479,7 +1478,7 @@ namespace Algolia.Search
             string paramsString = queryParams.GetQueryString();
             Dictionary<string, object> body = new Dictionary<string, object>();
             body["params"] = paramsString;
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token);
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token, requestOptions);
         }
     }
 }

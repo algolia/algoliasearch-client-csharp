@@ -230,7 +230,7 @@ namespace Algolia.Search
         /// <param name="queries">List of queries per index</param>
         /// <param name="strategy">Strategy applied on the sequence of queries</param>
         /// <returns></returns>
-        public Task<JObject> MultipleQueriesAsync(List<IndexQuery> queries, string strategy = "none", CancellationToken token = default(CancellationToken))
+        public Task<JObject> MultipleQueriesAsync(List<IndexQuery> queries, string strategy = "none", CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             List<Dictionary<string, object>> body = new List<Dictionary<string, object>>();
             foreach (IndexQuery indexQuery in queries)
@@ -243,7 +243,7 @@ namespace Algolia.Search
             Dictionary<string, object> requests = new Dictionary<string, object>();
             requests.Add("requests", body);
             requests.Add("strategy", strategy);
-            return ExecuteRequest(callType.Search, "POST", "/1/indexes/*/queries", requests, token);
+            return ExecuteRequest(callType.Search, "POST", "/1/indexes/*/queries", requests, token, requestOptions);
 
         }
 
@@ -252,9 +252,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="queries">List of queries per index</param>
         /// <returns></returns>
-        public JObject MultipleQueries(List<IndexQuery> queries, string strategy = "none", CancellationToken token = default(CancellationToken))
+        public JObject MultipleQueries(List<IndexQuery> queries, string strategy = "none", CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return MultipleQueriesAsync(queries, strategy).GetAwaiter().GetResult();
+            return MultipleQueriesAsync(queries, strategy, token, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -264,9 +264,9 @@ namespace Algolia.Search
         ///    {"items": [ {"name": "contacts", "createdAt": "2013-01-18T15:33:13.556Z"},
         ///                {"name": "notes", "createdAt": "2013-01-18T15:33:13.556Z"} ] }
         /// </returns>
-        public Task<JObject> ListIndexesAsync(CancellationToken token = default(CancellationToken))
+        public Task<JObject> ListIndexesAsync(CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Read, "GET", "/1/indexes/", null, token);
+            return ExecuteRequest(callType.Read, "GET", "/1/indexes/", null, token, requestOptions);
         }
 
         /// <summary>
@@ -276,9 +276,9 @@ namespace Algolia.Search
         ///    {"items": [ {"name": "contacts", "createdAt": "2013-01-18T15:33:13.556Z"},
         ///                {"name": "notes", "createdAt": "2013-01-18T15:33:13.556Z"} ] }
         /// </returns>
-        public JObject ListIndexes()
+        public JObject ListIndexes(RequestOptions requestOptions = null)
         {
-            return ListIndexesAsync().GetAwaiter().GetResult();
+            return ListIndexesAsync(default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -286,18 +286,18 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="indexName">The name of index to delete</param>
         /// <returns>An object containing a "deletedAt" attribute</returns>
-        public Task<JObject> DeleteIndexAsync(string indexName, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteIndexAsync(string indexName, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Write, "DELETE", "/1/indexes/" + WebUtility.UrlEncode(indexName), null, token);
+            return ExecuteRequest(callType.Write, "DELETE", "/1/indexes/" + WebUtility.UrlEncode(indexName), null, token, requestOptions);
         }
 
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.DeleteIndexAsync"/> 
         /// </summary>
         /// <returns>An object containing a "deletedAt" attribute</returns>
-        public JObject DeleteIndex(string indexName)
+        public JObject DeleteIndex(string indexName, RequestOptions requestOptions = null)
         {
-            return DeleteIndexAsync(indexName).GetAwaiter().GetResult();
+            return DeleteIndexAsync(indexName, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -305,21 +305,21 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="srcIndexName">The name of index to move.</param>
         /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
-        public Task<JObject> MoveIndexAsync(string srcIndexName, string dstIndexName, CancellationToken token = default(CancellationToken))
+        public Task<JObject> MoveIndexAsync(string srcIndexName, string dstIndexName, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "move";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token);
+            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token, requestOptions);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.MoveIndexAsync"/>
         /// </summary>
         /// <param name="srcIndexName">The name of index to move.</param>
         /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
-        public JObject MoveIndex(string srcIndexName, string dstIndexName)
+        public JObject MoveIndex(string srcIndexName, string dstIndexName, RequestOptions requestOptions = null)
         {
-            return MoveIndexAsync(srcIndexName, dstIndexName).GetAwaiter().GetResult();
+            return MoveIndexAsync(srcIndexName, dstIndexName, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -327,21 +327,21 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="srcIndexName">The name of index to copy.</param>
         /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
-        public Task<JObject> CopyIndexAsync(string srcIndexName, string dstIndexName, CancellationToken token = default(CancellationToken))
+        public Task<JObject> CopyIndexAsync(string srcIndexName, string dstIndexName, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "copy";
             operation["destination"] = dstIndexName;
-            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token);
+            return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token, requestOptions);
         }
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
         /// </summary>
         /// <param name="srcIndexName">The name of index to copy.</param>
         /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
-        public JObject CopyIndex(string srcIndexName, string dstIndexName)
+        public JObject CopyIndex(string srcIndexName, string dstIndexName, RequestOptions requestOptions = null)
         {
-            return CopyIndexAsync(srcIndexName, dstIndexName).GetAwaiter().GetResult();
+            return CopyIndexAsync(srcIndexName, dstIndexName, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -373,9 +373,9 @@ namespace Algolia.Search
         /// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length">Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
         /// <param name="onlyErrors">If set to true, the answer will only contain API calls with errors.</param>
-        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, bool onlyErrors = false)
+        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, bool onlyErrors = false, RequestOptions requestOptions = null)
         {
-            return GetLogsAsync(offset, length, onlyErrors ? LogType.LOG_ERROR : LogType.LOG_ALL);
+            return GetLogsAsync(offset, length, onlyErrors ? LogType.LOG_ERROR : LogType.LOG_ALL, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace Algolia.Search
         /// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length">Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
         /// <param name="logType">Specify the type of logs to include.</param>
-        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, LogType logType = LogType.LOG_ALL, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, LogType logType = LogType.LOG_ALL, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             string param = "";
             if (offset != 0)
@@ -420,7 +420,7 @@ namespace Algolia.Search
                 else
                     param += string.Format("&type={0}", type);
             }
-            return ExecuteRequest(callType.Write, "GET", String.Format("/1/logs{0}", param), null, token);
+            return ExecuteRequest(callType.Write, "GET", String.Format("/1/logs{0}", param), null, token, requestOptions);
         }
 
         /// <summary>
@@ -429,9 +429,9 @@ namespace Algolia.Search
         /// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length">Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
         /// <param name="onlyErrors">If set to true, the answer will only contain API calls with errors.</param>
-        public JObject GetLogs(int offset = 0, int length = 10, bool onlyErrors = false)
+        public JObject GetLogs(int offset = 0, int length = 10, bool onlyErrors = false, RequestOptions requestOptions = null)
         {
-            return GetLogsAsync(offset, length, onlyErrors).GetAwaiter().GetResult();
+            return GetLogsAsync(offset, length, onlyErrors, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -440,9 +440,9 @@ namespace Algolia.Search
         /// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
         /// <param name="length">Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
         /// <param name="logType">Specify the type of logs to include.</param>
-        public JObject GetLogs(int offset, int length, LogType logType)
+        public JObject GetLogs(int offset, int length, LogType logType, RequestOptions requestOptions = null)
         {
-            return GetLogsAsync(offset, length, logType).GetAwaiter().GetResult();
+            return GetLogsAsync(offset, length, logType, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -450,7 +450,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="indexName">The name of the index</param>
         /// <returns>An instance of the Index object that exposes Index actions</returns>
-        public Index InitIndex(string indexName)
+        public Index InitIndex(string indexName, RequestOptions requestOptions = null)
         {
             return new Index(this, indexName);
         }
@@ -460,18 +460,18 @@ namespace Algolia.Search
         /// </summary>
         /// <returns>An object containing the list of keys.</returns>
         [Obsolete("ListUserKeysAsync is deprecated, please use ListApiKeysAsync instead.")]
-        public Task<JObject> ListUserKeysAsync(CancellationToken token = default(CancellationToken))
+        public Task<JObject> ListUserKeysAsync(CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Read, "GET", "/1/keys", null, token);
+            return ExecuteRequest(callType.Read, "GET", "/1/keys", null, token, requestOptions);
         }
 
         /// <summary>
         /// List all existing api keys with their associated ACLs.
         /// </summary>
         /// <returns>An object containing the list of keys.</returns>
-        public Task<JObject> ListApiKeysAsync(CancellationToken token = default(CancellationToken))
+        public Task<JObject> ListApiKeysAsync(CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Read, "GET", "/1/keys", null, token);
+            return ExecuteRequest(callType.Read, "GET", "/1/keys", null, token, requestOptions);
         }
 
         /// <summary>
@@ -479,18 +479,18 @@ namespace Algolia.Search
         /// </summary>
         /// <returns>An object containing the list of keys.</returns>
         [Obsolete("ListUserKeys is deprecated, please use ListApiKeys instead.")]
-        public JObject ListUserKeys()
+        public JObject ListUserKeys(RequestOptions requestOptions = null)
         {
-            return ListApiKeysAsync().GetAwaiter().GetResult();
+            return ListApiKeysAsync(default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/> 
         /// </summary>
         /// <returns>An object containing the list of keys.</returns>
-        public JObject ListApiKeys()
+        public JObject ListApiKeys(RequestOptions requestOptions = null)
         {
-            return ListApiKeysAsync().GetAwaiter().GetResult();
+            return ListApiKeysAsync(default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -498,18 +498,18 @@ namespace Algolia.Search
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
         [Obsolete("GetUserKeyACLAsync is deprecated, please use GetApiKeyACLAsync instead.")]
-        public Task<JObject> GetUserKeyACLAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetUserKeyACLAsync(string key, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Read, "GET", "/1/keys/" + key, null, token);
+            return ExecuteRequest(callType.Read, "GET", "/1/keys/" + key, null, token, requestOptions);
         }
 
         /// <summary>
         /// Get ACL for an existing api key.
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-        public Task<JObject> GetApiKeyACLAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<JObject> GetApiKeyACLAsync(string key, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Read, "GET", "/1/keys/" + key, null, token);
+            return ExecuteRequest(callType.Read, "GET", "/1/keys/" + key, null, token, requestOptions);
         }
 
         /// <summary>
@@ -517,18 +517,18 @@ namespace Algolia.Search
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
         [Obsolete("GetUserKeyACL is deprecated, please use GetApiKeyACL instead.")]
-        public JObject GetUserKeyACL(string key)
+        public JObject GetUserKeyACL(string key, RequestOptions requestOptions = null)
         {
-            return GetApiKeyACLAsync(key).GetAwaiter().GetResult();
+            return GetApiKeyACLAsync(key, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-        public JObject GetApiKeyACL(string key)
+        public JObject GetApiKeyACL(string key, RequestOptions requestOptions = null)
         {
-            return GetApiKeyACLAsync(key).GetAwaiter().GetResult();
+            return GetApiKeyACLAsync(key, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -536,18 +536,18 @@ namespace Algolia.Search
         /// </summary>
         /// <returns>Returns an object with a "deleteAt" attribute.</returns>
         [Obsolete("DeleteUserKeyAsync is deprecated, please use DeleteApiKeyAsync instead.")]
-        public Task<JObject> DeleteUserKeyAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteUserKeyAsync(string key, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Write, "DELETE", "/1/keys/" + key, null, token);
+            return ExecuteRequest(callType.Write, "DELETE", "/1/keys/" + key, null, token, requestOptions);
         }
 
         /// <summary>
         /// Delete an existing user key.
         /// </summary>
         /// <returns>Returns an object with a "deleteAt" attribute.</returns>
-        public Task<JObject> DeleteApiKeyAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<JObject> DeleteApiKeyAsync(string key, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Write, "DELETE", "/1/keys/" + key, null, token);
+            return ExecuteRequest(callType.Write, "DELETE", "/1/keys/" + key, null, token, requestOptions);
         }
 
         /// <summary>
@@ -555,18 +555,18 @@ namespace Algolia.Search
         /// </summary>
         /// <returns>Returns an object with a "deleteAt" attribute.</returns>
         [Obsolete("DeleteUserKey is deprecated, please use DeleteApiKey instead.")]
-        public JObject DeleteUserKey(string key)
+        public JObject DeleteUserKey(string key, RequestOptions requestOptions = null)
         {
-            return DeleteApiKeyAsync(key).GetAwaiter().GetResult();
+            return DeleteApiKeyAsync(key, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/> 
         /// </summary>
         /// <returns>Returns an object with a "deleteAt" attribute.</returns>
-        public JObject DeleteApiKey(string key)
+        public JObject DeleteApiKey(string key, RequestOptions requestOptions = null)
         {
-            return DeleteApiKeyAsync(key).GetAwaiter().GetResult();
+            return DeleteApiKeyAsync(key, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -584,9 +584,9 @@ namespace Algolia.Search
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("AddUserKeyAsync is deprecated, please use AddApiKeyAsync instead.")]
-        public Task<JObject> AddUserKeyAsync(Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken))
+        public Task<JObject> AddUserKeyAsync(Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Write, "POST", "/1/keys", parameters, token);
+            return ExecuteRequest(callType.Write, "POST", "/1/keys", parameters, token, requestOptions);
         }
 
         /// <summary>
@@ -603,9 +603,9 @@ namespace Algolia.Search
         ///   - queryParameters: string
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> AddApiKeyAsync(Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken))
+        public Task<JObject> AddApiKeyAsync(Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Write, "POST", "/1/keys", parameters, token);
+            return ExecuteRequest(callType.Write, "POST", "/1/keys", parameters, token, requestOptions);
         }
 
         /// <summary>
@@ -623,9 +623,9 @@ namespace Algolia.Search
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("AddUserKey is deprecated, please use AddApiKey instead.")]
-        public JObject AddUserKey(Dictionary<string, object> parameters)
+        public JObject AddUserKey(Dictionary<string, object> parameters, RequestOptions requestOptions = null)
         {
-            return AddApiKeyAsync(parameters).GetAwaiter().GetResult();
+            return AddApiKeyAsync(parameters, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -642,9 +642,9 @@ namespace Algolia.Search
         ///   - queryParameters: string
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public JObject AddApiKey(Dictionary<string, object> parameters)
+        public JObject AddApiKey(Dictionary<string, object> parameters, RequestOptions requestOptions = null)
         {
-            return AddApiKeyAsync(parameters).GetAwaiter().GetResult();
+            return AddApiKeyAsync(parameters, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -663,7 +663,7 @@ namespace Algolia.Search
         /// <param name="indexes">Restrict the new API key to specific index names.</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("AddUserKeyAsync is deprecated, please use AddApiKeyAsync instead.")]
-        public Task<JObject> AddUserKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
+        public Task<JObject> AddUserKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null, RequestOptions requestOptions = null)
         {
             if (indexes == null)
             {
@@ -675,7 +675,7 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             content["indexes"] = indexes;
-            return AddApiKeyAsync(content);
+            return AddApiKeyAsync(content, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
@@ -693,7 +693,7 @@ namespace Algolia.Search
         /// <param name="maxHitsPerQuery">Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited).</param>
         /// <param name="indexes">Restrict the new API key to specific index names.</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> AddApiKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
+        public Task<JObject> AddApiKeyAsync(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null, RequestOptions requestOptions = null)
         {
             if (indexes == null)
             {
@@ -705,7 +705,7 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             content["indexes"] = indexes;
-            return AddApiKeyAsync(content);
+            return AddApiKeyAsync(content, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
@@ -724,9 +724,9 @@ namespace Algolia.Search
         /// <param name="indexes">Restrict the new API key to specific index names.</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("AddUserKey is deprecated, please use AddApiKey instead.")]
-        public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
+        public JObject AddUserKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null, RequestOptions requestOptions = null)
         {
-            return AddApiKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes).GetAwaiter().GetResult();
+            return AddApiKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -744,9 +744,9 @@ namespace Algolia.Search
         /// <param name="maxHitsPerQuery">Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited).</param>
         /// <param name="indexes">Restrict the new API key to specific index names.</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public JObject AddApiKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
+        public JObject AddApiKey(IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null, RequestOptions requestOptions = null)
         {
-            return AddApiKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes).GetAwaiter().GetResult();
+            return AddApiKeyAsync(acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -765,9 +765,9 @@ namespace Algolia.Search
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("UpdateUserKeyAsync is deprecated, please use UpdateApiKeyAsync instead.")]
-        public Task<JObject> UpdateUserKeyAsync(string key, Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken))
+        public Task<JObject> UpdateUserKeyAsync(string key, Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Write, "PUT", "/1/keys/" + key, parameters, token);
+            return ExecuteRequest(callType.Write, "PUT", "/1/keys/" + key, parameters, token, requestOptions);
         }
 
         /// <summary>
@@ -785,9 +785,9 @@ namespace Algolia.Search
         ///   - queryParameters: string
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> UpdateApiKeyAsync(string key, Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken))
+        public Task<JObject> UpdateApiKeyAsync(string key, Dictionary<string, object> parameters, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
-            return ExecuteRequest(callType.Write, "PUT", "/1/keys/" + key, parameters, token);
+            return ExecuteRequest(callType.Write, "PUT", "/1/keys/" + key, parameters, token, requestOptions);
         }
 
         /// <summary>
@@ -806,9 +806,9 @@ namespace Algolia.Search
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("UpdateUserKey is deprecated, please use UpdateApiKey instead.")]
-        public JObject UpdateUserKey(string key, Dictionary<string, object> parameters)
+        public JObject UpdateUserKey(string key, Dictionary<string, object> parameters, RequestOptions requestOptions = null)
         {
-            return UpdateApiKeyAsync(key, parameters).GetAwaiter().GetResult();
+            return UpdateApiKeyAsync(key, parameters, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -826,9 +826,9 @@ namespace Algolia.Search
         ///   - queryParameters: string
         ///   - maxQueriesPerIPPerHour: integer
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public JObject UpdateApiKey(string key, Dictionary<string, object> parameters)
+        public JObject UpdateApiKey(string key, Dictionary<string, object> parameters, RequestOptions requestOptions = null)
         {
-            return UpdateApiKeyAsync(key, parameters).GetAwaiter().GetResult();
+            return UpdateApiKeyAsync(key, parameters, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -848,7 +848,7 @@ namespace Algolia.Search
         /// <param name="indexes">Restrict the new API key to specific index names.</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("UpdateUserKeyAsync is deprecated, please use UpdateApiKeyAsync instead.")]
-        public Task<JObject> UpdateUserKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
+        public Task<JObject> UpdateUserKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null, RequestOptions requestOptions = null)
         {
             if (indexes == null)
             {
@@ -860,7 +860,7 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             content["indexes"] = indexes;
-            return UpdateApiKeyAsync(key, content);
+            return UpdateApiKeyAsync(key, content, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
@@ -879,7 +879,7 @@ namespace Algolia.Search
         /// <param name="maxHitsPerQuery">Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited).</param>
         /// <param name="indexes">Restrict the new API key to specific index names.</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public Task<JObject> UpdateApiKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
+        public Task<JObject> UpdateApiKeyAsync(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null, RequestOptions requestOptions = null)
         {
             if (indexes == null)
             {
@@ -891,7 +891,7 @@ namespace Algolia.Search
             content["maxQueriesPerIPPerHour"] = maxQueriesPerIPPerHour;
             content["maxHitsPerQuery"] = maxHitsPerQuery;
             content["indexes"] = indexes;
-            return UpdateApiKeyAsync(key, content);
+            return UpdateApiKeyAsync(key, content, default(CancellationToken), requestOptions);
         }
 
         /// <summary>
@@ -911,9 +911,9 @@ namespace Algolia.Search
         /// <param name="indexes">Restrict the new API key to specific index names.</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
         [Obsolete("UpdateUserKey is deprecated, please use UpdateApiKey instead.")]
-        public JObject UpdateUserKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
+        public JObject UpdateUserKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null, RequestOptions requestOptions = null)
         {
-            return UpdateApiKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes).GetAwaiter().GetResult();
+            return UpdateApiKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -932,9 +932,9 @@ namespace Algolia.Search
         /// <param name="maxHitsPerQuery">Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited).</param>
         /// <param name="indexes">Restrict the new API key to specific index names.</param>
         /// <returns>Returns an object with a "key" string attribute containing the new key.</returns>
-        public JObject UpdateApiKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null)
+        public JObject UpdateApiKey(string key, IEnumerable<string> acls, int validity = 0, int maxQueriesPerIPPerHour = 0, int maxHitsPerQuery = 0, IEnumerable<string> indexes = null, RequestOptions requestOptions = null)
         {
-            return UpdateApiKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes).GetAwaiter().GetResult();
+            return UpdateApiKeyAsync(key, acls, validity, maxQueriesPerIPPerHour, maxHitsPerQuery, indexes, requestOptions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -942,11 +942,11 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="actions">An array of action to send.</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string) and a dictionary for the taskIDs.</returns>
-        public Task<JObject> BatchAsync(IEnumerable<object> requests, CancellationToken token = default(CancellationToken))
+        public Task<JObject> BatchAsync(IEnumerable<object> requests, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
         {
             Dictionary<string, object> batch = new Dictionary<string, object>();
             batch["requests"] = requests;
-            return ExecuteRequest(AlgoliaClient.callType.Write, "POST", "/1/indexes/*/batch", batch, token);
+            return ExecuteRequest(AlgoliaClient.callType.Write, "POST", "/1/indexes/*/batch", batch, token, requestOptions);
         }
 
         /// <summary>
@@ -954,9 +954,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="actions">An array of action to send.</param>
         /// <returns>An object containing an "objectIDs" attribute (array of string) and a dictionary for the taskIDs.</returns>
-        public JObject Batch(IEnumerable<object> requests)
+        public JObject Batch(IEnumerable<object> requests, RequestOptions requestOptions = null)
         {
-            return BatchAsync(requests).GetAwaiter().GetResult();
+            return BatchAsync(requests, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
         }
 
 
@@ -1076,6 +1076,7 @@ namespace Algolia.Search
         /// <param name="method">HTTP method</param>
         /// <param name="requestUrl">URL to request</param>
         /// <param name="content">The content</param>
+        /// <param name="requestOptions">The additional request options</param>
         /// <returns></returns>
         public async Task<JObject> ExecuteRequest(callType type, string method, string requestUrl, object content, CancellationToken token, RequestOptions requestOptions = null)
         {
