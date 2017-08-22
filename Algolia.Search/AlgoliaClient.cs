@@ -1077,9 +1077,10 @@ namespace Algolia.Search
         /// <param name="requestUrl">URL to request</param>
         /// <param name="content">The content</param>
         /// <returns></returns>
-        public async Task<JObject> ExecuteRequest(callType type, string method, string requestUrl, object content, CancellationToken token)
+        public async Task<JObject> ExecuteRequest(callType type, string method, string requestUrl, object content, CancellationToken token, RequestOptions requestOptions = null)
         {
             string[] hosts = null;
+            string requestExtraQueryParams = "";
             HttpClient client = null;
             if (type == callType.Search)
             {
@@ -1094,6 +1095,11 @@ namespace Algolia.Search
                 client = _buildHttpClient;
             }
 
+            if (requestOptions != null)
+            {
+                requestExtraQueryParams = buildExtraQueryParamsUrlString(requestOptions.GenerateExtraQueryParams());
+            }
+
             Dictionary<string, string> errors = new Dictionary<string, string>();
             foreach (string host in hosts)
             {
@@ -1101,25 +1107,48 @@ namespace Algolia.Search
                 {
                     try
                     {
-                        string url = string.Format("https://{0}{1}", host, requestUrl);
-                        HttpResponseMessage responseMsg = null;
+                        string url;
+                        if (String.IsNullOrEmpty(requestExtraQueryParams))
+                        {
+                            url = string.Format("https://{0}{1}", host, requestUrl);
+                        }
+                        else
+                        {
+                            url = requestUrl.Contains("?") // check if we already had query parameters added to the requestUrl
+                                ? string.Format("https://{0}{1}&{2}", host, requestUrl, requestExtraQueryParams) 
+                                : string.Format("https://{0}{1}?{2}", host, requestUrl, requestExtraQueryParams);
+                        }
+
+                        HttpRequestMessage httpRequestMessage = null;
                         switch (method)
                         {
                             case "GET":
-                                responseMsg = await client.GetAsync(url, token).ConfigureAwait(_continueOnCapturedContext);
+                                httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
                                 break;
                             case "POST":
-                                HttpContent postcontent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                                responseMsg = await client.PostAsync(url, postcontent, token).ConfigureAwait(_continueOnCapturedContext);
+                                httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url);
+                                httpRequestMessage.Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
                                 break;
                             case "PUT":
-                                HttpContent putContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                                responseMsg = await client.PutAsync(url, putContent, token).ConfigureAwait(_continueOnCapturedContext);
+                                httpRequestMessage = new HttpRequestMessage(HttpMethod.Put, url);
+                                httpRequestMessage.Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
                                 break;
                             case "DELETE":
-                                responseMsg = await client.DeleteAsync(url, token).ConfigureAwait(_continueOnCapturedContext);
+                                httpRequestMessage = new HttpRequestMessage(HttpMethod.Delete, url);
                                 break;
                         }
+
+                        if (requestOptions != null)
+                        {
+                            foreach (var header in requestOptions.GenerateExtraHeaders())
+                            {
+                                httpRequestMessage.Headers.Add(header.Key, header.Value);
+                            }
+                        }
+
+                        HttpResponseMessage responseMsg = await client.SendAsync(httpRequestMessage, token)
+                            .ConfigureAwait(_continueOnCapturedContext);
+
                         if (responseMsg.IsSuccessStatusCode)
                         {
                             string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
@@ -1206,6 +1235,28 @@ namespace Algolia.Search
 
             }
             throw new AlgoliaException("Hosts unreachable: " + string.Join(", ", errors.Select(x => x.Key + "=" + x.Value).ToArray()));
+        }
+
+        private string buildExtraQueryParamsUrlString(Dictionary<string, string> extraQueryParams)
+        {
+            if (extraQueryParams == null || extraQueryParams.Count == 0)
+            {
+                return "";
+            }
+
+            string stringBuilder = "";
+
+            foreach (var queryParam in extraQueryParams)
+            {
+                if (stringBuilder.Length > 0)
+                {
+                    stringBuilder += '&';
+                }
+
+                stringBuilder += WebUtility.UrlEncode(queryParam.Key) + "=" + WebUtility.UrlEncode(queryParam.Value);
+            }
+
+            return stringBuilder;
         }
     }
 }
