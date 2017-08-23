@@ -1007,25 +1007,25 @@ namespace Algolia.Search.Test
 			Assert.Equal(JObject.Parse("{\"fromFirstHost\":[]}").ToString(), client.InitIndex("test").Browse().ToString());
 		}
 
-        [Fact]
-        public void TestRequestOptions()
-        {
-            ClearTest();
+		[Fact]
+		public void TestRequestOptions()
+		{
+			ClearTest();
 
-            var attributesToRetrieve = new List<string> {"firstname"};
-            RequestOptions requestOptions = new RequestOptions();
-            requestOptions.SetForwardedFor("ForwardedFor");
-            requestOptions.AddExtraHeader("Header", "headerValue");
-            requestOptions.AddExtraQueryParameters("ExtraQueryParamKey", "ExtraQueryParamValue");
+			var attributesToRetrieve = new List<string> {"firstname"};
+			RequestOptions requestOptions = new RequestOptions();
+			requestOptions.SetForwardedFor("ForwardedFor");
+			requestOptions.AddExtraHeader("Header", "headerValue");
+			requestOptions.AddExtraQueryParameters("ExtraQueryParamKey", "ExtraQueryParamValue");
 
-            // A Request without url parameters 
-            var task = _index.AddObject(JObject.Parse(@"{""firstname"":""bob"", ""lastname"":""snow"", ""objectID"":""ananas""}"), null, requestOptions);
-            _index.WaitTask(task["taskID"].ToString());
-            // A request with url parameters
-            var res = _index.GetObject("ananas", attributesToRetrieve, requestOptions);
+			// A Request without url parameters 
+			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""bob"", ""lastname"":""snow"", ""objectID"":""ananas""}"), null, requestOptions);
+			_index.WaitTask(task["taskID"].ToString());
+			// A request with url parameters
+			var res = _index.GetObject("ananas", attributesToRetrieve, requestOptions);
 
-            Assert.Equal("ananas", res["objectID"].ToString());
-            Assert.Equal("bob", res["firstname"].ToString());
-        }
-    }
+			Assert.Equal("ananas", res["objectID"].ToString());
+			Assert.Equal("bob", res["firstname"].ToString());
+		}
+	}
 }
