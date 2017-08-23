@@ -9,6 +9,11 @@ namespace Algolia.Search.Models
         private readonly Dictionary<string, string> _queryParams = new Dictionary<string, string>();
         private string _forwardedFor;
 
+        public RequestOptions()
+        {
+            
+        }
+
         public RequestOptions SetForwardedFor(string forwardedFor)
         {
             _forwardedFor = forwardedFor;
