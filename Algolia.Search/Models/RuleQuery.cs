@@ -3,25 +3,27 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models
 {
-    public class RuleQuery
+	public class RuleQuery
 	{
-		public RuleQuery() { }
+		public RuleQuery()
+		{
+		}
 
-        public RuleQuery(string query, string anchoring, string context)
-        {
-            Query = query;
-            Anchoring = anchoring;
-            Context = context;
-        }
+		public RuleQuery(string query, string anchoring, string context)
+		{
+			Query = query;
+			Anchoring = anchoring;
+			Context = context;
+		}
 
-        public RuleQuery(string query, string anchoring, string context, int page, int hitsPerPage)
-        {
-            Query = query;
-            Anchoring = anchoring;
-            Context = context;
-            Page = page;
-            HitsPerPage = hitsPerPage;
-        }
+		public RuleQuery(string query, string anchoring, string context, int page, int hitsPerPage)
+		{
+			Query = query;
+			Anchoring = anchoring;
+			Context = context;
+			Page = page;
+			HitsPerPage = hitsPerPage;
+		}
 
 		[JsonProperty(PropertyName = "query")]
 		public string Query { get; set; } = "";
@@ -35,8 +37,7 @@ namespace Algolia.Search.Models
 		[JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "page")]
 		public int? Page { get; set; }
 
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "hitsPerPage")]
-        public int? HitsPerPage { get; set; }
-    }
-
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "hitsPerPage")]
+		public int? HitsPerPage { get; set; }
+	}
 }
