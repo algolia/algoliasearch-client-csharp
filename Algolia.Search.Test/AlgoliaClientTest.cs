@@ -1033,16 +1033,14 @@ namespace Algolia.Search.Test
 
 		// Query Rule tests
 
-	    private static List<string> indicesNames = new List<string>() {"index1", "index2", "index3", "index4"};
-
-	    private JObject generateRuleStub(string objectId = "my-rule")
-	    {
+		private JObject generateRuleStub(string objectId = "my-rule")
+		{
 			JObject condition = new JObject();
 			condition.Add("pattern", "some text");
 			condition.Add("anchoring", "is");
 
-		    JObject consequence = new JObject();
-		    JObject parameters = new JObject();
+			JObject consequence = new JObject();
+			JObject parameters = new JObject();
 			parameters.Add("query", "other text");
 			consequence.Add("params", parameters);
 
@@ -1051,15 +1049,15 @@ namespace Algolia.Search.Test
 			rule.Add("condition", condition);
 			rule.Add("consequence", consequence);
 
-		    return rule;
-	    }
+			return rule;
+		}
 
-	    private static void AreEqualByJson(JObject expected, JObject actual)
-	    {
-		    var expectedJson = JsonConvert.SerializeObject(expected);
-		    var actualJson = JsonConvert.SerializeObject(actual);
-		    Assert.Equal(expectedJson, actualJson);
-	    }
+		private static void AreEqualByJson(JObject expected, JObject actual)
+		{
+			var expectedJson = JsonConvert.SerializeObject(expected);
+			var actualJson = JsonConvert.SerializeObject(actual);
+			Assert.Equal(expectedJson, actualJson);
+		}
 
 		[Fact]
 		public void TestSaveAndGetRule()
@@ -1073,80 +1071,80 @@ namespace Algolia.Search.Test
 			AreEqualByJson(rule, _index.GetRule(ruleId));
 		}
 
-	    [Fact]
-	    public void TestDeleteRule()
-	    {
-		    ClearTest();
+		[Fact]
+		public void TestDeleteRule()
+		{
+			ClearTest();
 
-		    string ruleId = "ruleID";
-		    JObject rule = generateRuleStub(ruleId);
+			string ruleId = "ruleID";
+			JObject rule = generateRuleStub(ruleId);
 
-		    var task = _index.SaveRule(rule);
-		    _index.WaitTask(task["taskID"].ToString());
+			var task = _index.SaveRule(rule);
+			_index.WaitTask(task["taskID"].ToString());
 
-		    var task2 = _index.DeleteRule(ruleId);
-		    _index.WaitTask(task2["taskID"].ToString());
+			var task2 = _index.DeleteRule(ruleId);
+			_index.WaitTask(task2["taskID"].ToString());
 
-		    try
-		    {
-			    var res = _index.GetRule(ruleId);
+			try
+			{
+				_index.GetRule(ruleId);
 			}
 			catch (AlgoliaException)
-		    {
-			    return;
-		    }
-		    Assert.True(false);
+			{
+				return;
+			}
+			Assert.True(false);
 		}
 
-	    [Fact]
-	    public void TestSearchRules()
-	    {
-		    ClearTest();
+		[Fact]
+		public void TestSearchRules()
+		{
+			ClearTest();
 
-		    string ruleId1 = "ruleID1";
-		    string ruleId2 = "ruleID2";
-		    JObject rule1 = generateRuleStub(ruleId1);
-		    JObject rule2 = generateRuleStub(ruleId2);
-		    var task1 = _index.SaveRule(rule1);
-		    _index.WaitTask(task1["taskID"].ToString());
-		    var task2 = _index.SaveRule(rule2);
-		    _index.WaitTask(task2["taskID"].ToString());
+			string ruleId1 = "ruleID1";
+			string ruleId2 = "ruleID2";
+			JObject rule1 = generateRuleStub(ruleId1);
+			JObject rule2 = generateRuleStub(ruleId2);
+			var task1 = _index.SaveRule(rule1);
+			_index.WaitTask(task1["taskID"].ToString());
+			var task2 = _index.SaveRule(rule2);
+			_index.WaitTask(task2["taskID"].ToString());
 
-		    var rules = _index.SearchRules();
+			var rules = _index.SearchRules();
 			Assert.Equal(2, (int) rules["nbHits"]);
-	    }
+		}
 
-	    [Fact]
-	    public void TestClearRules()
-	    {
-		    ClearTest();
+		[Fact]
+		public void TestClearRules()
+		{
+			ClearTest();
 
-		    string ruleId = "ruleID3";
-		    JObject rule = generateRuleStub(ruleId);
-		    var task = _index.SaveRule(rule);
-		    _index.WaitTask(task["taskID"].ToString());
-		    var task2 = _index.ClearRules();
-		    _index.WaitTask(task2["taskID"].ToString());
+			string ruleId = "ruleID3";
+			JObject rule = generateRuleStub(ruleId);
+			var task = _index.SaveRule(rule);
+			_index.WaitTask(task["taskID"].ToString());
+			var task2 = _index.ClearRules();
+			_index.WaitTask(task2["taskID"].ToString());
 
 			var rules = _index.SearchRules();
 
-		    Assert.Equal(rules["nbHits"], 0);
+			Assert.Equal(rules["nbHits"], 0);
 		}
 
-	    [Fact]
-	    public void TestBatchRules()
-	    {
-		    ClearTest();
+		[Fact]
+		public void TestBatchRules()
+		{
+			ClearTest();
 
-		    string ruleId1 = "ruleID4";
-		    string ruleId2 = "ruleID5";
-		    JObject rule1 = generateRuleStub(ruleId1);
-		    JObject rule2 = generateRuleStub(ruleId2);
-		    var task = _index.BatchRules(new List<JObject>() {rule1, rule2});
-		    _index.WaitTask(task["taskID"].ToString());
+			string ruleId1 = "ruleID4";
+			string ruleId2 = "ruleID5";
+			JObject rule1 = generateRuleStub(ruleId1);
+			JObject rule2 = generateRuleStub(ruleId2);
+			var task = _index.BatchRules(new List<JObject>() {rule1, rule2});
+			_index.WaitTask(task["taskID"].ToString());
 
-		    var rules = _index.SearchRules();
-		    Assert.Equal(2, (int)rules["nbHits"]);
+			var rules = _index.SearchRules();
+			Assert.Equal(2, (int) rules["nbHits"]);
 		}
 	}
 }
