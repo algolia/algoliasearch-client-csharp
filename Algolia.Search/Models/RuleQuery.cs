@@ -23,14 +23,19 @@ namespace Algolia.Search.Models
             HitsPerPage = hitsPerPage;
         }
 
-	    public string Query { get; set; } = "";
-	    public string Anchoring { get; set; } = "";
-	    public string Context { get; set; } = "";
+		[JsonProperty(PropertyName = "query")]
+		public string Query { get; set; } = "";
 
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public int? Page { get; set; }
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "anchoring")]
+		public string Anchoring { get; set; }
 
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		[JsonProperty(PropertyName = "context")]
+		public string Context { get; set; } = "";
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "page")]
+		public int? Page { get; set; }
+
+	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "hitsPerPage")]
         public int? HitsPerPage { get; set; }
     }
 
