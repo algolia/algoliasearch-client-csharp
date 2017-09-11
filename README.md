@@ -145,7 +145,7 @@ System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
 [frontend search UI librairies](https://www.algolia.com/doc/guides/search-ui/search-libraries/)
 
 The following example shows how to build a front-end search quickly using
-[InstanSearch.js](https://community.algolia.com/instantsearch.js/)
+[InstantSearch.js](https://community.algolia.com/instantsearch.js/)
 
 ### index.html
 
