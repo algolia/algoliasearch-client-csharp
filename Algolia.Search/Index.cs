@@ -1480,5 +1480,137 @@ namespace Algolia.Search
             body["params"] = paramsString;
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token, requestOptions);
         }
+
+        /// <summary>
+        ///  Save a new rule in the index.
+        /// </summary>
+        /// <param name="queryRule">The body of the rule to save (must contain an objectID attribute).</param>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        public Task<JObject> SaveRuleAsync(JObject queryRule, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
+        {
+            if (queryRule["objectID"] == null)
+            {
+                throw new AlgoliaException("objectID is missing");
+            }
+
+            string objectID = (string)queryRule["objectID"];
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/rules/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas.ToString().ToLower()), queryRule, token, requestOptions);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.SaveRuleAsync"/>.
+        /// </summary>
+        /// <param name="queryRule">The object to save (must contain an objectID attribute).</param>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        public JObject SaveRule(JObject queryRule, bool forwardToReplicas = false, RequestOptions requestOptions = null)
+        {
+            return SaveRuleAsync(queryRule,forwardToReplicas,default(CancellationToken), requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        ///  Retrieve a rule from the index with the specified objectID.
+        /// </summary>
+        /// <param name="objectID">The objectID of the rule to retrieve.</param>
+        public Task<JObject> GetRuleAsync(string objectID, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
+        {
+            if (string.IsNullOrEmpty(objectID))
+            {
+                throw new AlgoliaException("objectID is missing");
+            }
+
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/rules/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token, requestOptions);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.GetRuleAsync"/>.
+        /// </summary>
+        /// <param name="objectID">The objectID of the rule to retrieve.</param>
+        public JObject GetRule(string objectID, RequestOptions requestOptions = null)
+        {
+            return GetRuleAsync(objectID, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        ///  Search for rules inside the index.
+        /// </summary>
+        /// <param name="query">the query rules</param>
+        public Task<JObject> SearchRulesAsync(RuleQuery query = null, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
+        {
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/rules/search", _urlIndexName), query, token, requestOptions);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.SearchRulesAsync"/>.
+        /// </summary>
+        /// <param name="query">the query rules</param>
+        public JObject SearchRules(RuleQuery query = null, RequestOptions requestOptions = null)
+        {
+	        return SearchRulesAsync(query, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        ///  Delete a rule from the index with the specified objectID.
+        /// </summary>
+        /// <param name="objectID">The objectID of the rule to retrieve.</param>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        public Task<JObject> DeleteRuleAsync(string objectID, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
+        {
+            if (string.IsNullOrEmpty(objectID))
+            {
+                throw new AlgoliaException("objectID is missing");
+            }
+
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/rules/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas.ToString().ToLower()), null, token, requestOptions);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.DeleteRuleAsync"/>.
+        /// </summary>
+        /// <param name="objectID">The objectID of the rule to retrieve.</param>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        public JObject DeleteRule(string objectID, bool forwardToReplicas = false, RequestOptions requestOptions = null)
+        {
+            return DeleteRuleAsync(objectID, forwardToReplicas, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Clear all the rules of an index.
+        /// </summary>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        public Task<JObject> ClearRulesAsync(bool forwardToReplicas = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
+        {
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/rules/clear?forwardToReplicas={1}", _urlIndexName, forwardToReplicas.ToString().ToLower()), null, token, requestOptions);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.ClearRulesAsync"/>.
+        /// </summary>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        public JObject ClearRules(bool forwardToReplicas = false, RequestOptions requestOptions = null)
+        {
+            return ClearRulesAsync(forwardToReplicas, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        ///  Save a batch of new rules in the index.
+        /// </summary>
+        /// <param name="queryRules">Batch of rules to be added to the index (must contain an objectID attribute).</param>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        /// <param name="clearExistingRules">whether to clear existing rules in the index or not (defaults to false)</param>
+        public Task<JObject> BatchRulesAsync(IEnumerable<JObject> queryRules, bool forwardToReplicas = false, bool clearExistingRules = false, CancellationToken token = default(CancellationToken), RequestOptions requestOptions = null)
+        {
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/rules/batch?forwardToReplicas={1}&clearExistingRules={2}", _urlIndexName, forwardToReplicas.ToString().ToLower(), clearExistingRules.ToString().ToLower()), queryRules, token, requestOptions);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.BatchRulesAsync"/>.
+        /// </summary>
+        /// <param name="queryRules">The object to save (must contain an objectID attribute).</param>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        /// <param name="clearExistingRules">whether to clear existing rules in the index or not (defaults to false)</param>
+        public JObject BatchRules(IEnumerable<JObject> queryRules, bool forwardToReplicas = false, bool clearExistingRules = false, RequestOptions requestOptions = null)
+        {
+            return BatchRulesAsync(queryRules, forwardToReplicas, clearExistingRules, default(CancellationToken), requestOptions).GetAwaiter().GetResult();
+        }
     }
 }

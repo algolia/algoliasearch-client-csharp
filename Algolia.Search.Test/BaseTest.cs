@@ -36,6 +36,7 @@ namespace Algolia.Search.Test
 			try
 			{
 				_index.ClearIndex();
+				_index.ClearRules();
 			}
 			catch (Exception)
 			{

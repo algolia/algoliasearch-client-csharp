@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Xunit;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
@@ -9,6 +10,8 @@ using Algolia.Search.Models;
 using RichardSzalay.MockHttp;
 using System.Net.Http;
 using System.Net;
+using Newtonsoft.Json;
+using Xunit.Sdk;
 
 namespace Algolia.Search.Test
 {
@@ -1026,6 +1029,122 @@ namespace Algolia.Search.Test
 
 			Assert.Equal("ananas", res["objectID"].ToString());
 			Assert.Equal("bob", res["firstname"].ToString());
+		}
+
+		// Query Rule tests
+
+		private JObject generateRuleStub(string objectId = "my-rule")
+		{
+			JObject condition = new JObject();
+			condition.Add("pattern", "some text");
+			condition.Add("anchoring", "is");
+
+			JObject consequence = new JObject();
+			JObject parameters = new JObject();
+			parameters.Add("query", "other text");
+			consequence.Add("params", parameters);
+
+			JObject rule = new JObject();
+			rule.Add("objectID", objectId);
+			rule.Add("condition", condition);
+			rule.Add("consequence", consequence);
+
+			return rule;
+		}
+
+		private static void AreEqualByJson(JObject expected, JObject actual)
+		{
+			var expectedJson = JsonConvert.SerializeObject(expected);
+			var actualJson = JsonConvert.SerializeObject(actual);
+			Assert.Equal(expectedJson, actualJson);
+		}
+
+		[Fact]
+		public void TestSaveAndGetRule()
+		{
+			ClearTest();
+
+			string ruleId = "ruleID";
+			JObject rule = generateRuleStub(ruleId);
+			var task = _index.SaveRule(rule);
+			_index.WaitTask(task["taskID"].ToString());
+			AreEqualByJson(rule, _index.GetRule(ruleId));
+		}
+
+		[Fact]
+		public void TestDeleteRule()
+		{
+			ClearTest();
+
+			string ruleId = "ruleID";
+			JObject rule = generateRuleStub(ruleId);
+
+			var task = _index.SaveRule(rule);
+			_index.WaitTask(task["taskID"].ToString());
+
+			var task2 = _index.DeleteRule(ruleId);
+			_index.WaitTask(task2["taskID"].ToString());
+
+			try
+			{
+				_index.GetRule(ruleId);
+			}
+			catch (AlgoliaException)
+			{
+				return;
+			}
+			Assert.True(false);
+		}
+
+		[Fact]
+		public void TestSearchRules()
+		{
+			ClearTest();
+
+			string ruleId1 = "ruleID1";
+			string ruleId2 = "ruleID2";
+			JObject rule1 = generateRuleStub(ruleId1);
+			JObject rule2 = generateRuleStub(ruleId2);
+			var task1 = _index.SaveRule(rule1);
+			_index.WaitTask(task1["taskID"].ToString());
+			var task2 = _index.SaveRule(rule2);
+			_index.WaitTask(task2["taskID"].ToString());
+
+			var rules = _index.SearchRules();
+			Assert.Equal(2, (int) rules["nbHits"]);
+		}
+
+		[Fact]
+		public void TestClearRules()
+		{
+			ClearTest();
+
+			string ruleId = "ruleID3";
+			JObject rule = generateRuleStub(ruleId);
+			var task = _index.SaveRule(rule);
+			_index.WaitTask(task["taskID"].ToString());
+			var task2 = _index.ClearRules();
+			_index.WaitTask(task2["taskID"].ToString());
+
+			var rules = _index.SearchRules();
+
+			Assert.Equal(rules["nbHits"], 0);
+		}
+
+		[Fact]
+		public void TestBatchRules()
+		{
+			ClearTest();
+
+			string ruleId1 = "ruleID4";
+			string ruleId2 = "ruleID5";
+			JObject rule1 = generateRuleStub(ruleId1);
+			JObject rule2 = generateRuleStub(ruleId2);
+			var task = _index.BatchRules(new List<JObject>() {rule1, rule2});
+			_index.WaitTask(task["taskID"].ToString());
+
+			var rules = _index.SearchRules();
+			Assert.Equal(2, (int) rules["nbHits"]);
 		}
 	}
 }

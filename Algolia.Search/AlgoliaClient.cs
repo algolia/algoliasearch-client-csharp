@@ -1128,12 +1128,20 @@ namespace Algolia.Search
                                 break;
                             case "POST":
                                 httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url);
-                                httpRequestMessage.Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                                break;
+	                            if (content != null)
+	                            {
+		                            httpRequestMessage.Content =
+			                            new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
+	                            }
+	                            break;
                             case "PUT":
                                 httpRequestMessage = new HttpRequestMessage(HttpMethod.Put, url);
-                                httpRequestMessage.Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
-                                break;
+	                            if (content != null)
+	                            {
+		                            httpRequestMessage.Content =
+			                            new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
+	                            }
+	                            break;
                             case "DELETE":
                                 httpRequestMessage = new HttpRequestMessage(HttpMethod.Delete, url);
                                 break;
