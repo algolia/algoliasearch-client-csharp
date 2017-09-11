@@ -897,10 +897,10 @@ namespace Algolia.Search.Test
 			};
 
 			var _client = new AlgoliaClient(_testApplicationID, _testApiKey, hosts);
-			_client.setTimeout(3, 3);
+			_client.setTimeout(1, 1);
 			var startTime = DateTime.Now;
 			var index = _client.ListIndexes();
-			Assert.True(startTime.AddSeconds(3) < DateTime.Now);
+			Assert.True(startTime.AddSeconds(1) < DateTime.Now);
 		}
 
 		private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
