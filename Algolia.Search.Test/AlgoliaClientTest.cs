@@ -889,8 +889,6 @@ namespace Algolia.Search.Test
 		public void TestDnsTimeout()
 		{
 			var hosts = new List<string> {
-				_testApplicationID + "-dsn.algolia.biz",
-				_testApplicationID + "-dsn.algolia.net",
 				_testApplicationID + "-1.algolianet.com",
 				_testApplicationID + "-2.algolianet.com",
 				_testApplicationID + "-3.algolianet.com"
