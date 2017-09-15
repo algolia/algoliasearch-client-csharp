@@ -1022,10 +1022,10 @@ namespace Algolia.Search.Test
 			requestOptions.AddExtraQueryParameters("ExtraQueryParamKey", "ExtraQueryParamValue");
 
 			// A Request without url parameters 
-			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""bob"", ""lastname"":""snow"", ""objectID"":""ananas""}"), null, requestOptions);
+			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""bob"", ""lastname"":""snow"", ""objectID"":""ananas""}"), requestOptions, null);
 			_index.WaitTask(task["taskID"].ToString());
 			// A request with url parameters
-			var res = _index.GetObject("ananas", attributesToRetrieve, requestOptions);
+			var res = _index.GetObject("ananas", requestOptions, attributesToRetrieve);
 
 			Assert.Equal("ananas", res["objectID"].ToString());
 			Assert.Equal("bob", res["firstname"].ToString());

@@ -1,6 +1,9 @@
 Changelog
 =========
-4.0.1 (2017-09-13)
+4.1.1 (2017-09-13)
+- Adding overload methods everywhere to ensure binary compatibility with previous versions of the client. This is due to adding the RequestOptions optional parameter.
+
+4.1.0 (2017-09-13)
 - Support for Rules.
 - Support for per-request options parameters. 
 **Warning**: This version will be source-code compatible with the previous one but not binary compatible. In the next version, we will fix that by adding overload methods.

@@ -68,7 +68,7 @@ namespace Algolia.Search
                 if (toIndex.Count >= maxObjectsPerCall)
                 {
                     // Add or update indices
-                    taskList.Add(tempIndex.SaveObjectsAsync(toIndex));
+                    taskList.Add(tempIndex.SaveObjectsAsync(toIndex, null));
 
                     // Reset array
                     toIndex.Clear();
@@ -77,13 +77,13 @@ namespace Algolia.Search
 
             // Add or update indices for last batch
             if (toIndex.Count > 0)
-                taskList.Add(tempIndex.SaveObjectsAsync(toIndex));
+                taskList.Add(tempIndex.SaveObjectsAsync(toIndex, null));
 
             // Wait for all tasks to be done
             Task.WaitAll(taskList.ToArray());
 
             // Overwrite main index with temp index
-            return await base._client.MoveIndexAsync(tempIndexName, _indexName);
+            return await base._client.MoveIndexAsync(tempIndexName, _indexName, null);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Algolia.Search
                 if (toIndex.Count >= maxObjectsPerCall)
                 {
                     // Add or update indices
-                    taskList.Add(base.SaveObjectsAsync(toIndex));
+                    taskList.Add(base.SaveObjectsAsync(toIndex, null));
 
                     // Reset array
                     toIndex.Clear();
@@ -140,7 +140,7 @@ namespace Algolia.Search
 
             // Add or update indices for last batch
             if (toIndex.Count > 0)
-                taskList.Add(base.SaveObjectsAsync(toIndex));
+                taskList.Add(base.SaveObjectsAsync(toIndex, null));
 
             // Wait for all tasks to be done
             return await Task.WhenAll(taskList);
@@ -174,7 +174,7 @@ namespace Algolia.Search
             jObject.Add("objectID", id);
 
             // Add new index (if no matching jObject.objectID) or update
-            return base.SaveObjectAsync(jObject);
+            return base.SaveObjectAsync(jObject, null);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Algolia.Search
                 if (toIndex.Count >= maxObjectsPerCall)
                 {
                     // Delete indices
-                    taskList.Add(base.DeleteObjectsAsync(toIndex));
+                    taskList.Add(base.DeleteObjectsAsync(toIndex, null));
 
                     // Reset array
                     toIndex.Clear();
@@ -226,7 +226,7 @@ namespace Algolia.Search
 
             // Delete indices for last batch
             if (toIndex.Count > 0)
-                taskList.Add(base.DeleteObjectsAsync(toIndex));
+                taskList.Add(base.DeleteObjectsAsync(toIndex, null));
 
             // Wait for all tasks to be done
             return await Task.WhenAll(taskList);
@@ -257,7 +257,7 @@ namespace Algolia.Search
             var id = jObject.GetValue(_objectIdField).ToString();
 
             // Remove the index from Algolia
-            return base.DeleteObjectAsync(id);
+            return base.DeleteObjectAsync(id, null);
         }
 
         /// <summary>
