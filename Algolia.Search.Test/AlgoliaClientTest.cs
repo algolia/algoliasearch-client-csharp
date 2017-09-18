@@ -864,9 +864,9 @@ namespace Algolia.Search.Test
 			{
 				_client.ListIndexes();
 				_client = new AlgoliaClient(_testApplicationID, _testApiKey);
-                Assert.Throws<Exception>(() => {
+				Assert.Throws<Exception>(() => {
 					_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
-                });
+				});
 			}
 			catch (AlgoliaException)
 			{
@@ -878,7 +878,7 @@ namespace Algolia.Search.Test
 			{
 				_client = new AlgoliaClient(_testApplicationID, _testApiKey);
 				_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
-                Assert.Throws<AlgoliaException>(() =>
+				Assert.Throws<AlgoliaException>(() =>
 				{
 					_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
 				});
@@ -900,7 +900,7 @@ namespace Algolia.Search.Test
 			_client.setTimeout(1, 1);
 			var startTime = DateTime.Now;
 			var index = _client.ListIndexes();
-			Assert.True(startTime.AddSeconds(1) < DateTime.Now);
+			Assert.True(startTime.AddSeconds(4) < DateTime.Now);
 		}
 
 		private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
