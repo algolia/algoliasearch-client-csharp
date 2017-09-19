@@ -900,7 +900,7 @@ namespace Algolia.Search.Test
 			_client.setTimeout(1, 1);
 			var startTime = DateTime.Now;
 			var index = _client.ListIndexes();
-			Assert.True(startTime.AddSeconds(1) < DateTime.Now, DateTime.Now + " should have been less than " + startTime.AddSeconds(1) + " when testing the DNS timeout.");
+			Assert.True(startTime.AddSeconds(1) <= DateTime.Now, DateTime.Now + " should have been less than or equal to" + startTime.AddSeconds(1) + " when testing the DNS timeout.");
 		}
 
 		private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
