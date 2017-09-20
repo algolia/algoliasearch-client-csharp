@@ -901,7 +901,7 @@ namespace Algolia.Search.Test
 			var startTime = DateTime.Now;
 			var index = _client.ListIndexes();
 			Assert.True((DateTime.Now - startTime).TotalSeconds < 2);
-			Assert.IsNotNull(index);
+			Assert.True(index != null);
 		}
 
 		private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
