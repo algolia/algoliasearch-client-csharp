@@ -127,7 +127,7 @@ namespace Algolia.Search
         {
             Query q = new Query();
             q.advancedSyntax = advancedSyntax;
-	    q.removeStopWords = removeStopWords;
+            q.removeStopWords = removeStopWords;
             q.allowTyposOnNumericTokens = allowTyposOnNumericTokens;
             q.analytics = analytics;
             q.analyticsTags = analyticsTags;
@@ -157,7 +157,7 @@ namespace Algolia.Search
             q.optionalWords = optionalWords;
             q.page = page;
             q.query = query;
-	    q.similarQuery = similarQuery;
+            q.similarQuery = similarQuery;
             q.queryType = queryType;
             q.removeWordsIfNoResult = removeWordsIfNoResult;
             q.replaceSynonyms = replaceSynonyms;
@@ -169,6 +169,8 @@ namespace Algolia.Search
             q.aroundRadius = aroundRadius;
             q.aroundPrecision = aroundPrecision;
             q.customParameters = customParameters;
+            q.enableRules = enableRules;
+            q.ruleContexts = ruleContexts;
             return q;
         }
 
@@ -826,6 +828,29 @@ namespace Algolia.Search
             return this;
         }
 
+        /// <summary>
+        /// Allows enabling of rules.
+        /// </summary>
+        /// <param name="enabled">Turn it on or off</param>
+        /// <returns></returns>
+        public Query EnableRules(bool enabled)
+        {
+            this.enableRules = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// List of contexts for which rules are enabled.
+        /// Contextual rules matching any of these contexts are eligible, as well a s generic rules.
+        /// When empty, only generic rules are eligible.
+        /// </summary>
+        /// <param name="ruleContexts"></param>
+        /// <returns></returns>
+        public Query SetRuleContexts(IEnumerable<string> ruleContexts)
+        {
+            this.ruleContexts = ruleContexts;
+            return this;
+        }
 
         /// <summary>
         /// Allows enabling of stop words removal.
@@ -1177,6 +1202,27 @@ namespace Algolia.Search
                 stringBuilder += "advancedSyntax=";
                 stringBuilder += advancedSyntax.Value ? "1" : "0";
             }
+            if (enableRules.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "enableRules=";
+                stringBuilder += enableRules.Value ? "true" : "false";
+            }
+            if (ruleContexts != null)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "ruleContexts=";
+                bool first = true;
+                foreach (string attr in this.ruleContexts)
+                {
+                    if (!first)
+                        stringBuilder += ',';
+                    stringBuilder += WebUtility.UrlEncode(attr);
+                    first = false;
+                }
+            }
             if (!String.IsNullOrEmpty(removeStopWords))
             {
                 if (stringBuilder.Length > 0)
@@ -1454,5 +1500,7 @@ namespace Algolia.Search
         private IEnumerable<string> restrictIndices;
         private string restrictSources;
         private string referers;
+        private bool? enableRules;
+        private IEnumerable<string> ruleContexts;
     }
 }

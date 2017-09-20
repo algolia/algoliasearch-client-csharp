@@ -13,8 +13,8 @@
         <PackageLicenseUrl>https://github.com/algolia/algoliasearch-client-csharp/blob/master/LICENSE.TXT</PackageLicenseUrl>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
-        <Version>4.0.0</Version>
-        <AssemblyVersion>4.0.0</AssemblyVersion>
+        <Version>4.1.1</Version>
+        <AssemblyVersion>4.1.1</AssemblyVersion>
         <FileVersion>3.8.0.0</FileVersion>
         <TargetFrameworks>net46;net462;netcoreapp1.1;netcoreapp1.0;netstandard1.6;netstandard1.3;</TargetFrameworks>
     </PropertyGroup>
