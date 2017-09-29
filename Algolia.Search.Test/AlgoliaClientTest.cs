@@ -15,6 +15,7 @@ using Xunit.Sdk;
 
 namespace Algolia.Search.Test
 {
+#pragma warning disable 0618
     public class AlgoliaClientTest : BaseTest
     {
 		[Fact]
@@ -592,7 +593,7 @@ namespace Algolia.Search.Test
 			{
                 Assert.Throws<AlgoliaException>(() => ind.ClearIndex());
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
                 
 			}
@@ -918,7 +919,7 @@ namespace Algolia.Search.Test
 					}
 					return;
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Thread.Sleep(1000);
 					continue;
@@ -935,7 +936,7 @@ namespace Algolia.Search.Test
 					var key = index.GetApiKeyACL(newIndexKey["key"].ToString());
 					Thread.Sleep(1000);
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					return;
 				}
@@ -1149,3 +1150,4 @@ namespace Algolia.Search.Test
 		}
 	}
 }
+#pragma warning restore 0618
