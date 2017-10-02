@@ -1,5 +1,9 @@
 Changelog
 =========
+
+4.1.2 (2017-10-02)
+- Add support for .NET core 2 and .NET standard 2
+
 4.1.1 (2017-09-13)
 - Adding overload methods everywhere to ensure binary compatibility with previous versions of the client. This is due to adding the RequestOptions optional parameter.
 
