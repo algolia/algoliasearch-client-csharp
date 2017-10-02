@@ -138,7 +138,25 @@ namespace Algolia.Search.Test
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
 		}
 
-		[Fact]
+        [Fact]
+        public void TaskDeleteBy()
+        {
+            ClearTest();
+            List<JObject> objs = new List<JObject>();
+            objs.Add(JObject.Parse(@"{""dummy"": 1}"));
+            objs.Add(JObject.Parse(@"{""dummy"": 2}"));
+            objs.Add(JObject.Parse(@"{""dummy"": 3}"));
+            var task = _index.AddObjects(objs);
+            _index.WaitTask(task["taskID"].ToString());
+            var query = new Query();
+            query.SetNumericFilters("dummy <= 2");
+            var task2 = _index.DeleteBy(query);
+            _index.WaitTask(task2["taskID"].ToString());
+            var res = _index.Search(new Query(""));
+            Assert.Equal(1, res["nbHits"].ToObject<int>());
+        }
+
+        [Fact]
 		public void TestMissingObjectIDPartialUpdateObject()
 		{
 			ClearTest();

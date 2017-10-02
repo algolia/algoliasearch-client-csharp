@@ -450,6 +450,31 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="query">The query.</param>
         /// <param name="requestOptions"></param>
+        public Task<JObject> DeleteByAsync(Query query, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            string paramsString = query.GetQueryString();
+            Dictionary<string, object> body = new Dictionary<string, object>();
+            body["params"] = paramsString;
+
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/deleteByQuery", _urlIndexName), body, token, requestOptions);
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="Index.DeleteByAsync"/>.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="requestOptions"></param>
+        public JObject DeleteBy(Query query, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            return DeleteByAsync(query, requestOptions, token).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Delete all objects matching a query.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="requestOptions"></param>
+        [Obsolete("DeleteByQueryAsync is deprecated, please use deleteBy instead.")]
         async public Task DeleteByQueryAsync(Query query, RequestOptions requestOptions)
         {
             query.SetAttributesToRetrieve(new string[]{"objectID"});
@@ -479,6 +504,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="query">The query.</param>
         /// <param name="requestOptions"></param>
+        [Obsolete("DeleteByQuery is deprecated, please use deleteBy instead.")]
         public void DeleteByQuery(Query query, RequestOptions requestOptions)
         {
             DeleteByQueryAsync(query, requestOptions).GetAwaiter().GetResult();
@@ -1941,6 +1967,7 @@ namespace Algolia.Search
         /// Delete all objects matching a query.
         /// </summary>
         /// <param name="query">The query.</param>
+        [Obsolete("DeleteByQueryAsync is deprecated, please use deleteBy instead.")]
         async public Task DeleteByQueryAsync(Query query)
         { await DeleteByQueryAsync(query, (RequestOptions) null); }
 
@@ -1948,6 +1975,7 @@ namespace Algolia.Search
         /// Synchronously call <see cref="Index.DeleteByQueryAsync"/>.
         /// </summary>
         /// <param name="query">The query.</param>
+        [Obsolete("DeleteByQuery is deprecated, please use deleteBy instead.")]
         public void DeleteByQuery(Query query)
         { DeleteByQuery(query, null); }
 
