@@ -102,6 +102,21 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Values applicable to the sortFacetValuesBy parameter.
+        /// </summary>
+        public enum SortFacetValuesBy
+        {
+            /// <summary>
+            /// Facet values are sorted by decreasing count, the count being the number of records containing this facet value in the results of the query (default behavior).
+            /// </summary>
+            COUNT,
+            /// <summary>
+            /// /// Facet values are sorted by increasing alphabetical order.
+            /// </summary>
+            ALPHA,
+        }
+
+        /// <summary>
         /// Create a new query.
         /// </summary>
         /// <param name="query">The query.</param>
@@ -159,6 +174,7 @@ namespace Algolia.Search
             q.query = query;
             q.similarQuery = similarQuery;
             q.queryType = queryType;
+            q.sortFacetValuesBy = sortFacetValuesBy;
             q.removeWordsIfNoResult = removeWordsIfNoResult;
             q.replaceSynonyms = replaceSynonyms;
             q.restrictSearchableAttributes = restrictSearchableAttributes;
@@ -180,6 +196,15 @@ namespace Algolia.Search
         public Query SetQueryType(QueryType type)
         {
             this.queryType = type;
+            return this;
+        }
+
+        /// <summary>
+        /// Controls how the facet values are sorted within each faceted attribute.
+        /// </summary>
+        public Query SetSortFacetValuesBy(SortFacetValuesBy sortFacetValuesBy)
+        {
+            this.sortFacetValuesBy = sortFacetValuesBy;
             return this;
         }
 
@@ -1398,6 +1423,22 @@ namespace Algolia.Search
                         break;
                 }
             }
+            if (sortFacetValuesBy.HasValue)
+            {
+                switch (sortFacetValuesBy)
+                {
+                    case SortFacetValuesBy.COUNT:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "sortFacetValuesBy=count";
+                        break;
+                    case SortFacetValuesBy.ALPHA:
+                        if (stringBuilder.Length > 0)
+                            stringBuilder += '&';
+                        stringBuilder += "sortFacetValuesBy=alpha";
+                        break;
+                }
+            }
             if (userToken != null)
             {
                 if (stringBuilder.Length > 0)
@@ -1491,6 +1532,7 @@ namespace Algolia.Search
         private int? minProximity;
         private string optionalWords;
         private QueryType? queryType;
+        private SortFacetValuesBy? sortFacetValuesBy;
         private RemoveWordsIfNoResult? removeWordsIfNoResult;
         private IEnumerable<string> facets;
         private string facetFilters;

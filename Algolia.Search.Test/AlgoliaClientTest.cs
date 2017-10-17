@@ -687,6 +687,7 @@ namespace Algolia.Search.Test
 			query.SetTagFilters("people");
 			query.SetNumericFilters("Age>=42");
 			query.SetQueryType(Query.QueryType.PREFIX_ALL);
+			query.SetSortFacetValuesBy(Query.SortFacetValuesBy.ALPHA);
 			query.AddCustomParameter("facets", "_tags");
 			var res = _index.Search(query);
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
@@ -735,6 +736,7 @@ namespace Algolia.Search.Test
 			query.SetTagFilters("people");
 			query.SetNumericFilters("Age>=42");
 			query.SetQueryType(Query.QueryType.PREFIX_NONE);
+			 query.SetSortFacetValuesBy(Query.SortFacetValuesBy.ALPHA);
 			query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.LAST_WORDS);
 			var res = _index.Search(query);
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
