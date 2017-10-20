@@ -50,10 +50,9 @@ namespace Algolia.Search.Iterators
 
         private void LoadNextPage()
         {
+            _answer = _index.SearchRulesAsync(null, _ruleQuery).GetAwaiter().GetResult();
             _pos = 0;
-            RuleQuery ruleQuery = new RuleQuery();
             _ruleQuery.Page += 1;
-            _answer = _index.SearchRulesAsync(null, ruleQuery).GetAwaiter().GetResult();
         }
 
         public JObject Current
@@ -68,19 +67,21 @@ namespace Algolia.Search.Iterators
 
         public bool MoveNext()
         {
-            if (_pos < ((JArray)_answer["hits"]).Count())
+            while (true)
             {
-                _rule = ((JArray)_answer["hits"])[_pos++].ToObject<JObject>();
-                _rule.Remove("_highlightResult");
-                return true;
+                if (_pos < ((JArray)_answer["hits"]).Count())
+                {
+                    _rule = ((JArray)_answer["hits"])[_pos++].ToObject<JObject>();
+                    _rule.Remove("_highlightResult");
+                    return true;
+                }
+                if (((JArray)_answer["hits"]).Count != 0)
+                {
+                    LoadNextPage();
+                    continue;
+                }
+                return false;
             }
-            if (_answer["page"] != null && _answer["nbPages"] != null && 
-                _answer["page"].ToObject<int>() + 1 < _answer["nbPages"].ToObject<int>())
-            {
-                LoadNextPage();
-                return true;
-            }
-            return false;
             
         }
 
