@@ -12,6 +12,8 @@ using System.Net.Http;
 using System.Net;
 using Newtonsoft.Json;
 using Xunit.Sdk;
+using Algolia.Search.Iterators;
+using System.Linq;
 
 namespace Algolia.Search.Test
 {
@@ -1168,6 +1170,56 @@ namespace Algolia.Search.Test
 			var rules = _index.SearchRules();
 			Assert.Equal(2, (int) rules["nbHits"]);
 		}
-	}
+
+        [Fact]
+        public void TestExtractRules_ContainsManyPages()
+        {
+            ClearTest();
+            var rulesToPush = new List<JObject>();
+            for (int i = 0; i < 10; i++)
+            {
+                rulesToPush.Add(generateRuleStub("id_" + i));
+            }
+            var task = _index.BatchRules(rulesToPush);
+            _index.WaitTask(task["taskID"].ToString());
+
+            var rulesIterator = new RulesIterator(_index, 3);
+
+            var rulesFetched = rulesIterator.ToList();
+            Assert.Equal(10, rulesFetched.Count);
+            Assert.Contains("id_", rulesFetched[0]["objectID"].ToObject<String>());
+            Assert.Null(rulesFetched[0]["_highlightResult"]);
+        }
+
+        [Fact]
+        public void TestExtractRules_ContainsOnePage()
+        {
+            ClearTest();
+            var rulesToPush = new List<JObject>();
+            for (int i = 0; i < 10; i++)
+            {
+                rulesToPush.Add(generateRuleStub("id_" + i));
+            }
+            var task = _index.BatchRules(rulesToPush);
+            _index.WaitTask(task["taskID"].ToString());
+
+            var rulesIterator = new RulesIterator(_index, 1000);
+
+            var rulesFetched = rulesIterator.ToList();
+            Assert.Equal(10, rulesFetched.Count);
+            Assert.Contains("id_", rulesFetched[0]["objectID"].ToObject<String>());
+            Assert.Null(rulesFetched[0]["_highlightResult"]);
+        }
+
+        [Fact]
+        public void TestExtractRules_NoRules()
+        {
+            ClearTest();
+
+            var rulesIterator = new RulesIterator(_index, 3);
+            var rulesFetched = rulesIterator.ToList();
+            Assert.Equal(rulesFetched.Count, 0);
+        }
+    }
 }
 #pragma warning restore 0618

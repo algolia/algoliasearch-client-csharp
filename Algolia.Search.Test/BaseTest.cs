@@ -36,8 +36,9 @@ namespace Algolia.Search.Test
 			try
 			{
 				_index.ClearIndex();
-				_index.ClearRules();
-			}
+				var task = _index.ClearRules();
+                _index.WaitTask(task["taskID"].ToString());
+            }
 			catch (Exception)
 			{
 				// Index not found
