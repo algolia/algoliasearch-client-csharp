@@ -1198,7 +1198,81 @@ namespace Algolia.Search.Test
 
             var rulesIterator = new RulesIterator(_index, 3);
             var rulesFetched = rulesIterator.ToList();
-            Assert.Equal(rulesFetched.Count, 0);
+            Assert.Equal(0, rulesFetched.Count);
+        }
+
+        [Fact]
+        public void TestExtractSynonyms_ContainsManyPages()
+        {
+            ClearTest();
+            var synonymsToPush = new List<JObject>();
+            for (int i = 0; i < 10; i++)
+            {
+                var id = "synonymid_" + i;
+                var synonym = JObject.Parse(
+                        @"{
+                            ""objectID"":""" + id + @""",
+                            ""type"": ""synonym"",
+                            ""synonyms"": [
+                            ""car"",
+                            ""vehicle"",
+                            ""auto""
+                            ]
+                        }"
+                    );
+                synonymsToPush.Add(synonym);
+            }
+            var task = _index.BatchSynonyms(synonymsToPush);
+            _index.WaitTask(task["taskID"].ToString());
+
+            var synonymsIterator = new SynonymsIterator(_index, 3);
+
+            var synonymsFetched = synonymsIterator.ToList();
+            Assert.Equal(10, synonymsFetched.Count);
+            Assert.Contains("synonymid_", synonymsFetched[0]["objectID"].ToObject<String>());
+            Assert.Null(synonymsFetched[0]["_highlightResult"]);
+        }
+
+        [Fact]
+        public void TestExtractSynonyms_ContainsOnePage()
+        {
+            ClearTest();
+            var synonymsToPush = new List<JObject>();
+            for (int i = 0; i < 10; i++)
+            {
+                var id = "synonymid_" + i;
+                var synonym = JObject.Parse(
+                        @"{
+                            ""objectID"":""" + id + @""",
+                            ""type"": ""synonym"",
+                            ""synonyms"": [
+                            ""car"",
+                            ""vehicle"",
+                            ""auto""
+                            ]
+                        }"
+                    );
+                synonymsToPush.Add(synonym);
+            }
+            var task = _index.BatchSynonyms(synonymsToPush);
+            _index.WaitTask(task["taskID"].ToString());
+
+            var synonymsIterator = new SynonymsIterator(_index, 1000);
+
+            var synonymsFetched = synonymsIterator.ToList();
+            Assert.Equal(10, synonymsFetched.Count);
+            Assert.Contains("synonymid_", synonymsFetched[0]["objectID"].ToObject<String>());
+            Assert.Null(synonymsFetched[0]["_highlightResult"]);
+        }
+
+        [Fact]
+        public void TestExtractSynonyms_NoRules()
+        {
+            ClearTest();
+
+            var synonymIterator = new SynonymsIterator(_index, 3);
+            var synonymFetched = synonymIterator.ToList();
+            Assert.Equal(0, synonymFetched.Count);
         }
     }
 }

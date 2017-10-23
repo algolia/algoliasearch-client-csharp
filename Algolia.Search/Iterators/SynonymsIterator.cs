@@ -22,12 +22,12 @@ namespace Algolia.Search.Iterators
 
         public IEnumerator<JObject> GetEnumerator()
         {
-            return new RulesEnumerator(_index, _hitsPerPage);
+            return new SynonymsEnumerator(_index, _hitsPerPage);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new RulesEnumerator(_index, _hitsPerPage);
+            return new SynonymsEnumerator(_index, _hitsPerPage);
         }
     }
 
@@ -50,10 +50,10 @@ namespace Algolia.Search.Iterators
 
         private void LoadNextPage()
         {
-            _pos = 0;
-            _page += 1;
             IEnumerable<Index.SynonymType> synonymType = null;
             _answer = _index.SearchSynonymsAsync(query: "", types: synonymType, page: _page, hitsPerPage: _hitsPerPage).GetAwaiter().GetResult();
+            _pos = 0;
+            _page += 1;
         }
 
         public JObject Current
@@ -68,19 +68,22 @@ namespace Algolia.Search.Iterators
 
         public bool MoveNext()
         {
-            if (_pos < ((JArray)_answer["hits"]).Count())
+            while (true)
             {
-                _synonym = ((JArray)_answer["hits"])[_pos++].ToObject<JObject>();
-                _synonym.Remove("_highlightResult");
-                return true;
+                if (_pos < ((JArray)_answer["hits"]).Count())
+                {
+                    _synonym = ((JArray)_answer["hits"])[_pos++].ToObject<JObject>();
+                    _synonym.Remove("_highlightResult");
+                    return true;
+                }
+                if (((JArray)_answer["hits"]).Count != 0)
+                {
+                    LoadNextPage();
+                    continue;
+                }
+                return false;
             }
-            if (_answer["nbPages"] != null && _answer["page"] != null &&
-                _answer["page"].ToObject<int>() + 1 < _answer["nbPages"].ToObject<int>())
-            {
-                LoadNextPage();
-                return true;
-            }
-            return false;
+
         }
 
         public void Reset()
