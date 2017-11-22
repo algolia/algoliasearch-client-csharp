@@ -166,6 +166,7 @@ namespace Algolia.Search
             q.insideBoundingBox = insideBoundingBox;
             q.insidePolygon = insidePolygon;
             q.maxValuesPerFacets = maxValuesPerFacets;
+            q.maxFacetHits = maxFacetHits;
             q.minWordSizeForApprox1 = minWordSizeForApprox1;
             q.minWordSizeForApprox2 = minWordSizeForApprox2;
             q.numerics = numerics;
@@ -832,6 +833,17 @@ namespace Algolia.Search
         }
 
         /// <summary>
+        /// Set the max number of facet hits to return during a search for facet values.
+        /// </summary>
+        /// <param name="numbers">The number to limit it by.</param>
+        /// <returns></returns>
+        public Query SetMaxFacetHits(int numbers)
+        {
+            this.maxFacetHits = numbers;
+            return this;
+        }
+
+        /// <summary>
         /// List of attributes you want to use for textual search (must be a subset of the searchableAttributes index setting).
         /// </summary>
         /// <param name="attributes">Attributes are separated with a comma (for example @"name,address"). You can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")). By default, all attributes specified in searchableAttributes settings are used to search.</param>
@@ -1061,6 +1073,13 @@ namespace Algolia.Search
                     stringBuilder += '&';
                 stringBuilder += "maxValuesPerFacet=";
                 stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(maxValuesPerFacets.Value);
+            }
+            if (maxFacetHits.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "maxFacetHits=";
+                stringBuilder += Newtonsoft.Json.JsonConvert.SerializeObject(maxFacetHits.Value);
             }
             if (attributesToSnippet != null)
             {
@@ -1537,6 +1556,7 @@ namespace Algolia.Search
         private IEnumerable<string> facets;
         private string facetFilters;
         private int? maxValuesPerFacets;
+        private int? maxFacetHits;
         private string restrictSearchableAttributes;
         private string userToken;
         private IEnumerable<string> restrictIndices;
