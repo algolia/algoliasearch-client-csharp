@@ -8,7 +8,7 @@
         <PackageId>Algolia.Search</PackageId>
         <PackageTags>Algolia</PackageTags>
         <PackageReleaseNotes></PackageReleaseNotes>
-        <PackageIconUrl>https://www.algolia.com/download/logo.png</PackageIconUrl>
+        <PackageIconUrl>https://www.algolia.com/static_assets/images/press/downloads/algolia-mark-blue.png</PackageIconUrl>
         <PackageProjectUrl>https://github.com/algolia/algoliasearch-client-csharp</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/algolia/algoliasearch-client-csharp/blob/master/LICENSE.TXT</PackageLicenseUrl>
         <RepositoryType>git</RepositoryType>
