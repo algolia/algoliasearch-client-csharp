@@ -1,6 +1,10 @@
 Changelog
 =========
 
+4.2.1 (2017-12-7)
+- Add optional `scopes` parameter to `CopyIndex` method to scope the copy to settings/rules/synonyms.
+- Add support for .Net 4.5 and 4.6.1.
+
 4.2.0 (2017-10-23)
 - Add new `deleteBy` method that hits the deleteBy endpoints.
 - Add `sortFacetValuesBy` query parameter.
