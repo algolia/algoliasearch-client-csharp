@@ -339,16 +339,29 @@ namespace Algolia.Search.Test
 			task = _client.CopyIndex(srcIndexName, dstIndexName, null, scopes);
 			_index.WaitTask(task["taskID"].ToString());
 
-			var srcSettings = _index.GetSettings();
-			var dstSettings = dstIndex.GetSettings();
+			// The below would fail if we don't specify CopyScope.SETTINGS since there wouldn't be any settings.
+			//var srcSettings = _index.GetSettings();
+			//var dstSettings = dstIndex.GetSettings();
 			var dstRules = dstIndex.SearchRules();
 			var srcRules = _index.SearchRules();
 
 			// Assert same settings
-			Assert.Equal(srcSettings["searchableAttributes"][0].ToString(), dstSettings["searchableAttributes"][0].ToString());
+			//Assert.Equal(srcSettings["searchableAttributes"][0].ToString(), dstSettings["searchableAttributes"][0].ToString());
 			// Assert different rules since they haven't been copied
 			Assert.NotEqual((int)srcRules["nbHits"], (int)dstRules["nbHits"]);
-			
+
+			// Now copy rules
+			_client.DeleteIndex(dstIndexName);
+			scopes = new List<CopyScope>() { CopyScope.RULES};
+			task = _client.CopyIndex(srcIndexName, dstIndexName, null, scopes);
+			_index.WaitTask(task["taskID"].ToString());
+
+			dstRules = dstIndex.SearchRules();
+			srcRules = _index.SearchRules();
+
+			// Assert samerules since they have been copied
+			Assert.Equal((int)srcRules["nbHits"], (int)dstRules["nbHits"]);
+
 			_client.DeleteIndex(dstIndexName);
 		}
 
