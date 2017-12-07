@@ -317,6 +317,42 @@ namespace Algolia.Search.Test
 		}
 
 		[Fact]
+		public void TestScopedCopyIndex()
+		{
+			var dstIndexName = GetSafeName("àlgol?à-csharp2");
+			var srcIndexName = GetSafeName("àlgol?à-csharp");
+			ClearTest();
+			_client.DeleteIndex(dstIndexName);
+			var dstIndex = _client.InitIndex(GetSafeName(dstIndexName));
+
+			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""1""}"));
+			_index.WaitTask(task["taskID"].ToString());
+			task = _index.SetSettings(JObject.Parse(@"{""searchableAttributes"": [""name""]}"));
+			_index.WaitTask(task["taskID"].ToString());
+
+			string ruleId = "ruleID";
+			JObject rule = generateRuleStub(ruleId);
+			task = _index.SaveRule(rule);
+			_index.WaitTask(task["taskID"].ToString());
+
+			List<CopyScope> scopes = new List<CopyScope>() { CopyScope.SETTINGS };
+			task = _client.CopyIndex(srcIndexName, dstIndexName, null, scopes);
+			_index.WaitTask(task["taskID"].ToString());
+
+			var srcSettings = _index.GetSettings();
+			var dstSettings = dstIndex.GetSettings();
+			var dstRules = dstIndex.SearchRules();
+			var srcRules = _index.SearchRules();
+
+			// Assert same settings
+			Assert.Equal(srcSettings["searchableAttributes"][0].ToString(), dstSettings["searchableAttributes"][0].ToString());
+			// Assert different rules since they haven't been copied
+			Assert.NotEqual((int)srcRules["nbHits"], (int)dstRules["nbHits"]);
+			
+			_client.DeleteIndex(dstIndexName);
+		}
+
+		[Fact]
 		public void TestCopyIndex()
 		{
 			var index = _client.InitIndex(GetSafeName("àlgol?à-csharp2"));
