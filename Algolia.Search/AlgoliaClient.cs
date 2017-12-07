@@ -340,13 +340,33 @@ namespace Algolia.Search
         /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
         /// <param name="requestOptions"></param>
         /// <param name="token"></param>
-        public Task<JObject> CopyIndexAsync(string srcIndexName, string dstIndexName, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
+        /// <param name="scopes">the scope of the copy, as a list.</param>
+        public Task<JObject> CopyIndexAsync(string srcIndexName, string dstIndexName, RequestOptions requestOptions, CancellationToken token = default(CancellationToken), List<CopyScope> scopes = null)
         {
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "copy";
             operation["destination"] = dstIndexName;
+
+            if (scopes != null)
+            {
+                operation["scope"] = scopes;
+            }
+
             return ExecuteRequest(callType.Write, "POST", string.Format("/1/indexes/{0}/operation", WebUtility.UrlEncode(srcIndexName)), operation, token, requestOptions);
         }
+
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
+        /// </summary>
+        /// <param name="srcIndexName">The name of index to copy.</param>
+        /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
+        /// <param name="requestOptions"></param>
+        /// <param name="scopes">the scope of the copy, as a list.</param>
+        public JObject CopyIndex(string srcIndexName, string dstIndexName, RequestOptions requestOptions, List<CopyScope> scopes = null)
+        {
+            return CopyIndexAsync(srcIndexName, dstIndexName, requestOptions, default(CancellationToken), scopes).GetAwaiter().GetResult();
+        }
+
         /// <summary>
         /// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
         /// </summary>
@@ -1173,7 +1193,7 @@ namespace Algolia.Search
 	                            if (content != null)
 	                            {
 		                            httpRequestMessage.Content =
-			                            new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
+			                            new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content, new Newtonsoft.Json.Converters.StringEnumConverter()));
 	                            }
 	                            break;
                             case "PUT":
@@ -1181,7 +1201,7 @@ namespace Algolia.Search
 	                            if (content != null)
 	                            {
 		                            httpRequestMessage.Content =
-			                            new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content));
+			                            new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content, new Newtonsoft.Json.Converters.StringEnumConverter()));
 	                            }
 	                            break;
                             case "DELETE":
