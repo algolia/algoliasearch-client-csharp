@@ -350,18 +350,6 @@ namespace Algolia.Search.Test
 			// Assert different rules since they haven't been copied
 			Assert.NotEqual((int)srcRules["nbHits"], (int)dstRules["nbHits"]);
 
-			// Now copy rules
-			_client.DeleteIndex(dstIndexName);
-			scopes = new List<CopyScope>() { CopyScope.RULES};
-			task = _client.CopyIndex(srcIndexName, dstIndexName, null, scopes);
-			_index.WaitTask(task["taskID"].ToString());
-
-			dstRules = dstIndex.SearchRules();
-			srcRules = _index.SearchRules();
-
-			// Assert samerules since they have been copied
-			Assert.Equal((int)srcRules["nbHits"], (int)dstRules["nbHits"]);
-
 			_client.DeleteIndex(dstIndexName);
 		}
 
