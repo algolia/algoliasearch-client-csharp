@@ -660,6 +660,7 @@ namespace Algolia.Search
             Index index;
             Query query;
             string cursor;
+			RequestOptions requestOptions;
 
             public IndexIterator(Index ind, Query q, string cursor)
             {
@@ -668,14 +669,19 @@ namespace Algolia.Search
                 this.cursor = cursor;
             }
 
-            public IEnumerator<JObject> GetEnumerator()
+			public IndexIterator(Index ind, Query q, string cursor, RequestOptions reqOpt) : this(ind, q, cursor)
+			{
+				this.requestOptions = reqOpt;
+			}
+
+			public IEnumerator<JObject> GetEnumerator()
             {
-                return new IndexEnumerator(index, query, cursor);
+                return new IndexEnumerator(index, query, cursor, requestOptions);
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return new IndexEnumerator(index, query, cursor);
+                return new IndexEnumerator(index, query, cursor, requestOptions);
             }
         }
 
@@ -687,6 +693,7 @@ namespace Algolia.Search
             string cursor;
             Query query;
             JObject hit;
+			RequestOptions requestOptions;
 
             public IndexEnumerator(Index ind, Query q, string cursor)
             {
@@ -696,10 +703,19 @@ namespace Algolia.Search
                 Reset();
             }
 
-            private void LoadNextPage() {
+			public IndexEnumerator(Index ind, Query q, string cursor, RequestOptions reqOpt)
+			{
+				this.index = ind;
+				this.query = q;
+				this.cursor = cursor;
+				this.requestOptions = reqOpt;
+				Reset();
+			}
+
+			private void LoadNextPage() {
                 pos = 0;
                 string cursor = GetCursor();
-                answer = index.BrowseFromAsync(query, cursor, null).GetAwaiter().GetResult();
+                answer = index.BrowseFromAsync(query, cursor, requestOptions).GetAwaiter().GetResult();
             }
 
             public string GetCursor()
@@ -756,13 +772,22 @@ namespace Algolia.Search
         /// <param name="q">The query parameters for the browse.</param>
         public IndexIterator BrowseAll(Query q)
         {
-            return new IndexIterator(this, q, "");
+            return BrowseAll(q, null);
         }
 
-        /// <summary>
-        /// Delete the index contents without removing settings and index specific API keys.
-        /// </summary>
-        public Task<JObject> ClearIndexAsync(RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
+		/// <summary>
+		///  Browse all index contents.
+		/// </summary>
+		/// <param name="q">The query parameters for the browse.</param>
+		public IndexIterator BrowseAll(Query q, RequestOptions requestOptions)
+		{
+			return new IndexIterator(this, q, "", requestOptions);
+		}
+
+		/// <summary>
+		/// Delete the index contents without removing settings and index specific API keys.
+		/// </summary>
+		public Task<JObject> ClearIndexAsync(RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
         {
             return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/clear", _urlIndexName), null, token, requestOptions);
         }
