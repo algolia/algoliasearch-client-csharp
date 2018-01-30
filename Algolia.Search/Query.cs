@@ -161,6 +161,7 @@ namespace Algolia.Search
             q.getRankingInfo = getRankingInfo;
             q.hitsPerPage = hitsPerPage;
             q.offset = offset;
+			q.validUntil = validUntil;
             q.length = length;
             q.ignorePlural = ignorePlural;
             q.insideBoundingBox = insideBoundingBox;
@@ -512,10 +513,19 @@ namespace Algolia.Search
             return this;
         }
 
-        /// <summary>
-        /// Set the length for the pagination.
-        /// </summary>
-        public Query SetLength(int? length)
+		/// <summary>
+		/// Unix timestamp used to define the expiration date of the API key.
+		/// </summary>
+		public Query SetValidUntil(int? validUntil)
+		{
+			this.validUntil= validUntil;
+			return this;
+		}
+
+		/// <summary>
+		/// Set the length for the pagination.
+		/// </summary>
+		public Query SetLength(int? length)
         {
             this.length = length;
             return this;
@@ -1300,7 +1310,14 @@ namespace Algolia.Search
                 stringBuilder += "offset=";
                 stringBuilder += offset.Value.ToString();
             }
-            if (tags != null) {
+			if (validUntil.HasValue)
+			{
+				if (stringBuilder.Length > 0)
+					stringBuilder += '&';
+				stringBuilder += "validUntil=";
+				stringBuilder += validUntil.Value.ToString();
+			}
+			if (tags != null) {
                 if (stringBuilder.Length > 0)
                     stringBuilder += '&';
                 stringBuilder += "tagFilters=";
@@ -1535,6 +1552,7 @@ namespace Algolia.Search
         private int? page;
         private int? hitsPerPage;
         private int? offset;
+		private int? validUntil;
         private int? length;
         private string filters;
         private string tags;
