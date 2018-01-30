@@ -574,7 +574,7 @@ namespace Algolia.Search
 		/// </summary>
 		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
 		[Obsolete("GetApiKeyACL is deprecated, please use GetApiKey instead.")]
-		public JObject GetApiKeyACL(string key, RequestOptions requestOptions = null)
+		public JObject GetApiKeyACL(string key, RequestOptions requestOptions)
         {
             return GetApiKeyACLAsync(key, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
         }
@@ -583,7 +583,7 @@ namespace Algolia.Search
 		/// Synchronously call <see cref="AlgoliaClient.GetApiKeyAsync"/> 
 		/// </summary>
 		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-		public JObject GetApiKey(string key, RequestOptions requestOptions)
+		public JObject GetApiKey(string key, RequestOptions requestOptions = null)
 		{
 			return GetApiKeyAsync(key, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
 		}

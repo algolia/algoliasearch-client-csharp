@@ -884,35 +884,53 @@ namespace Algolia.Search
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token, requestOptions);
         }
 
-        /// <summary>
-        /// Get ACL of an api key associated with this index.
-        /// </summary>
-        public Task<JObject> GetApiKeyACLAsync(string key, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
+		/// <summary>
+		/// Get ACL of an api key associated with this index.
+		/// </summary>
+		[Obsolete("GetApiKeyACLAsync is deprecated, please use GetApiKeyAsync instead.")]
+		public Task<JObject> GetApiKeyACLAsync(string key, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
         {
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token, requestOptions);
         }
 
-        /// <summary>
-        /// Synchronously call <see cref="Index.GetUserKeyACLAsync"/>.
-        /// </summary>
-        [Obsolete("GetUserKeyACL is deprecated, please use GetApiKeyACL instead.")]
+		/// <summary>
+		/// Get ACL of an api key associated with this index.
+		/// </summary>
+		public Task<JObject> GetApiKeyAsync(string key, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="Index.GetUserKeyACLAsync"/>.
+		/// </summary>
+		[Obsolete("GetUserKeyACL is deprecated, please use GetApiKeyACL instead.")]
         public JObject GetUserKeyACL(string key, RequestOptions requestOptions)
         {
             return GetApiKeyACLAsync(key, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
         }
 
-        /// <summary>
-        /// Synchronously call <see cref="Index.GetApiKeyACLAsync"/>.
-        /// </summary>
-        public JObject GetApiKeyACL(string key, RequestOptions requestOptions)
+		/// <summary>
+		/// Synchronously call <see cref="Index.GetApiKeyACLAsync"/>.
+		/// </summary>
+		[Obsolete("GetApiKeyACL is deprecated, please use GetApiKey instead.")]
+		public JObject GetApiKeyACL(string key, RequestOptions requestOptions)
         {
             return GetApiKeyACLAsync(key, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
         }
 
-        /// <summary>
-        /// Delete an existing user key associated with this index.
-        /// </summary>
-        [Obsolete("DeleteUserKeyAsync is deprecated, please use DeleteApiKeyAsync instead.")]
+		/// <summary>
+		/// Synchronously call <see cref="Index.GetApiKeyAsync"/>.
+		/// </summary>
+		public JObject GetApiKey(string key, RequestOptions requestOptions = null)
+		{
+			return GetApiKeyAsync(key, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
+		}
+
+		/// <summary>
+		/// Delete an existing user key associated with this index.
+		/// </summary>
+		[Obsolete("DeleteUserKeyAsync is deprecated, please use DeleteApiKeyAsync instead.")]
         public Task<JObject> DeleteUserKeyAsync(string key, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
         {
             return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/keys/{1}", _urlIndexName, key), null, token, requestOptions);
