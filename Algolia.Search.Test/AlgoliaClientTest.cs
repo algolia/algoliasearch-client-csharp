@@ -573,7 +573,7 @@ namespace Algolia.Search.Test
 			var getKey = _client.GetUserKeyACL(key["key"].ToString());
 			Assert.Equal(key["key"], getKey["value"]);
 
-			getKey = _client.GetApiKeyACL(key["key"].ToString());
+			getKey = _client.GetApiKey(key["key"].ToString());
 			Assert.Equal(key["key"], getKey["value"]);
 
 			var keys = _client.ListUserKeys();
@@ -588,7 +588,7 @@ namespace Algolia.Search.Test
 			getKey = _client.GetUserKeyACL(key["key"].ToString());
 			Assert.Equal((string)getKey["acl"][0], "addObject");
 
-			getKey = _client.GetApiKeyACL(key["key"].ToString());
+			getKey = _client.GetApiKey(key["key"].ToString());
 			Assert.Equal((string)getKey["acl"][0], "addObject");
 
 			_client.DeleteApiKey(key["key"].ToString());
@@ -617,7 +617,7 @@ namespace Algolia.Search.Test
 			var getKey = _index.GetUserKeyACL(key["key"].ToString());
 			Assert.Equal(key["key"], getKey["value"]);
 
-			getKey = _index.GetApiKeyACL(key["key"].ToString());
+			getKey = _index.GetApiKey(key["key"].ToString());
 			Assert.Equal(key["key"], getKey["value"]);
 
 			var keys = _index.ListUserKeys();
@@ -632,7 +632,7 @@ namespace Algolia.Search.Test
 			getKey = _index.GetUserKeyACL(key["key"].ToString());
 			Assert.Equal((string)getKey["acl"][0], "addObject");
 
-			getKey = _index.GetApiKeyACL(key["key"].ToString());
+			getKey = _index.GetApiKey(key["key"].ToString());
 			Assert.Equal((string)getKey["acl"][0], "addObject");
 
 			_index.DeleteApiKey(key["key"].ToString());
@@ -972,7 +972,7 @@ namespace Algolia.Search.Test
 			{
 				try
 				{
-					var key = index.GetApiKeyACL(newIndexKey["key"].ToString());
+					var key = index.GetApiKey(newIndexKey["key"].ToString());
 					if (isUpdate && key["acl"][0].ToString() != updatedACL)
 					{
 						throw new Exception();
@@ -993,7 +993,7 @@ namespace Algolia.Search.Test
 			{
 				try
 				{
-					var key = index.GetApiKeyACL(newIndexKey["key"].ToString());
+					var key = index.GetApiKey(newIndexKey["key"].ToString());
 					Thread.Sleep(1000);
 				}
 				catch (Exception)

@@ -534,45 +534,65 @@ namespace Algolia.Search
         /// Get ACL for an existing user key.
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-        [Obsolete("GetUserKeyACLAsync is deprecated, please use GetApiKeyACLAsync instead.")]
+        [Obsolete("GetUserKeyACLAsync is deprecated, please use GetApiKeyAsync instead.")]
         public Task<JObject> GetUserKeyACLAsync(string key, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
         {
             return ExecuteRequest(callType.Read, "GET", "/1/keys/" + key, null, token, requestOptions);
         }
 
-        /// <summary>
-        /// Get ACL for an existing api key.
-        /// </summary>
-        /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-        public Task<JObject> GetApiKeyACLAsync(string key, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
+		/// <summary>
+		/// Get ACL for an existing api key.
+		/// </summary>
+		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
+		[Obsolete("GetApiKeyACLAsync is deprecated, please use GetApiKeyAsync instead.")]
+		public Task<JObject> GetApiKeyACLAsync(string key, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
         {
             return ExecuteRequest(callType.Read, "GET", "/1/keys/" + key, null, token, requestOptions);
         }
 
-        /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
-        /// </summary>
-        /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-        [Obsolete("GetUserKeyACL is deprecated, please use GetApiKeyACL instead.")]
+		/// <summary>
+		/// Get ACL for an existing user key.
+		/// </summary>
+		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
+		public Task<JObject> GetApiKeyAsync(string key, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+			return ExecuteRequest(callType.Read, "GET", "/1/keys/" + key, null, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
+		/// </summary>
+		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
+		[Obsolete("GetUserKeyACL is deprecated, please use GetApiKey instead.")]
         public JObject GetUserKeyACL(string key, RequestOptions requestOptions)
         {
             return GetApiKeyACLAsync(key, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
         }
 
-        /// <summary>
-        /// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
-        /// </summary>
-        /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-        public JObject GetApiKeyACL(string key, RequestOptions requestOptions)
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
+		/// </summary>
+		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
+		[Obsolete("GetApiKeyACL is deprecated, please use GetApiKey instead.")]
+		public JObject GetApiKeyACL(string key, RequestOptions requestOptions = null)
         {
             return GetApiKeyACLAsync(key, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
         }
 
-        /// <summary>
-        /// Delete an existing user key.
-        /// </summary>
-        /// <returns>Returns an object with a "deleteAt" attribute.</returns>
-        [Obsolete("DeleteUserKeyAsync is deprecated, please use DeleteApiKeyAsync instead.")]
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.GetApiKeyAsync"/> 
+		/// </summary>
+		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
+		public JObject GetApiKey(string key, RequestOptions requestOptions)
+		{
+			return GetApiKeyAsync(key, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
+		}
+
+		/// <summary>
+		/// Delete an existing user key.
+		/// </summary>
+		/// <returns>Returns an object with a "deleteAt" attribute.</returns>
+		[Obsolete("DeleteUserKeyAsync is deprecated, please use DeleteApiKeyAsync instead.")]
         public Task<JObject> DeleteUserKeyAsync(string key, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
         {
             return ExecuteRequest(callType.Write, "DELETE", "/1/keys/" + key, null, token, requestOptions);
@@ -1479,7 +1499,7 @@ namespace Algolia.Search
         /// Get ACL for an existing user key.
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-        [Obsolete("GetUserKeyACLAsync is deprecated, please use GetApiKeyACLAsync instead.")]
+        [Obsolete("GetUserKeyACLAsync is deprecated, please use GetApiKeyAsync instead.")]
         public Task<JObject> GetUserKeyACLAsync(string key, CancellationToken token = default(CancellationToken))
         { return GetUserKeyACLAsync(key, null, token); }
 
@@ -1494,7 +1514,7 @@ namespace Algolia.Search
         /// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
         /// </summary>
         /// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
-        [Obsolete("GetUserKeyACL is deprecated, please use GetApiKeyACL instead.")]
+        [Obsolete("GetUserKeyACL is deprecated, please use GetApiKey instead.")]
         public JObject GetUserKeyACL(string key)
         { return GetUserKeyACL(key, null); }
 
