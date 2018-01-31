@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Test
 {
-    public class BaseTest
-    {
+	public class BaseTest
+	{
 		public static string _testApplicationID = "";
 		public static string _testApiKey = "";
 
 		public AlgoliaClient _client;
 		public Index _index;
-        public IndexHelper<TestModel> _indexHelper;
+		public IndexHelper<TestModel> _indexHelper;
 
-        public BaseTest()
-        {
+		public BaseTest()
+		{
 			_testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
 			_testApplicationID = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
 			_client = new AlgoliaClient(_testApplicationID, _testApiKey);
@@ -21,7 +21,7 @@ namespace Algolia.Search.Test
 			_indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"));
 		}
 
-        public static string GetSafeName(string name)
+		public static string GetSafeName(string name)
 		{
 			if (Environment.GetEnvironmentVariable("APPVEYOR") == null)
 			{
@@ -37,11 +37,11 @@ namespace Algolia.Search.Test
 			{
 				_index.ClearIndex();
 				var clearTask = _index.ClearRules();
-                _index.WaitTask(clearTask["taskID"].ToString());
-                var taskSynonym = _index.ClearSynonyms();
-                _index.WaitTask(taskSynonym["taskID"].ToString());
-            }
-            catch (Exception)
+				_index.WaitTask(clearTask["taskID"].ToString());
+				var taskSynonym = _index.ClearSynonyms();
+				_index.WaitTask(taskSynonym["taskID"].ToString());
+			}
+			catch (Exception)
 			{
 				// Index not found
 			}
