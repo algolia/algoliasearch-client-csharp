@@ -1,4 +1,4 @@
 ﻿{
-  "diagnosticMessages": true,
-  "parallelizeTestCollections": false
+	"diagnosticMessages": true,
+	"parallelizeTestCollections": false
 }

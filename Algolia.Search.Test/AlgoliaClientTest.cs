@@ -18,8 +18,8 @@ using System.Linq;
 namespace Algolia.Search.Test
 {
 #pragma warning disable 0618
-    public class AlgoliaClientTest : BaseTest
-    {
+	public class AlgoliaClientTest : BaseTest
+	{
 		[Fact]
 		public void TaskAddObjects()
 		{
@@ -140,25 +140,25 @@ namespace Algolia.Search.Test
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
 		}
 
-        [Fact]
-        public void TaskDeleteBy()
-        {
-            ClearTest();
-            List<JObject> objs = new List<JObject>();
-            objs.Add(JObject.Parse(@"{""dummy"": 1}"));
-            objs.Add(JObject.Parse(@"{""dummy"": 2}"));
-            objs.Add(JObject.Parse(@"{""dummy"": 3}"));
-            var task = _index.AddObjects(objs);
-            _index.WaitTask(task["taskID"].ToString());
-            var query = new Query();
-            query.SetNumericFilters("dummy <= 2");
-            var task2 = _index.DeleteBy(query);
-            _index.WaitTask(task2["taskID"].ToString());
-            var res = _index.Search(new Query(""));
-            Assert.Equal(1, res["nbHits"].ToObject<int>());
-        }
+		[Fact]
+		public void TaskDeleteBy()
+		{
+			ClearTest();
+			List<JObject> objs = new List<JObject>();
+			objs.Add(JObject.Parse(@"{""dummy"": 1}"));
+			objs.Add(JObject.Parse(@"{""dummy"": 2}"));
+			objs.Add(JObject.Parse(@"{""dummy"": 3}"));
+			var task = _index.AddObjects(objs);
+			_index.WaitTask(task["taskID"].ToString());
+			var query = new Query();
+			query.SetNumericFilters("dummy <= 2");
+			var task2 = _index.DeleteBy(query);
+			_index.WaitTask(task2["taskID"].ToString());
+			var res = _index.Search(new Query(""));
+			Assert.Equal(1, res["nbHits"].ToObject<int>());
+		}
 
-        [Fact]
+		[Fact]
 		public void TestMissingObjectIDPartialUpdateObject()
 		{
 			ClearTest();
@@ -307,10 +307,11 @@ namespace Algolia.Search.Test
 			_index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", ""lastname"":""Barninger"", ""objectID"":""à/go/?à""}"));
 			try
 			{
-                Assert.Throws<Exception>(() => {
+				Assert.Throws<Exception>(() =>
+				{
 					var task = _index.DeleteObject("");
 					_index.WaitTask(task["taskID"].ToString());
-                });
+				});
 			}
 			catch (Exception)
 			{ }
@@ -648,18 +649,18 @@ namespace Algolia.Search.Test
 			var ind = _client.InitIndex("&&");
 			try
 			{
-                Assert.Throws<AlgoliaException>(() => ind.ClearIndex());
+				Assert.Throws<AlgoliaException>(() => ind.ClearIndex());
 			}
 			catch (Exception)
 			{
-                
+
 			}
 		}
 
 		[Fact]
 		public void NetworkIssue()
 		{
-            Assert.Throws<AlgoliaException>(() => new AlgoliaClient(_testApiKey, _testApiKey).ListIndexes());
+			Assert.Throws<AlgoliaException>(() => new AlgoliaClient(_testApiKey, _testApiKey).ListIndexes());
 		}
 
 		[Fact]
@@ -674,7 +675,7 @@ namespace Algolia.Search.Test
 			{ }
 			try
 			{
-                Assert.Throws<AlgoliaException>(() => new AlgoliaClient(_testApplicationID, ""));
+				Assert.Throws<AlgoliaException>(() => new AlgoliaClient(_testApplicationID, ""));
 			}
 			catch (Exception)
 			{ }
@@ -698,10 +699,10 @@ namespace Algolia.Search.Test
 			{ }
 			try
 			{
-                
+
 				var badClient = new AlgoliaClient(_testApplicationID, _testApiKey, _hosts);
 				Assert.Throws<AlgoliaException>(() => badClient.ListIndexes());
-   			}
+			}
 			catch (Exception)
 			{ }
 		}
@@ -756,7 +757,7 @@ namespace Algolia.Search.Test
 		[Fact]
 		public void TestBigQueryNone()
 		{
-            Console.WriteLine(GetSafeName("àlgol?à-csharp"));
+			Console.WriteLine(GetSafeName("àlgol?à-csharp"));
 			ClearTest();
 			_index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie J""
                 , ""Age"":42, ""lastname"":""Barninger"", ""_tags"": ""people""
@@ -794,7 +795,7 @@ namespace Algolia.Search.Test
 			query.SetTagFilters("people");
 			query.SetNumericFilters("Age>=42");
 			query.SetQueryType(Query.QueryType.PREFIX_NONE);
-			 query.SetSortFacetValuesBy(Query.SortFacetValuesBy.ALPHA);
+			query.SetSortFacetValuesBy(Query.SortFacetValuesBy.ALPHA);
 			query.SetRemoveWordsIfNoResult(Query.RemoveWordsIfNoResult.LAST_WORDS);
 			var res = _index.Search(query);
 			Assert.Equal(1, res["nbHits"].ToObject<int>());
@@ -925,9 +926,10 @@ namespace Algolia.Search.Test
 			{
 				_client.ListIndexes();
 				_client = new AlgoliaClient(_testApplicationID, _testApiKey);
-                Assert.Throws<Exception>(() => {
+				Assert.Throws<Exception>(() =>
+				{
 					_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
-                });
+				});
 			}
 			catch (AlgoliaException)
 			{
@@ -939,7 +941,7 @@ namespace Algolia.Search.Test
 			{
 				_client = new AlgoliaClient(_testApplicationID, _testApiKey);
 				_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
-                Assert.Throws<AlgoliaException>(() =>
+				Assert.Throws<AlgoliaException>(() =>
 				{
 					_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
 				});
@@ -1077,7 +1079,7 @@ namespace Algolia.Search.Test
 		{
 			ClearTest();
 
-			var attributesToRetrieve = new List<string> {"firstname"};
+			var attributesToRetrieve = new List<string> { "firstname" };
 			RequestOptions requestOptions = new RequestOptions();
 			requestOptions.SetForwardedFor("ForwardedFor");
 			requestOptions.AddExtraHeader("Header", "headerValue");
@@ -1173,7 +1175,7 @@ namespace Algolia.Search.Test
 			_index.WaitTask(task2["taskID"].ToString());
 
 			var rules = _index.SearchRules();
-			Assert.Equal(2, (int) rules["nbHits"]);
+			Assert.Equal(2, (int)rules["nbHits"]);
 		}
 
 		[Fact]
@@ -1202,73 +1204,73 @@ namespace Algolia.Search.Test
 			string ruleId2 = "ruleID5";
 			JObject rule1 = generateRuleStub(ruleId1);
 			JObject rule2 = generateRuleStub(ruleId2);
-			var task = _index.BatchRules(new List<JObject>() {rule1, rule2});
+			var task = _index.BatchRules(new List<JObject>() { rule1, rule2 });
 			_index.WaitTask(task["taskID"].ToString());
 
 			var rules = _index.SearchRules();
-			Assert.Equal(2, (int) rules["nbHits"]);
+			Assert.Equal(2, (int)rules["nbHits"]);
 		}
 
-        [Fact]
-        public void TestExtractRules_ContainsManyPages()
-        {
-            ClearTest();
-            var rulesToPush = new List<JObject>();
-            for (int i = 0; i < 10; i++)
-            {
-                rulesToPush.Add(generateRuleStub("id_" + i));
-            }
-            var task = _index.BatchRules(rulesToPush);
-            _index.WaitTask(task["taskID"].ToString());
+		[Fact]
+		public void TestExtractRules_ContainsManyPages()
+		{
+			ClearTest();
+			var rulesToPush = new List<JObject>();
+			for (int i = 0; i < 10; i++)
+			{
+				rulesToPush.Add(generateRuleStub("id_" + i));
+			}
+			var task = _index.BatchRules(rulesToPush);
+			_index.WaitTask(task["taskID"].ToString());
 
-            var rulesIterator = new RulesIterator(_index, 3);
+			var rulesIterator = new RulesIterator(_index, 3);
 
-            var rulesFetched = rulesIterator.ToList();
-            Assert.Equal(10, rulesFetched.Count);
-            Assert.Contains("id_", rulesFetched[0]["objectID"].ToObject<String>());
-            Assert.Null(rulesFetched[0]["_highlightResult"]);
-        }
+			var rulesFetched = rulesIterator.ToList();
+			Assert.Equal(10, rulesFetched.Count);
+			Assert.Contains("id_", rulesFetched[0]["objectID"].ToObject<String>());
+			Assert.Null(rulesFetched[0]["_highlightResult"]);
+		}
 
-        [Fact]
-        public void TestExtractRules_ContainsOnePage()
-        {
-            ClearTest();
-            var rulesToPush = new List<JObject>();
-            for (int i = 0; i < 10; i++)
-            {
-                rulesToPush.Add(generateRuleStub("id_" + i));
-            }
-            var task = _index.BatchRules(rulesToPush);
-            _index.WaitTask(task["taskID"].ToString());
+		[Fact]
+		public void TestExtractRules_ContainsOnePage()
+		{
+			ClearTest();
+			var rulesToPush = new List<JObject>();
+			for (int i = 0; i < 10; i++)
+			{
+				rulesToPush.Add(generateRuleStub("id_" + i));
+			}
+			var task = _index.BatchRules(rulesToPush);
+			_index.WaitTask(task["taskID"].ToString());
 
-            var rulesIterator = new RulesIterator(_index, 1000);
+			var rulesIterator = new RulesIterator(_index, 1000);
 
-            var rulesFetched = rulesIterator.ToList();
-            Assert.Equal(10, rulesFetched.Count);
-            Assert.Contains("id_", rulesFetched[0]["objectID"].ToObject<String>());
-            Assert.Null(rulesFetched[0]["_highlightResult"]);
-        }
+			var rulesFetched = rulesIterator.ToList();
+			Assert.Equal(10, rulesFetched.Count);
+			Assert.Contains("id_", rulesFetched[0]["objectID"].ToObject<String>());
+			Assert.Null(rulesFetched[0]["_highlightResult"]);
+		}
 
-        [Fact]
-        public void TestExtractRules_NoRules()
-        {
-            ClearTest();
+		[Fact]
+		public void TestExtractRules_NoRules()
+		{
+			ClearTest();
 
-            var rulesIterator = new RulesIterator(_index, 3);
-            var rulesFetched = rulesIterator.ToList();
-            Assert.Equal(0, rulesFetched.Count);
-        }
+			var rulesIterator = new RulesIterator(_index, 3);
+			var rulesFetched = rulesIterator.ToList();
+			Assert.Equal(0, rulesFetched.Count);
+		}
 
-        [Fact]
-        public void TestExtractSynonyms_ContainsManyPages()
-        {
-            ClearTest();
-            var synonymsToPush = new List<JObject>();
-            for (int i = 0; i < 10; i++)
-            {
-                var id = "synonymid_" + i;
-                var synonym = JObject.Parse(
-                        @"{
+		[Fact]
+		public void TestExtractSynonyms_ContainsManyPages()
+		{
+			ClearTest();
+			var synonymsToPush = new List<JObject>();
+			for (int i = 0; i < 10; i++)
+			{
+				var id = "synonymid_" + i;
+				var synonym = JObject.Parse(
+						@"{
                             ""objectID"":""" + id + @""",
                             ""type"": ""synonym"",
                             ""synonyms"": [
@@ -1277,30 +1279,30 @@ namespace Algolia.Search.Test
                             ""auto""
                             ]
                         }"
-                    );
-                synonymsToPush.Add(synonym);
-            }
-            var task = _index.BatchSynonyms(synonymsToPush);
-            _index.WaitTask(task["taskID"].ToString());
+					);
+				synonymsToPush.Add(synonym);
+			}
+			var task = _index.BatchSynonyms(synonymsToPush);
+			_index.WaitTask(task["taskID"].ToString());
 
-            var synonymsIterator = new SynonymsIterator(_index, 3);
+			var synonymsIterator = new SynonymsIterator(_index, 3);
 
-            var synonymsFetched = synonymsIterator.ToList();
-            Assert.Equal(10, synonymsFetched.Count);
-            Assert.Contains("synonymid_", synonymsFetched[0]["objectID"].ToObject<String>());
-            Assert.Null(synonymsFetched[0]["_highlightResult"]);
-        }
+			var synonymsFetched = synonymsIterator.ToList();
+			Assert.Equal(10, synonymsFetched.Count);
+			Assert.Contains("synonymid_", synonymsFetched[0]["objectID"].ToObject<String>());
+			Assert.Null(synonymsFetched[0]["_highlightResult"]);
+		}
 
-        [Fact]
-        public void TestExtractSynonyms_ContainsOnePage()
-        {
-            ClearTest();
-            var synonymsToPush = new List<JObject>();
-            for (int i = 0; i < 10; i++)
-            {
-                var id = "synonymid_" + i;
-                var synonym = JObject.Parse(
-                        @"{
+		[Fact]
+		public void TestExtractSynonyms_ContainsOnePage()
+		{
+			ClearTest();
+			var synonymsToPush = new List<JObject>();
+			for (int i = 0; i < 10; i++)
+			{
+				var id = "synonymid_" + i;
+				var synonym = JObject.Parse(
+						@"{
                             ""objectID"":""" + id + @""",
                             ""type"": ""synonym"",
                             ""synonyms"": [
@@ -1309,29 +1311,29 @@ namespace Algolia.Search.Test
                             ""auto""
                             ]
                         }"
-                    );
-                synonymsToPush.Add(synonym);
-            }
-            var task = _index.BatchSynonyms(synonymsToPush);
-            _index.WaitTask(task["taskID"].ToString());
+					);
+				synonymsToPush.Add(synonym);
+			}
+			var task = _index.BatchSynonyms(synonymsToPush);
+			_index.WaitTask(task["taskID"].ToString());
 
-            var synonymsIterator = new SynonymsIterator(_index, 1000);
+			var synonymsIterator = new SynonymsIterator(_index, 1000);
 
-            var synonymsFetched = synonymsIterator.ToList();
-            Assert.Equal(10, synonymsFetched.Count);
-            Assert.Contains("synonymid_", synonymsFetched[0]["objectID"].ToObject<String>());
-            Assert.Null(synonymsFetched[0]["_highlightResult"]);
-        }
+			var synonymsFetched = synonymsIterator.ToList();
+			Assert.Equal(10, synonymsFetched.Count);
+			Assert.Contains("synonymid_", synonymsFetched[0]["objectID"].ToObject<String>());
+			Assert.Null(synonymsFetched[0]["_highlightResult"]);
+		}
 
-        [Fact]
-        public void TestExtractSynonyms_NoRules()
-        {
-            ClearTest();
+		[Fact]
+		public void TestExtractSynonyms_NoRules()
+		{
+			ClearTest();
 
-            var synonymIterator = new SynonymsIterator(_index, 3);
-            var synonymFetched = synonymIterator.ToList();
-            Assert.Equal(0, synonymFetched.Count);
-        }
-    }
+			var synonymIterator = new SynonymsIterator(_index, 3);
+			var synonymFetched = synonymIterator.ToList();
+			Assert.Equal(0, synonymFetched.Count);
+		}
+	}
 }
 #pragma warning restore 0618
