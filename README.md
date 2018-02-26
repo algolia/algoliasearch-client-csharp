@@ -57,8 +57,10 @@ Compatibilities:
   * `.NET Framework 4.6.2`
   * `.NET Core 1.0`
   * `.NET Core 1.1`
+  * `.NET Core 2.0`
   * `.NETStandard 1.6`
   * `.NETStandard 1.3`
+  * `.NETStandard 2.0`
 
 ## Install
 
