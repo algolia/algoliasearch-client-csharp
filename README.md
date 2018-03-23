@@ -1,7 +1,11 @@
 # Algolia Search API Client for C#
 
-[Algolia Search](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
-The **Algolia Search API Client for C#** lets you easily use the [Algolia Search REST API](https://www.algolia.com/doc/rest-api/search) from your C# code.
+[Algolia Search](https://www.algolia.com) is a hosted full-text, numerical,
+and faceted search engine capable of delivering realtime results from the first keystroke.
+
+The **Algolia Search API Client for C#** lets
+you easily use the [Algolia Search REST API](https://www.algolia.com/doc/rest-api/search) from
+your C# code.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/r4c5ld2wh6bkvu7s?svg=true)](https://ci.appveyor.com/project/Algolia/algoliasearch-client-csharp)
 
@@ -15,10 +19,8 @@ The **Algolia Search API Client for C#** lets you easily use the [Algolia Search
 You can find the full reference on [Algolia's website](https://www.algolia.com/doc/api-client/csharp/).
 
 
-## Table of Contents
+## In this page
 
-
-1. **[Supported platforms](#supported-platforms)**
 
 
 1. **[Install](#install)**
@@ -26,7 +28,6 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 
 1. **[Quick Start](#quick-start)**
 
-    * [Initialize the client](#initialize-the-client)
 
 1. **[Push data](#push-data)**
 
@@ -39,33 +40,18 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 
 1. **[Search UI](#search-ui)**
 
-    * [index.html](#indexhtml)
 
-
-
+1. **[List of available methods](#list-of-available-methods)**
 
 
 # Getting Started
 
 
 
-
-## Supported platforms
-
-Compatibilities:
-  * `.NET Framework 4.6`
-  * `.NET Framework 4.6.2`
-  * `.NET Core 1.0`
-  * `.NET Core 1.1`
-  * `.NET Core 2.0`
-  * `.NETStandard 1.6`
-  * `.NETStandard 1.3`
-  * `.NETStandard 2.0`
-
 ## Install
 
-* in you project, open the `Package Manager Console` (`Tools` → `Library Package Manager` → `Package Manager Console`)
-* enter `Install-Package Algolia.Search` in the `Package Manager Console`
+* In your project, open the `Package Manager Console` (`Tools` → `Library Package Manager` → `Package Manager Console`)
+* Enter `Install-Package Algolia.Search` in the `Package Manager Console`
 
 ## Quick Start
 
@@ -77,12 +63,13 @@ To begin, you will need to initialize the client. In order to do this you will n
 You can find both on [your Algolia account](https://www.algolia.com/api-keys).
 
 ```csharp
-AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey")
+AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey");
+Index index = client.InitIndex("your_index_name");
 ```
 
 ## Push data
 
-Without any prior configuration, you can start indexing [500 contacts](https://raw.githubusercontent.com/algolia/datasets-public/master/contacts.json) in the ```contacts``` index using the following code:
+Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the ```contacts``` index using the following code:
 ```csharp
 // Load JSON file
 StreamReader re = File.OpenText("contacts.json");
@@ -144,7 +131,7 @@ System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
 ## Search UI
 
 **Warning:** If you are building a web application, you may be more interested in using one of our
-[frontend search UI librairies](https://www.algolia.com/doc/guides/search-ui/search-libraries/)
+[frontend search UI libraries](https://www.algolia.com/doc/guides/search-ui/search-libraries/)
 
 The following example shows how to build a front-end search quickly using
 [InstantSearch.js](https://community.algolia.com/instantsearch.js/)
@@ -155,7 +142,9 @@ The following example shows how to build a front-end search quickly using
 <!doctype html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.css">
+  <!-- Always use `2.x` versions in production rather than `2` to mitigate any side effects on your website,
+  Find the latest version on InstantSearch.js website: https://community.algolia.com/instantsearch.js/v2/guides/usage.html -->
 </head>
 <body>
   <header>
@@ -175,7 +164,7 @@ The following example shows how to build a front-end search quickly using
     
   </script>
 
-  <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
   <script src="app.js"></script>
 </body>
 ```
@@ -188,7 +177,10 @@ var search = instantsearch({
   appId: 'YourApplicationID',
   apiKey: 'YourSearchOnlyAPIKey', // search only API key, no ADMIN key
   indexName: 'contacts',
-  urlSync: true
+  urlSync: true,
+  searchParameters: {
+    hitsPerPage: 10
+  }
 });
 
 search.addWidget(
@@ -200,7 +192,6 @@ search.addWidget(
 search.addWidget(
   instantsearch.widgets.hits({
     container: '#hits',
-    hitsPerPage: 10,
     templates: {
       item: document.getElementById('hit-template').innerHTML,
       empty: "We didn't find any results for the search <em>\"{{query}}\"</em>"
@@ -211,10 +202,46 @@ search.addWidget(
 search.start();
 ```
 
+
+
+
+## List of available methods
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Getting Help
 
 - **Need help**? Ask a question to the [Algolia Community](https://discourse.algolia.com/) or on [Stack Overflow](http://stackoverflow.com/questions/tagged/algolia).
 - **Found a bug?** You can open a [GitHub issue](https://github.com/algolia/algoliasearch-client-csharp/issues).
-
-
 
