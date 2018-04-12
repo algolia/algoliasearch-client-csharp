@@ -1390,5 +1390,224 @@ namespace Algolia.Search
 		public JObject Batch(IEnumerable<object> requests)
 		{ return Batch(requests, null); }
 
+		// ***** METHODS RELATED TO MCM ***** \\
+
+		/// <summary>
+		/// Add a userID to the mapping
+		/// </summary>
+		/// <param name="userID"></param>
+		/// <param name="clusterName"></param>
+		/// <param name="requestOptions"></param>
+		/// <returns>an objecct containing a "updateAt" attribute {'updatedAt': 'XXXX'}</returns>
+		public Task<JObject> AssignUserIDAsync(string userID, string clusterName, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+			requestOptions = requestOptions ?? new RequestOptions();
+			requestOptions.AddExtraHeader("X-Algolia-User-ID", userID);
+
+			Dictionary<string, object> body = new Dictionary<string, object>();
+			body.Add("cluster", clusterName);
+
+			return ExecuteRequest(callType.Write, "POST", "/1/clusters/mapping", body, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.AssignUserIDAsync"/>
+		/// </summary>
+		public JObject AssignUserID(string userID, string clusterName, RequestOptions requestOptions = null)
+		{
+			return AssignUserIDAsync(userID, clusterName, requestOptions).GetAwaiter().GetResult();
+		}
+
+		/// <summary>
+		/// Remove a userID from the mapping
+		/// </summary>
+		/// <param name="userID"></param>
+		/// <param name="clusterName"></param>
+		/// <param name="requestOptions"></param>
+		/// <returns>an objecct containing a "deletedAt" attribute {'deletedAt': 'XXXX'}</returns>
+		public Task<JObject> RemoveUserIDAsync(string userID, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+			requestOptions = requestOptions ?? new RequestOptions();
+			requestOptions.AddExtraHeader("X-Algolia-User-ID", userID);
+
+			return ExecuteRequest(callType.Write, "DELETE", "/1/clusters/mapping", null, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.RemoveUserIDAsync"/>
+		/// </summary>
+		public JObject RemoveUserID(string userID, RequestOptions requestOptions = null)
+		{
+			return RemoveUserIDAsync(userID, requestOptions).GetAwaiter().GetResult();
+		}
+
+		/// <summary>
+		/// List available cluster in the mapping
+		/// Return an object in the form:
+		///{'clusters': [{
+		///		"clusterName": "XXXX",
+		///		"nbRecords": 0,
+		///		"nbUserIDs": 0,
+		///		"dataSize": 0
+		///}	]}
+		/// </summary>
+		/// <param name="requestOptions"></param>
+		/// <param name="token"></param>
+		/// <returns></returns>
+		public Task<JObject> ListClustersAsync(RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+			return ExecuteRequest(callType.Read, "GET", "/1/clusters", null, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.ListClustersAsync"/>
+		/// </summary>
+		public JObject ListClusters(RequestOptions requestOptions = null)
+		{
+			return ListClustersAsync(requestOptions).GetAwaiter().GetResult();
+		}
+
+		/// <summary>
+		/// Get one userID in the mapping
+		/// returns an object in the form:
+		/// {
+		/// "userID": "XXXX",
+		/// "clusterName": "XXXX",
+		/// "nbRecords": 0,
+		/// "dataSize": 0
+		///}
+		/// </summary>
+		/// <param name="userID"></param>
+		/// <param name="requestOptions"></param>
+		/// <param name="token"></param>
+		/// <returns></returns>
+		public Task<JObject> GetUserIDAsync(string userID, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+			return ExecuteRequest(callType.Read, "GET", "/1/clusters/mapping/" + WebUtility.UrlEncode(userID), null, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.GetUserIDAsync"/>
+		/// </summary>
+		public JObject GetUserID(string userID, RequestOptions requestOptions = null)
+		{
+			return GetUserIDAsync(userID, requestOptions).GetAwaiter().GetResult();
+		}
+
+		/// <summary>
+		/// Get top userID in the mapping
+		/// returns an object in the form:
+		/// {
+		/// "userIDs": [{
+		///		 "userID": "userName",
+		///		"clusterName": "name",
+		///		"nbRecords": 0,
+		///		"dataSize": 0
+		/// }],
+		/// "page": 0,
+		/// "hitsPerPage": 20
+		///}
+		/// </summary>
+		/// <param name="page"></param>
+		/// <param name="hitsPerPage"></param>
+		/// <param name="requestOptions"></param>
+		/// <param name="token"></param>
+		/// <returns></returns>
+		public Task<JObject> ListUserIDsAsync(int page =0, int hitsPerPage = 20, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+			return ExecuteRequest(callType.Read, "GET", "/1/clusters/mapping?page=" + page + "&hitsPerPage=" + hitsPerPage, null, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.ListUserIDsAsync"/>
+		/// </summary>
+		public JObject ListUserIDs(int page = 0, int hitsPerPage = 20, RequestOptions requestOptions = null)
+		{
+			return ListUserIDsAsync(page, hitsPerPage, requestOptions).GetAwaiter().GetResult();
+		}
+
+		/// <summary>
+		/// Get top userID in the mapping
+		/// returns an object in the form:
+		/// {
+		///"topUsers": {
+		///"XXXX": [{
+		///		"userID": "userName",
+		///		"nbRecords": 0,
+		///		"dataSize": 0
+		///}]
+		////},
+		///"page": 0,
+		///"hitsPerPage": 20
+		///}
+		/// </summary>
+		/// <param name="requestOptions"></param>
+		/// <param name="token"></param>
+		/// <returns></returns>
+		public Task<JObject> GetTopUserIDAsync(RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+			return ExecuteRequest(callType.Read, "GET", "/1/clusters/mapping/top", null, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.GetTopUserIDAsync"/>
+		/// </summary>
+		public JObject GetTopUserID(RequestOptions requestOptions = null)
+		{
+			return GetTopUserIDAsync(requestOptions).GetAwaiter().GetResult();
+		}
+
+		/// <summary>
+		///  Search userIDs in the mapping
+		///  returns an object in the form:
+		/// "hits": [{
+		///		"userID": "userName",
+		///		"clusterName": "name",
+		///		"nbRecords": 0,
+		///		"dataSize": 0
+		/// }],
+		/// "nbHits":0,
+		/// "page": 0,
+		/// "hitsPerPage": 20
+		/// </summary>
+		/// <param name="userID"></param>
+		/// <param name="clusterName"></param>
+		/// <param name="requestOptions"></param>
+		/// <returns>an objecct containing a "updateAt" attribute {'updatedAt': 'XXXX'}</returns>
+		public Task<JObject> SearchUserIdsAsync(string query, string clusterName = null, int? page = null, int? hitsPerPage = null, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+		{
+	
+			Dictionary<string, object> body = new Dictionary<string, object>();
+
+			if (query != null)
+			{
+				body.Add("query", query);
+			}
+
+			if (clusterName != null)
+			{
+				body.Add("cluster", clusterName);
+			}
+
+			if (page != null)
+			{
+				body.Add("page", page);
+			}
+
+			if (hitsPerPage != null)
+			{
+				body.Add("hitsPerPage", hitsPerPage);
+			}
+
+			return ExecuteRequest(callType.Read, "POST", "/1/clusters/mapping/search", body, token, requestOptions);
+		}
+
+		/// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.SearchUserIdsAsync"/>
+		/// </summary>
+		public JObject SearchUserIds(string query, string clusterName = null, int? page = null, int? hitsPerPage = null, RequestOptions requestOptions = null)
+		{
+			return SearchUserIdsAsync(query, clusterName, page, hitsPerPage, requestOptions).GetAwaiter().GetResult();
+		}
 	}
 }

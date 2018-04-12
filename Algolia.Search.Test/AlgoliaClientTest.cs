@@ -1224,6 +1224,97 @@ namespace Algolia.Search.Test
 			var synonymFetched = synonymIterator.ToList();
 			Assert.Equal(0, synonymFetched.Count);
 		}
+
+		// MCM tests
+
+		[Fact]
+		public void TestListClusters()
+		{
+			var answer = _clientMCM.ListClusters();
+
+			Assert.True(answer["clusters"] != null);
+			Assert.True(((JArray)answer["clusters"]).Count > 0);
+			Assert.True(answer["clusters"][0]["clusterName"] != null);
+			Assert.True(answer["clusters"][0]["nbRecords"] != null);
+			Assert.True(answer["clusters"][0]["nbUserIDs"] != null);
+			Assert.True(answer["clusters"][0]["dataSize"] != null);
+		}
+
+		[Fact]
+		public void TestAssignUserID()
+		{
+			var clusters = _clientMCM.ListClusters();
+			var clusterName = (string) (clusters["clusters"][0]["clusterName"]);
+			var answer = _clientMCM.AssignUserID(_userID, clusterName);
+
+			Assert.True(answer["createdAt"] != null);
+			Thread.Sleep(2000); // Sleep to let the cluster publish the change
+		}
+
+		[Fact]
+		public void TestListUserIds()
+		{
+			var answer = _clientMCM.ListUserIDs();
+
+			Assert.True(answer["userIDs"] != null);
+			Assert.True(((JArray)answer["userIDs"]).Count > 0);
+			Assert.True(answer["userIDs"][0]["userID"] != null);
+			Assert.True(answer["userIDs"][0]["clusterName"] != null);
+			Assert.True(answer["userIDs"][0]["nbRecords"] != null);
+			Assert.True(answer["userIDs"][0]["dataSize"] != null);
+		}
+
+		[Fact]
+		public void TestGetTopUserID()
+		{
+			var clusters = _clientMCM.ListClusters();
+			var clusterName = (string)(clusters["clusters"][0]["clusterName"]);
+			var answer = _clientMCM.GetTopUserID();
+
+			Assert.True(answer["topUsers"] != null);
+			Assert.True(((JArray)answer["topUsers"][clusterName]).Count > 0);
+			Assert.True(answer["topUsers"][clusterName][0]["userID"] != null);
+			Assert.True(answer["topUsers"][clusterName][0]["nbRecords"] != null);
+			Assert.True(answer["topUsers"][clusterName][0]["dataSize"] != null);
+		}
+
+		[Fact]
+		public void TestGetUserID()
+		{
+			var answer = _clientMCM.GetUserID(_userID);
+
+			Assert.True(answer["userID"] != null);
+			Assert.True(answer["clusterName"] != null);
+			Assert.True(answer["nbRecords"] != null);
+			Assert.True(answer["dataSize"] != null);
+		}
+
+		[Fact]
+		public void TestSearchUserIDs()
+		{
+			var clusters = _clientMCM.ListClusters();
+			var clusterName = (string)(clusters["clusters"][0]["clusterName"]);
+			var answer = _clientMCM.SearchUserIds(_userID, clusterName, 0, 1000);
+
+			Assert.True(answer["hits"] != null);
+			Assert.True(answer["nbHits"] != null);
+			Assert.True(answer["page"] != null);
+			Assert.True(answer["hitsPerPage"] != null);
+			Assert.True(((JArray)answer["hits"]).Count > 0);
+			Assert.True(answer["hits"][0]["userID"] != null);
+			Assert.True(answer["hits"][0]["clusterName"] != null);
+			Assert.True(answer["hits"][0]["nbRecords"] != null);
+			Assert.True(answer["hits"][0]["dataSize"] != null);
+		}
+
+		[Fact]
+		public void TestRemoveUserID()
+		{
+			var answer = _clientMCM.RemoveUserID(_userID);
+
+			Assert.True(answer["deletedAt"] != null);
+		}
+
 	}
 }
 #pragma warning restore 0618
