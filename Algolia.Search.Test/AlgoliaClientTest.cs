@@ -1358,7 +1358,7 @@ namespace Algolia.Search.Test
 			var answer = _clientMCM.AssignUserID(_userID, clusterName);
 
 			Assert.True(answer["createdAt"] != null);
-			Thread.Sleep(5000); // Sleep to let the cluster publish the change
+			Thread.Sleep(2000); // Sleep to let the cluster publish the change
 		}
 
 		[Fact]
@@ -1410,6 +1410,7 @@ namespace Algolia.Search.Test
 			Assert.True(answer["nbHits"] != null);
 			Assert.True(answer["page"] != null);
 			Assert.True(answer["hitsPerPage"] != null);
+			Assert.True(((JArray)answer["hits"]).Count > 0);
 			Assert.True(answer["hits"][0]["userID"] != null);
 			Assert.True(answer["hits"][0]["clusterName"] != null);
 			Assert.True(answer["hits"][0]["nbRecords"] != null);
