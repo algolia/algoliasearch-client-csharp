@@ -1599,7 +1599,7 @@ namespace Algolia.Search
 				body.Add("hitsPerPage", hitsPerPage);
 			}
 
-			return ExecuteRequest(callType.Read, "POST", "/1/clusters/mapping/search", body, token, requestOptions);
+			return ExecuteRequest(callType.Search, "POST", "/1/clusters/mapping/search", body, token, requestOptions);
 		}
 
 		/// <summary>
