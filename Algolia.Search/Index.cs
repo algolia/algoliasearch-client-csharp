@@ -1680,6 +1680,12 @@ namespace Algolia.Search
 			}
 
 			string objectID = (string)queryRule["objectID"];
+
+			if (objectID.IsNullOrEmpty())
+			{
+			    throw new AlgoliaException("objectID cannot be empty");
+			}
+
 			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/rules/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas.ToString().ToLower()), queryRule, token, requestOptions);
 		}
 
