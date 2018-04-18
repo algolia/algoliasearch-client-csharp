@@ -1025,6 +1025,25 @@ namespace Algolia.Search.Test
 			AreEqualByJson(rule, _index.GetRule(ruleId));
 		}
 
+        [Fact]
+        public void TestSaveRuleWithEmptyObjectID()
+        {
+            ClearTest();
+
+            string ruleID = "";
+            JObject rule = generateRuleStub(ruleID);
+            try
+            {
+                Assert.Throws<AlgoliaException>(() =>
+                {
+                    _index.SaveRule(rule);
+                });
+            }
+            catch (Exception)
+            {
+            }
+        }
+
 		[Fact]
 		public void TestDeleteRule()
 		{
