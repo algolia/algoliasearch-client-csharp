@@ -16,7 +16,7 @@
         <Version>4.2.2</Version>
         <AssemblyVersion>4.2.2</AssemblyVersion>
         <FileVersion>3.8.0.0</FileVersion>
-        <TargetFrameworks>net45;net46;net461;net462;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6;netstandard1.3;</TargetFrameworks>
+        <TargetFrameworks>net45;net46;net461;net462;net47;net471;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6;netstandard1.3;</TargetFrameworks>
     </PropertyGroup>
     <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
       <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
@@ -47,6 +47,20 @@
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
   </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
+        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+        <Reference Include="System.Security.Cryptography" />
+        <Reference Include="System" />
+        <Reference Include="System.Net.Http" />
+    </ItemGroup>
+
+      <ItemGroup Condition=" '$(TargetFramework)' == 'net471' ">
+        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+        <Reference Include="System.Security.Cryptography" />
+        <Reference Include="System" />
+        <Reference Include="System.Net.Http" />
+    </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
         <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
