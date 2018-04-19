@@ -1681,7 +1681,7 @@ namespace Algolia.Search
 
 			string objectID = (string)queryRule["objectID"];
 
-			if (objectID.IsNullOrEmpty())
+			if (string.IsNullOrEmpty(objectID))
 			{
 			    throw new AlgoliaException("objectID cannot be empty");
 			}
