@@ -211,30 +211,105 @@ search.start();
 
 
 
+### Search
+
+- [Search an index](https://algolia.com/doc/api-reference/api-methods/search/?language=csharp)
+- [Search for facet values](https://algolia.com/doc/api-reference/api-methods/search-for-facet-values/?language=csharp)
+- [Search multiple indexes](https://algolia.com/doc/api-reference/api-methods/multiple-queries/?language=csharp)
+- [Browse an index](https://algolia.com/doc/api-reference/api-methods/browse/?language=csharp)
 
 
 
 
+### Indexing
+
+- [Add objects](https://algolia.com/doc/api-reference/api-methods/add-objects/?language=csharp)
+- [Update objects](https://algolia.com/doc/api-reference/api-methods/update-objects/?language=csharp)
+- [Partial update objects](https://algolia.com/doc/api-reference/api-methods/partial-update-objects/?language=csharp)
+- [Delete objects](https://algolia.com/doc/api-reference/api-methods/delete-objects/?language=csharp)
+- [Delete by](https://algolia.com/doc/api-reference/api-methods/delete-by/?language=csharp)
+- [Get objects](https://algolia.com/doc/api-reference/api-methods/get-objects/?language=csharp)
+- [Custom batch](https://algolia.com/doc/api-reference/api-methods/batch/?language=csharp)
 
 
 
 
+### Settings
+
+- [Get settings](https://algolia.com/doc/api-reference/api-methods/get-settings/?language=csharp)
+- [Set settings](https://algolia.com/doc/api-reference/api-methods/set-settings/?language=csharp)
 
 
 
 
+### Manage indices
+
+- [List indexes](https://algolia.com/doc/api-reference/api-methods/list-indices/?language=csharp)
+- [Delete index](https://algolia.com/doc/api-reference/api-methods/delete-index/?language=csharp)
+- [Copy index](https://algolia.com/doc/api-reference/api-methods/copy-index/?language=csharp)
+- [Move index](https://algolia.com/doc/api-reference/api-methods/move-index/?language=csharp)
+- [Clear index](https://algolia.com/doc/api-reference/api-methods/clear-index/?language=csharp)
 
 
 
 
+### API Keys
+
+- [Create secured API Key](https://algolia.com/doc/api-reference/api-methods/generate-secured-api-key/?language=csharp)
+- [Add API Key](https://algolia.com/doc/api-reference/api-methods/add-api-key/?language=csharp)
+- [Update API Key](https://algolia.com/doc/api-reference/api-methods/update-api-key/?language=csharp)
+- [Delete API Key](https://algolia.com/doc/api-reference/api-methods/delete-api-key/?language=csharp)
+- [Get API Key permissions](https://algolia.com/doc/api-reference/api-methods/get-api-key/?language=csharp)
+- [List API Keys](https://algolia.com/doc/api-reference/api-methods/list-api-keys/?language=csharp)
 
 
 
 
+### Synonyms
+
+- [Save synonym](https://algolia.com/doc/api-reference/api-methods/save-synonym/?language=csharp)
+- [Batch synonyms](https://algolia.com/doc/api-reference/api-methods/batch-synonyms/?language=csharp)
+- [Delete synonym](https://algolia.com/doc/api-reference/api-methods/delete-synonym/?language=csharp)
+- [Clear all synonyms](https://algolia.com/doc/api-reference/api-methods/clear-synonyms/?language=csharp)
+- [Get synonym](https://algolia.com/doc/api-reference/api-methods/get-synonym/?language=csharp)
+- [Search synonyms](https://algolia.com/doc/api-reference/api-methods/search-synonyms/?language=csharp)
+- [Export Synonyms](https://algolia.com/doc/api-reference/api-methods/export-synonyms/?language=csharp)
 
 
 
 
+### Query rules
+
+- [Save a single rule](https://algolia.com/doc/api-reference/api-methods/rules-save/?language=csharp)
+- [Batch save multiple rules](https://algolia.com/doc/api-reference/api-methods/rules-save-batch/?language=csharp)
+- [Get a rule](https://algolia.com/doc/api-reference/api-methods/rules-get/?language=csharp)
+- [Delete a single rule](https://algolia.com/doc/api-reference/api-methods/rules-delete/?language=csharp)
+- [Clear all rules](https://algolia.com/doc/api-reference/api-methods/rules-clear/?language=csharp)
+- [Search for rules](https://algolia.com/doc/api-reference/api-methods/rules-search/?language=csharp)
+- [Export rules](https://algolia.com/doc/api-reference/api-methods/rules-export/?language=csharp)
+
+
+
+
+### MultiClusters
+
+- [Assign or Move userID](https://algolia.com/doc/api-reference/api-methods/assign-user-id/?language=csharp)
+- [Get top userID](https://algolia.com/doc/api-reference/api-methods/get-top-user-id/?language=csharp)
+- [Get userID](https://algolia.com/doc/api-reference/api-methods/get-user-id/?language=csharp)
+- [List clusters](https://algolia.com/doc/api-reference/api-methods/list-clusters/?language=csharp)
+- [List userIDs](https://algolia.com/doc/api-reference/api-methods/list-user-id/?language=csharp)
+- [Remove userID](https://algolia.com/doc/api-reference/api-methods/remove-user-id/?language=csharp)
+- [Search userID](https://algolia.com/doc/api-reference/api-methods/search-user-id/?language=csharp)
+
+
+
+
+### Advanced
+
+- [Get logs](https://algolia.com/doc/api-reference/api-methods/get-logs/?language=csharp)
+- [Configuring timeouts](https://algolia.com/doc/api-reference/api-methods/configuring-timeouts/?language=csharp)
+- [Set extra header](https://algolia.com/doc/api-reference/api-methods/set-extra-header/?language=csharp)
+- [Wait for operations](https://algolia.com/doc/api-reference/api-methods/wait-task/?language=csharp)
 
 
 
