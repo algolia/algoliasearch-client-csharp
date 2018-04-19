@@ -1248,7 +1248,7 @@ namespace Algolia.Search.Test
 			var answer = _clientMCM.AssignUserID(_userID, clusterName);
 
 			Assert.True(answer["createdAt"] != null);
-			Thread.Sleep(2000); // Sleep to let the cluster publish the change
+			Thread.Sleep(30000); // Sleep to let the cluster publish the change
 		}
 
 		[Fact]
@@ -1279,17 +1279,6 @@ namespace Algolia.Search.Test
 		}
 
 		[Fact]
-		public void TestGetUserID()
-		{
-			var answer = _clientMCM.GetUserID(_userID);
-
-			Assert.True(answer["userID"] != null);
-			Assert.True(answer["clusterName"] != null);
-			Assert.True(answer["nbRecords"] != null);
-			Assert.True(answer["dataSize"] != null);
-		}
-
-		[Fact]
 		public void TestSearchUserIDs()
 		{
 			var clusters = _clientMCM.ListClusters();
@@ -1298,13 +1287,24 @@ namespace Algolia.Search.Test
 
 			Assert.True(answer["hits"] != null);
 			Assert.True(answer["nbHits"] != null);
-			Assert.True(answer["page"] != null);
-			Assert.True(answer["hitsPerPage"] != null);
+			Assert.True((int)answer["page"] == 0);
+			Assert.True((int)answer["hitsPerPage"] == 1000);
 			Assert.True(((JArray)answer["hits"]).Count > 0);
 			Assert.True(answer["hits"][0]["userID"] != null);
 			Assert.True(answer["hits"][0]["clusterName"] != null);
 			Assert.True(answer["hits"][0]["nbRecords"] != null);
 			Assert.True(answer["hits"][0]["dataSize"] != null);
+		}
+
+		[Fact]
+		public void TestGetUserID()
+		{
+			var answer = _clientMCM.GetUserID(_userID);
+
+			Assert.True(answer["userID"] != null);
+			Assert.True(answer["clusterName"] != null);
+			Assert.True(answer["nbRecords"] != null);
+			Assert.True(answer["dataSize"] != null);
 		}
 
 		[Fact]
