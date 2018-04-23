@@ -67,16 +67,9 @@ namespace Algolia.Search
 		/// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
 		/// <param name="token"></param>
 		/// <returns>An object that contains an "objectID" attribute.</returns>
-		public Task<JObject> AddObjectAsync(object content, RequestOptions requestOptions, string objectId = null, CancellationToken token = default(CancellationToken))
+		public Task<JObject> AddObjectAsync(object content, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
-			if (string.IsNullOrWhiteSpace(objectId))
-			{
-				return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}", _urlIndexName), content, token, requestOptions);
-			}
-			else
-			{
-				return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectId)), content, token, requestOptions);
-			}
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}", _urlIndexName), content, token, requestOptions);
 		}
 
 		/// <summary>
@@ -86,9 +79,9 @@ namespace Algolia.Search
 		/// <param name="requestOptions"></param>
 		/// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
 		/// <returns>An object that contains an "objectID" attribute.</returns>
-		public JObject AddObject(object content, RequestOptions requestOptions, string objectId = null)
+		public JObject AddObject(object content, RequestOptions requestOptions)
 		{
-			return AddObjectAsync(content, requestOptions, objectId, default(CancellationToken)).GetAwaiter().GetResult();
+			return AddObjectAsync(content, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
 		}
 
 		/// <summary>
@@ -1824,8 +1817,8 @@ namespace Algolia.Search
 		/// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
 		/// <param name="token"></param>
 		/// <returns>An object that contains an "objectID" attribute.</returns>
-		public Task<JObject> AddObjectAsync(object content, string objectId = null, CancellationToken token = default(CancellationToken))
-		{ return AddObjectAsync(content, null, objectId, token); }
+		public Task<JObject> AddObjectAsync(object content, CancellationToken token = default(CancellationToken))
+		{ return AddObjectAsync(content, null, token); }
 
 		/// <summary>
 		/// Synchronously call <see cref="Index.AddObjectAsync"/>.
@@ -1834,8 +1827,8 @@ namespace Algolia.Search
 
 		/// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
 		/// <returns>An object that contains an "objectID" attribute.</returns>
-		public JObject AddObject(object content, string objectId = null)
-		{ return AddObject(content, null, objectId); }
+		public JObject AddObject(object content)
+		{ return AddObject(content, null); }
 
 		/// <summary>
 		/// Add several objects to this index.
