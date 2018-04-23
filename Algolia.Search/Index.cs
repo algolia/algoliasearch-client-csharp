@@ -1300,7 +1300,7 @@ namespace Algolia.Search
 		/// <param name="token"></param>
 		public Task<JObject> SearchRulesAsync(RequestOptions requestOptions, RuleQuery query = null, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/rules/search", _urlIndexName), query, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/rules/search", _urlIndexName), query, token, requestOptions);
 		}
 
 		/// <summary>
