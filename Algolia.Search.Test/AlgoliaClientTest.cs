@@ -126,21 +126,6 @@ namespace Algolia.Search.Test
 		}
 
 		[Fact]
-		public void TaskDeleteByQuery()
-		{
-			ClearTest();
-			List<JObject> objs = new List<JObject>();
-			objs.Add(JObject.Parse(@"{""name"":""San Francisco""}"));
-			objs.Add(JObject.Parse(@"{""name"":""San Jose""}"));
-			objs.Add(JObject.Parse(@"{""name"":""Washington""}"));
-			var task = _index.AddObjects(objs);
-			_index.WaitTask(task["taskID"].ToString());
-			_index.DeleteByQuery(new Query("San"));
-			var res = _index.Search(new Query(""));
-			Assert.Equal(1, res["nbHits"].ToObject<int>());
-		}
-
-		[Fact]
 		public void TaskDeleteBy()
 		{
 			ClearTest();
@@ -563,31 +548,18 @@ namespace Algolia.Search.Test
 			var res = _index.AddObject(JObject.Parse(@"{""objectID"":""myID"", ""name"":""San Francisco"", ""population"":805235}"));
 			_index.WaitTask(res["taskID"].ToString());
 
-			var key = _client.AddUserKey(new String[] { "search" });
+			var key = _client.AddApiKey(new String[] { "search" });
 			System.Threading.Thread.Sleep(5000);
 			Assert.False(string.IsNullOrWhiteSpace(key["key"].ToString()));
 
-			key = _client.AddApiKey(new String[] { "search" });
-			System.Threading.Thread.Sleep(5000);
-			Assert.False(string.IsNullOrWhiteSpace(key["key"].ToString()));
-
-			var getKey = _client.GetUserKeyACL(key["key"].ToString());
+			var getKey = _client.GetApiKey(key["key"].ToString());
 			Assert.Equal(key["key"], getKey["value"]);
 
-			getKey = _client.GetApiKey(key["key"].ToString());
-			Assert.Equal(key["key"], getKey["value"]);
-
-			var keys = _client.ListUserKeys();
-			Assert.True(Include((JArray)keys["keys"], "value", key["key"].ToString()));
-
-			keys = _client.ListApiKeys();
+			var keys = _client.ListApiKeys();
 			Assert.True(Include((JArray)keys["keys"], "value", key["key"].ToString()));
 
 			_client.UpdateApiKey(key["key"].ToString(), new String[] { "addObject" });
 			System.Threading.Thread.Sleep(5000);
-
-			getKey = _client.GetUserKeyACL(key["key"].ToString());
-			Assert.Equal((string)getKey["acl"][0], "addObject");
 
 			getKey = _client.GetApiKey(key["key"].ToString());
 			Assert.Equal((string)getKey["acl"][0], "addObject");
@@ -596,50 +568,6 @@ namespace Algolia.Search.Test
 			System.Threading.Thread.Sleep(5000);
 
 			keys = _client.ListApiKeys();
-			Assert.False(Include((JArray)keys["keys"], "value", key["key"].ToString()));
-		}
-
-		[Fact]
-		public void TaskACLIndex()
-		{
-			ClearTest();
-			// Add one object to be sure the test will not fail because index is empty
-			var res = _index.AddObject(JObject.Parse(@"{""objectID"":""myID"", ""name"":""San Francisco"", ""population"":805235}"));
-			_index.WaitTask(res["taskID"].ToString());
-
-			var key = _index.AddUserKey(new String[] { "search" });
-			WaitKey(_index, key);
-			Assert.False(string.IsNullOrWhiteSpace(key["key"].ToString()));
-
-			key = _index.AddApiKey(new String[] { "search" });
-			WaitKey(_index, key);
-			Assert.False(string.IsNullOrWhiteSpace(key["key"].ToString()));
-
-			var getKey = _index.GetUserKeyACL(key["key"].ToString());
-			Assert.Equal(key["key"], getKey["value"]);
-
-			getKey = _index.GetApiKey(key["key"].ToString());
-			Assert.Equal(key["key"], getKey["value"]);
-
-			var keys = _index.ListUserKeys();
-			Assert.True(Include((JArray)keys["keys"], "value", key["key"].ToString()));
-
-			keys = _index.ListApiKeys();
-			Assert.True(Include((JArray)keys["keys"], "value", key["key"].ToString()));
-
-			_index.UpdateApiKey(key["key"].ToString(), new String[] { "addObject" });
-			WaitKey(_index, key, "addObject");
-
-			getKey = _index.GetUserKeyACL(key["key"].ToString());
-			Assert.Equal((string)getKey["acl"][0], "addObject");
-
-			getKey = _index.GetApiKey(key["key"].ToString());
-			Assert.Equal((string)getKey["acl"][0], "addObject");
-
-			_index.DeleteApiKey(key["key"].ToString());
-
-			WaitKeyMissing(_index, key);
-			keys = _index.ListUserKeys();
 			Assert.False(Include((JArray)keys["keys"], "value", key["key"].ToString()));
 		}
 
@@ -965,44 +893,6 @@ namespace Algolia.Search.Test
 			var index = _client.ListIndexes();
 			Assert.True((DateTime.Now - startTime).TotalSeconds < 2);
 			Assert.True(index != null);
-		}
-
-		private void WaitKey(Index index, JObject newIndexKey, string updatedACL = null)
-		{
-			var isUpdate = !string.IsNullOrEmpty(updatedACL);
-			for (var i = 0; i <= 10; i++)
-			{
-				try
-				{
-					var key = index.GetApiKey(newIndexKey["key"].ToString());
-					if (isUpdate && key["acl"][0].ToString() != updatedACL)
-					{
-						throw new Exception();
-					}
-					return;
-				}
-				catch (Exception)
-				{
-					Thread.Sleep(1000);
-					continue;
-				}
-			}
-		}
-
-		private void WaitKeyMissing(Index index, JObject newIndexKey)
-		{
-			for (var i = 0; i <= 10; i++)
-			{
-				try
-				{
-					var key = index.GetApiKey(newIndexKey["key"].ToString());
-					Thread.Sleep(1000);
-				}
-				catch (Exception)
-				{
-					return;
-				}
-			}
 		}
 
 		[Fact]
