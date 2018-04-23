@@ -1593,8 +1593,7 @@ namespace Algolia.Search
 		/// <param name="content"></param>
 		/// <param name="requestOptions"></param>
 		/// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-		/// <param name="replaceExistingSynonyms"></param>
-		public JObject SaveSynonym(string objectID, object content, RequestOptions requestOptions, bool forwardToReplicas = false, bool replaceExistingSynonyms = false)
+		public JObject SaveSynonym(string objectID, object content, RequestOptions requestOptions, bool forwardToReplicas = false)
 		{
 			return SaveSynonymAsync(objectID, content, requestOptions, forwardToReplicas, default(CancellationToken)).GetAwaiter().GetResult();
 		}
@@ -2590,9 +2589,8 @@ namespace Algolia.Search
 		/// <param name="objectID"></param>
 		/// <param name="content"></param>
 		/// <param name="forwardToReplicas">Forward the operation to the replica indices</param>
-		/// <param name="replaceExistingSynonyms"></param>
-		public JObject SaveSynonym(string objectID, object content, bool forwardToReplicas = false, bool replaceExistingSynonyms = false)
-		{ return SaveSynonym(objectID, content, null, forwardToReplicas, replaceExistingSynonyms); }
+		public JObject SaveSynonym(string objectID, object content, bool forwardToReplicas = false)
+		{ return SaveSynonym(objectID, content, null, forwardToReplicas); }
 
 		/// <summary>
 		/// Synchronously call <see cref="Index.SearchForFacetValuestAsync"/>.
