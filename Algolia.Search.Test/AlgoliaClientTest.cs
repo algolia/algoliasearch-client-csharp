@@ -1082,7 +1082,7 @@ namespace Algolia.Search.Test
 
 			var rules = _index.SearchRules();
 
-			Assert.Equal(rules["nbHits"], 0);
+			Assert.Equal((int)rules["nbHits"], 0);
 		}
 
 		[Fact]
