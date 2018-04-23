@@ -468,7 +468,7 @@ namespace Algolia.Search.Test
 			ClearTest();
 			var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"));
 			Assert.False(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
-			res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+			res = _index.AddObject(JObject.Parse(@"{""objectID"":""myID"", ""name"":""San Francisco"", ""population"":805235}"));
 			Assert.Equal("myID", res["objectID"].ToString());
 		}
 
@@ -490,7 +490,7 @@ namespace Algolia.Search.Test
 		{
 			ClearTest();
 			// Add one object to be sure the test will not fail because index is empty
-			var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+			var res = _index.AddObject(JObject.Parse(@"{""objectID"":""myID"", ""name"":""San Francisco"", ""population"":805235}"));
 			_index.WaitTask(res["taskID"].ToString());
 			Assert.False(string.IsNullOrWhiteSpace(res["objectID"].ToString()));
 			res = _index.GetObject("myID");
@@ -512,7 +512,7 @@ namespace Algolia.Search.Test
 		{
 			ClearTest();
 			// Add one object to be sure the test will not fail because index is empty
-			var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+			var res = _index.AddObject(JObject.Parse(@"{""objectID"":""myID"", ""name"":""San Francisco"", ""population"":805235}"));
 			_index.WaitTask(res["taskID"].ToString());
 			res = _index.DeleteObject("myID");
 			Assert.False(string.IsNullOrWhiteSpace(res["deletedAt"].ToString()));
@@ -560,7 +560,7 @@ namespace Algolia.Search.Test
 		{
 			ClearTest();
 			// Add one object to be sure the test will not fail because index is empty
-			var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+			var res = _index.AddObject(JObject.Parse(@"{""objectID"":""myID"", ""name"":""San Francisco"", ""population"":805235}"));
 			_index.WaitTask(res["taskID"].ToString());
 
 			var key = _client.AddUserKey(new String[] { "search" });
@@ -604,7 +604,7 @@ namespace Algolia.Search.Test
 		{
 			ClearTest();
 			// Add one object to be sure the test will not fail because index is empty
-			var res = _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""population"":805235}"), "myID");
+			var res = _index.AddObject(JObject.Parse(@"{""objectID"":""myID"", ""name"":""San Francisco"", ""population"":805235}"));
 			_index.WaitTask(res["taskID"].ToString());
 
 			var key = _index.AddUserKey(new String[] { "search" });
@@ -1086,7 +1086,7 @@ namespace Algolia.Search.Test
 			requestOptions.AddExtraQueryParameters("ExtraQueryParamKey", "ExtraQueryParamValue");
 
 			// A Request without url parameters 
-			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""bob"", ""lastname"":""snow"", ""objectID"":""ananas""}"), requestOptions, null);
+			var task = _index.AddObject(JObject.Parse(@"{""firstname"":""bob"", ""lastname"":""snow"", ""objectID"":""ananas""}"), requestOptions);
 			_index.WaitTask(task["taskID"].ToString());
 			// A request with url parameters
 			var res = _index.GetObject("ananas", requestOptions, attributesToRetrieve);
