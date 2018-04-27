@@ -19,8 +19,8 @@ your C# code.
 You can find the full reference on [Algolia's website](https://www.algolia.com/doc/api-client/csharp/).
 
 
-## In this page
 
+1. **[Supported platforms](#supported-platforms)**
 
 
 1. **[Install](#install)**
@@ -47,6 +47,19 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 # Getting Started
 
 
+
+## Supported platforms
+
+Compatibilities:
+  * `.NET Framework 4.6`
+  * `.NET Framework 4.6.2`
+  * `.NET Core 1.0`
+  * `.NET Core 1.1`
+  * `.NET Core 2.0`
+  * `.NETStandard 1.6`
+  * `.NETStandard 1.3`
+  * `.NETStandard 2.0`
+  
 
 ## Install
 
