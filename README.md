@@ -53,6 +53,8 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 Compatibilities:
   * `.NET Framework 4.6`
   * `.NET Framework 4.6.2`
+  * `.NET Framework 4.7`
+  * `.NET Framework 4.7.1`
   * `.NET Core 1.0`
   * `.NET Core 1.1`
   * `.NET Core 2.0`
