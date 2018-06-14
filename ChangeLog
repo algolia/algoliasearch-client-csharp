@@ -1,6 +1,12 @@
 Changelog
 =========
 
+5.0.0 (2018-4-23)
+- Add Multi Cluster Management methods 
+- Add support for .NET 4.7 and .NET 4.7.1
+- Update some API methods to most recent signature: `SaveSynonym` and `AddObject`
+- Remove deprecated methods:`DeleteByQuery`, `ListUserKeys`, `GetUserKeyACL`, `GetAPIKeyACL`, `DeleteUserKey`, `AddUserKey`, `UpdateUserKey` and `ApiKey` methods of the `Index` class.
+
 4.2.2 (2018-1-31)
 - Deprecate GetApiKeyACL and rename to GetApiKey
 - Add validUntil parameter
