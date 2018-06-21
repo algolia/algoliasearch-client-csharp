@@ -11,6 +11,7 @@ namespace Algolia.Search.Test
 		public AlgoliaClient _client;
 
 		public Index _index;
+		public Analytics _analytics;
 		public IndexHelper<TestModel> _indexHelper;
 
 		// MCM specific
@@ -25,6 +26,7 @@ namespace Algolia.Search.Test
 			_testApplicationID = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
 			_client = new AlgoliaClient(_testApplicationID, _testApiKey);
 			_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
+			_analytics = new Analytics(_client);
 			_indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"));
 
 			_testApiKeyMCM = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY_MCM");
