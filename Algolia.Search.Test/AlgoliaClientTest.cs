@@ -1337,6 +1337,71 @@ namespace Algolia.Search.Test
 			Assert.True(answer["deletedAt"] != null);
 		}
 
+		// AB Test 
+
+		[Fact] 
+		public void TestABTest()
+		{
+			//var random = new Random().Next(1, 100000);
+			var indexName = GetSafeName("csharp-client-abtest");
+			var tmpIndex = _client.InitIndex(indexName);
+
+			var settings = new JObject();
+			var array = new JArray();
+			array.Add(indexName + "-alt");
+			settings.Add("replicas", array);
+
+			var task = tmpIndex.SetSettings(settings);
+			tmpIndex.WaitTask(task["taskID"].ToString());
+
+
+			var date = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ssZ");
+			var abtest = new JObject();
+			abtest.Add("name", "csharp client");
+			var variants = new JArray();
+			var var1 = new JObject();
+			var1.Add("trafficPercentage", 90);
+			var1.Add("index", indexName);
+			variants.Add(var1);
+			var var2 = new JObject();
+			var2.Add("trafficPercentage", 10);
+			var2.Add("index", indexName + "-alt");
+			variants.Add(var2);
+			abtest.Add("variants", variants);
+			abtest.Add("endAt", date);
+
+			// Add a new AB Test
+			task = _analytics.AddABTest(abtest);
+			var abtestID = (int) task["abTestID"];
+
+			_analytics.WaitTask(task["index"].ToString(), task["taskID"].ToString());
+
+			// Get it
+			var response = _analytics.GetABTest(abtestID);
+			Assert.Equal(response["abTestID"], abtestID);
+
+			// List it
+			Dictionary<string, object> parameters = new Dictionary<string, object>();
+			parameters.Add("offset", 0);
+			parameters.Add("limit", 5);
+			response = _analytics.GetABTests(parameters);
+			Assert.True((int) response["total"] >= (int) response["count"]);
+
+			// Stop it
+			task = _analytics.StopABTest(abtestID);
+			_analytics.WaitTask(task["index"].ToString(), task["taskID"].ToString());
+			response = _analytics.GetABTest(abtestID);
+			Assert.Equal(response["status"], "stopped");
+
+			// Delete it
+			task = _analytics.DeleteABTest(abtestID);
+			_analytics.WaitTask(task["index"].ToString(), task["taskID"].ToString());
+
+			_client.DeleteIndex(indexName);
+
+
+		}
+
 	}
 }
 #pragma warning restore 0618

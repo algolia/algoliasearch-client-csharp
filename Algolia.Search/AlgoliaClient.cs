@@ -494,6 +494,15 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
+		/// Get the analytics object initialized (no server call needed for initialization).
+		/// </summary>
+		/// <returns>An instance of the analytics object that exposes Index actions</returns>
+		public Analytics InitAnalytics()
+		{
+			return new Analytics(this);
+		}
+
+		/// <summary>
 		/// List all existing api keys with their associated ACLs.
 		/// </summary>
 		/// <returns>An object containing the list of keys.</returns>
@@ -873,7 +882,8 @@ namespace Algolia.Search
 		{
 			Search,
 			Write,
-			Read
+			Read,
+			Analytics
 		};
 
 		/// <summary>
@@ -893,6 +903,10 @@ namespace Algolia.Search
 			{
 				hosts = filterOnActiveHosts(_readHosts, true);
 				client = _searchHttpClient;
+			} else if (type == callType.Analytics)
+			{
+				hosts = new string[] { "analytics.algolia.com" };
+				client = _buildHttpClient;
 			}
 			else
 			{
