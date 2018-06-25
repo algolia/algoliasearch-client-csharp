@@ -1,5 +1,7 @@
 Changelog
 =========
+5.1.0 (2018-6-25)
+- Add ABTest APis. Found in the `Analytics` class.
 
 5.0.0 (2018-4-23)
 - Add Multi Cluster Management methods 
