@@ -228,10 +228,10 @@ search.start();
 
 ### Search
 
-- [Search an index](https://algolia.com/doc/api-reference/api-methods/search/?language=csharp)
+- [Search index](https://algolia.com/doc/api-reference/api-methods/search/?language=csharp)
 - [Search for facet values](https://algolia.com/doc/api-reference/api-methods/search-for-facet-values/?language=csharp)
 - [Search multiple indexes](https://algolia.com/doc/api-reference/api-methods/multiple-queries/?language=csharp)
-- [Browse an index](https://algolia.com/doc/api-reference/api-methods/browse/?language=csharp)
+- [Browse index](https://algolia.com/doc/api-reference/api-methods/browse/?language=csharp)
 
 
 
@@ -295,13 +295,24 @@ search.start();
 
 ### Query rules
 
-- [Save a single rule](https://algolia.com/doc/api-reference/api-methods/rules-save/?language=csharp)
-- [Batch save multiple rules](https://algolia.com/doc/api-reference/api-methods/rules-save-batch/?language=csharp)
-- [Get a rule](https://algolia.com/doc/api-reference/api-methods/rules-get/?language=csharp)
-- [Delete a single rule](https://algolia.com/doc/api-reference/api-methods/rules-delete/?language=csharp)
-- [Clear all rules](https://algolia.com/doc/api-reference/api-methods/rules-clear/?language=csharp)
-- [Search for rules](https://algolia.com/doc/api-reference/api-methods/rules-search/?language=csharp)
+- [Save rule](https://algolia.com/doc/api-reference/api-methods/rules-save/?language=csharp)
+- [Batch rules](https://algolia.com/doc/api-reference/api-methods/rules-save-batch/?language=csharp)
+- [Get rule](https://algolia.com/doc/api-reference/api-methods/rules-get/?language=csharp)
+- [Delete rule](https://algolia.com/doc/api-reference/api-methods/rules-delete/?language=csharp)
+- [Clear rules](https://algolia.com/doc/api-reference/api-methods/rules-clear/?language=csharp)
+- [Search rules](https://algolia.com/doc/api-reference/api-methods/rules-search/?language=csharp)
 - [Export rules](https://algolia.com/doc/api-reference/api-methods/rules-export/?language=csharp)
+
+
+
+
+### A/B Test
+
+- [Add A/B test](https://algolia.com/doc/api-reference/api-methods/add-ab-test/?language=csharp)
+- [Get A/B test](https://algolia.com/doc/api-reference/api-methods/get-ab-test/?language=csharp)
+- [List A/B tests](https://algolia.com/doc/api-reference/api-methods/get-ab-tests/?language=csharp)
+- [Stop A/B test](https://algolia.com/doc/api-reference/api-methods/stop-ab-test/?language=csharp)
+- [Delete A/B test](https://algolia.com/doc/api-reference/api-methods/delete-ab-test/?language=csharp)
 
 
 
