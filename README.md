@@ -310,7 +310,7 @@ search.start();
 
 - [Add A/B test](https://algolia.com/doc/api-reference/api-methods/add-ab-test/?language=csharp)
 - [Get A/B test](https://algolia.com/doc/api-reference/api-methods/get-ab-test/?language=csharp)
-- [List A/B tests](https://algolia.com/doc/api-reference/api-methods/get-ab-tests/?language=csharp)
+- [List A/B tests](https://algolia.com/doc/api-reference/api-methods/list-ab-tests/?language=csharp)
 - [Stop A/B test](https://algolia.com/doc/api-reference/api-methods/stop-ab-test/?language=csharp)
 - [Delete A/B test](https://algolia.com/doc/api-reference/api-methods/delete-ab-test/?language=csharp)
 
