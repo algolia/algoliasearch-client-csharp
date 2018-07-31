@@ -10,7 +10,7 @@ namespace Algolia.Search.Test
 
 		public IAlgoliaClient _client;
 
-		public Index _index;
+		public IIndex _index;
 		public Analytics _analytics;
 		public IndexHelper<TestModel> _indexHelper;
 

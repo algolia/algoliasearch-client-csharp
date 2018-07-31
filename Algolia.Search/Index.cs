@@ -40,8 +40,8 @@ namespace Algolia.Search
 	/// Contains all the functions related to one index.
 	/// You should use AlgoliaClient.initIndex(indexName) to instantiate this object.
 	/// </summary>
-	public class Index
-	{
+	public class Index : IIndex
+    {
 		protected IAlgoliaClient _client;
 		private string _indexName;
 		private string _urlIndexName;
@@ -615,19 +615,19 @@ namespace Algolia.Search
 		public class IndexIterator : IEnumerable<JObject>
 		{
 
-			Index index;
+		    IIndex index;
 			Query query;
 			string cursor;
 			RequestOptions requestOptions;
 
-			public IndexIterator(Index ind, Query q, string cursor)
+			public IndexIterator(IIndex ind, Query q, string cursor)
 			{
 				index = ind;
 				query = q;
 				this.cursor = cursor;
 			}
 
-			public IndexIterator(Index ind, Query q, string cursor, RequestOptions reqOpt) : this(ind, q, cursor)
+			public IndexIterator(IIndex ind, Query q, string cursor, RequestOptions reqOpt) : this(ind, q, cursor)
 			{
 				requestOptions = reqOpt;
 			}
@@ -645,7 +645,7 @@ namespace Algolia.Search
 
 		public class IndexEnumerator : IEnumerator<JObject>
 		{
-			Index index;
+		    IIndex index;
 			JObject answer;
 			int pos;
 			string cursor;
@@ -653,7 +653,7 @@ namespace Algolia.Search
 			JObject hit;
 			RequestOptions requestOptions;
 
-			public IndexEnumerator(Index ind, Query q, string cursor)
+			public IndexEnumerator(IIndex ind, Query q, string cursor)
 			{
 				index = ind;
 				query = q;
@@ -661,7 +661,7 @@ namespace Algolia.Search
 				Reset();
 			}
 
-			public IndexEnumerator(Index ind, Query q, string cursor, RequestOptions reqOpt)
+			public IndexEnumerator(IIndex ind, Query q, string cursor, RequestOptions reqOpt)
 			{
 				index = ind;
 				query = q;

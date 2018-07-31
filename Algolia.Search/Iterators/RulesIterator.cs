@@ -8,10 +8,10 @@ namespace Algolia.Search.Iterators
 {
 	public class RulesIterator : IEnumerable<JObject>
 	{
-		Index _index;
+	    IIndex _index;
 		int _hitsPerPage;
 
-		public RulesIterator(Index index, int hitsPerPage = 1000)
+		public RulesIterator(IIndex index, int hitsPerPage = 1000)
 		{
 			_index = index;
 			_hitsPerPage = hitsPerPage;
@@ -30,13 +30,13 @@ namespace Algolia.Search.Iterators
 
 	public class RulesEnumerator : IEnumerator<JObject>
 	{
-		Index _index;
+	    IIndex _index;
 		JObject _answer;
 		RuleQuery _ruleQuery;
 		int _pos;
 		JObject _rule;
 
-		public RulesEnumerator(Index index, int hitsPerPage = 1000)
+		public RulesEnumerator(IIndex index, int hitsPerPage = 1000)
 		{
 			_index = index;
 			_ruleQuery = new RuleQuery();

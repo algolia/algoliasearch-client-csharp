@@ -7,10 +7,10 @@ namespace Algolia.Search.Iterators
 {
 	public class SynonymsIterator : IEnumerable<JObject>
 	{
-		Index _index;
+	    IIndex _index;
 		int _hitsPerPage;
 
-		public SynonymsIterator(Index index, int hitsPerPage = 1000)
+		public SynonymsIterator(IIndex index, int hitsPerPage = 1000)
 		{
 			_index = index;
 			_hitsPerPage = hitsPerPage;
@@ -29,14 +29,14 @@ namespace Algolia.Search.Iterators
 
 	public class SynonymsEnumerator : IEnumerator<JObject>
 	{
-		Index _index;
+	    IIndex _index;
 		JObject _answer;
 		int _hitsPerPage;
 		int _page;
 		int _pos;
 		JObject _synonym;
 
-		public SynonymsEnumerator(Index index, int hitsPerPage = 1000)
+		public SynonymsEnumerator(IIndex index, int hitsPerPage = 1000)
 		{
 			_index = index;
 			_page = 0;
