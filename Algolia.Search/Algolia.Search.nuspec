@@ -11,8 +11,8 @@
     <iconUrl>http://www.algolia.com/download/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Algolia Search API Client for C#</description>
-    <releaseNotes>Changed to single project to .Net Core project</releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <releaseNotes>https://github.com/algolia/algoliasearch-client-csharp/releases</releaseNotes>
+    <copyright>Copyright 2018 Algolia</copyright>
     <tags>Search Engine Service Instant Typo-Tolerance Realtime</tags>
   </metadata>
   <files>

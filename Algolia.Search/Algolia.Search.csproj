@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Description>Algolia Search API Client for C#</Description>
     <AssemblyTitle>Algolia.Search</AssemblyTitle>
-    <VersionPrefix>2.0.2</VersionPrefix>
+    <VersionPrefix>5.2.0</VersionPrefix>
     <Authors>Algolia</Authors>
     <AssemblyName>Algolia.Search</AssemblyName>
     <PackageId>Algolia.Search</PackageId>
@@ -13,9 +13,9 @@
     <PackageLicenseUrl>https://github.com/algolia/algoliasearch-client-csharp/blob/master/LICENSE.TXT</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
-    <Version>5.1.0</Version>
-    <AssemblyVersion>5.1.0</AssemblyVersion>
-    <FileVersion>3.8.0.0</FileVersion>
+    <Version>5.2.0</Version>
+    <AssemblyVersion>5.2.0</AssemblyVersion>
+    <FileVersion>5.2.0.0</FileVersion>
     <TargetFrameworks>netstandard2.0;netstandard1.6;net45;net462;net471</TargetFrameworks>
   </PropertyGroup>
 
