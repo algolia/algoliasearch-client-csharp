@@ -4,31 +4,33 @@ using System.Linq;
 
 namespace Algolia.Search.Utils
 {
-	public class ArrayUtils<T>
-	{
-		Random _rand;
-		public ArrayUtils()
-		{
-			_rand = new Random();
-		}
+    public static class EnumerableExtensions
+    {
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+        {
+            return source.Shuffle(new Random());
+        }
 
-		public IEnumerable<T> Shuffle(IEnumerable<T> toBeShuffled)
-		{
-			var randomList = new List<KeyValuePair<int, T>>();
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (rng == null) throw new ArgumentNullException(nameof(rng));
 
-			foreach (var el in toBeShuffled)
-			{
-				randomList.Add(new KeyValuePair<int, T>(_rand.Next(), el));
-			}
+            return source.ShuffleIterator(rng);
+        }
 
-			T[] result = new T[toBeShuffled.Count()];
-			int index = 0;
-			foreach (KeyValuePair<int, T> pair in randomList.OrderBy(x => x.Key))
-			{
-				result[index] = pair.Value;
-				index++;
-			}
-			return result;
-		}
-	}
+        private static IEnumerable<T> ShuffleIterator<T>(
+            this IEnumerable<T> source, Random rng)
+        {
+            var buffer = source.ToList();
+            for (int i = 0; i < buffer.Count; i++)
+            {
+                int j = rng.Next(i, buffer.Count);
+                yield return buffer[j];
+
+                buffer[j] = buffer[i];
+            }
+        }
+    }
+
 }
