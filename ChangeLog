@@ -1,10 +1,17 @@
 Changelog
 =========
+
+5.2.0 (2018-8-1)
+- Code path optimisations / memory reduction
+- Add Client and Index Interfaces
+- Update xmldoc
+- Update JSON.Net to 11.0.2
+
 5.1.0 (2018-6-25)
 - Add ABTest APis. Found in the `Analytics` class.
 
 5.0.0 (2018-4-23)
-- Add Multi Cluster Management methods 
+- Add Multi Cluster Management methods
 - Add support for .NET 4.7 and .NET 4.7.1
 - Update some API methods to most recent signature: `SaveSynonym` and `AddObject`
 - Remove deprecated methods:`DeleteByQuery`, `ListUserKeys`, `GetUserKeyACL`, `GetAPIKeyACL`, `DeleteUserKey`, `AddUserKey`, `UpdateUserKey` and `ApiKey` methods of the `Index` class.
@@ -31,12 +38,12 @@ Changelog
 
 4.1.0 (2017-09-13)
 - Support for Rules.
-- Support for per-request options parameters. 
+- Support for per-request options parameters.
 **Warning**: This version will be source-code compatible with the previous one but not binary compatible. In the next version, we will fix that by adding overload methods.
 
 4.0 (2017-05-24)
 - Support to .NET Core 1.0 and 1.1, .Net Framework 4.6 and 4.6.2, .NETStandard 1.3 and 1.6
-- Dropping support to .NET Framework 4.0, 4.5 and PCL 
+- Dropping support to .NET Framework 4.0, 4.5 and PCL
 
 3.7.5 (2017-04-24)
 - Support to percentileComputation
@@ -105,7 +112,7 @@ Changelog
 
 3.4.3 (2016-02-05)
 - Added new SetSnippetEllipsisText query parameter to configure snippet ellipsis text
-	
+
 3.4.2 (2015-11-11)
 - Fixed a bug in the browse method when the cursor contains a '+'
 
@@ -115,23 +122,23 @@ Changelog
 
 3.3.3 (2015-10-13)
 - Fixed a typo in EnableRemoveStopWords method
-	
+
 3.3.2 (2015-10-12)
 ------------------
 - Added remove stop words query parameter
 - Added support of similar queries
-	
+
 3.3.1 (2015-10-09)
 ------------------
-	
+
 - Added support of multiple bounding box for geo-search
 - Added support of polygon for geo-search
 - Added support of automatic radius computation for geo-search
 - Added support of disableTypoToleranceOnAttributes
 - Fix generation of secured api key
 - Added support of unified filters
-	       
-	
+
+
 3.3.0 (2015-09-08)
 ------------------
 
@@ -202,7 +209,7 @@ Changelog
 ------------------
 - Fix multi-arch issue (version 3.0.0 was not installable on most architecture)
 - Added read timeout of 30s and put a host and the end of the list in case of error
-	
+
 3.0.0 (2015-01-02)
 ------------------
 
