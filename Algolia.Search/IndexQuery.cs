@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Algolia.Search
+﻿namespace Algolia.Search
 {
 	/// <summary>
 	/// Used for building index queries.
@@ -24,15 +22,8 @@ namespace Algolia.Search
 		/// <param name="query">The query.</param>
 		public IndexQuery(string index, Query query)
 		{
-			this.Index = index;
-			this.Query = query;
-		}
-
-		/// <summary>
-		/// Create a new index query.
-		/// </summary>
-		public IndexQuery()
-		{
+			Index = index;
+			Query = query;
 		}
 	}
 }

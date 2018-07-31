@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Algolia.Search.Models
 {
@@ -9,12 +8,7 @@ namespace Algolia.Search.Models
 		private readonly Dictionary<string, string> _queryParams = new Dictionary<string, string>();
 		private string _forwardedFor;
 
-		public RequestOptions()
-		{
-
-		}
-
-		public RequestOptions SetForwardedFor(string forwardedFor)
+	    public RequestOptions SetForwardedFor(string forwardedFor)
 		{
 			_forwardedFor = forwardedFor;
 			return this;
@@ -32,7 +26,7 @@ namespace Algolia.Search.Models
 			return this;
 		}
 
-		public Dictionary<String, String> GenerateExtraHeaders()
+		public Dictionary<string, string> GenerateExtraHeaders()
 		{
 			if (_forwardedFor != null)
 			{
@@ -41,18 +35,11 @@ namespace Algolia.Search.Models
 			return _headers;
 		}
 
-		public Dictionary<string, string> GenerateExtraQueryParams()
-		{
-			return _queryParams;
-		}
+		public Dictionary<string, string> GenerateExtraQueryParams() => _queryParams;
 
-		public override string ToString()
+	    public override string ToString()
 		{
-			return "RequestOptions{" +
-				   "headers=" + _headers +
-				   ", queryParams=" + _queryParams +
-				   ", forwardedFor='" + _forwardedFor + '\'' +
-				   '}';
+			return $"RequestOptions{{headers={_headers}, queryParams={_queryParams}, forwardedFor=\'{_forwardedFor}'\' }}";
 		}
 	}
 }

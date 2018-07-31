@@ -1,6 +1,6 @@
 ﻿/*
-* Copyright (c) 2013 Algolia
-* http://www.algolia.com/
+* Copyright (c) 2018 Algolia
+* https://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
 *  https://github.com/cmaneu/algoliasearch-client-csharp
 * 
@@ -49,37 +49,37 @@ namespace Algolia.Search
 		private string _indexName;
 		private string _urlIndexName;
 
-		/// <summary>
-		/// Index initialization (You should not call this constructor yourself).
-		/// </summary>
-		public Index(AlgoliaClient client, string indexName)
+        /// <summary>
+        /// Index initialization (You should not call this constructor yourself).
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="indexName"></param>
+        public Index(AlgoliaClient client, string indexName)
 		{
-			_client = client;
-			_indexName = indexName;
+			_client = client ?? throw new ArgumentNullException(nameof(client));
+			_indexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
 			_urlIndexName = WebUtility.UrlEncode(indexName);
 		}
 
-		/// <summary>
-		/// Add an object to this index.
-		/// </summary>
-		/// <param name="content">The object you want to add to the index.</param>
-		/// <param name="requestOptions"></param>
-		/// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
-		/// <param name="token"></param>
-		/// <returns>An object that contains an "objectID" attribute.</returns>
-		public Task<JObject> AddObjectAsync(object content, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
+	    /// <summary>
+	    /// Add an object to this index.
+	    /// </summary>
+	    /// <param name="content">The object you want to add to the index.</param>
+	    /// <param name="requestOptions"></param>
+	    /// <param name="token"></param>
+	    /// <returns>An object that contains an "objectID" attribute.</returns>
+	    public Task<JObject> AddObjectAsync(object content, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}", _urlIndexName), content, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", $"/1/indexes/{_urlIndexName}", content, token, requestOptions);
 		}
 
-		/// <summary>
-		/// Synchronously call <see cref="Index.AddObjectAsync"/>.
-		/// </summary>
-		/// <param name="content">The object you want to add to the index.</param>
-		/// <param name="requestOptions"></param>
-		/// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
-		/// <returns>An object that contains an "objectID" attribute.</returns>
-		public JObject AddObject(object content, RequestOptions requestOptions)
+	    /// <summary>
+	    /// Synchronously call <see cref="Index.AddObjectAsync"/>.
+	    /// </summary>
+	    /// <param name="content">The object you want to add to the index.</param>
+	    /// <param name="requestOptions"></param>
+	    /// <returns>An object that contains an "objectID" attribute.</returns>
+	    public JObject AddObject(object content, RequestOptions requestOptions)
 		{
 			return AddObjectAsync(content, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
 		}
@@ -103,7 +103,7 @@ namespace Algolia.Search
 			}
 			Dictionary<string, object> batch = new Dictionary<string, object>();
 			batch["requests"] = requests;
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", $"/1/indexes/{_urlIndexName}/batch", batch, token, requestOptions);
 		}
 
 		/// <summary>
@@ -129,19 +129,18 @@ namespace Algolia.Search
 		{
 			if (attributesToRetrieve == null)
 			{
-				return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token, requestOptions);
+				return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", $"/1/indexes/{_urlIndexName}/{WebUtility.UrlEncode(objectID)}", null, token, requestOptions);
 			}
-			else
-			{
-				string attributes = "";
-				foreach (string attr in attributesToRetrieve)
-				{
-					if (attributes.Length > 0)
-						attributes += ",";
-					attributes += WebUtility.UrlEncode(attr);
-				}
-				return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/{1}?attributesToRetrieve={2}", _urlIndexName, WebUtility.UrlEncode(objectID), attributes), null, token, requestOptions);
-			}
+
+		    string attributes = string.Empty;
+		    foreach (string attr in attributesToRetrieve)
+		    {
+		        if (attributes.Length > 0)
+		            attributes += Constants.Comma;
+
+		        attributes += WebUtility.UrlEncode(attr);
+		    }
+		    return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", $"/1/indexes/{_urlIndexName}/{WebUtility.UrlEncode(objectID)}?attributesToRetrieve={attributes}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -166,10 +165,10 @@ namespace Algolia.Search
 		public Task<JObject> GetObjectsAsync(IEnumerable<string> objectIDs, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
 			JArray requests = new JArray();
-			foreach (String id in objectIDs)
+			foreach (string id in objectIDs)
 			{
 				JObject request = new JObject();
-				request.Add("indexName", this._indexName);
+				request.Add("indexName", _indexName);
 				request.Add("objectID", id);
 				requests.Add(request);
 			}
@@ -199,10 +198,10 @@ namespace Algolia.Search
 				}
 			}
 
-			foreach (String id in objectIDs)
+			foreach (string id in objectIDs)
 			{
 				JObject request = new JObject();
-				request.Add("indexName", this._indexName);
+				request.Add("indexName", _indexName);
 				request.Add("objectID", id);
 				request.Add("attributesToRetrieve", attributes);
 				requests.Add(request);
@@ -256,7 +255,8 @@ namespace Algolia.Search
 				queryParam = "?createIfNotExists=false";
 			}
 			string objectID = (string)partialObject["objectID"];
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/{1}/partial{2}", _urlIndexName, WebUtility.UrlEncode(objectID), queryParam), partialObject, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST",
+			    $"/1/indexes/{_urlIndexName}/{WebUtility.UrlEncode(objectID)}/partial{queryParam}", partialObject, token, requestOptions);
 		}
 
 		/// <summary>
@@ -291,17 +291,15 @@ namespace Algolia.Search
 			{
 				Dictionary<string, object> request = new Dictionary<string, object>();
 				request["action"] = action;
-				if (obj["objectID"] == null)
-				{
-					throw new AlgoliaException("objectID is missing");
-				}
-				request["objectID"] = obj["objectID"];
+			    request["objectID"] = obj["objectID"] ?? throw new AlgoliaException("objectID is missing");
 				request["body"] = obj;
 				requests.Add(request);
 			}
-			Dictionary<string, object> batch = new Dictionary<string, object>();
-			batch["requests"] = requests;
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token, requestOptions);
+            var batch = new Dictionary<string, object>(1)
+            {
+                ["requests"] = requests
+            };
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", $"/1/indexes/{_urlIndexName}/batch", batch, token, requestOptions);
 		}
 
 		/// <summary>
@@ -329,8 +327,9 @@ namespace Algolia.Search
 			{
 				throw new AlgoliaException("objectID is missing");
 			}
-			string objectID = (string)obj["objectID"];
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), obj, token, requestOptions);
+			string objectId = (string)obj["objectID"];
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT",
+			    $"/1/indexes/{_urlIndexName}/{WebUtility.UrlEncode(objectId)}", obj, token, requestOptions);
 		}
 
 		/// <summary>
@@ -356,19 +355,15 @@ namespace Algolia.Search
 			List<object> requests = new List<object>();
 			foreach (JObject obj in objects)
 			{
-				Dictionary<string, object> request = new Dictionary<string, object>();
+				Dictionary<string, object> request = new Dictionary<string, object>(3);
 				request["action"] = "updateObject";
-				if (obj["objectID"] == null)
-				{
-					throw new AlgoliaException("objectID is missing");
-				}
-				request["objectID"] = obj["objectID"];
+			    request["objectID"] = obj["objectID"] ?? throw new AlgoliaException("objectID is missing");
 				request["body"] = obj;
 				requests.Add(request);
 			}
-			Dictionary<string, object> batch = new Dictionary<string, object>();
-			batch["requests"] = requests;
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token, requestOptions);
+
+		    var batch = new Dictionary<string, object>(1) {["requests"] = requests};
+		    return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", $"/1/indexes/{_urlIndexName}/batch", batch, token, requestOptions);
 		}
 
 		/// <summary>
@@ -392,8 +387,9 @@ namespace Algolia.Search
 		public Task<JObject> DeleteObjectAsync(string objectID, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
 			if (string.IsNullOrWhiteSpace(objectID))
-				throw new ArgumentOutOfRangeException("objectID", "objectID is required.");
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token, requestOptions);
+				throw new ArgumentOutOfRangeException(nameof(objectID), "objectID is required.");
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE",
+			    $"/1/indexes/{_urlIndexName}/{WebUtility.UrlEncode(objectID)}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -425,9 +421,9 @@ namespace Algolia.Search
 				request["body"] = obj;
 				requests.Add(request);
 			}
-			Dictionary<string, object> batch = new Dictionary<string, object>();
-			batch["requests"] = requests;
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/batch", _urlIndexName), batch, token, requestOptions);
+		    var batch = new Dictionary<string, object>(1) { ["requests"] = requests };
+
+            return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", $"/1/indexes/{_urlIndexName}/batch", batch, token, requestOptions);
 		}
 
 		/// <summary>
@@ -440,26 +436,29 @@ namespace Algolia.Search
 			return DeleteObjectsAsync(objects, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
 		}
 
-		/// <summary>
-		/// Delete all objects matching a query.
-		/// </summary>
-		/// <param name="query">The query.</param>
-		/// <param name="requestOptions"></param>
-		public Task<JObject> DeleteByAsync(Query query, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        /// <summary>
+        /// Delete all objects matching a query.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="requestOptions"></param>
+        /// <param name="token"></param>
+        public Task<JObject> DeleteByAsync(Query query, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
 		{
 			string paramsString = query.GetQueryString();
 			Dictionary<string, object> body = new Dictionary<string, object>();
 			body["params"] = paramsString;
 
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/deleteByQuery", _urlIndexName), body, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST",
+			    $"/1/indexes/{_urlIndexName}/deleteByQuery", body, token, requestOptions);
 		}
 
-		/// <summary>
-		/// Synchronously call <see cref="Index.DeleteByAsync"/>.
-		/// </summary>
-		/// <param name="query">The query.</param>
-		/// <param name="requestOptions"></param>
-		public JObject DeleteBy(Query query, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        /// <summary>
+        /// Synchronously call <see cref="Index.DeleteByAsync"/>.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="requestOptions"></param>
+        /// <param name="token"></param>
+        public JObject DeleteBy(Query query, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
 		{
 			return DeleteByAsync(query, requestOptions, token).GetAwaiter().GetResult();
 		}
@@ -477,11 +476,12 @@ namespace Algolia.Search
 			{
 				Dictionary<string, object> body = new Dictionary<string, object>();
 				body["params"] = paramsString;
-				return _client.ExecuteRequest(AlgoliaClient.callType.Search, "POST", string.Format("/1/indexes/{0}/query", _urlIndexName), body, token, requestOptions);
+				return _client.ExecuteRequest(AlgoliaClient.callType.Search, "POST",
+				    $"/1/indexes/{_urlIndexName}/query", body, token, requestOptions);
 			}
 			else
 			{
-				return _client.ExecuteRequest(AlgoliaClient.callType.Search, "GET", string.Format("/1/indexes/{0}", _urlIndexName), null, token, requestOptions);
+				return _client.ExecuteRequest(AlgoliaClient.callType.Search, "GET", $"/1/indexes/{_urlIndexName}", null, token, requestOptions);
 			}
 		}
 
@@ -502,11 +502,12 @@ namespace Algolia.Search
 		/// <param name="requestOptions"></param>
 		/// <param name="timeToWait"></param>
 		/// <param name="token"></param>
-		async public Task WaitTaskAsync(string taskID, RequestOptions requestOptions, int timeToWait = 100, CancellationToken token = default(CancellationToken))
+		public async Task WaitTaskAsync(string taskID, RequestOptions requestOptions, int timeToWait = 100, CancellationToken token = default(CancellationToken))
 		{
 			while (true)
 			{
-				JObject obj = await _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/task/{1}", _urlIndexName, taskID), null, token, requestOptions).ConfigureAwait(_client.getContinueOnCapturedContext());
+				JObject obj = await _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET",
+				    $"/1/indexes/{_urlIndexName}/task/{taskID}", null, token, requestOptions).ConfigureAwait(_client.getContinueOnCapturedContext());
 				string status = (string)obj["status"];
 				if (status.Equals("published"))
 					return;
@@ -528,13 +529,16 @@ namespace Algolia.Search
 			WaitTaskAsync(taskID, requestOptions, timeToWait, default(CancellationToken)).GetAwaiter().GetResult();
 		}
 
-		/// <summary>
-		/// Get the index settings.
-		/// </summary>
-		/// <returns>An object containing the settings.</returns>
-		public Task<JObject> GetSettingsAsync(RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
+        /// <summary>
+        /// Get the index settings.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="token"></param>
+        /// <returns>An object containing the settings.</returns>
+        public Task<JObject> GetSettingsAsync(RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/settings?getVersion=2", _urlIndexName), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET",
+			    $"/1/indexes/{_urlIndexName}/settings?getVersion=2", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -558,16 +562,17 @@ namespace Algolia.Search
 		{
 			string param = "";
 			if (page != 0)
-				param += string.Format("?page={0}", page);
+				param += $"?page={page.ToString()}";
 
 			if (hitsPerPage != 1000)
 			{
 				if (param.Length == 0)
-					param += string.Format("?hitsPerPage={0}", hitsPerPage);
+					param += $"?hitsPerPage={hitsPerPage.ToString()}";
 				else
-					param += string.Format("&hitsPerPage={0}", hitsPerPage);
+					param += $"&hitsPerPage={hitsPerPage.ToString()}";
 			}
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse{1}", _urlIndexName, param), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET",
+			    $"/1/indexes/{_urlIndexName}/browse{param}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -593,9 +598,10 @@ namespace Algolia.Search
 			string cursorParam = "";
 			if (cursor != null && cursor.Length > 0)
 			{
-				cursorParam = string.Format("&cursor={0}", WebUtility.UrlEncode(cursor));
+				cursorParam = $"&cursor={WebUtility.UrlEncode(cursor)}";
 			}
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}{2}", _urlIndexName, q.GetQueryString(), cursorParam), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET",
+			    $"/1/indexes/{_urlIndexName}/browse?{q.GetQueryString()}{cursorParam}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -619,14 +625,14 @@ namespace Algolia.Search
 
 			public IndexIterator(Index ind, Query q, string cursor)
 			{
-				this.index = ind;
-				this.query = q;
+				index = ind;
+				query = q;
 				this.cursor = cursor;
 			}
 
 			public IndexIterator(Index ind, Query q, string cursor, RequestOptions reqOpt) : this(ind, q, cursor)
 			{
-				this.requestOptions = reqOpt;
+				requestOptions = reqOpt;
 			}
 
 			public IEnumerator<JObject> GetEnumerator()
@@ -652,18 +658,18 @@ namespace Algolia.Search
 
 			public IndexEnumerator(Index ind, Query q, string cursor)
 			{
-				this.index = ind;
-				this.query = q;
+				index = ind;
+				query = q;
 				this.cursor = cursor;
 				Reset();
 			}
 
 			public IndexEnumerator(Index ind, Query q, string cursor, RequestOptions reqOpt)
 			{
-				this.index = ind;
-				this.query = q;
+				index = ind;
+				query = q;
 				this.cursor = cursor;
-				this.requestOptions = reqOpt;
+				requestOptions = reqOpt;
 				Reset();
 			}
 
@@ -732,21 +738,24 @@ namespace Algolia.Search
 			return BrowseAll(q, null);
 		}
 
-		/// <summary>
-		///  Browse all index contents.
-		/// </summary>
-		/// <param name="q">The query parameters for the browse.</param>
-		public IndexIterator BrowseAll(Query q, RequestOptions requestOptions)
+        /// <summary>
+        ///  Browse all index contents.
+        /// </summary>
+        /// <param name="q">The query parameters for the browse.</param>
+        /// <param name="requestOptions"></param>
+        public IndexIterator BrowseAll(Query q, RequestOptions requestOptions)
 		{
 			return new IndexIterator(this, q, "", requestOptions);
 		}
 
-		/// <summary>
-		/// Delete the index contents without removing settings and index specific API keys.
-		/// </summary>
-		public Task<JObject> ClearIndexAsync(RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
+        /// <summary>
+        /// Delete the index contents without removing settings and index specific API keys.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="token"></param>
+        public Task<JObject> ClearIndexAsync(RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/clear", _urlIndexName), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", $"/1/indexes/{_urlIndexName}/clear", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -808,15 +817,18 @@ namespace Algolia.Search
 		public Task<JObject> SetSettingsAsync(JObject settings, RequestOptions requestOptions, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
 		{
 			string changeSettingsPath = forwardToReplicas
-				? string.Format("/1/indexes/{0}/settings?forwardToReplicas={1}", _urlIndexName, forwardToReplicas.ToString().ToLower())
-				: string.Format("/1/indexes/{0}/settings", _urlIndexName);
+				? $"/1/indexes/{_urlIndexName}/settings?forwardToReplicas={forwardToReplicas.ToString().ToLower()}"
+			    : $"/1/indexes/{_urlIndexName}/settings";
 			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", changeSettingsPath, settings, token, requestOptions);
 		}
 
-		/// <summary>
-		/// Synchronously call <see cref="Index.SetSettingsAsync"/>.
-		/// </summary>
-		public JObject SetSettings(JObject settings, RequestOptions requestOptions, bool forwardToReplicas = false)
+        /// <summary>
+        /// Synchronously call <see cref="Index.SetSettingsAsync"/>.
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="forwardToReplicas"></param>
+        public JObject SetSettings(JObject settings, RequestOptions requestOptions, bool forwardToReplicas = false)
 		{
 			return SetSettingsAsync(settings, requestOptions, forwardToReplicas, default(CancellationToken)).GetAwaiter().GetResult();
 		}
@@ -828,7 +840,7 @@ namespace Algolia.Search
 		/// <param name="disjunctiveFacets">The array of disjunctive facets.</param>
 		/// <param name="requestOptions"></param>
 		/// <param name="refinements">The current refinements. Example: { "my_facet1" => ["my_value1", "my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }.</param>
-		async public Task<JObject> SearchDisjunctiveFacetingAsync(Query query, IEnumerable<string> disjunctiveFacets, RequestOptions requestOptions, Dictionary<string, IEnumerable<string>> refinements = null)
+		public async Task<JObject> SearchDisjunctiveFacetingAsync(Query query, IEnumerable<string> disjunctiveFacets, RequestOptions requestOptions, Dictionary<string, IEnumerable<string>> refinements = null)
 		{
 			if (refinements == null)
 				refinements = new Dictionary<string, IEnumerable<string>>();
@@ -855,13 +867,13 @@ namespace Algolia.Search
 					{
 						// disjunctive refinements are ORed
 						if (!first)
-							or += ',';
+							or += Constants.Comma;
 						first = false;
-						or += String.Format("{0}:{1}", key, value);
+						or += $"{key}:{value}";
 					}
 					else
 					{
-						filters.Add(String.Format("{0}:{1}", key, value));
+						filters.Add($"{key}:{value}");
 					}
 				}
 				// Add or
@@ -889,13 +901,13 @@ namespace Algolia.Search
 						{
 							// disjunctive refinements are ORed
 							if (!first)
-								or += ',';
+								or += Constants.Comma;
 							first = false;
-							or += String.Format("{0}:{1}", key, value);
+							or += $"{key}:{value}";
 						}
 						else
 						{
-							filters.Add(String.Format("{0}:{1}", key, value));
+							filters.Add($"{key}:{value}");
 						}
 					}
 					// Add or
@@ -904,7 +916,7 @@ namespace Algolia.Search
 						filters.Add(or + ')');
 					}
 				}
-				queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(0).EnableAnalytics(false).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new String[] { disjunctiveFacet }).SetFacetFilters(filters)));
+				queries.Add(new IndexQuery(_indexName, query.clone().SetPage(0).SetNbHitsPerPage(0).EnableAnalytics(false).SetAttributesToRetrieve(new List<string>()).SetAttributesToHighlight(new List<string>()).SetAttributesToSnippet(new List<string>()).SetFacets(new string[] { disjunctiveFacet }).SetFacetFilters(filters)));
 			}
 
 			JObject answers = await _client.MultipleQueriesAsync(queries, requestOptions, "none", default(CancellationToken)).ConfigureAwait(_client.getContinueOnCapturedContext());
@@ -943,10 +955,14 @@ namespace Algolia.Search
 			return aggregatedAnswer;
 		}
 
-		/// <summary>
-		/// Synchronously call <see cref="Index.UpdateUserKeyAsync"/>.
-		/// </summary>
-		public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, RequestOptions requestOptions, Dictionary<string, IEnumerable<string>> refinements = null)
+        /// <summary>
+        /// Synchronously call <see cref="Index.UpdateUserKeyAsync"/>.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="disjunctiveFacets"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="refinements"></param>
+        public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, RequestOptions requestOptions, Dictionary<string, IEnumerable<string>> refinements = null)
 		{
 			return SearchDisjunctiveFacetingAsync(query, disjunctiveFacets, requestOptions, refinements).GetAwaiter().GetResult();
 		}
@@ -1032,15 +1048,15 @@ namespace Algolia.Search
 			body["query"] = query;
 			if (types != null)
 			{
-				string typeStr = string.Join(",", types);
-				if (typeStr != null)
-					body["type"] = typeStr;
+			    string typeStr = string.Join(",", types);
+			    body["type"] = typeStr;
 			}
 			if (page.HasValue)
 				body["page"] = page.Value;
 			if (hitsPerPage.HasValue)
 				body["hitsPerPage"] = hitsPerPage.Value;
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/synonyms/search", _urlIndexName), body, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST",
+			    $"/1/indexes/{_urlIndexName}/synonyms/search", body, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1064,7 +1080,8 @@ namespace Algolia.Search
 		/// <param name="token"></param>
 		public Task<JObject> GetSynonymAsync(string objectID, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/synonyms/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET",
+			    $"/1/indexes/{_urlIndexName}/synonyms/{WebUtility.UrlEncode(objectID)}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1086,7 +1103,8 @@ namespace Algolia.Search
 		/// <param name="token"></param>
 		public Task<JObject> DeleteSynonymAsync(string objectID, RequestOptions requestOptions, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas ? "true" : "false"), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE",
+			    $"/1/indexes/{_urlIndexName}/synonyms/{WebUtility.UrlEncode(objectID)}?forwardToReplicas={(forwardToReplicas ? "true" : "false")}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1108,7 +1126,8 @@ namespace Algolia.Search
 		/// <param name="token"></param>
 		public Task<JObject> ClearSynonymsAsync(RequestOptions requestOptions, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/clear?forwardToReplicas={1}", _urlIndexName, forwardToReplicas ? "true" : "false"), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST",
+			    $"/1/indexes/{_urlIndexName}/synonyms/clear?forwardToReplicas={(forwardToReplicas ? "true" : "false")}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1131,7 +1150,8 @@ namespace Algolia.Search
 		/// <param name="token"></param>
 		public Task<JObject> BatchSynonymsAsync(IEnumerable<object> objects, RequestOptions requestOptions, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/synonyms/batch?replaceExistingSynonyms={1}&forwardToReplicas={2}", _urlIndexName, replaceExistingSynonyms ? "true" : "false", forwardToReplicas ? "true" : "false"), objects, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST",
+			    $"/1/indexes/{_urlIndexName}/synonyms/batch?replaceExistingSynonyms={(replaceExistingSynonyms ? "true" : "false")}&forwardToReplicas={(forwardToReplicas ? "true" : "false")}", objects, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1156,7 +1176,8 @@ namespace Algolia.Search
 		/// <param name="token"></param>
 		public Task<JObject> SaveSynonymAsync(string objectID, object content, RequestOptions requestOptions, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/synonyms/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas ? "true" : "false"), content, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT",
+			    $"/1/indexes/{_urlIndexName}/synonyms/{WebUtility.UrlEncode(objectID)}?forwardToReplicas={(forwardToReplicas ? "true" : "false")}", content, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1213,7 +1234,8 @@ namespace Algolia.Search
 			string paramsString = queryParams.GetQueryString();
 			Dictionary<string, object> body = new Dictionary<string, object>();
 			body["params"] = paramsString;
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST",
+			    $"/1/indexes/{_urlIndexName}/facets/{facetName}/query", body, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1231,10 +1253,10 @@ namespace Algolia.Search
 				queryParams = new Query();
 			}
 			queryParams.AddCustomParameter("facetQuery", facetQuery);
-			string paramsString = queryParams.GetQueryString();
-			Dictionary<string, object> body = new Dictionary<string, object>();
-			body["params"] = paramsString;
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/facets/{1}/query", _urlIndexName, facetName), body, token, requestOptions);
+            Dictionary<string, object> body = new Dictionary<string, object>();
+			body["params"] = queryParams.GetQueryString();
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST",
+			    $"/1/indexes/{_urlIndexName}/facets/{facetName}/query", body, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1258,7 +1280,8 @@ namespace Algolia.Search
 			    throw new AlgoliaException("objectID cannot be empty");
 			}
 
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT", string.Format("/1/indexes/{0}/rules/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas.ToString().ToLower()), queryRule, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "PUT",
+			    $"/1/indexes/{_urlIndexName}/rules/{WebUtility.UrlEncode(objectID)}?forwardToReplicas={forwardToReplicas.ToString().ToLower()}", queryRule, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1285,7 +1308,8 @@ namespace Algolia.Search
 				throw new AlgoliaException("objectID is missing");
 			}
 
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/rules/{1}", _urlIndexName, WebUtility.UrlEncode(objectID)), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET",
+			    $"/1/indexes/{_urlIndexName}/rules/{WebUtility.UrlEncode(objectID)}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1306,7 +1330,8 @@ namespace Algolia.Search
 		/// <param name="token"></param>
 		public Task<JObject> SearchRulesAsync(RequestOptions requestOptions, RuleQuery query = null, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/rules/search", _urlIndexName), query, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST",
+			    $"/1/indexes/{_urlIndexName}/rules/search", query, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1333,7 +1358,8 @@ namespace Algolia.Search
 				throw new AlgoliaException("objectID is missing");
 			}
 
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE", string.Format("/1/indexes/{0}/rules/{1}?forwardToReplicas={2}", _urlIndexName, WebUtility.UrlEncode(objectID), forwardToReplicas.ToString().ToLower()), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "DELETE",
+			    $"/1/indexes/{_urlIndexName}/rules/{WebUtility.UrlEncode(objectID)}?forwardToReplicas={forwardToReplicas.ToString().ToLower()}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1355,7 +1381,8 @@ namespace Algolia.Search
 		/// <param name="token"></param>
 		public Task<JObject> ClearRulesAsync(RequestOptions requestOptions, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/rules/clear?forwardToReplicas={1}", _urlIndexName, forwardToReplicas.ToString().ToLower()), null, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST",
+			    $"/1/indexes/{_urlIndexName}/rules/clear?forwardToReplicas={forwardToReplicas.ToString().ToLower()}", null, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1368,15 +1395,18 @@ namespace Algolia.Search
 			return ClearRulesAsync(requestOptions, forwardToReplicas, default(CancellationToken)).GetAwaiter().GetResult();
 		}
 
-		/// <summary>
-		///  Save a batch of new rules in the index.
-		/// </summary>
-		/// <param name="queryRules">Batch of rules to be added to the index (must contain an objectID attribute).</param>
-		/// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
-		/// <param name="clearExistingRules">whether to clear existing rules in the index or not (defaults to false)</param>
-		public Task<JObject> BatchRulesAsync(IEnumerable<JObject> queryRules, RequestOptions requestOptions, bool forwardToReplicas = false, bool clearExistingRules = false, CancellationToken token = default(CancellationToken))
+        /// <summary>
+        ///  Save a batch of new rules in the index.
+        /// </summary>
+        /// <param name="queryRules">Batch of rules to be added to the index (must contain an objectID attribute).</param>
+        /// <param name="requestOptions"></param>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        /// <param name="clearExistingRules">whether to clear existing rules in the index or not (defaults to false)</param>
+        /// <param name="token"></param>
+        public Task<JObject> BatchRulesAsync(IEnumerable<JObject> queryRules, RequestOptions requestOptions, bool forwardToReplicas = false, bool clearExistingRules = false, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/rules/batch?forwardToReplicas={1}&clearExistingRules={2}", _urlIndexName, forwardToReplicas.ToString().ToLower(), clearExistingRules.ToString().ToLower()), queryRules, token, requestOptions);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST",
+			    $"/1/indexes/{_urlIndexName}/rules/batch?forwardToReplicas={forwardToReplicas.ToString().ToLower()}&clearExistingRules={clearExistingRules.ToString().ToLower()}", queryRules, token, requestOptions);
 		}
 
 		/// <summary>
@@ -1411,6 +1441,9 @@ namespace Algolia.Search
 		/// </summary>
 		/// <param name="content">The object you want to add to the index.</param>
 
+		/// <summary>
+		/// Add object to index
+		/// </summary>
 		/// <param name="objectId">Optional objectID you want to attribute to this object (if the attribute already exists the old object will be overwritten).</param>
 		/// <returns>An object that contains an "objectID" attribute.</returns>
 		public JObject AddObject(object content)
@@ -1613,7 +1646,7 @@ namespace Algolia.Search
 		/// <param name="taskID">The id of the task returned by server.</param>
 		/// <param name="timeToWait"></param>
 		/// <param name="token"></param>
-		async public Task WaitTaskAsync(string taskID, int timeToWait = 100, CancellationToken token = default(CancellationToken))
+		public async Task WaitTaskAsync(string taskID, int timeToWait = 100, CancellationToken token = default(CancellationToken))
 		{ await WaitTaskAsync(taskID, null, timeToWait, token); }
 
 		/// <summary>
@@ -1624,11 +1657,12 @@ namespace Algolia.Search
 		public void WaitTask(string taskID, int timeToWait = 100)
 		{ WaitTask(taskID, null, timeToWait); }
 
-		/// <summary>
-		/// Get the index settings.
-		/// </summary>
-		/// <returns>An object containing the settings.</returns>
-		public Task<JObject> GetSettingsAsync(CancellationToken token = default(CancellationToken))
+        /// <summary>
+        /// Get the index settings.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns>An object containing the settings.</returns>
+        public Task<JObject> GetSettingsAsync(CancellationToken token = default(CancellationToken))
 		{ return GetSettingsAsync(null, token); }
 
 		/// <summary>
@@ -1664,10 +1698,11 @@ namespace Algolia.Search
 		public Task<JObject> BrowseFromAsync(Query q, string cursor, CancellationToken token = default(CancellationToken))
 		{ return BrowseFromAsync(q, cursor, null, token); }
 
-		/// <summary>
-		/// Delete the index contents without removing settings and index specific API keys.
-		/// </summary>
-		public Task<JObject> ClearIndexAsync(CancellationToken token = default(CancellationToken))
+        /// <summary>
+        /// Delete the index contents without removing settings and index specific API keys.
+        /// </summary>
+        /// <param name="token"></param>
+        public Task<JObject> ClearIndexAsync(CancellationToken token = default(CancellationToken))
 		{ return ClearIndexAsync(null, token); }
 
 		/// <summary>
@@ -1727,10 +1762,12 @@ namespace Algolia.Search
 		public Task<JObject> SetSettingsAsync(JObject settings, bool forwardToReplicas = false, CancellationToken token = default(CancellationToken))
 		{ return SetSettingsAsync(settings, null, forwardToReplicas, token); }
 
-		/// <summary>
-		/// Synchronously call <see cref="Index.SetSettingsAsync"/>.
-		/// </summary>
-		public JObject SetSettings(JObject settings, bool forwardToReplicas = false)
+        /// <summary>
+        /// Synchronously call <see cref="Index.SetSettingsAsync"/>.
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="forwardToReplicas"></param>
+        public JObject SetSettings(JObject settings, bool forwardToReplicas = false)
 		{ return SetSettings(settings, null, forwardToReplicas); }
 
 		/// <summary>
@@ -1740,13 +1777,16 @@ namespace Algolia.Search
 		/// <param name="disjunctiveFacets">The array of disjunctive facets.</param>
 		/// <param name="requestOptions"></param>
 		/// <param name="refinements">The current refinements. Example: { "my_facet1" => ["my_value1", "my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }.</param>
-		async public Task<JObject> SearchDisjunctiveFacetingAsync(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
+		public async Task<JObject> SearchDisjunctiveFacetingAsync(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
 		{ return await SearchDisjunctiveFacetingAsync(query, disjunctiveFacets, null, refinements); }
 
-		/// <summary>
-		/// Synchronously call <see cref="Index.UpdateUserKeyAsync"/>.
-		/// </summary>
-		public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
+        /// <summary>
+        /// Synchronously call <see cref="Index.UpdateUserKeyAsync"/>.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="disjunctiveFacets"></param>
+        /// <param name="refinements"></param>
+        public JObject SearchDisjunctiveFaceting(Query query, IEnumerable<string> disjunctiveFacets, Dictionary<string, IEnumerable<string>> refinements = null)
 		{ return SearchDisjunctiveFaceting(query, disjunctiveFacets, null, refinements); }
 
 		/// <summary>
@@ -1993,13 +2033,14 @@ namespace Algolia.Search
 		public JObject ClearRules(bool forwardToReplicas = false)
 		{ return ClearRules(null, forwardToReplicas); }
 
-		/// <summary>
-		///  Save a batch of new rules in the index.
-		/// </summary>
-		/// <param name="queryRules">Batch of rules to be added to the index (must contain an objectID attribute).</param>
-		/// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
-		/// <param name="clearExistingRules">whether to clear existing rules in the index or not (defaults to false)</param>
-		public Task<JObject> BatchRulesAsync(IEnumerable<JObject> queryRules, bool forwardToReplicas = false, bool clearExistingRules = false, CancellationToken token = default(CancellationToken))
+        /// <summary>
+        ///  Save a batch of new rules in the index.
+        /// </summary>
+        /// <param name="queryRules">Batch of rules to be added to the index (must contain an objectID attribute).</param>
+        /// <param name="forwardToReplicas">whether to forward to replicas or not (defaults to false)</param>
+        /// <param name="clearExistingRules">whether to clear existing rules in the index or not (defaults to false)</param>
+        /// <param name="token"></param>
+        public Task<JObject> BatchRulesAsync(IEnumerable<JObject> queryRules, bool forwardToReplicas = false, bool clearExistingRules = false, CancellationToken token = default(CancellationToken))
 		{ return BatchRulesAsync(queryRules, null, forwardToReplicas, clearExistingRules, token); }
 
 		/// <summary>
