@@ -19,7 +19,7 @@ namespace Algolia.Search
 		/// <param name="client">The AlgoliaClient to use for index management.</param>
 		/// <param name="indexName">The name of the Algolia index.</param>
 		/// <param name="objectIdField">The name of the field to use for mapping to the Algolia objectID.</param>
-		public IndexHelper(AlgoliaClient client, string indexName, string objectIdField = "Id")
+		public IndexHelper(IAlgoliaClient client, string indexName, string objectIdField = "Id")
 			: base(client, indexName)
 		{
 			// Save
@@ -275,7 +275,7 @@ namespace Algolia.Search
 		/// <summary>
 		/// The Algolia client
 		/// </summary>
-		public AlgoliaClient _client
+		public IAlgoliaClient _client
 		{
 			get { return base._client; }
 		}

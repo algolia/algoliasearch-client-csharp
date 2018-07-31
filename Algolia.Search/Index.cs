@@ -3,17 +3,17 @@
 * https://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
 *  https://github.com/cmaneu/algoliasearch-client-csharp
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,10 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Threading;
@@ -45,7 +42,7 @@ namespace Algolia.Search
 	/// </summary>
 	public class Index
 	{
-		protected AlgoliaClient _client;
+		protected IAlgoliaClient _client;
 		private string _indexName;
 		private string _urlIndexName;
 
@@ -54,7 +51,7 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="client"></param>
         /// <param name="indexName"></param>
-        public Index(AlgoliaClient client, string indexName)
+        public Index(IAlgoliaClient client, string indexName)
 		{
 			_client = client ?? throw new ArgumentNullException(nameof(client));
 			_indexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
@@ -161,7 +158,7 @@ namespace Algolia.Search
 		/// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
 		/// <param name="requestOptions"></param>
 		/// <param name="token"></param>
-		/// <returns></returns> 
+		/// <returns></returns>
 		public Task<JObject> GetObjectsAsync(IEnumerable<string> objectIDs, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
 			JArray requests = new JArray();
@@ -184,7 +181,7 @@ namespace Algolia.Search
 		/// <param name="attributesToRetrieve"></param>
 		/// <param name="requestOptions"></param>
 		/// <param name="token"></param>
-		/// <returns></returns> 
+		/// <returns></returns>
 		public Task<JObject> GetObjectsAsync(IEnumerable<string> objectIDs, IEnumerable<string> attributesToRetrieve, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
 		{
 			JArray requests = new JArray();
@@ -217,7 +214,7 @@ namespace Algolia.Search
 		/// </summary>
 		/// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
 		/// <param name="requestOptions"></param>
-		/// <returns></returns> 
+		/// <returns></returns>
 		public JObject GetObjects(IEnumerable<string> objectIDs, RequestOptions requestOptions)
 		{
 			return GetObjectsAsync(objectIDs, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
@@ -229,7 +226,7 @@ namespace Algolia.Search
 		/// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
 		/// <param name="attributesToRetrieve">list of attributes to retrieve.</param>
 		/// <param name="requestOptions"></param>
-		/// <returns></returns> 
+		/// <returns></returns>
 		public JObject GetObjects(IEnumerable<string> objectIDs, IEnumerable<string> attributesToRetrieve, RequestOptions requestOptions)
 		{
 			return GetObjectsAsync(objectIDs, attributesToRetrieve, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
@@ -774,25 +771,25 @@ namespace Algolia.Search
 		///     - minWordSizefor1Typo: (integer) the minimum number of characters to accept one typo (default = 3).
 		///     - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default = 7).
 		///     - hitsPerPage: (integer) the number of hits per page (default = 10).
-		///     - attributesToRetrieve: (array of strings) default list of attributes to retrieve in objects. 
+		///     - attributesToRetrieve: (array of strings) default list of attributes to retrieve in objects.
 		///     If set to null, all attributes are retrieved.
-		///     - attributesToHighlight: (array of strings) default list of attributes to highlight. 
+		///     - attributesToHighlight: (array of strings) default list of attributes to highlight.
 		///     If set to null, all indexed attributes are highlighted.
 		///     - attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is attributeName:nbWords).
 		///     By default no snippet is computed. If set to null, no snippet is computed.
 		///     - searchableAttributes(formerly attributesToIndex): (array of strings) the list of fields you want to index.
 		///     If set to null, all textual and numerical attributes of your objects are indexed, but you should update it to get optimal results.
 		///     This parameter has two important uses:
-		///     - Limit the attributes to index: For example if you store a binary image in base64, you want to store it and be able to 
+		///     - Limit the attributes to index: For example if you store a binary image in base64, you want to store it and be able to
 		///     retrieve it but you don't want to search in the base64 string.
-		///     - Control part of the ranking*: (see the ranking parameter for full explanation) Matches in attributes at the beginning of 
-		///     the list will be considered more important than matches in attributes further down the list. 
-		///     In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable 
+		///     - Control part of the ranking*: (see the ranking parameter for full explanation) Matches in attributes at the beginning of
+		///     the list will be considered more important than matches in attributes further down the list.
+		///     In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable
 		///     this behavior if you add your attribute inside `unordered(AttributeName)`, for example searchableAttributes: ["title", "unordered(text)"].
-		///     - attributesForFaceting: (array of strings) The list of fields you want to use for faceting. 
+		///     - attributesForFaceting: (array of strings) The list of fields you want to use for faceting.
 		///     All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
 		///     - ranking: (array of strings) controls the way results are sorted.
-		///     We have six available criteria: 
+		///     We have six available criteria:
 		///     - typo: sort according to number of typos,
 		///     - geo: sort according to decreassing distance when performing a geo-location based search,
 		///     - proximity: sort according to the proximity of query words in hits,
@@ -802,7 +799,7 @@ namespace Algolia.Search
 		///     The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
 		///     - customRanking: (array of strings) lets you specify part of the ranking.
 		///     The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
-		///     For example `"customRanking" => ["desc(population)", "asc(name)"]`  
+		///     For example `"customRanking" => ["desc(population)", "asc(name)"]`
 		///     - queryType: Select how the query words are interpreted, it can be one of the following value:
 		///     - prefixAll: all query words are interpreted as prefixes,
 		///     - prefixLast: only the last word is interpreted as a prefix (default behavior),
@@ -1141,7 +1138,7 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
-		/// Add or Replace a list of synonyms 
+		/// Add or Replace a list of synonyms
 		/// </summary>
 		/// <param name="objects"></param>
 		/// <param name="requestOptions"></param>
@@ -1421,8 +1418,8 @@ namespace Algolia.Search
 			return BatchRulesAsync(queryRules, requestOptions, forwardToReplicas, clearExistingRules, default(CancellationToken)).GetAwaiter().GetResult();
 		}
 
-		/* 
-         * These are overloaded methods of everything above in order to avoid binary incompatibility 
+		/*
+         * These are overloaded methods of everything above in order to avoid binary incompatibility
          * when adding all the requestOptions parameters
          */
 
@@ -1490,7 +1487,7 @@ namespace Algolia.Search
 		/// </summary>
 		/// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
 		/// <param name="token"></param>
-		/// <returns></returns> 
+		/// <returns></returns>
 		public Task<JObject> GetObjectsAsync(IEnumerable<string> objectIDs, CancellationToken token = default(CancellationToken))
 		{ return GetObjectsAsync(objectIDs, (RequestOptions)null, token); }
 
@@ -1500,7 +1497,7 @@ namespace Algolia.Search
 		/// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
 		/// <param name="attributesToRetrieve"></param>
 		/// <param name="token"></param>
-		/// <returns></returns> 
+		/// <returns></returns>
 		public Task<JObject> GetObjectsAsync(IEnumerable<string> objectIDs, IEnumerable<string> attributesToRetrieve, CancellationToken token = default(CancellationToken))
 		{ return GetObjectsAsync(objectIDs, attributesToRetrieve, null, token); }
 
@@ -1508,7 +1505,7 @@ namespace Algolia.Search
 		/// Synchronously call <see cref="Index.GetObjectsAsync"/>.
 		/// </summary>
 		/// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
-		/// <returns></returns> 
+		/// <returns></returns>
 		public JObject GetObjects(IEnumerable<string> objectIDs)
 		{ return GetObjects(objectIDs, (RequestOptions)null); }
 
@@ -1517,7 +1514,7 @@ namespace Algolia.Search
 		/// </summary>
 		/// <param name="objectIDs">An array of unique identifiers of the objects to retrieve.</param>
 		/// <param name="attributesToRetrieve">list of attributes to retrieve.</param>
-		/// <returns></returns> 
+		/// <returns></returns>
 		public JObject GetObjects(IEnumerable<string> objectIDs, IEnumerable<string> attributesToRetrieve)
 		{ return GetObjects(objectIDs, attributesToRetrieve, null); }
 
@@ -1720,25 +1717,25 @@ namespace Algolia.Search
 		///     - minWordSizefor1Typo: (integer) the minimum number of characters to accept one typo (default = 3).
 		///     - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default = 7).
 		///     - hitsPerPage: (integer) the number of hits per page (default = 10).
-		///     - attributesToRetrieve: (array of strings) default list of attributes to retrieve in objects. 
+		///     - attributesToRetrieve: (array of strings) default list of attributes to retrieve in objects.
 		///     If set to null, all attributes are retrieved.
-		///     - attributesToHighlight: (array of strings) default list of attributes to highlight. 
+		///     - attributesToHighlight: (array of strings) default list of attributes to highlight.
 		///     If set to null, all indexed attributes are highlighted.
 		///     - attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is attributeName:nbWords).
 		///     By default no snippet is computed. If set to null, no snippet is computed.
 		///     - searchableAttributes(formerly attributesToIndex): (array of strings) the list of fields you want to index.
 		///     If set to null, all textual and numerical attributes of your objects are indexed, but you should update it to get optimal results.
 		///     This parameter has two important uses:
-		///     - Limit the attributes to index: For example if you store a binary image in base64, you want to store it and be able to 
+		///     - Limit the attributes to index: For example if you store a binary image in base64, you want to store it and be able to
 		///     retrieve it but you don't want to search in the base64 string.
-		///     - Control part of the ranking*: (see the ranking parameter for full explanation) Matches in attributes at the beginning of 
-		///     the list will be considered more important than matches in attributes further down the list. 
-		///     In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable 
+		///     - Control part of the ranking*: (see the ranking parameter for full explanation) Matches in attributes at the beginning of
+		///     the list will be considered more important than matches in attributes further down the list.
+		///     In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable
 		///     this behavior if you add your attribute inside `unordered(AttributeName)`, for example searchableAttributes: ["title", "unordered(text)"].
-		///     - attributesForFaceting: (array of strings) The list of fields you want to use for faceting. 
+		///     - attributesForFaceting: (array of strings) The list of fields you want to use for faceting.
 		///     All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
 		///     - ranking: (array of strings) controls the way results are sorted.
-		///     We have six available criteria: 
+		///     We have six available criteria:
 		///     - typo: sort according to number of typos,
 		///     - geo: sort according to decreassing distance when performing a geo-location based search,
 		///     - proximity: sort according to the proximity of query words in hits,
@@ -1748,7 +1745,7 @@ namespace Algolia.Search
 		///     The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
 		///     - customRanking: (array of strings) lets you specify part of the ranking.
 		///     The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
-		///     For example `"customRanking" => ["desc(population)", "asc(name)"]`  
+		///     For example `"customRanking" => ["desc(population)", "asc(name)"]`
 		///     - queryType: Select how the query words are interpreted, it can be one of the following value:
 		///     - prefixAll: all query words are interpreted as prefixes,
 		///     - prefixLast: only the last word is interpreted as a prefix (default behavior),
@@ -1879,7 +1876,7 @@ namespace Algolia.Search
 		{ return ClearSynonyms(null, forwardToReplicas); }
 
 		/// <summary>
-		/// Add or Replace a list of synonyms 
+		/// Add or Replace a list of synonyms
 		/// </summary>
 		/// <param name="objects"></param>
 		/// <param name="forwardToReplicas">Forward the operation to the replica indices</param>

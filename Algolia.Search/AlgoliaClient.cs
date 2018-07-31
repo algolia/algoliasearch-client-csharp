@@ -43,7 +43,7 @@ namespace Algolia.Search
 	/// Client for the Algolia Search cloud API.
 	/// You should instantiate a Client object with your ApplicationID, ApiKey and Hosts to start using Algolia Search API
 	/// </summary>
-	public class AlgoliaClient
+	public class AlgoliaClient : IAlgoliaClient
 	{
 		private IList<string> _readHosts;
 		private IList<string> _writeHosts;

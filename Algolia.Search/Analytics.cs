@@ -9,9 +9,9 @@ namespace Algolia.Search
 {
     public class Analytics
     {
-		private AlgoliaClient _client;
+		private IAlgoliaClient _client;
 
-		public Analytics(AlgoliaClient client)
+		public Analytics(IAlgoliaClient client)
 		{
 			_client = client;
 		}
