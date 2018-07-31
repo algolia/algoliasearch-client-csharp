@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http.Headers;
-using Algolia.Search.Models;
 using Newtonsoft.Json.Converters;
 
 namespace Algolia.Search
 {
-    internal class Constants
+    internal static class Constants
     {
         public static readonly List<string> AnalyticsUrl = new List<string>(1) { "analytics.algolia.com" };
         public const string Ampersand = "&";
