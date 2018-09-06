@@ -960,6 +960,22 @@ namespace Algolia.Search
 			this.restrictIndices = indices;
 			return this;
 		}
+		
+		/// <summary>
+		/// Specify the query language(s) (using language ISO code) for the
+		/// given query. It enables language-specific features that may have an
+		/// effect on `removeStopWords` or `ignorePlurals` for instance.
+		/// </summary>
+		/// <param name="queryLanguages">
+		/// List of query languages (using language
+		/// ISO code such as "de" or "fi".
+		/// </param>
+		/// <returns></returns>
+		public Query SetQueryLanguages(IEnumerable<string> queryLanguages)
+		{
+			this.queryLanguages = queryLanguages;
+			return this;
+		}
 
 		/// <summary>
 		/// Restrict an API key to a specific IPv4
@@ -1534,6 +1550,20 @@ namespace Algolia.Search
 					first = false;
 				}
 			}
+			if (queryLanguages != null)
+			{
+				if (stringBuilder.Length > 0)
+					stringBuilder += '&';
+				stringBuilder += "queryLanguages=";
+				bool first = true;
+				foreach (string lang in this.queryLanguages)
+				{
+					if (!first)
+						stringBuilder += ',';
+					stringBuilder += WebUtility.UrlEncode(lang);
+					first = false;
+				}
+			}
 			if (restrictSources != null)
 			{
 				if (stringBuilder.Length > 0)
@@ -1620,5 +1650,6 @@ namespace Algolia.Search
 		private string referers;
 		private bool? enableRules;
 		private IEnumerable<string> ruleContexts;
+		private IEnumerable<string> queryLanguages;
 	}
 }
