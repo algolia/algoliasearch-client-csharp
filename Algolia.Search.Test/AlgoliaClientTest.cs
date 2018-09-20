@@ -1,19 +1,16 @@
-using System;
-using System.Collections;
-using Xunit;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using Algolia.Search;
-using System.Threading;
-using Algolia.Search.Models;
-using RichardSzalay.MockHttp;
-using System.Net.Http;
-using System.Net;
-using Newtonsoft.Json;
-using Xunit.Sdk;
 using Algolia.Search.Iterators;
+using Algolia.Search.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RichardSzalay.MockHttp;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Algolia.Search.Test
 {
@@ -989,20 +986,31 @@ namespace Algolia.Search.Test
 
         private JObject generateRuleStub(string objectId = "my-rule", bool? enabled = null)
         {
-            JObject condition = new JObject();
-            condition.Add("pattern", "some text");
-            condition.Add("anchoring", "is");
+            JObject condition = new JObject
+            {
+                { "pattern", "some text" },
+                { "anchoring", "is" }
+            };
 
-            JObject consequence = new JObject();
-            JObject parameters = new JObject();
-            parameters.Add("query", "other text");
-            consequence.Add("params", parameters);
+            JObject parameters = new JObject
+            {
+                { "query", "other text" }
+            };
 
-            JObject rule = new JObject();
-            rule.Add("objectID", objectId);
-            rule.Add("condition", condition);
-            rule.Add("consequence", consequence);
-            rule.Add("enabled", enabled);
+            JObject consequence = new JObject
+            {
+                { "params", parameters }
+            };
+
+            JObject rule = new JObject
+            {
+                { "objectID", objectId },
+                { "condition", condition },
+                { "consequence", consequence }
+            };
+
+            if (enabled.HasValue)
+                rule.Add("enabled", enabled);
 
             return rule;
         }
@@ -1169,6 +1177,50 @@ namespace Algolia.Search.Test
             var rulesIterator = new RulesIterator(_index, 3);
             var rulesFetched = rulesIterator.ToList();
             Assert.Equal(0, rulesFetched.Count);
+        }
+
+        [Fact]
+        public void TestDemote()
+        {
+            ClearTest();
+
+            // Create three records
+            List<JObject> objs = new List<JObject>
+            {
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""other text"", ""objectID"":""ID2""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""other text"", ""objectID"":""ID3""}")
+            };
+            var task = _index.AddObjects(objs);
+            _index.WaitTask(task["taskID"].ToString());
+            var res = _index.Search(new Query(""));
+            Assert.Equal(3, res["nbHits"].ToObject<int>());
+
+            // Hide two of them with a rule
+            JObject hideRule = generateRuleStub("ruleID1");
+
+            // Test if hidden
+            hideRule["consequence"]["hide"] = JArray.Parse(@"[{""objectID"":""ID1""}]");
+
+            var hideRuleTask = _index.SaveRule(hideRule);
+            _index.WaitTask(hideRuleTask["taskID"].ToString());
+
+            var demoteSearch = _index.Search(new Query("some text"));
+            Assert.Equal(2, demoteSearch["nbHits"].ToObject<int>());
+
+            // Delete records after test
+            List<string> ids = new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            };
+            task = _index.DeleteObjects(ids);
+            _index.WaitTask(task["taskID"].ToString());
+            var ret = _index.Search(new Query(""));
         }
 
         [Fact]
