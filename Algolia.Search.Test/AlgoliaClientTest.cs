@@ -984,15 +984,15 @@ namespace Algolia.Search.Test
 
         // Query Rule tests
 
-        private JObject generateRuleStub(string objectId = "my-rule", bool? enabled = null)
+        private JObject generateRuleStub(string objectId = "my-rule", bool? enabled = null, JObject conditionParams = null, JObject consequenceParams = null)
         {
-            JObject condition = new JObject
+            JObject condition = conditionParams ?? new JObject
             {
                 { "pattern", "some text" },
                 { "anchoring", "is" }
             };
 
-            JObject parameters = new JObject
+            JObject parameters = consequenceParams ?? new JObject
             {
                 { "query", "other text" }
             };
@@ -1177,6 +1177,112 @@ namespace Algolia.Search.Test
             var rulesIterator = new RulesIterator(_index, 3);
             var rulesFetched = rulesIterator.ToList();
             Assert.Equal(0, rulesFetched.Count);
+        }
+
+        [Fact]
+        public void TestEditsAttributeRemoveWord()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject>
+            {
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Vendame"", ""objectID"":""ID2""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Vendame"", ""objectID"":""ID3""}")
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "Barninger" },
+                { "anchoring", "contains" }
+            };
+
+            JObject queryParam = new JObject {
+                { "edits", JArray.Parse(@"[{""type"":""remove"",""delete"":""Barninger""}]")}
+            };
+
+            JObject consequenceParamsRemove = new JObject
+            {
+                { "query", queryParam }
+            };
+
+            // set the remove attribute to remove "badword"
+            JObject shouldApplyRule = generateRuleStub("ruleID1", conditionParams: conditionParams, consequenceParams: consequenceParamsRemove);
+
+            var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
+            _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
+
+            // if the rule correctly applies we should get three records because we delete baringer from the query
+            var result = _index.Search(new Query("Barninger"));
+            Assert.Equal(3, result["nbHits"].ToObject<int>());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
+        }
+
+        [Fact]
+        public void TestEditsAttributeReplaceWord()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject>
+            {
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Vendame"", ""objectID"":""ID2""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Vendame"", ""objectID"":""ID3""}")
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // Creating JObject "edits"
+            JObject conditionParams =  new JObject
+            {
+                { "pattern", "Barninger" },
+                { "anchoring", "contains" }
+            };
+
+            // if the query contains baringer replace baringer by some text
+            JObject queryParam = new JObject {
+                { "edits", JArray.Parse(@"[{""type"":""replace"",""delete"":""Barninger"",""insert"":""Vendame""}]")}
+            };
+
+            JObject consequenceParamsRemove = new JObject
+            {
+                { "query", queryParam }
+            };
+
+            // set the remove attribute to remove "badword"
+            JObject shouldApplyRule = generateRuleStub("ruleID1", conditionParams: conditionParams, consequenceParams: consequenceParamsRemove);
+
+            var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
+            _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
+
+            // if the rule correctly applies we should get only two records with "Barringer" removed from the query
+            var result = _index.Search(new Query("Barninger")); 
+            Assert.Equal(2, result["nbHits"].ToObject<int>());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
         }
 
         [Fact]
