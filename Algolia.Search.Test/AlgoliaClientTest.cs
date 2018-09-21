@@ -1180,6 +1180,48 @@ namespace Algolia.Search.Test
         }
 
         [Fact]
+        public void TestMatchTheEmptyQuery()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject>
+            {
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""other text"", ""objectID"":""ID2""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""other text"", ""objectID"":""ID3""}")
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // Adds the possibility to match the empty query. Only the “is” anchoring is allowed for the empty query
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "" },
+                { "anchoring", "is" }
+            };
+
+            JObject matchTheEmptyQueryRule = generateRuleStub("ruleID1", conditionParams: conditionParams);
+            var matchTheEmptyQueryRuleTask = _index.SaveRule(matchTheEmptyQueryRule);
+            _index.WaitTask(matchTheEmptyQueryRuleTask["taskID"].ToString());
+
+            // if the rule correctly applies we should get two records because it will match the empty string and replace it with "other text"
+            var result = _index.Search(new Query(""));
+            Assert.Equal(2, result["nbHits"].ToObject<int>());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
+        }
+
+        [Fact]
         public void TestEditsAttributeRemoveWord()
         {
             ClearTest();
