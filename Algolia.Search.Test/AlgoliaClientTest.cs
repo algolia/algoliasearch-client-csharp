@@ -1180,12 +1180,12 @@ namespace Algolia.Search.Test
         }
 
         [Fact]
-        public void TestDemote()
+        public void TestTimeFrameValidity()
         {
             ClearTest();
 
             // Create three records
-            List<JObject> objs = new List<JObject>
+            var task = _index.AddObjects(new List<JObject>
             {
                 JObject.Parse(@"{""firstname"":""Jimmie"", 
                           ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
@@ -1193,8 +1193,70 @@ namespace Algolia.Search.Test
                           ""lastname"":""other text"", ""objectID"":""ID2""}"),
                 JObject.Parse(@"{""firstname"":""Jimmie"", 
                           ""lastname"":""other text"", ""objectID"":""ID3""}")
-            };
-            var task = _index.AddObjects(objs);
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // Should Apply Rule (replace some text by other text)
+            // time frames must be in unix timestamp 
+            JObject shouldApplyRule = generateRuleStub("ruleID1", true);
+            long from = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+            long until = new DateTimeOffset(DateTime.UtcNow.AddDays(10)).ToUnixTimeSeconds();
+            shouldApplyRule["validity"] = JArray.Parse($@"[{{""from"":{from.ToString()},""until"":{until.ToString()}}}]");
+
+            var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
+            _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
+
+            // if the rule correctly apply we should get 2 records because "some text" will be replaced by "other text" and we have two records with "other text"
+            var shouldSuccessSearch = _index.Search(new Query("some text"));
+            Assert.Equal(2, shouldSuccessSearch["nbHits"].ToObject<int>());
+            Assert.True(shouldSuccessSearch["hits"][0]["lastname"].ToString().Contains("other text"));
+            Assert.True(shouldSuccessSearch["hits"][1]["lastname"].ToString().Contains("other text"));
+
+            var shouldApplyRuleDeleteTask = _index.DeleteRule("ruleID1");
+            _index.WaitTask(shouldApplyRuleDeleteTask["taskID"].ToString());
+
+            // Should not apply rule (replace some text by other text)
+            // creating a new rule that shouldn't apply to the query
+            JObject shouldNotApplyRule = generateRuleStub("ruleID2", false);
+            long fromNotApply = new DateTimeOffset(DateTime.UtcNow.AddDays(-100)).ToUnixTimeSeconds();
+            long untilNotApply = new DateTimeOffset(DateTime.UtcNow.AddDays(-50)).ToUnixTimeSeconds();
+            shouldNotApplyRule["validity"] = JArray.Parse($@"[{{""from"":{fromNotApply.ToString()},""until"":{untilNotApply.ToString()}}}]");
+
+            var saveShouldNotApplyRuleTask = _index.SaveRule(shouldNotApplyRule);
+            _index.WaitTask(saveShouldNotApplyRuleTask["taskID"].ToString());
+
+            // if the rule don't apply we should receive 0 records because we don't have records having "some text"
+            var result = _index.Search(new Query("some text"));
+            Assert.Equal(0, result["nbHits"].ToObject<int>());
+
+            var shouldNotApplyRuleDeleteTask = _index.DeleteRule("ruleID1");
+            _index.WaitTask(shouldNotApplyRuleDeleteTask["taskID"].ToString());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
+        }
+
+        [Fact]
+        public void TestDemote()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject>
+            {
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""other text"", ""objectID"":""ID2""}"),
+                JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""other text"", ""objectID"":""ID3""}")
+            });
             _index.WaitTask(task["taskID"].ToString());
             var res = _index.Search(new Query(""));
             Assert.Equal(3, res["nbHits"].ToObject<int>());
@@ -1212,13 +1274,12 @@ namespace Algolia.Search.Test
             Assert.Equal(2, demoteSearch["nbHits"].ToObject<int>());
 
             // Delete records after test
-            List<string> ids = new List<string>
+            task = _index.DeleteObjects(new List<string>
             {
                 "ID1",
                 "ID2",
                 "ID3"
-            };
-            task = _index.DeleteObjects(ids);
+            });
             _index.WaitTask(task["taskID"].ToString());
             var ret = _index.Search(new Query(""));
         }
