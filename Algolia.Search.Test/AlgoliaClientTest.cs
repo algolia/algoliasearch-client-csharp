@@ -1180,19 +1180,83 @@ namespace Algolia.Search.Test
         }
 
         [Fact]
+        public void TestDisjunctiveFacetFilters()
+        {
+            ClearTest();
+
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "test {facet:lastname}" },
+                { "anchoring", "contains" },
+            };
+
+            JArray automaticFacetFilters = new JArray {new JObject
+            {
+                { "facet", "lastname" },
+                { "disjunctive", true },
+                { "score", 42 }
+            }};
+
+            JObject consequenceParams = new JObject
+            {
+                { "automaticFacetFilters", automaticFacetFilters }
+            };
+
+            JObject disjunctiveFilterRule = generateRuleStub("ruleID1", conditionParams: conditionParams, consequenceParams: consequenceParams);
+            var matchTheEmptyQueryRuleTask = _index.SaveRule(disjunctiveFilterRule);
+            _index.WaitTask(matchTheEmptyQueryRuleTask["taskID"].ToString());
+
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True((bool)rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["disjunctive"]);
+            Assert.True(rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["facet"].ToString().Contains("lastname"));
+            Assert.True((int)rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["score"] == 42);
+        }
+
+        [Fact]
+        public void TestConjunctiveFacetFilters()
+        {
+            ClearTest();
+
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "test {facet:lastname}" },
+                { "anchoring", "contains" },
+            };
+
+            JArray automaticFacetFilters = new JArray {new JObject
+            {
+                { "facet", "lastname" },
+                { "disjunctive", false },
+                { "score", 42 }
+            }};
+
+            JObject consequenceParams = new JObject
+            {
+                { "automaticFacetFilters", automaticFacetFilters }
+            };
+
+            JObject disjunctiveFilterRule = generateRuleStub("ruleID1", conditionParams: conditionParams, consequenceParams: consequenceParams);
+            var matchTheEmptyQueryRuleTask = _index.SaveRule(disjunctiveFilterRule);
+            _index.WaitTask(matchTheEmptyQueryRuleTask["taskID"].ToString());
+
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.False((bool)rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["disjunctive"]);
+            Assert.True(rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["facet"].ToString().Contains("lastname"));
+            Assert.True((int)rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["score"] == 42);
+        }
+
+        [Fact]
         public void TestMatchTheEmptyQuery()
         {
             ClearTest();
 
             // Create three records
-            var task = _index.AddObjects(new List<JObject>
-            {
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""other text"", ""objectID"":""ID2""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""other text"", ""objectID"":""ID3""}")
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID3"}}
             });
             _index.WaitTask(task["taskID"].ToString());
 
@@ -1206,6 +1270,12 @@ namespace Algolia.Search.Test
             JObject matchTheEmptyQueryRule = generateRuleStub("ruleID1", conditionParams: conditionParams);
             var matchTheEmptyQueryRuleTask = _index.SaveRule(matchTheEmptyQueryRule);
             _index.WaitTask(matchTheEmptyQueryRuleTask["taskID"].ToString());
+
+            // test if the rule is well created
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True(string.IsNullOrWhiteSpace(rules["hits"][0]["condition"]["pattern"].ToString()));
+            Assert.True(rules["hits"][0]["condition"]["anchoring"].ToString().Contains("is"));
 
             // if the rule correctly applies we should get two records because it will match the empty string and replace it with "other text"
             var result = _index.Search(new Query(""));
@@ -1227,14 +1297,10 @@ namespace Algolia.Search.Test
             ClearTest();
 
             // Create three records
-            var task = _index.AddObjects(new List<JObject>
-            {
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Vendame"", ""objectID"":""ID2""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Vendame"", ""objectID"":""ID3""}")
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "Vendame" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "Vendame" },{"objectID","ID3"}}
             });
             _index.WaitTask(task["taskID"].ToString());
 
@@ -1245,8 +1311,8 @@ namespace Algolia.Search.Test
             };
 
             JObject queryParam = new JObject {
-                { "edits", JArray.Parse(@"[{""type"":""remove"",""delete"":""Barninger""}]")}
-            };
+                { "edits", new JArray {new JObject {{ "type", "remove" },{ "delete", "Barninger" }}}
+            }};
 
             JObject consequenceParamsRemove = new JObject
             {
@@ -1258,6 +1324,11 @@ namespace Algolia.Search.Test
 
             var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
             _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
+
+            // test if the rule is well created
+            var rules = _index.SearchRules();
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["type"].ToString().Contains("remove"));
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["delete"].ToString().Contains("Barninger"));
 
             // if the rule correctly applies we should get three records because we delete baringer from the query
             var result = _index.Search(new Query("Barninger"));
@@ -1279,19 +1350,15 @@ namespace Algolia.Search.Test
             ClearTest();
 
             // Create three records
-            var task = _index.AddObjects(new List<JObject>
-            {
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Vendame"", ""objectID"":""ID2""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Vendame"", ""objectID"":""ID3""}")
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "Vendame" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "Vendame" },{"objectID","ID3"}}
             });
             _index.WaitTask(task["taskID"].ToString());
 
             // Creating JObject "edits"
-            JObject conditionParams =  new JObject
+            JObject conditionParams = new JObject
             {
                 { "pattern", "Barninger" },
                 { "anchoring", "contains" }
@@ -1299,8 +1366,8 @@ namespace Algolia.Search.Test
 
             // if the query contains baringer replace baringer by some text
             JObject queryParam = new JObject {
-                { "edits", JArray.Parse(@"[{""type"":""replace"",""delete"":""Barninger"",""insert"":""Vendame""}]")}
-            };
+                { "edits", new JArray { new JObject {{ "type", "replace" },{ "delete", "Barninger" },{ "insert", "Vendame" }}}
+            }};
 
             JObject consequenceParamsRemove = new JObject
             {
@@ -1313,8 +1380,14 @@ namespace Algolia.Search.Test
             var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
             _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
 
+            // test if the rule is well created
+            var rules = _index.SearchRules();
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["type"].ToString().Contains("replace"));
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["delete"].ToString().Contains("Barninger"));
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["insert"].ToString().Contains("Vendame"));
+
             // if the rule correctly applies we should get only two records with "Barringer" removed from the query
-            var result = _index.Search(new Query("Barninger")); 
+            var result = _index.Search(new Query("Barninger"));
             Assert.Equal(2, result["nbHits"].ToObject<int>());
 
             // Delete records after test
@@ -1333,14 +1406,10 @@ namespace Algolia.Search.Test
             ClearTest();
 
             // Create three records
-            var task = _index.AddObjects(new List<JObject>
-            {
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""other text"", ""objectID"":""ID2""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""other text"", ""objectID"":""ID3""}")
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID3"}}
             });
             _index.WaitTask(task["taskID"].ToString());
 
@@ -1349,10 +1418,21 @@ namespace Algolia.Search.Test
             JObject shouldApplyRule = generateRuleStub("ruleID1", true);
             long from = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
             long until = new DateTimeOffset(DateTime.UtcNow.AddDays(10)).ToUnixTimeSeconds();
-            shouldApplyRule["validity"] = JArray.Parse($@"[{{""from"":{from.ToString()},""until"":{until.ToString()}}}]");
+
+            shouldApplyRule["validity"] = new JArray {new JObject
+            {
+                { "from", from },
+                { "until", until }
+            }};
 
             var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
             _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
+
+            // test if the rule is well created 
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True(rules["hits"][0]["validity"].ToString().Contains(from.ToString()));
+            Assert.True(rules["hits"][0]["validity"].ToString().Contains(until.ToString()));
 
             // if the rule correctly apply we should get 2 records because "some text" will be replaced by "other text" and we have two records with "other text"
             var shouldSuccessSearch = _index.Search(new Query("some text"));
@@ -1368,10 +1448,21 @@ namespace Algolia.Search.Test
             JObject shouldNotApplyRule = generateRuleStub("ruleID2", false);
             long fromNotApply = new DateTimeOffset(DateTime.UtcNow.AddDays(-100)).ToUnixTimeSeconds();
             long untilNotApply = new DateTimeOffset(DateTime.UtcNow.AddDays(-50)).ToUnixTimeSeconds();
-            shouldNotApplyRule["validity"] = JArray.Parse($@"[{{""from"":{fromNotApply.ToString()},""until"":{untilNotApply.ToString()}}}]");
+
+            shouldNotApplyRule["validity"] = new JArray {new JObject
+            {
+                { "from", fromNotApply },
+                { "until", untilNotApply}
+            }};
 
             var saveShouldNotApplyRuleTask = _index.SaveRule(shouldNotApplyRule);
             _index.WaitTask(saveShouldNotApplyRuleTask["taskID"].ToString());
+
+            // test if the rule is well created 
+            var rulesNotApply = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True(rulesNotApply["hits"][0]["validity"].ToString().Contains(fromNotApply.ToString()));
+            Assert.True(rulesNotApply["hits"][0]["validity"].ToString().Contains(untilNotApply.ToString()));
 
             // if the rule don't apply we should receive 0 records because we don't have records having "some text"
             var result = _index.Search(new Query("some text"));
@@ -1396,28 +1487,31 @@ namespace Algolia.Search.Test
             ClearTest();
 
             // Create three records
-            var task = _index.AddObjects(new List<JObject>
-            {
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""Barninger"", ""objectID"":""ID1""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""other text"", ""objectID"":""ID2""}"),
-                JObject.Parse(@"{""firstname"":""Jimmie"", 
-                          ""lastname"":""other text"", ""objectID"":""ID3""}")
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID3"}}
             });
             _index.WaitTask(task["taskID"].ToString());
-            var res = _index.Search(new Query(""));
-            Assert.Equal(3, res["nbHits"].ToObject<int>());
 
-            // Hide two of them with a rule
+            // Hide one of the record with a rule
             JObject hideRule = generateRuleStub("ruleID1");
 
-            // Test if hidden
-            hideRule["consequence"]["hide"] = JArray.Parse(@"[{""objectID"":""ID1""}]");
+            // Create the rule and save it
+            hideRule["consequence"]["hide"] = new JArray {new JObject
+            {
+                { "objectID", "ID1" }
+            }};
 
             var hideRuleTask = _index.SaveRule(hideRule);
             _index.WaitTask(hideRuleTask["taskID"].ToString());
 
+            // test if the rule is well created
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True(rules["hits"][0]["consequence"]["hide"].ToString().Contains("ID1"));
+
+            // then test the rule with a little search
             var demoteSearch = _index.Search(new Query("some text"));
             Assert.Equal(2, demoteSearch["nbHits"].ToObject<int>());
 
