@@ -1,24 +1,21 @@
-using System;
-using System.Collections;
-using Xunit;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using Algolia.Search;
-using System.Threading;
-using Algolia.Search.Models;
-using RichardSzalay.MockHttp;
-using System.Net.Http;
-using System.Net;
-using Newtonsoft.Json;
-using Xunit.Sdk;
 using Algolia.Search.Iterators;
+using Algolia.Search.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RichardSzalay.MockHttp;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Algolia.Search.Test
 {
 #pragma warning disable 0618
-	public class AlgoliaClientTest : BaseTest
+    public class AlgoliaClientTest : BaseTest
 	{
 		[Fact]
 		public void TaskAddObjects()
@@ -985,28 +982,40 @@ namespace Algolia.Search.Test
 			Assert.Equal("bob", res["firstname"].ToString());
 		}
 
-		// Query Rule tests
+        // Query Rule tests
 
-		private JObject generateRuleStub(string objectId = "my-rule")
-		{
-			JObject condition = new JObject();
-			condition.Add("pattern", "some text");
-			condition.Add("anchoring", "is");
+        private JObject generateRuleStub(string objectId = "my-rule", bool? enabled = null, JObject conditionParams = null, JObject consequenceParams = null)
+        {
+            JObject condition = conditionParams ?? new JObject
+            {
+                { "pattern", "some text" },
+                { "anchoring", "is" }
+            };
 
-			JObject consequence = new JObject();
-			JObject parameters = new JObject();
-			parameters.Add("query", "other text");
-			consequence.Add("params", parameters);
+            JObject parameters = consequenceParams ?? new JObject
+            {
+                { "query", "other text" }
+            };
 
-			JObject rule = new JObject();
-			rule.Add("objectID", objectId);
-			rule.Add("condition", condition);
-			rule.Add("consequence", consequence);
+            JObject consequence = new JObject
+            {
+                { "params", parameters }
+            };
 
-			return rule;
-		}
+            JObject rule = new JObject
+            {
+                { "objectID", objectId },
+                { "condition", condition },
+                { "consequence", consequence }
+            };
 
-		private static void AreEqualByJson(JObject expected, JObject actual)
+            if (enabled.HasValue)
+                rule.Add("enabled", enabled);
+
+            return rule;
+        }
+
+        private static void AreEqualByJson(JObject expected, JObject actual)
 		{
 			var expectedJson = JsonConvert.SerializeObject(expected);
 			var actualJson = JsonConvert.SerializeObject(actual);
@@ -1402,6 +1411,425 @@ namespace Algolia.Search.Test
 
 		}
 
-	}
+        [Fact]
+        public void TestDisjunctiveFacetFilters()
+        {
+            ClearTest();
+
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "test {facet:lastname}" },
+                { "anchoring", "contains" },
+            };
+
+            JArray automaticFacetFilters = new JArray {new JObject
+            {
+                { "facet", "lastname" },
+                { "disjunctive", true },
+                { "score", 42 }
+            }};
+
+            JObject consequenceParams = new JObject
+            {
+                { "automaticFacetFilters", automaticFacetFilters }
+            };
+
+            JObject disjunctiveFilterRule = generateRuleStub("ruleID1", conditionParams: conditionParams, consequenceParams: consequenceParams);
+            var matchTheEmptyQueryRuleTask = _index.SaveRule(disjunctiveFilterRule);
+            _index.WaitTask(matchTheEmptyQueryRuleTask["taskID"].ToString());
+
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True((bool)rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["disjunctive"]);
+            Assert.True(rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["facet"].ToString().Contains("lastname"));
+            Assert.True((int)rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["score"] == 42);
+        }
+
+        [Fact]
+        public void TestConjunctiveFacetFilters()
+        {
+            ClearTest();
+
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "test {facet:lastname}" },
+                { "anchoring", "contains" },
+            };
+
+            JArray automaticFacetFilters = new JArray {new JObject
+            {
+                { "facet", "lastname" },
+                { "disjunctive", false },
+                { "score", 42 }
+            }};
+
+            JObject consequenceParams = new JObject
+            {
+                { "automaticFacetFilters", automaticFacetFilters }
+            };
+
+            JObject disjunctiveFilterRule = generateRuleStub("ruleID1", conditionParams: conditionParams, consequenceParams: consequenceParams);
+            var matchTheEmptyQueryRuleTask = _index.SaveRule(disjunctiveFilterRule);
+            _index.WaitTask(matchTheEmptyQueryRuleTask["taskID"].ToString());
+
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.False((bool)rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["disjunctive"]);
+            Assert.True(rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["facet"].ToString().Contains("lastname"));
+            Assert.True((int)rules["hits"][0]["consequence"]["params"]["automaticFacetFilters"][0]["score"] == 42);
+        }
+
+        [Fact]
+        public void TestMatchTheEmptyQuery()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID3"}}
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // Adds the possibility to match the empty query. Only the “is” anchoring is allowed for the empty query
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "" },
+                { "anchoring", "is" }
+            };
+
+            JObject matchTheEmptyQueryRule = generateRuleStub("ruleID1", conditionParams: conditionParams);
+            var matchTheEmptyQueryRuleTask = _index.SaveRule(matchTheEmptyQueryRule);
+            _index.WaitTask(matchTheEmptyQueryRuleTask["taskID"].ToString());
+
+            // test if the rule is well created
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True(string.IsNullOrWhiteSpace(rules["hits"][0]["condition"]["pattern"].ToString()));
+            Assert.True(rules["hits"][0]["condition"]["anchoring"].ToString().Contains("is"));
+
+            // if the rule correctly applies we should get two records because it will match the empty string and replace it with "other text"
+            var result = _index.Search(new Query(""));
+            Assert.Equal(2, result["nbHits"].ToObject<int>());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
+        }
+
+        [Fact]
+        public void TestEditsAttributeRemoveWord()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "Vendame" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "Vendame" },{"objectID","ID3"}}
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "Barninger" },
+                { "anchoring", "contains" }
+            };
+
+            JObject queryParam = new JObject {
+                { "edits", new JArray {new JObject {{ "type", "remove" },{ "delete", "Barninger" }}}
+            }};
+
+            JObject consequenceParamsRemove = new JObject
+            {
+                { "query", queryParam }
+            };
+
+            // set the remove attribute to remove "badword"
+            JObject shouldApplyRule = generateRuleStub("ruleID1", conditionParams: conditionParams, consequenceParams: consequenceParamsRemove);
+
+            var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
+            _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
+
+            // test if the rule is well created
+            var rules = _index.SearchRules();
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["type"].ToString().Contains("remove"));
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["delete"].ToString().Contains("Barninger"));
+
+            // if the rule correctly applies we should get three records because we delete baringer from the query
+            var result = _index.Search(new Query("Barninger"));
+            Assert.Equal(3, result["nbHits"].ToObject<int>());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
+        }
+
+        [Fact]
+        public void TestEditsAttributeReplaceWord()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "Vendame" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "Vendame" },{"objectID","ID3"}}
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // Creating JObject "edits"
+            JObject conditionParams = new JObject
+            {
+                { "pattern", "Barninger" },
+                { "anchoring", "contains" }
+            };
+
+            // if the query contains baringer replace baringer by some text
+            JObject queryParam = new JObject {
+                { "edits", new JArray { new JObject {{ "type", "replace" },{ "delete", "Barninger" },{ "insert", "Vendame" }}}
+            }};
+
+            JObject consequenceParamsRemove = new JObject
+            {
+                { "query", queryParam }
+            };
+
+            // set the remove attribute to remove "badword"
+            JObject shouldApplyRule = generateRuleStub("ruleID1", conditionParams: conditionParams, consequenceParams: consequenceParamsRemove);
+
+            var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
+            _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
+
+            // test if the rule is well created
+            var rules = _index.SearchRules();
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["type"].ToString().Contains("replace"));
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["delete"].ToString().Contains("Barninger"));
+            Assert.True(rules["hits"][0]["consequence"]["params"]["query"]["edits"][0]["insert"].ToString().Contains("Vendame"));
+
+            // if the rule correctly applies we should get only two records with "Barringer" removed from the query
+            var result = _index.Search(new Query("Barninger"));
+            Assert.Equal(2, result["nbHits"].ToObject<int>());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
+        }
+
+        [Fact]
+        public void TestTimeFrameValidity()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID3"}}
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // Should Apply Rule (replace some text by other text)
+            // time frames must be in unix timestamp 
+            JObject shouldApplyRule = generateRuleStub("ruleID1", true);
+            long from = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+            long until = new DateTimeOffset(DateTime.UtcNow.AddDays(10)).ToUnixTimeSeconds();
+
+            shouldApplyRule["validity"] = new JArray {new JObject
+            {
+                { "from", from },
+                { "until", until }
+            }};
+
+            var shouldApplyRuleSaveTask = _index.SaveRule(shouldApplyRule);
+            _index.WaitTask(shouldApplyRuleSaveTask["taskID"].ToString());
+
+            // test if the rule is well created 
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True(rules["hits"][0]["validity"].ToString().Contains(from.ToString()));
+            Assert.True(rules["hits"][0]["validity"].ToString().Contains(until.ToString()));
+
+            // if the rule correctly apply we should get 2 records because "some text" will be replaced by "other text" and we have two records with "other text"
+            var shouldSuccessSearch = _index.Search(new Query("some text"));
+            Assert.Equal(2, shouldSuccessSearch["nbHits"].ToObject<int>());
+            Assert.True(shouldSuccessSearch["hits"][0]["lastname"].ToString().Contains("other text"));
+            Assert.True(shouldSuccessSearch["hits"][1]["lastname"].ToString().Contains("other text"));
+
+            var shouldApplyRuleDeleteTask = _index.DeleteRule("ruleID1");
+            _index.WaitTask(shouldApplyRuleDeleteTask["taskID"].ToString());
+
+            // Should not apply rule (replace some text by other text)
+            // creating a new rule that shouldn't apply to the query
+            JObject shouldNotApplyRule = generateRuleStub("ruleID2", false);
+            long fromNotApply = new DateTimeOffset(DateTime.UtcNow.AddDays(-100)).ToUnixTimeSeconds();
+            long untilNotApply = new DateTimeOffset(DateTime.UtcNow.AddDays(-50)).ToUnixTimeSeconds();
+
+            shouldNotApplyRule["validity"] = new JArray {new JObject
+            {
+                { "from", fromNotApply },
+                { "until", untilNotApply}
+            }};
+
+            var saveShouldNotApplyRuleTask = _index.SaveRule(shouldNotApplyRule);
+            _index.WaitTask(saveShouldNotApplyRuleTask["taskID"].ToString());
+
+            // test if the rule is well created 
+            var rulesNotApply = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True(rulesNotApply["hits"][0]["validity"].ToString().Contains(fromNotApply.ToString()));
+            Assert.True(rulesNotApply["hits"][0]["validity"].ToString().Contains(untilNotApply.ToString()));
+
+            // if the rule don't apply we should receive 0 records because we don't have records having "some text"
+            var result = _index.Search(new Query("some text"));
+            Assert.Equal(0, result["nbHits"].ToObject<int>());
+
+            var shouldNotApplyRuleDeleteTask = _index.DeleteRule("ruleID1");
+            _index.WaitTask(shouldNotApplyRuleDeleteTask["taskID"].ToString());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
+        }
+
+        [Fact]
+        public void TestDemote()
+        {
+            ClearTest();
+
+            // Create three records
+            var task = _index.AddObjects(new List<JObject> {
+               new JObject{ {"firstname", "Jimmie" },{"lastname","Barninger"},{"objectID","ID1"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID2"}},
+               new JObject{ {"firstname", "Jimmie" },{"lastname", "other text" },{"objectID","ID3"}}
+            });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // Hide one of the record with a rule
+            JObject hideRule = generateRuleStub("ruleID1");
+
+            // Create the rule and save it
+            hideRule["consequence"]["hide"] = new JArray {new JObject
+            {
+                { "objectID", "ID1" }
+            }};
+
+            var hideRuleTask = _index.SaveRule(hideRule);
+            _index.WaitTask(hideRuleTask["taskID"].ToString());
+
+            // test if the rule is well created
+            var rules = _index.SearchRules();
+            Assert.Equal(1, (int)rules["nbHits"]);
+            Assert.True(rules["hits"][0]["consequence"]["hide"].ToString().Contains("ID1"));
+
+            // then test the rule with a little search
+            var demoteSearch = _index.Search(new Query("some text"));
+            Assert.Equal(2, demoteSearch["nbHits"].ToObject<int>());
+
+            // Delete records after test
+            task = _index.DeleteObjects(new List<string>
+            {
+                "ID1",
+                "ID2",
+                "ID3"
+            });
+            _index.WaitTask(task["taskID"].ToString());
+            var ret = _index.Search(new Query(""));
+        }
+
+        [Fact]
+        public void TestEnabledFlagTrue()
+        {
+            ClearTest();
+
+            // create two rules one disabled and one enabled
+            JObject shouldDisplayRule = generateRuleStub("ruleID1", true);
+            JObject shouldNotDisplayRule = generateRuleStub("ruleID2", false);
+
+            var task1 = _index.SaveRule(shouldDisplayRule);
+            _index.WaitTask(task1["taskID"].ToString());
+
+            var task2 = _index.SaveRule(shouldNotDisplayRule);
+            _index.WaitTask(task2["taskID"].ToString());
+
+            // should return all enabled rules as we as specified enabled = true in our query
+            var enabledRules = _index.SearchRules(new RuleQuery { Enabled = true });
+            // should return only one rule of the two
+            Assert.Equal(1, (int)enabledRules["nbHits"]);
+            // and this rule should be enabled
+            Assert.True((bool)enabledRules["hits"][0]["enabled"]);
+
+            // should return all rules even the disabled one
+            var allRules = _index.SearchRules();
+            Assert.Equal(2, (int)allRules["nbHits"]);
+        }
+
+        [Fact]
+        public void TestEnabledFlagFalse()
+        {
+            ClearTest();
+
+            // create two rules one disabled and one enabled
+            JObject shouldDisplayRule = generateRuleStub("ruleID1", true);
+            JObject shouldNotDisplayRule = generateRuleStub("ruleID2", false);
+
+            var task1 = _index.SaveRule(shouldDisplayRule);
+            _index.WaitTask(task1["taskID"].ToString());
+
+            var task2 = _index.SaveRule(shouldNotDisplayRule);
+            _index.WaitTask(task2["taskID"].ToString());
+
+            // should return only disabled rules because we specified enabled = false in our query
+            var disabledRules = _index.SearchRules(new RuleQuery { Enabled = false });
+            // should return only one rule of the two
+            Assert.Equal(1, (int)disabledRules["nbHits"]);
+            // and this rule should be disbled
+            Assert.False((bool)disabledRules["hits"][0]["enabled"]);
+
+            // should return all rules even the enabled one when searching with no enable params
+            var allRules = _index.SearchRules();
+            Assert.Equal(2, (int)allRules["nbHits"]);
+        }
+
+        [Fact]
+        public void TestEnabledFlagNoSideEffectsOnSearchRules()
+        {
+            ClearTest();
+
+            JObject shouldDisplayRule = generateRuleStub("ruleID1", true);
+            JObject shouldNotDisplayRule = generateRuleStub("ruleID2", false);
+
+            var task1 = _index.SaveRule(shouldDisplayRule);
+            _index.WaitTask(task1["taskID"].ToString());
+
+            var task2 = _index.SaveRule(shouldNotDisplayRule);
+            _index.WaitTask(task2["taskID"].ToString());
+
+            // should return all rules even the disabled one when the parameter enabled is not set in the query
+            var allRules = _index.SearchRules();
+            Assert.Equal(2, (int)allRules["nbHits"]);
+        }
+    }
 }
 #pragma warning restore 0618

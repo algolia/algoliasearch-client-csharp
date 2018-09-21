@@ -1,15 +1,8 @@
-﻿using System.Threading.Tasks;
-using Xunit;
-using System;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Collections;
-using Algolia.Search;
+﻿using Xunit;
 
 namespace Algolia.Search.Test
 {
-	public class IndexHelperTest : BaseTest
+    public class IndexHelperTest : BaseTest
 	{
 
 		[Fact]
