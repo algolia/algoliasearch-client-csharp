@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Algolia.Search.Models
 {
@@ -39,5 +38,8 @@ namespace Algolia.Search.Models
 
 		[JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "hitsPerPage")]
 		public int? HitsPerPage { get; set; }
-	}
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "enabled")]
+        public bool? Enabled { get; set; }
+    }
 }
