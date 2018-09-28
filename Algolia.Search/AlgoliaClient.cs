@@ -1,19 +1,19 @@
 ﻿/*
-* Copyright (c) 2013 Algolia
-* http://www.algolia.com/
+* Copyright (c) 2018 Algolia
+* https://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
 *  https://github.com/cmaneu/algoliasearch-client-csharp
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,7 +27,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Threading;
 using Newtonsoft.Json;
@@ -44,17 +43,16 @@ namespace Algolia.Search
 	/// Client for the Algolia Search cloud API.
 	/// You should instantiate a Client object with your ApplicationID, ApiKey and Hosts to start using Algolia Search API
 	/// </summary>
-	public class AlgoliaClient
+	public class AlgoliaClient : IAlgoliaClient
 	{
-		private string[] _readHosts;
-		private string[] _writeHosts;
-		private string _applicationId;
-		private string _apiKey;
+		private IList<string> _readHosts;
+		private IList<string> _writeHosts;
+		private readonly string _applicationId;
+		private readonly string _apiKey;
 		private HttpClient _searchHttpClient;
 		private HttpClient _buildHttpClient;
 		private HttpMessageHandler _mock;
 		private bool _continueOnCapturedContext;
-		private ArrayUtils<string> _arrayUtils;
 		private Dictionary<string, HostStatus> _readHostsStatus = new Dictionary<string, HostStatus>();
 		private Dictionary<string, HostStatus> _writeHostsStatus = new Dictionary<string, HostStatus>();
 		public int _dsnInternalTimeout = 60 * 5;
@@ -66,54 +64,52 @@ namespace Algolia.Search
 		/// <param name="apiKey">A valid API key for the service</param>
 		/// <param name="hosts">The list of hosts that you have received for the service</param>
 		/// <param name="mock">Mocking object for controlling HTTP message handler</param>
-		public AlgoliaClient(string applicationId, string apiKey, IEnumerable<string> hosts = null, HttpMessageHandler mock = null)
+		public AlgoliaClient(string applicationId, string apiKey, IList<string> hosts = null, HttpMessageHandler mock = null)
 		{
 			if (string.IsNullOrWhiteSpace(applicationId))
-				throw new ArgumentOutOfRangeException("applicationId", "An application Id is required.");
+				throw new ArgumentOutOfRangeException(nameof(applicationId), "An application Id is required.");
 
 			if (string.IsNullOrWhiteSpace(apiKey))
-				throw new ArgumentOutOfRangeException("apiKey", "An API key is required.");
+				throw new ArgumentOutOfRangeException(nameof(apiKey), "An API key is required.");
 
-			if (hosts != null && hosts.Count() == 0)
-				throw new ArgumentOutOfRangeException("hosts", "At least one host is required.");
+			if (hosts?.Any() == false)
+				throw new ArgumentOutOfRangeException(nameof(hosts), "At least one host is required.");
 
 			if (hosts != null)
 			{
 				foreach (var host in hosts)
 				{
 					if (string.IsNullOrWhiteSpace(host))
-						throw new ArgumentOutOfRangeException("hosts", "Each host is required.");
+						throw new ArgumentOutOfRangeException(nameof(hosts), "Each host is required.");
 				}
-				_readHosts = _writeHosts = hosts.ToArray();
+				_readHosts = _writeHosts = hosts;
 			}
 			else
 			{
-				_arrayUtils = new ArrayUtils<string>();
-
-				var baseReadHosts = applicationId + "-dsn.algolia.net";
-				var shuffledReadHosts = new List<string> { applicationId + "-1.algolianet.com", applicationId + "-2.algolianet.com", applicationId + "-3.algolianet.com" };
-				_readHosts = getHosts(baseReadHosts, shuffledReadHosts);
-
-				var baseWriteHosts = applicationId + ".algolia.net";
-				var shuffledWriteHosts = new List<string> { applicationId + "-1.algolianet.com", applicationId + "-2.algolianet.com", applicationId + "-3.algolianet.com" };
-				_writeHosts = getHosts(baseWriteHosts, shuffledWriteHosts);
+			    var hostList = new List<string>(3)
+			    {
+			        applicationId + "-1.algolianet.com",
+			        applicationId + "-2.algolianet.com",
+			        applicationId + "-3.algolianet.com"
+			    };
+                _readHosts = GetHosts($"{applicationId}-dsn.algolia.net", hostList);
+                _writeHosts = GetHosts($"{applicationId}.algolia.net", hostList);
 			}
 
 			_applicationId = applicationId;
 			_apiKey = apiKey;
 			_mock = mock;
+
 			// randomize elements of hostsArray (act as a kind of load-balancer)
-
-
 			HttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
 			HttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
 			HttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 4.0.0");
-			HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			HttpClient.DefaultRequestHeaders.Accept.Add(Constants.JsonMediaType);
 
 			SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
 			SearchHttpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
 			SearchHttpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 4.0.0");
-			SearchHttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			SearchHttpClient.DefaultRequestHeaders.Accept.Add(Constants.JsonMediaType);
 
 			SearchHttpClient.Timeout = TimeSpan.FromSeconds(5);
 			HttpClient.Timeout = TimeSpan.FromSeconds(30);
@@ -127,26 +123,23 @@ namespace Algolia.Search
 		/// <param name="baseHost"></param>
 		/// <param name="hosts"></param>
 		/// <returns></returns>
-		public string[] getHosts(string baseHost, IEnumerable<string> hosts)
+		public static List<string> GetHosts(string baseHost, IEnumerable<string> hosts)
 		{
-			var result = new List<string> { baseHost };
-			//shuffling all but not the first one
-			var shuffledHosts = _arrayUtils.Shuffle(hosts);
-			result.AddRange(shuffledHosts);
-			return result.ToArray();
-		}
+		    var result = new List<string>(4) { baseHost };
+		    result.AddRange(hosts.Shuffle());
+		    return result;
+        }
 
 		public HostStatus setHostStatus(bool up)
 		{
 			return new HostStatus { Up = up, LastModified = DateTime.Now };
 		}
 
-		public string[] filterOnActiveHosts(string[] _hosts, bool isQuery)
+		public IList<string> filterOnActiveHosts(IList<string> hosts, bool isQuery)
 		{
-
-			var validHosts = new List<string> { };
+			var validHosts = new List<string>(hosts.Count);
 			var statusHosts = isQuery ? _readHostsStatus : _writeHostsStatus;
-			foreach (var host in _hosts)
+			foreach (var host in hosts)
 			{
 				if (statusHosts.ContainsKey(host))
 				{
@@ -163,7 +156,7 @@ namespace Algolia.Search
 
 			}
 
-			return validHosts.Count > 0 ? validHosts.ToArray() : _hosts;
+			return validHosts.Count > 0 ? validHosts : hosts;
 		}
 
 		/// <summary>
@@ -276,7 +269,7 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.ListIndexesAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.ListIndexesAsync"/>
 		/// </summary>
 		/// <returns>An object in the form:
 		///    {"items": [ {"name": "contacts", "createdAt": "2013-01-18T15:33:13.556Z"},
@@ -300,7 +293,7 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.DeleteIndexAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.DeleteIndexAsync"/>
 		/// </summary>
 		/// <returns>An object containing a "deletedAt" attribute</returns>
 		public JObject DeleteIndex(string indexName, RequestOptions requestOptions)
@@ -357,7 +350,7 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/>
 		/// </summary>
 		/// <param name="srcIndexName">The name of index to copy.</param>
 		/// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
@@ -369,7 +362,7 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/>
 		/// </summary>
 		/// <param name="srcIndexName">The name of index to copy.</param>
 		/// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
@@ -512,7 +505,7 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/>
 		/// </summary>
 		/// <returns>An object containing the list of keys.</returns>
 		public JObject ListApiKeys(RequestOptions requestOptions)
@@ -530,7 +523,7 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.GetApiKeyAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.GetApiKeyAsync"/>
 		/// </summary>
 		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
 		public JObject GetApiKey(string key, RequestOptions requestOptions = null)
@@ -548,7 +541,7 @@ namespace Algolia.Search
 		}
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/>
 		/// </summary>
 		/// <returns>Returns an object with a "deleteAt" attribute.</returns>
 		public JObject DeleteApiKey(string key, RequestOptions requestOptions)
@@ -559,7 +552,7 @@ namespace Algolia.Search
 		/// <summary>
 		/// Create a new api key.
 		/// </summary>
-		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
 		///     can contains the following values:
 		///     - acl: array of string
 		///     - indices: array of string
@@ -580,7 +573,7 @@ namespace Algolia.Search
 		/// <summary>
 		/// Synchronously call <see cref="AlgoliaClient.AddApiKeyAsync"/>
 		/// </summary>
-		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
 		///     can contains the following values:
 		///     - acl: array of string
 		///     - indices: array of string
@@ -653,7 +646,7 @@ namespace Algolia.Search
 		/// Update an api key.
 		/// </summary>
 		/// <param name="key">The user key</param>
-		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
 		///     can contains the following values:
 		///     - acl: array of string
 		///     - indices: array of string
@@ -675,7 +668,7 @@ namespace Algolia.Search
 		/// Synchronously call <see cref="AlgoliaClient.UpdateApiKeyAsync"/>
 		/// </summary>
 		/// <param name="key">The user key</param>
-		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
 		///     can contains the following values:
 		///     - acl: array of string
 		///     - indices: array of string
@@ -802,15 +795,15 @@ namespace Algolia.Search
 		/// <returns></returns>
 		public string GenerateSecuredApiKey(String privateApiKey, String tagFilter, String userToken = null)
 		{
-			if (!tagFilter.Contains("="))
-				return GenerateSecuredApiKey(privateApiKey, new Query().SetTagFilters(tagFilter), userToken);
-			else
-			{
-				if (userToken != null && userToken.Length > 0)
-					tagFilter = string.Format("{0}&userToken={1}", tagFilter, WebUtility.UrlEncode(userToken));
-				byte[] content = System.Text.Encoding.UTF8.GetBytes(string.Format("{0}{1}", Hmac(privateApiKey, tagFilter), tagFilter));
-				return System.Convert.ToBase64String(content);
-			}
+		    if (!tagFilter.Contains("="))
+		    {
+		        return GenerateSecuredApiKey(privateApiKey, new Query().SetTagFilters(tagFilter), userToken);
+		    }
+
+		    if (!string.IsNullOrEmpty(userToken))
+		        tagFilter = $"{tagFilter}&userToken={WebUtility.UrlEncode(userToken)}";
+		    byte[] content = System.Text.Encoding.UTF8.GetBytes($"{Hmac(privateApiKey, tagFilter)}{tagFilter}");
+		    return System.Convert.ToBase64String(content);
 		}
 
 		private string Hmac(string key, string data)
@@ -886,33 +879,35 @@ namespace Algolia.Search
 			Analytics
 		};
 
-		/// <summary>
-		/// Used to execute the search request
-		/// </summary>
-		/// <param name="method">HTTP method</param>
-		/// <param name="requestUrl">URL to request</param>
-		/// <param name="content">The content</param>
-		/// <param name="requestOptions">The additional request options</param>
-		/// <returns></returns>
-		public async Task<JObject> ExecuteRequest(callType type, string method, string requestUrl, object content, CancellationToken token, RequestOptions requestOptions)
+        /// <summary>
+        /// Used to execute the search request
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="method">HTTP method</param>
+        /// <param name="requestUrl">URL to request</param>
+        /// <param name="content">The content</param>
+        /// <param name="token"></param>
+        /// <param name="requestOptions">The additional request options</param>
+        /// <returns></returns>
+        public async Task<JObject> ExecuteRequest(callType type, string method, string requestUrl, object content, CancellationToken token, RequestOptions requestOptions)
 		{
-			string[] hosts = null;
-			string requestExtraQueryParams = "";
-			HttpClient client = null;
+		    IList<string> hosts;
+			string requestExtraQueryParams = string.Empty;
+			HttpClient client;
+
 			if (type == callType.Search)
 			{
 				hosts = filterOnActiveHosts(_readHosts, true);
 				client = _searchHttpClient;
-			} else if (type == callType.Analytics)
+			}
+            else if (type == callType.Analytics)
 			{
-				hosts = new string[] { "analytics.algolia.com" };
-				client = _buildHttpClient;
+			    hosts = Constants.AnalyticsUrl;
+                client = _buildHttpClient;
 			}
 			else
 			{
-				hosts = type == callType.Read
-					? filterOnActiveHosts(_readHosts, true)
-					: filterOnActiveHosts(_writeHosts, false);
+				hosts = type == callType.Read ? filterOnActiveHosts(_readHosts, true) : filterOnActiveHosts(_writeHosts, false);
 				client = _buildHttpClient;
 			}
 
@@ -922,175 +917,153 @@ namespace Algolia.Search
 			}
 
 			Dictionary<string, string> errors = new Dictionary<string, string>();
+
+            // Retry
 			foreach (string host in hosts)
 			{
-				try
-				{
-					try
-					{
-						string url;
-						if (String.IsNullOrEmpty(requestExtraQueryParams))
-						{
-							url = string.Format("https://{0}{1}", host, requestUrl);
-						}
-						else
-						{
-							url = requestUrl.Contains("?") // check if we already had query parameters added to the requestUrl
-								? string.Format("https://{0}{1}&{2}", host, requestUrl, requestExtraQueryParams)
-								: string.Format("https://{0}{1}?{2}", host, requestUrl, requestExtraQueryParams);
-						}
+			    try
+			    {
+			        string url;
+			        if (string.IsNullOrEmpty(requestExtraQueryParams))
+			        {
+			            url = $"https://{host}{requestUrl}";
+			        }
+			        else
+			        {
+			            url = requestUrl.Contains("?") // check if we already had query parameters added to the requestUrl
+			                ? $"https://{host}{requestUrl}&{requestExtraQueryParams}"
+			                : $"https://{host}{requestUrl}?{requestExtraQueryParams}";
+			        }
 
-						HttpRequestMessage httpRequestMessage = null;
-						switch (method)
-						{
-							case "GET":
-								httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
-								break;
-							case "POST":
-								httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url);
-								if (content != null)
-								{
-									httpRequestMessage.Content =
-										new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content, new Newtonsoft.Json.Converters.StringEnumConverter()));
-								}
-								break;
-							case "PUT":
-								httpRequestMessage = new HttpRequestMessage(HttpMethod.Put, url);
-								if (content != null)
-								{
-									httpRequestMessage.Content =
-										new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content, new Newtonsoft.Json.Converters.StringEnumConverter()));
-								}
-								break;
-							case "DELETE":
-								httpRequestMessage = new HttpRequestMessage(HttpMethod.Delete, url);
-								break;
-						}
+			        HttpRequestMessage httpRequestMessage = null;
+			        switch (method)
+			        {
+			            case "GET":
+			                httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+			                break;
+			            case "POST":
+			                httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url);
+			                if (content != null)
+			                {
+			                    httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(content, Constants.StringEnumConverter));
+			                }
+			                break;
+			            case "PUT":
+			                httpRequestMessage = new HttpRequestMessage(HttpMethod.Put, url);
+			                if (content != null)
+			                {
+			                    httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(content, Constants.StringEnumConverter));
+			                }
+			                break;
+			            case "DELETE":
+			                httpRequestMessage = new HttpRequestMessage(HttpMethod.Delete, url);
+			                break;
+			        }
 
-						if (requestOptions != null)
-						{
-							foreach (var header in requestOptions.GenerateExtraHeaders())
-							{
-								httpRequestMessage.Headers.Add(header.Key, header.Value);
-							}
-						}
+			        if (requestOptions != null)
+			        {
+			            foreach (var header in requestOptions.GenerateExtraHeaders())
+			            {
+			                httpRequestMessage.Headers.Add(header.Key, header.Value);
+			            }
+			        }
 
-						HttpResponseMessage responseMsg = await client.SendAsync(httpRequestMessage, token)
-							.ConfigureAwait(_continueOnCapturedContext);
+			        HttpResponseMessage responseMsg = await client.SendAsync(httpRequestMessage, token).ConfigureAwait(_continueOnCapturedContext);
 
-						if (responseMsg.IsSuccessStatusCode)
-						{
-							string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
-							JObject obj = JObject.Parse(serializedJSON);
-							if (type == callType.Search || type == callType.Read)
-							{
-								_readHostsStatus[host] = setHostStatus(true);
-							}
-							else
-							{
-								_writeHostsStatus[host] = setHostStatus(true);
-							}
-							return obj;
-						}
-						else
-						{
-							string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
-							string message = "Internal Error";
-							string status = "0";
-							try
-							{
-								JObject obj = JObject.Parse(serializedJSON);
-								message = obj["message"].ToString();
-								status = obj["status"].ToString();
-								if (obj["status"].ToObject<int>() / 100 == 4)
-								{
-									throw new AlgoliaException(message);
-								}
-							}
-							catch (JsonReaderException)
-							{
-								message = responseMsg.ReasonPhrase;
-								status = "0";
-							}
+			        if (responseMsg.IsSuccessStatusCode)
+			        {
+			            var resp = JObject.Parse(await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext));
+			            if (type == callType.Search || type == callType.Read)
+			            {
+			                _readHostsStatus[host] = setHostStatus(true);
+			            }
+			            else
+			            {
+			                _writeHostsStatus[host] = setHostStatus(true);
+			            }
+			            return resp;
+			        }
 
-							errors.Add(host + '(' + status + ')', message);
-						}
-					}
-					catch (AlgoliaException)
-					{
-						if (type == callType.Search || type == callType.Read)
-						{
-							_readHostsStatus[host] = setHostStatus(false);
-						}
-						else
-						{
-							_writeHostsStatus[host] = setHostStatus(false);
-						}
-						throw;
-					}
-					catch (TaskCanceledException e)
-					{
-						if (token.IsCancellationRequested)
-						{
-							throw e;
-						}
-						if (type == callType.Search || type == callType.Read)
-						{
-							_readHostsStatus[host] = setHostStatus(false);
-						}
-						else
-						{
-							_writeHostsStatus[host] = setHostStatus(false);
-						}
-						errors.Add(host, "Timeout expired");
-					}
-					catch (Exception ex)
-					{
-						if (type == callType.Search || type == callType.Read)
-						{
-							_readHostsStatus[host] = setHostStatus(false);
-						}
-						else
-						{
-							_writeHostsStatus[host] = setHostStatus(false);
-						}
-						errors.Add(host, ex.Message);
-					}
+                    // Handle Error Response
+			        string message = "Internal Error";
+			        string statusCode = "0";
+			        try
+			        {
+			            var obj = JObject.Parse(await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext));
+			            message = obj["message"].ToString();
+			            statusCode = obj["status"].ToString();
+			            if (obj["status"].ToObject<int>() / 100 == 4)
+			            {
+			                throw new AlgoliaException("Internal Error");
+			            }
+			        }
+			        catch (JsonReaderException)
+			        {
+			            message = responseMsg.ReasonPhrase;
+			            statusCode = "0";
+			        }
 
-				}
-				catch (AlgoliaException)
-				{
-					throw;
-				}
-
-			}
-			throw new AlgoliaException("Hosts unreachable: " + string.Join(", ", errors.Select(x => x.Key + "=" + x.Value).ToArray()));
+                    errors.Add($"{host}({statusCode})", $"Internal Error ({message})");
+			    }
+			    catch (AlgoliaException)
+			    {
+			        FailHost(type, host);
+			        throw;
+			    }
+			    catch (TaskCanceledException ex)
+			    {
+			        if (token.IsCancellationRequested)
+			        {
+			            throw ex;
+			        }
+                    FailHost(type, host);
+                    errors.Add(host, "Timeout expired");
+			    }
+			    catch (Exception ex)
+			    {
+			        FailHost(type, host);
+                    errors.Add(host, ex.Message);
+			    }
+			} // END of Loop
+			throw new AlgoliaException($"Hosts unreachable: {string.Join(", ", errors.Select(x => $"{x.Key}={x.Value}"))}");
 		}
 
-		private string buildExtraQueryParamsUrlString(Dictionary<string, string> extraQueryParams)
+	    private void FailHost(callType callType, string host)
+	    {
+	        if (callType == callType.Search || callType == callType.Read)
+	        {
+	            _readHostsStatus[host] = setHostStatus(false);
+	        }
+	        else
+	        {
+	            _writeHostsStatus[host] = setHostStatus(false);
+	        }
+	    }
+
+	    private string buildExtraQueryParamsUrlString(Dictionary<string, string> extraQueryParams)
 		{
 			if (extraQueryParams == null || extraQueryParams.Count == 0)
 			{
-				return "";
+				return string.Empty;
 			}
 
-			string stringBuilder = "";
+            var stringBuilder = string.Empty;
 
-			foreach (var queryParam in extraQueryParams)
+            foreach (var queryParam in extraQueryParams)
 			{
 				if (stringBuilder.Length > 0)
 				{
-					stringBuilder += '&';
+					stringBuilder += Constants.Ampersand;
 				}
 
-				stringBuilder += WebUtility.UrlEncode(queryParam.Key) + "=" + WebUtility.UrlEncode(queryParam.Value);
+				stringBuilder += $"{WebUtility.UrlEncode(queryParam.Key)}={WebUtility.UrlEncode(queryParam.Value)}";
 			}
 
 			return stringBuilder;
 		}
 
-		/* 
-         * These are overloaded methods of everything above in order to avoid binary incompatibility 
+		/*
+         * These are overloaded methods of everything above in order to avoid binary incompatibility
          * when adding all the requestOptions parameters
          */
 
@@ -1100,80 +1073,71 @@ namespace Algolia.Search
 		/// <param name="queries">List of queries per index</param>
 		/// <param name="strategy">Strategy applied on the sequence of queries</param>
 		/// <returns></returns>
-		public Task<JObject> MultipleQueriesAsync(List<IndexQuery> queries, string strategy = "none", CancellationToken token = default(CancellationToken))
-		{ return MultipleQueriesAsync(queries, null, strategy, token); }
+		public Task<JObject> MultipleQueriesAsync(List<IndexQuery> queries, string strategy = "none", CancellationToken token = default(CancellationToken)) => MultipleQueriesAsync(queries, null, strategy, token);
 
-		/// <summary>
+	    /// <summary>
 		/// Synchronously call <see cref="AlgoliaClient.MultipleQueriesAsync"/>
 		/// </summary>
 		/// <param name="queries">List of queries per index</param>
 		/// <returns></returns>
-		public JObject MultipleQueries(List<IndexQuery> queries, string strategy = "none", CancellationToken token = default(CancellationToken))
-		{ return MultipleQueries(queries, null, strategy, token); }
-		/// </returns>
-		public Task<JObject> ListIndexesAsync(CancellationToken token = default(CancellationToken))
-		{ return ListIndexesAsync(null, token); }
-		/// </returns>
-		public JObject ListIndexes()
-		{
-			return ListIndexes(null);
-		}
+		public JObject MultipleQueries(List<IndexQuery> queries, string strategy = "none", CancellationToken token = default(CancellationToken)) => MultipleQueries(queries, null, strategy, token);
 
-		/// <summary>
+	    /// </returns>
+		public Task<JObject> ListIndexesAsync(CancellationToken token = default(CancellationToken)) => ListIndexesAsync(null, token);
+
+	    /// </returns>
+		public JObject ListIndexes() => ListIndexes(null);
+
+	    /// <summary>
 		/// Delete an index.
 		/// </summary>
 		/// <param name="indexName">The name of index to delete</param>
 		/// <returns>An object containing a "deletedAt" attribute</returns>
-		public Task<JObject> DeleteIndexAsync(string indexName, CancellationToken token = default(CancellationToken))
-		{ return DeleteIndexAsync(indexName, null, token); }
+		public Task<JObject> DeleteIndexAsync(string indexName, CancellationToken token = default(CancellationToken)) => DeleteIndexAsync(indexName, null, token);
 
-		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.DeleteIndexAsync"/> 
+	    /// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.DeleteIndexAsync"/>
 		/// </summary>
 		/// <returns>An object containing a "deletedAt" attribute</returns>
-		public JObject DeleteIndex(string indexName)
-		{ return DeleteIndex(indexName, null); }
+		public JObject DeleteIndex(string indexName) => DeleteIndex(indexName, null);
 
-		/// <summary>
+	    /// <summary>
 		/// Move an existing index.
 		/// </summary>
 		/// <param name="srcIndexName">The name of index to move.</param>
 		/// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
-		public Task<JObject> MoveIndexAsync(string srcIndexName, string dstIndexName, CancellationToken token = default(CancellationToken))
-		{ return MoveIndexAsync(srcIndexName, dstIndexName, null, token); }
-		/// <summary>
+		public Task<JObject> MoveIndexAsync(string srcIndexName, string dstIndexName, CancellationToken token = default(CancellationToken)) => MoveIndexAsync(srcIndexName, dstIndexName, null, token);
+
+	    /// <summary>
 		/// Synchronously call <see cref="AlgoliaClient.MoveIndexAsync"/>
 		/// </summary>
 		/// <param name="srcIndexName">The name of index to move.</param>
 		/// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
-		public JObject MoveIndex(string srcIndexName, string dstIndexName)
-		{ return MoveIndex(srcIndexName, dstIndexName, null); }
+		public JObject MoveIndex(string srcIndexName, string dstIndexName) => MoveIndex(srcIndexName, dstIndexName, null);
 
-		/// <summary>
+	    /// <summary>
 		/// Copy an existing index.
 		/// </summary>
 		/// <param name="srcIndexName">The name of index to copy.</param>
 		/// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
-		public Task<JObject> CopyIndexAsync(string srcIndexName, string dstIndexName, CancellationToken token = default(CancellationToken))
-		{ return CopyIndexAsync(srcIndexName, dstIndexName, null, token); }
-		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/> 
+		public Task<JObject> CopyIndexAsync(string srcIndexName, string dstIndexName, CancellationToken token = default(CancellationToken)) => CopyIndexAsync(srcIndexName, dstIndexName, null, token);
+
+	    /// <summary>
+		/// Synchronously call <see cref="AlgoliaClient.CopyIndexAsync"/>
 		/// </summary>
 		/// <param name="srcIndexName">The name of index to copy.</param>
 		/// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
-		public JObject CopyIndex(string srcIndexName, string dstIndexName)
-		{ return CopyIndex(srcIndexName, dstIndexName, null); }
+		public JObject CopyIndex(string srcIndexName, string dstIndexName) => CopyIndex(srcIndexName, dstIndexName, null);
 
-		/// <summary>
+	    /// <summary>
 		/// Return last logs entries.
 		/// </summary>
 		/// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
 		/// <param name="length">Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.</param>
 		/// <param name="onlyErrors">If set to true, the answer will only contain API calls with errors.</param>
-		public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, bool onlyErrors = false)
-		{ return GetLogsAsync(null, offset, length, onlyErrors); }
+		public Task<JObject> GetLogsAsync(int offset = 0, int length = 10, bool onlyErrors = false) => GetLogsAsync(null, offset, length, onlyErrors);
 
-		/// <summary>
+	    /// <summary>
 		/// Return last logs entries.
 		/// </summary>
 		/// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
@@ -1208,7 +1172,7 @@ namespace Algolia.Search
 		{ return ListApiKeysAsync(null, token); }
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.ListApiKeysAsync"/>
 		/// </summary>
 		/// <returns>An object containing the list of keys.</returns>
 		public JObject ListApiKeys()
@@ -1224,7 +1188,7 @@ namespace Algolia.Search
 		{ return GetApiKeyAsync(key, null, token); }
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.GetApiKeyACLAsync"/>
 		/// </summary>
 		/// <returns>Returns an object with an "acls" array containing an array of strings with rights.</returns>
 		public JObject GetApiKeyACL(string key)
@@ -1238,7 +1202,7 @@ namespace Algolia.Search
 		{ return DeleteApiKeyAsync(key, null, token); }
 
 		/// <summary>
-		/// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/> 
+		/// Synchronously call <see cref="AlgoliaClient.DeleteApiKeyAsync"/>
 		/// </summary>
 		/// <returns>Returns an object with a "deleteAt" attribute.</returns>
 		public JObject DeleteApiKey(string key)
@@ -1247,7 +1211,7 @@ namespace Algolia.Search
 		/// <summary>
 		/// Create a new api key.
 		/// </summary>
-		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
 		/// can contains the following values:
 		///   - acl: array of string
 		///   - indices: array of string
@@ -1264,7 +1228,7 @@ namespace Algolia.Search
 		/// <summary>
 		/// Synchronously call <see cref="AlgoliaClient.AddApiKeyAsync"/>
 		/// </summary>
-		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
 		/// can contains the following values:
 		///   - acl: array of string
 		///   - indices: array of string
@@ -1318,7 +1282,7 @@ namespace Algolia.Search
 		/// Update an api key.
 		/// </summary>
 		/// <param name="key">The user key</param>
-		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
 		/// can contains the following values:
 		///   - acl: array of string
 		///   - indices: array of string
@@ -1336,7 +1300,7 @@ namespace Algolia.Search
 		/// Synchronously call <see cref="AlgoliaClient.UpdateApiKeyAsync"/>
 		/// </summary>
 		/// <param name="key">The user key</param>
-		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that 
+		/// <param name="parameters">the list of parameters for this key. Defined by a Dictionnary that
 		/// can contains the following values:
 		///   - acl: array of string
 		///   - indices: array of string
@@ -1590,7 +1554,7 @@ namespace Algolia.Search
 		/// <returns>an objecct containing a "updateAt" attribute {'updatedAt': 'XXXX'}</returns>
 		public Task<JObject> SearchUserIdsAsync(string query, string clusterName = null, int? page = null, int? hitsPerPage = null, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
 		{
-	
+
 			Dictionary<string, object> body = new Dictionary<string, object>();
 
 			if (query != null)

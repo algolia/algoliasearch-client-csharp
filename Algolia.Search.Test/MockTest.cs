@@ -1,5 +1,4 @@
-﻿using Algolia.Search;
-using Xunit;
+﻿using Xunit;
 using Newtonsoft.Json.Linq;
 using RichardSzalay.MockHttp;
 using System.Net;

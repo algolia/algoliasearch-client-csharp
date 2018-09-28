@@ -25,7 +25,7 @@ namespace Algolia.Search.Models
 		}
 
 		[JsonProperty(PropertyName = "query")]
-		public string Query { get; set; } = "";
+		public string Query { get; set; } = string.Empty;
 
 		[JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "anchoring")]
 		public string Anchoring { get; set; }

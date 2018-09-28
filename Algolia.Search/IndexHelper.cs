@@ -19,7 +19,7 @@ namespace Algolia.Search
 		/// <param name="client">The AlgoliaClient to use for index management.</param>
 		/// <param name="indexName">The name of the Algolia index.</param>
 		/// <param name="objectIdField">The name of the field to use for mapping to the Algolia objectID.</param>
-		public IndexHelper(AlgoliaClient client, string indexName, string objectIdField = "Id")
+		public IndexHelper(IAlgoliaClient client, string indexName, string objectIdField = "Id")
 			: base(client, indexName)
 		{
 			// Save
@@ -35,13 +35,13 @@ namespace Algolia.Search
 		/// </summary>
 		/// <param name="objects">An enumerable list of objects to override the index with.</param>
 		/// <param name="maxObjectsPerCall">Maximum number of objects per indexing call. Should be between 1,000 and 10,000 depending on size of objects.</param>
-		async public Task<JObject> OverwriteIndexAsync(IEnumerable<T> objects, int maxObjectsPerCall = 1000)
+		public async Task<JObject> OverwriteIndexAsync(IEnumerable<T> objects, int maxObjectsPerCall = 1000)
 		{
 			// Build list for Tasks
 			var taskList = new List<Task<JObject>>();
 
 			//Index names
-			var tempIndexName = _indexName + "_temp";
+			var tempIndexName = $"{_indexName}_temp";
 
 			// Use the temp index
 			var tempIndex = base._client.InitIndex(tempIndexName);
@@ -76,8 +76,10 @@ namespace Algolia.Search
 			}
 
 			// Add or update indices for last batch
-			if (toIndex.Count > 0)
-				taskList.Add(tempIndex.SaveObjectsAsync(toIndex, null));
+		    if (toIndex.Count > 0)
+		    {
+		        taskList.Add(tempIndex.SaveObjectsAsync(toIndex, null));
+		    }
 
 			// Wait for all tasks to be done
 			Task.WaitAll(taskList.ToArray());
@@ -104,7 +106,7 @@ namespace Algolia.Search
 		/// <param name="objects">An enumerable list of objects to add or update.</param>
 		/// <param name="maxObjectsPerCall">Maximum number of objects per indexing call. Should be between 1,000 and 10,000 depending on size of objects.</param>
 		/// <returns>An array of objects containing an "objectIDs" attribute (array of string).</returns>
-		async public Task<JObject[]> SaveObjectsAsync(IEnumerable<T> objects, int maxObjectsPerCall = 1000)
+		public async Task<JObject[]> SaveObjectsAsync(IEnumerable<T> objects, int maxObjectsPerCall = 1000)
 		{
 			// Build list for Tasks
 			var taskList = new List<Task<JObject>>();
@@ -193,13 +195,13 @@ namespace Algolia.Search
 		/// <param name="objects">An enumerable list of objects to delete.</param>
 		/// <param name="maxObjectsPerCall">Maximum number of objects per indexing call. Should be between 1,000 and 10,000 depending on size of objects.</param>
 		/// <returns>An array of objects containing an "objectIDs" attribute (array of string).</returns>
-		async public Task<JObject[]> DeleteObjectsAsync(IEnumerable<T> objects, int maxObjectsPerCall = 1000)
+		public async Task<JObject[]> DeleteObjectsAsync(IEnumerable<T> objects, int maxObjectsPerCall = 1000)
 		{
 			// Build list for Tasks
 			var taskList = new List<Task<JObject>>();
 
 			// Setup array to store objects to index
-			var toIndex = new List<string>();
+			var toDelete = new List<string>();
 
 			// Process each object
 			foreach (var obj in objects)
@@ -211,22 +213,22 @@ namespace Algolia.Search
 				var id = jObject.GetValue(_objectIdField).ToString();
 
 				// Save object for indexing
-				toIndex.Add(id);
+				toDelete.Add(id);
 
 				// See if we have reached our limit
-				if (toIndex.Count >= maxObjectsPerCall)
+				if (toDelete.Count >= maxObjectsPerCall)
 				{
 					// Delete indices
-					taskList.Add(base.DeleteObjectsAsync(toIndex, null));
+					taskList.Add(base.DeleteObjectsAsync(toDelete, null));
 
 					// Reset array
-					toIndex.Clear();
+					toDelete.Clear();
 				}
 			}
 
 			// Delete indices for last batch
-			if (toIndex.Count > 0)
-				taskList.Add(base.DeleteObjectsAsync(toIndex, null));
+			if (toDelete.Count > 0)
+				taskList.Add(base.DeleteObjectsAsync(toDelete, null));
 
 			// Wait for all tasks to be done
 			return await Task.WhenAll(taskList);
@@ -273,7 +275,7 @@ namespace Algolia.Search
 		/// <summary>
 		/// The Algolia client
 		/// </summary>
-		public AlgoliaClient _client
+		public IAlgoliaClient _client
 		{
 			get { return base._client; }
 		}

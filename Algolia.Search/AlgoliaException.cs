@@ -13,7 +13,14 @@ namespace Algolia.Search
 		/// <param name="message">The exception details.</param>
 		public AlgoliaException(string message) : base(message)
 		{
-
 		}
-	}
+
+        public AlgoliaException()
+        {
+        }
+
+        public AlgoliaException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
 }

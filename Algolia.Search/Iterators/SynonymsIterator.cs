@@ -1,23 +1,19 @@
-﻿using Algolia.Search.Models;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Iterators
 {
 	public class SynonymsIterator : IEnumerable<JObject>
 	{
-		Index _index;
+	    IIndex _index;
 		int _hitsPerPage;
 
-		public SynonymsIterator(Index index, int hitsPerPage = 1000)
+		public SynonymsIterator(IIndex index, int hitsPerPage = 1000)
 		{
-			this._index = index;
-			this._hitsPerPage = hitsPerPage;
+			_index = index;
+			_hitsPerPage = hitsPerPage;
 		}
 
 		public IEnumerator<JObject> GetEnumerator()
@@ -33,18 +29,18 @@ namespace Algolia.Search.Iterators
 
 	public class SynonymsEnumerator : IEnumerator<JObject>
 	{
-		Index _index;
+	    IIndex _index;
 		JObject _answer;
 		int _hitsPerPage;
 		int _page;
 		int _pos;
 		JObject _synonym;
 
-		public SynonymsEnumerator(Index index, int hitsPerPage = 1000)
+		public SynonymsEnumerator(IIndex index, int hitsPerPage = 1000)
 		{
-			this._index = index;
-			this._page = 0;
-			this._hitsPerPage = hitsPerPage;
+			_index = index;
+			_page = 0;
+			_hitsPerPage = hitsPerPage;
 			Reset();
 		}
 

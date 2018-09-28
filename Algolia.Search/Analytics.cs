@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Models;
@@ -12,9 +9,9 @@ namespace Algolia.Search
 {
     public class Analytics
     {
-		private AlgoliaClient _client;
+		private IAlgoliaClient _client;
 
-		public Analytics(AlgoliaClient client)
+		public Analytics(IAlgoliaClient client)
 		{
 			_client = client;
 		}
@@ -60,11 +57,7 @@ namespace Algolia.Search
 			return _client.ExecuteRequest(
 				AlgoliaClient.callType.Analytics,
 				"GET",
-				string.Format(
-					"/2/abtests?offest={0}&limit={1}",
-					WebUtility.UrlEncode(parameters["offset"].ToString()),
-					WebUtility.UrlEncode(parameters["limit"].ToString())
-				),
+				$"/2/abtests?offest={WebUtility.UrlEncode(parameters["offset"].ToString())}&limit={WebUtility.UrlEncode(parameters["limit"].ToString())}",
 				null,
 				token,
 				null
@@ -90,7 +83,7 @@ namespace Algolia.Search
 		/// <returns>An object that contains a full AB Test.</returns>
 		public Task<JObject> GetABTestAsync(int abTestID, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Analytics, "GET", string.Format("/2/abtests/{0}", abTestID), null, token, null);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Analytics, "GET", $"/2/abtests/{abTestID}", null, token, null);
 		}
 
 		/// <summary>
@@ -111,7 +104,7 @@ namespace Algolia.Search
 		/// <returns>An object that contains a taskID and the corresponding index name.</returns>
 		public Task<JObject> StopABTestAsync(int abTestID, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Analytics, "POST", string.Format("/2/abtests/{0}/stop", abTestID), "", token, null);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Analytics, "POST", $"/2/abtests/{abTestID}/stop", "", token, null);
 		}
 
 		/// <summary>
@@ -132,7 +125,7 @@ namespace Algolia.Search
 		/// <returns>An object that contains a taskID and the corresponding index name.</returns>
 		public Task<JObject> DeleteABTestAsync(int abTestID, CancellationToken token = default(CancellationToken))
 		{
-			return _client.ExecuteRequest(AlgoliaClient.callType.Analytics, "DELETE", string.Format("/2/abtests/{0}", abTestID), null, token, null);
+			return _client.ExecuteRequest(AlgoliaClient.callType.Analytics, "DELETE", $"/2/abtests/{abTestID}", null, token, null);
 		}
 
 		/// <summary>

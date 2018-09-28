@@ -5,33 +5,33 @@ namespace Algolia.Search.Test
 {
 	public class BaseTest
 	{
-		public static string _testApplicationID = "";
-		public static string _testApiKey = "";
+		public static string _testApplicationID;
+		public static string _testApiKey;
 
-		public AlgoliaClient _client;
+		public IAlgoliaClient _client;
 
-		public Index _index;
+		public IIndex _index;
 		public Analytics _analytics;
 		public IndexHelper<TestModel> _indexHelper;
 
 		// MCM specific
 		public static string _testApplicationIDMCM = "";
 		public static string _testApiKeyMCM = "";
-		public AlgoliaClient _clientMCM;
+		public IAlgoliaClient _clientMCM;
 		public string _userID;
 
 		public BaseTest()
 		{
 			_testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
 			_testApplicationID = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
-			_client = new AlgoliaClient(_testApplicationID, _testApiKey);
+            _client = new AlgoliaClient(_testApplicationID, _testApiKey);
 			_index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
 			_analytics = new Analytics(_client);
 			_indexHelper = new IndexHelper<TestModel>(_client, GetSafeName("àlgol?à-csharp"));
 
 			_testApiKeyMCM = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY_MCM");
 			_testApplicationIDMCM = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_MCM");
-			_clientMCM = new AlgoliaClient(_testApplicationIDMCM, _testApiKeyMCM);
+            _clientMCM = new AlgoliaClient(_testApplicationIDMCM, _testApiKeyMCM);
 			_userID = GetUniqueUserID("csharp-client");
 		}
 

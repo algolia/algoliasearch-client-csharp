@@ -1,23 +1,20 @@
 ﻿using Algolia.Search.Models;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Iterators
 {
 	public class RulesIterator : IEnumerable<JObject>
 	{
-		Index _index;
+	    IIndex _index;
 		int _hitsPerPage;
 
-		public RulesIterator(Index index, int hitsPerPage = 1000)
+		public RulesIterator(IIndex index, int hitsPerPage = 1000)
 		{
-			this._index = index;
-			this._hitsPerPage = hitsPerPage;
+			_index = index;
+			_hitsPerPage = hitsPerPage;
 		}
 
 		public IEnumerator<JObject> GetEnumerator()
@@ -33,18 +30,18 @@ namespace Algolia.Search.Iterators
 
 	public class RulesEnumerator : IEnumerator<JObject>
 	{
-		Index _index;
+	    IIndex _index;
 		JObject _answer;
 		RuleQuery _ruleQuery;
 		int _pos;
 		JObject _rule;
 
-		public RulesEnumerator(Index index, int hitsPerPage = 1000)
+		public RulesEnumerator(IIndex index, int hitsPerPage = 1000)
 		{
-			this._index = index;
-			this._ruleQuery = new RuleQuery();
-			this._ruleQuery.Page = 0;
-			this._ruleQuery.HitsPerPage = hitsPerPage;
+			_index = index;
+			_ruleQuery = new RuleQuery();
+			_ruleQuery.Page = 0;
+			_ruleQuery.HitsPerPage = hitsPerPage;
 			Reset();
 		}
 
@@ -55,17 +52,11 @@ namespace Algolia.Search.Iterators
 			_ruleQuery.Page += 1;
 		}
 
-		public JObject Current
-		{
-			get { return _rule; }
-		}
+		public JObject Current => _rule;
 
-		object IEnumerator.Current
-		{
-			get { return _rule; }
-		}
+	    object IEnumerator.Current => _rule;
 
-		public bool MoveNext()
+	    public bool MoveNext()
 		{
 			while (true)
 			{
@@ -89,7 +80,7 @@ namespace Algolia.Search.Iterators
 		{
 			_pos = 0;
 			_answer = new JObject();
-			this._ruleQuery.Page = 0;
+			_ruleQuery.Page = 0;
 			LoadNextPage();
 		}
 
