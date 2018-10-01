@@ -23,26 +23,42 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Algolia.Search.Utils
 {
     /// <summary>
-    /// Used to ensure that all the properties are serialized and deserialized well (because of Pascal and Camel Casing)
+    /// Extension method to shuffle List
+    /// https://stackoverflow.com/questions/5807128/an-extension-method-on-ienumerable-needed-for-shuffling
     /// </summary>
-    public static class HttpUtil
+    public static class ShuffleHelper
     {
-        public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
         {
-            Formatting = Formatting.Indented,
-            ContractResolver = new DefaultContractResolver
+            return source.Shuffle(new Random());
+        }
+
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (rng == null) throw new ArgumentNullException(nameof(rng));
+
+            return source.ShuffleIterator(rng);
+        }
+
+        private static IEnumerable<T> ShuffleIterator<T>(
+            this IEnumerable<T> source, Random rng)
+        {
+            var buffer = source.ToList();
+            for (int i = 0; i < buffer.Count; i++)
             {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            },
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            DateParseHandling = DateParseHandling.DateTime
-        };
+                int j = rng.Next(i, buffer.Count);
+                yield return buffer[j];
+
+                buffer[j] = buffer[i];
+            }
+        }
     }
 }
-

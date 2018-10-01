@@ -1,0 +1,113 @@
+﻿/*
+* Copyright (c) 2018 Algolia
+* http://www.algolia.com/
+* Based on the first version developed by Christopher Maneu under the same license:
+*  https://github.com/cmaneu/algoliasearch-client-csharp
+* 
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+* 
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Algolia.Search.Http;
+using Algolia.Search.Utils;
+
+namespace Algolia.Search.Client
+{
+    public class AlgoliaClient
+    {
+        private readonly string _applicationId;
+        private readonly string _apiKey;
+        private IEnumerable<string> _hosts;
+        private static IHttpRequester _httpClient;
+
+        /// <summary>
+        /// Instance a new Algolia client
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <param name="apiKey"></param>
+        /// <param name="hosts"></param>
+        /// <param name="customHttpClient"></param>
+        public AlgoliaClient(string applicationId, string apiKey, ICollection<string> hosts = null,
+            IHttpRequester customHttpClient = null)
+        {
+            _applicationId = string.IsNullOrEmpty(applicationId)
+                ? throw new ArgumentNullException(nameof(applicationId), "Application ID is required")
+                : applicationId;
+            _apiKey = string.IsNullOrEmpty(apiKey)
+                ? throw new ArgumentNullException(nameof(apiKey), "An API key is required")
+                : applicationId;
+            _httpClient = customHttpClient ?? new AlgoliaHttpRequester(applicationId, apiKey);
+
+            if (hosts != null)
+            {
+                if (!hosts.Any(string.IsNullOrEmpty))
+                    throw new ArgumentNullException(nameof(hosts), "Hosts must not contain empty string");
+                _hosts = hosts;
+            }
+            else
+            {
+                _hosts = new List<string>(3)
+                {
+                    $"{applicationId}-1.algolianet.com",
+                    $"{applicationId}-2.algolianet.com",
+                    $"{applicationId}-3.algolianet.com"
+                }.Shuffle();
+            }
+        }
+
+        /// <summary>
+        /// Initialize an index for the given client
+        /// </summary>
+        /// <param name="indexName"></param>
+        /// <returns></returns>
+        public Index InitIndex(string indexName)
+        {
+            return string.IsNullOrEmpty(indexName)
+                ? throw new ArgumentNullException(nameof(indexName), "Index name is required") : new Index(this, indexName);
+        }
+
+        /// <summary>
+        /// Call the API with the retry strategy in case of error
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="method"></param>
+        /// <param name="uri"></param>
+        /// <param name="data"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<T> ExecuteRequestAsync<T>(HttpMethod method, string uri, T data = default(T),
+            CancellationToken ct = default(CancellationToken)) where T : class
+        {
+            if (string.IsNullOrEmpty(uri))
+                throw new ArgumentNullException(nameof(uri));
+
+            if (method == null)
+                throw new ArgumentNullException(nameof(method));
+
+            // Retry strategy
+            var uriToCall = new Uri(new Uri($"https://{_hosts.ElementAt(0)}"), uri);
+            return await _httpClient.SendRequestAsync(method, uriToCall, data, ct);
+        }
+    }
+}

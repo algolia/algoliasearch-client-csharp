@@ -23,26 +23,21 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-namespace Algolia.Search.Utils
+namespace Algolia.Search.Models.Responses
 {
     /// <summary>
-    /// Used to ensure that all the properties are serialized and deserialized well (because of Pascal and Camel Casing)
+    /// https://www.algolia.com/doc/rest-api/search/
     /// </summary>
-    public static class HttpUtil
+    /// <typeparam name="T"></typeparam>
+    public class SearchResponse<T> where T : class
     {
-        public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
-        {
-            Formatting = Formatting.Indented,
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            },
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            DateParseHandling = DateParseHandling.DateTime
-        };
+        public T Hits { get; set; }
+        public int Page { get; set; }
+        public int NbHits { get; set; }
+        public int NbPages { get; set; }
+        public int HitsPerPage { get; set; }
+        public int ProcessingTimeMs { get; set; }
+        public string Query { get; set; }
+        public string Params { get; set; }
     }
 }
-

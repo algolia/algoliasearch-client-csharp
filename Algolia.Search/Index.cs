@@ -23,26 +23,42 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Algolia.Search.Client;
+using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.RuleQuery;
 
-namespace Algolia.Search.Utils
+namespace Algolia.Search
 {
-    /// <summary>
-    /// Used to ensure that all the properties are serialized and deserialized well (because of Pascal and Camel Casing)
-    /// </summary>
-    public static class HttpUtil
+    public class Index : IIndex
     {
-        public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
+        private readonly AlgoliaClient _client;
+        private readonly string _indexName;
+        private readonly string _urlIndexName;
+
+        public Index(AlgoliaClient client, string indexName)
         {
-            Formatting = Formatting.Indented,
-            ContractResolver = new DefaultContractResolver
+            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _indexName = string.IsNullOrEmpty(indexName) ? throw new ArgumentNullException(nameof(indexName)) : indexName;
+            _urlIndexName = WebUtility.UrlEncode(indexName);
+        }
+
+        public SearchRuleResponse GetRule(string objectId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Rule> GetRuleAsync(string objectId)
+        {
+            if (string.IsNullOrEmpty(objectId))
             {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            },
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            DateParseHandling = DateParseHandling.DateTime
-        };
+                throw new ArgumentNullException(nameof(objectId));
+            }
+
+            return await _client.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/{objectId}");
+        }
     }
 }
-
