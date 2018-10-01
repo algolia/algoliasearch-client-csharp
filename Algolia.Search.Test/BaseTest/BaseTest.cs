@@ -36,7 +36,14 @@ namespace Algolia.Search.Test.BaseTest
         public BaseTest()
         {
             _client = new AlgoliaClient(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID"), Environment.GetEnvironmentVariable("ALGOLIA_API_KEY"));
-            _index = _client.InitIndex("àlgol?à-csharp");
+            _index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
+        }
+
+        public static string GetSafeName(string name)
+        {
+            return Environment.GetEnvironmentVariable("APPVEYOR") == null
+                ? name
+                : $"{name}appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
         }
     }
 }
