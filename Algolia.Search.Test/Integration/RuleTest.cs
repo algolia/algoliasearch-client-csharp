@@ -23,42 +23,28 @@
 * THE SOFTWARE.
 */
 
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Algolia.Search.Client;
-using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace Algolia.Search
+namespace Algolia.Search.Test.Integration
 {
-    public class Index : IIndex
+    public class RuleTest : BaseTest.BaseTest
     {
-        private readonly AlgoliaClient _client;
-        private readonly string _indexName;
-        private readonly string _urlIndexName;
-
-        public Index(AlgoliaClient client, string indexName)
+        [Fact]
+        public async Task TestGetRuleAsync()
         {
-            _client = client ?? throw new ArgumentNullException(nameof(client));
-            _indexName = string.IsNullOrEmpty(indexName) ? throw new ArgumentNullException(nameof(indexName)) : indexName;
-            _urlIndexName = WebUtility.UrlEncode(indexName);
+            var ret = await _index.GetRuleAsync("ruleID1");
+            Assert.IsType<Rule>(ret);
+            Assert.Equal("ruleID1", ret.ObjectId);
         }
 
-        public SearchRuleResponse GetRule(string objectId)
+        [Fact]
+        public void TestGetRule()
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Rule> GetRuleAsync(string objectId)
-        {
-            if (string.IsNullOrEmpty(objectId))
-            {
-                throw new ArgumentNullException(nameof(objectId));
-            }
-
-            return await _client.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/{objectId}");
+            var ret =  _index.GetRule("ruleID1");
+            Assert.IsType<Rule>(ret);
+            Assert.Equal("ruleID1", ret.ObjectId);
         }
     }
 }

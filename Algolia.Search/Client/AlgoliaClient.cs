@@ -23,14 +23,13 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Http;
-using Algolia.Search.Utils;
 
 namespace Algolia.Search.Client
 {
@@ -61,7 +60,7 @@ namespace Algolia.Search.Client
 
             if (hosts != null)
             {
-                if (!hosts.Any(string.IsNullOrEmpty))
+                if (hosts.Any(string.IsNullOrEmpty))
                     throw new ArgumentNullException(nameof(hosts), "Hosts must not contain empty string");
                 _hosts = hosts;
             }

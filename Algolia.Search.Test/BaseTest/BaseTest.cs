@@ -23,26 +23,20 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System;
+using Algolia.Search.Client;
 
-namespace Algolia.Search.Utils
+namespace Algolia.Search.Test.BaseTest
 {
-    /// <summary>
-    /// Used to ensure that all the properties are serialized and deserialized well (because of Pascal and Camel Casing)
-    /// </summary>
-    public static class HttpUtil
+    public class BaseTest
     {
-        public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
+        protected AlgoliaClient _client;
+        protected Index _index;
+
+        public BaseTest()
         {
-            Formatting = Formatting.Indented,
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            },
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            DateParseHandling = DateParseHandling.DateTime
-        };
+            _client = new AlgoliaClient(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID"), Environment.GetEnvironmentVariable("ALGOLIA_API_KEY"));
+            _index = _client.InitIndex("àlgol?à-csharp");
+        }
     }
 }
-

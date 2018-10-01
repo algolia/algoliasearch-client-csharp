@@ -23,15 +23,26 @@
 * THE SOFTWARE.
 */
 
-using System.Threading.Tasks;
-using Algolia.Search.Models.Responses;
-using Algolia.Search.Models.RuleQuery;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
-namespace Algolia.Search
+namespace Algolia.Search.Http
 {
-    public interface IIndex
+    /// <summary>
+    /// Used to ensure that all the properties are serialized and deserialized well (because of Pascal and Camel Casing)
+    /// </summary>
+    public static class JsonConfig
     {
-        SearchRuleResponse GetRule(string objectId);
-        Task<Rule> GetRuleAsync(string objectId);
+        public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new CamelCaseNamingStrategy()
+            },
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            DateParseHandling = DateParseHandling.DateTime
+        };
     }
 }
+

@@ -23,6 +23,7 @@
 * THE SOFTWARE.
 */
 
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -30,8 +31,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Utils;
-using Newtonsoft.Json;
 
 namespace Algolia.Search.Http
 {
@@ -75,35 +74,53 @@ namespace Algolia.Search.Http
                 throw new ArgumentNullException(nameof(uri), "No URI found");
 
             HttpResponseMessage response;
+            string jsonString;
+            string responseString;
 
             switch (method)
             {
                 case HttpMethod m when m == HttpMethod.Post:
-                {
-                    var jsonString = JsonConvert.SerializeObject(body, HttpUtil.AlgoliaJsonSerializerSettings);
-                    response = await _httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8, "application/json"), ct).ConfigureAwait(false);
+                    {
+                        jsonString = JsonConvert.SerializeObject(body, JsonConfig.AlgoliaJsonSerializerSettings);
+                        response = await _httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8, "application/json"), ct).ConfigureAwait(false);
 
-                    if (!response.IsSuccessStatusCode)
-                        throw new Exception(response.StatusCode.ToString());
+                        if (!response.IsSuccessStatusCode)
+                            throw new Exception(response.StatusCode.ToString());
 
-                    throw new NotImplementedException();
-                }
+                        responseString = await response.Content.ReadAsStringAsync();                 
+                        return JsonConvert.DeserializeObject<T>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
+                    }
                 case HttpMethod m when m == HttpMethod.Get:
-                {
-                    response = await _httpClient.GetAsync(uri, ct).ConfigureAwait(false);
+                    {
+                        response = await _httpClient.GetAsync(uri, ct).ConfigureAwait(false);
 
-                    if (!response.IsSuccessStatusCode)
-                        throw new Exception(response.StatusCode.ToString());
+                        if (!response.IsSuccessStatusCode)
+                            throw new Exception(response.StatusCode.ToString());
 
-                    var json = await response.Content.ReadAsStringAsync();
-                    var ret = JsonConvert.DeserializeObject<T>(json, HttpUtil.AlgoliaJsonSerializerSettings);
-                    return ret;
-                }
-
+                        responseString = await response.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<T>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
+                    }
                 case HttpMethod m when m == HttpMethod.Delete:
-                    throw new NotImplementedException();
+                    {
+                        response = await _httpClient.DeleteAsync(uri, ct).ConfigureAwait(false);
+
+                        if (!response.IsSuccessStatusCode)
+                            throw new Exception(response.StatusCode.ToString());
+
+                        responseString = await response.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<T>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
+                    }
                 case HttpMethod m when m == HttpMethod.Put:
-                    throw new NotImplementedException();
+                    {
+                        jsonString = JsonConvert.SerializeObject(body, JsonConfig.AlgoliaJsonSerializerSettings);
+                        response = await _httpClient.PutAsync(uri, new StringContent(jsonString, Encoding.UTF8, "application/json"), ct).ConfigureAwait(false);
+
+                        if (!response.IsSuccessStatusCode)
+                            throw new Exception(response.StatusCode.ToString());
+
+                        responseString = await response.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<T>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
+                    }
                 default:
                     throw new NotSupportedException();
             }

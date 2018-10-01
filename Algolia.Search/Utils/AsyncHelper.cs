@@ -27,7 +27,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.Utils
+namespace Algolia.Search.Http
 {
     public static class AsyncHelper
     {
