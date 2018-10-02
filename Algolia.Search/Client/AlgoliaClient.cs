@@ -87,26 +87,52 @@ namespace Algolia.Search.Client
         }
 
         /// <summary>
-        /// Call the API with the retry strategy in case of error
+        /// More friendly execute request for GET/DELETE Method
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
         /// <param name="method"></param>
         /// <param name="uri"></param>
-        /// <param name="data"></param>
+        /// <param name="queryParameters">GET or DELETE query parameters</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<T> ExecuteRequestAsync<T>(HttpMethod method, string uri, T data = default(T),
-            CancellationToken ct = default(CancellationToken)) where T : class
+        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters,
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class
+        {
+            return await ExecuteRequestAsync<TResult, string>(method, uri, queryParameters, ct);
+        }
+
+        /// <summary>
+        /// Call api with retry strategy
+        /// </summary>
+        /// <typeparam name="TResult">Return type</typeparam>
+        /// <typeparam name="TData">Data type</typeparam>
+        /// <param name="method"></param>
+        /// <param name="uri"></param>
+        /// <param name="data">Your data</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class
+            where TData : class
         {
             if (string.IsNullOrEmpty(uri))
+            {
                 throw new ArgumentNullException(nameof(uri));
+            }
 
             if (method == null)
+            {
                 throw new ArgumentNullException(nameof(method));
+            }
 
-            // Retry strategy
-            var uriToCall = new Uri(new Uri($"https://{_hosts.ElementAt(0)}"), uri);
-            return await _httpClient.SendRequestAsync(method, uriToCall, data, ct);
+            // TODO : Retry strategy
+            var uriToCall = method == HttpMethod.Get || method == HttpMethod.Delete 
+                ? new Uri(new Uri($"https://{_hosts.ElementAt(0)}"), $"{uri}{data}") 
+                : new Uri(new Uri($"https://{_hosts.ElementAt(0)}"), uri);
+
+            return await _httpClient.SendRequestAsync<TResult, TData>(method, uriToCall, data, ct);
         }
     }
 }

@@ -27,8 +27,10 @@ using Algolia.Search.Models.RuleQuery;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Http;
+using Algolia.Search.Models.Responses;
 
 namespace Algolia.Search.Client
 {
@@ -72,7 +74,19 @@ namespace Algolia.Search.Client
                 throw new ArgumentNullException(nameof(objectId));
             }
 
-            return await _client.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/{objectId}");
+            return await _client.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/", objectId);
+        }
+
+        /// <summary>
+        /// Search query 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SearchRuleResponse> SearchRuleAsync(Rule query = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _client.ExecuteRequestAsync<SearchRuleResponse, Rule>(HttpMethod.Post, $"/1/indexes/{_urlIndexName}/rules/search", query, ct);
         }
     }
 }

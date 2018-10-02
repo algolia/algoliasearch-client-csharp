@@ -23,6 +23,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
 using System.Threading.Tasks;
 using Xunit;
@@ -31,6 +32,13 @@ namespace Algolia.Search.Test.Integration
 {
     public class RuleTest : BaseTest.BaseTest
     {
+        [Fact]
+        public async Task SearchRuleAsync()
+        {
+            var ret = await _index.SearchRuleAsync(new Rule());
+            Assert.IsType<SearchRuleResponse>(ret);
+        }
+
         [Fact]
         public async Task TestGetRuleAsync()
         {
@@ -42,7 +50,7 @@ namespace Algolia.Search.Test.Integration
         [Fact]
         public void TestGetRule()
         {
-            var ret =  _index.GetRule("ruleID1");
+            var ret = _index.GetRule("ruleID1");
             Assert.IsType<Rule>(ret);
             Assert.Equal("ruleID1", ret.ObjectId);
         }
