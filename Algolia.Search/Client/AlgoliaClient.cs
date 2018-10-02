@@ -33,7 +33,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Client
 {
-    public class AlgoliaClient
+    public class AlgoliaClient : IAlgoliaClient
     {
         private readonly string _applicationId;
         private readonly string _apiKey;

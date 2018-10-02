@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -24,21 +24,16 @@
 */
 
 using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Algolia.Search.Http
+namespace Algolia.Search.Client
 {
-    /// <summary>
-    /// Interface that allow users to inject their custom http requester
-    /// Don't use directly, use AlgoliClient to make request with the retry strategy
-    /// </summary>
-    public interface IHttpRequester
+    public class Analytics : IAnalytics
     {
-        Task<TResult> SendRequestAsync<TResult, TData>(HttpMethod method, Uri uri, TData body = default(TData),
-            CancellationToken ct = default(CancellationToken)) 
-            where TResult : class
-            where TData : class;
+        private readonly IAlgoliaClient _client;
+
+        public Analytics(IAlgoliaClient client)
+        {
+            _client = client ?? throw new ArgumentNullException(nameof(client));
+        }
     }
 }

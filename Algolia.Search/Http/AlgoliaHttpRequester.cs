@@ -138,7 +138,7 @@ namespace Algolia.Search.Http
                         return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
                     }
                 default:
-                    throw new NotSupportedException();
+                    throw new NotSupportedException(method.Method);
             }
         }
     }

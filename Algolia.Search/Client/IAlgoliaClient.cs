@@ -23,9 +23,23 @@
 * THE SOFTWARE.
 */
 
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Algolia.Search.Client
 {
     public interface IAlgoliaClient
     {
+        Index InitIndex(string indexName);
+
+        Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters,
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class;
+        
+        Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class
+            where TData : class;
     }
 }

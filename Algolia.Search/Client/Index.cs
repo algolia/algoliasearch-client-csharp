@@ -36,7 +36,7 @@ namespace Algolia.Search.Client
 {
     public class Index : IIndex
     {
-        private readonly AlgoliaClient _client;
+        private readonly IAlgoliaClient _client;
         private readonly string _indexName;
         private readonly string _urlIndexName;
 
@@ -45,7 +45,7 @@ namespace Algolia.Search.Client
         /// </summary>
         /// <param name="client"></param>
         /// <param name="indexName"></param>
-        public Index(AlgoliaClient client, string indexName)
+        public Index(IAlgoliaClient client, string indexName)
         {
             _client = client ?? throw new ArgumentNullException(nameof(client));
             _indexName = string.IsNullOrEmpty(indexName) ? throw new ArgumentNullException(nameof(indexName)) : indexName;
