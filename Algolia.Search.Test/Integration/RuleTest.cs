@@ -30,7 +30,7 @@ using Xunit;
 
 namespace Algolia.Search.Test.Integration
 {
-    public class RuleTest : BaseTest.BaseTest
+    public class RuleTest : BaseTest
     {
         [Fact]
         public async Task SearchRuleAsync()

@@ -26,7 +26,7 @@
 using System;
 using Algolia.Search.Client;
 
-namespace Algolia.Search.Test.BaseTest
+namespace Algolia.Search.Test
 {
     public class BaseTest
     {
