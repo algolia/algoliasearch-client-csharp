@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,26 +23,31 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Utils.Serializer;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 
-namespace Algolia.Search.Models.RuleQuery
+namespace Algolia.Search.Utils.Serializer
 {
-    public class TimeRange
+    /// <summary>
+    /// Allow Json.NET to serialize/deserialize DateTime in UnixTimeStamp
+    /// </summary>
+    public class DateTimeEpochSerializer : DateTimeConverterBase
     {
-        /// <summary>
-        /// DateTime with UTC offset for Serialization/Deserialization in unix timespam
-        /// </summary>
-        /// <value></value>
-        [JsonConverter(typeof(DateTimeEpochSerializer))]
-        public DateTime From { get; set; }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            long until = new DateTimeOffset(((DateTime)value)).ToUnixTimeSeconds();
+            writer.WriteValue(until);
+        }
 
-        /// <summary>
-        /// DateTime with UTC offset for Serialization/Deserialization in unix timespam
-        /// </summary>
-        /// <value></value>
-        [JsonConverter(typeof(DateTimeEpochSerializer))]
-        public DateTime Until { get; set; }
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.Value == null)
+            {
+                return null;
+            }
+
+            return DateTimeOffset.FromUnixTimeSeconds((long)reader.Value).UtcDateTime;;
+        }
     }
 }
