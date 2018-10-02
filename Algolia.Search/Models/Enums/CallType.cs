@@ -25,26 +25,10 @@
 
 namespace Algolia.Search.Models.Enums
 {
-    public static class LogType
+    public enum CallType
     {
-        	/// <summary>
-			/// All build logs
-			/// </summary>
-			public const string Build = "build";
-			
-			/// <summary>
-			/// All query logs
-			/// </summary>
-			public const string Query = "query";
-			
-			/// <summary>
-			/// All error logs
-			/// </summary>
-			public const string Error = "error";
-			
-			/// <summary>
-			/// All logs
-			/// </summary>
-			public const string All = "all";
+        Read,
+        Write,
+        Send,
     }
 }

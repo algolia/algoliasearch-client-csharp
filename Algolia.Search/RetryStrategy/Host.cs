@@ -23,28 +23,12 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Enums
+namespace Algolia.Search.RetryStrategy
 {
-    public static class LogType
+    public class Host
     {
-        	/// <summary>
-			/// All build logs
-			/// </summary>
-			public const string Build = "build";
-			
-			/// <summary>
-			/// All query logs
-			/// </summary>
-			public const string Query = "query";
-			
-			/// <summary>
-			/// All error logs
-			/// </summary>
-			public const string Error = "error";
-			
-			/// <summary>
-			/// All logs
-			/// </summary>
-			public const string All = "all";
+        public string Url { get; set; }
+        public bool Up { get; set; }
+        public int Priority { get; set; }
     }
 }
