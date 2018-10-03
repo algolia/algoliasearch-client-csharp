@@ -87,10 +87,14 @@ namespace Algolia.Search.Http
             where TData : class
         {
             if (method == null)
+            {
                 throw new ArgumentNullException(nameof(method), "No HTTP method found");
+            }
 
             if (uri == null)
+            {
                 throw new ArgumentNullException(nameof(uri), "No URI found");
+            }
 
             string jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage
