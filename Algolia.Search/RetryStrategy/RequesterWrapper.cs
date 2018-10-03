@@ -36,7 +36,7 @@ namespace Algolia.Search.RetryStrategy
 {
     public class RequesterWrapper : IRequesterWrapper
     {
-        private IHttpRequester _httpClient;
+        private static IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Algolia.Search.RetryStrategy
                 throw new ArgumentNullException(nameof(method));
             }
 
-            // TODO : Retry strategy
+            // WIP : Retry strategy
             var hosts = new List<string>(3)
                 {
                     $"{_algoliaConfig.AppId}-1.algolianet.com",
@@ -117,11 +117,26 @@ namespace Algolia.Search.RetryStrategy
                     $"{_algoliaConfig.AppId}-3.algolianet.com"
                 };
 
-            var uriToCall = method == HttpMethod.Get || method == HttpMethod.Delete
-                ? new Uri(new Uri($"https://{hosts.ElementAt(0)}"), $"{uri}{data}")
-                : new Uri(new Uri($"https://{hosts.ElementAt(0)}"), uri);
+            foreach (var host in hosts)
+            {
+                Uri uriToCall = new Uri($"https://{host}{uri}");         
 
-            return await _httpClient.SendRequestAsync<TResult, TData>(method, uriToCall, data, ct);
+                try
+                {
+                   return await _httpClient.SendRequestAsync<TResult, TData>(method, uriToCall, data, ct);
+                }
+                catch (HttpRequestException httpex)
+                {
+                    // call retry
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+
+            throw new AlgoliaException("Unreachable hosts");
         }
     }
 }

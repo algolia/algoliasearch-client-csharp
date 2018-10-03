@@ -40,10 +40,17 @@ namespace Algolia.Search.Http
     public class AlgoliaHttpRequester : IHttpRequester
     {
         /// <summary>
-        /// Must be static
         /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
         /// </summary>
-        private static HttpClient _httpClient;
+        private static HttpClient _httpClient = new HttpClient(
+            new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.GZip
+            });
+
+        private string _applicationId;
+        ///
+        private string _apiKey;
 
         /// <summary>
         /// Algolia's implementation of the generic HttpRequester
@@ -55,7 +62,6 @@ namespace Algolia.Search.Http
             if (string.IsNullOrEmpty(applicationId))
             {
                 throw new ArgumentNullException(nameof(applicationId), "Application ID is required");
-
             }
 
             if (string.IsNullOrEmpty(apiKey))
@@ -63,12 +69,8 @@ namespace Algolia.Search.Http
                 throw new ArgumentNullException(nameof(apiKey), "An API key is required");
             }
 
-            _httpClient = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip });
-            _httpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
-            _httpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Algolia for Csharp 5.0.0");
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _httpClient.Timeout = TimeSpan.FromSeconds(5);
+            _apiKey = apiKey;
+            _applicationId = applicationId;
         }
 
         /// <summary>
@@ -96,10 +98,22 @@ namespace Algolia.Search.Http
                 throw new ArgumentNullException(nameof(uri), "No URI found");
             }
 
+            // Handle query parameters
+            if ((method == HttpMethod.Get || method == HttpMethod.Delete) && data != null)
+            {
+                uri = new Uri(uri, data.ToString());
+            }
+
             string jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage
             {
                 Method = method,
+                Headers = {
+                    {"X-Algolia-Application-Id", _applicationId},
+                    {"X-Algolia-API-Key", _apiKey},
+                    {"User-Agent", "Algolia for Csharp 5.0.0"},
+                    {"Accept","application/json"}
+                },
                 RequestUri = uri,
                 Content = new StringContent(jsonString, Encoding.UTF8, "application/json")
             };
@@ -108,7 +122,7 @@ namespace Algolia.Search.Http
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(response.StatusCode.ToString());
+                throw new HttpRequestException(((int)response.StatusCode).ToString());
             }
 
             string responseString = await response.Content.ReadAsStringAsync();

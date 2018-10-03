@@ -23,7 +23,9 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.RetryStrategy;
 using System;
+using System.Collections.Generic;
 
 namespace Algolia.Search.Client
 {
@@ -35,5 +37,6 @@ namespace Algolia.Search.Client
         public int WriteTimeOut { get; set; } = 5;
         public int ConnectTimeOut { get; set; } = 5;
         public bool? ForwardToReplicas { get; set; }
+        public IEnumerable<Host> Hosts { get; set; }
     }
 }
