@@ -23,21 +23,20 @@
 * THE SOFTWARE.
 */
 
-using System.Net.Http;
-using System.Threading;
+using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.RuleQuery;
 using System.Threading.Tasks;
+using Xunit;
 
-namespace Algolia.Search.RetryStrategy
+namespace Algolia.Search.Test.Integration
 {
-    public interface IRequesterWrapper
+    public class LogTest : BaseTest
     {
-    Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
-            CancellationToken ct = default(CancellationToken))
-            where TResult : class
-            where TData : class;
-
-    Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters = null,
-            CancellationToken ct = default(CancellationToken))
-            where TResult : class;
+        [Fact]
+        public async Task GetLogsAsync()
+        {
+            var ret = await _index.GetLogsAsync();
+            Assert.IsType<LogResponse>(ret);
+        }
     }
 }

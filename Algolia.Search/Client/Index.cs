@@ -89,5 +89,25 @@ namespace Algolia.Search.Client
         {
             return await _requesterWrapper.ExecuteRequestAsync<SearchRuleResponse, Rule>(HttpMethod.Post, $"/1/indexes/{_urlIndexName}/rules/search", query, ct);
         }
+
+        /// <summary>
+        /// Get logs for the given index
+        /// </summary>
+        /// <returns></returns>
+        public LogResponse GetLogResponse()
+        {
+            return AsyncHelper.RunSync(() => GetLogsAsync());
+        }
+
+        /// <summary>
+        /// Get logs for the given index
+        /// </summary>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<LogResponse> GetLogsAsync(CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, $"/1/logs", ct: ct);
+        }
     }
+
 }

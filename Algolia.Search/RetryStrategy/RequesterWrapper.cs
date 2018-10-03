@@ -77,7 +77,7 @@ namespace Algolia.Search.RetryStrategy
         /// <param name="queryParameters">GET or DELETE query parameters</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters,
+        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters = null,
             CancellationToken ct = default(CancellationToken))
             where TResult : class
         {
