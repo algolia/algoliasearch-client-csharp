@@ -23,17 +23,40 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.RetryStrategy;
 using System;
+using System.Net.Http;
 
 namespace Algolia.Search.Client
 {
     public class Analytics : IAnalytics
     {
-        private readonly IAlgoliaClient _client;
+        private IRequesterWrapper _requesterWrapper;
 
-        public Analytics(IAlgoliaClient client)
+        /// <summary>
+        /// Initialize a client with default settings
+        /// </summary>
+        public Analytics()
         {
-            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _requesterWrapper = new RequesterWrapper();
+        }
+
+        /// <summary>
+        /// Initialize a client with custom config
+        /// </summary>
+        /// <param name="config"></param>
+        public Analytics(AlgoliaConfig config)
+        {
+            _requesterWrapper = new RequesterWrapper(config);
+        }
+
+        /// <summary>
+        /// Initialize the client with custom config and custom Requester
+        /// </summary>
+        /// <param name="customRequesterWrapper"></param>
+        public Analytics(IRequesterWrapper customRequesterWrapper)
+        {
+            _requesterWrapper = customRequesterWrapper;
         }
     }
 }
