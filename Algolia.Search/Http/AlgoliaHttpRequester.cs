@@ -92,66 +92,23 @@ namespace Algolia.Search.Http
             if (uri == null)
                 throw new ArgumentNullException(nameof(uri), "No URI found");
 
-            HttpResponseMessage response;
-            string jsonString;
-            string responseString;
-
-            //todo : httprequest message
-            switch (method)
+            string jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage
             {
-                case HttpMethod m when m == HttpMethod.Post:
-                    {
-                        jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
-                        response = await _httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8, "application/json"), ct).ConfigureAwait(false);
+                Method = method,
+                RequestUri = uri,
+                Content = new StringContent(jsonString, Encoding.UTF8, "application/json")
+            };
 
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            throw new Exception(response.StatusCode.ToString());
-                        }
+            HttpResponseMessage response = await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false);
 
-                        responseString = await response.Content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
-                    }
-                case HttpMethod m when m == HttpMethod.Get:
-                    {
-                        response = await _httpClient.GetAsync(uri, ct).ConfigureAwait(false);
-
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            throw new Exception(response.StatusCode.ToString());
-                        }
-
-                        responseString = await response.Content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
-                    }
-                case HttpMethod m when m == HttpMethod.Delete:
-                    {
-                        response = await _httpClient.GetAsync(uri, ct).ConfigureAwait(false);
-
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            throw new Exception(response.StatusCode.ToString());
-                        }
-
-                        responseString = await response.Content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
-                    }
-                case HttpMethod m when m == HttpMethod.Put:
-                    {
-                        jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
-                        response = await _httpClient.PutAsync(uri, new StringContent(jsonString, Encoding.UTF8, "application/json"), ct).ConfigureAwait(false);
-
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            throw new Exception(response.StatusCode.ToString());
-                        }
-
-                        responseString = await response.Content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
-                    }
-                default:
-                    throw new NotSupportedException(method.Method);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(response.StatusCode.ToString());
             }
+
+            string responseString = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
         }
     }
 }
