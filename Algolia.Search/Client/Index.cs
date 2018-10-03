@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Models.RuleQuery;
+using Algolia.Search.RetryStrategy;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -36,7 +37,7 @@ namespace Algolia.Search.Client
 {
     public class Index : IIndex
     {
-        private readonly IAlgoliaClient _client;
+        private readonly IRequesterWrapper _requesterWrapper;
         private readonly string _indexName;
         private readonly string _urlIndexName;
 
@@ -45,9 +46,9 @@ namespace Algolia.Search.Client
         /// </summary>
         /// <param name="client"></param>
         /// <param name="indexName"></param>
-        public Index(IAlgoliaClient client, string indexName)
+        public Index(IRequesterWrapper requesterWrapper, string indexName)
         {
-            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _requesterWrapper = requesterWrapper ?? throw new ArgumentNullException(nameof(requesterWrapper));
             _indexName = string.IsNullOrEmpty(indexName) ? throw new ArgumentNullException(nameof(indexName)) : indexName;
             _urlIndexName = WebUtility.UrlEncode(_indexName);
         }
@@ -74,7 +75,7 @@ namespace Algolia.Search.Client
                 throw new ArgumentNullException(nameof(objectId));
             }
 
-            return await _client.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/", objectId);
+            return await _requesterWrapper.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/", objectId);
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace Algolia.Search.Client
         public async Task<SearchRuleResponse> SearchRuleAsync(Rule query = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _client.ExecuteRequestAsync<SearchRuleResponse, Rule>(HttpMethod.Post, $"/1/indexes/{_urlIndexName}/rules/search", query, ct);
+            return await _requesterWrapper.ExecuteRequestAsync<SearchRuleResponse, Rule>(HttpMethod.Post, $"/1/indexes/{_urlIndexName}/rules/search", query, ct);
         }
     }
 }

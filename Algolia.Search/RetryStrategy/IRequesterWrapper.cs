@@ -23,10 +23,21 @@
 * THE SOFTWARE.
 */
 
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Algolia.Search.RetryStrategy
 {
     public interface IRequesterWrapper
     {
-         
+    Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class
+            where TData : class;
+
+    Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters,
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class;
     }
 }

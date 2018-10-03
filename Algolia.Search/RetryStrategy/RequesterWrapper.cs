@@ -23,17 +23,105 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
+using Algolia.Search.Client;
 using Algolia.Search.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.RetryStrategy
 {
-    public class RequesterWrapper
+    public class RequesterWrapper : IRequesterWrapper
     {
-        private readonly string _applicationId;
-        private readonly string _apiKey;
-        private IEnumerable<string> _readHosts;
-        private IEnumerable<string> _writeHosts;
-        private static IHttpRequester _httpClient;
+        private IHttpRequester _httpClient;
+        private readonly AlgoliaConfig _algoliaConfig;
+
+        /// <summary>
+        /// default constructor, intantiate with default configuration and default http client
+        /// </summary>
+        public RequesterWrapper()
+        {
+            _algoliaConfig = new AlgoliaConfig();
+            _httpClient = new AlgoliaHttpRequester(_algoliaConfig.AppId, _algoliaConfig.ApiKey);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="config"></param>
+        public RequesterWrapper(AlgoliaConfig config)
+        {
+            _algoliaConfig = config;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="customRequesterWrapper"></param>
+        public RequesterWrapper(AlgoliaConfig config, IHttpRequester httpClient)
+        {
+            _algoliaConfig = config;
+            _httpClient = httpClient;
+        }
+
+        /// <summary>
+        /// More friendly execute request for GET/DELETE Method
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="method"></param>
+        /// <param name="uri"></param>
+        /// <param name="queryParameters">GET or DELETE query parameters</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters,
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class
+        {
+            return await ExecuteRequestAsync<TResult, string>(method, uri, queryParameters, ct);
+        }
+
+        /// <summary>
+        /// Call api with retry strategy
+        /// </summary>
+        /// <typeparam name="TResult">Return type</typeparam>
+        /// <typeparam name="TData">Data type</typeparam>
+        /// <param name="method"></param>
+        /// <param name="uri"></param>
+        /// <param name="data">Your data</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class
+            where TData : class
+        {
+            if (string.IsNullOrEmpty(uri))
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+
+            if (method == null)
+            {
+                throw new ArgumentNullException(nameof(method));
+            }
+
+            // TODO : Retry strategy
+            var hosts = new List<string>(3)
+                {
+                    $"{_algoliaConfig.AppId}-1.algolianet.com",
+                    $"{_algoliaConfig.AppId}-2.algolianet.com",
+                    $"{_algoliaConfig.AppId}-3.algolianet.com"
+                };
+
+            var uriToCall = method == HttpMethod.Get || method == HttpMethod.Delete
+                ? new Uri(new Uri($"https://{hosts.ElementAt(0)}"), $"{uri}{data}")
+                : new Uri(new Uri($"https://{hosts.ElementAt(0)}"), uri);
+
+            return await _httpClient.SendRequestAsync<TResult, TData>(method, uriToCall, data, ct);
+        }
     }
 }

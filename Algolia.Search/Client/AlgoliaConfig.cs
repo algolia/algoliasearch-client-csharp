@@ -23,15 +23,17 @@
 * THE SOFTWARE.
 */
 
+using System;
+
 namespace Algolia.Search.Client
 {
     public class AlgoliaConfig
     {
-        public string AppId { get; set; }
-        public string ApiKey { get; set; }
-        public int ReadTimeOut { get; set; }
-        public int WriteTimeOut { get; set; }
-        public int ConnectTimeOut { get; set; }
+        public string AppId { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
+        public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
+        public int ReadTimeOut { get; set; } = 5;
+        public int WriteTimeOut { get; set; } = 5;
+        public int ConnectTimeOut { get; set; } = 5;
         public bool? ForwardToReplicas { get; set; }
     }
 }

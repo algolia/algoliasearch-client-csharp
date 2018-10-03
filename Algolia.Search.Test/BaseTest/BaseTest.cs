@@ -35,7 +35,7 @@ namespace Algolia.Search.Test
 
         public BaseTest()
         {
-            _client = new AlgoliaClient(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID"), Environment.GetEnvironmentVariable("ALGOLIA_API_KEY"));
+            _client = new AlgoliaClient();
             _index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
         }
 

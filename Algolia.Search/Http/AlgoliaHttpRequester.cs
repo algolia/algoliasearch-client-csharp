@@ -52,6 +52,17 @@ namespace Algolia.Search.Http
         /// <param name="apiKey"></param>
         public AlgoliaHttpRequester(string applicationId, string apiKey)
         {
+            if (string.IsNullOrEmpty(applicationId))
+            {
+                throw new ArgumentNullException(nameof(applicationId), "Application ID is required");
+
+            }
+
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                throw new ArgumentNullException(nameof(apiKey), "An API key is required");
+            }
+
             _httpClient = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip });
             _httpClient.DefaultRequestHeaders.Add("X-Algolia-Application-Id", applicationId);
             _httpClient.DefaultRequestHeaders.Add("X-Algolia-API-Key", apiKey);
@@ -85,6 +96,7 @@ namespace Algolia.Search.Http
             string jsonString;
             string responseString;
 
+            //todo : httprequest message
             switch (method)
             {
                 case HttpMethod m when m == HttpMethod.Post:
