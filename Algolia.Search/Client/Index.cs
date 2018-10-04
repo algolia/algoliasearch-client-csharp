@@ -37,20 +37,27 @@ namespace Algolia.Search.Client
 {
     public class Index : IIndex
     {
+        /// <summary>
+        /// The Requester wrapper
+        /// </summary>
         private readonly IRequesterWrapper _requesterWrapper;
-        private readonly string _indexName;
+
+        /// <summary>
+        /// Url encoded index name
+        /// </summary>
         private readonly string _urlIndexName;
 
         /// <summary>
         /// Instantiate an Index for a given client
         /// </summary>
-        /// <param name="client"></param>
+        /// <param name="requesterWrapper"></param>
         /// <param name="indexName"></param>
         public Index(IRequesterWrapper requesterWrapper, string indexName)
         {
             _requesterWrapper = requesterWrapper ?? throw new ArgumentNullException(nameof(requesterWrapper));
-            _indexName = string.IsNullOrEmpty(indexName) ? throw new ArgumentNullException(nameof(indexName)) : indexName;
-            _urlIndexName = WebUtility.UrlEncode(_indexName);
+            _urlIndexName = !string.IsNullOrEmpty(indexName)
+                ? WebUtility.UrlEncode(indexName)
+                : throw new ArgumentNullException(nameof(indexName));
         }
 
         /// <summary>
@@ -58,25 +65,30 @@ namespace Algolia.Search.Client
         /// </summary>
         /// <param name="objectId"></param>
         /// <returns></returns>
-        public Rule GetRule(string objectId)
-        {
-            return AsyncHelper.RunSync(() => GetRuleAsync(objectId));
-        }
+        public Rule GetRule(string objectId) => AsyncHelper.RunSync(() => GetRuleAsync(objectId));
 
         /// <summary>
         /// Get the specified rule by its objectID
         /// </summary>
         /// <param name="objectId"></param>
+        /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<Rule> GetRuleAsync(string objectId)
+        public async Task<Rule> GetRuleAsync(string objectId, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(objectId))
             {
                 throw new ArgumentNullException(nameof(objectId));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/", objectId);
+            return await _requesterWrapper.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/", objectId, ct);
         }
+
+        /// <summary>
+        /// Search rules sync
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public SearchRuleResponse SearchRule(Rule query = null) => AsyncHelper.RunSync(() => SearchRuleAsync(query));
 
         /// <summary>
         /// Search query 
@@ -94,10 +106,7 @@ namespace Algolia.Search.Client
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
-        public LogResponse GetLogResponse()
-        {
-            return AsyncHelper.RunSync(() => GetLogsAsync());
-        }
+        public LogResponse GetLogResponse() => AsyncHelper.RunSync(() => GetLogsAsync());
 
         /// <summary>
         /// Get logs for the given index
@@ -109,5 +118,4 @@ namespace Algolia.Search.Client
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, $"/1/logs", ct: ct);
         }
     }
-
 }

@@ -23,14 +23,20 @@
 * THE SOFTWARE.
 */
 
+using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
 
 namespace Algolia.Search.Client
 {
     public interface IIndex
     {
+        LogResponse GetLogResponse();
+        Task<LogResponse> GetLogsAsync(CancellationToken ct = default(CancellationToken));
+        SearchRuleResponse SearchRule(Rule query = null);
+        Task<SearchRuleResponse> SearchRuleAsync(Rule query = null, CancellationToken ct = default(CancellationToken));
         Rule GetRule(string objectId);
-        Task<Rule> GetRuleAsync(string objectId);
+        Task<Rule> GetRuleAsync(string objectId, CancellationToken ct = default(CancellationToken));
     }
 }
