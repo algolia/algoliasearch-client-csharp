@@ -23,20 +23,19 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Client;
+using Algolia.Search.Clients;
 using Algolia.Search.Http;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.RetryStrategy
+namespace Algolia.Search.Transport
 {
     public class RequesterWrapper : IRequesterWrapper
     {
-        private static IHttpRequester _httpClient;
+        private readonly IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
 
         /// <summary>
@@ -55,13 +54,14 @@ namespace Algolia.Search.RetryStrategy
         public RequesterWrapper(AlgoliaConfig config)
         {
             _algoliaConfig = config;
+            _httpClient = new AlgoliaHttpRequester(_algoliaConfig.AppId, _algoliaConfig.ApiKey);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="config"></param>
-        /// <param name="customRequesterWrapper"></param>
+        /// <param name="httpClient"></param>
         public RequesterWrapper(AlgoliaConfig config, IHttpRequester httpClient)
         {
             _algoliaConfig = config;

@@ -39,10 +39,9 @@ namespace Algolia.Search.Http
     public class AlgoliaHttpRequester : IHttpRequester
     {
         /// <summary>
-        /// Should be static to avoid sockets exception
         /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
         /// </summary>
-        private static readonly HttpClient HttpClient = new HttpClient(
+        private readonly HttpClient httpClient = new HttpClient(
             new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip
@@ -123,7 +122,7 @@ namespace Algolia.Search.Http
 
             using (httpRequestMessage)
             using (HttpResponseMessage response =
-                await HttpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
+                await httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
             {
                 if (!response.IsSuccessStatusCode)
                 {

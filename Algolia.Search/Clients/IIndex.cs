@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,21 +23,20 @@
 * THE SOFTWARE.
 */
 
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.RuleQuery;
 
-namespace Algolia.Search.RetryStrategy
+namespace Algolia.Search.Clients
 {
-    public interface IRequesterWrapper
+    public interface IIndex
     {
-    Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
-            CancellationToken ct = default(CancellationToken))
-            where TResult : class
-            where TData : class;
-
-    Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters = null,
-            CancellationToken ct = default(CancellationToken))
-            where TResult : class;
+        LogResponse GetLogResponse();
+        Task<LogResponse> GetLogsAsync(CancellationToken ct = default(CancellationToken));
+        SearchRuleResponse SearchRule(Rule query = null);
+        Task<SearchRuleResponse> SearchRuleAsync(Rule query = null, CancellationToken ct = default(CancellationToken));
+        Rule GetRule(string objectId);
+        Task<Rule> GetRuleAsync(string objectId, CancellationToken ct = default(CancellationToken));
     }
 }

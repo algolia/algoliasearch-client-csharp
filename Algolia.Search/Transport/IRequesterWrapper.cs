@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,10 +23,21 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Client
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Algolia.Search.Transport
 {
-    public interface IAlgoliaClient
+    public interface IRequesterWrapper
     {
-        Index InitIndex(string indexName);
+    Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class
+            where TData : class;
+
+    Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters = null,
+            CancellationToken ct = default(CancellationToken))
+            where TResult : class;
     }
 }

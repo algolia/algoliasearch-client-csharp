@@ -23,28 +23,49 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.RetryStrategy;
+using Algolia.Search.Transport;
 using System;
+using Algolia.Search.Http;
 
-namespace Algolia.Search.Client
+namespace Algolia.Search.Clients
 {
-    public class AlgoliaClient : IAlgoliaClient
+    public class SearchClient : ISearchClient
     {
         private IRequesterWrapper _requesterWrapper;
 
         /// <summary>
         /// Initialize a client with default settings
         /// </summary>
-        public AlgoliaClient()
+        public SearchClient()
         {
             _requesterWrapper = new RequesterWrapper();
+        }
+
+        /// <summary>
+        /// Create a new search client for the given appID
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <param name="apiKey"></param>
+        public SearchClient(string applicationId, string apiKey)
+        {
+            if (string.IsNullOrEmpty(applicationId))
+            {
+                throw new ArgumentNullException(nameof(applicationId), "Application ID is required");
+            }
+
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                throw new ArgumentNullException(nameof(apiKey), "An API key is required");
+            }
+
+            _requesterWrapper = new RequesterWrapper(new AlgoliaConfig {ApiKey = apiKey, AppId = applicationId});
         }
 
         /// <summary>
         /// Initialize a client with custom config
         /// </summary>
         /// <param name="config"></param>
-        public AlgoliaClient(AlgoliaConfig config)
+        public SearchClient(AlgoliaConfig config)
         {
             _requesterWrapper = new RequesterWrapper(config);
         }
@@ -52,10 +73,11 @@ namespace Algolia.Search.Client
         /// <summary>
         /// Initialize the client with custom config and custom Requester
         /// </summary>
-        /// <param name="customRequesterWrapper"></param>
-        public AlgoliaClient(IRequesterWrapper customRequesterWrapper)
+        /// <param name="config"></param>
+        /// <param name="httpRequester"></param>
+        public SearchClient(AlgoliaConfig config, IHttpRequester httpRequester)
         {
-            _requesterWrapper = customRequesterWrapper;
+            _requesterWrapper = new RequesterWrapper(config, httpRequester);
         }
 
         /// <summary>

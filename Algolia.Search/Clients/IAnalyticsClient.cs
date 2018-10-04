@@ -23,12 +23,10 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.RetryStrategy
+namespace Algolia.Search.Clients
 {
-    public class Host
+    public interface IAnalyticsClient
     {
-        public string Url { get; set; }
-        public bool Up { get; set; }
-        public int Priority { get; set; }
+        
     }
 }

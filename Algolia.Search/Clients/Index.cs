@@ -26,14 +26,14 @@
 using Algolia.Search.Http;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
-using Algolia.Search.RetryStrategy;
+using Algolia.Search.Transport;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.Client
+namespace Algolia.Search.Clients
 {
     public class Index : IIndex
     {

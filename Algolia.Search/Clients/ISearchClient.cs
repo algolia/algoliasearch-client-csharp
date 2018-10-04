@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,10 +23,10 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Client
+namespace Algolia.Search.Clients
 {
-    public interface IAnalytics
+    public interface ISearchClient
     {
-        
+        Index InitIndex(string indexName);
     }
 }

@@ -23,19 +23,19 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
 using System;
-using Algolia.Search.Client;
 
 namespace Algolia.Search.Test
 {
     public class BaseTest
     {
-        protected AlgoliaClient _client;
+        protected SearchClient _client;
         protected Index _index;
 
         public BaseTest()
         {
-            _client = new AlgoliaClient();
+            _client = new SearchClient();
             _index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
         }
 

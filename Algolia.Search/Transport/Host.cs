@@ -23,20 +23,12 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.RetryStrategy;
-using System;
-using System.Collections.Generic;
-
-namespace Algolia.Search.Client
+namespace Algolia.Search.Transport
 {
-    public class AlgoliaConfig
+    public class Host
     {
-        public string AppId { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
-        public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
-        public int ReadTimeOut { get; set; } = 5;
-        public int WriteTimeOut { get; set; } = 5;
-        public int ConnectTimeOut { get; set; } = 5;
-        public bool? ForwardToReplicas { get; set; }
-        public IEnumerable<Host> Hosts { get; set; }
+        public string Url { get; set; }
+        public bool Up { get; set; }
+        public int Priority { get; set; }
     }
 }
