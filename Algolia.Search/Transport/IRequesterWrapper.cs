@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Http;
+using Algolia.Search.Models.Enums;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,11 +40,12 @@ namespace Algolia.Search.Transport
         /// <typeparam name="TData"></typeparam>
         /// <param name="method"></param>
         /// <param name="uri"></param>
+        /// <param name="callType"></param>
         /// <param name="data"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
+        Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType, TData data = default(TData),
             RequestOption requestOptions = null, CancellationToken ct = default(CancellationToken))
             where TResult : class
             where TData : class;
@@ -54,10 +56,11 @@ namespace Algolia.Search.Transport
         /// <typeparam name="TResult"></typeparam>
         /// <param name="method"></param>
         /// <param name="uri"></param>
+        /// <param name="callType"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, RequestOption requestOptions = null,
+        Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken)) 
             where TResult : class;
     }

@@ -33,10 +33,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Enums;
 
 namespace Algolia.Search.Clients
 {
-    public class Index :  IIndex
+    public class Index : IIndex
     {
         /// <summary>
         /// The Requester wrapper
@@ -86,7 +87,7 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<Rule>(HttpMethod.Get,
-                $"/1/indexes/{_urlIndexName}/rules/{objectId}", requestOptions, ct);
+                $"/1/indexes/{_urlIndexName}/rules/{objectId}", CallType.Read, requestOptions, ct);
         }
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<SearchRuleResponse, Rule>(HttpMethod.Post,
-                $"/1/indexes/{_urlIndexName}/rules/search", query, requestOptions, ct);
+                $"/1/indexes/{_urlIndexName}/rules/search", CallType.Read, query, requestOptions, ct);
         }
 
         /// <summary>
@@ -128,7 +129,7 @@ namespace Algolia.Search.Clients
         public async Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs",
+            return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
                 requestOptions: requestOptions, ct: ct);
         }
     }

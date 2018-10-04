@@ -25,6 +25,7 @@
 
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Request;
 using Newtonsoft.Json;
 using System;
@@ -76,12 +77,13 @@ namespace Algolia.Search.Transport
         /// <typeparam name="TResult"></typeparam>
         /// <param name="method"></param>
         /// <param name="uri"></param>
+        /// <param name="callType"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, RequestOption requestOptions = null,
+        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
-            where TResult : class => await ExecuteRequestAsync<TResult, string>(method, uri, requestOptions: requestOptions, ct: ct);
+            where TResult : class => await ExecuteRequestAsync<TResult, string>(method, uri, callType, requestOptions: requestOptions, ct: ct);
 
         /// <summary>
         /// Call api with retry strategy
@@ -90,11 +92,12 @@ namespace Algolia.Search.Transport
         /// <typeparam name="TData">Data type</typeparam>
         /// <param name="method"></param>
         /// <param name="uri"></param>
+        /// <param name="callType"></param>
         /// <param name="data">Your data</param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri,
+        public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType,
             TData data = default(TData), RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
             where TResult : class
