@@ -27,6 +27,7 @@ using Algolia.Search.Http;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
 using Algolia.Search.Transport;
+using Algolia.Search.Utils;
 using System;
 using System.Net;
 using System.Net.Http;
