@@ -42,7 +42,7 @@ namespace Algolia.Search.Http
         /// <summary>
         /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
         /// </summary>
-        private static HttpClient _httpClient = new HttpClient(
+        private static readonly HttpClient _httpClient = new HttpClient(
             new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip
