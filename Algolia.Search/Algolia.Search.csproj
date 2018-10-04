@@ -17,7 +17,7 @@
     <AssemblyVersion>6.0.0</AssemblyVersion>
     <FileVersion>3.8.0.0</FileVersion>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0;netstandard1.6</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;netstandard1.6;net45;net462;net471</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;netstandard1.6;net471;net462;net45;</TargetFrameworks>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6' OR '$(TargetFramework)' == 'netstandard2.0'">
