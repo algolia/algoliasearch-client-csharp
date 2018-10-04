@@ -42,7 +42,7 @@ namespace Algolia.Search.Http
         /// Should be static to avoid sockets exception
         /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
         /// </summary>
-        private static readonly HttpClient _httpClient = new HttpClient(
+        private static readonly HttpClient HttpClient = new HttpClient(
             new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip
@@ -123,7 +123,7 @@ namespace Algolia.Search.Http
 
             using (httpRequestMessage)
             using (HttpResponseMessage response =
-                await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
+                await HttpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
             {
                 if (!response.IsSuccessStatusCode)
                 {
