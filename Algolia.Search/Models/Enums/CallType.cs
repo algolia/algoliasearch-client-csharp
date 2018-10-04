@@ -29,6 +29,6 @@ namespace Algolia.Search.Models.Enums
     {
         Read,
         Write,
-        Analytics,
+        Analytics
     }
 }
