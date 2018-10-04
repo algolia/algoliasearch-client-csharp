@@ -25,7 +25,6 @@
 
 using Algolia.Search.Models.Request;
 using Algolia.Search.Utils;
-using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -36,7 +35,8 @@ using System.Threading.Tasks;
 namespace Algolia.Search.Http
 {
     /// <summary>
-    /// WIP : Algolia's implementation of the generic HttpRequester
+    /// Algolia's HTTP requester
+    /// You can inject your own by the SearchClient or Analytics Client
     /// </summary>
     public class AlgoliaHttpRequester : IHttpRequester
     {
@@ -50,6 +50,13 @@ namespace Algolia.Search.Http
             });
 
         /// <summary>
+        /// Default constructor
+        /// </summary>
+        public AlgoliaHttpRequester()
+        {
+        }
+
+        /// <summary>
         /// Don't use it directly
         /// Send request to the REST API 
         /// </summary>
@@ -61,10 +68,8 @@ namespace Algolia.Search.Http
         /// <param name="uri"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> SendRequestAsync<TResult, TData>(Request<TData> request, int connectTimeOut,
-            int totalTimeout, CancellationToken ct = default(CancellationToken))
-            where TResult : class
-            where TData : class
+        public async Task<string> SendRequestAsync(Request request, int connectTimeOut, int totalTimeout,
+            CancellationToken ct = default(CancellationToken))
         {
             if (request.Method == null)
             {
@@ -76,19 +81,11 @@ namespace Algolia.Search.Http
                 throw new ArgumentNullException(nameof(request), "No URI found");
             }
 
-            // Handle query parameters
-            if ((request.Method == HttpMethod.Get || request.Method == HttpMethod.Delete) && request.Body != null)
-            {
-                request.Uri = new Uri(request.Uri, request.Body.ToString());
-            }
-
-            string jsonString = JsonConvert.SerializeObject(request.Body, JsonConfig.AlgoliaJsonSerializerSettings);
-
             var httpRequestMessage = new HttpRequestMessage
             {
                 Method = request.Method,
                 RequestUri = request.Uri,
-                Content = new StringContent(jsonString, Encoding.UTF8, "application/json")
+                Content = new StringContent(request.Body, Encoding.UTF8, "application/json")
             };
 
             httpRequestMessage.Headers.Fill(request.Headers);
@@ -99,11 +96,10 @@ namespace Algolia.Search.Http
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new HttpRequestException(((int)response.StatusCode).ToString());
+                    throw new HttpRequestException(((int) response.StatusCode).ToString());
                 }
 
-                string responseString = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
+                return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
         }
     }

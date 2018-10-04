@@ -35,7 +35,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public class Index : IIndex
+    public class Index :  IIndex
     {
         /// <summary>
         /// The Requester wrapper
@@ -64,58 +64,71 @@ namespace Algolia.Search.Clients
         /// Get the specified by its objectID
         /// </summary>
         /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public Rule GetRule(string objectId) => AsyncHelper.RunSync(() => GetRuleAsync(objectId));
+        public Rule GetRule(string objectId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetRuleAsync(objectId, requestOptions));
 
         /// <summary>
         /// Get the specified rule by its objectID
         /// </summary>
         /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<Rule> GetRuleAsync(string objectId, CancellationToken ct = default(CancellationToken))
+        public async Task<Rule> GetRuleAsync(string objectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(objectId))
             {
                 throw new ArgumentNullException(nameof(objectId));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<Rule>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/rules/", objectId, ct);
+            return await _requesterWrapper.ExecuteRequestAsync<Rule>(HttpMethod.Get,
+                $"/1/indexes/{_urlIndexName}/rules/{objectId}", requestOptions, ct);
         }
 
         /// <summary>
         /// Search rules sync
         /// </summary>
         /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SearchRuleResponse SearchRule(Rule query = null) => AsyncHelper.RunSync(() => SearchRuleAsync(query));
+        public SearchRuleResponse SearchRule(Rule query = null, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => SearchRuleAsync(query, requestOptions));
 
         /// <summary>
         /// Search query 
         /// </summary>
         /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SearchRuleResponse> SearchRuleAsync(Rule query = null,
+        public async Task<SearchRuleResponse> SearchRuleAsync(Rule query = null, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<SearchRuleResponse, Rule>(HttpMethod.Post, $"/1/indexes/{_urlIndexName}/rules/search", query, ct);
+            return await _requesterWrapper.ExecuteRequestAsync<SearchRuleResponse, Rule>(HttpMethod.Post,
+                $"/1/indexes/{_urlIndexName}/rules/search", query, requestOptions, ct);
         }
 
         /// <summary>
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
-        public LogResponse GetLogResponse() => AsyncHelper.RunSync(() => GetLogsAsync());
+        public LogResponse GetLogResponse(RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetLogsAsync(requestOptions));
 
         /// <summary>
         /// Get logs for the given index
         /// </summary>
+        /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<LogResponse> GetLogsAsync(CancellationToken ct = default(CancellationToken))
+        public async Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, $"/1/logs", ct: ct);
+            return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs",
+                requestOptions: requestOptions, ct: ct);
         }
     }
 }

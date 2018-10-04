@@ -23,6 +23,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Http;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,13 +32,33 @@ namespace Algolia.Search.Transport
 {
     public interface IRequesterWrapper
     {
-    Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
-            CancellationToken ct = default(CancellationToken))
+        /// <summary>
+        /// Execute the request with the specified TData class and will return the TResult
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <typeparam name="TData"></typeparam>
+        /// <param name="method"></param>
+        /// <param name="uri"></param>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
+            RequestOption requestOptions = null, CancellationToken ct = default(CancellationToken))
             where TResult : class
             where TData : class;
 
-    Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters = null,
-            CancellationToken ct = default(CancellationToken))
+        /// <summary>
+        /// Execute the request (more likely request with no body like GET or Delete)
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="method"></param>
+        /// <param name="uri"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken)) 
             where TResult : class;
     }
 }

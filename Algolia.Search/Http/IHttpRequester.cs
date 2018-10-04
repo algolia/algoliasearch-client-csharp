@@ -38,14 +38,12 @@ namespace Algolia.Search.Http
         /// <summary>
         /// Sends the HTTP request
         /// </summary>
-        /// <typeparam name="TResult"></typeparam>
-        /// <typeparam name="TData"></typeparam>
         /// <param name="request"></param>
         /// <param name="connectTimeOut"></param>
         /// <param name="totalTimeout"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<TResult> SendRequestAsync<TResult, TData>(Request<TData> request, int connectTimeOut, int totalTimeout,
-            CancellationToken ct = default(CancellationToken)) where TResult : class where TData : class;
+        Task<string> SendRequestAsync(Request request, int connectTimeOut, int totalTimeout,
+            CancellationToken ct = default(CancellationToken));
     }
 }

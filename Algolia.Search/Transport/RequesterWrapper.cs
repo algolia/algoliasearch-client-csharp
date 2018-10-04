@@ -26,6 +26,7 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Request;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -70,20 +71,17 @@ namespace Algolia.Search.Transport
         }
 
         /// <summary>
-        /// More friendly execute request for GET/DELETE Method
+        /// Execute the request (more likely request with no body like GET or Delete)
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="method"></param>
         /// <param name="uri"></param>
-        /// <param name="queryParameters">GET or DELETE query parameters</param>
+        /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, string queryParameters = null,
+        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
-            where TResult : class
-        {
-            return await ExecuteRequestAsync<TResult, string>(method, uri, queryParameters, ct);
-        }
+            where TResult : class => await ExecuteRequestAsync<TResult, string>(method, uri, requestOptions: requestOptions, ct: ct);
 
         /// <summary>
         /// Call api with retry strategy
@@ -93,9 +91,11 @@ namespace Algolia.Search.Transport
         /// <param name="method"></param>
         /// <param name="uri"></param>
         /// <param name="data">Your data</param>
+        /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, TData data = default(TData),
+        public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri,
+            TData data = default(TData), RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
             where TResult : class
             where TData : class
@@ -118,10 +118,12 @@ namespace Algolia.Search.Transport
                     $"{_algoliaConfig.AppId}-3.algolianet.com"
                 };
 
-            Request<TData> request = new Request<TData>
+            string jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            var request = new Request
             {
                 Method = method,
-                Body = data,
+                Body = jsonString,
                 Headers = GenerateAlgoliaHeaders()
             };
 
@@ -129,9 +131,9 @@ namespace Algolia.Search.Transport
             {
                 try
                 {
-                    Uri uriToCall = new Uri($"https://{host}{uri}");
-                    request.Uri = uriToCall;
-                    return await _httpClient.SendRequestAsync<TResult, TData>(request, 5, 5, ct);
+                    request.Uri = BuildUri(method, host, uri);
+                    string response = await _httpClient.SendRequestAsync(request, _algoliaConfig.ConnectTimeOut, _algoliaConfig.ReadTimeOut, ct);
+                    return JsonConvert.DeserializeObject<TResult>(response, JsonConfig.AlgoliaJsonSerializerSettings);
                 }
                 catch (HttpRequestException httpEx)
                 {
@@ -165,6 +167,21 @@ namespace Algolia.Search.Transport
                 {"User-Agent", "Algolia for Csharp 5.0.0"},
                 {"Accept", "application/json"}
             };
+        }
+
+        /// <summary>
+        /// Build uri depending on the method
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="host"></param>
+        /// <param name="baseUri"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private Uri BuildUri(HttpMethod method, string host, string baseUri)
+        {
+            var builder = new UriBuilder { Scheme = "https", Host = host, Path = baseUri };
+
+            return builder.Uri;
         }
     }
 }

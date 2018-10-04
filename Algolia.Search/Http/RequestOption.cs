@@ -23,10 +23,13 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+
 namespace Algolia.Search.Http
 {
     public class RequestOption
     {
-        
+        public Dictionary<string, string> Headers { get; set; }
+        public string QueryParameters { get; set; }
     }
 }

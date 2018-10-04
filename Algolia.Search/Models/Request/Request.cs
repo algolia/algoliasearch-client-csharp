@@ -29,11 +29,11 @@ using System.Net.Http;
 
 namespace Algolia.Search.Models.Request
 {
-    public class Request<TData>
+    public class Request
     {
         public HttpMethod Method { get; set; }
         public Uri Uri { get; set; }
         public Dictionary<string, string> Headers { get; set; }
-        public TData Body { get; set; }
+        public string Body { get; set; }
     }
 }

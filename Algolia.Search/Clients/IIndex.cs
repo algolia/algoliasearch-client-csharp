@@ -23,20 +23,65 @@
 * THE SOFTWARE.
 */
 
-using System.Threading;
-using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
     public interface IIndex
     {
-        LogResponse GetLogResponse();
-        Task<LogResponse> GetLogsAsync(CancellationToken ct = default(CancellationToken));
-        SearchRuleResponse SearchRule(Rule query = null);
-        Task<SearchRuleResponse> SearchRuleAsync(Rule query = null, CancellationToken ct = default(CancellationToken));
-        Rule GetRule(string objectId);
-        Task<Rule> GetRuleAsync(string objectId, CancellationToken ct = default(CancellationToken));
+        /// <summary>
+        /// Get the specified by its objectID
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        Rule GetRule(string objectId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get the specified rule by its objectID
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<Rule> GetRuleAsync(string objectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Search rules sync
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        SearchRuleResponse SearchRule(Rule query = null, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Search query 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<SearchRuleResponse> SearchRuleAsync(Rule query = null, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get logs for the given index
+        /// </summary>
+        /// <returns></returns>
+        LogResponse GetLogResponse(RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get logs for the given index
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
     }
 }
