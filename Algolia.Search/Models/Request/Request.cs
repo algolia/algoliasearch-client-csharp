@@ -23,29 +23,17 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Request;
-using System.Threading;
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 
-namespace Algolia.Search.Http
+namespace Algolia.Search.Models.Request
 {
-    /// <summary>
-    /// Interface that allow users to inject their custom http requester
-    /// Don't use directly, use AlgoliClient to make request with the retry strategy
-    /// </summary>
-    public interface IHttpRequester
+    public class Request<TData>
     {
-        /// <summary>
-        /// Sends the HTTP request
-        /// </summary>
-        /// <typeparam name="TResult"></typeparam>
-        /// <typeparam name="TData"></typeparam>
-        /// <param name="request"></param>
-        /// <param name="connectTimeOut"></param>
-        /// <param name="totalTimeout"></param>
-        /// <param name="ct"></param>
-        /// <returns></returns>
-        Task<TResult> SendRequestAsync<TResult, TData>(Request<TData> request, int connectTimeOut, int totalTimeout,
-            CancellationToken ct = default(CancellationToken)) where TResult : class where TData : class;
+        public HttpMethod Method { get; set; }
+        public Uri Uri { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
+        public TData Body { get; set; }
     }
 }

@@ -24,7 +24,6 @@
 */
 
 using Algolia.Search.Models.Responses;
-using Algolia.Search.Models.RuleQuery;
 using System.Threading.Tasks;
 using Xunit;
 

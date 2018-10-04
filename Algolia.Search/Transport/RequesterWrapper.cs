@@ -25,6 +25,7 @@
 
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
+using Algolia.Search.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -44,7 +45,7 @@ namespace Algolia.Search.Transport
         public RequesterWrapper()
         {
             _algoliaConfig = new AlgoliaConfig();
-            _httpClient = new AlgoliaHttpRequester(_algoliaConfig.AppId, _algoliaConfig.ApiKey);
+            _httpClient = new AlgoliaHttpRequester();
         }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace Algolia.Search.Transport
         public RequesterWrapper(AlgoliaConfig config)
         {
             _algoliaConfig = config;
-            _httpClient = new AlgoliaHttpRequester(_algoliaConfig.AppId, _algoliaConfig.ApiKey);
+            _httpClient = new AlgoliaHttpRequester();
         }
 
         /// <summary>
@@ -117,17 +118,29 @@ namespace Algolia.Search.Transport
                     $"{_algoliaConfig.AppId}-3.algolianet.com"
                 };
 
+            Request<TData> request = new Request<TData>
+            {
+                Method = method,
+                Body = data,
+                Headers = GenerateAlgoliaHeaders()
+            };
+
             foreach (var host in hosts)
             {
-                Uri uriToCall = new Uri($"https://{host}{uri}");         
-
                 try
                 {
-                   return await _httpClient.SendRequestAsync<TResult, TData>(method, uriToCall, data, ct);
+                    Uri uriToCall = new Uri($"https://{host}{uri}");
+                    request.Uri = uriToCall;
+                    return await _httpClient.SendRequestAsync<TResult, TData>(request, 5, 5, ct);
                 }
-                catch (HttpRequestException httpex)
+                catch (HttpRequestException httpEx)
                 {
                     // call retry
+                    throw;
+                }
+                catch (TaskCanceledException taskEx)
+                {
+                    // Time out are handled with task canceled exception
                     throw;
                 }
                 catch (Exception ex)
@@ -137,6 +150,21 @@ namespace Algolia.Search.Transport
             }
 
             throw new AlgoliaException("Unreachable hosts");
+        }
+
+        /// <summary>
+        /// Generate common headers from the config 
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, string> GenerateAlgoliaHeaders()
+        {
+            return new Dictionary<string, string>
+            {
+                {"X-Algolia-Application-Id", _algoliaConfig.AppId},
+                {"X-Algolia-API-Key", _algoliaConfig.ApiKey},
+                {"User-Agent", "Algolia for Csharp 5.0.0"},
+                {"Accept", "application/json"}
+            };
         }
     }
 }

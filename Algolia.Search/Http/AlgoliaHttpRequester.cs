@@ -23,6 +23,8 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Request;
+using Algolia.Search.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Net;
@@ -41,36 +43,11 @@ namespace Algolia.Search.Http
         /// <summary>
         /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
         /// </summary>
-        private readonly HttpClient httpClient = new HttpClient(
+        private readonly HttpClient _httpClient = new HttpClient(
             new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip
             });
-
-        private readonly string _applicationId;
-
-        private readonly string _apiKey;
-
-        /// <summary>
-        /// Algolia's implementation of the generic HttpRequester
-        /// </summary>
-        /// <param name="applicationId"></param>
-        /// <param name="apiKey"></param>
-        public AlgoliaHttpRequester(string applicationId, string apiKey)
-        {
-            if (string.IsNullOrEmpty(applicationId))
-            {
-                throw new ArgumentNullException(nameof(applicationId), "Application ID is required");
-            }
-
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                throw new ArgumentNullException(nameof(apiKey), "An API key is required");
-            }
-
-            _apiKey = apiKey;
-            _applicationId = applicationId;
-        }
 
         /// <summary>
         /// Don't use it directly
@@ -78,55 +55,51 @@ namespace Algolia.Search.Http
         /// </summary>
         /// <typeparam name="TResult">Return type</typeparam>
         /// <typeparam name="TData">Parameter type</typeparam>
-        /// <param name="method"></param>
+        /// <param name="request"></param>
+        /// <param name="connectTimeOut"></param>
+        /// <param name="totalTimeout"></param>
         /// <param name="uri"></param>
-        /// <param name="data"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> SendRequestAsync<TResult, TData>(HttpMethod method, Uri uri,
-            TData data = default(TData), CancellationToken ct = default(CancellationToken))
+        public async Task<TResult> SendRequestAsync<TResult, TData>(Request<TData> request, int connectTimeOut,
+            int totalTimeout, CancellationToken ct = default(CancellationToken))
             where TResult : class
             where TData : class
         {
-            if (method == null)
+            if (request.Method == null)
             {
-                throw new ArgumentNullException(nameof(method), "No HTTP method found");
+                throw new ArgumentNullException(nameof(request.Method), "No HTTP method found");
             }
 
-            if (uri == null)
+            if (request.Uri == null)
             {
-                throw new ArgumentNullException(nameof(uri), "No URI found");
+                throw new ArgumentNullException(nameof(request), "No URI found");
             }
 
             // Handle query parameters
-            if ((method == HttpMethod.Get || method == HttpMethod.Delete) && data != null)
+            if ((request.Method == HttpMethod.Get || request.Method == HttpMethod.Delete) && request.Body != null)
             {
-                uri = new Uri(uri, data.ToString());
+                request.Uri = new Uri(request.Uri, request.Body.ToString());
             }
 
-            string jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
+            string jsonString = JsonConvert.SerializeObject(request.Body, JsonConfig.AlgoliaJsonSerializerSettings);
 
             var httpRequestMessage = new HttpRequestMessage
             {
-                Method = method,
-                Headers =
-                {
-                    {"X-Algolia-Application-Id", _applicationId},
-                    {"X-Algolia-API-Key", _apiKey},
-                    {"User-Agent", "Algolia for Csharp 5.0.0"},
-                    {"Accept", "application/json"}
-                },
-                RequestUri = uri,
+                Method = request.Method,
+                RequestUri = request.Uri,
                 Content = new StringContent(jsonString, Encoding.UTF8, "application/json")
             };
 
+            httpRequestMessage.Headers.Fill(request.Headers);
+
             using (httpRequestMessage)
             using (HttpResponseMessage response =
-                await httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
+                await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new HttpRequestException(((int) response.StatusCode).ToString());
+                    throw new HttpRequestException(((int)response.StatusCode).ToString());
                 }
 
                 string responseString = await response.Content.ReadAsStringAsync();

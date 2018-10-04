@@ -23,9 +23,9 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Http;
 using Algolia.Search.Transport;
 using System;
-using Algolia.Search.Http;
 
 namespace Algolia.Search.Clients
 {

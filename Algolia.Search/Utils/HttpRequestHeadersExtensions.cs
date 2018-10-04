@@ -23,29 +23,27 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Request;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Net.Http.Headers;
 
-namespace Algolia.Search.Http
+namespace Algolia.Search.Utils
 {
-    /// <summary>
-    /// Interface that allow users to inject their custom http requester
-    /// Don't use directly, use AlgoliClient to make request with the retry strategy
-    /// </summary>
-    public interface IHttpRequester
+    public static class HttpRequestHeadersExtensions
     {
         /// <summary>
-        /// Sends the HTTP request
+        /// Extension method to easily fill the HttpRequesterHeaders object
         /// </summary>
-        /// <typeparam name="TResult"></typeparam>
-        /// <typeparam name="TData"></typeparam>
-        /// <param name="request"></param>
-        /// <param name="connectTimeOut"></param>
-        /// <param name="totalTimeout"></param>
-        /// <param name="ct"></param>
+        /// <param name="headers"></param>
+        /// <param name="dictionary"></param>
         /// <returns></returns>
-        Task<TResult> SendRequestAsync<TResult, TData>(Request<TData> request, int connectTimeOut, int totalTimeout,
-            CancellationToken ct = default(CancellationToken)) where TResult : class where TData : class;
+        public static HttpRequestHeaders Fill(this HttpRequestHeaders headers, Dictionary<string, string> dictionary)
+        {
+            foreach (var header in dictionary)
+            {
+                headers.Add(header.Key, header.Value);
+            }
+
+            return headers;
+        }
     }
 }
