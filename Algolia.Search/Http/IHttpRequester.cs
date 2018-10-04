@@ -37,8 +37,6 @@ namespace Algolia.Search.Http
     public interface IHttpRequester
     {
         Task<TResult> SendRequestAsync<TResult, TData>(HttpMethod method, Uri uri, TData body = default(TData),
-            CancellationToken ct = default(CancellationToken)) 
-            where TResult : class
-            where TData : class;
+            CancellationToken ct = default(CancellationToken)) where TResult : class where TData : class;
     }
 }

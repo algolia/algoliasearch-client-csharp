@@ -84,7 +84,8 @@ namespace Algolia.Search.Http
         /// <param name="data"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> SendRequestAsync<TResult, TData>(HttpMethod method, Uri uri, TData data = default(TData), CancellationToken ct = default(CancellationToken))
+        public async Task<TResult> SendRequestAsync<TResult, TData>(HttpMethod method, Uri uri,
+            TData data = default(TData), CancellationToken ct = default(CancellationToken))
             where TResult : class
             where TData : class
         {
@@ -105,28 +106,33 @@ namespace Algolia.Search.Http
             }
 
             string jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
-            HttpRequestMessage httpRequestMessage = new HttpRequestMessage
+
+            var httpRequestMessage = new HttpRequestMessage
             {
                 Method = method,
-                Headers = {
+                Headers =
+                {
                     {"X-Algolia-Application-Id", _applicationId},
                     {"X-Algolia-API-Key", _apiKey},
                     {"User-Agent", "Algolia for Csharp 5.0.0"},
-                    {"Accept","application/json"}
+                    {"Accept", "application/json"}
                 },
                 RequestUri = uri,
                 Content = new StringContent(jsonString, Encoding.UTF8, "application/json")
             };
 
-            HttpResponseMessage response = await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false);
-
-            if (!response.IsSuccessStatusCode)
+            using (httpRequestMessage)
+            using (HttpResponseMessage response =
+                await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
             {
-                throw new HttpRequestException(((int)response.StatusCode).ToString());
-            }
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException(((int) response.StatusCode).ToString());
+                }
 
-            string responseString = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
+                string responseString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<TResult>(responseString, JsonConfig.AlgoliaJsonSerializerSettings);
+            }
         }
     }
 }
