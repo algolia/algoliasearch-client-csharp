@@ -50,13 +50,6 @@ namespace Algolia.Search.Http
             });
 
         /// <summary>
-        /// Default constructor
-        /// </summary>
-        public AlgoliaHttpRequester()
-        {
-        }
-
-        /// <summary>
         /// Don't use it directly
         /// Send request to the REST API 
         /// </summary>

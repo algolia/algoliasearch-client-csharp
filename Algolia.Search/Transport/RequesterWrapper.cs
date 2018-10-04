@@ -132,7 +132,11 @@ namespace Algolia.Search.Transport
                 try
                 {
                     request.Uri = BuildUri(method, host, uri);
-                    string response = await _httpClient.SendRequestAsync(request, _algoliaConfig.ConnectTimeOut, _algoliaConfig.ReadTimeOut, ct);
+
+                    string response = await _httpClient
+                        .SendRequestAsync(request, _algoliaConfig.ConnectTimeOut, _algoliaConfig.ReadTimeOut, ct)
+                        .ConfigureAwait(false);
+
                     return JsonConvert.DeserializeObject<TResult>(response, JsonConfig.AlgoliaJsonSerializerSettings);
                 }
                 catch (HttpRequestException httpEx)
