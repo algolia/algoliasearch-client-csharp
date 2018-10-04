@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,31 +23,37 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 
-namespace Algolia.Search.Utils.Serializer
+namespace Algolia.Search.Utils
 {
     /// <summary>
-    /// Allow Json.NET to serialize/deserialize DateTime in UnixTimeStamp
+    /// We need this helper because the ToUnixTimeSeconds() is not supported in 4.5 framework
+    /// Inspired by : https://www.fluxbytes.com/csharp/convert-datetime-to-unix-time-in-c/
     /// </summary>
-    public class DateTimeEpochSerializer : DateTimeConverterBase
+    public static class DateTimeHelper
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+
+        /// <summary>
+        /// Convert a date time object to Unix time representation.
+        /// </summary>
+        /// <param name="date">The datetime object to convert to Unix time stamp.</param>
+        /// <returns>Returns a numerical representation (Unix time) of the DateTime object.</returns>
+        public static long ToUnixTimeSeconds(this DateTime date)
         {
-            long until = ((DateTime) value).ToUnixTimeSeconds();
-            writer.WriteValue(until);
+            DateTime sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return (long)(date - sTime).TotalSeconds;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        /// <summary>
+        /// Convert Unix time value to a DateTime object.
+        /// </summary>
+        /// <param name="unixTime">The Unix time stamp you want to convert to DateTime.</param>
+        /// <returns>Returns a DateTime object that represents value of the Unix time.</returns>
+        public static DateTime UnixTimeToDateTime(long unixTime)
         {
-            if (reader.Value == null)
-            {
-                return null;
-            }
-
-            return DateTimeHelper.UnixTimeToDateTime((long)reader.Value);
+            DateTime sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return sTime.AddSeconds(unixTime);
         }
     }
 }
