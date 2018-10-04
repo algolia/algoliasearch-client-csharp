@@ -27,7 +27,6 @@ using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,6 +39,7 @@ namespace Algolia.Search.Http
     public class AlgoliaHttpRequester : IHttpRequester
     {
         /// <summary>
+        /// Should be static to avoid sockets exception
         /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
         /// </summary>
         private static readonly HttpClient _httpClient = new HttpClient(
@@ -48,9 +48,9 @@ namespace Algolia.Search.Http
                 AutomaticDecompression = DecompressionMethods.GZip
             });
 
-        private string _applicationId;
-        ///
-        private string _apiKey;
+        private readonly string _applicationId;
+
+        private readonly string _apiKey;
 
         /// <summary>
         /// Algolia's implementation of the generic HttpRequester

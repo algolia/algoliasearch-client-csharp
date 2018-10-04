@@ -23,6 +23,8 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Http;
+using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
 using Algolia.Search.RetryStrategy;
 using System;
@@ -30,8 +32,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Http;
-using Algolia.Search.Models.Responses;
 
 namespace Algolia.Search.Client
 {

@@ -24,8 +24,6 @@
 */
 
 using Algolia.Search.RetryStrategy;
-using System;
-using System.Net.Http;
 
 namespace Algolia.Search.Client
 {
