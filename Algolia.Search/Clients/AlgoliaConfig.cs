@@ -52,8 +52,6 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <value></value>
         
-        public int ConnectTimeOut { get; set; } = 2;
-        
         public bool? ForwardToReplicas { get; set; }
         
         public IEnumerable<Host> Hosts { get; set; }

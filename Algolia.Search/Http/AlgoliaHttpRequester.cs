@@ -61,7 +61,7 @@ namespace Algolia.Search.Http
         /// <param name="uri"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<string> SendRequestAsync(Request request, int connectTimeOut, int totalTimeout,
+        public async Task<string> SendRequestAsync(Request request, int totalTimeout,
             CancellationToken ct = default(CancellationToken))
         {
             if (request.Method == null)

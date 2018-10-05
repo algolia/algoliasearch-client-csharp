@@ -43,7 +43,7 @@ namespace Algolia.Search.Http
         /// <param name="totalTimeout"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<string> SendRequestAsync(Request request, int connectTimeOut, int totalTimeout,
+        Task<string> SendRequestAsync(Request request, int totalTimeout,
             CancellationToken ct = default(CancellationToken));
     }
 }
