@@ -26,7 +26,7 @@
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 
-namespace Algolia.Search.Utils
+namespace Algolia.Search.Http
 {
     internal static class HttpRequestHeadersExtensions
     {
