@@ -9,7 +9,7 @@ namespace Algolia.Search.Http
     /// This class allow to handle timeout per request
     /// https://www.thomaslevesque.com/2018/02/25/better-timeout-handling-with-httpclient/
     /// </summary>
-    public class TimeoutHandler : DelegatingHandler
+    internal class TimeoutHandler : DelegatingHandler
     {
         public TimeSpan DefaultTimeout { get; set; } = TimeSpan.FromSeconds(100);
 

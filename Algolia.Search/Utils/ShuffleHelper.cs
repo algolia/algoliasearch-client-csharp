@@ -33,14 +33,14 @@ namespace Algolia.Search.Http
     /// Extension method to shuffle List
     /// https://stackoverflow.com/questions/5807128/an-extension-method-on-ienumerable-needed-for-shuffling
     /// </summary>
-    public static class ShuffleHelper
+    internal static class ShuffleHelper
     {
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+        internal static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
         {
             return source.Shuffle(new Random());
         }
 
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
+        internal static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (rng == null) throw new ArgumentNullException(nameof(rng));

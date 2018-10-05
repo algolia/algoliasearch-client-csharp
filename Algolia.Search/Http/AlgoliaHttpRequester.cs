@@ -38,7 +38,7 @@ namespace Algolia.Search.Http
     /// Algolia's HTTP requester
     /// You can inject your own by the SearchClient or Analytics Client
     /// </summary>
-    public class AlgoliaHttpRequester : IHttpRequester
+    internal class AlgoliaHttpRequester : IHttpRequester
     {
         /// <summary>
         /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client

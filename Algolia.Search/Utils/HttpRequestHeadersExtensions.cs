@@ -28,7 +28,7 @@ using System.Net.Http.Headers;
 
 namespace Algolia.Search.Utils
 {
-    public static class HttpRequestHeadersExtensions
+    internal static class HttpRequestHeadersExtensions
     {
         /// <summary>
         /// Extension method to easily fill the HttpRequesterHeaders object
@@ -36,7 +36,7 @@ namespace Algolia.Search.Utils
         /// <param name="headers"></param>
         /// <param name="dictionary"></param>
         /// <returns></returns>
-        public static HttpRequestHeaders Fill(this HttpRequestHeaders headers, Dictionary<string, string> dictionary)
+        internal static HttpRequestHeaders Fill(this HttpRequestHeaders headers, Dictionary<string, string> dictionary)
         {
             foreach (var header in dictionary)
             {

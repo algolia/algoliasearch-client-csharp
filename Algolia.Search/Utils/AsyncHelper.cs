@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Utils
 {
-    public static class AsyncHelper
+    internal static class AsyncHelper
     {
         private static readonly TaskFactory _taskFactory = new
             TaskFactory(CancellationToken.None,
@@ -37,14 +37,14 @@ namespace Algolia.Search.Utils
                 TaskContinuationOptions.None,
                 TaskScheduler.Default);
 
-        public static TResult RunSync<TResult>(Func<Task<TResult>> func)
+        internal static TResult RunSync<TResult>(Func<Task<TResult>> func)
             => _taskFactory
                 .StartNew(func)
                 .Unwrap()
                 .GetAwaiter()
                 .GetResult();
 
-        public static void RunSync(Func<Task> func)
+        internal static void RunSync(Func<Task> func)
             => _taskFactory
                 .StartNew(func)
                 .Unwrap()

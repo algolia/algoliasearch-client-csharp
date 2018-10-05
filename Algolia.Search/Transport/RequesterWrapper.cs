@@ -36,7 +36,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Transport
 {
-    public class RequesterWrapper : IRequesterWrapper
+    internal class RequesterWrapper : IRequesterWrapper
     {
         private readonly IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
