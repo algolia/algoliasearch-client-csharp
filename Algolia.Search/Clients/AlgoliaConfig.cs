@@ -36,7 +36,7 @@ namespace Algolia.Search.Clients
         public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
         
         /// <summary>
-        /// Reand Time out in seconds
+        /// Read Time out in seconds
         /// </summary>
         /// <value></value>
         public int ReadTimeOut { get; set; } = 5;
