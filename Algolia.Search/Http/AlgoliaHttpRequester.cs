@@ -44,9 +44,9 @@ namespace Algolia.Search.Http
         /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
         /// </summary>
         private readonly HttpClient _httpClient = new HttpClient(
-            new HttpClientHandler
+            new TimeoutHandler
             {
-                AutomaticDecompression = DecompressionMethods.GZip
+                InnerHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip }
             });
 
         /// <summary>
@@ -82,6 +82,7 @@ namespace Algolia.Search.Http
             };
 
             httpRequestMessage.Headers.Fill(request.Headers);
+            httpRequestMessage.SetTimeout(TimeSpan.FromSeconds(totalTimeout));
 
             using (httpRequestMessage)
             using (HttpResponseMessage response =
@@ -89,7 +90,7 @@ namespace Algolia.Search.Http
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new HttpRequestException(((int) response.StatusCode).ToString());
+                    throw new HttpRequestException(((int)response.StatusCode).ToString());
                 }
 
                 return await response.Content.ReadAsStringAsync().ConfigureAwait(false);

@@ -147,7 +147,7 @@ namespace Algolia.Search.Transport
                     // call retry
                     throw;
                 }
-                catch (TaskCanceledException taskEx)
+                catch (TimeoutException taskEx)
                 {
                     // Time out are handled with task canceled exception
                     throw;
