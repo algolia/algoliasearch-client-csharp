@@ -129,7 +129,7 @@ namespace Algolia.Search.Transport
             }
             else
             {
-                foreach (var host in hosts)
+                foreach (var host in hosts.Where(h => h.Accept.HasFlag(callType)))
                 {
                     Reset(host);
                 }
@@ -144,7 +144,7 @@ namespace Algolia.Search.Transport
         /// <param name="httpResponseCode"></param>
         /// <param name="isTimedOut"></param>
         /// <returns></returns>
-        public RetryOutcomeType UpdateState(StateFulHost tryableHost, int? httpResponseCode = null, bool? isTimedOut = null)
+        public RetryOutcomeType Decide(StateFulHost tryableHost, int? httpResponseCode = null, bool? isTimedOut = null)
         {
             if (httpResponseCode.HasValue)
             {

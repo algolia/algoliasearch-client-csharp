@@ -94,7 +94,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
 
             foreach (var host in hosts)
             {
-                retryStrategy.UpdateState(host, isTimedOut: true);
+                retryStrategy.Decide(host, isTimedOut: true);
             }
 
             var updatedHosts = retryStrategy.GetTryableHost(callType);
@@ -104,7 +104,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
 
             foreach (var host in updatedHosts)
             {
-                retryStrategy.UpdateState(host, isTimedOut: true);
+                retryStrategy.Decide(host, isTimedOut: true);
             }
 
             var updatedHosts2 = retryStrategy.GetTryableHost(callType);
@@ -114,20 +114,81 @@ namespace Algolia.Search.Test.RetryStrategyTest
         }
 
         [Theory]
+        [InlineData(CallType.Read)]
+        [InlineData(CallType.Write)]
+        public void TestRetryStrategyResetExpired(CallType callType)
+        {
+            var commonHosts = new List<StateFulHost> {
+            new StateFulHost
+            {
+                Url = $"-1.algolianet.com",
+                Priority = 0,
+                Up = true,
+                LastUse = DateTime.UtcNow,
+                Accept = CallType.Read | CallType.Write,
+                TimeOut = 5
+            },
+            new StateFulHost
+            {
+                Url = $"-2.algolianet.com",
+                Priority = 0,
+                Up = true,
+                LastUse = DateTime.UtcNow,
+                Accept = CallType.Read | CallType.Write,
+                TimeOut = 5
+            },
+            new StateFulHost
+            {
+                Url = $"-3.algolianet.com",
+                Priority = 0,
+                Up = false,
+                LastUse = DateTime.UtcNow,
+                Accept = CallType.Read | CallType.Write,
+                TimeOut = 5
+            }};
+
+            RetryStrategy retryStrategy = new RetryStrategy("appId", commonHosts);
+            var hosts = retryStrategy.GetTryableHost(callType);
+            Assert.True(hosts.Where(h => h.Up).Count() == 2);
+            hosts.ElementAt(2).LastUse = DateTime.UtcNow.AddMinutes(-10);
+
+            var updatedHosts = retryStrategy.GetTryableHost(callType);
+            Assert.True(updatedHosts.Where(h => h.Up).Count() == 3);
+        }
+
+        [Theory]
         [InlineData(CallType.Read, 500)]
         [InlineData(CallType.Write, 500)]
-        public void TestRetryStrategyServerError(CallType callType, int httpErrorCode)
+        [InlineData(CallType.Read, 300)]
+        [InlineData(CallType.Write, 300)]
+        public void TestRetryStrategyRetriableFailure(CallType callType, int httpErrorCode)
+        {
+            RetryStrategy retryStrategy = new RetryStrategy("appId");
+            var hosts = retryStrategy.GetTryableHost(callType);
+            Assert.True(hosts.Where(h => h.Up).Count() == 4);
+            
+            RetryOutcomeType decision;
+            decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode);
+            Assert.True(decision.HasFlag(RetryOutcomeType.Retry));
+
+            var updatedHosts = retryStrategy.GetTryableHost(callType);
+            Assert.True(updatedHosts.Where(h => h.Up).Count() == 3);
+        }
+
+        [Theory]
+        [InlineData(CallType.Read, 400)]
+        [InlineData(CallType.Write, 400)]
+        [InlineData(CallType.Read, 404)]
+        [InlineData(CallType.Write, 404)]
+        public void TestRetryStrategyFailureDecision(CallType callType, int httpErrorCode)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
             var hosts = retryStrategy.GetTryableHost(callType);
 
-            foreach (var host in hosts)
-            {
-                retryStrategy.UpdateState(host, httpErrorCode);
-            }
+            RetryOutcomeType decision;
+            decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode);
 
-            var updatedHosts = retryStrategy.GetTryableHost(callType);
-            Assert.False(updatedHosts.All(h => h.Up));
+            Assert.True(decision.HasFlag(RetryOutcomeType.Failure));
         }
     }
 }

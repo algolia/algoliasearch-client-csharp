@@ -128,6 +128,7 @@ namespace Algolia.Search.Transport
 
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
+                RetryOutcomeType decision;
                 try
                 {
                     request.Uri = BuildUri(method, host.Url, uri);
@@ -135,16 +136,20 @@ namespace Algolia.Search.Transport
                     string response = await _httpClient
                         .SendRequestAsync(request, host.TimeOut, ct)
                         .ConfigureAwait(false);
-                    
+
                     return JsonConvert.DeserializeObject<TResult>(response, JsonConfig.AlgoliaJsonSerializerSettings);
                 }
                 catch (HttpRequestException httpEx)
                 {
-                    _retryStrategy.UpdateState(host, Int32.Parse(httpEx.Message));
+                    decision = _retryStrategy.Decide(host, Int32.Parse(httpEx.Message));
+                    if (decision.HasFlag(RetryOutcomeType.Failure))
+                    {
+                        throw;
+                    }
                 }
                 catch (TimeoutException)
                 {
-                    _retryStrategy.UpdateState(host, isTimedOut: true);
+                    decision = _retryStrategy.Decide(host, isTimedOut: true);
                 }
             }
 
