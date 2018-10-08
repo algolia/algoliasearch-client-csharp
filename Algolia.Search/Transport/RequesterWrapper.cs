@@ -40,6 +40,7 @@ namespace Algolia.Search.Transport
     {
         private readonly IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
+        private RetryStrategy _retryStrategy;
 
         /// <summary>
         /// default constructor, intantiate with default configuration and default http client
@@ -48,20 +49,22 @@ namespace Algolia.Search.Transport
         {
             _algoliaConfig = new AlgoliaConfig();
             _httpClient = new AlgoliaHttpRequester();
+            _retryStrategy = new RetryStrategy(_algoliaConfig.AppId);
         }
 
         /// <summary>
-        /// 
+        /// Instantiate with custom config
         /// </summary>
         /// <param name="config"></param>
         public RequesterWrapper(AlgoliaConfig config)
         {
             _algoliaConfig = config;
             _httpClient = new AlgoliaHttpRequester();
+            _retryStrategy = new RetryStrategy(_algoliaConfig.AppId, config.Hosts);
         }
 
         /// <summary>
-        /// 
+        /// Instantiate with custom config and custom http requester 
         /// </summary>
         /// <param name="config"></param>
         /// <param name="httpClient"></param>
@@ -69,6 +72,7 @@ namespace Algolia.Search.Transport
         {
             _algoliaConfig = config;
             _httpClient = httpClient;
+            _retryStrategy = new RetryStrategy(_algoliaConfig.AppId, config.Hosts);
         }
 
         /// <summary>
@@ -113,48 +117,36 @@ namespace Algolia.Search.Transport
                 throw new ArgumentNullException(nameof(method));
             }
 
-            // WIP : Retry strategy
-            var hosts = new List<string>(3)
-                {
-                    $"{_algoliaConfig.AppId}-1.algolianet.com",
-                    $"{_algoliaConfig.AppId}-2.algolianet.com",
-                    $"{_algoliaConfig.AppId}-3.algolianet.com"
-                };
-
             string jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
 
             var request = new Request
             {
                 Method = method,
                 Body = jsonString,
-                Headers = GenerateAlgoliaHeaders()
+                Headers = GenerateHeaders()
             };
 
-            foreach (var host in hosts)
+            foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
                 try
                 {
-                    request.Uri = BuildUri(method, host, uri);
+                    request.Uri = BuildUri(method, host.Url, uri);
 
                     string response = await _httpClient
-                        .SendRequestAsync(request, _algoliaConfig.ReadTimeOut, ct)
+                        .SendRequestAsync(request, host.TimeOut, ct)
                         .ConfigureAwait(false);
+                    
+                    _retryStrategy.UpdateState(host, 200);
 
                     return JsonConvert.DeserializeObject<TResult>(response, JsonConfig.AlgoliaJsonSerializerSettings);
                 }
                 catch (HttpRequestException httpEx)
                 {
-                    // call retry
-                    throw;
+                    _retryStrategy.UpdateState(host, Int32.Parse(httpEx.Message));
                 }
-                catch (TimeoutException taskEx)
+                catch (TimeoutException)
                 {
-                    // Time out are handled with task canceled exception
-                    throw;
-                }
-                catch (Exception ex)
-                {
-                    throw;
+                    _retryStrategy.UpdateState(host, isTimedOut: true);
                 }
             }
 
@@ -165,7 +157,7 @@ namespace Algolia.Search.Transport
         /// Generate common headers from the config 
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, string> GenerateAlgoliaHeaders()
+        private Dictionary<string, string> GenerateHeaders()
         {
             return new Dictionary<string, string>
             {
@@ -184,10 +176,9 @@ namespace Algolia.Search.Transport
         /// <param name="baseUri"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        private Uri BuildUri(HttpMethod method, string host, string baseUri)
+        private Uri BuildUri(HttpMethod method, string url, string baseUri)
         {
-            var builder = new UriBuilder { Scheme = "https", Host = host, Path = baseUri };
-
+            var builder = new UriBuilder { Scheme = "https", Host = url, Path = baseUri };
             return builder.Uri;
         }
     }

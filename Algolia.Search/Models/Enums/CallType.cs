@@ -23,12 +23,19 @@
 * THE SOFTWARE.
 */
 
+using System;
+
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/enumeration-types
+    /// Binary enums beware when adding new values
+    /// </summary>
+    [Flags]
     public enum CallType
     {
-        Read,
-        Write,
-        Analytics
+        Read = 1,
+        Write = 2,
+        Analytics = 4
     }
 }

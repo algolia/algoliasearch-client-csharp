@@ -23,6 +23,9 @@
 * THE SOFTWARE.
 */
 
+using System;
+using Algolia.Search.Models.Enums;
+
 namespace Algolia.Search.Transport
 {
     public class StateFulHost
@@ -30,5 +33,9 @@ namespace Algolia.Search.Transport
         public string Url { get; set; }
         public bool Up { get; set; }
         public int Priority { get; set; }
+        public int TimeOut { get; set; }
+        public int RetryCount { get; set; }
+        public DateTime LastUse { get; set; }
+        public CallType Accept { get; set; }
     }
 }

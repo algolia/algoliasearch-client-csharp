@@ -23,10 +23,12 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Transport
+namespace Algolia.Search.Models.Enums
 {
-    public class Retry
+    public enum RetryOutcomeType
     {
-        
+        Succes,
+        Retry,
+        Failure
     }
 }

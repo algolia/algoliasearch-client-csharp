@@ -27,7 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Algolia.Search.Http
+namespace Algolia.Search.Utils
 {
     /// <summary>
     /// Extension method to shuffle List

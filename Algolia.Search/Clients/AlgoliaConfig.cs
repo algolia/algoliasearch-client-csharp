@@ -34,26 +34,9 @@ namespace Algolia.Search.Clients
         public string AppId { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
         
         public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
-        
-        /// <summary>
-        /// Read Time out in seconds
-        /// </summary>
-        /// <value></value>
-        public int ReadTimeOut { get; set; } = 5;
-        
-        /// <summary>
-        /// Write time out in secondes
-        /// </summary>
-        /// <value></value>
-        public int WriteTimeOut { get; set; } = 30;
-        
-        /// <summary>
-        /// Connect time out in seconds
-        /// </summary>
-        /// <value></value>
-        
+                        
         public bool? ForwardToReplicas { get; set; }
         
-        public IEnumerable<StateFulHost> Hosts { get; set; }
+        public List<StateFulHost> Hosts { get; set; }
     }
 }
