@@ -54,6 +54,6 @@ namespace Algolia.Search.Clients
         
         public bool? ForwardToReplicas { get; set; }
         
-        public IEnumerable<Host> Hosts { get; set; }
+        public IEnumerable<StateFulHost> Hosts { get; set; }
     }
 }

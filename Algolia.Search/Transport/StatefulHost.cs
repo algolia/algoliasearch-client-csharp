@@ -25,7 +25,7 @@
 
 namespace Algolia.Search.Transport
 {
-    public class Host
+    public class StateFulHost
     {
         public string Url { get; set; }
         public bool Up { get; set; }
