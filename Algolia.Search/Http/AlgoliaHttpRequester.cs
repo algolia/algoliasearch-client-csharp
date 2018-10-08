@@ -53,10 +53,7 @@ namespace Algolia.Search.Http
         /// Don't use it directly
         /// Send request to the REST API 
         /// </summary>
-        /// <typeparam name="TResult">Return type</typeparam>
-        /// <typeparam name="TData">Parameter type</typeparam>
         /// <param name="request"></param>
-        /// <param name="connectTimeOut"></param>
         /// <param name="totalTimeout"></param>
         /// <param name="uri"></param>
         /// <param name="ct"></param>
