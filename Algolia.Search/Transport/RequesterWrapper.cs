@@ -136,8 +136,6 @@ namespace Algolia.Search.Transport
                         .SendRequestAsync(request, host.TimeOut, ct)
                         .ConfigureAwait(false);
                     
-                    _retryStrategy.UpdateState(host, 200);
-
                     return JsonConvert.DeserializeObject<TResult>(response, JsonConfig.AlgoliaJsonSerializerSettings);
                 }
                 catch (HttpRequestException httpEx)

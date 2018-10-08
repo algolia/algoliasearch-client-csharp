@@ -28,7 +28,9 @@ using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Algolia.Search.Test")]
 namespace Algolia.Search.Transport
 {
     internal class RetryStrategy
@@ -44,55 +46,63 @@ namespace Algolia.Search.Transport
         {
             hosts = new List<StateFulHost>();
 
-            hosts.Add(new StateFulHost
+            if (customHosts != null && customHosts.Count() > 0)
             {
-                Url = $"{applicationId}-dsn.algolia.net",
-                Priority = 10,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                TimeOut = 5,
-                Accept = CallType.Read
-            });
-            hosts.Add(new StateFulHost
+                hosts.AddRange(customHosts);
+                hosts.ForEach(x => x.Accept = CallType.Read | CallType.Write);
+            }
+            else
             {
-                Url = $"{applicationId}.algolia.net",
-                Priority = 10,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Write,
-                TimeOut = 30
-            });
+                hosts.Add(new StateFulHost
+                {
+                    Url = $"{applicationId}-dsn.algolia.net",
+                    Priority = 10,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    TimeOut = 5,
+                    Accept = CallType.Read
+                });
+                hosts.Add(new StateFulHost
+                {
+                    Url = $"{applicationId}.algolia.net",
+                    Priority = 10,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Write,
+                    TimeOut = 30
+                });
 
-            var commonHosts = new List<StateFulHost> {
-            new StateFulHost
-            {
-                Url = $"{applicationId}-1.algolianet.com",
-                Priority = 0,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
-            },
-            new StateFulHost
-            {
-                Url = $"{applicationId}-2.algolianet.com",
-                Priority = 0,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
-            },
-            new StateFulHost
-            {
-                Url = $"{applicationId}-3.algolianet.com",
-                Priority = 0,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
-            }}.Shuffle();
+                var commonHosts = new List<StateFulHost> {
+                new StateFulHost
+                {
+                    Url = $"{applicationId}-1.algolianet.com",
+                    Priority = 0,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read | CallType.Write,
+                    TimeOut = 5
+                },
+                new StateFulHost
+                {
+                    Url = $"{applicationId}-2.algolianet.com",
+                    Priority = 0,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read | CallType.Write,
+                    TimeOut = 5
+                },
+                new StateFulHost
+                {
+                    Url = $"{applicationId}-3.algolianet.com",
+                    Priority = 0,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read | CallType.Write,
+                    TimeOut = 5
+                }}.Shuffle();
 
-            hosts.AddRange(commonHosts);
+                hosts.AddRange(commonHosts);
+            }
 
             hosts.Add(new StateFulHost
             {
