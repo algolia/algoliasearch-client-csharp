@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 using Algolia.Search.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -147,6 +148,7 @@ namespace Algolia.Search
             q.allowTyposOnNumericTokens = allowTyposOnNumericTokens;
             q.analytics = analytics;
             q.analyticsTags = analyticsTags;
+            q.clickAnalytics = clickAnalytics;
             q.percentileComputation = percentileComputation;
             q.aroundLatLong = aroundLatLong;
             q.aroundLatLongViaIP = aroundLatLongViaIP;
@@ -414,6 +416,15 @@ namespace Algolia.Search
         public Query EnableDistinct(int nbHitsToKeep)
         {
             distinct = nbHitsToKeep;
+            return this;
+        }
+
+        /// <summary>
+        /// Enables click analytics
+        /// </summary>
+        public Query EnableClickAnalytics(bool enabled)
+        {
+            clickAnalytics = enabled;
             return this;
         }
 
@@ -1225,6 +1236,14 @@ namespace Algolia.Search
                 stringBuilder += analytics.Value ? "true" : "false";
             }
 
+            if (clickAnalytics.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "clickAnalytics=";
+                stringBuilder += clickAnalytics.Value ? "true" : "false";
+            }
+
             if (percentileComputation.HasValue)
             {
                 if (stringBuilder.Length > 0)
@@ -1613,6 +1632,7 @@ namespace Algolia.Search
         private bool? advancedSyntax;
         private string removeStopWords;
         private bool? analytics;
+        private bool? clickAnalytics;
         private bool? synonyms;
         private bool? replaceSynonyms;
         private TypoTolerance? typoTolerance;

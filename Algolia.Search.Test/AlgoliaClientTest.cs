@@ -704,6 +704,7 @@ namespace Algolia.Search.Test
             query.SetAnalyticsTags(new string[] { "tagIt" });
             query.EnableDistinct(true);
             query.EnableAnalytics(true);
+            query.EnableClickAnalytics(true);
             query.EnableAdvancedSyntax(true);
             query.GetRankingInfo(true);
             query.EnableTypoTolerance(false);
