@@ -41,6 +41,6 @@ namespace Algolia.Search.Clients
         /// If you want to set custom hosts
         /// </summary>
         /// <value></value>
-        public List<StateFulHost> Hosts { get; set; }
+        public List<StatefulHost> Hosts { get; set; }
     }
 }

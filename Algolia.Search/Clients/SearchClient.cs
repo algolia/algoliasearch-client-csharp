@@ -95,7 +95,8 @@ namespace Algolia.Search.Clients
         public Index InitIndex(string indexName)
         {
             return string.IsNullOrEmpty(indexName)
-                ? throw new ArgumentNullException(nameof(indexName), "Index name is required") : new Index(_requesterWrapper, indexName);
+                ? throw new ArgumentNullException(nameof(indexName), "Index name is required") 
+                : new Index(_requesterWrapper, indexName);
         }
     }
 }

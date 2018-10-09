@@ -28,7 +28,7 @@ using Algolia.Search.Models.Enums;
 
 namespace Algolia.Search.Transport
 {
-    public class StateFulHost
+    public class StatefulHost
     {
         public string Url { get; set; }
         public bool Up { get; set; }

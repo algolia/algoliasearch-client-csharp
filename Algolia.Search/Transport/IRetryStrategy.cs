@@ -35,7 +35,7 @@ namespace Algolia.Search.Transport
         /// </summary>
         /// <param name="callType"></param>
         /// <returns></returns>
-        IEnumerable<StateFulHost> GetTryableHost(CallType callType);
+        IEnumerable<StatefulHost> GetTryableHost(CallType callType);
 
         /// <summary>
         /// Update host's state 
@@ -44,6 +44,6 @@ namespace Algolia.Search.Transport
         /// <param name="httpResponseCode"></param>
         /// <param name="isTimedOut"></param>
         /// <returns></returns>
-        RetryOutcomeType Decide(StateFulHost tryableHost, int httpResponseCode, bool isTimedOut);
+        RetryOutcomeType Decide(StatefulHost tryableHost, int httpResponseCode, bool isTimedOut);
     }
 }

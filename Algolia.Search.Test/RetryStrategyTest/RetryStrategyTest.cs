@@ -60,8 +60,8 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [InlineData(CallType.Write)]
         public void TestRetryStrategyTimeOut(CallType callType)
         {
-            var commonHosts = new List<StateFulHost> {
-            new StateFulHost
+            var commonHosts = new List<StatefulHost> {
+            new StatefulHost
             {
                 Url = $"-1.algolianet.com",
                 Priority = 0,
@@ -70,7 +70,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 Accept = CallType.Read | CallType.Write,
                 TimeOut = 5
             },
-            new StateFulHost
+            new StatefulHost
             {
                 Url = $"-2.algolianet.com",
                 Priority = 0,
@@ -79,7 +79,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 Accept = CallType.Read | CallType.Write,
                 TimeOut = 5
             },
-            new StateFulHost
+            new StatefulHost
             {
                 Url = $"-3.algolianet.com",
                 Priority = 0,
@@ -118,8 +118,8 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [InlineData(CallType.Write)]
         public void TestRetryStrategyResetExpired(CallType callType)
         {
-            var commonHosts = new List<StateFulHost> {
-            new StateFulHost
+            var commonHosts = new List<StatefulHost> {
+            new StatefulHost
             {
                 Url = $"-1.algolianet.com",
                 Priority = 0,
@@ -128,7 +128,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 Accept = CallType.Read | CallType.Write,
                 TimeOut = 5
             },
-            new StateFulHost
+            new StatefulHost
             {
                 Url = $"-2.algolianet.com",
                 Priority = 0,
@@ -137,7 +137,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 Accept = CallType.Read | CallType.Write,
                 TimeOut = 5
             },
-            new StateFulHost
+            new StatefulHost
             {
                 Url = $"-3.algolianet.com",
                 Priority = 0,

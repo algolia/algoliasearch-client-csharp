@@ -31,7 +31,7 @@ namespace Algolia.Search.Http
 {
     /// <summary>
     /// Interface that allow users to inject their custom http requester
-    /// Don't use directly, use AlgoliClient to make request with the retry strategy
+    /// Don't use directly, use AlgoliaClient to make request with the retry strategy
     /// </summary>
     public interface IHttpRequester
     {

@@ -35,16 +35,16 @@ namespace Algolia.Search.Transport
 {
     internal class RetryStrategy : IRetryStrategy
     {
-        private List<StateFulHost> _hosts;
+        private List<StatefulHost> _hosts;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="applicationId"></param>
         /// <param name="customHosts"></param>
-        public RetryStrategy(string applicationId, IEnumerable<StateFulHost> customHosts = null)
+        public RetryStrategy(string applicationId, IEnumerable<StatefulHost> customHosts = null)
         {
-            _hosts = new List<StateFulHost>();
+            _hosts = new List<StatefulHost>();
 
             if (customHosts != null && customHosts.Any())
             {
@@ -53,7 +53,7 @@ namespace Algolia.Search.Transport
             }
             else
             {
-                _hosts.Add(new StateFulHost
+                _hosts.Add(new StatefulHost
                 {
                     Url = $"{applicationId}-dsn.algolia.net",
                     Priority = 10,
@@ -62,7 +62,7 @@ namespace Algolia.Search.Transport
                     TimeOut = 5,
                     Accept = CallType.Read
                 });
-                _hosts.Add(new StateFulHost
+                _hosts.Add(new StatefulHost
                 {
                     Url = $"{applicationId}.algolia.net",
                     Priority = 10,
@@ -72,8 +72,8 @@ namespace Algolia.Search.Transport
                     TimeOut = 30
                 });
 
-                var commonHosts = new List<StateFulHost> {
-                new StateFulHost
+                var commonHosts = new List<StatefulHost> {
+                new StatefulHost
                 {
                     Url = $"{applicationId}-1.algolianet.com",
                     Priority = 0,
@@ -82,7 +82,7 @@ namespace Algolia.Search.Transport
                     Accept = CallType.Read | CallType.Write,
                     TimeOut = 5
                 },
-                new StateFulHost
+                new StatefulHost
                 {
                     Url = $"{applicationId}-2.algolianet.com",
                     Priority = 0,
@@ -91,7 +91,7 @@ namespace Algolia.Search.Transport
                     Accept = CallType.Read | CallType.Write,
                     TimeOut = 5
                 },
-                new StateFulHost
+                new StatefulHost
                 {
                     Url = $"{applicationId}-3.algolianet.com",
                     Priority = 0,
@@ -104,7 +104,7 @@ namespace Algolia.Search.Transport
                 _hosts.AddRange(commonHosts);
             }
 
-            _hosts.Add(new StateFulHost
+            _hosts.Add(new StatefulHost
             {
                 Url = "analytics.algolia.com",
                 Up = true,
@@ -119,7 +119,7 @@ namespace Algolia.Search.Transport
         /// </summary>
         /// <param name="callType"></param>
         /// <returns></returns>
-        public IEnumerable<StateFulHost> GetTryableHost(CallType callType)
+        public IEnumerable<StatefulHost> GetTryableHost(CallType callType)
         {
             ResetExpiredHosts();
 
@@ -144,7 +144,7 @@ namespace Algolia.Search.Transport
         /// <param name="httpResponseCode"></param>
         /// <param name="isTimedOut"></param>
         /// <returns></returns>
-        public RetryOutcomeType Decide(StateFulHost tryableHost, int httpResponseCode, bool isTimedOut)
+        public RetryOutcomeType Decide(StatefulHost tryableHost, int httpResponseCode, bool isTimedOut)
         {
             if (!isTimedOut && (int)Math.Floor((decimal)httpResponseCode / 100) == 2)
             {
@@ -174,7 +174,7 @@ namespace Algolia.Search.Transport
         /// Reset the given host
         /// </summary>
         /// <param name="host"></param>
-        private void Reset(StateFulHost host)
+        private void Reset(StatefulHost host)
         {
             host.Up = true;
             host.RetryCount = 0;
