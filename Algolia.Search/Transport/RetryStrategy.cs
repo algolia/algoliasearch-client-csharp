@@ -140,13 +140,13 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         public RetryOutcomeType Decide(StatefulHost tryableHost, int httpResponseCode, bool isTimedOut)
         {
-            if (!isTimedOut && (int)Math.Floor((decimal)httpResponseCode / 100) == 2)
+            if (!isTimedOut && IsSuccess(httpResponseCode))
             {
                 tryableHost.Up = true;
                 tryableHost.LastUse = DateTime.UtcNow;
                 return RetryOutcomeType.Success;
             }
-            else if (!isTimedOut && (((int)Math.Floor((decimal)httpResponseCode / 100) != 2) && ((int)Math.Floor((decimal)httpResponseCode / 100) != 4)))
+            else if (!isTimedOut && IsRetryable(httpResponseCode))
             {
                 tryableHost.Up = false;
                 tryableHost.LastUse = DateTime.UtcNow;
@@ -161,6 +161,26 @@ namespace Algolia.Search.Transport
             }
 
             return RetryOutcomeType.Failure;
+        }
+
+        /// <summary>
+        ///  Tells if the response is a success or not
+        /// </summary>
+        /// <param name="httpResponseCode"></param>
+        /// <returns></returns>
+        private bool IsSuccess(int httpResponseCode)
+        {
+            return (int)Math.Floor((decimal)httpResponseCode / 100) == 2;
+        }
+
+        /// <summary>
+        ///  Tells if the response is retryable or not
+        /// </summary>
+        /// <param name="httpResponseCode"></param>
+        /// <returns></returns>
+        private bool IsRetryable(int httpResponseCode)
+        {
+            return (int)Math.Floor((decimal)httpResponseCode / 100) != 2 && (int)Math.Floor((decimal)httpResponseCode / 100) != 4;
         }
 
         /// <summary>
