@@ -30,6 +30,7 @@ using Algolia.Search.Models.Request;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -123,12 +124,12 @@ namespace Algolia.Search.Transport
             {
                 Method = method,
                 Body = jsonString,
-                Headers = GenerateHeaders()
+                Headers = GenerateHeaders(requestOptions?.Headers)
             };
 
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
-                request.Uri = BuildUri(method, host.Url, uri);
+                request.Uri = BuildUri(method, host.Url, uri, requestOptions?.QueryParameters);
 
                 AlgoliaHttpResponse response = await _httpClient
                     .SendRequestAsync(request, host.TimeOut, ct)
@@ -150,30 +151,36 @@ namespace Algolia.Search.Transport
         /// <summary>
         /// Generate common headers from the config 
         /// </summary>
+        /// <param name="optionalHeaders"></param>
         /// <returns></returns>
-        private Dictionary<string, string> GenerateHeaders()
+        private Dictionary<string, string> GenerateHeaders(Dictionary<string, string> optionalHeaders = null)
         {
-            return new Dictionary<string, string>
+            var algoliaHeaders = new Dictionary<string, string>
             {
                 {"X-Algolia-Application-Id", _algoliaConfig.AppId},
                 {"X-Algolia-API-Key", _algoliaConfig.ApiKey},
                 {"User-Agent", "Algolia for Csharp 5.0.0"},
                 {"Accept", JsonConfig.JsonContentType}
             };
+
+            return optionalHeaders != null && optionalHeaders.Any()
+                ? algoliaHeaders.Concat(optionalHeaders).ToDictionary(x => x.Key, x => x.Value)
+                : algoliaHeaders;
         }
 
         /// <summary>
         /// Build uri depending on the method
         /// </summary>
         /// <param name="method"></param>
-        /// <param name="host"></param>
+        /// <param name="url"></param>
         /// <param name="baseUri"></param>
-        /// <param name="data"></param>
+        /// <param name="optionalQueryParameters"></param>
         /// <returns></returns>
-        private Uri BuildUri(HttpMethod method, string url, string baseUri)
+        private Uri BuildUri(HttpMethod method, string url, string baseUri, string optionalQueryParameters = null)
         {
-            var builder = new UriBuilder { Scheme = "https", Host = url, Path = baseUri };
-            return builder.Uri;
+            return optionalQueryParameters != null
+                ? new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}{optionalQueryParameters}" }.Uri
+                : new UriBuilder { Scheme = "https", Host = url, Path = baseUri }.Uri;
         }
     }
 }
