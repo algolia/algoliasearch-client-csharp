@@ -58,64 +58,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [Theory]
         [InlineData(CallType.Read)]
         [InlineData(CallType.Write)]
-        public void TestRetryStrategyTimeOut(CallType callType)
-        {
-            var commonHosts = new List<StatefulHost> {
-            new StatefulHost
-            {
-                Url = $"-1.algolianet.com",
-                Priority = 0,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
-            },
-            new StatefulHost
-            {
-                Url = $"-2.algolianet.com",
-                Priority = 0,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
-            },
-            new StatefulHost
-            {
-                Url = $"-3.algolianet.com",
-                Priority = 0,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
-            }};
-
-            RetryStrategy retryStrategy = new RetryStrategy("appId", commonHosts);
-            var hosts = retryStrategy.GetTryableHost(callType);
-
-            foreach (var host in hosts)
-            {
-                retryStrategy.Decide(host, 504, true);
-            }
-
-            var updatedHosts = retryStrategy.GetTryableHost(callType);
-            Assert.True(updatedHosts.All(h => h.Up));
-            Assert.True(updatedHosts.All(h => h.RetryCount == 1));
-            Assert.True(updatedHosts.All(h => h.TimeOut == 10));
-
-            foreach (var host in updatedHosts)
-            {
-                retryStrategy.Decide(host, 504, true);
-            }
-
-            var updatedHosts2 = retryStrategy.GetTryableHost(callType);
-            Assert.True(updatedHosts2.All(h => h.Up));
-            Assert.True(updatedHosts2.All(h => h.RetryCount == 2));
-            Assert.True(updatedHosts2.All(h => h.TimeOut == 30));
-        }
-
-        [Theory]
-        [InlineData(CallType.Read)]
-        [InlineData(CallType.Write)]
         public void TestRetryStrategyResetExpired(CallType callType)
         {
             var commonHosts = new List<StatefulHost> {
@@ -126,7 +68,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 Up = true,
                 LastUse = DateTime.UtcNow,
                 Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
             },
             new StatefulHost
             {
@@ -135,7 +76,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 Up = true,
                 LastUse = DateTime.UtcNow,
                 Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
             },
             new StatefulHost
             {
@@ -144,7 +84,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 Up = false,
                 LastUse = DateTime.UtcNow,
                 Accept = CallType.Read | CallType.Write,
-                TimeOut = 5
             }};
 
             // TODO

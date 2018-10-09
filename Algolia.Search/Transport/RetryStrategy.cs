@@ -59,7 +59,6 @@ namespace Algolia.Search.Transport
                     Priority = 10,
                     Up = true,
                     LastUse = DateTime.UtcNow,
-                    TimeOut = 5,
                     Accept = CallType.Read
                 });
                 _hosts.Add(new StatefulHost
@@ -69,7 +68,6 @@ namespace Algolia.Search.Transport
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Write,
-                    TimeOut = 30
                 });
 
                 var commonHosts = new List<StatefulHost> {
@@ -80,7 +78,6 @@ namespace Algolia.Search.Transport
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
-                    TimeOut = 5
                 },
                 new StatefulHost
                 {
@@ -89,7 +86,6 @@ namespace Algolia.Search.Transport
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
-                    TimeOut = 5
                 },
                 new StatefulHost
                 {
@@ -98,7 +94,6 @@ namespace Algolia.Search.Transport
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
-                    TimeOut = 5
                 }}.Shuffle();
 
                 _hosts.AddRange(commonHosts);
@@ -109,7 +104,6 @@ namespace Algolia.Search.Transport
                 Url = "analytics.algolia.com",
                 Up = true,
                 LastUse = DateTime.UtcNow,
-                TimeOut = 5,
                 Accept = CallType.Analytics
             });
         }
@@ -163,7 +157,6 @@ namespace Algolia.Search.Transport
                 tryableHost.Up = true;
                 tryableHost.LastUse = DateTime.UtcNow;
                 tryableHost.RetryCount++;
-                tryableHost.TimeOut *= (tryableHost.RetryCount + 1);
                 return RetryOutcomeType.Retry;
             }
 

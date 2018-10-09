@@ -109,9 +109,10 @@ namespace Algolia.Search.Transport
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
                 request.Uri = BuildUri(method, host.Url, uri, requestOptions?.QueryParameters);
+                int requestTimeout = SetTimeout(callType) * (host.RetryCount + 1);
 
                 AlgoliaHttpResponse response = await _httpClient
-                    .SendRequestAsync(request, host.TimeOut, ct)
+                    .SendRequestAsync(request, requestTimeout, ct)
                     .ConfigureAwait(false);
 
                 switch (_retryStrategy.Decide(host, response.HttpStatusCode, response.IsTimedOut))
@@ -160,6 +161,26 @@ namespace Algolia.Search.Transport
             return optionalQueryParameters != null
                 ? new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}{optionalQueryParameters}" }.Uri
                 : new UriBuilder { Scheme = "https", Host = url, Path = baseUri }.Uri;
+        }
+
+        /// <summary>
+        /// Sets the timeout with the given call type
+        /// </summary>
+        /// <param name="calltype"></param>
+        /// <returns></returns>
+        private int SetTimeout(CallType calltype)
+        {
+            switch (calltype)
+            {
+                case CallType.Read:
+                    return 5;
+                case CallType.Write:
+                    return 30;
+                case CallType.Analytics:
+                    return 5;
+                default:
+                    return 5;
+            }
         }
     }
 }
