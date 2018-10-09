@@ -112,3 +112,5 @@ UpgradeLog*.XML
 /.vs/slnx.sqlite
 /.vs/Algolia.Search/v15/Server/sqlite3
 /.vs
+.vscode/launch.json
+.vscode/tasks.json
