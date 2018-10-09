@@ -46,22 +46,16 @@ namespace Algolia.Search.Transport
         /// <summary>
         /// default constructor, intantiate with default configuration and default http client
         /// </summary>
-        public RequesterWrapper()
+        public RequesterWrapper() : this(new AlgoliaConfig(), new AlgoliaHttpRequester())
         {
-            _algoliaConfig = new AlgoliaConfig();
-            _httpClient = new AlgoliaHttpRequester();
-            _retryStrategy = new RetryStrategy(_algoliaConfig.AppId);
         }
 
         /// <summary>
         /// Instantiate with custom config
         /// </summary>
         /// <param name="config"></param>
-        public RequesterWrapper(AlgoliaConfig config)
+        public RequesterWrapper(AlgoliaConfig config) : this(config, new AlgoliaHttpRequester())
         {
-            _algoliaConfig = config;
-            _httpClient = new AlgoliaHttpRequester();
-            _retryStrategy = new RetryStrategy(_algoliaConfig.AppId, config.Hosts);
         }
 
         /// <summary>
@@ -159,7 +153,7 @@ namespace Algolia.Search.Transport
             {
                 {"X-Algolia-Application-Id", _algoliaConfig.AppId},
                 {"X-Algolia-API-Key", _algoliaConfig.ApiKey},
-                {"User-Agent", "Algolia for Csharp 5.0.0"},
+                {"User-Agent", $"Algolia for Csharp 5.0.0"},
                 {"Accept", JsonConfig.JsonContentType}
             };
 

@@ -46,19 +46,8 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="applicationId"></param>
         /// <param name="apiKey"></param>
-        public SearchClient(string applicationId, string apiKey)
+        public SearchClient(string applicationId, string apiKey) : this(new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId })
         {
-            if (string.IsNullOrEmpty(applicationId))
-            {
-                throw new ArgumentNullException(nameof(applicationId), "Application ID is required");
-            }
-
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                throw new ArgumentNullException(nameof(apiKey), "An API key is required");
-            }
-
-            _requesterWrapper = new RequesterWrapper(new AlgoliaConfig {ApiKey = apiKey, AppId = applicationId});
         }
 
         /// <summary>
@@ -67,6 +56,16 @@ namespace Algolia.Search.Clients
         /// <param name="config"></param>
         public SearchClient(AlgoliaConfig config)
         {
+            if (string.IsNullOrEmpty(config.AppId))
+            {
+                throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+            }
+
+            if (string.IsNullOrEmpty(config.ApiKey))
+            {
+                throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+            }
+
             _requesterWrapper = new RequesterWrapper(config);
         }
 
