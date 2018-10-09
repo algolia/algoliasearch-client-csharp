@@ -36,9 +36,8 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Initialize a client with default settings
         /// </summary>
-        public AnalyticsClient()
+        public AnalyticsClient() : this(new AlgoliaConfig(), new AlgoliaHttpRequester())
         {
-            _requesterWrapper = new RequesterWrapper();
         }
 
         /// <summary>
@@ -46,7 +45,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="applicationId"></param>
         /// <param name="apiKey"></param>
-        public AnalyticsClient(string applicationId, string apiKey) : this(new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId })
+        public AnalyticsClient(string applicationId, string apiKey) : this(new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId }, new AlgoliaHttpRequester())
         {
         }
 
@@ -54,8 +53,27 @@ namespace Algolia.Search.Clients
         /// Initialize a client with custom config
         /// </summary>
         /// <param name="config"></param>
-        public AnalyticsClient(AlgoliaConfig config)
+        public AnalyticsClient(AlgoliaConfig config) : this(config, new AlgoliaHttpRequester())
         {
+        }
+
+        /// <summary>
+        /// Initialize the client with custom config and custom Requester
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="httpRequester"></param>
+        public AnalyticsClient(AlgoliaConfig config, IHttpRequester httpRequester)
+        {
+            if (httpRequester == null)
+            {
+                throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
+            }
+
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config), "A config is required");
+            }
+
             if (string.IsNullOrEmpty(config.AppId))
             {
                 throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
@@ -66,16 +84,6 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
             }
 
-            _requesterWrapper = new RequesterWrapper(config);
-        }
-
-        /// <summary>
-        /// Initialize the client with custom config and custom Requester
-        /// </summary>
-        /// <param name="config"></param>
-        /// <param name="httpRequester"></param>
-        public AnalyticsClient(AlgoliaConfig config, IHttpRequester httpRequester)
-        {
             _requesterWrapper = new RequesterWrapper(config, httpRequester);
         }
     }

@@ -44,29 +44,14 @@ namespace Algolia.Search.Transport
         private readonly RetryStrategy _retryStrategy;
 
         /// <summary>
-        /// default constructor, intantiate with default configuration and default http client
-        /// </summary>
-        public RequesterWrapper() : this(new AlgoliaConfig(), new AlgoliaHttpRequester())
-        {
-        }
-
-        /// <summary>
-        /// Instantiate with custom config
-        /// </summary>
-        /// <param name="config"></param>
-        public RequesterWrapper(AlgoliaConfig config) : this(config, new AlgoliaHttpRequester())
-        {
-        }
-
-        /// <summary>
         /// Instantiate with custom config and custom http requester 
         /// </summary>
         /// <param name="config"></param>
         /// <param name="httpClient"></param>
         public RequesterWrapper(AlgoliaConfig config, IHttpRequester httpClient)
         {
-            _algoliaConfig = config;
-            _httpClient = httpClient;
+            _algoliaConfig = config ?? throw new ArgumentNullException(nameof(config));
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _retryStrategy = new RetryStrategy(_algoliaConfig.AppId, config.Hosts);
         }
 
