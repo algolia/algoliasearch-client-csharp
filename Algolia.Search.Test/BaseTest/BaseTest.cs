@@ -36,7 +36,7 @@ namespace Algolia.Search.Test
         public BaseTest()
         {
             _client = new SearchClient();
-            _index = _client.InitIndex(GetSafeName("àlgol?à-csharp"));
+            _index = _client.InitIndex(GetSafeName("Actors"));
         }
 
         public static string GetSafeName(string name)

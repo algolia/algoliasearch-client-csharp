@@ -39,20 +39,22 @@ namespace Algolia.Search.Test.Integration
             Assert.IsType<SearchRuleResponse>(ret);
         }
 
-        [Fact]
-        public async Task TestGetRuleAsync()
+        [Theory]
+        [InlineData("1537453094938")]
+        public async Task TestGetRuleAsync(string ruleId)
         {
-            var ret = await _index.GetRuleAsync("ruleID1");
+            var ret = await _index.GetRuleAsync(ruleId);
             Assert.IsType<Rule>(ret);
-            Assert.Equal("ruleID1", ret.ObjectId);
+            Assert.Equal(ruleId, ret.ObjectId);
         }
 
-        [Fact]
-        public void TestGetRule()
+        [Theory]
+        [InlineData("1537453094938")]
+        public void TestGetRule(string ruleId)
         {
-            var ret = _index.GetRule("ruleID1");
+            var ret = _index.GetRule(ruleId);
             Assert.IsType<Rule>(ret);
-            Assert.Equal("ruleID1", ret.ObjectId);
+            Assert.Equal(ruleId, ret.ObjectId);
         }
     }
 }
