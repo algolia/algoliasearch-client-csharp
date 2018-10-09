@@ -27,7 +27,7 @@ namespace Algolia.Search.Models.Enums
 {
     public enum RetryOutcomeType
     {
-        Succes,
+        Success,
         Retry,
         Failure
     }

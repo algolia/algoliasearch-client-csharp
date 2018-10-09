@@ -40,7 +40,7 @@ namespace Algolia.Search.Transport
     {
         private readonly IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
-        private RetryStrategy _retryStrategy;
+        private readonly RetryStrategy _retryStrategy;
 
         /// <summary>
         /// default constructor, intantiate with default configuration and default http client
@@ -136,7 +136,7 @@ namespace Algolia.Search.Transport
 
                 switch (_retryStrategy.Decide(host, response.HttpStatusCode, response.IsTimedOut))
                 {
-                    case RetryOutcomeType.Succes:
+                    case RetryOutcomeType.Success:
                         return JsonConvert.DeserializeObject<TResult>(response.Body, JsonConfig.AlgoliaJsonSerializerSettings);
                     case RetryOutcomeType.Retry:
                         continue;

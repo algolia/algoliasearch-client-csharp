@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Http;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
 using Algolia.Search.Transport;
@@ -33,7 +34,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Models.Enums;
 
 namespace Algolia.Search.Clients
 {

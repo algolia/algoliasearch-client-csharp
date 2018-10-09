@@ -31,7 +31,7 @@ namespace Algolia.Search.Clients
 {
     public class SearchClient : ISearchClient
     {
-        private IRequesterWrapper _requesterWrapper;
+        private readonly IRequesterWrapper _requesterWrapper;
 
         /// <summary>
         /// Initialize a client with default settings

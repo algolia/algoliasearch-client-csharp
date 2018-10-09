@@ -24,7 +24,6 @@
 */
 
 using Algolia.Search.Models.Request;
-using Algolia.Search.Utils;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -55,7 +54,6 @@ namespace Algolia.Search.Http
         /// </summary>
         /// <param name="request"></param>
         /// <param name="totalTimeout"></param>
-        /// <param name="uri"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, int totalTimeout,
@@ -89,12 +87,9 @@ namespace Algolia.Search.Http
                 {
                     string content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        return new AlgoliaHttpResponse { Error = content, HttpStatusCode = (int)response.StatusCode };
-                    }
-
-                    return new AlgoliaHttpResponse { Body = content, HttpStatusCode = (int)response.StatusCode };
+                    return !response.IsSuccessStatusCode
+                        ? new AlgoliaHttpResponse { Error = content, HttpStatusCode = (int)response.StatusCode }
+                        : new AlgoliaHttpResponse { Body = content, HttpStatusCode = (int)response.StatusCode };
                 }
             }
             catch (TimeoutException timeOutException)

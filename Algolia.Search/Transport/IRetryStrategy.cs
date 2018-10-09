@@ -23,13 +23,27 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Http
+using Algolia.Search.Models.Enums;
+using System.Collections.Generic;
+
+namespace Algolia.Search.Transport
 {
-    public class AlgoliaHttpResponse
+    internal interface IRetryStrategy
     {
-        public int HttpStatusCode { get; set; }
-        public string Body { get; set; }
-        public bool IsTimedOut { get; set; }
-        public string Error { get; set; }
+        /// <summary>
+        /// Returns the tryable host regarding the retry strategy
+        /// </summary>
+        /// <param name="callType"></param>
+        /// <returns></returns>
+        IEnumerable<StateFulHost> GetTryableHost(CallType callType);
+
+        /// <summary>
+        /// Update host's state 
+        /// </summary>
+        /// <param name="tryableHost"></param>
+        /// <param name="httpResponseCode"></param>
+        /// <param name="isTimedOut"></param>
+        /// <returns></returns>
+        RetryOutcomeType Decide(StateFulHost tryableHost, int httpResponseCode, bool isTimedOut);
     }
 }

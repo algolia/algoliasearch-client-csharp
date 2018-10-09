@@ -31,7 +31,7 @@ namespace Algolia.Search.Clients
 {
     public class AnalyticsClient : IAnalyticsClient
     {
-        private IRequesterWrapper _requesterWrapper;
+        private readonly IRequesterWrapper _requesterWrapper;
 
         /// <summary>
         /// Initialize a client with default settings

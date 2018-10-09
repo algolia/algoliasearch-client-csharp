@@ -33,27 +33,27 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Algolia.Search.Test")]
 namespace Algolia.Search.Transport
 {
-    internal class RetryStrategy
+    internal class RetryStrategy : IRetryStrategy
     {
-        private List<StateFulHost> hosts;
+        private List<StateFulHost> _hosts;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="applicationId"></param>
-        /// <param name="hosts"></param>
+        /// <param name="customHosts"></param>
         public RetryStrategy(string applicationId, IEnumerable<StateFulHost> customHosts = null)
         {
-            hosts = new List<StateFulHost>();
+            _hosts = new List<StateFulHost>();
 
-            if (customHosts != null && customHosts.Count() > 0)
+            if (customHosts != null && customHosts.Any())
             {
-                hosts.AddRange(customHosts);
-                hosts.ForEach(x => x.Accept = CallType.Read | CallType.Write);
+                _hosts.AddRange(customHosts);
+                _hosts.ForEach(x => x.Accept = CallType.Read | CallType.Write);
             }
             else
             {
-                hosts.Add(new StateFulHost
+                _hosts.Add(new StateFulHost
                 {
                     Url = $"{applicationId}-dsn.algolia.net",
                     Priority = 10,
@@ -62,7 +62,7 @@ namespace Algolia.Search.Transport
                     TimeOut = 5,
                     Accept = CallType.Read
                 });
-                hosts.Add(new StateFulHost
+                _hosts.Add(new StateFulHost
                 {
                     Url = $"{applicationId}.algolia.net",
                     Priority = 10,
@@ -101,10 +101,10 @@ namespace Algolia.Search.Transport
                     TimeOut = 5
                 }}.Shuffle();
 
-                hosts.AddRange(commonHosts);
+                _hosts.AddRange(commonHosts);
             }
 
-            hosts.Add(new StateFulHost
+            _hosts.Add(new StateFulHost
             {
                 Url = "analytics.algolia.com",
                 Up = true,
@@ -123,17 +123,17 @@ namespace Algolia.Search.Transport
         {
             ResetExpiredHosts();
 
-            if (hosts.Where(h => h.Up && h.Accept.HasFlag(callType)).Count() > 0)
+            if (_hosts.Any(h => h.Up && h.Accept.HasFlag(callType)))
             {
-                return hosts.Where(h => h.Up && h.Accept.HasFlag(callType));
+                return _hosts.Where(h => h.Up && h.Accept.HasFlag(callType));
             }
             else
             {
-                foreach (var host in hosts.Where(h => h.Accept.HasFlag(callType)))
+                foreach (var host in _hosts.Where(h => h.Accept.HasFlag(callType)))
                 {
                     Reset(host);
                 }
-                return hosts;
+                return _hosts;
             }
         }
 
@@ -150,7 +150,7 @@ namespace Algolia.Search.Transport
             {
                 tryableHost.Up = true;
                 tryableHost.LastUse = DateTime.UtcNow;
-                return RetryOutcomeType.Succes;
+                return RetryOutcomeType.Success;
             }
             else if (!isTimedOut && (((int)Math.Floor((decimal)httpResponseCode / 100) != 2) && ((int)Math.Floor((decimal)httpResponseCode / 100) != 4)))
             {
@@ -186,7 +186,7 @@ namespace Algolia.Search.Transport
         /// </summary>
         private void ResetExpiredHosts()
         {
-            foreach (var host in hosts)
+            foreach (var host in _hosts)
             {
                 if (!host.Up && DateTime.UtcNow.Subtract(host.LastUse).Minutes > 5)
                 {
