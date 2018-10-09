@@ -144,24 +144,21 @@ namespace Algolia.Search.Transport
         /// <param name="httpResponseCode"></param>
         /// <param name="isTimedOut"></param>
         /// <returns></returns>
-        public RetryOutcomeType Decide(StateFulHost tryableHost, int? httpResponseCode = null, bool? isTimedOut = null)
+        public RetryOutcomeType Decide(StateFulHost tryableHost, int httpResponseCode, bool isTimedOut)
         {
-            if (httpResponseCode.HasValue)
+            if (!isTimedOut && (int)Math.Floor((decimal)httpResponseCode / 100) == 2)
             {
-                if ((int)Math.Floor((decimal)httpResponseCode / 100) == 2)
-                {
-                    tryableHost.Up = true;
-                    tryableHost.LastUse = DateTime.UtcNow;
-                    return RetryOutcomeType.Succes;
-                }
-                else if (((int)Math.Floor((decimal)httpResponseCode / 100) != 2) && ((int)Math.Floor((decimal)httpResponseCode / 100) != 4))
-                {
-                    tryableHost.Up = false;
-                    tryableHost.LastUse = DateTime.UtcNow;
-                    return RetryOutcomeType.Retry;
-                }
+                tryableHost.Up = true;
+                tryableHost.LastUse = DateTime.UtcNow;
+                return RetryOutcomeType.Succes;
             }
-            else if (isTimedOut.HasValue && isTimedOut.Value)
+            else if (!isTimedOut && (((int)Math.Floor((decimal)httpResponseCode / 100) != 2) && ((int)Math.Floor((decimal)httpResponseCode / 100) != 4)))
+            {
+                tryableHost.Up = false;
+                tryableHost.LastUse = DateTime.UtcNow;
+                return RetryOutcomeType.Retry;
+            }
+            else if (isTimedOut)
             {
                 tryableHost.Up = true;
                 tryableHost.LastUse = DateTime.UtcNow;

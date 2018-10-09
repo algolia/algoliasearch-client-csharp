@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,29 +23,13 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
 namespace Algolia.Search.Http
 {
-    /// <summary>
-    /// Used to ensure that all the properties are serialized and deserialized well (because of Pascal and Camel Casing)
-    /// </summary>
-    internal static class JsonConfig
-    {
-        public const string JsonContentType = "application/json";
-        
-        public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
+        public class AlgoliaHttpResponse
         {
-            Formatting = Formatting.Indented,
-            NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            },
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            DateParseHandling = DateParseHandling.DateTime
-        };
-    }
+            public int HttpStatusCode { get; set; }
+            public string Body { get; set; }
+            public bool IsTimedOut { get; set; }
+            public string Error { get; set; }
+        }
 }
-

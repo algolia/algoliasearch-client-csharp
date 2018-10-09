@@ -41,10 +41,8 @@ namespace Algolia.Search.Http
         /// <param name="request"></param>
         /// <param name="totalTimeout"></param>
         /// <param name="ct"></param>
-        /// <exception cref="System.Net.Http.HttpRequestException">Thrown when the requester receives an error code from the server i.e when floor(httpCode / 100) != 2 </exception>
-        /// <exception cref="System.Runtime.Serialization.TimeoutException">Thrown when the request timed out</exception>
         /// <returns></returns>
-        Task<string> SendRequestAsync(Request request, int totalTimeout,
+        Task<AlgoliaHttpResponse> SendRequestAsync(Request request, int totalTimeout,
             CancellationToken ct = default(CancellationToken));
     }
 }

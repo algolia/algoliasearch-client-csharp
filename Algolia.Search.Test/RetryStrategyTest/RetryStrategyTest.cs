@@ -94,7 +94,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
 
             foreach (var host in hosts)
             {
-                retryStrategy.Decide(host, isTimedOut: true);
+                retryStrategy.Decide(host, 504, true);
             }
 
             var updatedHosts = retryStrategy.GetTryableHost(callType);
@@ -104,7 +104,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
 
             foreach (var host in updatedHosts)
             {
-                retryStrategy.Decide(host, isTimedOut: true);
+                retryStrategy.Decide(host, 504, true);
             }
 
             var updatedHosts2 = retryStrategy.GetTryableHost(callType);
@@ -147,13 +147,11 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 TimeOut = 5
             }};
 
+            // TODO
+
             RetryStrategy retryStrategy = new RetryStrategy("appId", commonHosts);
             var hosts = retryStrategy.GetTryableHost(callType);
             Assert.True(hosts.Where(h => h.Up).Count() == 2);
-            hosts.ElementAt(2).LastUse = DateTime.UtcNow.AddMinutes(-10);
-
-            var updatedHosts = retryStrategy.GetTryableHost(callType);
-            Assert.True(updatedHosts.Where(h => h.Up).Count() == 3);
         }
 
         [Theory]
@@ -166,9 +164,9 @@ namespace Algolia.Search.Test.RetryStrategyTest
             RetryStrategy retryStrategy = new RetryStrategy("appId");
             var hosts = retryStrategy.GetTryableHost(callType);
             Assert.True(hosts.Where(h => h.Up).Count() == 4);
-            
+
             RetryOutcomeType decision;
-            decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode);
+            decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
             Assert.True(decision.HasFlag(RetryOutcomeType.Retry));
 
             var updatedHosts = retryStrategy.GetTryableHost(callType);
@@ -186,7 +184,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
             var hosts = retryStrategy.GetTryableHost(callType);
 
             RetryOutcomeType decision;
-            decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode);
+            decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
 
             Assert.True(decision.HasFlag(RetryOutcomeType.Failure));
         }

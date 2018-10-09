@@ -58,7 +58,7 @@ namespace Algolia.Search.Http
         /// <param name="uri"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<string> SendRequestAsync(Request request, int totalTimeout,
+        public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, int totalTimeout,
             CancellationToken ct = default(CancellationToken))
         {
             if (request.Method == null)
@@ -75,22 +75,31 @@ namespace Algolia.Search.Http
             {
                 Method = request.Method,
                 RequestUri = request.Uri,
-                Content = new StringContent(request.Body, Encoding.UTF8, "application/json")
+                Content = new StringContent(request.Body, Encoding.UTF8, JsonConfig.JsonContentType)
             };
 
             httpRequestMessage.Headers.Fill(request.Headers);
             httpRequestMessage.SetTimeout(TimeSpan.FromSeconds(totalTimeout));
 
-            using (httpRequestMessage)
-            using (HttpResponseMessage response =
-                await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
+            try
             {
-                if (!response.IsSuccessStatusCode)
+                using (httpRequestMessage)
+                using (HttpResponseMessage response =
+                    await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
                 {
-                    throw new HttpRequestException(((int)response.StatusCode).ToString());
-                }
+                    string content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        return new AlgoliaHttpResponse { Error = content, HttpStatusCode = (int)response.StatusCode };
+                    }
+
+                    return new AlgoliaHttpResponse { Body = content, HttpStatusCode = (int)response.StatusCode };
+                }
+            }
+            catch (TimeoutException timeOutException)
+            {
+                return new AlgoliaHttpResponse { IsTimedOut = true, Error = timeOutException.ToString() };
             }
         }
     }

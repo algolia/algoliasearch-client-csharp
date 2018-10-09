@@ -128,31 +128,22 @@ namespace Algolia.Search.Transport
 
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
-                RetryOutcomeType decision;
-                try
-                {
-                    request.Uri = BuildUri(method, host.Url, uri);
+                request.Uri = BuildUri(method, host.Url, uri);
 
-                    string response = await _httpClient
-                        .SendRequestAsync(request, host.TimeOut, ct)
-                        .ConfigureAwait(false);
+                AlgoliaHttpResponse response = await _httpClient
+                    .SendRequestAsync(request, host.TimeOut, ct)
+                    .ConfigureAwait(false);
 
-                    return JsonConvert.DeserializeObject<TResult>(response, JsonConfig.AlgoliaJsonSerializerSettings);
-                }
-                catch (HttpRequestException httpEx)
+                switch (_retryStrategy.Decide(host, response.HttpStatusCode, response.IsTimedOut))
                 {
-                    decision = _retryStrategy.Decide(host, Int32.Parse(httpEx.Message));
-                    if (decision.HasFlag(RetryOutcomeType.Failure))
-                    {
-                        throw;
-                    }
-                }
-                catch (TimeoutException)
-                {
-                    decision = _retryStrategy.Decide(host, isTimedOut: true);
+                    case RetryOutcomeType.Succes:
+                        return JsonConvert.DeserializeObject<TResult>(response.Body, JsonConfig.AlgoliaJsonSerializerSettings);
+                    case RetryOutcomeType.Retry:
+                        continue;
+                    case RetryOutcomeType.Failure:
+                        throw new AlgoliaException(response.Error);
                 }
             }
-
             throw new AlgoliaException("Unreachable hosts");
         }
 
@@ -167,7 +158,7 @@ namespace Algolia.Search.Transport
                 {"X-Algolia-Application-Id", _algoliaConfig.AppId},
                 {"X-Algolia-API-Key", _algoliaConfig.ApiKey},
                 {"User-Agent", "Algolia for Csharp 5.0.0"},
-                {"Accept", "application/json"}
+                {"Accept", JsonConfig.JsonContentType}
             };
         }
 
