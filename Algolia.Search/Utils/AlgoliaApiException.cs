@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -27,35 +27,32 @@ using System;
 
 namespace Algolia.Search.Utils
 {
-	/// <summary>
-	/// Algolia exception.
-	/// </summary>
-	public class AlgoliaException : Exception
-	{
+    public class AlgoliaApiException : Exception
+    {
         /// <summary>
         /// Algolia's Execption
         /// </summary>
-	    public AlgoliaException()
-	    {
-	    }
+	    public AlgoliaApiException()
+        {
+        }
 
         /// <summary>
-        /// Create a new Algolia exception.
+        /// Create a new Algolia's api exception.
         /// </summary>
         /// <param name="message">The exception details.</param>
-        public AlgoliaException(string message) : base(message)
-		{
+        public AlgoliaApiException(string message) : base(message)
+        {
 
-		}
+        }
 
         /// <summary>
-        /// Algolia Exception
+        /// Algolia API Exception
         /// </summary>
         /// <param name="message"></param>
         /// <param name="inner"></param>
-	    public AlgoliaException(string message, Exception inner)
-	        : base(message, inner)
-	    {
-	    }
+	    public AlgoliaApiException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
     }
 }
