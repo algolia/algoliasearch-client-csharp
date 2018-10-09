@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-/*
+﻿/*
  * Copyright (c) 2013 Algolia
  * http://www.algolia.com/
  * 
@@ -21,11 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+using Algolia.Search.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Globalization;
-using Algolia.Search.Models;
+using System.Linq;
 using System.Net;
 
 namespace Algolia.Search
