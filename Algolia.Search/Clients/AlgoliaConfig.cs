@@ -38,7 +38,7 @@ namespace Algolia.Search.Clients
         public bool? ForwardToReplicas { get; set; }
         
         /// <summary>
-        /// If you want to set custom hosts
+        /// To set custom hosts
         /// </summary>
         /// <value></value>
         public List<StatefulHost> Hosts { get; set; }
