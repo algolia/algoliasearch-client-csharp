@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -43,6 +44,7 @@ namespace Algolia.Search.Transport
         private readonly IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
         private readonly RetryStrategy _retryStrategy;
+        private readonly string _clientVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         /// <summary>
         /// Instantiate with custom config and custom http requester 
@@ -140,9 +142,8 @@ namespace Algolia.Search.Transport
             {
                 {"X-Algolia-Application-Id", _algoliaConfig.AppId},
                 {"X-Algolia-API-Key", _algoliaConfig.ApiKey},
-                {"User-Agent", $"Algolia for Csharp 5.0.0"},
+                {"User-Agent", $"Algolia for CSharp {_clientVersion}"},
                 {"Connection","keep-alive"},
-                {"Keep-Alive", "500"},
                 {"Accept", JsonConfig.JsonContentType}
             };
 
