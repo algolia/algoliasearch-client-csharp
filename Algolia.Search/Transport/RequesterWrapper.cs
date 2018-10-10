@@ -141,6 +141,8 @@ namespace Algolia.Search.Transport
                 {"X-Algolia-Application-Id", _algoliaConfig.AppId},
                 {"X-Algolia-API-Key", _algoliaConfig.ApiKey},
                 {"User-Agent", $"Algolia for Csharp 5.0.0"},
+                {"Connection","keep-alive"},
+                {"Keep-Alive", "500"},
                 {"Accept", JsonConfig.JsonContentType}
             };
 
