@@ -33,7 +33,7 @@ namespace Algolia.Search.Clients
     {
         public string AppId { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
         
-        public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
+        public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY");
                         
         public bool? ForwardToReplicas { get; set; }
         

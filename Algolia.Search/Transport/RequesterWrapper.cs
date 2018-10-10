@@ -44,7 +44,7 @@ namespace Algolia.Search.Transport
         private readonly IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
         private readonly RetryStrategy _retryStrategy;
-        private readonly string _clientVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        private readonly string _clientVersion = typeof(RequesterWrapper).GetTypeInfo().Assembly.GetName().Version.ToString();
 
         /// <summary>
         /// Instantiate with custom config and custom http requester 

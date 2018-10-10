@@ -35,6 +35,7 @@ namespace Algolia.Search.Test
 
         public BaseTest()
         {
+            CheckEnvironmentVariable();
             _client = new SearchClient();
             _index = _client.InitIndex(GetSafeName("Actors"));
         }
@@ -44,6 +45,25 @@ namespace Algolia.Search.Test
             return Environment.GetEnvironmentVariable("APPVEYOR") == null
                 ? name
                 : $"{name}appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
+        }
+
+        /// <summary>
+        /// Check env variable before starting tests suite
+        /// </summary>
+        private void CheckEnvironmentVariable()
+        {
+            if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR")))
+            {
+                if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID")))
+                {
+                    throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_API_KEY");
+                }
+
+                if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY")))
+                {
+                    throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_API_KEY");
+                }
+            }
         }
     }
 }
