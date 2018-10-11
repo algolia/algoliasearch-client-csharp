@@ -100,7 +100,9 @@ namespace Algolia.Search.Transport
                 throw new ArgumentNullException(nameof(method));
             }
 
-            string jsonString = JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
+            string jsonString = data != null 
+                ? JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings)
+                : String.Empty;
 
             var request = new Request
             {
