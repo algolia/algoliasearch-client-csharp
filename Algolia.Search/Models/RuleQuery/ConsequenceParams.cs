@@ -23,9 +23,14 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+
 namespace Algolia.Search.Models.RuleQuery
 {
     public class ConsequenceParams
     {
+        public List<string> AutomaticFacetFilters { get; set; }
+
+        public List<string> AutomaticOptionalFacetFilters { get; set; }
     }
 }
