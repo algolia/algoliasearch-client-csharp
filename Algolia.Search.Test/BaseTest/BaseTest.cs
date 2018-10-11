@@ -37,7 +37,7 @@ namespace Algolia.Search.Test
         {
             CheckEnvironmentVariable();
             _client = new SearchClient();
-            _index = _client.InitIndex(GetSafeName("Actors"));
+            _index = _client.InitIndex(GetSafeName("CSharp-V6"));
         }
 
         public static string GetSafeName(string name)

@@ -25,6 +25,7 @@
 
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -32,6 +33,22 @@ namespace Algolia.Search.Test.Integration
 {
     public class RuleTest : BaseTest
     {
+        [Theory]
+        [InlineData("ruleID1")]
+        public async Task SaveRuleAsyncTest(string ruleID)
+        {
+            var ruleToSave = new Rule
+            {
+                Description = "Rule Test",
+                ObjectID = ruleID,
+                Condition = new Condition { Pattern = "{facet:products.properties.fbrand}", Anchoring = "contains" },
+                Consequence = new Consequence { Params = new ConsequenceParams { AutomaticFacetFilters = new List<string> { "products.properties.fbrand" } } }
+            };
+
+            var response = await _index.SaveRuleAsync(ruleToSave);
+            Assert.IsType<SaveRuleResponse>(response);
+        }
+
         [Fact]
         public async Task SearchRuleAsync()
         {
@@ -39,22 +56,28 @@ namespace Algolia.Search.Test.Integration
             Assert.IsType<SearchRuleResponse>(ret);
         }
 
-        [Theory]
-        [InlineData("1537453094938")]
-        public async Task TestGetRuleAsync(string ruleId)
+        [Theory(Skip="Waiting for waitTask implementation")]
+        [InlineData("SaveGetDeleteRuleAsync")]
+        public async Task SaveGetDeleteRuleAsync(string ruleID)
         {
-            var ret = await _index.GetRuleAsync(ruleId);
-            Assert.IsType<Rule>(ret);
-            Assert.Equal(ruleId, ret.ObjectId);
-        }
+            var ruleToSave = new Rule
+            {
+                Description = "Rule Test",
+                ObjectID = ruleID,
+                Condition = new Condition { Pattern = "{facet:products.properties.fbrand}", Anchoring = "contains" },
+                Consequence = new Consequence { Params = new ConsequenceParams { AutomaticFacetFilters = new List<string> { "products.properties.fbrand" } } }
+            };
 
-        [Theory]
-        [InlineData("1537453094938")]
-        public void TestGetRule(string ruleId)
-        {
-            var ret = _index.GetRule(ruleId);
+            var response = await _index.SaveRuleAsync(ruleToSave);
+            Assert.IsType<SaveRuleResponse>(response);
+
+
+            var ret = await _index.GetRuleAsync(ruleID);
             Assert.IsType<Rule>(ret);
-            Assert.Equal(ruleId, ret.ObjectId);
+            Assert.Equal(ruleID, ret.ObjectID);
+
+            var del = await _index.DeleteRuleAsync(ruleID);
+            Assert.IsType<DeleteResponse>(del);
         }
     }
 }
