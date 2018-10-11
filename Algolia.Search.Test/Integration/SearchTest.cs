@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Models.Query;
+using Algolia.Search.Models.Responses;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -40,6 +41,7 @@ namespace Algolia.Search.Test.Integration
                 Page = 1
             });
             Assert.NotNull(ret);
+            Assert.IsType<SearchResponse<Actor>>(ret);
         }
     }
 }
