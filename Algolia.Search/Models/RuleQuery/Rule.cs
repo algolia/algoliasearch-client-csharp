@@ -32,11 +32,11 @@ namespace Algolia.Search.Models.RuleQuery
     /// </summary>
     public class Rule
     {
-        public string ObjectId { get; set; }
+        public string ObjectID { get; set; }
         public Condition Condition { get; set; }
         public Consequence Consequence { get; set; }
         public string Description { get; set; }
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
         public IEnumerable<TimeRange> Validity { get; set; }
     }
 }
