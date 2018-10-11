@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,23 +23,23 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
+using Algolia.Search.Models.Query;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Test.Integration
 {
-    /// <summary>
-    /// https://www.algolia.com/doc/rest-api/search/
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class SearchResponse<T> where T : class
+    public class SearchTest : BaseTest
     {
-        public List<T> Hits { get; set; }
-        public int Page { get; set; }
-        public int NbHits { get; set; }
-        public int NbPages { get; set; }
-        public int HitsPerPage { get; set; }
-        public int ProcessingTimeMs { get; set; }
-        public string Query { get; set; }
-        public string Params { get; set; }
+        [Fact]
+        public async Task SearchEmptyQuery()
+        {
+            var ret = await _index.SearchAsync(new SearchQuery{
+                Query = "toni",
+                HitsPerPage = 2,
+                Page = 1
+            });
+            Assert.NotNull(ret);
+        }
     }
 }

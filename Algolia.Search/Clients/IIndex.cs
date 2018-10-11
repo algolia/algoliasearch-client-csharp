@@ -31,7 +31,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public interface IIndex
+    public interface IIndex<T> where T : class
     {
         /// <summary>
         /// Get the specified by its objectID

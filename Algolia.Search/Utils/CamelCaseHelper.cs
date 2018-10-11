@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,10 +23,15 @@
 * THE SOFTWARE.
 */
 
+using System;
 
-namespace Algolia.Search.Models
+namespace Algolia.Search.Utils
 {
-    public class Query
+    public static class CamelCaseHelper
     {
+        public static string ToCamelCase(this string stringToCamelCase)
+        {
+           return Char.ToLowerInvariant(stringToCamelCase[0]) + stringToCamelCase.Substring(1);
+        }
     }
 }

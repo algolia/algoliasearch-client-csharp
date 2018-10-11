@@ -29,7 +29,7 @@ using System;
 
 namespace Algolia.Search.Clients
 {
-    public class SearchClient : ISearchClient
+    public class SearchClient<T> : ISearchClient<T> where T : class
     {
         private readonly IRequesterWrapper _requesterWrapper;
 
@@ -92,11 +92,11 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="indexName"></param>
         /// <returns></returns>
-        public Index InitIndex(string indexName)
+        public Index<T> InitIndex(string indexName)
         {
             return string.IsNullOrEmpty(indexName)
-                ? throw new ArgumentNullException(nameof(indexName), "Index name is required") 
-                : new Index(_requesterWrapper, indexName);
+                ? throw new ArgumentNullException(nameof(indexName), "Index name is required")
+                : new Index<T>(_requesterWrapper, indexName);
         }
     }
 }

@@ -23,23 +23,17 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
+using Algolia.Search.Utils.Serializer;
+using Newtonsoft.Json;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.Query
 {
-    /// <summary>
-    /// https://www.algolia.com/doc/rest-api/search/
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class SearchResponse<T> where T : class
+    [JsonConverter(typeof(QuerySerializer))]
+    public class SearchQuery
     {
-        public List<T> Hits { get; set; }
-        public int Page { get; set; }
-        public int NbHits { get; set; }
-        public int NbPages { get; set; }
-        public int HitsPerPage { get; set; }
-        public int ProcessingTimeMs { get; set; }
         public string Query { get; set; }
-        public string Params { get; set; }
+        public int Page { get; set; }
+        public int HitsPerPage { get; set; }
+        public int Offset { get; set; }
     }
 }

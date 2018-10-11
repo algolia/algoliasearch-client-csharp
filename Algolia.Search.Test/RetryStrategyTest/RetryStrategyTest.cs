@@ -122,8 +122,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
             RetryStrategy retryStrategy = new RetryStrategy("appId");
             var hosts = retryStrategy.GetTryableHost(callType);
 
-            RetryOutcomeType decision;
-            decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
+           var decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
 
             Assert.True(decision.HasFlag(RetryOutcomeType.Failure));
         }

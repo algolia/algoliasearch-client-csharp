@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Http;
+using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
@@ -37,7 +38,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public class Index : IIndex
+    public class Index<T> : IIndex<T> where T : class
     {
         /// <summary>
         /// The Requester wrapper
@@ -60,6 +61,57 @@ namespace Algolia.Search.Clients
             _urlIndexName = !string.IsNullOrEmpty(indexName)
                 ? WebUtility.UrlEncode(indexName)
                 : throw new ArgumentNullException(nameof(indexName));
+        }
+
+        /// <summary>
+        /// Search in the index for the given query
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SearchResponse<T> Search(SearchQuery query, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => SearchAsync(query, requestOptions));
+
+        /// <summary>
+        ///  Search in the index for the given query
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SearchResponse<T>> SearchAsync(SearchQuery query, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<T>, SearchQuery>(HttpMethod.Post,
+                $"/1/indexes/{_urlIndexName}/query", CallType.Read, query, requestOptions, ct);
+        }
+
+        /// <summary>
+        /// Get object for the specified ID
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public T GetObject(string objectId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetObjectAsync(objectId, requestOptions));
+
+        /// <summary>
+        /// Get the specified object by its objectID
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<T> GetObjectAsync(string objectId, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrEmpty(objectId))
+            {
+                throw new ArgumentNullException(nameof(objectId));
+            }
+
+            return await _requesterWrapper.ExecuteRequestAsync<T>(HttpMethod.Get,
+                $"/1/indexes/{_urlIndexName}/{objectId}", CallType.Read, requestOptions, ct);
         }
 
         /// <summary>
@@ -155,6 +207,11 @@ namespace Algolia.Search.Clients
         public async Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (string.IsNullOrEmpty(objectId))
+            {
+                throw new ArgumentNullException(nameof(objectId));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete, $"/1/indexes/{_urlIndexName}/rules/{objectId}", CallType.Write,
                 requestOptions: requestOptions, ct: ct);
         }

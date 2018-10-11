@@ -25,8 +25,8 @@
 
 namespace Algolia.Search.Clients
 {
-    public interface ISearchClient
+    public interface ISearchClient<T> where T : class
     {
-        Index InitIndex(string indexName);
+        Index<T> InitIndex(string indexName);
     }
 }

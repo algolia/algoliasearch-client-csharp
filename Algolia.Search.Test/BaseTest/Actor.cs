@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,23 +23,14 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Test
 {
-    /// <summary>
-    /// https://www.algolia.com/doc/rest-api/search/
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class SearchResponse<T> where T : class
+    public class Actor
     {
-        public List<T> Hits { get; set; }
-        public int Page { get; set; }
-        public int NbHits { get; set; }
-        public int NbPages { get; set; }
-        public int HitsPerPage { get; set; }
-        public int ProcessingTimeMs { get; set; }
-        public string Query { get; set; }
-        public string Params { get; set; }
+        public string Name { get; set; }
+        public string ObjectId { get; set; }
+        public int Rating { get; set; }
+        public string ImagePath { get; set; }
+        public string AlternativePath { get; set; }
     }
 }
