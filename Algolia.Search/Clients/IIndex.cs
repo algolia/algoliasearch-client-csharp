@@ -70,6 +70,42 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
+        ///  Save rule 
+        /// </summary>
+        /// <param name="rule"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        SaveRuleResponse SaveRule(Rule rule, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Save the given rule
+        /// </summary>
+        /// <param name="rule"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Delete the rule for the given ruleId
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        DeleteResponse DeleteRule(string objectId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Delete the rule for the given ruleId
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOption requestOptions = null,
+        CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>

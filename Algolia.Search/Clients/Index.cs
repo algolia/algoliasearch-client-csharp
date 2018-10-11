@@ -114,6 +114,52 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        ///  Save rule 
+        /// </summary>
+        /// <param name="rule"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SaveRuleResponse SaveRule(Rule rule, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => SaveRuleAsync(rule, requestOptions));
+
+        /// <summary>
+        /// Save the given rule
+        /// </summary>
+        /// <param name="rule"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<SaveRuleResponse, Rule>(HttpMethod.Put,
+                $"/1/indexes/{_urlIndexName}/rules/{rule.ObjectID}", CallType.Write, rule, requestOptions, ct);
+        }
+
+        /// <summary>
+        /// Delete the rule for the given ruleId
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse DeleteRule(string objectId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => DeleteRuleAsync(objectId, requestOptions));
+
+        /// <summary>
+        /// Delete the rule for the given ruleId
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete, $"/1/indexes/{_urlIndexName}/rules/{objectId}", CallType.Write,
+                requestOptions: requestOptions, ct: ct);
+        }
+
+        /// <summary>
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
