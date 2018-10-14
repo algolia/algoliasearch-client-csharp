@@ -35,6 +35,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Settings;
 
 namespace Algolia.Search.Clients
 {
@@ -234,6 +235,50 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
                 requestOptions: requestOptions, ct: ct);
+        }
+
+        /// <summary>
+        /// Get settings for the given index
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public IndexSettings GetSettings(RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetSettingsAsync(requestOptions));
+
+        /// <summary>
+        /// Get settings for the given index
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<IndexSettings> GetSettingsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<IndexSettings>(HttpMethod.Get, $"/1/indexes/{_urlIndexName}/settings", CallType.Read,
+                requestOptions: requestOptions, ct: ct);
+        }
+
+        /// <summary>
+        /// Set settings
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SetSettingsResponse SetSettings(IndexSettings settings, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => SetSettingsAsync(settings, requestOptions));
+
+        /// <summary>
+        /// Set settings for the given index
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<SetSettingsResponse, IndexSettings>(HttpMethod.Put, $"/1/indexes/{_urlIndexName}/settings", CallType.Write,
+               settings, requestOptions: requestOptions, ct: ct);
         }
     }
 }
