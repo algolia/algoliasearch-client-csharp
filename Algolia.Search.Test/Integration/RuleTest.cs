@@ -56,7 +56,7 @@ namespace Algolia.Search.Test.Integration
             Assert.IsType<SearchRuleResponse>(ret);
         }
 
-        [Theory(Skip="Waiting for waitTask implementation")]
+        [Theory]
         [InlineData("SaveGetDeleteRuleAsync")]
         public async Task SaveGetDeleteRuleAsync(string ruleID)
         {
@@ -71,12 +71,38 @@ namespace Algolia.Search.Test.Integration
             var response = await _index.SaveRuleAsync(ruleToSave);
             Assert.IsType<SaveRuleResponse>(response);
 
+            await _index.WaitForCompletionAsync(response.TaskID);
 
             var ret = await _index.GetRuleAsync(ruleID);
             Assert.IsType<Rule>(ret);
             Assert.Equal(ruleID, ret.ObjectID);
 
             var del = await _index.DeleteRuleAsync(ruleID);
+            Assert.IsType<DeleteResponse>(del);
+        }
+
+        [Theory]
+        [InlineData("SaveGetDeleteRule")]
+        public void SaveGetDeleteRule(string ruleID)
+        {
+            var ruleToSave = new Rule
+            {
+                Description = "Rule Test",
+                ObjectID = ruleID,
+                Condition = new Condition { Pattern = "{facet:products.properties.fbrand}", Anchoring = "contains" },
+                Consequence = new Consequence { Params = new ConsequenceParams { AutomaticFacetFilters = new List<string> { "products.properties.fbrand" } } }
+            };
+
+            var response = _index.SaveRule(ruleToSave);
+            Assert.IsType<SaveRuleResponse>(response);
+
+            _index.WaitForCompletion(response.TaskID);
+
+            var ret = _index.GetRule(ruleID);
+            Assert.IsType<Rule>(ret);
+            Assert.Equal(ruleID, ret.ObjectID);
+
+            var del = _index.DeleteRule(ruleID);
             Assert.IsType<DeleteResponse>(del);
         }
     }

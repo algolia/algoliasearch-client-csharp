@@ -70,7 +70,7 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
-            where TResult : class => await ExecuteRequestAsync<TResult, string>(method, uri, callType, requestOptions: requestOptions, ct: ct);
+            where TResult : class => await ExecuteRequestAsync<TResult, string>(method, uri, callType, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
 
         /// <summary>
         /// Call api with retry strategy
