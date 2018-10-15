@@ -590,9 +590,13 @@ namespace Algolia.Search
             string cursorParam = "";
             if (cursor != null && cursor.Length > 0)
             {
-                cursorParam = string.Format("&cursor={0}", WebUtility.UrlEncode(cursor));
+                Dictionary<string, object> body = new Dictionary<string, object>();
+                body["cursor"] = cursor;
+
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/browse?{1}", _urlIndexName, q.GetQueryString()), body, token, requestOptions);
             }
-            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}{2}", _urlIndexName, q.GetQueryString(), cursorParam), null, token, requestOptions);
+
+            return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}", _urlIndexName, q.GetQueryString()), null, token, requestOptions);
         }
 
         /// <summary>
