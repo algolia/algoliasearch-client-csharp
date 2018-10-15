@@ -27,35 +27,26 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Settings
 {
+    /// <summary>
+    /// For more informations regarding Index settings
+    /// https://www.algolia.com/doc/api-reference/settings-api-parameters/
+    /// </summary>
     public class IndexSettings
     {
-        // Typos
-        public int? MinWordSizefor1Typo { get; set; }
-        public int? MinWordSizefor2Typos { get; set; }
-        public bool? AllowTyposOnNumericTokens { get; set; }
-        public string SeparatorsToIndex { get; set; }
-        public List<string> DisableTypoToleranceOnAttributes { get; set; }
-        public List<string> disableTypoToleranceOnWords { get; set; }
-        public string AttributesToIndex { get; set; }
-
-        // faceting
-        public long? MaxValuesPerFacet { get; set; }
-        public string SortFacetValuesBy { get; set; }
-
-        // query strategy
-        public string QueryType { get; set; }
-        public string RemoveWordsIfNoResults { get; set; }
-        public bool? AdvancedSyntax { get; set; }
-        public List<string> OptionalWords { get; set; }
-        public List<string> DisablePrefixOnAttributes { get; set; }
-        public List<string> DisableExactOnAttributes { get; set; }
-        public string ExactOnSingleWordQuery { get; set; }
-        public List<string> AlternativesAsExact { get; set; }
+        // Attributes
+        public List<string> SearchableAttributes { get; set; }
+        public List<string> AttributesForFaceting { get; set; }
+        public List<string> UnretrievableAttributes { get; set; }
+        public List<string> AttributesToRetrieve { get; set; }
 
         // ranking
         public List<string> Ranking { get; set; }
         public List<string> CustomRanking { get; set; }
         public List<string> Replicas { get; set; }
+
+        // faceting
+        public long? MaxValuesPerFacet { get; set; }
+        public string SortFacetValuesBy { get; set; }
 
         // highlight snipetting
         public List<string> AttributesToHighlight { get; set; }
@@ -69,8 +60,29 @@ namespace Algolia.Search.Models.Settings
         public long? HitsPerPage { get; set; }
         public long? PaginationLimitedTo { get; set; }
 
+        // Typos
+        public int? MinWordSizefor1Typo { get; set; }
+        public int? MinWordSizefor2Typos { get; set; }
+        public string TypoTolerance { get; set; }
+        public bool? AllowTyposOnNumericTokens { get; set; }
+        public List<string> DisableTypoToleranceOnAttributes { get; set; }
+        public List<string> DisableTypoToleranceOnWords { get; set; }
+        public string SeparatorsToIndex { get; set; }
+
+        // languages
+
         // query rules
         public bool? EnableRules { get; set; }
+
+        // query strategy
+        public string QueryType { get; set; }
+        public string RemoveWordsIfNoResults { get; set; }
+        public bool? AdvancedSyntax { get; set; }
+        public List<string> OptionalWords { get; set; }
+        public List<string> DisablePrefixOnAttributes { get; set; }
+        public List<string> DisableExactOnAttributes { get; set; }
+        public string ExactOnSingleWordQuery { get; set; }
+        public List<string> AlternativesAsExact { get; set; }
 
         // performance
         public List<string> NumericAttributesForFiltering { get; set; }
@@ -78,15 +90,13 @@ namespace Algolia.Search.Models.Settings
 
         // advanced
         public string AttributeForDistinct { get; set; }
+        public int? Distinct { get; set; }
         public bool? ReplaceSynonymsInHighlight { get; set; }
         public int? MinProximity { get; set; }
         public List<string> ResponseFields { get; set; }
         public int? MaxFacetHits { get; set; }
-        public string KeepDiacriticsOnCharacters { get; set; }
-        public List<string> QueryLanguages { get; set; }
 
         // custom
         public int? Version { get; set; }
-
     }
 }
