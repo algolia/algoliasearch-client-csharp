@@ -370,6 +370,27 @@ namespace Algolia.Search.Test
         }
 
         [Fact]
+        public void TestBrowseFrom()
+        {
+            ClearTest();
+
+            _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""objectID"":""1"", ""nickname"":""SF""}"));
+            var task = _index.AddObject(JObject.Parse(@"{""name"":""Los Angeles"", ""objectID"":""2"", ""nickname"":""SanF""}"));
+            _index.WaitTask(task["taskID"].ToString());
+            
+            var query = new Query().SetNbHitsPerPage(1);
+            var res = _index.BrowseAll(query);
+            
+            List<JObject> hits = new List<JObject>();
+            foreach (var hit in res)
+            {
+                hits.Add(hit);
+            }
+            
+            Assert.Equal(2, hits.Count);
+        }
+
+        [Fact]
         public void TestBrowse()
         {
             ClearTest();
