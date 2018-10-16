@@ -587,12 +587,11 @@ namespace Algolia.Search
         /// <param name="token"></param>
         public Task<JObject> BrowseFromAsync(Query q, string cursor, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
         {
-            string cursorParam = "";
             if (cursor != null && cursor.Length > 0)
             {
-                Dictionary<string, object> body = new Dictionary<string, object>();
-                body["cursor"] = cursor;
-
+                JObject body = new JObject(); 
+                body.Add("cursor", cursor);
+                
                 return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/browse?{1}", _urlIndexName, q.GetQueryString()), body, token, requestOptions);
             }
 
