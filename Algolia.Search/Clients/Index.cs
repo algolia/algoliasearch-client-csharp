@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Http;
+using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
@@ -32,6 +33,7 @@ using Algolia.Search.Models.Settings;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -62,6 +64,59 @@ namespace Algolia.Search.Clients
             _urlEncodedIndexName = !string.IsNullOrEmpty(indexName)
                 ? WebUtility.UrlEncode(indexName)
                 : throw new ArgumentNullException(nameof(indexName));
+        }
+
+        /// <summary>
+        /// Add an object to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public AddObjectResponse AddObject(T data, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => AddObjectAysnc(data, requestOptions));
+
+        /// <summary>
+        /// Add an object to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<AddObjectResponse> AddObjectAysnc(T data, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Add objects to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public BatchResponse AddObjects(IEnumerable<T> datas, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => AddObjectsAysnc(datas, requestOptions));
+
+        /// <summary>
+        /// Add objects to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<BatchResponse> AddObjectsAysnc(IEnumerable<T> datas, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            if (datas == null)
+            {
+                throw new ArgumentNullException(nameof(datas));
+            }
+
+            var batch = new BatchRequest<T>(BatchActionType.AddObject, datas);
+
+            return await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<T>>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>

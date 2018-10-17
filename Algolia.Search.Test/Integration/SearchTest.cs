@@ -25,6 +25,7 @@
 
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Responses;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -32,11 +33,50 @@ namespace Algolia.Search.Test.Integration
 {
     public class SearchTest : BaseTest
     {
-        [Fact(Skip="need to implement add object before doing this test because index won't exist otherwise")]
-        public async Task SearchEmptyQuery()
+        [Fact]
+        public async Task AddObjectAndSearch()
         {
-            var ret = await _index.SearchAsync(new SearchQuery{
-                Query = "toni",
+            var actor = new Actor
+            {
+                Name = "Tony Casanova",
+                Rating = 456,
+                ObjectID = "1337"
+            };
+
+            var addObject = await _index.AddObjectAysnc(actor);
+            await _index.WaitForCompletionAsync(addObject.TaskID);
+
+            var ret = await _index.SearchAsync(new SearchQuery
+            {
+                Query = "Tony",
+                HitsPerPage = 2,
+                Page = 1
+            });
+            Assert.NotNull(ret);
+            Assert.IsType<SearchResponse<Actor>>(ret);
+        }
+
+        [Fact]
+        public async Task AddObjectsAndSearch()
+        {
+            var actors = new List<Actor>
+            {
+                new Actor {
+                    Name = "Tony Casanova",
+                    Rating = 456
+                },
+                new Actor {
+                    Name = "Billy the kid",
+                    Rating = 500
+                }
+            };
+
+            var addObjects = await _index.AddObjectsAysnc(actors);
+            Assert.IsType<BatchResponse>(addObjects);
+
+            var ret = await _index.SearchAsync(new SearchQuery
+            {
+                Query = "Tony",
                 HitsPerPage = 2,
                 Page = 1
             });

@@ -23,14 +23,12 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Test
+namespace Algolia.Search.Models.Batch
 {
-    public class Actor
+    public class BatchOperation<T> where T : class
     {
-        public string Name { get; set; }
-        public string ObjectID { get; set; }
-        public int Rating { get; set; }
-        public string ImagePath { get; set; }
-        public string AlternativePath { get; set; }
+        public string Action { get; set; }
+        public string IndexName { get; set; }
+        public T Body { get; set; }
     }
 }

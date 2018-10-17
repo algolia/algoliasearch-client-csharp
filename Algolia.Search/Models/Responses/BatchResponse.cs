@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,14 +23,13 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Test
+using System.Collections.Generic;
+
+namespace Algolia.Search.Models.Responses
 {
-    public class Actor
+    public class BatchResponse
     {
-        public string Name { get; set; }
-        public string ObjectID { get; set; }
-        public int Rating { get; set; }
-        public string ImagePath { get; set; }
-        public string AlternativePath { get; set; }
+        IEnumerable<string> ObjectIDs { get; set; }
+        long TaskID { get; set; }
     }
 }

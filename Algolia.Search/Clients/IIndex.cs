@@ -26,15 +26,53 @@
 using Algolia.Search.Http;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
-using System.Threading;
-using System.Threading.Tasks;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Settings;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
     public interface IIndex<T> where T : class
     {
+
+        /// <summary>
+        /// Add objects to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        BatchResponse AddObjects(IEnumerable<T> datas, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Add objects to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<BatchResponse> AddObjectsAysnc(IEnumerable<T> datas, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Add an object to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        AddObjectResponse AddObject(T data, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Add an object to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<AddObjectResponse> AddObjectAysnc(T data, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken));
+
         /// <summary>
         /// Search in the index for the given query
         /// </summary>

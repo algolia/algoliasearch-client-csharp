@@ -22,15 +22,14 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-
-namespace Algolia.Search.Test
+namespace Algolia.Search.Models.Enums
 {
-    public class Actor
+    public static class BatchActionType
     {
-        public string Name { get; set; }
-        public string ObjectID { get; set; }
-        public int Rating { get; set; }
-        public string ImagePath { get; set; }
-        public string AlternativePath { get; set; }
+        public const string AddObject = "addObject";
+        public const string UpdateObject = "updateObject";
+        public const string PartialUpdateObject = "partialUpdateObject";
+        public const string PartialUpdateObjectNoCreate = "partialUpdateObjectNoCreate";
+        public const string DeleteObject = "deleteObject";
     }
 }

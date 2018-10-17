@@ -50,7 +50,7 @@ namespace Algolia.Search.Test
         {
             return Environment.GetEnvironmentVariable("APPVEYOR") == null
                 ? name
-                : $"{name}appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
+                : $"{name}-appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
         }
 
         /// <summary>
