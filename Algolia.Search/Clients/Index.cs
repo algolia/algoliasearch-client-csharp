@@ -39,7 +39,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public class Index<T> : IIndex, IIndex<T> where T : class
+    public class Index<T> : IIndex<T> where T : class
     {
         /// <summary>
         /// The Requester wrapper
