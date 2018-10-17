@@ -30,7 +30,7 @@ using Newtonsoft.Json;
 namespace Algolia.Search.Models.Query
 {
     /// <summary>
-    /// For more informations regarding the parameters
+    /// For more information regarding the parameters
     /// https://www.algolia.com/doc/api-reference/search-api-parameters/
     /// </summary>
     [JsonConverter(typeof(QuerySerializer))]
@@ -38,7 +38,7 @@ namespace Algolia.Search.Models.Query
     {
         public string Query { get; set; }
 
-        // filterting
+        // filtering
         public IEnumerable<string> FacetFilters { get; set; }
         public IEnumerable<string> OptionalFilters { get; set; }
         public string NumericFilters { get; set; }
@@ -51,7 +51,7 @@ namespace Algolia.Search.Models.Query
         public int? Offset { get; set; }
         public int? Length { get; set; }
 
-        // highlighting-snippeting
+        // highlighting-snippet
         public IEnumerable<string> AttributesToHighlight { get; set; }
         public IEnumerable<string> AttributesToSnippet { get; set; }
         public string HighlightPreTag { get; set; }

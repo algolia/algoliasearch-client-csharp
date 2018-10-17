@@ -26,6 +26,7 @@
 using Algolia.Search.Models.Query;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Net;
@@ -43,11 +44,12 @@ namespace Algolia.Search.Utils.Serializer
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             SearchQuery query = (SearchQuery)value;
-            var properties = typeof(SearchQuery).GetTypeInfo().DeclaredProperties
-                                .Where(p => p.GetValue(query, null) != null)
-                                .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(query, null).ToString()));
 
-            string queryString = String.Join("&", properties.ToArray());
+            IEnumerable<string> properties = typeof(SearchQuery).GetTypeInfo()
+                .DeclaredProperties.Where(p => p.GetValue(query, null) != null)
+                .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(query, null).ToString()));
+
+            string queryString = string.Join("&", properties.ToArray());
 
             writer.WriteStartObject();
             writer.WritePropertyName("params");

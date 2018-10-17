@@ -29,9 +29,14 @@ namespace Algolia.Search.Utils
 {
     public static class CamelCaseHelper
     {
+        /// <summary>
+        /// Helper used in the custom query serializer otherwise we use the built-in camel case strategy by JSON.Net
+        /// </summary>
+        /// <param name="stringToCamelCase"></param>
+        /// <returns></returns>
         public static string ToCamelCase(this string stringToCamelCase)
         {
-           return Char.ToLowerInvariant(stringToCamelCase[0]) + stringToCamelCase.Substring(1);
+           return char.ToLowerInvariant(stringToCamelCase[0]) + stringToCamelCase.Substring(1);
         }
     }
 }

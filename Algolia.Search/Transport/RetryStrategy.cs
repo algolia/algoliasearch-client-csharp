@@ -35,14 +35,14 @@ namespace Algolia.Search.Transport
 {
     internal class RetryStrategy : IRetryStrategy
     {
-        private List<StatefulHost> _hosts;
+        private readonly List<StatefulHost> _hosts;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="applicationId"></param>
         /// <param name="customHosts"></param>
-        public RetryStrategy(string applicationId, IEnumerable<StatefulHost> customHosts = null)
+        public RetryStrategy(string applicationId, ICollection<StatefulHost> customHosts = null)
         {
             _hosts = new List<StatefulHost>();
 
@@ -131,6 +131,7 @@ namespace Algolia.Search.Transport
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Update host's state 
         /// </summary>

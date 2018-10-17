@@ -28,11 +28,49 @@ using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Query;
+using Algolia.Search.Models.Settings;
 
 namespace Algolia.Search.Clients
 {
     public interface IIndex<T> where T : class
     {
+        /// <summary>
+        /// Search in the index for the given query
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        SearchResponse<T> Search(SearchQuery query, RequestOption requestOptions = null);
+
+        /// <summary>
+        ///  Search in the index for the given query
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<SearchResponse<T>> SearchAsync(SearchQuery query, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get object for the specified ID
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        T GetObject(string objectId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get the specified object by its objectID
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<T> GetObjectAsync(string objectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
         /// <summary>
         /// Get the specified by its objectID
         /// </summary>
@@ -103,7 +141,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOption requestOptions = null,
-        CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Get logs for the given index
@@ -118,6 +156,77 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get settings for the given index
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        IndexSettings GetSettings(RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get settings for the given index
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<IndexSettings> GetSettingsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Set settings
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        SetSettingsResponse SetSettings(IndexSettings settings, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Set settings for the given index
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// This function waits for the Algolia's API task to finish
+        /// </summary>
+        /// <param name="taskID"></param>
+        /// <param name="timeToWait"></param>
+        /// <param name="requestOptions"></param>
+        void WaitForCompletion(int taskID, int timeToWait = 100, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// This function waits for the Algolia's API task to finish
+        /// </summary>
+        /// <param name="taskID">The task ID to wait</param>
+        /// <param name="timeToWait"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task WaitForCompletionAsync(int taskID, int timeToWait = 100, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get the status of the given task
+        /// </summary>
+        /// <param name="taskID"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        TaskStatusResponse GetTask(int taskID, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get the status of the given task
+        /// </summary>
+        /// <param name="taskID"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<TaskStatusResponse> GetTaskAsync(int taskID, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
     }
 }

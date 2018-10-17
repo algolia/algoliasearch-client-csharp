@@ -58,6 +58,7 @@ namespace Algolia.Search.Transport
             _retryStrategy = new RetryStrategy(_algoliaConfig.AppId, config.Hosts);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Execute the request (more likely request with no body like GET or Delete)
         /// </summary>
@@ -72,6 +73,7 @@ namespace Algolia.Search.Transport
             CancellationToken ct = default(CancellationToken))
             where TResult : class => await ExecuteRequestAsync<TResult, string>(method, uri, callType, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
 
+        /// <inheritdoc />
         /// <summary>
         /// Call api with retry strategy
         /// </summary>
@@ -102,7 +104,7 @@ namespace Algolia.Search.Transport
 
             string jsonString = data != null 
                 ? JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings)
-                : String.Empty;
+                : string.Empty;
 
             var request = new Request
             {
@@ -172,11 +174,11 @@ namespace Algolia.Search.Transport
         /// <summary>
         /// Sets the timeout with the given call type
         /// </summary>
-        /// <param name="calltype"></param>
+        /// <param name="callType"></param>
         /// <returns></returns>
-        private int SetTimeout(CallType calltype)
+        private int SetTimeout(CallType callType)
         {
-            switch (calltype)
+            switch (callType)
             {
                 case CallType.Read:
                     return 5;

@@ -39,7 +39,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public class Index<T> : IIndex<T> where T : class
+    public class Index<T> : IIndex, IIndex<T> where T : class
     {
         /// <summary>
         /// The Requester wrapper
@@ -310,7 +310,7 @@ namespace Algolia.Search.Clients
                     return;
                 }
 
-                await Task.Delay(timeToWait).ConfigureAwait(false);
+                await Task.Delay(timeToWait, ct).ConfigureAwait(false);
                 timeToWait *= 2;
 
                 if (timeToWait > 10000)
