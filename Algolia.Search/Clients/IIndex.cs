@@ -198,7 +198,7 @@ namespace Algolia.Search.Clients
         /// <param name="taskID"></param>
         /// <param name="timeToWait"></param>
         /// <param name="requestOptions"></param>
-        void WaitForCompletion(int taskID, int timeToWait = 100, RequestOption requestOptions = null);
+        void WaitForCompletion(long taskID, int timeToWait = 100, RequestOption requestOptions = null);
 
         /// <summary>
         /// This function waits for the Algolia's API task to finish
@@ -208,7 +208,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task WaitForCompletionAsync(int taskID, int timeToWait = 100, RequestOption requestOptions = null,
+        Task WaitForCompletionAsync(long taskID, int timeToWait = 100, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Algolia.Search.Clients
         /// <param name="taskID"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        TaskStatusResponse GetTask(int taskID, RequestOption requestOptions = null);
+        TaskStatusResponse GetTask(long taskID, RequestOption requestOptions = null);
 
         /// <summary>
         /// Get the status of the given task
@@ -226,7 +226,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<TaskStatusResponse> GetTaskAsync(int taskID, RequestOption requestOptions = null,
+        Task<TaskStatusResponse> GetTaskAsync(long taskID, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
     }
 }

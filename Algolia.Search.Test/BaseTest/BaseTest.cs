@@ -30,13 +30,19 @@ namespace Algolia.Search.Test
 {
     public class BaseTest
     {
+        protected static string _testApiKey;
         protected SearchClient<Actor> _client;
         protected Index<Actor> _index;
 
         public BaseTest()
         {
             CheckEnvironmentVariable();
-            _client = new SearchClient<Actor>(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID"), Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY"));
+
+            _testApiKey = Environment.GetEnvironmentVariable("APPVEYOR") == null 
+                ? Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY") 
+                : Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
+
+            _client = new SearchClient<Actor>(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID"), _testApiKey);
             _index = _client.InitIndex(GetSafeName("Actors"));
         }
 

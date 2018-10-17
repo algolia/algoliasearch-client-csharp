@@ -30,6 +30,6 @@ namespace Algolia.Search.Models.Responses
     public class SaveRuleResponse
     {
         public DateTime UpdatedAt { get; set; }
-        public int TaskID { get; set; }
+        public long TaskID { get; set; }
     }
 }

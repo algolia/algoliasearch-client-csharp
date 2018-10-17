@@ -287,7 +287,7 @@ namespace Algolia.Search.Clients
         /// <param name="taskID"></param>
         /// <param name="timeToWait"></param>
         /// <param name="requestOptions"></param>
-        public void WaitForCompletion(int taskID, int timeToWait = 100, RequestOption requestOptions = null) =>
+        public void WaitForCompletion(long taskID, int timeToWait = 100, RequestOption requestOptions = null) =>
             AsyncHelper.RunSync(() => WaitForCompletionAsync(taskID, timeToWait, requestOptions));
 
         /// <summary>
@@ -298,7 +298,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task WaitForCompletionAsync(int taskID, int timeToWait = 100, RequestOption requestOptions = null,
+        public async Task WaitForCompletionAsync(long taskID, int timeToWait = 100, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             while (true)
@@ -326,7 +326,7 @@ namespace Algolia.Search.Clients
         /// <param name="taskID"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public TaskStatusResponse GetTask(int taskID, RequestOption requestOptions = null) =>
+        public TaskStatusResponse GetTask(long taskID, RequestOption requestOptions = null) =>
             AsyncHelper.RunSync(() => GetTaskAsync(taskID, requestOptions));
 
         /// <summary>
@@ -336,7 +336,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TaskStatusResponse> GetTaskAsync(int taskID, RequestOption requestOptions = null,
+        public async Task<TaskStatusResponse> GetTaskAsync(long taskID, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<TaskStatusResponse>(HttpMethod.Get, $"/1/indexes/{_urlEncodedIndexName}/task/{taskID}", CallType.Read,
