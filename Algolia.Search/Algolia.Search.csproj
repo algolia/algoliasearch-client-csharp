@@ -16,65 +16,16 @@
         <Version>5.2.0</Version>
         <AssemblyVersion>5.2.0</AssemblyVersion>
         <FileVersion>3.8.0.0</FileVersion>
-        <TargetFrameworks>net45;net46;net461;net462;net47;net471;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6;netstandard1.3;</TargetFrameworks>
-    </PropertyGroup>
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-      <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    </ItemGroup>
-    
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    </ItemGroup>
-    
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+        <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6</TargetFrameworks>
+        <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6;net471;net47;net462;net461;net46;net45;</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0' OR '$(TargetFramework)' == 'netcoreapp1.1' OR '$(TargetFramework)' == 'netcoreapp1.0' OR '$(TargetFramework)' == 'netstandard1.6' OR '$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45' OR '$(TargetFramework)' == 'net46' OR '$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'net462' OR '$(TargetFramework)' == 'net47' OR '$(TargetFramework)' == 'net471'">
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <Reference Include="System" />
-        <Reference Include="System.Net.Http" />
-    </ItemGroup>
-
-      <ItemGroup Condition=" '$(TargetFramework)' == 'net471' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <Reference Include="System" />
-        <Reference Include="System.Net.Http" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <Reference Include="System" />
-        <Reference Include="System.Net.Http" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <Reference Include="System" />
-        <Reference Include="System.Net.Http" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <Reference Include="System" />
-        <Reference Include="System.Net.Http" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <Reference Include="System" />
-        <Reference Include="System.Net.Http" />
-    </ItemGroup>
 </Project>
