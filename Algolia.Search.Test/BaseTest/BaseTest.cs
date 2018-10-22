@@ -58,14 +58,14 @@ namespace Algolia.Search.Test
         /// </summary>
         private void CheckEnvironmentVariable()
         {
-            if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR")))
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR")))
             {
-                if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID")))
+                if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID")))
                 {
                     throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_API_KEY");
                 }
 
-                if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY")))
+                if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY")))
                 {
                     throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_API_KEY");
                 }

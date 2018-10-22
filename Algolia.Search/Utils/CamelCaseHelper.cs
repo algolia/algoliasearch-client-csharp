@@ -23,7 +23,6 @@
 * THE SOFTWARE.
 */
 
-using System;
 
 namespace Algolia.Search.Utils
 {

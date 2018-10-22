@@ -40,7 +40,7 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Add objects to the given index
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="datas"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         BatchResponse AddObjects(IEnumerable<T> datas, RequestOption requestOptions = null);
@@ -48,7 +48,7 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Add objects to the given index
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="datas"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>

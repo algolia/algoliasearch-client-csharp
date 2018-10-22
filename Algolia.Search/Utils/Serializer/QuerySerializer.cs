@@ -53,7 +53,7 @@ namespace Algolia.Search.Utils.Serializer
 
             writer.WriteStartObject();
             writer.WritePropertyName("params");
-            writer.WriteValue(queryString.ToString());
+            writer.WriteValue(queryString);
             writer.WriteEnd();
         }
 
