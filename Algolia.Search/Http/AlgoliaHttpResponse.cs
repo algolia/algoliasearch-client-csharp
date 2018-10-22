@@ -23,12 +23,14 @@
 * THE SOFTWARE.
 */
 
+using System.IO;
+
 namespace Algolia.Search.Http
 {
     public class AlgoliaHttpResponse
     {
         public int HttpStatusCode { get; set; }
-        public string Body { get; set; }
+        public Stream Body { get; set; }
         public bool IsTimedOut { get; set; }
         public string Error { get; set; }
     }

@@ -31,6 +31,7 @@ using Algolia.Search.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -102,14 +103,10 @@ namespace Algolia.Search.Transport
                 throw new ArgumentNullException(nameof(method));
             }
 
-            string jsonString = data != null 
-                ? JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings)
-                : string.Empty;
-
             var request = new Request
             {
                 Method = method,
-                Body = jsonString,
+                Body = CreateRequestContent(data),
                 Headers = GenerateHeaders(requestOptions?.Headers)
             };
 
@@ -125,7 +122,7 @@ namespace Algolia.Search.Transport
                 switch (_retryStrategy.Decide(host, response.HttpStatusCode, response.IsTimedOut))
                 {
                     case RetryOutcomeType.Success:
-                        return JsonConvert.DeserializeObject<TResult>(response.Body, JsonConfig.AlgoliaJsonSerializerSettings);
+                        return JsonHelper.Deserialize<TResult>(response.Body, JsonConfig.AlgoliaJsonSerializerSettings);
                     case RetryOutcomeType.Retry:
                         continue;
                     case RetryOutcomeType.Failure:
@@ -133,6 +130,25 @@ namespace Algolia.Search.Transport
                 }
             }
             throw new AlgoliaUnreachableHostException("Unreachable hosts");
+        }
+
+        /// <summary>
+        /// Generate stream for serializing objects
+        /// </summary>
+        /// <param name="data"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        private MemoryStream CreateRequestContent<T>(T data)
+        {
+            if (data != null)
+            {
+                MemoryStream ms = new MemoryStream();
+                JsonHelper.Serialize(data, ms, JsonConfig.AlgoliaJsonSerializerSettings);
+                ms.Seek(0, SeekOrigin.Begin);
+                return ms;
+            }
+
+            return null;
         }
 
         /// <summary>

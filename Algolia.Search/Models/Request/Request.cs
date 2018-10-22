@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 
 namespace Algolia.Search.Models.Request
@@ -34,6 +35,6 @@ namespace Algolia.Search.Models.Request
         public HttpMethod Method { get; set; }
         public Uri Uri { get; set; }
         public Dictionary<string, string> Headers { get; set; }
-        public string Body { get; set; }
+        public Stream Body { get; set; }
     }
 }

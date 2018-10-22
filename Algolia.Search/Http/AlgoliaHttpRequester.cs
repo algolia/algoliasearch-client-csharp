@@ -24,7 +24,9 @@
 */
 
 using Algolia.Search.Models.Request;
+using Algolia.Search.Utils;
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -73,7 +75,7 @@ namespace Algolia.Search.Http
             {
                 Method = request.Method,
                 RequestUri = request.Uri,
-                Content = new StringContent(request.Body, Encoding.UTF8, JsonConfig.JsonContentType)
+                Content = request.Body != null ? new StreamContent(request.Body) : null
             };
 
             httpRequestMessage.Headers.Fill(request.Headers);
@@ -82,14 +84,30 @@ namespace Algolia.Search.Http
             try
             {
                 using (httpRequestMessage)
-                using (HttpResponseMessage response =
-                    await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
+                using (HttpResponseMessage response = await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
                 {
-                    string content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
-                    return !response.IsSuccessStatusCode
-                        ? new AlgoliaHttpResponse { Error = content, HttpStatusCode = (int)response.StatusCode }
-                        : new AlgoliaHttpResponse { Body = content, HttpStatusCode = (int)response.StatusCode };
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MemoryStream outputStream = new MemoryStream();
+                        await stream.CopyToAsync(outputStream).ConfigureAwait(false);
+                        outputStream.Seek(0, SeekOrigin.Begin);
+
+                        return new AlgoliaHttpResponse
+                        {
+                            Body = outputStream,
+                            HttpStatusCode = (int)response.StatusCode
+                        };
+                    }
+
+                    var content = await JsonHelper.StreamToStringAsync(stream).ConfigureAwait(false);
+                    
+                    return new AlgoliaHttpResponse
+                    {
+                        Error = content,
+                        HttpStatusCode = (int)response.StatusCode
+                    };
                 }
             }
             catch (TimeoutException timeOutException)
