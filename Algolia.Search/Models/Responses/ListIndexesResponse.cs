@@ -28,6 +28,9 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/list-indices/
+    /// </summary>
     public class ListIndexesResponse
     {
         public List<IndexesResponse> Items { get; set; }

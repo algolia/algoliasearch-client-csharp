@@ -125,7 +125,29 @@ namespace Algolia.Search.Clients
                     CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ListIndexesResponse>(HttpMethod.Get,
-                $"/1/indexes/", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                $"/1/indexes", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get the full list of API Keys.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public ListApiKeysResponse ListApiKeys(RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => ListApiKeysAsync(requestOptions));
+
+        /// <summary>
+        /// Get the full list of API Keys.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<ListApiKeysResponse> ListApiKeysAsync(RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<ListApiKeysResponse>(HttpMethod.Get,
+                $"/1/keys", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }

@@ -23,27 +23,24 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Responses;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
 
-namespace Algolia.Search.Test.Integration
+namespace Algolia.Search.Models.Responses
 {
-    public class IndexTest : BaseTest
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/list-api-keys/
+    /// </summary>
+    public class ListApiKeysResponse
     {
-        [Fact]
-        public async Task ListIndexesAsync()
-        {
-            var ret = await _client.ListIndexesAsync();
-            Assert.IsType<ListIndexesResponse>(ret);
-        }
+        public List<ApiKeysResponse> Keys { get; set; }
+    }
 
-        [Fact]
-        public async Task ListApiKeysAsync()
-        {
-            var ret = await _client.ListApiKeysAsync();
-            Assert.IsType<ListApiKeysResponse>(ret);
-        }
+    public class ApiKeysResponse
+    {
+        public string Value { get; set; }
+        public string CreatedAt { get; set; }
+        public IEnumerable<string> Acl { get; set; }
+        public int Validity { get; set; }
+        public string Description { get; set; }
     }
 }
