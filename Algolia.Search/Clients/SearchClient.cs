@@ -149,5 +149,27 @@ namespace Algolia.Search.Clients
             return await _requesterWrapper.ExecuteRequestAsync<ListApiKeysResponse>(HttpMethod.Get,
                 $"/1/keys", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Get the full list of API Keys.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public ApiKeysResponse GetApiKey(string key, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => GetApiKeyAsync(key, requestOptions));
+
+        /// <summary>
+        /// Get the full list of API Keys.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<ApiKeysResponse> GetApiKeyAsync(string key, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<ApiKeysResponse>(HttpMethod.Get,
+                $"/1/keys/{key}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
     }
 }
