@@ -152,6 +152,31 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public MoveIndexResponse MoveIndex(string sourceIndex, string destinationIndex, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => MoveIndexAsync(sourceIndex, destinationIndex, requestOptions));
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<MoveIndexResponse>(HttpMethod.Post,
+                $"/1/indexes/{sourceIndex}/operation", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Get the full list of API Keys.
         /// </summary>
         /// <param name="data"></param>
@@ -193,6 +218,29 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<ApiKeysResponse>(HttpMethod.Get,
                 $"/1/keys/{key}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Delete an existing API Key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse DeleteApiKey(string key, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => DeleteApiKeyAsync(key, requestOptions));
+
+        /// <summary>
+        /// Delete an existing API Key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> DeleteApiKeyAsync(string key, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
+                $"/1/keys/{key}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }
