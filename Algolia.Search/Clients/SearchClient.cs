@@ -242,5 +242,26 @@ namespace Algolia.Search.Clients
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
                 $"/1/keys/{key}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// List the clusters available in a multi-clusters setup for a single appID
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public ListClustersResponse ListClusters(RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => ListClustersAsync(requestOptions));
+
+        /// <summary>
+        /// List the clusters available in a multi-clusters setup for a single appID
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<ListClustersResponse> ListClustersAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Delete,
+                "/1/clusters", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+        }
     }
 }
