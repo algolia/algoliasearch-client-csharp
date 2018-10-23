@@ -24,8 +24,15 @@
 */
 
 using Algolia.Search.Http;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Responses;
 using Algolia.Search.Transport;
+using Algolia.Search.Utils;
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
@@ -97,6 +104,28 @@ namespace Algolia.Search.Clients
             return string.IsNullOrEmpty(indexName)
                 ? throw new ArgumentNullException(nameof(indexName), "Index name is required")
                 : new Index<T>(_requesterWrapper, indexName);
+        }
+
+        /// <summary>
+        /// Get a list of indexes/indices with their associated metadata.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public ListIndexesResponse ListIndexes(RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => ListIndexesAsync(requestOptions));
+
+        /// <summary>
+        /// Get a list of indexes/indices with their associated metadata.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<ListIndexesResponse> ListIndexesAsync(RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<ListIndexesResponse>(HttpMethod.Get,
+                $"/1/indexes/", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }
