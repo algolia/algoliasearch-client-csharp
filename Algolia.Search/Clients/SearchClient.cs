@@ -125,7 +125,30 @@ namespace Algolia.Search.Clients
                     CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ListIndexesResponse>(HttpMethod.Get,
-                $"/1/indexes", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                "/1/indexes", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Delete an index by name
+        /// </summary>
+        /// <param name="indexName"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse DeleteIndex(string indexName, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => DeleteIndexAsync(indexName, requestOptions));
+
+        /// <summary>
+        /// Delete an index by name
+        /// </summary>
+        /// <param name="indexName"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
+                $"/1/indexes/{indexName}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -147,7 +170,7 @@ namespace Algolia.Search.Clients
                     CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ListApiKeysResponse>(HttpMethod.Get,
-                $"/1/keys", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                "/1/keys", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
