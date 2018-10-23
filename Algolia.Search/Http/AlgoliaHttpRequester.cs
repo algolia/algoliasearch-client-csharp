@@ -23,7 +23,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Request;
+using Algolia.Search.Models.Requests;
 using Algolia.Search.Utils;
 using System;
 using System.IO;

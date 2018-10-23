@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 
-namespace Algolia.Search.Models.Request
+namespace Algolia.Search.Models.Requests
 {
     public class Request
     {

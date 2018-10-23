@@ -26,7 +26,7 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Request;
+using Algolia.Search.Models.Requests;
 using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
