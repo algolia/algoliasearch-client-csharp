@@ -28,6 +28,7 @@ using Algolia.Search.Transport;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Algolia.Search.Test.RetryStrategyTest
@@ -122,9 +123,37 @@ namespace Algolia.Search.Test.RetryStrategyTest
             RetryStrategy retryStrategy = new RetryStrategy("appId");
             var hosts = retryStrategy.GetTryableHost(callType);
 
-           var decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
+            var decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
 
             Assert.True(decision.HasFlag(RetryOutcomeType.Failure));
+        }
+
+        [Theory]
+        [InlineData(CallType.Read)]
+        [InlineData(CallType.Write)]
+        public void TestRetryStrategyMultiThread(CallType callType)
+        {
+            RetryStrategy retryStrategy = new RetryStrategy("appId");
+
+            var initialHosts = retryStrategy.GetTryableHost(callType);
+            Assert.True(initialHosts.Count() == 4);
+
+            Task task1 = Task.Run(() =>
+           {
+               var hosts = retryStrategy.GetTryableHost(callType);
+               retryStrategy.Decide(hosts.ElementAt(0), 200, false);
+           });
+
+            Task task2 = Task.Run(() =>
+           {
+               var hosts = retryStrategy.GetTryableHost(callType);
+               retryStrategy.Decide(hosts.ElementAt(0), 500, false);
+           });
+
+            Task.WaitAll(task1, task2);
+
+            var updatedHosts = retryStrategy.GetTryableHost(callType);
+            Assert.True(updatedHosts.Count() == 3);
         }
     }
 }

@@ -36,6 +36,12 @@ namespace Algolia.Search.Transport
     internal class RetryStrategy : IRetryStrategy
     {
         private readonly List<StatefulHost> _hosts;
+        
+        /// <summary>
+        /// The synchronization lock for each set RetryStrategy/RequesterWrapper/Client
+        /// </summary>
+        /// <returns></returns>
+        private readonly object _lock = new object();
 
         /// <summary>
         /// Default constructor
@@ -115,19 +121,22 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         public IEnumerable<StatefulHost> GetTryableHost(CallType callType)
         {
-            ResetExpiredHosts();
+            lock (_lock)
+            {
+                ResetExpiredHosts();
 
-            if (_hosts.Any(h => h.Up && h.Accept.HasFlag(callType)))
-            {
-                return _hosts.Where(h => h.Up && h.Accept.HasFlag(callType));
-            }
-            else
-            {
-                foreach (var host in _hosts.Where(h => h.Accept.HasFlag(callType)))
+                if (_hosts.Any(h => h.Up && h.Accept.HasFlag(callType)))
                 {
-                    Reset(host);
+                    return _hosts.Where(h => h.Up && h.Accept.HasFlag(callType));
                 }
-                return _hosts;
+                else
+                {
+                    foreach (var host in _hosts.Where(h => h.Accept.HasFlag(callType)))
+                    {
+                        Reset(host);
+                    }
+                    return _hosts;
+                }
             }
         }
 
@@ -141,27 +150,30 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         public RetryOutcomeType Decide(StatefulHost tryableHost, int httpResponseCode, bool isTimedOut)
         {
-            if (!isTimedOut && IsSuccess(httpResponseCode))
+            lock (_lock)
             {
-                tryableHost.Up = true;
-                tryableHost.LastUse = DateTime.UtcNow;
-                return RetryOutcomeType.Success;
-            }
-            else if (!isTimedOut && IsRetryable(httpResponseCode))
-            {
-                tryableHost.Up = false;
-                tryableHost.LastUse = DateTime.UtcNow;
-                return RetryOutcomeType.Retry;
-            }
-            else if (isTimedOut)
-            {
-                tryableHost.Up = true;
-                tryableHost.LastUse = DateTime.UtcNow;
-                tryableHost.RetryCount++;
-                return RetryOutcomeType.Retry;
-            }
+                if (!isTimedOut && IsSuccess(httpResponseCode))
+                {
+                    tryableHost.Up = true;
+                    tryableHost.LastUse = DateTime.UtcNow;
+                    return RetryOutcomeType.Success;
+                }
+                else if (!isTimedOut && IsRetryable(httpResponseCode))
+                {
+                    tryableHost.Up = false;
+                    tryableHost.LastUse = DateTime.UtcNow;
+                    return RetryOutcomeType.Retry;
+                }
+                else if (isTimedOut)
+                {
+                    tryableHost.Up = true;
+                    tryableHost.LastUse = DateTime.UtcNow;
+                    tryableHost.RetryCount++;
+                    return RetryOutcomeType.Retry;
+                }
 
-            return RetryOutcomeType.Failure;
+                return RetryOutcomeType.Failure;
+            }
         }
 
         /// <summary>
@@ -190,9 +202,9 @@ namespace Algolia.Search.Transport
         /// <param name="host"></param>
         private void Reset(StatefulHost host)
         {
-            host.Up = true;
-            host.RetryCount = 0;
-            host.LastUse = DateTime.UtcNow;
+                host.Up = true;
+                host.RetryCount = 0;
+                host.LastUse = DateTime.UtcNow;
         }
 
         /// <summary>

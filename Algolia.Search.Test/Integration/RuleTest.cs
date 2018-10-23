@@ -56,6 +56,42 @@ namespace Algolia.Search.Test.Integration
             Assert.IsType<SearchRuleResponse>(ret);
         }
 
+        [Fact]
+        public void MultiThreadSearchRule()
+        {
+            Task task1 = Task.Run(() =>
+         {
+             var ret = _index.SearchRule(new Rule());
+             Assert.IsType<SearchRuleResponse>(ret);
+         });
+
+            Task task2 = Task.Run(() =>
+          {
+              var ret = _index.SearchRule(new Rule());
+              Assert.IsType<SearchRuleResponse>(ret);
+          });
+
+            Task.WaitAll(task1, task2);
+        }
+
+        [Fact]
+        public void MultiThreadSearchRuleAsync()
+        {
+            Task task1 = Task.Run(async () =>
+         {
+             var ret = await _index.SearchRuleAsync(new Rule());
+             Assert.IsType<SearchRuleResponse>(ret);
+         });
+
+            Task task2 = Task.Run(async () =>
+          {
+              var ret = await _index.SearchRuleAsync(new Rule());
+              Assert.IsType<SearchRuleResponse>(ret);
+          });
+
+            Task.WaitAll(task1, task2);
+        }
+
         [Theory]
         [InlineData("SaveGetDeleteRuleAsync")]
         public async Task SaveGetDeleteRuleAsync(string ruleID)
