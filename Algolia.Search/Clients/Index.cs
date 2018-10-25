@@ -30,6 +30,7 @@ using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.RuleQuery;
 using Algolia.Search.Models.Settings;
+using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
@@ -38,7 +39,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Models.Synonyms;
 using System.Reflection;
 
 namespace Algolia.Search.Clients
@@ -457,6 +457,29 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<Synonym>(HttpMethod.Get,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Create or update multiple synonyms.
+        /// </summary>
+        /// <param name="synonyms"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => SaveSynonymsAsync(synonyms, requestOptions));
+
+        /// <summary>
+        /// Create or update multiple synonyms.
+        /// </summary>
+        /// <param name="synonyms"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/synonyms", CallType.Write, synonyms, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
