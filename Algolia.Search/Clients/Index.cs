@@ -414,6 +414,29 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Get all synonyms that match a query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SearchResponse<Synonym> SearchSynonyms(SynonymQuery query, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => SearchSynonymsAsync(query, requestOptions));
+
+        /// <summary>
+        /// Get all synonyms that match a query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SearchResponse<Synonym>> SearchSynonymsAsync(SynonymQuery query, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<Synonym>, SynonymQuery>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/synonyms/search", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Get a single synonym using its object id.
         /// </summary>
         /// <param name="synonymObjectId"></param>
