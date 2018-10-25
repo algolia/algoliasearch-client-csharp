@@ -32,7 +32,12 @@ namespace Algolia.Search.Models.Synonyms
     /// </summary>
     public class Synonym
     {
-        public string ObjectId { get; set; }
-        public IEnumerable<string> Synonyms { get; set; }
-    }
+        public string ObjectID { get; set; }
+        public string Type { get; set; }
+        public List<string> Synonyms { get; set; }
+        public string Input { get; set; }
+        public string Word { get; set; }
+        public List<string> Corrections { get; set; }
+        public string Placeholder { get; set; }
+        public List<string> Replacements { get; set; }    }
 }

@@ -38,6 +38,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Synonyms;
 
 namespace Algolia.Search.Clients
 {
@@ -314,6 +315,29 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<SetSettingsResponse, IndexSettings>(HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Write,
                settings, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a single synonym using its object id.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public Synonym GetSynonym(string synonymObjectId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetSynonymAsync(synonymObjectId, requestOptions));
+
+        /// <summary>
+        /// Get a single synonym using its object id.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<Synonym> GetSynonymAsync(string synonymObjectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<Synonym>(HttpMethod.Get,
+                $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
