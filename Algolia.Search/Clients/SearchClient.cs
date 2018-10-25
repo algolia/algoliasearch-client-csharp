@@ -264,6 +264,29 @@ namespace Algolia.Search.Clients
                 "/1/clusters", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
+
+        /// <summary>
+        /// List the userIDs assigned to a multi-clusters appID.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SearchResponse<UserId> ListUserIds(RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => ListUserIdsAsync(requestOptions));
+
+
+        /// <summary>
+        /// List the userIDs assigned to a multi-clusters appID.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SearchResponse<UserId>> ListUserIdsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserId>>(HttpMethod.Get,
+                "/1/clusters/mapping", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
         /// <summary>
         /// Returns the userID data stored in the mapping.
         /// </summary>
