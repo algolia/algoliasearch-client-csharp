@@ -27,6 +27,6 @@ namespace Algolia.Search.Models.RuleQuery
 {
     public class Hide
     {
-        public string ObjectId { get; set; }
+        public string ObjectID { get; set; }
     }
 }

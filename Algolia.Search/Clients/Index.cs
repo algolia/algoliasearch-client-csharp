@@ -39,6 +39,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Models.Synonyms;
+using System.Reflection;
 
 namespace Algolia.Search.Clients
 {
@@ -88,6 +89,43 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Update one or more attributes of an existing object.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public UpdateObjectResponse PartialUpdateObject(T data, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => PartialUpdateObjectAsync(data, requestOptions));
+
+        /// <summary>
+        /// Update one or more attributes of an existing object.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<UpdateObjectResponse> PartialUpdateObjectAsync(T data, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            PropertyInfo pi = data.GetType().GetProperty("ObjectID");
+
+            if (pi == null)
+            {
+                throw new ArgumentNullException("ObjectID");
+            }
+
+            if (pi.GetType() != typeof(string))
+            {
+                throw new NotSupportedException("ObjectID property must be a string");
+            }
+
+            string objectId = (string)pi.GetValue(data);
+
+            return await _requesterWrapper.ExecuteRequestAsync<UpdateObjectResponse, T>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/{objectId}/partial", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>

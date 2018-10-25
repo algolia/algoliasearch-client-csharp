@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,11 +23,14 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.RuleQuery
+using System;
+
+namespace Algolia.Search.Models.Responses
 {
-    public class ConsequencePromote
+    public class UpdateObjectResponse
     {
+        public DateTime UpdatedAt { get; set; }
+        public long TaskID { get; set; }
         public string ObjectID { get; set; }
-        public int Position { get; set; }
     }
 }
