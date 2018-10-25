@@ -269,8 +269,8 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(objectId));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete, $"/1/indexes/{_urlEncodedIndexName}/rules/{objectId}", CallType.Write,
-                requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
+                $"/1/indexes/{_urlEncodedIndexName}/rules/{objectId}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -290,8 +290,8 @@ namespace Algolia.Search.Clients
         public async Task<IndexSettings> GetSettingsAsync(RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<IndexSettings>(HttpMethod.Get, $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Read,
-                requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            return await _requesterWrapper.ExecuteRequestAsync<IndexSettings>(HttpMethod.Get,
+                $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -313,8 +313,8 @@ namespace Algolia.Search.Clients
         public async Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<SetSettingsResponse, IndexSettings>(HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Write,
-               settings, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            return await _requesterWrapper.ExecuteRequestAsync<SetSettingsResponse, IndexSettings>(HttpMethod.Put,
+                $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Write, settings, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -398,8 +398,8 @@ namespace Algolia.Search.Clients
         public async Task<TaskStatusResponse> GetTaskAsync(long taskID, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<TaskStatusResponse>(HttpMethod.Get, $"/1/indexes/{_urlEncodedIndexName}/task/{taskID}", CallType.Read,
-                requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            return await _requesterWrapper.ExecuteRequestAsync<TaskStatusResponse>(HttpMethod.Get,
+                $"/1/indexes/{_urlEncodedIndexName}/task/{taskID}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }
