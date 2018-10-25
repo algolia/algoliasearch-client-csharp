@@ -110,7 +110,7 @@ namespace Algolia.Search.Clients
         public async Task<UpdateObjectResponse> PartialUpdateObjectAsync(T data, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            PropertyInfo pi = data.GetType().GetProperty("ObjectID");
+            PropertyInfo pi = typeof(T).GetTypeInfo().GetDeclaredProperty("ObjectID");
 
             if (pi == null)
             {
