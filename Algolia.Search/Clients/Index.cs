@@ -341,6 +341,31 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Create or update a single synonym on an index.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="synonym"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SaveSynonymResponse SaveSynonym(string synonymObjectId, Synonym synonym, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => SaveSynonymAsync(synonymObjectId, synonym, requestOptions));
+
+        /// <summary>
+        /// Create or update a single synonym on an index.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="synonym"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SaveSynonymResponse> SaveSynonymAsync(string synonymObjectId, Synonym synonym, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, Synonym>(HttpMethod.Put,
+                $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Write, synonym, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// This function waits for the Algolia's API task to finish
         /// </summary>
         /// <param name="taskID"></param>
