@@ -182,21 +182,6 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// Get logs for the given index
-        /// </summary>
-        /// <returns></returns>
-        LogResponse GetLogResponse(RequestOption requestOptions = null);
-
-        /// <summary>
-        /// Get logs for the given index
-        /// </summary>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
-        /// <returns></returns>
-        Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
-
-        /// <summary>
         /// Get settings for the given index
         /// </summary>
         /// <param name="requestOptions"></param>

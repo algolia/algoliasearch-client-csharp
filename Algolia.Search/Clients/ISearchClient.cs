@@ -23,10 +23,30 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Http;
+using Algolia.Search.Models.Responses;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Algolia.Search.Clients
 {
     public interface ISearchClient<T> where T : class
     {
         Index<T> InitIndex(string indexName);
+
+        /// <summary>
+        /// Get logs for the given index
+        /// </summary>
+        /// <returns></returns>
+        LogResponse GetLogs(RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get logs for the given index
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
     }
 }

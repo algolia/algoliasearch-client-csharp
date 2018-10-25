@@ -263,5 +263,26 @@ namespace Algolia.Search.Clients
             return await _requesterWrapper.ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Delete,
                 "/1/clusters", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Get logs for the given index
+        /// </summary>
+        /// <returns></returns>
+        public LogResponse GetLogs(RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetLogsAsync(requestOptions));
+
+        /// <summary>
+        /// Get logs for the given index
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
+                requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+        }
+
     }
 }

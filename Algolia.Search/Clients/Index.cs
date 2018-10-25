@@ -273,26 +273,6 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
-        /// Get logs for the given index
-        /// </summary>
-        /// <returns></returns>
-        public LogResponse GetLogResponse(RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => GetLogsAsync(requestOptions));
-
-        /// <summary>
-        /// Get logs for the given index
-        /// </summary>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
-        /// <returns></returns>
-        public async Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
-        {
-            return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
-                requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
-        }
-
-        /// <summary>
         /// Get settings for the given index
         /// </summary>
         /// <param name="requestOptions"></param>
