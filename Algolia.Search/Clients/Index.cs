@@ -366,6 +366,50 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Remove a single synonym from an index using its object id.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse DeleteSynonym(string synonymObjectId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => DeleteSynonymAsync(synonymObjectId, requestOptions));
+
+        /// <summary>
+        /// Remove a single synonym from an index using its object id.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
+                $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Remove all synonyms from an index.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public ClearSynonymsResponse ClearSynonyms(RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => ClearSynonymsAsync(requestOptions));
+
+        /// <summary>
+        /// Remove all synonyms from an index.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<ClearSynonymsResponse> ClearSynonymsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<ClearSynonymsResponse>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/synonyms/clear", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// This function waits for the Algolia's API task to finish
         /// </summary>
         /// <param name="taskID"></param>
