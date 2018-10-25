@@ -260,8 +260,31 @@ namespace Algolia.Search.Clients
         public async Task<ListClustersResponse> ListClustersAsync(RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Delete,
-                "/1/clusters", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+            return await _requesterWrapper.ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Get,
+                "/1/clusters", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns the userID data stored in the mapping.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public UserId GetUserId(string userId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetUserIdAsync(userId, requestOptions));
+
+        /// <summary>
+        /// Returns the userID data stored in the mapping.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<UserId> GetUserIdAsync(string userId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<UserId>(HttpMethod.Get,
+                $"/1/clusters/mapping/{userId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>

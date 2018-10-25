@@ -23,19 +23,13 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Responses;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace Algolia.Search.Test.Integration
+namespace Algolia.Search.Models.Responses
 {
-    public class LogTest : BaseTest
+    public class UserId
     {
-        [Fact]
-        public async Task GetLogsAsync()
-        {
-            var ret = await _client.GetLogsAsync();
-            Assert.IsType<LogResponse>(ret);
-        }
+        public string UserID { get; set; }
+        public string ClusterName { get; set; }
+        public int NbRecords { get; set; }
+        public int DataSize { get; set; }
     }
 }
