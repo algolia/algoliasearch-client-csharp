@@ -121,6 +121,36 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Delete all the objects for their objectIds
+        /// </summary>
+        /// <param name="objectIds"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public BatchResponse DeleteObjects(IEnumerable<string> objectIds, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => DeleteObjectsAsync(objectIds, requestOptions));
+
+        /// <summary>
+        /// Delete all the objects for their objectIds
+        /// </summary>
+        /// <param name="objectIds"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<BatchResponse> DeleteObjectsAsync(IEnumerable<string> objectIds, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            if (objectIds == null)
+            {
+                throw new ArgumentNullException(nameof(objectIds));
+            }
+
+            var batch = new BatchRequest<string>(BatchActionType.DeleteObject, objectIds);
+
+            return await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<string>>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Search in the index for the given query
         /// </summary>
         /// <param name="query"></param>
@@ -168,6 +198,34 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<T>(HttpMethod.Get,
+                $"/1/indexes/{_urlEncodedIndexName}/{objectId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Remove objects from an index using its object id.
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse DeleteObject(string objectId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => DeleteObjectAsync(objectId, requestOptions));
+
+        /// <summary>
+        /// Remove objects from an index using its object id.
+        /// </summary>
+        /// <param name="objectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> DeleteObjectAsync(string objectId, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrEmpty(objectId))
+            {
+                throw new ArgumentNullException(nameof(objectId));
+            }
+
+            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Get,
                 $"/1/indexes/{_urlEncodedIndexName}/{objectId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
