@@ -36,10 +36,10 @@ namespace Algolia.Search.Utils
     /// </summary>
     public static class JsonHelper
     {
-        private static readonly UTF8Encoding _enconding = new UTF8Encoding(false);
+        private static readonly UTF8Encoding _encoding = new UTF8Encoding(false);
         public static void Serialize<T>(T data, Stream stream, JsonSerializerSettings settings)
         {
-            using (var sw = new StreamWriter(stream, _enconding, 1024, true))
+            using (var sw = new StreamWriter(stream, _encoding, 1024, true))
             using (var jtw = new JsonTextWriter(sw) { Formatting = Formatting.None })
             {
                 JsonSerializer serializer = JsonSerializer.Create(settings);

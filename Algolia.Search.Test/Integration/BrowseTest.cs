@@ -23,8 +23,13 @@
 * THE SOFTWARE.
 */
 
-using System.Linq;
 using Algolia.Search.Iterators;
+using Algolia.Search.Models.Query;
+using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Rules;
+using Algolia.Search.Models.Synonyms;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Algolia.Search.Test.Integration
@@ -35,22 +40,48 @@ namespace Algolia.Search.Test.Integration
         public void TestBrowseSynonyms()
         {
             var browseSynonym = new SynonymsIterator<Actor>(_index, 1);
+            int totalHits = 0;
+            List<Synonym> synonyms = new List<Synonym>();
 
-            foreach (var synonym in browseSynonym)
+            foreach (var result in browseSynonym)
             {
-                Assert.True(synonym.Hits.Count()== 1);
+                totalHits = result.NbHits;
+                synonyms.AddRange(result.Hits);
             }
+
+            Assert.True(synonyms.Count() == totalHits);
         }
 
         [Fact]
         public void TestBrowseRules()
         {
             var browseRule = new RulesIterator<Actor>(_index, 1);
+            int totalHits = 0;
+            List<Rule> rules = new List<Rule>();
 
-            foreach (var synonym in browseRule)
+            foreach (var result in browseRule)
             {
-                Assert.True(synonym.Hits.Count() == 1);
+                totalHits = result.NbHits;
+                rules.AddRange(result.Hits);
             }
+
+            Assert.True(rules.Count() == totalHits);
+        }
+
+        [Fact]
+        public void TestBrowseAll()
+        {
+            var browseRule = new IndexIterator<Actor>(_index, new BrowseIndexQuery { HitsPerPage = 100 });
+            int totalHits = 0;
+            List<Actor> actors = new List<Actor>();
+
+            foreach (var result in browseRule)
+            {
+                totalHits = result.NbHits;
+                actors.AddRange(result.Hits);
+            }
+
+            Assert.True(actors.Count() == totalHits);
         }
     }
 }

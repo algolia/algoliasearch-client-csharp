@@ -23,40 +23,17 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Clients;
-using Algolia.Search.Models.Responses;
-using Algolia.Search.Models.Rules;
-using System.Collections.Generic;
-using System.Linq;
+using Algolia.Search.Models.Query;
+using Algolia.Search.Utils.Serializer;
+using Newtonsoft.Json;
 
-namespace Algolia.Search.Iterators
+namespace Algolia.Search.Models.Requests
 {
-    public class RulesIterator<T> where T : class
+    /// <summary>
+    /// https://www.algolia.com/doc/rest-api/search/#browse-index-post
+    /// </summary>
+    public class BrowseIndexQuery : SearchQuery
     {
-        private readonly Index<T> _index;
-        private RuleQuery _query = new RuleQuery();
-
-        public RulesIterator(Index<T> index, int hitsPerpage = 1000)
-        {
-            _index = index;
-            _query.HitsPerPage = hitsPerpage;
-            _query.Page = 0;
-        }
-
-        public IEnumerator<SearchResponse<Rule>> GetEnumerator()
-        {
-            while (true)
-            {
-                SearchResponse<Rule> result = _index.SearchRule(_query);
-
-                if (result.Hits.Count() == 0)
-                {
-                    yield break;
-                }
-
-                _query.Page++;
-                yield return result;
-            }
-        }
+        public string Cursor { get; set; }
     }
 }

@@ -40,6 +40,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Reflection;
+using Algolia.Search.Models.Requests;
+using Algolia.Search.Iterators;
 
 namespace Algolia.Search.Clients
 {
@@ -265,6 +267,47 @@ namespace Algolia.Search.Clients
 
             return await _requesterWrapper.ExecuteRequestAsync<T>(HttpMethod.Get,
                 $"/1/indexes/{_urlEncodedIndexName}/{objectId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// This method allows you to retrieve all index content  
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// You can use the same query parameters as for a search query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public IndexIterator<T> BrowseAll(BrowseIndexQuery query) 
+        { 
+            return new IndexIterator<T>(this, query);
+        }
+
+        /// <summary>
+        /// This method allows you to retrieve all index content  
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// You can use the same query parameters as for a search query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cursor"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public BrowseIndexResponse<T> BrowseFrom(BrowseIndexQuery query, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => BrowseFromAsync(query, requestOptions));
+
+        /// <summary>
+        /// This method allows you to retrieve all index content  
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// You can use the same query parameters as for a search query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cursor"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<BrowseIndexResponse<T>> BrowseFromAsync(BrowseIndexQuery query, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<BrowseIndexResponse<T>, BrowseIndexQuery>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/browse", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>

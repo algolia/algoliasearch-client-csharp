@@ -49,15 +49,14 @@ namespace Algolia.Search.Iterators
             while (true)
             {
                 SearchResponse<Synonym> result = _index.SearchSynonyms(_query);
-
-                if (result.Hits.Count() > 0)
+                
+                if (result.Hits.Count() == 0)
                 {
-                    _query.Page += 1;
-                    yield return result;
-                    continue;
+                    yield break;
                 }
 
-                yield break;
+                _query.Page++;
+                yield return result;
             }
         }
     }

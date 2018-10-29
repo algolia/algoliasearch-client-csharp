@@ -23,45 +23,42 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
 using Algolia.Search.Models.Query;
-using Newtonsoft.Json;
-using System;
+using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Responses;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Net;
 
-namespace Algolia.Search.Utils.Serializer
+namespace Algolia.Search.Iterators
 {
-    /// <summary>
-    /// Custom serializer for the query object because it must math specific syntax 
-    /// For more informations regarding the syntax 
-    /// https://www.algolia.com/doc/rest-api/search/#search-endpoints
-    /// https://www.newtonsoft.com/json/help/html/JsonConverterAttributeClass.htm
-    /// </summary>
-    public class QuerySerializer : JsonConverter
+    public class IndexIterator<T> where T : class
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        private readonly Index<T> _index;
+        private BrowseIndexQuery _query = new BrowseIndexQuery();
+        private string _cursor = string.Empty;
+
+        public IndexIterator(Index<T> index, BrowseIndexQuery query)
         {
-            SearchQuery query = (SearchQuery)value;
-
-            IEnumerable<string> properties = typeof(SearchQuery).GetTypeInfo()
-                .DeclaredProperties.Where(p => p.GetValue(query, null) != null)
-                .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(query, null).ToString()));
-
-            string queryString = string.Join("&", properties.ToArray());
-
-            writer.WriteValue(queryString);
+            _index = index;
+            _query = query;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public IEnumerator<BrowseIndexResponse<T>> GetEnumerator()
         {
-            throw new NotImplementedException("Unnecessary : we don't need to deserialize the Query");
-        }
+            while (true)
+            {
+                BrowseIndexResponse<T> result = _index.BrowseFrom(_query);
 
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(SearchQuery);
+                if (result.Cursor == null)
+                {
+                    yield return result;
+                    yield break;
+                }
+
+                _query.Cursor = result.Cursor;
+                yield return result;
+            }
         }
     }
 }

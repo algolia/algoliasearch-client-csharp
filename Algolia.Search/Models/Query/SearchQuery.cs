@@ -33,10 +33,9 @@ namespace Algolia.Search.Models.Query
     /// For more information regarding the parameters
     /// https://www.algolia.com/doc/api-reference/search-api-parameters/
     /// </summary>
-    [JsonConverter(typeof(QuerySerializer))]
     public class SearchQuery
     {
-        public string Query { get; set; }
+        public string Query { get; set; } = string.Empty;
 
         // filtering
         public IEnumerable<string> FacetFilters { get; set; }
