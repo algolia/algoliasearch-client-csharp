@@ -23,20 +23,10 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-
-namespace Algolia.Search.Models.RuleQuery
+namespace Algolia.Search.Models.Rules
 {
-    /// <summary>
-    /// https://www.algolia.com/doc/tutorials/query-rules/coding-query-rules-parameters/#coding-query-rule-parameters
-    /// </summary>
-    public class Rule
+    public class Hide
     {
         public string ObjectID { get; set; }
-        public Condition Condition { get; set; }
-        public Consequence Consequence { get; set; }
-        public string Description { get; set; }
-        public bool? Enabled { get; set; }
-        public IEnumerable<TimeRange> Validity { get; set; }
     }
 }

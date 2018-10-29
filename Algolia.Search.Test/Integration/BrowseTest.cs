@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,10 +23,34 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.RuleQuery
+using System.Linq;
+using Algolia.Search.Iterators;
+using Xunit;
+
+namespace Algolia.Search.Test.Integration
 {
-    public class Hide
+    public class IteratorsTest : BaseTest
     {
-        public string ObjectID { get; set; }
+        [Fact]
+        public void TestBrowseSynonyms()
+        {
+            var browseSynonym = new SynonymsIterator<Actor>(_index, 1);
+
+            foreach (var synonym in browseSynonym)
+            {
+                Assert.True(synonym.Hits.Count()== 1);
+            }
+        }
+
+        [Fact]
+        public void TestBrowseRules()
+        {
+            var browseRule = new RulesIterator<Actor>(_index, 1);
+
+            foreach (var synonym in browseRule)
+            {
+                Assert.True(synonym.Hits.Count() == 1);
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@
 
 using Algolia.Search.Http;
 using Algolia.Search.Models.Responses;
-using Algolia.Search.Models.RuleQuery;
+using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Settings;
 using System.Collections.Generic;
@@ -133,7 +133,7 @@ namespace Algolia.Search.Clients
         /// <param name="query"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SearchRuleResponse SearchRule(Rule query = null, RequestOption requestOptions = null);
+        SearchResponse<Rule> SearchRule(RuleQuery query = null, RequestOption requestOptions = null);
 
         /// <summary>
         /// Search query 
@@ -142,7 +142,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SearchRuleResponse> SearchRuleAsync(Rule query = null, RequestOption requestOptions = null,
+        Task<SearchResponse<Rule>> SearchRuleAsync(RuleQuery query = null, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

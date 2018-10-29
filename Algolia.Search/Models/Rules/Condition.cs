@@ -23,12 +23,12 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.RuleQuery
+namespace Algolia.Search.Models.Rules
 {
-    public class Edit
+    public class Condition
     {
-        public string Type { get; set; }
-        public string Delete { get; set; }
-        public string Insert { get; set; }
+        public string Pattern { get; set; }
+        public string Anchoring { get; set; }
+        public string Context { get; set; }
     }
 }

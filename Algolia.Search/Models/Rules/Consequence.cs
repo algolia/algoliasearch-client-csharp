@@ -25,12 +25,12 @@
 
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.RuleQuery
+namespace Algolia.Search.Models.Rules
 {
-    public class ConsequenceParams
+    public class Consequence
     {
-        public List<string> AutomaticFacetFilters { get; set; }
-
-        public List<string> AutomaticOptionalFacetFilters { get; set; }
+        public ConsequenceParams Params { get; set; }
+        public IEnumerable<ConsequencePromote> Promote { get; set; }
+        public IEnumerable<Hide> Hide { get; set; }
     }
 }

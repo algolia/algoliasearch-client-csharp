@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,16 +23,42 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
+using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Synonyms;
+using System.Collections;
 using System.Collections.Generic;
-using Algolia.Search.Models.RuleQuery;
+using System.Linq;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Iterators
 {
-    public class SearchRuleResponse
+    public class SynonymsIterator<T> where T : class
     {
-        public IEnumerable<Rule> Hits { get; set; }
-        public int Page { get; set; }
-        public int NbHits { get; set; }
-        public int NbPages { get; set; }
+        private readonly Index<T> _index;
+        private SynonymQuery _query = new SynonymQuery();
+
+        public SynonymsIterator(Index<T> index, int hitsPerpage = 1000)
+        {
+            _index = index;
+            _query.HitsPerPage = hitsPerpage;
+            _query.Page = 0;
+        }
+
+        public IEnumerator<SearchResponse<Synonym>> GetEnumerator()
+        {
+            while (true)
+            {
+                SearchResponse<Synonym> result = _index.SearchSynonyms(_query);
+
+                if (result.Hits.Count() > 0)
+                {
+                    _query.Page += 1;
+                    yield return result;
+                    continue;
+                }
+
+                yield break;
+            }
+        }
     }
 }

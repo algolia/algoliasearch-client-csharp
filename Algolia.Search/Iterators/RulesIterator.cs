@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,11 +23,41 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.RuleQuery
+using Algolia.Search.Clients;
+using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Rules;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Algolia.Search.Iterators
 {
-    public class ConsequencePromote
+    public class RulesIterator<T> where T : class
     {
-        public string ObjectID { get; set; }
-        public int Position { get; set; }
+        private readonly Index<T> _index;
+        private RuleQuery _query = new RuleQuery();
+
+        public RulesIterator(Index<T> index, int hitsPerpage = 1000)
+        {
+            _index = index;
+            _query.HitsPerPage = hitsPerpage;
+            _query.Page = 0;
+        }
+
+        public IEnumerator<SearchResponse<Rule>> GetEnumerator()
+        {
+            while (true)
+            {
+                SearchResponse<Rule> result =  _index.SearchRule(_query);
+
+                if (result.Hits.Count() > 0)
+                {
+                    _query.Page += 1;
+                    yield return result;
+                    continue;
+                }
+
+                yield break;
+            }
+        }
     }
 }

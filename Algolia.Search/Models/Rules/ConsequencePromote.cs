@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,15 +23,11 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-
-namespace Algolia.Search.Models.Synonyms
+namespace Algolia.Search.Models.Rules
 {
-    public class SynonymQuery
+    public class ConsequencePromote
     {
-        public string Query { get; set; } = string.Empty;
-        public List<string> Type { get; set; }
-        public int? Page { get; set; }
-        public int? HitsPerPage { get; set; }
+        public string ObjectID { get; set; }
+        public int Position { get; set; }
     }
 }

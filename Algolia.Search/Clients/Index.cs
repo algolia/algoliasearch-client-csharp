@@ -28,7 +28,7 @@ using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
-using Algolia.Search.Models.RuleQuery;
+using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Transport;
@@ -301,7 +301,7 @@ namespace Algolia.Search.Clients
         /// <param name="query"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SearchRuleResponse SearchRule(Rule query = null, RequestOption requestOptions = null) =>
+        public SearchResponse<Rule> SearchRule(RuleQuery query = null, RequestOption requestOptions = null) =>
             AsyncHelper.RunSync(() => SearchRuleAsync(query, requestOptions));
 
         /// <summary>
@@ -311,10 +311,10 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SearchRuleResponse> SearchRuleAsync(Rule query = null, RequestOption requestOptions = null,
+        public async Task<SearchResponse<Rule>> SearchRuleAsync(RuleQuery query = null, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<SearchRuleResponse, Rule>(HttpMethod.Post,
+            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<Rule>, RuleQuery>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/rules/search", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
         }
 

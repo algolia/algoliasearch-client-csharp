@@ -23,12 +23,12 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.RuleQuery
+namespace Algolia.Search.Models.Rules
 {
-    public class Condition
+    public class AutomaticFacetFilter
     {
-        public string Pattern { get; set; }
-        public string Anchoring { get; set; }
-        public string Context { get; set; }
+        public string Facet { get; set; }
+        public bool Disjunctive { get; set; }
+        public int Score { get; set; }
     }
 }

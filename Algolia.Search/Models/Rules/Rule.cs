@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -25,13 +25,18 @@
 
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Synonyms
+namespace Algolia.Search.Models.Rules
 {
-    public class SynonymQuery
+    /// <summary>
+    /// https://www.algolia.com/doc/tutorials/query-rules/coding-query-rules-parameters/#coding-query-rule-parameters
+    /// </summary>
+    public class Rule
     {
-        public string Query { get; set; } = string.Empty;
-        public List<string> Type { get; set; }
-        public int? Page { get; set; }
-        public int? HitsPerPage { get; set; }
+        public string ObjectID { get; set; }
+        public Condition Condition { get; set; }
+        public Consequence Consequence { get; set; }
+        public string Description { get; set; }
+        public bool? Enabled { get; set; }
+        public IEnumerable<TimeRange> Validity { get; set; }
     }
 }

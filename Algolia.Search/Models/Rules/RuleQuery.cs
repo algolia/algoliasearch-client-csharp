@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,12 +23,15 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.RuleQuery
+namespace Algolia.Search.Models.Rules
 {
-    public class AutomaticFacetFilter
+    public class RuleQuery
     {
-        public string Facet { get; set; }
-        public bool Disjunctive { get; set; }
-        public int Score { get; set; }
+        public string Query { get; set; } = string.Empty;
+        public string Anchoring { get; set; }
+        public string Context { get; set; }
+        public int? Page { get; set; }
+        public int? HitsPerPage { get; set; }
+        public bool? Enabled { get; set; }
     }
 }

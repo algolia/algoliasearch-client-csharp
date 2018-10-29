@@ -23,26 +23,14 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Utils.Serializer;
-using Newtonsoft.Json;
-using System;
+using System.Collections.Generic;
 
-namespace Algolia.Search.Models.RuleQuery
+namespace Algolia.Search.Models.Rules
 {
-    public class TimeRange
+    public class ConsequenceParams
     {
-        /// <summary>
-        /// DateTime with UTC offset for Serialization/Deserialization in unix timespam
-        /// </summary>
-        /// <value></value>
-        [JsonConverter(typeof(DateTimeEpochSerializer))]
-        public DateTime From { get; set; }
+        public List<string> AutomaticFacetFilters { get; set; }
 
-        /// <summary>
-        /// DateTime with UTC offset for Serialization/Deserialization in unix timespam
-        /// </summary>
-        /// <value></value>
-        [JsonConverter(typeof(DateTimeEpochSerializer))]
-        public DateTime Until { get; set; }
+        public List<string> AutomaticOptionalFacetFilters { get; set; }
     }
 }

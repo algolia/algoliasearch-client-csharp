@@ -24,7 +24,7 @@
 */
 
 using Algolia.Search.Models.Responses;
-using Algolia.Search.Models.RuleQuery;
+using Algolia.Search.Models.Rules;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -52,8 +52,8 @@ namespace Algolia.Search.Test.Integration
         [Fact]
         public async Task SearchRuleAsync()
         {
-            var ret = await _index.SearchRuleAsync(new Rule());
-            Assert.IsType<SearchRuleResponse>(ret);
+            var ret = await _index.SearchRuleAsync(new RuleQuery());
+            Assert.IsType<SearchResponse<Rule>>(ret);
         }
 
         [Fact]
@@ -61,14 +61,14 @@ namespace Algolia.Search.Test.Integration
         {
             Task task1 = Task.Run(() =>
          {
-             var ret = _index.SearchRule(new Rule());
-             Assert.IsType<SearchRuleResponse>(ret);
+             var ret = _index.SearchRule(new RuleQuery());
+             Assert.IsType<SearchResponse<Rule>>(ret);
          });
 
             Task task2 = Task.Run(() =>
           {
-              var ret = _index.SearchRule(new Rule());
-              Assert.IsType<SearchRuleResponse>(ret);
+              var ret = _index.SearchRule(new RuleQuery());
+              Assert.IsType<SearchResponse<Rule>>(ret);
           });
 
             Task.WaitAll(task1, task2);
@@ -79,14 +79,14 @@ namespace Algolia.Search.Test.Integration
         {
             Task task1 = Task.Run(async () =>
          {
-             var ret = await _index.SearchRuleAsync(new Rule());
-             Assert.IsType<SearchRuleResponse>(ret);
+             var ret = await _index.SearchRuleAsync(new RuleQuery());
+             Assert.IsType<SearchResponse<Rule>>(ret);
          });
 
             Task task2 = Task.Run(async () =>
           {
-              var ret = await _index.SearchRuleAsync(new Rule());
-              Assert.IsType<SearchRuleResponse>(ret);
+              var ret = await _index.SearchRuleAsync(new RuleQuery());
+              Assert.IsType<SearchResponse<Rule>>(ret);
           });
 
             Task.WaitAll(task1, task2);
