@@ -35,6 +35,7 @@ namespace Algolia.Search.Iterators
     {
         private readonly Index<T> _index;
         private RuleQuery _query = new RuleQuery();
+        private int _hits = 0;
 
         public RulesIterator(Index<T> index, int hitsPerpage = 1000)
         {
@@ -43,20 +44,19 @@ namespace Algolia.Search.Iterators
             _query.Page = 0;
         }
 
-        public IEnumerator<SearchResponse<Rule>> GetEnumerator()
+        public IEnumerator<Rule> GetEnumerator()
         {
-            while (true)
+            do
             {
                 SearchResponse<Rule> result = _index.SearchRule(_query);
-
-                if (result.Hits.Count() == 0)
-                {
-                    yield break;
-                }
-
+                _hits = result.Hits.Count();
                 _query.Page++;
-                yield return result;
-            }
+
+                foreach (var hit in result.Hits)
+                {
+                    yield return hit;
+                }
+            } while (_hits > 0);
         }
     }
 }

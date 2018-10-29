@@ -36,7 +36,6 @@ namespace Algolia.Search.Iterators
     {
         private readonly Index<T> _index;
         private BrowseIndexQuery _query = new BrowseIndexQuery();
-        private string _cursor = string.Empty;
 
         public IndexIterator(Index<T> index, BrowseIndexQuery query)
         {
@@ -44,20 +43,17 @@ namespace Algolia.Search.Iterators
             _query = query;
         }
 
-        public IEnumerator<BrowseIndexResponse<T>> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-            while (true)
+            while (_query.Cursor != null)
             {
                 BrowseIndexResponse<T> result = _index.BrowseFrom(_query);
-
-                if (result.Cursor == null)
-                {
-                    yield return result;
-                    yield break;
-                }
-
                 _query.Cursor = result.Cursor;
-                yield return result;
+
+                foreach (var hit in result.Hits)
+                {
+                    yield return hit;
+                }
             }
         }
     }

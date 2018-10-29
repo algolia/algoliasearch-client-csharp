@@ -36,6 +36,7 @@ namespace Algolia.Search.Iterators
     {
         private readonly Index<T> _index;
         private SynonymQuery _query = new SynonymQuery();
+        private int _hits = 0;
 
         public SynonymsIterator(Index<T> index, int hitsPerpage = 1000)
         {
@@ -44,20 +45,19 @@ namespace Algolia.Search.Iterators
             _query.Page = 0;
         }
 
-        public IEnumerator<SearchResponse<Synonym>> GetEnumerator()
+        public IEnumerator<Synonym> GetEnumerator()
         {
-            while (true)
+            do
             {
                 SearchResponse<Synonym> result = _index.SearchSynonyms(_query);
-                
-                if (result.Hits.Count() == 0)
-                {
-                    yield break;
-                }
-
+                _hits = result.Hits.Count();
                 _query.Page++;
-                yield return result;
-            }
+
+                foreach (var hit in result.Hits)
+                {
+                    yield return hit;
+                }
+            } while (_hits > 0);
         }
     }
 }

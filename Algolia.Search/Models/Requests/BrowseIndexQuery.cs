@@ -34,6 +34,6 @@ namespace Algolia.Search.Models.Requests
     /// </summary>
     public class BrowseIndexQuery : SearchQuery
     {
-        public string Cursor { get; set; }
+        public string Cursor { get; set; } = string.Empty;
     }
 }

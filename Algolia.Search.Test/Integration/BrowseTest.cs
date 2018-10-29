@@ -39,49 +39,39 @@ namespace Algolia.Search.Test.Integration
         [Fact]
         public void TestBrowseSynonyms()
         {
-            var browseSynonym = new SynonymsIterator<Actor>(_index, 1);
-            int totalHits = 0;
             List<Synonym> synonyms = new List<Synonym>();
 
-            foreach (var result in browseSynonym)
+            foreach (var result in new SynonymsIterator<Actor>(_index, 1))
             {
-                totalHits = result.NbHits;
-                synonyms.AddRange(result.Hits);
+                synonyms.Add(result);
             }
-
-            Assert.True(synonyms.Count() == totalHits);
         }
 
         [Fact]
         public void TestBrowseRules()
         {
-            var browseRule = new RulesIterator<Actor>(_index, 1);
-            int totalHits = 0;
             List<Rule> rules = new List<Rule>();
 
-            foreach (var result in browseRule)
+            foreach (var result in new RulesIterator<Actor>(_index, 1))
             {
-                totalHits = result.NbHits;
-                rules.AddRange(result.Hits);
+                rules.Add(result);
             }
 
-            Assert.True(rules.Count() == totalHits);
+            Assert.True(rules.Count() == 3);
         }
 
         [Fact]
         public void TestBrowseAll()
         {
             var browseRule = new IndexIterator<Actor>(_index, new BrowseIndexQuery { HitsPerPage = 100 });
-            int totalHits = 0;
             List<Actor> actors = new List<Actor>();
 
             foreach (var result in browseRule)
             {
-                totalHits = result.NbHits;
-                actors.AddRange(result.Hits);
+                actors.Add(result);
             }
 
-            Assert.True(actors.Count() == totalHits);
+            Assert.True(actors.Count() == 611);
         }
     }
 }
