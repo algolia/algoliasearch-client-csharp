@@ -592,7 +592,7 @@ namespace Algolia.Search
                 JObject body = new JObject(); 
                 body.Add("cursor", cursor);
                 
-                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/browse?{1}", _urlIndexName, q.GetQueryString()), body, token, requestOptions);
+                return _client.ExecuteRequest(AlgoliaClient.callType.Read, "POST", string.Format("/1/indexes/{0}/browse", _urlIndexName), body, token, requestOptions);
             }
 
             return _client.ExecuteRequest(AlgoliaClient.callType.Read, "GET", string.Format("/1/indexes/{0}/browse?{1}", _urlIndexName, q.GetQueryString()), null, token, requestOptions);
