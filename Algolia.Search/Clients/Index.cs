@@ -276,7 +276,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public IndexIterator<T> BrowseAll(BrowseIndexQuery query) 
+        public IndexIterator<T> Browse(BrowseIndexQuery query) 
         { 
             return new IndexIterator<T>(this, query);
         }

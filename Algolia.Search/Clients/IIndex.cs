@@ -28,6 +28,8 @@ using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Settings;
+using Algolia.Search.Models.Requests;
+using Algolia.Search.Iterators;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -108,6 +110,34 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         Task<T> GetObjectAsync(string objectId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// This method allows you to retrieve all index content  
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// You can use the same query parameters as for a search query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IndexIterator<T> Browse(BrowseIndexQuery query);
+
+        /// <summary>
+        /// This method allows you to retrieve all index content  
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// You can use the same query parameters as for a search query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        BrowseIndexResponse<T> BrowseFrom(BrowseIndexQuery query, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// This method allows you to retrieve all index content  
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// You can use the same query parameters as for a search query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        Task<BrowseIndexResponse<T>> BrowseFromAsync(BrowseIndexQuery query, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Get the specified by its objectID
