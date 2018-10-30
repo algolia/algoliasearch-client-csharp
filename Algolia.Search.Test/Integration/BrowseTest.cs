@@ -56,8 +56,6 @@ namespace Algolia.Search.Test.Integration
             {
                 rules.Add(result);
             }
-
-            Assert.True(rules.Count() == 3);
         }
 
         [Fact]
@@ -70,8 +68,6 @@ namespace Algolia.Search.Test.Integration
             {
                 actors.Add(result);
             }
-
-            Assert.True(actors.Count() == 611);
         }
     }
 }
