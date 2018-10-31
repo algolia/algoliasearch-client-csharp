@@ -1,5 +1,5 @@
 os: Visual Studio 2017
 build_script:
- - dotnet build
+ - dotnet build -c release
 test_script:
- - dotnet test Algolia.Search.Test/Algolia.Search.Test.csproj
+ - dotnet test Algolia.Search.Test/Algolia.Search.Test.csproj -c release
