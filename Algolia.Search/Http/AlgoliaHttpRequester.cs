@@ -70,6 +70,10 @@ namespace Algolia.Search.Http
                 throw new ArgumentNullException(nameof(request), "No URI found");
             }
 
+            #if DEBUG
+            await LogHelper.LogToFile(request.Body);
+            #endif
+
             var httpRequestMessage = new HttpRequestMessage
             {
                 Method = request.Method,
@@ -93,6 +97,10 @@ namespace Algolia.Search.Http
                         await stream.CopyToAsync(outputStream).ConfigureAwait(false);
                         outputStream.Seek(0, SeekOrigin.Begin);
 
+                        #if DEBUG
+                        await LogHelper.LogToFile(outputStream);
+                        #endif
+
                         return new AlgoliaHttpResponse
                         {
                             Body = outputStream,
@@ -101,7 +109,7 @@ namespace Algolia.Search.Http
                     }
 
                     var content = await JsonHelper.StreamToStringAsync(stream).ConfigureAwait(false);
-                    
+
                     return new AlgoliaHttpResponse
                     {
                         Error = content,
