@@ -31,13 +31,13 @@ using System.Linq;
 
 namespace Algolia.Search.Iterators
 {
-    public class RulesIterator<T> where T : class
+    public class RulesIterator
     {
-        private readonly Index<T> _index;
+        private readonly Index _index;
         private RuleQuery _query = new RuleQuery();
         private int _hits = 0;
 
-        public RulesIterator(Index<T> index, int hitsPerpage = 1000)
+        public RulesIterator(Index index, int hitsPerpage = 1000)
         {
             _index = index;
             _query.HitsPerPage = hitsPerpage;

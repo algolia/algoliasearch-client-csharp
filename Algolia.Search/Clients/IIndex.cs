@@ -36,7 +36,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public interface IIndex<T> where T : class
+    public interface IIndex
     {
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Algolia.Search.Clients
         /// <param name="datas"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        BatchResponse AddObjects(IEnumerable<T> datas, RequestOption requestOptions = null);
+        BatchResponse AddObjects<T>(IEnumerable<T> datas, RequestOption requestOptions = null) where T : class;
 
         /// <summary>
         /// Add objects to the given index
@@ -54,8 +54,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<BatchResponse> AddObjectsAysnc(IEnumerable<T> datas, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken));
+        Task<BatchResponse> AddObjectsAysnc<T>(IEnumerable<T> datas, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Add an object to the given index
@@ -63,7 +63,7 @@ namespace Algolia.Search.Clients
         /// <param name="data"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        AddObjectResponse AddObject(T data, RequestOption requestOptions = null);
+        AddObjectResponse AddObject<T>(T data, RequestOption requestOptions = null) where T : class;
 
         /// <summary>
         /// Add an object to the given index
@@ -72,8 +72,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AddObjectResponse> AddObjectAysnc(T data, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken));
+        Task<AddObjectResponse> AddObjectAysnc<T>(T data, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Search in the index for the given query
@@ -81,7 +81,7 @@ namespace Algolia.Search.Clients
         /// <param name="query"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SearchResponse<T> Search(SearchQuery query, RequestOption requestOptions = null);
+        SearchResponse<T> Search<T>(SearchQuery query, RequestOption requestOptions = null) where T : class;
 
         /// <summary>
         ///  Search in the index for the given query
@@ -90,8 +90,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SearchResponse<T>> SearchAsync(SearchQuery query, RequestOption requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+        Task<SearchResponse<T>> SearchAsync<T>(SearchQuery query, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Get object for the specified ID
@@ -99,7 +99,7 @@ namespace Algolia.Search.Clients
         /// <param name="objectId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        T GetObject(string objectId, RequestOption requestOptions = null);
+        T GetObject<T>(string objectId, RequestOption requestOptions = null) where T : class;
 
         /// <summary>
         /// Get the specified object by its objectID
@@ -108,8 +108,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<T> GetObjectAsync(string objectId, RequestOption requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+        Task<T> GetObjectAsync<T>(string objectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// This method allows you to retrieve all index content  
@@ -118,7 +118,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        IndexIterator<T> Browse(BrowseIndexQuery query);
+        IndexIterator<T> Browse<T>(BrowseIndexQuery query) where T : class;
 
         /// <summary>
         /// This method allows you to retrieve all index content  
@@ -127,7 +127,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        BrowseIndexResponse<T> BrowseFrom(BrowseIndexQuery query, RequestOption requestOptions = null);
+        BrowseIndexResponse<T> BrowseFrom<T>(BrowseIndexQuery query, RequestOption requestOptions = null) where T : class;
 
         /// <summary>
         /// This method allows you to retrieve all index content  
@@ -136,8 +136,8 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        Task<BrowseIndexResponse<T>> BrowseFromAsync(BrowseIndexQuery query, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken));
+        Task<BrowseIndexResponse<T>> BrowseFromAsync<T>(BrowseIndexQuery query, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Get the specified by its objectID

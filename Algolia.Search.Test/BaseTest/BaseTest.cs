@@ -31,8 +31,8 @@ namespace Algolia.Search.Test
     public class BaseTest
     {
         protected static string _testApiKey;
-        protected SearchClient<Actor> _client;
-        protected Index<Actor> _index;
+        protected SearchClient _client;
+        protected Index _index;
 
         public BaseTest()
         {
@@ -42,7 +42,7 @@ namespace Algolia.Search.Test
                 ? Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY") 
                 : Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
 
-            _client = new SearchClient<Actor>(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID"), _testApiKey);
+            _client = new SearchClient(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID"), _testApiKey);
             _index = _client.InitIndex(GetSafeName("Actors"));
         }
 

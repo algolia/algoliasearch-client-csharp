@@ -30,9 +30,166 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public interface ISearchClient<T> where T : class
+    public interface ISearchClient
     {
-        Index<T> InitIndex(string indexName);
+        Index InitIndex(string indexName);
+
+        /// <summary>
+        /// Get a list of indexes/indices with their associated metadata.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        ListIndexesResponse ListIndexes(RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get a list of indexes/indices with their associated metadata.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<ListIndexesResponse> ListIndexesAsync(RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Delete an index by name
+        /// </summary>
+        /// <param name="indexName"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        DeleteResponse DeleteIndex(string indexName, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Delete an index by name
+        /// </summary>
+        /// <param name="indexName"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        MoveIndexResponse MoveIndex(string sourceIndex, string destinationIndex, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get the full list of API Keys.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        ListApiKeysResponse ListApiKeys(RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get the full list of API Keys.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<ListApiKeysResponse> ListApiKeysAsync(RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get the full list of API Keys.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        ApiKeysResponse GetApiKey(string key, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get the full list of API Keys.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<ApiKeysResponse> GetApiKeyAsync(string key, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Delete an existing API Key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        DeleteResponse DeleteApiKey(string key, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Delete an existing API Key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<DeleteResponse> DeleteApiKeyAsync(string key, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// List the clusters available in a multi-clusters setup for a single appID
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        ListClustersResponse ListClusters(RequestOption requestOptions = null);
+
+        /// <summary>
+        /// List the clusters available in a multi-clusters setup for a single appID
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<ListClustersResponse> ListClustersAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// List the userIDs assigned to a multi-clusters appID.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        SearchResponse<UserId> ListUserIds(RequestOption requestOptions = null);
+
+        /// <summary>
+        /// List the userIDs assigned to a multi-clusters appID.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<SearchResponse<UserId>> ListUserIdsAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Returns the userID data stored in the mapping.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        UserId GetUserId(string userId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Returns the userID data stored in the mapping.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<UserId> GetUserIdAsync(string userId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Get logs for the given index

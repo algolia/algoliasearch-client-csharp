@@ -41,7 +41,7 @@ namespace Algolia.Search.Test.Integration
         {
             List<Synonym> synonyms = new List<Synonym>();
 
-            foreach (var result in new SynonymsIterator<Actor>(_index, 1))
+            foreach (var result in new SynonymsIterator(_index, 1))
             {
                 synonyms.Add(result);
             }
@@ -52,7 +52,7 @@ namespace Algolia.Search.Test.Integration
         {
             List<Rule> rules = new List<Rule>();
 
-            foreach (var result in new RulesIterator<Actor>(_index, 1))
+            foreach (var result in new RulesIterator(_index, 1))
             {
                 rules.Add(result);
             }
@@ -61,10 +61,10 @@ namespace Algolia.Search.Test.Integration
         [Fact]
         public void TestBrowseAll()
         {
-            var browseRule = new IndexIterator<Actor>(_index, new BrowseIndexQuery { HitsPerPage = 100 });
+            var browseIndex = new IndexIterator<Actor>(_index, new BrowseIndexQuery { HitsPerPage = 100 });
             List<Actor> actors = new List<Actor>();
 
-            foreach (var result in browseRule)
+            foreach (var result in browseIndex)
             {
                 actors.Add(result);
             }

@@ -34,10 +34,10 @@ namespace Algolia.Search.Iterators
 {
     public class IndexIterator<T> where T : class
     {
-        private readonly Index<T> _index;
+        private readonly Index _index;
         private BrowseIndexQuery _query = new BrowseIndexQuery();
 
-        public IndexIterator(Index<T> index, BrowseIndexQuery query)
+        public IndexIterator(Index index, BrowseIndexQuery query)
         {
             _index = index;
             _query = query;
@@ -47,7 +47,7 @@ namespace Algolia.Search.Iterators
         {
             while (_query.Cursor != null)
             {
-                BrowseIndexResponse<T> result = _index.BrowseFrom(_query);
+                BrowseIndexResponse<T> result = _index.BrowseFrom<T>(_query);
                 _query.Cursor = result.Cursor;
 
                 foreach (var hit in result.Hits)

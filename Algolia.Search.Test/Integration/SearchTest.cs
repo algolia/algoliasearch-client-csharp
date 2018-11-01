@@ -46,7 +46,7 @@ namespace Algolia.Search.Test.Integration
             var addObject = await _index.AddObjectAysnc(actor);
             await _index.WaitForCompletionAsync(addObject.TaskID);
 
-            var ret = await _index.SearchAsync(new SearchQuery
+            var ret = await _index.SearchAsync<Actor>(new SearchQuery
             {
                 Query = "Tony",
                 HitsPerPage = 2,
@@ -74,7 +74,7 @@ namespace Algolia.Search.Test.Integration
             var addObjects = await _index.AddObjectsAysnc(actors);
             Assert.IsType<BatchResponse>(addObjects);
 
-            var ret = await _index.SearchAsync(new SearchQuery
+            var ret = await _index.SearchAsync<Actor>(new SearchQuery
             {
                 Query = "Tony",
                 HitsPerPage = 2,

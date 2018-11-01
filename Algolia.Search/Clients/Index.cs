@@ -45,7 +45,7 @@ using Algolia.Search.Iterators;
 
 namespace Algolia.Search.Clients
 {
-    public class Index<T> : IIndex<T> where T : class
+    public class Index
     {
         /// <summary>
         /// The Requester wrapper
@@ -76,7 +76,7 @@ namespace Algolia.Search.Clients
         /// <param name="data"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public AddObjectResponse AddObject(T data, RequestOption requestOptions = null) =>
+        public AddObjectResponse AddObject<T>(T data, RequestOption requestOptions = null) where T : class =>
                     AsyncHelper.RunSync(() => AddObjectAysnc(data, requestOptions));
 
         /// <summary>
@@ -86,8 +86,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<AddObjectResponse> AddObjectAysnc(T data, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken))
+        public async Task<AddObjectResponse> AddObjectAysnc<T>(T data, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class
         {
             return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
@@ -99,8 +99,8 @@ namespace Algolia.Search.Clients
         /// <param name="data"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public UpdateObjectResponse PartialUpdateObject(T data, RequestOption requestOptions = null) =>
-                    AsyncHelper.RunSync(() => PartialUpdateObjectAsync(data, requestOptions));
+        public UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOption requestOptions = null) where T : class =>
+                    AsyncHelper.RunSync(() => PartialUpdateObjectAsync<T>(data, requestOptions));
 
         /// <summary>
         /// Update one or more attributes of an existing object.
@@ -109,8 +109,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<UpdateObjectResponse> PartialUpdateObjectAsync(T data, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken))
+        public async Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class
         {
             PropertyInfo pi = typeof(T).GetTypeInfo().GetDeclaredProperty("ObjectID");
 
@@ -136,8 +136,8 @@ namespace Algolia.Search.Clients
         /// <param name="data"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public BatchResponse AddObjects(IEnumerable<T> datas, RequestOption requestOptions = null) =>
-                    AsyncHelper.RunSync(() => AddObjectsAysnc(datas, requestOptions));
+        public BatchResponse AddObjects<T>(IEnumerable<T> datas, RequestOption requestOptions = null) where T : class =>
+                    AsyncHelper.RunSync(() => AddObjectsAysnc<T>(datas, requestOptions));
 
         /// <summary>
         /// Add objects to the given index
@@ -146,8 +146,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<BatchResponse> AddObjectsAysnc(IEnumerable<T> datas, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken))
+        public async Task<BatchResponse> AddObjectsAysnc<T>(IEnumerable<T> datas, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (datas == null)
             {
@@ -224,8 +224,8 @@ namespace Algolia.Search.Clients
         /// <param name="query"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SearchResponse<T> Search(SearchQuery query, RequestOption requestOptions = null) =>
-                    AsyncHelper.RunSync(() => SearchAsync(query, requestOptions));
+        public SearchResponse<T> Search<T>(SearchQuery query, RequestOption requestOptions = null) where T : class =>
+                    AsyncHelper.RunSync(() => SearchAsync<T>(query, requestOptions));
 
         /// <summary>
         ///  Search in the index for the given query
@@ -234,8 +234,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SearchResponse<T>> SearchAsync(SearchQuery query, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken))
+        public async Task<SearchResponse<T>> SearchAsync<T>(SearchQuery query, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class
         {
             return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<T>, SearchQuery>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/query", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
@@ -247,8 +247,8 @@ namespace Algolia.Search.Clients
         /// <param name="objectId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public T GetObject(string objectId, RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => GetObjectAsync(objectId, requestOptions));
+        public T GetObject<T>(string objectId, RequestOption requestOptions = null) where T : class =>
+            AsyncHelper.RunSync(() => GetObjectAsync<T>(objectId, requestOptions));
 
         /// <summary>
         /// Get the specified object by its objectID
@@ -257,8 +257,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<T> GetObjectAsync(string objectId, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken))
+        public async Task<T> GetObjectAsync<T>(string objectId, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (string.IsNullOrEmpty(objectId))
             {
@@ -276,8 +276,8 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public IndexIterator<T> Browse(BrowseIndexQuery query) 
-        { 
+        public IndexIterator<T> Browse<T>(BrowseIndexQuery query) where T : class
+        {
             return new IndexIterator<T>(this, query);
         }
 
@@ -290,8 +290,8 @@ namespace Algolia.Search.Clients
         /// <param name="cursor"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public BrowseIndexResponse<T> BrowseFrom(BrowseIndexQuery query, RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => BrowseFromAsync(query, requestOptions));
+        public BrowseIndexResponse<T> BrowseFrom<T>(BrowseIndexQuery query, RequestOption requestOptions = null) where T : class =>
+            AsyncHelper.RunSync(() => BrowseFromAsync<T>(query, requestOptions));
 
         /// <summary>
         /// This method allows you to retrieve all index content  
@@ -303,8 +303,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<BrowseIndexResponse<T>> BrowseFromAsync(BrowseIndexQuery query, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken))
+        public async Task<BrowseIndexResponse<T>> BrowseFromAsync<T>(BrowseIndexQuery query, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class
         {
             return await _requesterWrapper.ExecuteRequestAsync<BrowseIndexResponse<T>, BrowseIndexQuery>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/browse", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);

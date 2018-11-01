@@ -32,13 +32,13 @@ using System.Linq;
 
 namespace Algolia.Search.Iterators
 {
-    public class SynonymsIterator<T> where T : class
+    public class SynonymsIterator
     {
-        private readonly Index<T> _index;
+        private readonly Index _index;
         private SynonymQuery _query = new SynonymQuery();
         private int _hits = 0;
 
-        public SynonymsIterator(Index<T> index, int hitsPerpage = 1000)
+        public SynonymsIterator(Index index, int hitsPerpage = 1000)
         {
             _index = index;
             _query.HitsPerPage = hitsPerpage;
