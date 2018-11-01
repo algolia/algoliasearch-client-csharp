@@ -50,7 +50,7 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 
 ## Supported platforms
 
-Compatibilities:
+The API client is compatible with:
   * `.NET Framework 4.6`
   * `.NET Framework 4.6.2`
   * `.NET Framework 4.7`
@@ -61,7 +61,6 @@ Compatibilities:
   * `.NETStandard 1.6`
   * `.NETStandard 1.3`
   * `.NETStandard 2.0`
-  
 
 ## Install
 
@@ -87,9 +86,11 @@ Index index = client.InitIndex("your_index_name");
 Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the ```contacts``` index using the following code:
 ```csharp
 // Load JSON file
-StreamReader re = File.OpenText("contacts.json");
-JsonTextReader reader = new JsonTextReader(re);
-JArray batch = JArray.Load(reader);
+using(StreamReader re = File.OpenText("contacts.json"))
+using(JsonTextReader reader = new JsonTextReader(re))
+{
+   JArray batch = JArray.Load(reader);
+};
 // Add objects
 Index index = client.InitIndex("contacts");
 index.AddObjects(batch);
@@ -113,11 +114,15 @@ You can also configure the list of attributes you want to index by order of impo
 In this case, the order of attributes is very important to decide which hit is the best:
 
 ```csharp
-index.SetSettings(JObject.Parse(@"{""searchableAttributes"":[""lastname"", ""firstname"",
-                                                          ""company"", ""email"", ""city""]}"));
+var settings = new JObject
+{
+  { "searchableAttributes", new JArray { "lastname", "firstname", "company", "email", "city" }}
+};
+
+index.SetSettings(settings);
+
 // Asynchronous
-//await index.SetSettingsAsync(JObject.Parse(@"{""searchableAttributes"":[""lastname"", ""firstname"",
-//                                                                     ""company"", ""email"", ""city""]}"));
+// await index.SetSettingsAsync(settings);
 ```
 
 ## Search
@@ -125,19 +130,19 @@ index.SetSettings(JObject.Parse(@"{""searchableAttributes"":[""lastname"", ""fir
 You can now search for contacts using `firstname`, `lastname`, `company`, etc. (even with typos):
 
 ```csharp
-// search by firstname
+// Search for a first name
 System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie")));
 // Asynchronous
 // System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie")));
-// search a firstname with typo
+// Search for a first name with typo
 System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimie")));
 // Asynchronous
 // System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimie")));
-// search for a company
+// Search for a company
 System.Diagnostics.Debug.WriteLine(index.Search(new Query("california paint")));
 // Asynchronous
 // System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("california paint")));
-// search for a firstname & company
+// Search for a first name and a company
 System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
 // Asynchronous
 // System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie paint")));
@@ -226,11 +231,17 @@ search.start();
 
 
 
+### Personalization
+
+
+
+
+
 ### Search
 
 - [Search index](https://algolia.com/doc/api-reference/api-methods/search/?language=csharp)
 - [Search for facet values](https://algolia.com/doc/api-reference/api-methods/search-for-facet-values/?language=csharp)
-- [Search multiple indexes](https://algolia.com/doc/api-reference/api-methods/multiple-queries/?language=csharp)
+- [Search multiple indices](https://algolia.com/doc/api-reference/api-methods/multiple-queries/?language=csharp)
 - [Browse index](https://algolia.com/doc/api-reference/api-methods/browse/?language=csharp)
 
 
@@ -239,7 +250,7 @@ search.start();
 ### Indexing
 
 - [Add objects](https://algolia.com/doc/api-reference/api-methods/add-objects/?language=csharp)
-- [Update objects](https://algolia.com/doc/api-reference/api-methods/update-objects/?language=csharp)
+- [Update objects](https://algolia.com/doc/api-reference/api-methods/save-objects/?language=csharp)
 - [Partial update objects](https://algolia.com/doc/api-reference/api-methods/partial-update-objects/?language=csharp)
 - [Delete objects](https://algolia.com/doc/api-reference/api-methods/delete-objects/?language=csharp)
 - [Delete by](https://algolia.com/doc/api-reference/api-methods/delete-by/?language=csharp)
@@ -295,13 +306,13 @@ search.start();
 
 ### Query rules
 
-- [Save rule](https://algolia.com/doc/api-reference/api-methods/rules-save/?language=csharp)
-- [Batch rules](https://algolia.com/doc/api-reference/api-methods/rules-save-batch/?language=csharp)
-- [Get rule](https://algolia.com/doc/api-reference/api-methods/rules-get/?language=csharp)
-- [Delete rule](https://algolia.com/doc/api-reference/api-methods/rules-delete/?language=csharp)
-- [Clear rules](https://algolia.com/doc/api-reference/api-methods/rules-clear/?language=csharp)
-- [Search rules](https://algolia.com/doc/api-reference/api-methods/rules-search/?language=csharp)
-- [Export rules](https://algolia.com/doc/api-reference/api-methods/rules-export/?language=csharp)
+- [Save rule](https://algolia.com/doc/api-reference/api-methods/save-rule/?language=csharp)
+- [Batch rules](https://algolia.com/doc/api-reference/api-methods/batch-rules/?language=csharp)
+- [Get rule](https://algolia.com/doc/api-reference/api-methods/get-rule/?language=csharp)
+- [Delete rule](https://algolia.com/doc/api-reference/api-methods/delete-rule/?language=csharp)
+- [Clear rules](https://algolia.com/doc/api-reference/api-methods/clear-rules/?language=csharp)
+- [Search rules](https://algolia.com/doc/api-reference/api-methods/search-rules/?language=csharp)
+- [Export rules](https://algolia.com/doc/api-reference/api-methods/export-rules/?language=csharp)
 
 
 
