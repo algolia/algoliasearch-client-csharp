@@ -45,7 +45,7 @@ using Algolia.Search.Iterators;
 
 namespace Algolia.Search.Clients
 {
-    public class Index
+    public class Index : IIndex
     {
         /// <summary>
         /// The Requester wrapper

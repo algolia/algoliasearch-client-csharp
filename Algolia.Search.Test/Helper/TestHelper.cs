@@ -23,19 +23,35 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Responses;
-using System.Threading.Tasks;
-using Xunit;
+using System;
 
-namespace Algolia.Search.Test.Integration
+namespace Algolia.Search.Test.Helpers
 {
-    public class LogTest : BaseTest
+    internal static class TestHelper
     {
-        [Fact]
-        public async Task GetLogsAsync()
+        internal static string ApplicationId = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
+        
+        internal static string TestApiKey = Environment.GetEnvironmentVariable("APPVEYOR") == null
+              ? Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY")
+              : Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
+
+        /// <summary>
+        /// Check env variable before starting tests suite
+        /// </summary>
+        internal static void CheckEnvironmentVariable()
         {
-            var ret = await _client.GetLogsAsync();
-            Assert.IsType<LogResponse>(ret);
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR")))
+            {
+                if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID")))
+                {
+                    throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_API_KEY");
+                }
+
+                if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY")))
+                {
+                    throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_API_KEY");
+                }
+            }
         }
     }
 }

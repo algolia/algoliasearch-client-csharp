@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -24,34 +24,44 @@
 */
 
 using Algolia.Search.Clients;
+using Algolia.Search.Models.Responses;
 using Algolia.Search.Test.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace Algolia.Search.Test
+namespace Algolia.Search.Test.Integration
 {
-    public class BaseTest : IDisposable
+    public class SearchClientTest
     {
-        protected static string _testApiKey;
         protected SearchClient _client;
-        protected Index _index;
 
-        public BaseTest()
+        public SearchClientTest()
         {
             TestHelper.CheckEnvironmentVariable();
             _client = new SearchClient(TestHelper.ApplicationId, TestHelper.TestApiKey);
-            _index = _client.InitIndex(GetSafeName("Actors"));
         }
 
-        public static string GetSafeName(string name)
+        [Fact]
+        public async Task ListIndexesAsync()
         {
-            return Environment.GetEnvironmentVariable("APPVEYOR") == null
-                ? name
-                : $"{name}-appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
+            var ret = await _client.ListIndexesAsync();
+            Assert.IsType<ListIndexesResponse>(ret);
         }
 
-        public void Dispose()
+        [Fact]
+        public async Task ListApiKeysAsync()
         {
-            // Todo : clear index
+            var ret = await _client.ListApiKeysAsync();
+            Assert.IsType<ListApiKeysResponse>(ret);
+        }
+
+        [Fact]
+        public async Task GetLogsAsync()
+        {
+            var ret = await _client.GetLogsAsync();
+            Assert.IsType<LogResponse>(ret);
         }
     }
 }
