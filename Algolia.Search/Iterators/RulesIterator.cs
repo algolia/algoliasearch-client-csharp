@@ -33,11 +33,11 @@ namespace Algolia.Search.Iterators
 {
     public class RulesIterator
     {
-        private readonly Index _index;
+        private readonly SearchIndex _index;
         private readonly RuleQuery _query = new RuleQuery();
         private int _hits;
 
-        public RulesIterator(Index index, int hitsPerpage = 1000)
+        public RulesIterator(SearchIndex index, int hitsPerpage = 1000)
         {
             _index = index;
             _query.HitsPerPage = hitsPerpage;

@@ -46,7 +46,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public class Index : IIndex
+    public class SearchIndex : ISearchIndex
     {
         /// <summary>
         /// The Requester wrapper
@@ -63,7 +63,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requesterWrapper"></param>
         /// <param name="indexName"></param>
-        public Index(IRequesterWrapper requesterWrapper, string indexName)
+        public SearchIndex(IRequesterWrapper requesterWrapper, string indexName)
         {
             _requesterWrapper = requesterWrapper ?? throw new ArgumentNullException(nameof(requesterWrapper));
             _urlEncodedIndexName = !string.IsNullOrWhiteSpace(indexName)

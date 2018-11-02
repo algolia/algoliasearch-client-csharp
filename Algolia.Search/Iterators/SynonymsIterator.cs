@@ -32,11 +32,11 @@ namespace Algolia.Search.Iterators
 {
     public class SynonymsIterator
     {
-        private readonly Index _index;
+        private readonly SearchIndex _index;
         private readonly SynonymQuery _query = new SynonymQuery();
         private int _hits;
 
-        public SynonymsIterator(Index index, int hitsPerpage = 1000)
+        public SynonymsIterator(SearchIndex index, int hitsPerpage = 1000)
         {
             _index = index;
             _query.HitsPerPage = hitsPerpage;

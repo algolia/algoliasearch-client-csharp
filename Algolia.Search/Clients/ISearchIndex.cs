@@ -37,7 +37,7 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
-    public interface IIndex
+    public interface ISearchIndex
     {
         /// <summary>
         /// Add an object to the given index

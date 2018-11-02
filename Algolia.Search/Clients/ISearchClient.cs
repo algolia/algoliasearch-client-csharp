@@ -40,7 +40,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="indexName"></param>
         /// <returns></returns>
-        Index InitIndex(string indexName);
+        SearchIndex InitIndex(string indexName);
 
         /// <summary>
         /// Retrieve one or more objects, potentially from different indices, in a single API call.

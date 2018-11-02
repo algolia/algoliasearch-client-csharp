@@ -102,11 +102,11 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="indexName"></param>
         /// <returns></returns>
-        public Index InitIndex(string indexName)
+        public SearchIndex InitIndex(string indexName)
         {
             return string.IsNullOrWhiteSpace(indexName)
                 ? throw new ArgumentNullException(nameof(indexName), "The Index name is required")
-                : new Index(_requesterWrapper, indexName);
+                : new SearchIndex(_requesterWrapper, indexName);
         }
 
         /// <summary>
@@ -615,6 +615,5 @@ namespace Algolia.Search.Clients
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
                 requestOptions, ct).ConfigureAwait(false);
         }
-
     }
 }
