@@ -285,6 +285,29 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Add a new API Key with specific permissions/restrictions.
+        /// </summary>
+        /// <param name="acl"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public AddApiKeyResponse AddApiKey(AddApiKeyRequest acl, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => AddApiKeyAsync(acl, requestOptions));
+
+        /// <summary>
+        /// Add a new API Key with specific permissions/restrictions.
+        /// </summary>
+        /// <param name="acl"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<AddApiKeyResponse> AddApiKeyAsync(AddApiKeyRequest acl, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<AddApiKeyResponse, AddApiKeyRequest>(HttpMethod.Post,
+                $"/1/keys", CallType.Write, acl, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Delete an existing API Key
         /// </summary>
         /// <param name="key"></param>
