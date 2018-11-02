@@ -27,7 +27,7 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Requests
 {
-    public class AddApiKeyRequest
+    public class ApiKeyRequest
     {
         public IEnumerable<string> Acl { get; set; }
         public long? Validity { get; set; }

@@ -123,6 +123,11 @@ namespace Algolia.Search.Clients
         public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries, RequestOption requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class
         {
+            if (queries == null)
+            {
+                throw new ArgumentNullException(nameof(queries));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<MultipleGetObjectsResponse<T>>(HttpMethod.Post,
                 "/1/indexes/*/objects", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
@@ -141,6 +146,11 @@ namespace Algolia.Search.Clients
         public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries, RequestOption requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class
         {
+            if (queries == null)
+            {
+                throw new ArgumentNullException(nameof(queries));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<MultipleQueriesResponse<T>>(HttpMethod.Post,
                 "/1/indexes/*/queries", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
@@ -211,6 +221,11 @@ namespace Algolia.Search.Clients
         public async Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
+            if (string.IsNullOrWhiteSpace(indexName))
+            {
+                throw new ArgumentNullException(indexName);
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
                 $"/1/indexes/{indexName}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
@@ -236,6 +251,16 @@ namespace Algolia.Search.Clients
         public async Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
+            if (string.IsNullOrWhiteSpace(sourceIndex))
+            {
+                throw new ArgumentNullException(sourceIndex);
+            }
+
+            if (string.IsNullOrWhiteSpace(destinationIndex))
+            {
+                throw new ArgumentNullException(destinationIndex);
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<MoveIndexResponse>(HttpMethod.Post,
                 $"/1/indexes/{sourceIndex}/operation", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
@@ -265,23 +290,29 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Get the full list of API Keys.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public ApiKeysResponse GetApiKey(string key, RequestOption requestOptions = null) =>
-                    AsyncHelper.RunSync(() => GetApiKeyAsync(key, requestOptions));
+        public ApiKeysResponse GetApiKey(string apiKey, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => GetApiKeyAsync(apiKey, requestOptions));
 
         /// <summary>
         /// Get the full list of API Keys.
         /// </summary>
+        /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ApiKeysResponse> GetApiKeyAsync(string key, RequestOption requestOptions = null,
+        public async Task<ApiKeysResponse> GetApiKeyAsync(string apiKey, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                throw new ArgumentNullException(apiKey);
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<ApiKeysResponse>(HttpMethod.Get,
-                $"/1/keys/{key}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                $"/1/keys/{apiKey}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -290,7 +321,7 @@ namespace Algolia.Search.Clients
         /// <param name="acl"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public AddApiKeyResponse AddApiKey(AddApiKeyRequest acl, RequestOption requestOptions = null) =>
+        public AddApiKeyResponse AddApiKey(ApiKeyRequest acl, RequestOption requestOptions = null) =>
                     AsyncHelper.RunSync(() => AddApiKeyAsync(acl, requestOptions));
 
         /// <summary>
@@ -300,34 +331,79 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<AddApiKeyResponse> AddApiKeyAsync(AddApiKeyRequest acl, RequestOption requestOptions = null,
+        public async Task<AddApiKeyResponse> AddApiKeyAsync(ApiKeyRequest acl, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<AddApiKeyResponse, AddApiKeyRequest>(HttpMethod.Post,
-                $"/1/keys", CallType.Write, acl, requestOptions, ct).ConfigureAwait(false);
+            if (acl == null)
+            {
+                throw new ArgumentNullException(nameof(acl));
+            }
+
+            return await _requesterWrapper.ExecuteRequestAsync<AddApiKeyResponse, ApiKeyRequest>(HttpMethod.Post,
+                "/1/keys", CallType.Write, acl, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Update the permissions of an existing API Key.
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="acl"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public UpdateApiKeyResponse UpdateApiKey(string apiKey, ApiKeyRequest acl, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => UpdateApiKeyAsync(apiKey, acl, requestOptions));
+
+        /// <summary>
+        /// Update the permissions of an existing API Key.
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="acl"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string apiKey, ApiKeyRequest acl, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                throw new ArgumentNullException(apiKey);
+            }
+
+            if (acl == null)
+            {
+                throw new ArgumentNullException(nameof(acl));
+            }
+
+            return await _requesterWrapper.ExecuteRequestAsync<UpdateApiKeyResponse, ApiKeyRequest>(HttpMethod.Put,
+                $"/1/keys/{apiKey}", CallType.Write, acl, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Delete an existing API Key
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public DeleteResponse DeleteApiKey(string key, RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => DeleteApiKeyAsync(key, requestOptions));
+        public DeleteResponse DeleteApiKey(string apiKey, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => DeleteApiKeyAsync(apiKey, requestOptions));
 
         /// <summary>
         /// Delete an existing API Key
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<DeleteResponse> DeleteApiKeyAsync(string key, RequestOption requestOptions = null,
+        public async Task<DeleteResponse> DeleteApiKeyAsync(string apiKey, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                throw new ArgumentNullException(apiKey);
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                $"/1/keys/{key}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+                $"/1/keys/{apiKey}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -392,6 +468,11 @@ namespace Algolia.Search.Clients
         public async Task<UserIdResponse> GetUserIdAsync(string userId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                throw new ArgumentNullException(userId);
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<UserIdResponse>(HttpMethod.Get,
                 $"/1/clusters/mapping/{userId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }

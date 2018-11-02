@@ -42,6 +42,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Linq;
 
 namespace Algolia.Search.Clients
 {
@@ -89,6 +90,11 @@ namespace Algolia.Search.Clients
         public async Task<AddObjectResponse> AddObjectAysnc<T>(T data, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken)) where T : class
         {
+            if (ReferenceEquals(data, null))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
         }
@@ -112,6 +118,11 @@ namespace Algolia.Search.Clients
         public async Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken)) where T : class
         {
+            if (ReferenceEquals(data, null))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
             PropertyInfo pi = typeof(T).GetTypeInfo().GetDeclaredProperty("ObjectID");
 
             if (pi == null)
@@ -207,7 +218,7 @@ namespace Algolia.Search.Clients
         public async Task<BatchResponse> DeleteObjectsAsync(IEnumerable<string> objectIds, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            if (objectIds == null)
+            if (objectIds == null || !objectIds.Any())
             {
                 throw new ArgumentNullException(nameof(objectIds));
             }
@@ -237,6 +248,11 @@ namespace Algolia.Search.Clients
         public async Task<SearchResponse<T>> SearchAsync<T>(SearchQuery query, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken)) where T : class
         {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<T>, SearchQuery>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/query", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
         }
@@ -278,6 +294,11 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public IndexIterator<T> Browse<T>(BrowseIndexQuery query) where T : class
         {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
             return new IndexIterator<T>(this, query);
         }
 
@@ -306,6 +327,11 @@ namespace Algolia.Search.Clients
         public async Task<BrowseIndexResponse<T>> BrowseFromAsync<T>(BrowseIndexQuery query, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken)) where T : class
         {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<BrowseIndexResponse<T>, BrowseIndexQuery>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/browse", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
         }
@@ -380,6 +406,11 @@ namespace Algolia.Search.Clients
         public async Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (rule == null)
+            {
+                throw new ArgumentNullException(nameof(rule));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<SaveRuleResponse, Rule>(HttpMethod.Put,
                 $"/1/indexes/{_urlEncodedIndexName}/rules/{rule.ObjectID}", CallType.Write, rule, requestOptions, ct).ConfigureAwait(false);
         }
@@ -452,6 +483,11 @@ namespace Algolia.Search.Clients
         public async Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<SetSettingsResponse, IndexSettings>(HttpMethod.Put,
                 $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Write, settings, requestOptions, ct).ConfigureAwait(false);
         }
@@ -475,6 +511,11 @@ namespace Algolia.Search.Clients
         public async Task<SearchResponse<Synonym>> SearchSynonymsAsync(SynonymQuery query, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<Synonym>, SynonymQuery>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms/search", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
         }
@@ -498,6 +539,11 @@ namespace Algolia.Search.Clients
         public async Task<Synonym> GetSynonymAsync(string synonymObjectId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (synonymObjectId == null)
+            {
+                throw new ArgumentNullException(nameof(synonymObjectId));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<Synonym>(HttpMethod.Get,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
@@ -521,6 +567,11 @@ namespace Algolia.Search.Clients
         public async Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (synonyms == null || !synonyms.Any())
+            {
+                throw new ArgumentNullException(nameof(synonyms));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms", CallType.Write, synonyms, requestOptions, ct).ConfigureAwait(false);
         }
@@ -546,6 +597,16 @@ namespace Algolia.Search.Clients
         public async Task<SaveSynonymResponse> SaveSynonymAsync(string synonymObjectId, Synonym synonym, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (synonymObjectId == null)
+            {
+                throw new ArgumentNullException(nameof(synonymObjectId));
+            }
+
+            if (synonym == null)
+            {
+                throw new ArgumentNullException(nameof(synonym));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, Synonym>(HttpMethod.Put,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Write, synonym, requestOptions, ct).ConfigureAwait(false);
         }
@@ -569,6 +630,11 @@ namespace Algolia.Search.Clients
         public async Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (synonymObjectId == null)
+            {
+                throw new ArgumentNullException(nameof(synonymObjectId));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
