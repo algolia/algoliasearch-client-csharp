@@ -32,6 +32,7 @@ using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -371,6 +372,68 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<UserIdResponse>(HttpMethod.Get,
                 $"/1/clusters/mapping/{userId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get the top 10 userIDs with the highest number of records per cluster.
+        // The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds to propagate to the different clusters.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public TopUserIdResponse GetTopUserId(RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetTopUserIdAsync(requestOptions));
+
+        /// <summary>
+        /// Get the top 10 userIDs with the highest number of records per cluster.
+        // The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds to propagate to the different clusters.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<TopUserIdResponse> GetTopUserIdAsync(RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<TopUserIdResponse>(HttpMethod.Get,
+                "/1/clusters/mapping/top", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Remove a userID and its associated data from the multi-clusters.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse RemoveUserId(string userId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => RemoveUserIdAsync(userId, requestOptions));
+
+        /// <summary>
+        /// Remove a userID and its associated data from the multi-clusters.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> RemoveUserIdAsync(string userId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+
+            if (requestOptions != null && requestOptions.Headers != null && requestOptions.Headers.Any())
+            {
+                requestOptions.Headers.Concat(removeUserId).ToDictionary(x => x.Key, x => x.Value);
+            }
+            else if (requestOptions != null && requestOptions.Headers == null)
+            {
+                requestOptions.Headers = removeUserId;
+            }
+            else
+            {
+                requestOptions = new RequestOption();
+                requestOptions.Headers = removeUserId;
+            }
+
+            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
+                "/1/clusters/mapping'", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>

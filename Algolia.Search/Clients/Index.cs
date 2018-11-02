@@ -27,6 +27,8 @@ using Algolia.Search.Http;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Enums;
+using Algolia.Search.Iterators;
+using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
@@ -40,8 +42,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Reflection;
-using Algolia.Search.Models.Requests;
-using Algolia.Search.Iterators;
 
 namespace Algolia.Search.Clients
 {
