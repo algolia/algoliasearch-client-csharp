@@ -162,7 +162,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SearchResponse<UserId> ListUserIds(RequestOption requestOptions = null);
+        SearchResponse<UserIdResponse> ListUserIds(RequestOption requestOptions = null);
 
         /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
@@ -170,7 +170,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SearchResponse<UserId>> ListUserIdsAsync(RequestOption requestOptions = null,
+        Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Algolia.Search.Clients
         /// <param name="userId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        UserId GetUserId(string userId, RequestOption requestOptions = null);
+        UserIdResponse GetUserId(string userId, RequestOption requestOptions = null);
 
         /// <summary>
         /// Returns the userID data stored in the mapping.
@@ -188,7 +188,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<UserId> GetUserIdAsync(string userId, RequestOption requestOptions = null,
+        Task<UserIdResponse> GetUserIdAsync(string userId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

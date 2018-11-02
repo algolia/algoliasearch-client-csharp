@@ -333,7 +333,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SearchResponse<UserId> ListUserIds(RequestOption requestOptions = null) =>
+        public SearchResponse<UserIdResponse> ListUserIds(RequestOption requestOptions = null) =>
             AsyncHelper.RunSync(() => ListUserIdsAsync(requestOptions));
 
 
@@ -343,10 +343,10 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SearchResponse<UserId>> ListUserIdsAsync(RequestOption requestOptions = null,
+        public async Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserId>>(HttpMethod.Get,
+            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserIdResponse>>(HttpMethod.Get,
                 "/1/clusters/mapping", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
@@ -356,7 +356,7 @@ namespace Algolia.Search.Clients
         /// <param name="userId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public UserId GetUserId(string userId, RequestOption requestOptions = null) =>
+        public UserIdResponse GetUserId(string userId, RequestOption requestOptions = null) =>
             AsyncHelper.RunSync(() => GetUserIdAsync(userId, requestOptions));
 
         /// <summary>
@@ -366,10 +366,10 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<UserId> GetUserIdAsync(string userId, RequestOption requestOptions = null,
+        public async Task<UserIdResponse> GetUserIdAsync(string userId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<UserId>(HttpMethod.Get,
+            return await _requesterWrapper.ExecuteRequestAsync<UserIdResponse>(HttpMethod.Get,
                 $"/1/clusters/mapping/{userId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 

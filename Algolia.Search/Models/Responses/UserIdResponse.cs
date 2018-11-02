@@ -25,7 +25,7 @@
 
 namespace Algolia.Search.Models.Responses
 {
-    public class UserId
+    public class UserIdResponse
     {
         public string UserID { get; set; }
         public string ClusterName { get; set; }
