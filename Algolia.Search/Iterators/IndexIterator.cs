@@ -24,18 +24,16 @@
 */
 
 using Algolia.Search.Clients;
-using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Algolia.Search.Iterators
 {
     public class IndexIterator<T> where T : class
     {
         private readonly Index _index;
-        private BrowseIndexQuery _query = new BrowseIndexQuery();
+        private readonly BrowseIndexQuery _query;
 
         public IndexIterator(Index index, BrowseIndexQuery query)
         {

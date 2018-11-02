@@ -34,8 +34,8 @@ namespace Algolia.Search.Iterators
     public class RulesIterator
     {
         private readonly Index _index;
-        private RuleQuery _query = new RuleQuery();
-        private int _hits = 0;
+        private readonly RuleQuery _query = new RuleQuery();
+        private int _hits;
 
         public RulesIterator(Index index, int hitsPerpage = 1000)
         {
@@ -49,7 +49,7 @@ namespace Algolia.Search.Iterators
             do
             {
                 SearchResponse<Rule> result = _index.SearchRule(_query);
-                _hits = result.Hits.Count();
+                _hits = result.Hits.Count;
                 _query.Page++;
 
                 foreach (var hit in result.Hits)

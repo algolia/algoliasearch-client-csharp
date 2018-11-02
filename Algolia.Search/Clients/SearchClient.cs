@@ -105,7 +105,7 @@ namespace Algolia.Search.Clients
         public Index InitIndex(string indexName)
         {
             return string.IsNullOrWhiteSpace(indexName)
-                ? throw new ArgumentNullException(nameof(indexName), "Index name is required")
+                ? throw new ArgumentNullException(nameof(indexName), "The Index name is required")
                 : new Index(_requesterWrapper, indexName);
         }
 
@@ -160,12 +160,13 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <typeparam name="T"></typeparam>
         public MultipleBatchResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null) where T : class =>
-                    AsyncHelper.RunSync(() => MultipleBatchAsync<T>(operations, requestOptions));
+                    AsyncHelper.RunSync(() => MultipleBatchAsync(operations, requestOptions));
 
+        /// <inheritdoc />
         /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
-        /// <typeparam name="BatchResponse"></typeparam>
+        /// <typeparam name="T"></typeparam>
         public async Task<MultipleBatchResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class
         {
@@ -183,7 +184,6 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Get a list of indexes/indices with their associated metadata.
         /// </summary>
-        /// <param name="data"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         public ListIndexesResponse ListIndexes(RequestOption requestOptions = null) =>
@@ -268,7 +268,6 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Get the full list of API Keys.
         /// </summary>
-        /// <param name="data"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         public ListApiKeysResponse ListApiKeys(RequestOption requestOptions = null) =>
@@ -479,7 +478,7 @@ namespace Algolia.Search.Clients
 
         /// <summary>
         /// Get the top 10 userIDs with the highest number of records per cluster.
-        // The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds to propagate to the different clusters.
+        /// The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds to propagate to the different clusters.
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
@@ -488,7 +487,7 @@ namespace Algolia.Search.Clients
 
         /// <summary>
         /// Get the top 10 userIDs with the highest number of records per cluster.
-        // The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds to propagate to the different clusters.
+        /// The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds to propagate to the different clusters.
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
@@ -502,7 +501,7 @@ namespace Algolia.Search.Clients
 
         /// <summary>
         /// Assign or Move a userID to a cluster.
-        // The time it takes to migrate (move) a user is proportional to the amount of data linked to the userID.
+        /// The time it takes to migrate (move) a user is proportional to the amount of data linked to the userID.
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="clusterName"></param>
@@ -513,7 +512,7 @@ namespace Algolia.Search.Clients
 
         /// <summary>
         /// Assign or Move a userID to a cluster.
-        // The time it takes to migrate (move) a user is proportional to the amount of data linked to the userID.
+        /// The time it takes to migrate (move) a user is proportional to the amount of data linked to the userID.
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="clusterName"></param>
@@ -537,9 +536,9 @@ namespace Algolia.Search.Clients
 
             var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
 
-            if (requestOptions != null && requestOptions.Headers != null && requestOptions.Headers.Any())
+            if (requestOptions?.Headers != null && requestOptions.Headers.Any())
             {
-                requestOptions.Headers.Concat(removeUserId).ToDictionary(x => x.Key, x => x.Value);
+                requestOptions.Headers = requestOptions.Headers.Concat(removeUserId).ToDictionary(x => x.Key, x => x.Value);
             }
             else if (requestOptions != null && requestOptions.Headers == null)
             {
@@ -547,8 +546,7 @@ namespace Algolia.Search.Clients
             }
             else
             {
-                requestOptions = new RequestOption();
-                requestOptions.Headers = removeUserId;
+                requestOptions = new RequestOption { Headers = removeUserId };
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, AssignUserIdRequest>(HttpMethod.Post,
@@ -581,9 +579,9 @@ namespace Algolia.Search.Clients
 
             var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
 
-            if (requestOptions != null && requestOptions.Headers != null && requestOptions.Headers.Any())
+            if (requestOptions?.Headers != null && requestOptions.Headers.Any())
             {
-                requestOptions.Headers.Concat(removeUserId).ToDictionary(x => x.Key, x => x.Value);
+                requestOptions.Headers = requestOptions.Headers.Concat(removeUserId).ToDictionary(x => x.Key, x => x.Value);
             }
             else if (requestOptions != null && requestOptions.Headers == null)
             {
@@ -591,8 +589,7 @@ namespace Algolia.Search.Clients
             }
             else
             {
-                requestOptions = new RequestOption();
-                requestOptions.Headers = removeUserId;
+                requestOptions = new RequestOption { Headers = removeUserId };
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
@@ -616,7 +613,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
-                requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+                requestOptions, ct).ConfigureAwait(false);
         }
 
     }

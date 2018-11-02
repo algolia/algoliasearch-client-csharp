@@ -23,6 +23,7 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -33,9 +34,9 @@ namespace Algolia.Search.Utils
     /// </summary>
     internal static class LogHelper
     {
-        internal async static Task LogToFile(Stream content)
+        internal static async Task LogToFile(Stream content)
         {
-            if (content != null)
+            if (content != null && Environment.GetEnvironmentVariable("ALGOLIA_DEBUG") != null)
             {
                 using (FileStream output = new FileStream(@"log.txt", FileMode.Append))
                 {

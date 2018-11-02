@@ -24,12 +24,13 @@
 */
 
 using Algolia.Search.Http;
+using Algolia.Search.Iterators;
+using Algolia.Search.Models.Query;
+using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
-using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Settings;
-using Algolia.Search.Models.Requests;
-using Algolia.Search.Iterators;
+using Algolia.Search.Models.Synonyms;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,6 +39,41 @@ namespace Algolia.Search.Clients
 {
     public interface IIndex
     {
+        /// <summary>
+        /// Add an object to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        AddObjectResponse AddObject<T>(T data, RequestOption requestOptions = null) where T : class;
+
+        /// <summary>
+        /// Add an object to the given index
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<AddObjectResponse> AddObjectAysnc<T>(T data, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken)) where T : class;
+
+        /// <summary>
+        /// Update one or more attributes of an existing object.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOption requestOptions = null) where T : class;
+
+        /// <summary>
+        /// Update one or more attributes of an existing object.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Add objects to the given index
@@ -55,25 +91,43 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<BatchResponse> AddObjectsAysnc<T>(IEnumerable<T> datas, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken)) where T : class;
+            CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
-        /// Add an object to the given index
+        /// Remove objects from an index using its object id.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="objectId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        AddObjectResponse AddObject<T>(T data, RequestOption requestOptions = null) where T : class;
+        DeleteResponse DeleteObject(string objectId, RequestOption requestOptions = null);
 
         /// <summary>
-        /// Add an object to the given index
+        /// Remove objects from an index using its object id.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="objectId"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AddObjectResponse> AddObjectAysnc<T>(T data, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken)) where T : class;
+        Task<DeleteResponse> DeleteObjectAsync(string objectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Delete all the objects for their objectIds
+        /// </summary>
+        /// <param name="objectIds"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        BatchResponse DeleteObjects(IEnumerable<string> objectIds, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Delete all the objects for their objectIds
+        /// </summary>
+        /// <param name="objectIds"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<BatchResponse> DeleteObjectsAsync(IEnumerable<string> objectIds, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Search in the index for the given query
@@ -126,6 +180,7 @@ namespace Algolia.Search.Clients
         /// You can use the same query parameters as for a search query.
         /// </summary>
         /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
         /// <returns></returns>
         BrowseIndexResponse<T> BrowseFrom<T>(BrowseIndexQuery query, RequestOption requestOptions = null) where T : class;
 
@@ -135,9 +190,11 @@ namespace Algolia.Search.Clients
         /// You can use the same query parameters as for a search query.
         /// </summary>
         /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
         /// <returns></returns>
         Task<BrowseIndexResponse<T>> BrowseFromAsync<T>(BrowseIndexQuery query, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken)) where T : class;
+            CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Get the specified by its objectID
@@ -243,6 +300,114 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get all synonyms that match a query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        SearchResponse<Synonym> SearchSynonyms(SynonymQuery query, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get all synonyms that match a query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<SearchResponse<Synonym>> SearchSynonymsAsync(SynonymQuery query, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get a single synonym using its object id.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        Synonym GetSynonym(string synonymObjectId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get a single synonym using its object id.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<Synonym> GetSynonymAsync(string synonymObjectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Create or update multiple synonyms.
+        /// </summary>
+        /// <param name="synonyms"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Create or update multiple synonyms.
+        /// </summary>
+        /// <param name="synonyms"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Create or update a single synonym on an index.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="synonym"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        SaveSynonymResponse SaveSynonym(string synonymObjectId, Synonym synonym, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Create or update a single synonym on an index.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="synonym"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<SaveSynonymResponse> SaveSynonymAsync(string synonymObjectId, Synonym synonym, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Remove a single synonym from an index using its object id.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        DeleteResponse DeleteSynonym(string synonymObjectId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Remove a single synonym from an index using its object id.
+        /// </summary>
+        /// <param name="synonymObjectId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Remove all synonyms from an index.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        ClearSynonymsResponse ClearSynonyms(RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Remove all synonyms from an index.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<ClearSynonymsResponse> ClearSynonymsAsync(RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

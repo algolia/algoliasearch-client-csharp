@@ -111,7 +111,7 @@ namespace Algolia.Search.Transport
 
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
-                request.Uri = BuildUri(method, host.Url, uri, requestOptions?.QueryParameters);
+                request.Uri = BuildUri(host.Url, uri, requestOptions?.QueryParameters);
                 int requestTimeout = SetTimeout(callType) * (host.RetryCount + 1);
 
                 AlgoliaHttpResponse response = await _httpClient
@@ -174,12 +174,11 @@ namespace Algolia.Search.Transport
         /// <summary>
         /// Build uri depending on the method
         /// </summary>
-        /// <param name="method"></param>
         /// <param name="url"></param>
         /// <param name="baseUri"></param>
         /// <param name="optionalQueryParameters"></param>
         /// <returns></returns>
-        private Uri BuildUri(HttpMethod method, string url, string baseUri, string optionalQueryParameters = null)
+        private Uri BuildUri(string url, string baseUri, string optionalQueryParameters = null)
         {
             return optionalQueryParameters != null
                 ? new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}{optionalQueryParameters}" }.Uri

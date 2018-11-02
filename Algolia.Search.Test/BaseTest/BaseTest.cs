@@ -31,7 +31,6 @@ namespace Algolia.Search.Test
 {
     public class BaseTest : IDisposable
     {
-        protected static string _testApiKey;
         protected SearchClient _client;
         protected Index _index;
 

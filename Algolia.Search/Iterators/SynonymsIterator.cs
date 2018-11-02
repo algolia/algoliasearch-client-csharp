@@ -26,17 +26,15 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Synonyms;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Algolia.Search.Iterators
 {
     public class SynonymsIterator
     {
         private readonly Index _index;
-        private SynonymQuery _query = new SynonymQuery();
-        private int _hits = 0;
+        private readonly SynonymQuery _query = new SynonymQuery();
+        private int _hits;
 
         public SynonymsIterator(Index index, int hitsPerpage = 1000)
         {
@@ -50,7 +48,7 @@ namespace Algolia.Search.Iterators
             do
             {
                 SearchResponse<Synonym> result = _index.SearchSynonyms(_query);
-                _hits = result.Hits.Count();
+                _hits = result.Hits.Count;
                 _query.Page++;
 
                 foreach (var hit in result.Hits)

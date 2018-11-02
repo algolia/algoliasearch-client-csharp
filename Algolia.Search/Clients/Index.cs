@@ -24,10 +24,10 @@
 */
 
 using Algolia.Search.Http;
-using Algolia.Search.Models.Batch;
-using Algolia.Search.Models.Query;
-using Algolia.Search.Models.Enums;
 using Algolia.Search.Iterators;
+using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
@@ -37,12 +37,12 @@ using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Linq;
 
 namespace Algolia.Search.Clients
 {
@@ -106,7 +106,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         public UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOption requestOptions = null) where T : class =>
-                    AsyncHelper.RunSync(() => PartialUpdateObjectAsync<T>(data, requestOptions));
+                    AsyncHelper.RunSync(() => PartialUpdateObjectAsync(data, requestOptions));
 
         /// <summary>
         /// Update one or more attributes of an existing object.
@@ -127,7 +127,7 @@ namespace Algolia.Search.Clients
 
             if (pi == null)
             {
-                throw new ArgumentNullException("ObjectID");
+                throw new Exception("The class mut have an ObjectID property");
             }
 
             if (pi.GetType() != typeof(string))
@@ -144,16 +144,16 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Add objects to the given index
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="datas"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         public BatchResponse AddObjects<T>(IEnumerable<T> datas, RequestOption requestOptions = null) where T : class =>
-                    AsyncHelper.RunSync(() => AddObjectsAysnc<T>(datas, requestOptions));
+                    AsyncHelper.RunSync(() => AddObjectsAysnc(datas, requestOptions));
 
         /// <summary>
         /// Add objects to the given index
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="datas"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
@@ -308,7 +308,6 @@ namespace Algolia.Search.Clients
         /// You can use the same query parameters as for a search query.
         /// </summary>
         /// <param name="query"></param>
-        /// <param name="cursor"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         public BrowseIndexResponse<T> BrowseFrom<T>(BrowseIndexQuery query, RequestOption requestOptions = null) where T : class =>
@@ -320,7 +319,6 @@ namespace Algolia.Search.Clients
         /// You can use the same query parameters as for a search query.
         /// </summary>
         /// <param name="query"></param>
-        /// <param name="cursor"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
@@ -663,26 +661,26 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// This function waits for the Algolia's API task to finish
         /// </summary>
-        /// <param name="taskID"></param>
+        /// <param name="taskId"></param>
         /// <param name="timeToWait"></param>
         /// <param name="requestOptions"></param>
-        public void WaitForCompletion(long taskID, int timeToWait = 100, RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => WaitForCompletionAsync(taskID, timeToWait, requestOptions));
+        public void WaitForCompletion(long taskId, int timeToWait = 100, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => WaitForCompletionAsync(taskId, timeToWait, requestOptions));
 
         /// <summary>
         /// This function waits for the Algolia's API task to finish
         /// </summary>
-        /// <param name="taskID">The task ID to wait</param>
+        /// <param name="taskId">The task ID to wait</param>
         /// <param name="timeToWait"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task WaitForCompletionAsync(long taskID, int timeToWait = 100, RequestOption requestOptions = null,
+        public async Task WaitForCompletionAsync(long taskId, int timeToWait = 100, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             while (true)
             {
-                TaskStatusResponse response = await GetTaskAsync(taskID, requestOptions, ct).ConfigureAwait(false);
+                TaskStatusResponse response = await GetTaskAsync(taskId, requestOptions, ct).ConfigureAwait(false);
 
                 if (response.Status.Equals("published"))
                 {
@@ -702,24 +700,24 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Get the status of the given task
         /// </summary>
-        /// <param name="taskID"></param>
+        /// <param name="taskId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public TaskStatusResponse GetTask(long taskID, RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => GetTaskAsync(taskID, requestOptions));
+        public TaskStatusResponse GetTask(long taskId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetTaskAsync(taskId, requestOptions));
 
         /// <summary>
         /// Get the status of the given task
         /// </summary>
-        /// <param name="taskID"></param>
+        /// <param name="taskId"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TaskStatusResponse> GetTaskAsync(long taskID, RequestOption requestOptions = null,
+        public async Task<TaskStatusResponse> GetTaskAsync(long taskId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<TaskStatusResponse>(HttpMethod.Get,
-                $"/1/indexes/{_urlEncodedIndexName}/task/{taskID}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                $"/1/indexes/{_urlEncodedIndexName}/task/{taskId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }

@@ -23,10 +23,10 @@
 * THE SOFTWARE.
 */
 
+using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace Algolia.Search.Utils
 {
