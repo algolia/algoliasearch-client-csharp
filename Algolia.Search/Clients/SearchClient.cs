@@ -109,6 +109,24 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Retrieve one or more objects, potentially from different indices, in a single API call.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public MultipleGetObjectsResponse<T> MultipleGetObjects<T>(MultipleGetObjectsRequest queries, RequestOption requestOptions = null) where T : class =>
+                    AsyncHelper.RunSync(() => MultipleGetObjectsAsync<T>(queries, requestOptions));
+
+        /// <summary>
+        /// Retrieve one or more objects, potentially from different indices, in a single API call.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries, RequestOption requestOptions = null,
+                            CancellationToken ct = default(CancellationToken)) where T : class
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<MultipleGetObjectsResponse<T>>(HttpMethod.Post,
+                "/1/indexes/*/objects", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
