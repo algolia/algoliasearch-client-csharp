@@ -92,7 +92,7 @@ namespace Algolia.Search.Transport
             where TResult : class
             where TData : class
         {
-            if (string.IsNullOrEmpty(uri))
+            if (string.IsNullOrWhiteSpace(uri))
             {
                 throw new ArgumentNullException(nameof(uri));
             }

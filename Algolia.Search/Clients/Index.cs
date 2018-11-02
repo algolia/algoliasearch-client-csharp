@@ -65,7 +65,7 @@ namespace Algolia.Search.Clients
         public Index(IRequesterWrapper requesterWrapper, string indexName)
         {
             _requesterWrapper = requesterWrapper ?? throw new ArgumentNullException(nameof(requesterWrapper));
-            _urlEncodedIndexName = !string.IsNullOrEmpty(indexName)
+            _urlEncodedIndexName = !string.IsNullOrWhiteSpace(indexName)
                 ? WebUtility.UrlEncode(indexName)
                 : throw new ArgumentNullException(nameof(indexName));
         }
@@ -179,7 +179,7 @@ namespace Algolia.Search.Clients
         public async Task<DeleteResponse> DeleteObjectAsync(string objectId, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            if (string.IsNullOrEmpty(objectId))
+            if (string.IsNullOrWhiteSpace(objectId))
             {
                 throw new ArgumentNullException(nameof(objectId));
             }
@@ -260,7 +260,7 @@ namespace Algolia.Search.Clients
         public async Task<T> GetObjectAsync<T>(string objectId, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken)) where T : class
         {
-            if (string.IsNullOrEmpty(objectId))
+            if (string.IsNullOrWhiteSpace(objectId))
             {
                 throw new ArgumentNullException(nameof(objectId));
             }
@@ -329,7 +329,7 @@ namespace Algolia.Search.Clients
         public async Task<Rule> GetRuleAsync(string objectId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            if (string.IsNullOrEmpty(objectId))
+            if (string.IsNullOrWhiteSpace(objectId))
             {
                 throw new ArgumentNullException(nameof(objectId));
             }
@@ -403,7 +403,7 @@ namespace Algolia.Search.Clients
         public async Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            if (string.IsNullOrEmpty(objectId))
+            if (string.IsNullOrWhiteSpace(objectId))
             {
                 throw new ArgumentNullException(nameof(objectId));
             }

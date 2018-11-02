@@ -84,12 +84,12 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(config), "A config is required");
             }
 
-            if (string.IsNullOrEmpty(config.AppId))
+            if (string.IsNullOrWhiteSpace(config.AppId))
             {
                 throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
             }
 
-            if (string.IsNullOrEmpty(config.ApiKey))
+            if (string.IsNullOrWhiteSpace(config.ApiKey))
             {
                 throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
             }
@@ -104,7 +104,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public Index InitIndex(string indexName)
         {
-            return string.IsNullOrEmpty(indexName)
+            return string.IsNullOrWhiteSpace(indexName)
                 ? throw new ArgumentNullException(nameof(indexName), "Index name is required")
                 : new Index(_requesterWrapper, indexName);
         }
@@ -328,7 +328,6 @@ namespace Algolia.Search.Clients
                 "/1/clusters", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
 
-
         /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
         /// </summary>
@@ -398,6 +397,61 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Assign or Move a userID to a cluster.
+        // The time it takes to migrate (move) a user is proportional to the amount of data linked to the userID.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="clusterName"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public AddObjectResponse AssignUserId(string userId, string clusterName, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => AssignUserIdAsync(userId, clusterName, requestOptions));
+
+        /// <summary>
+        /// Assign or Move a userID to a cluster.
+        // The time it takes to migrate (move) a user is proportional to the amount of data linked to the userID.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="clusterName"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<AddObjectResponse> AssignUserIdAsync(string userId, string clusterName, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                throw new ArgumentNullException(userId);
+            }
+
+            if (string.IsNullOrWhiteSpace(clusterName))
+            {
+                throw new ArgumentNullException(clusterName);
+            }
+
+            var data = new AssignUserIdRequest { Cluster = clusterName };
+
+            var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+
+            if (requestOptions != null && requestOptions.Headers != null && requestOptions.Headers.Any())
+            {
+                requestOptions.Headers.Concat(removeUserId).ToDictionary(x => x.Key, x => x.Value);
+            }
+            else if (requestOptions != null && requestOptions.Headers == null)
+            {
+                requestOptions.Headers = removeUserId;
+            }
+            else
+            {
+                requestOptions = new RequestOption();
+                requestOptions.Headers = removeUserId;
+            }
+
+            return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, AssignUserIdRequest>(HttpMethod.Post,
+                "/1/clusters/mapping", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Remove a userID and its associated data from the multi-clusters.
         /// </summary>
         /// <param name="userId"></param>
@@ -416,6 +470,11 @@ namespace Algolia.Search.Clients
         public async Task<DeleteResponse> RemoveUserIdAsync(string userId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                throw new ArgumentNullException(userId);
+            }
+
             var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
 
             if (requestOptions != null && requestOptions.Headers != null && requestOptions.Headers.Any())
@@ -433,7 +492,7 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                "/1/clusters/mapping'", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                "/1/clusters/mapping'", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>

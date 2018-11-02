@@ -74,12 +74,12 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(config), "A config is required");
             }
 
-            if (string.IsNullOrEmpty(config.AppId))
+            if (string.IsNullOrWhiteSpace(config.AppId))
             {
                 throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
             }
 
-            if (string.IsNullOrEmpty(config.ApiKey))
+            if (string.IsNullOrWhiteSpace(config.ApiKey))
             {
                 throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
             }
