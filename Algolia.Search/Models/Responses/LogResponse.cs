@@ -31,4 +31,16 @@ namespace Algolia.Search.Models.Responses
     {
         public IEnumerable<Log> Logs { get; set; }
     }
+
+    public class Log
+    {
+        public string TimeStamp { get; set; }
+        public string Method { get; set; }
+        public string AnswerCode { get; set; }
+        public string QueryBody { get; set; }
+        public string Answer { get; set; }
+        public string Url { get; set; }
+        public string Ip { get; set; }
+        public string Sha1 { get; set; }
+    }
 }
