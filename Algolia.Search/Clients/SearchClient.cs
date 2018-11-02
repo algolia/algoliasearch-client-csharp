@@ -26,6 +26,7 @@
 using Algolia.Search.Http;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
@@ -108,6 +109,24 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest queries, RequestOption requestOptions = null) where T : class =>
+                    AsyncHelper.RunSync(() => MultipleQueriesAsync<T>(queries, requestOptions));
+
+        /// <summary>
+        /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries, RequestOption requestOptions = null,
+                            CancellationToken ct = default(CancellationToken)) where T : class
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<MultipleQueriesResponse<T>>(HttpMethod.Post,
+                "/1/indexes/*/queries", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -129,7 +148,7 @@ namespace Algolia.Search.Clients
             var batch = new BatchRequest<T>(operations);
 
             return await _requesterWrapper.ExecuteRequestAsync<MultipleBatchResponse, BatchRequest<T>>(HttpMethod.Post,
-                $"/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
+                "/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
