@@ -23,46 +23,13 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Algolia.Search.Models.Batch
+namespace Algolia.Search.Models.Responses
 {
-    public class BatchRequest<T> where T : class
+    public class MultipleBatchResponse
     {
-
-        public BatchRequest(IEnumerable<BatchOperation<T>> operations)
-        {
-            if (operations == null)
-            {
-                throw new ArgumentNullException(nameof(operations));
-            }
-
-            Operations = operations.ToList();
-        }
-        public BatchRequest(string actionType, IEnumerable<T> datas)
-        {
-            if (datas == null)
-            {
-                throw new ArgumentNullException(nameof(datas));
-            }
-
-            Operations = new List<BatchOperation<T>>();
-
-            foreach (var data in datas)
-            {
-                Operations.Add(new BatchOperation<T>
-                {
-                    Action = actionType,
-                    Body = data
-                });
-            }
-        }
-
-        [JsonProperty(PropertyName = "requests")]
-        public ICollection<BatchOperation<T>> Operations { get; set; }
-
+        IEnumerable<string> ObjectIDs { get; set; }
+        Dictionary<string, long> TaskID { get; set; }
     }
 }

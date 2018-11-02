@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Http;
+using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Transport;
@@ -104,6 +105,31 @@ namespace Algolia.Search.Clients
             return string.IsNullOrEmpty(indexName)
                 ? throw new ArgumentNullException(nameof(indexName), "Index name is required")
                 : new Index(_requesterWrapper, indexName);
+        }
+
+        /// <summary>
+        /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public MultipleBatchResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null) where T : class =>
+                    AsyncHelper.RunSync(() => MultipleBatchAsync<T>(operations, requestOptions));
+
+        /// <summary>
+        /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
+        /// </summary>
+        /// <typeparam name="BatchResponse"></typeparam>
+        public async Task<MultipleBatchResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null,
+                            CancellationToken ct = default(CancellationToken)) where T : class
+        {
+            if (operations == null)
+            {
+                throw new ArgumentNullException(nameof(operations));
+            }
+
+            var batch = new BatchRequest<T>(operations);
+
+            return await _requesterWrapper.ExecuteRequestAsync<MultipleBatchResponse, BatchRequest<T>>(HttpMethod.Post,
+                $"/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
