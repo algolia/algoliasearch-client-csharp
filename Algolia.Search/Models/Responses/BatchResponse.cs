@@ -29,7 +29,7 @@ namespace Algolia.Search.Models.Responses
 {
     public class BatchResponse
     {
-        IEnumerable<string> ObjectIDs { get; set; }
-        long TaskID { get; set; }
+        public IEnumerable<string> ObjectIDs { get; set; }
+        public long TaskID { get; set; }
     }
 }
