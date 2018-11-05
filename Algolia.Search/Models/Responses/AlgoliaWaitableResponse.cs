@@ -39,7 +39,7 @@ namespace Algolia.Search.Models.Responses
 
         public long TaskID { get; set; }
 
-        public T WaitForCompletion()
+        public T Wait()
         {
             WaitDelegate(TaskID);
             return (T)this;

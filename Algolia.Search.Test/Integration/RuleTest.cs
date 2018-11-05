@@ -107,7 +107,7 @@ namespace Algolia.Search.Test.Integration
             var response = await _index.SaveRuleAsync(ruleToSave);
             Assert.IsType<SaveRuleResponse>(response);
 
-            response.WaitForCompletion();
+            response.Wait();
 
             var ret = await _index.GetRuleAsync(ruleID);
             Assert.IsType<Rule>(ret);
@@ -129,7 +129,7 @@ namespace Algolia.Search.Test.Integration
                 Consequence = new Consequence { Params = new ConsequenceParams { AutomaticFacetFilters = new List<string> { "products.properties.fbrand" } } }
             };
 
-            SaveRuleResponse response = _index.SaveRule(ruleToSave).WaitForCompletion();
+            SaveRuleResponse response = _index.SaveRule(ruleToSave).Wait();
             Assert.IsType<SaveRuleResponse>(response);
 
             var ret = _index.GetRule(ruleID);

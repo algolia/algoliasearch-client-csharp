@@ -44,7 +44,7 @@ namespace Algolia.Search.Test.Integration
             };
 
             var response = await _index.AddObjectAysnc(actor);
-            response.WaitForCompletion();
+            response.Wait();
 
             var ret = await _index.SearchAsync<Actor>(new SearchQuery
             {
