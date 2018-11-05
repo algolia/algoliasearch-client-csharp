@@ -23,10 +23,111 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Http;
+using Algolia.Search.Models.Analytics;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Algolia.Search.Clients
 {
-    public interface IAnalyticsClient
+    /// <summary>
+    /// Analytics client
+    /// </summary>
+    interface IAnalyticsClient
     {
-        
+        /// <summary>
+        /// Get an A/B test information and results.
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        ABTest GetABTest(long abTestId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Get an A/B test information and results.
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<ABTest> GetABTestAsync(long abTestId, RequestOption requestOptions = null,
+           CancellationToken ct = default(CancellationToken));
+        /// <summary>
+        /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="limit"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="limit"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOption requestOptions = null,
+           CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Creates a new AB Test with provided configuration.
+        /// </summary>
+        /// <param name="aBTest"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        AddABTestResponse AddABTest(ABTest aBTest, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Creates a new AB Test with provided configuration.
+        /// </summary>
+        /// <param name="aBTest"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Marks the A/B Test as stopped. At this point, the test is over and cannot be restarted. 
+        /// As a result, your application is back to normal: index A will perform as usual, receiving 100% of all search requests. 
+        /// Associated metadata and metrics are still stored
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        StopABTestResponse StopABTest(long abTestId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Marks the A/B Test as stopped. At this point, the test is over and cannot be restarted. 
+        /// As a result, your application is back to normal: index A will perform as usual, receiving 100% of all search requests. 
+        /// Associated metadata and metrics are still stored
+        /// </summary>
+        /// <param name="aBTest"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOption requestOptions = null,
+           CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes the A/B Test and removes all associated metadata & metrics.
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        DeleteABTestResponse DeleteABTest(long abTestId, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Deletes the A/B Test and removes all associated metadata & metrics.
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOption requestOptions = null,
+           CancellationToken ct = default(CancellationToken));
     }
 }
