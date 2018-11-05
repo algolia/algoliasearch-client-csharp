@@ -231,41 +231,6 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
-        /// Rename an index. Normally used to reindex your data atomically, without any down time.
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex"></param>
-        /// <param name="requestOptions"></param>
-        /// <returns></returns>
-        public MoveIndexResponse MoveIndex(string sourceIndex, string destinationIndex, RequestOption requestOptions = null) =>
-                    AsyncHelper.RunSync(() => MoveIndexAsync(sourceIndex, destinationIndex, requestOptions));
-
-        /// <summary>
-        /// Rename an index. Normally used to reindex your data atomically, without any down time.
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
-        /// <returns></returns>
-        public async Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken))
-        {
-            if (string.IsNullOrWhiteSpace(sourceIndex))
-            {
-                throw new ArgumentNullException(sourceIndex);
-            }
-
-            if (string.IsNullOrWhiteSpace(destinationIndex))
-            {
-                throw new ArgumentNullException(destinationIndex);
-            }
-
-            return await _requesterWrapper.ExecuteRequestAsync<MoveIndexResponse>(HttpMethod.Post,
-                $"/1/indexes/{sourceIndex}/operation", CallType.Write, requestOptions, ct).ConfigureAwait(false);
-        }
-
-        /// <summary>
         /// Get the full list of API Keys.
         /// </summary>
         /// <param name="requestOptions"></param>

@@ -116,26 +116,6 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// Rename an index. Normally used to reindex your data atomically, without any down time.
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex"></param>
-        /// <param name="requestOptions"></param>
-        /// <returns></returns>
-        MoveIndexResponse MoveIndex(string sourceIndex, string destinationIndex, RequestOption requestOptions = null);
-
-        /// <summary>
-        /// Rename an index. Normally used to reindex your data atomically, without any down time.
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
-        /// <returns></returns>
-        Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex, RequestOption requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
-
-        /// <summary>
         /// Get the full list of API Keys.
         /// </summary>
         /// <param name="requestOptions"></param>

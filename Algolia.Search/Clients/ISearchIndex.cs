@@ -411,6 +411,24 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        MoveIndexResponse MoveTo(string destinationIndex, RequestOption requestOptions = null);
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<MoveIndexResponse> MoveToAsync(string destinationIndex, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
         /// This function waits for the Algolia's API task to finish
         /// </summary>
         /// <param name="taskID"></param>

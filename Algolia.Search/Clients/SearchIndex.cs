@@ -56,7 +56,7 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Url encoded index name
         /// </summary>
-        private readonly string _urlEncodedIndexName;
+        private string _urlEncodedIndexName;
 
         /// <summary>
         /// Instantiate an Index for a given client
@@ -172,7 +172,7 @@ namespace Algolia.Search.Clients
 
             BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<T>>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
-            
+
             response.WaitDelegate = t => WaitForCompletion(t);
             return response;
         }
@@ -665,6 +665,37 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<ClearSynonymsResponse>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms/clear", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public MoveIndexResponse MoveTo(string destinationIndex, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => MoveToAsync(destinationIndex, requestOptions));
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<MoveIndexResponse> MoveToAsync(string destinationIndex, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrWhiteSpace(destinationIndex))
+            {
+                throw new ArgumentNullException(destinationIndex);
+            }
+
+            MoveIndexResponse response = await _requesterWrapper.ExecuteRequestAsync<MoveIndexResponse>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/operation", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+
+            _urlEncodedIndexName = WebUtility.UrlEncode(destinationIndex);
+            return response;
         }
 
         /// <summary>
