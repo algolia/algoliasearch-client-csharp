@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -377,16 +378,16 @@ namespace Algolia.Search.Test
             _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""objectID"":""1"", ""nickname"":""SF""}"));
             var task = _index.AddObject(JObject.Parse(@"{""name"":""Los Angeles"", ""objectID"":""2"", ""nickname"":""SanF""}"));
             _index.WaitTask(task["taskID"].ToString());
-            
+
             var query = new Query().SetNbHitsPerPage(1);
             var res = _index.BrowseAll(query);
-            
+
             List<JObject> hits = new List<JObject>();
             foreach (var hit in res)
             {
                 hits.Add(hit);
             }
-            
+
             Assert.Equal(2, hits.Count);
         }
 
@@ -1851,6 +1852,37 @@ namespace Algolia.Search.Test
             // should return all rules even the disabled one when the parameter enabled is not set in the query
             var allRules = _index.SearchRules();
             Assert.Equal(2, (int)allRules["nbHits"]);
+        }
+
+        [Fact]
+        public void TestNewMoveIndex()
+        {
+            string originalIndex = "MoveIndex";
+            string newIndex = "MoveIndex2";
+
+            var moveIndexClient = new AlgoliaClient(_testApplicationID, _testApiKey);
+            var index = _client.InitIndex(originalIndex);
+
+            var addObjectTask = index.AddObject(new JObject { { "objectID", "test" } });
+            index.WaitTask(addObjectTask["taskID"].ToString());
+
+            var moveTask = index.MoveIndex(newIndex);
+            index.WaitTask(moveTask["taskID"].ToString());
+
+            // should contain the new index and should not contain the old one
+            var indices = moveIndexClient.ListIndexes();
+            Assert.True(Include((JArray)indices["items"], "name", newIndex));
+            Assert.False(Include((JArray)indices["items"], "name", originalIndex));
+
+            var resp = index.GetObject("test");
+            Assert.True(resp["objectID"].ToString().Equals("test"));
+
+            string val = (string)typeof(Index).GetField("_indexName", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(index);
+
+            // test that the property is well updated in the index object
+            Assert.True(val.Equals(newIndex));
+
+            moveIndexClient.DeleteIndex(newIndex);
         }
     }
 }

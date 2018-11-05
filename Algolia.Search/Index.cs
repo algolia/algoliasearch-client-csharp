@@ -2011,5 +2011,35 @@ namespace Algolia.Search
         public JObject BatchRules(IEnumerable<JObject> queryRules, bool forwardToReplicas = false, bool clearExistingRules = false)
         { return BatchRules(queryRules, null, forwardToReplicas, clearExistingRules); }
 
+        /// <summary>
+        /// Move this exisint index to a new one.
+        /// </summary>
+        /// <param name="dstIndexName">The new index name that will contain a copy of this index.</param>
+        /// <param name="requestOptions"></param>
+        /// <param name="token"></param>
+        public Task<JObject> MoveIndexAsync(string dstIndexName, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            Dictionary<string, object> operation = new Dictionary<string, object>();
+            operation["operation"] = "move";
+            operation["destination"] = dstIndexName;
+
+            var response = _client.ExecuteRequest(AlgoliaClient.callType.Write, "POST", string.Format("/1/indexes/{0}/operation", _urlIndexName), operation, token, requestOptions);
+            
+            _indexName = dstIndexName;
+            _urlIndexName = WebUtility.UrlEncode(_indexName);
+
+            return response;
+        }
+
+        /// <summary>
+        /// Synchronously call <see cref="AlgoliaClient.MoveIndexAsync"/>
+        /// </summary>
+        /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
+        /// <param name="requestOptions"></param>
+        public JObject MoveIndex(string dstIndexName, RequestOptions requestOptions = null)
+        {
+            return MoveIndexAsync(dstIndexName, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
+        }
+
     }
 }
