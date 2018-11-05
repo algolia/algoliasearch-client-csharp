@@ -95,8 +95,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(data));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(HttpMethod.Post,
+            AddObjectResponse response = await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitForCompletion(t);
+            return response;
         }
 
         /// <summary>
@@ -167,8 +170,11 @@ namespace Algolia.Search.Clients
 
             var batch = new BatchRequest<T>(BatchActionType.AddObject, datas);
 
-            return await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<T>>(HttpMethod.Post,
+            BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<T>>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
+            
+            response.WaitDelegate = t => WaitForCompletion(t);
+            return response;
         }
 
         /// <summary>
@@ -409,8 +415,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(rule));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<SaveRuleResponse, Rule>(HttpMethod.Put,
+            SaveRuleResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveRuleResponse, Rule>(HttpMethod.Put,
                 $"/1/indexes/{_urlEncodedIndexName}/rules/{rule.ObjectID}", CallType.Write, rule, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitForCompletion(t);
+            return response;
         }
 
         /// <summary>

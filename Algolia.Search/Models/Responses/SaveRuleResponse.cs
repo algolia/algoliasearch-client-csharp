@@ -27,9 +27,8 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class SaveRuleResponse
+    public class SaveRuleResponse : AlgoliaWaitableResponse<SaveRuleResponse>
     {
         public DateTime UpdatedAt { get; set; }
-        public long TaskID { get; set; }
     }
 }

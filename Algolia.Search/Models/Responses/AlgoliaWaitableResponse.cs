@@ -23,13 +23,26 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
 using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class AddObjectResponse : AlgoliaWaitableResponse<AddObjectResponse>
+    /// <summary>
+    /// Base class for Algolia's waitable responses
+    /// Allow to chain the WaitForCompletion method directly on the responses
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class AlgoliaWaitableResponse<T> where T : AlgoliaWaitableResponse<T>
     {
-        public DateTime CreatedAt { get; set; }
-        public string ObjectID { get; set; }
+        public Action<long> WaitDelegate { private get; set; }
+
+        public long TaskID { get; set; }
+
+        public T WaitForCompletion()
+        {
+            WaitDelegate(TaskID);
+            return (T)this;
+        }
     }
 }

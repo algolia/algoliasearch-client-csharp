@@ -60,16 +60,16 @@ namespace Algolia.Search.Test.Integration
         public void MultiThreadSearchRule()
         {
             Task task1 = Task.Run(() =>
-         {
-             var ret = _index.SearchRule(new RuleQuery());
-             Assert.IsType<SearchResponse<Rule>>(ret);
-         });
+            {
+                var ret = _index.SearchRule(new RuleQuery());
+                Assert.IsType<SearchResponse<Rule>>(ret);
+            });
 
             Task task2 = Task.Run(() =>
-          {
-              var ret = _index.SearchRule(new RuleQuery());
-              Assert.IsType<SearchResponse<Rule>>(ret);
-          });
+            {
+                var ret = _index.SearchRule(new RuleQuery());
+                Assert.IsType<SearchResponse<Rule>>(ret);
+            });
 
             Task.WaitAll(task1, task2);
         }
@@ -78,16 +78,16 @@ namespace Algolia.Search.Test.Integration
         public void MultiThreadSearchRuleAsync()
         {
             Task task1 = Task.Run(async () =>
-         {
-             var ret = await _index.SearchRuleAsync(new RuleQuery());
-             Assert.IsType<SearchResponse<Rule>>(ret);
-         });
+             {
+                var ret = await _index.SearchRuleAsync(new RuleQuery());
+                Assert.IsType<SearchResponse<Rule>>(ret);
+             });
 
             Task task2 = Task.Run(async () =>
-          {
-              var ret = await _index.SearchRuleAsync(new RuleQuery());
-              Assert.IsType<SearchResponse<Rule>>(ret);
-          });
+            {
+                var ret = await _index.SearchRuleAsync(new RuleQuery());
+                Assert.IsType<SearchResponse<Rule>>(ret);
+            });
 
             Task.WaitAll(task1, task2);
         }
@@ -107,7 +107,7 @@ namespace Algolia.Search.Test.Integration
             var response = await _index.SaveRuleAsync(ruleToSave);
             Assert.IsType<SaveRuleResponse>(response);
 
-            await _index.WaitForCompletionAsync(response.TaskID);
+            response.WaitForCompletion();
 
             var ret = await _index.GetRuleAsync(ruleID);
             Assert.IsType<Rule>(ret);
@@ -129,10 +129,8 @@ namespace Algolia.Search.Test.Integration
                 Consequence = new Consequence { Params = new ConsequenceParams { AutomaticFacetFilters = new List<string> { "products.properties.fbrand" } } }
             };
 
-            var response = _index.SaveRule(ruleToSave);
+            SaveRuleResponse response = _index.SaveRule(ruleToSave).WaitForCompletion();
             Assert.IsType<SaveRuleResponse>(response);
-
-            _index.WaitForCompletion(response.TaskID);
 
             var ret = _index.GetRule(ruleID);
             Assert.IsType<Rule>(ret);

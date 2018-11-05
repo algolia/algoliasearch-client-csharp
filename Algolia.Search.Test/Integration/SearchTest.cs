@@ -43,8 +43,8 @@ namespace Algolia.Search.Test.Integration
                 ObjectID = "1337"
             };
 
-            var addObject = await _index.AddObjectAysnc(actor);
-            await _index.WaitForCompletionAsync(addObject.TaskID);
+            var response = await _index.AddObjectAysnc(actor);
+            response.WaitForCompletion();
 
             var ret = await _index.SearchAsync<Actor>(new SearchQuery
             {
@@ -52,6 +52,7 @@ namespace Algolia.Search.Test.Integration
                 HitsPerPage = 2,
                 Page = 1
             });
+
             Assert.NotNull(ret);
             Assert.IsType<SearchResponse<Actor>>(ret);
         }
@@ -72,6 +73,7 @@ namespace Algolia.Search.Test.Integration
             };
 
             var addObjects = await _index.AddObjectsAysnc(actors);
+            
             Assert.IsType<BatchResponse>(addObjects);
 
             var ret = await _index.SearchAsync<Actor>(new SearchQuery
