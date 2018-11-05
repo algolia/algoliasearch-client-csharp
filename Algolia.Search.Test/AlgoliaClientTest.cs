@@ -1855,7 +1855,7 @@ namespace Algolia.Search.Test
         }
 
         [Fact]
-        public void TestNewMoveIndex()
+        public void TestMoveTo()
         {
             string originalIndex = "MoveIndex";
             string newIndex = "MoveIndex2";
@@ -1866,7 +1866,7 @@ namespace Algolia.Search.Test
             var addObjectTask = index.AddObject(new JObject { { "objectID", "test" } });
             index.WaitTask(addObjectTask["taskID"].ToString());
 
-            var moveTask = index.MoveIndex(newIndex);
+            var moveTask = index.MoveTo(newIndex);
             index.WaitTask(moveTask["taskID"].ToString());
 
             // should contain the new index and should not contain the old one

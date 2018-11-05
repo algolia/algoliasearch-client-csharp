@@ -2012,12 +2012,12 @@ namespace Algolia.Search
         { return BatchRules(queryRules, null, forwardToReplicas, clearExistingRules); }
 
         /// <summary>
-        /// Move this exisint index to a new one.
+        /// Move this existing index to a new one.
         /// </summary>
         /// <param name="dstIndexName">The new index name that will contain a copy of this index.</param>
         /// <param name="requestOptions"></param>
         /// <param name="token"></param>
-        public Task<JObject> MoveIndexAsync(string dstIndexName, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        public Task<JObject> MoveToAsync(string dstIndexName, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
         {
             Dictionary<string, object> operation = new Dictionary<string, object>();
             operation["operation"] = "move";
@@ -2036,9 +2036,9 @@ namespace Algolia.Search
         /// </summary>
         /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
         /// <param name="requestOptions"></param>
-        public JObject MoveIndex(string dstIndexName, RequestOptions requestOptions = null)
+        public JObject MoveTo(string dstIndexName, RequestOptions requestOptions = null)
         {
-            return MoveIndexAsync(dstIndexName, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
+            return MoveToAsync(dstIndexName, requestOptions, default(CancellationToken)).GetAwaiter().GetResult();
         }
 
     }
