@@ -315,7 +315,7 @@ namespace Algolia.Search
         /// <param name="dstIndexName">The new index name that will contain a copy of srcIndexName (destination will be overriten if it already exists).</param>
         /// <param name="requestOptions"></param>
         /// <param name="token"></param>
-        [Obsolete("Client.MoveIndex is deprecated, please use Index.MoveTo instead")]
+        [Obsolete("Client.MoveIndexAsync is deprecated, please use Index.MoveToAsync instead")]
         public Task<JObject> MoveIndexAsync(string srcIndexName, string dstIndexName, RequestOptions requestOptions, CancellationToken token = default(CancellationToken))
         {
             Dictionary<string, object> operation = new Dictionary<string, object>();
