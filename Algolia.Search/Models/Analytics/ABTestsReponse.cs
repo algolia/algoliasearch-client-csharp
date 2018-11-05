@@ -24,21 +24,13 @@
 */
 
 using System.Collections.Generic;
-using System;
+using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Analytics
 {
-    /// <summary>
-    /// https://www.algolia.com/doc/rest-api/ab-test/
-    /// </summary>
-    public class ABTest
+    public class ABTestsReponse
     {
-        public string Name { get; set; }
-        public IEnumerable<Variant> Variants { get; set; }
-        public DateTime EndAt { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public long AbTestId { get; set; }
-        public int ClickSignificance { get; set; }
-        public int ConversionSignificance { get; set; }
+        [JsonProperty(PropertyName = "abtests")]
+        public IEnumerable<ABTestResponse> ABTests { get; set; }
     }
 }

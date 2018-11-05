@@ -24,8 +24,15 @@
 */
 
 using Algolia.Search.Http;
+using Algolia.Search.Models.Analytics;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
+using Algolia.Search.Utils;
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
@@ -85,6 +92,53 @@ namespace Algolia.Search.Clients
             }
 
             _requesterWrapper = new RequesterWrapper(config, httpRequester);
+        }
+
+        /// <summary>
+        /// Get an A/B test information and results.
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public ABTestResponse GetABTest(int abTestId, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetABTestAsync(abTestId, requestOptions));
+
+        /// <summary>
+        /// Get an A/B test information and results.
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<ABTestResponse> GetABTestAsync(int abTestId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<ABTestResponse>(HttpMethod.Get,
+                $"/2/abtests/{abTestId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="limit"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => GetABTestsAsync(offset, limit, requestOptions));
+
+        /// <summary>
+        /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="limit"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
+                $"/2/abtests?offset=${offset}&limit=${limit}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }
