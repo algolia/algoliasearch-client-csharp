@@ -31,7 +31,7 @@ namespace Algolia.Search.Models.Analytics
     /// <summary>
     /// https://www.algolia.com/doc/rest-api/ab-test/
     /// </summary>
-    public class ABTestResponse
+    public class ABTest
     {
         public string Name { get; set; }
         public IEnumerable<Variant> Variants { get; set; }

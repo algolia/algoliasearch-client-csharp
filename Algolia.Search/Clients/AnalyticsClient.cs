@@ -100,7 +100,7 @@ namespace Algolia.Search.Clients
         /// <param name="abTestId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public ABTestResponse GetABTest(int abTestId, RequestOption requestOptions = null) =>
+        public ABTest GetABTest(long abTestId, RequestOption requestOptions = null) =>
             AsyncHelper.RunSync(() => GetABTestAsync(abTestId, requestOptions));
 
         /// <summary>
@@ -110,10 +110,10 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ABTestResponse> GetABTestAsync(int abTestId, RequestOption requestOptions = null,
+        public async Task<ABTest> GetABTestAsync(long abTestId, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<ABTestResponse>(HttpMethod.Get,
+            return await _requesterWrapper.ExecuteRequestAsync<ABTest>(HttpMethod.Get,
                 $"/2/abtests/{abTestId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
         }
         /// <summary>
@@ -139,6 +139,79 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
                 $"/2/abtests?offset=${offset}&limit=${limit}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates a new AB Test with provided configuration.
+        /// </summary>
+        /// <param name="aBTest"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public AddABTestResponse AddABTest(ABTest aBTest, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => AddABTestAsync(aBTest, requestOptions));
+
+        /// <summary>
+        /// Creates a new AB Test with provided configuration.
+        /// </summary>
+        /// <param name="aBTest"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOption requestOptions = null,
+             CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
+                "/2/abtests", CallType.Write, aBTest, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Marks the A/B Test as stopped. At this point, the test is over and cannot be restarted. 
+        /// As a result, your application is back to normal: index A will perform as usual, receiving 100% of all search requests. 
+        /// Associated metadata and metrics are still stored
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public StopABTestResponse StopABTest(long abTestId, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => StopABTestAsync(abTestId, requestOptions));
+
+        /// <summary>
+        /// Marks the A/B Test as stopped. At this point, the test is over and cannot be restarted. 
+        /// As a result, your application is back to normal: index A will perform as usual, receiving 100% of all search requests. 
+        /// Associated metadata and metrics are still stored
+        /// </summary>
+        /// <param name="aBTest"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<StopABTestResponse>(HttpMethod.Post,
+                $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Deletes the A/B Test and removes all associated metadata & metrics.
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteABTestResponse DeleteABTest(long abTestId, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => DeleteABTestAsync(abTestId, requestOptions));
+
+        /// <summary>
+        /// Deletes the A/B Test and removes all associated metadata & metrics.
+        /// </summary>
+        /// <param name="abTestId"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOption requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<DeleteABTestResponse>(HttpMethod.Delete,
+                $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }

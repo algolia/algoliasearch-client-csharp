@@ -34,7 +34,7 @@ namespace Algolia.Search.Utils
     /// Helper to improve performance with large json
     /// https://www.newtonsoft.com/json/help/html/performance.htm
     /// </summary>
-    public static class JsonHelper
+    internal static class JsonHelper
     {
         private static readonly UTF8Encoding _encoding = new UTF8Encoding(false);
         

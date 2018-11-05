@@ -23,14 +23,11 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
 namespace Algolia.Search.Models.Analytics
 {
-    public class ABTestsReponse
+    public class DeleteABTestResponse
     {
-        [JsonProperty(PropertyName = "abtests")]
-        public IEnumerable<ABTest> ABTests { get; set; }
+        public long TaskID { get; set; }
+        public string Index { get; set; }
     }
 }

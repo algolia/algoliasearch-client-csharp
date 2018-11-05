@@ -26,7 +26,7 @@
 
 namespace Algolia.Search.Utils
 {
-    public static class CamelCaseHelper
+    internal static class CamelCaseHelper
     {
         /// <summary>
         /// Helper used in the custom query serializer otherwise we use the built-in camel case strategy by JSON.Net
