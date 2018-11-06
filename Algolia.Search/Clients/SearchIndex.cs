@@ -451,6 +451,29 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Delete all rules in an index.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse ClearRules(RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => ClearRulesAsync(requestOptions));
+
+        /// <summary>
+        /// Delete all rules in an index.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> ClearRulesAsync(RequestOption requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/rules/clear", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
+        }
+
+        /// <summary>
         /// Get settings for the given index
         /// </summary>
         /// <param name="requestOptions"></param>

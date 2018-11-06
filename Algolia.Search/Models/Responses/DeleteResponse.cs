@@ -27,9 +27,8 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class DeleteResponse
+    public class DeleteResponse : AlgoliaWaitableResponse<DeleteResponse>
     {
         public DateTime DeletedAt { get; set; }
-        public long TaskID { get; set; }
     }
 }
