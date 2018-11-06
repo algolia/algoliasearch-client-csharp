@@ -255,7 +255,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<DeleteResponse> DeleteByAsync(SearchQuery query, RequestOption requestOptions = null, 
+        public async Task<DeleteResponse> DeleteByAsync(SearchQuery query, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
             if (query == null)
@@ -778,6 +778,46 @@ namespace Algolia.Search.Clients
         {
             return await _requesterWrapper.ExecuteRequestAsync<ClearSynonymsResponse>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms/clear", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="scope"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public CopyToResponse CopyTo(string destinationIndex, string scope = null, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => CopyToAsync(destinationIndex, scope, requestOptions));
+
+        /// <summary>
+        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="scope"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<CopyToResponse> CopyToAsync(string destinationIndex, string scope = null, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrWhiteSpace(destinationIndex))
+            {
+                throw new ArgumentNullException(destinationIndex);
+            }
+
+            var data = new CopyToRequest
+            {
+                Operation = "copy",
+                IndexNameDest = destinationIndex,
+                Scope = scope
+            };
+
+            CopyToResponse response = await _requesterWrapper.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/operation", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
         }
 
         /// <summary>
