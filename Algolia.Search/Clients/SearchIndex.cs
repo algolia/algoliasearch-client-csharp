@@ -194,7 +194,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<DeleteResponse> DeleteObjectAsync(string objectId, RequestOption requestOptions = null,
-                    CancellationToken ct = default(CancellationToken))
+                 CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(objectId))
             {
@@ -255,7 +255,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<DeleteResponse> DeleteByAsync(SearchQuery query, RequestOption requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<DeleteResponse> DeleteByAsync(SearchQuery query, RequestOption requestOptions = null, 
+                    CancellationToken ct = default(CancellationToken))
         {
             if (query == null)
             {
@@ -319,6 +320,36 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<T>, SearchQuery>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/query", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Search for a set of values within a given facet attribute. Can be combined with a query.
+        /// This method enables you to search through the values of a facet attribute, selecting only a subset of those values that meet a given criteria.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SearchForFacetResponse SearchForFacetValue(SearchForFacetRequest query, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => SearchForFacetValueAsync(query, requestOptions));
+
+        /// <summary>
+        /// Search for a set of values within a given facet attribute. Can be combined with a query.
+        /// This method enables you to search through the values of a facet attribute, selecting only a subset of those values that meet a given criteria.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SearchForFacetResponse> SearchForFacetValueAsync(SearchForFacetRequest query, RequestOption requestOptions = null,
+                CancellationToken ct = default(CancellationToken))
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            return await _requesterWrapper.ExecuteRequestAsync<SearchForFacetResponse, SearchForFacetRequest>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/query", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
         }
 
