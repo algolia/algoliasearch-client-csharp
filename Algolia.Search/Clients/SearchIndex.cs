@@ -236,6 +236,31 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Clear the records of an index without affecting its settings.
+        /// This method enables you to delete an index’s contents (records) without removing any settings, rules and synonyms.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse ClearObjects(RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => ClearObjectsAsync(requestOptions));
+
+        /// <summary>
+        /// Clear the records of an index without affecting its settings.
+        /// This method enables you to delete an index’s contents (records) without removing any settings, rules and synonyms.
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> ClearObjectsAsync(RequestOption requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/clear", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
+        }
+
+        /// <summary>
         /// Search in the index for the given query
         /// </summary>
         /// <param name="query"></param>
