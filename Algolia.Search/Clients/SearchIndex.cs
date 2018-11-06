@@ -582,7 +582,8 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopyRulesToAsync(string destinationIndex, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            return await CopyToAsync(destinationIndex, CopyScope.Rules).ConfigureAwait(false);
+            var scopes = new List<string> { CopyScope.Settings };
+            return await CopyToAsync(destinationIndex, scopes).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -653,7 +654,8 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySettingsToAsync(string destinationIndex, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            return await CopyToAsync(destinationIndex, CopyScope.Settings).ConfigureAwait(false);
+            var scopes = new List<string> { CopyScope.Settings };
+            return await CopyToAsync(destinationIndex, scopes).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -843,7 +845,8 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySynonymsToAsync(string destinationIndex, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            return await CopyToAsync(destinationIndex, CopyScope.Synonyms).ConfigureAwait(false);
+            var scopes = new List<string> { CopyScope.Synonyms };
+            return await CopyToAsync(destinationIndex, scopes).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -853,7 +856,7 @@ namespace Algolia.Search.Clients
         /// <param name="scope"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public CopyToResponse CopyTo(string destinationIndex, string scope = null, RequestOption requestOptions = null) =>
+        public CopyToResponse CopyTo(string destinationIndex, IEnumerable<string> scope = null, RequestOption requestOptions = null) =>
             AsyncHelper.RunSync(() => CopyToAsync(destinationIndex, scope, requestOptions));
 
         /// <summary>
@@ -864,7 +867,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<CopyToResponse> CopyToAsync(string destinationIndex, string scope = null, RequestOption requestOptions = null,
+        public async Task<CopyToResponse> CopyToAsync(string destinationIndex, IEnumerable<string> scope = null, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(destinationIndex))

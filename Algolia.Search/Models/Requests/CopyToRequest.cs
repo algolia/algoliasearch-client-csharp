@@ -23,12 +23,14 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+
 namespace Algolia.Search.Models.Requests
 {
     public class CopyToRequest
     {
         public string Operation { get; set; }
-        public string Scope { get; set; }
+        public IEnumerable<string> Scope { get; set; }
         public string IndexNameDest { get; set; }
     }
 }
