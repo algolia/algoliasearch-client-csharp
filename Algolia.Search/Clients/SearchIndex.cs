@@ -564,6 +564,28 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Make a copy of the rules of an index
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public CopyToResponse CopyRulesTo(string destinationIndex, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => CopySettingsToAsync(destinationIndex, requestOptions));
+
+        /// <summary>
+        /// Make a copy of the rules of an index
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<CopyToResponse> CopyRulesToAsync(string destinationIndex, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await CopyToAsync(destinationIndex, CopyScope.Rules).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Get settings for the given index
         /// </summary>
         /// <param name="requestOptions"></param>
