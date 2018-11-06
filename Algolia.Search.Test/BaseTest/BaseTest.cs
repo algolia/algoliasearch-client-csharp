@@ -29,7 +29,7 @@ using System;
 
 namespace Algolia.Search.Test
 {
-    public class BaseTest : IDisposable
+    public class BaseTest
     {
         protected SearchClient _client;
         protected SearchIndex _index;
@@ -46,11 +46,6 @@ namespace Algolia.Search.Test
             return Environment.GetEnvironmentVariable("APPVEYOR") == null
                 ? name
                 : $"{name}-appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
-        }
-
-        public void Dispose()
-        {
-            // Todo : clear index
         }
     }
 }
