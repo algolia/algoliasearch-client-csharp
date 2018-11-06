@@ -236,6 +236,40 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Remove all objects matching a filter (including geo filters).
+        /// This method enables you to delete one or more objects based on filters (numeric, facet, tag or geo queries).
+        /// It does not accept empty filters or a query.        
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public DeleteResponse DeleteBy(SearchQuery query, RequestOption requestOptions = null) =>
+                    AsyncHelper.RunSync(() => DeleteByAsync(query, requestOptions));
+
+        /// <summary>
+        /// Remove all objects matching a filter (including geo filters).
+        /// This method enables you to delete one or more objects based on filters (numeric, facet, tag or geo queries).
+        /// It does not accept empty filters or a query.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> DeleteByAsync(SearchQuery query, RequestOption requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse, SearchQuery>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/deleteByQuery", CallType.Write, query, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
+        }
+
+        /// <summary>
         /// Clear the records of an index without affecting its settings.
         /// This method enables you to delete an index’s contents (records) without removing any settings, rules and synonyms.
         /// </summary>
