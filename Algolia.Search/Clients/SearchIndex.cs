@@ -613,6 +613,28 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Make a copy of the settings of an index
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public CopyToResponse CopySettingsTo(string destinationIndex, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => CopySettingsToAsync(destinationIndex, requestOptions));
+
+        /// <summary>
+        /// Make a copy of the settings of an index
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<CopyToResponse> CopySettingsToAsync(string destinationIndex, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken))
+        {
+            return await CopyToAsync(destinationIndex, CopyScope.Settings).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Get all synonyms that match a query.
         /// </summary>
         /// <param name="query"></param>
