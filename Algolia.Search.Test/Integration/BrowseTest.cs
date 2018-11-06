@@ -61,10 +61,9 @@ namespace Algolia.Search.Test.Integration
         [Fact]
         public void TestBrowseAll()
         {
-            var browseIndex = new IndexIterator<Actor>(_index, new BrowseIndexQuery { HitsPerPage = 100 });
             List<Actor> actors = new List<Actor>();
 
-            foreach (var result in browseIndex)
+            foreach (var result in new IndexIterator<Actor>(_index, new BrowseIndexQuery { HitsPerPage = 200 }))
             {
                 actors.Add(result);
             }
