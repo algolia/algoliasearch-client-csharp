@@ -30,15 +30,20 @@ namespace Algolia.Search.Models.Responses
 {
     /// <summary>
     /// Base class for Algolia's waitable responses
-    /// Allow to chain the WaitForCompletion method directly on the responses
+    /// Allow to bind the WaitTask method directly on the responses
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class AlgoliaWaitableResponse<T> where T : AlgoliaWaitableResponse<T>
     {
+        
         public Action<long> WaitDelegate { private get; set; }
 
         public long TaskID { get; set; }
 
+        /// <summary>
+        /// This method waits on an asynchronous Algolia operation like a save or an update
+        /// </summary>
+        /// <returns></returns>
         public T Wait()
         {
             WaitDelegate(TaskID);

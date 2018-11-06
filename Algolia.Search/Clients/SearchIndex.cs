@@ -98,7 +98,7 @@ namespace Algolia.Search.Clients
             AddObjectResponse response = await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitForCompletion(t);
+            response.WaitDelegate = t => WaitTask(t);
             return response;
         }
 
@@ -173,7 +173,7 @@ namespace Algolia.Search.Clients
             BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<T>>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitForCompletion(t);
+            response.WaitDelegate = t => WaitTask(t);
             return response;
         }
 
@@ -418,7 +418,7 @@ namespace Algolia.Search.Clients
             SaveRuleResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveRuleResponse, Rule>(HttpMethod.Put,
                 $"/1/indexes/{_urlEncodedIndexName}/rules/{rule.ObjectID}", CallType.Write, rule, requestOptions, ct).ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitForCompletion(t);
+            response.WaitDelegate = t => WaitTask(t);
             return response;
         }
 
@@ -704,8 +704,8 @@ namespace Algolia.Search.Clients
         /// <param name="taskId"></param>
         /// <param name="timeToWait"></param>
         /// <param name="requestOptions"></param>
-        public void WaitForCompletion(long taskId, int timeToWait = 100, RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => WaitForCompletionAsync(taskId, timeToWait, requestOptions));
+        public void WaitTask(long taskId, int timeToWait = 100, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => WaitTaskAsync(taskId, timeToWait, requestOptions));
 
         /// <summary>
         /// This function waits for the Algolia's API task to finish
@@ -715,7 +715,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task WaitForCompletionAsync(long taskId, int timeToWait = 100, RequestOption requestOptions = null,
+        public async Task WaitTaskAsync(long taskId, int timeToWait = 100, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             while (true)
