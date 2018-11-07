@@ -47,14 +47,14 @@ public class BaseTest
     [OneTimeTearDown]
     public void Teardown()
     {
-       // PreviousTestCleanUp();
+        PreviousTestCleanUp();
     }
 
     protected void PreviousTestCleanUp()
     {
         if (indices?.Items != null && indices.Items.Any())
         {
-            var indicesToDelete = indices.Items.Where(x => x.Name.Contains("csharp"));
+            var indicesToDelete = indices.Items.Where(x => x.Name.Contains("csharp_"));
 
             foreach (var index in indicesToDelete)
             {

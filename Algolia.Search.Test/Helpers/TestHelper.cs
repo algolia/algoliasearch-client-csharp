@@ -64,8 +64,8 @@ namespace Algolia.Search.Test.Helpers
             var date = DateTime.UtcNow.ToString("yyyy-MM-dd_HH:mm:ss", CultureInfo.InvariantCulture);
 
             return string.IsNullOrEmpty(appVeyor)
-                ? $"csharp_{date}_{testName}"
-                : $"csharp_{date}_{testName}{appVeyor}";
+                ? $"csharp_{date}_{Environment.UserName}_{testName}"
+                : $"csharp_{date}_{appVeyor}_{testName}";
         }
     }
 }
