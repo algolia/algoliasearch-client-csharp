@@ -27,7 +27,7 @@ using System;
 using System.Linq;
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Responses;
-using Algolia.Search.Test.Helpers;
+using Algolia.Search.Test;
 using NUnit.Framework;
 
 [SetUpFixture]

@@ -26,7 +26,7 @@
 using System;
 using System.Globalization;
 
-namespace Algolia.Search.Test.Helpers
+namespace Algolia.Search.Test
 {
     internal static class TestHelper
     {

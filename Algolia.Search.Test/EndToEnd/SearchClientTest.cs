@@ -25,13 +25,12 @@
 
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Responses;
-using Algolia.Search.Test.Helpers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.Test.Integration
+namespace Algolia.Search.Test.EndToEnd
 {
     [TestFixture]
     [Parallelizable]

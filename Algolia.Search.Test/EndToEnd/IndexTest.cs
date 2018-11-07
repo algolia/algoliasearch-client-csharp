@@ -28,7 +28,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.Test.Integration
+namespace Algolia.Search.Test.EndToEnd
 {
     [TestFixture]
     [Parallelizable]
