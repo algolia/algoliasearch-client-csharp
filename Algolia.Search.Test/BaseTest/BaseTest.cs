@@ -23,29 +23,43 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Clients;
-using Algolia.Search.Test.Helpers;
 using System;
+using System.Linq;
+using Algolia.Search.Clients;
+using Algolia.Search.Models.Responses;
+using Algolia.Search.Test.Helpers;
+using NUnit.Framework;
 
-namespace Algolia.Search.Test
+[SetUpFixture]
+public class BaseTest
 {
-    public class BaseTest
+    public static SearchClient SearchClient;
+    private static ListIndexesResponse indices;
+
+    [OneTimeSetUp]
+    public void Setup()
     {
-        protected SearchClient _client;
-        protected SearchIndex _index;
+        TestHelper.CheckEnvironmentVariable();
+        SearchClient = new SearchClient(TestHelper.ApplicationId, TestHelper.TestApiKey);
+        indices = SearchClient.ListIndexes();
+    }
 
-        public BaseTest()
-        {
-            TestHelper.CheckEnvironmentVariable();
-            _client = new SearchClient(TestHelper.ApplicationId, TestHelper.TestApiKey);
-            _index = _client.InitIndex(GetSafeName("Actors"));
-        }
+    [OneTimeTearDown]
+    public void Teardown()
+    {
+       // PreviousTestCleanUp();
+    }
 
-        public static string GetSafeName(string name)
+    protected void PreviousTestCleanUp()
+    {
+        if (indices?.Items != null && indices.Items.Any())
         {
-            return Environment.GetEnvironmentVariable("APPVEYOR") == null
-                ? name
-                : $"{name}-appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
+            var indicesToDelete = indices.Items.Where(x => x.Name.Contains("csharp"));
+
+            foreach (var index in indicesToDelete)
+            {
+                SearchClient.DeleteIndex(index.Name);
+            }
         }
     }
 }

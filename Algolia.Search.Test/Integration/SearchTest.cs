@@ -23,17 +23,30 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Responses;
+using Algolia.Search.Test.Helpers;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Algolia.Search.Test.Integration
 {
-    public class SearchTest : BaseTest
+    [TestFixture]
+    [Parallelizable]
+    public class SearchTest
     {
-        [Fact]
+        protected SearchIndex _index;
+
+        [OneTimeSetUp]
+        public void Init()
+        {
+            var indexName = TestHelper.GetTestIndexName("search");
+            _index = BaseTest.SearchClient.InitIndex(indexName);
+        }
+
+        [Test]
         public async Task AddObjectAndSearch()
         {
             var actor = new Actor
@@ -54,10 +67,10 @@ namespace Algolia.Search.Test.Integration
             });
 
             Assert.NotNull(ret);
-            Assert.IsType<SearchResponse<Actor>>(ret);
+            Assert.IsInstanceOf<SearchResponse<Actor>>(ret);
         }
 
-        [Fact]
+        [Test]
         public async Task AddObjectsAndSearch()
         {
             var actors = new List<Actor>
@@ -73,8 +86,8 @@ namespace Algolia.Search.Test.Integration
             };
 
             var addObjects = await _index.AddObjectsAysnc(actors);
-            
-            Assert.IsType<BatchResponse>(addObjects);
+
+            Assert.IsInstanceOf<BatchResponse>(addObjects);
 
             var ret = await _index.SearchAsync<Actor>(new SearchQuery
             {
@@ -83,7 +96,7 @@ namespace Algolia.Search.Test.Integration
                 Page = 1
             });
             Assert.NotNull(ret);
-            Assert.IsType<SearchResponse<Actor>>(ret);
+            Assert.IsInstanceOf<SearchResponse<Actor>>(ret);
         }
     }
 }

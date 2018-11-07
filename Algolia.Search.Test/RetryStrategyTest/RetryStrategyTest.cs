@@ -25,20 +25,22 @@
 
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Algolia.Search.Test.RetryStrategyTest
 {
+    [TestFixture]
+    [Parallelizable]
     public class RetryStrategyTest
     {
-        [Theory]
-        [InlineData(CallType.Read)]
-        [InlineData(CallType.Write)]
-        [InlineData(CallType.Analytics)]
+        [TestCase(CallType.Read)]
+        [TestCase(CallType.Write)]
+        [TestCase(CallType.Analytics)]
+
         public void TestGetTryableHost(CallType callType)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
@@ -56,9 +58,8 @@ namespace Algolia.Search.Test.RetryStrategyTest
             }
         }
 
-        [Theory]
-        [InlineData(CallType.Read)]
-        [InlineData(CallType.Write)]
+        [TestCase(CallType.Read)]
+        [TestCase(CallType.Write)]
         public void TestRetryStrategyResetExpired(CallType callType)
         {
             var commonHosts = new List<StatefulHost> {
@@ -94,11 +95,12 @@ namespace Algolia.Search.Test.RetryStrategyTest
             Assert.True(hosts.Where(h => h.Up).Count() == 2);
         }
 
-        [Theory]
-        [InlineData(CallType.Read, 500)]
-        [InlineData(CallType.Write, 500)]
-        [InlineData(CallType.Read, 300)]
-        [InlineData(CallType.Write, 300)]
+
+        [TestCase(CallType.Read, 500)]
+        [TestCase(CallType.Write, 500)]
+        [TestCase(CallType.Read, 300)]
+        [TestCase(CallType.Write, 300)]
+
         public void TestRetryStrategyRetriableFailure(CallType callType, int httpErrorCode)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
@@ -113,11 +115,11 @@ namespace Algolia.Search.Test.RetryStrategyTest
             Assert.True(updatedHosts.Where(h => h.Up).Count() == 3);
         }
 
-        [Theory]
-        [InlineData(CallType.Read, 400)]
-        [InlineData(CallType.Write, 400)]
-        [InlineData(CallType.Read, 404)]
-        [InlineData(CallType.Write, 404)]
+
+        [TestCase(CallType.Read, 400)]
+        [TestCase(CallType.Write, 400)]
+        [TestCase(CallType.Read, 404)]
+        [TestCase(CallType.Write, 404)]
         public void TestRetryStrategyFailureDecision(CallType callType, int httpErrorCode)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
@@ -128,9 +130,8 @@ namespace Algolia.Search.Test.RetryStrategyTest
             Assert.True(decision.HasFlag(RetryOutcomeType.Failure));
         }
 
-        [Theory]
-        [InlineData(CallType.Read)]
-        [InlineData(CallType.Write)]
+        [TestCase(CallType.Read)]
+        [TestCase(CallType.Write)]
         public void TestRetryStrategyMultiThread(CallType callType)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");

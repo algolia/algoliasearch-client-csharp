@@ -26,42 +26,36 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Test.Helpers;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Algolia.Search.Test.Integration
 {
+    [TestFixture]
+    [Parallelizable]
     public class SearchClientTest
     {
-        protected SearchClient _client;
-
-        public SearchClientTest()
-        {
-            TestHelper.CheckEnvironmentVariable();
-            _client = new SearchClient(TestHelper.ApplicationId, TestHelper.TestApiKey);
-        }
-
-        [Fact]
+        [Test]
         public async Task ListIndexesAsync()
         {
-            var ret = await _client.ListIndexesAsync();
-            Assert.IsType<ListIndexesResponse>(ret);
+            var ret = await BaseTest.SearchClient.ListIndexesAsync();
+            Assert.IsInstanceOf<ListIndexesResponse>(ret);
         }
 
-        [Fact]
+        [Test]
         public async Task ListApiKeysAsync()
         {
-            var ret = await _client.ListApiKeysAsync();
-            Assert.IsType<ListApiKeysResponse>(ret);
+            var ret = await BaseTest.SearchClient.ListApiKeysAsync();
+            Assert.IsInstanceOf<ListApiKeysResponse>(ret);
         }
 
-        [Fact]
+        [Test]
         public async Task GetLogsAsync()
         {
-            var ret = await _client.GetLogsAsync();
-            Assert.IsType<LogResponse>(ret);
+            var ret = await BaseTest.SearchClient.GetLogsAsync();
+            Assert.IsInstanceOf<LogResponse>(ret);
         }
     }
 }

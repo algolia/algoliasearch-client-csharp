@@ -23,18 +23,30 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
+using Algolia.Search.Iterators;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
+using Algolia.Search.Test.Helpers;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Algolia.Search.Test.Integration
 {
-    public class RuleTest : BaseTest
+    [TestFixture]
+    public class RuleTest
     {
-        [Theory]
-        [InlineData("ruleID1")]
+        protected SearchIndex _index;
+
+        [OneTimeSetUp]
+        public void Init()
+        {
+            var indexName = TestHelper.GetTestIndexName("rules");
+            _index = BaseTest.SearchClient.InitIndex(indexName);
+        }
+
+        [TestCase("ruleID1")]
         public async Task SaveRuleAsyncTest(string ruleID)
         {
             var ruleToSave = new Rule
@@ -46,54 +58,64 @@ namespace Algolia.Search.Test.Integration
             };
 
             var response = await _index.SaveRuleAsync(ruleToSave);
-            Assert.IsType<SaveRuleResponse>(response);
+            Assert.IsInstanceOf<SaveRuleResponse>(response);
         }
 
-        [Fact]
+        [Test]
+        public void TestBrowseRules()
+        {
+            List<Rule> rules = new List<Rule>();
+
+            foreach (var result in new RulesIterator(_index, 1))
+            {
+                rules.Add(result);
+            }
+        }
+
+        [Test]
         public async Task SearchRuleAsync()
         {
             var ret = await _index.SearchRuleAsync(new RuleQuery());
-            Assert.IsType<SearchResponse<Rule>>(ret);
+            Assert.IsInstanceOf<SearchResponse<Rule>>(ret);
         }
 
-        [Fact]
+        [Test]
         public void MultiThreadSearchRule()
         {
             Task task1 = Task.Run(() =>
             {
                 var ret = _index.SearchRule(new RuleQuery());
-                Assert.IsType<SearchResponse<Rule>>(ret);
+                Assert.IsInstanceOf<SearchResponse<Rule>>(ret);
             });
 
             Task task2 = Task.Run(() =>
             {
                 var ret = _index.SearchRule(new RuleQuery());
-                Assert.IsType<SearchResponse<Rule>>(ret);
+                Assert.IsInstanceOf<SearchResponse<Rule>>(ret);
             });
 
             Task.WaitAll(task1, task2);
         }
 
-        [Fact]
+        [Test]
         public void MultiThreadSearchRuleAsync()
         {
             Task task1 = Task.Run(async () =>
              {
-                var ret = await _index.SearchRuleAsync(new RuleQuery());
-                Assert.IsType<SearchResponse<Rule>>(ret);
+                 var ret = await _index.SearchRuleAsync(new RuleQuery());
+                 Assert.IsInstanceOf<SearchResponse<Rule>>(ret);
              });
 
             Task task2 = Task.Run(async () =>
             {
                 var ret = await _index.SearchRuleAsync(new RuleQuery());
-                Assert.IsType<SearchResponse<Rule>>(ret);
+                Assert.IsInstanceOf<SearchResponse<Rule>>(ret);
             });
 
             Task.WaitAll(task1, task2);
         }
 
-        [Theory]
-        [InlineData("SaveGetDeleteRuleAsync")]
+        [TestCase("SaveGetDeleteRuleAsync")]
         public async Task SaveGetDeleteRuleAsync(string ruleID)
         {
             var ruleToSave = new Rule
@@ -105,20 +127,20 @@ namespace Algolia.Search.Test.Integration
             };
 
             var response = await _index.SaveRuleAsync(ruleToSave);
-            Assert.IsType<SaveRuleResponse>(response);
+            Assert.IsInstanceOf<SaveRuleResponse>(response);
 
             response.Wait();
 
             var ret = await _index.GetRuleAsync(ruleID);
-            Assert.IsType<Rule>(ret);
-            Assert.Equal(ruleID, ret.ObjectID);
+            Assert.IsInstanceOf<Rule>(ret);
+            Assert.AreEqual(ruleID, ret.ObjectID);
 
             var del = await _index.DeleteRuleAsync(ruleID);
-            Assert.IsType<DeleteResponse>(del);
+            Assert.IsInstanceOf<DeleteResponse>(del);
         }
 
-        [Theory]
-        [InlineData("SaveGetDeleteRule")]
+        [TestCase("SaveGetDeleteRule")]
+
         public void SaveGetDeleteRule(string ruleID)
         {
             var ruleToSave = new Rule
@@ -130,14 +152,14 @@ namespace Algolia.Search.Test.Integration
             };
 
             SaveRuleResponse response = _index.SaveRule(ruleToSave).Wait();
-            Assert.IsType<SaveRuleResponse>(response);
+            Assert.IsInstanceOf<SaveRuleResponse>(response);
 
             var ret = _index.GetRule(ruleID);
-            Assert.IsType<Rule>(ret);
-            Assert.Equal(ruleID, ret.ObjectID);
+            Assert.IsInstanceOf<Rule>(ret);
+            Assert.AreEqual(ruleID, ret.ObjectID);
 
             var del = _index.DeleteRule(ruleID);
-            Assert.IsType<DeleteResponse>(del);
+            Assert.IsInstanceOf<DeleteResponse>(del);
         }
     }
 }

@@ -24,26 +24,28 @@
 */
 
 using Algolia.Search.Models.Responses;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Algolia.Search.Test.Integration
 {
-    public class IndexTest : BaseTest
+    [TestFixture]
+    [Parallelizable]
+    public class IndexTest
     {
-        [Fact]
+        [Test]
         public async Task ListIndexesAsync()
         {
-            var ret = await _client.ListIndexesAsync();
-            Assert.IsType<ListIndexesResponse>(ret);
+            var ret = await BaseTest.SearchClient.ListIndexesAsync();
+            Assert.IsInstanceOf<ListIndexesResponse>(ret);
         }
 
-        [Fact]
+        [Test]
         public async Task ListApiKeysAsync()
         {
-            var ret = await _client.ListApiKeysAsync();
-            Assert.IsType<ListApiKeysResponse>(ret);
+            var ret = await BaseTest.SearchClient.ListApiKeysAsync();
+            Assert.IsInstanceOf<ListApiKeysResponse>(ret);
         }
     }
 }

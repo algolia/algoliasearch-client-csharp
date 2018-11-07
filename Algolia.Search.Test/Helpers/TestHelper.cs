@@ -24,13 +24,14 @@
 */
 
 using System;
+using System.Globalization;
 
 namespace Algolia.Search.Test.Helpers
 {
     internal static class TestHelper
     {
         internal static string ApplicationId = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
-        
+
         internal static string TestApiKey = Environment.GetEnvironmentVariable("APPVEYOR") == null
               ? Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY")
               : Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
@@ -52,6 +53,19 @@ namespace Algolia.Search.Test.Helpers
                     throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_API_KEY");
                 }
             }
+        }
+
+        internal static string GetTestIndexName(string testName)
+        {
+            string appVeyor = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"))
+                ? null
+                : $"-appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
+
+            var date = DateTime.UtcNow.ToString("yyyy-MM-dd_HH:mm:ss", CultureInfo.InvariantCulture);
+
+            return string.IsNullOrEmpty(appVeyor)
+                ? $"csharp_{date}_{testName}"
+                : $"csharp_{date}_{testName}{appVeyor}";
         }
     }
 }
