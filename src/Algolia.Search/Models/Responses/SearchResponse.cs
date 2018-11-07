@@ -41,5 +41,6 @@ namespace Algolia.Search.Models.Responses
         public int ProcessingTimeMs { get; set; }
         public string Query { get; set; }
         public string Params { get; set; }
+        public string QueryID { get; set; }
     }
 }

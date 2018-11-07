@@ -349,8 +349,13 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(query));
             }
 
+            if (string.IsNullOrWhiteSpace(query.FacetName))
+            {
+                throw new ArgumentNullException(nameof(query.FacetName));
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<SearchForFacetResponse, SearchForFacetRequest>(HttpMethod.Post,
-                $"/1/indexes/{_urlEncodedIndexName}/query", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
+                $"/1/indexes/{_urlEncodedIndexName}/facets/{query.FacetName}/query", CallType.Read, query, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -631,8 +636,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(settings));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<SetSettingsResponse, IndexSettings>(HttpMethod.Put,
+            SetSettingsResponse response = await _requesterWrapper.ExecuteRequestAsync<SetSettingsResponse, IndexSettings>(HttpMethod.Put,
                 $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Write, settings, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
         }
 
         /// <summary>

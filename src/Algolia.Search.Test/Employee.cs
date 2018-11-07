@@ -23,12 +23,13 @@
 * THE SOFTWARE.
 */
 
-using System;
-
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Test
 {
-    public class SetSettingsResponse : AlgoliaWaitableResponse<SetSettingsResponse>
+
+    public class Employee
     {
-        public DateTime UpdatedAt { get; set; }
+        public string Company { get; set; }
+        public string Name { get; set; }
+        public string QueryID { get; set; }
     }
 }

@@ -43,6 +43,7 @@ namespace Algolia.Search.Models.Query
         public string NumericFilters { get; set; }
         public string TagFilters { get; set; }
         public bool? SumOrFiltersScores { get; set; }
+        public string Filters { get; set; }
 
         // Pagination
         public int? Page { get; set; }
@@ -94,5 +95,7 @@ namespace Algolia.Search.Models.Query
         public IEnumerable<string> ResponseFields { get; set; }
         public int? MaxFacetHits { get; set; }
         public bool? PercentileComputation { get; set; }
+
+        public bool? ClickAnalytics { get; set; }
     }
 }

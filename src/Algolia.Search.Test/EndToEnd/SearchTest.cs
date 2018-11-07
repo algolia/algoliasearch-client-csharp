@@ -25,9 +25,12 @@
 
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Query;
+using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Settings;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd
@@ -37,65 +40,92 @@ namespace Algolia.Search.Test.EndToEnd
     public class SearchTest
     {
         protected SearchIndex _index;
+        private IEnumerable<Employee> _employees;
 
         [OneTimeSetUp]
         public void Init()
         {
             var indexName = TestHelper.GetTestIndexName("search");
             _index = BaseTest.SearchClient.InitIndex(indexName);
+            _employees = InitEmployees();
         }
 
         [Test]
-        public async Task AddObjectAndSearch()
+        public async Task SearchTestAsync()
         {
-            var actor = new Actor
-            {
-                Name = "Tony Casanova",
-                Rating = 456,
-                ObjectID = "1337"
-            };
+            BatchResponse addObjectResponse = await _index.AddObjectsAysnc(_employees);
+            addObjectResponse.Wait();
 
-            var response = await _index.AddObjectAysnc(actor);
-            response.Wait();
+            Assert.IsInstanceOf<BatchResponse>(addObjectResponse);
+            Assert.NotNull(addObjectResponse);
 
-            var ret = await _index.SearchAsync<Actor>(new SearchQuery
+            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "searchable(company)" } };
+            var setSettingsResponse = await _index.SetSettingsAsync(settings);
+            setSettingsResponse.Wait();
+
+            Assert.IsInstanceOf<SetSettingsResponse>(setSettingsResponse);
+            Assert.NotNull(setSettingsResponse);
+
+            Task<SearchResponse<Employee>> searchAlgoliaTask = _index.SearchAsync<Employee>(new SearchQuery
             {
-                Query = "Tony",
-                HitsPerPage = 2,
-                Page = 1
+                Query = "algolia"
             });
 
-            Assert.NotNull(ret);
-            Assert.IsInstanceOf<SearchResponse<Actor>>(ret);
+            Task<SearchResponse<Employee>> searchElonTask = _index.SearchAsync<Employee>(new SearchQuery
+            {
+                Query = "elon",
+                ClickAnalytics = true
+            });
+
+            Task<SearchResponse<Employee>> searchElonTask1 = _index.SearchAsync<Employee>(new SearchQuery
+            {
+                Query = "elon",
+                Facets = new List<string> { "*" },
+                FacetFilters = new List<string> { "company:tesla" }
+            });
+
+            Task<SearchResponse<Employee>> searchElonTask2 = _index.SearchAsync<Employee>(new SearchQuery
+            {
+                Query = "elon",
+                Facets = new List<string> { "*" },
+                Filters = "(company:tesla OR company:spacex)"
+            });
+
+            Task<SearchForFacetResponse> searchFacetTask =  _index.SearchForFacetValueAsync(new SearchForFacetRequest
+            {
+                FacetName = "company",
+                FacetQuery = "a"
+            });
+
+            Task.WaitAll(searchAlgoliaTask, searchElonTask, searchElonTask1, searchElonTask2, searchFacetTask);
+
+            Assert.IsTrue(searchAlgoliaTask.Result.Hits.Count == 2);
+            Assert.IsTrue(searchElonTask.Result.QueryID != null);
+            Assert.IsTrue(searchElonTask1.Result.Hits.Count == 1);
+            Assert.IsTrue(searchElonTask2.Result.Hits.Count == 2);
+            Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Algolia")));
+            Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Amazon")));
+            Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Apple")));
+            Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Arista Networks")));
         }
 
-        [Test]
-        public async Task AddObjectsAndSearch()
+        private IEnumerable<Employee> InitEmployees()
         {
-            var actors = new List<Actor>
-            {
-                new Actor {
-                    Name = "Tony Casanova",
-                    Rating = 456
-                },
-                new Actor {
-                    Name = "Billy the kid",
-                    Rating = 500
-                }
+            return new List<Employee>() {
+                new Employee{ Company = "Algolia", Name = "Julien Lemoine" },
+                new Employee{ Company = "Algolia", Name = "Nicolas Dessaigne" },
+                new Employee{ Company = "Amazon", Name = "Jeff Bezos" },
+                new Employee{ Company = "Apple", Name = "Steve Jobs" },
+                new Employee{ Company = "Apple", Name = "Steve Wozniak" },
+                new Employee{ Company = "Arista Networks", Name = "Jayshree Ullal" },
+                new Employee{ Company = "Google", Name = "Lary Page" },
+                new Employee{ Company = "Google", Name = "Rob Pike" },
+                new Employee{ Company = "Google", Name = "Sergueï Brin" },
+                new Employee{ Company = "Microsoft", Name = "Bill Gates" },
+                new Employee{ Company = "SpaceX", Name = "Elon Musk" },
+                new Employee{ Company = "Tesla", Name = "Elon Musk" },
+                new Employee{ Company = "Yahoo", Name = "Marissa Mayer" }
             };
-
-            var addObjects = await _index.AddObjectsAysnc(actors);
-
-            Assert.IsInstanceOf<BatchResponse>(addObjects);
-
-            var ret = await _index.SearchAsync<Actor>(new SearchQuery
-            {
-                Query = "Tony",
-                HitsPerPage = 2,
-                Page = 1
-            });
-            Assert.NotNull(ret);
-            Assert.IsInstanceOf<SearchResponse<Actor>>(ret);
         }
     }
 }
