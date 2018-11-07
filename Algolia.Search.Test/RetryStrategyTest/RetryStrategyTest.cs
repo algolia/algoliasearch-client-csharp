@@ -131,7 +131,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
         }
 
         [TestCase(CallType.Read)]
-        [TestCase(CallType.Write)]
         public void TestRetryStrategyMultiThread(CallType callType)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
