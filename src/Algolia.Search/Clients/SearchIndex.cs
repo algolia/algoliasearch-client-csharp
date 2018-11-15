@@ -575,7 +575,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         public CopyToResponse CopyRulesTo(string destinationIndex, RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => CopySettingsToAsync(destinationIndex, requestOptions));
+            AsyncHelper.RunSync(() => CopyRulesToAsync(destinationIndex, requestOptions));
 
         /// <summary>
         /// Make a copy of the rules of an index
@@ -587,7 +587,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopyRulesToAsync(string destinationIndex, RequestOption requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Settings };
+            var scopes = new List<string> { CopyScope.Rules };
             return await CopyToAsync(destinationIndex, scopes).ConfigureAwait(false);
         }
 
@@ -746,8 +746,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(synonyms));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
+            SaveSynonymResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms", CallType.Write, synonyms, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
         }
 
         /// <summary>
@@ -781,8 +784,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(synonym));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, Synonym>(HttpMethod.Put,
+            SaveSynonymResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, Synonym>(HttpMethod.Put,
                 $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Write, synonym, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
         }
 
         /// <summary>

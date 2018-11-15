@@ -23,6 +23,7 @@
 * THE SOFTWARE.
 */
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Requests
@@ -31,6 +32,7 @@ namespace Algolia.Search.Models.Requests
     {
         public string Operation { get; set; }
         public IEnumerable<string> Scope { get; set; }
+        [JsonProperty(PropertyName = "destination")]
         public string IndexNameDest { get; set; }
     }
 }

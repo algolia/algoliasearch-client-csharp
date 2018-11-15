@@ -27,10 +27,9 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class SaveSynonymResponse
+    public class SaveSynonymResponse : AlgoliaWaitableResponse<SaveSynonymResponse>
     {
         public DateTime UpdatedAt { get; set; }
-        public long TaskID { get; set; }
         public string Id { get; set; }
     }
 }

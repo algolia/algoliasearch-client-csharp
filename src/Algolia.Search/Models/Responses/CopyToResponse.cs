@@ -27,7 +27,7 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class CopyToResponse : AlgoliaWaitableResponse<AddObjectResponse>
+    public class CopyToResponse : AlgoliaWaitableResponse<CopyToResponse>
     {
         public DateTime UpdatedAt { get; set; }
     }
