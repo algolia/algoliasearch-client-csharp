@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Clients;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
@@ -79,7 +80,7 @@ namespace Algolia.Search.Test.EndToEnd
             Synonym synonym = new Synonym
             {
                 ObjectID = "google.placeholder",
-                Type = "placeholder",
+                Type = SynonymType.Placeholder,
                 Placeholder = "<GOOG>",
                 Replacements = new List<string> { "Google", "GOOG" }
             };

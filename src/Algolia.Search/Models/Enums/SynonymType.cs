@@ -23,12 +23,14 @@
 * THE SOFTWARE.
 */
 
-using System;
-
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.Enums
 {
-    public class ClearSynonymsResponse : AlgoliaWaitableResponse<ClearSynonymsResponse>
+    public class SynonymType
     {
-        public DateTime UpdatedAt { get; set; }
+        public const string Synonym = "synonym";
+        public const string OneWaySynonym = "oneWaySynonym";
+        public const string AltCorrection1 = "altCorrection1";
+        public const string AltCorrection2 = "altCorrection2";
+        public const string Placeholder = "placeholder";
     }
 }
