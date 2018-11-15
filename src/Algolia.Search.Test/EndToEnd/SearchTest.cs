@@ -91,7 +91,7 @@ namespace Algolia.Search.Test.EndToEnd
                 Filters = "(company:tesla OR company:spacex)"
             });
 
-            Task<SearchForFacetResponse> searchFacetTask =  _index.SearchForFacetValueAsync(new SearchForFacetRequest
+            Task<SearchForFacetResponse> searchFacetTask = _index.SearchForFacetValueAsync(new SearchForFacetRequest
             {
                 FacetName = "company",
                 FacetQuery = "a"

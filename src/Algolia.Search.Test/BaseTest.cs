@@ -33,7 +33,7 @@ using NUnit.Framework;
 [SetUpFixture]
 public class BaseTest
 {
-    public static SearchClient SearchClient;
+    internal static SearchClient SearchClient;
     private static ListIndexesResponse indices;
 
     [OneTimeSetUp]
@@ -47,7 +47,7 @@ public class BaseTest
     [OneTimeTearDown]
     public void Teardown()
     {
-        //PreviousTestCleanUp();
+        PreviousTestCleanUp();
     }
 
     protected void PreviousTestCleanUp()
