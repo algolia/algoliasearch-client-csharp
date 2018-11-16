@@ -26,6 +26,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Algolia.Search.Clients;
+using Algolia.Search.Iterators;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Synonyms;
@@ -65,14 +66,14 @@ namespace Algolia.Search.Test.EndToEnd
             BatchResponse addObjectResponse = await _index.AddObjectsAysnc(_objectsToSave);
             addObjectResponse.Wait();
 
-            Synonym regularSynonym = new Synonym
+            Synonym gba = new Synonym
             {
                 ObjectID = "gba",
                 Type = SynonymType.Synonym,
                 Synonyms = new List<string> { "gba", "gameboy advance", "game boy advance" }
             };
 
-            var regularSynonymResponse = await _index.SaveSynonymAsync(regularSynonym.ObjectID, regularSynonym);
+            var regularSynonymResponse = await _index.SaveSynonymAsync(gba.ObjectID, gba);
             regularSynonymResponse.Wait();
 
             Synonym wiiToWiiu = new Synonym
@@ -98,7 +99,7 @@ namespace Algolia.Search.Test.EndToEnd
                 Word = "ps4",
                 Corrections = new List<string> { "playstation4" }
             };
-            
+
             Synonym psone = new Synonym
             {
                 ObjectID = "psone",
@@ -112,18 +113,50 @@ namespace Algolia.Search.Test.EndToEnd
             var saveSynonymsResponse = await _index.SaveSynonymsAsync(synonyms);
             saveSynonymsResponse.Wait();
 
+            // Retrieve the 5 added synonyms with getSynonym and check they are correctly retrieved
+            var gbaTask = _index.GetSynonymAsync("gba");
+            var wiiTask = _index.GetSynonymAsync("wii_to_wii_u");
+            var playstationPlaceholderTask = _index.GetSynonymAsync("playstation_version_placeholder");
+            var ps4Task = _index.GetSynonymAsync("ps4");
+            var psoneTask = _index.GetSynonymAsync("psone");
+
+            Synonym[] tasks = await Task.WhenAll(gbaTask, wiiTask, playstationPlaceholderTask, ps4Task, psoneTask);
+            Assert.True(TestHelper.AreObjectsEqual(gba, tasks[0]));
+            Assert.True(TestHelper.AreObjectsEqual(wiiToWiiu, tasks[1]));
+            Assert.True(TestHelper.AreObjectsEqual(playstationPlaceholder, tasks[2]));
+            Assert.True(TestHelper.AreObjectsEqual(ps4, tasks[3]));
+            Assert.True(TestHelper.AreObjectsEqual(psone, tasks[4]));
+
+            // Perform a synonym search using searchSynonyms with an empty query, page 0 and hitsPerPage set to 10 and check that the returned synonyms are the same as the 5 originally saved
             SearchResponse<Synonym> searchResponse = await _index.SearchSynonymsAsync(new SynonymQuery { HitsPerPage = 10, Page = 0 });
             Assert.True(searchResponse.Hits.Count == 5);
 
+            // Instantiate a new SynonymIterator using newSynonymIterator and iterate over all the synonyms and check that those collected synonyms are the same as the 5 originally saved
+            List<Synonym> synonymsFromIterator = new List<Synonym>();
+
+            foreach (var synonym in new SynonymsIterator(_index))
+            {
+                synonymsFromIterator.Add(synonym);
+            }
+
+            Assert.True(TestHelper.AreObjectsEqual(gba, synonymsFromIterator.Find(s => s.ObjectID.Equals("gba"))));
+            Assert.True(TestHelper.AreObjectsEqual(wiiToWiiu, synonymsFromIterator.Find(s => s.ObjectID.Equals("wii_to_wii_u"))));
+            Assert.True(TestHelper.AreObjectsEqual(playstationPlaceholder, synonymsFromIterator.Find(s => s.ObjectID.Equals("playstation_version_placeholder"))));
+            Assert.True(TestHelper.AreObjectsEqual(ps4, synonymsFromIterator.Find(s => s.ObjectID.Equals("ps4"))));
+            Assert.True(TestHelper.AreObjectsEqual(psone, synonymsFromIterator.Find(s => s.ObjectID.Equals("psone"))));
+
+            // Delete the synonym with objectID=”gba” using deleteSynonym and wait for the task to terminate using waitTask with the returned taskID
             var deleteGbaResponse = await _index.DeleteSynonymAsync("gba");
             deleteGbaResponse.Wait();
 
-            // Catching 404
+            // Try to get the synonym with getSynonym with objectID “gba” and check that the synonym does not exist anymore (404)
             Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("gba"));
 
+            // Clear all the synonyms using clearSynonyms and wait for the task to terminate using waitTask with the returned taskID
             var clearSynonymResponse = await _index.ClearSynonymsAsync();
             clearSynonymResponse.Wait();
 
+            // Perform a synonym search using searchSynonyms with an empty query, page 0 and hitsPerPage set to 10 and check that the number of returned synonyms is equal to 0
             SearchResponse<Synonym> searchAfterClearResponse = await _index.SearchSynonymsAsync(new SynonymQuery { HitsPerPage = 10, Page = 0 });
             Assert.True(searchAfterClearResponse.Hits.Count == 0);
         }
