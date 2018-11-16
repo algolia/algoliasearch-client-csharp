@@ -42,12 +42,12 @@ namespace Algolia.Search.Test.EndToEnd
     {
         private SearchIndex _index;
         private SearchIndex _settingsIndex;
-        private string _settingsIndexName;
         private SearchIndex _rulesIndex;
-        private string _rulesIndexName;
-        private SearchIndex _synonymsIndex;
-        private string _synonymsIndexName;
         private SearchIndex _fullCopyIndex;
+        private SearchIndex _synonymsIndex;
+        private string _settingsIndexName;
+        private string _rulesIndexName;
+        private string _synonymsIndexName;
         private string _fullCopyIndexName;
         private IEnumerable<IndexOperationObject> _objectsToSave;
 
@@ -113,15 +113,19 @@ namespace Algolia.Search.Test.EndToEnd
             CopyToResponse[] tasks = await Task.WhenAll(copySettingsTask, copyRulesTask, copySynonymsTask, copyFullTask);
             tasks.ToList().ForEach(x => x.Wait());
 
+            // Check that “index_operations_settings” only contains the same settings as the original index with getSettings
             IndexSettings copySettings = await _settingsIndex.GetSettingsAsync();
             Assert.True(settings.AttributesForFaceting.ElementAt(0).Equals(copySettings.AttributesForFaceting.ElementAt(0)));
 
+            // Check that “index_operations_rules” only contains the same rules as the original index with getRule
             Rule copyRule = await _rulesIndex.GetRuleAsync("company_auto_faceting");
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave, copyRule));
 
+            // Check that “index_operations_synonyms” only contains the same synonyms as the original index with getSynonym
             Synonym copySynonym = await _synonymsIndex.GetSynonymAsync("google.placeholder");
             Assert.True(TestHelper.AreObjectsEqual(synonym, copySynonym));
 
+            // Check that “index_operations_copy” contains both the same settings, rules and synonyms as the original index with getSettings, getRule and getSynonym
             var copyFullSettings = _fullCopyIndex.GetSettingsAsync();
             var copyFullRule = _fullCopyIndex.GetRuleAsync("company_auto_faceting");
             var copyFullSynonym = _fullCopyIndex.GetSynonymAsync("google.placeholder");
