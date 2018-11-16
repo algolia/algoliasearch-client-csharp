@@ -90,6 +90,7 @@ namespace Algolia.Search.Test.EndToEnd
                 Placeholder = "<PLAYSTATIONVERSION>",
                 Replacements = new List<string> { "1", "One", "2", "3", "4", "4 Pro" }
             };
+
             Synonym ps4 = new Synonym
             {
                 ObjectID = "ps4",
@@ -97,6 +98,7 @@ namespace Algolia.Search.Test.EndToEnd
                 Word = "ps4",
                 Corrections = new List<string> { "playstation4" }
             };
+            
             Synonym psone = new Synonym
             {
                 ObjectID = "psone",

@@ -40,31 +40,38 @@ namespace Algolia.Search.Test.EndToEnd
     [Parallelizable]
     public class IndexOperationsTest
     {
-        protected SearchIndex _index;
+        private SearchIndex _index;
+        private SearchIndex _settingsIndex;
+        private string _settingsIndexName;
+        private SearchIndex _rulesIndex;
+        private string _rulesIndexName;
+        private SearchIndex _synonymsIndex;
+        private string _synonymsIndexName;
+        private SearchIndex _fullCopyIndex;
+        private string _fullCopyIndexName;
         private IEnumerable<IndexOperationObject> _objectsToSave;
-        private string _indexName;
 
         [OneTimeSetUp]
         public void Init()
         {
-            _indexName = TestHelper.GetTestIndexName("index_operations");
-            _index = BaseTest.SearchClient.InitIndex(_indexName);
+            _index = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("index_operations"));
+
+            _settingsIndexName = TestHelper.GetTestIndexName("index_operations_settings");
+            _settingsIndex = BaseTest.SearchClient.InitIndex(_settingsIndexName);
+
+            _rulesIndexName = TestHelper.GetTestIndexName("index_operations_rules");
+            _rulesIndex = BaseTest.SearchClient.InitIndex(_rulesIndexName);
+
+            _synonymsIndexName = TestHelper.GetTestIndexName("index_operations_synonyms");
+            _synonymsIndex = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("index_operations_synonyms"));
+
+            _fullCopyIndexName = TestHelper.GetTestIndexName("index_operations_copy");
+            _fullCopyIndex = BaseTest.SearchClient.InitIndex(_fullCopyIndexName);
 
             _objectsToSave = new List<IndexOperationObject>{
                 new IndexOperationObject {ObjectID = "one", Company = "apple"},
                 new IndexOperationObject {ObjectID = "two", Company = "apple"}
             };
-        }
-
-        [OneTimeTearDown]
-        public void Dispose()
-        {
-            var copySettingsTask = BaseTest.SearchClient.DeleteIndexAsync("index_operations_settings");
-            var copyRulesTask = BaseTest.SearchClient.DeleteIndexAsync("index_operations_rules");
-            var copySynonymsTask = BaseTest.SearchClient.DeleteIndexAsync("index_operations_synonyms");
-            var copyFullTask = BaseTest.SearchClient.DeleteIndexAsync("index_operations_copy");
-
-            Task.WaitAll(copySettingsTask, copyRulesTask, copySynonymsTask, copyFullTask);
         }
 
         [Test]
@@ -98,33 +105,26 @@ namespace Algolia.Search.Test.EndToEnd
             var saveRuleResponse = await _index.SaveRuleAsync(ruleToSave);
             saveRuleResponse.Wait();
 
-            var copySettingsTask = _index.CopySettingsToAsync("index_operations_settings");
-            var copyRulesTask = _index.CopyRulesToAsync("index_operations_rules");
-            var copySynonymsTask = _index.CopySynonymsToAsync("index_operations_synonyms");
-            var copyFullTask = _index.CopyToAsync("index_operations_copy");
+            var copySettingsTask = _index.CopySettingsToAsync(_settingsIndexName);
+            var copyRulesTask = _index.CopyRulesToAsync(_rulesIndexName);
+            var copySynonymsTask = _index.CopySynonymsToAsync(_synonymsIndexName);
+            var copyFullTask = _index.CopyToAsync(_fullCopyIndexName);
 
             CopyToResponse[] tasks = await Task.WhenAll(copySettingsTask, copyRulesTask, copySynonymsTask, copyFullTask);
             tasks.ToList().ForEach(x => x.Wait());
 
-            SearchIndex settingsIndex = BaseTest.SearchClient.InitIndex("index_operations_settings");
-            IndexSettings copySettings = await settingsIndex.GetSettingsAsync();
-
+            IndexSettings copySettings = await _settingsIndex.GetSettingsAsync();
             Assert.True(settings.AttributesForFaceting.ElementAt(0).Equals(copySettings.AttributesForFaceting.ElementAt(0)));
 
-            SearchIndex rulesIndex = BaseTest.SearchClient.InitIndex("index_operations_rules");
-            Rule copyRule = await rulesIndex.GetRuleAsync("company_auto_faceting");
-
+            Rule copyRule = await _rulesIndex.GetRuleAsync("company_auto_faceting");
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave, copyRule));
 
-            SearchIndex synonymsIndex = BaseTest.SearchClient.InitIndex("index_operations_synonyms");
-            Synonym copySynonym = await synonymsIndex.GetSynonymAsync("google.placeholder");
-
+            Synonym copySynonym = await _synonymsIndex.GetSynonymAsync("google.placeholder");
             Assert.True(TestHelper.AreObjectsEqual(synonym, copySynonym));
 
-            SearchIndex fullCopyIndex = BaseTest.SearchClient.InitIndex("index_operations_copy");
-            var copyFullSettings = fullCopyIndex.GetSettingsAsync();
-            var copyFullRule = fullCopyIndex.GetRuleAsync("company_auto_faceting");
-            var copyFullSynonym = fullCopyIndex.GetSynonymAsync("google.placeholder");
+            var copyFullSettings = _fullCopyIndex.GetSettingsAsync();
+            var copyFullRule = _fullCopyIndex.GetRuleAsync("company_auto_faceting");
+            var copyFullSynonym = _fullCopyIndex.GetSynonymAsync("google.placeholder");
 
             Task.WaitAll(copyFullSettings, copyFullRule, copyFullSynonym);
 

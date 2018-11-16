@@ -23,14 +23,13 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Test
+namespace Algolia.Search.Test.EndToEnd
 {
-    public class Actor
+
+    public class Employee
     {
+        public string Company { get; set; }
         public string Name { get; set; }
-        public string ObjectID { get; set; }
-        public int Rating { get; set; }
-        public string ImagePath { get; set; }
-        public string AlternativePath { get; set; }
+        public string QueryID { get; set; }
     }
 }
