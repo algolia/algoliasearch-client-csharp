@@ -518,6 +518,37 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Save several rules
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public BatchResponse SaveRules(IEnumerable<Rule> rules, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => SaveRulesAsync(rules, requestOptions));
+
+        /// <summary>
+        /// Save several rules
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, RequestOption requestOptions = null,
+             CancellationToken ct = default(CancellationToken))
+        {
+            if (rules == null)
+            {
+                throw new ArgumentNullException(nameof(rules));
+            }
+
+            BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, IEnumerable<Rule>>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/rules/batch", CallType.Write, rules, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
+        }
+
+        /// <summary>
         /// Delete the rule for the given ruleId
         /// </summary>
         /// <param name="objectId"></param>
@@ -541,8 +572,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(objectId));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
+            DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
                 $"/1/indexes/{_urlEncodedIndexName}/rules/{objectId}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
         }
 
         /// <summary>

@@ -29,8 +29,8 @@ namespace Algolia.Search.Models.Rules
 {
     public class ConsequenceParams
     {
-        public List<string> AutomaticFacetFilters { get; set; }
-
-        public List<string> AutomaticOptionalFacetFilters { get; set; }
+        public ConsequenceQuery Query { get; set; }
+        public List<AutomaticFacetFilter> AutomaticFacetFilters { get; set; }
+        public List<AutomaticFacetFilter> AutomaticOptionalFacetFilters { get; set; }
     }
 }

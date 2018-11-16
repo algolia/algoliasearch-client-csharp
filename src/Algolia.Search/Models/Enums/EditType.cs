@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,13 +23,11 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+namespace Algolia.Search.Models.Enums
 {
-    // TODO: to implement in query rule
-    public class AutomaticFacetFilter
+    public class EditType
     {
-        public string Facet { get; set; }
-        public bool Disjunctive { get; set; }
-        public int Score { get; set; }
+        public const string Remove = "remove";
+        public const string Replace = "replace";
     }
 }

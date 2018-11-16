@@ -99,7 +99,16 @@ namespace Algolia.Search.Test.EndToEnd
             {
                 ObjectID = "company_auto_faceting",
                 Condition = new Condition { Anchoring = "contains", Pattern = "{facet:company}" },
-                Consequence = new Consequence { Params = new ConsequenceParams { AutomaticFacetFilters = new List<string> { "company" } } }
+                Consequence = new Consequence
+                {
+                    Params = new ConsequenceParams
+                    {
+                        AutomaticFacetFilters = new List<AutomaticFacetFilter>
+                        {
+                            new AutomaticFacetFilter {Facet = "company"}
+                        }
+                    }
+                }
             };
 
             var saveRuleResponse = await _index.SaveRuleAsync(ruleToSave);

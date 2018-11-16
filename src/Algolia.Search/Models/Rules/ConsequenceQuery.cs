@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,13 +23,13 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+
 namespace Algolia.Search.Models.Rules
 {
-    // TODO: to implement in query rule
-    public class AutomaticFacetFilter
+    public class ConsequenceQuery
     {
-        public string Facet { get; set; }
-        public bool Disjunctive { get; set; }
-        public int Score { get; set; }
+        // TODO : custom serializer for string/edits
+        public IEnumerable<Edit> Edits { get; set; }
     }
 }
