@@ -32,7 +32,6 @@ namespace Algolia.Search.Models.Batch
 {
     public class BatchRequest<T> where T : class
     {
-
         public BatchRequest(IEnumerable<BatchOperation<T>> operations)
         {
             if (operations == null)

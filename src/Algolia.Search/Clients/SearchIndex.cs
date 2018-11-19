@@ -140,8 +140,11 @@ namespace Algolia.Search.Clients
 
             string objectId = (string)pi.GetValue(data);
 
-            return await _requesterWrapper.ExecuteRequestAsync<UpdateObjectResponse, T>(HttpMethod.Post,
+            UpdateObjectResponse response = await _requesterWrapper.ExecuteRequestAsync<UpdateObjectResponse, T>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/{objectId}/partial", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
         }
 
         /// <summary>
@@ -178,6 +181,34 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Batch the given request
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public BatchResponse Batch<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null) where T : class =>
+            AsyncHelper.RunSync(() => BatchAsync(operations, requestOptions));
+
+        /// <summary>
+        /// Batch the given request
+        /// </summary>
+        /// <typeparam name="BatchResponse"></typeparam>
+        public async Task<BatchResponse> BatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class
+        {
+            if (operations == null)
+            {
+                throw new ArgumentNullException(nameof(operations));
+            }
+
+            var batch = new BatchRequest<T>(operations);
+
+            BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<T>>(HttpMethod.Post,
+                $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
+        }
+
+        /// <summary>
         /// Remove objects from an index using its object id.
         /// </summary>
         /// <param name="objectId"></param>
@@ -201,8 +232,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(objectId));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Get,
+            DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Get,
                 $"/1/indexes/{_urlEncodedIndexName}/{objectId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
         }
 
         /// <summary>
@@ -231,8 +265,11 @@ namespace Algolia.Search.Clients
 
             var batch = new BatchRequest<string>(BatchActionType.DeleteObject, objectIds);
 
-            return await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<string>>(HttpMethod.Post,
+            BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<string>>(HttpMethod.Post,
                 $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
+            return response;
         }
 
         /// <summary>
