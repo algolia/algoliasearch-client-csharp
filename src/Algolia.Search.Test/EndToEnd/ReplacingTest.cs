@@ -24,26 +24,24 @@
 */
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Algolia.Search.Models.Responses;
+using Algolia.Search.Clients;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Rules;
 using NUnit.Framework;
 
 namespace Algolia.Search.Test.EndToEnd
 {
     [TestFixture]
     [Parallelizable]
-    public class MultiClusterManagementTest
+    public class ReplacingTest
     {
+        private SearchIndex _index;
 
-        [Test]
-        public async Task McmTest()
+        [OneTimeSetUp]
+        public void Init()
         {
-            IEnumerable<ClustersResponse> listClusters = await BaseTest.McmClient.ListClustersAsync();
-            Assert.True(listClusters.Count() == 2);
-
-            SearchResponse<UserIdResponse> listUsersIdsResponse = await BaseTest.McmClient.ListUserIdsAsync(0, 20);
-//            IEnumerable<UserIdResponse> userIds = listUsersIdsResponse.Hits.Where(x => !x.UserID.StartsWith("LANG-client-"));
+            _index = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("replacing"));
         }
     }
 }

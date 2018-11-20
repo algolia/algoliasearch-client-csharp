@@ -35,8 +35,6 @@ namespace Algolia.Search.Clients
         
         public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY");
                         
-        public bool? ForwardToReplicas { get; set; }
-        
         /// <summary>
         /// To set custom hosts
         /// </summary>

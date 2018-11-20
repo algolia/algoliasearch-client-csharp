@@ -45,11 +45,7 @@ namespace Algolia.Search.Utils.Serializer
         {
             SearchQuery query = (SearchQuery)value;
 
-            IEnumerable<string> properties = typeof(SearchQuery).GetTypeInfo()
-                .DeclaredProperties.Where(p => p.GetValue(query, null) != null)
-                .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(query, null).ToString()));
-
-            string queryString = string.Join("&", properties.ToArray());
+            string queryString = QueryStringHelper.ToQueryString(query);
 
             writer.WriteValue(queryString);
         }

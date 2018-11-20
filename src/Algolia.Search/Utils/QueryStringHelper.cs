@@ -25,25 +25,20 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Algolia.Search.Models.Responses;
-using NUnit.Framework;
+using System.Net;
+using System.Reflection;
 
-namespace Algolia.Search.Test.EndToEnd
+namespace Algolia.Search.Utils
 {
-    [TestFixture]
-    [Parallelizable]
-    public class MultiClusterManagementTest
+    public static class QueryStringHelper
     {
-
-        [Test]
-        public async Task McmTest()
+        public static string ToQueryString<T>(T value)
         {
-            IEnumerable<ClustersResponse> listClusters = await BaseTest.McmClient.ListClustersAsync();
-            Assert.True(listClusters.Count() == 2);
+            IEnumerable<string> properties = typeof(T).GetTypeInfo()
+                    .DeclaredProperties.Where(p => p.GetValue(value, null) != null)
+                    .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
 
-            SearchResponse<UserIdResponse> listUsersIdsResponse = await BaseTest.McmClient.ListUserIdsAsync(0, 20);
-//            IEnumerable<UserIdResponse> userIds = listUsersIdsResponse.Hits.Where(x => !x.UserID.StartsWith("LANG-client-"));
+            return string.Join("&", properties.ToArray());
         }
     }
 }
