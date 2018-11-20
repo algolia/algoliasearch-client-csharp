@@ -178,11 +178,14 @@ namespace Algolia.Search.Transport
         /// <param name="baseUri"></param>
         /// <param name="optionalQueryParameters"></param>
         /// <returns></returns>
-        private Uri BuildUri(string url, string baseUri, string optionalQueryParameters = null)
+        private Uri BuildUri(string url, string baseUri, Dictionary<string, object> optionalQueryParameters = null)
         {
-            return optionalQueryParameters != null
-                ? new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}{optionalQueryParameters}" }.Uri
-                : new UriBuilder { Scheme = "https", Host = url, Path = baseUri }.Uri;
+            if (optionalQueryParameters != null)
+            {
+                return new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}", Query = optionalQueryParameters.ToQueryString() }.Uri;
+            }
+
+            return new UriBuilder { Scheme = "https", Host = url, Path = baseUri }.Uri;
         }
 
         /// <summary>

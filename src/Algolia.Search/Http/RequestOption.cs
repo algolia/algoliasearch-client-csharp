@@ -24,12 +24,13 @@
 */
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Algolia.Search.Http
 {
     public class RequestOption
     {
         public Dictionary<string, string> Headers { get; set; }
-        public string QueryParameters { get; set; }
+        public Dictionary<string, object> QueryParameters { get; set; }
     }
 }

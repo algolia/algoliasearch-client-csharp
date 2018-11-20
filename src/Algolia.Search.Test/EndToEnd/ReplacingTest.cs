@@ -26,6 +26,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Algolia.Search.Clients;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;
 using NUnit.Framework;
@@ -42,6 +43,38 @@ namespace Algolia.Search.Test.EndToEnd
         public void Init()
         {
             _index = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("replacing"));
+        }
+
+        [Test]
+        public async Task TestReplacing()
+        {
+            Rule ruleToSave2 = new Rule
+            {
+                ObjectID = "query_edits",
+                Condition = new Condition { Anchoring = "is", Pattern = "mobile phone" },
+                Consequence = new Consequence
+                {
+                    Params = new ConsequenceParams
+                    {
+                        Query = new ConsequenceQuery
+                        {
+                            Edits = new List<Edit>
+                            {
+                                new Edit {Type = EditType.Remove, Delete = "mobile"},
+                                new Edit {Type = EditType.Replace, Delete = "phone", Insert = "ihpone"},
+                            }
+                        }
+                    }
+                },
+            };
+
+            Dictionary<string, object> queryParams = new Dictionary<string, object>();
+            queryParams.Add("forwardToReplicas", false);
+            queryParams.Add("clearExistingRules", true);
+            RequestOption requestOption = new RequestOption { QueryParameters = queryParams };
+
+            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 }, requestOption);
+            batchRulesResponse.Wait();
         }
     }
 }

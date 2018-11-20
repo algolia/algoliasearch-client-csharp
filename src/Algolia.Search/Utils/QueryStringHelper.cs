@@ -23,6 +23,7 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -30,7 +31,7 @@ using System.Reflection;
 
 namespace Algolia.Search.Utils
 {
-    public static class QueryStringHelper
+    internal static class QueryStringHelper
     {
         public static string ToQueryString<T>(T value)
         {
@@ -39,6 +40,36 @@ namespace Algolia.Search.Utils
                     .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
 
             return string.Join("&", properties.ToArray());
+        }
+
+        public static string ToQueryString(this Dictionary<string, Object> dic)
+        {
+            if (dic == null)
+            {
+                throw new ArgumentNullException(nameof(dic));
+            }
+
+            return WebUtility.UrlEncode(string.Join("&",
+                  dic.Select(kvp =>
+                      string.Format("{0}={1}", kvp.Key, kvp.Value))));
+        }
+
+        public static Dictionary<string, Object> BuildQueryParams<T>(params T[] objects)
+        {
+            Dictionary<string, object> queryParams = new Dictionary<string, object>();
+
+            if (objects != null)
+            {
+                foreach (var item in objects)
+                {
+                    if (item != null)
+                    {
+                        queryParams.Add(nameof(item), item);
+                    }
+                }
+            }
+
+            return queryParams;
         }
     }
 }
