@@ -68,6 +68,7 @@ namespace Algolia.Search.Models.Settings
         public List<string> DisableTypoToleranceOnAttributes { get; set; }
         public List<string> DisableTypoToleranceOnWords { get; set; }
         public string SeparatorsToIndex { get; set; }
+        public bool? IgnorePlurals { get; set; }
 
         // languages
 
@@ -83,6 +84,7 @@ namespace Algolia.Search.Models.Settings
         public List<string> DisableExactOnAttributes { get; set; }
         public string ExactOnSingleWordQuery { get; set; }
         public List<string> AlternativesAsExact { get; set; }
+        public bool? RemoveStopWords { get; set; }
 
         // performance
         public List<string> NumericAttributesForFiltering { get; set; }
@@ -95,7 +97,10 @@ namespace Algolia.Search.Models.Settings
         public int? MinProximity { get; set; }
         public List<string> ResponseFields { get; set; }
         public int? MaxFacetHits { get; set; }
-
+        public List<string> CamelCaseAttributes { get; set; }
+        public List<string> DecompoundedAttributes { get; set; }
+        public string KeepDiacriticsOnCharacters { get; set; }
+        
         // custom
         public int? Version { get; set; }
     }

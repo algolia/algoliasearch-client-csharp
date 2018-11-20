@@ -58,6 +58,7 @@ public class BaseTest
 
             foreach (var index in indicesToDelete)
             {
+                // Todo perfom it with batch
                 SearchClient.DeleteIndex(index.Name);
             }
         }
