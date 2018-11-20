@@ -23,16 +23,11 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Enums
+namespace Algolia.Search.Models.Requests
 {
-    public static class BatchActionType
+    public class ListUserIdsRequest
     {
-        public const string AddObject = "addObject";
-        public const string UpdateObject = "updateObject";
-        public const string PartialUpdateObject = "partialUpdateObject";
-        public const string PartialUpdateObjectNoCreate = "partialUpdateObjectNoCreate";
-        public const string DeleteObject = "deleteObject";
-        public const string Delete = "delete";
-        public const string Clear = "clear";
+        public int Page { get; set; }
+        public int HitsPerPage { get; set; }
     }
 }

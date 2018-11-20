@@ -210,7 +210,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        ListClustersResponse ListClusters(RequestOption requestOptions = null);
+        IEnumerable<ClustersResponse> ListClusters(RequestOption requestOptions = null);
 
         /// <summary>
         /// List the clusters available in a multi-clusters setup for a single appID
@@ -218,23 +218,27 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<ListClustersResponse> ListClustersAsync(RequestOption requestOptions = null,
+        Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
         /// </summary>
+        /// <param name="page"></param>
+        /// <param name="hitsPerPage"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SearchResponse<UserIdResponse> ListUserIds(RequestOption requestOptions = null);
+        SearchResponse<UserIdResponse> ListUserIds(int page, int hitsPerPage, RequestOption requestOptions = null);
 
         /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
         /// </summary>
+        /// <param name="page"></param>
+        /// <param name="hitsPerPage"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(RequestOption requestOptions = null,
+        Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

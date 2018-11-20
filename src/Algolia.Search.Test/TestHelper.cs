@@ -35,10 +35,11 @@ namespace Algolia.Search.Test
     internal static class TestHelper
     {
         internal static string ApplicationId = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
-
         internal static string TestApiKey = Environment.GetEnvironmentVariable("APPVEYOR") == null
               ? Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY")
               : Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
+        internal static string McmApplicationId = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_MCM");
+        internal static string McmApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY_MCM");
 
         /// <summary>
         /// Check env variable before starting tests suite
@@ -55,6 +56,16 @@ namespace Algolia.Search.Test
                 if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY")))
                 {
                     throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_API_KEY");
+                }
+
+                if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_MCM")))
+                {
+                    throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_APPLICATION_ID_MCM");
+                }
+
+                if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_API_KEY_MCM")))
+                {
+                    throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_API_KEY_MCM");
                 }
             }
         }

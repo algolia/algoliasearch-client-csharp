@@ -24,8 +24,11 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Algolia.Search.Clients;
+using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Test;
 using NUnit.Framework;
@@ -34,6 +37,7 @@ using NUnit.Framework;
 public class BaseTest
 {
     internal static SearchClient SearchClient;
+    internal static SearchClient McmClient;
     private static ListIndexesResponse indices;
 
     [OneTimeSetUp]
@@ -41,6 +45,7 @@ public class BaseTest
     {
         TestHelper.CheckEnvironmentVariable();
         SearchClient = new SearchClient(TestHelper.ApplicationId, TestHelper.TestApiKey);
+        McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmApiKey);
         indices = SearchClient.ListIndexes();
     }
 
@@ -55,12 +60,18 @@ public class BaseTest
         if (indices?.Items != null && indices.Items.Any())
         {
             var indicesToDelete = indices.Items.Where(x => x.Name.Contains("csharp_"));
+            List<BatchOperation<string>> operations = new List<BatchOperation<string>>();
 
             foreach (var index in indicesToDelete)
             {
-                // Todo perfom it with batch
-                SearchClient.DeleteIndex(index.Name);
+                operations.Add(new BatchOperation<string>
+                {
+                    IndexName = index.Name,
+                    Action = BatchActionType.Delete
+                });
             }
+
+            SearchClient.MultipleBatch(operations);
         }
     }
 }

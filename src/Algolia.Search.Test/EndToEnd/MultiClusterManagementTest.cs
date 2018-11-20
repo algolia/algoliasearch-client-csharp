@@ -23,16 +23,27 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Enums
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Algolia.Search.Models.Responses;
+using NUnit.Framework;
+
+namespace Algolia.Search.Test.EndToEnd
 {
-    public static class BatchActionType
+    [TestFixture]
+    [Parallelizable]
+    public class MultiClusterManagementTest
     {
-        public const string AddObject = "addObject";
-        public const string UpdateObject = "updateObject";
-        public const string PartialUpdateObject = "partialUpdateObject";
-        public const string PartialUpdateObjectNoCreate = "partialUpdateObjectNoCreate";
-        public const string DeleteObject = "deleteObject";
-        public const string Delete = "delete";
-        public const string Clear = "clear";
+
+        [Test]
+        public async Task McmTest()
+        {
+            IEnumerable<ClustersResponse> listClusters = await BaseTest.McmClient.ListClustersAsync();
+            Assert.True(listClusters.Count() == 2);
+
+            SearchResponse<UserIdResponse> listUsersIdsResponse = await BaseTest.McmClient.ListUserIdsAsync(0, 20);
+            IEnumerable<UserIdResponse> userIds = listUsersIdsResponse.Hits.Where(x => !x.UserID.StartsWith("LANG-client-"));
+        }
     }
 }

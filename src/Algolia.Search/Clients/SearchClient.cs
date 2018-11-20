@@ -375,7 +375,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public ListClustersResponse ListClusters(RequestOption requestOptions = null) =>
+        public IEnumerable<ClustersResponse> ListClusters(RequestOption requestOptions = null) =>
             AsyncHelper.RunSync(() => ListClustersAsync(requestOptions));
 
         /// <summary>
@@ -384,11 +384,12 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ListClustersResponse> ListClustersAsync(RequestOption requestOptions = null,
+        public async Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Get,
-                "/1/clusters", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+            ListClustersResponse response = await _requesterWrapper.ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Get,
+                 "/1/clusters", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+            return response?.Clusters;
         }
 
         /// <summary>
@@ -396,8 +397,8 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SearchResponse<UserIdResponse> ListUserIds(RequestOption requestOptions = null) =>
-            AsyncHelper.RunSync(() => ListUserIdsAsync(requestOptions));
+        public SearchResponse<UserIdResponse> ListUserIds(int page, int hitsPerPage, RequestOption requestOptions = null) =>
+            AsyncHelper.RunSync(() => ListUserIdsAsync(page, hitsPerPage, requestOptions));
 
 
         /// <summary>
@@ -406,11 +407,17 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(RequestOption requestOptions = null,
+        public async Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage, RequestOption requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserIdResponse>>(HttpMethod.Get,
-                "/1/clusters/mapping", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+            ListUserIdsRequest request = new ListUserIdsRequest
+            {
+                Page = page,
+                HitsPerPage = hitsPerPage
+            };
+
+            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserIdResponse>, ListUserIdsRequest>(HttpMethod.Get,
+                "/1/clusters/mapping", CallType.Read, request, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
