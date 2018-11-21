@@ -558,19 +558,23 @@ namespace Algolia.Search.Clients
         /// Save several rules
         /// </summary>
         /// <param name="rules"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="clearExistingRules"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public BatchResponse SaveRules(IEnumerable<Rule> rules, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => SaveRulesAsync(rules, requestOptions));
+        public BatchResponse SaveRules(IEnumerable<Rule> rules, bool forwardToReplicas = false, bool clearExistingRules = false, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => SaveRulesAsync(rules, forwardToReplicas, clearExistingRules, requestOptions));
 
         /// <summary>
         /// Save several rules
         /// </summary>
         /// <param name="rules"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="clearExistingRules"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
+        public async Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, bool clearExistingRules = false, RequestOptions requestOptions = null,
              CancellationToken ct = default(CancellationToken))
         {
             if (rules == null)
@@ -578,8 +582,16 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(rules));
             }
 
+            var dic = new Dictionary<string, object>
+            {
+                { nameof(forwardToReplicas), forwardToReplicas },
+                { nameof(clearExistingRules), clearExistingRules }
+            };
+
+            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
+
             BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, IEnumerable<Rule>>(HttpMethod.Post,
-                $"/1/indexes/{_urlEncodedIndexName}/rules/batch", CallType.Write, rules, requestOptions, ct).ConfigureAwait(false);
+                $"/1/indexes/{_urlEncodedIndexName}/rules/batch", CallType.Write, rules, requestOptionsToSend, ct).ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
             return response;

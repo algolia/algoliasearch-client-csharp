@@ -68,12 +68,14 @@ namespace Algolia.Search.Test.EndToEnd
                 },
             };
 
-            Dictionary<string, object> queryParams = new Dictionary<string, object>();
-            queryParams.Add("forwardToReplicas", false);
-            queryParams.Add("clearExistingRules", true);
-            RequestOptions requestOption = new RequestOptions { QueryParameters = queryParams };
+            var dic = new Dictionary<string, object>
+            {
+                { "forwardToReplicas", true },
+                { "clearExistingRules", true }
+            };
+            RequestOptions requestOption = new RequestOptions { QueryParameters = dic };
 
-            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 }, requestOption);
+            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 }, false, true, requestOption);
             batchRulesResponse.Wait();
         }
     }

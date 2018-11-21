@@ -23,35 +23,28 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Reflection;
+using Algolia.Search.Http;
 
 namespace Algolia.Search.Utils
 {
-    internal static class QueryStringHelper
+    public class RequestOptionsHelper
     {
-        public static string ToQueryString<T>(T value)
+        public static RequestOptions Create(RequestOptions requestOptions, Dictionary<string, object> queryParams)
         {
-            IEnumerable<string> properties = typeof(T).GetTypeInfo()
-                    .DeclaredProperties.Where(p => p.GetValue(value, null) != null)
-                    .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
-
-            return string.Join("&", properties.ToArray());
-        }
-
-        public static string ToQueryString(this Dictionary<string, object> dic)
-        {
-            if (dic == null)
+            if (requestOptions == null)
             {
-                throw new ArgumentNullException(nameof(dic));
+                return new RequestOptions { QueryParameters = queryParams };
             }
 
-            return WebUtility.UrlEncode(string.Join("&",
-                  dic.Select(kvp =>
-                      string.Format("{0}={1}", kvp.Key, kvp.Value))));
+            if (requestOptions.QueryParameters == null)
+            {
+                requestOptions.QueryParameters = queryParams;
+                return requestOptions;
+            }
+
+            requestOptions.QueryParameters.MergeWith(queryParams);
+            return requestOptions;
         }
     }
 }

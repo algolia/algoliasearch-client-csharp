@@ -23,12 +23,14 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace Algolia.Search.Utils
 {
-    public class DictionaryHelper
+    public static class DictionaryHelper
     {
         /// <summary>
         /// Merge a into b removing the duplicates from b if they exists
@@ -38,9 +40,24 @@ namespace Algolia.Search.Utils
         /// <typeparam name="TKey"></typeparam>
         /// <typeparam name="TValue"></typeparam>
         /// <returns></returns>
-        public static Dictionary<TKey,TValue> MergeDict<TKey,TValue>(Dictionary<TKey,TValue> a, Dictionary<TKey,TValue> b)
+        public static Dictionary<TKey, TValue> MergeWith<TKey, TValue>(this Dictionary<TKey, TValue> a, Dictionary<TKey, TValue> b)
         {
-            return a.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            if (a == null && b != null)
+            {
+                return b;
+            }
+
+            if (a != null && b == null)
+            {
+                return a;
+            }
+
+            if (a == null && b == null)
+            {
+                return null;
+            }
+
+            return a.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key) && kvp.Value != null)).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
     }
 }
