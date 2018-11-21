@@ -577,7 +577,7 @@ namespace Algolia.Search.Clients
         public async Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, bool clearExistingRules = false, RequestOptions requestOptions = null,
              CancellationToken ct = default(CancellationToken))
         {
-            if (rules == null)
+            if (rules == null || !rules.Any())
             {
                 throw new ArgumentNullException(nameof(rules));
             }
@@ -598,7 +598,7 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
-        /// Add and replace a list of Rules
+        /// Add a list of rules and clear the existing one
         /// </summary>
         /// <param name="rules"></param>
         /// <param name="forwardToReplicas"></param>
@@ -610,15 +610,15 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
-        /// Add and replace a list of Rules
+        /// Add a list of rules and clear the existing one
         /// </summary>
         /// <param name="rules"></param>
         /// <param name="forwardToReplicas"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public async Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, RequestOptions requestOptions = null)
+        public async Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, RequestOptions requestOptions = null,  CancellationToken ct = default(CancellationToken))
         {
-            return await SaveRulesAsync(rules, forwardToReplicas, true, requestOptions).ConfigureAwait(false);
+            return await SaveRulesAsync(rules, forwardToReplicas, true, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -833,19 +833,23 @@ namespace Algolia.Search.Clients
         /// Create or update multiple synonyms.
         /// </summary>
         /// <param name="synonyms"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="clearExistingSynonyms"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => SaveSynonymsAsync(synonyms, requestOptions));
+        public SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool clearExistingSynonyms = false, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => SaveSynonymsAsync(synonyms, forwardToReplicas, clearExistingSynonyms, requestOptions));
 
         /// <summary>
         /// Create or update multiple synonyms.
         /// </summary>
         /// <param name="synonyms"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="clearExistingSynonyms"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null,
+        public async Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool clearExistingSynonyms = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (synonyms == null || !synonyms.Any())
@@ -853,11 +857,44 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(synonyms));
             }
 
+            var dic = new Dictionary<string, object>
+            {
+                { nameof(forwardToReplicas), forwardToReplicas },
+                { nameof(clearExistingSynonyms), clearExistingSynonyms }
+            };
+
+            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
+
             SaveSynonymResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
-                $"/1/indexes/{_urlEncodedIndexName}/synonyms/batch", CallType.Write, synonyms, requestOptions, ct).ConfigureAwait(false);
+                $"/1/indexes/{_urlEncodedIndexName}/synonyms/batch", CallType.Write, synonyms, requestOptionsToSend, ct).ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
             return response;
+        }
+
+        /// <summary>
+        /// Add a new list of synonyms and clear the exsiting one
+        /// </summary>
+        /// <param name="synonyms"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SaveSynonymResponse ReplaceAllSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, RequestOptions requestOptions = null)
+        {
+            return SaveSynonyms(synonyms, forwardToReplicas, true, requestOptions);
+        }
+
+        /// <summary>
+        /// Add a new list of synonyms and clear the exsiting one
+        /// </summary>
+        /// <param name="synonyms"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SaveSynonymResponse> ReplaceAllSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            return await SaveSynonymsAsync(synonyms, forwardToReplicas, true, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>

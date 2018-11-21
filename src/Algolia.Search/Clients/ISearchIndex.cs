@@ -344,7 +344,7 @@ namespace Algolia.Search.Clients
         /// <param name="synonyms"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null);
+        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms,bool forwardToReplicas = false, bool clearExistingSynonyms = false, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Create or update multiple synonyms.
@@ -353,7 +353,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null,
+        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool clearExistingSynonyms = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
