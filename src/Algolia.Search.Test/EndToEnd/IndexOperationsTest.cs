@@ -92,7 +92,7 @@ namespace Algolia.Search.Test.EndToEnd
                 Replacements = new List<string> { "Google", "GOOG" }
             };
 
-            var saveSynonymResponse = await _index.SaveSynonymAsync(synonym.ObjectID, synonym);
+            var saveSynonymResponse = await _index.SaveSynonymAsync(synonym);
             saveSynonymResponse.Wait();
 
             Rule ruleToSave = new Rule

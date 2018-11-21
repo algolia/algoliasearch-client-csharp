@@ -342,38 +342,40 @@ namespace Algolia.Search.Clients
         /// Create or update multiple synonyms.
         /// </summary>
         /// <param name="synonyms"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="replaceExistingSynonyms"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms,bool forwardToReplicas = false, bool clearExistingSynonyms = false, RequestOptions requestOptions = null);
+        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Create or update multiple synonyms.
         /// </summary>
         /// <param name="synonyms"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="replaceExistingSynonyms"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool clearExistingSynonyms = false, RequestOptions requestOptions = null,
+        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Create or update a single synonym on an index.
         /// </summary>
-        /// <param name="synonymObjectId"></param>
         /// <param name="synonym"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SaveSynonymResponse SaveSynonym(string synonymObjectId, Synonym synonym, RequestOptions requestOptions = null);
+        SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Create or update a single synonym on an index.
         /// </summary>
-        /// <param name="synonymObjectId"></param>
         /// <param name="synonym"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SaveSynonymResponse> SaveSynonymAsync(string synonymObjectId, Synonym synonym, RequestOptions requestOptions = null,
+        Task<SaveSynonymResponse> SaveSynonymAsync(Synonym synonym, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

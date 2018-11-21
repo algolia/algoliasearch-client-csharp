@@ -178,7 +178,7 @@ namespace Algolia.Search.Transport
         /// <param name="baseUri"></param>
         /// <param name="optionalQueryParameters"></param>
         /// <returns></returns>
-        private Uri BuildUri(string url, string baseUri, Dictionary<string, object> optionalQueryParameters = null)
+        private Uri BuildUri(string url, string baseUri, Dictionary<string, string> optionalQueryParameters = null)
         {
             if (optionalQueryParameters != null)
             {

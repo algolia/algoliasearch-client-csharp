@@ -30,7 +30,7 @@ namespace Algolia.Search.Utils
 {
     public class RequestOptionsHelper
     {
-        public static RequestOptions Create(RequestOptions requestOptions, Dictionary<string, object> queryParams)
+        public static RequestOptions Create(RequestOptions requestOptions, Dictionary<string, string> queryParams)
         {
             if (requestOptions == null)
             {

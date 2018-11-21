@@ -31,6 +31,6 @@ namespace Algolia.Search.Http
     public class RequestOptions
     {
         public Dictionary<string, string> Headers { get; set; }
-        public Dictionary<string, object> QueryParameters { get; set; }
+        public Dictionary<string, string> QueryParameters { get; set; }
     }
 }

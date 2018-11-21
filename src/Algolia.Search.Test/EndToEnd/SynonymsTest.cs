@@ -73,7 +73,7 @@ namespace Algolia.Search.Test.EndToEnd
                 Synonyms = new List<string> { "gba", "gameboy advance", "game boy advance" }
             };
 
-            var regularSynonymResponse = await _index.SaveSynonymAsync(gba.ObjectID, gba);
+            var regularSynonymResponse = await _index.SaveSynonymAsync(gba);
             regularSynonymResponse.Wait();
 
             Synonym wiiToWiiu = new Synonym

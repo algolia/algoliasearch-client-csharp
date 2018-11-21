@@ -42,16 +42,16 @@ namespace Algolia.Search.Utils
             return string.Join("&", properties.ToArray());
         }
 
-        public static string ToQueryString(this Dictionary<string, object> dic)
+        public static string ToQueryString(this Dictionary<string, string> dic)
         {
             if (dic == null)
             {
                 throw new ArgumentNullException(nameof(dic));
             }
 
-            return WebUtility.UrlEncode(string.Join("&",
+            return string.Join("&",
                   dic.Select(kvp =>
-                      string.Format("{0}={1}", kvp.Key, kvp.Value))));
+                      string.Format($"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}" )));
         }
     }
 }

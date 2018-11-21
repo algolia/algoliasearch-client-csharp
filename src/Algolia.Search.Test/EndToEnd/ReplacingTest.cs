@@ -29,6 +29,8 @@ using Algolia.Search.Clients;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;
+using Algolia.Search.Models.Synonyms;
+using Algolia.Search.Utils;
 using NUnit.Framework;
 
 namespace Algolia.Search.Test.EndToEnd
@@ -48,35 +50,84 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestReplacing()
         {
-            Rule ruleToSave2 = new Rule
+            var addResponse = _index.AddObjectAysnc(new { ObjectID = "one" });
+
+            var ruleToSave = new Rule
             {
-                ObjectID = "query_edits",
-                Condition = new Condition { Anchoring = "is", Pattern = "mobile phone" },
+                ObjectID = "one",
+                Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
                     {
                         Query = new ConsequenceQuery
                         {
-                            Edits = new List<Edit>
-                            {
-                                new Edit {Type = EditType.Remove, Delete = "mobile"},
-                                new Edit {Type = EditType.Replace, Delete = "phone", Insert = "ihpone"},
-                            }
+                            Edits = new List<Edit> { new Edit { Type = EditType.Remove, Delete = "pattern" } }
                         }
                     }
-                },
+                }
             };
 
-            var dic = new Dictionary<string, object>
+            var saveRuleResponse = _index.SaveRuleAsync(ruleToSave);
+
+            var synonymToSave = new Synonym
             {
-                { "forwardToReplicas", true },
-                { "clearExistingRules", true }
+                ObjectID = "one",
+                Type = SynonymType.Synonym,
+                Synonyms = new List<string> { "one", "two" }
             };
-            RequestOptions requestOption = new RequestOptions { QueryParameters = dic };
 
-            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 }, false, true, requestOption);
-            batchRulesResponse.Wait();
+            var saveSynonymResponse = _index.SaveSynonymAsync(synonymToSave);
+
+            Task.WaitAll(saveSynonymResponse, addResponse, saveRuleResponse);
+
+            addResponse.Result.Wait();
+            saveRuleResponse.Result.Wait();
+            saveSynonymResponse.Result.Wait();
+
+            // replaceAllObjects TODO
+
+            var ruleToSave2 = new Rule
+            {
+                ObjectID = "two",
+                Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
+                Consequence = new Consequence
+                {
+                    Params = new ConsequenceParams
+                    {
+                        Query = new ConsequenceQuery
+                        {
+                            Edits = new List<Edit> { new Edit { Type = EditType.Remove, Delete = "pattern" } }
+                        }
+                    }
+                }
+            };
+
+            var replaceAllRulesResponse = await _index.ReplaceAllRulesAsync(new List<Rule> { ruleToSave2 });
+
+            var synonymToSave2 = new Synonym
+            {
+                ObjectID = "two",
+                Type = SynonymType.Synonym,
+                Synonyms = new List<string> { "one", "two" }
+            };
+
+            var replaceAllSynonymsResponse = await _index.ReplaceAllSynonymsAsync(new List<Synonym> { synonymToSave2 });
+
+            replaceAllRulesResponse.Wait();
+            replaceAllSynonymsResponse.Wait();
+
+//var test = await _index.GetSynonymAsync("one");
+
+   //          Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("one"));
+             Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetRuleAsync("one"));
+
+            var ruleAfterReplace = _index.GetRuleAsync("two");
+            var synonymAfterReplace = _index.GetSynonymAsync("two");
+            Task.WaitAll(ruleAfterReplace, synonymAfterReplace);
+
+            Assert.True(TestHelper.AreObjectsEqual(ruleAfterReplace.Result, ruleToSave2));
+            Assert.True(TestHelper.AreObjectsEqual(synonymAfterReplace.Result, synonymToSave2));
         }
     }
 }

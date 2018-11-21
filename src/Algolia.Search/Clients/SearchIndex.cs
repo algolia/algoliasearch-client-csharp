@@ -582,10 +582,10 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(rules));
             }
 
-            var dic = new Dictionary<string, object>
+            var dic = new Dictionary<string, string>
             {
-                { nameof(forwardToReplicas), forwardToReplicas },
-                { nameof(clearExistingRules), clearExistingRules }
+                { nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower()},
+                { nameof(clearExistingRules), clearExistingRules.ToString().ToLower() }
             };
 
             RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
@@ -616,7 +616,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public async Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, RequestOptions requestOptions = null,  CancellationToken ct = default(CancellationToken))
+        public async Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             return await SaveRulesAsync(rules, forwardToReplicas, true, requestOptions, ct).ConfigureAwait(false);
         }
@@ -834,22 +834,22 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="synonyms"></param>
         /// <param name="forwardToReplicas"></param>
-        /// <param name="clearExistingSynonyms"></param>
+        /// <param name="replaceExistingSynonyms"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool clearExistingSynonyms = false, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => SaveSynonymsAsync(synonyms, forwardToReplicas, clearExistingSynonyms, requestOptions));
+        public SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => SaveSynonymsAsync(synonyms, forwardToReplicas, replaceExistingSynonyms, requestOptions));
 
         /// <summary>
         /// Create or update multiple synonyms.
         /// </summary>
         /// <param name="synonyms"></param>
         /// <param name="forwardToReplicas"></param>
-        /// <param name="clearExistingSynonyms"></param>
+        /// <param name="replaceExistingSynonyms"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool clearExistingSynonyms = false, RequestOptions requestOptions = null,
+        public async Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (synonyms == null || !synonyms.Any())
@@ -857,10 +857,10 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(synonyms));
             }
 
-            var dic = new Dictionary<string, object>
+            var dic = new Dictionary<string, string>
             {
-                { nameof(forwardToReplicas), forwardToReplicas },
-                { nameof(clearExistingSynonyms), clearExistingSynonyms }
+                { nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower() },
+                { nameof(replaceExistingSynonyms), replaceExistingSynonyms.ToString().ToLower() }
             };
 
             RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
@@ -900,36 +900,34 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Create or update a single synonym on an index.
         /// </summary>
-        /// <param name="synonymObjectId"></param>
         /// <param name="synonym"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SaveSynonymResponse SaveSynonym(string synonymObjectId, Synonym synonym, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => SaveSynonymAsync(synonymObjectId, synonym, requestOptions));
+        public SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => SaveSynonymAsync(synonym, requestOptions));
 
         /// <summary>
         /// Create or update a single synonym on an index.
         /// </summary>
-        /// <param name="synonymObjectId"></param>
         /// <param name="synonym"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SaveSynonymResponse> SaveSynonymAsync(string synonymObjectId, Synonym synonym, RequestOptions requestOptions = null,
+        public async Task<SaveSynonymResponse> SaveSynonymAsync(Synonym synonym, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            if (synonymObjectId == null)
-            {
-                throw new ArgumentNullException(nameof(synonymObjectId));
-            }
-
             if (synonym == null)
             {
                 throw new ArgumentNullException(nameof(synonym));
             }
 
+            if (string.IsNullOrWhiteSpace(synonym.ObjectID))
+            {
+                throw new ArgumentNullException(nameof(synonym.ObjectID));
+            }
+
             SaveSynonymResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, Synonym>(HttpMethod.Put,
-                $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Write, synonym, requestOptions, ct).ConfigureAwait(false);
+                $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonym.ObjectID}", CallType.Write, synonym, requestOptions, ct).ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
             return response;
