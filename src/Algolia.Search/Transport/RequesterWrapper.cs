@@ -167,7 +167,7 @@ namespace Algolia.Search.Transport
             };
 
             return optionalHeaders != null && optionalHeaders.Any()
-                ? algoliaHeaders.Concat(optionalHeaders).ToDictionary(x => x.Key, x => x.Value)
+                ? DictionaryHelper.MergeDict(optionalHeaders, algoliaHeaders)
                 : algoliaHeaders;
         }
 

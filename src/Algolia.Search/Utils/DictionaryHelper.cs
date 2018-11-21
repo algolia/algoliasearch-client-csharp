@@ -23,18 +23,24 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Algolia.Search.Utils
 {
-    internal static class CamelCaseHelper
+    public class DictionaryHelper
     {
         /// <summary>
-        /// Helper used in the custom query serializer otherwise we use the built-in camel case strategy by JSON.Net
+        /// Merge a into b removing the duplicates from b if they exists
         /// </summary>
-        /// <param name="stringToCamelCase"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
         /// <returns></returns>
-        public static string ToCamelCase(this string stringToCamelCase)
+        public static Dictionary<TKey,TValue> MergeDict<TKey,TValue>(Dictionary<TKey,TValue> a, Dictionary<TKey,TValue> b)
         {
-           return char.ToLowerInvariant(stringToCamelCase[0]) + stringToCamelCase.Substring(1);
+            return a.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
     }
 }
