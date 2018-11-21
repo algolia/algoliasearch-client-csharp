@@ -598,6 +598,30 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Add and replace a list of Rules
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public BatchResponse ReplaceAllRules(IEnumerable<Rule> rules, bool forwardToReplicas = false, RequestOptions requestOptions = null)
+        {
+            return SaveRules(rules, forwardToReplicas, true, requestOptions);
+        }
+
+        /// <summary>
+        /// Add and replace a list of Rules
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public async Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, RequestOptions requestOptions = null)
+        {
+            return await SaveRulesAsync(rules, forwardToReplicas, true, requestOptions).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Delete the rule for the given ruleId
         /// </summary>
         /// <param name="objectId"></param>
