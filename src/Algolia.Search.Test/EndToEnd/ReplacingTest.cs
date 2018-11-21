@@ -71,7 +71,7 @@ namespace Algolia.Search.Test.EndToEnd
             Dictionary<string, object> queryParams = new Dictionary<string, object>();
             queryParams.Add("forwardToReplicas", false);
             queryParams.Add("clearExistingRules", true);
-            RequestOption requestOption = new RequestOption { QueryParameters = queryParams };
+            RequestOptions requestOption = new RequestOptions { QueryParameters = queryParams };
 
             var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 }, requestOption);
             batchRulesResponse.Wait();

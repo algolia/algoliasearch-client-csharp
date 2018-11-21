@@ -100,7 +100,7 @@ namespace Algolia.Search.Clients
         /// <param name="abTestId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public ABTest GetABTest(long abTestId, RequestOption requestOptions = null) =>
+        public ABTest GetABTest(long abTestId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetABTestAsync(abTestId, requestOptions));
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ABTest> GetABTestAsync(long abTestId, RequestOption requestOptions = null,
+        public async Task<ABTest> GetABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ABTest>(HttpMethod.Get,
@@ -123,7 +123,7 @@ namespace Algolia.Search.Clients
         /// <param name="limit"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOption requestOptions = null) =>
+        public ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetABTestsAsync(offset, limit, requestOptions));
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOption requestOptions = null,
+        public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
@@ -147,7 +147,7 @@ namespace Algolia.Search.Clients
         /// <param name="aBTest"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public AddABTestResponse AddABTest(ABTest aBTest, RequestOption requestOptions = null) =>
+        public AddABTestResponse AddABTest(ABTest aBTest, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => AddABTestAsync(aBTest, requestOptions));
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOption requestOptions = null,
+        public async Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOptions requestOptions = null,
              CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
@@ -172,7 +172,7 @@ namespace Algolia.Search.Clients
         /// <param name="abTestId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public StopABTestResponse StopABTest(long abTestId, RequestOption requestOptions = null) =>
+        public StopABTestResponse StopABTest(long abTestId, RequestOptions requestOptions = null) =>
                     AsyncHelper.RunSync(() => StopABTestAsync(abTestId, requestOptions));
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOption requestOptions = null,
+        public async Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<StopABTestResponse>(HttpMethod.Post,
@@ -197,7 +197,7 @@ namespace Algolia.Search.Clients
         /// <param name="abTestId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public DeleteABTestResponse DeleteABTest(long abTestId, RequestOption requestOptions = null) =>
+        public DeleteABTestResponse DeleteABTest(long abTestId, RequestOptions requestOptions = null) =>
                     AsyncHelper.RunSync(() => DeleteABTestAsync(abTestId, requestOptions));
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOption requestOptions = null,
+        public async Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<DeleteABTestResponse>(HttpMethod.Delete,

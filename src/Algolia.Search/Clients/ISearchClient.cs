@@ -46,39 +46,39 @@ namespace Algolia.Search.Clients
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleGetObjectsResponse<T> MultipleGetObjects<T>(MultipleGetObjectsRequest queries, RequestOption requestOptions = null) where T : class;
+        MultipleGetObjectsResponse<T> MultipleGetObjects<T>(MultipleGetObjectsRequest queries, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries, RequestOption requestOptions = null,
+        Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest queries, RequestOption requestOptions = null) where T : class;
+        MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest queries, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries, RequestOption requestOptions = null,
+        Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleBatchResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null) where T : class;
+        MultipleBatchResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleBatchResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null,
+        Task<MultipleBatchResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        ListIndexesResponse ListIndexes(RequestOption requestOptions = null);
+        ListIndexesResponse ListIndexes(RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get a list of indexes/indices with their associated metadata.
@@ -94,7 +94,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<ListIndexesResponse> ListIndexesAsync(RequestOption requestOptions = null,
+        Task<ListIndexesResponse> ListIndexesAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Algolia.Search.Clients
         /// <param name="indexName"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        DeleteResponse DeleteIndex(string indexName, RequestOption requestOptions = null);
+        DeleteResponse DeleteIndex(string indexName, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Delete an index by name
@@ -112,7 +112,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOption requestOptions = null,
+        Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        ListApiKeysResponse ListApiKeys(RequestOption requestOptions = null);
+        ListApiKeysResponse ListApiKeys(RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get the full list of API Keys.
@@ -128,7 +128,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<ListApiKeysResponse> ListApiKeysAsync(RequestOption requestOptions = null,
+        Task<ListApiKeysResponse> ListApiKeysAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Algolia.Search.Clients
         /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        ApiKeysResponse GetApiKey(string apiKey, RequestOption requestOptions = null);
+        ApiKeysResponse GetApiKey(string apiKey, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get the full list of API Keys.
@@ -146,7 +146,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<ApiKeysResponse> GetApiKeyAsync(string apiKey, RequestOption requestOptions = null,
+        Task<ApiKeysResponse> GetApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Algolia.Search.Clients
         /// <param name="acl"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        AddApiKeyResponse AddApiKey(ApiKeyRequest acl, RequestOption requestOptions = null);
+        AddApiKeyResponse AddApiKey(ApiKeyRequest acl, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Add a new API Key with specific permissions/restrictions.
@@ -164,7 +164,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AddApiKeyResponse> AddApiKeyAsync(ApiKeyRequest acl, RequestOption requestOptions = null,
+        Task<AddApiKeyResponse> AddApiKeyAsync(ApiKeyRequest acl, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Algolia.Search.Clients
         /// <param name="acl"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        UpdateApiKeyResponse UpdateApiKey(string apiKey, ApiKeyRequest acl, RequestOption requestOptions = null);
+        UpdateApiKeyResponse UpdateApiKey(string apiKey, ApiKeyRequest acl, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Update the permissions of an existing API Key.
@@ -184,7 +184,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string apiKey, ApiKeyRequest acl, RequestOption requestOptions = null,
+        Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string apiKey, ApiKeyRequest acl, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Algolia.Search.Clients
         /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        DeleteResponse DeleteApiKey(string apiKey, RequestOption requestOptions = null);
+        DeleteResponse DeleteApiKey(string apiKey, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Delete an existing API Key
@@ -202,7 +202,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<DeleteResponse> DeleteApiKeyAsync(string apiKey, RequestOption requestOptions = null,
+        Task<DeleteResponse> DeleteApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        IEnumerable<ClustersResponse> ListClusters(RequestOption requestOptions = null);
+        IEnumerable<ClustersResponse> ListClusters(RequestOptions requestOptions = null);
 
         /// <summary>
         /// List the clusters available in a multi-clusters setup for a single appID
@@ -218,7 +218,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOption requestOptions = null,
+        Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace Algolia.Search.Clients
         /// <param name="hitsPerPage"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SearchResponse<UserIdResponse> ListUserIds(int page, int hitsPerPage, RequestOption requestOptions = null);
+        SearchResponse<UserIdResponse> ListUserIds(int page, int hitsPerPage, RequestOptions requestOptions = null);
 
         /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
@@ -238,7 +238,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage, RequestOption requestOptions = null,
+        Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace Algolia.Search.Clients
         /// <param name="userId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        UserIdResponse GetUserId(string userId, RequestOption requestOptions = null);
+        UserIdResponse GetUserId(string userId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Returns the userID data stored in the mapping.
@@ -256,7 +256,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<UserIdResponse> GetUserIdAsync(string userId, RequestOption requestOptions = null,
+        Task<UserIdResponse> GetUserIdAsync(string userId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -265,7 +265,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        TopUserIdResponse GetTopUserId(RequestOption requestOptions = null);
+        TopUserIdResponse GetTopUserId(RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get the top 10 userIDs with the highest number of records per cluster.
@@ -274,7 +274,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<TopUserIdResponse> GetTopUserIdAsync(RequestOption requestOptions = null,
+        Task<TopUserIdResponse> GetTopUserIdAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace Algolia.Search.Clients
         /// <param name="clusterName"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        AddObjectResponse AssignUserId(string userId, string clusterName, RequestOption requestOptions = null);
+        AddObjectResponse AssignUserId(string userId, string clusterName, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Assign or Move a userID to a cluster.
@@ -296,7 +296,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AddObjectResponse> AssignUserIdAsync(string userId, string clusterName, RequestOption requestOptions = null,
+        Task<AddObjectResponse> AssignUserIdAsync(string userId, string clusterName, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace Algolia.Search.Clients
         /// <param name="userId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        DeleteResponse RemoveUserId(string userId, RequestOption requestOptions = null);
+        DeleteResponse RemoveUserId(string userId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Remove a userID and its associated data from the multi-clusters.
@@ -314,14 +314,14 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<DeleteResponse> RemoveUserIdAsync(string userId, RequestOption requestOptions = null,
+        Task<DeleteResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
-        LogResponse GetLogs(RequestOption requestOptions = null);
+        LogResponse GetLogs(RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get logs for the given index
@@ -329,7 +329,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
+        Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
     }
 }

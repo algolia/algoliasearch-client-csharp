@@ -28,7 +28,7 @@ using System.Linq;
 
 namespace Algolia.Search.Http
 {
-    public class RequestOption
+    public class RequestOptions
     {
         public Dictionary<string, string> Headers { get; set; }
         public Dictionary<string, object> QueryParameters { get; set; }

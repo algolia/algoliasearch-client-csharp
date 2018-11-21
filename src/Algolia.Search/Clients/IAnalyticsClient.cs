@@ -41,7 +41,7 @@ namespace Algolia.Search.Clients
         /// <param name="abTestId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        ABTest GetABTest(long abTestId, RequestOption requestOptions = null);
+        ABTest GetABTest(long abTestId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get an A/B test information and results.
@@ -50,7 +50,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<ABTest> GetABTestAsync(long abTestId, RequestOption requestOptions = null,
+        Task<ABTest> GetABTestAsync(long abTestId, RequestOptions requestOptions = null,
            CancellationToken ct = default(CancellationToken));
         /// <summary>
         /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
@@ -59,7 +59,7 @@ namespace Algolia.Search.Clients
         /// <param name="limit"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOption requestOptions = null);
+        ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
@@ -69,7 +69,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOption requestOptions = null,
+        Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOptions requestOptions = null,
            CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Algolia.Search.Clients
         /// <param name="aBTest"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        AddABTestResponse AddABTest(ABTest aBTest, RequestOption requestOptions = null);
+        AddABTestResponse AddABTest(ABTest aBTest, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Creates a new AB Test with provided configuration.
@@ -87,7 +87,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOption requestOptions = null,
+        Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Algolia.Search.Clients
         /// <param name="abTestId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        StopABTestResponse StopABTest(long abTestId, RequestOption requestOptions = null);
+        StopABTestResponse StopABTest(long abTestId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Marks the A/B Test as stopped. At this point, the test is over and cannot be restarted. 
@@ -109,7 +109,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOption requestOptions = null,
+        Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOptions requestOptions = null,
            CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Algolia.Search.Clients
         /// <param name="abTestId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        DeleteABTestResponse DeleteABTest(long abTestId, RequestOption requestOptions = null);
+        DeleteABTestResponse DeleteABTest(long abTestId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Deletes the A/B Test and removes all associated metadata & metrics.
@@ -127,7 +127,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOption requestOptions = null,
+        Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOptions requestOptions = null,
            CancellationToken ct = default(CancellationToken));
     }
 }

@@ -113,14 +113,14 @@ namespace Algolia.Search.Clients
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public MultipleGetObjectsResponse<T> MultipleGetObjects<T>(MultipleGetObjectsRequest queries, RequestOption requestOptions = null) where T : class =>
+        public MultipleGetObjectsResponse<T> MultipleGetObjects<T>(MultipleGetObjectsRequest queries, RequestOptions requestOptions = null) where T : class =>
                     AsyncHelper.RunSync(() => MultipleGetObjectsAsync<T>(queries, requestOptions));
 
         /// <summary>
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries, RequestOption requestOptions = null,
+        public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries, RequestOptions requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (queries == null)
@@ -136,14 +136,14 @@ namespace Algolia.Search.Clients
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest queries, RequestOption requestOptions = null) where T : class =>
+        public MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest queries, RequestOptions requestOptions = null) where T : class =>
                     AsyncHelper.RunSync(() => MultipleQueriesAsync<T>(queries, requestOptions));
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries, RequestOption requestOptions = null,
+        public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries, RequestOptions requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (queries == null)
@@ -159,7 +159,7 @@ namespace Algolia.Search.Clients
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public MultipleBatchResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null) where T : class =>
+        public MultipleBatchResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null) where T : class =>
                     AsyncHelper.RunSync(() => MultipleBatchAsync(operations, requestOptions));
 
         /// <inheritdoc />
@@ -167,7 +167,7 @@ namespace Algolia.Search.Clients
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public async Task<MultipleBatchResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOption requestOptions = null,
+        public async Task<MultipleBatchResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (operations == null)
@@ -186,7 +186,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public ListIndexesResponse ListIndexes(RequestOption requestOptions = null) =>
+        public ListIndexesResponse ListIndexes(RequestOptions requestOptions = null) =>
                     AsyncHelper.RunSync(() => ListIndexesAsync(requestOptions));
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ListIndexesResponse> ListIndexesAsync(RequestOption requestOptions = null,
+        public async Task<ListIndexesResponse> ListIndexesAsync(RequestOptions requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ListIndexesResponse>(HttpMethod.Get,
@@ -208,7 +208,7 @@ namespace Algolia.Search.Clients
         /// <param name="indexName"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public DeleteResponse DeleteIndex(string indexName, RequestOption requestOptions = null) =>
+        public DeleteResponse DeleteIndex(string indexName, RequestOptions requestOptions = null) =>
                     AsyncHelper.RunSync(() => DeleteIndexAsync(indexName, requestOptions));
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOption requestOptions = null,
+        public async Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOptions requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(indexName))
@@ -235,7 +235,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public ListApiKeysResponse ListApiKeys(RequestOption requestOptions = null) =>
+        public ListApiKeysResponse ListApiKeys(RequestOptions requestOptions = null) =>
                     AsyncHelper.RunSync(() => ListApiKeysAsync(requestOptions));
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ListApiKeysResponse> ListApiKeysAsync(RequestOption requestOptions = null,
+        public async Task<ListApiKeysResponse> ListApiKeysAsync(RequestOptions requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ListApiKeysResponse>(HttpMethod.Get,
@@ -257,7 +257,7 @@ namespace Algolia.Search.Clients
         /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public ApiKeysResponse GetApiKey(string apiKey, RequestOption requestOptions = null) =>
+        public ApiKeysResponse GetApiKey(string apiKey, RequestOptions requestOptions = null) =>
                     AsyncHelper.RunSync(() => GetApiKeyAsync(apiKey, requestOptions));
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ApiKeysResponse> GetApiKeyAsync(string apiKey, RequestOption requestOptions = null,
+        public async Task<ApiKeysResponse> GetApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(apiKey))
@@ -285,7 +285,7 @@ namespace Algolia.Search.Clients
         /// <param name="acl"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public AddApiKeyResponse AddApiKey(ApiKeyRequest acl, RequestOption requestOptions = null) =>
+        public AddApiKeyResponse AddApiKey(ApiKeyRequest acl, RequestOptions requestOptions = null) =>
                     AsyncHelper.RunSync(() => AddApiKeyAsync(acl, requestOptions));
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<AddApiKeyResponse> AddApiKeyAsync(ApiKeyRequest acl, RequestOption requestOptions = null,
+        public async Task<AddApiKeyResponse> AddApiKeyAsync(ApiKeyRequest acl, RequestOptions requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
             if (acl == null)
@@ -314,7 +314,7 @@ namespace Algolia.Search.Clients
         /// <param name="acl"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public UpdateApiKeyResponse UpdateApiKey(string apiKey, ApiKeyRequest acl, RequestOption requestOptions = null) =>
+        public UpdateApiKeyResponse UpdateApiKey(string apiKey, ApiKeyRequest acl, RequestOptions requestOptions = null) =>
                     AsyncHelper.RunSync(() => UpdateApiKeyAsync(apiKey, acl, requestOptions));
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string apiKey, ApiKeyRequest acl, RequestOption requestOptions = null,
+        public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string apiKey, ApiKeyRequest acl, RequestOptions requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(apiKey))
@@ -348,7 +348,7 @@ namespace Algolia.Search.Clients
         /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public DeleteResponse DeleteApiKey(string apiKey, RequestOption requestOptions = null) =>
+        public DeleteResponse DeleteApiKey(string apiKey, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => DeleteApiKeyAsync(apiKey, requestOptions));
 
         /// <summary>
@@ -358,7 +358,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<DeleteResponse> DeleteApiKeyAsync(string apiKey, RequestOption requestOptions = null,
+        public async Task<DeleteResponse> DeleteApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(apiKey))
@@ -375,7 +375,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public IEnumerable<ClustersResponse> ListClusters(RequestOption requestOptions = null) =>
+        public IEnumerable<ClustersResponse> ListClusters(RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ListClustersAsync(requestOptions));
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOption requestOptions = null,
+        public async Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             ListClustersResponse response = await _requesterWrapper.ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Get,
@@ -397,7 +397,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SearchResponse<UserIdResponse> ListUserIds(int page, int hitsPerPage, RequestOption requestOptions = null) =>
+        public SearchResponse<UserIdResponse> ListUserIds(int page, int hitsPerPage, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ListUserIdsAsync(page, hitsPerPage, requestOptions));
 
 
@@ -407,7 +407,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage, RequestOption requestOptions = null,
+        public async Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             ListUserIdsRequest request = new ListUserIdsRequest
@@ -426,7 +426,7 @@ namespace Algolia.Search.Clients
         /// <param name="userId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public UserIdResponse GetUserId(string userId, RequestOption requestOptions = null) =>
+        public UserIdResponse GetUserId(string userId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetUserIdAsync(userId, requestOptions));
 
         /// <summary>
@@ -436,7 +436,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<UserIdResponse> GetUserIdAsync(string userId, RequestOption requestOptions = null,
+        public async Task<UserIdResponse> GetUserIdAsync(string userId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(userId))
@@ -454,7 +454,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public TopUserIdResponse GetTopUserId(RequestOption requestOptions = null) =>
+        public TopUserIdResponse GetTopUserId(RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetTopUserIdAsync(requestOptions));
 
         /// <summary>
@@ -464,7 +464,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TopUserIdResponse> GetTopUserIdAsync(RequestOption requestOptions = null,
+        public async Task<TopUserIdResponse> GetTopUserIdAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<TopUserIdResponse>(HttpMethod.Get,
@@ -479,7 +479,7 @@ namespace Algolia.Search.Clients
         /// <param name="clusterName"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public AddObjectResponse AssignUserId(string userId, string clusterName, RequestOption requestOptions = null) =>
+        public AddObjectResponse AssignUserId(string userId, string clusterName, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => AssignUserIdAsync(userId, clusterName, requestOptions));
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<AddObjectResponse> AssignUserIdAsync(string userId, string clusterName, RequestOption requestOptions = null,
+        public async Task<AddObjectResponse> AssignUserIdAsync(string userId, string clusterName, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(userId))
@@ -518,7 +518,7 @@ namespace Algolia.Search.Clients
             }
             else
             {
-                requestOptions = new RequestOption { Headers = removeUserId };
+                requestOptions = new RequestOptions { Headers = removeUserId };
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, AssignUserIdRequest>(HttpMethod.Post,
@@ -531,7 +531,7 @@ namespace Algolia.Search.Clients
         /// <param name="userId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public DeleteResponse RemoveUserId(string userId, RequestOption requestOptions = null) =>
+        public DeleteResponse RemoveUserId(string userId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => RemoveUserIdAsync(userId, requestOptions));
 
         /// <summary>
@@ -541,7 +541,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<DeleteResponse> RemoveUserIdAsync(string userId, RequestOption requestOptions = null,
+        public async Task<DeleteResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(userId))
@@ -561,7 +561,7 @@ namespace Algolia.Search.Clients
             }
             else
             {
-                requestOptions = new RequestOption { Headers = removeUserId };
+                requestOptions = new RequestOptions { Headers = removeUserId };
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
@@ -572,7 +572,7 @@ namespace Algolia.Search.Clients
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
-        public LogResponse GetLogs(RequestOption requestOptions = null) =>
+        public LogResponse GetLogs(RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetLogsAsync(requestOptions));
 
         /// <summary>
@@ -581,7 +581,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<LogResponse> GetLogsAsync(RequestOption requestOptions = null,
+        public async Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,

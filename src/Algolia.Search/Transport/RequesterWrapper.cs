@@ -69,7 +69,7 @@ namespace Algolia.Search.Transport
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType, RequestOption requestOptions = null,
+        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
             where TResult : class => await ExecuteRequestAsync<TResult, string>(method, uri, callType, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
 
@@ -87,7 +87,7 @@ namespace Algolia.Search.Transport
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType,
-            TData data = default(TData), RequestOption requestOptions = null,
+            TData data = default(TData), RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
             where TResult : class
             where TData : class

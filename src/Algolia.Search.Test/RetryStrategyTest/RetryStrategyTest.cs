@@ -29,6 +29,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.RetryStrategyTest
@@ -142,7 +143,9 @@ namespace Algolia.Search.Test.RetryStrategyTest
            {
                var hosts = retryStrategy.GetTryableHost(callType);
                retryStrategy.Decide(hosts.ElementAt(0), 200, false);
+               Console.WriteLine(Thread.CurrentThread.Name);
            });
+
 
             Task task2 = Task.Run(() =>
            {
