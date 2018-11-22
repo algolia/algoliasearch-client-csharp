@@ -27,7 +27,7 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class MoveIndexResponse : AlgoliaIndexingResponse<MoveIndexResponse>
+    public class MoveIndexResponse : IndexingResponse
     {
         public DateTime UpdatedAt { get; set; }
     }

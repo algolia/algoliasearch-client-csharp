@@ -27,7 +27,7 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class DeleteResponse : AlgoliaIndexingResponse<DeleteResponse>
+    public class DeleteResponse : IndexingResponse
     {
         public DateTime DeletedAt { get; set; }
     }

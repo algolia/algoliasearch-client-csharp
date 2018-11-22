@@ -23,19 +23,10 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-using Algolia.Search.Models.Responses;
-
-namespace Algolia.Search.Utils
+namespace Algolia.Search.Models.Responses
 {
-    public static class AlgoliaWaitableResponseExtensions
+    public interface IAlgoliaWaitableResponse
     {
-        public static void Wait<T>(this IEnumerable<IndexingResponse> responses) where T : IndexingResponse
-        {
-            foreach (var response in responses)
-            {
-                response.Wait();
-            }
-        }
+        void Wait();
     }
 }

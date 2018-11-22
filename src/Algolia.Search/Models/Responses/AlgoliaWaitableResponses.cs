@@ -28,22 +28,15 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class AlgoliaWaitableResponses : AlgoliaIndexingResponse<AlgoliaWaitableResponses>
+    public class MultiResponse : IAlgoliaWaitableResponse
     {
-        public static explicit operator AlgoliaWaitableResponses(CopyToResponse source)
+        public List<IAlgoliaWaitableResponse> Responses { get; set; }
+        public void Wait()
         {
-            return new AlgoliaWaitableResponses { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
-        }
-
-        public static explicit operator AlgoliaWaitableResponses(BatchResponse source)
-        {
-            return new AlgoliaWaitableResponses { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
-        }
-
-        public static explicit operator AlgoliaWaitableResponses(MoveIndexResponse source)
-        {
-            return new AlgoliaWaitableResponses { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
+            foreach (var response in Responses)
+            {
+                response.Wait();
+            }
         }
     }
-
 }

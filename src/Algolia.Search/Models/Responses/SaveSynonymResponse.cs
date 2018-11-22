@@ -27,7 +27,7 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class SaveSynonymResponse : AlgoliaIndexingResponse<SaveSynonymResponse>
+    public class SaveSynonymResponse : IndexingResponse
     {
         public DateTime UpdatedAt { get; set; }
         public string Id { get; set; }

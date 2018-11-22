@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Responses
     /// Allow to bind the WaitTask method directly on the responses
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AlgoliaIndexingResponse<T> where T : AlgoliaIndexingResponse<T>
+    public class IndexingResponse : IAlgoliaWaitableResponse
     {
         public Action<long> WaitDelegate { get; set; }
 
@@ -44,10 +44,9 @@ namespace Algolia.Search.Models.Responses
         /// This method waits on an asynchronous Algolia operation like a save or an update
         /// </summary>
         /// <returns></returns>
-        public T Wait()
+        public void Wait()
         {
             WaitDelegate(TaskID);
-            return (T)this;
         }
     }
 }
