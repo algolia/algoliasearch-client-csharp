@@ -28,21 +28,21 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class ReplaceAllResponse : AlgoliaWaitableResponse<ReplaceAllResponse>
+    public class AlgoliaWaitableResponses : AlgoliaIndexingResponse<AlgoliaWaitableResponses>
     {
-        public static explicit operator ReplaceAllResponse(CopyToResponse source)
+        public static explicit operator AlgoliaWaitableResponses(CopyToResponse source)
         {
-            return new ReplaceAllResponse { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
+            return new AlgoliaWaitableResponses { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
         }
 
-        public static explicit operator ReplaceAllResponse(BatchResponse source)
+        public static explicit operator AlgoliaWaitableResponses(BatchResponse source)
         {
-            return new ReplaceAllResponse { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
+            return new AlgoliaWaitableResponses { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
         }
 
-        public static explicit operator ReplaceAllResponse(MoveIndexResponse source)
+        public static explicit operator AlgoliaWaitableResponses(MoveIndexResponse source)
         {
-            return new ReplaceAllResponse { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
+            return new AlgoliaWaitableResponses { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
         }
     }
 

@@ -193,7 +193,7 @@ namespace Algolia.Search.Clients
         /// <param name="safe"></param>
         /// <param name="requestOptions"></param>
         /// <typeparam name="T"></typeparam>
-        public List<ReplaceAllResponse> ReplaceAllObjects<T>(IEnumerable<T> datas, bool safe = false, RequestOptions requestOptions = null) where T : class =>
+        public List<AlgoliaWaitableResponses> ReplaceAllObjects<T>(IEnumerable<T> datas, bool safe = false, RequestOptions requestOptions = null) where T : class =>
                     AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(datas, safe, requestOptions));
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public async Task<List<ReplaceAllResponse>> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, bool safe = false, RequestOptions requestOptions = null,
+        public async Task<List<AlgoliaWaitableResponses>> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, bool safe = false, RequestOptions requestOptions = null,
                     CancellationToken ct = default(CancellationToken)) where T : class
         {
             Random rnd = new Random();
@@ -213,19 +213,19 @@ namespace Algolia.Search.Clients
             SearchIndex tmpIndex = new SearchIndex(_requesterWrapper, tmpIndexName);
 
             List<string> scopes = new List<string> { CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms };
-            List<ReplaceAllResponse> responses = new List<ReplaceAllResponse>();
+            List<AlgoliaWaitableResponses> responses = new List<AlgoliaWaitableResponses>();
 
             // Copy index ressources
             CopyToResponse copyResponse = await CopyToAsync(tmpIndexName, scopes, requestOptions, ct).ConfigureAwait(false);
-            responses.Add((ReplaceAllResponse)copyResponse);
-            
+            responses.Add((AlgoliaWaitableResponses)copyResponse);
+
             if (safe)
             {
                 copyResponse.Wait();
             }
 
             BatchResponse saveObjectsResponse = await tmpIndex.AddObjectsAysnc<T>(datas, requestOptions, ct).ConfigureAwait(false);
-            responses.Add(new ReplaceAllResponse { TaskID = saveObjectsResponse.TaskID, WaitDelegate = saveObjectsResponse.WaitDelegate });
+            responses.Add((AlgoliaWaitableResponses)saveObjectsResponse);
 
             if (safe)
             {
@@ -234,7 +234,7 @@ namespace Algolia.Search.Clients
 
             // Move temporary index to source index
             MoveIndexResponse moveResponse = await MoveFromAsync(tmpIndexName, requestOptions, ct).ConfigureAwait(false);
-            responses.Add(new ReplaceAllResponse { TaskID = moveResponse.TaskID, WaitDelegate = moveResponse.WaitDelegate });
+            responses.Add((AlgoliaWaitableResponses)moveResponse);
 
             if (safe)
             {

@@ -87,7 +87,7 @@ namespace Algolia.Search.Test.EndToEnd
             saveRuleResponse.Result.Wait();
             saveSynonymResponse.Result.Wait();
 
-            IEnumerable<ReplaceAllResponse> response = await _index.ReplaceAllObjectsAsync(new List<ReplaceAllTestObject>
+            var response = await _index.ReplaceAllObjectsAsync(new List<ReplaceAllTestObject>
             {
                 new ReplaceAllTestObject { ObjectID = "two" }
             });

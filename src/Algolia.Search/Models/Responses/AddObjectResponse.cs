@@ -27,7 +27,7 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class AddObjectResponse : AlgoliaWaitableResponse<AddObjectResponse>
+    public class AddObjectResponse : AlgoliaIndexingResponse<AddObjectResponse>
     {
         public DateTime CreatedAt { get; set; }
         public string ObjectID { get; set; }

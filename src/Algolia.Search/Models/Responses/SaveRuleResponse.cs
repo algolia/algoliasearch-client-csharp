@@ -27,7 +27,7 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class SaveRuleResponse : AlgoliaWaitableResponse<SaveRuleResponse>
+    public class SaveRuleResponse : AlgoliaIndexingResponse<SaveRuleResponse>
     {
         public DateTime UpdatedAt { get; set; }
     }

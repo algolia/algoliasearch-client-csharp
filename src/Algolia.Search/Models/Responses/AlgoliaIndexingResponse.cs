@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Responses
     /// Allow to bind the WaitTask method directly on the responses
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AlgoliaWaitableResponse<T> where T : AlgoliaWaitableResponse<T>
+    public abstract class AlgoliaIndexingResponse<T> where T : AlgoliaIndexingResponse<T>
     {
         public Action<long> WaitDelegate { get; set; }
 

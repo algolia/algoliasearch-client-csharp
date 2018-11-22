@@ -27,7 +27,7 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class BatchResponse : AlgoliaWaitableResponse<BatchResponse>
+    public class BatchResponse : AlgoliaIndexingResponse<BatchResponse>
     {
         public IEnumerable<string> ObjectIDs { get; set; }
     }

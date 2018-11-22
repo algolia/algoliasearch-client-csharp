@@ -30,7 +30,7 @@ namespace Algolia.Search.Utils
 {
     public static class AlgoliaWaitableResponseExtensions
     {
-        public static void Wait<T>(this IEnumerable<AlgoliaWaitableResponse<T>> responses) where T : AlgoliaWaitableResponse<T>
+        public static void Wait<T>(this IEnumerable<AlgoliaIndexingResponse<T>> responses) where T : AlgoliaIndexingResponse<T>
         {
             foreach (var response in responses)
             {

@@ -27,7 +27,7 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class UpdateObjectResponse : AlgoliaWaitableResponse<UpdateObjectResponse>
+    public class UpdateObjectResponse : AlgoliaIndexingResponse<UpdateObjectResponse>
     {
         public DateTime UpdatedAt { get; set; }
         public string ObjectID { get; set; }
