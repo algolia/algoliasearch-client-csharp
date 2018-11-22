@@ -23,31 +23,27 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Clients;
-using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
-    /// <summary>
-    /// Base class for Algolia's waitable responses
-    /// Allow to bind the WaitTask method directly on the responses
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class AlgoliaWaitableResponse<T> where T : AlgoliaWaitableResponse<T>
+    public class ReplaceAllResponse : AlgoliaWaitableResponse<ReplaceAllResponse>
     {
-        public Action<long> WaitDelegate { get; set; }
-
-        public long TaskID { get; set; }
-
-        /// <summary>
-        /// This method waits on an asynchronous Algolia operation like a save or an update
-        /// </summary>
-        /// <returns></returns>
-        public T Wait()
+        public static explicit operator ReplaceAllResponse(CopyToResponse source)
         {
-            WaitDelegate(TaskID);
-            return (T)this;
+            return new ReplaceAllResponse { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
+        }
+
+        public static explicit operator ReplaceAllResponse(BatchResponse source)
+        {
+            return new ReplaceAllResponse { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
+        }
+
+        public static explicit operator ReplaceAllResponse(MoveIndexResponse source)
+        {
+            return new ReplaceAllResponse { TaskID = source.TaskID, WaitDelegate = source.WaitDelegate };
         }
     }
+
 }

@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Utils;
@@ -86,10 +87,12 @@ namespace Algolia.Search.Test.EndToEnd
             saveRuleResponse.Result.Wait();
             saveSynonymResponse.Result.Wait();
 
-            var taskIds = await _index.ReplaceAllObjectsAsync(new List<ReplaceAllTestObject>
+            IEnumerable<ReplaceAllResponse> response = await _index.ReplaceAllObjectsAsync(new List<ReplaceAllTestObject>
             {
                 new ReplaceAllTestObject { ObjectID = "two" }
             });
+
+            response.Wait();
 
             var ruleToSave2 = new Rule
             {
