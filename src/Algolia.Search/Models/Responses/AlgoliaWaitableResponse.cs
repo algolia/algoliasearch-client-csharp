@@ -35,7 +35,6 @@ namespace Algolia.Search.Models.Responses
     /// <typeparam name="T"></typeparam>
     public abstract class AlgoliaWaitableResponse<T> where T : AlgoliaWaitableResponse<T>
     {
-        
         public Action<long> WaitDelegate { private get; set; }
 
         public long TaskID { get; set; }

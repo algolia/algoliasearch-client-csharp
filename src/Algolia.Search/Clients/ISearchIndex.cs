@@ -418,7 +418,7 @@ namespace Algolia.Search.Clients
         /// <param name="destinationIndex"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        MoveIndexResponse MoveTo(string destinationIndex, RequestOptions requestOptions = null);
+        MoveIndexResponse MoveFrom(string destinationIndex, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Rename an index. Normally used to reindex your data atomically, without any down time.
@@ -427,7 +427,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<MoveIndexResponse> MoveToAsync(string destinationIndex, RequestOptions requestOptions = null,
+        Task<MoveIndexResponse> MoveFromAsync(string destinationIndex, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

@@ -56,7 +56,12 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Url encoded index name
         /// </summary>
-        private string _urlEncodedIndexName;
+        private readonly string _urlEncodedIndexName;
+
+        /// <summary>
+        /// Original index name
+        /// </summary>
+        private readonly string _indexName;
 
         /// <summary>
         /// Instantiate an Index for a given client
@@ -66,9 +71,10 @@ namespace Algolia.Search.Clients
         public SearchIndex(IRequesterWrapper requesterWrapper, string indexName)
         {
             _requesterWrapper = requesterWrapper ?? throw new ArgumentNullException(nameof(requesterWrapper));
-            _urlEncodedIndexName = !string.IsNullOrWhiteSpace(indexName)
-                ? WebUtility.UrlEncode(indexName)
-                : throw new ArgumentNullException(nameof(indexName));
+            _indexName = !string.IsNullOrWhiteSpace(indexName)
+                    ? indexName
+                    : throw new ArgumentNullException(nameof(indexName));
+            _urlEncodedIndexName = WebUtility.UrlEncode(indexName);
         }
 
         /// <summary>
@@ -178,6 +184,61 @@ namespace Algolia.Search.Clients
 
             response.WaitDelegate = t => WaitTask(t);
             return response;
+        }
+
+        /// <summary>
+        /// Replace all objects
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <param name="safe"></param>
+        /// <param name="requestOptions"></param>
+        /// <typeparam name="T"></typeparam>
+        public List<long> ReplaceAllObjects<T>(IEnumerable<T> datas, bool safe = false, RequestOptions requestOptions = null) where T : class =>
+                    AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(datas, safe, requestOptions));
+
+        /// <summary>
+        /// Replace all objects
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <param name="safe"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public async Task<List<long>> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, bool safe = false, RequestOptions requestOptions = null,
+                    CancellationToken ct = default(CancellationToken)) where T : class
+        {
+            Random rnd = new Random();
+            string tmpIndexName = $"{this._indexName}_tmp_{rnd.Next(100)}";
+            SearchIndex tmpIndex = new SearchIndex(_requesterWrapper, tmpIndexName);
+
+            List<string> scopes = new List<string> { CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms };
+            List<long> taskIds = new List<long>();
+
+            // Copy index ressources
+            CopyToResponse copyResponse = await CopyToAsync(tmpIndexName, scopes, requestOptions, ct).ConfigureAwait(false);
+
+            if (safe)
+            {
+                copyResponse.Wait();
+            }
+
+            BatchResponse saveObjectsResponse = await tmpIndex.AddObjectsAysnc<T>(datas, requestOptions, ct).ConfigureAwait(false);
+
+            if (safe)
+            {
+                saveObjectsResponse.Wait();
+            }
+
+            // Move temporary index to source index
+            MoveIndexResponse moveResponse = await MoveFromAsync(tmpIndexName, requestOptions, ct).ConfigureAwait(false);
+
+            if (safe)
+            {
+                moveResponse.Wait();
+            }
+
+            return taskIds;
         }
 
         /// <summary>
@@ -1039,7 +1100,7 @@ namespace Algolia.Search.Clients
 
             var data = new CopyToRequest
             {
-                Operation = "copy",
+                Operation = MoveType.Copy,
                 IndexNameDest = destinationIndex,
                 Scope = scope
             };
@@ -1057,28 +1118,34 @@ namespace Algolia.Search.Clients
         /// <param name="destinationIndex"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public MoveIndexResponse MoveTo(string destinationIndex, RequestOptions requestOptions = null) =>
-                    AsyncHelper.RunSync(() => MoveToAsync(destinationIndex, requestOptions));
+        public MoveIndexResponse MoveFrom(string destinationIndex, RequestOptions requestOptions = null) =>
+                    AsyncHelper.RunSync(() => MoveFromAsync(destinationIndex, requestOptions));
 
         /// <summary>
         /// Rename an index. Normally used to reindex your data atomically, without any down time.
         /// </summary>
-        /// <param name="destinationIndex"></param>
+        /// <param name="sourceIndex"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<MoveIndexResponse> MoveToAsync(string destinationIndex, RequestOptions requestOptions = null,
+        public async Task<MoveIndexResponse> MoveFromAsync(string sourceIndex, RequestOptions requestOptions = null,
                     CancellationToken ct = default(CancellationToken))
         {
-            if (string.IsNullOrWhiteSpace(destinationIndex))
+            if (string.IsNullOrWhiteSpace(sourceIndex))
             {
-                throw new ArgumentNullException(destinationIndex);
+                throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexResponse response = await _requesterWrapper.ExecuteRequestAsync<MoveIndexResponse>(HttpMethod.Post,
-                $"/1/indexes/{_urlEncodedIndexName}/operation", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+            MoveIndexRequest request = new MoveIndexRequest
+            {
+                Operation = MoveType.Move,
+                Destination = _indexName
+            };
 
-            _urlEncodedIndexName = WebUtility.UrlEncode(destinationIndex);
+            MoveIndexResponse response = await _requesterWrapper.ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,
+                $"/1/indexes/{sourceIndex}/operation", CallType.Write, request, requestOptions, ct).ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(t);
             return response;
         }
 

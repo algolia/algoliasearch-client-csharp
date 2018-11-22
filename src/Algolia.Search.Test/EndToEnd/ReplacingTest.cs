@@ -24,6 +24,7 @@
 */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
@@ -50,7 +51,7 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestReplacing()
         {
-            var addResponse = _index.AddObjectAysnc(new { ObjectID = "one" });
+            var addResponse = _index.AddObjectAysnc(new ReplaceAllTestObject { ObjectID = "one" });
 
             var ruleToSave = new Rule
             {
@@ -85,7 +86,10 @@ namespace Algolia.Search.Test.EndToEnd
             saveRuleResponse.Result.Wait();
             saveSynonymResponse.Result.Wait();
 
-            // replaceAllObjects TODO
+            var taskIds = await _index.ReplaceAllObjectsAsync(new List<ReplaceAllTestObject>
+            {
+                new ReplaceAllTestObject { ObjectID = "two" }
+            });
 
             var ruleToSave2 = new Rule
             {
@@ -117,10 +121,9 @@ namespace Algolia.Search.Test.EndToEnd
             replaceAllRulesResponse.Wait();
             replaceAllSynonymsResponse.Wait();
 
-//var test = await _index.GetSynonymAsync("one");
-
-   //          Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("one"));
-             Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetRuleAsync("one"));
+            Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetObjectAsync<ReplaceAllTestObject>("one"));
+            Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("one"));
+            Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetRuleAsync("one"));
 
             var ruleAfterReplace = _index.GetRuleAsync("two");
             var synonymAfterReplace = _index.GetSynonymAsync("two");
@@ -129,5 +132,10 @@ namespace Algolia.Search.Test.EndToEnd
             Assert.True(TestHelper.AreObjectsEqual(ruleAfterReplace.Result, ruleToSave2));
             Assert.True(TestHelper.AreObjectsEqual(synonymAfterReplace.Result, synonymToSave2));
         }
+    }
+
+    public class ReplaceAllTestObject
+    {
+        public string ObjectID { get; set; }
     }
 }

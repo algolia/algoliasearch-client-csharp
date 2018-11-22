@@ -23,12 +23,11 @@
 * THE SOFTWARE.
 */
 
-using System;
-
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.Enums
 {
-    public class MoveIndexResponse : AlgoliaWaitableResponse<MoveIndexResponse>
+    public class MoveType
     {
-        public DateTime UpdatedAt { get; set; }
+        public const string Move = "move";
+        public const string Copy = "copy";
     }
 }

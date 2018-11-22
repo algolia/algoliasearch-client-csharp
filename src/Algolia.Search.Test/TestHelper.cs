@@ -28,6 +28,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 
 namespace Algolia.Search.Test
