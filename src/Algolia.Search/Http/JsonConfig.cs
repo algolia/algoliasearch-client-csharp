@@ -37,7 +37,7 @@ namespace Algolia.Search.Http
         
         public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
         {
-            Formatting = Formatting.Indented,
+            Formatting = Formatting.None,
             NullValueHandling = NullValueHandling.Ignore,
             ContractResolver = new DefaultContractResolver
             {
