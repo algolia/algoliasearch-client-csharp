@@ -26,12 +26,13 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Algolia.Search.Iterators
 {
-    public class RulesIterator
+    public class RulesIterator : IEnumerable
     {
         private readonly ISearchIndex _index;
         private readonly RuleQuery _query = new RuleQuery();
@@ -57,6 +58,11 @@ namespace Algolia.Search.Iterators
                     yield return hit;
                 }
             } while (_hits > 0);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

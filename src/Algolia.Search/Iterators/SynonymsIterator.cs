@@ -26,11 +26,12 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Synonyms;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Iterators
 {
-    public class SynonymsIterator
+    public class SynonymsIterator : IEnumerable
     {
         private readonly ISearchIndex _index;
         private readonly SynonymQuery _query = new SynonymQuery();
@@ -56,6 +57,11 @@ namespace Algolia.Search.Iterators
                     yield return hit;
                 }
             } while (_hits > 0);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

@@ -26,11 +26,12 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Iterators
 {
-    public class IndexIterator<T> where T : class
+    public class IndexIterator<T> : IEnumerable<T> where T : class
     {
         private readonly SearchIndex _index;
         private readonly BrowseIndexQuery _query;
@@ -53,6 +54,11 @@ namespace Algolia.Search.Iterators
                     yield return hit;
                 }
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
