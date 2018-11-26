@@ -23,22 +23,25 @@
 * THE SOFTWARE.
 */
 
-using System.Linq;
-using System.Collections.Generic;
+using System;
+using System.Reflection;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Utils
 {
-    /// <summary>
-    /// Any different call can be any write operation
-    /// </summary>
-    public class MultiResponse : IAlgoliaWaitableResponse
+    internal static class AlgoliaHelper
     {
-        public List<IAlgoliaWaitableResponse> Responses { get; set; }
-        public void Wait()
+        public static void EnsureObjectID<T>()
         {
-            foreach (var response in Responses)
+            PropertyInfo pi = typeof(T).GetTypeInfo().GetDeclaredProperty("ObjectID");
+
+            if (pi == null)
             {
-                response.Wait();
+                throw new Exception("The class mut have an ObjectID property");
+            }
+
+            if (pi.GetType() != typeof(string))
+            {
+                throw new NotSupportedException("ObjectID property must be a string");
             }
         }
     }

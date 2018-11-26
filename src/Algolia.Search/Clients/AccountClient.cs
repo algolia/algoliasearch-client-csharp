@@ -68,60 +68,29 @@ namespace Algolia.Search.Clients
                 throw new AlgoliaException("Destination index already exists. Please delete it before copying index across applications.");
             }
 
-            MultiResponse response = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
+            MultiResponse ret = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
 
             // Save settings
             IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync().ConfigureAwait(false);
             SetSettingsResponse destinationSettingsResp = await destinationIndex.SetSettingsAsync(sourceSettings, requestOptions, ct).ConfigureAwait(false);
-            response.Responses.Add(destinationSettingsResp);
+            ret.Responses.Add(destinationSettingsResp);
 
             // Save synonyms
             SynonymsIterator sourceSynonyms = new SynonymsIterator(sourceIndex);
-            List<Synonym> synonyms = new List<Synonym>();
-
-            foreach (var synonym in sourceSynonyms)
-            {
-                synonyms.Add(synonym);
-            }
-
-            SaveSynonymResponse destinationSynonymResponse = await destinationIndex.SaveSynonymsAsync(synonyms, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
-            response.Responses.Add(destinationSynonymResponse);
+            SaveSynonymResponse destinationSynonymResponse = await destinationIndex.SaveSynonymsAsync(sourceSynonyms, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            ret.Responses.Add(destinationSynonymResponse);
 
             // Save rules
             RulesIterator sourceRules = new RulesIterator(sourceIndex);
-            List<Rule> rules = new List<Rule>();
+            BatchResponse destinationRuleResponse = await destinationIndex.SaveRulesAsync(sourceRules, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            ret.Responses.Add(destinationRuleResponse);
 
-            foreach (var rule in sourceRules)
-            {
-                rules.Add(rule);
-            }
-
-            BatchResponse destinationRuleResponse = await destinationIndex.SaveRulesAsync(rules, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
-            response.Responses.Add(destinationRuleResponse);
-
-            // Save objects
+            // Save objects (batched)
             IndexIterator<T> indexIterator = sourceIndex.Browse<T>(new BrowseIndexQuery());
-            List<T> records = new List<T>();
+            BatchIndexingResponse saveObject = await destinationIndex.AddObjectsAysnc<T>(indexIterator, requestOptions, ct).ConfigureAwait(false);
+            ret.Responses.Add(saveObject);
 
-            foreach (var record in indexIterator)
-            {
-                if (records.Count == 1000)
-                {
-                    BatchResponse saveObject = await destinationIndex.AddObjectsAysnc(records, requestOptions, ct).ConfigureAwait(false);
-                    response.Responses.Add(saveObject);
-                    records.Clear();
-                }
-
-                records.Add(record);
-            }
-
-            if (records.Count == 1000)
-            {
-                BatchResponse saveObject = await destinationIndex.AddObjectsAysnc(records, requestOptions, ct).ConfigureAwait(false);
-                response.Responses.Add(saveObject);
-            }
-
-            return response;
+            return ret;
         }
     }
 }

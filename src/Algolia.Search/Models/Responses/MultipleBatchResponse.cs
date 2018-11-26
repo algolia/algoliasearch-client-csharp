@@ -27,9 +27,14 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class MultipleBatchResponse
+    public class MultipleIndexBatchIndexingResponse : IAlgoliaWaitableResponse
     {
         IEnumerable<string> ObjectIDs { get; set; }
         Dictionary<string, long> TaskID { get; set; }
+
+        public void Wait()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -74,13 +74,13 @@ namespace Algolia.Search.Clients
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleBatchResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null) where T : class;
+        MultipleIndexBatchIndexingResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleBatchResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
+        Task<MultipleIndexBatchIndexingResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>

@@ -161,7 +161,7 @@ namespace Algolia.Search.Clients
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public MultipleBatchResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null) where T : class =>
+        public MultipleIndexBatchIndexingResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null) where T : class =>
                     AsyncHelper.RunSync(() => MultipleBatchAsync(operations, requestOptions));
 
         /// <inheritdoc />
@@ -169,7 +169,7 @@ namespace Algolia.Search.Clients
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public async Task<MultipleBatchResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
+        public async Task<MultipleIndexBatchIndexingResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (operations == null)
@@ -179,7 +179,7 @@ namespace Algolia.Search.Clients
 
             var batch = new BatchRequest<T>(operations);
 
-            return await _requesterWrapper.ExecuteRequestAsync<MultipleBatchResponse, BatchRequest<T>>(HttpMethod.Post,
+            return await _requesterWrapper.ExecuteRequestAsync<MultipleIndexBatchIndexingResponse, BatchRequest<T>>(HttpMethod.Post,
                 "/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
         }
 

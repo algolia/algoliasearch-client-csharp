@@ -83,7 +83,7 @@ namespace Algolia.Search.Clients
         /// <param name="datas"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        BatchResponse AddObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null) where T : class;
+        BatchIndexingResponse AddObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Add objects to the given index
@@ -92,7 +92,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<BatchResponse> AddObjectsAysnc<T>(IEnumerable<T> datas, RequestOptions requestOptions = null,
+        Task<BatchIndexingResponse> AddObjectsAysnc<T>(IEnumerable<T> datas, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Algolia.Search.Clients
         /// <param name="objectIds"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        BatchResponse DeleteObjects(IEnumerable<string> objectIds, RequestOptions requestOptions = null);
+        BatchIndexingResponse DeleteObjects(IEnumerable<string> objectIds, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Delete all the objects for their objectIds
@@ -128,7 +128,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<BatchResponse> DeleteObjectsAsync(IEnumerable<string> objectIds, RequestOptions requestOptions = null,
+        Task<BatchIndexingResponse> DeleteObjectsAsync(IEnumerable<string> objectIds, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

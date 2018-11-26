@@ -32,7 +32,7 @@ using System.Linq;
 
 namespace Algolia.Search.Iterators
 {
-    public class RulesIterator : IEnumerable
+    public class RulesIterator : IEnumerable<Rule>
     {
         private readonly ISearchIndex _index;
         private readonly RuleQuery _query = new RuleQuery();

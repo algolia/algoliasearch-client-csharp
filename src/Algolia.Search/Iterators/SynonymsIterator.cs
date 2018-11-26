@@ -31,7 +31,7 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Iterators
 {
-    public class SynonymsIterator : IEnumerable
+    public class SynonymsIterator : IEnumerable<Synonym>
     {
         private readonly ISearchIndex _index;
         private readonly SynonymQuery _query = new SynonymQuery();

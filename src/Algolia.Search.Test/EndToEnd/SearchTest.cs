@@ -53,10 +53,10 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task SearchTestAsync()
         {
-            BatchResponse addObjectResponse = await _index.AddObjectsAysnc(_employees);
+            BatchIndexingResponse addObjectResponse = await _index.AddObjectsAysnc(_employees);
             addObjectResponse.Wait();
 
-            Assert.IsInstanceOf<BatchResponse>(addObjectResponse);
+            Assert.IsInstanceOf<BatchIndexingResponse>(addObjectResponse);
             Assert.NotNull(addObjectResponse);
 
             IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "searchable(company)" } };

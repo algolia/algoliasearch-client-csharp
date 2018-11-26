@@ -23,17 +23,13 @@
 * THE SOFTWARE.
 */
 
-using System.Linq;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
-    /// <summary>
-    /// Any different call can be any write operation
-    /// </summary>
-    public class MultiResponse : IAlgoliaWaitableResponse
+    public class BatchIndexingResponse : IAlgoliaWaitableResponse
     {
-        public List<IAlgoliaWaitableResponse> Responses { get; set; }
+        public List<BatchResponse> Responses { get; set; }
         public void Wait()
         {
             foreach (var response in Responses)
