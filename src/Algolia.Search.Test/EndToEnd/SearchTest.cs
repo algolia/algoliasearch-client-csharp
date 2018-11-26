@@ -39,7 +39,7 @@ namespace Algolia.Search.Test.EndToEnd
     [Parallelizable]
     public class SearchTest
     {
-        protected SearchIndex _index;
+        private SearchIndex _index;
         private IEnumerable<Employee> _employees;
 
         [OneTimeSetUp]

@@ -33,7 +33,7 @@ namespace Algolia.Search.Clients
     /// <summary>
     /// Analytics client
     /// </summary>
-    interface IAnalyticsClient
+    public interface IAnalyticsClient
     {
         /// <summary>
         /// Get an A/B test information and results.
@@ -52,6 +52,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         Task<ABTest> GetABTestAsync(long abTestId, RequestOptions requestOptions = null,
            CancellationToken ct = default(CancellationToken));
+
         /// <summary>
         /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
         /// </summary>

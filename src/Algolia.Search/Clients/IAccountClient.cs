@@ -30,18 +30,27 @@ using Algolia.Search.Models.Responses;
 
 namespace Algolia.Search.Clients
 {
-    interface IAccountClient
+    public interface IAccountClient
     {
         /// <summary>
-        // The method copy settings, synonyms, rules and objects from the source index to the destination index
+        /// The method copy settings, synonyms, rules and objects from the source index to the destination index
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
         MultiResponse CopyIndex<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex, RequestOptions requestOptions = null) where T : class;
-        
+
         /// <summary>
-        // The method copy settings, synonyms, rules and objects from the source index to the destination index
+        /// The method copy settings, synonyms, rules and objects from the source index to the destination index
         /// </summary>
-        /// <typeparam name="MultiResponse"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex, RequestOptions requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class;
     }

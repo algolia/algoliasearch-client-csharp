@@ -23,10 +23,8 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 
 namespace Algolia.Search.Utils
 {
@@ -52,12 +50,7 @@ namespace Algolia.Search.Utils
                 return a;
             }
 
-            if (a == null && b == null)
-            {
-                return null;
-            }
-
-            return a.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key) && kvp.Value != null)).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            return a?.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key) && kvp.Value != null)).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
     }
 }

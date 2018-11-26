@@ -39,7 +39,7 @@ namespace Algolia.Search.Test.EndToEnd
     [Parallelizable]
     public class SynonymsTest
     {
-        protected SearchIndex _index;
+        private SearchIndex _index;
         private IEnumerable<SynonymTestObject> _objectsToSave;
         private string _indexName;
 

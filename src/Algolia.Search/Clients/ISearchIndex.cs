@@ -252,7 +252,7 @@ namespace Algolia.Search.Clients
         Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
-        
+
         /// <summary>
         /// Batch rules
         /// </summary>

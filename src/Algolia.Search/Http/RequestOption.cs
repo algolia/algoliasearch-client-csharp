@@ -24,7 +24,6 @@
 */
 
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Algolia.Search.Http
 {

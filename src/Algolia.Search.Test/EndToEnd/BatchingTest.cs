@@ -23,15 +23,14 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Requests;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd
 {

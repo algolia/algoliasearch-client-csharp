@@ -29,7 +29,6 @@ using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -180,7 +179,7 @@ namespace Algolia.Search.Clients
         /// As a result, your application is back to normal: index A will perform as usual, receiving 100% of all search requests. 
         /// Associated metadata and metrics are still stored
         /// </summary>
-        /// <param name="aBTest"></param>
+        /// <param name="abTestId"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>

@@ -28,7 +28,6 @@ using Algolia.Search.Models.Responses;
 using Algolia.Search.Models.Rules;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Algolia.Search.Iterators
 {

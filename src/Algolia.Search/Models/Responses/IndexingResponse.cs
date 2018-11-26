@@ -23,9 +23,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Clients;
 using System;
-using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
@@ -33,11 +31,13 @@ namespace Algolia.Search.Models.Responses
     /// Base class for Algolia's waitable responses
     /// Allow to bind the WaitTask method directly on the responses
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class IndexingResponse : IAlgoliaWaitableResponse
     {
         public Action<long> WaitDelegate { get; set; }
 
+        /// <summary>
+        /// Algolia's API taskID
+        /// </summary>
         public long TaskID { get; set; }
 
         /// <summary>

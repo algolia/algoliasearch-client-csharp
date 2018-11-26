@@ -38,7 +38,7 @@ public class BaseTest
 {
     internal static SearchClient SearchClient;
     internal static SearchClient McmClient;
-    private static ListIndexesResponse indices;
+    private static ListIndexesResponse _indices;
 
     [OneTimeSetUp]
     public void Setup()
@@ -46,7 +46,7 @@ public class BaseTest
         TestHelper.CheckEnvironmentVariable();
         SearchClient = new SearchClient(TestHelper.ApplicationId, TestHelper.TestApiKey);
         McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmApiKey);
-        indices = SearchClient.ListIndexes();
+        _indices = SearchClient.ListIndexes();
     }
 
     [OneTimeTearDown]
@@ -57,9 +57,9 @@ public class BaseTest
 
     protected void PreviousTestCleanUp()
     {
-        if (indices?.Items != null && indices.Items.Any())
+        if (_indices?.Items != null && _indices.Items.Any())
         {
-            var indicesToDelete = indices.Items.Where(x => x.Name.Contains("csharp_"));
+            var indicesToDelete = _indices.Items.Where(x => x.Name.Contains("csharp_"));
             List<BatchOperation<string>> operations = new List<BatchOperation<string>>();
 
             foreach (var index in indicesToDelete)

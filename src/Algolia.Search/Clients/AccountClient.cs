@@ -23,18 +23,15 @@
 * THE SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
-using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
-using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Utils;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
@@ -44,15 +41,25 @@ namespace Algolia.Search.Clients
     public class AccountClient : IAccountClient
     {
         /// <summary>
-        // The method copy settings, synonyms, rules and objects from the source index to the destination index
+        /// The method copy settings, synonyms, rules and objects from the source index to the destination index
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
         public MultiResponse CopyIndex<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex, RequestOptions requestOptions = null) where T : class =>
                      AsyncHelper.RunSync(() => CopyIndexAsync<T>(sourceIndex, destinationIndex, requestOptions));
 
         /// <summary>
-        // The method copy settings, synonyms, rules and objects from the source index to the destination index
-        /// <typeparam name="MultiResponse"></typeparam>
+        /// The method copy settings, synonyms, rules and objects from the source index to the destination index
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         public async Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex, RequestOptions requestOptions = null,
                             CancellationToken ct = default(CancellationToken)) where T : class
         {
@@ -61,7 +68,7 @@ namespace Algolia.Search.Clients
                 throw new AlgoliaException("Source and Destination indices should not be on the same application.");
             }
 
-            IndexSettings destinationSettings = await destinationIndex.GetSettingsAsync().ConfigureAwait(false);
+            IndexSettings destinationSettings = await destinationIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
 
             if (destinationSettings != null)
             {
@@ -71,7 +78,7 @@ namespace Algolia.Search.Clients
             MultiResponse ret = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
 
             // Save settings
-            IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync().ConfigureAwait(false);
+            IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
             SetSettingsResponse destinationSettingsResp = await destinationIndex.SetSettingsAsync(sourceSettings, requestOptions, ct).ConfigureAwait(false);
             ret.Responses.Add(destinationSettingsResp);
 
@@ -87,7 +94,7 @@ namespace Algolia.Search.Clients
 
             // Save objects (batched)
             IndexIterator<T> indexIterator = sourceIndex.Browse<T>(new BrowseIndexQuery());
-            BatchIndexingResponse saveObject = await destinationIndex.AddObjectsAysnc<T>(indexIterator, requestOptions, ct).ConfigureAwait(false);
+            BatchIndexingResponse saveObject = await destinationIndex.AddObjectsAysnc(indexIterator, requestOptions, ct).ConfigureAwait(false);
             ret.Responses.Add(saveObject);
 
             return ret;
