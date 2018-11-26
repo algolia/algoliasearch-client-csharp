@@ -49,6 +49,11 @@ namespace Algolia.Search.Clients
     public class SearchIndex : ISearchIndex
     {
         /// <summary>
+        /// Index configuration
+        /// </summary>
+        public AlgoliaConfig Config { get; }
+
+        /// <summary>
         /// The Requester wrapper
         /// </summary>
         private readonly IRequesterWrapper _requesterWrapper;
@@ -68,13 +73,14 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requesterWrapper"></param>
         /// <param name="indexName"></param>
-        public SearchIndex(IRequesterWrapper requesterWrapper, string indexName)
+        public SearchIndex(IRequesterWrapper requesterWrapper, AlgoliaConfig config, string indexName)
         {
             _requesterWrapper = requesterWrapper ?? throw new ArgumentNullException(nameof(requesterWrapper));
             _indexName = !string.IsNullOrWhiteSpace(indexName)
                     ? indexName
                     : throw new ArgumentNullException(nameof(indexName));
             _urlEncodedIndexName = WebUtility.UrlEncode(indexName);
+            Config = config;
         }
 
         /// <summary>
@@ -210,7 +216,7 @@ namespace Algolia.Search.Clients
         {
             Random rnd = new Random();
             string tmpIndexName = $"{this._indexName}_tmp_{rnd.Next(100)}";
-            SearchIndex tmpIndex = new SearchIndex(_requesterWrapper, tmpIndexName);
+            SearchIndex tmpIndex = new SearchIndex(_requesterWrapper, Config, tmpIndexName);
 
             List<string> scopes = new List<string> { CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms };
             MultiResponse response = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };

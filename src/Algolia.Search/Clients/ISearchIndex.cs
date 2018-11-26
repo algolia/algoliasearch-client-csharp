@@ -39,6 +39,8 @@ namespace Algolia.Search.Clients
 {
     public interface ISearchIndex
     {
+        AlgoliaConfig Config { get; }
+
         /// <summary>
         /// Add an object to the given index
         /// </summary>
@@ -249,6 +251,29 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
+
+        
+        /// <summary>
+        /// Batch rules
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="clearExistingRules"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        BatchResponse SaveRules(IEnumerable<Rule> rules, bool forwardToReplicas = false, bool clearExistingRules = false, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Batch rules
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="forwardToReplicas"></param>
+        /// <param name="clearExistingRules"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, bool clearExistingRules = false, RequestOptions requestOptions = null,
+                     CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Delete the rule for the given ruleId

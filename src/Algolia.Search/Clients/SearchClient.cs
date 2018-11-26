@@ -42,6 +42,7 @@ namespace Algolia.Search.Clients
     public class SearchClient : ISearchClient
     {
         private readonly IRequesterWrapper _requesterWrapper;
+        public AlgoliaConfig Config { get; }
 
         /// <summary>
         /// Initialize a client with default settings
@@ -94,6 +95,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
             }
 
+            Config = config;
             _requesterWrapper = new RequesterWrapper(config, httpRequester);
         }
 
@@ -106,7 +108,7 @@ namespace Algolia.Search.Clients
         {
             return string.IsNullOrWhiteSpace(indexName)
                 ? throw new ArgumentNullException(nameof(indexName), "The Index name is required")
-                : new SearchIndex(_requesterWrapper, indexName);
+                : new SearchIndex(_requesterWrapper, Config, indexName);
         }
 
         /// <summary>

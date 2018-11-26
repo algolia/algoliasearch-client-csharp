@@ -23,40 +23,26 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Clients;
+using System.Threading;
+using System.Threading.Tasks;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Responses;
-using Algolia.Search.Models.Rules;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Algolia.Search.Iterators
+namespace Algolia.Search.Clients
 {
-    public class RulesIterator
+    interface IAccountClient
     {
-        private readonly ISearchIndex _index;
-        private readonly RuleQuery _query = new RuleQuery();
-        private int _hits;
-
-        public RulesIterator(ISearchIndex index, int hitsPerpage = 1000)
-        {
-            _index = index;
-            _query.HitsPerPage = hitsPerpage;
-            _query.Page = 0;
-        }
-
-        public IEnumerator<Rule> GetEnumerator()
-        {
-            do
-            {
-                SearchResponse<Rule> result = _index.SearchRule(_query);
-                _hits = result.Hits.Count;
-                _query.Page++;
-
-                foreach (var hit in result.Hits)
-                {
-                    yield return hit;
-                }
-            } while (_hits > 0);
-        }
+        /// <summary>
+        // The method copy settings, synonyms, rules and objects from the source index to the destination index
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        MultiResponse CopyIndex<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex, RequestOptions requestOptions = null) where T : class;
+        
+        /// <summary>
+        // The method copy settings, synonyms, rules and objects from the source index to the destination index
+        /// </summary>
+        /// <typeparam name="MultiResponse"></typeparam>
+        Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex, RequestOptions requestOptions = null,
+                            CancellationToken ct = default(CancellationToken)) where T : class;
     }
 }
