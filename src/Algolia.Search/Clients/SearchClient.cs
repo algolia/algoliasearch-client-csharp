@@ -125,8 +125,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <typeparam name="T"></typeparam>
         public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (queries == null)
             {
@@ -134,7 +133,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<MultipleGetObjectsResponse<T>>(HttpMethod.Post,
-                "/1/indexes/*/objects", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    "/1/indexes/*/objects", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -150,8 +150,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <typeparam name="T"></typeparam>
         public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (queries == null)
             {
@@ -159,7 +158,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<MultipleQueriesResponse<T>>(HttpMethod.Post,
-                "/1/indexes/*/queries", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    "/1/indexes/*/queries", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -187,8 +187,8 @@ namespace Algolia.Search.Clients
             var batch = new BatchRequest<T>(operations);
 
             return await _requesterWrapper.ExecuteRequestAsync<MultipleIndexBatchIndexingResponse, BatchRequest<T>>(
-                HttpMethod.Post,
-                "/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct).ConfigureAwait(false);
+                    HttpMethod.Post, "/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -209,7 +209,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ListIndexesResponse>(HttpMethod.Get,
-                "/1/indexes", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    "/1/indexes", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -237,7 +238,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                $"/1/indexes/{indexName}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+                    $"/1/indexes/{indexName}", CallType.Write, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -258,7 +260,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ListApiKeysResponse>(HttpMethod.Get,
-                "/1/keys", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    "/1/keys", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -286,7 +289,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<ApiKeysResponse>(HttpMethod.Get,
-                $"/1/keys/{apiKey}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    $"/1/keys/{apiKey}", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -314,7 +318,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<AddApiKeyResponse, ApiKeyRequest>(HttpMethod.Post,
-                "/1/keys", CallType.Write, acl, requestOptions, ct).ConfigureAwait(false);
+                    "/1/keys", CallType.Write, acl, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -337,8 +342,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string apiKey, ApiKeyRequest acl,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -351,7 +355,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<UpdateApiKeyResponse, ApiKeyRequest>(HttpMethod.Put,
-                $"/1/keys/{apiKey}", CallType.Write, acl, requestOptions, ct).ConfigureAwait(false);
+                    $"/1/keys/{apiKey}", CallType.Write, acl, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -379,7 +384,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                $"/1/keys/{apiKey}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+                    $"/1/keys/{apiKey}", CallType.Write, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -399,9 +405,10 @@ namespace Algolia.Search.Clients
         public async Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            ListClustersResponse response = await _requesterWrapper.ExecuteRequestAsync<ListClustersResponse>(
-                HttpMethod.Get,
-                "/1/clusters", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+            ListClustersResponse response = await _requesterWrapper
+                .ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Get, "/1/clusters", CallType.Read, requestOptions,
+                    ct)
+                .ConfigureAwait(false);
             return response?.Clusters;
         }
 
@@ -416,7 +423,6 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ListUserIdsAsync(page, hitsPerPage, requestOptions));
 
-
         /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
         /// </summary>
@@ -426,18 +432,13 @@ namespace Algolia.Search.Clients
         /// <param name="page"></param>
         /// <returns></returns>
         public async Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            ListUserIdsRequest request = new ListUserIdsRequest
-            {
-                Page = page,
-                HitsPerPage = hitsPerPage
-            };
+            ListUserIdsRequest request = new ListUserIdsRequest {Page = page, HitsPerPage = hitsPerPage};
 
             return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserIdResponse>, ListUserIdsRequest>(
-                HttpMethod.Get,
-                "/1/clusters/mapping", CallType.Read, request, requestOptions, ct).ConfigureAwait(false);
+                    HttpMethod.Get, "/1/clusters/mapping", CallType.Read, request, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -465,7 +466,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<UserIdResponse>(HttpMethod.Get,
-                $"/1/clusters/mapping/{userId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    $"/1/clusters/mapping/{userId}", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -488,7 +490,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<TopUserIdResponse>(HttpMethod.Get,
-                "/1/clusters/mapping/top", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    "/1/clusters/mapping/top", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -513,8 +516,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<AddObjectResponse> AssignUserIdAsync(string userId, string clusterName,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
@@ -545,7 +547,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, AssignUserIdRequest>(HttpMethod.Post,
-                "/1/clusters/mapping", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
+                    "/1/clusters/mapping", CallType.Write, data, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -589,7 +592,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                "/1/clusters/mapping'", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+                    "/1/clusters/mapping'", CallType.Write, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -609,7 +613,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
-                requestOptions, ct).ConfigureAwait(false);
+                    requestOptions, ct)
+                .ConfigureAwait(false);
         }
     }
 }

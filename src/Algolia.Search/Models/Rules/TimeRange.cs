@@ -23,7 +23,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Utils.Serializer;
+using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 using System;
 

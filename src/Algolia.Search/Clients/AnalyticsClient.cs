@@ -51,7 +51,8 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="applicationId"></param>
         /// <param name="apiKey"></param>
-        public AnalyticsClient(string applicationId, string apiKey) : this(new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId }, new AlgoliaHttpRequester())
+        public AnalyticsClient(string applicationId, string apiKey) : this(
+            new AlgoliaConfig {ApiKey = apiKey, AppId = applicationId}, new AlgoliaHttpRequester())
         {
         }
 
@@ -113,8 +114,10 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ABTest>(HttpMethod.Get,
-                $"/2/abtests/{abTestId}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    $"/2/abtests/{abTestId}", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
+
         /// <summary>
         /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
         /// </summary>
@@ -133,11 +136,12 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+        public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
-                $"/2/abtests?offset=${offset}&limit=${limit}", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    $"/2/abtests?offset=${offset}&limit=${limit}", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -157,10 +161,11 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOptions requestOptions = null,
-             CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
-                "/2/abtests", CallType.Write, aBTest, requestOptions, ct).ConfigureAwait(false);
+                    "/2/abtests", CallType.Write, aBTest, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -172,7 +177,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         public StopABTestResponse StopABTest(long abTestId, RequestOptions requestOptions = null) =>
-                    AsyncHelper.RunSync(() => StopABTestAsync(abTestId, requestOptions));
+            AsyncHelper.RunSync(() => StopABTestAsync(abTestId, requestOptions));
 
         /// <summary>
         /// Marks the A/B Test as stopped. At this point, the test is over and cannot be restarted. 
@@ -187,7 +192,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<StopABTestResponse>(HttpMethod.Post,
-                $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+                    $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -197,7 +203,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <returns></returns>
         public DeleteABTestResponse DeleteABTest(long abTestId, RequestOptions requestOptions = null) =>
-                    AsyncHelper.RunSync(() => DeleteABTestAsync(abTestId, requestOptions));
+            AsyncHelper.RunSync(() => DeleteABTestAsync(abTestId, requestOptions));
 
         /// <summary>
         /// Deletes the A/B Test and removes all associated metadata & metrics.
@@ -210,7 +216,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<DeleteABTestResponse>(HttpMethod.Delete,
-                $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+                    $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct)
+                .ConfigureAwait(false);
         }
     }
 }

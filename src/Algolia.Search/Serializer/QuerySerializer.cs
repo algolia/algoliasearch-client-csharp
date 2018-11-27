@@ -23,31 +23,38 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Query;
+using Algolia.Search.Utils;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 
-namespace Algolia.Search.Utils.Serializer
+namespace Algolia.Search.Serializer
 {
     /// <summary>
-    /// Allow Json.NET to serialize/deserialize DateTime in UnixTimeStamp
+    /// Custom serializer for the query object because it must math specific syntax 
+    /// For more informations regarding the syntax 
+    /// https://www.algolia.com/doc/rest-api/search/#search-endpoints
+    /// https://www.newtonsoft.com/json/help/html/JsonConverterAttributeClass.htm
     /// </summary>
-    public class DateTimeEpochSerializer : DateTimeConverterBase
+    public class QuerySerializer : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            long until = ((DateTime) value).ToUnixTimeSeconds();
-            writer.WriteValue(until);
+            SearchQuery query = (SearchQuery)value;
+
+            string queryString = QueryStringHelper.ToQueryString(query);
+
+            writer.WriteValue(queryString);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (reader.Value == null)
-            {
-                return null;
-            }
+            throw new NotImplementedException("Unnecessary : we don't need to deserialize the Query");
+        }
 
-            return DateTimeHelper.UnixTimeToDateTime((long)reader.Value);
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(SearchQuery);
         }
     }
 }

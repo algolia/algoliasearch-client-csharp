@@ -23,9 +23,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Utils.Serializer;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Query
 {

@@ -48,8 +48,9 @@ namespace Algolia.Search.Clients
         /// <param name="destinationIndex"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public MultiResponse CopyIndex<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex, RequestOptions requestOptions = null) where T : class =>
-                     AsyncHelper.RunSync(() => CopyIndexAsync<T>(sourceIndex, destinationIndex, requestOptions));
+        public MultiResponse CopyIndex<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex,
+            RequestOptions requestOptions = null) where T : class =>
+            AsyncHelper.RunSync(() => CopyIndexAsync<T>(sourceIndex, destinationIndex, requestOptions));
 
         /// <summary>
         /// The method copy settings, synonyms, rules and objects from the source index to the destination index
@@ -60,8 +61,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex, RequestOptions requestOptions = null,
-                            CancellationToken ct = default(CancellationToken)) where T : class
+        public async Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (sourceIndex.Config.AppId.Equals(destinationIndex.Config.AppId))
             {
@@ -72,29 +73,37 @@ namespace Algolia.Search.Clients
 
             if (destinationSettings != null)
             {
-                throw new AlgoliaException("Destination index already exists. Please delete it before copying index across applications.");
+                throw new AlgoliaException(
+                    "Destination index already exists. Please delete it before copying index across applications.");
             }
 
-            MultiResponse ret = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
+            MultiResponse ret = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
 
             // Save settings
             IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
-            SetSettingsResponse destinationSettingsResp = await destinationIndex.SetSettingsAsync(sourceSettings, requestOptions, ct).ConfigureAwait(false);
+            SetSettingsResponse destinationSettingsResp = await destinationIndex
+                .SetSettingsAsync(sourceSettings, requestOptions, ct)
+                .ConfigureAwait(false);
             ret.Responses.Add(destinationSettingsResp);
 
             // Save synonyms
             SynonymsIterator sourceSynonyms = new SynonymsIterator(sourceIndex);
-            SaveSynonymResponse destinationSynonymResponse = await destinationIndex.SaveSynonymsAsync(sourceSynonyms, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            SaveSynonymResponse destinationSynonymResponse = await destinationIndex
+                .SaveSynonymsAsync(sourceSynonyms, requestOptions: requestOptions, ct: ct)
+                .ConfigureAwait(false);
             ret.Responses.Add(destinationSynonymResponse);
 
             // Save rules
             RulesIterator sourceRules = new RulesIterator(sourceIndex);
-            BatchResponse destinationRuleResponse = await destinationIndex.SaveRulesAsync(sourceRules, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            BatchResponse destinationRuleResponse = await destinationIndex
+                .SaveRulesAsync(sourceRules, requestOptions: requestOptions, ct: ct)
+                .ConfigureAwait(false);
             ret.Responses.Add(destinationRuleResponse);
 
             // Save objects (batched)
             IndexIterator<T> indexIterator = sourceIndex.Browse<T>(new BrowseIndexQuery());
-            BatchIndexingResponse saveObject = await destinationIndex.AddObjectsAysnc(indexIterator, requestOptions, ct).ConfigureAwait(false);
+            BatchIndexingResponse saveObject = await destinationIndex.AddObjectsAysnc(indexIterator, requestOptions, ct)
+                .ConfigureAwait(false);
             ret.Responses.Add(saveObject);
 
             return ret;

@@ -26,7 +26,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Algolia.Search.Http
+namespace Algolia.Search.Serializer
 {
     /// <summary>
     /// Used to ensure that all the properties are serialized and deserialized well (because of Pascal and Camel Casing)

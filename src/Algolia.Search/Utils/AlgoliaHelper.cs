@@ -23,26 +23,71 @@
 * THE SOFTWARE.
 */
 
-using System;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Algolia.Search.Utils
 {
     internal static class AlgoliaHelper
     {
-        public static void EnsureObjectID<T>()
+        /// <summary>
+        /// Ensure that the List has an JsonPropertyAttribute(Name="ObjectID")
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="datas"></param>
+        public static void EnsureObjectID<T>(IEnumerable<T> datas)
         {
-            PropertyInfo pi = typeof(T).GetTypeInfo().GetDeclaredProperty("ObjectID");
+            var propertyWithObjectIdAttribute = CheckAttribute<T>();
 
-            if (pi == null)
+            if (datas == null)
             {
-                throw new Exception("The class mut have an ObjectID property");
+                return;
             }
 
-            if (pi.GetType() != typeof(string))
+            if (datas.Any(x => string.IsNullOrWhiteSpace((string) propertyWithObjectIdAttribute.GetValue(x, null))))
             {
-                throw new NotSupportedException("ObjectID property must be a string");
+                throw new AlgoliaException(
+                    "Property with JsonPropertyAttribute with name='objectID' must not be null or empty");
             }
+        }
+
+        /// <summary>
+        /// Get the property which has JsonPropertyAttribute with name='objectID' 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static string GetObjectID<T>(T data)
+        {
+            var propertyWithObjectIdAttribute = CheckAttribute<T>();
+            return (string) propertyWithObjectIdAttribute.GetValue(data);
+        }
+
+        /// <summary>
+        /// Check if JsonPropertyAttribute with name='objectID' exist in the given type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        private static PropertyInfo CheckAttribute<T>()
+        {
+            var attr = typeof(T).GetTypeInfo().GetCustomAttribute<JsonPropertyAttribute>();
+
+            var propertyWithObjectIdAttribute = typeof(T).GetTypeInfo().DeclaredProperties
+                .First(p => p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Equals("objectID"));
+
+            if (!attr.PropertyName.Equals("objectID"))
+            {
+                throw new AlgoliaException("The class mut have a JsonPropertyAttribute property with name='objectID'");
+            }
+
+            if (propertyWithObjectIdAttribute.GetType() != typeof(string))
+            {
+                throw new AlgoliaException("Property with JsonPropertyAttribute with name='objectID' must be a string");
+            }
+
+            return propertyWithObjectIdAttribute;
         }
     }
 }

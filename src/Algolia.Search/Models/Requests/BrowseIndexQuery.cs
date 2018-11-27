@@ -24,8 +24,6 @@
 */
 
 using Algolia.Search.Models.Query;
-using Algolia.Search.Utils.Serializer;
-using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Requests
 {

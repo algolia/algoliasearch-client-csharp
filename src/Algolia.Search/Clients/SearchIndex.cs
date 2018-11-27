@@ -40,7 +40,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -109,13 +108,14 @@ namespace Algolia.Search.Clients
             }
 
             AddObjectResponse response = await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(
-                HttpMethod.Post,
-                $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct).ConfigureAwait(false);
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct)
+                .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
             return response;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Update one or more attributes of an existing object.
         /// </summary>
@@ -126,6 +126,7 @@ namespace Algolia.Search.Clients
             where T : class =>
             AsyncHelper.RunSync(() => PartialUpdateObjectAsync(data, requestOptions));
 
+        /// <inheritdoc />
         /// <summary>
         /// Update one or more attributes of an existing object.
         /// </summary>
@@ -134,22 +135,19 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (ReferenceEquals(data, null))
             {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            AlgoliaHelper.EnsureObjectID<T>();
-
-            PropertyInfo pi = typeof(T).GetTypeInfo().GetDeclaredProperty("ObjectID");
-            string objectId = (string)pi.GetValue(data);
+            // Get && check if the generic type has an objectID
+            string objectId = AlgoliaHelper.GetObjectID(data);
 
             UpdateObjectResponse response = await _requesterWrapper.ExecuteRequestAsync<UpdateObjectResponse, T>(
-                    HttpMethod.Post,
-                    $"/1/indexes/{_urlEncodedIndexName}/{objectId}/partial", CallType.Write, data, requestOptions, ct)
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/{objectId}/partial", CallType.Write, data,
+                    requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
@@ -176,8 +174,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> datas,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (datas == null)
             {
@@ -206,8 +203,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<BatchIndexingResponse> AddObjectsAysnc<T>(IEnumerable<T> datas,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (datas == null)
             {
@@ -239,7 +235,7 @@ namespace Algolia.Search.Clients
         public async Task<BatchIndexingResponse> SaveObjectAsync<T>(T data, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class
         {
-            throw new NotImplementedException();
+            return await SaveObjectsAsync(new List<T> { data }, requestOptions, ct);
         }
 
         /// <summary>
@@ -249,7 +245,8 @@ namespace Algolia.Search.Clients
         /// <param name="datas"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null) where T : class =>
+        public BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
+            where T : class =>
             AsyncHelper.RunSync(() => SaveObjectsAsync(datas, requestOptions));
 
         /// <summary>
@@ -259,12 +256,24 @@ namespace Algolia.Search.Clients
         /// <param name="datas"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
+        /// <param name="autoGenerateObjectId"></param>
         /// <returns></returns>
         public async Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> datas,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool autoGenerateObjectId = false) where T : class
         {
-            throw new NotImplementedException();
+            if (datas == null)
+            {
+                throw new ArgumentNullException(nameof(datas));
+            }
+
+            if (autoGenerateObjectId)
+            {
+                return await AddObjectsAysnc(datas, requestOptions, ct).ConfigureAwait(false);
+            }
+
+            AlgoliaHelper.EnsureObjectID(datas);
+
+            return await SplitIntoBatchesAsync(datas, BatchActionType.UpdateObject, requestOptions, ct);
         }
 
         /// <summary>
@@ -288,8 +297,7 @@ namespace Algolia.Search.Clients
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public async Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, bool safe = false,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             Random rnd = new Random();
             string tmpIndexName = $"{_indexName}_tmp_{rnd.Next(100)}";
@@ -350,8 +358,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<BatchResponse> BatchAsync<T>(IEnumerable<BatchOperation<T>> operations,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (operations == null)
             {
@@ -383,8 +390,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         internal async Task<BatchIndexingResponse> SplitIntoBatchesAsync<T>(IEnumerable<T> datas, string actionType,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             BatchIndexingResponse ret = new BatchIndexingResponse { Responses = new List<BatchResponse>() };
             List<T> records = new List<T>();
@@ -429,8 +435,9 @@ namespace Algolia.Search.Clients
             }
 
             BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, BatchRequest<T>>(
-                    HttpMethod.Post,
-                    $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, request, requestOptions, ct)
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, request,
+                    requestOptions,
+                    ct)
                 .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
@@ -487,8 +494,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<BatchIndexingResponse> DeleteObjectsAsync(IEnumerable<string> objectIds,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (objectIds == null || !objectIds.Any())
             {
@@ -528,8 +534,8 @@ namespace Algolia.Search.Clients
             }
 
             DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse, SearchQuery>(
-                    HttpMethod.Post,
-                    $"/1/indexes/{_urlEncodedIndexName}/deleteByQuery", CallType.Write, query, requestOptions, ct)
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/deleteByQuery", CallType.Write, query,
+                    requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
@@ -556,7 +562,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Post,
-                $"/1/indexes/{_urlEncodedIndexName}/clear", CallType.Write, requestOptions, ct).ConfigureAwait(false);
+                    $"/1/indexes/{_urlEncodedIndexName}/clear", CallType.Write, requestOptions, ct)
+                .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
             return response;
@@ -611,8 +618,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<SearchForFacetResponse> SearchForFacetValueAsync(SearchForFacetRequest query,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (query == null)
             {
@@ -625,9 +631,9 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<SearchForFacetResponse, SearchForFacetRequest>(
-                HttpMethod.Post,
-                $"/1/indexes/{_urlEncodedIndexName}/facets/{query.FacetName}/query", CallType.Read, query,
-                requestOptions, ct).ConfigureAwait(false);
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/facets/{query.FacetName}/query", CallType.Read,
+                    query, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -698,8 +704,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<BrowseIndexResponse<T>> BrowseFromAsync<T>(BrowseIndexQuery query,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (query == null)
             {
@@ -707,8 +712,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<BrowseIndexResponse<T>, BrowseIndexQuery>(
-                    HttpMethod.Post,
-                    $"/1/indexes/{_urlEncodedIndexName}/browse", CallType.Read, query, requestOptions, ct)
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/browse", CallType.Read, query, requestOptions,
+                    ct)
                 .ConfigureAwait(false);
         }
 
@@ -758,8 +763,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<SearchResponse<Rule>> SearchRuleAsync(RuleQuery query = null,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<Rule>, RuleQuery>(HttpMethod.Post,
                     $"/1/indexes/{_urlEncodedIndexName}/rules/search", CallType.Read, query, requestOptions, ct)
@@ -791,9 +795,8 @@ namespace Algolia.Search.Clients
             }
 
             SaveRuleResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveRuleResponse, Rule>(
-                    HttpMethod.Put,
-                    $"/1/indexes/{_urlEncodedIndexName}/rules/{rule.ObjectID}", CallType.Write, rule, requestOptions,
-                    ct)
+                    HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/rules/{rule.ObjectID}", CallType.Write, rule,
+                    requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
@@ -839,8 +842,8 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
 
             BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, IEnumerable<Rule>>(
-                    HttpMethod.Post,
-                    $"/1/indexes/{_urlEncodedIndexName}/rules/batch", CallType.Write, rules, requestOptionsToSend, ct)
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/rules/batch", CallType.Write, rules,
+                    requestOptionsToSend, ct)
                 .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
@@ -948,8 +951,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<CopyToResponse> CopyRulesToAsync(string destinationIndex,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> { CopyScope.Rules };
             return await CopyToAsync(destinationIndex, scopes).ConfigureAwait(false);
@@ -973,7 +975,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<IndexSettings>(HttpMethod.Get,
-                $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Read, requestOptions, ct).ConfigureAwait(false);
+                    $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -993,8 +996,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (settings == null)
             {
@@ -1027,8 +1029,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<CopyToResponse> CopySettingsToAsync(string destinationIndex,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> { CopyScope.Settings };
             return await CopyToAsync(destinationIndex, scopes).ConfigureAwait(false);
@@ -1051,8 +1052,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<SearchResponse<Synonym>> SearchSynonymsAsync(SynonymQuery query,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (query == null)
             {
@@ -1135,7 +1135,8 @@ namespace Algolia.Search.Clients
             SaveSynonymResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
                     $"/1/indexes/{_urlEncodedIndexName}/synonyms/batch", CallType.Write, synonyms, requestOptionsToSend,
-                    ct).ConfigureAwait(false);
+                    ct)
+                .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
             return response;
@@ -1199,9 +1200,9 @@ namespace Algolia.Search.Clients
             }
 
             SaveSynonymResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, Synonym>(
-                HttpMethod.Put,
-                $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonym.ObjectID}", CallType.Write, synonym,
-                requestOptions, ct).ConfigureAwait(false);
+                    HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonym.ObjectID}", CallType.Write,
+                    synonym, requestOptions, ct)
+                .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
             return response;
@@ -1224,8 +1225,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (synonymObjectId == null)
             {
@@ -1258,8 +1258,9 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             ClearSynonymsResponse response = await _requesterWrapper.ExecuteRequestAsync<ClearSynonymsResponse>(
-                    HttpMethod.Post,
-                    $"/1/indexes/{_urlEncodedIndexName}/synonyms/clear", CallType.Write, requestOptions, ct)
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/synonyms/clear", CallType.Write,
+                    requestOptions,
+                    ct)
                 .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
@@ -1283,8 +1284,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<CopyToResponse> CopySynonymsToAsync(string destinationIndex,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> { CopyScope.Synonyms };
             return await CopyToAsync(destinationIndex, scopes).ConfigureAwait(false);
@@ -1310,24 +1310,19 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<CopyToResponse> CopyToAsync(string destinationIndex, IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(destinationIndex))
             {
                 throw new ArgumentNullException(destinationIndex);
             }
 
-            var data = new CopyToRequest
-            {
-                Operation = MoveType.Copy,
-                IndexNameDest = destinationIndex,
-                Scope = scope
-            };
+            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
 
             CopyToResponse response = await _requesterWrapper.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
-                    HttpMethod.Post,
-                    $"/1/indexes/{_urlEncodedIndexName}/operation", CallType.Write, data, requestOptions, ct)
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/operation", CallType.Write, data,
+                    requestOptions,
+                    ct)
                 .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
@@ -1358,11 +1353,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexRequest request = new MoveIndexRequest
-            {
-                Operation = MoveType.Move,
-                Destination = _indexName
-            };
+            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = _indexName };
 
             MoveIndexResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,
