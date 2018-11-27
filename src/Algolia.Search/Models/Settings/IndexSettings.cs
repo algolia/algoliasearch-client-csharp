@@ -68,7 +68,11 @@ namespace Algolia.Search.Models.Settings
         public List<string> DisableTypoToleranceOnAttributes { get; set; }
         public List<string> DisableTypoToleranceOnWords { get; set; }
         public string SeparatorsToIndex { get; set; }
-        public bool? IgnorePlurals { get; set; }
+
+        /// <summary>
+        /// Could be string[] or bool
+        /// </summary>
+        public object IgnorePlurals { get; set; }
 
         // languages
 
@@ -92,7 +96,11 @@ namespace Algolia.Search.Models.Settings
 
         // advanced
         public string AttributeForDistinct { get; set; }
-        public int? Distinct { get; set; }
+
+        /// <summary>
+        /// Could be int or bool
+        /// </summary>
+        public object Distinct { get; set; }
         public bool? ReplaceSynonymsInHighlight { get; set; }
         public int? MinProximity { get; set; }
         public List<string> ResponseFields { get; set; }

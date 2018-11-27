@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,22 +23,35 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Rules;
+using Algolia.Search.Serializer;
+using Newtonsoft.Json;
+using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Test.Serializer
 {
-    /// <summary>
-    /// Any different call can be any write operation
-    /// </summary>
-    public class MultiResponse : IAlgoliaWaitableResponse
+    [TestFixture]
+    [Parallelizable]
+    public class SerializerTest
     {
-        public List<IAlgoliaWaitableResponse> Responses { get; set; }
-        public void Wait()
+        [Test]
+        public void TestAutomaticFacetFilters()
         {
-            foreach (var response in Responses)
-            {
-                response.Wait();
-            }
+            string json = "[\"lastname\",\"firstname\"]";
+
+            List<AutomaticFacetFilter> deserialized = JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(json, new AutomaticFacetFiltersConverter());
+
+            Assert.True(deserialized.ElementAt(0).Facet.Equals("lastname"));
+            Assert.False(deserialized.ElementAt(0).Disjunctive);
+            Assert.IsNull(deserialized.ElementAt(0).Score);
+
+            Assert.True(deserialized.ElementAt(1).Facet.Equals("firstname"));
+            Assert.False(deserialized.ElementAt(1).Disjunctive);
+            Assert.IsNull(deserialized.ElementAt(1).Score);
         }
     }
 }
+
+

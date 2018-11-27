@@ -110,7 +110,7 @@ namespace Algolia.Search.Test.EndToEnd
 
                 // Advanced
                 AttributeForDistinct = "attribute1",
-                Distinct = 2,
+                Distinct = true,
                 ReplaceSynonymsInHighlight = false,
                 MinProximity = 7,
                 ResponseFields = new List<string> { "hits", "hitsPerPage" },
@@ -129,7 +129,7 @@ namespace Algolia.Search.Test.EndToEnd
             getSettingsResponse.TypoTolerance = "min";
             // getSettingsResponse.IgnorePlurals TBD
             // getSettingsResponse.RemoveStopWords = "en,fr"; TBD
-            // getSettingsResponse.Distinct = true; TBD
+            getSettingsResponse.Distinct = true;
         }
     }
 }

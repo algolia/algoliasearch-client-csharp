@@ -23,11 +23,11 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Responses;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Algolia.Search.Models.Responses;
-using NUnit.Framework;
 
 namespace Algolia.Search.Test.EndToEnd
 {

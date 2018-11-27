@@ -93,7 +93,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
 
             RetryStrategy retryStrategy = new RetryStrategy("appId", commonHosts);
             var hosts = retryStrategy.GetTryableHost(callType);
-            Assert.True(hosts.Where(h => h.Up).Count() == 2);
+            Assert.True(hosts.Count(h => h.Up) == 2);
         }
 
 
@@ -106,14 +106,13 @@ namespace Algolia.Search.Test.RetryStrategyTest
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
             var hosts = retryStrategy.GetTryableHost(callType);
-            Assert.True(hosts.Where(h => h.Up).Count() == 4);
+            Assert.True(hosts.Count(h => h.Up) == 4);
 
-            RetryOutcomeType decision;
-            decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
+            var decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
             Assert.True(decision.HasFlag(RetryOutcomeType.Retry));
 
             var updatedHosts = retryStrategy.GetTryableHost(callType);
-            Assert.True(updatedHosts.Where(h => h.Up).Count() == 3);
+            Assert.True(updatedHosts.Count(h => h.Up) == 3);
         }
 
 

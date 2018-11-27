@@ -27,11 +27,12 @@ using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace Algolia.Search.Serializer
 {
-    internal class AutomaticFacetFiltersConverter : JsonConverter<IEnumerable<AutomaticFacetFilter>>
+    public class AutomaticFacetFiltersConverter : JsonConverter<IEnumerable<AutomaticFacetFilter>>
     {
         public override void WriteJson(JsonWriter writer, IEnumerable<AutomaticFacetFilter> value, JsonSerializer serializer)
         {
@@ -45,14 +46,14 @@ namespace Algolia.Search.Serializer
             if (reader.TokenType == JsonToken.Null) return null;
             if (reader.TokenType != JsonToken.StartArray) return null;
 
-            List<AutomaticFacetFilter> ret = new List<AutomaticFacetFilter>();
+            var ret = new List<AutomaticFacetFilter>();
 
             var tokens = JToken.Load(reader);
             foreach (var token in tokens)
             {
-                string facet = token.Value<string>("facet");
-                bool disjunctive = token.Value<bool?>("disjunctive") ?? false;
-                int score = token.Value<int>("score");
+                string facet = token.Type != JTokenType.String ? token.Value<string>("facet") : token.Value<string>();
+                bool disjunctive = token.Type != JTokenType.String && token.Value<bool>("disjunctive");
+                int? score = token.Type != JTokenType.String ? token.Value<int?>("score") : null;
 
                 ret.Add(new AutomaticFacetFilter { Facet = facet, Disjunctive = disjunctive, Score = score });
             }
