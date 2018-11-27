@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -23,32 +23,43 @@
 * THE SOFTWARE.
 */
 
-using System;
-using Algolia.Search.Utils;
+using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Algolia.Search.Serializer
 {
-    /// <summary>
-    /// Allow Json.NET to serialize/deserialize DateTime in UnixTimeStamp
-    /// </summary>
-    internal class DateTimeEpochSerializer : DateTimeConverterBase
+    internal class AutomaticFacetFiltersConverter : JsonConverter<IEnumerable<AutomaticFacetFilter>>
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, IEnumerable<AutomaticFacetFilter> value, JsonSerializer serializer)
         {
-            long until = ((DateTime) value).ToUnixTimeSeconds();
-            writer.WriteValue(until);
+            throw new NotImplementedException();
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override IEnumerable<AutomaticFacetFilter> ReadJson(JsonReader reader, Type objectType,
+            IEnumerable<AutomaticFacetFilter> existingValue,
+            bool hasExistingValue, JsonSerializer serializer)
         {
-            if (reader.Value == null)
+            if (reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType != JsonToken.StartArray) return null;
+
+            List<AutomaticFacetFilter> ret = new List<AutomaticFacetFilter>();
+
+            var tokens = JToken.Load(reader);
+            foreach (var token in tokens)
             {
-                return null;
+                string facet = token.Value<string>("facet");
+                bool disjunctive = token.Value<bool?>("disjunctive") ?? false;
+                int score = token.Value<int>("score");
+
+                ret.Add(new AutomaticFacetFilter { Facet = facet, Disjunctive = disjunctive, Score = score });
             }
 
-            return DateTimeHelper.UnixTimeToDateTime((long)reader.Value);
+            return ret;
         }
+
+        public override bool CanWrite => false;
     }
 }

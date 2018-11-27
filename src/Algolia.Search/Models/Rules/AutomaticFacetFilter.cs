@@ -30,6 +30,6 @@ namespace Algolia.Search.Models.Rules
     {
         public string Facet { get; set; }
         public bool Disjunctive { get; set; }
-        public int Score { get; set; }
+        public int? Score { get; set; }
     }
 }
