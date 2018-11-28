@@ -37,6 +37,7 @@ using NUnit.Framework;
 public class BaseTest
 {
     internal static SearchClient SearchClient;
+    internal static SearchClient SearchClient2;
     internal static SearchClient McmClient;
     private static ListIndexesResponse _indices;
 
@@ -44,8 +45,9 @@ public class BaseTest
     public void Setup()
     {
         TestHelper.CheckEnvironmentVariable();
-        SearchClient = new SearchClient(TestHelper.ApplicationId, TestHelper.TestApiKey);
-        McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmApiKey);
+        SearchClient = new SearchClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
+        SearchClient2 = new SearchClient(TestHelper.ApplicationId2, TestHelper.AdminKey2);
+        McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmAdminKey);
         _indices = SearchClient.ListIndexes();
     }
 
