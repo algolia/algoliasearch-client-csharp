@@ -23,13 +23,15 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Serializer;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Rules
 {
     public class ConsequenceQuery
     {
-        // TODO : custom serializer for string/edits
+        [JsonConverter(typeof(EditConverter))]
         public IEnumerable<Edit> Edits { get; set; }
     }
 }
