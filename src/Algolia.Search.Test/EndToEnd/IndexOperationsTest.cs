@@ -49,12 +49,14 @@ namespace Algolia.Search.Test.EndToEnd
         private string _rulesIndexName;
         private string _synonymsIndexName;
         private string _fullCopyIndexName;
+        private string _indexName;
         private IEnumerable<IndexOperationObject> _objectsToSave;
 
         [OneTimeSetUp]
         public void Init()
         {
-            _index = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("index_operations"));
+            _indexName = TestHelper.GetTestIndexName("index_operations");
+            _index = BaseTest.SearchClient.InitIndex(_indexName);
 
             _settingsIndexName = TestHelper.GetTestIndexName("index_operations_settings");
             _settingsIndex = BaseTest.SearchClient.InitIndex(_settingsIndexName);
@@ -114,10 +116,10 @@ namespace Algolia.Search.Test.EndToEnd
             var saveRuleResponse = await _index.SaveRuleAsync(ruleToSave);
             saveRuleResponse.Wait();
 
-            var copySettingsTask = _index.CopySettingsToAsync(_settingsIndexName);
-            var copyRulesTask = _index.CopyRulesToAsync(_rulesIndexName);
-            var copySynonymsTask = _index.CopySynonymsToAsync(_synonymsIndexName);
-            var copyFullTask = _index.CopyToAsync(_fullCopyIndexName);
+            var copySettingsTask = BaseTest.SearchClient.CopySettingsAsync(_indexName, _settingsIndexName);
+            var copyRulesTask = BaseTest.SearchClient.CopyRulesAsync(_indexName, _rulesIndexName);
+            var copySynonymsTask = BaseTest.SearchClient.CopySynonymsAsync(_indexName, _synonymsIndexName);
+            var copyFullTask = BaseTest.SearchClient.CopyIndexAsync(_indexName, _fullCopyIndexName);
 
             CopyToResponse[] tasks = await Task.WhenAll(copySettingsTask, copyRulesTask, copySynonymsTask, copyFullTask);
             tasks.ToList().ForEach(x => x.Wait());

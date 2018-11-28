@@ -33,6 +33,7 @@ using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,7 +58,7 @@ namespace Algolia.Search.Clients
         /// <param name="applicationId"></param>
         /// <param name="apiKey"></param>
         public SearchClient(string applicationId, string apiKey) : this(
-            new AlgoliaConfig {ApiKey = apiKey, AppId = applicationId}, new AlgoliaHttpRequester())
+            new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId }, new AlgoliaHttpRequester())
         {
         }
 
@@ -434,7 +435,7 @@ namespace Algolia.Search.Clients
         public async Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            ListUserIdsRequest request = new ListUserIdsRequest {Page = page, HitsPerPage = hitsPerPage};
+            ListUserIdsRequest request = new ListUserIdsRequest { Page = page, HitsPerPage = hitsPerPage };
 
             return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserIdResponse>, ListUserIdsRequest>(
                     HttpMethod.Get, "/1/clusters/mapping", CallType.Read, request, requestOptions, ct)
@@ -528,9 +529,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(clusterName);
             }
 
-            var data = new AssignUserIdRequest {Cluster = clusterName};
+            var data = new AssignUserIdRequest { Cluster = clusterName };
 
-            var removeUserId = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
+            var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
 
             if (requestOptions?.Headers != null && requestOptions.Headers.Any())
             {
@@ -543,7 +544,7 @@ namespace Algolia.Search.Clients
             }
             else
             {
-                requestOptions = new RequestOptions {Headers = removeUserId};
+                requestOptions = new RequestOptions { Headers = removeUserId };
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, AssignUserIdRequest>(HttpMethod.Post,
@@ -575,7 +576,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(userId);
             }
 
-            var removeUserId = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
+            var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
 
             if (requestOptions?.Headers != null && requestOptions.Headers.Any())
             {
@@ -588,7 +589,7 @@ namespace Algolia.Search.Clients
             }
             else
             {
-                requestOptions = new RequestOptions {Headers = removeUserId};
+                requestOptions = new RequestOptions { Headers = removeUserId };
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
@@ -615,6 +616,168 @@ namespace Algolia.Search.Clients
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
                     requestOptions, ct)
                 .ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Make a copy of the settings of an index
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public CopyToResponse CopySettings(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => CopySettingsAsync(sourceIndex, destinationIndex, requestOptions));
+
+        /// <summary>
+        /// Make a copy of the settings of an index
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<CopyToResponse> CopySettingsAsync(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            var scopes = new List<string> { CopyScope.Settings };
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Make a copy of the rules of an index
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public CopyToResponse CopyRules(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => CopyRulesAsync(sourceIndex, destinationIndex, requestOptions));
+
+        /// <summary>
+        /// Make a copy of the rules of an index
+        /// </summary>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<CopyToResponse> CopyRulesAsync(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            var scopes = new List<string> { CopyScope.Rules };
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Make a copy of the synonyms of an index
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public CopyToResponse CopySynonyms(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => CopySynonymsAsync(sourceIndex, destinationIndex, requestOptions));
+
+        /// <summary>
+        /// Make a copy of the synonyms of an index
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<CopyToResponse> CopySynonymsAsync(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            var scopes = new List<string> { CopyScope.Synonyms };
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="scope"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public CopyToResponse CopyIndex(string sourceIndex, string destinationIndex, IEnumerable<string> scope = null,
+            RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => CopyIndexAsync(sourceIndex, destinationIndex, scope, requestOptions));
+
+        /// <summary>
+        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="scope"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex, IEnumerable<string> scope = null,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrWhiteSpace(destinationIndex))
+            {
+                throw new ArgumentNullException(destinationIndex);
+            }
+
+            string encondedSourceIndex = WebUtility.UrlEncode(sourceIndex);
+            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
+
+            CopyToResponse response = await _requesterWrapper.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
+                    HttpMethod.Post, $"/1/indexes/{encondedSourceIndex}/operation", CallType.Write, data,
+                    requestOptions,
+                    ct)
+                .ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(sourceIndex, t);
+            return response;
+        }
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public MoveIndexResponse MoveIndex(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => MoveIndexAsync(sourceIndex, destinationIndex, requestOptions));
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="destinationIndex"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+        {
+            if (string.IsNullOrWhiteSpace(sourceIndex))
+            {
+                throw new ArgumentNullException(sourceIndex);
+            }
+
+            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = destinationIndex };
+
+            MoveIndexResponse response = await _requesterWrapper
+                .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,
+                    $"/1/indexes/{sourceIndex}/operation", CallType.Write, request, requestOptions, ct)
+                .ConfigureAwait(false);
+
+            response.WaitDelegate = t => WaitTask(destinationIndex, t);
+            return response;
+        }
+
+        /// <summary>
+        /// This function waits for the Algolia's API task to finish
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="timeToWait"></param>
+        /// <param name="requestOptions"></param>
+        public void WaitTask(string indexName, long taskId, int timeToWait = 100, RequestOptions requestOptions = null)
+        {
+            SearchIndex indexToWait = InitIndex(indexName);
+            indexToWait.WaitTask(taskId);
         }
     }
 }

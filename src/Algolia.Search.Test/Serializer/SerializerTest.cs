@@ -70,5 +70,3 @@ namespace Algolia.Search.Test.Serializer
         }
     }
 }
-
-
