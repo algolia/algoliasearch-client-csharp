@@ -25,10 +25,9 @@
 
 using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace Algolia.Search.Serializer
 {
@@ -39,6 +38,15 @@ namespace Algolia.Search.Serializer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Algolia's specific converter to handle this specific object that could be a List<string> or AutomaticFacetFilter
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="objectType"></param>
+        /// <param name="existingValue"></param>
+        /// <param name="hasExistingValue"></param>
+        /// <param name="serializer"></param>
+        /// <returns></returns>
         public override IEnumerable<AutomaticFacetFilter> ReadJson(JsonReader reader, Type objectType,
             IEnumerable<AutomaticFacetFilter> existingValue,
             bool hasExistingValue, JsonSerializer serializer)

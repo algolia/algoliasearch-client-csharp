@@ -84,7 +84,7 @@ namespace Algolia.Search.Test.EndToEnd
                 // Typos
                 MinWordSizefor1Typo = 2,
                 MinWordSizefor2Typos = 6,
-                // settings.TypoTolerance = false; TBD
+                TypoTolerance = false,
                 AllowTyposOnNumericTokens = false,
                 IgnorePlurals = true,
                 DisableTypoToleranceOnAttributes = new List<string> { "attribute1", "attribute2" },
@@ -110,13 +110,17 @@ namespace Algolia.Search.Test.EndToEnd
 
                 // Advanced
                 AttributeForDistinct = "attribute1",
-                Distinct = true,
+                Distinct = 2,
                 ReplaceSynonymsInHighlight = false,
                 MinProximity = 7,
                 ResponseFields = new List<string> { "hits", "hitsPerPage" },
                 MaxFacetHits = 100,
                 CamelCaseAttributes = new List<string> { "attribute1", "attribute2" },
-                // settings.DecompoundedAttributes = new List<string>{}; TBD
+                DecompoundedAttributes = new Dictionary<string, List<string>>
+                {
+                    { "de", new List<string> { "attribute1", "attribute2" } },
+                    { "fi", new List<string> { "attribute3" } }
+                },
                 KeepDiacriticsOnCharacters = "øé"
             };
 
@@ -124,12 +128,39 @@ namespace Algolia.Search.Test.EndToEnd
             saveSettingsResponse.Wait();
 
             var getSettingsResponse = await _index.GetSettingsAsync();
-            Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponse, "Version", "AlternativesAsExact"));
+            var spceficPropertiesCheck = new List<string> { "Version", "AlternativesAsExact", "DecompoundedAttributes" };
+            Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponse, spceficPropertiesCheck.ToArray()));
 
-            getSettingsResponse.TypoTolerance = "min";
-            // getSettingsResponse.IgnorePlurals TBD
-            // getSettingsResponse.RemoveStopWords = "en,fr"; TBD
-            getSettingsResponse.Distinct = true;
+            // Check specific properties (couldn't be done by the helper)
+            Assert.True(getSettingsResponse.DecompoundedAttributes.ContainsKey("de"));
+            Assert.True(getSettingsResponse.DecompoundedAttributes["de"].Contains("attribute1"));
+            Assert.True(getSettingsResponse.DecompoundedAttributes["de"].Contains("attribute2"));
+            Assert.True(getSettingsResponse.DecompoundedAttributes.ContainsKey("fi"));
+            Assert.True(getSettingsResponse.DecompoundedAttributes["fi"].Contains("attribute3"));
+
+            // Set new values
+            settings.TypoTolerance = "min";
+            settings.IgnorePlurals = new List<string> { "en", "fr" };
+            settings.RemoveStopWords = new List<string> { "en", "fr" };
+            settings.Distinct = true;
+
+            var saveSettingsResponseAfterChanges = await _index.SetSettingsAsync(settings);
+            saveSettingsResponseAfterChanges.Wait();
+
+            var getSettingsResponseAfterChanges = await _index.GetSettingsAsync();
+            spceficPropertiesCheck.AddRange(new List<string> { "TypoTolerance", "IgnorePlurals", "RemoveStopWords" });
+            Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponseAfterChanges, spceficPropertiesCheck.ToArray()));
+
+            // Check specific properties (couldn't be done by test helper)
+            Assert.True((string)getSettingsResponseAfterChanges.TypoTolerance == (string)settings.TypoTolerance);
+            Assert.True(getSettingsResponseAfterChanges.IgnorePlurals.GetType() == typeof(List<string>));
+            Assert.True(getSettingsResponseAfterChanges.RemoveStopWords.GetType() == typeof(List<string>));
+
+            var ignorePlurals = (List<string>)getSettingsResponseAfterChanges.IgnorePlurals;
+            var removeStopWords = (List<string>)getSettingsResponseAfterChanges.RemoveStopWords;
+
+            Assert.True(ignorePlurals.Contains("en") && ignorePlurals.Contains("fr"));
+            Assert.True(removeStopWords.Contains("en") && removeStopWords.Contains("fr"));
         }
     }
 }

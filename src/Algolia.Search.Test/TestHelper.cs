@@ -25,10 +25,8 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 
 namespace Algolia.Search.Test
@@ -98,19 +96,14 @@ namespace Algolia.Search.Test
 
             if (objectA != null && objectB != null)
             {
-                Type objectType;
-
-                objectType = objectA.GetType();
+                var objectType = objectA.GetType();
 
                 result = true; // assume by default they are equal
 
                 foreach (PropertyInfo propertyInfo in objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => p.CanRead && !ignoreList.Contains(p.Name)))
                 {
-                    object valueA;
-                    object valueB;
-
-                    valueA = propertyInfo.GetValue(objectA, null);
-                    valueB = propertyInfo.GetValue(objectB, null);
+                    var valueA = propertyInfo.GetValue(objectA, null);
+                    var valueB = propertyInfo.GetValue(objectB, null);
 
                     // if it is a primative type, value type or implements IComparable, just directly try and compare the value
                     if (CanDirectlyCompare(propertyInfo.PropertyType))
@@ -124,23 +117,18 @@ namespace Algolia.Search.Test
                     // if it implements IEnumerable, then scan any items
                     else if (typeof(IEnumerable).IsAssignableFrom(propertyInfo.PropertyType))
                     {
-                        IEnumerable<object> collectionItems1;
-                        IEnumerable<object> collectionItems2;
-                        int collectionItemsCount1;
-                        int collectionItemsCount2;
-
                         // null check
                         if (valueA == null && valueB != null || valueA != null && valueB == null)
                         {
                             Console.WriteLine("Mismatch with property '{0}.{1}' found.", objectType.FullName, propertyInfo.Name);
                             result = false;
                         }
-                        else if (valueA != null && valueB != null)
+                        else if (valueA != null)
                         {
-                            collectionItems1 = ((IEnumerable)valueA).Cast<object>();
-                            collectionItems2 = ((IEnumerable)valueB).Cast<object>();
-                            collectionItemsCount1 = collectionItems1.Count();
-                            collectionItemsCount2 = collectionItems2.Count();
+                            var collectionItems1 = ((IEnumerable)valueA).Cast<object>();
+                            var collectionItems2 = ((IEnumerable)valueB).Cast<object>();
+                            var collectionItemsCount1 = collectionItems1.Count();
+                            var collectionItemsCount2 = collectionItems2.Count();
 
                             // check the counts to ensure they match
                             if (collectionItemsCount1 != collectionItemsCount2)
@@ -153,13 +141,9 @@ namespace Algolia.Search.Test
                             {
                                 for (int i = 0; i < collectionItemsCount1; i++)
                                 {
-                                    object collectionItem1;
-                                    object collectionItem2;
-                                    Type collectionItemType;
-
-                                    collectionItem1 = collectionItems1.ElementAt(i);
-                                    collectionItem2 = collectionItems2.ElementAt(i);
-                                    collectionItemType = collectionItem1.GetType();
+                                    var collectionItem1 = collectionItems1.ElementAt(i);
+                                    var collectionItem2 = collectionItems2.ElementAt(i);
+                                    var collectionItemType = collectionItem1.GetType();
 
                                     if (CanDirectlyCompare(collectionItemType))
                                     {
@@ -194,7 +178,7 @@ namespace Algolia.Search.Test
                 }
             }
             else
-                result = object.Equals(objectA, objectB);
+                result = Equals(objectA, objectB);
 
             return result;
         }
@@ -220,15 +204,14 @@ namespace Algolia.Search.Test
         private static bool AreValuesEqual(object valueA, object valueB)
         {
             bool result;
-            IComparable selfValueComparer;
 
-            selfValueComparer = valueA as IComparable;
+            var selfValueComparer = valueA as IComparable;
 
             if (valueA == null && valueB != null || valueA != null && valueB == null)
                 result = false; // one of the values is null
             else if (selfValueComparer != null && selfValueComparer.CompareTo(valueB) != 0)
                 result = false; // the comparison using IComparable failed
-            else if (!object.Equals(valueA, valueB))
+            else if (!Equals(valueA, valueB))
                 result = false; // the comparison using Equals failed
             else
                 result = true; // match
