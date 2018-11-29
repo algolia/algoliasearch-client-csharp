@@ -1005,7 +1005,7 @@ namespace Algolia.Search
                                 status = obj["status"].ToString();
                                 if (obj["status"].ToObject<int>() / 100 == 4)
                                 {
-                                    throw new AlgoliaException(message);
+                                    throw new AlgoliaException(message, responseMsg.StatusCode);
                                 }
                             }
                             catch (JsonReaderException)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Algolia.Search
 {
@@ -7,13 +8,16 @@ namespace Algolia.Search
     /// </summary>
     public class AlgoliaException : Exception
     {
+        public HttpStatusCode? HttpStatusCode { get; }
+
         /// <summary>
         /// Create a new Algolia exception.
         /// </summary>
         /// <param name="message">The exception details.</param>
-        public AlgoliaException(string message) : base(message)
+        /// <param name="httpStatusCode">The raw HttpStatusCode</param>
+        public AlgoliaException(string message, HttpStatusCode? httpStatusCode = null) : base(message)
         {
-
+            HttpStatusCode = httpStatusCode;
         }
     }
 }
