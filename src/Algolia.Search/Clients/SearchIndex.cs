@@ -828,7 +828,7 @@ namespace Algolia.Search.Clients
             bool clearExistingRules = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            if (rules == null || !rules.Any())
+            if (rules == null)
             {
                 throw new ArgumentNullException(nameof(rules));
             }
@@ -840,7 +840,6 @@ namespace Algolia.Search.Clients
             };
 
             RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
-
             BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, IEnumerable<Rule>>(
                     HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/rules/batch", CallType.Write, rules,
                     requestOptionsToSend, ct)
@@ -1073,7 +1072,7 @@ namespace Algolia.Search.Clients
             bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            if (synonyms == null || !synonyms.Any())
+            if (synonyms == null)
             {
                 throw new ArgumentNullException(nameof(synonyms));
             }
@@ -1085,7 +1084,6 @@ namespace Algolia.Search.Clients
             };
 
             RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
-
             SaveSynonymResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
                     $"/1/indexes/{_urlEncodedIndexName}/synonyms/batch", CallType.Write, synonyms, requestOptionsToSend,

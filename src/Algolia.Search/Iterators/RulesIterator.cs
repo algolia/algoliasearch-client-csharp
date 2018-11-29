@@ -52,6 +52,12 @@ namespace Algolia.Search.Iterators
                 _hits = result.Hits.Count;
                 _query.Page++;
 
+                if (_hits == 0)
+                {
+                    _query.Page = 0;
+                    yield break;
+                }
+
                 foreach (var hit in result.Hits)
                 {
                     yield return hit;

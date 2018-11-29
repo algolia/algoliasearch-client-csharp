@@ -126,7 +126,7 @@ namespace Algolia.Search.Transport
                     case RetryOutcomeType.Retry:
                         continue;
                     case RetryOutcomeType.Failure:
-                        throw new AlgoliaApiException(response.Error);
+                        throw new AlgoliaApiException(response.Error, response.HttpStatusCode);
                 }
             }
             throw new AlgoliaUnreachableHostException("Unreachable hosts");

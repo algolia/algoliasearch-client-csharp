@@ -84,16 +84,14 @@ namespace Algolia.Search.Test.EndToEnd
                 }
             };
 
-            var addObjectSrcIndex = await _sourceIndex.AddObjectsAysnc(objectsToAdd).ConfigureAwait(false);
-            addObjectSrcIndex.Wait();
+            var addObjectSrcIndex = _sourceIndex.AddObjectsAysnc(objectsToAdd);
 
             IndexSettings settings = new IndexSettings
             {
                 AttributesForFaceting = new List<string> { "company" }
             };
 
-            var setSettings = await _sourceIndex.SetSettingsAsync(settings).ConfigureAwait(false);
-            setSettings.Wait();
+            var setSettings = _sourceIndex.SetSettingsAsync(settings);
 
             var synonym = new Synonym
             {
@@ -103,8 +101,7 @@ namespace Algolia.Search.Test.EndToEnd
                 Replacements = new List<string> { "Google", "GOOG" }
             };
 
-            var saveSynonyms = await _sourceIndex.SaveSynonymAsync(synonym).ConfigureAwait(false);
-            saveSynonyms.Wait();
+            var saveSynonyms = _sourceIndex.SaveSynonymAsync(synonym);
 
             Rule ruleToSave = new Rule
             {
@@ -122,8 +119,15 @@ namespace Algolia.Search.Test.EndToEnd
                 }
             };
 
-            var saveRule = await _sourceIndex.SaveRuleAsync(ruleToSave);
-            saveRule.Wait();
+            var saveRule = _sourceIndex.SaveRuleAsync(ruleToSave);
+
+            Task.WaitAll(addObjectSrcIndex, setSettings, saveSynonyms, saveRule);
+
+            // Algolia wait
+            addObjectSrcIndex.Result.Wait();
+            setSettings.Result.Wait();
+            saveSynonyms.Result.Wait();
+            saveRule.Result.Wait();
 
             var copySetttingsTask = BaseTest.SearchClient.CopySettingsAsync(_sourceIndexName, _copyIndexSettingsName);
             var copyRulesTask = BaseTest.SearchClient.CopyRulesAsync(_sourceIndexName, _copyIndexRulesName);

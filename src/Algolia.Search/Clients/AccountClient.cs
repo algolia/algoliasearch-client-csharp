@@ -69,15 +69,28 @@ namespace Algolia.Search.Clients
                 throw new AlgoliaException("Source and Destination indices should not be on the same application.");
             }
 
-            IndexSettings destinationSettings = await destinationIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
-
-            if (destinationSettings != null)
+            // TODO: improve this section
+            try
             {
-                throw new AlgoliaException(
-                    "Destination index already exists. Please delete it before copying index across applications.");
+                IndexSettings destinationSettings = await destinationIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
+
+                if (destinationSettings != null)
+                {
+                    throw new AlgoliaException(
+                        "Destination index already exists. Please delete it before copying index across applications.");
+                }
+            }
+            catch (AlgoliaApiException ex)
+            {
+                // We want to catch an non existing index exception (404) and continue
+                // However we want to throw if it's an ohter http exception
+                if (ex.HttpErrorCode != 404)
+                {
+                    throw;
+                }
             }
 
-            MultiResponse ret = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
+            MultiResponse ret = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
 
             // Save settings
             IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);

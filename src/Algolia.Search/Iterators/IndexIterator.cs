@@ -33,10 +33,10 @@ namespace Algolia.Search.Iterators
 {
     public class IndexIterator<T> : IEnumerable<T> where T : class
     {
-        private readonly SearchIndex _index;
+        private readonly ISearchIndex _index;
         private readonly BrowseIndexQuery _query;
 
-        public IndexIterator(SearchIndex index, BrowseIndexQuery query)
+        public IndexIterator(ISearchIndex index, BrowseIndexQuery query)
         {
             _index = index;
             _query = query;
