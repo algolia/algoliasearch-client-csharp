@@ -414,13 +414,44 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Search for userIDs.·
+        // The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds propagate to the different cluster
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        public SearchResponse<UserIdResponse> SearchUserIDs(SearchUserIdsRequest query, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => SearchUserIDsAsync(query, requestOptions));
+
+        /// <summary>
+        /// Search for userIDs.·
+        // The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds propagate to the different cluster
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<SearchResponse<UserIdResponse>> SearchUserIDsAsync(SearchUserIdsRequest query,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserIdResponse>, SearchUserIdsRequest>(
+                    HttpMethod.Post, "/1/clusters/mapping/search", CallType.Read, query, requestOptions, ct)
+                .ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
         /// </summary>
         /// <param name="hitsPerPage"></param>
         /// <param name="requestOptions"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public SearchResponse<UserIdResponse> ListUserIds(int page, int hitsPerPage,
+        public ListUserIdsResponse ListUserIds(int page = 0, int hitsPerPage = 1000,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ListUserIdsAsync(page, hitsPerPage, requestOptions));
 
@@ -432,12 +463,12 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public async Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage,
+        public async Task<ListUserIdsResponse> ListUserIdsAsync(int page = 0, int hitsPerPage = 1000,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            ListUserIdsRequest request = new ListUserIdsRequest { Page = page, HitsPerPage = hitsPerPage };
+            SearchUserIdsRequest request = new SearchUserIdsRequest { Page = page, HitsPerPage = hitsPerPage };
 
-            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<UserIdResponse>, ListUserIdsRequest>(
+            return await _requesterWrapper.ExecuteRequestAsync<ListUserIdsResponse, SearchUserIdsRequest>(
                     HttpMethod.Get, "/1/clusters/mapping", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }
@@ -467,7 +498,7 @@ namespace Algolia.Search.Clients
             }
 
             return await _requesterWrapper.ExecuteRequestAsync<UserIdResponse>(HttpMethod.Get,
-                    $"/1/clusters/mapping/{userId}", CallType.Read, requestOptions, ct)
+                    $"/1/clusters/mapping/{WebUtility.UrlEncode(userId)}", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -503,7 +534,7 @@ namespace Algolia.Search.Clients
         /// <param name="clusterName"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public AddObjectResponse
+        public AssignUserIdResponse
             AssignUserId(string userId, string clusterName, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => AssignUserIdAsync(userId, clusterName, requestOptions));
 
@@ -516,7 +547,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<AddObjectResponse> AssignUserIdAsync(string userId, string clusterName,
+        public async Task<AssignUserIdResponse> AssignUserIdAsync(string userId, string clusterName,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(userId))
@@ -547,9 +578,13 @@ namespace Algolia.Search.Clients
                 requestOptions = new RequestOptions { Headers = removeUserId };
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, AssignUserIdRequest>(HttpMethod.Post,
-                    "/1/clusters/mapping", CallType.Write, data, requestOptions, ct)
-                .ConfigureAwait(false);
+            AssignUserIdResponse response = await _requesterWrapper.ExecuteRequestAsync<AssignUserIdResponse, AssignUserIdRequest>(HttpMethod.Post,
+                  "/1/clusters/mapping", CallType.Write, data, requestOptions, ct)
+              .ConfigureAwait(false);
+
+            response.UserId = userId;
+            response.GetUserDelegate = u => GetUserId(u);
+            return response;
         }
 
         /// <summary>
@@ -558,7 +593,7 @@ namespace Algolia.Search.Clients
         /// <param name="userId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public DeleteResponse RemoveUserId(string userId, RequestOptions requestOptions = null) =>
+        public RemoveUserIdResponse RemoveUserId(string userId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => RemoveUserIdAsync(userId, requestOptions));
 
         /// <summary>
@@ -568,7 +603,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<DeleteResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
+        public async Task<RemoveUserIdResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(userId))
@@ -592,9 +627,25 @@ namespace Algolia.Search.Clients
                 requestOptions = new RequestOptions { Headers = removeUserId };
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                    "/1/clusters/mapping'", CallType.Write, requestOptions, ct)
-                .ConfigureAwait(false);
+            try
+            {
+                RemoveUserIdResponse response = await _requesterWrapper.ExecuteRequestAsync<RemoveUserIdResponse>(HttpMethod.Delete,
+                       $"/1/clusters/mapping", CallType.Write, requestOptions, ct)
+                        .ConfigureAwait(false);
+
+                response.UserId = userId;
+                response.RemoveDelegate = u => RemoveUserId(u);
+                return response;
+            }
+            catch (AlgoliaApiException ex)
+            {
+                if (!ex.Message.Contains("Another mapping operation is already running for this userID"))
+                {
+                    throw;
+                }
+
+                return new RemoveUserIdResponse { UserId = userId, RemoveDelegate = u => RemoveUserId(u) };
+            }
         }
 
         /// <summary>

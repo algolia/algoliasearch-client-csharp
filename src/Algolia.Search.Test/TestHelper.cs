@@ -89,6 +89,19 @@ namespace Algolia.Search.Test
                 : $"csharp_{date}_{appVeyor}_{testName}";
         }
 
+        internal static string GetMcmUserId()
+        {
+            string appVeyor = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"))
+                ? null
+                : $"-appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
+
+            var date = DateTime.UtcNow.ToString("yyyy-MM-dd-HH-mm-ss", CultureInfo.InvariantCulture);
+
+            return string.IsNullOrEmpty(appVeyor)
+                ? $"csharp-{date}-{Environment.UserName}"
+                : $"csharp-{date}-{appVeyor}";
+        }
+
         /// <summary>
         /// https://www.cyotek.com/blog/comparing-the-properties-of-two-objects-via-reflection
         /// Compares the properties of two objects of the same type and returns if all properties are equal.

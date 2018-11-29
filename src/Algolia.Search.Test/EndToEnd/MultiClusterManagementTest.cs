@@ -23,9 +23,12 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,15 +38,34 @@ namespace Algolia.Search.Test.EndToEnd
     [Parallelizable]
     public class MultiClusterManagementTest
     {
-
         [Test]
         public async Task McmTest()
         {
             IEnumerable<ClustersResponse> listClusters = await BaseTest.McmClient.ListClustersAsync();
-            Assert.True(listClusters.Count() == 2);
+            Assert.True(listClusters.Count() >= 2);
 
-            SearchResponse<UserIdResponse> listUsersIdsResponse = await BaseTest.McmClient.ListUserIdsAsync(0, 20);
-//            IEnumerable<UserIdResponse> userIds = listUsersIdsResponse.Hits.Where(x => !x.UserID.StartsWith("LANG-client-"));
+            string userId = TestHelper.GetMcmUserId();
+            AssignUserIdResponse assignResponse = await BaseTest.McmClient.AssignUserIdAsync(userId, listClusters.ElementAt(0).ClusterName);
+            assignResponse.Wait();
+
+            SearchResponse<UserIdResponse> searchResponse = await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest { Query = userId, Cluster = listClusters.ElementAt(0).ClusterName });
+            Assert.True(searchResponse.NbHits == 1);
+
+            ListUserIdsResponse listUserIds = await BaseTest.McmClient.ListUserIdsAsync();
+            Assert.True(listUserIds.UserIds.Exists(x => x.UserID.Equals(userId)));
+
+            TopUserIdResponse topUserIds = await BaseTest.McmClient.GetTopUserIdAsync();
+            Assert.True(topUserIds.TopUsers.Any());
+
+            RemoveUserIdResponse removeResponse = await BaseTest.McmClient.RemoveUserIdAsync(userId);
+            removeResponse.Wait();
+
+            ListUserIdsResponse listUserIdsTwo = await BaseTest.McmClient.ListUserIdsAsync();
+            var yesterday = DateTime.UtcNow.AddDays(-1).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+            IEnumerable<UserIdResponse> userIdsToRemove = listUserIdsTwo.UserIds.Where(x => x.UserID.Contains($"csharp-{yesterday}"));
+
+            IEnumerable<Task<RemoveUserIdResponse>> delete = userIdsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID));
+            Task.WaitAll(delete.ToArray());
         }
     }
 }

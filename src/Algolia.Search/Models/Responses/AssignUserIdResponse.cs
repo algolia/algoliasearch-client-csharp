@@ -23,11 +23,43 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Requests
+
+using System;
+using System.Threading;
+using Algolia.Search.Utils;
+
+namespace Algolia.Search.Models.Responses
 {
-    public class ListUserIdsRequest
+    public class AssignUserIdResponse : IAlgoliaWaitableResponse
     {
-        public int Page { get; set; }
-        public int HitsPerPage { get; set; }
+        public Func<string, UserIdResponse> GetUserDelegate { get; set; }
+
+        public string UserId { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public void Wait()
+        {
+            while (true)
+            {
+                try
+                {
+                    GetUserDelegate(UserId);
+                }
+                catch (AlgoliaApiException ex)
+                {
+                    // Loop until we have found the userID
+                    if (ex.HttpErrorCode == 404)
+                    {
+                        Thread.Sleep(1000);
+                        continue;
+                    }
+
+                    throw;
+                }
+
+                break;
+            }
+        }
     }
 }

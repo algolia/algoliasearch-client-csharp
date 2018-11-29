@@ -63,7 +63,6 @@ namespace Algolia.Search.Test.EndToEnd
             _rulesIndex = BaseTest.SearchClient.InitIndex(_copyIndexRulesName);
             _synonymsIndex = BaseTest.SearchClient.InitIndex(_copyIndexSynonymsName);
             _fullIndex = BaseTest.SearchClient.InitIndex(_copyIndexFullName);
-
         }
 
         [Test]

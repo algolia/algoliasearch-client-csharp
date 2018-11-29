@@ -124,6 +124,8 @@ namespace Algolia.Search.Test.EndToEnd
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave, await getRule));
             Assert.True(TestHelper.AreObjectsEqual(synonym, await getSynonym));
             Assert.True(TestHelper.AreObjectsEqual(await getOriginalSettings, await getSettings));
+
+            var deleteIndex = await BaseTest.SearchClient2.DeleteIndexAsync(indexTwoName);
         }
 
         public class AccountCopyObject

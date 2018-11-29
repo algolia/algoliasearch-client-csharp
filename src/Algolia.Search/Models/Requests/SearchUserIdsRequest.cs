@@ -23,22 +23,13 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.Requests
 {
-    public class ListUserIdsResponse
+    public class SearchUserIdsRequest
     {
-        [JsonProperty(PropertyName="userIDs")]
-        public List<UserIdResponse> UserIds { get; set; }
-    }
-
-    public class UserIdResponse
-    {
-        public string UserID { get; set; }
-        public string ClusterName { get; set; }
-        public int NbRecords { get; set; }
-        public int DataSize { get; set; }
+        public string Query { get; set; }
+        public string Cluster { get; set; }
+        public int Page { get; set; }
+        public int HitsPerPage { get; set; }
     }
 }

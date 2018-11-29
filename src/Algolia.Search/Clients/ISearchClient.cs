@@ -230,7 +230,7 @@ namespace Algolia.Search.Clients
         /// <param name="hitsPerPage"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SearchResponse<UserIdResponse> ListUserIds(int page, int hitsPerPage, RequestOptions requestOptions = null);
+        ListUserIdsResponse ListUserIds(int page = 0, int hitsPerPage = 1000, RequestOptions requestOptions = null);
 
         /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
@@ -240,7 +240,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SearchResponse<UserIdResponse>> ListUserIdsAsync(int page, int hitsPerPage, RequestOptions requestOptions = null,
+        Task<ListUserIdsResponse> ListUserIdsAsync(int page = 0, int hitsPerPage = 1000, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -287,7 +287,7 @@ namespace Algolia.Search.Clients
         /// <param name="clusterName"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        AddObjectResponse AssignUserId(string userId, string clusterName, RequestOptions requestOptions = null);
+        AssignUserIdResponse AssignUserId(string userId, string clusterName, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Assign or Move a userID to a cluster.
@@ -298,7 +298,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AddObjectResponse> AssignUserIdAsync(string userId, string clusterName, RequestOptions requestOptions = null,
+        Task<AssignUserIdResponse> AssignUserIdAsync(string userId, string clusterName, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace Algolia.Search.Clients
         /// <param name="userId"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        DeleteResponse RemoveUserId(string userId, RequestOptions requestOptions = null);
+        RemoveUserIdResponse RemoveUserId(string userId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Remove a userID and its associated data from the multi-clusters.
@@ -316,7 +316,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<DeleteResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
+        Task<RemoveUserIdResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
