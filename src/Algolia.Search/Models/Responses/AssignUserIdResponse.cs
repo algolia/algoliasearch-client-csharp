@@ -23,9 +23,9 @@
 * THE SOFTWARE.
 */
 
-
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Utils;
 
 namespace Algolia.Search.Models.Responses
@@ -51,7 +51,7 @@ namespace Algolia.Search.Models.Responses
                     // Loop until we have found the userID
                     if (ex.HttpErrorCode == 404)
                     {
-                        Thread.Sleep(1000);
+                        Task.Delay(1000);
                         continue;
                     }
 
