@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 * Based on the first version developed by Christopher Maneu under the same license:
@@ -25,47 +25,37 @@
 
 using System;
 
-namespace Algolia.Search.Utils
+namespace Algolia.Search.Exceptions
 {
-    public class AlgoliaApiException : Exception
-    {
-        public int HttpErrorCode { get; set; }
-
+	/// <summary>
+	/// Algolia exception.
+	/// </summary>
+	public class AlgoliaException : Exception
+	{
         /// <summary>
         /// Algolia's Execption
         /// </summary>
-        public AlgoliaApiException()
-        {
-        }
+	    public AlgoliaException()
+	    {
+	    }
 
         /// <summary>
-        /// Create a new Algolia's api exception.
+        /// Create a new Algolia exception.
         /// </summary>
         /// <param name="message">The exception details.</param>
-        public AlgoliaApiException(string message) : base(message)
-        {
+        public AlgoliaException(string message) : base(message)
+		{
 
-        }
+		}
 
         /// <summary>
-        /// Algolia API Exception
+        /// Algolia Exception
         /// </summary>
         /// <param name="message"></param>
         /// <param name="inner"></param>
-	    public AlgoliaApiException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
-
-        /// <summary>
-        /// Ctor with error code and message
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="httpErrorCode"></param>
-        public AlgoliaApiException(string message, int httpErrorCode)
-            : base(message)
-        {
-            HttpErrorCode = httpErrorCode;
-        }
+	    public AlgoliaException(string message, Exception inner)
+	        : base(message, inner)
+	    {
+	    }
     }
 }

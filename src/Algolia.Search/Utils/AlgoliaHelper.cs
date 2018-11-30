@@ -23,6 +23,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Exceptions;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;

@@ -26,6 +26,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Algolia.Search.Clients;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;

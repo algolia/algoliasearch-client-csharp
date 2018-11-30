@@ -37,6 +37,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Serializer;
+using Algolia.Search.Exceptions;
 
 namespace Algolia.Search.Transport
 {

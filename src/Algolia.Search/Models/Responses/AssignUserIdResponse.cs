@@ -26,6 +26,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Utils;
 
 namespace Algolia.Search.Models.Responses

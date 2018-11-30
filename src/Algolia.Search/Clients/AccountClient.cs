@@ -23,6 +23,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Requests;

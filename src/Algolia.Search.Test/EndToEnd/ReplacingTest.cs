@@ -24,6 +24,7 @@
 */
 
 using Algolia.Search.Clients;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Synonyms;
