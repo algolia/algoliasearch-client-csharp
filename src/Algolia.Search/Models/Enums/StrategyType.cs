@@ -23,18 +23,11 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.Enums
 {
-    public class MultipleIndexBatchIndexingResponse : IAlgoliaWaitableResponse
+    public class StrategyType
     {
-        IEnumerable<string> ObjectIDs { get; set; }
-        Dictionary<string, long> TaskID { get; set; }
-
-        public void Wait()
-        {
-            throw new System.NotImplementedException();
-        }
+        public const string None = "none";
+        public const string StopIfEnoughMatches = "stopIfEnoughMatches";
     }
 }

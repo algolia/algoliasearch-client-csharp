@@ -39,6 +39,7 @@ public class BaseTest
     internal static SearchClient SearchClient;
     internal static SearchClient SearchClient2;
     internal static SearchClient McmClient;
+    internal static AnalyticsClient AnalyticsClient;
     private static ListIndexesResponse _indices;
 
     [OneTimeSetUp]
@@ -48,6 +49,7 @@ public class BaseTest
         SearchClient = new SearchClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
         SearchClient2 = new SearchClient(TestHelper.ApplicationId2, TestHelper.AdminKey2);
         McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmAdminKey);
+        AnalyticsClient = new AnalyticsClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
         _indices = SearchClient.ListIndexes();
     }
 

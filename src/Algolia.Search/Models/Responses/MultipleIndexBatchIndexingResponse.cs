@@ -23,24 +23,23 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Query;
-using Algolia.Search.Serializer;
-using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Requests
+namespace Algolia.Search.Models.Responses
 {
-    public class MultipleQueriesRequest
+    public class MultipleIndexBatchIndexingResponse : IAlgoliaWaitableResponse
     {
-        public IEnumerable<MultipleQueries> Requests { get; set; }
-        public string Strategy { get; set; }
-    }
+        public Action<string, long> WaitDelegate { get; set; }
+        public IEnumerable<string> ObjectIDs { get; set; }
+        public Dictionary<string, long> TaskID { get; set; }
 
-    public class MultipleQueries
-    {
-        public string IndexName { get; set; }
-        
-        [JsonConverter(typeof(QuerySerializer))]
-        public SearchQuery Params { get; set; }
+        public void Wait()
+        {
+            foreach (var item in TaskID)
+            {
+                WaitDelegate(item.Key, item.Value);
+            }
+        }
     }
 }

@@ -48,26 +48,26 @@ namespace Algolia.Search.Clients
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleGetObjectsResponse<T> MultipleGetObjects<T>(MultipleGetObjectsRequest queries, RequestOptions requestOptions = null) where T : class;
+        MultipleGetObjectsResponse<T> MultipleGetObjects<T>(IEnumerable<MultipleGetObject> queries, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries, RequestOptions requestOptions = null,
+        Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(IEnumerable<MultipleGetObject> queries, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest queries, RequestOptions requestOptions = null) where T : class;
+        MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest request, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries, RequestOptions requestOptions = null,
+        Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest request, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>

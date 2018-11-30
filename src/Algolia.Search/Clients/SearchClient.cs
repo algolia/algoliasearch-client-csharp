@@ -118,7 +118,7 @@ namespace Algolia.Search.Clients
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public MultipleGetObjectsResponse<T> MultipleGetObjects<T>(MultipleGetObjectsRequest queries,
+        public MultipleGetObjectsResponse<T> MultipleGetObjects<T>(IEnumerable<MultipleGetObject> queries,
             RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => MultipleGetObjectsAsync<T>(queries, requestOptions));
 
@@ -126,7 +126,7 @@ namespace Algolia.Search.Clients
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(MultipleGetObjectsRequest queries,
+        public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(IEnumerable<MultipleGetObject> queries,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (queries == null)
@@ -134,8 +134,10 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(queries));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<MultipleGetObjectsResponse<T>>(HttpMethod.Post,
-                    "/1/indexes/*/objects", CallType.Read, requestOptions, ct)
+            var request = new MultipleGetObjectsRequest { Requests = queries };
+
+            return await _requesterWrapper.ExecuteRequestAsync<MultipleGetObjectsResponse<T>, MultipleGetObjectsRequest>(HttpMethod.Post,
+                    "/1/indexes/*/objects", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -143,24 +145,24 @@ namespace Algolia.Search.Clients
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest queries,
+        public MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest request,
             RequestOptions requestOptions = null) where T : class =>
-            AsyncHelper.RunSync(() => MultipleQueriesAsync<T>(queries, requestOptions));
+            AsyncHelper.RunSync(() => MultipleQueriesAsync<T>(request, requestOptions));
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest queries,
+        public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest request,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
-            if (queries == null)
+            if (request == null)
             {
-                throw new ArgumentNullException(nameof(queries));
+                throw new ArgumentNullException(nameof(request));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<MultipleQueriesResponse<T>>(HttpMethod.Post,
-                    "/1/indexes/*/queries", CallType.Read, requestOptions, ct)
+            return await _requesterWrapper.ExecuteRequestAsync<MultipleQueriesResponse<T>, MultipleQueriesRequest>(HttpMethod.Post,
+                    "/1/indexes/*/queries", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -188,9 +190,12 @@ namespace Algolia.Search.Clients
 
             var batch = new BatchRequest<T>(operations);
 
-            return await _requesterWrapper.ExecuteRequestAsync<MultipleIndexBatchIndexingResponse, BatchRequest<T>>(
+            MultipleIndexBatchIndexingResponse resp = await _requesterWrapper.ExecuteRequestAsync<MultipleIndexBatchIndexingResponse, BatchRequest<T>>(
                     HttpMethod.Post, "/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct)
                 .ConfigureAwait(false);
+
+            resp.WaitDelegate = (i, t) => WaitTask(i, t);
+            return resp;
         }
 
         /// <summary>

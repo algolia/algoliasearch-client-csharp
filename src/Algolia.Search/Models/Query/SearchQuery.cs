@@ -33,6 +33,11 @@ namespace Algolia.Search.Models.Query
     /// </summary>
     public class SearchQuery
     {
+        public SearchQuery(string searchQuery = "")
+        {
+            Query = searchQuery;
+        }
+
         public string Query { get; set; } = string.Empty;
 
         // filtering
