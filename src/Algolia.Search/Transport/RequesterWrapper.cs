@@ -183,7 +183,8 @@ namespace Algolia.Search.Transport
         {
             if (optionalQueryParameters != null)
             {
-                return new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}", Query = optionalQueryParameters.ToQueryString() }.Uri;
+                var queryParams = optionalQueryParameters.ToQueryString();
+                return new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}", Query = queryParams }.Uri;
             }
 
             return new UriBuilder { Scheme = "https", Host = url, Path = baseUri }.Uri;

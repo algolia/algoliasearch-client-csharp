@@ -466,10 +466,16 @@ namespace Algolia.Search.Clients
         public async Task<ListUserIdsResponse> ListUserIdsAsync(int page = 0, int hitsPerPage = 1000,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            SearchUserIdsRequest request = new SearchUserIdsRequest { Page = page, HitsPerPage = hitsPerPage };
+            var queryParams = new Dictionary<string, string>
+            {
+                { "page", page.ToString() },
+                { "hitsPerPage", hitsPerPage.ToString() }
+            };
 
-            return await _requesterWrapper.ExecuteRequestAsync<ListUserIdsResponse, SearchUserIdsRequest>(
-                    HttpMethod.Get, "/1/clusters/mapping", CallType.Read, request, requestOptions, ct)
+            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
+
+            return await _requesterWrapper.ExecuteRequestAsync<ListUserIdsResponse>(
+                    HttpMethod.Get, "/1/clusters/mapping", CallType.Read, requestOptionsToSend, ct)
                 .ConfigureAwait(false);
         }
 
