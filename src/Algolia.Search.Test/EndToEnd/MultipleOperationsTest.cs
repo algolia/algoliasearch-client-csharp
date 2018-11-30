@@ -78,7 +78,6 @@ namespace Algolia.Search.Test.EndToEnd
             for (int i = 0; i < 4; i++)
             {
                 Assert.True(multipleGet.Results.ElementAt(i).ObjectID == saveMultiple.ObjectIDs.ElementAt(i));
-
             }
 
             List<MultipleQueries> multipleSearch = new List<MultipleQueries>
@@ -115,7 +114,6 @@ namespace Algolia.Search.Test.EndToEnd
         {
             public string ObjectID { get; set; }
             public string Firstname { get; set; }
-
         }
     }
 }

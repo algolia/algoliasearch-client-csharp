@@ -323,7 +323,7 @@ namespace Algolia.Search.Clients
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
-        LogResponse GetLogs(RequestOptions requestOptions = null);
+        LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10, string indexName = null, string type = "all");
 
         /// <summary>
         /// Get logs for the given index
@@ -332,6 +332,6 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null, string type = "all");
     }
 }

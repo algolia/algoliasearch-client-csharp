@@ -664,8 +664,8 @@ namespace Algolia.Search.Clients
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
-        public LogResponse GetLogs(RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => GetLogsAsync(requestOptions));
+        public LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10, string indexName = null, string type = "all") =>
+            AsyncHelper.RunSync(() => GetLogsAsync(requestOptions, offset: offset, length: length, indexName: indexName, type: type));
 
         /// <summary>
         /// Get logs for the given index
@@ -674,10 +674,20 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null, string type = "all")
         {
+            var queryParams = new Dictionary<string, string>
+                {
+                    { "offset", offset.ToString()},
+                    { "length", length.ToString() },
+                    { "indexName", indexName },
+                    { "type", type},
+                };
+
+            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
+
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
-                    requestOptions, ct)
+                    requestOptionsToSend, ct)
                 .ConfigureAwait(false);
         }
 
