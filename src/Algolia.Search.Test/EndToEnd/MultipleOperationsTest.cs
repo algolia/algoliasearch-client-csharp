@@ -39,8 +39,6 @@ namespace Algolia.Search.Test.EndToEnd
     [Parallelizable]
     public class MultipleOperationsTest
     {
-        private SearchIndex _index1;
-        private SearchIndex _index2;
         private string _indexName1;
         private string _indexName2;
 
@@ -49,8 +47,6 @@ namespace Algolia.Search.Test.EndToEnd
         {
             _indexName1 = TestHelper.GetTestIndexName("multiple_operations");
             _indexName2 = TestHelper.GetTestIndexName("multiple_operations_dev");
-            _index1 = BaseTest.SearchClient.InitIndex(_indexName1);
-            _index2 = BaseTest.SearchClient.InitIndex(_indexName2);
         }
 
         [Test]
