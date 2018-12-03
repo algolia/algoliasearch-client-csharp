@@ -66,16 +66,19 @@ public class BaseTest
             var indicesToDelete = _indices.Items.Where(x => x.Name.Contains("csharp_"));
             List<BatchOperation<string>> operations = new List<BatchOperation<string>>();
 
-            foreach (var index in indicesToDelete)
+            if (indicesToDelete.Count() > 0)
             {
-                operations.Add(new BatchOperation<string>
+                foreach (var index in indicesToDelete)
                 {
-                    IndexName = index.Name,
-                    Action = BatchActionType.Delete
-                });
-            }
+                    operations.Add(new BatchOperation<string>
+                    {
+                        IndexName = index.Name,
+                        Action = BatchActionType.Delete
+                    });
+                }
 
-            SearchClient.MultipleBatch(operations);
+                SearchClient.MultipleBatch(operations);
+            }
         }
     }
 }

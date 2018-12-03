@@ -139,7 +139,7 @@ namespace Algolia.Search.Clients
         /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        ApiKeysResponse GetApiKey(string apiKey, RequestOptions requestOptions = null);
+        ApiKey GetApiKey(string apiKey, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get the full list of API Keys.
@@ -148,7 +148,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<ApiKeysResponse> GetApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
+        Task<ApiKey> GetApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Algolia.Search.Clients
         /// <param name="acl"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        AddApiKeyResponse AddApiKey(ApiKeyRequest acl, RequestOptions requestOptions = null);
+        AddApiKeyResponse AddApiKey(ApiKey acl, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Add a new API Key with specific permissions/restrictions.
@@ -166,27 +166,25 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AddApiKeyResponse> AddApiKeyAsync(ApiKeyRequest acl, RequestOptions requestOptions = null,
+        Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey acl, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Update the permissions of an existing API Key.
         /// </summary>
-        /// <param name="apiKey"></param>
-        /// <param name="acl"></param>
+        /// <param name="request"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        UpdateApiKeyResponse UpdateApiKey(string apiKey, ApiKeyRequest acl, RequestOptions requestOptions = null);
+        UpdateApiKeyResponse UpdateApiKey(ApiKey request, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Update the permissions of an existing API Key.
         /// </summary>
-        /// <param name="apiKey"></param>
-        /// <param name="acl"></param>
+        /// <param name="request"></param>
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string apiKey, ApiKeyRequest acl, RequestOptions requestOptions = null,
+        Task<UpdateApiKeyResponse> UpdateApiKeyAsync(ApiKey request, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -195,7 +193,7 @@ namespace Algolia.Search.Clients
         /// <param name="apiKey"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        DeleteResponse DeleteApiKey(string apiKey, RequestOptions requestOptions = null);
+        DeleteApiKeyResponse DeleteApiKey(string apiKey, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Delete an existing API Key
@@ -204,7 +202,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<DeleteResponse> DeleteApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
+        Task<DeleteApiKeyResponse> DeleteApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

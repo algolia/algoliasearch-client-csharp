@@ -24,6 +24,7 @@
 */
 
 using System.Collections.Generic;
+using Algolia.Search.Models.Requests;
 
 namespace Algolia.Search.Models.Responses
 {
@@ -32,15 +33,6 @@ namespace Algolia.Search.Models.Responses
     /// </summary>
     public class ListApiKeysResponse
     {
-        public List<ApiKeysResponse> Keys { get; set; }
-    }
-
-    public class ApiKeysResponse
-    {
-        public string Value { get; set; }
-        public string CreatedAt { get; set; }
-        public IEnumerable<string> Acl { get; set; }
-        public int Validity { get; set; }
-        public string Description { get; set; }
+        public List<ApiKey> Keys { get; set; }
     }
 }

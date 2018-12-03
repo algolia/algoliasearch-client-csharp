@@ -23,20 +23,36 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
+using Algolia.Search.Models.Requests;
+using Newtonsoft.Json;
 
-namespace Algolia.Search.Models.Requests
+namespace Algolia.Search.Models.Responses
 {
-    public class ApiKeyRequest
+    public class DeleteApiKeyResponse : IAlgoliaWaitableResponse
     {
-        public IEnumerable<string> Acl { get; set; }
-        public long? Validity { get; set; }
-        public int? MaxHitsPerQuery { get; set; }
-        public int? MaxQueriesPerIPPerHour { get; set; }
-        public IEnumerable<string> Indexes { get; set; }
-        public IEnumerable<string> Referers { get; set; }
-        public string RestrictSources { get; set; }
-        public string QueryParameters { get; set; }
-        public string Description { get; set; }
+        [JsonIgnore]
+        public Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+        [JsonIgnore]
+        public string Key { get; set; }
+        public DateTime DeletedAt { get; set; }
+
+        public virtual void Wait()
+        {
+            while (true)
+            {
+                // loop until the key doesn't exist on the api side
+                ApiKey retrievedApiKey = GetApiKeyDelegate(Key);
+
+                if (!retrievedApiKey.Exist)
+                {
+                    break;
+                }
+
+                Task.Delay(1000);
+                continue;
+            }
+        }
     }
 }

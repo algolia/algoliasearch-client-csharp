@@ -41,6 +41,6 @@ namespace Algolia.Search.Clients
         /// <value></value>
         public List<StatefulHost> Hosts { get; set; }
 
-        public int BatchSize { get; set; } = 1000;
+        public int BatchSize { get; set; } = 10000;
     }
 }
