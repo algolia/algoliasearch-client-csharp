@@ -29,10 +29,10 @@ namespace Algolia.Search.Transport
     public class StatefulHost
     {
         public string Url { get; set; }
-        public bool Up { get; set; }
+        public bool Up { get; set; } = true;
         public int Priority { get; set; }
         public int RetryCount { get; set; }
-        public DateTime LastUse { get; set; }
+        public DateTime LastUse { get; set; } = DateTime.UtcNow;
         public CallType Accept { get; set; }
     }
 }
