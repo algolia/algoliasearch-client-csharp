@@ -33,10 +33,8 @@ namespace Algolia.Search.Models.Requests
 {
     public class ApiKey : IAlgoliaWaitableResponse
     {
-        [JsonIgnore]
-        public Func<string, ApiKey> GetApiKeyDelegate { get; set; }
-        [JsonIgnore]
-        public string Key { get; set; }
+        [JsonIgnore] public Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+        [JsonIgnore] public string Key { get; set; }
         public string Value { get; set; }
         public IEnumerable<string> Acl { get; set; }
         public long? Validity { get; set; }
@@ -47,10 +45,11 @@ namespace Algolia.Search.Models.Requests
         public string RestrictSources { get; set; }
         public string QueryParameters { get; set; }
         public string Description { get; set; }
+
         [JsonConverter(typeof(DateTimeEpochSerializer))]
         public DateTime? CreatedAt { get; set; }
-        [JsonIgnore]
-        public bool Exist { get; set; }
+
+        [JsonIgnore] public bool Exist { get; set; }
 
         public void Wait()
         {

@@ -37,7 +37,7 @@ namespace Algolia.Search.Models.Requests
     public class MultipleQueries
     {
         public string IndexName { get; set; }
-        
+
         [JsonConverter(typeof(QuerySerializer))]
         public SearchQuery Params { get; set; }
     }

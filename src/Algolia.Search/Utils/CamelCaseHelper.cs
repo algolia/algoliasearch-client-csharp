@@ -32,7 +32,7 @@ namespace Algolia.Search.Utils
         /// <returns></returns>
         public static string ToCamelCase(this string stringToCamelCase)
         {
-           return char.ToLowerInvariant(stringToCamelCase[0]) + stringToCamelCase.Substring(1);
+            return char.ToLowerInvariant(stringToCamelCase[0]) + stringToCamelCase.Substring(1);
         }
     }
 }

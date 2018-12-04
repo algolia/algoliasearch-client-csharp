@@ -28,6 +28,7 @@ namespace Algolia.Search.Models.Responses
     public class BatchIndexingResponse : IAlgoliaWaitableResponse
     {
         public List<BatchResponse> Responses { get; set; }
+
         public void Wait()
         {
             foreach (var response in Responses)

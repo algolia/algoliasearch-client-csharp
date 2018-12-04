@@ -32,7 +32,7 @@ namespace Algolia.Search.Serializer
     internal static class JsonConfig
     {
         public const string JsonContentType = "application/json";
-        
+
         public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
         {
             Formatting = Formatting.None,
@@ -46,4 +46,3 @@ namespace Algolia.Search.Serializer
         };
     }
 }
-

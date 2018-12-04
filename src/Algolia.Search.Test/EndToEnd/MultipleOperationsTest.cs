@@ -21,15 +21,14 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Algolia.Search.Clients;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Requests;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd
 {
@@ -52,10 +51,26 @@ namespace Algolia.Search.Test.EndToEnd
         {
             var objectsToSave = new List<BatchOperation<MultipleOperationClass>>
             {
-                    new BatchOperation<MultipleOperationClass> { IndexName = _indexName1, Action = BatchActionType.AddObject , Body = new MultipleOperationClass { Firstname = "Jimmie"}},
-                    new BatchOperation<MultipleOperationClass> { IndexName = _indexName1, Action = BatchActionType.AddObject , Body = new MultipleOperationClass { Firstname = "Jimmie"}},
-                    new BatchOperation<MultipleOperationClass> { IndexName = _indexName2, Action = BatchActionType.AddObject , Body = new MultipleOperationClass { Firstname = "Jimmie"}},
-                    new BatchOperation<MultipleOperationClass> { IndexName = _indexName2, Action = BatchActionType.AddObject , Body = new MultipleOperationClass { Firstname = "Jimmie"}}
+                new BatchOperation<MultipleOperationClass>
+                {
+                    IndexName = _indexName1, Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass {Firstname = "Jimmie"}
+                },
+                new BatchOperation<MultipleOperationClass>
+                {
+                    IndexName = _indexName1, Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass {Firstname = "Jimmie"}
+                },
+                new BatchOperation<MultipleOperationClass>
+                {
+                    IndexName = _indexName2, Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass {Firstname = "Jimmie"}
+                },
+                new BatchOperation<MultipleOperationClass>
+                {
+                    IndexName = _indexName2, Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass {Firstname = "Jimmie"}
+                }
             };
 
             var saveMultiple = await BaseTest.SearchClient.MultipleBatchAsync(objectsToSave);
@@ -63,13 +78,14 @@ namespace Algolia.Search.Test.EndToEnd
 
             var objectsToRetrieve = new List<MultipleGetObject>
             {
-                    new MultipleGetObject { IndexName = _indexName1, ObjectID = saveMultiple.ObjectIDs.ElementAt(0)},
-                    new MultipleGetObject { IndexName = _indexName1, ObjectID = saveMultiple.ObjectIDs.ElementAt(1)},
-                    new MultipleGetObject { IndexName = _indexName2, ObjectID = saveMultiple.ObjectIDs.ElementAt(2)},
-                    new MultipleGetObject { IndexName = _indexName2, ObjectID = saveMultiple.ObjectIDs.ElementAt(3)}
-             };
+                new MultipleGetObject {IndexName = _indexName1, ObjectID = saveMultiple.ObjectIDs.ElementAt(0)},
+                new MultipleGetObject {IndexName = _indexName1, ObjectID = saveMultiple.ObjectIDs.ElementAt(1)},
+                new MultipleGetObject {IndexName = _indexName2, ObjectID = saveMultiple.ObjectIDs.ElementAt(2)},
+                new MultipleGetObject {IndexName = _indexName2, ObjectID = saveMultiple.ObjectIDs.ElementAt(3)}
+            };
 
-            var multipleGet = await BaseTest.SearchClient.MultipleGetObjectsAsync<MultipleOperationClass>(objectsToRetrieve);
+            var multipleGet =
+                await BaseTest.SearchClient.MultipleGetObjectsAsync<MultipleOperationClass>(objectsToRetrieve);
             Assert.True(multipleGet.Results.Count() == 4);
             Assert.True(multipleGet.Results.All(x => x.Firstname.Equals("Jimmie")));
 
@@ -80,8 +96,8 @@ namespace Algolia.Search.Test.EndToEnd
 
             List<MultipleQueries> multipleSearch = new List<MultipleQueries>
             {
-                new MultipleQueries{IndexName = _indexName1, Params = new SearchQuery { HitsPerPage = 2 }},
-                new MultipleQueries{IndexName = _indexName2, Params = new SearchQuery { HitsPerPage = 2 }},
+                new MultipleQueries {IndexName = _indexName1, Params = new SearchQuery {HitsPerPage = 2}},
+                new MultipleQueries {IndexName = _indexName2, Params = new SearchQuery {HitsPerPage = 2}},
             };
 
             MultipleQueriesRequest request = new MultipleQueriesRequest

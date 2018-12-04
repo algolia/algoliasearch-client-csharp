@@ -30,7 +30,7 @@ namespace Algolia.Search.Exceptions
         /// <summary>
         /// Algolia's Execption
         /// </summary>
-	    public AlgoliaUnreachableHostException()
+        public AlgoliaUnreachableHostException()
         {
         }
 
@@ -47,7 +47,7 @@ namespace Algolia.Search.Exceptions
         /// </summary>
         /// <param name="message"></param>
         /// <param name="inner"></param>
-	    public AlgoliaUnreachableHostException(string message, Exception inner)
+        public AlgoliaUnreachableHostException(string message, Exception inner)
             : base(message, inner)
         {
         }

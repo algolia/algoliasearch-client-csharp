@@ -30,9 +30,9 @@ namespace Algolia.Search.Clients
     public class AlgoliaConfig
     {
         public string AppId { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
-        
+
         public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY");
-                        
+
         /// <summary>
         /// To set custom hosts
         /// </summary>

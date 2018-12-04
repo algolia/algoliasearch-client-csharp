@@ -22,9 +22,11 @@
 */
 
 using Algolia.Search.Clients;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Requests;
+using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
@@ -34,8 +36,6 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Serializer;
-using Algolia.Search.Exceptions;
 
 namespace Algolia.Search.Transport
 {
@@ -44,7 +44,9 @@ namespace Algolia.Search.Transport
         private readonly IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
         private readonly RetryStrategy _retryStrategy;
-        private readonly string _clientVersion = typeof(RequesterWrapper).GetTypeInfo().Assembly.GetName().Version.ToString();
+
+        private readonly string _clientVersion =
+            typeof(RequesterWrapper).GetTypeInfo().Assembly.GetName().Version.ToString();
 
         /// <summary>
         /// Instantiate with custom config and custom http requester 
@@ -69,9 +71,12 @@ namespace Algolia.Search.Transport
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType, RequestOptions requestOptions = null,
+        public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
-            where TResult : class => await ExecuteRequestAsync<TResult, string>(method, uri, callType, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
+            where TResult : class =>
+            await ExecuteRequestAsync<TResult, string>(method, uri, callType, requestOptions: requestOptions, ct: ct)
+                .ConfigureAwait(false);
 
         /// <inheritdoc />
         /// <summary>
@@ -128,6 +133,7 @@ namespace Algolia.Search.Transport
                         throw new AlgoliaApiException(response.Error, response.HttpStatusCode);
                 }
             }
+
             throw new AlgoliaUnreachableHostException("Unreachable hosts");
         }
 
@@ -162,7 +168,7 @@ namespace Algolia.Search.Transport
                 {"X-Algolia-Application-Id", _algoliaConfig.AppId},
                 {"X-Algolia-API-Key", _algoliaConfig.ApiKey},
                 {"User-Agent", $"Algolia for CSharp {_clientVersion}"},
-                {"Connection","keep-alive"},
+                {"Connection", "keep-alive"},
                 {"Accept", JsonConfig.JsonContentType}
             };
 
@@ -183,10 +189,10 @@ namespace Algolia.Search.Transport
             if (optionalQueryParameters != null)
             {
                 var queryParams = optionalQueryParameters.ToQueryString();
-                return new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}", Query = queryParams }.Uri;
+                return new UriBuilder {Scheme = "https", Host = url, Path = $"{baseUri}", Query = queryParams}.Uri;
             }
 
-            return new UriBuilder { Scheme = "https", Host = url, Path = baseUri }.Uri;
+            return new UriBuilder {Scheme = "https", Host = url, Path = baseUri}.Uri;
         }
 
         /// <summary>

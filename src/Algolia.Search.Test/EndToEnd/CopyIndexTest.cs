@@ -22,14 +22,14 @@
 */
 
 using Algolia.Search.Clients;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using NUnit.Framework;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
-using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Rules;
-using Algolia.Search.Models.Responses;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd
 {
@@ -66,7 +66,6 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestCopyIndex()
         {
-
             var objectsToAdd = new List<CopyIndexObject>
             {
                 new CopyIndexObject
@@ -85,7 +84,7 @@ namespace Algolia.Search.Test.EndToEnd
 
             IndexSettings settings = new IndexSettings
             {
-                AttributesForFaceting = new List<string> { "company" }
+                AttributesForFaceting = new List<string> {"company"}
             };
 
             var setSettings = _sourceIndex.SetSettingsAsync(settings);
@@ -95,7 +94,7 @@ namespace Algolia.Search.Test.EndToEnd
                 ObjectID = "google_placeholder",
                 Type = SynonymType.Placeholder,
                 Placeholder = "<GOOG>",
-                Replacements = new List<string> { "Google", "GOOG" }
+                Replacements = new List<string> {"Google", "GOOG"}
             };
 
             var saveSynonyms = _sourceIndex.SaveSynonymAsync(synonym);
@@ -103,14 +102,14 @@ namespace Algolia.Search.Test.EndToEnd
             Rule ruleToSave = new Rule
             {
                 ObjectID = "company_automatic_faceting",
-                Condition = new Condition { Anchoring = "contains", Pattern = "{facet:company}" },
+                Condition = new Condition {Anchoring = "contains", Pattern = "{facet:company}"},
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
                     {
                         AutomaticFacetFilters = new List<AutomaticFacetFilter>
                         {
-                            new AutomaticFacetFilter {Facet = "company" }
+                            new AutomaticFacetFilter {Facet = "company"}
                         }
                     }
                 }
@@ -131,7 +130,8 @@ namespace Algolia.Search.Test.EndToEnd
             var copySynonymsTask = BaseTest.SearchClient.CopySynonymsAsync(_sourceIndexName, _copyIndexSynonymsName);
             var copyFullTask = BaseTest.SearchClient.CopyIndexAsync(_sourceIndexName, _copyIndexFullName);
 
-            CopyToResponse[] saveResponses = await Task.WhenAll(copySetttingsTask, copyRulesTask, copySynonymsTask, copyFullTask);
+            CopyToResponse[] saveResponses =
+                await Task.WhenAll(copySetttingsTask, copyRulesTask, copySynonymsTask, copyFullTask);
 
             foreach (var resp in saveResponses)
             {

@@ -46,30 +46,35 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestSettings()
         {
-            var addObjectResponse = await _index.AddObjectAysnc(new { ObjectId = "one", Attribute = "value" });
+            var addObjectResponse = await _index.AddObjectAysnc(new {ObjectId = "one", Attribute = "value"});
             addObjectResponse.Wait();
 
             IndexSettings settings = new IndexSettings
             {
-
                 // Attributes
-                SearchableAttributes = new List<string> { "attribute1", "attribute2", "attribute3", "ordered(attribute4)", "unordered(attribute5)" },
-                AttributesForFaceting = new List<string> { "attribute1", "filterOnly(attribute2)", "searchable(attribute3)" },
-                UnretrievableAttributes = new List<string> { "attribute1", "attribute2" },
-                AttributesToRetrieve = new List<string> { "attribute3", "attribute4" },
+                SearchableAttributes = new List<string>
+                    {"attribute1", "attribute2", "attribute3", "ordered(attribute4)", "unordered(attribute5)"},
+                AttributesForFaceting = new List<string>
+                    {"attribute1", "filterOnly(attribute2)", "searchable(attribute3)"},
+                UnretrievableAttributes = new List<string> {"attribute1", "attribute2"},
+                AttributesToRetrieve = new List<string> {"attribute3", "attribute4"},
 
                 // Ranking
-                Ranking = new List<string> { "asc(attribute1)", "desc(attribute2)", "attribute", "custom", "exact", "filters", "geo", "proximity", "typo", "words" },
-                CustomRanking = new List<string> { "asc(attribute1)", "desc(attribute1)" },
-                Replicas = new List<string> { _indexName + "_replica1", _indexName + "_replica2" },
+                Ranking = new List<string>
+                {
+                    "asc(attribute1)", "desc(attribute2)", "attribute", "custom", "exact", "filters", "geo",
+                    "proximity", "typo", "words"
+                },
+                CustomRanking = new List<string> {"asc(attribute1)", "desc(attribute1)"},
+                Replicas = new List<string> {_indexName + "_replica1", _indexName + "_replica2"},
 
                 // Faceting
                 MaxValuesPerFacet = 100,
                 SortFacetValuesBy = "count",
 
                 // Highligthing/snippeting
-                AttributesToHighlight = new List<string> { "attribute1", "attribute2" },
-                AttributesToSnippet = new List<string> { "attribute1:10", "attribute2:8" },
+                AttributesToHighlight = new List<string> {"attribute1", "attribute2"},
+                AttributesToSnippet = new List<string> {"attribute1:10", "attribute2:8"},
                 HighlightPreTag = "<strong>",
                 HighlightPostTag = "</strong>",
                 SnippetEllipsisText = "and so on.",
@@ -85,25 +90,25 @@ namespace Algolia.Search.Test.EndToEnd
                 TypoTolerance = false,
                 AllowTyposOnNumericTokens = false,
                 IgnorePlurals = true,
-                DisableTypoToleranceOnAttributes = new List<string> { "attribute1", "attribute2" },
-                DisableTypoToleranceOnWords = new List<string> { "word1", "word2" },
+                DisableTypoToleranceOnAttributes = new List<string> {"attribute1", "attribute2"},
+                DisableTypoToleranceOnWords = new List<string> {"word1", "word2"},
                 SeparatorsToIndex = "()[]",
 
                 // Query
                 QueryType = "prefixNone",
                 RemoveWordsIfNoResults = "allOptional",
                 AdvancedSyntax = true,
-                OptionalWords = new List<string> { "word1", "word2" },
+                OptionalWords = new List<string> {"word1", "word2"},
                 RemoveStopWords = true,
-                DisablePrefixOnAttributes = new List<string> { "attribute1", "attribute2" },
-                DisableExactOnAttributes = new List<string> { "attribute1", "attribute2" },
+                DisablePrefixOnAttributes = new List<string> {"attribute1", "attribute2"},
+                DisableExactOnAttributes = new List<string> {"attribute1", "attribute2"},
                 ExactOnSingleWordQuery = "word",
 
                 // Query rules
                 EnableRules = false,
 
                 // Performance
-                NumericAttributesForFiltering = new List<string> { "attribute1", "attribute2" },
+                NumericAttributesForFiltering = new List<string> {"attribute1", "attribute2"},
                 AllowCompressionOfIntegerArray = true,
 
                 // Advanced
@@ -111,13 +116,13 @@ namespace Algolia.Search.Test.EndToEnd
                 Distinct = 2,
                 ReplaceSynonymsInHighlight = false,
                 MinProximity = 7,
-                ResponseFields = new List<string> { "hits", "hitsPerPage" },
+                ResponseFields = new List<string> {"hits", "hitsPerPage"},
                 MaxFacetHits = 100,
-                CamelCaseAttributes = new List<string> { "attribute1", "attribute2" },
+                CamelCaseAttributes = new List<string> {"attribute1", "attribute2"},
                 DecompoundedAttributes = new Dictionary<string, List<string>>
                 {
-                    { "de", new List<string> { "attribute1", "attribute2" } },
-                    { "fi", new List<string> { "attribute3" } }
+                    {"de", new List<string> {"attribute1", "attribute2"}},
+                    {"fi", new List<string> {"attribute3"}}
                 },
                 KeepDiacriticsOnCharacters = "øé"
             };
@@ -126,7 +131,7 @@ namespace Algolia.Search.Test.EndToEnd
             saveSettingsResponse.Wait();
 
             var getSettingsResponse = await _index.GetSettingsAsync();
-            var spceficPropertiesCheck = new List<string> { "Version", "AlternativesAsExact", "DecompoundedAttributes" };
+            var spceficPropertiesCheck = new List<string> {"Version", "AlternativesAsExact", "DecompoundedAttributes"};
             Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponse, spceficPropertiesCheck.ToArray()));
 
             // Check specific properties (couldn't be done by the helper)
@@ -138,24 +143,25 @@ namespace Algolia.Search.Test.EndToEnd
 
             // Set new values
             settings.TypoTolerance = "min";
-            settings.IgnorePlurals = new List<string> { "en", "fr" };
-            settings.RemoveStopWords = new List<string> { "en", "fr" };
+            settings.IgnorePlurals = new List<string> {"en", "fr"};
+            settings.RemoveStopWords = new List<string> {"en", "fr"};
             settings.Distinct = true;
 
             var saveSettingsResponseAfterChanges = await _index.SetSettingsAsync(settings);
             saveSettingsResponseAfterChanges.Wait();
 
             var getSettingsResponseAfterChanges = await _index.GetSettingsAsync();
-            spceficPropertiesCheck.AddRange(new List<string> { "TypoTolerance", "IgnorePlurals", "RemoveStopWords" });
-            Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponseAfterChanges, spceficPropertiesCheck.ToArray()));
+            spceficPropertiesCheck.AddRange(new List<string> {"TypoTolerance", "IgnorePlurals", "RemoveStopWords"});
+            Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponseAfterChanges,
+                spceficPropertiesCheck.ToArray()));
 
             // Check specific properties (couldn't be done by test helper)
-            Assert.True((string)getSettingsResponseAfterChanges.TypoTolerance == (string)settings.TypoTolerance);
+            Assert.True((string) getSettingsResponseAfterChanges.TypoTolerance == (string) settings.TypoTolerance);
             Assert.True(getSettingsResponseAfterChanges.IgnorePlurals.GetType() == typeof(List<string>));
             Assert.True(getSettingsResponseAfterChanges.RemoveStopWords.GetType() == typeof(List<string>));
 
-            var ignorePlurals = (List<string>)getSettingsResponseAfterChanges.IgnorePlurals;
-            var removeStopWords = (List<string>)getSettingsResponseAfterChanges.RemoveStopWords;
+            var ignorePlurals = (List<string>) getSettingsResponseAfterChanges.IgnorePlurals;
+            var removeStopWords = (List<string>) getSettingsResponseAfterChanges.RemoveStopWords;
 
             Assert.True(ignorePlurals.Contains("en") && ignorePlurals.Contains("fr"));
             Assert.True(removeStopWords.Contains("en") && removeStopWords.Contains("fr"));

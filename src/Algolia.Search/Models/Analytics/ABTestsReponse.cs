@@ -30,6 +30,7 @@ namespace Algolia.Search.Models.Analytics
     {
         public int Count { get; set; }
         public int Total { get; set; }
+
         [JsonProperty(PropertyName = "abtests")]
         public IEnumerable<ABTest> ABTests { get; set; }
     }

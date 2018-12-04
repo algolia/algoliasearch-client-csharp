@@ -36,7 +36,8 @@ namespace Algolia.Search.Utils
         /// <typeparam name="TKey"></typeparam>
         /// <typeparam name="TValue"></typeparam>
         /// <returns></returns>
-        public static Dictionary<TKey, TValue> MergeWith<TKey, TValue>(this Dictionary<TKey, TValue> a, Dictionary<TKey, TValue> b)
+        public static Dictionary<TKey, TValue> MergeWith<TKey, TValue>(this Dictionary<TKey, TValue> a,
+            Dictionary<TKey, TValue> b)
         {
             if (a == null && b != null)
             {
@@ -48,7 +49,8 @@ namespace Algolia.Search.Utils
                 return a;
             }
 
-            return a?.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key) && kvp.Value != null)).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            return a?.Concat(b.Where(kvp => !a.ContainsKey(kvp.Key) && kvp.Value != null))
+                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
     }
 }

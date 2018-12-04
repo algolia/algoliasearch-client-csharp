@@ -57,7 +57,7 @@ namespace Algolia.Search.Clients
         /// <param name="applicationId"></param>
         /// <param name="apiKey"></param>
         public SearchClient(string applicationId, string apiKey) : this(
-            new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId }, new AlgoliaHttpRequester())
+            new AlgoliaConfig {ApiKey = apiKey, AppId = applicationId}, new AlgoliaHttpRequester())
         {
         }
 
@@ -124,7 +124,8 @@ namespace Algolia.Search.Clients
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(IEnumerable<MultipleGetObject> queries,
+        public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(
+            IEnumerable<MultipleGetObject> queries,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (queries == null)
@@ -132,9 +133,10 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(queries));
             }
 
-            var request = new MultipleGetObjectsRequest { Requests = queries };
+            var request = new MultipleGetObjectsRequest {Requests = queries};
 
-            return await _requesterWrapper.ExecuteRequestAsync<MultipleGetObjectsResponse<T>, MultipleGetObjectsRequest>(HttpMethod.Post,
+            return await _requesterWrapper
+                .ExecuteRequestAsync<MultipleGetObjectsResponse<T>, MultipleGetObjectsRequest>(HttpMethod.Post,
                     "/1/indexes/*/objects", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }
@@ -159,7 +161,8 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<MultipleQueriesResponse<T>, MultipleQueriesRequest>(HttpMethod.Post,
+            return await _requesterWrapper.ExecuteRequestAsync<MultipleQueriesResponse<T>, MultipleQueriesRequest>(
+                    HttpMethod.Post,
                     "/1/indexes/*/queries", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }
@@ -188,7 +191,8 @@ namespace Algolia.Search.Clients
 
             var batch = new BatchRequest<T>(operations);
 
-            MultipleIndexBatchIndexingResponse resp = await _requesterWrapper.ExecuteRequestAsync<MultipleIndexBatchIndexingResponse, BatchRequest<T>>(
+            MultipleIndexBatchIndexingResponse resp = await _requesterWrapper
+                .ExecuteRequestAsync<MultipleIndexBatchIndexingResponse, BatchRequest<T>>(
                     HttpMethod.Post, "/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct)
                 .ConfigureAwait(false);
 
@@ -309,8 +313,8 @@ namespace Algolia.Search.Clients
             try
             {
                 ApiKey response = await _requesterWrapper.ExecuteRequestAsync<ApiKey>(HttpMethod.Get,
-                     $"/1/keys/{apiKey}", CallType.Read, requestOptions, ct)
-                 .ConfigureAwait(false);
+                        $"/1/keys/{apiKey}", CallType.Read, requestOptions, ct)
+                    .ConfigureAwait(false);
 
                 response.GetApiKeyDelegate = null;
                 response.Exist = true;
@@ -325,8 +329,10 @@ namespace Algolia.Search.Clients
                     throw;
                 }
 
-                return new ApiKey { Key = apiKey, GetApiKeyDelegate = k => GetApiKey(k), Exist = false };
-            };
+                return new ApiKey {Key = apiKey, GetApiKeyDelegate = k => GetApiKey(k), Exist = false};
+            }
+
+            ;
         }
 
         /// <summary>
@@ -421,7 +427,8 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(apiKey);
             }
 
-            DeleteApiKeyResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteApiKeyResponse>(HttpMethod.Delete,
+            DeleteApiKeyResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteApiKeyResponse>(
+                    HttpMethod.Delete,
                     $"/1/keys/{apiKey}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
@@ -461,7 +468,8 @@ namespace Algolia.Search.Clients
         /// <param name="query"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public SearchResponse<UserIdResponse> SearchUserIDs(SearchUserIdsRequest query, RequestOptions requestOptions = null) =>
+        public SearchResponse<UserIdResponse> SearchUserIDs(SearchUserIdsRequest query,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => SearchUserIDsAsync(query, requestOptions));
 
         /// <summary>
@@ -509,8 +517,8 @@ namespace Algolia.Search.Clients
         {
             var queryParams = new Dictionary<string, string>
             {
-                { "page", page.ToString() },
-                { "hitsPerPage", hitsPerPage.ToString() }
+                {"page", page.ToString()},
+                {"hitsPerPage", hitsPerPage.ToString()}
             };
 
             RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
@@ -607,9 +615,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(clusterName);
             }
 
-            var data = new AssignUserIdRequest { Cluster = clusterName };
+            var data = new AssignUserIdRequest {Cluster = clusterName};
 
-            var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+            var removeUserId = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
 
             if (requestOptions?.Headers != null && requestOptions.Headers.Any())
             {
@@ -622,12 +630,13 @@ namespace Algolia.Search.Clients
             }
             else
             {
-                requestOptions = new RequestOptions { Headers = removeUserId };
+                requestOptions = new RequestOptions {Headers = removeUserId};
             }
 
-            AssignUserIdResponse response = await _requesterWrapper.ExecuteRequestAsync<AssignUserIdResponse, AssignUserIdRequest>(HttpMethod.Post,
-                  "/1/clusters/mapping", CallType.Write, data, requestOptions, ct)
-              .ConfigureAwait(false);
+            AssignUserIdResponse response = await _requesterWrapper
+                .ExecuteRequestAsync<AssignUserIdResponse, AssignUserIdRequest>(HttpMethod.Post,
+                    "/1/clusters/mapping", CallType.Write, data, requestOptions, ct)
+                .ConfigureAwait(false);
 
             response.UserId = userId;
             response.GetUserDelegate = u => GetUserId(u);
@@ -658,7 +667,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(userId);
             }
 
-            var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+            var removeUserId = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
 
             if (requestOptions?.Headers != null && requestOptions.Headers.Any())
             {
@@ -671,14 +680,15 @@ namespace Algolia.Search.Clients
             }
             else
             {
-                requestOptions = new RequestOptions { Headers = removeUserId };
+                requestOptions = new RequestOptions {Headers = removeUserId};
             }
 
             try
             {
-                RemoveUserIdResponse response = await _requesterWrapper.ExecuteRequestAsync<RemoveUserIdResponse>(HttpMethod.Delete,
-                       $"/1/clusters/mapping", CallType.Write, requestOptions, ct)
-                        .ConfigureAwait(false);
+                RemoveUserIdResponse response = await _requesterWrapper.ExecuteRequestAsync<RemoveUserIdResponse>(
+                        HttpMethod.Delete,
+                        $"/1/clusters/mapping", CallType.Write, requestOptions, ct)
+                    .ConfigureAwait(false);
 
                 response.UserId = userId;
                 response.RemoveDelegate = u => RemoveUserId(u);
@@ -691,7 +701,7 @@ namespace Algolia.Search.Clients
                     throw;
                 }
 
-                return new RemoveUserIdResponse { UserId = userId, RemoveDelegate = u => RemoveUserId(u) };
+                return new RemoveUserIdResponse {UserId = userId, RemoveDelegate = u => RemoveUserId(u)};
             }
         }
 
@@ -699,8 +709,10 @@ namespace Algolia.Search.Clients
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
-        public LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10, string indexName = null, string type = "all") =>
-            AsyncHelper.RunSync(() => GetLogsAsync(requestOptions, offset: offset, length: length, indexName: indexName, type: type));
+        public LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10,
+            string indexName = null, string type = "all") =>
+            AsyncHelper.RunSync(() =>
+                GetLogsAsync(requestOptions, offset: offset, length: length, indexName: indexName, type: type));
 
         /// <summary>
         /// Get logs for the given index
@@ -709,15 +721,16 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         public async Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null, string type = "all")
+            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null,
+            string type = "all")
         {
             var queryParams = new Dictionary<string, string>
-                {
-                    { "offset", offset.ToString()},
-                    { "length", length.ToString() },
-                    { "indexName", indexName },
-                    { "type", type},
-                };
+            {
+                {"offset", offset.ToString()},
+                {"length", length.ToString()},
+                {"indexName", indexName},
+                {"type", type},
+            };
 
             RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
 
@@ -732,7 +745,8 @@ namespace Algolia.Search.Clients
         /// <param name="destinationIndex"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public CopyToResponse CopySettings(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null) =>
+        public CopyToResponse CopySettings(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => CopySettingsAsync(sourceIndex, destinationIndex, requestOptions));
 
         /// <summary>
@@ -745,7 +759,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySettingsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Settings };
+            var scopes = new List<string> {CopyScope.Settings};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
@@ -755,7 +769,8 @@ namespace Algolia.Search.Clients
         /// <param name="destinationIndex"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public CopyToResponse CopyRules(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null) =>
+        public CopyToResponse CopyRules(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => CopyRulesAsync(sourceIndex, destinationIndex, requestOptions));
 
         /// <summary>
@@ -768,7 +783,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopyRulesAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Rules };
+            var scopes = new List<string> {CopyScope.Rules};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
@@ -779,7 +794,8 @@ namespace Algolia.Search.Clients
         /// <param name="destinationIndex"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public CopyToResponse CopySynonyms(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null) =>
+        public CopyToResponse CopySynonyms(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => CopySynonymsAsync(sourceIndex, destinationIndex, requestOptions));
 
         /// <summary>
@@ -793,7 +809,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySynonymsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Synonyms };
+            var scopes = new List<string> {CopyScope.Synonyms};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
@@ -818,7 +834,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex, IEnumerable<string> scope = null,
+        public async Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex,
+            IEnumerable<string> scope = null,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(destinationIndex))
@@ -827,7 +844,7 @@ namespace Algolia.Search.Clients
             }
 
             string encondedSourceIndex = WebUtility.UrlEncode(sourceIndex);
-            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
+            var data = new CopyToRequest {Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope};
 
             CopyToResponse response = await _requesterWrapper.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
                     HttpMethod.Post, $"/1/indexes/{encondedSourceIndex}/operation", CallType.Write, data,
@@ -846,7 +863,8 @@ namespace Algolia.Search.Clients
         /// <param name="destinationIndex"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        public MoveIndexResponse MoveIndex(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null) =>
+        public MoveIndexResponse MoveIndex(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => MoveIndexAsync(sourceIndex, destinationIndex, requestOptions));
 
         /// <summary>
@@ -857,7 +875,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null,
+        public async Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(sourceIndex))
@@ -865,7 +884,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = destinationIndex };
+            MoveIndexRequest request = new MoveIndexRequest {Operation = MoveType.Move, Destination = destinationIndex};
 
             MoveIndexResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,

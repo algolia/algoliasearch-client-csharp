@@ -57,7 +57,8 @@ namespace Algolia.Search.Test.EndToEnd
             Assert.IsInstanceOf<BatchIndexingResponse>(addObjectResponse);
             Assert.NotNull(addObjectResponse);
 
-            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "searchable(company)" } };
+            IndexSettings settings = new IndexSettings
+                {AttributesForFaceting = new List<string> {"searchable(company)"}};
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
             setSettingsResponse.Wait();
 
@@ -78,14 +79,14 @@ namespace Algolia.Search.Test.EndToEnd
             Task<SearchResponse<Employee>> searchElonTask1 = _index.SearchAsync<Employee>(new SearchQuery
             {
                 Query = "elon",
-                Facets = new List<string> { "*" },
-                FacetFilters = new List<string> { "company:tesla" }
+                Facets = new List<string> {"*"},
+                FacetFilters = new List<string> {"company:tesla"}
             });
 
             Task<SearchResponse<Employee>> searchElonTask2 = _index.SearchAsync<Employee>(new SearchQuery
             {
                 Query = "elon",
-                Facets = new List<string> { "*" },
+                Facets = new List<string> {"*"},
                 Filters = "(company:tesla OR company:spacex)"
             });
 
@@ -109,20 +110,21 @@ namespace Algolia.Search.Test.EndToEnd
 
         private IEnumerable<Employee> InitEmployees()
         {
-            return new List<Employee>() {
-                new Employee{ Company = "Algolia", Name = "Julien Lemoine" },
-                new Employee{ Company = "Algolia", Name = "Nicolas Dessaigne" },
-                new Employee{ Company = "Amazon", Name = "Jeff Bezos" },
-                new Employee{ Company = "Apple", Name = "Steve Jobs" },
-                new Employee{ Company = "Apple", Name = "Steve Wozniak" },
-                new Employee{ Company = "Arista Networks", Name = "Jayshree Ullal" },
-                new Employee{ Company = "Google", Name = "Lary Page" },
-                new Employee{ Company = "Google", Name = "Rob Pike" },
-                new Employee{ Company = "Google", Name = "Sergueï Brin" },
-                new Employee{ Company = "Microsoft", Name = "Bill Gates" },
-                new Employee{ Company = "SpaceX", Name = "Elon Musk" },
-                new Employee{ Company = "Tesla", Name = "Elon Musk" },
-                new Employee{ Company = "Yahoo", Name = "Marissa Mayer" }
+            return new List<Employee>()
+            {
+                new Employee {Company = "Algolia", Name = "Julien Lemoine"},
+                new Employee {Company = "Algolia", Name = "Nicolas Dessaigne"},
+                new Employee {Company = "Amazon", Name = "Jeff Bezos"},
+                new Employee {Company = "Apple", Name = "Steve Jobs"},
+                new Employee {Company = "Apple", Name = "Steve Wozniak"},
+                new Employee {Company = "Arista Networks", Name = "Jayshree Ullal"},
+                new Employee {Company = "Google", Name = "Lary Page"},
+                new Employee {Company = "Google", Name = "Rob Pike"},
+                new Employee {Company = "Google", Name = "Sergueï Brin"},
+                new Employee {Company = "Microsoft", Name = "Bill Gates"},
+                new Employee {Company = "SpaceX", Name = "Elon Musk"},
+                new Employee {Company = "Tesla", Name = "Elon Musk"},
+                new Employee {Company = "Yahoo", Name = "Marissa Mayer"}
             };
         }
     }

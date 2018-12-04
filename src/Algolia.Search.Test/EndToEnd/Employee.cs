@@ -23,7 +23,6 @@
 
 namespace Algolia.Search.Test.EndToEnd
 {
-
     public class Employee
     {
         public string Company { get; set; }

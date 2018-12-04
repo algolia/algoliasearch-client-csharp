@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Responses
 {
     public class ListUserIdsResponse
     {
-        [JsonProperty(PropertyName="userIDs")]
+        [JsonProperty(PropertyName = "userIDs")]
         public List<UserIdResponse> UserIds { get; set; }
     }
 

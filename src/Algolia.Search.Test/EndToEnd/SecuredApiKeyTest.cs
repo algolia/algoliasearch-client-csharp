@@ -21,14 +21,14 @@
 * THE SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Utils;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd
 {
@@ -54,8 +54,8 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestApiKey()
         {
-            var addOne = await _index1.AddObjectAysnc(new SecuredApiKeyStub { ObjectID = "one" });
-            var addTwo = await _index2.AddObjectAysnc(new SecuredApiKeyStub { ObjectID = "one" });
+            var addOne = await _index1.AddObjectAysnc(new SecuredApiKeyStub {ObjectID = "one"});
+            var addTwo = await _index2.AddObjectAysnc(new SecuredApiKeyStub {ObjectID = "one"});
 
             addOne.Wait();
             addTwo.Wait();
@@ -63,7 +63,7 @@ namespace Algolia.Search.Test.EndToEnd
             SecuredApiKeyRestriction restriction = new SecuredApiKeyRestriction
             {
                 ValidUntil = DateTimeHelper.ToUnixTimeSeconds(DateTime.UtcNow.AddMinutes(10)),
-                RestrictIndices = new List<string> { _index1Name }
+                RestrictIndices = new List<string> {_index1Name}
             };
 
             string key = BaseTest.SearchClient.GenerateSecuredApiKeys(TestHelper.SearchKey1, restriction);

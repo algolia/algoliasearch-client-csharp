@@ -71,7 +71,8 @@ namespace Algolia.Search.Clients
             // TODO: improve this section
             try
             {
-                IndexSettings destinationSettings = await destinationIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
+                IndexSettings destinationSettings =
+                    await destinationIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
 
                 if (destinationSettings != null)
                 {
@@ -89,7 +90,7 @@ namespace Algolia.Search.Clients
                 }
             }
 
-            MultiResponse ret = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
+            MultiResponse ret = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
 
             // Save settings
             IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);

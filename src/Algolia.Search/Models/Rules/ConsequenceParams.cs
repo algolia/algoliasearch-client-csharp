@@ -30,8 +30,10 @@ namespace Algolia.Search.Models.Rules
     public class ConsequenceParams
     {
         public ConsequenceQuery Query { get; set; }
+
         [JsonConverter(typeof(AutomaticFacetFiltersConverter))]
         public List<AutomaticFacetFilter> AutomaticFacetFilters { get; set; }
+
         public List<AutomaticFacetFilter> AutomaticOptionalFacetFilters { get; set; }
     }
 }

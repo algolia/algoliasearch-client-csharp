@@ -21,15 +21,15 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
+using Algolia.Search.Exceptions;
+using Algolia.Search.Models.Analytics;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Algolia.Search.Clients;
-using Algolia.Search.Exceptions;
-using Algolia.Search.Models.Analytics;
-using NUnit.Framework;
 
 namespace Algolia.Search.Test.EndToEnd
 {
@@ -61,7 +61,8 @@ namespace Algolia.Search.Test.EndToEnd
 
             if (abTests.ABTests != null)
             {
-                var abTestsToDelete = abTests.ABTests?.Where(x => x.Name.Contains("csharp-") && !x.Name.Contains($"csharp-{now}"));
+                var abTestsToDelete =
+                    abTests.ABTests?.Where(x => x.Name.Contains("csharp-") && !x.Name.Contains($"csharp-{now}"));
 
                 foreach (var item in abTestsToDelete)
                 {
@@ -69,8 +70,8 @@ namespace Algolia.Search.Test.EndToEnd
                 }
             }
 
-            var addOne = await _index1.AddObjectAysnc(new AlgoliaStub { ObjectID = "one" });
-            var addTwo = await _index2.AddObjectAysnc(new AlgoliaStub { ObjectID = "one" });
+            var addOne = await _index1.AddObjectAysnc(new AlgoliaStub {ObjectID = "one"});
+            var addTwo = await _index2.AddObjectAysnc(new AlgoliaStub {ObjectID = "one"});
 
             addOne.Wait();
             addTwo.Wait();
@@ -102,7 +103,8 @@ namespace Algolia.Search.Test.EndToEnd
 
             ABTestsReponse listAbTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
             Assert.IsTrue(listAbTests.ABTests.Any(x => x.AbTestId == abTest.AbTestId));
-            Assert.IsTrue(TestHelper.AreObjectsEqual(listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status"));
+            Assert.IsTrue(TestHelper.AreObjectsEqual(
+                listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status"));
 
             StopABTestResponse stopAbtest = await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId);
 

@@ -22,9 +22,9 @@
 */
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 namespace Algolia.Search.Serializer
 {
@@ -44,7 +44,8 @@ namespace Algolia.Search.Serializer
         /// <param name="existingValue"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
             object ret = new object();
 
@@ -65,6 +66,7 @@ namespace Algolia.Search.Serializer
                             break;
                     }
                 }
+
                 return objects;
             }
 
@@ -84,6 +86,7 @@ namespace Algolia.Search.Serializer
                         ret = Convert.ToBoolean(reader.Value);
                         break;
                     }
+
                     ret = reader.Value.ToString();
                     break;
                 case JsonToken.Boolean:
@@ -102,6 +105,7 @@ namespace Algolia.Search.Serializer
                     ret = null;
                     break;
             }
+
             return ret;
         }
 

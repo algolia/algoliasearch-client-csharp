@@ -71,7 +71,8 @@ namespace Algolia.Search.Test
 
             if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_MCM")))
             {
-                throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_APPLICATION_ID_MCM");
+                throw new ArgumentNullException(
+                    "Please set the following environment variable : ALGOLIA_APPLICATION_ID_MCM");
             }
 
             if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_API_KEY_MCM")))
@@ -124,7 +125,9 @@ namespace Algolia.Search.Test
 
                 result = true; // assume by default they are equal
 
-                foreach (PropertyInfo propertyInfo in objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => p.CanRead && !ignoreList.Contains(p.Name)))
+                foreach (PropertyInfo propertyInfo in objectType
+                    .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(p => p.CanRead && !ignoreList.Contains(p.Name)))
                 {
                     var valueA = propertyInfo.GetValue(objectA, null);
                     var valueB = propertyInfo.GetValue(objectB, null);
@@ -134,7 +137,8 @@ namespace Algolia.Search.Test
                     {
                         if (!AreValuesEqual(valueA, valueB))
                         {
-                            Console.WriteLine("Mismatch with property '{0}.{1}' found.", objectType.FullName, propertyInfo.Name);
+                            Console.WriteLine("Mismatch with property '{0}.{1}' found.", objectType.FullName,
+                                propertyInfo.Name);
                             result = false;
                         }
                     }
@@ -144,20 +148,22 @@ namespace Algolia.Search.Test
                         // null check
                         if (valueA == null && valueB != null || valueA != null && valueB == null)
                         {
-                            Console.WriteLine("Mismatch with property '{0}.{1}' found.", objectType.FullName, propertyInfo.Name);
+                            Console.WriteLine("Mismatch with property '{0}.{1}' found.", objectType.FullName,
+                                propertyInfo.Name);
                             result = false;
                         }
                         else if (valueA != null)
                         {
-                            var collectionItems1 = ((IEnumerable)valueA).Cast<object>();
-                            var collectionItems2 = ((IEnumerable)valueB).Cast<object>();
+                            var collectionItems1 = ((IEnumerable) valueA).Cast<object>();
+                            var collectionItems2 = ((IEnumerable) valueB).Cast<object>();
                             var collectionItemsCount1 = collectionItems1.Count();
                             var collectionItemsCount2 = collectionItems2.Count();
 
                             // check the counts to ensure they match
                             if (collectionItemsCount1 != collectionItemsCount2)
                             {
-                                Console.WriteLine("Collection counts for property '{0}.{1}' do not match.", objectType.FullName, propertyInfo.Name);
+                                Console.WriteLine("Collection counts for property '{0}.{1}' do not match.",
+                                    objectType.FullName, propertyInfo.Name);
                                 result = false;
                             }
                             // and if they do, compare each item... this assumes both collections have the same order
@@ -173,13 +179,16 @@ namespace Algolia.Search.Test
                                     {
                                         if (!AreValuesEqual(collectionItem1, collectionItem2))
                                         {
-                                            Console.WriteLine("Item {0} in property collection '{1}.{2}' does not match.", i, objectType.FullName, propertyInfo.Name);
+                                            Console.WriteLine(
+                                                "Item {0} in property collection '{1}.{2}' does not match.", i,
+                                                objectType.FullName, propertyInfo.Name);
                                             result = false;
                                         }
                                     }
                                     else if (!AreObjectsEqual(collectionItem1, collectionItem2, ignoreList))
                                     {
-                                        Console.WriteLine("Item {0} in property collection '{1}.{2}' does not match.", i, objectType.FullName, propertyInfo.Name);
+                                        Console.WriteLine("Item {0} in property collection '{1}.{2}' does not match.",
+                                            i, objectType.FullName, propertyInfo.Name);
                                         result = false;
                                     }
                                 }
@@ -188,9 +197,11 @@ namespace Algolia.Search.Test
                     }
                     else if (propertyInfo.PropertyType.IsClass)
                     {
-                        if (!AreObjectsEqual(propertyInfo.GetValue(objectA, null), propertyInfo.GetValue(objectB, null), ignoreList))
+                        if (!AreObjectsEqual(propertyInfo.GetValue(objectA, null), propertyInfo.GetValue(objectB, null),
+                            ignoreList))
                         {
-                            Console.WriteLine("Mismatch with property '{0}.{1}' found.", objectType.FullName, propertyInfo.Name);
+                            Console.WriteLine("Mismatch with property '{0}.{1}' found.", objectType.FullName,
+                                propertyInfo.Name);
                             result = false;
                         }
                     }

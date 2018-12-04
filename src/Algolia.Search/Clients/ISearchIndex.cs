@@ -126,7 +126,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<BatchIndexingResponse> DeleteObjectsAsync(IEnumerable<string> objectIds, RequestOptions requestOptions = null,
+        Task<BatchIndexingResponse> DeleteObjectsAsync(IEnumerable<string> objectIds,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -182,7 +183,8 @@ namespace Algolia.Search.Clients
         /// <param name="query"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        BrowseIndexResponse<T> BrowseFrom<T>(BrowseIndexQuery query, RequestOptions requestOptions = null) where T : class;
+        BrowseIndexResponse<T> BrowseFrom<T>(BrowseIndexQuery query, RequestOptions requestOptions = null)
+            where T : class;
 
         /// <summary>
         /// This method allows you to retrieve all index content  
@@ -259,7 +261,8 @@ namespace Algolia.Search.Clients
         /// <param name="clearExistingRules"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        BatchResponse SaveRules(IEnumerable<Rule> rules, bool forwardToReplicas = false, bool clearExistingRules = false, RequestOptions requestOptions = null);
+        BatchResponse SaveRules(IEnumerable<Rule> rules, bool forwardToReplicas = false,
+            bool clearExistingRules = false, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Batch rules
@@ -270,8 +273,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false, bool clearExistingRules = false, RequestOptions requestOptions = null,
-                     CancellationToken ct = default(CancellationToken));
+        Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false,
+            bool clearExistingRules = false, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Delete the rule for the given ruleId
@@ -369,7 +373,8 @@ namespace Algolia.Search.Clients
         /// <param name="replaceExistingSynonyms"></param>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null);
+        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
+            bool replaceExistingSynonyms = false, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Create or update multiple synonyms.
@@ -380,7 +385,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
+        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
+            bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

@@ -28,10 +28,9 @@ namespace Algolia.Search.Models.Requests
 {
     public class SearchForFacetRequest
     {
-        [JsonIgnore]
-        public string FacetName { get; set; }
+        [JsonIgnore] public string FacetName { get; set; }
         public string FacetQuery { get; set; }
-        
+
         [JsonProperty(PropertyName = "requests")]
         public SearchQuery SearchParameters { get; set; }
     }

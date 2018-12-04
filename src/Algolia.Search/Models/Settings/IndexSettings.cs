@@ -69,6 +69,7 @@ namespace Algolia.Search.Models.Settings
         /// </summary>
         [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object TypoTolerance { get; set; }
+
         public bool? AllowTyposOnNumericTokens { get; set; }
         public List<string> DisableTypoToleranceOnAttributes { get; set; }
         public List<string> DisableTypoToleranceOnWords { get; set; }
@@ -113,14 +114,15 @@ namespace Algolia.Search.Models.Settings
         /// </summary>
         [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object Distinct { get; set; }
+
         public bool? ReplaceSynonymsInHighlight { get; set; }
         public int? MinProximity { get; set; }
         public List<string> ResponseFields { get; set; }
         public int? MaxFacetHits { get; set; }
         public List<string> CamelCaseAttributes { get; set; }
-        public Dictionary<string,List<string>> DecompoundedAttributes { get; set; }
+        public Dictionary<string, List<string>> DecompoundedAttributes { get; set; }
         public string KeepDiacriticsOnCharacters { get; set; }
-        
+
         // custom
         public int? Version { get; set; }
     }

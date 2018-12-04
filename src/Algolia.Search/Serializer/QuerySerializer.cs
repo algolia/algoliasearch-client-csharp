@@ -38,14 +38,15 @@ namespace Algolia.Search.Serializer
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            SearchQuery query = (SearchQuery)value;
+            SearchQuery query = (SearchQuery) value;
 
             string queryString = QueryStringHelper.ToQueryString(query);
 
             writer.WriteValue(queryString);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
             throw new NotImplementedException("Unnecessary : we don't need to deserialize the Query");
         }

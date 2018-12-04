@@ -29,6 +29,7 @@ namespace Algolia.Search.Models.Analytics
     {
         [JsonProperty(PropertyName = "abTestID")]
         public long ABTestId { get; set; }
+
         public long TaskID { get; set; }
         public string Index { get; set; }
     }

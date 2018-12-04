@@ -54,18 +54,33 @@ namespace Algolia.Search.Test.EndToEnd
                 new ObjectToBatch {ObjectID = "three", Key = "value"},
                 new ObjectToBatch {ObjectID = "four", Key = "value"},
                 new ObjectToBatch {ObjectID = "five", Key = "value"}
-             };
+            };
 
             var batchOneResponse = await _index.AddObjectsAysnc(batchOne);
             batchOneResponse.Wait();
 
-            List<BatchOperation<ObjectToBatch>> operations = new List<BatchOperation<ObjectToBatch>>{
-                new BatchOperation<ObjectToBatch> { Action = BatchActionType.AddObject, Body = new ObjectToBatch {ObjectID = "zero", Key = "value"}},
-                new BatchOperation<ObjectToBatch> { Action = BatchActionType.UpdateObject, Body = new ObjectToBatch {ObjectID = "one", Key = "v"}},
-                new BatchOperation<ObjectToBatch> { Action = BatchActionType.PartialUpdateObject, Body = new ObjectToBatch {ObjectID = "two", Key = "v"}},
-                new BatchOperation<ObjectToBatch> { Action = BatchActionType.PartialUpdateObject, Body = new ObjectToBatch {ObjectID = "two_bis", Key = "value"}},
-                new BatchOperation<ObjectToBatch> { Action = BatchActionType.PartialUpdateObjectNoCreate, Body = new ObjectToBatch {ObjectID = "three", Key = "v"}},
-                new BatchOperation<ObjectToBatch> { Action = BatchActionType.DeleteObject, Body = new ObjectToBatch {ObjectID = "four"}},
+            List<BatchOperation<ObjectToBatch>> operations = new List<BatchOperation<ObjectToBatch>>
+            {
+                new BatchOperation<ObjectToBatch>
+                    {Action = BatchActionType.AddObject, Body = new ObjectToBatch {ObjectID = "zero", Key = "value"}},
+                new BatchOperation<ObjectToBatch>
+                    {Action = BatchActionType.UpdateObject, Body = new ObjectToBatch {ObjectID = "one", Key = "v"}},
+                new BatchOperation<ObjectToBatch>
+                {
+                    Action = BatchActionType.PartialUpdateObject, Body = new ObjectToBatch {ObjectID = "two", Key = "v"}
+                },
+                new BatchOperation<ObjectToBatch>
+                {
+                    Action = BatchActionType.PartialUpdateObject,
+                    Body = new ObjectToBatch {ObjectID = "two_bis", Key = "value"}
+                },
+                new BatchOperation<ObjectToBatch>
+                {
+                    Action = BatchActionType.PartialUpdateObjectNoCreate,
+                    Body = new ObjectToBatch {ObjectID = "three", Key = "v"}
+                },
+                new BatchOperation<ObjectToBatch>
+                    {Action = BatchActionType.DeleteObject, Body = new ObjectToBatch {ObjectID = "four"}},
             };
 
             var batchTwoResponse = await _index.BatchAsync(operations);
@@ -80,12 +95,18 @@ namespace Algolia.Search.Test.EndToEnd
             }
 
             Assert.True(objectsFromIterator.Count == 6);
-            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("zero")), operations.Find(r => r.Body.ObjectID.Equals("zero")).Body));
-            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("one")), operations.Find(r => r.Body.ObjectID.Equals("one")).Body));
-            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two")), operations.Find(r => r.Body.ObjectID.Equals("two")).Body));
-            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two_bis")), operations.Find(r => r.Body.ObjectID.Equals("two_bis")).Body));
-            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("three")), operations.Find(r => r.Body.ObjectID.Equals("three")).Body));
-            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("five")), batchOne.Find(r => r.ObjectID.Equals("five"))));
+            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("zero")),
+                operations.Find(r => r.Body.ObjectID.Equals("zero")).Body));
+            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("one")),
+                operations.Find(r => r.Body.ObjectID.Equals("one")).Body));
+            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two")),
+                operations.Find(r => r.Body.ObjectID.Equals("two")).Body));
+            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two_bis")),
+                operations.Find(r => r.Body.ObjectID.Equals("two_bis")).Body));
+            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("three")),
+                operations.Find(r => r.Body.ObjectID.Equals("three")).Body));
+            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("five")),
+                batchOne.Find(r => r.ObjectID.Equals("five"))));
             Assert.False(objectsFromIterator.Exists(x => x.ObjectID.Equals("four")));
         }
 
@@ -94,6 +115,5 @@ namespace Algolia.Search.Test.EndToEnd
             public string ObjectID { get; set; }
             public string Key { get; set; }
         }
-
     }
 }

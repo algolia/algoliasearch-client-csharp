@@ -43,10 +43,13 @@ namespace Algolia.Search.Test.EndToEnd
             Assert.True(listClusters.Count() >= 2);
 
             string userId = TestHelper.GetMcmUserId();
-            AssignUserIdResponse assignResponse = await BaseTest.McmClient.AssignUserIdAsync(userId, listClusters.ElementAt(0).ClusterName);
+            AssignUserIdResponse assignResponse =
+                await BaseTest.McmClient.AssignUserIdAsync(userId, listClusters.ElementAt(0).ClusterName);
             assignResponse.Wait();
 
-            SearchResponse<UserIdResponse> searchResponse = await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest { Query = userId, Cluster = listClusters.ElementAt(0).ClusterName });
+            SearchResponse<UserIdResponse> searchResponse =
+                await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest
+                    {Query = userId, Cluster = listClusters.ElementAt(0).ClusterName});
             Assert.True(searchResponse.NbHits == 1);
 
             ListUserIdsResponse listUserIds = await BaseTest.McmClient.ListUserIdsAsync();
@@ -60,9 +63,11 @@ namespace Algolia.Search.Test.EndToEnd
 
             ListUserIdsResponse listUserIdsTwo = await BaseTest.McmClient.ListUserIdsAsync();
             var yesterday = DateTime.UtcNow.AddDays(-1).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-            IEnumerable<UserIdResponse> userIdsToRemove = listUserIdsTwo.UserIds.Where(x => x.UserID.Contains($"csharp-{yesterday}"));
+            IEnumerable<UserIdResponse> userIdsToRemove =
+                listUserIdsTwo.UserIds.Where(x => x.UserID.Contains($"csharp-{yesterday}"));
 
-            IEnumerable<Task<RemoveUserIdResponse>> delete = userIdsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID));
+            IEnumerable<Task<RemoveUserIdResponse>> delete =
+                userIdsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID));
             Task.WaitAll(delete.ToArray());
         }
     }

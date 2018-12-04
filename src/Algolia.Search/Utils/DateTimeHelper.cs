@@ -31,7 +31,6 @@ namespace Algolia.Search.Utils
     /// </summary>
     public static class DateTimeHelper
     {
-
         /// <summary>
         /// Convert a date time object to Unix time representation.
         /// </summary>
@@ -40,7 +39,7 @@ namespace Algolia.Search.Utils
         public static long ToUnixTimeSeconds(this DateTime date)
         {
             DateTime sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return (long)(date - sTime).TotalSeconds;
+            return (long) (date - sTime).TotalSeconds;
         }
 
         /// <summary>

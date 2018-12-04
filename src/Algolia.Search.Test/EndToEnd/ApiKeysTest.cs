@@ -21,7 +21,6 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using NUnit.Framework;
@@ -47,13 +46,13 @@ namespace Algolia.Search.Test.EndToEnd
         {
             ApiKey apiKeyToSend = new ApiKey
             {
-                Acl = new List<string> { "search" },
+                Acl = new List<string> {"search"},
                 Description = "A description",
-                Indexes = new List<string> { "indexes" },
+                Indexes = new List<string> {"indexes"},
                 MaxHitsPerQuery = 1000,
                 MaxQueriesPerIPPerHour = 1000,
                 QueryParameters = "typoTolerance=strict",
-                Referers = new List<string> { "referer" },
+                Referers = new List<string> {"referer"},
                 Validity = 600
             };
 
@@ -65,7 +64,8 @@ namespace Algolia.Search.Test.EndToEnd
             addedKey = await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
             addedKey.Wait();
 
-            Assert.IsTrue(TestHelper.AreObjectsEqual(apiKeyToSend, addedKey, "CreatedAt", "Validity", "GetApiKeyDelegate", "Key"));
+            Assert.IsTrue(TestHelper.AreObjectsEqual(apiKeyToSend, addedKey, "CreatedAt", "Validity",
+                "GetApiKeyDelegate", "Key"));
 
             ListApiKeysResponse allKeys = await BaseTest.SearchClient.ListApiKeysAsync();
             Assert.IsTrue(allKeys.Keys.Exists(x => x.Value.Equals(_apiKey)));

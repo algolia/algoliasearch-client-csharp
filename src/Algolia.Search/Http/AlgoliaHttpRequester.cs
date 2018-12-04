@@ -44,7 +44,7 @@ namespace Algolia.Search.Http
         private readonly HttpClient _httpClient = new HttpClient(
             new TimeoutHandler
             {
-                InnerHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip }
+                InnerHandler = new HttpClientHandler {AutomaticDecompression = DecompressionMethods.GZip}
             });
 
         /// <summary>
@@ -68,9 +68,9 @@ namespace Algolia.Search.Http
                 throw new ArgumentNullException(nameof(request), "No URI found");
             }
 
-            #if DEBUG
+#if DEBUG
             await LogHelper.LogToFile(request.Body);
-            #endif
+#endif
 
             var httpRequestMessage = new HttpRequestMessage
             {
@@ -85,7 +85,8 @@ namespace Algolia.Search.Http
             try
             {
                 using (httpRequestMessage)
-                using (HttpResponseMessage response = await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
+                using (HttpResponseMessage response =
+                    await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
                 {
                     var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
@@ -95,14 +96,14 @@ namespace Algolia.Search.Http
                         await stream.CopyToAsync(outputStream).ConfigureAwait(false);
                         outputStream.Seek(0, SeekOrigin.Begin);
 
-                        #if DEBUG
+#if DEBUG
                         await LogHelper.LogToFile(outputStream);
-                        #endif
+#endif
 
                         return new AlgoliaHttpResponse
                         {
                             Body = outputStream,
-                            HttpStatusCode = (int)response.StatusCode
+                            HttpStatusCode = (int) response.StatusCode
                         };
                     }
 
@@ -111,13 +112,13 @@ namespace Algolia.Search.Http
                     return new AlgoliaHttpResponse
                     {
                         Error = content,
-                        HttpStatusCode = (int)response.StatusCode
+                        HttpStatusCode = (int) response.StatusCode
                     };
                 }
             }
             catch (TimeoutException timeOutException)
             {
-                return new AlgoliaHttpResponse { IsTimedOut = true, Error = timeOutException.ToString() };
+                return new AlgoliaHttpResponse {IsTimedOut = true, Error = timeOutException.ToString()};
             }
         }
     }

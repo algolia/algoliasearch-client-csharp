@@ -29,7 +29,6 @@ namespace Algolia.Search.Models.Rules
 {
     public class ConsequenceQuery
     {
-        [JsonConverter(typeof(EditConverter))]
-        public IEnumerable<Edit> Edits { get; set; }
+        [JsonConverter(typeof(EditConverter))] public IEnumerable<Edit> Edits { get; set; }
     }
 }

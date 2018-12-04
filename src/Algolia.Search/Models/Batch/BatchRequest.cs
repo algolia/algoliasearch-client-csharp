@@ -39,6 +39,7 @@ namespace Algolia.Search.Models.Batch
 
             Operations = operations.ToList();
         }
+
         public BatchRequest(string actionType, IEnumerable<T> datas)
         {
             if (datas == null)
@@ -60,6 +61,5 @@ namespace Algolia.Search.Models.Batch
 
         [JsonProperty(PropertyName = "requests")]
         public ICollection<BatchOperation<T>> Operations { get; set; }
-
     }
 }

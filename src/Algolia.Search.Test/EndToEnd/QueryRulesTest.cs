@@ -45,12 +45,13 @@ namespace Algolia.Search.Test.EndToEnd
         public void Init()
         {
             _index = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("rules"));
-            _objectsToSave = new List<RuleTest> {
-                new RuleTest { ObjectID = "iphone_7", Brand = "Apple", Model = "7"},
-                new RuleTest { ObjectID = "iphone_8", Brand = "Apple", Model = "8"},
-                new RuleTest { ObjectID = "iphone_X", Brand = "Apple", Model = "X"},
-                new RuleTest { ObjectID = "one_plus_one", Brand = "OnePlus", Model = "One"},
-                new RuleTest { ObjectID = "one_plus_two", Brand = "OnePlus", Model = "Two"}
+            _objectsToSave = new List<RuleTest>
+            {
+                new RuleTest {ObjectID = "iphone_7", Brand = "Apple", Model = "7"},
+                new RuleTest {ObjectID = "iphone_8", Brand = "Apple", Model = "8"},
+                new RuleTest {ObjectID = "iphone_X", Brand = "Apple", Model = "X"},
+                new RuleTest {ObjectID = "one_plus_one", Brand = "OnePlus", Model = "One"},
+                new RuleTest {ObjectID = "one_plus_two", Brand = "OnePlus", Model = "Two"}
             };
         }
 
@@ -58,7 +59,7 @@ namespace Algolia.Search.Test.EndToEnd
         public async Task RulesTest()
         {
             // Set attributesForFaceting to [“brand”] using setSettings and collect the taskID
-            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "brand" } };
+            IndexSettings settings = new IndexSettings {AttributesForFaceting = new List<string> {"brand"}};
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
             setSettingsResponse.Wait();
 
@@ -66,14 +67,14 @@ namespace Algolia.Search.Test.EndToEnd
             {
                 ObjectID = "brand_automatic_faceting",
                 Enabled = false,
-                Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
+                Condition = new Condition {Anchoring = "is", Pattern = "{facet:brand}"},
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
                     {
                         AutomaticFacetFilters = new List<AutomaticFacetFilter>
                         {
-                            new AutomaticFacetFilter {Facet = "brand", Disjunctive = true, Score = 42 }
+                            new AutomaticFacetFilter {Facet = "brand", Disjunctive = true, Score = 42}
                         }
                     }
                 },
@@ -99,7 +100,7 @@ namespace Algolia.Search.Test.EndToEnd
             Rule ruleToSave2 = new Rule
             {
                 ObjectID = "query_edits",
-                Condition = new Condition { Anchoring = "is", Pattern = "mobile phone" },
+                Condition = new Condition {Anchoring = "is", Pattern = "mobile phone"},
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -116,7 +117,7 @@ namespace Algolia.Search.Test.EndToEnd
                 },
             };
 
-            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 });
+            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> {ruleToSave2});
             batchRulesResponse.Wait();
 
             // Retrieve all the rules using getRule and check that they were correctly saved
@@ -129,8 +130,10 @@ namespace Algolia.Search.Test.EndToEnd
 
             SearchResponse<Rule> searchRules = await _index.SearchRuleAsync(new RuleQuery());
             Assert.IsTrue(searchRules.Hits.Count == 2);
-            Assert.True(TestHelper.AreObjectsEqual(ruleToSave, searchRules.Hits.Find(r => r.ObjectID.Equals(ruleToSave.ObjectID))));
-            Assert.True(TestHelper.AreObjectsEqual(ruleToSave2, searchRules.Hits.Find(r => r.ObjectID.Equals(ruleToSave2.ObjectID))));
+            Assert.True(TestHelper.AreObjectsEqual(ruleToSave,
+                searchRules.Hits.Find(r => r.ObjectID.Equals(ruleToSave.ObjectID))));
+            Assert.True(TestHelper.AreObjectsEqual(ruleToSave2,
+                searchRules.Hits.Find(r => r.ObjectID.Equals(ruleToSave2.ObjectID))));
 
             // Iterate over all the rules using ruleIterator and check that they were correctly saved
             List<Rule> rulesFromIterator = new List<Rule>();
@@ -140,8 +143,10 @@ namespace Algolia.Search.Test.EndToEnd
                 rulesFromIterator.Add(rule);
             }
 
-            Assert.True(TestHelper.AreObjectsEqual(ruleToSave, rulesFromIterator.Find(r => r.ObjectID.Equals(ruleToSave.ObjectID))));
-            Assert.True(TestHelper.AreObjectsEqual(ruleToSave2, rulesFromIterator.Find(r => r.ObjectID.Equals(ruleToSave2.ObjectID))));
+            Assert.True(TestHelper.AreObjectsEqual(ruleToSave,
+                rulesFromIterator.Find(r => r.ObjectID.Equals(ruleToSave.ObjectID))));
+            Assert.True(TestHelper.AreObjectsEqual(ruleToSave2,
+                rulesFromIterator.Find(r => r.ObjectID.Equals(ruleToSave2.ObjectID))));
 
             // Delete the first rule using deleteRule and check that it was correctly deleted
             var deleteRule = await _index.DeleteRuleAsync(ruleToSave.ObjectID);

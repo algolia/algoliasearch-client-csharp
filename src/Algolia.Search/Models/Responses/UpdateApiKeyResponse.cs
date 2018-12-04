@@ -25,7 +25,7 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
-    public class UpdateApiKeyResponse 
+    public class UpdateApiKeyResponse
     {
         public string Key { get; set; }
         public DateTime UpdatedAt { get; set; }

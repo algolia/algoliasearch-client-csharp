@@ -26,7 +26,6 @@ using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Synonyms;
-using Algolia.Search.Utils;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -48,19 +47,19 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestReplacing()
         {
-            var addResponse = _index.AddObjectAysnc(new ReplaceAllTestObject { ObjectID = "one" });
+            var addResponse = _index.AddObjectAysnc(new ReplaceAllTestObject {ObjectID = "one"});
 
             var ruleToSave = new Rule
             {
                 ObjectID = "one",
-                Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
+                Condition = new Condition {Anchoring = "is", Pattern = "pattern"},
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
                     {
                         Query = new ConsequenceQuery
                         {
-                            Edits = new List<Edit> { new Edit { Type = EditType.Remove, Delete = "pattern" } }
+                            Edits = new List<Edit> {new Edit {Type = EditType.Remove, Delete = "pattern"}}
                         }
                     }
                 }
@@ -72,7 +71,7 @@ namespace Algolia.Search.Test.EndToEnd
             {
                 ObjectID = "one",
                 Type = SynonymType.Synonym,
-                Synonyms = new List<string> { "one", "two" }
+                Synonyms = new List<string> {"one", "two"}
             };
 
             var saveSynonymResponse = _index.SaveSynonymAsync(synonymToSave);
@@ -85,7 +84,7 @@ namespace Algolia.Search.Test.EndToEnd
 
             var response = await _index.ReplaceAllObjectsAsync(new List<ReplaceAllTestObject>
             {
-                new ReplaceAllTestObject { ObjectID = "two" }
+                new ReplaceAllTestObject {ObjectID = "two"}
             });
 
             response.Wait();
@@ -93,29 +92,29 @@ namespace Algolia.Search.Test.EndToEnd
             var ruleToSave2 = new Rule
             {
                 ObjectID = "two",
-                Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
+                Condition = new Condition {Anchoring = "is", Pattern = "pattern"},
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
                     {
                         Query = new ConsequenceQuery
                         {
-                            Edits = new List<Edit> { new Edit { Type = EditType.Remove, Delete = "pattern" } }
+                            Edits = new List<Edit> {new Edit {Type = EditType.Remove, Delete = "pattern"}}
                         }
                     }
                 }
             };
 
-            var replaceAllRulesResponse = await _index.ReplaceAllRulesAsync(new List<Rule> { ruleToSave2 });
+            var replaceAllRulesResponse = await _index.ReplaceAllRulesAsync(new List<Rule> {ruleToSave2});
 
             var synonymToSave2 = new Synonym
             {
                 ObjectID = "two",
                 Type = SynonymType.Synonym,
-                Synonyms = new List<string> { "one", "two" }
+                Synonyms = new List<string> {"one", "two"}
             };
 
-            var replaceAllSynonymsResponse = await _index.ReplaceAllSynonymsAsync(new List<Synonym> { synonymToSave2 });
+            var replaceAllSynonymsResponse = await _index.ReplaceAllSynonymsAsync(new List<Synonym> {synonymToSave2});
 
             replaceAllRulesResponse.Wait();
             replaceAllSynonymsResponse.Wait();

@@ -37,5 +37,6 @@ namespace Algolia.Search.Models.Synonyms
         public string Word { get; set; }
         public List<string> Corrections { get; set; }
         public string Placeholder { get; set; }
-        public List<string> Replacements { get; set; }    }
+        public List<string> Replacements { get; set; }
+    }
 }

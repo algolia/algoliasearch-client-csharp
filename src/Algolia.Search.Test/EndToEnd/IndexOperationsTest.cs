@@ -68,7 +68,8 @@ namespace Algolia.Search.Test.EndToEnd
             _fullCopyIndexName = TestHelper.GetTestIndexName("index_operations_copy");
             _fullCopyIndex = BaseTest.SearchClient.InitIndex(_fullCopyIndexName);
 
-            _objectsToSave = new List<IndexOperationObject>{
+            _objectsToSave = new List<IndexOperationObject>
+            {
                 new IndexOperationObject {ObjectID = "one", Company = "apple"},
                 new IndexOperationObject {ObjectID = "two", Company = "apple"}
             };
@@ -80,7 +81,7 @@ namespace Algolia.Search.Test.EndToEnd
             BatchIndexingResponse addObjectResponse = await _index.AddObjectsAysnc(_objectsToSave);
             addObjectResponse.Wait();
 
-            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "company" } };
+            IndexSettings settings = new IndexSettings {AttributesForFaceting = new List<string> {"company"}};
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
             setSettingsResponse.Wait();
 
@@ -89,7 +90,7 @@ namespace Algolia.Search.Test.EndToEnd
                 ObjectID = "google.placeholder",
                 Type = SynonymType.Placeholder,
                 Placeholder = "<GOOG>",
-                Replacements = new List<string> { "Google", "GOOG" }
+                Replacements = new List<string> {"Google", "GOOG"}
             };
 
             var saveSynonymResponse = await _index.SaveSynonymAsync(synonym);
@@ -98,7 +99,7 @@ namespace Algolia.Search.Test.EndToEnd
             Rule ruleToSave = new Rule
             {
                 ObjectID = "company_auto_faceting",
-                Condition = new Condition { Anchoring = "contains", Pattern = "{facet:company}" },
+                Condition = new Condition {Anchoring = "contains", Pattern = "{facet:company}"},
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -119,12 +120,14 @@ namespace Algolia.Search.Test.EndToEnd
             var copySynonymsTask = BaseTest.SearchClient.CopySynonymsAsync(_indexName, _synonymsIndexName);
             var copyFullTask = BaseTest.SearchClient.CopyIndexAsync(_indexName, _fullCopyIndexName);
 
-            CopyToResponse[] tasks = await Task.WhenAll(copySettingsTask, copyRulesTask, copySynonymsTask, copyFullTask);
+            CopyToResponse[] tasks =
+                await Task.WhenAll(copySettingsTask, copyRulesTask, copySynonymsTask, copyFullTask);
             tasks.ToList().ForEach(x => x.Wait());
 
             // Check that “index_operations_settings” only contains the same settings as the original index with getSettings
             IndexSettings copySettings = await _settingsIndex.GetSettingsAsync();
-            Assert.True(settings.AttributesForFaceting.ElementAt(0).Equals(copySettings.AttributesForFaceting.ElementAt(0)));
+            Assert.True(settings.AttributesForFaceting.ElementAt(0)
+                .Equals(copySettings.AttributesForFaceting.ElementAt(0)));
 
             // Check that “index_operations_rules” only contains the same rules as the original index with getRule
             Rule copyRule = await _rulesIndex.GetRuleAsync("company_auto_faceting");
@@ -141,7 +144,8 @@ namespace Algolia.Search.Test.EndToEnd
 
             Task.WaitAll(copyFullSettings, copyFullRule, copyFullSynonym);
 
-            Assert.True(settings.AttributesForFaceting.ElementAt(0).Equals(copyFullSettings.Result.AttributesForFaceting.ElementAt(0)));
+            Assert.True(settings.AttributesForFaceting.ElementAt(0)
+                .Equals(copyFullSettings.Result.AttributesForFaceting.ElementAt(0)));
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave, copyFullRule.Result));
             Assert.True(TestHelper.AreObjectsEqual(synonym, copyFullSynonym.Result));
         }

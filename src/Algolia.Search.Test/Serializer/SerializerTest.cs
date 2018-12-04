@@ -40,7 +40,8 @@ namespace Algolia.Search.Test.Serializer
         {
             string json = "[\"lastname\",\"firstname\"]";
 
-            List<AutomaticFacetFilter> deserialized = JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(json, new AutomaticFacetFiltersConverter());
+            List<AutomaticFacetFilter> deserialized =
+                JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(json, new AutomaticFacetFiltersConverter());
 
             Assert.True(deserialized.ElementAt(0).Facet.Equals("lastname"));
             Assert.False(deserialized.ElementAt(0).Disjunctive);

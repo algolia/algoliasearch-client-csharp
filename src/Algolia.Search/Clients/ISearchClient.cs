@@ -46,39 +46,45 @@ namespace Algolia.Search.Clients
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleGetObjectsResponse<T> MultipleGetObjects<T>(IEnumerable<MultipleGetObject> queries, RequestOptions requestOptions = null) where T : class;
+        MultipleGetObjectsResponse<T> MultipleGetObjects<T>(IEnumerable<MultipleGetObject> queries,
+            RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Retrieve one or more objects, potentially from different indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(IEnumerable<MultipleGetObject> queries, RequestOptions requestOptions = null,
+        Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(IEnumerable<MultipleGetObject> queries,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest request, RequestOptions requestOptions = null) where T : class;
+        MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest request,
+            RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest request, RequestOptions requestOptions = null,
+        Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest request,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        MultipleIndexBatchIndexingResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null) where T : class;
+        MultipleIndexBatchIndexingResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations,
+            RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        Task<MultipleIndexBatchIndexingResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
+        Task<MultipleIndexBatchIndexingResponse> MultipleBatchAsync<T>(IEnumerable<BatchOperation<T>> operations,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
@@ -236,7 +242,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<ListUserIdsResponse> ListUserIdsAsync(int page = 0, int hitsPerPage = 1000, RequestOptions requestOptions = null,
+        Task<ListUserIdsResponse> ListUserIdsAsync(int page = 0, int hitsPerPage = 1000,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -294,7 +301,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AssignUserIdResponse> AssignUserIdAsync(string userId, string clusterName, RequestOptions requestOptions = null,
+        Task<AssignUserIdResponse> AssignUserIdAsync(string userId, string clusterName,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -319,7 +327,8 @@ namespace Algolia.Search.Clients
         /// Get logs for the given index
         /// </summary>
         /// <returns></returns>
-        LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10, string indexName = null, string type = "all");
+        LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10,
+            string indexName = null, string type = "all");
 
         /// <summary>
         /// Get logs for the given index
@@ -328,6 +337,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null, string type = "all");
+            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null,
+            string type = "all");
     }
 }

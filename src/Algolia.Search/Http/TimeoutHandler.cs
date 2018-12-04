@@ -13,7 +13,8 @@ namespace Algolia.Search.Http
     {
         public TimeSpan DefaultTimeout { get; set; } = TimeSpan.FromSeconds(100);
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellationToken)
         {
             using (var cts = GetCancellationTokenSource(request, cancellationToken))
             {
@@ -28,7 +29,8 @@ namespace Algolia.Search.Http
             }
         }
 
-        private CancellationTokenSource GetCancellationTokenSource(HttpRequestMessage request, CancellationToken cancellationToken)
+        private CancellationTokenSource GetCancellationTokenSource(HttpRequestMessage request,
+            CancellationToken cancellationToken)
         {
             var timeout = request.GetTimeout() ?? DefaultTimeout;
             if (timeout == Timeout.InfiniteTimeSpan)

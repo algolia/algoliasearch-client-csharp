@@ -23,7 +23,7 @@
 
 namespace Algolia.Search.Models.Responses
 {
-    public class BrowseIndexResponse<T> : SearchResponse<T>  where T : class
+    public class BrowseIndexResponse<T> : SearchResponse<T> where T : class
     {
         public string Cursor { get; set; }
     }

@@ -31,6 +31,7 @@ namespace Algolia.Search.Models.Responses
     public class MultiResponse : IAlgoliaWaitableResponse
     {
         public List<IAlgoliaWaitableResponse> Responses { get; set; }
+
         public void Wait()
         {
             foreach (var response in Responses)

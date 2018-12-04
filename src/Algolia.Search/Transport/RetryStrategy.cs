@@ -29,12 +29,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Algolia.Search.Test")]
+
 namespace Algolia.Search.Transport
 {
     internal class RetryStrategy : IRetryStrategy
     {
         private readonly List<StatefulHost> _hosts;
-        
+
         /// <summary>
         /// The synchronization lock for each set RetryStrategy/RequesterWrapper/Client
         /// </summary>
@@ -74,31 +75,33 @@ namespace Algolia.Search.Transport
                     Accept = CallType.Write,
                 });
 
-                var commonHosts = new List<StatefulHost> {
-                new StatefulHost
+                var commonHosts = new List<StatefulHost>
                 {
-                    Url = $"{applicationId}-1.algolianet.com",
-                    Priority = 0,
-                    Up = true,
-                    LastUse = DateTime.UtcNow,
-                    Accept = CallType.Read | CallType.Write,
-                },
-                new StatefulHost
-                {
-                    Url = $"{applicationId}-2.algolianet.com",
-                    Priority = 0,
-                    Up = true,
-                    LastUse = DateTime.UtcNow,
-                    Accept = CallType.Read | CallType.Write,
-                },
-                new StatefulHost
-                {
-                    Url = $"{applicationId}-3.algolianet.com",
-                    Priority = 0,
-                    Up = true,
-                    LastUse = DateTime.UtcNow,
-                    Accept = CallType.Read | CallType.Write,
-                }}.Shuffle();
+                    new StatefulHost
+                    {
+                        Url = $"{applicationId}-1.algolianet.com",
+                        Priority = 0,
+                        Up = true,
+                        LastUse = DateTime.UtcNow,
+                        Accept = CallType.Read | CallType.Write,
+                    },
+                    new StatefulHost
+                    {
+                        Url = $"{applicationId}-2.algolianet.com",
+                        Priority = 0,
+                        Up = true,
+                        LastUse = DateTime.UtcNow,
+                        Accept = CallType.Read | CallType.Write,
+                    },
+                    new StatefulHost
+                    {
+                        Url = $"{applicationId}-3.algolianet.com",
+                        Priority = 0,
+                        Up = true,
+                        LastUse = DateTime.UtcNow,
+                        Accept = CallType.Read | CallType.Write,
+                    }
+                }.Shuffle();
 
                 _hosts.AddRange(commonHosts);
             }
@@ -133,6 +136,7 @@ namespace Algolia.Search.Transport
                     {
                         Reset(host);
                     }
+
                     return _hosts;
                 }
             }
@@ -181,7 +185,7 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         private bool IsSuccess(int httpResponseCode)
         {
-            return (int)Math.Floor((decimal)httpResponseCode / 100) == 2;
+            return (int) Math.Floor((decimal) httpResponseCode / 100) == 2;
         }
 
         /// <summary>
@@ -191,7 +195,8 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         private bool IsRetryable(int httpResponseCode)
         {
-            return (int)Math.Floor((decimal)httpResponseCode / 100) != 2 && (int)Math.Floor((decimal)httpResponseCode / 100) != 4;
+            return (int) Math.Floor((decimal) httpResponseCode / 100) != 2 &&
+                   (int) Math.Floor((decimal) httpResponseCode / 100) != 4;
         }
 
         /// <summary>
@@ -200,9 +205,9 @@ namespace Algolia.Search.Transport
         /// <param name="host"></param>
         private void Reset(StatefulHost host)
         {
-                host.Up = true;
-                host.RetryCount = 0;
-                host.LastUse = DateTime.UtcNow;
+            host.Up = true;
+            host.RetryCount = 0;
+            host.LastUse = DateTime.UtcNow;
         }
 
         /// <summary>

@@ -51,7 +51,7 @@ namespace Algolia.Search.Clients
         /// <param name="applicationId"></param>
         /// <param name="apiKey"></param>
         public AnalyticsClient(string applicationId, string apiKey) : this(
-            new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId }, new AlgoliaHttpRequester())
+            new AlgoliaConfig {ApiKey = apiKey, AppId = applicationId}, new AlgoliaHttpRequester())
         {
         }
 
@@ -139,10 +139,10 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var queryParams = new Dictionary<string, string>
-                {
-                    { "offset", offset.ToString()},
-                    { "limit", limit.ToString() }
-                };
+            {
+                {"offset", offset.ToString()},
+                {"limit", limit.ToString()}
+            };
 
             RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
 

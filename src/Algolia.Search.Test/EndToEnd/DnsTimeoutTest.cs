@@ -21,14 +21,13 @@
 * THE SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd
 {
@@ -43,7 +42,8 @@ namespace Algolia.Search.Test.EndToEnd
         public void Init()
         {
             string applicationId = TestHelper.ApplicationId1;
-            _hosts = new List<StatefulHost>{
+            _hosts = new List<StatefulHost>
+            {
                 new StatefulHost
                 {
                     Url = $"10.0.32.1",
@@ -63,7 +63,8 @@ namespace Algolia.Search.Test.EndToEnd
                 {
                     Url = $"{applicationId}-3.algolianet.com",
                     Accept = CallType.Read | CallType.Write,
-                }};
+                }
+            };
         }
 
         [Test]
@@ -83,7 +84,7 @@ namespace Algolia.Search.Test.EndToEnd
 
             for (int i = 0; i < 10; i++)
             {
-               var test = await client.ListIndexesAsync();
+                var test = await client.ListIndexesAsync();
             }
 
             timer.Stop();

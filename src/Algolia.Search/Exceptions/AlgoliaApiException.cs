@@ -42,7 +42,6 @@ namespace Algolia.Search.Exceptions
         /// <param name="message">The exception details.</param>
         public AlgoliaApiException(string message) : base(message)
         {
-
         }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace Algolia.Search.Exceptions
         /// </summary>
         /// <param name="message"></param>
         /// <param name="inner"></param>
-	    public AlgoliaApiException(string message, Exception inner)
+        public AlgoliaApiException(string message, Exception inner)
             : base(message, inner)
         {
         }

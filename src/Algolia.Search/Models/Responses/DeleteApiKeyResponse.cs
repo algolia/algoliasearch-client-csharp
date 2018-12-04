@@ -30,10 +30,8 @@ namespace Algolia.Search.Models.Responses
 {
     public class DeleteApiKeyResponse : IAlgoliaWaitableResponse
     {
-        [JsonIgnore]
-        public Func<string, ApiKey> GetApiKeyDelegate { get; set; }
-        [JsonIgnore]
-        public string Key { get; set; }
+        [JsonIgnore] public Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+        [JsonIgnore] public string Key { get; set; }
         public DateTime DeletedAt { get; set; }
 
         public virtual void Wait()

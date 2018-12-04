@@ -30,6 +30,7 @@ namespace Algolia.Search.Models.Requests
     {
         public string Operation { get; set; }
         public IEnumerable<string> Scope { get; set; }
+
         [JsonProperty(PropertyName = "destination")]
         public string IndexNameDest { get; set; }
     }

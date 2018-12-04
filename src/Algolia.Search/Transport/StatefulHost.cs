@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using System;
 using Algolia.Search.Models.Enums;
+using System;
 
 namespace Algolia.Search.Transport
 {

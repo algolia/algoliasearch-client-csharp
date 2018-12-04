@@ -40,6 +40,7 @@ namespace Algolia.Search.Utils
                 {
                     await content.CopyToAsync(output).ConfigureAwait(false);
                 }
+
                 content.Seek(0, SeekOrigin.Begin);
             }
         }

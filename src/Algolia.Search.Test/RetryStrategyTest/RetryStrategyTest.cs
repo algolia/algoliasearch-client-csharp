@@ -39,7 +39,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [TestCase(CallType.Read)]
         [TestCase(CallType.Write)]
         [TestCase(CallType.Analytics)]
-
         public void TestGetTryableHost(CallType callType)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
@@ -61,31 +60,33 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [TestCase(CallType.Write)]
         public void TestRetryStrategyResetExpired(CallType callType)
         {
-            var commonHosts = new List<StatefulHost> {
-            new StatefulHost
+            var commonHosts = new List<StatefulHost>
             {
-                Url = "-1.algolianet.com",
-                Priority = 0,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-            },
-            new StatefulHost
-            {
-                Url = "-2.algolianet.com",
-                Priority = 0,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-            },
-            new StatefulHost
-            {
-                Url = "-3.algolianet.com",
-                Priority = 0,
-                Up = false,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read | CallType.Write,
-            }};
+                new StatefulHost
+                {
+                    Url = "-1.algolianet.com",
+                    Priority = 0,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read | CallType.Write,
+                },
+                new StatefulHost
+                {
+                    Url = "-2.algolianet.com",
+                    Priority = 0,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read | CallType.Write,
+                },
+                new StatefulHost
+                {
+                    Url = "-3.algolianet.com",
+                    Priority = 0,
+                    Up = false,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read | CallType.Write,
+                }
+            };
 
             // TODO
 
@@ -99,7 +100,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [TestCase(CallType.Write, 500)]
         [TestCase(CallType.Read, 300)]
         [TestCase(CallType.Write, 300)]
-
         public void TestRetryStrategyRetriableFailure(CallType callType, int httpErrorCode)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
@@ -137,18 +137,18 @@ namespace Algolia.Search.Test.RetryStrategyTest
             Assert.True(initialHosts.Count() == 4);
 
             Task task1 = Task.Run(() =>
-           {
-               var hosts = retryStrategy.GetTryableHost(callType);
-               retryStrategy.Decide(hosts.ElementAt(0), 200, false);
-               Console.WriteLine(Thread.CurrentThread.Name);
-           });
+            {
+                var hosts = retryStrategy.GetTryableHost(callType);
+                retryStrategy.Decide(hosts.ElementAt(0), 200, false);
+                Console.WriteLine(Thread.CurrentThread.Name);
+            });
 
 
             Task task2 = Task.Run(() =>
-           {
-               var hosts = retryStrategy.GetTryableHost(callType);
-               retryStrategy.Decide(hosts.ElementAt(0), 500, false);
-           });
+            {
+                var hosts = retryStrategy.GetTryableHost(callType);
+                retryStrategy.Decide(hosts.ElementAt(0), 500, false);
+            });
 
             Task.WaitAll(task1, task2);
 

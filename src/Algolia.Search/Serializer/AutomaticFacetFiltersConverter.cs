@@ -31,7 +31,8 @@ namespace Algolia.Search.Serializer
 {
     public class AutomaticFacetFiltersConverter : JsonConverter<IEnumerable<AutomaticFacetFilter>>
     {
-        public override void WriteJson(JsonWriter writer, IEnumerable<AutomaticFacetFilter> value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, IEnumerable<AutomaticFacetFilter> value,
+            JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
@@ -61,7 +62,7 @@ namespace Algolia.Search.Serializer
                 bool disjunctive = token.Type != JTokenType.String && token.Value<bool>("disjunctive");
                 int? score = token.Type != JTokenType.String ? token.Value<int?>("score") : null;
 
-                ret.Add(new AutomaticFacetFilter { Facet = facet, Disjunctive = disjunctive, Score = score });
+                ret.Add(new AutomaticFacetFilter {Facet = facet, Disjunctive = disjunctive, Score = score});
             }
 
             return ret;

@@ -43,7 +43,8 @@ namespace Algolia.Search.Transport
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType, TData data = default(TData),
+        Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType,
+            TData data = default(TData),
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
             where TResult : class
             where TData : class;
@@ -58,8 +59,9 @@ namespace Algolia.Search.Transport
         /// <param name="requestOptions"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) 
+        Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType,
+            RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
             where TResult : class;
     }
 }

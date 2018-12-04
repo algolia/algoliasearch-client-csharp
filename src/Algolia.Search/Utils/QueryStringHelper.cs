@@ -34,8 +34,8 @@ namespace Algolia.Search.Utils
         public static string ToQueryString<T>(T value)
         {
             IEnumerable<string> properties = typeof(T).GetTypeInfo()
-                    .DeclaredProperties.Where(p => p.GetValue(value, null) != null)
-                    .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
+                .DeclaredProperties.Where(p => p.GetValue(value, null) != null)
+                .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
 
             return string.Join("&", properties.ToArray());
         }
@@ -48,8 +48,8 @@ namespace Algolia.Search.Utils
             }
 
             return string.Join("&",
-                  dic.Select(kvp =>
-                      string.Format($"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}" )));
+                dic.Select(kvp =>
+                    string.Format($"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}")));
         }
     }
 }

@@ -21,10 +21,10 @@
 * THE SOFTWARE.
 */
 
-using System;
 using Algolia.Search.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 
 namespace Algolia.Search.Serializer
 {
@@ -39,14 +39,15 @@ namespace Algolia.Search.Serializer
             writer.WriteValue(until);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
             if (reader.Value == null)
             {
                 return null;
             }
 
-            return DateTimeHelper.UnixTimeToDateTime((long)reader.Value);
+            return DateTimeHelper.UnixTimeToDateTime((long) reader.Value);
         }
     }
 }
