@@ -879,7 +879,8 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// This function waits for the Algolia's API task to finish
         /// </summary>
-        /// <param name="taskId"></param>
+        /// <param name="indexName">Your index name</param>
+        /// <param name="taskId">taskID returned by Aloglia API</param>
         /// <param name="timeToWait"></param>
         /// <param name="requestOptions"></param>
         public void WaitTask(string indexName, long taskId, int timeToWait = 100, RequestOptions requestOptions = null)

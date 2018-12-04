@@ -28,6 +28,8 @@ namespace Algolia.Search.Models.Analytics
 {
     public class ABTestsReponse
     {
+        public int Count { get; set; }
+        public int Total { get; set; }
         [JsonProperty(PropertyName = "abtests")]
         public IEnumerable<ABTest> ABTests { get; set; }
     }

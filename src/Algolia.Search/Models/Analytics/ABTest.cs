@@ -32,6 +32,7 @@ namespace Algolia.Search.Models.Analytics
     public class ABTest
     {
         public string Name { get; set; }
+        public string Status { get; set; }
         public IEnumerable<Variant> Variants { get; set; }
         public DateTime EndAt { get; set; }
         public DateTime CreatedAt { get; set; }

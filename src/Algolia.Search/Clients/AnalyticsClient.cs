@@ -27,6 +27,7 @@ using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace Algolia.Search.Clients
         /// <param name="applicationId"></param>
         /// <param name="apiKey"></param>
         public AnalyticsClient(string applicationId, string apiKey) : this(
-            new AlgoliaConfig {ApiKey = apiKey, AppId = applicationId}, new AlgoliaHttpRequester())
+            new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId }, new AlgoliaHttpRequester())
         {
         }
 
@@ -112,7 +113,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ABTest>(HttpMethod.Get,
-                    $"/2/abtests/{abTestId}", CallType.Read, requestOptions, ct)
+                    $"/2/abtests/{abTestId}", CallType.Analytics, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -137,8 +138,16 @@ namespace Algolia.Search.Clients
         public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
+            var queryParams = new Dictionary<string, string>
+                {
+                    { "offset", offset.ToString()},
+                    { "limit", limit.ToString() }
+                };
+
+            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
+
             return await _requesterWrapper.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
-                    $"/2/abtests?offset=${offset}&limit=${limit}", CallType.Read, requestOptions, ct)
+                    "/2/abtests", CallType.Analytics, requestOptionsToSend, ct)
                 .ConfigureAwait(false);
         }
 
@@ -162,7 +171,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
-                    "/2/abtests", CallType.Write, aBTest, requestOptions, ct)
+                    "/2/abtests", CallType.Analytics, aBTest, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -190,7 +199,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<StopABTestResponse>(HttpMethod.Post,
-                    $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct)
+                    $"/2/abtests/{abTestId}/stop", CallType.Analytics, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -214,7 +223,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<DeleteABTestResponse>(HttpMethod.Delete,
-                    $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct)
+                    $"/2/abtests/{abTestId}", CallType.Analytics, requestOptions, ct)
                 .ConfigureAwait(false);
         }
     }
