@@ -1,8 +1,6 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* Based on the first version developed by Christopher Maneu under the same license:
-*  https://github.com/cmaneu/algoliasearch-client-csharp
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
