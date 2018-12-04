@@ -35,6 +35,7 @@ namespace Algolia.Search.Test
     {
         internal static string ApplicationId1 = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_1");
         internal static string AdminKey1 = Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_KEY_1");
+        internal static string SearchKey1 = Environment.GetEnvironmentVariable("ALGOLIA_SEARCH_KEY_1");
         internal static string ApplicationId2 = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_2");
         internal static string AdminKey2 = Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_KEY_2");
         internal static string McmApplicationId = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_MCM");
@@ -53,6 +54,11 @@ namespace Algolia.Search.Test
             if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_KEY_1")))
             {
                 throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_KEY_1");
+            }
+
+            if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_SEARCH_KEY_1")))
+            {
+                throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_SEARCH_KEY_1");
             }
 
             if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_2")))

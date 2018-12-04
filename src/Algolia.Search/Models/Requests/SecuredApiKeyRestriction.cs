@@ -1,8 +1,6 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* Based on the first version developed by Christopher Maneu under the same license:
-*  https://github.com/cmaneu/algoliasearch-client-csharp
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -23,37 +21,16 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using Algolia.Search.Models.Query;
 
-using System;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace Algolia.Search.Utils
+namespace Algolia.Search.Models.Requests
 {
-    /// <summary>
-    /// Helper to compute HMAC SHA 256
-    /// </summary>
-    internal static class HmacShaHelper
+    public class SecuredApiKeyRestriction : SearchQuery
     {
-        private static readonly ASCIIEncoding _encoding = new ASCIIEncoding();
-
-        internal static string GetHash(string text, string key)
-        {
-            Byte[] keyBytes = _encoding.GetBytes(key);
-            Byte[] textBytes = _encoding.GetBytes(text);
-            string hash;
-
-            using (HMACSHA256 hmac = new HMACSHA256(keyBytes))
-            {
-                byte[] hmBytes = hmac.ComputeHash(textBytes);
-                return hash = BitConverter.ToString(hmBytes).Replace("-", string.Empty);
-            }
-        }
-
-        internal static string Base64Encode(string plainText)
-        {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
-        }
+        public long ValidUntil { get; set; }
+        public List<string> RestrictIndices { get; set; }
+        public List<string> RestrictSources { get; set; }
+        public string UserToken { get; set; }
     }
 }

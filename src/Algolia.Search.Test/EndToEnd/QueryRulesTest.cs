@@ -67,6 +67,7 @@ namespace Algolia.Search.Test.EndToEnd
             Rule ruleToSave = new Rule
             {
                 ObjectID = "brand_automatic_faceting",
+                Enabled = false,
                 Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
                 Consequence = new Consequence
                 {

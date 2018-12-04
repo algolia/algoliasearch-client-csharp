@@ -250,6 +250,19 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
+        /// Generate a virtual API Key without any call to the server.
+        /// </summary>
+        /// <param name="parentApiKey"></param>
+        /// <param name="restriction"></param>
+        /// <returns></returns>
+        public string GenerateSecuredApiKeys(string parentApiKey, SecuredApiKeyRestriction restriction)
+        {
+            string queryParams = QueryStringHelper.ToQueryString(restriction);
+            string hash = HmacShaHelper.GetHash(parentApiKey, queryParams);
+            return HmacShaHelper.Base64Encode($"{hash}{queryParams}");
+        }
+
+        /// <summary>
         /// Get the full list of API Keys.
         /// </summary>
         /// <param name="requestOptions"></param>
