@@ -38,7 +38,7 @@ namespace Algolia.Search.Models.Responses
     }
 
     /// <summary>
-    /// 
+    /// Index response
     /// </summary>
     public class IndexesResponse
     {

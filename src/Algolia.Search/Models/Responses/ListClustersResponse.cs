@@ -8,7 +8,7 @@ namespace Algolia.Search.Models.Responses
     public class ListClustersResponse
     {
         /// <summary>
-        /// 
+        /// List of clusters
         /// </summary>
         public IEnumerable<ClustersResponse> Clusters { get; set; }
     }
