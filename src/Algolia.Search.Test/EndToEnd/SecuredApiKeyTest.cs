@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Clients;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Utils;
@@ -34,7 +35,7 @@ namespace Algolia.Search.Test.EndToEnd
 {
     [TestFixture]
     [Parallelizable]
-    [Ignore("WIP")]
+    //[Ignore("WIP")]
     public class SecuredApiKeyTest
     {
         private SearchIndex _index1;
@@ -54,8 +55,8 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestApiKey()
         {
-            var addOne = await _index1.AddObjectAysnc(new SecuredApiKeyStub {ObjectID = "one"});
-            var addTwo = await _index2.AddObjectAysnc(new SecuredApiKeyStub {ObjectID = "one"});
+            var addOne = await _index1.AddObjectAysnc(new SecuredApiKeyStub { ObjectID = "one" });
+            var addTwo = await _index2.AddObjectAysnc(new SecuredApiKeyStub { ObjectID = "one" });
 
             addOne.Wait();
             addTwo.Wait();
@@ -63,7 +64,7 @@ namespace Algolia.Search.Test.EndToEnd
             SecuredApiKeyRestriction restriction = new SecuredApiKeyRestriction
             {
                 ValidUntil = DateTimeHelper.ToUnixTimeSeconds(DateTime.UtcNow.AddMinutes(10)),
-                RestrictIndices = new List<string> {_index1Name}
+                RestrictIndices = new List<string> { _index1Name }
             };
 
             string key = BaseTest.SearchClient.GenerateSecuredApiKeys(TestHelper.SearchKey1, restriction);
@@ -73,7 +74,10 @@ namespace Algolia.Search.Test.EndToEnd
             SearchIndex index2WithRestriction = clientWithRestriciton.InitIndex(_index2Name);
 
             var searchOne = await index1WithoutRestriction.SearchAsync<SecuredApiKeyStub>(new SearchQuery());
-            var searchTwo = await index2WithRestriction.SearchAsync<SecuredApiKeyStub>(new SearchQuery());
+            AlgoliaApiException ex = Assert.ThrowsAsync<AlgoliaApiException>(() => index2WithRestriction.SearchAsync<SecuredApiKeyStub>(new SearchQuery()));
+
+            Assert.That(ex.Message.Contains("Index not allowed with this API key"));
+            Assert.That(ex.HttpErrorCode == 403);
         }
 
         public class SecuredApiKeyStub

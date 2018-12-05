@@ -29,12 +29,17 @@ namespace Algolia.Search.Models.Requests
     /// <summary>
     /// Secured Api Key restrictions
     /// </summary>
-    public class SecuredApiKeyRestriction : SearchQuery
+    public class SecuredApiKeyRestriction
     {
+        /// <summary>
+        /// Search query parameters
+        /// </summary>
+        public SearchQuery Query { get; set; }
+
         /// <summary>
         /// A Unix timestamp used to define the expiration date of the API key.
         /// </summary>
-        public long ValidUntil { get; set; }
+        public long? ValidUntil { get; set; }
 
         /// <summary>
         /// List of index names that can be queried.

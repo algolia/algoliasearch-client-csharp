@@ -22,19 +22,54 @@
 */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using Algolia.Search.Models.Requests;
 
 namespace Algolia.Search.Utils
 {
     internal static class QueryStringHelper
     {
-        public static string ToQueryString<T>(T value)
+        public static string BuildRestrictionQueryString(SecuredApiKeyRestriction restriction)
+        {
+            string restrictionQuery = null;
+            if (restriction.Query != null)
+            {
+                restrictionQuery = QueryStringHelper.ToQueryString(restriction.Query);
+            }
+
+            string restrictIndices = null;
+            if (restriction.RestrictIndices != null)
+            {
+                restrictIndices = $"restrictIndices={string.Join(";", restriction.RestrictIndices)}";
+            }
+
+            string restrictSources = null;
+            if (restriction.RestrictSources != null)
+            {
+                restrictSources = $"restrictSources={string.Join(";", restriction.RestrictSources)}";
+            }
+
+            string restrictionQueryParams = QueryStringHelper.ToQueryString(restriction, nameof(restriction.Query), nameof(restriction.RestrictIndices), nameof(restriction.RestrictSources));
+            var array = new[] { restrictionQuery, restrictIndices, restrictSources, restrictionQueryParams };
+
+            return string.Join("&", array.Where(s => !string.IsNullOrEmpty(s)));
+        }
+
+        /// <summary>
+        /// Transfrom a poco (only class of primitive objects) to a query string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="ignoreList"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static string ToQueryString<T>(T value, params string[] ignoreList)
         {
             IEnumerable<string> properties = typeof(T).GetTypeInfo()
-                .DeclaredProperties.Where(p => p.GetValue(value, null) != null)
+                .DeclaredProperties.Where(p => p.GetValue(value, null) != null && !ignoreList.Contains(p.Name))
                 .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
 
             return string.Join("&", properties.ToArray());

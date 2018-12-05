@@ -35,23 +35,32 @@ namespace Algolia.Search.Utils
     {
         private static readonly ASCIIEncoding _encoding = new ASCIIEncoding();
 
-        internal static string GetHash(string text, string key)
+        internal static string GetHash(string key, string text)
         {
             Byte[] keyBytes = _encoding.GetBytes(key);
             Byte[] textBytes = _encoding.GetBytes(text);
-            string hash;
 
             using (HMACSHA256 hmac = new HMACSHA256(keyBytes))
             {
                 byte[] hmBytes = hmac.ComputeHash(textBytes);
-                return hash = BitConverter.ToString(hmBytes).Replace("-", string.Empty);
+                return ToHexString(hmBytes);
             }
+        }
+
+        internal static string ToHexString(byte[] array)
+        {
+            StringBuilder hex = new StringBuilder(array.Length * 2);
+            foreach (byte b in array)
+            {
+                hex.AppendFormat("{0:x2}", b);
+            }
+            return hex.ToString();
         }
 
         internal static string Base64Encode(string plainText)
         {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
+            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            return Convert.ToBase64String(plainTextBytes);
         }
     }
 }

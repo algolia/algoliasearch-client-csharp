@@ -266,7 +266,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public string GenerateSecuredApiKeys(string parentApiKey, SecuredApiKeyRestriction restriction)
         {
-            string queryParams = QueryStringHelper.ToQueryString(restriction);
+            string queryParams = QueryStringHelper.BuildRestrictionQueryString(restriction);
             string hash = HmacShaHelper.GetHash(parentApiKey, queryParams);
             return HmacShaHelper.Base64Encode($"{hash}{queryParams}");
         }
