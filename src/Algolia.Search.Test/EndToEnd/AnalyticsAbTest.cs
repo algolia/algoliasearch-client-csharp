@@ -70,11 +70,15 @@ namespace Algolia.Search.Test.EndToEnd
                 }
             }
 
-            var addOne = await _index1.AddObjectAysnc(new AlgoliaStub {ObjectID = "one"});
-            var addTwo = await _index2.AddObjectAysnc(new AlgoliaStub {ObjectID = "one"});
+            var addOne = await _index1.AddObjectAysnc(new AlgoliaStub { ObjectID = "one" });
+            var addTwo = await _index2.AddObjectAysnc(new AlgoliaStub { ObjectID = "one" });
 
             addOne.Wait();
             addTwo.Wait();
+
+            // Create tomorrow datetime without seconds/ms to avoid test to fail
+            DateTime utcNow = DateTime.UtcNow;
+            DateTime tomorrow = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day + 1, utcNow.Hour, utcNow.Minute, 0, utcNow.Kind);
 
             var abTest = new ABTest
             {
@@ -90,7 +94,7 @@ namespace Algolia.Search.Test.EndToEnd
                         Index = _index2Name, TrafficPercentage = 40, Description = string.Empty
                     }
                 },
-                EndAt = DateTime.UtcNow.AddHours(24)
+                EndAt = tomorrow
             };
 
             AddABTestResponse addAbTest = await BaseTest.AnalyticsClient.AddABTestAsync(abTest);
