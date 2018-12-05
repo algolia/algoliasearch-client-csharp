@@ -40,58 +40,59 @@ namespace Algolia.Search.Models.Requests
         internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// Api Key
         /// </summary>
         [JsonIgnore]
         public string Key { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// Key Value
         /// </summary>
         public string Value { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// Set of permissions associated to the key.
         /// </summary>
         public IEnumerable<string> Acl { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        ///  A Unix timestamp used to define the expiration date of the API key.
         /// </summary>
         public long? Validity { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// Specify the maximum number of hits this API key can retrieve in one call. 
+        /// This parameter can be used to protect you from attempts at retrieving your entire index contents by massively querying the index.
         /// </summary>
         public int? MaxHitsPerQuery { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// Specify the maximum number of API calls allowed from an IP address per hour. Each time an API call is performed with this key, a check is performed.
         /// </summary>
         public int? MaxQueriesPerIPPerHour { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// Specify the list of targeted indices. You can target all indices starting with a prefix or ending with a suffix using the ‘*’ character.
         /// </summary>
         public IEnumerable<string> Indexes { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// Specify the list of referers. You can target all referers starting with a prefix, ending with a suffix using the ‘*’ character.
         /// </summary>
         public IEnumerable<string> Referers { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// IPv4 network allowed to use the generated key. This is used for more protection against API key leaking and reuse.
         /// </summary>
         public string RestrictSources { get; set; }
 
         /// <summary>
-        /// Get Api Key delegate
+        /// Specify the list of query parameters. You can force the query parameters for a query using the url string format.
         /// </summary>
         public string QueryParameters { get; set; }
 
         /// <summary>
-        /// Wait until the key exists on the server
+        /// Specify a description of the API key. Used for informative purposes only. It has impact on the functionality of the API key.
         /// </summary>
         public string Description { get; set; }
 
