@@ -28,8 +28,16 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Serializer
 {
+    /// <summary>
+    /// Multi type converter for handling multi type properties in Algolia settings
+    /// </summary>
     public class MultiTypeObjectConverter : JsonConverter
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectType"></param>
+        /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(object);
@@ -109,11 +117,20 @@ namespace Algolia.Search.Serializer
             return ret;
         }
 
+        /// <summary>
+        /// No need to implement this method as we want the default behavior for writting
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Disable write json
+        /// </summary>
         public override bool CanWrite => false;
     }
 }

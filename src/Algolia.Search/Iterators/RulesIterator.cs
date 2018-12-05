@@ -29,12 +29,20 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Iterators
 {
+    /// <summary>
+    /// Algolia's rule iterator
+    /// </summary>
     public class RulesIterator : IEnumerable<Rule>
     {
         private readonly ISearchIndex _index;
         private readonly RuleQuery _query = new RuleQuery();
         private int _hits;
 
+        /// <summary>
+        /// Create an instance of the rule iterator
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="hitsPerpage"></param>
         public RulesIterator(ISearchIndex index, int hitsPerpage = 1000)
         {
             _index = index;
@@ -42,6 +50,10 @@ namespace Algolia.Search.Iterators
             _query.Page = 0;
         }
 
+        /// <summary>
+        /// Iterator perform an api call
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<Rule> GetEnumerator()
         {
             do

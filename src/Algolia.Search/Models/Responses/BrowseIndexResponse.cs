@@ -23,8 +23,14 @@
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Browse response from the API
+    /// </summary>
     public class BrowseIndexResponse<T> : SearchResponse<T> where T : class
     {
+        /// <summary>
+        /// A cursor to retrieve the next chunk of data. 
+        /// </summary>
         public string Cursor { get; set; }
     }
 }

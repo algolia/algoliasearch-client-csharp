@@ -26,12 +26,11 @@ using System;
 namespace Algolia.Search.Models.Responses
 {
     /// <summary>
-    /// Base class for Algolia's waitable responses
-    /// Allow to bind the WaitTask method directly on the responses
+    /// Waitable algolia's api response
     /// </summary>
     public class IndexingResponse : IAlgoliaWaitableResponse
     {
-        public Action<long> WaitDelegate { get; set; }
+        internal Action<long> WaitDelegate { get; set; }
 
         /// <summary>
         /// Algolia's API taskID
@@ -39,9 +38,8 @@ namespace Algolia.Search.Models.Responses
         public long TaskID { get; set; }
 
         /// <summary>
-        /// This method waits on an asynchronous Algolia operation like a save or an update
+        /// Wait for a task to complete before executing the next line of code, to synchronize index updates.
         /// </summary>
-        /// <returns></returns>
         public void Wait()
         {
             WaitDelegate(TaskID);

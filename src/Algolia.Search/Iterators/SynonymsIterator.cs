@@ -29,12 +29,20 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Iterators
 {
+    /// <summary>
+    /// Algolia's synonym iterator
+    /// </summary>
     public class SynonymsIterator : IEnumerable<Synonym>
     {
         private readonly ISearchIndex _index;
         private readonly SynonymQuery _query = new SynonymQuery();
         private int _hits;
 
+        /// <summary>
+        /// Create a new instance of a synonym iterator
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="hitsPerpage"></param>
         public SynonymsIterator(ISearchIndex index, int hitsPerpage = 1000)
         {
             _index = index;
@@ -42,6 +50,10 @@ namespace Algolia.Search.Iterators
             _query.Page = 0;
         }
 
+        /// <summary>
+        /// Iterator for synonym (perfom an api call)
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<Synonym> GetEnumerator()
         {
             do

@@ -25,9 +25,19 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api response for addObject method
+    /// </summary>
     public class AddObjectResponse : IndexingResponse
     {
+        /// <summary>
+        /// Date of creation of the object
+        /// </summary>
         public DateTime CreatedAt { get; set; }
+
+        /// <summary>
+        /// ObjectID of the added object
+        /// </summary>
         public string ObjectID { get; set; }
     }
 }

@@ -25,8 +25,14 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's copy to response
+    /// </summary>
     public class CopyToResponse : IndexingResponse
     {
+        /// <summary>
+        /// Date of update
+        /// </summary>
         public DateTime UpdatedAt { get; set; }
     }
 }

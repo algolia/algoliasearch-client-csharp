@@ -28,15 +28,18 @@ using Algolia.Search.Models.Responses;
 
 namespace Algolia.Search.Clients
 {
+    /// <summary>
+    /// Interface for account client
+    /// </summary>
     public interface IAccountClient
     {
         /// <summary>
         /// The method copy settings, synonyms, rules and objects from the source index to the destination index
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="destinationIndex">The destination index</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         MultiResponse CopyIndex<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex,
             RequestOptions requestOptions = null) where T : class;
@@ -44,11 +47,11 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// The method copy settings, synonyms, rules and objects from the source index to the destination index
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="destinationIndex">The destination index</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex,
             RequestOptions requestOptions = null,

@@ -25,12 +25,26 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Analytics
 {
+    /// <summary>
+    /// Api response
+    /// </summary>
     public class AddABTestResponse
     {
+        
+        /// <summary>
+        /// The AbTest ID
+        /// </summary>
         [JsonProperty(PropertyName = "abTestID")]
         public long ABTestId { get; set; }
 
+        /// <summary>
+        /// The taskID
+        /// </summary>
         public long TaskID { get; set; }
+        
+        /// <summary>
+        /// Index Name
+        /// </summary>
         public string Index { get; set; }
     }
 }

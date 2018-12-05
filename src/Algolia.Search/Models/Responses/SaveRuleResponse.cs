@@ -25,8 +25,14 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's response for save rule
+    /// </summary>
     public class SaveRuleResponse : IndexingResponse
     {
+        /// <summary>
+        /// Date of update
+        /// </summary>
         public DateTime UpdatedAt { get; set; }
     }
 }

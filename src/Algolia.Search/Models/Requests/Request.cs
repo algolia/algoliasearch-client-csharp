@@ -28,11 +28,29 @@ using System.Net.Http;
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Request to send to the API
+    /// </summary>
     public class Request
     {
+        /// <summary>
+        /// The HTTP verb GET,POST etc.
+        /// </summary>
         public HttpMethod Method { get; set; }
+        
+        /// <summary>
+        /// Uri of the request
+        /// </summary>
         public Uri Uri { get; set; }
+        
+        /// <summary>
+        /// Headers a dictionary
+        /// </summary>
         public Dictionary<string, string> Headers { get; set; }
+        
+        /// <summary>
+        /// Body of the request
+        /// </summary>
         public Stream Body { get; set; }
     }
 }

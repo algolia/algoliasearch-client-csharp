@@ -32,8 +32,19 @@ namespace Algolia.Search.Models.Enums
     [Flags]
     public enum CallType
     {
+        /// <summary>
+        /// Read Call 
+        /// </summary>
         Read = 1,
+        
+        /// <summary>
+        /// Write Call 
+        /// </summary>
         Write = 2,
+        
+        /// <summary>
+        /// Analytics Call 
+        /// </summary>
         Analytics = 4
     }
 }

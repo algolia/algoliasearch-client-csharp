@@ -23,10 +23,24 @@
 
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// Retry strategy outcome values
+    /// </summary>
     public enum RetryOutcomeType
     {
+        /// <summary>
+        /// Success
+        /// </summary>
         Success,
+
+        /// <summary>
+        /// Retry the call 
+        /// </summary>
         Retry,
+
+        /// <summary>
+        /// Call failed error
+        /// </summary>
         Failure
     }
 }

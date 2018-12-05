@@ -23,11 +23,24 @@
 
 namespace Algolia.Search.Models.Rules
 {
-    // TODO: to implement in query rule
+    /// <summary>
+    /// Automatic facet filters of a rule
+    /// </summary>
     public class AutomaticFacetFilter
     {
+        /// <summary>
+        /// Attribute to filter on. This must match a facet placeholder in the rule’s pattern.
+        /// </summary>
         public string Facet { get; set; }
+        
+        /// <summary>
+        /// Whether the filter is disjunctive (true) or conjunctive (false). 
+        /// </summary>
         public bool Disjunctive { get; set; }
+        
+        /// <summary>
+        /// Score for the filter. Typically used for optional or disjunctive filters.
+        /// </summary>
         public int? Score { get; set; }
     }
 }

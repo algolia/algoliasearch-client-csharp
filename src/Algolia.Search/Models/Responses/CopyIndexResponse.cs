@@ -23,9 +23,19 @@
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's copy index reponse
+    /// </summary>
     public class CopyIndexResponse
     {
+        /// <summary>
+        /// Status of the copy
+        /// </summary>
         public string Status { get; set; }
+        
+        /// <summary>
+        /// Is the task pending
+        /// </summary>
         public bool PendingTask { get; set; }
     }
 }

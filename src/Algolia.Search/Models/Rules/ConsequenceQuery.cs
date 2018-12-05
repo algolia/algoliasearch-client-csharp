@@ -27,8 +27,15 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Rules
 {
+    /// <summary>
+    /// Consequence query
+    /// </summary>
     public class ConsequenceQuery
     {
-        [JsonConverter(typeof(EditConverter))] public IEnumerable<Edit> Edits { get; set; }
+        /// <summary>
+        /// List of edits
+        /// </summary>
+        [JsonConverter(typeof(EditConverter))] 
+        public IEnumerable<Edit> Edits { get; set; }
     }
 }

@@ -23,6 +23,9 @@
 
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// Algoli'as Log type
+    /// </summary>
     public static class LogType
     {
         /// <summary>

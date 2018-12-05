@@ -23,8 +23,15 @@
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Assign user request
+    /// https://www.algolia.com/doc/api-reference/api-methods/assign-user-id/
+    /// </summary>
     public class AssignUserIdRequest
     {
+        /// <summary>
+        /// Cluster name.
+        /// </summary>
         public string Cluster { get; set; }
     }
 }

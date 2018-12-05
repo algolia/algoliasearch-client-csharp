@@ -34,8 +34,8 @@ namespace Algolia.Search.Utils
         /// <summary>
         /// Ensure that the List has an JsonPropertyAttribute(Name="ObjectID")
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="datas"></param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="datas">Datas to send</param>
         public static void EnsureObjectID<T>(IEnumerable<T> datas)
         {
             var propertyWithObjectIdAttribute = CheckAttribute<T>();
@@ -55,8 +55,8 @@ namespace Algolia.Search.Utils
         /// <summary>
         /// Get the property which has JsonPropertyAttribute with name='objectID' 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="data"></param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="data">Data to send</param>
         /// <returns></returns>
         public static string GetObjectID<T>(T data)
         {
@@ -67,7 +67,7 @@ namespace Algolia.Search.Utils
         /// <summary>
         /// Check if JsonPropertyAttribute with name='objectID' exist in the given type
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
         private static PropertyInfo CheckAttribute<T>()
         {

@@ -23,9 +23,19 @@
 
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/save-rule/#method-param-type
+    /// </summary>
     public class EditType
     {
+        /// <summary>
+        /// when you want to delete some text and not replace it with anything
+        /// </summary>
         public const string Remove = "remove";
+        
+        /// <summary>
+        ///  when you want to delete some text and replace it with something else
+        /// </summary>
         public const string Replace = "replace";
     }
 }

@@ -31,6 +31,9 @@ namespace Algolia.Search.Models.Responses
     /// </summary>
     public class ListApiKeysResponse
     {
+        /// <summary>
+        /// List of keys
+        /// </summary>
         public List<ApiKey> Keys { get; set; }
     }
 }

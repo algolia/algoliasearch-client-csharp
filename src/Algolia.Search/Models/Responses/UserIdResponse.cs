@@ -26,17 +26,41 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/list-user-id/
+    /// </summary>
     public class ListUserIdsResponse
     {
+        /// <summary>
+        /// List of users id
+        /// </summary>
         [JsonProperty(PropertyName = "userIDs")]
         public List<UserIdResponse> UserIds { get; set; }
     }
 
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/list-user-id/
+    /// </summary>
     public class UserIdResponse
     {
+        /// <summary>
+        /// userID of the user.
+        /// </summary>
         public string UserID { get; set; }
+
+        /// <summary>
+        /// Cluster on which the user is assigned
+        /// </summary>
         public string ClusterName { get; set; }
+
+        /// <summary>
+        /// Number of records belonging to the user.
+        /// </summary>
         public int NbRecords { get; set; }
+
+        /// <summary>
+        /// Data size used by the user.
+        /// </summary>
         public int DataSize { get; set; }
     }
 }

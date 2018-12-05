@@ -25,11 +25,29 @@ using System.IO;
 
 namespace Algolia.Search.Http
 {
+    /// <summary>
+    /// Response from Algolia's API
+    /// </summary>
     public class AlgoliaHttpResponse
     {
+        /// <summary>
+        /// The http status code of the resposne
+        /// </summary>
         public int HttpStatusCode { get; set; }
+        
+        /// <summary>
+        /// Body of the response
+        /// </summary>
         public Stream Body { get; set; }
+        
+        /// <summary>
+        /// Is the request timedout
+        /// </summary>
         public bool IsTimedOut { get; set; }
+        
+        /// <summary>
+        /// Error message if so
+        /// </summary>
         public string Error { get; set; }
     }
 }

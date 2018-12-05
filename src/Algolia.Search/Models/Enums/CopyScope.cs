@@ -25,10 +25,24 @@ using System.Runtime.Serialization;
 
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/copy-index/#method-param-scope
+    /// </summary>
     public static class CopyScope
     {
+        /// <summary>
+        /// Copy settings
+        /// </summary>
         public const string Settings = "settings";
+        
+        /// <summary>
+        /// Copy synonyms
+        /// </summary>
         public const string Synonyms = "synonyms";
+        
+        /// <summary>
+        /// Copy rules
+        /// </summary>
         public const string Rules = "rules";
     }
 }

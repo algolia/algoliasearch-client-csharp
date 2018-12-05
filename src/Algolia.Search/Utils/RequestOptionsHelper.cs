@@ -26,8 +26,17 @@ using Algolia.Search.Http;
 
 namespace Algolia.Search.Utils
 {
+    /// <summary>
+    /// Helper for Algolia's request options
+    /// </summary>
     public class RequestOptionsHelper
     {
+        /// <summary>
+        /// Create a request option with or without existing queryParams or Request options
+        /// </summary>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="queryParams"></param>
+        /// <returns></returns>
         public static RequestOptions Create(RequestOptions requestOptions, Dictionary<string, string> queryParams)
         {
             if (requestOptions == null)

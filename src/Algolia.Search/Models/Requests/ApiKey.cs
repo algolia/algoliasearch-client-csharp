@@ -31,26 +31,85 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Algolia's API Key
+    /// </summary>
     public class ApiKey : IAlgoliaWaitableResponse
     {
-        [JsonIgnore] public Func<string, ApiKey> GetApiKeyDelegate { get; set; }
-        [JsonIgnore] public string Key { get; set; }
+        [JsonIgnore]
+        internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
+        [JsonIgnore]
+        public string Key { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public string Value { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public IEnumerable<string> Acl { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public long? Validity { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public int? MaxHitsPerQuery { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public int? MaxQueriesPerIPPerHour { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public IEnumerable<string> Indexes { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public IEnumerable<string> Referers { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public string RestrictSources { get; set; }
+
+        /// <summary>
+        /// Get Api Key delegate
+        /// </summary>
         public string QueryParameters { get; set; }
+
+        /// <summary>
+        /// Wait until the key exists on the server
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Wait until the key exists on the server
+        /// </summary>
         [JsonConverter(typeof(DateTimeEpochSerializer))]
         public DateTime? CreatedAt { get; set; }
 
-        [JsonIgnore] public bool Exist { get; set; }
+        /// <summary>
+        /// Wait until the key exists on the server
+        /// </summary>
+        [JsonIgnore]
+        public bool Exist { get; set; }
 
+        /// <summary>
+        /// Wait until the key exists on the server
+        /// </summary>
         public void Wait()
         {
             while (true)

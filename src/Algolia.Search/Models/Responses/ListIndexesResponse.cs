@@ -31,19 +31,60 @@ namespace Algolia.Search.Models.Responses
     /// </summary>
     public class ListIndexesResponse
     {
+        /// <summary>
+        /// List of index response
+        /// </summary>
         public List<IndexesResponse> Items { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class IndexesResponse
     {
+        /// <summary>
+        /// Index name.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Index creation date.
+        /// </summary>
         public DateTime CreatedAt { get; set; }
+
+        /// <summary>
+        /// Date of last update.
+        /// </summary>
         public DateTime UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Number of records contained in the index
+        /// </summary>
         public int Entries { get; set; }
+
+        /// <summary>
+        /// Number of bytes of the index in minified format.
+        /// </summary>
         public int DataSize { get; set; }
+
+        /// <summary>
+        /// Number of bytes of the index binary file.
+        /// </summary>
         public int FileSize { get; set; }
+
+        /// <summary>
+        /// Last build time in seconds.
+        /// </summary>
         public int LastBuildTimes { get; set; }
+
+        /// <summary>
+        /// Number of pending indexing operations.
+        /// </summary>
         public int NumberOfPendingTasks { get; set; }
+
+        /// <summary>
+        /// A boolean which says whether the index has pending tasks.
+        /// </summary>
         public bool PendingTask { get; set; }
     }
 }

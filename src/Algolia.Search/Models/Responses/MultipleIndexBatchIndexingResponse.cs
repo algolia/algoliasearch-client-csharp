@@ -26,12 +26,26 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Waitable api's response for multi batch
+    /// </summary>
     public class MultipleIndexBatchIndexingResponse : IAlgoliaWaitableResponse
     {
-        public Action<string, long> WaitDelegate { get; set; }
+        internal Action<string, long> WaitDelegate { get; set; }
+        
+        /// <summary>
+        /// List of returned objectIDS
+        /// </summary>
         public IEnumerable<string> ObjectIDs { get; set; }
+        
+        /// <summary>
+        /// A map of index/taskid
+        /// </summary>
         public Dictionary<string, long> TaskID { get; set; }
 
+        /// <summary>
+        /// Wait for all asynchronous batch operations to finish
+        /// </summary>
         public void Wait()
         {
             foreach (var item in TaskID)

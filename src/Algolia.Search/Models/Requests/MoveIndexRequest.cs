@@ -23,9 +23,19 @@
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Move index request
+    /// </summary>
     public class MoveIndexRequest
     {
+        /// <summary>
+        /// Operation <see cref="Enums.MoveType"/>
+        /// </summary>
         public string Operation { get; set; }
+        
+        /// <summary>
+        /// Index destination name
+        /// </summary>
         public string Destination { get; set; }
     }
 }

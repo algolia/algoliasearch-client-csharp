@@ -29,8 +29,17 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Serializer
 {
+    /// <summary>
+    /// Custom converter for legacy AutomaticFacetFilters
+    /// </summary>
     public class AutomaticFacetFiltersConverter : JsonConverter<IEnumerable<AutomaticFacetFilter>>
     {
+        /// <summary>
+        /// No need to implement this method as we don't want to override default writer
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, IEnumerable<AutomaticFacetFilter> value,
             JsonSerializer serializer)
         {
@@ -38,7 +47,7 @@ namespace Algolia.Search.Serializer
         }
 
         /// <summary>
-        /// Algolia's specific converter to handle this specific object that could be a List<string> or AutomaticFacetFilter
+        /// Algolia's specific converter to handle this specific object that could be a List of string or AutomaticFacetFilter
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="objectType"></param>
@@ -68,6 +77,9 @@ namespace Algolia.Search.Serializer
             return ret;
         }
 
+        /// <summary>
+        /// Disable write json
+        /// </summary>
         public override bool CanWrite => false;
     }
 }

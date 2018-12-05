@@ -26,11 +26,25 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Copy index to request
+    /// </summary>
     public class CopyToRequest
     {
+        /// <summary>
+        /// Operation <see cref="Enums.MoveType"/>
+        /// </summary>
         public string Operation { get; set; }
+        
+        /// <summary>
+        /// The “scope” parameter is an array of strings that refer to the following items <see cref="Enums.CopyScope"/>
+        /// </summary>
         public IEnumerable<string> Scope { get; set; }
 
+        
+        /// <summary>
+        /// Destination index name
+        /// </summary>
         [JsonProperty(PropertyName = "destination")]
         public string IndexNameDest { get; set; }
     }

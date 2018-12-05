@@ -25,6 +25,9 @@ using System;
 
 namespace Algolia.Search.Exceptions
 {
+    /// <summary>
+    /// Exception thrown when an host in unreachable
+    /// </summary>
     public class AlgoliaUnreachableHostException : Exception
     {
         /// <summary>

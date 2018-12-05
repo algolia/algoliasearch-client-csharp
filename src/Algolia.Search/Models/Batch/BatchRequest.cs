@@ -28,8 +28,15 @@ using System.Linq;
 
 namespace Algolia.Search.Models.Batch
 {
+    /// <summary>
+    /// Batch request for algoli'as API
+    /// </summary>
     public class BatchRequest<T> where T : class
     {
+        /// <summary>
+        /// Create a new batch request with operations
+        /// </summary>
+        /// <param name="operations"></param>
         public BatchRequest(IEnumerable<BatchOperation<T>> operations)
         {
             if (operations == null)
@@ -40,6 +47,11 @@ namespace Algolia.Search.Models.Batch
             Operations = operations.ToList();
         }
 
+        /// <summary>
+        /// Create a new batch request with action type and datas
+        /// </summary>
+        /// <param name="actionType">Batch Action Type</param>
+        /// <param name="datas">Datas to send</param>
         public BatchRequest(string actionType, IEnumerable<T> datas)
         {
             if (datas == null)
@@ -59,6 +71,9 @@ namespace Algolia.Search.Models.Batch
             }
         }
 
+        /// <summary>
+        /// List of operations of the batch request
+        /// </summary>
         [JsonProperty(PropertyName = "requests")]
         public ICollection<BatchOperation<T>> Operations { get; set; }
     }

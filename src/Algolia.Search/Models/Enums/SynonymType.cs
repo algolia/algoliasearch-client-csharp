@@ -23,12 +23,34 @@
 
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// https://www.algolia.com/doc/guides/textual-relevance/synonyms/#synonyms-overview
+    /// </summary>
     public class SynonymType
     {
+        /// <summary>
+        /// Synonuym
+        /// </summary>
         public const string Synonym = "synonym";
+        
+        /// <summary>
+        /// One way synonm
+        /// </summary>
         public const string OneWaySynonym = "oneWaySynonym";
+        
+        /// <summary>
+        /// Alt correction
+        /// </summary>
         public const string AltCorrection1 = "altCorrection1";
+        
+        /// <summary>
+        /// Alt correction
+        /// </summary>
         public const string AltCorrection2 = "altCorrection2";
+        
+        /// <summary>
+        /// Placeholder
+        /// </summary>
         public const string Placeholder = "placeholder";
     }
 }

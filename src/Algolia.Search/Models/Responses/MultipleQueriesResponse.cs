@@ -25,8 +25,14 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's response for multiple queries
+    /// </summary>
     public class MultipleQueriesResponse<T> where T : class
     {
+        /// <summary>
+        /// List of results
+        /// </summary>
         public IEnumerable<SearchResponse<T>> Results { get; set; }
     }
 }

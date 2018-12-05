@@ -27,18 +27,31 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Clients
 {
+    /// <summary>
+    /// Algolia's client configuration
+    /// </summary>
     public class AlgoliaConfig
     {
+        /// <summary>
+        /// Your application ID
+        /// </summary>
+        /// <returns></returns>
         public string AppId { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
 
+        /// <summary>
+        /// Your API Key
+        /// </summary>
+        /// <returns></returns>
         public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY");
 
         /// <summary>
         /// To set custom hosts
         /// </summary>
-        /// <value></value>
         public List<StatefulHost> Hosts { get; set; }
 
+        /// <summary>
+        /// The batch size for save methods
+        /// </summary>
         public int BatchSize { get; set; } = 10000;
     }
 }

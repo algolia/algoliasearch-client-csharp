@@ -27,19 +27,20 @@ using System;
 
 namespace Algolia.Search.Models.Rules
 {
+    /// <summary>
+    /// Time range object From/Until
+    /// </summary>
     public class TimeRange
     {
         /// <summary>
         /// DateTime with UTC offset for Serialization/Deserialization in unix timespam
         /// </summary>
-        /// <value></value>
         [JsonConverter(typeof(DateTimeEpochSerializer))]
         public DateTime From { get; set; }
 
         /// <summary>
         /// DateTime with UTC offset for Serialization/Deserialization in unix timespam
         /// </summary>
-        /// <value></value>
         [JsonConverter(typeof(DateTimeEpochSerializer))]
         public DateTime Until { get; set; }
     }

@@ -23,9 +23,19 @@
 
 namespace Algolia.Search.Models.Rules
 {
+    /// <summary>
+    /// Consequence promote
+    /// </summary>
     public class ConsequencePromote
     {
+        /// <summary>
+        /// Unique identifier of the object to promote.
+        /// </summary>
         public string ObjectID { get; set; }
+        
+        /// <summary>
+        /// Promoted rank for the object (zero-based).
+        /// </summary>
         public int Position { get; set; }
     }
 }

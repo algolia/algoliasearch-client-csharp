@@ -25,11 +25,29 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Synonyms
 {
+    /// <summary>
+    /// /
+    /// </summary>
     public class SynonymQuery
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Query { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// There are 4 synonym types. The parameter can be one of the following values <see cref="Enums.SynonymType"/>
+        /// </summary>
         public List<string> Type { get; set; }
+        
+        /// <summary>
+        /// Page to retrieve
+        /// </summary>
         public int? Page { get; set; }
+        
+        /// <summary>
+        /// Number of hits per page
+        /// </summary>
         public int? HitsPerPage { get; set; }
     }
 }

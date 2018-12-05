@@ -29,17 +29,30 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Iterators
 {
+    /// <summary>
+    /// Algolia's iterator for indew
+    /// </summary>
+    /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
     public class IndexIterator<T> : IEnumerable<T> where T : class
     {
         private readonly ISearchIndex _index;
         private readonly BrowseIndexQuery _query;
 
+        /// <summary>
+        /// Create a new instance of the iterator
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="query"></param>
         public IndexIterator(ISearchIndex index, BrowseIndexQuery query)
         {
             _index = index;
             _query = query;
         }
 
+        /// <summary>
+        /// GetEnumerator perfom a browse from (api call)
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
             while (_query.Cursor != null)

@@ -29,6 +29,9 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Transport
 {
+    /// <summary>
+    /// Algolia's requester wrapper interface
+    /// </summary>
     public interface IRequesterWrapper
     {
         /// <summary>
@@ -39,9 +42,9 @@ namespace Algolia.Search.Transport
         /// <param name="method"></param>
         /// <param name="uri"></param>
         /// <param name="callType"></param>
-        /// <param name="data"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType,
             TData data = default(TData),
@@ -56,8 +59,8 @@ namespace Algolia.Search.Transport
         /// <param name="method"></param>
         /// <param name="uri"></param>
         /// <param name="callType"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType,
             RequestOptions requestOptions = null,

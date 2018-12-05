@@ -25,8 +25,14 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Algolia's top user id response 
+    /// </summary>
     public class TopUserIdResponse
     {
+        /// <summary>
+        /// Mapping of cluster names to top users.
+        /// </summary>
         public Dictionary<string, IEnumerable<UserIdResponse>> TopUsers { get; set; }
     }
 }

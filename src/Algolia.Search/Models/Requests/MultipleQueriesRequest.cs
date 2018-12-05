@@ -28,16 +28,35 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Class used to perfom multiple requests
+    /// </summary>
     public class MultipleQueriesRequest
     {
+        /// <summary>
+        /// List of requests
+        /// </summary>
         public IEnumerable<MultipleQueries> Requests { get; set; }
+
+        /// <summary>
+        /// Request strategy <see cref="Enums.StrategyType"/>
+        /// </summary>
         public string Strategy { get; set; }
     }
 
+    /// <summary>
+    /// Multiple queries
+    /// </summary>
     public class MultipleQueries
     {
+        /// <summary>
+        /// The name of the index to perform the operation
+        /// </summary>
         public string IndexName { get; set; }
 
+        /// <summary>
+        /// Search query parameters
+        /// </summary>
         [JsonConverter(typeof(QuerySerializer))]
         public SearchQuery Params { get; set; }
     }

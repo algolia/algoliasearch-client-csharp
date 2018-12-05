@@ -23,10 +23,24 @@
 
 namespace Algolia.Search.Models.Rules
 {
+    /// <summary>
+    /// Objects to edti
+    /// </summary>
     public class Edit
     {
+        /// <summary>
+        /// Type of edit <see cref="Enums.EditType"/>
+        /// </summary>
         public string Type { get; set; }
+        
+        /// <summary>
+        /// Text or patterns to remove from the query string.
+        /// </summary>
         public string Delete { get; set; }
+        
+        /// <summary>
+        /// Text that should be inserted in place of the removed text inside the query string.
+        /// </summary>
         public string Insert { get; set; }
     }
 }

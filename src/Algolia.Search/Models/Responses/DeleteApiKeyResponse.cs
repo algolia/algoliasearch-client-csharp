@@ -28,12 +28,28 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Waitable delete api key response
+    /// </summary>
     public class DeleteApiKeyResponse : IAlgoliaWaitableResponse
     {
-        [JsonIgnore] public Func<string, ApiKey> GetApiKeyDelegate { get; set; }
-        [JsonIgnore] public string Key { get; set; }
+        [JsonIgnore] 
+        internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+
+        /// <summary>
+        /// The key to delete
+        /// </summary>
+        [JsonIgnore] 
+        public string Key { get; set; }
+
+        /// <summary>
+        /// Date of deletion
+        /// </summary>
         public DateTime DeletedAt { get; set; }
 
+        /// <summary>
+        /// Wait that the key doesn't exist anymore on the API side
+        /// </summary>
         public virtual void Wait()
         {
             while (true)

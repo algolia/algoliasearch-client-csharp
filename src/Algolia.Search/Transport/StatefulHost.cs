@@ -26,13 +26,39 @@ using System;
 
 namespace Algolia.Search.Transport
 {
+    /// <summary>
+    /// Algolia's stateful host
+    /// </summary>
     public class StatefulHost
     {
+        /// <summary>
+        /// Url endpoint without the scheme
+        /// </summary>
         public string Url { get; set; }
+        
+        /// <summary>
+        /// Is the host up or not
+        /// </summary>
         public bool Up { get; set; } = true;
+        
+        /// <summary>
+        /// Host's priority
+        /// </summary>
         public int Priority { get; set; }
+        
+        /// <summary>
+        /// Retry count
+        /// </summary>
         public int RetryCount { get; set; }
+        
+        /// <summary>
+        /// Last time the host has been used
+        /// </summary>
         public DateTime LastUse { get; set; } = DateTime.UtcNow;
+        
+        /// <summary>
+        /// Calltype accepted by the host
+        /// </summary>
         public CallType Accept { get; set; }
     }
 }

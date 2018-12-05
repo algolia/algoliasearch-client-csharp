@@ -23,9 +23,19 @@
 
 namespace Algolia.Search.Models.Analytics
 {
+    /// <summary>
+    /// Api Response
+    /// </summary>
     public class DeleteABTestResponse
     {
+        /// <summary>
+        /// The Task ID
+        /// </summary>
         public long TaskID { get; set; }
+        
+        /// <summary>
+        /// Index Name
+        /// </summary>
         public string Index { get; set; }
     }
 }

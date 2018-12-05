@@ -25,14 +25,30 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Used to create multiple get
+    /// </summary>
     public class MultipleGetObjectsRequest
     {
+        /// <summary>
+        /// List of requests
+        /// </summary>
         public IEnumerable<MultipleGetObject> Requests { get; set; }
     }
 
+    /// <summary>
+    /// Multiple request
+    /// </summary>
     public class MultipleGetObject
     {
+        /// <summary>
+        /// Index Name
+        /// </summary>
         public string IndexName { get; set; }
+
+        /// <summary>
+        /// ObjectID of the object to retrieve
+        /// </summary>
         public string ObjectID { get; set; }
     }
 }

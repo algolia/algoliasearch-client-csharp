@@ -30,6 +30,9 @@ namespace Algolia.Search.Models.Requests
     /// </summary>
     public class BrowseIndexQuery : SearchQuery
     {
+        /// <summary>
+        /// A cursor to retrieve the next chunk of data. 
+        /// </summary>
         public string Cursor { get; set; } = string.Empty;
     }
 }

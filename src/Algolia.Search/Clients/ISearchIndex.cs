@@ -32,136 +32,349 @@ using Algolia.Search.Models.Synonyms;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Batch;
 
 namespace Algolia.Search.Clients
 {
+    /// <summary>
+    /// Search index interface
+    /// </summary>
     public interface ISearchIndex
     {
+        /// <summary>
+        /// Index configuration
+        /// </summary>
         AlgoliaConfig Config { get; }
 
         /// <summary>
-        /// Add an object to the given index
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="requestOptions"></param>
+        /// This method allows you to create records on your index by sending one or more objects
+        /// Each object contains a set of attributes and values, which represents a full record on an index.
+        /// </summary>        
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         AddObjectResponse AddObject<T>(T data, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
-        /// Add an object to the given index
+        /// This method allows you to create records on your index by sending one or more objects
+        /// Each object contains a set of attributes and values, which represents a full record on an index.
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<AddObjectResponse> AddObjectAysnc<T>(T data, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
+        /// <inheritdoc />
         /// <summary>
         /// Update one or more attributes of an existing object.
+        /// This method enables you to update only a part of an object by singling out one or more attributes of an existing object and performing the following actions:
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null) where T : class;
+        UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null)
+            where T : class;
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Update one or more attributes of an existing object.
+        /// This method enables you to update only a part of an object by singling out one or more attributes of an existing object and performing the following actions:
+        /// </summary>
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Update one or more attributes of an existing object.
+        /// This method enables you to update only a part of an object by singling out one or more attributes of an existing object and performing the following actions:
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="datas">Datas to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data, RequestOptions requestOptions = null,
+        BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
+            where T : class;
+
+        /// <summary>
+        /// Update one or more attributes of an existing object.
+        /// This method enables you to update only a part of an object by singling out one or more attributes of an existing object and performing the following actions:
+        /// </summary>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="datas">Datas to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> datas,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+
+        /// <summary>
+        /// This method allows you to create records on your index by sending one or more objects
+        /// Each object contains a set of attributes and values, which represents a full record on an index.
+        /// </summary>
+        /// <param name="datas">Datas to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        BatchIndexingResponse AddObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
+            where T : class;
+
+        /// <summary>
+        /// This method allows you to create records on your index by sending one or more objects
+        /// Each object contains a set of attributes and values, which represents a full record on an index.
+        /// </summary>
+        /// <param name="datas">Datas to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<BatchIndexingResponse> AddObjectsAysnc<T>(IEnumerable<T> datas,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+
+        /// <summary>
+        /// Replace an existing object with an updated set of attributes.
+        /// </summary>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>>
+        BatchIndexingResponse SaveObject<T>(T data, RequestOptions requestOptions = null) where T : class;
+
+        /// <summary>
+        /// Replace an existing object with an updated set of attributes.
+        /// </summary>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<BatchIndexingResponse> SaveObjectAsync<T>(T data, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
-        /// Add objects to the given index
+        /// Replace an existing object with an updated set of attributes.
         /// </summary>
-        /// <param name="datas"></param>
-        /// <param name="requestOptions"></param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="datas">Datas to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        BatchIndexingResponse AddObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null) where T : class;
+        BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
+            where T : class;
 
         /// <summary>
-        /// Add objects to the given index
+        /// Replace an existing object with an updated set of attributes.
         /// </summary>
-        /// <param name="datas"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="datas">Datas to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <param name="autoGenerateObjectId"></param>
         /// <returns></returns>
-        Task<BatchIndexingResponse> AddObjectsAysnc<T>(IEnumerable<T> datas, RequestOptions requestOptions = null,
+        Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> datas,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            bool autoGenerateObjectId = false) where T : class;
+
+        /// <summary>
+        /// Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
+        /// Replace all records in an index without any downtime.
+        /// </summary>
+        /// <param name="datas">Datas to send</param>
+        /// <param name="safe">Run all api calls synchronously</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        MultiResponse ReplaceAllObjects<T>(IEnumerable<T> datas, bool safe = false,
+            RequestOptions requestOptions = null) where T : class;
+
+        /// <summary>
+        /// Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
+        /// Replace all records in an index without any downtime.
+        /// </summary>
+        /// <param name="datas">Datas to send</param>
+        /// <param name="safe">Run all api calls synchronously</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <returns></returns>
+        Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, bool safe = false,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+
+        /// <summary>
+        /// Batch the given request
+        /// </summary>
+        /// <typeparam name="T">Type of the object to send</typeparam>
+        /// <param name="operations">Operations to send to the api</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        BatchResponse Batch<T>(IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null)
+            where T : class;
+
+        /// <summary>
+        /// Perform several indexing operations in one API call.
+        /// </summary>
+        /// <typeparam name="T">Type of the object to send</typeparam>
+        /// <param name="operations">Operations to send to the api</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<BatchResponse> BatchAsync<T>(IEnumerable<BatchOperation<T>> operations,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+
+        /// <summary>
+        /// Perform several indexing operations in one API call.
+        /// </summary>
+        /// <typeparam name="T">Type of the object to send</typeparam>
+        /// <param name="request">Request to send to the api</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        BatchResponse Batch<T>(BatchRequest<T> request, RequestOptions requestOptions = null) where T : class;
+
+        /// <summary>
+        /// Perform several indexing operations in one API call.
+        /// </summary>
+        /// <typeparam name="T">Type of the object to send</typeparam>
+        /// <param name="request">Batch request</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<BatchResponse> BatchAsync<T>(BatchRequest<T> request, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
-        /// Remove objects from an index using its object id.
+        /// Remove objects from an index using their object ids.
         /// </summary>
-        /// <param name="objectId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="objectId">Algolia's objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         DeleteResponse DeleteObject(string objectId, RequestOptions requestOptions = null);
 
         /// <summary>
-        /// Remove objects from an index using its object id.
+        /// Remove objects from an index using their object ids.
         /// </summary>
-        /// <param name="objectId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="objectId">Algolia's objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteObjectAsync(string objectId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// Delete all the objects for their objectIds
+        /// Remove objects from an index using their object ids.
         /// </summary>
-        /// <param name="objectIds"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="objectIds">List of objectId</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        BatchIndexingResponse DeleteObjects(IEnumerable<string> objectIds, RequestOptions requestOptions = null);
+        BatchIndexingResponse
+            DeleteObjects(IEnumerable<string> objectIds, RequestOptions requestOptions = null);
 
         /// <summary>
-        /// Delete all the objects for their objectIds
+        /// Remove objects from an index using their object ids.
         /// </summary>
-        /// <param name="objectIds"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="objectIds">List of objectId</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<BatchIndexingResponse> DeleteObjectsAsync(IEnumerable<string> objectIds,
-            RequestOptions requestOptions = null,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Remove all objects matching a filter (including geo filters).
+        /// This method enables you to delete one or more objects based on filters (numeric, facet, tag or geo queries).
+        /// It does not accept empty filters or a query.        
+        /// </summary>
+        /// <param name="query">Search query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        DeleteResponse DeleteBy(SearchQuery query, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Remove all objects matching a filter (including geo filters).
+        /// This method enables you to delete one or more objects based on filters (numeric, facet, tag or geo queries).
+        /// It does not accept empty filters or a query.
+        /// </summary>
+        /// <param name="query">Search query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<DeleteResponse> DeleteByAsync(SearchQuery query, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// Search in the index for the given query
+        /// Clear the records of an index without affecting its settings.
+        /// This method enables you to delete an index’s contents (records) without removing any settings, rules and synonyms.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        DeleteResponse ClearObjects(RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Clear the records of an index without affecting its settings.
+        /// This method enables you to delete an index’s contents (records) without removing any settings, rules and synonyms.
+        /// </summary>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<DeleteResponse> ClearObjectsAsync(RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        ///  Method used for querying an index.
+        /// The search query only allows for the retrieval of up to 1000 hits. 
+        /// If you need to retrieve more than 1000 hits (e.g. for SEO), you can either leverage the Browse index method or increase the paginationLimitedTo parameter.
+        /// </summary>
+        /// <param name="query">Search query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         SearchResponse<T> Search<T>(SearchQuery query, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
-        ///  Search in the index for the given query
+        ///  Method used for querying an index.
+        /// The search query only allows for the retrieval of up to 1000 hits. 
+        /// If you need to retrieve more than 1000 hits (e.g. for SEO), you can either leverage the Browse index method or increase the paginationLimitedTo parameter.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="query">Search query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SearchResponse<T>> SearchAsync<T>(SearchQuery query, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
-        /// Get object for the specified ID
+        /// Search for a set of values within a given facet attribute. Can be combined with a query.
+        /// This method enables you to search through the values of a facet attribute, selecting only a subset of those values that meet a given criteria.
         /// </summary>
-        /// <param name="objectId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="query">Search for facet query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        SearchForFacetResponse SearchForFacetValue(SearchForFacetRequest query,
+            RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Search for a set of values within a given facet attribute. Can be combined with a query.
+        /// This method enables you to search through the values of a facet attribute, selecting only a subset of those values that meet a given criteria.
+        /// </summary>
+        /// <param name="query">Search for facet query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<SearchForFacetResponse> SearchForFacetValueAsync(SearchForFacetRequest query,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Get one or more objects using their object ids.
+        /// </summary>
+        /// <param name="objectId">Algolia's objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         T GetObject<T>(string objectId, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
-        /// Get the specified object by its objectID
+        /// Get one or more objects using their object ids.
         /// </summary>
-        /// <param name="objectId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="objectId">Algolia's objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<T> GetObjectAsync<T>(string objectId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
@@ -171,7 +384,7 @@ namespace Algolia.Search.Clients
         /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
         /// You can use the same query parameters as for a search query.
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="query">Browse index query</param>
         /// <returns></returns>
         IndexIterator<T> Browse<T>(BrowseIndexQuery query) where T : class;
 
@@ -180,8 +393,8 @@ namespace Algolia.Search.Clients
         /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
         /// You can use the same query parameters as for a search query.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="query">Browse index query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         BrowseIndexResponse<T> BrowseFrom<T>(BrowseIndexQuery query, RequestOptions requestOptions = null)
             where T : class;
@@ -191,176 +404,220 @@ namespace Algolia.Search.Clients
         /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
         /// You can use the same query parameters as for a search query.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="query">Browse index query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<BrowseIndexResponse<T>> BrowseFromAsync<T>(BrowseIndexQuery query, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class;
+        Task<BrowseIndexResponse<T>> BrowseFromAsync<T>(BrowseIndexQuery query,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
         /// Get the specified by its objectID
         /// </summary>
-        /// <param name="objectId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="objectId">Algolia's objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         Rule GetRule(string objectId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get the specified rule by its objectID
         /// </summary>
-        /// <param name="objectId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="objectId">Algolia's objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<Rule> GetRuleAsync(string objectId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// Search rules sync
+        /// Search for rules matching various criteria.
         /// </summary>
         /// <param name="query"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         SearchResponse<Rule> SearchRule(RuleQuery query = null, RequestOptions requestOptions = null);
 
         /// <summary>
-        /// Search query 
+        /// Search for rules matching various criteria.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="query">Rule query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<SearchResponse<Rule>> SearchRuleAsync(RuleQuery query = null, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+        Task<SearchResponse<Rule>> SearchRuleAsync(RuleQuery query = null,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        ///  Save rule 
+        /// Create or update a single rule.
         /// </summary>
-        /// <param name="rule"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="rule">Query rule</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         SaveRuleResponse SaveRule(Rule rule, RequestOptions requestOptions = null);
 
         /// <summary>
-        /// Save the given rule
+        /// Create or update a single rule.
         /// </summary>
-        /// <param name="rule"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="rule">Query rule</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
-
         /// <summary>
-        /// Batch rules
+        /// Create or update a specified set of rules, or all rules.
         /// </summary>
-        /// <param name="rules"></param>
-        /// <param name="forwardToReplicas"></param>
+        /// <param name="rules">List of rules</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="clearExistingRules"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         BatchResponse SaveRules(IEnumerable<Rule> rules, bool forwardToReplicas = false,
             bool clearExistingRules = false, RequestOptions requestOptions = null);
 
         /// <summary>
-        /// Batch rules
+        /// Create or update a specified set of rules, or all rules.
         /// </summary>
-        /// <param name="rules"></param>
-        /// <param name="forwardToReplicas"></param>
+        /// <param name="rules">List of rules</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="clearExistingRules"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false,
             bool clearExistingRules = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
+        /// Push a new set of rules and erase all previous ones.
+        /// This method, like replaceAllObjects, guarantees zero downtime.
+        /// All existing rules are deleted and replaced with the new ones, in a single, atomic operation
+        /// </summary>
+        /// <param name="rules">List of rules</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        BatchResponse ReplaceAllRules(IEnumerable<Rule> rules, bool forwardToReplicas = false,
+            RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Push a new set of rules and erase all previous ones.
+        /// This method, like replaceAllObjects, guarantees zero downtime.
+        /// All existing rules are deleted and replaced with the new ones, in a single, atomic operation
+        /// </summary>
+        /// <param name="rules">List of rules</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
         /// Delete the rule for the given ruleId
         /// </summary>
-        /// <param name="objectId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="objectId">Algolia's objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         DeleteResponse DeleteRule(string objectId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Delete the rule for the given ruleId
         /// </summary>
-        /// <param name="objectId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="objectId">Algolia's objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
+        /// Delete all rules in an index.
+        /// </summary>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        DeleteResponse ClearRules(RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Delete all rules in an index.
+        /// </summary>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<DeleteResponse> ClearRulesAsync(RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
         /// Get settings for the given index
         /// </summary>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         IndexSettings GetSettings(RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get settings for the given index
         /// </summary>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<IndexSettings> GetSettingsAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// Set settings
+        /// Create or change an index’s settings.
+        /// Only specified settings are overridden; unspecified settings are left unchanged. 
+        /// Specifying null for a setting resets it to its default value.
         /// </summary>
-        /// <param name="settings"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="settings">Algolia's index settings</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         SetSettingsResponse SetSettings(IndexSettings settings, RequestOptions requestOptions = null);
 
         /// <summary>
-        /// Set settings for the given index
+        /// Create or change an index’s settings.
+        /// Only specified settings are overridden; unspecified settings are left unchanged. 
+        /// Specifying null for a setting resets it to its default value.
         /// </summary>
-        /// <param name="settings"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="settings">Algolia's index settings</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+        Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Get all synonyms that match a query.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="query">Synonym query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         SearchResponse<Synonym> SearchSynonyms(SynonymQuery query, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get all synonyms that match a query.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="query">Synonym query</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<SearchResponse<Synonym>> SearchSynonymsAsync(SynonymQuery query, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+        Task<SearchResponse<Synonym>> SearchSynonymsAsync(SynonymQuery query,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Get a single synonym using its object id.
         /// </summary>
-        /// <param name="synonymObjectId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="synonymObjectId">The synonym objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         Synonym GetSynonym(string synonymObjectId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get a single synonym using its object id.
         /// </summary>
-        /// <param name="synonymObjectId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="synonymObjectId">The synonym objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<Synonym> GetSynonymAsync(string synonymObjectId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
@@ -368,10 +625,10 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Create or update multiple synonyms.
         /// </summary>
-        /// <param name="synonyms"></param>
-        /// <param name="forwardToReplicas"></param>
+        /// <param name="synonyms">List of synonyms</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="replaceExistingSynonyms"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
             bool replaceExistingSynonyms = false, RequestOptions requestOptions = null);
@@ -379,30 +636,56 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Create or update multiple synonyms.
         /// </summary>
-        /// <param name="synonyms"></param>
-        /// <param name="forwardToReplicas"></param>
+        /// <param name="synonyms">List of synonyms</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="replaceExistingSynonyms"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
-            bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
+        Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms,
+            bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Push a new set of synonyms and erase all previous ones.
+        /// This method, like replaceAllObjects, guarantees zero downtime.
+        /// All existing synonyms are deleted and replaced with the new ones, in a single, atomic operation
+        /// </summary>
+        /// <param name="synonyms">List of synonyms</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        SaveSynonymResponse ReplaceAllSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
+            RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Push a new set of synonyms and erase all previous ones.
+        /// This method, like replaceAllObjects, guarantees zero downtime.
+        /// All existing synonyms are deleted and replaced with the new ones, in a single, atomic operation
+        /// </summary>
+        /// <param name="synonyms">List of synonyms</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<SaveSynonymResponse> ReplaceAllSynonymsAsync(IEnumerable<Synonym> synonyms,
+            bool forwardToReplicas = false, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Create or update a single synonym on an index.
         /// </summary>
-        /// <param name="synonym"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="synonym">Algolia's synonym</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Create or update a single synonym on an index.
         /// </summary>
-        /// <param name="synonym"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="synonym">Algolia's synonym</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> SaveSynonymAsync(Synonym synonym, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
@@ -410,90 +693,113 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Remove a single synonym from an index using its object id.
         /// </summary>
-        /// <param name="synonymObjectId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="synonymObjectId">The synonym objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         DeleteResponse DeleteSynonym(string synonymObjectId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Remove a single synonym from an index using its object id.
         /// </summary>
-        /// <param name="synonymObjectId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="synonymObjectId">The synonym objectID</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+        Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Remove all synonyms from an index.
         /// </summary>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         ClearSynonymsResponse ClearSynonyms(RequestOptions requestOptions = null);
 
         /// <summary>
         /// Remove all synonyms from an index.
         /// </summary>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<ClearSynonymsResponse> ClearSynonymsAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
         /// </summary>
-        /// <param name="destinationIndex"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="destinationIndex">The destination index</param>
+        /// <param name="scope">The scope copy</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        MoveIndexResponse MoveFrom(string destinationIndex, RequestOptions requestOptions = null);
+        CopyToResponse CopyTo(string destinationIndex, IEnumerable<string> scope = null,
+            RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
+        /// </summary>
+        /// <param name="destinationIndex">The destination index</param>
+        /// <param name="scope">The scope copy</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<CopyToResponse> CopyToAsync(string destinationIndex, IEnumerable<string> scope = null,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Rename an index. Normally used to reindex your data atomically, without any down time.
         /// </summary>
-        /// <param name="destinationIndex"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="sourceIndex"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        Task<MoveIndexResponse> MoveFromAsync(string destinationIndex, RequestOptions requestOptions = null,
+        MoveIndexResponse MoveFrom(string sourceIndex, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Rename an index. Normally used to reindex your data atomically, without any down time.
+        /// </summary>
+        /// <param name="sourceIndex"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<MoveIndexResponse> MoveFromAsync(string sourceIndex, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// This function waits for the Algolia's API task to finish
+        /// Wait for a task to complete before executing the next line of code, to synchronize index updates.
+        /// All write operations in Algolia are asynchronous by design.
         /// </summary>
-        /// <param name="taskID"></param>
+        /// <param name="taskId"></param>
         /// <param name="timeToWait"></param>
-        /// <param name="requestOptions"></param>
-        void WaitTask(long taskID, int timeToWait = 100, RequestOptions requestOptions = null);
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        void WaitTask(long taskId, int timeToWait = 100, RequestOptions requestOptions = null);
 
         /// <summary>
-        /// This function waits for the Algolia's API task to finish
+        /// Wait for a task to complete before executing the next line of code, to synchronize index updates.
+        /// All write operations in Algolia are asynchronous by design.
         /// </summary>
-        /// <param name="taskID">The task ID to wait</param>
+        /// <param name="taskId">The task ID to wait</param>
         /// <param name="timeToWait"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task WaitTaskAsync(long taskID, int timeToWait = 100, RequestOptions requestOptions = null,
+        Task WaitTaskAsync(long taskId, int timeToWait = 100, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// Get the status of the given task
         /// </summary>
-        /// <param name="taskID"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="taskId"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        TaskStatusResponse GetTask(long taskID, RequestOptions requestOptions = null);
+        TaskStatusResponse GetTask(long taskId, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get the status of the given task
         /// </summary>
-        /// <param name="taskID"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="taskId"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<TaskStatusResponse> GetTaskAsync(long taskID, RequestOptions requestOptions = null,
+        Task<TaskStatusResponse> GetTaskAsync(long taskId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
     }
 }

@@ -34,6 +34,9 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {
+    /// <summary>
+    /// Algolia Analytics Client
+    /// </summary>
     public class AnalyticsClient : IAnalyticsClient
     {
         private readonly IRequesterWrapper _requesterWrapper;
@@ -97,7 +100,7 @@ namespace Algolia.Search.Clients
         /// Get an A/B test information and results.
         /// </summary>
         /// <param name="abTestId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         public ABTest GetABTest(long abTestId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetABTestAsync(abTestId, requestOptions));
@@ -106,8 +109,8 @@ namespace Algolia.Search.Clients
         /// Get an A/B test information and results.
         /// </summary>
         /// <param name="abTestId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         public async Task<ABTest> GetABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
@@ -122,7 +125,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="offset"></param>
         /// <param name="limit"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         public ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetABTestsAsync(offset, limit, requestOptions));
@@ -132,8 +135,8 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="offset"></param>
         /// <param name="limit"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
@@ -155,7 +158,7 @@ namespace Algolia.Search.Clients
         /// Creates a new AB Test with provided configuration.
         /// </summary>
         /// <param name="aBTest"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         public AddABTestResponse AddABTest(ABTest aBTest, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => AddABTestAsync(aBTest, requestOptions));
@@ -164,8 +167,8 @@ namespace Algolia.Search.Clients
         /// Creates a new AB Test with provided configuration.
         /// </summary>
         /// <param name="aBTest"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         public async Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
@@ -181,7 +184,7 @@ namespace Algolia.Search.Clients
         /// Associated metadata and metrics are still stored
         /// </summary>
         /// <param name="abTestId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         public StopABTestResponse StopABTest(long abTestId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => StopABTestAsync(abTestId, requestOptions));
@@ -192,8 +195,8 @@ namespace Algolia.Search.Clients
         /// Associated metadata and metrics are still stored
         /// </summary>
         /// <param name="abTestId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         public async Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
@@ -204,20 +207,20 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
-        /// Deletes the A/B Test and removes all associated metadata & metrics.
+        /// Deletes the A/B Test and removes all associated metadata and metrics.
         /// </summary>
         /// <param name="abTestId"></param>
-        /// <param name="requestOptions"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
         public DeleteABTestResponse DeleteABTest(long abTestId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => DeleteABTestAsync(abTestId, requestOptions));
 
         /// <summary>
-        /// Deletes the A/B Test and removes all associated metadata & metrics.
+        /// Deletes the A/B Test and removes all associated metadata and metrics.
         /// </summary>
         /// <param name="abTestId"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         public async Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))

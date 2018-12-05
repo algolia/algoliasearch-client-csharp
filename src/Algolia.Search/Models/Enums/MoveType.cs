@@ -23,9 +23,19 @@
 
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// Move operation
+    /// </summary>
     public class MoveType
     {
+        /// <summary>
+        /// Move the index
+        /// </summary>
         public const string Move = "move";
+        
+        /// <summary>
+        /// Copy the index
+        /// </summary>
         public const string Copy = "copy";
     }
 }

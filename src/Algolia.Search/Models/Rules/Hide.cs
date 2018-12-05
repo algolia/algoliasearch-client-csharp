@@ -23,8 +23,14 @@
 
 namespace Algolia.Search.Models.Rules
 {
+    /// <summary>
+    /// Objects to hide from hits. Each object must contain an objectID field
+    /// </summary>
     public class Hide
     {
+        /// <summary>
+        /// ObjectID to hide
+        /// </summary>
         public string ObjectID { get; set; }
     }
 }

@@ -27,13 +27,27 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Rules
 {
+    /// <summary>
+    /// Consequence params
+    /// </summary>
     public class ConsequenceParams
     {
+        /// <summary>
+        /// When providing a string, it replaces the entire query string.
+        ///  When providing an object, it describes incremental edits to be made to the query string (but you can’t do both).
+        /// </summary>
         public ConsequenceQuery Query { get; set; }
 
+        /// <summary>
+        /// Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
+        /// </summary>
         [JsonConverter(typeof(AutomaticFacetFiltersConverter))]
         public List<AutomaticFacetFilter> AutomaticFacetFilters { get; set; }
 
+        /// <summary>
+        /// Same syntax as automaticFacetFilters, but the engine treats the filters as optional. 
+        /// Behaves like optionalFilters.
+        /// </summary>
         public List<AutomaticFacetFilter> AutomaticOptionalFacetFilters { get; set; }
     }
 }

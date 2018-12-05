@@ -23,13 +23,40 @@
 
 namespace Algolia.Search.Models.Rules
 {
+    /// <summary>
+    /// Rule query matching various criteria.
+    /// </summary>
     public class RuleQuery
     {
+        /// <summary>
+        /// Full text query.
+        /// </summary>
         public string Query { get; set; } = string.Empty;
+
+        /// <summary>
+        /// When specified, restricts matches to rules with a specific anchoring type. When omitted, all anchoring types may match. 
+        /// </summary>
         public string Anchoring { get; set; }
+
+        /// <summary>
+        /// Restricts matches to contextual rules with a specific context (exact match).
+        /// </summary>
         public string Context { get; set; }
+
+        /// <summary>
+        /// Requested page (zero-based).
+        /// </summary>
         public int? Page { get; set; }
+
+        /// <summary>
+        /// Maximum number of hits in a page. Minimum is 1, maximum is 1000.
+        /// </summary>
         public int? HitsPerPage { get; set; }
+
+        /// <summary>
+        /// When specified, restricts matches to rules with a specific enabled status. 
+        /// When absent (default), all rules are retrieved, regardless of their enabled status.
+        /// </summary>
         public bool? Enabled { get; set; }
     }
 }

@@ -26,11 +26,24 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Analytics
 {
+    /// <summary>
+    /// Api response
+    /// </summary>
     public class ABTestsReponse
     {
+        /// <summary>
+        /// The count
+        /// </summary>
         public int Count { get; set; }
+        
+        /// <summary>
+        /// The total
+        /// </summary>
         public int Total { get; set; }
 
+        /// <summary>
+        /// List of AbTests
+        /// </summary>
         [JsonProperty(PropertyName = "abtests")]
         public IEnumerable<ABTest> ABTests { get; set; }
     }

@@ -25,9 +25,20 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Analytics
 {
+    /// <summary>
+    /// Api response
+    /// </summary>
     public class StopABTestResponse
     {
+        
+        /// <summary>
+        /// The task ID
+        /// </summary>
         public long TaskID { get; set; }
+        
+        /// <summary>
+        /// The index name
+        /// </summary>
         public string Index { get; set; }
     }
 }

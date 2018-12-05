@@ -68,8 +68,8 @@ namespace Algolia.Search.Transport
         /// <param name="method"></param>
         /// <param name="uri"></param>
         /// <param name="callType"></param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType,
             RequestOptions requestOptions = null,
@@ -88,8 +88,8 @@ namespace Algolia.Search.Transport
         /// <param name="uri"></param>
         /// <param name="callType"></param>
         /// <param name="data">Your data</param>
-        /// <param name="requestOptions"></param>
-        /// <param name="ct"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType,
             TData data = default(TData), RequestOptions requestOptions = null,
@@ -140,8 +140,8 @@ namespace Algolia.Search.Transport
         /// <summary>
         /// Generate stream for serializing objects
         /// </summary>
-        /// <param name="data"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <param name="data">Data to send</param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
         private MemoryStream CreateRequestContent<T>(T data)
         {

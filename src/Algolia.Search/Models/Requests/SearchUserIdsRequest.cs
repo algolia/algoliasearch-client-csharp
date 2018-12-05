@@ -23,11 +23,29 @@
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Search user Ids Request
+    /// </summary>
     public class SearchUserIdsRequest
     {
+        /// <summary>
+        /// Query to search. The search is a prefix search with typoTolerance. Use empty query to retrieve all users.
+        /// </summary>
         public string Query { get; set; }
+
+        /// <summary>
+        /// If specified only clusters assigned to this cluster can be returned.
+        /// </summary>
         public string Cluster { get; set; }
+
+        /// <summary>
+        /// Page to fetch.
+        /// </summary>
         public int Page { get; set; }
+
+        /// <summary>
+        /// Number of users to return by page.
+        /// </summary>
         public int HitsPerPage { get; set; }
     }
 }

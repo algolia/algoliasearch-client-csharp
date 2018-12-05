@@ -22,23 +22,98 @@
 */
 
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/get-logs/
+    /// </summary>
     public class LogResponse
     {
+        /// <summary>
+        /// List of logs
+        /// </summary>
         public IEnumerable<Log> Logs { get; set; }
     }
 
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/get-logs/
+    /// </summary>
     public class Log
     {
+        /// <summary>
+        /// Timestamp in ISO-8601 format.
+        /// </summary>
         public string TimeStamp { get; set; }
+
+        /// <summary>
+        /// Rest type of the method.
+        /// </summary>
         public string Method { get; set; }
+
+        /// <summary>
+        /// Http response code.
+        /// </summary>
         public string AnswerCode { get; set; }
+
+        /// <summary>
+        /// Request body. It’s truncated after 1000 characters.
+        /// </summary>
         public string QueryBody { get; set; }
+
+        /// <summary>
+        /// Answer body. It’s truncated after 1000 characters.
+        /// </summary>
         public string Answer { get; set; }
+
+        /// <summary>
+        /// Request URL.
+        /// </summary>
         public string Url { get; set; }
+
+        /// <summary>
+        /// Client ip of the call.
+        /// </summary>
         public string Ip { get; set; }
+
+        /// <summary>
+        /// SHA1 ID of entry.
+        /// </summary>
         public string Sha1 { get; set; }
+
+        /// <summary>
+        /// Request Headers (API Key is obfuscated).
+        /// </summary>
+        [JsonProperty(PropertyName = "query_headers")]
+        public string QueryHeaders { get; set; }
+
+        /// <summary>
+        /// Number Of Api Calls
+        /// </summary>
+        [JsonProperty(PropertyName = "nb_api_calls")]
+        public string NumberOfApiCalls { get; set; }
+
+        /// <summary>
+        /// Processing time for the query. This does not include network time.
+        /// </summary>
+        [JsonProperty(PropertyName = "processing_time_ms")]
+        public string ProcessingTimeMs { get; set; }
+
+        /// <summary>
+        /// Number of hits returned for the query.
+        /// </summary>
+        [JsonProperty(PropertyName = "query_nb_hits")]
+        public string NumberOfQueryHits { get; set; }
+
+        /// <summary>
+        /// Exhaustive flags used during the query.
+        /// </summary>
+        public bool? Exhaustive { get; set; }
+
+        /// <summary>
+        /// Index name of the log
+        /// </summary>
+        public string Index { get; set; }
     }
 }

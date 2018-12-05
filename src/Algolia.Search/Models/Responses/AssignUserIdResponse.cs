@@ -29,14 +29,27 @@ using Algolia.Search.Utils;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Waitable response of assignUserid method
+    /// </summary>
     public class AssignUserIdResponse : IAlgoliaWaitableResponse
     {
-        public Func<string, UserIdResponse> GetUserDelegate { get; set; }
+        internal Func<string, UserIdResponse> GetUserDelegate { get; set; }
 
+        /// <summary>
+        /// The user Id
+        /// </summary>
         public string UserId { get; set; }
 
+        /// <summary>
+        /// Date of creation of the userId
+        /// </summary>
         public DateTime CreatedAt { get; set; }
 
+        /// <summary>
+        /// Wait until the userID is created on the API
+        /// Loop until httpErrorCode != 404
+        /// </summary>
         public void Wait()
         {
             while (true)

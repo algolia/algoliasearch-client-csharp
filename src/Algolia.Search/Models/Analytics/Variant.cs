@@ -24,20 +24,63 @@
 namespace Algolia.Search.Models.Analytics
 {
     /// <summary>
-    /// https://www.algolia.com/doc/rest-api/ab-test/?language=php#add-ab-test
+    /// https://www.algolia.com/doc/api-reference/api-methods/add-ab-test/#method-param-variant
     /// </summary>
     public class Variant
     {
+        /// <summary>
+        /// The index name
+        /// </summary>
         public string Index { get; set; }
+        
+        /// <summary>
+        /// Percentage of the traffic that should be going to the variant. The sum of the percentage should be equal to 100.
+        /// </summary>
         public int TrafficPercentage { get; set; }
+        
+        /// <summary>
+        /// Description of the variant. This is useful when seing the results in the dashboard or via the API.
+        /// </summary>
         public string Description { get; set; }
+        
+        /// <summary>
+        /// Average click position for the variant.
+        /// </summary>
         public int AverageClickPostion { get; set; }
+        
+        /// <summary>
+        /// Distinct click count for the variant.
+        /// </summary>
         public int ClickCount { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public float ClickThroughRate { get; set; }
+        
+        /// <summary>
+        /// Click through rate for the variant.
+        /// </summary>
         public int ConversionCount { get; set; }
+        
+        /// <summary>
+        /// Distinct conversion count for the variant.
+        /// </summary>
         public float ConversionRate { get; set; }
+        
+        /// <summary>
+        /// No result count
+        /// </summary>
         public int NoResultCount { get; set; }
+        
+        /// <summary>
+        /// Search count
+        /// </summary>
         public int SearchCount { get; set; }
+        
+        /// <summary>
+        /// user Count
+        /// </summary>
         public int UserCount { get; set; }
     }
 }

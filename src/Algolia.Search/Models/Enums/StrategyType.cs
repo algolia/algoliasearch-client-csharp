@@ -23,9 +23,20 @@
 
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// Query strategy type
+    /// </summary>
     public class StrategyType
     {
+        
+        /// <summary>
+        /// No strategy
+        /// </summary>
         public const string None = "none";
+        
+        /// <summary>
+        /// Stop if enough matches
+        /// </summary>
         public const string StopIfEnoughMatches = "stopIfEnoughMatches";
     }
 }

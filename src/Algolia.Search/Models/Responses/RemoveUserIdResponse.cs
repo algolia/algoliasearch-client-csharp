@@ -28,14 +28,27 @@ using Algolia.Search.Utils;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Waitable response for removeUserId
+    /// </summary>
     public class RemoveUserIdResponse : IAlgoliaWaitableResponse
     {
-        public Func<string, RemoveUserIdResponse> RemoveDelegate { get; set; }
+        internal Func<string, RemoveUserIdResponse> RemoveDelegate { get; set; }
 
+        /// <summary>
+        /// UserId to remove
+        /// </summary>
         public string UserId { get; set; }
 
+        /// <summary>
+        /// Date of deletion
+        /// </summary>
         public DateTime DeletedAt { get; set; }
 
+        /// <summary>
+        /// As the delete operation is asynchronous
+        /// Wait until the userId is deleted on the API
+        /// </summary>
         public void Wait()
         {
             RemoveUserIdResponse deleteResponse;

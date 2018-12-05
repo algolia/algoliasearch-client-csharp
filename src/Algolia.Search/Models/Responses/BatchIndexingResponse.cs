@@ -25,10 +25,19 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Batch Indexing response. Composed of multiple batch responses.
+    /// </summary>
     public class BatchIndexingResponse : IAlgoliaWaitableResponse
     {
+        /// <summary>
+        /// List of responses
+        /// </summary>
         public List<BatchResponse> Responses { get; set; }
 
+        /// <summary>
+        /// Wait for all request to finish on the API side
+        /// </summary>
         public void Wait()
         {
             foreach (var response in Responses)

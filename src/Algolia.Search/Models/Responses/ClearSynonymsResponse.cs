@@ -25,8 +25,14 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's clear synonyms response
+    /// </summary>
     public class ClearSynonymsResponse : IndexingResponse
     {
+        /// <summary>
+        /// Date of update
+        /// </summary>
         public DateTime UpdatedAt { get; set; }
     }
 }

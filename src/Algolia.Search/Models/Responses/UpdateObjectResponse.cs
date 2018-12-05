@@ -25,9 +25,19 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's update object response
+    /// </summary>
     public class UpdateObjectResponse : IndexingResponse
     {
+        /// <summary>
+        /// Date of update
+        /// </summary>
         public DateTime UpdatedAt { get; set; }
+        
+        /// <summary>
+        /// ObjectId updated
+        /// </summary>
         public string ObjectID { get; set; }
     }
 }

@@ -23,10 +23,24 @@
 
 namespace Algolia.Search.Models.Batch
 {
+    /// <summary>
+    /// Represent an algolia batch object
+    /// </summary>
     public class BatchOperation<T> where T : class
     {
+        /// <summary>
+        /// Type of batch see <see cref="Enums.BatchActionType"/>
+        /// </summary>
         public string Action { get; set; }
+        
+        /// <summary>
+        /// The index name on which you want to perform the operation
+        /// </summary>
         public string IndexName { get; set; }
+        
+        /// <summary>
+        /// Body of the batch, objects you want to send
+        /// </summary>
         public T Body { get; set; }
     }
 }

@@ -25,9 +25,19 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Http
 {
+    /// <summary>
+    /// Request option you can add to your queries
+    /// </summary>
     public class RequestOptions
     {
+        /// <summary>
+        /// Custom headers will override default headers if they exist
+        /// </summary>
         public Dictionary<string, string> Headers { get; set; }
+        
+        /// <summary>
+        /// Add custom queries parameters
+        /// </summary>
         public Dictionary<string, string> QueryParameters { get; set; }
     }
 }

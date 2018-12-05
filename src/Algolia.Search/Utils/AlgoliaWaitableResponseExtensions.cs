@@ -26,8 +26,16 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Utils
 {
+    /// <summary>
+    /// Extensions methods regarding algolia waitable responses
+    /// </summary>
     public static class AlgoliaWaitableResponseExtensions
     {
+        /// <summary>
+        /// Wait on multiple algolia responses
+        /// </summary>
+        /// <param name="responses"></param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         public static void Wait<T>(this IEnumerable<IndexingResponse> responses) where T : IndexingResponse
         {
             foreach (var response in responses)

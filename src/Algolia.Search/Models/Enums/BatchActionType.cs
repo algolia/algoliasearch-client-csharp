@@ -23,14 +23,45 @@
 
 namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// Actions that need to be performed
+    /// https://www.algolia.com/doc/api-reference/api-methods/batch/
+    /// </summary>
     public static class BatchActionType
     {
+        /// <summary>
+        /// https://www.algolia.com/doc/api-reference/api-methods/batch/?language=csharp#method-param-operation
+        /// </summary>
         public const string AddObject = "addObject";
+
+        /// <summary>
+        /// https://www.algolia.com/doc/api-reference/api-methods/batch/?language=csharp#method-param-operation
+        /// </summary>
         public const string UpdateObject = "updateObject";
+
+        /// <summary>
+        /// https://www.algolia.com/doc/api-reference/api-methods/batch/?language=csharp#method-param-operation
+        /// </summary>
         public const string PartialUpdateObject = "partialUpdateObject";
+
+        /// <summary>
+        /// https://www.algolia.com/doc/api-reference/api-methods/batch/?language=csharp#method-param-operation
+        /// </summary>
         public const string PartialUpdateObjectNoCreate = "partialUpdateObjectNoCreate";
+
+        /// <summary>
+        /// https://www.algolia.com/doc/api-reference/api-methods/batch/?language=csharp#method-param-operation
+        /// </summary>
         public const string DeleteObject = "deleteObject";
+
+        /// <summary>
+        /// https://www.algolia.com/doc/api-reference/api-methods/batch/?language=csharp#method-param-operation
+        /// </summary>
         public const string Delete = "delete";
+
+        /// <summary>
+        /// https://www.algolia.com/doc/api-reference/api-methods/batch/?language=csharp#method-param-operation
+        /// </summary>
         public const string Clear = "clear";
     }
 }

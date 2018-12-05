@@ -26,6 +26,9 @@ using System.Linq;
 
 namespace Algolia.Search.Utils
 {
+    /// <summary>
+    /// Helper regarding dictionary mergning
+    /// </summary>
     public static class DictionaryHelper
     {
         /// <summary>

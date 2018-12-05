@@ -23,9 +23,19 @@
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Algolia's asynchronous task
+    /// </summary>
     public class TaskStatusResponse
     {
+        /// <summary>
+        /// The status of the task
+        /// </summary>
         public string Status { get; set; }
+
+        /// <summary>
+        /// Is the task pending
+        /// </summary>
         public bool PendingTask { get; set; }
     }
 }

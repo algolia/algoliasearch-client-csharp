@@ -25,8 +25,14 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Multiple get objects
+    /// </summary>
     public class MultipleGetObjectsResponse<T> where T : class
     {
+        /// <summary>
+        /// List of results
+        /// </summary>
         public IEnumerable<T> Results { get; set; }
     }
 }

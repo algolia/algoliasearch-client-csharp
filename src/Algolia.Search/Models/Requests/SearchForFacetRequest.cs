@@ -26,11 +26,27 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Requests
 {
+    /// <summary>
+    /// Search for facets
+    /// </summary>
     public class SearchForFacetRequest
     {
-        [JsonIgnore] public string FacetName { get; set; }
+        /// <summary>
+        /// Attribute name.
+        /// Note that for this to work, attribute must be declared in the attributesForFaceting index setting with the searchable() modifier.
+        /// </summary>
+        [JsonIgnore]
+        public string FacetName { get; set; }
+
+        /// <summary>
+        /// The search query used to search the facet attribute. 
+        /// Follows the same rules for an index query: a single character, a partial word, a word, or a phrase
+        /// </summary>
         public string FacetQuery { get; set; }
 
+        /// <summary>
+        /// Search parameters to be used to search the underlying index
+        /// </summary>
         [JsonProperty(PropertyName = "requests")]
         public SearchQuery SearchParameters { get; set; }
     }

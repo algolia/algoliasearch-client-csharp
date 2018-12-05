@@ -25,9 +25,19 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Add api key api response
+    /// </summary>
     public class AddApiKeyResponse
     {
+        /// <summary>
+        /// The returned api key
+        /// </summary>
         public string Key { get; set; }
+
+        /// <summary>
+        /// Date of creation of the api key
+        /// </summary>
         public DateTime CreatedAt { get; set; }
     }
 }

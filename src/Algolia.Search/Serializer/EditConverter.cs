@@ -30,8 +30,20 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Serializer
 {
+    /// <summary>
+    /// Custom converter for legacy EDIT objects
+    /// </summary>
     public class EditConverter : JsonConverter<IEnumerable<Edit>>
     {
+        /// <summary>
+        /// Converter for handling legacy Edit
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="objectType"></param>
+        /// <param name="existingValue"></param>
+        /// <param name="hasExistingValue"></param>
+        /// <param name="serializer"></param>
+        /// <returns></returns>
         public override IEnumerable<Edit> ReadJson(JsonReader reader, Type objectType, IEnumerable<Edit> existingValue,
             bool hasExistingValue, JsonSerializer serializer)
         {
@@ -49,17 +61,26 @@ namespace Algolia.Search.Serializer
                 string type = isObject ? token.Value<string>("type") : EditType.Remove;
                 string insert = isObject ? token.Value<string>("insert") : null;
 
-                ret.Add(new Edit {Type = type, Delete = delete, Insert = insert});
+                ret.Add(new Edit { Type = type, Delete = delete, Insert = insert });
             }
 
             return ret;
         }
 
+        /// <summary>
+        /// No need to implement this method as we want to keep the default writer
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, IEnumerable<Edit> value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
-
+        
+        /// <summary>
+        /// Disable write JSOn
+        /// </summary>
         public override bool CanWrite => false;
     }
 }

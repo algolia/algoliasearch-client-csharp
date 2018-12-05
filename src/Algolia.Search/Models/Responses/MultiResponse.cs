@@ -30,8 +30,14 @@ namespace Algolia.Search.Models.Responses
     /// </summary>
     public class MultiResponse : IAlgoliaWaitableResponse
     {
+        /// <summary>
+        /// List of waitable responses
+        /// </summary>
         public List<IAlgoliaWaitableResponse> Responses { get; set; }
 
+        /// <summary>
+        /// Wait for different asynchronous operations to finish
+        /// </summary>
         public void Wait()
         {
             foreach (var response in Responses)

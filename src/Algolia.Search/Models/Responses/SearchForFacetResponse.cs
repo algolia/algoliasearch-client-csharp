@@ -25,17 +25,45 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/search-for-facet-values/
+    /// </summary>
     public class SearchForFacetResponse
     {
+        /// <summary>
+        /// List of facet hit
+        /// </summary>
         public IEnumerable<FacetHit> FacetHits { get; set; }
+
+        /// <summary>
+        /// Whether the count returned for each facetHit is exhaustive.
+        /// </summary>
         public bool ExhaustiveFacetsCount { get; set; }
+
+        /// <summary>
+        /// Processing time.
+        /// </summary>
         public int ProcessingTimeMS { get; set; }
     }
 
+    /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/search-for-facet-values/
+    /// </summary>
     public class FacetHit
     {
+        /// <summary>
+        /// Facet value.
+        /// </summary>
         public string Value { get; set; }
+
+        /// <summary>
+        /// Highlighted value.
+        /// </summary>
         public string Highlighted { get; set; }
+
+        /// <summary>
+        /// Number of times the value is present in the dataset.
+        /// </summary>
         public long Count { get; set; }
     }
 }

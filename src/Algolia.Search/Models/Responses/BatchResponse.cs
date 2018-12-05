@@ -25,8 +25,14 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's batch response
+    /// </summary>
     public class BatchResponse : IndexingResponse
     {
+        /// <summary>
+        /// List of objectIds
+        /// </summary>
         public IEnumerable<string> ObjectIDs { get; set; }
     }
 }

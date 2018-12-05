@@ -30,11 +30,36 @@ namespace Algolia.Search.Models.Rules
     /// </summary>
     public class Rule
     {
+
+        /// <summary>
+        /// Unique identifier for the rule (format: [A-Za-z0-9_-]+).
+        /// </summary>
         public string ObjectID { get; set; }
+
+        /// <summary>
+        /// Condition of the rule, expressed using the following variables: pattern, anchoring, context.
+        /// </summary>
         public Condition Condition { get; set; }
+
+        /// <summary>
+        /// Consequence of the rule. At least one of the following object must be used: params, promote, hide, userData
+        /// </summary>
         public Consequence Consequence { get; set; }
+
+        /// <summary>
+        /// This field is intended for rule management purposes, in particular to ease searching for rules and presenting them to human readers. It is not interpreted by the API.
+        /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Whether the rule is enabled. Disabled rules remain in the index, but are not applied at query time.
+        /// </summary>
         public bool? Enabled { get; set; }
+
+        /// <summary>
+        /// By default, rules are permanently valid. When validity periods are specified, the rule applies only during those periods; it is ignored the rest of the time. 
+        /// The list must not be empty.
+        /// </summary>
         public IEnumerable<TimeRange> Validity { get; set; }
     }
 }

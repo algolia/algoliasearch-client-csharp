@@ -25,8 +25,14 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's delete response
+    /// </summary>
     public class DeleteResponse : IndexingResponse
     {
+        /// <summary>
+        /// Date of deletion
+        /// </summary>
         public DateTime DeletedAt { get; set; }
     }
 }

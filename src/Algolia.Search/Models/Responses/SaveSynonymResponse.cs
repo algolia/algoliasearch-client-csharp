@@ -25,9 +25,19 @@ using System;
 
 namespace Algolia.Search.Models.Responses
 {
+    /// <summary>
+    /// Api's save synonym response
+    /// </summary>
     public class SaveSynonymResponse : IndexingResponse
     {
+        /// <summary>
+        /// Date of update
+        /// </summary>
         public DateTime UpdatedAt { get; set; }
+        
+        /// <summary>
+        /// Synonym ID
+        /// </summary>
         public string Id { get; set; }
     }
 }
