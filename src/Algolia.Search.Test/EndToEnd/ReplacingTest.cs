@@ -47,19 +47,19 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestReplacing()
         {
-            var addResponse = _index.AddObjectAysnc(new ReplaceAllTestObject {ObjectID = "one"});
+            var addResponse = _index.AddObjectAysnc(new ReplaceAllTestObject { ObjectID = "one" });
 
             var ruleToSave = new Rule
             {
                 ObjectID = "one",
-                Condition = new Condition {Anchoring = "is", Pattern = "pattern"},
+                Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
                     {
                         Query = new ConsequenceQuery
                         {
-                            Edits = new List<Edit> {new Edit {Type = EditType.Remove, Delete = "pattern"}}
+                            Edits = new List<Edit> { new Edit { Type = EditType.Remove, Delete = "pattern" } }
                         }
                     }
                 }
@@ -71,7 +71,7 @@ namespace Algolia.Search.Test.EndToEnd
             {
                 ObjectID = "one",
                 Type = SynonymType.Synonym,
-                Synonyms = new List<string> {"one", "two"}
+                Synonyms = new List<string> { "one", "two" }
             };
 
             var saveSynonymResponse = _index.SaveSynonymAsync(synonymToSave);
@@ -92,36 +92,40 @@ namespace Algolia.Search.Test.EndToEnd
             var ruleToSave2 = new Rule
             {
                 ObjectID = "two",
-                Condition = new Condition {Anchoring = "is", Pattern = "pattern"},
+                Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
                     {
                         Query = new ConsequenceQuery
                         {
-                            Edits = new List<Edit> {new Edit {Type = EditType.Remove, Delete = "pattern"}}
+                            Edits = new List<Edit> { new Edit { Type = EditType.Remove, Delete = "pattern" } }
                         }
                     }
                 }
             };
 
-            var replaceAllRulesResponse = await _index.ReplaceAllRulesAsync(new List<Rule> {ruleToSave2});
+            var replaceAllRulesResponse = await _index.ReplaceAllRulesAsync(new List<Rule> { ruleToSave2 });
 
             var synonymToSave2 = new Synonym
             {
                 ObjectID = "two",
                 Type = SynonymType.Synonym,
-                Synonyms = new List<string> {"one", "two"}
+                Synonyms = new List<string> { "one", "two" }
             };
 
-            var replaceAllSynonymsResponse = await _index.ReplaceAllSynonymsAsync(new List<Synonym> {synonymToSave2});
+            var replaceAllSynonymsResponse = await _index.ReplaceAllSynonymsAsync(new List<Synonym> { synonymToSave2 });
 
             replaceAllRulesResponse.Wait();
             replaceAllSynonymsResponse.Wait();
 
-            Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetObjectAsync<ReplaceAllTestObject>("one"));
-            Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("one"));
-            Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetRuleAsync("one"));
+            AlgoliaApiException getObjectEx = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetObjectAsync<ReplaceAllTestObject>("one"));
+            AlgoliaApiException getSynonymEx = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("one"));
+            AlgoliaApiException getRuleEx = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetRuleAsync("one"));
+
+            Assert.That(getObjectEx.HttpErrorCode == 404);
+            Assert.That(getSynonymEx.HttpErrorCode == 404);
+            Assert.That(getRuleEx.HttpErrorCode == 404);
 
             var ruleAfterReplace = _index.GetRuleAsync("two");
             var synonymAfterReplace = _index.GetSynonymAsync("two");

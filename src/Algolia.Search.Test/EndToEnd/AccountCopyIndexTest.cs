@@ -45,8 +45,8 @@ namespace Algolia.Search.Test.EndToEnd
             SearchIndex index2 = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("copy_index_2"));
             AccountClient account = new AccountClient();
 
-            Assert.ThrowsAsync<AlgoliaException>(() => account.CopyIndexAsync<AccountCopyObject>(index1, index2));
-            ;
+            AlgoliaException ex = Assert.ThrowsAsync<AlgoliaException>(() => account.CopyIndexAsync<AccountCopyObject>(index1, index2));
+            Assert.That(ex.Message.Contains("Source and Destination indices should not be on the same application."));
         }
 
         [Test]
@@ -61,13 +61,13 @@ namespace Algolia.Search.Test.EndToEnd
             SearchIndex index1 = BaseTest.SearchClient.InitIndex(indexOneName);
             SearchIndex index2 = BaseTest.SearchClient2.InitIndex(indexTwoName);
 
-            var objectToAdd = new AccountCopyObject {ObjectID = "one"};
+            var objectToAdd = new AccountCopyObject { ObjectID = "one" };
             var addObject = index1.AddObjectAysnc(objectToAdd);
 
             Rule ruleToSave = new Rule
             {
                 ObjectID = "one",
-                Condition = new Condition {Anchoring = "is", Pattern = "pattern"},
+                Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -89,14 +89,14 @@ namespace Algolia.Search.Test.EndToEnd
             {
                 ObjectID = "one",
                 Type = SynonymType.Synonym,
-                Synonyms = new List<string> {"one", "two"}
+                Synonyms = new List<string> { "one", "two" }
             };
 
             var saveSynonym = index1.SaveSynonymAsync(synonym);
 
             IndexSettings settings = new IndexSettings
             {
-                AttributesForFaceting = new List<string> {"company"}
+                AttributesForFaceting = new List<string> { "company" }
             };
 
             var saveSettings = index1.SetSettingsAsync(settings);

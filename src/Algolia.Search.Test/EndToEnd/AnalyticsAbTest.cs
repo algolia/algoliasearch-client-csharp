@@ -118,7 +118,8 @@ namespace Algolia.Search.Test.EndToEnd
             DeleteABTestResponse deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId);
             _index1.WaitTask(deleteAbTest.TaskID);
 
-            Assert.ThrowsAsync<AlgoliaApiException>(() => BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId));
+            AlgoliaApiException ex = Assert.ThrowsAsync<AlgoliaApiException>(() => BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId));
+            Assert.That(ex.HttpErrorCode == 404);
         }
 
         public class AlgoliaStub

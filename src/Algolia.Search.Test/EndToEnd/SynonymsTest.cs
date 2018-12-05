@@ -69,7 +69,7 @@ namespace Algolia.Search.Test.EndToEnd
             {
                 ObjectID = "gba",
                 Type = SynonymType.Synonym,
-                Synonyms = new List<string> {"gba", "gameboy advance", "game boy advance"}
+                Synonyms = new List<string> { "gba", "gameboy advance", "game boy advance" }
             };
 
             var regularSynonymResponse = await _index.SaveSynonymAsync(gba);
@@ -80,7 +80,7 @@ namespace Algolia.Search.Test.EndToEnd
                 ObjectID = "wii_to_wii_u",
                 Type = SynonymType.OneWaySynonym,
                 Input = "wii",
-                Synonyms = new List<string> {"wii u"}
+                Synonyms = new List<string> { "wii u" }
             };
 
             Synonym playstationPlaceholder = new Synonym
@@ -88,7 +88,7 @@ namespace Algolia.Search.Test.EndToEnd
                 ObjectID = "playstation_version_placeholder",
                 Type = SynonymType.Placeholder,
                 Placeholder = "<PLAYSTATIONVERSION>",
-                Replacements = new List<string> {"1", "One", "2", "3", "4", "4 Pro"}
+                Replacements = new List<string> { "1", "One", "2", "3", "4", "4 Pro" }
             };
 
             Synonym ps4 = new Synonym
@@ -96,7 +96,7 @@ namespace Algolia.Search.Test.EndToEnd
                 ObjectID = "ps4",
                 Type = SynonymType.AltCorrection1,
                 Word = "ps4",
-                Corrections = new List<string> {"playstation4"}
+                Corrections = new List<string> { "playstation4" }
             };
 
             Synonym psone = new Synonym
@@ -104,10 +104,10 @@ namespace Algolia.Search.Test.EndToEnd
                 ObjectID = "psone",
                 Type = SynonymType.AltCorrection2,
                 Word = "psone",
-                Corrections = new List<string> {"playstationone"}
+                Corrections = new List<string> { "playstationone" }
             };
 
-            List<Synonym> synonyms = new List<Synonym> {wiiToWiiu, playstationPlaceholder, ps4, psone};
+            List<Synonym> synonyms = new List<Synonym> { wiiToWiiu, playstationPlaceholder, ps4, psone };
 
             var saveSynonymsResponse = await _index.SaveSynonymsAsync(synonyms);
             saveSynonymsResponse.Wait();
@@ -128,7 +128,7 @@ namespace Algolia.Search.Test.EndToEnd
 
             // Perform a synonym search using searchSynonyms with an empty query, page 0 and hitsPerPage set to 10 and check that the returned synonyms are the same as the 5 originally saved
             SearchResponse<Synonym> searchResponse =
-                await _index.SearchSynonymsAsync(new SynonymQuery {HitsPerPage = 10, Page = 0});
+                await _index.SearchSynonymsAsync(new SynonymQuery { HitsPerPage = 10, Page = 0 });
             Assert.True(searchResponse.Hits.Count == 5);
 
             // Instantiate a new SynonymIterator using newSynonymIterator and iterate over all the synonyms and check that those collected synonyms are the same as the 5 originally saved
@@ -152,7 +152,8 @@ namespace Algolia.Search.Test.EndToEnd
             deleteGbaResponse.Wait();
 
             // Try to get the synonym with getSynonym with objectID “gba” and check that the synonym does not exist anymore (404)
-            Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("gba"));
+            AlgoliaApiException ex = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("gba"));
+            Assert.That(ex.HttpErrorCode == 404);
 
             // Clear all the synonyms using clearSynonyms and wait for the task to terminate using waitTask with the returned taskID
             var clearSynonymResponse = await _index.ClearSynonymsAsync();
@@ -160,7 +161,7 @@ namespace Algolia.Search.Test.EndToEnd
 
             // Perform a synonym search using searchSynonyms with an empty query, page 0 and hitsPerPage set to 10 and check that the number of returned synonyms is equal to 0
             SearchResponse<Synonym> searchAfterClearResponse =
-                await _index.SearchSynonymsAsync(new SynonymQuery {HitsPerPage = 10, Page = 0});
+                await _index.SearchSynonymsAsync(new SynonymQuery { HitsPerPage = 10, Page = 0 });
             Assert.True(searchAfterClearResponse.Hits.Count == 0);
         }
 
