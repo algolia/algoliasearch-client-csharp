@@ -41,8 +41,8 @@ namespace Algolia.Search.Iterators
         /// <summary>
         /// Create an instance of the rule iterator
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="hitsPerpage"></param>
+        /// <param name="index">The index to fetch the rule from</param>
+        /// <param name="hitsPerpage">Hits per page for each call default = 1000</param>
         public RulesIterator(ISearchIndex index, int hitsPerpage = 1000)
         {
             _index = index;
@@ -53,7 +53,6 @@ namespace Algolia.Search.Iterators
         /// <summary>
         /// Iterator perform an api call
         /// </summary>
-        /// <returns></returns>
         public IEnumerator<Rule> GetEnumerator()
         {
             do

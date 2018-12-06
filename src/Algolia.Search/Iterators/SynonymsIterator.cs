@@ -41,8 +41,8 @@ namespace Algolia.Search.Iterators
         /// <summary>
         /// Create a new instance of a synonym iterator
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="hitsPerpage"></param>
+        /// <param name="index">The index to fetch the synonym from</param>
+        /// <param name="hitsPerpage">Hits per page for each call default = 1000</param>
         public SynonymsIterator(ISearchIndex index, int hitsPerpage = 1000)
         {
             _index = index;

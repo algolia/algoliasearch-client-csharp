@@ -41,8 +41,8 @@ namespace Algolia.Search.Iterators
         /// <summary>
         /// Create a new instance of the iterator
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="query"></param>
+        /// <param name="index">The index to browse</param>
+        /// <param name="query">The browse query</param>
         public IndexIterator(ISearchIndex index, BrowseIndexQuery query)
         {
             _index = index;
@@ -52,7 +52,6 @@ namespace Algolia.Search.Iterators
         /// <summary>
         /// GetEnumerator perfom a browse from (api call)
         /// </summary>
-        /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
             while (_query.Cursor != null)
