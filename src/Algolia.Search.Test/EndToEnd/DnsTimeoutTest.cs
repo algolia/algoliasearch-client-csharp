@@ -33,6 +33,7 @@ namespace Algolia.Search.Test.EndToEnd
 {
     [TestFixture]
     [Parallelizable]
+    [Ignore("Waiting for new spec for dns timeout test")]
     public class DnsTimeoutTest
     {
         List<StatefulHost> _hosts;
