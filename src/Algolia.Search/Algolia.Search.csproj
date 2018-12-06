@@ -10,7 +10,7 @@
     <PackageReleaseNotes>https://github.com/algolia/algoliasearch-client-csharp/releases</PackageReleaseNotes>
     <PackageIconUrl>https://www.algolia.com/static_assets/images/press/downloads/algolia-mark-blue.png</PackageIconUrl>
     <PackageProjectUrl>https://www.algolia.com/doc/api-client/getting-started/install/csharp/</PackageProjectUrl>
-    <PackageLicenseExpression>MIT License</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageDescription>
