@@ -33,7 +33,6 @@ namespace Algolia.Search.Test.EndToEnd
 {
     [TestFixture]
     [Parallelizable]
-    [Ignore("WIP")]
     public class DnsTimeoutTest
     {
         List<StatefulHost> _hosts;
@@ -46,7 +45,7 @@ namespace Algolia.Search.Test.EndToEnd
             {
                 new StatefulHost
                 {
-                    Url = $"10.0.32.1",
+                    Url = "algolia.biz",
                     Accept = CallType.Read | CallType.Write,
                 },
                 new StatefulHost
