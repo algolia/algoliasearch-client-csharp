@@ -42,19 +42,12 @@ namespace Algolia.Search.Clients
         private readonly IRequesterWrapper _requesterWrapper;
 
         /// <summary>
-        /// Initialize a client with default settings
-        /// </summary>
-        public AnalyticsClient() : this(new AlgoliaConfig(), new AlgoliaHttpRequester())
-        {
-        }
-
-        /// <summary>
         /// Create a new search client for the given appID
         /// </summary>
         /// <param name="applicationId">Your application ID</param>
         /// <param name="apiKey">Your Api KEY</param>
         public AnalyticsClient(string applicationId, string apiKey) : this(
-            new AlgoliaConfig {ApiKey = apiKey, AppId = applicationId}, new AlgoliaHttpRequester())
+            new AlgoliaConfig(applicationId, apiKey), new AlgoliaHttpRequester())
         {
         }
 

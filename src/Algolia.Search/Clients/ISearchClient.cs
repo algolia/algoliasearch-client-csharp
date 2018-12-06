@@ -37,11 +37,6 @@ namespace Algolia.Search.Clients
     public interface ISearchClient
     {
         /// <summary>
-        /// Algolia's configuration
-        /// </summary>
-        AlgoliaConfig Config { get; }
-
-        /// <summary>
         /// Initialize an index for the given client
         /// </summary>
         /// <param name="indexName"></param>

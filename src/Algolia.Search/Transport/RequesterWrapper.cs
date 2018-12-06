@@ -33,7 +33,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,9 +46,6 @@ namespace Algolia.Search.Transport
         private readonly IHttpRequester _httpClient;
         private readonly AlgoliaConfig _algoliaConfig;
         private readonly RetryStrategy _retryStrategy;
-
-        private readonly string _clientVersion =
-            typeof(RequesterWrapper).GetTypeInfo().Assembly.GetName().Version.ToString();
 
         /// <summary>
         /// Instantiate with custom config and custom http requester 
@@ -144,18 +140,9 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         private Dictionary<string, string> GenerateHeaders(Dictionary<string, string> optionalHeaders = null)
         {
-            var algoliaHeaders = new Dictionary<string, string>
-            {
-                {"X-Algolia-Application-Id", _algoliaConfig.AppId},
-                {"X-Algolia-API-Key", _algoliaConfig.ApiKey},
-                {"User-Agent", $"Algolia for CSharp {_clientVersion}"},
-                {"Connection", "keep-alive"},
-                {"Accept", JsonConfig.JsonContentType}
-            };
-
             return optionalHeaders != null && optionalHeaders.Any()
-                ? optionalHeaders.MergeWith(algoliaHeaders)
-                : algoliaHeaders;
+                ? optionalHeaders.MergeWith(_algoliaConfig.DefaultHeaders)
+                : _algoliaConfig.DefaultHeaders;
         }
 
         /// <summary>

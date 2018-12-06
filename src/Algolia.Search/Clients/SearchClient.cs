@@ -45,16 +45,7 @@ namespace Algolia.Search.Clients
     public class SearchClient : ISearchClient
     {
         private readonly IRequesterWrapper _requesterWrapper;
-
-        /// <inheritdoc />
-        public AlgoliaConfig Config { get; }
-
-        /// <summary>
-        /// Initialize a client with default settings
-        /// </summary>
-        public SearchClient() : this(new AlgoliaConfig(), new AlgoliaHttpRequester())
-        {
-        }
+        private readonly AlgoliaConfig _config;
 
         /// <summary>
         /// Create a new search client for the given appID
@@ -62,7 +53,7 @@ namespace Algolia.Search.Clients
         /// <param name="applicationId">Your application</param>
         /// <param name="apiKey">Your API key</param>
         public SearchClient(string applicationId, string apiKey) : this(
-            new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId }, new AlgoliaHttpRequester())
+            new AlgoliaConfig(applicationId, apiKey), new AlgoliaHttpRequester())
         {
         }
 
@@ -101,7 +92,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
             }
 
-            Config = config;
+            _config = config;
             _requesterWrapper = new RequesterWrapper(config, httpRequester);
         }
 
@@ -109,12 +100,11 @@ namespace Algolia.Search.Clients
         /// Initialize an index for the given client
         /// </summary>
         /// <param name="indexName">Your index name</param>
-        /// <returns></returns>
         public SearchIndex InitIndex(string indexName)
         {
             return string.IsNullOrWhiteSpace(indexName)
                 ? throw new ArgumentNullException(nameof(indexName), "The Index name is required")
-                : new SearchIndex(_requesterWrapper, Config, indexName);
+                : new SearchIndex(_requesterWrapper, _config, indexName);
         }
 
         /// <inheritdoc />

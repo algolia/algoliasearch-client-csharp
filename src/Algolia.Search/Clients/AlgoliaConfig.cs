@@ -21,9 +21,11 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Serializer;
 using Algolia.Search.Transport;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Algolia.Search.Clients
 {
@@ -32,17 +34,40 @@ namespace Algolia.Search.Clients
     /// </summary>
     public class AlgoliaConfig
     {
+        private static readonly string _clientVersion =
+            typeof(AlgoliaConfig).GetTypeInfo().Assembly.GetName().Version.ToString();
+
+        /// <summary>
+        /// Create a new Algolia's configuration for the given credentials
+        /// </summary>
+        /// <param name="applicationId">Your application ID</param>
+        /// <param name="apiKey">Your API Key</param>
+        public AlgoliaConfig(string applicationId, string apiKey)
+        {
+            AppId = applicationId;
+            ApiKey = apiKey;
+
+            DefaultHeaders = new Dictionary<string, string>
+            {
+                {"X-Algolia-Application-Id", AppId},
+                {"X-Algolia-API-Key", ApiKey},
+                {"User-Agent", $"C# {_clientVersion}"},
+                {"Connection", "keep-alive"},
+                {"Accept", JsonConfig.JsonContentType}
+            };
+        }
+
         /// <summary>
         /// Your application ID
         /// </summary>
         /// <returns></returns>
-        public string AppId { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID");
+        public string AppId { get; set; }
 
         /// <summary>
         /// Your API Key
         /// </summary>
         /// <returns></returns>
-        public string ApiKey { get; set; } = Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_API_KEY");
+        public string ApiKey { get; set; }
 
         /// <summary>
         /// To set custom hosts
@@ -50,8 +75,14 @@ namespace Algolia.Search.Clients
         public List<StatefulHost> Hosts { get; set; }
 
         /// <summary>
+        /// Algolia's default headers.
+        /// Will be sent for every request
+        /// </summary>
+        public Dictionary<string, string> DefaultHeaders { get; set; }
+
+        /// <summary>
         /// The batch size for save methods
         /// </summary>
-        public int BatchSize { get; set; } = 10000;
+        public int BatchSize { get; set; } = 1000;
     }
 }
