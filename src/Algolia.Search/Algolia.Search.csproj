@@ -10,10 +10,13 @@
     <PackageReleaseNotes>https://github.com/algolia/algoliasearch-client-csharp/releases</PackageReleaseNotes>
     <PackageIconUrl>https://www.algolia.com/static_assets/images/press/downloads/algolia-mark-blue.png</PackageIconUrl>
     <PackageProjectUrl>https://www.algolia.com/doc/api-client/getting-started/install/csharp/</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/algolia/algoliasearch-client-csharp/blob/master/LICENSE.TXT</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT License</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageDescription>Algolia Search API Client for .NET</PackageDescription>
+    <PackageDescription>
+      Algolia API Client for .NET 
+      Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries, and pre-built integrations.
+    </PackageDescription>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Copyright>Copyright 2018 Algolia</Copyright>
     <VersionPrefix>6.0.0</VersionPrefix>
@@ -21,15 +24,15 @@
     <AssemblyVersion>6.0.0</AssemblyVersion>
     <FileVersion>6.0.0</FileVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0;netstandard1.6</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;netstandard1.6;net471;net462;net45;</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0;netstandard1.3</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;netstandard1.3;net45;</TargetFrameworks>
   </PropertyGroup>
   
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6' OR '$(TargetFramework)' == 'netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3' OR '$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net45' OR '$(TargetFramework)' == 'net462' OR '$(TargetFramework)' == 'net471'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
