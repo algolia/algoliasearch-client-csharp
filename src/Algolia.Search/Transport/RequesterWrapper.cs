@@ -103,7 +103,7 @@ namespace Algolia.Search.Transport
                 switch (_retryStrategy.Decide(host, response.HttpStatusCode, response.IsTimedOut))
                 {
                     case RetryOutcomeType.Success:
-                        return JsonHelper.Deserialize<TResult>(response.Body, JsonConfig.AlgoliaJsonSerializerSettings);
+                        return SerializerHelper.Deserialize<TResult>(response.Body, JsonConfig.AlgoliaJsonSerializerSettings);
                     case RetryOutcomeType.Retry:
                         continue;
                     case RetryOutcomeType.Failure:
@@ -125,7 +125,7 @@ namespace Algolia.Search.Transport
             if (data != null)
             {
                 MemoryStream ms = new MemoryStream();
-                JsonHelper.Serialize(data, ms, JsonConfig.AlgoliaJsonSerializerSettings);
+                SerializerHelper.Serialize(data, ms, JsonConfig.AlgoliaJsonSerializerSettings);
                 ms.Seek(0, SeekOrigin.Begin);
                 return ms;
             }

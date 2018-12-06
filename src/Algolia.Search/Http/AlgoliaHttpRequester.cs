@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Models.Requests;
+using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 using System;
 using System.IO;
@@ -107,7 +108,7 @@ namespace Algolia.Search.Http
                         };
                     }
 
-                    var content = await JsonHelper.StreamToStringAsync(stream).ConfigureAwait(false);
+                    var content = await SerializerHelper.StreamToStringAsync(stream).ConfigureAwait(false);
 
                     return new AlgoliaHttpResponse
                     {

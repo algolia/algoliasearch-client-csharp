@@ -26,13 +26,13 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.Utils
+namespace Algolia.Search.Serializer
 {
     /// <summary>
     /// Helper to improve performance with large json
     /// https://www.newtonsoft.com/json/help/html/performance.htm
     /// </summary>
-    internal static class JsonHelper
+    internal static class SerializerHelper
     {
         private static readonly UTF8Encoding _encoding = new UTF8Encoding(false);
 

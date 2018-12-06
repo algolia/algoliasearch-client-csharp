@@ -70,15 +70,13 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestTimeOut()
         {
-            AlgoliaConfig config = new AlgoliaConfig
+            AlgoliaConfig config = new AlgoliaConfig(TestHelper.ApplicationId1, TestHelper.AdminKey1)
             {
-                ApiKey = TestHelper.AdminKey1,
-                AppId = TestHelper.ApplicationId1,
                 Hosts = _hosts
             };
 
             SearchClient client = new SearchClient(config);
-
+            
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
