@@ -35,31 +35,16 @@ using System.Threading.Tasks;
 namespace Algolia.Search.Clients
 {
     /// <summary>
-    /// Client to perfom cross indices operations
+    /// Client to perfom cross indices operations implementation of <see cref="IAccountClient"/>
     /// </summary>
     public class AccountClient : IAccountClient
     {
-        /// <summary>
-        /// The method copy settings, synonyms, rules and objects from the source index to the destination index
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public MultiResponse CopyIndex<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex,
             RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => CopyIndexAsync<T>(sourceIndex, destinationIndex, requestOptions));
 
-        /// <summary>
-        /// The method copy settings, synonyms, rules and objects from the source index to the destination index
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {

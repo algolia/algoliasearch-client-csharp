@@ -40,15 +40,13 @@ using System.Threading.Tasks;
 namespace Algolia.Search.Clients
 {
     /// <summary>
-    /// Algolia search client
+    /// Algolia search client implementation of <see cref="ISearchClient"/>
     /// </summary>
     public class SearchClient : ISearchClient
     {
         private readonly IRequesterWrapper _requesterWrapper;
 
-        /// <summary>
-        /// Algolia's configuration
-        /// </summary>
+        /// <inheritdoc />
         public AlgoliaConfig Config { get; }
 
         /// <summary>
@@ -61,8 +59,8 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Create a new search client for the given appID
         /// </summary>
-        /// <param name="applicationId"></param>
-        /// <param name="apiKey"></param>
+        /// <param name="applicationId">Your application</param>
+        /// <param name="apiKey">Your API key</param>
         public SearchClient(string applicationId, string apiKey) : this(
             new AlgoliaConfig { ApiKey = apiKey, AppId = applicationId }, new AlgoliaHttpRequester())
         {
@@ -71,7 +69,7 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Initialize a client with custom config
         /// </summary>
-        /// <param name="config"></param>
+        /// <param name="config">Algolia configuration</param>
         public SearchClient(AlgoliaConfig config) : this(config, new AlgoliaHttpRequester())
         {
         }
@@ -79,8 +77,8 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Initialize the client with custom config and custom Requester
         /// </summary>
-        /// <param name="config"></param>
-        /// <param name="httpRequester"></param>
+        /// <param name="config">Algolia Config</param>
+        /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
         public SearchClient(AlgoliaConfig config, IHttpRequester httpRequester)
         {
             if (httpRequester == null)
@@ -110,7 +108,7 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Initialize an index for the given client
         /// </summary>
-        /// <param name="indexName"></param>
+        /// <param name="indexName">Your index name</param>
         /// <returns></returns>
         public SearchIndex InitIndex(string indexName)
         {
@@ -119,18 +117,12 @@ namespace Algolia.Search.Clients
                 : new SearchIndex(_requesterWrapper, Config, indexName);
         }
 
-        /// <summary>
-        /// Retrieve one or more objects, potentially from different indices, in a single API call.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <inheritdoc />
         public MultipleGetObjectsResponse<T> MultipleGetObjects<T>(IEnumerable<MultipleGetObject> queries,
             RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => MultipleGetObjectsAsync<T>(queries, requestOptions));
 
-        /// <summary>
-        /// Retrieve one or more objects, potentially from different indices, in a single API call.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <inheritdoc />
         public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(
             IEnumerable<MultipleGetObject> queries,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
@@ -148,18 +140,12 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <inheritdoc />
         public MultipleQueriesResponse<T> MultipleQueries<T>(MultipleQueriesRequest request,
             RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => MultipleQueriesAsync<T>(request, requestOptions));
 
-        /// <summary>
-        /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <inheritdoc />
         public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest request,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
@@ -174,19 +160,12 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <inheritdoc />
         public MultipleIndexBatchIndexingResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations,
             RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => MultipleBatchAsync(operations, requestOptions));
 
         /// <inheritdoc />
-        /// <summary>
-        /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         public async Task<MultipleIndexBatchIndexingResponse> MultipleBatchAsync<T>(
             IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class
@@ -207,20 +186,11 @@ namespace Algolia.Search.Clients
             return resp;
         }
 
-        /// <summary>
-        /// Get a list of indexes/indices with their associated metadata.
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public ListIndexesResponse ListIndexes(RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ListIndexesAsync(requestOptions));
 
-        /// <summary>
-        /// Get a list of indexes/indices with their associated metadata.
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<ListIndexesResponse> ListIndexesAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -229,22 +199,11 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Delete an index and all its settings, including links to its replicas.
-        /// </summary>
-        /// <param name="indexName"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public DeleteResponse DeleteIndex(string indexName, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => DeleteIndexAsync(indexName, requestOptions));
 
-        /// <summary>
-        /// Delete an index and all its settings, including links to its replicas.
-        /// </summary>
-        /// <param name="indexName"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -258,12 +217,7 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Generate a virtual API Key without any call to the server.
-        /// </summary>
-        /// <param name="parentApiKey"></param>
-        /// <param name="restriction"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public string GenerateSecuredApiKeys(string parentApiKey, SecuredApiKeyRestriction restriction)
         {
             string queryParams = QueryStringHelper.BuildRestrictionQueryString(restriction);
@@ -271,20 +225,11 @@ namespace Algolia.Search.Clients
             return HmacShaHelper.Base64Encode($"{hash}{queryParams}");
         }
 
-        /// <summary>
-        /// Get the full list of API Keys.
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public ListApiKeysResponse ListApiKeys(RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ListApiKeysAsync(requestOptions));
 
-        /// <summary>
-        /// Get the full list of API Keys.
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<ListApiKeysResponse> ListApiKeysAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -293,22 +238,11 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Get the permissions of an API Key.
-        /// </summary>
-        /// <param name="apiKey"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public ApiKey GetApiKey(string apiKey, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetApiKeyAsync(apiKey, requestOptions));
 
-        /// <summary>
-        /// Get the permissions of an API Key.
-        /// </summary>
-        /// <param name="apiKey"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<ApiKey> GetApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -342,22 +276,11 @@ namespace Algolia.Search.Clients
             ;
         }
 
-        /// <summary>
-        /// Add a new API Key with specific permissions/restrictions.
-        /// </summary>
-        /// <param name="acl"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public AddApiKeyResponse AddApiKey(ApiKey acl, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => AddApiKeyAsync(acl, requestOptions));
 
-        /// <summary>
-        /// Add a new API Key with specific permissions/restrictions.
-        /// </summary>
-        /// <param name="acl"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey acl, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -371,22 +294,11 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Update the permissions of an existing API Key.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public UpdateApiKeyResponse UpdateApiKey(ApiKey request, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => UpdateApiKeyAsync(request, requestOptions));
 
-        /// <summary>
-        /// Update the permissions of an existing API Key.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(ApiKey request,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
@@ -409,22 +321,11 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Delete an existing API Key
-        /// </summary>
-        /// <param name="apiKey"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public DeleteApiKeyResponse DeleteApiKey(string apiKey, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => DeleteApiKeyAsync(apiKey, requestOptions));
 
-        /// <summary>
-        /// Delete an existing API Key
-        /// </summary>
-        /// <param name="apiKey"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<DeleteApiKeyResponse> DeleteApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -443,20 +344,11 @@ namespace Algolia.Search.Clients
             return response;
         }
 
-        /// <summary>
-        /// List the clusters available in a multi-clusters setup for a single appID
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<ClustersResponse> ListClusters(RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ListClustersAsync(requestOptions));
 
-        /// <summary>
-        /// List the clusters available in a multi-clusters setup for a single appID
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -467,25 +359,12 @@ namespace Algolia.Search.Clients
             return response?.Clusters;
         }
 
-        /// <summary>
-        /// Search for userIDs
-        /// The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds propagate to the different cluster
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public SearchResponse<UserIdResponse> SearchUserIDs(SearchUserIdsRequest query,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => SearchUserIDsAsync(query, requestOptions));
 
-        /// <summary>
-        /// Search for userIDs
-        /// The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds propagate to the different cluster
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<SearchResponse<UserIdResponse>> SearchUserIDsAsync(SearchUserIdsRequest query,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
@@ -499,25 +378,12 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// List the userIDs assigned to a multi-clusters appID.
-        /// </summary>
-        /// <param name="hitsPerPage"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="page"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public ListUserIdsResponse ListUserIds(int page = 0, int hitsPerPage = 1000,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ListUserIdsAsync(page, hitsPerPage, requestOptions));
 
-        /// <summary>
-        /// List the userIDs assigned to a multi-clusters appID.
-        /// </summary>
-        /// <param name="hitsPerPage"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <param name="page"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<ListUserIdsResponse> ListUserIdsAsync(int page = 0, int hitsPerPage = 1000,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
@@ -534,22 +400,11 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Returns the userID data stored in the mapping.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public UserIdResponse GetUserId(string userId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetUserIdAsync(userId, requestOptions));
 
-        /// <summary>
-        /// Returns the userID data stored in the mapping.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<UserIdResponse> GetUserIdAsync(string userId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -563,22 +418,11 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Get the top 10 userIDs with the highest number of records per cluster.
-        /// The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds to propagate to the different clusters.
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public TopUserIdResponse GetTopUserId(RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetTopUserIdAsync(requestOptions));
 
-        /// <summary>
-        /// Get the top 10 userIDs with the highest number of records per cluster.
-        /// The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few seconds to propagate to the different clusters.
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<TopUserIdResponse> GetTopUserIdAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -587,27 +431,12 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Assign or Move a userID to a cluster.
-        /// The time it takes to migrate (move) a user is proportional to the amount of data linked to the userID.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="clusterName"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public AssignUserIdResponse
             AssignUserId(string userId, string clusterName, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => AssignUserIdAsync(userId, clusterName, requestOptions));
 
-        /// <summary>
-        /// Assign or Move a userID to a cluster.
-        /// The time it takes to migrate (move) a user is proportional to the amount of data linked to the userID.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="clusterName"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<AssignUserIdResponse> AssignUserIdAsync(string userId, string clusterName,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
@@ -649,22 +478,11 @@ namespace Algolia.Search.Clients
             return response;
         }
 
-        /// <summary>
-        /// Remove a userID and its associated data from the multi-clusters.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public RemoveUserIdResponse RemoveUserId(string userId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => RemoveUserIdAsync(userId, requestOptions));
 
-        /// <summary>
-        /// Remove a userID and its associated data from the multi-clusters.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<RemoveUserIdResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
@@ -711,27 +529,13 @@ namespace Algolia.Search.Clients
             }
         }
 
-        /// <summary>
-        /// Get the logs of the latest search and indexing operations
-        /// You can retrieve the logs of your last 1,000 API calls. It is designed for immediate, real-time debugging.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10,
             string indexName = null, string type = "all") =>
             AsyncHelper.RunSync(() =>
                 GetLogsAsync(requestOptions, offset: offset, length: length, indexName: indexName, type: type));
 
-        /// <summary>
-        /// Get the logs of the latest search and indexing operations
-        /// You can retrieve the logs of your last 1,000 API calls. It is designed for immediate, real-time debugging.
-        /// </summary>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <param name="offset"></param>
-        /// <param name="length"></param>
-        /// <param name="indexName"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null,
             string type = "all")
@@ -751,25 +555,12 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Copy the settings of an index to another index
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public CopyToResponse CopySettings(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => CopySettingsAsync(sourceIndex, destinationIndex, requestOptions));
 
-        /// <summary>
-        /// Copy the settings of an index to another index
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<CopyToResponse> CopySettingsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
@@ -777,25 +568,12 @@ namespace Algolia.Search.Clients
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Copy the rules of an index to another index
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public CopyToResponse CopyRules(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => CopyRulesAsync(sourceIndex, destinationIndex, requestOptions));
 
-        /// <summary>
-        /// Copy the rules of an index to another index
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<CopyToResponse> CopyRulesAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
@@ -803,25 +581,12 @@ namespace Algolia.Search.Clients
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Make a copy of the synonyms of an index
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public CopyToResponse CopySynonyms(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => CopySynonymsAsync(sourceIndex, destinationIndex, requestOptions));
 
-        /// <summary>
-        /// Make a copy of the synonyms of an index
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<CopyToResponse> CopySynonymsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
@@ -829,27 +594,12 @@ namespace Algolia.Search.Clients
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="scope">The scope copy</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public CopyToResponse CopyIndex(string sourceIndex, string destinationIndex, IEnumerable<string> scope = null,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => CopyIndexAsync(sourceIndex, destinationIndex, scope, requestOptions));
 
-        /// <summary>
-        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="scope">The scope copy</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex,
             IEnumerable<string> scope = null,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
@@ -877,25 +627,12 @@ namespace Algolia.Search.Clients
             return response;
         }
 
-        /// <summary>
-        /// Rename an index. Normally used to reindex your data atomically, without any down time.
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public MoveIndexResponse MoveIndex(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => MoveIndexAsync(sourceIndex, destinationIndex, requestOptions));
 
-        /// <summary>
-        /// Rename an index. Normally used to reindex your data atomically, without any down time.
-        /// </summary>
-        /// <param name="sourceIndex"></param>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
@@ -916,13 +653,7 @@ namespace Algolia.Search.Clients
             return response;
         }
 
-        /// <summary>
-        /// This function waits for the Algolia's API task to finish
-        /// </summary>
-        /// <param name="indexName">Your index name</param>
-        /// <param name="taskId">taskID returned by Aloglia API</param>
-        /// <param name="timeToWait"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <inheritdoc />
         public void WaitTask(string indexName, long taskId, int timeToWait = 100, RequestOptions requestOptions = null)
         {
             SearchIndex indexToWait = InitIndex(indexName);

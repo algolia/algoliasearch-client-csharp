@@ -37,7 +37,7 @@ namespace Algolia.Search.Clients
         /// The method copy settings, synonyms, rules and objects from the source index to the destination index
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="sourceIndex"></param>
+        /// <param name="sourceIndex">The source index</param>
         /// <param name="destinationIndex">The destination index</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
@@ -48,7 +48,7 @@ namespace Algolia.Search.Clients
         /// The method copy settings, synonyms, rules and objects from the source index to the destination index
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="sourceIndex"></param>
+        /// <param name="sourceIndex">The source index</param>
         /// <param name="destinationIndex">The destination index</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
