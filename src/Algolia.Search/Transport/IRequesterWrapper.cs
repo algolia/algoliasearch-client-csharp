@@ -35,17 +35,16 @@ namespace Algolia.Search.Transport
     public interface IRequesterWrapper
     {
         /// <summary>
-        /// Execute the request with the specified TData class and will return the TResult
+        /// Call api with retry strategy
         /// </summary>
-        /// <typeparam name="TResult"></typeparam>
-        /// <typeparam name="TData"></typeparam>
-        /// <param name="method"></param>
-        /// <param name="uri"></param>
-        /// <param name="callType"></param>
-        /// <param name="data">Data to send</param>
+        /// <typeparam name="TResult">Return type</typeparam>
+        /// <typeparam name="TData">Data type</typeparam>
+        /// <param name="method">The HttpMethod <see cref="HttpMethod"/></param>
+        /// <param name="uri">The endpoint URI</param>
+        /// <param name="callType">The method Algolia's call type <see cref="CallType"/> </param>
+        /// <param name="data">Your data</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
         Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType,
             TData data = default(TData),
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
@@ -56,12 +55,11 @@ namespace Algolia.Search.Transport
         /// Execute the request (more likely request with no body like GET or Delete)
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="method"></param>
-        /// <param name="uri"></param>
-        /// <param name="callType"></param>
+        /// <param name="method">The HttpMethod <see cref="HttpMethod"/></param>
+        /// <param name="uri">The endpoint URI</param>
+        /// <param name="callType">The method Algolia's call type <see cref="CallType"/> </param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
         Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType,
             RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
