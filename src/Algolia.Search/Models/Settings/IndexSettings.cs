@@ -31,6 +31,7 @@ namespace Algolia.Search.Models.Settings
     /// For more informations regarding Index settings
     /// https://www.algolia.com/doc/api-reference/settings-api-parameters/
     /// </summary>
+    [JsonConverter(typeof(SettingsConverter))]
     public class IndexSettings
     {
         // Attributes
