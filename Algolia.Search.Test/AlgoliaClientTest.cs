@@ -1857,21 +1857,24 @@ namespace Algolia.Search.Test
         public void TestInightsClient()
         {
             var indexName = GetSafeName("àlgol?à-csharp");
+            var insights = _insightsClient.User("tets");
 
             // click
-            _insightsClient.User("testClickedFilters").ClickedFilters("clickedFilters", indexName, new List<string> { "brand:apple" });
-            _insightsClient.User("testClickedObjectEvent").ClickedObjectIDs("clickedObjectEvent", indexName, new List<string> { "1", "2" });
+            insights.ClickedFilters("clickedFilters", indexName, new List<string> { "brand:apple" });
+            insights.ClickedObjectIDs("clickedObjectEvent", indexName, new List<string> { "1", "2" });
+            
             // need more precision regarding queryId
             //_insightsClient.User("testClickedObjectIDsAfterSearch").ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, "12345");
 
             // Conversion
-            _insightsClient.User("testConvertedObjectIDs").ConvertedObjectIDs("convertedObjectIDs", indexName, new List<string> { "1", "2" });
+            insights.ConvertedObjectIDs("convertedObjectIDs", indexName, new List<string> { "1", "2" });
+            
             // need more precision regarding queryId
             //_insightsClient.User("testConvertedObjectIDsAfterSearch").ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, "12345");
 
             // View
-            _insightsClient.User("testViewedFilters").ViewedFilters("viewedFilters", indexName, new List<string> { "brand:apple", "brand:google" });
-            _insightsClient.User("testViewedObjectIDs").ViewedObjectIDs("viewedObjectIDs", indexName, new List<string> { "1", "2" });
+            insights.ViewedFilters("viewedFilters", indexName, new List<string> { "brand:apple", "brand:google" });
+            insights.ViewedObjectIDs("viewedObjectIDs", indexName, new List<string> { "1", "2" });
         }
     }
 }
