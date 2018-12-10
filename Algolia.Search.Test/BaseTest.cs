@@ -20,6 +20,9 @@ namespace Algolia.Search.Test
         public AlgoliaClient _clientMCM;
         public string _userID;
 
+        // Insights
+        public InsightsClient _insightsClient;
+
         public BaseTest()
         {
             _testApiKey = Environment.GetEnvironmentVariable("ALGOLIA_API_KEY");
@@ -33,6 +36,8 @@ namespace Algolia.Search.Test
             _testApplicationIDMCM = Environment.GetEnvironmentVariable("ALGOLIA_APPLICATION_ID_MCM");
             _clientMCM = new AlgoliaClient(_testApplicationIDMCM, _testApiKeyMCM);
             _userID = GetUniqueUserID("csharp-client");
+
+            _insightsClient = new InsightsClient(_testApplicationID, _testApiKey);
         }
 
         public static string GetSafeName(string name)

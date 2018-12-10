@@ -377,16 +377,16 @@ namespace Algolia.Search.Test
             _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""objectID"":""1"", ""nickname"":""SF""}"));
             var task = _index.AddObject(JObject.Parse(@"{""name"":""Los Angeles"", ""objectID"":""2"", ""nickname"":""SanF""}"));
             _index.WaitTask(task["taskID"].ToString());
-            
+
             var query = new Query().SetNbHitsPerPage(1);
             var res = _index.BrowseAll(query);
-            
+
             List<JObject> hits = new List<JObject>();
             foreach (var hit in res)
             {
                 hits.Add(hit);
             }
-            
+
             Assert.Equal(2, hits.Count);
         }
 
@@ -1851,6 +1851,27 @@ namespace Algolia.Search.Test
             // should return all rules even the disabled one when the parameter enabled is not set in the query
             var allRules = _index.SearchRules();
             Assert.Equal(2, (int)allRules["nbHits"]);
+        }
+
+        [Fact]
+        public void TestInightsClient()
+        {
+            var indexName = GetSafeName("àlgol?à-csharp");
+
+            // click
+            _insightsClient.User("testClickedFilters").ClickedFilters("clickedFilters", indexName, new List<string> { "brand:apple" });
+            _insightsClient.User("testClickedObjectEvent").ClickedObjectIDs("clickedObjectEvent", indexName, new List<string> { "1", "2" });
+            // need more precision regarding queryId
+            //_insightsClient.User("testClickedObjectIDsAfterSearch").ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, "12345");
+
+            // Conversion
+            _insightsClient.User("testConvertedObjectIDs").ConvertedObjectIDs("convertedObjectIDs", indexName, new List<string> { "1", "2" });
+            // need more precision regarding queryId
+            //_insightsClient.User("testConvertedObjectIDsAfterSearch").ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, "12345");
+
+            // View
+            _insightsClient.User("testViewedFilters").ViewedFilters("viewedFilters", indexName, new List<string> { "brand:apple", "brand:google" });
+            _insightsClient.User("testViewedObjectIDs").ViewedObjectIDs("viewedObjectIDs", indexName, new List<string> { "1", "2" });
         }
     }
 }

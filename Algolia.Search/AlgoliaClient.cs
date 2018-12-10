@@ -883,7 +883,8 @@ namespace Algolia.Search
             Search,
             Write,
             Read,
-            Analytics
+            Analytics,
+            Insights
         };
 
         /// <summary>
@@ -907,6 +908,11 @@ namespace Algolia.Search
             else if (type == callType.Analytics)
             {
                 hosts = new string[] { "analytics.algolia.com" };
+                client = _buildHttpClient;
+            }
+            else if (type == callType.Insights)
+            {
+                hosts = filterOnActiveHosts(_readHosts, true);
                 client = _buildHttpClient;
             }
             else
@@ -982,6 +988,12 @@ namespace Algolia.Search
                         if (responseMsg.IsSuccessStatusCode)
                         {
                             string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
+
+                            if (type == callType.Insights && string.IsNullOrEmpty(serializedJSON))
+                            {
+                                return new JObject();
+                            }
+
                             JObject obj = JObject.Parse(serializedJSON);
                             if (type == callType.Search || type == callType.Read)
                             {
