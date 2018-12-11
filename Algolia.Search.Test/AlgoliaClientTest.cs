@@ -1857,7 +1857,7 @@ namespace Algolia.Search.Test
         public void TestInightsClient()
         {
             var indexName = GetSafeName("àlgol?à-csharp");
-            var insights = _insightsClient.User("tets");
+            var insights = _insightsClient.User("test");
 
             // click
             insights.ClickedFilters("clickedFilters", indexName, new List<string> { "brand:apple" });
