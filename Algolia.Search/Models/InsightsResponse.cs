@@ -5,7 +5,7 @@ namespace Algolia.Search.Models
     public class InsightsResponse
     {
         [JsonProperty(PropertyName = "status")]
-        public string Status { get; set; }
+        public int Status { get; set; }
         
         [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
