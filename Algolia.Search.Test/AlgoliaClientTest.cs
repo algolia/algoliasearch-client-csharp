@@ -1862,19 +1862,56 @@ namespace Algolia.Search.Test
             // click
             insights.ClickedFilters("clickedFilters", indexName, new List<string> { "brand:apple" });
             insights.ClickedObjectIDs("clickedObjectEvent", indexName, new List<string> { "1", "2" });
-            
+
             // need more precision regarding queryId
             //_insightsClient.User("testClickedObjectIDsAfterSearch").ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, "12345");
 
             // Conversion
             insights.ConvertedObjectIDs("convertedObjectIDs", indexName, new List<string> { "1", "2" });
-            
+
             // need more precision regarding queryId
             //_insightsClient.User("testConvertedObjectIDsAfterSearch").ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, "12345");
 
             // View
             insights.ViewedFilters("viewedFilters", indexName, new List<string> { "brand:apple", "brand:google" });
             insights.ViewedObjectIDs("viewedObjectIDs", indexName, new List<string> { "1", "2" });
+        }
+
+        [Fact]
+        public void TestPersonalizationStrategy()
+        {
+            var strategyToSave = new PersonalizationStrategyRequest
+            {
+                FacetsScoring = new Dictionary<string, FacetScoring>
+                {
+                    {"brand", new FacetScoring { Score = 100}},
+                    {"categories", new FacetScoring { Score = 10}}
+                },
+                EventsScoring = new Dictionary<string, EventScoring>
+                {
+                    {"Add to cart", new EventScoring { Score = 50, Type = "conversion" }},
+                    {"Purchase", new EventScoring { Score = 100, Type = "conversion" }}
+                }
+            };
+
+            var response = _client.SetStrategy(strategyToSave);
+            Assert.NotNull(response);
+            Assert.NotNull(response.UpdatedAt);
+
+            var getStrategy = _client.GetStrategy();
+            Assert.True(getStrategy.EventsScoring.ContainsKey("Add to cart"));
+            Assert.True(getStrategy.EventsScoring["Add to cart"].Score == 50);
+            Assert.True(getStrategy.EventsScoring["Add to cart"].Type.Equals("conversion"));
+
+            Assert.True(getStrategy.EventsScoring.ContainsKey("Purchase"));
+            Assert.True(getStrategy.EventsScoring["Purchase"].Score == 100);
+            Assert.True(getStrategy.EventsScoring["Purchase"].Type.Equals("conversion"));
+
+            Assert.True(getStrategy.FacetsScoring.ContainsKey("brand"));
+            Assert.True(getStrategy.FacetsScoring["brand"].Score == 100);
+
+            Assert.True(getStrategy.FacetsScoring.ContainsKey("categories"));
+            Assert.True(getStrategy.FacetsScoring["categories"].Score == 10);
         }
     }
 }

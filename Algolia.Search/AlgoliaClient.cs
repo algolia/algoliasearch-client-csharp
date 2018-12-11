@@ -1636,5 +1636,52 @@ namespace Algolia.Search
         {
             return SearchUserIdsAsync(query, clusterName, page, hitsPerPage, requestOptions).GetAwaiter().GetResult();
         }
+
+                /// <summary>
+        /// Returns the personalization strategy
+        /// </summary>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <returns></returns>
+        public PersonalizationStrategyResponse GetStrategy(RequestOptions requestOptions = null)
+        {
+            return GetStrategyAsync(requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Returns the personalization strategy
+        /// </summary>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <param name="token">The cancellation token</param>
+        /// <returns></returns>
+        public async Task<PersonalizationStrategyResponse> GetStrategyAsync(RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            JObject response = await ExecuteRequest(AlgoliaClient.callType.Read, "GET", "/1/recommendation/personalization/strategy", null, token, requestOptions);
+
+            return response.ToObject<PersonalizationStrategyResponse>();
+        }
+
+        /// <summary>
+        /// This command configures the personalization strategy
+        /// </summary>
+        /// <param name="request">Your personalization strategy</param>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <returns></returns>
+        public PersonalizationSaveStrategyResponse SetStrategy(PersonalizationStrategyRequest request, RequestOptions requestOptions = null)
+        {
+            return SetStrategyAsync(request, requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// This command configures the personalization strategy
+        /// </summary>
+        /// <param name="request">Your personalization strategy</param>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <param name="token">The cancellation token</param>
+        /// <returns></returns>
+        public async Task<PersonalizationSaveStrategyResponse> SetStrategyAsync(PersonalizationStrategyRequest request, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            JObject response = await ExecuteRequest(AlgoliaClient.callType.Write, "POST", "/1/recommendation/personalization/strategy", request, token, requestOptions);
+            return response.ToObject<PersonalizationSaveStrategyResponse>();
+        }
     }
 }
