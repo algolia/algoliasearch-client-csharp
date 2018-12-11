@@ -22,10 +22,10 @@
         <Version>5.2.1</Version>
         <AssemblyVersion>5.2.1</AssemblyVersion>
         <FileVersion>5.2.1</FileVersion>
-        <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.2;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6</TargetFrameworks>
-        <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.2;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6;net471;net47;net462;net461;net46;net45;</TargetFrameworks>
+        <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.1;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6</TargetFrameworks>
+        <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.1;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6;net471;net47;net462;net461;net46;net45;</TargetFrameworks>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2' OR'$(TargetFramework)' == 'netcoreapp2.0' OR '$(TargetFramework)' == 'netcoreapp1.1' OR '$(TargetFramework)' == 'netcoreapp1.0' OR '$(TargetFramework)' == 'netstandard1.6' OR '$(TargetFramework)' == 'netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1' OR'$(TargetFramework)' == 'netcoreapp2.0' OR '$(TargetFramework)' == 'netcoreapp1.1' OR '$(TargetFramework)' == 'netcoreapp1.0' OR '$(TargetFramework)' == 'netstandard1.6' OR '$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 
