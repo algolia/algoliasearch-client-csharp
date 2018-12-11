@@ -262,8 +262,6 @@ namespace Algolia.Search.Clients
 
                 return new ApiKey { Key = apiKey, GetApiKeyDelegate = k => GetApiKey(k), Exist = false };
             }
-
-            ;
         }
 
         /// <inheritdoc />
@@ -383,10 +381,10 @@ namespace Algolia.Search.Clients
                 {"hitsPerPage", hitsPerPage.ToString()}
             };
 
-            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
+            requestOptions = requestOptions.AddQueryParams(queryParams);
 
             return await _requesterWrapper.ExecuteRequestAsync<ListUserIdsResponse>(
-                    HttpMethod.Get, "/1/clusters/mapping", CallType.Read, requestOptionsToSend, ct)
+                    HttpMethod.Get, "/1/clusters/mapping", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -442,21 +440,8 @@ namespace Algolia.Search.Clients
 
             var data = new AssignUserIdRequest { Cluster = clusterName };
 
-            var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
-
-            if (requestOptions?.Headers != null && requestOptions.Headers.Any())
-            {
-                requestOptions.Headers =
-                    requestOptions.Headers.Concat(removeUserId).ToDictionary(x => x.Key, x => x.Value);
-            }
-            else if (requestOptions != null && requestOptions.Headers == null)
-            {
-                requestOptions.Headers = removeUserId;
-            }
-            else
-            {
-                requestOptions = new RequestOptions { Headers = removeUserId };
-            }
+            var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+            requestOptions = requestOptions.AddHeaders(userIdHeader);
 
             AssignUserIdResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<AssignUserIdResponse, AssignUserIdRequest>(HttpMethod.Post,
@@ -481,21 +466,8 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(userId);
             }
 
-            var removeUserId = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
-
-            if (requestOptions?.Headers != null && requestOptions.Headers.Any())
-            {
-                requestOptions.Headers =
-                    requestOptions.Headers.Concat(removeUserId).ToDictionary(x => x.Key, x => x.Value);
-            }
-            else if (requestOptions != null && requestOptions.Headers == null)
-            {
-                requestOptions.Headers = removeUserId;
-            }
-            else
-            {
-                requestOptions = new RequestOptions { Headers = removeUserId };
-            }
+            var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+            requestOptions = requestOptions.AddHeaders(userIdHeader);
 
             try
             {
@@ -538,10 +510,10 @@ namespace Algolia.Search.Clients
                 {"type", type},
             };
 
-            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
+            requestOptions = requestOptions.AddQueryParams(queryParams);
 
             return await _requesterWrapper.ExecuteRequestAsync<LogResponse>(HttpMethod.Get, "/1/logs", CallType.Read,
-                    requestOptionsToSend, ct)
+                    requestOptions, ct)
                 .ConfigureAwait(false);
         }
 

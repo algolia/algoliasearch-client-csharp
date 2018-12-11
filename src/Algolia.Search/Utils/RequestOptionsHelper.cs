@@ -29,19 +29,19 @@ namespace Algolia.Search.Utils
     /// <summary>
     /// Helper for Algolia's request options
     /// </summary>
-    public class RequestOptionsHelper
+    public static class RequestOptionsHelper
     {
         /// <summary>
         /// Create a request option with or without existing queryParams or Request options
         /// </summary>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="queryParams"></param>
+        /// <param name="queryParams">Query params</param>
         /// <returns></returns>
-        public static RequestOptions Create(RequestOptions requestOptions, Dictionary<string, string> queryParams)
+        public static RequestOptions AddQueryParams(this RequestOptions requestOptions, Dictionary<string, string> queryParams)
         {
             if (requestOptions == null)
             {
-                return new RequestOptions {QueryParameters = queryParams};
+                return new RequestOptions { QueryParameters = queryParams };
             }
 
             if (requestOptions.QueryParameters == null)
@@ -51,6 +51,29 @@ namespace Algolia.Search.Utils
             }
 
             requestOptions.QueryParameters.MergeWith(queryParams);
+            return requestOptions;
+        }
+
+        /// <summary>
+        /// Create a request option with or without existing headers or Request options
+        /// </summary>
+        /// <param name="requestOptions">request options</param>
+        /// <param name="headers">Custom headers</param>
+        /// <returns></returns>
+        public static RequestOptions AddHeaders(this RequestOptions requestOptions, Dictionary<string, string> headers)
+        {
+            if (requestOptions == null)
+            {
+                return new RequestOptions { Headers = headers };
+            }
+
+            if (requestOptions.Headers == null)
+            {
+                requestOptions.Headers = headers;
+                return requestOptions;
+            }
+
+            requestOptions.Headers.MergeWith(headers);
             return requestOptions;
         }
     }

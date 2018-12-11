@@ -561,10 +561,11 @@ namespace Algolia.Search.Clients
                 {nameof(clearExistingRules), clearExistingRules.ToString().ToLower()}
             };
 
-            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
+            requestOptions = requestOptions.AddQueryParams(dic);
+
             BatchResponse response = await _requesterWrapper.ExecuteRequestAsync<BatchResponse, IEnumerable<Rule>>(
                     HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/rules/batch", CallType.Write, rules,
-                    requestOptionsToSend, ct)
+                    requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitDelegate = t => WaitTask(t);
@@ -715,10 +716,11 @@ namespace Algolia.Search.Clients
                 {nameof(replaceExistingSynonyms), replaceExistingSynonyms.ToString().ToLower()}
             };
 
-            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, dic);
+            requestOptions = requestOptions.AddQueryParams(dic);
+            
             SaveSynonymResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
-                    $"/1/indexes/{_urlEncodedIndexName}/synonyms/batch", CallType.Write, synonyms, requestOptionsToSend,
+                    $"/1/indexes/{_urlEncodedIndexName}/synonyms/batch", CallType.Write, synonyms, requestOptions,
                     ct)
                 .ConfigureAwait(false);
 

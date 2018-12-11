@@ -116,10 +116,10 @@ namespace Algolia.Search.Clients
                 {"limit", limit.ToString()}
             };
 
-            RequestOptions requestOptionsToSend = RequestOptionsHelper.Create(requestOptions, queryParams);
+            requestOptions = requestOptions.AddQueryParams(queryParams);
 
             return await _requesterWrapper.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
-                    "/2/abtests", CallType.Analytics, requestOptionsToSend, ct)
+                    "/2/abtests", CallType.Analytics, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
