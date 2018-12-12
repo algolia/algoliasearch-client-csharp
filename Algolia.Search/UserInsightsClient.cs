@@ -210,6 +210,43 @@ namespace Algolia.Search
             return await _insightsClient.SendEventAsync(insightEvent, requestOptions, token);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="indexName"></param>
+        /// <param name="filters"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public InsightsResponse ConvertedFilters(string eventName, string indexName, IEnumerable<string> filters, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            return ConvertedFiltersAsync(eventName, indexName, filters, requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="indexName"></param>
+        /// <param name="filters"></param>
+        /// <param name="requestOptions"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public async Task<InsightsResponse> ConvertedFiltersAsync(string eventName, string indexName, IEnumerable<string> filters, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            var insightEvent = new InsightsEvent
+            {
+                EventType = "conversion",
+                UserToken = _userToken,
+                EventName = eventName,
+                Index = indexName,
+                Filters = filters,
+            };
+
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, token);
+        }
+
         // View
 
         /// <summary>

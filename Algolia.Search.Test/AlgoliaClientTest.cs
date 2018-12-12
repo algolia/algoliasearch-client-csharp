@@ -1864,13 +1864,14 @@ namespace Algolia.Search.Test
             insights.ClickedObjectIDs("clickedObjectEvent", indexName, new List<string> { "1", "2" });
 
             // need more precision regarding queryId
-            //_insightsClient.User("testClickedObjectIDsAfterSearch").ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, "12345");
+            // insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, "12345");
 
             // Conversion
             insights.ConvertedObjectIDs("convertedObjectIDs", indexName, new List<string> { "1", "2" });
+            insights.ConvertedFilters("converterdFilters", indexName, new List<string> { "brand:apple" });
 
             // need more precision regarding queryId
-            //_insightsClient.User("testConvertedObjectIDsAfterSearch").ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, "12345");
+            //insights.ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, "12345");
 
             // View
             insights.ViewedFilters("viewedFilters", indexName, new List<string> { "brand:apple", "brand:google" });
