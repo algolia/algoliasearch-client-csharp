@@ -1863,19 +1863,31 @@ namespace Algolia.Search.Test
             insights.ClickedFilters("clickedFilters", indexName, new List<string> { "brand:apple" });
             insights.ClickedObjectIDs("clickedObjectEvent", indexName, new List<string> { "1", "2" });
 
-            // need more precision regarding queryId
-            // insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, "12345");
-
             // Conversion
             insights.ConvertedObjectIDs("convertedObjectIDs", indexName, new List<string> { "1", "2" });
             insights.ConvertedFilters("converterdFilters", indexName, new List<string> { "brand:apple" });
 
-            // need more precision regarding queryId
-            //insights.ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, "12345");
-
             // View
             insights.ViewedFilters("viewedFilters", indexName, new List<string> { "brand:apple", "brand:google" });
             insights.ViewedObjectIDs("viewedObjectIDs", indexName, new List<string> { "1", "2" });
+
+            // Test methods with queryID
+            var task = _index.AddObject(new JObject { { "firstName", "Jimmie" } });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // We need to generate a queryID before sending it to the method
+            Query query = new Query("Jimmie");
+            query.EnableClickAnalytics(true);
+            var res = _index.Search(query);
+
+            insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, res["queryID"].ToString());
+            
+            // We need to generate a queryID before sending it to the method
+            Query query2 = new Query("Jimmie");
+            query.EnableClickAnalytics(true);
+            var res2 = _index.Search(query);
+
+            insights.ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, res2["queryID"].ToString());
         }
 
         [Fact]
