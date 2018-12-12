@@ -989,11 +989,6 @@ namespace Algolia.Search
                         {
                             string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
 
-                            if (type == callType.Insights && string.IsNullOrEmpty(serializedJSON))
-                            {
-                                return new JObject();
-                            }
-
                             JObject obj = JObject.Parse(serializedJSON);
                             if (type == callType.Search || type == callType.Read)
                             {
