@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Algolia.Search.Models
 {
-    public class PersonalizationStrategyResponse
+    public class PersonalizationGetStrategyResponse
     {
         [JsonProperty(PropertyName = "eventsScoring", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, EventScoring> EventsScoring { get; set; }
