@@ -1881,7 +1881,7 @@ namespace Algolia.Search.Test
             var res = _index.Search(query);
 
             insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, res["queryID"].ToString());
-            
+
             // We need to generate a queryID before sending it to the method
             Query query2 = new Query("Jimmie");
             query.EnableClickAnalytics(true);
@@ -1907,24 +1907,10 @@ namespace Algolia.Search.Test
                 }
             };
 
-            var response = _client.SetStrategy(strategyToSave);
-            Assert.NotNull(response);
-            Assert.NotNull(response.UpdatedAt);
-
-            var getStrategy = _client.GetStrategy();
-            Assert.True(getStrategy.EventsScoring.ContainsKey("Add to cart"));
-            Assert.True(getStrategy.EventsScoring["Add to cart"].Score == 50);
-            Assert.True(getStrategy.EventsScoring["Add to cart"].Type.Equals("conversion"));
-
-            Assert.True(getStrategy.EventsScoring.ContainsKey("Purchase"));
-            Assert.True(getStrategy.EventsScoring["Purchase"].Score == 100);
-            Assert.True(getStrategy.EventsScoring["Purchase"].Type.Equals("conversion"));
-
-            Assert.True(getStrategy.FacetsScoring.ContainsKey("brand"));
-            Assert.True(getStrategy.FacetsScoring["brand"].Score == 100);
-
-            Assert.True(getStrategy.FacetsScoring.ContainsKey("categories"));
-            Assert.True(getStrategy.FacetsScoring["categories"].Score == 10);
+            // Here we test the payload, as this settings are at app level all tests could overlap
+            string json = JsonConvert.SerializeObject(strategyToSave);
+            string expectedJson = "{\"eventsScoring\":{\"Add to cart\":{\"type\":\"conversion\",\"score\":50},\"Purchase\":{\"type\":\"conversion\",\"score\":100}},\"facetsScoring\":{\"brand\":{\"score\":100},\"categories\":{\"score\":10}}}";
+            Assert.True(json.Equals(expectedJson));
         }
     }
 }
