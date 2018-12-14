@@ -1,3 +1,6 @@
+trigger:
+- client-csharp-v2
+
 jobs:
 - job: Windows
   pool:
