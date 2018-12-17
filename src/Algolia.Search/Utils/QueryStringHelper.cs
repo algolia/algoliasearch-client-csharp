@@ -21,13 +21,13 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.ApiKeys;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using Algolia.Search.Models.Requests;
 
 namespace Algolia.Search.Utils
 {

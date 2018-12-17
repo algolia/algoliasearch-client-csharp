@@ -22,49 +22,22 @@
 */
 
 using System;
-using System.Threading.Tasks;
-using Algolia.Search.Models.Requests;
-using Newtonsoft.Json;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.ApiKeys
 {
     /// <summary>
-    /// Waitable delete api key response
+    /// Add api key api response
     /// </summary>
-    public class DeleteApiKeyResponse : IAlgoliaWaitableResponse
+    public class AddApiKeyResponse
     {
-        [JsonIgnore] 
-        internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
-
         /// <summary>
-        /// The key to delete
+        /// The returned api key
         /// </summary>
-        [JsonIgnore] 
         public string Key { get; set; }
 
         /// <summary>
-        /// Date of deletion
+        /// Date of creation of the api key
         /// </summary>
-        public DateTime DeletedAt { get; set; }
-
-        /// <summary>
-        /// Wait that the key doesn't exist anymore on the API side
-        /// </summary>
-        public virtual void Wait()
-        {
-            while (true)
-            {
-                // loop until the key doesn't exist on the api side
-                ApiKey retrievedApiKey = GetApiKeyDelegate(Key);
-
-                if (!retrievedApiKey.Exist)
-                {
-                    break;
-                }
-
-                Task.Delay(1000);
-                continue;
-            }
-        }
+        public DateTime CreatedAt { get; set; }
     }
 }

@@ -29,7 +29,7 @@ using Algolia.Search.Models.Responses;
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 
-namespace Algolia.Search.Models.Requests
+namespace Algolia.Search.Models.ApiKeys
 {
     /// <summary>
     /// Algolia's API Key

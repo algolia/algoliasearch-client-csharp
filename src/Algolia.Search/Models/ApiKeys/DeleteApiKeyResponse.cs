@@ -21,19 +21,51 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
 using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Responses;
+using System;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.ApiKeys
 {
     /// <summary>
-    /// https://www.algolia.com/doc/api-reference/api-methods/list-api-keys/
+    /// Waitable delete api key response
     /// </summary>
-    public class ListApiKeysResponse
+    public class DeleteApiKeyResponse : IAlgoliaWaitableResponse
     {
+        [JsonIgnore] 
+        internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+
         /// <summary>
-        /// List of keys
+        /// The key to delete
         /// </summary>
-        public List<ApiKey> Keys { get; set; }
+        [JsonIgnore] 
+        public string Key { get; set; }
+
+        /// <summary>
+        /// Date of deletion
+        /// </summary>
+        public DateTime DeletedAt { get; set; }
+
+        /// <summary>
+        /// Wait that the key doesn't exist anymore on the API side
+        /// </summary>
+        public virtual void Wait()
+        {
+            while (true)
+            {
+                // loop until the key doesn't exist on the api side
+                ApiKey retrievedApiKey = GetApiKeyDelegate(Key);
+
+                if (!retrievedApiKey.Exist)
+                {
+                    break;
+                }
+
+                Task.Delay(1000);
+                continue;
+            }
+        }
     }
 }

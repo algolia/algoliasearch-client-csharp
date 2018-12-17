@@ -23,21 +23,21 @@
 
 using System;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.ApiKeys
 {
     /// <summary>
-    /// Add api key api response
+    /// Api's reponse for update api key
     /// </summary>
-    public class AddApiKeyResponse
+    public class UpdateApiKeyResponse
     {
         /// <summary>
-        /// The returned api key
+        /// The updated key
         /// </summary>
         public string Key { get; set; }
-
+        
         /// <summary>
-        /// Date of creation of the api key
+        /// Date of update
         /// </summary>
-        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

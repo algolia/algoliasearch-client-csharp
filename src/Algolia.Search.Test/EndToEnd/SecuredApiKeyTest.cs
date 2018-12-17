@@ -23,6 +23,7 @@
 
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
+using Algolia.Search.Models.ApiKeys;
 using Algolia.Search.Models.Query;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Utils;
