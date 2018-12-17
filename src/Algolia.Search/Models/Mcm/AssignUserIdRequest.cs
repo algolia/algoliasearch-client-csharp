@@ -21,7 +21,7 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Requests
+namespace Algolia.Search.Models.Mcm
 {
     /// <summary>
     /// Assign user request

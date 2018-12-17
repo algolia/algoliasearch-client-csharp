@@ -24,6 +24,7 @@
 using Algolia.Search.Http;
 using Algolia.Search.Models.ApiKeys;
 using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;

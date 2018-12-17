@@ -1,6 +1,6 @@
 /*
 * Copyright (c) 2018 Algolia
-* http://www.algolia.com/ 
+* http://www.algolia.com/
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -21,31 +21,18 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Requests
+using System.Collections.Generic;
+
+namespace Algolia.Search.Models.Mcm
 {
     /// <summary>
-    /// Search user Ids Request
+    /// Algolia's top user id response 
     /// </summary>
-    public class SearchUserIdsRequest
+    public class TopUserIdResponse
     {
         /// <summary>
-        /// Query to search. The search is a prefix search with typoTolerance. Use empty query to retrieve all users.
+        /// Mapping of cluster names to top users.
         /// </summary>
-        public string Query { get; set; }
-
-        /// <summary>
-        /// If specified only clusters assigned to this cluster can be returned.
-        /// </summary>
-        public string Cluster { get; set; }
-
-        /// <summary>
-        /// Page to fetch.
-        /// </summary>
-        public int Page { get; set; }
-
-        /// <summary>
-        /// Number of users to return by page.
-        /// </summary>
-        public int HitsPerPage { get; set; }
+        public Dictionary<string, IEnumerable<UserIdResponse>> TopUsers { get; set; }
     }
 }

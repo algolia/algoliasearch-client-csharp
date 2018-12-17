@@ -21,7 +21,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Responses;
 using NUnit.Framework;
 using System;

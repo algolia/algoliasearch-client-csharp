@@ -24,7 +24,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.Mcm
 {
     /// <summary>
     /// https://www.algolia.com/doc/api-reference/api-methods/list-user-id/

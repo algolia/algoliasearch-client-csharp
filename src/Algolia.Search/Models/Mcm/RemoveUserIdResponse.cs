@@ -1,6 +1,6 @@
 /*
 * Copyright (c) 2018 Algolia
-* http://www.algolia.com/
+* http://www.algolia.com/ 
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -22,46 +22,48 @@
 */
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Exceptions;
+using Algolia.Search.Models.Responses;
 using Algolia.Search.Utils;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.Mcm
 {
     /// <summary>
-    /// Waitable response of assignUserid method
+    /// Waitable response for removeUserId
     /// </summary>
-    public class AssignUserIdResponse : IAlgoliaWaitableResponse
+    public class RemoveUserIdResponse : IAlgoliaWaitableResponse
     {
-        internal Func<string, UserIdResponse> GetUserDelegate { get; set; }
+        internal Func<string, RemoveUserIdResponse> RemoveDelegate { get; set; }
 
         /// <summary>
-        /// The user Id
+        /// UserId to remove
         /// </summary>
         public string UserId { get; set; }
 
         /// <summary>
-        /// Date of creation of the userId
+        /// Date of deletion
         /// </summary>
-        public DateTime CreatedAt { get; set; }
+        public DateTime DeletedAt { get; set; }
 
         /// <summary>
-        /// Wait until the userID is created on the API
-        /// Loop until httpErrorCode != 404
+        /// As the delete operation is asynchronous
+        /// Wait until the userId is deleted on the API
         /// </summary>
         public void Wait()
         {
+            RemoveUserIdResponse deleteResponse;
+
             while (true)
             {
                 try
                 {
-                    GetUserDelegate(UserId);
+                    deleteResponse = RemoveDelegate(UserId);
                 }
                 catch (AlgoliaApiException ex)
                 {
-                    // Loop until we have found the userID
-                    if (ex.HttpErrorCode == 404)
+                    // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
+                    if (ex.Message.Contains("Another mapping operation is already running for this userID"))
                     {
                         Task.Delay(1000);
                         continue;
@@ -70,6 +72,7 @@ namespace Algolia.Search.Models.Responses
                     throw;
                 }
 
+                DeletedAt = deleteResponse.DeletedAt;
                 break;
             }
         }

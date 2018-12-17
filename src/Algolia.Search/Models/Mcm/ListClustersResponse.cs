@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Responses
+namespace Algolia.Search.Models.Mcm
 {
     /// <summary>
     /// List of cluster response
