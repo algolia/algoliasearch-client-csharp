@@ -1,5 +1,9 @@
 Changelog
 =========
+5.3.0 (2018-12-17)
+- Added Insights feature
+- Added Personalization feature
+
 5.2.1 (2018-12-03)
 - Added HTTP code in AlgoliaException
 - Fixed browse post URL
