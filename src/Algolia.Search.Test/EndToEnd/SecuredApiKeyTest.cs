@@ -24,8 +24,8 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.ApiKeys;
-using Algolia.Search.Models.Query;
-using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Search;
+using Algolia.Search.Models.Commons;
 using Algolia.Search.Utils;
 using NUnit.Framework;
 using System;

@@ -22,7 +22,8 @@
 */
 
 using Algolia.Search.Models.Mcm;
-using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Search;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

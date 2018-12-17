@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Requests;
-using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Commons;
+using Algolia.Search.Models.Common;
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;

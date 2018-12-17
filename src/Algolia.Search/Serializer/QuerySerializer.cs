@@ -21,7 +21,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Query;
+using Algolia.Search.Models.Search;
 using Algolia.Search.Utils;
 using Newtonsoft.Json;
 using System;

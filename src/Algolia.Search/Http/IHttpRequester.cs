@@ -21,7 +21,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Commons;
 using System.Threading;
 using System.Threading.Tasks;
 

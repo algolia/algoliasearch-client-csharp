@@ -24,7 +24,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Http;
-using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Clients
 {

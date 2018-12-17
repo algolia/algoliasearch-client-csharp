@@ -25,7 +25,7 @@ using Algolia.Search.Clients;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Commons;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;

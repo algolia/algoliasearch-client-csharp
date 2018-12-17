@@ -24,9 +24,10 @@
 using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
-using Algolia.Search.Models.Requests;
-using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Commons;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Settings;
+using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Utils;
 using System.Collections.Generic;
 using System.Threading;

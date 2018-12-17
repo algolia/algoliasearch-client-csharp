@@ -23,7 +23,7 @@
 
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;

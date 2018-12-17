@@ -23,8 +23,8 @@
 
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Query;
-using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Search;
+using Algolia.Search.Models.Commons;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;

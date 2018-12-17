@@ -21,7 +21,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Commons;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 using System;

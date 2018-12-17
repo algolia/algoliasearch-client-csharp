@@ -22,7 +22,8 @@
 */
 
 using Algolia.Search.Clients;
-using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Synonyms;
 using System.Collections;
 using System.Collections.Generic;

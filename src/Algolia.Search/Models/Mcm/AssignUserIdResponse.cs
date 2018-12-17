@@ -25,7 +25,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Exceptions;
-using Algolia.Search.Models.Responses;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Utils;
 
 namespace Algolia.Search.Models.Mcm

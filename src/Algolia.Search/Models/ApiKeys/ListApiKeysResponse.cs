@@ -22,7 +22,7 @@
 */
 
 using System.Collections.Generic;
-using Algolia.Search.Models.Requests;
+using Algolia.Search.Models.Commons;
 
 namespace Algolia.Search.Models.ApiKeys
 {
