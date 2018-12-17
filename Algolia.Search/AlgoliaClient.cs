@@ -883,7 +883,8 @@ namespace Algolia.Search
             Search,
             Write,
             Read,
-            Analytics
+            Analytics,
+            Insights
         };
 
         /// <summary>
@@ -907,6 +908,11 @@ namespace Algolia.Search
             else if (type == callType.Analytics)
             {
                 hosts = new string[] { "analytics.algolia.com" };
+                client = _buildHttpClient;
+            }
+            else if (type == callType.Insights)
+            {
+                hosts = filterOnActiveHosts(_readHosts, true);
                 client = _buildHttpClient;
             }
             else
@@ -982,6 +988,7 @@ namespace Algolia.Search
                         if (responseMsg.IsSuccessStatusCode)
                         {
                             string serializedJSON = await responseMsg.Content.ReadAsStringAsync().ConfigureAwait(_continueOnCapturedContext);
+
                             JObject obj = JObject.Parse(serializedJSON);
                             if (type == callType.Search || type == callType.Read)
                             {
@@ -1623,6 +1630,53 @@ namespace Algolia.Search
         public JObject SearchUserIds(string query, string clusterName = null, int? page = null, int? hitsPerPage = null, RequestOptions requestOptions = null)
         {
             return SearchUserIdsAsync(query, clusterName, page, hitsPerPage, requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Returns the personalization strategy
+        /// </summary>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <returns></returns>
+        public PersonalizationGetStrategyResponse GetPersonalizationStrategy(RequestOptions requestOptions = null)
+        {
+            return GetPersonalizationStrategyAsync(requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Returns the personalization strategy
+        /// </summary>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <param name="token">The cancellation token</param>
+        /// <returns></returns>
+        public async Task<PersonalizationGetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            JObject response = await ExecuteRequest(AlgoliaClient.callType.Read, "GET", "/1/recommendation/personalization/strategy", null, token, requestOptions);
+
+            return response.ToObject<PersonalizationGetStrategyResponse>();
+        }
+
+        /// <summary>
+        /// This command configures the personalization strategy
+        /// </summary>
+        /// <param name="request">Your personalization strategy</param>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <returns></returns>
+        public PersonalizationSetStrategyResponse SetPersonalizationStrategy(PersonalizationStrategyRequest request, RequestOptions requestOptions = null)
+        {
+            return SetPersonalizationStrategyAsync(request, requestOptions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// This command configures the personalization strategy
+        /// </summary>
+        /// <param name="request">Your personalization strategy</param>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <param name="token">The cancellation token</param>
+        /// <returns></returns>
+        public async Task<PersonalizationSetStrategyResponse> SetPersonalizationStrategyAsync(PersonalizationStrategyRequest request, RequestOptions requestOptions = null, CancellationToken token = default(CancellationToken))
+        {
+            JObject response = await ExecuteRequest(AlgoliaClient.callType.Write, "POST", "/1/recommendation/personalization/strategy", request, token, requestOptions);
+            return response.ToObject<PersonalizationSetStrategyResponse>();
         }
     }
 }

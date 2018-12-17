@@ -377,16 +377,16 @@ namespace Algolia.Search.Test
             _index.AddObject(JObject.Parse(@"{""name"":""San Francisco"", ""objectID"":""1"", ""nickname"":""SF""}"));
             var task = _index.AddObject(JObject.Parse(@"{""name"":""Los Angeles"", ""objectID"":""2"", ""nickname"":""SanF""}"));
             _index.WaitTask(task["taskID"].ToString());
-            
+
             var query = new Query().SetNbHitsPerPage(1);
             var res = _index.BrowseAll(query);
-            
+
             List<JObject> hits = new List<JObject>();
             foreach (var hit in res)
             {
                 hits.Add(hit);
             }
-            
+
             Assert.Equal(2, hits.Count);
         }
 
@@ -1851,6 +1851,66 @@ namespace Algolia.Search.Test
             // should return all rules even the disabled one when the parameter enabled is not set in the query
             var allRules = _index.SearchRules();
             Assert.Equal(2, (int)allRules["nbHits"]);
+        }
+
+        [Fact]
+        public void TestInightsClient()
+        {
+            var indexName = GetSafeName("àlgol?à-csharp");
+            var insights = _insightsClient.User("test");
+
+            // click
+            insights.ClickedFilters("clickedFilters", indexName, new List<string> { "brand:apple" });
+            insights.ClickedObjectIDs("clickedObjectEvent", indexName, new List<string> { "1", "2" });
+
+            // Conversion
+            insights.ConvertedObjectIDs("convertedObjectIDs", indexName, new List<string> { "1", "2" });
+            insights.ConvertedFilters("converterdFilters", indexName, new List<string> { "brand:apple" });
+
+            // View
+            insights.ViewedFilters("viewedFilters", indexName, new List<string> { "brand:apple", "brand:google" });
+            insights.ViewedObjectIDs("viewedObjectIDs", indexName, new List<string> { "1", "2" });
+
+            // Test methods with queryID
+            var task = _index.AddObject(new JObject { { "firstName", "Jimmie" } });
+            _index.WaitTask(task["taskID"].ToString());
+
+            // We need to generate a queryID before sending it to the method
+            Query query = new Query("Jimmie");
+            query.EnableClickAnalytics(true);
+            var res = _index.Search(query);
+
+            insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, res["queryID"].ToString());
+
+            // We need to generate a queryID before sending it to the method
+            Query query2 = new Query("Jimmie");
+            query.EnableClickAnalytics(true);
+            var res2 = _index.Search(query);
+
+            insights.ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, res2["queryID"].ToString());
+        }
+
+        [Fact]
+        public void TestPersonalizationStrategy()
+        {
+            var strategyToSave = new PersonalizationStrategyRequest
+            {
+                FacetsScoring = new Dictionary<string, FacetScoring>
+                {
+                    {"brand", new FacetScoring { Score = 100}},
+                    {"categories", new FacetScoring { Score = 10}}
+                },
+                EventsScoring = new Dictionary<string, EventScoring>
+                {
+                    {"Add to cart", new EventScoring { Score = 50, Type = "conversion" }},
+                    {"Purchase", new EventScoring { Score = 100, Type = "conversion" }}
+                }
+            };
+
+            // Here we test the payload, as this settings are at app level all tests could overlap
+            string json = JsonConvert.SerializeObject(strategyToSave);
+            string expectedJson = "{\"eventsScoring\":{\"Add to cart\":{\"type\":\"conversion\",\"score\":50},\"Purchase\":{\"type\":\"conversion\",\"score\":100}},\"facetsScoring\":{\"brand\":{\"score\":100},\"categories\":{\"score\":10}}}";
+            Assert.True(json.Equals(expectedJson));
         }
     }
 }
