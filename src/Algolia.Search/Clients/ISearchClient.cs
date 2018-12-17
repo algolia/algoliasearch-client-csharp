@@ -23,6 +23,7 @@
 
 using Algolia.Search.Http;
 using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using System.Collections.Generic;
@@ -484,6 +485,37 @@ namespace Algolia.Search.Clients
         Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// Returns the personalization strategy of the application
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <returns></returns>
+        GetStrategyResponse GetPersonalizationStrategy(RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Returns the personalization strategy of the application
+        /// </summary>
+        /// <param name="requestOptions"></param>
+        /// <param name="ct">Optional cancellation token</param>
+        Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
+        /// This command configures the personalization strategy
+        /// </summary>
+        /// <param name="request">The personalization strategy</param>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <returns></returns>
+        SetStrategyResponse SetPersonalizationStrategy(SetStrategyRequest request, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// This command configures the personalization strategy
+        /// </summary>
+        /// <param name="request">The personalization strategy></param>
+        /// <param name="requestOptions">Request options for the query</param>
+        /// <param name="ct">Request options for the query</param>
+        /// <returns></returns>
+        Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// This function waits for the Algolia's API task to finish

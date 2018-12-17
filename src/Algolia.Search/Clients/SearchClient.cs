@@ -25,6 +25,7 @@ using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Requests;
 using Algolia.Search.Models.Responses;
 using Algolia.Search.Transport;
@@ -613,6 +614,30 @@ namespace Algolia.Search.Clients
 
             response.WaitDelegate = t => WaitTask(destinationIndex, t);
             return response;
+        }
+
+        /// <inheritdoc />
+        public GetStrategyResponse GetPersonalizationStrategy(RequestOptions requestOptions = null) =>
+             AsyncHelper.RunSync(() => GetPersonalizationStrategyAsync(requestOptions));
+
+        /// <inheritdoc />
+        public async Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<GetStrategyResponse>(HttpMethod.Get, "/1/recommendation/personalization/strategy", CallType.Read,
+                    requestOptions, ct)
+                .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public SetStrategyResponse SetPersonalizationStrategy(SetStrategyRequest request, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => SetPersonalizationStrategyAsync(request, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<SetStrategyResponse, SetStrategyRequest>(HttpMethod.Post, "/1/recommendation/personalization/strategy", CallType.Write,
+                    request, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <inheritdoc />
