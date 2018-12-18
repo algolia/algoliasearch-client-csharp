@@ -18,10 +18,10 @@
         </PackageDescription>
         <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
         <Copyright>Copyright 2018 Algolia</Copyright>
-        <VersionPrefix>5.3.0</VersionPrefix>
-        <Version>5.3.0</Version>
-        <AssemblyVersion>5.3.0</AssemblyVersion>
-        <FileVersion>5.3.0</FileVersion>
+        <VersionPrefix>5.3.1</VersionPrefix>
+        <Version>5.3.1</Version>
+        <AssemblyVersion>5.3.1</AssemblyVersion>
+        <FileVersion>5.3.1</FileVersion>
         <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.1;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6</TargetFrameworks>
         <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.1;netcoreapp2.0;netcoreapp1.1;netcoreapp1.0;netstandard2.0;netstandard1.6;net471;net47;net462;net461;net46;net45;</TargetFrameworks>
   </PropertyGroup>
