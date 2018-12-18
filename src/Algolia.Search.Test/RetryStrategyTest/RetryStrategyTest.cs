@@ -38,17 +38,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
     {
         [TestCase(CallType.Read)]
         [TestCase(CallType.Write)]
-        public void TestGetTryableHost(CallType callType)
-        {
-            RetryStrategy retryStrategy = new RetryStrategy("appId");
-            var hosts = retryStrategy.GetTryableHost(callType);
-
-            Assert.True(hosts.Count() == 1);
-            Assert.True(hosts.All(h => h.Up));
-        }
-
-        [TestCase(CallType.Read)]
-        [TestCase(CallType.Write)]
         public void TestRetryStrategyResetExpired(CallType callType)
         {
             var commonHosts = new List<StatefulHost>
