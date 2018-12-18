@@ -107,11 +107,7 @@ namespace Algolia.Search.Transport
             }
         }
 
-        /// <summary>
-        /// Returns the tryable host regarding the retry strategy
-        /// </summary>
-        /// <param name="callType"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<StatefulHost> GetTryableHost(CallType callType)
         {
             lock (_lock)
@@ -135,13 +131,6 @@ namespace Algolia.Search.Transport
         }
 
         /// <inheritdoc />
-        /// <summary>
-        /// Update host's state 
-        /// </summary>
-        /// <param name="tryableHost"></param>
-        /// <param name="httpResponseCode"></param>
-        /// <param name="isTimedOut"></param>
-        /// <returns></returns>
         public RetryOutcomeType Decide(StatefulHost tryableHost, int httpResponseCode, bool isTimedOut)
         {
             lock (_lock)

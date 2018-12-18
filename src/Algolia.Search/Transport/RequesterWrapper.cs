@@ -44,8 +44,8 @@ namespace Algolia.Search.Transport
     internal class RequesterWrapper : IRequesterWrapper
     {
         private readonly IHttpRequester _httpClient;
+        private readonly IRetryStrategy _retryStrategy;
         private readonly AlgoliaConfig _algoliaConfig;
-        private readonly RetryStrategy _retryStrategy;
 
         /// <summary>
         /// Instantiate with custom config and custom http requester 
@@ -157,10 +157,10 @@ namespace Algolia.Search.Transport
             if (optionalQueryParameters != null)
             {
                 var queryParams = optionalQueryParameters.ToQueryString();
-                return new UriBuilder {Scheme = "https", Host = url, Path = $"{baseUri}", Query = queryParams}.Uri;
+                return new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}", Query = queryParams }.Uri;
             }
 
-            return new UriBuilder {Scheme = "https", Host = url, Path = baseUri}.Uri;
+            return new UriBuilder { Scheme = "https", Host = url, Path = baseUri }.Uri;
         }
 
         /// <summary>

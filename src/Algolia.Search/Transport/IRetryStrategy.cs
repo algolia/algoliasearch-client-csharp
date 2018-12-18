@@ -31,16 +31,16 @@ namespace Algolia.Search.Transport
         /// <summary>
         /// Returns the tryable host regarding the retry strategy
         /// </summary>
-        /// <param name="callType"></param>
+        /// <param name="callType">The Call type <see cref="Models.Enums.CallType"/></param>
         /// <returns></returns>
         IEnumerable<StatefulHost> GetTryableHost(CallType callType);
 
         /// <summary>
         /// Update host's state 
         /// </summary>
-        /// <param name="tryableHost"></param>
-        /// <param name="httpResponseCode"></param>
-        /// <param name="isTimedOut"></param>
+        /// <param name="tryableHost">A statefull host</param>
+        /// <param name="httpResponseCode">An http response code</param>
+        /// <param name="isTimedOut">Is the request timed out</param>
         /// <returns></returns>
         RetryOutcomeType Decide(StatefulHost tryableHost, int httpResponseCode, bool isTimedOut);
     }
