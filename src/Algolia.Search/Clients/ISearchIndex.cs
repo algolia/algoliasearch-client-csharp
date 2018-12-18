@@ -24,8 +24,6 @@
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Search;
-using Algolia.Search.Models.Commons;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
@@ -33,6 +31,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Clients
 {

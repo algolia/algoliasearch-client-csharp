@@ -26,7 +26,7 @@ using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Commons
+namespace Algolia.Search.Models.Common
 {
     /// <summary>
     /// Class used to perfom multiple requests

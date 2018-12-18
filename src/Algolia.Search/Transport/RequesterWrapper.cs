@@ -25,7 +25,7 @@ using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Commons;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 using System;

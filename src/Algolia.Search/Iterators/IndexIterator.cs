@@ -22,7 +22,7 @@
 */
 
 using Algolia.Search.Clients;
-using Algolia.Search.Models.Commons;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Common;
 using System.Collections;
 using System.Collections.Generic;

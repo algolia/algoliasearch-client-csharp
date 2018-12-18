@@ -24,7 +24,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Commons
+namespace Algolia.Search.Models.Common
 {
     /// <summary>
     /// Copy index to request

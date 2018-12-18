@@ -23,7 +23,7 @@
 
 using Algolia.Search.Models.Search;
 
-namespace Algolia.Search.Models.Commons
+namespace Algolia.Search.Models.Common
 {
     /// <summary>
     /// https://www.algolia.com/doc/rest-api/search/#browse-index-post

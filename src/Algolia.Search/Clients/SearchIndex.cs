@@ -26,7 +26,7 @@ using Algolia.Search.Iterators;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Search;
-using Algolia.Search.Models.Commons;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;

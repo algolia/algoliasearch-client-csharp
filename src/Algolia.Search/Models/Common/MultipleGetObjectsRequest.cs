@@ -23,7 +23,7 @@
 
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Commons
+namespace Algolia.Search.Models.Common
 {
     /// <summary>
     /// Used to create multiple get

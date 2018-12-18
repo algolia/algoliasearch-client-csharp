@@ -21,7 +21,7 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Commons
+namespace Algolia.Search.Models.Common
 {
     /// <summary>
     /// Move index request

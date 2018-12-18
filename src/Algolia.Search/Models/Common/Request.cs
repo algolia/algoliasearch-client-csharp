@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 
-namespace Algolia.Search.Models.Commons
+namespace Algolia.Search.Models.Common
 {
     /// <summary>
     /// Request to send to the API
