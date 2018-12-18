@@ -40,11 +40,6 @@ namespace Algolia.Search.Models.Enums
         /// <summary>
         /// Write Call 
         /// </summary>
-        Write = 2,
-        
-        /// <summary>
-        /// Analytics Call 
-        /// </summary>
-        Analytics = 4
+        Write = 2
     }
 }

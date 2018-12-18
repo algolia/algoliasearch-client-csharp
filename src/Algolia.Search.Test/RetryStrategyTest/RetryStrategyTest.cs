@@ -38,22 +38,13 @@ namespace Algolia.Search.Test.RetryStrategyTest
     {
         [TestCase(CallType.Read)]
         [TestCase(CallType.Write)]
-        [TestCase(CallType.Analytics)]
         public void TestGetTryableHost(CallType callType)
         {
             RetryStrategy retryStrategy = new RetryStrategy("appId");
             var hosts = retryStrategy.GetTryableHost(callType);
 
-            if (callType.HasFlag(CallType.Analytics))
-            {
-                Assert.True(hosts.Count() == 1);
-                Assert.True(hosts.All(h => h.Up));
-            }
-            else
-            {
-                Assert.True(hosts.Count() == 4);
-                Assert.True(hosts.All(h => h.Up));
-            }
+            Assert.True(hosts.Count() == 1);
+            Assert.True(hosts.All(h => h.Up));
         }
 
         [TestCase(CallType.Read)]

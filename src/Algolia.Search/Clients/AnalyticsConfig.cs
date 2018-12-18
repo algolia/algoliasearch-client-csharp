@@ -21,50 +21,29 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Common;
-using System;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Transport;
 
-namespace Algolia.Search.Models.ApiKeys
+namespace Algolia.Search.Clients
 {
     /// <summary>
-    /// Waitable delete api key response
+    /// Analytics client configuration
     /// </summary>
-    public class DeleteApiKeyResponse : IAlgoliaWaitableResponse
+    public class AnalyticsConfig : AlgoliaConfig
     {
-        [JsonIgnore] 
-        internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
-
         /// <summary>
-        /// The key to delete
+        /// Create a new Algolia's configuration for the given credentials
         /// </summary>
-        [JsonIgnore] 
-        public string Key { get; set; }
-
-        /// <summary>
-        /// Date of deletion
-        /// </summary>
-        public DateTime DeletedAt { get; set; }
-
-        /// <summary>
-        /// Wait that the key doesn't exist anymore on the API side
-        /// </summary>
-        public virtual void Wait()
+        /// <param name="applicationId">Your application ID</param>
+        /// <param name="apiKey">Your API Key</param>
+        public AnalyticsConfig(string applicationId, string apiKey) : base(applicationId, apiKey)
         {
-            while (true)
-            {
-                // loop until the key doesn't exist on the api side
-                ApiKey retrievedApiKey = GetApiKeyDelegate(Key);
-
-                if (!retrievedApiKey.Exist)
-                {
-                    break;
-                }
-
-                Task.Delay(1000);
-                continue;
-            }
+            this.Hosts = new List<StatefulHost> {
+            new StatefulHost {
+                Url = "analytics.algolia.com",
+                Accept = CallType.Read | CallType.Write
+            }};
         }
     }
 }

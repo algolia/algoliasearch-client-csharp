@@ -176,8 +176,6 @@ namespace Algolia.Search.Transport
                     return 5;
                 case CallType.Write:
                     return 30;
-                case CallType.Analytics:
-                    return 5;
                 default:
                     return 5;
             }

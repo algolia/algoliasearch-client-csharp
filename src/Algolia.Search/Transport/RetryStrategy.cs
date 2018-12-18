@@ -105,14 +105,6 @@ namespace Algolia.Search.Transport
 
                 _hosts.AddRange(commonHosts);
             }
-
-            _hosts.Add(new StatefulHost
-            {
-                Url = "analytics.algolia.com",
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Analytics
-            });
         }
 
         /// <summary>

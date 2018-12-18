@@ -47,7 +47,7 @@ namespace Algolia.Search.Clients
         /// <param name="applicationId">Your application ID</param>
         /// <param name="apiKey">Your Api KEY</param>
         public AnalyticsClient(string applicationId, string apiKey) : this(
-            new AlgoliaConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+            new AnalyticsConfig(applicationId, apiKey), new AlgoliaHttpRequester())
         {
         }
 
@@ -55,7 +55,7 @@ namespace Algolia.Search.Clients
         /// Initialize a client with custom config
         /// </summary>
         /// <param name="config">Algolia config instance</param>
-        public AnalyticsClient(AlgoliaConfig config) : this(config, new AlgoliaHttpRequester())
+        public AnalyticsClient(AnalyticsConfig config) : this(config, new AlgoliaHttpRequester())
         {
         }
 
@@ -64,7 +64,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="config">Algolia config instance</param>
         /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-        public AnalyticsClient(AlgoliaConfig config, IHttpRequester httpRequester)
+        public AnalyticsClient(AnalyticsConfig config, IHttpRequester httpRequester)
         {
             if (httpRequester == null)
             {
@@ -98,7 +98,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<ABTest>(HttpMethod.Get,
-                    $"/2/abtests/{abTestId}", CallType.Analytics, requestOptions, ct)
+                    $"/2/abtests/{abTestId}", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -119,7 +119,7 @@ namespace Algolia.Search.Clients
             requestOptions = requestOptions.AddQueryParams(queryParams);
 
             return await _requesterWrapper.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
-                    "/2/abtests", CallType.Analytics, requestOptions, ct)
+                    "/2/abtests", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -132,7 +132,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
-                    "/2/abtests", CallType.Analytics, aBTest, requestOptions, ct)
+                    "/2/abtests", CallType.Write, aBTest, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -145,7 +145,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<StopABTestResponse>(HttpMethod.Post,
-                    $"/2/abtests/{abTestId}/stop", CallType.Analytics, requestOptions, ct)
+                    $"/2/abtests/{abTestId}/stop", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -158,7 +158,7 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken))
         {
             return await _requesterWrapper.ExecuteRequestAsync<DeleteABTestResponse>(HttpMethod.Delete,
-                    $"/2/abtests/{abTestId}", CallType.Analytics, requestOptions, ct)
+                    $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
         }
     }
