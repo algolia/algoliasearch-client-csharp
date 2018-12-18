@@ -1877,14 +1877,14 @@ namespace Algolia.Search.Test
 
             // We need to generate a queryID before sending it to the method
             Query query = new Query("Jimmie");
-            query.EnableClickAnalytics(true);
+            query.EnableClickAnalytics(true).EnablePersonalization(true);
             var res = _index.Search(query);
 
             insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, new List<uint> { 17, 19 }, res["queryID"].ToString());
 
             // We need to generate a queryID before sending it to the method
             Query query2 = new Query("Jimmie");
-            query.EnableClickAnalytics(true);
+            query.EnableClickAnalytics(true).EnablePersonalization(true);
             var res2 = _index.Search(query);
 
             insights.ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", indexName, new List<string> { "1", "2" }, res2["queryID"].ToString());
