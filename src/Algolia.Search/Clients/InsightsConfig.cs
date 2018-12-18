@@ -21,29 +21,31 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Transport;
+
 namespace Algolia.Search.Clients
 {
     /// <summary>
     /// Insights client configuration
     /// </summary>
-    public class InsightsConfig
+    public class InsightsConfig : AlgoliaConfig
     {
         /// <summary>
-        /// Your application ID
+        /// Create a new Algolia's configuration for the given credentials
         /// </summary>
-        /// <returns></returns>
-        public string AppId { get; set; }
-
-        /// <summary>
-        /// Your API Key
-        /// </summary>
-        /// <returns></returns>
-        public string ApiKey { get; set; }
-        
-        /// <summary>
-        /// Server's region
-        /// </summary>
-        /// <value></value>
-        public string Region { get; set; } = "us";
+        /// <param name="applicationId">Your application ID</param>
+        /// <param name="apiKey">Your API Key</param>
+        /// <param name="region">Insigts api's region</param>
+        public InsightsConfig(string applicationId, string apiKey, string region = "us") : base(applicationId, apiKey)
+        {
+            this.Hosts = new List<StatefulHost> { 
+                new StatefulHost {
+                    Url = $"insights.{region}.algolia.io",
+                    Accept = CallType.Read | CallType.Write
+                }
+            };
+        }
     }
 }

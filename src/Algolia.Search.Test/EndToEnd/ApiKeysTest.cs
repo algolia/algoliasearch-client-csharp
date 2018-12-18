@@ -23,7 +23,6 @@
 
 using Algolia.Search.Models.ApiKeys;
 using Algolia.Search.Models.Common;
-using Algolia.Search.Models.Common;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;

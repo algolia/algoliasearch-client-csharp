@@ -24,7 +24,6 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Common;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Settings;
 using NUnit.Framework;
 using System.Collections.Generic;

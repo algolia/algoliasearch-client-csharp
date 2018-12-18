@@ -27,7 +27,6 @@ using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Common;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Search;
 using System.Collections.Generic;
 using System.Threading;

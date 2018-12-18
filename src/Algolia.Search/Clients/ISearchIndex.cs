@@ -48,7 +48,7 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// This method allows you to create records on your index by sending one or more objects
         /// Each object contains a set of attributes and values, which represents a full record on an index.
-        /// </summary>        
+        /// </summary>
         /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
