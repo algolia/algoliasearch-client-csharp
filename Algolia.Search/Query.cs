@@ -149,6 +149,7 @@ namespace Algolia.Search
             q.analytics = analytics;
             q.analyticsTags = analyticsTags;
             q.clickAnalytics = clickAnalytics;
+            q.enablePersonalization = enablePersonalization;
             q.percentileComputation = percentileComputation;
             q.aroundLatLong = aroundLatLong;
             q.aroundLatLongViaIP = aroundLatLongViaIP;
@@ -425,6 +426,15 @@ namespace Algolia.Search
         public Query EnableClickAnalytics(bool enabled)
         {
             clickAnalytics = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// Enables personalization
+        /// </summary>
+        public Query EnablePersonalization(bool enabled)
+        {
+            enablePersonalization = enabled;
             return this;
         }
 
@@ -1244,6 +1254,14 @@ namespace Algolia.Search
                 stringBuilder += clickAnalytics.Value ? "true" : "false";
             }
 
+            if (enablePersonalization.HasValue)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder += '&';
+                stringBuilder += "enablePersonalization=";
+                stringBuilder += enablePersonalization.Value ? "true" : "false";
+            }
+
             if (percentileComputation.HasValue)
             {
                 if (stringBuilder.Length > 0)
@@ -1633,6 +1651,7 @@ namespace Algolia.Search
         private string removeStopWords;
         private bool? analytics;
         private bool? clickAnalytics;
+        private bool? enablePersonalization;
         private bool? synonyms;
         private bool? replaceSynonyms;
         private TypoTolerance? typoTolerance;
