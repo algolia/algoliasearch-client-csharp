@@ -14,7 +14,7 @@ jobs:
   pool:
     vmImage: 'macOS-10.13'
   steps:
-  - script: dotnet build src -c $(buildConfiguration)
+  - script: dotnet build -c $(buildConfiguration)
     displayName: 'Run build'
   - script: dotnet test Algolia.Search.Test --configuration $(buildConfiguration) --logger trx
     env:
