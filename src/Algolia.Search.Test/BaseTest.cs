@@ -48,7 +48,6 @@ public class BaseTest
         SearchClient2 = new SearchClient(TestHelper.ApplicationId2, TestHelper.AdminKey2);
         McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmAdminKey);
         AnalyticsClient = new AnalyticsClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
-        _indices = SearchClient.ListIndexes();
     }
 
     [OneTimeTearDown]
@@ -59,10 +58,12 @@ public class BaseTest
 
     protected void PreviousTestCleanUp()
     {
+        _indices = SearchClient.ListIndexes();
+
         if (_indices?.Items != null && _indices.Items.Any())
         {
             var yesterday = DateTime.UtcNow.AddDays(-1);
-            var indicesToDelete = _indices.Items.Where(x => x.Name.Contains($"csharp_{Environment.OSVersion.Platform}") && x.CreatedAt <= yesterday);
+            var indicesToDelete = _indices?.Items?.Where(x => x.Name.Contains($"csharp_{Environment.OSVersion.Platform}") && x.CreatedAt <= yesterday);
             List<BatchOperation<string>> operations = new List<BatchOperation<string>>();
 
             if (indicesToDelete != null && indicesToDelete.Count() > 0)
