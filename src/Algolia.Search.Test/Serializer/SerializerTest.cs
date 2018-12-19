@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Serializer;
@@ -86,6 +87,29 @@ namespace Algolia.Search.Test.Serializer
             Assert.IsNotNull(settings.NumericAttributesForFiltering);
             Assert.True(settings.NumericAttributesForFiltering.Contains("attr1"));
             Assert.True(settings.NumericAttributesForFiltering.Contains("attr2"));
+        }
+
+        [Test]
+        public void TestPersonalization()
+        {
+            var strategyToSave = new SetStrategyRequest
+            {
+                EventsScoring = new Dictionary<string, EventScoring>
+                {
+                    {"Add to cart", new EventScoring { Score = 50, Type = "conversion" }},
+                    {"Purchase", new EventScoring { Score = 100, Type = "conversion" }}
+                },
+                FacetsScoring = new Dictionary<string, FacetScoring>
+                {
+                    {"brand", new FacetScoring { Score = 100}},
+                    {"categories", new FacetScoring { Score = 10}}
+                }
+            };
+
+            // Here we test the payload, as this settings are at app level all tests could overlap
+            string json = JsonConvert.SerializeObject(strategyToSave, JsonConfig.AlgoliaJsonSerializerSettings);
+            string expectedJson = "{\"eventsScoring\":{\"Add to cart\":{\"type\":\"conversion\",\"score\":50},\"Purchase\":{\"type\":\"conversion\",\"score\":100}},\"facetsScoring\":{\"brand\":{\"score\":100},\"categories\":{\"score\":10}}}";
+            Assert.True(json.Equals(expectedJson));
         }
     }
 }
