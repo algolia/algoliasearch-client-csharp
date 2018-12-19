@@ -29,6 +29,7 @@ using Algolia.Search.Test;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 [SetUpFixture]
 public class BaseTest
@@ -60,10 +61,11 @@ public class BaseTest
     {
         if (_indices?.Items != null && _indices.Items.Any())
         {
-            var indicesToDelete = _indices.Items.Where(x => x.Name.Contains("csharp_"));
+            var yesterday = DateTime.UtcNow.AddDays(-1);
+            var indicesToDelete = _indices.Items.Where(x => x.Name.Contains($"csharp_{Environment.OSVersion.Platform}") && x.CreatedAt <= yesterday);
             List<BatchOperation<string>> operations = new List<BatchOperation<string>>();
 
-            if (indicesToDelete.Count() > 0)
+            if (indicesToDelete != null && indicesToDelete.Count() > 0)
             {
                 foreach (var index in indicesToDelete)
                 {

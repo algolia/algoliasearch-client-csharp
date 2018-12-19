@@ -83,28 +83,14 @@ namespace Algolia.Search.Test
 
         internal static string GetTestIndexName(string testName)
         {
-            string appVeyor = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"))
-                ? null
-                : $"-appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
-
             var date = DateTime.UtcNow.ToString("yyyy-MM-dd_HH:mm:ss", CultureInfo.InvariantCulture);
-
-            return string.IsNullOrEmpty(appVeyor)
-                ? $"csharp_{date}_{Environment.UserName}_{testName}"
-                : $"csharp_{date}_{appVeyor}_{testName}";
+            return $"csharp_{Environment.OSVersion.Platform}_{date}_{Environment.UserName}_{testName}";
         }
 
         internal static string GetMcmUserId()
         {
-            string appVeyor = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"))
-                ? null
-                : $"-appveyor-{Environment.GetEnvironmentVariable("APPVEYOR_BUILD_NUMBER")}";
-
             var date = DateTime.UtcNow.ToString("yyyy-MM-dd-HH-mm-ss", CultureInfo.InvariantCulture);
-
-            return string.IsNullOrEmpty(appVeyor)
-                ? $"csharp-{date}-{Environment.UserName}"
-                : $"csharp-{date}-{appVeyor}";
+            return $"csharp-{date}-{Environment.UserName}";
         }
 
         /// <summary>

@@ -10,7 +10,21 @@ jobs:
     vmImage: 'vs2017-win2016'
   steps:
   - script: dotnet build src -c $(buildConfiguration)
-  displayName: 'Run build'
+    displayName: 'Run build'
+  - script: dotnet test src/Algolia.Search.Test --configuration $(buildConfiguration) --logger trx --framework net45
+    env:
+      ALGOLIA_APPLICATION_ID_1: $(ALGOLIA-APPLICATION-ID-1)
+      ALGOLIA_APPLICATION_ID_2: $(ALGOLIA-APPLICATION-ID-2)
+      ALGOLIA_APPLICATION_ID_MCM: $(ALGOLIA-APPLICATION-ID-MCM)
+      ALGOLIA_SEARCH_KEY_1: $(ALGOLIA-SEARCH-KEY-1)
+      ALGOLIA_ADMIN_KEY_1: $(ALGOLIA-ADMIN-KEY-1)
+      ALGOLIA_ADMIN_KEY_2: $(ALGOLIA-ADMIN-KEY-2)
+      ALGOLIA_ADMIN_KEY_MCM: $(ALGOLIA-ADMIN-KEY-MCM)
+    displayName: 'Unit testing'
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: VSTest
+      testResultsFiles: '**/*.trx'
 
 - job: macOS
   pool:
