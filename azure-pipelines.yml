@@ -52,4 +52,3 @@ jobs:
     vmImage: 'ubuntu-16.04'
   steps:
   - script: dotnet build src -c $(buildConfiguration)
-  displayName: 'Run build'
