@@ -19,17 +19,11 @@ jobs:
   - script: dotnet build src -c $(buildConfiguration)
     displayName: 'Run build'
   - script: dotnet test src/Algolia.Search.Test --configuration $(buildConfiguration) --logger trx
-    displayName: 'Run tests'
-  - script: dotnet publish --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
-    displayName: 'Published'
-
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
-
-- task: PublishBuildArtifacts@1
+    displayName: 'Unit testing'
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: VSTest
+      testResultsFiles: '**/*.trx'
 
 - job: Linux
   pool:
