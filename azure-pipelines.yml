@@ -1,19 +1,34 @@
 trigger:
 - master
 
+variables:
+  buildConfiguration: 'Release'
+
 jobs:
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
   steps:
-  - script: dotnet build -c release
+  - script: dotnet build -c $(buildConfiguration)
 - job: macOS
   pool:
     vmImage: 'macOS-10.13'
   steps:
-  - script: dotnet build -c release
+  - script: dotnet build src -c $(buildConfiguration)
+    displayName: 'Run build'
+  - script: dotnet test Algolia.Search.Test --configuration $(buildConfiguration) --logger trx
+    env:
+      ALGOLIA_APPLICATION_ID: $(ALGOLIA-APPLICATION-ID-1)
+      ALGOLIA_APPLICATION_ID_MCM: $(ALGOLIA-APPLICATION-ID-MCM)
+      ALGOLIA_API_KEY: $(ALGOLIA-ADMIN-KEY-1)
+      ALGOLIA_API_KEY_MCM: $(ALGOLIA-ADMIN-KEY-MCM)
+    displayName: 'Unit testing'
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: VSTest
+      testResultsFiles: '**/*.trx'
 - job: Linux
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
-  - script: dotnet build -c release
+  - script: dotnet build -c $(buildConfiguration)
