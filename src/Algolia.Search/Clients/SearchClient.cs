@@ -529,7 +529,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> {CopyScope.Settings};
-            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -542,7 +542,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> {CopyScope.Rules};
-            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -555,7 +555,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> {CopyScope.Synonyms};
-            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
