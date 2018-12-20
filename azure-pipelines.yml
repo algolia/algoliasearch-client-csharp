@@ -11,7 +11,7 @@ jobs:
   steps:
   - script: dotnet build src -c $(buildConfiguration)
     displayName: 'Run build'
-  - script: dotnet test src/Algolia.Search.Test --configuration $(buildConfiguration) --logger trx --framework net45
+  - script: dotnet test src/Algolia.Search.Test --configuration $(buildConfiguration) --logger trx --framework net45 --collect "Code coverage"
     env:
       ALGOLIA_APPLICATION_ID_1: $(ALGOLIA-APPLICATION-ID-1)
       ALGOLIA_APPLICATION_ID_2: $(ALGOLIA-APPLICATION-ID-2)
