@@ -2,5 +2,5 @@
 
 | Name              | Email                         |
 |-------------------|-------------------------------|
-| Guy Daher         | guy.daher@algolia.com         |
-| Baptiste Coquelle | baptiste.coquelle@algolia.com |
+| Antoine Hémery    | antoine.hemery@algolia.com    |
+| Anthony Seure     | anthony.seure@algolia.com     |
