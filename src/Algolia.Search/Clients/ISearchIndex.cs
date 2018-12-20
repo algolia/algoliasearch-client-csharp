@@ -1,17 +1,17 @@
 ﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,15 +23,15 @@
 
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
-using Algolia.Search.Models.Search;
+using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Rules;
+using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Models.Batch;
-using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Clients
 {
@@ -280,7 +280,7 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Remove all objects matching a filter (including geo filters).
         /// This method enables you to delete one or more objects based on filters (numeric, facet, tag or geo queries).
-        /// It does not accept empty filters or a query.        
+        /// It does not accept empty filters or a query.
         /// </summary>
         /// <param name="query">Search query</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
@@ -319,7 +319,7 @@ namespace Algolia.Search.Clients
 
         /// <summary>
         ///  Method used for querying an index.
-        /// The search query only allows for the retrieval of up to 1000 hits. 
+        /// The search query only allows for the retrieval of up to 1000 hits.
         /// If you need to retrieve more than 1000 hits (e.g. for SEO), you can either leverage the Browse index method or increase the paginationLimitedTo parameter.
         /// </summary>
         /// <param name="query">Search query</param>
@@ -329,7 +329,7 @@ namespace Algolia.Search.Clients
 
         /// <summary>
         ///  Method used for querying an index.
-        /// The search query only allows for the retrieval of up to 1000 hits. 
+        /// The search query only allows for the retrieval of up to 1000 hits.
         /// If you need to retrieve more than 1000 hits (e.g. for SEO), you can either leverage the Browse index method or increase the paginationLimitedTo parameter.
         /// </summary>
         /// <param name="query">Search query</param>
@@ -379,8 +379,8 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
-        /// This method allows you to retrieve all index content  
-        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// This method allows you to retrieve all index content
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters.
         /// You can use the same query parameters as for a search query.
         /// </summary>
         /// <param name="query">Browse index query</param>
@@ -388,8 +388,8 @@ namespace Algolia.Search.Clients
         IndexIterator<T> Browse<T>(BrowseIndexQuery query) where T : class;
 
         /// <summary>
-        /// This method allows you to retrieve all index content  
-        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// This method allows you to retrieve all index content
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters.
         /// You can use the same query parameters as for a search query.
         /// </summary>
         /// <param name="query">Browse index query</param>
@@ -399,8 +399,8 @@ namespace Algolia.Search.Clients
             where T : class;
 
         /// <summary>
-        /// This method allows you to retrieve all index content  
-        /// It can retrieve up to 1,000 records per call and supports full text search and filters. 
+        /// This method allows you to retrieve all index content
+        /// It can retrieve up to 1,000 records per call and supports full text search and filters.
         /// You can use the same query parameters as for a search query.
         /// </summary>
         /// <param name="query">Browse index query</param>
@@ -565,7 +565,7 @@ namespace Algolia.Search.Clients
 
         /// <summary>
         /// Create or change an index’s settings.
-        /// Only specified settings are overridden; unspecified settings are left unchanged. 
+        /// Only specified settings are overridden; unspecified settings are left unchanged.
         /// Specifying null for a setting resets it to its default value.
         /// </summary>
         /// <param name="settings">Algolia's index settings</param>
@@ -575,7 +575,7 @@ namespace Algolia.Search.Clients
 
         /// <summary>
         /// Create or change an index’s settings.
-        /// Only specified settings are overridden; unspecified settings are left unchanged. 
+        /// Only specified settings are overridden; unspecified settings are left unchanged.
         /// Specifying null for a setting resets it to its default value.
         /// </summary>
         /// <param name="settings">Algolia's index settings</param>

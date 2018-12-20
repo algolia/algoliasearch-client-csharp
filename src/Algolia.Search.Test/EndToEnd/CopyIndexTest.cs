@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,8 +22,8 @@
 */
 
 using Algolia.Search.Clients;
-using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
@@ -84,7 +84,7 @@ namespace Algolia.Search.Test.EndToEnd
 
             IndexSettings settings = new IndexSettings
             {
-                AttributesForFaceting = new List<string> {"company"}
+                AttributesForFaceting = new List<string> { "company" }
             };
 
             var setSettings = _sourceIndex.SetSettingsAsync(settings);
@@ -94,7 +94,7 @@ namespace Algolia.Search.Test.EndToEnd
                 ObjectID = "google_placeholder",
                 Type = SynonymType.Placeholder,
                 Placeholder = "<GOOG>",
-                Replacements = new List<string> {"Google", "GOOG"}
+                Replacements = new List<string> { "Google", "GOOG" }
             };
 
             var saveSynonyms = _sourceIndex.SaveSynonymAsync(synonym);
@@ -102,7 +102,7 @@ namespace Algolia.Search.Test.EndToEnd
             Rule ruleToSave = new Rule
             {
                 ObjectID = "company_automatic_faceting",
-                Condition = new Condition {Anchoring = "contains", Pattern = "{facet:company}"},
+                Condition = new Condition { Anchoring = "contains", Pattern = "{facet:company}" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams

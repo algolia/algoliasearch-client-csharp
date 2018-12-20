@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -60,7 +60,8 @@ namespace Algolia.Search.Clients
         /// <param name="filters">A filter is defined by the ${attr}${op}${value} string e.g. brand:apple. Limited to 10 filters.</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        public InsightsResponse ClickedFilters(string eventName, string indexName, IEnumerable<string> filters, RequestOptions requestOptions = null) =>
+        public InsightsResponse ClickedFilters(string eventName, string indexName, IEnumerable<string> filters,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ClickedFiltersAsync(eventName, indexName, filters, requestOptions));
 
         /// <summary>
@@ -72,7 +73,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public async Task<InsightsResponse> ClickedFiltersAsync(string eventName, string indexName, IEnumerable<string> filters, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> ClickedFiltersAsync(string eventName, string indexName,
+            IEnumerable<string> filters, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
             var insightEvent = new InsightsEvent
             {
@@ -94,9 +97,9 @@ namespace Algolia.Search.Clients
         /// <param name="objectIDs">Array of index objectIDs. Limited to 20 objects</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        public InsightsResponse ClickedObjectIDs(string eventName, string indexName, IEnumerable<string> objectIDs, RequestOptions requestOptions = null) =>
+        public InsightsResponse ClickedObjectIDs(string eventName, string indexName, IEnumerable<string> objectIDs,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ClickedObjectIDsAsync(eventName, indexName, objectIDs, requestOptions));
-
 
         /// <summary>
         /// Send events when objectIDs are clicked
@@ -107,7 +110,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public async Task<InsightsResponse> ClickedObjectIDsAsync(string eventName, string indexName, IEnumerable<string> objectIDs, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> ClickedObjectIDsAsync(string eventName, string indexName,
+            IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
             var insightEvent = new InsightsEvent
             {
@@ -131,8 +136,11 @@ namespace Algolia.Search.Clients
         /// <param name="queryID">Algolia queryID, format: [a-z1-9]{32}.</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        public InsightsResponse ClickedObjectIDsAfterSearch(string eventName, string indexName, IEnumerable<string> objectIDs, IEnumerable<uint> positions, string queryID, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => ClickedObjectIDsAfterSearchAsync(eventName, indexName, objectIDs, positions, queryID, requestOptions));
+        public InsightsResponse ClickedObjectIDsAfterSearch(string eventName, string indexName,
+            IEnumerable<string> objectIDs, IEnumerable<uint> positions, string queryID,
+            RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() =>
+                ClickedObjectIDsAfterSearchAsync(eventName, indexName, objectIDs, positions, queryID, requestOptions));
 
         /// <summary>
         /// Send events after a search when objectIDs are clicked
@@ -145,7 +153,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public async Task<InsightsResponse> ClickedObjectIDsAfterSearchAsync(string eventName, string indexName, IEnumerable<string> objectIDs, IEnumerable<uint> positions, string queryID, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> ClickedObjectIDsAfterSearchAsync(string eventName, string indexName,
+            IEnumerable<string> objectIDs, IEnumerable<uint> positions, string queryID,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var insightEvent = new InsightsEvent
             {
@@ -171,7 +181,8 @@ namespace Algolia.Search.Clients
         /// <param name="objectIDs">Array of index objectIDs. Limited to 20 objects</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        public InsightsResponse ConvertedObjectIDs(string eventName, string indexName, IEnumerable<string> objectIDs, RequestOptions requestOptions = null) =>
+        public InsightsResponse ConvertedObjectIDs(string eventName, string indexName, IEnumerable<string> objectIDs,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ConvertedObjectIDsAsync(eventName, indexName, objectIDs, requestOptions));
 
         /// <summary>
@@ -183,7 +194,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public async Task<InsightsResponse> ConvertedObjectIDsAsync(string eventName, string indexName, IEnumerable<string> objectIDs, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> ConvertedObjectIDsAsync(string eventName, string indexName,
+            IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
             var insightEvent = new InsightsEvent
             {
@@ -206,8 +219,10 @@ namespace Algolia.Search.Clients
         /// <param name="queryID">Algolia queryID, format: [a-z1-9]{32}.</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        public InsightsResponse ConvertedObjectIDsAfterSearch(string eventName, string indexName, IEnumerable<string> objectIDs, string queryID, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => ConvertedObjectIDsAfterSearchAsync(eventName, indexName, objectIDs, queryID, requestOptions));
+        public InsightsResponse ConvertedObjectIDsAfterSearch(string eventName, string indexName,
+            IEnumerable<string> objectIDs, string queryID, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() =>
+                ConvertedObjectIDsAfterSearchAsync(eventName, indexName, objectIDs, queryID, requestOptions));
 
         /// <summary>
         /// Send events of converted objectIDs after a search
@@ -219,7 +234,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public async Task<InsightsResponse> ConvertedObjectIDsAfterSearchAsync(string eventName, string indexName, IEnumerable<string> objectIDs, string queryID, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> ConvertedObjectIDsAfterSearchAsync(string eventName, string indexName,
+            IEnumerable<string> objectIDs, string queryID, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
             var insightEvent = new InsightsEvent
             {
@@ -243,7 +260,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public InsightsResponse ConvertedFilters(string eventName, string indexName, IEnumerable<string> filters, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) =>
+        public InsightsResponse ConvertedFilters(string eventName, string indexName, IEnumerable<string> filters,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) =>
             AsyncHelper.RunSync(() => ConvertedFiltersAsync(eventName, indexName, filters, requestOptions));
 
         /// <summary>
@@ -255,7 +273,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public async Task<InsightsResponse> ConvertedFiltersAsync(string eventName, string indexName, IEnumerable<string> filters, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> ConvertedFiltersAsync(string eventName, string indexName,
+            IEnumerable<string> filters, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
             var insightEvent = new InsightsEvent
             {
@@ -279,7 +299,8 @@ namespace Algolia.Search.Clients
         /// <param name="filters">A filter is defined by the ${attr}${op}${value} string e.g. brand:apple. Limited to 10 filters.</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        public InsightsResponse ViewedFilters(string eventName, string indexName, IEnumerable<string> filters, RequestOptions requestOptions = null) =>
+        public InsightsResponse ViewedFilters(string eventName, string indexName, IEnumerable<string> filters,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ViewedFiltersAsync(eventName, indexName, filters, requestOptions));
 
         /// <summary>
@@ -291,7 +312,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public async Task<InsightsResponse> ViewedFiltersAsync(string eventName, string indexName, IEnumerable<string> filters, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> ViewedFiltersAsync(string eventName, string indexName,
+            IEnumerable<string> filters, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
             var insightEvent = new InsightsEvent
             {
@@ -313,7 +336,8 @@ namespace Algolia.Search.Clients
         /// <param name="objectIDs">Array of index objectIDs. Limited to 20 objects</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        public InsightsResponse ViewedObjectIDs(string eventName, string indexName, IEnumerable<string> objectIDs, RequestOptions requestOptions = null) =>
+        public InsightsResponse ViewedObjectIDs(string eventName, string indexName, IEnumerable<string> objectIDs,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ViewedObjectIDsAsync(eventName, indexName, objectIDs, requestOptions));
 
         /// <summary>
@@ -325,7 +349,9 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
-        public async Task<InsightsResponse> ViewedObjectIDsAsync(string eventName, string indexName, IEnumerable<string> objectIDs, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> ViewedObjectIDsAsync(string eventName, string indexName,
+            IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
             var insightEvent = new InsightsEvent
             {

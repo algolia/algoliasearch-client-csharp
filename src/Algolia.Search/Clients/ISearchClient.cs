@@ -1,17 +1,17 @@
 ﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,9 +24,9 @@
 using Algolia.Search.Http;
 using Algolia.Search.Models.ApiKeys;
 using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Personalization;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Search;
 using System.Collections.Generic;
 using System.Threading;
@@ -500,7 +500,8 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <param name="ct">Optional cancellation token</param>
-        Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+        Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// This command configures the personalization strategy
@@ -508,7 +509,8 @@ namespace Algolia.Search.Clients
         /// <param name="request">The personalization strategy</param>
         /// <param name="requestOptions">Request options for the query</param>
         /// <returns></returns>
-        SetStrategyResponse SetPersonalizationStrategy(SetStrategyRequest request, RequestOptions requestOptions = null);
+        SetStrategyResponse
+            SetPersonalizationStrategy(SetStrategyRequest request, RequestOptions requestOptions = null);
 
         /// <summary>
         /// This command configures the personalization strategy
@@ -517,7 +519,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Request options for the query</param>
         /// <param name="ct">Request options for the query</param>
         /// <returns></returns>
-        Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+        Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
 
         /// <summary>
         /// This function waits for the Algolia's API task to finish

@@ -1,17 +1,17 @@
 ﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -49,7 +49,7 @@ namespace Algolia.Search.Models.Search
         public int NbHits { get; set; }
 
         /// <summary>
-        /// Number of pages returned. 
+        /// Number of pages returned.
         /// Calculation is based on the total number of hits (nbHits) divided by the number of hits per page (hitsPerPage), rounded up to the nearest integer.
         /// </summary>
         public int NbPages { get; set; }
@@ -65,18 +65,18 @@ namespace Algolia.Search.Models.Search
         public int ProcessingTimeMs { get; set; }
 
         /// <summary>
-        /// Whether the nbHits is exhaustive (true) or approximate (false). 
+        /// Whether the nbHits is exhaustive (true) or approximate (false).
         /// An approximation is done when the query takes more than 50ms to be processed (this can happen when using complex filters on millions on records).
         /// </summary>
         public bool? ExhaustiveNbHits { get; set; }
 
         /// <summary>
-        /// An echo of the query text. 
+        /// An echo of the query text.
         /// </summary>
         public bool? ExhaustiveFacetsCount { get; set; }
 
         /// <summary>
-        /// An echo of the query text. 
+        /// An echo of the query text.
         /// </summary>
         public string Query { get; set; }
 
@@ -101,7 +101,7 @@ namespace Algolia.Search.Models.Search
         public string Message { get; set; }
 
         /// <summary>
-        /// The computed geo location. Warning: for legacy reasons, this parameter is a string and not an object. 
+        /// The computed geo location. Warning: for legacy reasons, this parameter is a string and not an object.
         /// Format: ${lat},${lng}, where the latitude and longitude are expressed as decimal floating point number
         /// </summary>
         public string AroundLatLng { get; set; }
@@ -112,7 +112,7 @@ namespace Algolia.Search.Models.Search
         public float? AutomaticRadius { get; set; }
 
         /// <summary>
-        /// Actual host name of the server that processed the request. 
+        /// Actual host name of the server that processed the request.
         /// Our DNS supports automatic failover and load balancing, so this may differ from the host name used in the request.
         /// </summary>
         public string ServerUsed { get; set; }

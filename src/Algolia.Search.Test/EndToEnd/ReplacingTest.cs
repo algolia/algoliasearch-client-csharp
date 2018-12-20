@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -119,8 +119,10 @@ namespace Algolia.Search.Test.EndToEnd
             replaceAllRulesResponse.Wait();
             replaceAllSynonymsResponse.Wait();
 
-            AlgoliaApiException getObjectEx = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetObjectAsync<ReplaceAllTestObject>("one"));
-            AlgoliaApiException getSynonymEx = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("one"));
+            AlgoliaApiException getObjectEx =
+                Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetObjectAsync<ReplaceAllTestObject>("one"));
+            AlgoliaApiException getSynonymEx =
+                Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("one"));
             AlgoliaApiException getRuleEx = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetRuleAsync("one"));
 
             Assert.That(getObjectEx.HttpErrorCode == 404);

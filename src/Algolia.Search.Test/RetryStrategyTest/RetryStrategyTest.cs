@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -75,7 +75,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
             Assert.True(hosts.Count(h => h.Up) == 2);
         }
 
-
         [TestCase(CallType.Read, 500)]
         [TestCase(CallType.Write, 500)]
         [TestCase(CallType.Read, 300)]
@@ -92,7 +91,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
             var updatedHosts = retryStrategy.GetTryableHost(callType);
             Assert.True(updatedHosts.Count(h => h.Up) == 3);
         }
-
 
         [TestCase(CallType.Read, 400)]
         [TestCase(CallType.Write, 400)]
@@ -122,7 +120,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 retryStrategy.Decide(hosts.ElementAt(0), 200, false);
                 Console.WriteLine(Thread.CurrentThread.Name);
             });
-
 
             Task task2 = Task.Run(() =>
             {

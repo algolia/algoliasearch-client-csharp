@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -104,32 +104,36 @@ namespace Algolia.Search.Clients
             AsyncHelper.RunSync(() => SendEventAsync(insightEvent, requestOptions));
 
         /// <inheritdoc />
-        public InsightsResponse SendEvents(IEnumerable<InsightsEvent> insightEvents, RequestOptions requestOptions = null) =>
+        public InsightsResponse SendEvents(IEnumerable<InsightsEvent> insightEvents,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => SendEventsAsync(insightEvents, requestOptions));
 
         /// <inheritdoc />
-        public async Task<InsightsResponse> SendEventAsync(InsightsEvent insightEvent, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> SendEventAsync(InsightsEvent insightEvent,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (insightEvent == null)
             {
                 throw new ArgumentNullException(nameof(insightEvent));
             }
 
-            return await SendEventsAsync(new List<InsightsEvent> { insightEvent }, requestOptions, ct);
+            return await SendEventsAsync(new List<InsightsEvent> {insightEvent}, requestOptions, ct);
         }
 
         /// <inheritdoc />
-        public async Task<InsightsResponse> SendEventsAsync(IEnumerable<InsightsEvent> insightEvents, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<InsightsResponse> SendEventsAsync(IEnumerable<InsightsEvent> insightEvents,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             if (insightEvents == null)
             {
                 throw new ArgumentNullException(nameof(insightEvents));
             }
 
-            var request = new InsightsRequest { Events = insightEvents };
+            var request = new InsightsRequest {Events = insightEvents};
 
-            return await _requesterWrapper.ExecuteRequestAsync<InsightsResponse, InsightsRequest>(HttpMethod.Post, "/1/events", CallType.Read, request, requestOptions, ct)
-                 .ConfigureAwait(false);
+            return await _requesterWrapper.ExecuteRequestAsync<InsightsResponse, InsightsRequest>(HttpMethod.Post,
+                    "/1/events", CallType.Read, request, requestOptions, ct)
+                .ConfigureAwait(false);
         }
     }
 }

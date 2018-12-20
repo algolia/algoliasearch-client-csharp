@@ -1,17 +1,17 @@
 ﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,10 +24,10 @@
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Batch;
-using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;
+using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Transport;
@@ -169,7 +169,7 @@ namespace Algolia.Search.Clients
         public async Task<BatchIndexingResponse> SaveObjectAsync<T>(T data, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class
         {
-            return await SaveObjectsAsync(new List<T> { data }, requestOptions, ct);
+            return await SaveObjectsAsync(new List<T> {data}, requestOptions, ct);
         }
 
         /// <inheritdoc />
@@ -210,8 +210,8 @@ namespace Algolia.Search.Clients
             string tmpIndexName = $"{_indexName}_tmp_{rnd.Next(100)}";
             SearchIndex tmpIndex = new SearchIndex(_requesterWrapper, Config, tmpIndexName);
 
-            List<string> scopes = new List<string> { CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms };
-            MultiResponse response = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
+            List<string> scopes = new List<string> {CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms};
+            MultiResponse response = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
 
             // Copy index ressources
             CopyToResponse copyResponse =
@@ -272,7 +272,7 @@ namespace Algolia.Search.Clients
         internal async Task<BatchIndexingResponse> SplitIntoBatchesAsync<T>(IEnumerable<T> datas, string actionType,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
-            BatchIndexingResponse ret = new BatchIndexingResponse { Responses = new List<BatchResponse>() };
+            BatchIndexingResponse ret = new BatchIndexingResponse {Responses = new List<BatchResponse>()};
             List<T> records = new List<T>();
 
             foreach (var data in datas)
@@ -716,7 +716,7 @@ namespace Algolia.Search.Clients
             };
 
             requestOptions = requestOptions.AddQueryParams(dic);
-            
+
             SaveSynonymResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<SaveSynonymResponse, IEnumerable<Synonym>>(HttpMethod.Post,
                     $"/1/indexes/{_urlEncodedIndexName}/synonyms/batch", CallType.Write, synonyms, requestOptions,
@@ -822,7 +822,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(destinationIndex);
             }
 
-            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
+            var data = new CopyToRequest {Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope};
 
             CopyToResponse response = await _requesterWrapper.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
                     HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/operation", CallType.Write, data,
@@ -847,7 +847,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = _indexName };
+            MoveIndexRequest request = new MoveIndexRequest {Operation = MoveType.Move, Destination = _indexName};
 
             MoveIndexResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,

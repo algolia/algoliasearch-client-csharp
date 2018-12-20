@@ -77,7 +77,8 @@ namespace Algolia.Search.Test
 
             if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ALGOLIA_ADMIN_KEY_MCM")))
             {
-                throw new ArgumentNullException("Please set the following environment variable : ALGOLIA_ADMIN_KEY_MCM");
+                throw new ArgumentNullException(
+                    "Please set the following environment variable : ALGOLIA_ADMIN_KEY_MCM");
             }
         }
 

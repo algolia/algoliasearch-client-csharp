@@ -9,7 +9,7 @@ namespace Algolia.Search.Http
     /// </summary>
     internal static class HttpRequestExtensions
     {
-        private static string TimeoutPropertyKey = "RequestTimeout";
+        private static readonly string TimeoutPropertyKey = "RequestTimeout";
 
         internal static void SetTimeout(this HttpRequestMessage request, TimeSpan? timeout)
         {

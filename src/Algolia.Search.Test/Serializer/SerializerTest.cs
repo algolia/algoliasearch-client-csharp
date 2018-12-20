@@ -1,17 +1,17 @@
 ﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -73,7 +73,8 @@ namespace Algolia.Search.Test.Serializer
         [Test]
         public void TestLegacySettings()
         {
-            string json = "{ \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}";
+            string json =
+                "{ \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}";
 
             IndexSettings settings = JsonConvert.DeserializeObject<IndexSettings>(json, new SettingsConverter());
             Assert.IsNotNull(settings.Replicas);
@@ -96,19 +97,20 @@ namespace Algolia.Search.Test.Serializer
             {
                 EventsScoring = new Dictionary<string, EventScoring>
                 {
-                    {"Add to cart", new EventScoring { Score = 50, Type = "conversion" }},
-                    {"Purchase", new EventScoring { Score = 100, Type = "conversion" }}
+                    {"Add to cart", new EventScoring {Score = 50, Type = "conversion"}},
+                    {"Purchase", new EventScoring {Score = 100, Type = "conversion"}}
                 },
                 FacetsScoring = new Dictionary<string, FacetScoring>
                 {
-                    {"brand", new FacetScoring { Score = 100}},
-                    {"categories", new FacetScoring { Score = 10}}
+                    {"brand", new FacetScoring {Score = 100}},
+                    {"categories", new FacetScoring {Score = 10}}
                 }
             };
 
             // Here we test the payload, as this settings are at app level all tests could overlap
             string json = JsonConvert.SerializeObject(strategyToSave, JsonConfig.AlgoliaJsonSerializerSettings);
-            string expectedJson = "{\"eventsScoring\":{\"Add to cart\":{\"type\":\"conversion\",\"score\":50},\"Purchase\":{\"type\":\"conversion\",\"score\":100}},\"facetsScoring\":{\"brand\":{\"score\":100},\"categories\":{\"score\":10}}}";
+            string expectedJson =
+                "{\"eventsScoring\":{\"Add to cart\":{\"type\":\"conversion\",\"score\":50},\"Purchase\":{\"type\":\"conversion\",\"score\":100}},\"facetsScoring\":{\"brand\":{\"score\":100},\"categories\":{\"score\":10}}}";
             Assert.True(json.Equals(expectedJson));
         }
     }

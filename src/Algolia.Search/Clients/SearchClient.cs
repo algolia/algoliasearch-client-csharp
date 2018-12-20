@@ -1,17 +1,17 @@
 ﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,16 +25,15 @@ using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Models.ApiKeys;
 using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Personalization;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -125,7 +124,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(queries));
             }
 
-            var request = new MultipleGetObjectsRequest { Requests = queries };
+            var request = new MultipleGetObjectsRequest {Requests = queries};
 
             return await _requesterWrapper
                 .ExecuteRequestAsync<MultipleGetObjectsResponse<T>, MultipleGetObjectsRequest>(HttpMethod.Post,
@@ -263,7 +262,7 @@ namespace Algolia.Search.Clients
                     throw;
                 }
 
-                return new ApiKey { Key = apiKey, GetApiKeyDelegate = k => GetApiKey(k), Exist = false };
+                return new ApiKey {Key = apiKey, GetApiKeyDelegate = k => GetApiKey(k), Exist = false};
             }
         }
 
@@ -441,9 +440,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(clusterName);
             }
 
-            var data = new AssignUserIdRequest { Cluster = clusterName };
+            var data = new AssignUserIdRequest {Cluster = clusterName};
 
-            var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+            var userIdHeader = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
             requestOptions = requestOptions.AddHeaders(userIdHeader);
 
             AssignUserIdResponse response = await _requesterWrapper
@@ -469,7 +468,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(userId);
             }
 
-            var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+            var userIdHeader = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
             requestOptions = requestOptions.AddHeaders(userIdHeader);
 
             try
@@ -490,7 +489,7 @@ namespace Algolia.Search.Clients
                     throw;
                 }
 
-                return new RemoveUserIdResponse { UserId = userId, RemoveDelegate = u => RemoveUserId(u) };
+                return new RemoveUserIdResponse {UserId = userId, RemoveDelegate = u => RemoveUserId(u)};
             }
         }
 
@@ -529,7 +528,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySettingsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Settings };
+            var scopes = new List<string> {CopyScope.Settings};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
@@ -542,7 +541,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopyRulesAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Rules };
+            var scopes = new List<string> {CopyScope.Rules};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
@@ -555,7 +554,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySynonymsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Synonyms };
+            var scopes = new List<string> {CopyScope.Synonyms};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes).ConfigureAwait(false);
         }
 
@@ -580,7 +579,7 @@ namespace Algolia.Search.Clients
             }
 
             string encondedSourceIndex = WebUtility.UrlEncode(sourceIndex);
-            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
+            var data = new CopyToRequest {Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope};
 
             CopyToResponse response = await _requesterWrapper.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
                     HttpMethod.Post, $"/1/indexes/{encondedSourceIndex}/operation", CallType.Write, data,
@@ -607,7 +606,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = destinationIndex };
+            MoveIndexRequest request = new MoveIndexRequest {Operation = MoveType.Move, Destination = destinationIndex};
 
             MoveIndexResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,
@@ -620,24 +619,29 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public GetStrategyResponse GetPersonalizationStrategy(RequestOptions requestOptions = null) =>
-             AsyncHelper.RunSync(() => GetPersonalizationStrategyAsync(requestOptions));
+            AsyncHelper.RunSync(() => GetPersonalizationStrategyAsync(requestOptions));
 
         /// <inheritdoc />
-        public async Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<GetStrategyResponse>(HttpMethod.Get, "/1/recommendation/personalization/strategy", CallType.Read,
+            return await _requesterWrapper.ExecuteRequestAsync<GetStrategyResponse>(HttpMethod.Get,
+                    "/1/recommendation/personalization/strategy", CallType.Read,
                     requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public SetStrategyResponse SetPersonalizationStrategy(SetStrategyRequest request, RequestOptions requestOptions = null) =>
+        public SetStrategyResponse SetPersonalizationStrategy(SetStrategyRequest request,
+            RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => SetPersonalizationStrategyAsync(request, requestOptions));
 
         /// <inheritdoc />
-        public async Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request, RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<SetStrategyResponse, SetStrategyRequest>(HttpMethod.Post, "/1/recommendation/personalization/strategy", CallType.Write,
+            return await _requesterWrapper.ExecuteRequestAsync<SetStrategyResponse, SetStrategyRequest>(HttpMethod.Post,
+                    "/1/recommendation/personalization/strategy", CallType.Write,
                     request, requestOptions, ct)
                 .ConfigureAwait(false);
         }

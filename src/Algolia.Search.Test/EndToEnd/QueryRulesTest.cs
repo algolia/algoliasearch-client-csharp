@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,7 +24,6 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
@@ -60,7 +59,7 @@ namespace Algolia.Search.Test.EndToEnd
         public async Task RulesTest()
         {
             // Set attributesForFaceting to [“brand”] using setSettings and collect the taskID
-            IndexSettings settings = new IndexSettings {AttributesForFaceting = new List<string> {"brand"}};
+            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "brand" } };
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
             setSettingsResponse.Wait();
 
@@ -68,7 +67,7 @@ namespace Algolia.Search.Test.EndToEnd
             {
                 ObjectID = "brand_automatic_faceting",
                 Enabled = false,
-                Condition = new Condition {Anchoring = "is", Pattern = "{facet:brand}"},
+                Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -101,7 +100,7 @@ namespace Algolia.Search.Test.EndToEnd
             Rule ruleToSave2 = new Rule
             {
                 ObjectID = "query_edits",
-                Condition = new Condition {Anchoring = "is", Pattern = "mobile phone"},
+                Condition = new Condition { Anchoring = "is", Pattern = "mobile phone" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -118,7 +117,7 @@ namespace Algolia.Search.Test.EndToEnd
                 },
             };
 
-            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> {ruleToSave2});
+            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 });
             batchRulesResponse.Wait();
 
             // Retrieve all the rules using getRule and check that they were correctly saved

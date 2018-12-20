@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,8 +24,8 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
-using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 using System;
@@ -48,7 +48,7 @@ namespace Algolia.Search.Transport
         private readonly AlgoliaConfig _algoliaConfig;
 
         /// <summary>
-        /// Instantiate with custom config and custom http requester 
+        /// Instantiate with custom config and custom http requester
         /// </summary>
         /// <param name="config">Algolia Config</param>
         /// <param name="httpClient">An implementation of http requester <see cref="IHttpRequester"/> </param>
@@ -103,7 +103,9 @@ namespace Algolia.Search.Transport
                 switch (_retryStrategy.Decide(host, response.HttpStatusCode, response.IsTimedOut))
                 {
                     case RetryOutcomeType.Success:
-                        return SerializerHelper.Deserialize<TResult>(response.Body, JsonConfig.AlgoliaJsonSerializerSettings);
+                        return SerializerHelper.Deserialize<TResult>(response.Body,
+                            JsonConfig.AlgoliaJsonSerializerSettings);
+
                     case RetryOutcomeType.Retry:
                         continue;
                     case RetryOutcomeType.Failure:
@@ -134,7 +136,7 @@ namespace Algolia.Search.Transport
         }
 
         /// <summary>
-        /// Generate common headers from the config 
+        /// Generate common headers from the config
         /// </summary>
         /// <param name="optionalHeaders"></param>
         /// <returns></returns>
@@ -157,10 +159,10 @@ namespace Algolia.Search.Transport
             if (optionalQueryParameters != null)
             {
                 var queryParams = optionalQueryParameters.ToQueryString();
-                return new UriBuilder { Scheme = "https", Host = url, Path = $"{baseUri}", Query = queryParams }.Uri;
+                return new UriBuilder {Scheme = "https", Host = url, Path = $"{baseUri}", Query = queryParams}.Uri;
             }
 
-            return new UriBuilder { Scheme = "https", Host = url, Path = baseUri }.Uri;
+            return new UriBuilder {Scheme = "https", Host = url, Path = baseUri}.Uri;
         }
 
         /// <summary>
@@ -174,8 +176,10 @@ namespace Algolia.Search.Transport
             {
                 case CallType.Read:
                     return 5;
+
                 case CallType.Write:
                     return 30;
+
                 default:
                     return 5;
             }

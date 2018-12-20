@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
 using Algolia.Search.Http;
+using System.Collections.Generic;
 
 namespace Algolia.Search.Utils
 {
@@ -37,11 +37,12 @@ namespace Algolia.Search.Utils
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="queryParams">Query params</param>
         /// <returns></returns>
-        public static RequestOptions AddQueryParams(this RequestOptions requestOptions, Dictionary<string, string> queryParams)
+        public static RequestOptions AddQueryParams(this RequestOptions requestOptions,
+            Dictionary<string, string> queryParams)
         {
             if (requestOptions == null)
             {
-                return new RequestOptions { QueryParameters = queryParams };
+                return new RequestOptions {QueryParameters = queryParams};
             }
 
             if (requestOptions.QueryParameters == null)
@@ -64,7 +65,7 @@ namespace Algolia.Search.Utils
         {
             if (requestOptions == null)
             {
-                return new RequestOptions { Headers = headers };
+                return new RequestOptions {Headers = headers};
             }
 
             if (requestOptions.Headers == null)

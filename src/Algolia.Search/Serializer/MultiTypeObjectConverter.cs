@@ -1,17 +1,17 @@
 ﻿/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,7 +34,7 @@ namespace Algolia.Search.Serializer
     public class MultiTypeObjectConverter : JsonConverter
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="objectType"></param>
         /// <returns></returns>
@@ -83,9 +83,11 @@ namespace Algolia.Search.Serializer
                 case JsonToken.Integer:
                     ret = Convert.ToInt32(reader.Value);
                     break;
+
                 case JsonToken.Float:
                     ret = Convert.ToDecimal(reader.Value);
                     break;
+
                 case JsonToken.String:
                     string tmp = reader.Value.ToString();
 
@@ -97,18 +99,23 @@ namespace Algolia.Search.Serializer
 
                     ret = reader.Value.ToString();
                     break;
+
                 case JsonToken.Boolean:
                     ret = Convert.ToBoolean(reader.Value);
                     break;
+
                 case JsonToken.Null:
                     ret = null;
                     break;
+
                 case JsonToken.Date:
                     ret = Convert.ToDateTime(reader.Value);
                     break;
+
                 case JsonToken.Bytes:
                     ret = Convert.ToByte(reader.Value);
                     break;
+
                 default:
                     ret = null;
                     break;

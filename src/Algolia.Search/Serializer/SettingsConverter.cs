@@ -1,17 +1,17 @@
 /*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,6 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models;
 using Algolia.Search.Models.Settings;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -44,7 +43,8 @@ namespace Algolia.Search.Serializer
         /// <param name="hasExistingValue"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public override IndexSettings ReadJson(JsonReader reader, Type objectType, IndexSettings existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override IndexSettings ReadJson(JsonReader reader, Type objectType, IndexSettings existingValue,
+            bool hasExistingValue, JsonSerializer serializer)
         {
             if (reader.TokenType != JsonToken.Null)
             {
@@ -68,7 +68,8 @@ namespace Algolia.Search.Serializer
                 if (properties.Exists(x => x.Name.Equals("numericAttributesToIndex")))
                 {
                     settings.NumericAttributesForFiltering = new List<string>();
-                    foreach (var token in properties.FirstOrDefault(x => x.Name.Equals("numericAttributesToIndex")).Values())
+                    foreach (var token in properties.FirstOrDefault(x => x.Name.Equals("numericAttributesToIndex"))
+                        .Values())
                     {
                         if (token.Type != JTokenType.Null)
                         {
