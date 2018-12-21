@@ -279,5 +279,10 @@ namespace Algolia.Search.Models.Search
         /// Enable personalization for the query
         /// </summary>
         public bool? EnablePersonalization { get; set; }
+
+        /// <summary>
+        /// Restricts a given query to look in only a subset of your searchable attributes.
+        /// </summary>
+        public List<string> RestrictSearchableAttributes { get; set; }
     }
 }
