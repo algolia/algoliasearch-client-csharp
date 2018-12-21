@@ -297,5 +297,40 @@ namespace Algolia.Search.Models.Search
         /// </summary>
         [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object TypoTolerance { get; set; }
+
+        /// <summary>
+        /// Search for entries around a central geolocation, enabling a geo search within a circular area.
+        /// </summary>
+        public string AroundLatLng { get; set; }
+
+        /// <summary>
+        /// Search for entries around a given location automatically computed from the requester’s IP address.
+        /// </summary>
+        public bool? AroundLatLngViaIP { get; set; }
+
+        /// <summary>
+        /// Define the maximum radius for a geo search (in meters).
+        /// </summary>
+        public object AroundRadius { get; set; }
+
+        /// <summary>
+        /// Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
+        /// </summary>
+        public long AroundPrecision { get; set; }
+
+        /// <summary>
+        /// Minimum radius (in meters) used for a geo search when aroundRadius is not set.
+        /// </summary>
+        public long MinimumAroundRadius { get; set; }
+
+        /// <summary>
+        /// Search inside a rectangular area (in geo coordinates).
+        /// </summary>
+        public List<float> InsideBoundingBox { get; set; }
+
+        /// <summary>
+        /// Search inside a polygon (in geo coordinates).
+        /// </summary>
+        public List<float> InsidePolygon { get; set; }
     }
 }
