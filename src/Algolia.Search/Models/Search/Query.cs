@@ -321,12 +321,12 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
         /// </summary>
-        public long AroundPrecision { get; set; }
+        public long? AroundPrecision { get; set; }
 
         /// <summary>
         /// Minimum radius (in meters) used for a geo search when aroundRadius is not set.
         /// </summary>
-        public long MinimumAroundRadius { get; set; }
+        public long? MinimumAroundRadius { get; set; }
 
         /// <summary>
         /// Search inside a rectangular area (in geo coordinates).
