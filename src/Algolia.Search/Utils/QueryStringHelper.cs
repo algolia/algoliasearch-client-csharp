@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Models.ApiKeys;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace Algolia.Search.Utils
 
             string restrictionQueryParams = ToQueryString(restriction, nameof(restriction.Query),
                 nameof(restriction.RestrictIndices), nameof(restriction.RestrictSources));
-            var array = new[] {restrictionQuery, restrictIndices, restrictSources, restrictionQueryParams};
+            var array = new[] { restrictionQuery, restrictIndices, restrictSources, restrictionQueryParams };
 
             return string.Join("&", array.Where(s => !string.IsNullOrEmpty(s)));
         }
@@ -69,10 +70,19 @@ namespace Algolia.Search.Utils
         public static string ToQueryString<T>(T value, params string[] ignoreList)
         {
             IEnumerable<string> properties = typeof(T).GetTypeInfo()
-                .DeclaredProperties.Where(p => p.GetValue(value, null) != null && !ignoreList.Contains(p.Name))
+                .DeclaredProperties.Where(p => p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) && p.GetCustomAttribute<JsonPropertyAttribute>() == null)
                 .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
 
-            return string.Join("&", properties.ToArray());
+            // Handle properties with JsonPropertyAttribute
+            var attr = typeof(T).GetTypeInfo().GetCustomAttribute<JsonPropertyAttribute>();
+            IEnumerable<string> propertiesWithJsonAttribute = typeof(T).GetTypeInfo()
+                .DeclaredProperties.Where(p => p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) && p.GetCustomAttribute<JsonPropertyAttribute>() != null)
+                .Select(p => p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
+
+            // Merge twoListBeforeSending
+            var mergedProperties = propertiesWithJsonAttribute.Concat(properties);
+
+            return string.Join("&", mergedProperties.ToArray());
         }
 
         public static string ToQueryString(this Dictionary<string, string> dic)

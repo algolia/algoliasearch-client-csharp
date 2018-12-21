@@ -38,7 +38,7 @@ namespace Algolia.Search.Utils
         /// <param name="datas">Datas to send</param>
         public static void EnsureObjectID<T>(IEnumerable<T> datas)
         {
-            var propertyWithObjectIdAttribute = CheckAttribute<T>();
+            var propertyWithObjectIdAttribute = CheckAttribute<T>("objectID");
 
             if (datas == null)
             {
@@ -60,7 +60,7 @@ namespace Algolia.Search.Utils
         /// <returns></returns>
         public static string GetObjectID<T>(T data)
         {
-            var propertyWithObjectIdAttribute = CheckAttribute<T>();
+            var propertyWithObjectIdAttribute = CheckAttribute<T>("objectID");
             return (string) propertyWithObjectIdAttribute.GetValue(data);
         }
 
@@ -68,22 +68,23 @@ namespace Algolia.Search.Utils
         /// Check if JsonPropertyAttribute with name='objectID' exist in the given type
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="propertyName">Name of the property to check</param>
         /// <returns></returns>
-        private static PropertyInfo CheckAttribute<T>()
+        private static PropertyInfo CheckAttribute<T>(string propertyName)
         {
             var attr = typeof(T).GetTypeInfo().GetCustomAttribute<JsonPropertyAttribute>();
 
             var propertyWithObjectIdAttribute = typeof(T).GetTypeInfo().DeclaredProperties
-                .First(p => p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Equals("objectID"));
+                .First(p => p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Equals(propertyName));
 
-            if (!attr.PropertyName.Equals("objectID"))
+            if (!attr.PropertyName.Equals(propertyName))
             {
-                throw new AlgoliaException("The class mut have a JsonPropertyAttribute property with name='objectID'");
+                throw new AlgoliaException($"The class mut have a JsonPropertyAttribute property with name='{propertyName}'");
             }
 
             if (propertyWithObjectIdAttribute.GetType() != typeof(string))
             {
-                throw new AlgoliaException("Property with JsonPropertyAttribute with name='objectID' must be a string");
+                throw new AlgoliaException($"Property with JsonPropertyAttribute with name='{propertyName}' must be a string");
             }
 
             return propertyWithObjectIdAttribute;
