@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -289,5 +290,12 @@ namespace Algolia.Search.Models.Search
         /// Override default sort order for facet values at query time
         /// </summary>
         public string SortFacetValuesBy { get; set; }
+
+        /// <summary>
+        /// Controls whether typo tolerance is enabled and how it is applied.
+        /// Could be string or bool
+        /// </summary>
+        [JsonConverter(typeof(MultiTypeObjectConverter))]
+        public object TypoTolerance { get; set; }
     }
 }
