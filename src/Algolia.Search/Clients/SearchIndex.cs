@@ -357,11 +357,11 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public DeleteResponse DeleteBy(SearchQuery query, RequestOptions requestOptions = null) =>
+        public DeleteResponse DeleteBy(Query query, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => DeleteByAsync(query, requestOptions));
 
         /// <inheritdoc />
-        public async Task<DeleteResponse> DeleteByAsync(SearchQuery query, RequestOptions requestOptions = null,
+        public async Task<DeleteResponse> DeleteByAsync(Query query, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
             if (query == null)
@@ -369,7 +369,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(query));
             }
 
-            DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse, SearchQuery>(
+            DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse, Query>(
                     HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/deleteByQuery", CallType.Write, query,
                     requestOptions, ct)
                 .ConfigureAwait(false);
@@ -395,11 +395,11 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public SearchResponse<T> Search<T>(SearchQuery query, RequestOptions requestOptions = null) where T : class =>
+        public SearchResponse<T> Search<T>(Query query, RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => SearchAsync<T>(query, requestOptions));
 
         /// <inheritdoc />
-        public async Task<SearchResponse<T>> SearchAsync<T>(SearchQuery query, RequestOptions requestOptions = null,
+        public async Task<SearchResponse<T>> SearchAsync<T>(Query query, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class
         {
             if (query == null)
@@ -407,7 +407,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(query));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<T>, SearchQuery>(HttpMethod.Post,
+            return await _requesterWrapper.ExecuteRequestAsync<SearchResponse<T>, Query>(HttpMethod.Post,
                     $"/1/indexes/{_urlEncodedIndexName}/query", CallType.Read, query, requestOptions, ct)
                 .ConfigureAwait(false);
         }

@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Common
     /// <summary>
     /// https://www.algolia.com/doc/rest-api/search/#browse-index-post
     /// </summary>
-    public class BrowseIndexQuery : SearchQuery
+    public class BrowseIndexQuery : Query
     {
         /// <summary>
         /// A cursor to retrieve the next chunk of data.

@@ -96,8 +96,8 @@ namespace Algolia.Search.Test.EndToEnd
 
             List<MultipleQueries> multipleSearch = new List<MultipleQueries>
             {
-                new MultipleQueries {IndexName = _indexName1, Params = new SearchQuery {HitsPerPage = 2}},
-                new MultipleQueries {IndexName = _indexName2, Params = new SearchQuery {HitsPerPage = 2}},
+                new MultipleQueries {IndexName = _indexName1, Params = new Query {HitsPerPage = 2}},
+                new MultipleQueries {IndexName = _indexName2, Params = new Query {HitsPerPage = 2}},
             };
 
             MultipleQueriesRequest request = new MultipleQueriesRequest

@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Search
@@ -29,21 +30,22 @@ namespace Algolia.Search.Models.Search
     /// For more information regarding the parameters
     /// https://www.algolia.com/doc/api-reference/search-api-parameters/
     /// </summary>
-    public class SearchQuery
+    public class Query
     {
         /// <summary>
         /// Create a new query with an empty search query
         /// </summary>
         /// <param name="searchQuery"></param>
-        public SearchQuery(string searchQuery = "")
+        public Query(string searchQuery = "")
         {
-            Query = searchQuery;
+            SearchQuery = searchQuery;
         }
 
         /// <summary>
         /// The text to search in the index.
         /// </summary>
-        public string Query { get; set; } = string.Empty;
+        [JsonProperty(PropertyName = "query")]
+        public string SearchQuery { get; set; } = string.Empty;
 
         // filtering
 

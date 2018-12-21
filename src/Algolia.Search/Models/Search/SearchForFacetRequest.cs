@@ -47,6 +47,6 @@ namespace Algolia.Search.Models.Search
         /// Search parameters to be used to search the underlying index
         /// </summary>
         [JsonProperty(PropertyName = "requests")]
-        public SearchQuery SearchParameters { get; set; }
+        public Query SearchParameters { get; set; }
     }
 }

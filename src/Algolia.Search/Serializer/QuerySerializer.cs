@@ -38,7 +38,7 @@ namespace Algolia.Search.Serializer
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            SearchQuery query = (SearchQuery) value;
+            Query query = (Query) value;
 
             string queryString = QueryStringHelper.ToQueryString(query);
 
@@ -53,7 +53,7 @@ namespace Algolia.Search.Serializer
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(SearchQuery);
+            return objectType == typeof(Query);
         }
     }
 }

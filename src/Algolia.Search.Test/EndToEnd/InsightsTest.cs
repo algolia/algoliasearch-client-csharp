@@ -62,7 +62,7 @@ namespace Algolia.Search.Test.EndToEnd
 
             _index.AddObject(new AlgoliaStub { ObjectID = "one" }).Wait();
 
-            var query = new SearchQuery()
+            var query = new Query()
             {
                 EnablePersonalization = true,
                 ClickAnalytics = true

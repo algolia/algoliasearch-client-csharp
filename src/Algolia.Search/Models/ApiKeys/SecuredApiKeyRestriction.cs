@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.ApiKeys
         /// <summary>
         /// Search query parameters
         /// </summary>
-        public SearchQuery Query { get; set; }
+        public Query Query { get; set; }
 
         /// <summary>
         /// A Unix timestamp used to define the expiration date of the API key.

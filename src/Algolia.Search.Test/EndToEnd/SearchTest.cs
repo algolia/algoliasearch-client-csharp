@@ -64,27 +64,27 @@ namespace Algolia.Search.Test.EndToEnd
             Assert.IsInstanceOf<SetSettingsResponse>(setSettingsResponse);
             Assert.NotNull(setSettingsResponse);
 
-            Task<SearchResponse<Employee>> searchAlgoliaTask = _index.SearchAsync<Employee>(new SearchQuery
+            Task<SearchResponse<Employee>> searchAlgoliaTask = _index.SearchAsync<Employee>(new Query
             {
-                Query = "algolia"
+                SearchQuery = "algolia"
             });
 
-            Task<SearchResponse<Employee>> searchElonTask = _index.SearchAsync<Employee>(new SearchQuery
+            Task<SearchResponse<Employee>> searchElonTask = _index.SearchAsync<Employee>(new Query
             {
-                Query = "elon",
+                SearchQuery = "elon",
                 ClickAnalytics = true
             });
 
-            Task<SearchResponse<Employee>> searchElonTask1 = _index.SearchAsync<Employee>(new SearchQuery
+            Task<SearchResponse<Employee>> searchElonTask1 = _index.SearchAsync<Employee>(new Query
             {
-                Query = "elon",
+                SearchQuery = "elon",
                 Facets = new List<string> { "*" },
                 FacetFilters = new List<string> { "company:tesla" }
             });
 
-            Task<SearchResponse<Employee>> searchElonTask2 = _index.SearchAsync<Employee>(new SearchQuery
+            Task<SearchResponse<Employee>> searchElonTask2 = _index.SearchAsync<Employee>(new Query
             {
-                Query = "elon",
+                SearchQuery = "elon",
                 Facets = new List<string> { "*" },
                 Filters = "(company:tesla OR company:spacex)"
             });

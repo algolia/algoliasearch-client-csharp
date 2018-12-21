@@ -72,9 +72,9 @@ namespace Algolia.Search.Test.EndToEnd
             SearchIndex index1WithoutRestriction = clientWithRestriciton.InitIndex(_index1Name);
             SearchIndex index2WithRestriction = clientWithRestriciton.InitIndex(_index2Name);
 
-            var searchOne = await index1WithoutRestriction.SearchAsync<SecuredApiKeyStub>(new SearchQuery());
+            var searchOne = await index1WithoutRestriction.SearchAsync<SecuredApiKeyStub>(new Query());
             AlgoliaApiException ex = Assert.ThrowsAsync<AlgoliaApiException>(() =>
-                index2WithRestriction.SearchAsync<SecuredApiKeyStub>(new SearchQuery()));
+                index2WithRestriction.SearchAsync<SecuredApiKeyStub>(new Query()));
 
             Assert.That(ex.Message.Contains("Index not allowed with this API key"));
             Assert.That(ex.HttpErrorCode == 403);

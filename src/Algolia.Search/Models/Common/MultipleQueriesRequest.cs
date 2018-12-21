@@ -58,6 +58,6 @@ namespace Algolia.Search.Models.Common
         /// Search query parameters
         /// </summary>
         [JsonConverter(typeof(QuerySerializer))]
-        public SearchQuery Params { get; set; }
+        public Query Params { get; set; }
     }
 }

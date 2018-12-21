@@ -285,7 +285,7 @@ namespace Algolia.Search.Clients
         /// <param name="query">Search query</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        DeleteResponse DeleteBy(SearchQuery query, RequestOptions requestOptions = null);
+        DeleteResponse DeleteBy(Query query, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Remove all objects matching a filter (including geo filters).
@@ -296,7 +296,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<DeleteResponse> DeleteByAsync(SearchQuery query, RequestOptions requestOptions = null,
+        Task<DeleteResponse> DeleteByAsync(Query query, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace Algolia.Search.Clients
         /// <param name="query">Search query</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        SearchResponse<T> Search<T>(SearchQuery query, RequestOptions requestOptions = null) where T : class;
+        SearchResponse<T> Search<T>(Query query, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         ///  Method used for querying an index.
@@ -336,7 +336,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<SearchResponse<T>> SearchAsync<T>(SearchQuery query, RequestOptions requestOptions = null,
+        Task<SearchResponse<T>> SearchAsync<T>(Query query, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken)) where T : class;
 
         /// <summary>
