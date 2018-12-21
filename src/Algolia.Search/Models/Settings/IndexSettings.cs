@@ -177,6 +177,11 @@ namespace Algolia.Search.Models.Settings
 
         // languages
 
+        /// <summary>
+        /// Sets the languages to be used by language-specific settings and functionalities such as ignorePlurals, removeStopWords, and CJK word-detection.
+        /// </summary>
+        public List<string> QueryLanguages { get; set; }
+
         // query rules
 
         /// <summary>

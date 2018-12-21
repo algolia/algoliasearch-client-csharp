@@ -115,6 +115,11 @@ namespace Algolia.Search.Models.Search
         public IEnumerable<string> AttributesToSnippet { get; set; }
 
         /// <summary>
+        /// Gives control over which attributes to retrieve and which not to retrieve.
+        /// </summary>
+        public IEnumerable<string> AttributesToRetrieve { get; set; }
+
+        /// <summary>
         /// The HTML string to insert before the highlighted parts in all highlight and snippet results.
         /// </summary>
         public string HighlightPreTag { get; set; }
@@ -332,5 +337,15 @@ namespace Algolia.Search.Models.Search
         /// Search inside a polygon (in geo coordinates).
         /// </summary>
         public List<float> InsidePolygon { get; set; }
+
+        /// <summary>
+        /// Treats singular, plurals, and other forms of declensions as matching terms.
+        /// </summary>
+        public List<string> IgnorePlurals { get; set; }
+
+        /// <summary>
+        /// Removes stop (common) words from the query before executing it.
+        /// </summary>
+        public List<string> RemoveStopWords { get; set; }
     }
 }
