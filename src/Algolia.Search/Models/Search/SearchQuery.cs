@@ -284,5 +284,10 @@ namespace Algolia.Search.Models.Search
         /// Restricts a given query to look in only a subset of your searchable attributes.
         /// </summary>
         public List<string> RestrictSearchableAttributes { get; set; }
+
+        /// <summary>
+        /// Override default sort order for facet values at query time
+        /// </summary>
+        public string SortFacetValuesBy { get; set; }
     }
 }
