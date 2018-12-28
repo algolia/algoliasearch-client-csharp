@@ -653,17 +653,24 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public SetSettingsResponse SetSettings(IndexSettings settings, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => SetSettingsAsync(settings, requestOptions));
+        public SetSettingsResponse SetSettings(IndexSettings settings, RequestOptions requestOptions = null, bool forwardToReplicas = false) =>
+            AsyncHelper.RunSync(() => SetSettingsAsync(settings, requestOptions, forwardToReplicas: forwardToReplicas));
 
         /// <inheritdoc />
         public async Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
             if (settings == null)
             {
                 throw new ArgumentNullException(nameof(settings));
             }
+
+            var dic = new Dictionary<string, string>
+            {
+                {nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower()}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
 
             SetSettingsResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<SetSettingsResponse, IndexSettings>(HttpMethod.Put,

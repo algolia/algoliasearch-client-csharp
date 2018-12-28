@@ -562,8 +562,9 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="settings">Algolia's index settings</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
-        SetSettingsResponse SetSettings(IndexSettings settings, RequestOptions requestOptions = null);
+        SetSettingsResponse SetSettings(IndexSettings settings, RequestOptions requestOptions = null, bool forwardToReplicas = false);
 
         /// <summary>
         /// Create or change an index’s settings.
@@ -573,9 +574,10 @@ namespace Algolia.Search.Clients
         /// <param name="settings">Algolia's index settings</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
         Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
         /// Get all synonyms that match a query.
