@@ -52,8 +52,9 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
-        UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null)
+        UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null, bool createIfNotExists = false)
             where T : class;
 
         /// <inheritdoc />
@@ -64,9 +65,10 @@ namespace Algolia.Search.Clients
         /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
         Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool createIfNotExists = false) where T : class;
 
         /// <summary>
         /// Update one or more attributes of an existing object.
@@ -75,8 +77,9 @@ namespace Algolia.Search.Clients
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <param name="datas">Datas to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
-        BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
+        BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool createIfNotExists = false)
             where T : class;
 
         /// <summary>
@@ -87,9 +90,10 @@ namespace Algolia.Search.Clients
         /// <param name="datas">Datas to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
         Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> datas,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool createIfNotExists = false) where T : class;
 
         /// <summary>
         /// This method allows you to create records on your index by sending one or more objects

@@ -79,13 +79,13 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null)
+        public UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null, bool createIfNotExists = false)
             where T : class =>
-            AsyncHelper.RunSync(() => PartialUpdateObjectAsync(data, requestOptions));
+            AsyncHelper.RunSync(() => PartialUpdateObjectAsync(data, requestOptions, createIfNotExists: createIfNotExists));
 
         /// <inheritdoc />
         public async Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool createIfNotExists = false) where T : class
         {
             if (ReferenceEquals(data, null))
             {
@@ -94,6 +94,13 @@ namespace Algolia.Search.Clients
 
             // Get && check if the generic type has an objectID
             string objectId = AlgoliaHelper.GetObjectID(data);
+
+            var dic = new Dictionary<string, string>
+            {
+                {nameof(createIfNotExists), createIfNotExists.ToString().ToLower()}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
 
             UpdateObjectResponse response = await _requesterWrapper.ExecuteRequestAsync<UpdateObjectResponse, T>(
                     HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/{objectId}/partial", CallType.Write, data,
@@ -105,20 +112,22 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
+        public BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool createIfNotExists = false)
             where T : class =>
-            AsyncHelper.RunSync(() => PartialUpdateObjectsAsync(datas, requestOptions));
+            AsyncHelper.RunSync(() => PartialUpdateObjectsAsync(datas, requestOptions, createIfNotExists: createIfNotExists));
 
         /// <inheritdoc />
         public async Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> datas,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool createIfNotExists = false) where T : class
         {
+            string action = createIfNotExists ? BatchActionType.PartialUpdateObject : BatchActionType.PartialUpdateObjectNoCreate;
+
             if (datas == null)
             {
                 throw new ArgumentNullException(nameof(datas));
             }
 
-            return await SplitIntoBatchesAsync(datas, BatchActionType.PartialUpdateObjectNoCreate, requestOptions, ct)
+            return await SplitIntoBatchesAsync(datas, action, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
