@@ -447,24 +447,24 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="sourceIndex"></param>
         /// <param name="destinationIndex">The destination index</param>
-        /// <param name="scope">The scope copy</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="scope">The scope copy</param>
         /// <returns></returns>
-        CopyToResponse CopyIndex(string sourceIndex, string destinationIndex, IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null);
+        CopyToResponse CopyIndex(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null,
+            IEnumerable<string> scope = null);
 
         /// <summary>
         /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
         /// </summary>
         /// <param name="sourceIndex"></param>
         /// <param name="destinationIndex">The destination index</param>
-        /// <param name="scope">The scope copy</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="scope">The scope copy</param>
         /// <returns></returns>
         Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex,
-            IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            IEnumerable<string> scope = null);
 
         /// <summary>
         /// Rename an index. Normally used to reindex your data atomically, without any down time.

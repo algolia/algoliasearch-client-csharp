@@ -519,7 +519,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> { CopyScope.Settings };
-            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -532,7 +532,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> { CopyScope.Rules };
-            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -545,18 +545,18 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
             var scopes = new List<string> { CopyScope.Synonyms };
-            return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
+            return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public CopyToResponse CopyIndex(string sourceIndex, string destinationIndex, IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => CopyIndexAsync(sourceIndex, destinationIndex, scope, requestOptions));
+        public CopyToResponse CopyIndex(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null,
+            IEnumerable<string> scope = null) =>
+            AsyncHelper.RunSync(() => CopyIndexAsync(sourceIndex, destinationIndex, scope: scope, requestOptions: requestOptions));
 
         /// <inheritdoc />
         public async Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex,
-            IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            IEnumerable<string> scope = null)
         {
             if (string.IsNullOrWhiteSpace(sourceIndex))
             {

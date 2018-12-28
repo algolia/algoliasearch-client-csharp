@@ -45,7 +45,6 @@ namespace Algolia.Search.Clients
         /// </summary>
         AlgoliaConfig Config { get; }
 
-        /// <inheritdoc />
         /// <summary>
         /// Update one or more attributes of an existing object.
         /// This method enables you to update only a part of an object by singling out one or more attributes of an existing object and performing the following actions:
@@ -57,7 +56,6 @@ namespace Algolia.Search.Clients
         UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null, bool createIfNotExists = false)
             where T : class;
 
-        /// <inheritdoc />
         /// <summary>
         /// Update one or more attributes of an existing object.
         /// This method enables you to update only a part of an object by singling out one or more attributes of an existing object and performing the following actions:
@@ -150,24 +148,23 @@ namespace Algolia.Search.Clients
         /// Replace all records in an index without any downtime.
         /// </summary>
         /// <param name="datas">Datas to send</param>
-        /// <param name="safe">Run all api calls synchronously</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="safe">Run all api calls synchronously</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        MultiResponse ReplaceAllObjects<T>(IEnumerable<T> datas, bool safe = false,
-            RequestOptions requestOptions = null) where T : class;
+        MultiResponse ReplaceAllObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool safe = false) where T : class;
 
         /// <summary>
         /// Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
         /// Replace all records in an index without any downtime.
         /// </summary>
         /// <param name="datas">Datas to send</param>
-        /// <param name="safe">Run all api calls synchronously</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="safe">Run all api calls synchronously</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
-        Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, bool safe = false,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+        Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool safe = false) where T : class;
 
         /// <summary>
         /// Batch the given request
@@ -460,25 +457,25 @@ namespace Algolia.Search.Clients
         /// Create or update a specified set of rules, or all rules.
         /// </summary>
         /// <param name="rules">List of rules</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="clearExistingRules"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        BatchResponse SaveRules(IEnumerable<Rule> rules, bool forwardToReplicas = false,
-            bool clearExistingRules = false, RequestOptions requestOptions = null);
+        BatchResponse SaveRules(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false, bool clearExistingRules = false);
 
         /// <summary>
         /// Create or update a specified set of rules, or all rules.
         /// </summary>
         /// <param name="rules">List of rules</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="clearExistingRules"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false,
-            bool clearExistingRules = false, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+        Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false,
+            bool clearExistingRules = false);
 
         /// <summary>
         /// Push a new set of rules and erase all previous ones.
@@ -486,11 +483,11 @@ namespace Algolia.Search.Clients
         /// All existing rules are deleted and replaced with the new ones, in a single, atomic operation
         /// </summary>
         /// <param name="rules">List of rules</param>
-        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
-        BatchResponse ReplaceAllRules(IEnumerable<Rule> rules, bool forwardToReplicas = false,
-            RequestOptions requestOptions = null);
+        BatchResponse ReplaceAllRules(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Push a new set of rules and erase all previous ones.
@@ -498,12 +495,12 @@ namespace Algolia.Search.Clients
         /// All existing rules are deleted and replaced with the new ones, in a single, atomic operation
         /// </summary>
         /// <param name="rules">List of rules</param>
-        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
-        Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+        Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
         /// Delete the rule for the given ruleId
@@ -619,25 +616,25 @@ namespace Algolia.Search.Clients
         /// Create or update multiple synonyms.
         /// </summary>
         /// <param name="synonyms">List of synonyms</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="replaceExistingSynonyms"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
-            bool replaceExistingSynonyms = false, RequestOptions requestOptions = null);
+        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null, bool forwardToReplicas = false,
+            bool replaceExistingSynonyms = false);
 
         /// <summary>
         /// Create or update multiple synonyms.
         /// </summary>
         /// <param name="synonyms">List of synonyms</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="replaceExistingSynonyms"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms,
-            bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            bool forwardToReplicas = false, bool replaceExistingSynonyms = false);
 
         /// <summary>
         /// Push a new set of synonyms and erase all previous ones.
@@ -645,11 +642,11 @@ namespace Algolia.Search.Clients
         /// All existing synonyms are deleted and replaced with the new ones, in a single, atomic operation
         /// </summary>
         /// <param name="synonyms">List of synonyms</param>
-        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
-        SaveSynonymResponse ReplaceAllSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
-            RequestOptions requestOptions = null);
+        SaveSynonymResponse ReplaceAllSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Push a new set of synonyms and erase all previous ones.
@@ -657,13 +654,13 @@ namespace Algolia.Search.Clients
         /// All existing synonyms are deleted and replaced with the new ones, in a single, atomic operation
         /// </summary>
         /// <param name="synonyms">List of synonyms</param>
-        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> ReplaceAllSynonymsAsync(IEnumerable<Synonym> synonyms,
-            bool forwardToReplicas = false, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Create or update a single synonym on an index.
@@ -721,22 +718,23 @@ namespace Algolia.Search.Clients
         /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
         /// </summary>
         /// <param name="destinationIndex">The destination index</param>
-        /// <param name="scope">The scope copy</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="scope">The scope copy</param>
         /// <returns></returns>
-        CopyToResponse CopyTo(string destinationIndex, IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null);
+        CopyToResponse CopyTo(string destinationIndex, RequestOptions requestOptions = null,
+            IEnumerable<string> scope = null);
 
         /// <summary>
         /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
         /// </summary>
         /// <param name="destinationIndex">The destination index</param>
-        /// <param name="scope">The scope copy</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="scope">The scope copy</param>
         /// <returns></returns>
-        Task<CopyToResponse> CopyToAsync(string destinationIndex, IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+        Task<CopyToResponse> CopyToAsync(string destinationIndex,
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            IEnumerable<string> scope = null);
 
         /// <summary>
         /// Rename an index. Normally used to reindex your data atomically, without any down time.

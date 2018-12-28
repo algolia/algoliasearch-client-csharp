@@ -168,13 +168,12 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public MultiResponse ReplaceAllObjects<T>(IEnumerable<T> datas, bool safe = false,
-            RequestOptions requestOptions = null) where T : class =>
-            AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(datas, safe, requestOptions));
+        public MultiResponse ReplaceAllObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool safe = false) where T : class =>
+            AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(datas, requestOptions, safe: safe));
 
         /// <inheritdoc />
-        public async Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, bool safe = false,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
+        public async Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, RequestOptions requestOptions = null,
+        CancellationToken ct = default(CancellationToken), bool safe = false) where T : class
         {
             Random rnd = new Random();
             string tmpIndexName = $"{_indexName}_tmp_{rnd.Next(100)}";
@@ -185,7 +184,7 @@ namespace Algolia.Search.Clients
 
             // Copy index ressources
             CopyToResponse copyResponse =
-                await CopyToAsync(tmpIndexName, scopes, requestOptions, ct).ConfigureAwait(false);
+                await CopyToAsync(tmpIndexName, scope: scopes, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
             response.Responses.Add(copyResponse);
 
             if (safe)
@@ -557,14 +556,14 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public BatchResponse SaveRules(IEnumerable<Rule> rules, bool forwardToReplicas = false,
-            bool clearExistingRules = false, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => SaveRulesAsync(rules, forwardToReplicas, clearExistingRules, requestOptions));
+        public BatchResponse SaveRules(IEnumerable<Rule> rules, RequestOptions requestOptions = null, bool forwardToReplicas = false,
+            bool clearExistingRules = false) =>
+            AsyncHelper.RunSync(() => SaveRulesAsync(rules, forwardToReplicas: forwardToReplicas, clearExistingRules: clearExistingRules, requestOptions: requestOptions));
 
         /// <inheritdoc />
-        public async Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false,
-            bool clearExistingRules = false, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+        public async Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false,
+            bool clearExistingRules = false)
         {
             if (rules == null)
             {
@@ -589,17 +588,16 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public BatchResponse ReplaceAllRules(IEnumerable<Rule> rules, bool forwardToReplicas = false,
-            RequestOptions requestOptions = null)
+        public BatchResponse ReplaceAllRules(IEnumerable<Rule> rules, RequestOptions requestOptions = null, bool forwardToReplicas = false)
         {
-            return SaveRules(rules, forwardToReplicas, true, requestOptions);
+            return SaveRules(rules, forwardToReplicas: forwardToReplicas, clearExistingRules: true, requestOptions: requestOptions);
         }
 
         /// <inheritdoc />
-        public async Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, bool forwardToReplicas = false,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
+        CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
-            return await SaveRulesAsync(rules, forwardToReplicas, true, requestOptions, ct).ConfigureAwait(false);
+            return await SaveRulesAsync(rules, forwardToReplicas: forwardToReplicas, clearExistingRules: true, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -718,15 +716,15 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
-            bool replaceExistingSynonyms = false, RequestOptions requestOptions = null) =>
+        public SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null, bool forwardToReplicas = false,
+            bool replaceExistingSynonyms = false) =>
             AsyncHelper.RunSync(() =>
-                SaveSynonymsAsync(synonyms, forwardToReplicas, replaceExistingSynonyms, requestOptions));
+                SaveSynonymsAsync(synonyms, requestOptions, forwardToReplicas: forwardToReplicas, replaceExistingSynonyms: replaceExistingSynonyms));
 
         /// <inheritdoc />
         public async Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms,
-            bool forwardToReplicas = false, bool replaceExistingSynonyms = false, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            bool forwardToReplicas = false, bool replaceExistingSynonyms = false)
         {
             if (synonyms == null)
             {
@@ -752,18 +750,17 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public SaveSynonymResponse ReplaceAllSynonyms(IEnumerable<Synonym> synonyms, bool forwardToReplicas = false,
-            RequestOptions requestOptions = null)
+        public SaveSynonymResponse ReplaceAllSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false)
         {
-            return SaveSynonyms(synonyms, forwardToReplicas, true, requestOptions);
+            return SaveSynonyms(synonyms, forwardToReplicas: forwardToReplicas, replaceExistingSynonyms: true, requestOptions: requestOptions);
         }
 
         /// <inheritdoc />
         public async Task<SaveSynonymResponse> ReplaceAllSynonymsAsync(IEnumerable<Synonym> synonyms,
-            bool forwardToReplicas = false, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
-            return await SaveSynonymsAsync(synonyms, forwardToReplicas, true, requestOptions, ct).ConfigureAwait(false);
+            return await SaveSynonymsAsync(synonyms, forwardToReplicas: forwardToReplicas, replaceExistingSynonyms: true, requestOptions: requestOptions, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -833,13 +830,13 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public CopyToResponse CopyTo(string destinationIndex, IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => CopyToAsync(destinationIndex, scope, requestOptions));
+        public CopyToResponse CopyTo(string destinationIndex, RequestOptions requestOptions = null,
+            IEnumerable<string> scope = null) =>
+            AsyncHelper.RunSync(() => CopyToAsync(destinationIndex, requestOptions: requestOptions, scope: scope));
 
         /// <inheritdoc />
-        public async Task<CopyToResponse> CopyToAsync(string destinationIndex, IEnumerable<string> scope = null,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+        public async Task<CopyToResponse> CopyToAsync(string destinationIndex, RequestOptions requestOptions = null,
+             CancellationToken ct = default(CancellationToken), IEnumerable<string> scope = null)
         {
             if (string.IsNullOrWhiteSpace(destinationIndex))
             {
