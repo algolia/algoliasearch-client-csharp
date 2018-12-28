@@ -331,8 +331,9 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="objectId">Algolia's objectID</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
         /// <returns></returns>
-        T GetObject<T>(string objectId, RequestOptions requestOptions = null) where T : class;
+        T GetObject<T>(string objectId, RequestOptions requestOptions = null, IEnumerable<string> attributesToRetrieve = null) where T : class;
 
         /// <summary>
         /// Get one or more objects using their object ids.
@@ -340,9 +341,30 @@ namespace Algolia.Search.Clients
         /// <param name="objectId">Algolia's objectID</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
         /// <returns></returns>
         Task<T> GetObjectAsync<T>(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class;
+            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null) where T : class;
+
+        /// <summary>
+        /// Retrieve one or more objects, potentially from the index, in a single API call.
+        /// </summary>
+        /// <param name="objectIDs"> ID of the object within that index</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
+        /// <returns></returns>
+        IEnumerable<T> GetObjects<T>(IEnumerable<string> objectIDs, RequestOptions requestOptions = null, IEnumerable<string> attributesToRetrieve = null) where T : class;
+
+        /// <summary>
+        /// Retrieve one or more objects, potentially from the index, in a single API call.
+        /// </summary>
+        /// <param name="objectIDs">ID of the object within that index</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
+        /// <returns></returns>
+        Task<IEnumerable<T>> GetObjectsAsync<T>(IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null) where T : class;
 
         /// <summary>
         /// This method allows you to retrieve all index content

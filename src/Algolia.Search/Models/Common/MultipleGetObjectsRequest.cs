@@ -42,13 +42,18 @@ namespace Algolia.Search.Models.Common
     public class MultipleGetObject
     {
         /// <summary>
-        /// Index Name
+        /// Name of the index containing the object
         /// </summary>
         public string IndexName { get; set; }
 
         /// <summary>
-        /// ObjectID of the object to retrieve
+        /// ID of the object within that index
         /// </summary>
         public string ObjectID { get; set; }
+
+        /// <summary>
+        /// List of attributes to retrieve. By default, all retrievable attributes are returned.
+        /// </summary>
+        public IEnumerable<string> AttributesToRetrieve { get; set; }
     }
 }

@@ -399,21 +399,68 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public T GetObject<T>(string objectId, RequestOptions requestOptions = null) where T : class =>
-            AsyncHelper.RunSync(() => GetObjectAsync<T>(objectId, requestOptions));
+        public T GetObject<T>(string objectId, RequestOptions requestOptions = null, IEnumerable<string> attributesToRetrieve = null) where T : class =>
+            AsyncHelper.RunSync(() => GetObjectAsync<T>(objectId, requestOptions, attributesToRetrieve: attributesToRetrieve));
 
         /// <inheritdoc />
         public async Task<T> GetObjectAsync<T>(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null) where T : class
         {
             if (string.IsNullOrWhiteSpace(objectId))
             {
                 throw new ArgumentNullException(nameof(objectId));
             }
 
+            if (attributesToRetrieve != null && attributesToRetrieve.Any())
+            {
+                var dic = new Dictionary<string, string>
+                {
+                    {nameof(attributesToRetrieve),  WebUtility.UrlEncode(String.Join(",", attributesToRetrieve)) }
+                };
+
+                requestOptions = requestOptions.AddQueryParams(dic);
+            }
+
             return await _requesterWrapper.ExecuteRequestAsync<T>(HttpMethod.Get,
                     $"/1/indexes/{_urlEncodedIndexName}/{objectId}", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<T> GetObjects<T>(IEnumerable<string> objectIDs,
+            RequestOptions requestOptions = null, IEnumerable<string> attributesToRetrieve = null) where T : class =>
+            AsyncHelper.RunSync(() => GetObjectsAsync<T>(objectIDs, requestOptions, attributesToRetrieve: attributesToRetrieve));
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<T>> GetObjectsAsync<T>(
+            IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null) where T : class
+        {
+            if (objectIDs == null)
+            {
+                throw new ArgumentNullException(nameof(objectIDs));
+            }
+
+            List<MultipleGetObject> queries = new List<MultipleGetObject>();
+
+            foreach (var objectID in objectIDs)
+            {
+                queries.Add(new MultipleGetObject
+                {
+                    IndexName = this._indexName,
+                    ObjectID = objectID,
+                    AttributesToRetrieve = attributesToRetrieve != null ? attributesToRetrieve : null
+                });
+            }
+
+            var request = new MultipleGetObjectsRequest { Requests = queries };
+
+            var response = await _requesterWrapper
+                .ExecuteRequestAsync<MultipleGetObjectsResponse<T>, MultipleGetObjectsRequest>(HttpMethod.Post,
+                    "/1/indexes/*/objects", CallType.Read, request, requestOptions, ct)
+                .ConfigureAwait(false);
+
+            return response.Results;
         }
 
         /// <inheritdoc />
