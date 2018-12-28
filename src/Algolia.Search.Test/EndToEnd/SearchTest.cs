@@ -50,7 +50,7 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task SearchTestAsync()
         {
-            BatchIndexingResponse addObjectResponse = await _index.AddObjectsAysnc(_employees);
+            BatchIndexingResponse addObjectResponse = await _index.SaveObjectsAsync(_employees, autoGenerateObjectId: true);
             addObjectResponse.Wait();
 
             Assert.IsInstanceOf<BatchIndexingResponse>(addObjectResponse);

@@ -47,7 +47,7 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestReplacing()
         {
-            var addResponse = _index.AddObjectAysnc(new ReplaceAllTestObject { ObjectID = "one" });
+            var addResponse = _index.SaveObjectAsync(new ReplaceAllTestObject { ObjectID = "one" });
 
             var ruleToSave = new Rule
             {

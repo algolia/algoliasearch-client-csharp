@@ -60,7 +60,7 @@ namespace Algolia.Search.Test.EndToEnd
             insights.ViewedFilters("viewedFilters", _indexName, new List<string> { "brand:apple", "brand:google" });
             insights.ViewedObjectIDs("viewedObjectIDs", _indexName, new List<string> { "1", "2" });
 
-            _index.AddObject(new AlgoliaStub { ObjectID = "one" }).Wait();
+            _index.SaveObject(new AlgoliaStub { ObjectID = "one" }).Wait();
 
             var query = new Query()
             {

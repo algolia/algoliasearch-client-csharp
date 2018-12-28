@@ -79,27 +79,6 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public AddObjectResponse AddObject<T>(T data, RequestOptions requestOptions = null) where T : class =>
-            AsyncHelper.RunSync(() => AddObjectAysnc(data, requestOptions));
-
-        /// <inheritdoc />
-        public async Task<AddObjectResponse> AddObjectAysnc<T>(T data, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
-        {
-            if (ReferenceEquals(data, null))
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
-
-            AddObjectResponse response = await _requesterWrapper.ExecuteRequestAsync<AddObjectResponse, T>(
-                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, data, requestOptions, ct)
-                .ConfigureAwait(false);
-
-            response.WaitDelegate = t => WaitTask(t);
-            return response;
-        }
-
-        /// <inheritdoc />
         public UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null)
             where T : class =>
             AsyncHelper.RunSync(() => PartialUpdateObjectAsync(data, requestOptions));
@@ -144,38 +123,20 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public BatchIndexingResponse AddObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
-            where T : class =>
-            AsyncHelper.RunSync(() => AddObjectsAysnc(datas, requestOptions));
-
-        /// <inheritdoc />
-        public async Task<BatchIndexingResponse> AddObjectsAysnc<T>(IEnumerable<T> datas,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
-        {
-            if (datas == null)
-            {
-                throw new ArgumentNullException(nameof(datas));
-            }
-
-            return await SplitIntoBatchesAsync(datas, BatchActionType.AddObject, requestOptions, ct)
-                .ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public BatchIndexingResponse SaveObject<T>(T data, RequestOptions requestOptions = null) where T : class =>
-            AsyncHelper.RunSync(() => SaveObjectAsync(data, requestOptions));
+        public BatchIndexingResponse SaveObject<T>(T data, RequestOptions requestOptions = null, bool autoGenerateObjectId = false) where T : class =>
+            AsyncHelper.RunSync(() => SaveObjectAsync(data, requestOptions, autoGenerateObjectId: autoGenerateObjectId));
 
         /// <inheritdoc />
         public async Task<BatchIndexingResponse> SaveObjectAsync<T>(T data, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            CancellationToken ct = default(CancellationToken), bool autoGenerateObjectId = false) where T : class
         {
-            return await SaveObjectsAsync(new List<T> {data}, requestOptions, ct);
+            return await SaveObjectsAsync(new List<T> { data }, requestOptions, ct, autoGenerateObjectId);
         }
 
         /// <inheritdoc />
-        public BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
+        public BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool autoGenerateObjectId = false)
             where T : class =>
-            AsyncHelper.RunSync(() => SaveObjectsAsync(datas, requestOptions));
+            AsyncHelper.RunSync(() => SaveObjectsAsync(datas, requestOptions, autoGenerateObjectId: autoGenerateObjectId));
 
         /// <inheritdoc />
         public async Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> datas,
@@ -189,12 +150,12 @@ namespace Algolia.Search.Clients
 
             if (autoGenerateObjectId)
             {
-                return await AddObjectsAysnc(datas, requestOptions, ct).ConfigureAwait(false);
+                return await SplitIntoBatchesAsync(datas, BatchActionType.AddObject, requestOptions, ct).ConfigureAwait(false);
             }
 
-            AlgoliaHelper.EnsureObjectID(datas);
+            AlgoliaHelper.EnsureObjectID<T>();
 
-            return await SplitIntoBatchesAsync(datas, BatchActionType.UpdateObject, requestOptions, ct);
+            return await SplitIntoBatchesAsync(datas, BatchActionType.UpdateObject, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -210,8 +171,8 @@ namespace Algolia.Search.Clients
             string tmpIndexName = $"{_indexName}_tmp_{rnd.Next(100)}";
             SearchIndex tmpIndex = new SearchIndex(_requesterWrapper, Config, tmpIndexName);
 
-            List<string> scopes = new List<string> {CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms};
-            MultiResponse response = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
+            List<string> scopes = new List<string> { CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms };
+            MultiResponse response = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
 
             // Copy index ressources
             CopyToResponse copyResponse =
@@ -224,7 +185,7 @@ namespace Algolia.Search.Clients
             }
 
             BatchIndexingResponse saveObjectsResponse =
-                await tmpIndex.AddObjectsAysnc(datas, requestOptions, ct).ConfigureAwait(false);
+                await tmpIndex.SaveObjectsAsync(datas, requestOptions, ct).ConfigureAwait(false);
             response.Responses.Add(copyResponse);
 
             if (safe)
@@ -272,7 +233,7 @@ namespace Algolia.Search.Clients
         internal async Task<BatchIndexingResponse> SplitIntoBatchesAsync<T>(IEnumerable<T> datas, string actionType,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
-            BatchIndexingResponse ret = new BatchIndexingResponse {Responses = new List<BatchResponse>()};
+            BatchIndexingResponse ret = new BatchIndexingResponse { Responses = new List<BatchResponse>() };
             List<T> records = new List<T>();
 
             foreach (var data in datas)
@@ -822,7 +783,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(destinationIndex);
             }
 
-            var data = new CopyToRequest {Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope};
+            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
 
             CopyToResponse response = await _requesterWrapper.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
                     HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/operation", CallType.Write, data,
@@ -847,7 +808,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexRequest request = new MoveIndexRequest {Operation = MoveType.Move, Destination = _indexName};
+            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = _indexName };
 
             MoveIndexResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,

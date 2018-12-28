@@ -70,8 +70,8 @@ namespace Algolia.Search.Test.EndToEnd
                 }
             }
 
-            var addOne = await _index1.AddObjectAysnc(new AlgoliaStub { ObjectID = "one" });
-            var addTwo = await _index2.AddObjectAysnc(new AlgoliaStub { ObjectID = "one" });
+            var addOne = await _index1.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
+            var addTwo = await _index2.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
 
             addOne.Wait();
             addTwo.Wait();

@@ -56,7 +56,7 @@ namespace Algolia.Search.Test.EndToEnd
                 new ObjectToBatch {ObjectID = "five", Key = "value"}
             };
 
-            var batchOneResponse = await _index.AddObjectsAysnc(batchOne);
+            var batchOneResponse = await _index.SaveObjectsAsync(batchOne);
             batchOneResponse.Wait();
 
             List<BatchOperation<ObjectToBatch>> operations = new List<BatchOperation<ObjectToBatch>>

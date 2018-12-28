@@ -54,8 +54,8 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestApiKey()
         {
-            var addOne = await _index1.AddObjectAysnc(new SecuredApiKeyStub { ObjectID = "one" });
-            var addTwo = await _index2.AddObjectAysnc(new SecuredApiKeyStub { ObjectID = "one" });
+            var addOne = await _index1.SaveObjectAsync(new SecuredApiKeyStub { ObjectID = "one" });
+            var addTwo = await _index2.SaveObjectAsync(new SecuredApiKeyStub { ObjectID = "one" });
 
             addOne.Wait();
             addTwo.Wait();

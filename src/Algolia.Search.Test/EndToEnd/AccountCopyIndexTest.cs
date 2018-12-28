@@ -63,7 +63,7 @@ namespace Algolia.Search.Test.EndToEnd
             SearchIndex index2 = BaseTest.SearchClient2.InitIndex(indexTwoName);
 
             var objectToAdd = new AccountCopyObject { ObjectID = "one" };
-            var addObject = index1.AddObjectAysnc(objectToAdd);
+            var addObject = index1.SaveObjectAsync(objectToAdd);
 
             Rule ruleToSave = new Rule
             {

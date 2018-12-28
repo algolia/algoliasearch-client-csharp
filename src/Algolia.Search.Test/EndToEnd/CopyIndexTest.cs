@@ -80,7 +80,7 @@ namespace Algolia.Search.Test.EndToEnd
                 }
             };
 
-            var addObjectSrcIndex = _sourceIndex.AddObjectsAysnc(objectsToAdd);
+            var addObjectSrcIndex = _sourceIndex.SaveObjectsAsync(objectsToAdd);
 
             IndexSettings settings = new IndexSettings
             {

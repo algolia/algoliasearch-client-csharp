@@ -32,62 +32,75 @@ namespace Algolia.Search.Utils
     internal static class AlgoliaHelper
     {
         /// <summary>
-        /// Ensure that the List has an JsonPropertyAttribute(Name="ObjectID")
+        /// Ensure that the type T has a property ObjectID or a JsonPropertyAttribute(Name="objectID")
         /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="datas">Datas to send</param>
-        public static void EnsureObjectID<T>(IEnumerable<T> datas)
+        /// <typeparam name="T">Type to check/type</typeparam>
+        public static void EnsureObjectID<T>()
         {
-            var propertyWithObjectIdAttribute = CheckAttribute<T>("objectID");
+            var objectIdProperty = PropertyOrJsonAttributeExists<T>("ObjectID");
 
-            if (datas == null)
+            if (objectIdProperty != null)
             {
+                if (objectIdProperty.PropertyType != typeof(string))
+                {
+                    throw new AlgoliaException($"The ObjectID property or the JsonPropertyAttribute with name='objectID' must be a string");
+                }
+
                 return;
             }
 
-            if (datas.Any(x => string.IsNullOrWhiteSpace((string) propertyWithObjectIdAttribute.GetValue(x, null))))
-            {
-                throw new AlgoliaException(
-                    "Property with JsonPropertyAttribute with name='objectID' must not be null or empty");
-            }
+            throw new AlgoliaException($"The type {nameof(T)} must have an ObjectID property or a JsonPropertyAttribute with name='objectID'");
         }
 
         /// <summary>
-        /// Get the property which has JsonPropertyAttribute with name='objectID'
+        /// Check if the Property or JsonPropertyAttribute with name='objectID' exists in the given type'
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <param name="data">Data to send</param>
         /// <returns></returns>
         public static string GetObjectID<T>(T data)
         {
-            var propertyWithObjectIdAttribute = CheckAttribute<T>("objectID");
-            return (string) propertyWithObjectIdAttribute.GetValue(data);
+            var objectIdProperty = PropertyOrJsonAttributeExists<T>("ObjectID");
+
+            if (objectIdProperty != null)
+            {
+                if (objectIdProperty.PropertyType != typeof(string))
+                {
+                    throw new AlgoliaException($"The ObjectID property or the JsonPropertyAttribute with name='objectID' must be a string");
+                }
+
+                return objectIdProperty.GetValue(data, null).ToString();
+            }
+
+            throw new AlgoliaException($"The type {nameof(T)} must have an ObjectID properties or a JsonPropertyAttribute with name='objectID'");
         }
 
         /// <summary>
-        /// Check if JsonPropertyAttribute with name='objectID' exist in the given type
+        /// Check if the Property or JsonPropertyAttribute exists in the given type, return null if not exist otherwise return propertyInfo
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="propertyName">Name of the property to check</param>
+        /// <param name="propertyName">Name of the property to check. Will be test as PascalCase for property and as camelCase for JsonAttribute</param>
         /// <returns></returns>
-        private static PropertyInfo CheckAttribute<T>(string propertyName)
+        private static PropertyInfo PropertyOrJsonAttributeExists<T>(string propertyName)
         {
-            var attr = typeof(T).GetTypeInfo().GetCustomAttribute<JsonPropertyAttribute>();
+            var typeInfo = typeof(T).GetTypeInfo();
+            var declaredProperties = typeInfo.DeclaredProperties;
 
-            var propertyWithObjectIdAttribute = typeof(T).GetTypeInfo().DeclaredProperties
-                .First(p => p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Equals(propertyName));
+            var objectIdProperty = declaredProperties.FirstOrDefault(p => p.Name.Equals(propertyName));
 
-            if (!attr.PropertyName.Equals(propertyName))
+            if (objectIdProperty != null)
             {
-                throw new AlgoliaException($"The class mut have a JsonPropertyAttribute property with name='{propertyName}'");
+                return objectIdProperty;
             }
 
-            if (propertyWithObjectIdAttribute.GetType() != typeof(string))
+            var camelCaseProperty = CamelCaseHelper.ToCamelCase(propertyName);
+
+            if (typeInfo.GetCustomAttribute<JsonPropertyAttribute>() != null)
             {
-                throw new AlgoliaException($"Property with JsonPropertyAttribute with name='{propertyName}' must be a string");
+                return declaredProperties.FirstOrDefault(p => p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Equals(camelCaseProperty));
             }
 
-            return propertyWithObjectIdAttribute;
+            return null;
         }
     }
 }

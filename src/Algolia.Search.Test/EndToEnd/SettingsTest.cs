@@ -46,7 +46,7 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestSettings()
         {
-            var addObjectResponse = await _index.AddObjectAysnc(new { ObjectId = "one", Attribute = "value" });
+            var addObjectResponse = await _index.SaveObjectAsync(new { ObjectID = "one", Attribute = "value" });
             addObjectResponse.Wait();
 
             IndexSettings settings = new IndexSettings

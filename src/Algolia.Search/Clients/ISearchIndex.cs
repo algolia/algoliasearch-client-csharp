@@ -45,26 +45,6 @@ namespace Algolia.Search.Clients
         /// </summary>
         AlgoliaConfig Config { get; }
 
-        /// <summary>
-        /// This method allows you to create records on your index by sending one or more objects
-        /// Each object contains a set of attributes and values, which represents a full record on an index.
-        /// </summary>
-        /// <param name="data">Data to send</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
-        AddObjectResponse AddObject<T>(T data, RequestOptions requestOptions = null) where T : class;
-
-        /// <summary>
-        /// This method allows you to create records on your index by sending one or more objects
-        /// Each object contains a set of attributes and values, which represents a full record on an index.
-        /// </summary>
-        /// <param name="data">Data to send</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
-        Task<AddObjectResponse> AddObjectAysnc<T>(T data, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class;
-
         /// <inheritdoc />
         /// <summary>
         /// Update one or more attributes of an existing object.
@@ -115,61 +95,47 @@ namespace Algolia.Search.Clients
         /// This method allows you to create records on your index by sending one or more objects
         /// Each object contains a set of attributes and values, which represents a full record on an index.
         /// </summary>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="autoGenerateObjectId">Add objectID if not present</param>
+        /// <returns></returns>>
+        BatchIndexingResponse SaveObject<T>(T data, RequestOptions requestOptions = null, bool autoGenerateObjectId = false) where T : class;
+
+        /// <summary>
+        /// This method allows you to create records on your index by sending one or more objects
+        /// Each object contains a set of attributes and values, which represents a full record on an index.
+        /// </summary>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <param name="data">Data to send</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <param name="autoGenerateObjectId">Add objectID if not present</param>
+        /// <returns></returns>
+        Task<BatchIndexingResponse> SaveObjectAsync<T>(T data, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken), bool autoGenerateObjectId = false) where T : class;
+
+        /// <summary>
+        /// This method allows you to create records on your index by sending one or more objects
+        /// Each object contains a set of attributes and values, which represents a full record on an index.
+        /// </summary>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <param name="datas">Datas to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="autoGenerateObjectId">Add objectIDs if not present</param>
         /// <returns></returns>
-        BatchIndexingResponse AddObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
+        BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool autoGenerateObjectId = false)
             where T : class;
 
         /// <summary>
         /// This method allows you to create records on your index by sending one or more objects
         /// Each object contains a set of attributes and values, which represents a full record on an index.
         /// </summary>
-        /// <param name="datas">Datas to send</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
-        Task<BatchIndexingResponse> AddObjectsAysnc<T>(IEnumerable<T> datas,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
-
-        /// <summary>
-        /// Replace an existing object with an updated set of attributes.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="data">Data to send</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>>
-        BatchIndexingResponse SaveObject<T>(T data, RequestOptions requestOptions = null) where T : class;
-
-        /// <summary>
-        /// Replace an existing object with an updated set of attributes.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="data">Data to send</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
-        Task<BatchIndexingResponse> SaveObjectAsync<T>(T data, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class;
-
-        /// <summary>
-        /// Replace an existing object with an updated set of attributes.
-        /// </summary>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="datas">Datas to send</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
-        BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null)
-            where T : class;
-
-        /// <summary>
-        /// Replace an existing object with an updated set of attributes.
-        /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <param name="datas">Datas to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
-        /// <param name="autoGenerateObjectId"></param>
+        /// <param name="autoGenerateObjectId">Add objectIDs if not present</param>
         /// <returns></returns>
         Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> datas,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),

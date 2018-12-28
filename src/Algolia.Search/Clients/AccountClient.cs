@@ -75,7 +75,7 @@ namespace Algolia.Search.Clients
                 }
             }
 
-            MultiResponse ret = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
+            MultiResponse ret = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
 
             // Save settings
             IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
@@ -100,7 +100,7 @@ namespace Algolia.Search.Clients
 
             // Save objects (batched)
             IndexIterator<T> indexIterator = sourceIndex.Browse<T>(new BrowseIndexQuery());
-            BatchIndexingResponse saveObject = await destinationIndex.AddObjectsAysnc(indexIterator, requestOptions, ct)
+            BatchIndexingResponse saveObject = await destinationIndex.SaveObjectsAsync(indexIterator, requestOptions, ct)
                 .ConfigureAwait(false);
             ret.Responses.Add(saveObject);
 

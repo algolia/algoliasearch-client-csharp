@@ -78,7 +78,7 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task IndexOperationsAsyncTest()
         {
-            BatchIndexingResponse addObjectResponse = await _index.AddObjectsAysnc(_objectsToSave);
+            BatchIndexingResponse addObjectResponse = await _index.SaveObjectsAsync(_objectsToSave);
             addObjectResponse.Wait();
 
             IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "company" } };
