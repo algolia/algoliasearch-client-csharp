@@ -55,13 +55,12 @@ namespace Algolia.Search.Test.EndToEnd
                 Validity = 600
             };
 
-            AddApiKeyResponse addKey = await BaseTest.SearchClient.AddApiKeyAsync(apiKeyToSend);
-            _apiKey = addKey.Key;
+            AddApiKeyResponse addKeyResponse = await BaseTest.SearchClient.AddApiKeyAsync(apiKeyToSend);
+            _apiKey = addKeyResponse.Key;
             apiKeyToSend.Value = _apiKey;
+            addKeyResponse.Wait();
 
-            ApiKey addedKey = null;
-            addedKey = await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
-            addedKey.Wait();
+            var addedKey = await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
 
             Assert.IsTrue(TestHelper.AreObjectsEqual(apiKeyToSend, addedKey, "CreatedAt", "Validity",
                 "GetApiKeyDelegate", "Key"));

@@ -124,7 +124,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(queries));
             }
 
-            var request = new MultipleGetObjectsRequest {Requests = queries};
+            var request = new MultipleGetObjectsRequest { Requests = queries };
 
             return await _requesterWrapper
                 .ExecuteRequestAsync<MultipleGetObjectsResponse<T>, MultipleGetObjectsRequest>(HttpMethod.Post,
@@ -243,27 +243,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(apiKey);
             }
 
-            try
-            {
-                ApiKey response = await _requesterWrapper.ExecuteRequestAsync<ApiKey>(HttpMethod.Get,
-                        $"/1/keys/{apiKey}", CallType.Read, requestOptions, ct)
-                    .ConfigureAwait(false);
-
-                response.GetApiKeyDelegate = null;
-                response.Exist = true;
-                response.Key = apiKey;
-                return response;
-            }
-            catch (AlgoliaApiException ex)
-            {
-                // We need to catch the 404 error to allow the Wait() method on the response
-                if (ex.HttpErrorCode != 404)
-                {
-                    throw;
-                }
-
-                return new ApiKey {Key = apiKey, GetApiKeyDelegate = k => GetApiKey(k), Exist = false};
-            }
+            return await _requesterWrapper.ExecuteRequestAsync<ApiKey>(HttpMethod.Get,
+                    $"/1/keys/{apiKey}", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -279,9 +261,12 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(acl));
             }
 
-            return await _requesterWrapper.ExecuteRequestAsync<AddApiKeyResponse, ApiKey>(HttpMethod.Post,
+            var response = await _requesterWrapper.ExecuteRequestAsync<AddApiKeyResponse, ApiKey>(HttpMethod.Post,
                     "/1/keys", CallType.Write, acl, requestOptions, ct)
                 .ConfigureAwait(false);
+
+            response.GetApiKeyDelegate = k => GetApiKey(k);
+            return response;
         }
 
         /// <inheritdoc />
@@ -440,9 +425,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(clusterName);
             }
 
-            var data = new AssignUserIdRequest {Cluster = clusterName};
+            var data = new AssignUserIdRequest { Cluster = clusterName };
 
-            var userIdHeader = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
+            var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
             requestOptions = requestOptions.AddHeaders(userIdHeader);
 
             AssignUserIdResponse response = await _requesterWrapper
@@ -468,7 +453,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(userId);
             }
 
-            var userIdHeader = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
+            var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
             requestOptions = requestOptions.AddHeaders(userIdHeader);
 
             try
@@ -489,7 +474,7 @@ namespace Algolia.Search.Clients
                     throw;
                 }
 
-                return new RemoveUserIdResponse {UserId = userId, RemoveDelegate = u => RemoveUserId(u)};
+                return new RemoveUserIdResponse { UserId = userId, RemoveDelegate = u => RemoveUserId(u) };
             }
         }
 
@@ -528,7 +513,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySettingsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> {CopyScope.Settings};
+            var scopes = new List<string> { CopyScope.Settings };
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
         }
 
@@ -541,7 +526,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopyRulesAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> {CopyScope.Rules};
+            var scopes = new List<string> { CopyScope.Rules };
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
         }
 
@@ -554,7 +539,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySynonymsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> {CopyScope.Synonyms};
+            var scopes = new List<string> { CopyScope.Synonyms };
             return await CopyIndexAsync(sourceIndex, destinationIndex, scopes, ct: ct).ConfigureAwait(false);
         }
 
@@ -579,7 +564,7 @@ namespace Algolia.Search.Clients
             }
 
             string encondedSourceIndex = WebUtility.UrlEncode(sourceIndex);
-            var data = new CopyToRequest {Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope};
+            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
 
             CopyToResponse response = await _requesterWrapper.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
                     HttpMethod.Post, $"/1/indexes/{encondedSourceIndex}/operation", CallType.Write, data,
@@ -606,7 +591,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexRequest request = new MoveIndexRequest {Operation = MoveType.Move, Destination = destinationIndex};
+            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = destinationIndex };
 
             MoveIndexResponse response = await _requesterWrapper
                 .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,

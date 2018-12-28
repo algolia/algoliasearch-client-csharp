@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Common;
 using Newtonsoft.Json;
 using System;
@@ -51,14 +52,19 @@ namespace Algolia.Search.Models.ApiKeys
         /// </summary>
         public virtual void Wait()
         {
+            // Loop until the key is deleted on the server => error code == 404
             while (true)
             {
-                // loop until the key doesn't exist on the api side
-                ApiKey retrievedApiKey = GetApiKeyDelegate(Key);
-
-                if (!retrievedApiKey.Exist)
+                try
                 {
-                    break;
+                    GetApiKeyDelegate(Key);
+                }
+                catch (AlgoliaApiException ex)
+                {
+                    if (ex.HttpErrorCode == 404)
+                    {
+                        break;
+                    }
                 }
 
                 Task.Delay(1000);

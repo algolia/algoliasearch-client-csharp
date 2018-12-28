@@ -21,15 +21,22 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Exceptions;
+using Algolia.Search.Models.Common;
+using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Models.ApiKeys
 {
     /// <summary>
     /// Add api key api response
     /// </summary>
-    public class AddApiKeyResponse
+    public class AddApiKeyResponse : IAlgoliaWaitableResponse
     {
+        [JsonIgnore]
+        internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+
         /// <summary>
         /// The returned api key
         /// </summary>
@@ -39,5 +46,30 @@ namespace Algolia.Search.Models.ApiKeys
         /// Date of creation of the api key
         /// </summary>
         public DateTime CreatedAt { get; set; }
+
+        /// <summary>
+        /// Wait until the key exists on the server
+        /// </summary>
+        public void Wait()
+        {
+            // Loop until the key is created on the server => error code != 404
+            while (true)
+            {
+                try
+                {
+                    GetApiKeyDelegate(Key);
+                }
+                catch (AlgoliaApiException ex)
+                {
+                    // We need to catch the 404 error to allow the Wait() method on the response
+                    if (ex.HttpErrorCode == 404)
+                    {
+                        Task.Delay(1000);
+                        continue;
+                    }
+                }
+                break;
+            }
+        }
     }
 }

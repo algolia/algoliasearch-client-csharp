@@ -33,10 +33,8 @@ namespace Algolia.Search.Models.ApiKeys
     /// <summary>
     /// Algolia's API Key
     /// </summary>
-    public class ApiKey : IAlgoliaWaitableResponse
+    public class ApiKey
     {
-        [JsonIgnore] internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
-
         /// <summary>
         /// Api Key
         /// </summary>
@@ -95,45 +93,9 @@ namespace Algolia.Search.Models.ApiKeys
         public string Description { get; set; }
 
         /// <summary>
-        /// Wait until the key exists on the server
+        /// Date of creation
         /// </summary>
         [JsonConverter(typeof(DateTimeEpochSerializer))]
         public DateTime? CreatedAt { get; set; }
-
-        /// <summary>
-        /// Wait until the key exists on the server
-        /// </summary>
-        [JsonIgnore]
-        public bool Exist { get; set; }
-
-        /// <summary>
-        /// Wait until the key exists on the server
-        /// </summary>
-        public void Wait()
-        {
-            while (true)
-            {
-                ApiKey retrievedApiKey = GetApiKeyDelegate(Key);
-
-                // loop until the key exists on the api side
-                if (retrievedApiKey.Exist)
-                {
-                    Value = retrievedApiKey.Value;
-                    Acl = retrievedApiKey.Acl;
-                    Validity = retrievedApiKey.Validity;
-                    MaxHitsPerQuery = retrievedApiKey.MaxHitsPerQuery;
-                    MaxQueriesPerIPPerHour = retrievedApiKey.MaxQueriesPerIPPerHour;
-                    Indexes = retrievedApiKey.Indexes;
-                    Referers = retrievedApiKey.Referers;
-                    QueryParameters = retrievedApiKey.QueryParameters;
-                    Description = retrievedApiKey.Description;
-                    CreatedAt = retrievedApiKey.CreatedAt;
-                    break;
-                }
-
-                Task.Delay(1000);
-                continue;
-            }
         }
-    }
 }
