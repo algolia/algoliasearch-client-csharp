@@ -70,20 +70,9 @@ namespace Algolia.Search.Test.EndToEnd
 
             apiKeyToSend.MaxHitsPerQuery = 42;
             var updateKey = await BaseTest.SearchClient.UpdateApiKeyAsync(apiKeyToSend);
+            updateKey.Wait();
 
-            ApiKey getUpdatedKey = null;
-
-            // Not wait method on api side, so we have to loop until changes are made.
-            while (true)
-            {
-                getUpdatedKey = await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
-                if (getUpdatedKey.MaxHitsPerQuery == 42)
-                {
-                    break;
-                }
-
-                await Task.Delay(1000);
-            }
+            var getUpdatedKey = await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
 
             Assert.IsTrue(getUpdatedKey.MaxHitsPerQuery == 42);
         }

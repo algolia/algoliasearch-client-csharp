@@ -97,5 +97,13 @@ namespace Algolia.Search.Models.ApiKeys
         /// </summary>
         [JsonConverter(typeof(DateTimeEpochSerializer))]
         public DateTime? CreatedAt { get; set; }
+
+        /// <summary>
+        /// ToString()
+        /// </summary>
+        public override string ToString()
+        {
+            return $"{Value}{string.Join(",", Acl)}{MaxHitsPerQuery}{MaxQueriesPerIPPerHour}{string.Join(",", Indexes)}{string.Join(",", Referers)}{RestrictSources}{QueryParameters}{Description}";
         }
+    }
 }

@@ -291,9 +291,14 @@ namespace Algolia.Search.Clients
             // need to unset the value before sending it, otherwise it will appers on the body and error when sent to the API
             request.Value = null;
 
-            return await _requesterWrapper.ExecuteRequestAsync<UpdateApiKeyResponse, ApiKey>(HttpMethod.Put,
+            var response = await _requesterWrapper.ExecuteRequestAsync<UpdateApiKeyResponse, ApiKey>(HttpMethod.Put,
                     $"/1/keys/{key}", CallType.Write, request, requestOptions, ct)
                 .ConfigureAwait(false);
+
+            response.GetApiKeyDelegate = k => GetApiKey(k);
+            response.PendingKey = request;
+            response.PendingKey.Value = key;
+            return response;
         }
 
         /// <inheritdoc />

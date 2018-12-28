@@ -21,15 +21,20 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Common;
+using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Models.ApiKeys
 {
     /// <summary>
     /// Api's reponse for update api key
     /// </summary>
-    public class UpdateApiKeyResponse
+    public class UpdateApiKeyResponse : IAlgoliaWaitableResponse
     {
+        [JsonIgnore] internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+
         /// <summary>
         /// The updated key
         /// </summary>
@@ -39,5 +44,31 @@ namespace Algolia.Search.Models.ApiKeys
         /// Date of update
         /// </summary>
         public DateTime UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Field used in the wait the method to check that the key was updated
+        /// </summary>
+        internal ApiKey PendingKey { get; set; }
+
+        /// <summary>
+        /// Wait until the key is updated
+        /// Can be used for debuggin purposes
+        /// </summary>
+        public void Wait()
+        {
+            while (true)
+            {
+                var actualKey = GetApiKeyDelegate(Key).ToString();
+
+                // When the key on the server equals the key we sent we break the loop
+                if (PendingKey.ToString().Equals(actualKey))
+                {
+                    break;
+                }
+
+                Task.Delay(1000);
+                continue;
+            }
+        }
     }
 }
