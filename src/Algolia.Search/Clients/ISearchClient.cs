@@ -170,19 +170,19 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// Add a new API Key with specific permissions/restrictions.
         /// </summary>
-        /// <param name="acl"></param>
+        /// <param name="apiKey"></param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        AddApiKeyResponse AddApiKey(ApiKey acl, RequestOptions requestOptions = null);
+        AddApiKeyResponse AddApiKey(ApiKey apiKey, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Add a new API Key with specific permissions/restrictions.
         /// </summary>
-        /// <param name="acl"></param>
+        /// <param name="apiKey"></param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey acl, RequestOptions requestOptions = null,
+        Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey apiKey, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
