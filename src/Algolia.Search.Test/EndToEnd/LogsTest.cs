@@ -34,8 +34,8 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task TestLog()
         {
-            var listIndices1 = BaseTest.SearchClient.ListIndexesAsync();
-            var listIndices2 = BaseTest.SearchClient.ListIndexesAsync();
+            var listIndices1 = BaseTest.SearchClient.ListIndicesAsync();
+            var listIndices2 = BaseTest.SearchClient.ListIndicesAsync();
             Task.WaitAll(listIndices1, listIndices2);
 
             var logs = await BaseTest.SearchClient.GetLogsAsync(offset: 0, length: 2, type: "all");

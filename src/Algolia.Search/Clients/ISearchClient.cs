@@ -96,7 +96,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        ListIndexesResponse ListIndexes(RequestOptions requestOptions = null);
+        ListIndicesResponse ListIndices(RequestOptions requestOptions = null);
 
         /// <summary>
         /// Get a list of indexes/indices with their associated metadata.
@@ -104,7 +104,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<ListIndexesResponse> ListIndexesAsync(RequestOptions requestOptions = null,
+        Task<ListIndicesResponse> ListIndicesAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>

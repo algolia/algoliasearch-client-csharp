@@ -179,14 +179,14 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public ListIndexesResponse ListIndexes(RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => ListIndexesAsync(requestOptions));
+        public ListIndicesResponse ListIndices(RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => ListIndicesAsync(requestOptions));
 
         /// <inheritdoc />
-        public async Task<ListIndexesResponse> ListIndexesAsync(RequestOptions requestOptions = null,
+        public async Task<ListIndicesResponse> ListIndicesAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<ListIndexesResponse>(HttpMethod.Get,
+            return await _requesterWrapper.ExecuteRequestAsync<ListIndicesResponse>(HttpMethod.Get,
                     "/1/indexes", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }

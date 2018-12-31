@@ -29,18 +29,18 @@ namespace Algolia.Search.Models.Common
     /// <summary>
     /// https://www.algolia.com/doc/api-reference/api-methods/list-indices/
     /// </summary>
-    public class ListIndexesResponse
+    public class ListIndicesResponse
     {
         /// <summary>
         /// List of index response
         /// </summary>
-        public List<IndexesResponse> Items { get; set; }
+        public List<IndicesResponse> Items { get; set; }
     }
 
     /// <summary>
     /// Index response
     /// </summary>
-    public class IndexesResponse
+    public class IndicesResponse
     {
         /// <summary>
         /// Index name.

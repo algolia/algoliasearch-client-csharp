@@ -82,7 +82,7 @@ namespace Algolia.Search.Test.EndToEnd
 
             for (int i = 0; i < 10; i++)
             {
-                var test = await client.ListIndexesAsync();
+                var test = await client.ListIndicesAsync();
             }
 
             timer.Stop();

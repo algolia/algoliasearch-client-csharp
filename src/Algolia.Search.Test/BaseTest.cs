@@ -38,7 +38,7 @@ public class BaseTest
     internal static SearchClient SearchClient2;
     internal static SearchClient McmClient;
     internal static AnalyticsClient AnalyticsClient;
-    private static ListIndexesResponse _indices;
+    private static ListIndicesResponse _indices;
 
     [OneTimeSetUp]
     public void Setup()
@@ -58,7 +58,7 @@ public class BaseTest
 
     protected void PreviousTestCleanUp()
     {
-        _indices = SearchClient.ListIndexes();
+        _indices = SearchClient.ListIndices();
 
         if (_indices?.Items != null && _indices.Items.Any())
         {
