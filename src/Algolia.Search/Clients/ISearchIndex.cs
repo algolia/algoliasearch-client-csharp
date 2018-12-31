@@ -459,7 +459,7 @@ namespace Algolia.Search.Clients
         /// <param name="rules">List of rules</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
-        /// <param name="clearExistingRules"></param>
+        /// <param name="clearExistingRules">Clear all existing rules</param>
         /// <returns></returns>
         BatchResponse SaveRules(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
             bool forwardToReplicas = false, bool clearExistingRules = false);
@@ -471,7 +471,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
-        /// <param name="clearExistingRules"></param>
+        /// <param name="clearExistingRules">Clear all existing rules</param>
         /// <returns></returns>
         Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false,
@@ -630,7 +630,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
-        /// <param name="replaceExistingSynonyms"></param>
+        /// <param name="replaceExistingSynonyms">Replace all existing synonyms</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),

@@ -26,12 +26,21 @@ using System.Collections.Generic;
 namespace Algolia.Search.Models.Synonyms
 {
     /// <summary>
-    /// /
+    /// Query to search synonyms on an index
     /// </summary>
     public class SynonymQuery
     {
         /// <summary>
-        ///
+        /// Constructor with query string
+        /// </summary>
+        /// <param name="query">the text to search</param>
+        public SynonymQuery(string query = "")
+        {
+            Query = query;
+        }
+
+        /// <summary>
+        /// The text to search
         /// </summary>
         public string Query { get; set; } = string.Empty;
 

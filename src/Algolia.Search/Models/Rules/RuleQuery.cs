@@ -29,6 +29,15 @@ namespace Algolia.Search.Models.Rules
     public class RuleQuery
     {
         /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="query">Full text query.</param>
+        public RuleQuery(string query = "")
+        {
+            Query = query;
+        }
+
+        /// <summary>
         /// Full text query.
         /// </summary>
         public string Query { get; set; } = string.Empty;
