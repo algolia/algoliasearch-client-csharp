@@ -77,8 +77,8 @@ namespace Algolia.Search.Test.EndToEnd
             addTwo.Wait();
 
             // Create tomorrow datetime without seconds/ms to avoid test to fail
-            DateTime utcNow = DateTime.UtcNow;
-            DateTime tomorrow = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day + 1, utcNow.Hour, utcNow.Minute, 0,
+            DateTime utcNow = DateTime.UtcNow.AddDays(1);
+            DateTime tomorrow = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day, utcNow.Hour, utcNow.Minute, 0,
                 utcNow.Kind);
 
             var abTest = new ABTest
