@@ -440,8 +440,9 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="rule">Query rule</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        SaveRuleResponse SaveRule(Rule rule, RequestOptions requestOptions = null);
+        SaveRuleResponse SaveRule(Rule rule, RequestOptions requestOptions = null, bool forwardToReplicas = false);
 
         /// <summary>
         /// Create or update a single rule.
@@ -449,9 +450,10 @@ namespace Algolia.Search.Clients
         /// <param name="rule">Query rule</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
         /// Create or update a specified set of rules, or all rules.
@@ -507,8 +509,9 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="objectId">Algolia's objectID</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        DeleteResponse DeleteRule(string objectId, RequestOptions requestOptions = null);
+        DeleteResponse DeleteRule(string objectId, RequestOptions requestOptions = null, bool forwardToReplicas = false);
 
         /// <summary>
         /// Delete the rule for the given ruleId
@@ -516,25 +519,28 @@ namespace Algolia.Search.Clients
         /// <param name="objectId">Algolia's objectID</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
         /// Delete all rules in an index.
         /// </summary>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        DeleteResponse ClearRules(RequestOptions requestOptions = null);
+        DeleteResponse ClearRules(RequestOptions requestOptions = null, bool forwardToReplicas = false);
 
         /// <summary>
         /// Delete all rules in an index.
         /// </summary>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<DeleteResponse> ClearRulesAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
         /// Get settings for the given index
@@ -667,8 +673,9 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="synonym">Algolia's synonym</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null);
+        SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null, bool forwardToReplicas = false);
 
         /// <summary>
         /// Create or update a single synonym on an index.
@@ -676,17 +683,19 @@ namespace Algolia.Search.Clients
         /// <param name="synonym">Algolia's synonym</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> SaveSynonymAsync(Synonym synonym, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
         /// Remove a single synonym from an index using its object id.
         /// </summary>
         /// <param name="synonymObjectId">The synonym objectID</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        DeleteResponse DeleteSynonym(string synonymObjectId, RequestOptions requestOptions = null);
+        DeleteResponse DeleteSynonym(string synonymObjectId, RequestOptions requestOptions = null, bool forwardToReplicas = false);
 
         /// <summary>
         /// Remove a single synonym from an index using its object id.
@@ -694,25 +703,28 @@ namespace Algolia.Search.Clients
         /// <param name="synonymObjectId">The synonym objectID</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
         /// Remove all synonyms from an index.
         /// </summary>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        ClearSynonymsResponse ClearSynonyms(RequestOptions requestOptions = null);
+        ClearSynonymsResponse ClearSynonyms(RequestOptions requestOptions = null, bool forwardToReplicas = false);
 
         /// <summary>
         /// Remove all synonyms from an index.
         /// </summary>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
+        /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<ClearSynonymsResponse> ClearSynonymsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
         /// Make a copy of an index, including its objects, settings, synonyms, and query rules.

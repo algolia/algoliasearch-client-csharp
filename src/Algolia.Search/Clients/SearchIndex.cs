@@ -534,17 +534,24 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public SaveRuleResponse SaveRule(Rule rule, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => SaveRuleAsync(rule, requestOptions));
+        public SaveRuleResponse SaveRule(Rule rule, RequestOptions requestOptions = null, bool forwardToReplicas = false) =>
+            AsyncHelper.RunSync(() => SaveRuleAsync(rule, requestOptions, forwardToReplicas: forwardToReplicas));
 
         /// <inheritdoc />
         public async Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
             if (rule == null)
             {
                 throw new ArgumentNullException(nameof(rule));
             }
+
+            var dic = new Dictionary<string, string>
+            {
+                {nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower()}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
 
             SaveRuleResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveRuleResponse, Rule>(
                     HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/rules/{rule.ObjectID}", CallType.Write, rule,
@@ -601,17 +608,24 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public DeleteResponse DeleteRule(string objectId, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => DeleteRuleAsync(objectId, requestOptions));
+        public DeleteResponse DeleteRule(string objectId, RequestOptions requestOptions = null, bool forwardToReplicas = false) =>
+            AsyncHelper.RunSync(() => DeleteRuleAsync(objectId, requestOptions, forwardToReplicas: forwardToReplicas));
 
         /// <inheritdoc />
         public async Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
             if (string.IsNullOrWhiteSpace(objectId))
             {
                 throw new ArgumentNullException(nameof(objectId));
             }
+
+            var dic = new Dictionary<string, string>
+            {
+                {nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower()}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
 
             DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
                     $"/1/indexes/{_urlEncodedIndexName}/rules/{objectId}", CallType.Write, requestOptions, ct)
@@ -622,13 +636,20 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public DeleteResponse ClearRules(RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => ClearRulesAsync(requestOptions));
+        public DeleteResponse ClearRules(RequestOptions requestOptions = null, bool forwardToReplicas = false) =>
+            AsyncHelper.RunSync(() => ClearRulesAsync(requestOptions, forwardToReplicas: forwardToReplicas));
 
         /// <inheritdoc />
         public async Task<DeleteResponse> ClearRulesAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
+            var dic = new Dictionary<string, string>
+            {
+                {nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower()}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
+
             DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Post,
                     $"/1/indexes/{_urlEncodedIndexName}/rules/clear", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
@@ -764,12 +785,12 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => SaveSynonymAsync(synonym, requestOptions));
+        public SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null, bool forwardToReplicas = false) =>
+            AsyncHelper.RunSync(() => SaveSynonymAsync(synonym, requestOptions, forwardToReplicas: forwardToReplicas));
 
         /// <inheritdoc />
         public async Task<SaveSynonymResponse> SaveSynonymAsync(Synonym synonym, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
             if (synonym == null)
             {
@@ -781,6 +802,13 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(synonym.ObjectID));
             }
 
+            var dic = new Dictionary<string, string>
+            {
+                {nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower()}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
+
             SaveSynonymResponse response = await _requesterWrapper.ExecuteRequestAsync<SaveSynonymResponse, Synonym>(
                     HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonym.ObjectID}", CallType.Write,
                     synonym, requestOptions, ct)
@@ -791,17 +819,24 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public DeleteResponse DeleteSynonym(string synonymObjectId, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => DeleteSynonymAsync(synonymObjectId, requestOptions));
+        public DeleteResponse DeleteSynonym(string synonymObjectId, RequestOptions requestOptions = null, bool forwardToReplicas = false) =>
+            AsyncHelper.RunSync(() => DeleteSynonymAsync(synonymObjectId, requestOptions, forwardToReplicas: forwardToReplicas));
 
         /// <inheritdoc />
         public async Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
             if (synonymObjectId == null)
             {
                 throw new ArgumentNullException(nameof(synonymObjectId));
             }
+
+            var dic = new Dictionary<string, string>
+            {
+                {nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower()}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
 
             DeleteResponse response = await _requesterWrapper.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
                     $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Write, requestOptions, ct)
@@ -812,13 +847,20 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public ClearSynonymsResponse ClearSynonyms(RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => ClearSynonymsAsync(requestOptions));
+        public ClearSynonymsResponse ClearSynonyms(RequestOptions requestOptions = null, bool forwardToReplicas = false) =>
+            AsyncHelper.RunSync(() => ClearSynonymsAsync(requestOptions, forwardToReplicas: forwardToReplicas));
 
         /// <inheritdoc />
         public async Task<ClearSynonymsResponse> ClearSynonymsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false)
         {
+            var dic = new Dictionary<string, string>
+            {
+                {nameof(forwardToReplicas), forwardToReplicas.ToString().ToLower()}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
+
             ClearSynonymsResponse response = await _requesterWrapper.ExecuteRequestAsync<ClearSynonymsResponse>(
                     HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/synonyms/clear", CallType.Write,
                     requestOptions,
