@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Search;
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -30,11 +31,11 @@ namespace Algolia.Search.Models.Rules
     /// <summary>
     /// Consequence params
     /// </summary>
-    public class ConsequenceParams
+    public class ConsequenceParams : Query
     {
         /// <summary>
         /// When providing a string, it replaces the entire query string.
-        ///  When providing an object, it describes incremental edits to be made to the query string (but you can’t do both).
+        /// When providing an object, it describes incremental edits to be made to the query string (but you can’t do both).
         /// </summary>
         public ConsequenceQuery Query { get; set; }
 

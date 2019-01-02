@@ -36,6 +36,6 @@ namespace Algolia.Search.Models.Rules
         /// <summary>
         /// Promoted rank for the object (zero-based).
         /// </summary>
-        public int Position { get; set; }
+        public int? Position { get; set; }
     }
 }

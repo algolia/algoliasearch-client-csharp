@@ -44,5 +44,11 @@ namespace Algolia.Search.Models.Rules
         /// Objects to hide from hits.
         /// </summary>
         public IEnumerable<Hide> Hide { get; set; }
+
+        /// <summary>
+        /// Custom JSON object that will be appended to the userData array in the response. 
+        /// This object is not interpreted by the API. It is limited to 1kB of minified JSON.
+        /// </summary>
+        public object UserData { get; set; }
     }
 }
