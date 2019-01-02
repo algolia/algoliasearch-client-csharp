@@ -39,7 +39,7 @@ namespace Algolia.Search.Clients
     /// </summary>
     public class InsightsClient : IInsightsClient
     {
-        private readonly IRequesterWrapper _requesterWrapper;
+        private readonly ITransport _transport;
         private readonly InsightsConfig _config;
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Algolia.Search.Clients
             }
 
             _config = config;
-            _requesterWrapper = new RequesterWrapper(config, httpRequester);
+            _transport = new Transport.Transport(config, httpRequester);
         }
 
         /// <inheritdoc />
@@ -131,7 +131,7 @@ namespace Algolia.Search.Clients
 
             var request = new InsightsRequest {Events = insightEvents};
 
-            return await _requesterWrapper.ExecuteRequestAsync<InsightsResponse, InsightsRequest>(HttpMethod.Post,
+            return await _transport.ExecuteRequestAsync<InsightsResponse, InsightsRequest>(HttpMethod.Post,
                     "/1/events", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }

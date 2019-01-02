@@ -37,7 +37,7 @@ namespace Algolia.Search.Transport
         private readonly List<StatefulHost> _hosts;
 
         /// <summary>
-        /// The synchronization lock for each set RetryStrategy/RequesterWrapper/Client
+        /// The synchronization lock for each set RetryStrategy/Transport/Client
         /// </summary>
         /// <returns></returns>
         private readonly object _lock = new object();

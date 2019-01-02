@@ -39,7 +39,7 @@ namespace Algolia.Search.Clients
     /// </summary>
     public class AnalyticsClient : IAnalyticsClient
     {
-        private readonly IRequesterWrapper _requesterWrapper;
+        private readonly ITransport _transport;
 
         /// <summary>
         /// Create a new search client for the given appID
@@ -86,7 +86,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
             }
 
-            _requesterWrapper = new RequesterWrapper(config, httpRequester);
+            _transport = new Transport.Transport(config, httpRequester);
         }
 
         /// <inheritdoc />
@@ -97,7 +97,7 @@ namespace Algolia.Search.Clients
         public async Task<ABTest> GetABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<ABTest>(HttpMethod.Get,
+            return await _transport.ExecuteRequestAsync<ABTest>(HttpMethod.Get,
                     $"/2/abtests/{abTestId}", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }
@@ -118,7 +118,7 @@ namespace Algolia.Search.Clients
 
             requestOptions = requestOptions.AddQueryParams(queryParams);
 
-            return await _requesterWrapper.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
+            return await _transport.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
                     "/2/abtests", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }
@@ -131,7 +131,7 @@ namespace Algolia.Search.Clients
         public async Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
+            return await _transport.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
                     "/2/abtests", CallType.Write, aBTest, requestOptions, ct)
                 .ConfigureAwait(false);
         }
@@ -144,7 +144,7 @@ namespace Algolia.Search.Clients
         public async Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<StopABTestResponse>(HttpMethod.Post,
+            return await _transport.ExecuteRequestAsync<StopABTestResponse>(HttpMethod.Post,
                     $"/2/abtests/{abTestId}/stop", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
         }
@@ -157,7 +157,7 @@ namespace Algolia.Search.Clients
         public async Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
         {
-            return await _requesterWrapper.ExecuteRequestAsync<DeleteABTestResponse>(HttpMethod.Delete,
+            return await _transport.ExecuteRequestAsync<DeleteABTestResponse>(HttpMethod.Delete,
                     $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
         }
