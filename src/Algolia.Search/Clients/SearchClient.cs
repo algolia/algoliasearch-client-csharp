@@ -642,5 +642,22 @@ namespace Algolia.Search.Clients
             SearchIndex indexToWait = InitIndex(indexName);
             indexToWait.WaitTask(taskId);
         }
+
+        /// <inheritdoc />
+        public TResult CustomRequest<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType,
+            RequestOptions requestOptions = null)
+                where TResult : class
+                where TData : class =>
+            AsyncHelper.RunSync(() => CustomRequestAsync<TResult, TData>(data, uri, method, callType, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<TResult> CustomRequestAsync<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+                where TResult : class
+                where TData : class
+        {
+            return await _requesterWrapper.ExecuteRequestAsync<TResult, TData>(method, uri, callType, data, requestOptions, ct)
+                .ConfigureAwait(false);
+        }
     }
 }

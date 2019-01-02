@@ -25,10 +25,12 @@ using Algolia.Search.Http;
 using Algolia.Search.Models.ApiKeys;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Search;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -530,5 +532,38 @@ namespace Algolia.Search.Clients
         /// <param name="timeToWait"></param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         void WaitTask(string indexName, long taskId, int timeToWait = 100, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Execute a custom request
+        /// </summary>
+        /// <param name="data">Body data</param>
+        /// <param name="uri">The URI to request</param>
+        /// <param name="method">The HTTP method</param>
+        /// <param name="callType">CallType.Write or CallType.Read</param>
+        /// <param name="requestOptions">Add extra http header and query parameters to the request</param>
+        /// <typeparam name="TResult">The type of the result</typeparam>
+        /// <typeparam name="TData">The type of the input</typeparam>
+        /// <returns></returns>
+        TResult CustomRequest<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType, 
+            RequestOptions requestOptions = null)
+                where TResult : class
+                where TData : class;
+
+        /// <summary>
+        /// Execute a custom request asynchronously
+        /// </summary>
+        /// <param name="data">Body data</param>
+        /// <param name="uri">The URI to request</param>
+        /// <param name="method">The HTTP method</param>
+        /// <param name="callType">CallType.Write or CallType.Read</param>
+        /// <param name="requestOptions">Add extra http header and query parameters to the request</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <typeparam name="TResult">The type of the result</typeparam>
+        /// <typeparam name="TData">The type of the input</typeparam>
+        /// <returns></returns>
+        Task<TResult> CustomRequestAsync<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken))
+                where TResult : class
+                where TData : class;
     }
 }
