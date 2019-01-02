@@ -347,5 +347,10 @@ namespace Algolia.Search.Models.Search
         /// Removes stop (common) words from the query before executing it.
         /// </summary>
         public List<string> RemoveStopWords { get; set; }
+
+        /// <summary>
+        /// When true, each hit in the response contains an additional _rankingInfo object
+        /// </summary>
+        public bool? GetRankingInfo { get; set; }
     }
 }
