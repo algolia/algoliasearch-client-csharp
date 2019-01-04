@@ -53,17 +53,19 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Filter hits by facet value.
         /// </summary>
+        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
         public IEnumerable<string> FacetFilters { get; set; }
 
         /// <summary>
         /// Create filters for ranking purposes, where records that match the filter are ranked highest.
         /// </summary>
-        public IEnumerable<string> OptionalFilters { get; set; }
+        public IEnumerable<IEnumerable<string>> OptionalFilters { get; set; }
 
         /// <summary>
         /// Filter on numeric attributes.
         /// </summary>
-        public string NumericFilters { get; set; }
+        [JsonConverter(typeof(SingleOrArrayConverter<string>))]
+        public IEnumerable<IEnumerable<string>> NumericFilters { get; set; }
 
         /// <summary>
         /// Filter hits by tags.
