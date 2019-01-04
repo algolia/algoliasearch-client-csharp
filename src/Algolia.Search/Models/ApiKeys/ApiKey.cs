@@ -95,7 +95,7 @@ namespace Algolia.Search.Models.ApiKeys
         /// <summary>
         /// Date of creation
         /// </summary>
-        [JsonConverter(typeof(DateTimeEpochSerializer))]
+        [JsonConverter(typeof(DateTimeEpochConverter))]
         public DateTime? CreatedAt { get; set; }
 
         /// <summary>

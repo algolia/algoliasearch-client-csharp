@@ -99,7 +99,7 @@ namespace Algolia.Search.Test.Serializer
 
             Assert.IsNotNull(settings.CustomRanking);
             Assert.True(settings.CustomRanking.Contains("desc(population)"));
-            Assert.True(settings.CustomRanking.Contains("asc(name"));
+            Assert.True(settings.CustomRanking.Contains("asc(name)"));
 
             Assert.IsNotNull(settings.Replicas);
             Assert.True(settings.Replicas.Contains("index1"));

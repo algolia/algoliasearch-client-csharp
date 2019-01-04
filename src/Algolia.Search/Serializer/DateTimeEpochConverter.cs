@@ -31,7 +31,7 @@ namespace Algolia.Search.Serializer
     /// <summary>
     /// Allow Json.NET to serialize/deserialize DateTime in UnixTimeStamp
     /// </summary>
-    internal class DateTimeEpochSerializer : DateTimeConverterBase
+    internal class DateTimeEpochConverter : DateTimeConverterBase
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {

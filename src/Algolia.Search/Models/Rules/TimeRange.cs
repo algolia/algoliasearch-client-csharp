@@ -35,13 +35,13 @@ namespace Algolia.Search.Models.Rules
         /// <summary>
         /// DateTime with UTC offset for Serialization/Deserialization in unix timespam
         /// </summary>
-        [JsonConverter(typeof(DateTimeEpochSerializer))]
+        [JsonConverter(typeof(DateTimeEpochConverter))]
         public DateTime From { get; set; }
 
         /// <summary>
         /// DateTime with UTC offset for Serialization/Deserialization in unix timespam
         /// </summary>
-        [JsonConverter(typeof(DateTimeEpochSerializer))]
+        [JsonConverter(typeof(DateTimeEpochConverter))]
         public DateTime Until { get; set; }
     }
 }
