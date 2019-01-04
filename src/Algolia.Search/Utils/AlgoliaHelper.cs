@@ -23,6 +23,8 @@
 
 using Algolia.Search.Exceptions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -37,6 +39,12 @@ namespace Algolia.Search.Utils
         /// <typeparam name="T">Type to check/type</typeparam>
         public static void EnsureObjectID<T>()
         {
+            Type itemType = typeof(T);
+            if (itemType == typeof(JToken) || itemType == typeof(JObject) || itemType == typeof(JArray) || itemType == typeof(JRaw))
+            {
+                return;
+            }
+            
             var objectIdProperty = PropertyOrJsonAttributeExists<T>("ObjectID");
 
             if (objectIdProperty != null)
