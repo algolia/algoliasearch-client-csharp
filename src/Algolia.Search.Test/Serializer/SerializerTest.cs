@@ -27,6 +27,7 @@ using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +78,29 @@ namespace Algolia.Search.Test.Serializer
                 "{ \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}";
 
             IndexSettings settings = JsonConvert.DeserializeObject<IndexSettings>(json, new SettingsConverter());
+            Assert.IsNotNull(settings.Replicas);
+            Assert.True(settings.Replicas.Contains("index1"));
+            Assert.True(settings.Replicas.Contains("index2"));
+
+            Assert.IsNotNull(settings.SearchableAttributes);
+            Assert.True(settings.SearchableAttributes.Contains("attr1"));
+            Assert.True(settings.SearchableAttributes.Contains("attr2"));
+
+            Assert.IsNotNull(settings.NumericAttributesForFiltering);
+            Assert.True(settings.NumericAttributesForFiltering.Contains("attr1"));
+            Assert.True(settings.NumericAttributesForFiltering.Contains("attr2"));
+        }
+
+        [Test]
+        public void TestSettingsJObjectMigration()
+        {
+            var json = JObject.Parse("{\"customRanking\":[\"desc(population)\", \"asc(name)\"], \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}");
+            IndexSettings settings = json.ToObject<IndexSettings>();
+
+            Assert.IsNotNull(settings.CustomRanking);
+            Assert.True(settings.CustomRanking.Contains("desc(population)"));
+            Assert.True(settings.CustomRanking.Contains("asc(name"));
+
             Assert.IsNotNull(settings.Replicas);
             Assert.True(settings.Replicas.Contains("index1"));
             Assert.True(settings.Replicas.Contains("index2"));
