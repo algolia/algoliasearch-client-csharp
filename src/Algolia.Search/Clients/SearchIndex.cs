@@ -248,7 +248,7 @@ namespace Algolia.Search.Clients
             {
                 if (records.Count == Config.BatchSize)
                 {
-                    var request = new BatchRequest<T>(BatchActionType.AddObject, records);
+                    var request = new BatchRequest<T>(actionType, records);
                     BatchResponse batch = await BatchAsync(request, requestOptions, ct).ConfigureAwait(false);
                     ret.Responses.Add(batch);
                     records.Clear();
@@ -259,7 +259,7 @@ namespace Algolia.Search.Clients
 
             if (records.Count > 0)
             {
-                var request = new BatchRequest<T>(BatchActionType.AddObject, records);
+                var request = new BatchRequest<T>(actionType, records);
                 BatchResponse batch = await BatchAsync(request, requestOptions, ct).ConfigureAwait(false);
                 ret.Responses.Add(batch);
             }
@@ -321,7 +321,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(objectIds));
             }
 
-            return await SplitIntoBatchesAsync(objectIds, BatchActionType.DeleteObject, requestOptions, ct)
+            var request = objectIds.Select(x => new Dictionary<string, string> { { "objectID", x } });
+
+            return await SplitIntoBatchesAsync(request, BatchActionType.DeleteObject, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
