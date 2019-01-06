@@ -63,7 +63,7 @@ namespace Algolia.Search.Test.EndToEnd
         [Test]
         public async Task SynonymsOperationsTest()
         {
-            BatchIndexingResponse addObjectResponse = await _index.SaveObjectsAsync(_objectsToSave);
+            BatchIndexingResponse addObjectResponse = await _index.SaveObjectsAsync(_objectsToSave, autoGenerateObjectId: true);
             addObjectResponse.Wait();
 
             Synonym gba = new Synonym
