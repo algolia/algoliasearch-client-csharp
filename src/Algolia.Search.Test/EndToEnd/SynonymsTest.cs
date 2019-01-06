@@ -74,7 +74,6 @@ namespace Algolia.Search.Test.EndToEnd
             };
 
             var regularSynonymResponse = await _index.SaveSynonymAsync(gba);
-            regularSynonymResponse.Wait();
 
             Synonym wiiToWiiu = new Synonym
             {
@@ -111,6 +110,8 @@ namespace Algolia.Search.Test.EndToEnd
             List<Synonym> synonyms = new List<Synonym> { wiiToWiiu, playstationPlaceholder, ps4, psone };
 
             var saveSynonymsResponse = await _index.SaveSynonymsAsync(synonyms);
+
+            regularSynonymResponse.Wait();
             saveSynonymsResponse.Wait();
 
             // Retrieve the 5 added synonyms with getSynonym and check they are correctly retrieved

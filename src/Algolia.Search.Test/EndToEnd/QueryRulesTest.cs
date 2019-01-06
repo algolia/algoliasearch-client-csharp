@@ -95,7 +95,6 @@ namespace Algolia.Search.Test.EndToEnd
             };
 
             var saveRuleResponse = await _index.SaveRuleAsync(ruleToSave);
-            saveRuleResponse.Wait();
 
             Rule ruleToSave2 = new Rule
             {
@@ -118,6 +117,8 @@ namespace Algolia.Search.Test.EndToEnd
             };
 
             var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 });
+            
+            saveRuleResponse.Wait();
             batchRulesResponse.Wait();
 
             // Retrieve all the rules using getRule and check that they were correctly saved
