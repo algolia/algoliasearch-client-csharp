@@ -35,8 +35,7 @@ namespace Algolia.Search.Utils
         /// Wait on multiple algolia responses
         /// </summary>
         /// <param name="responses"></param>
-        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        public static void Wait<T>(this IEnumerable<IAlgoliaWaitableResponse> responses) where T : IAlgoliaWaitableResponse
+        public static void Wait(this IEnumerable<IAlgoliaWaitableResponse> responses)
         {
             foreach (var response in responses)
             {
