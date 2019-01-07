@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
 using NUnit.Framework;
@@ -68,9 +69,13 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 }
             };
 
-            // TODO
+            SearchConfig config = new SearchConfig(TestHelper.ApplicationId1, TestHelper.AdminKey1)
+            {
+                CustomHosts = commonHosts
+            };
 
-            RetryStrategy retryStrategy = new RetryStrategy("appId", commonHosts);
+            // TODO
+            RetryStrategy retryStrategy = new RetryStrategy(config);
             var hosts = retryStrategy.GetTryableHost(callType);
             Assert.True(hosts.Count(h => h.Up) == 2);
         }
@@ -81,7 +86,9 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [TestCase(CallType.Write, 300)]
         public void TestRetryStrategyRetriableFailure(CallType callType, int httpErrorCode)
         {
-            RetryStrategy retryStrategy = new RetryStrategy("appId");
+            var searchConfig = new SearchConfig("appId", "apiKey");
+            RetryStrategy retryStrategy = new RetryStrategy(searchConfig);
+
             var hosts = retryStrategy.GetTryableHost(callType);
             Assert.True(hosts.Count(h => h.Up) == 4);
 
@@ -98,7 +105,9 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [TestCase(CallType.Write, 404)]
         public void TestRetryStrategyFailureDecision(CallType callType, int httpErrorCode)
         {
-            RetryStrategy retryStrategy = new RetryStrategy("appId");
+            var searchConfig = new SearchConfig("appId", "apiKey");
+            RetryStrategy retryStrategy = new RetryStrategy(searchConfig);
+
             var hosts = retryStrategy.GetTryableHost(callType);
 
             var decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
@@ -109,7 +118,8 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [TestCase(CallType.Read)]
         public void TestRetryStrategyMultiThread(CallType callType)
         {
-            RetryStrategy retryStrategy = new RetryStrategy("appId");
+            var searchConfig = new SearchConfig("appId", "apiKey");
+            RetryStrategy retryStrategy = new RetryStrategy(searchConfig);
 
             var initialHosts = retryStrategy.GetTryableHost(callType);
             Assert.True(initialHosts.Count() == 4);

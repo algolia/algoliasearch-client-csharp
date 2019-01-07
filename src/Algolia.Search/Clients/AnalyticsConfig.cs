@@ -33,13 +33,14 @@ namespace Algolia.Search.Clients
     public class AnalyticsConfig : AlgoliaConfig
     {
         /// <summary>
-        /// Create a new Algolia's configuration for the given credentials
+        /// The configuration of the analytics client
+        /// A client should have it's own configuration ie on configuration per client instance
         /// </summary>
         /// <param name="applicationId">Your application ID</param>
         /// <param name="apiKey">Your API Key</param>
         public AnalyticsConfig(string applicationId, string apiKey) : base(applicationId, apiKey)
         {
-            this.Hosts = new List<StatefulHost>
+            DefaultHosts = new List<StatefulHost>
             {
                 new StatefulHost
                 {

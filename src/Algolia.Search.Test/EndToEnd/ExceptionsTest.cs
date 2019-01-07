@@ -67,7 +67,7 @@ namespace Algolia.Search.Test.EndToEnd
         [Parallelizable]
         public void InitClientsWithoutHttpClient()
         {
-            var config = new AlgoliaConfig("AppID", "APIKey");
+            var config = new SearchConfig("AppID", "APIKey");
             Assert.Throws<ArgumentNullException>(() => new SearchClient(config, null));
 
             var analyticsConfig = new AnalyticsConfig("AppID", "APIKey");

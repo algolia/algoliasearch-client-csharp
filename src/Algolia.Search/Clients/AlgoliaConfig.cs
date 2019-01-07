@@ -31,7 +31,7 @@ namespace Algolia.Search.Clients
     /// <summary>
     /// Algolia's client configuration
     /// </summary>
-    public class AlgoliaConfig
+    public abstract class AlgoliaConfig
     {
         private static readonly string _clientVersion =
             typeof(AlgoliaConfig).GetTypeInfo().Assembly.GetName().Version.ToString();
@@ -57,21 +57,21 @@ namespace Algolia.Search.Clients
         }
 
         /// <summary>
-        /// Your application ID
+        /// The application ID
         /// </summary>
         /// <returns></returns>
         public string AppId { get; set; }
 
         /// <summary>
-        /// Your API Key
+        /// The admin API Key
         /// </summary>
         /// <returns></returns>
         public string ApiKey { get; set; }
 
         /// <summary>
-        /// To set custom hosts
+        /// Configurations hosts
         /// </summary>
-        public List<StatefulHost> Hosts { get; set; }
+        public List<StatefulHost> CustomHosts { get; set; }
 
         /// <summary>
         /// Algolia's default headers.
@@ -80,8 +80,13 @@ namespace Algolia.Search.Clients
         public Dictionary<string, string> DefaultHeaders { get; set; }
 
         /// <summary>
-        /// The batch size for save methods
+        /// Save methods batch size
         /// </summary>
         public int BatchSize { get; set; } = 1000;
+
+        /// <summary>
+        /// Configurations hosts
+        /// </summary>
+        protected internal List<StatefulHost> DefaultHosts { get; set; }
     }
 }

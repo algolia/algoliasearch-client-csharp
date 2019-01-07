@@ -55,7 +55,7 @@ namespace Algolia.Search.Clients
         /// <param name="applicationId">Your application</param>
         /// <param name="apiKey">Your API key</param>
         public SearchClient(string applicationId, string apiKey) : this(
-            new AlgoliaConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+            new SearchConfig(applicationId, apiKey), new AlgoliaHttpRequester())
         {
         }
 
@@ -63,7 +63,7 @@ namespace Algolia.Search.Clients
         /// Initialize a client with custom config
         /// </summary>
         /// <param name="config">Algolia configuration</param>
-        public SearchClient(AlgoliaConfig config) : this(config, new AlgoliaHttpRequester())
+        public SearchClient(SearchConfig config) : this(config, new AlgoliaHttpRequester())
         {
         }
 
@@ -72,7 +72,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="config">Algolia Config</param>
         /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-        public SearchClient(AlgoliaConfig config, IHttpRequester httpRequester)
+        public SearchClient(SearchConfig config, IHttpRequester httpRequester)
         {
             if (httpRequester == null)
             {

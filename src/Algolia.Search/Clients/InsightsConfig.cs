@@ -33,14 +33,15 @@ namespace Algolia.Search.Clients
     public class InsightsConfig : AlgoliaConfig
     {
         /// <summary>
-        /// Create a new Algolia's configuration for the given credentials
+        /// The configuration of the insights client
+        /// A client should have it's own configuration ie on configuration per client instance
         /// </summary>
         /// <param name="applicationId">Your application ID</param>
         /// <param name="apiKey">Your API Key</param>
         /// <param name="region">Insigts api's region</param>
         public InsightsConfig(string applicationId, string apiKey, string region = "us") : base(applicationId, apiKey)
         {
-            this.Hosts = new List<StatefulHost>
+            DefaultHosts = new List<StatefulHost>
             {
                 new StatefulHost
                 {

@@ -21,73 +21,76 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Clients;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
-using NUnit.Framework;
+using Algolia.Search.Utils;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
-namespace Algolia.Search.Test.EndToEnd
+namespace Algolia.Search.Clients
 {
-    [TestFixture]
-    [Parallelizable]
-    [Ignore("Waiting for new spec for dns timeout test")]
-    public class DnsTimeoutTest
+    /// <summary>
+    /// Search client configuration
+    /// </summary>
+    public class SearchConfig : AlgoliaConfig
     {
-        private List<StatefulHost> _hosts;
-
-        [OneTimeSetUp]
-        public void Init()
+        /// <summary>
+        /// The configuration of the search client
+        /// A client should have it's own configuration ie on configuration per client instance
+        /// </summary>
+        /// <param name="applicationId">Your application ID</param>
+        /// <param name="apiKey">Your API Key</param>
+        public SearchConfig(string applicationId, string apiKey) : base(applicationId, apiKey)
         {
-            string applicationId = TestHelper.ApplicationId1;
-            _hosts = new List<StatefulHost>
+            List<StatefulHost> hosts = new List<StatefulHost> {
+            new StatefulHost
+            {
+                Url = $"{applicationId}-dsn.algolia.net",
+                Priority = 10,
+                Up = true,
+                LastUse = DateTime.UtcNow,
+                Accept = CallType.Read
+            },
+            new StatefulHost
+            {
+                Url = $"{applicationId}.algolia.net",
+                Priority = 10,
+                Up = true,
+                LastUse = DateTime.UtcNow,
+                Accept = CallType.Write,
+            }};
+
+            var commonHosts = new List<StatefulHost>
             {
                 new StatefulHost
                 {
-                    Url = "algolia.biz",
-                    Accept = CallType.Read | CallType.Write,
-                },
-                new StatefulHost
-                {
                     Url = $"{applicationId}-1.algolianet.com",
+                    Priority = 0,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
                 },
                 new StatefulHost
                 {
                     Url = $"{applicationId}-2.algolianet.com",
+                    Priority = 0,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
                 },
                 new StatefulHost
                 {
                     Url = $"{applicationId}-3.algolianet.com",
+                    Priority = 0,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
                 }
-            };
-        }
+            }.Shuffle();
 
-        [Test]
-        public async Task TestTimeOut()
-        {
-            SearchConfig config = new SearchConfig(TestHelper.ApplicationId1, TestHelper.AdminKey1)
-            {
-                CustomHosts = _hosts
-            };
+            hosts.AddRange(commonHosts);
 
-            SearchClient client = new SearchClient(config);
-
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-
-            for (int i = 0; i < 10; i++)
-            {
-                var test = await client.ListIndicesAsync();
-            }
-
-            timer.Stop();
-
-            Assert.IsTrue(timer.ElapsedMilliseconds < 5000);
+            DefaultHosts = hosts;
         }
     }
 }

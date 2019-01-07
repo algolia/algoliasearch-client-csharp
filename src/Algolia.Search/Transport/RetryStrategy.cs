@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Clients;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +32,15 @@ using System.Runtime.CompilerServices;
 
 namespace Algolia.Search.Transport
 {
+    /// <summary>
+    /// Retry strategy logic in case of error/timeout
+    /// </summary>
     internal class RetryStrategy : IRetryStrategy
     {
+        /// <summary>
+        /// Hosts that will be used by the strategy
+        /// Could be default hosts or custom hosts
+        /// </summary>
         private readonly List<StatefulHost> _hosts;
 
         /// <summary>
@@ -45,66 +52,10 @@ namespace Algolia.Search.Transport
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="applicationId"></param>
-        /// <param name="customHosts"></param>
-        public RetryStrategy(string applicationId, ICollection<StatefulHost> customHosts = null)
+        /// <param name="config">Client's configuration</param>
+        public RetryStrategy(AlgoliaConfig config)
         {
-            _hosts = new List<StatefulHost>();
-
-            if (customHosts != null && customHosts.Any())
-            {
-                _hosts.AddRange(customHosts);
-                _hosts.ForEach(x => x.Accept = CallType.Read | CallType.Write);
-            }
-            else
-            {
-                _hosts.Add(new StatefulHost
-                {
-                    Url = $"{applicationId}-dsn.algolia.net",
-                    Priority = 10,
-                    Up = true,
-                    LastUse = DateTime.UtcNow,
-                    Accept = CallType.Read
-                });
-                _hosts.Add(new StatefulHost
-                {
-                    Url = $"{applicationId}.algolia.net",
-                    Priority = 10,
-                    Up = true,
-                    LastUse = DateTime.UtcNow,
-                    Accept = CallType.Write,
-                });
-
-                var commonHosts = new List<StatefulHost>
-                {
-                    new StatefulHost
-                    {
-                        Url = $"{applicationId}-1.algolianet.com",
-                        Priority = 0,
-                        Up = true,
-                        LastUse = DateTime.UtcNow,
-                        Accept = CallType.Read | CallType.Write,
-                    },
-                    new StatefulHost
-                    {
-                        Url = $"{applicationId}-2.algolianet.com",
-                        Priority = 0,
-                        Up = true,
-                        LastUse = DateTime.UtcNow,
-                        Accept = CallType.Read | CallType.Write,
-                    },
-                    new StatefulHost
-                    {
-                        Url = $"{applicationId}-3.algolianet.com",
-                        Priority = 0,
-                        Up = true,
-                        LastUse = DateTime.UtcNow,
-                        Accept = CallType.Read | CallType.Write,
-                    }
-                }.Shuffle();
-
-                _hosts.AddRange(commonHosts);
-            }
+            _hosts = config.CustomHosts != null ? config.CustomHosts : config.DefaultHosts;
         }
 
         /// <inheritdoc />
@@ -166,7 +117,7 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         private bool IsSuccess(int httpResponseCode)
         {
-            return (int) Math.Floor((decimal) httpResponseCode / 100) == 2;
+            return (int)Math.Floor((decimal)httpResponseCode / 100) == 2;
         }
 
         /// <summary>
@@ -176,8 +127,8 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         private bool IsRetryable(int httpResponseCode)
         {
-            return (int) Math.Floor((decimal) httpResponseCode / 100) != 2 &&
-                   (int) Math.Floor((decimal) httpResponseCode / 100) != 4;
+            return (int)Math.Floor((decimal)httpResponseCode / 100) != 2 &&
+                   (int)Math.Floor((decimal)httpResponseCode / 100) != 4;
         }
 
         /// <summary>

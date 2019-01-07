@@ -48,7 +48,7 @@ namespace Algolia.Search.Transport
         private readonly AlgoliaConfig _algoliaConfig;
 
         /// <summary>
-        /// Instantiate with custom config and custom http requester
+        /// Instantiate the transport class with the given configuratio and requester
         /// </summary>
         /// <param name="config">Algolia Config</param>
         /// <param name="httpClient">An implementation of http requester <see cref="IHttpRequester"/> </param>
@@ -56,7 +56,7 @@ namespace Algolia.Search.Transport
         {
             _algoliaConfig = config ?? throw new ArgumentNullException(nameof(config));
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _retryStrategy = new RetryStrategy(_algoliaConfig.AppId, config.Hosts);
+            _retryStrategy = new RetryStrategy(config);
         }
 
         /// <inheritdoc />
@@ -105,7 +105,6 @@ namespace Algolia.Search.Transport
                     case RetryOutcomeType.Success:
                         return SerializerHelper.Deserialize<TResult>(response.Body,
                             JsonConfig.AlgoliaJsonSerializerSettings);
-
                     case RetryOutcomeType.Retry:
                         continue;
                     case RetryOutcomeType.Failure:
