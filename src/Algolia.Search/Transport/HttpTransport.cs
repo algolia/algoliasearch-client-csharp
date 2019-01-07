@@ -39,9 +39,9 @@ using System.Threading.Tasks;
 namespace Algolia.Search.Transport
 {
     /// <summary>
-    /// TransportLogic implementation of <see cref="ITransport"/>
+    /// TransportLogic implementation of <see cref="IHttpTransport"/>
     /// </summary>
-    internal class Transport : ITransport
+    internal class HttpTransport : IHttpTransport
     {
         private readonly IHttpRequester _httpClient;
         private readonly IRetryStrategy _retryStrategy;
@@ -52,7 +52,7 @@ namespace Algolia.Search.Transport
         /// </summary>
         /// <param name="config">Algolia Config</param>
         /// <param name="httpClient">An implementation of http requester <see cref="IHttpRequester"/> </param>
-        public Transport(AlgoliaConfig config, IHttpRequester httpClient)
+        public HttpTransport(AlgoliaConfig config, IHttpRequester httpClient)
         {
             _algoliaConfig = config ?? throw new ArgumentNullException(nameof(config));
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));

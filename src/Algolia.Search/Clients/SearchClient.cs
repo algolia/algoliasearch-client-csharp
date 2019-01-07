@@ -46,7 +46,7 @@ namespace Algolia.Search.Clients
     /// </summary>
     public class SearchClient : ISearchClient
     {
-        private readonly ITransport _transport;
+        private readonly IHttpTransport _transport;
         private readonly AlgoliaConfig _config;
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Algolia.Search.Clients
             }
 
             _config = config;
-            _transport = new Transport.Transport(config, httpRequester);
+            _transport = new HttpTransport(config, httpRequester);
         }
 
         /// <summary>

@@ -39,7 +39,7 @@ namespace Algolia.Search.Clients
     /// </summary>
     public class AnalyticsClient : IAnalyticsClient
     {
-        private readonly ITransport _transport;
+        private readonly IHttpTransport _transport;
 
         /// <summary>
         /// Create a new search client for the given appID
@@ -86,7 +86,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
             }
 
-            _transport = new Transport.Transport(config, httpRequester);
+            _transport = new HttpTransport(config, httpRequester);
         }
 
         /// <inheritdoc />

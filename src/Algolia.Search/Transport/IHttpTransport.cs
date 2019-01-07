@@ -32,7 +32,7 @@ namespace Algolia.Search.Transport
     /// <summary>
     /// Algolia's requester wrapper interface
     /// </summary>
-    public interface ITransport
+    public interface IHttpTransport
     {
         /// <summary>
         /// Call api with retry strategy

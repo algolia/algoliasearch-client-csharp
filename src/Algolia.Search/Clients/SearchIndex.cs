@@ -55,7 +55,7 @@ namespace Algolia.Search.Clients
         /// <summary>
         /// The Requester wrapper
         /// </summary>
-        private readonly ITransport _transport;
+        private readonly IHttpTransport _transport;
 
         /// <summary>
         /// Url encoded index name
@@ -68,7 +68,7 @@ namespace Algolia.Search.Clients
         private readonly string _indexName;
 
         /// <inheritdoc />
-        public SearchIndex(ITransport transport, AlgoliaConfig config, string indexName)
+        public SearchIndex(IHttpTransport transport, AlgoliaConfig config, string indexName)
         {
             _transport = transport ?? throw new ArgumentNullException(nameof(transport));
             _indexName = !string.IsNullOrWhiteSpace(indexName)
