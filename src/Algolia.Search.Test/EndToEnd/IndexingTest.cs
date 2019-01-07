@@ -217,8 +217,11 @@ namespace Algolia.Search.Test.EndToEnd
                 ids.Add(id);
             }
 
-            var batch = _indexDeleteBy.SaveObjectsAsync(objectsToBatch);
+            var batch = await _indexDeleteBy.SaveObjectsAsync(objectsToBatch);
             batch.Wait();
+
+            var delete = await _indexDeleteBy.DeleteObjectAsync("1");
+            delete.Wait();
 
             var resp = await _indexDeleteBy.DeleteByAsync(new Query { TagFilters = "car" });
             resp.Wait();

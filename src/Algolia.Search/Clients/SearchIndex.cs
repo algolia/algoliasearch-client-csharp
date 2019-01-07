@@ -33,10 +33,12 @@ using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -92,6 +94,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(data));
             }
 
+            if (data is IEnumerable)
+            {
+                throw new ArgumentException($"{nameof(data)} should not be an IEnumerable/List/Collection");
+            }
+
             // Get && check if the generic type has an objectID
             string objectId = AlgoliaHelper.GetObjectID(data);
 
@@ -142,6 +149,11 @@ namespace Algolia.Search.Clients
             if (data == null)
             {
                 throw new ArgumentNullException(nameof(data));
+            }
+
+            if (data is IEnumerable)
+            {
+                throw new ArgumentException($"{nameof(data)} should not be an IEnumerable/List/Collection");
             }
 
             return await SaveObjectsAsync(new List<T> { data }, requestOptions, ct, autoGenerateObjectId);
@@ -247,7 +259,9 @@ namespace Algolia.Search.Clients
         public BatchResponse Batch<T>(BatchRequest<T> request, RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => BatchAsync(request, requestOptions));
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Split records into smaller chunks before sending them to the API
+        /// </summary>
         internal async Task<BatchIndexingResponse> SplitIntoBatchesAsync<T>(IEnumerable<T> data, string actionType,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {

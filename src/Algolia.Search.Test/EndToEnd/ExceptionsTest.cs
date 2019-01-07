@@ -24,6 +24,7 @@
 using Algolia.Search.Clients;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace Algolia.Search.Test.EndToEnd
 {
@@ -108,6 +109,7 @@ namespace Algolia.Search.Test.EndToEnd
             Assert.Throws<ArgumentNullException>(() => _index.BrowseFrom<Object>(null));
             Assert.Throws<ArgumentNullException>(() => _index.PartialUpdateObject<Object>(null));
             Assert.Throws<ArgumentNullException>(() => _index.SaveObject<Object>(null));
+
             Assert.Throws<ArgumentNullException>(() => _index.SaveObjects<Object>(null));
             Assert.Throws<ArgumentNullException>(() => _index.ReplaceAllObjects<Object>(null));
             Assert.Throws<ArgumentNullException>(() => _index.Batch<Object>(operations: null));
@@ -118,6 +120,9 @@ namespace Algolia.Search.Test.EndToEnd
             Assert.Throws<ArgumentNullException>(() => _index.Search<Object>(null));
             Assert.Throws<ArgumentNullException>(() => _index.CopyTo(""));
             Assert.Throws<ArgumentNullException>(() => _index.MoveFrom(""));
+
+            Assert.Throws<ArgumentException>(() => _index.SaveObject<Object>(new List<Object> { }));
+            Assert.Throws<ArgumentException>(() => _index.PartialUpdateObject<Object>(new List<Object> { }));
         }
     }
 }
