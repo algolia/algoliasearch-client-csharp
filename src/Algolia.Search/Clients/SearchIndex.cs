@@ -112,22 +112,22 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool createIfNotExists = false)
+        public BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool createIfNotExists = false)
             where T : class =>
-            AsyncHelper.RunSync(() => PartialUpdateObjectsAsync(datas, requestOptions, createIfNotExists: createIfNotExists));
+            AsyncHelper.RunSync(() => PartialUpdateObjectsAsync(data, requestOptions, createIfNotExists: createIfNotExists));
 
         /// <inheritdoc />
-        public async Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> datas,
+        public async Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> data,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool createIfNotExists = false) where T : class
         {
             string action = createIfNotExists ? BatchActionType.PartialUpdateObject : BatchActionType.PartialUpdateObjectNoCreate;
 
-            if (datas == null)
+            if (data == null)
             {
-                throw new ArgumentNullException(nameof(datas));
+                throw new ArgumentNullException(nameof(data));
             }
 
-            return await SplitIntoBatchesAsync(datas, action, requestOptions, ct)
+            return await SplitIntoBatchesAsync(data, action, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -148,41 +148,41 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool autoGenerateObjectId = false)
+        public BatchIndexingResponse SaveObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool autoGenerateObjectId = false)
             where T : class =>
-            AsyncHelper.RunSync(() => SaveObjectsAsync(datas, requestOptions, autoGenerateObjectId: autoGenerateObjectId));
+            AsyncHelper.RunSync(() => SaveObjectsAsync(data, requestOptions, autoGenerateObjectId: autoGenerateObjectId));
 
         /// <inheritdoc />
-        public async Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> datas,
+        public async Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> data,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
             bool autoGenerateObjectId = false) where T : class
         {
-            if (datas == null)
+            if (data == null)
             {
-                throw new ArgumentNullException(nameof(datas));
+                throw new ArgumentNullException(nameof(data));
             }
 
             if (autoGenerateObjectId)
             {
-                return await SplitIntoBatchesAsync(datas, BatchActionType.AddObject, requestOptions, ct).ConfigureAwait(false);
+                return await SplitIntoBatchesAsync(data, BatchActionType.AddObject, requestOptions, ct).ConfigureAwait(false);
             }
 
             AlgoliaHelper.EnsureObjectID<T>();
 
-            return await SplitIntoBatchesAsync(datas, BatchActionType.UpdateObject, requestOptions, ct).ConfigureAwait(false);
+            return await SplitIntoBatchesAsync(data, BatchActionType.UpdateObject, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public MultiResponse ReplaceAllObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool safe = false) where T : class =>
-            AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(datas, requestOptions, safe: safe));
+        public MultiResponse ReplaceAllObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool safe = false) where T : class =>
+            AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(data, requestOptions, safe: safe));
 
         /// <inheritdoc />
-        public async Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, RequestOptions requestOptions = null,
+        public async Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> data, RequestOptions requestOptions = null,
         CancellationToken ct = default(CancellationToken), bool safe = false) where T : class
         {
-            if (datas == null)
+            if (data == null)
             {
-                throw new ArgumentNullException(nameof(datas));
+                throw new ArgumentNullException(nameof(data));
             }
 
             Random rnd = new Random();
@@ -203,7 +203,7 @@ namespace Algolia.Search.Clients
             }
 
             BatchIndexingResponse saveObjectsResponse =
-                await tmpIndex.SaveObjectsAsync(datas, requestOptions, ct).ConfigureAwait(false);
+                await tmpIndex.SaveObjectsAsync(data, requestOptions, ct).ConfigureAwait(false);
             response.Responses.Add(copyResponse);
 
             if (safe)
@@ -248,13 +248,13 @@ namespace Algolia.Search.Clients
             AsyncHelper.RunSync(() => BatchAsync(request, requestOptions));
 
         /// <inheritdoc />
-        internal async Task<BatchIndexingResponse> SplitIntoBatchesAsync<T>(IEnumerable<T> datas, string actionType,
+        internal async Task<BatchIndexingResponse> SplitIntoBatchesAsync<T>(IEnumerable<T> data, string actionType,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
             BatchIndexingResponse ret = new BatchIndexingResponse { Responses = new List<BatchResponse>() };
             List<T> records = new List<T>();
 
-            foreach (var data in datas)
+            foreach (var item in data)
             {
                 if (records.Count == Config.BatchSize)
                 {
@@ -264,7 +264,7 @@ namespace Algolia.Search.Clients
                     records.Clear();
                 }
 
-                records.Add(data);
+                records.Add(item);
             }
 
             if (records.Count > 0)

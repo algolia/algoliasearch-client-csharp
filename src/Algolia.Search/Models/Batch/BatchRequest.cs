@@ -48,25 +48,25 @@ namespace Algolia.Search.Models.Batch
         }
 
         /// <summary>
-        /// Create a new batch request with action type and datas
+        /// Create a new batch request with action type and data
         /// </summary>
         /// <param name="actionType">Batch Action Type</param>
-        /// <param name="datas">Datas to send</param>
-        public BatchRequest(string actionType, IEnumerable<T> datas)
+        /// <param name="data">Data to send</param>
+        public BatchRequest(string actionType, IEnumerable<T> data)
         {
-            if (datas == null)
+            if (data == null)
             {
-                throw new ArgumentNullException(nameof(datas));
+                throw new ArgumentNullException(nameof(data));
             }
 
             Operations = new List<BatchOperation<T>>();
 
-            foreach (var data in datas)
+            foreach (var item in data)
             {
                 Operations.Add(new BatchOperation<T>
                 {
                     Action = actionType,
-                    Body = data
+                    Body = item
                 });
             }
         }

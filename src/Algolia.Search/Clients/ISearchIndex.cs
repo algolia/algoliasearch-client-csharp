@@ -73,11 +73,11 @@ namespace Algolia.Search.Clients
         /// This method enables you to update only a part of an object by singling out one or more attributes of an existing object and performing the following actions:
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="datas">Datas to send</param>
+        /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
-        BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool createIfNotExists = false)
+        BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool createIfNotExists = false)
             where T : class;
 
         /// <summary>
@@ -85,12 +85,12 @@ namespace Algolia.Search.Clients
         /// This method enables you to update only a part of an object by singling out one or more attributes of an existing object and performing the following actions:
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="datas">Datas to send</param>
+        /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
-        Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> datas,
+        Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> data,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool createIfNotExists = false) where T : class;
 
         /// <summary>
@@ -122,11 +122,11 @@ namespace Algolia.Search.Clients
         /// Each object contains a set of attributes and values, which represents a full record on an index.
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="datas">Datas to send</param>
+        /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="autoGenerateObjectId">Add objectIDs if not present</param>
         /// <returns></returns>
-        BatchIndexingResponse SaveObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool autoGenerateObjectId = false)
+        BatchIndexingResponse SaveObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool autoGenerateObjectId = false)
             where T : class;
 
         /// <summary>
@@ -134,12 +134,12 @@ namespace Algolia.Search.Clients
         /// Each object contains a set of attributes and values, which represents a full record on an index.
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        /// <param name="datas">Datas to send</param>
+        /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <param name="autoGenerateObjectId">Add objectIDs if not present</param>
         /// <returns></returns>
-        Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> datas,
+        Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> data,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
             bool autoGenerateObjectId = false) where T : class;
 
@@ -147,23 +147,23 @@ namespace Algolia.Search.Clients
         /// Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
         /// Replace all records in an index without any downtime.
         /// </summary>
-        /// <param name="datas">Datas to send</param>
+        /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="safe">Run all api calls synchronously</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        MultiResponse ReplaceAllObjects<T>(IEnumerable<T> datas, RequestOptions requestOptions = null, bool safe = false) where T : class;
+        MultiResponse ReplaceAllObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool safe = false) where T : class;
 
         /// <summary>
         /// Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
         /// Replace all records in an index without any downtime.
         /// </summary>
-        /// <param name="datas">Datas to send</param>
+        /// <param name="data">Data to send</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <param name="safe">Run all api calls synchronously</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
-        Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas,
+        Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> data,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool safe = false) where T : class;
 
         /// <summary>
