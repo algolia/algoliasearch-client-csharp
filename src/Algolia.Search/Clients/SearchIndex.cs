@@ -139,6 +139,11 @@ namespace Algolia.Search.Clients
         public async Task<BatchIndexingResponse> SaveObjectAsync<T>(T data, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken), bool autoGenerateObjectId = false) where T : class
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
             return await SaveObjectsAsync(new List<T> { data }, requestOptions, ct, autoGenerateObjectId);
         }
 
@@ -175,6 +180,11 @@ namespace Algolia.Search.Clients
         public async Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> datas, RequestOptions requestOptions = null,
         CancellationToken ct = default(CancellationToken), bool safe = false) where T : class
         {
+            if (datas == null)
+            {
+                throw new ArgumentNullException(nameof(datas));
+            }
+
             Random rnd = new Random();
             string tmpIndexName = $"{_indexName}_tmp_{rnd.Next(100)}";
             SearchIndex tmpIndex = new SearchIndex(_transport, Config, tmpIndexName);
