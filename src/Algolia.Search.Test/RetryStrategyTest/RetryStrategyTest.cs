@@ -39,6 +39,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
     {
         [TestCase(CallType.Read)]
         [TestCase(CallType.Write)]
+        [Parallelizable]
         public void TestRetryStrategyResetExpired(CallType callType)
         {
             var commonHosts = new List<StatefulHost>
@@ -84,6 +85,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [TestCase(CallType.Write, 500)]
         [TestCase(CallType.Read, 300)]
         [TestCase(CallType.Write, 300)]
+        [Parallelizable]
         public void TestRetryStrategyRetriableFailure(CallType callType, int httpErrorCode)
         {
             var searchConfig = new SearchConfig("appId", "apiKey");
@@ -103,6 +105,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [TestCase(CallType.Write, 400)]
         [TestCase(CallType.Read, 404)]
         [TestCase(CallType.Write, 404)]
+        [Parallelizable]
         public void TestRetryStrategyFailureDecision(CallType callType, int httpErrorCode)
         {
             var searchConfig = new SearchConfig("appId", "apiKey");
@@ -116,6 +119,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
         }
 
         [TestCase(CallType.Read)]
+        [Parallelizable]
         public void TestRetryStrategyMultiThread(CallType callType)
         {
             var searchConfig = new SearchConfig("appId", "apiKey");

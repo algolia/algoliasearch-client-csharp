@@ -25,9 +25,11 @@ using Algolia.Search.Clients;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;
+using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Utils;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,11 +44,23 @@ namespace Algolia.Search.Test.EndToEnd
         private SearchIndex _index;
         private string _indexName;
 
+        private SearchIndex _indexDeleteBy;
+        private string _indexDeleteByName;
+
+        private SearchIndex _indexMove;
+        private string _indexMoveName;
+
         [OneTimeSetUp]
         public void Init()
         {
             _indexName = TestHelper.GetTestIndexName("indexing");
             _index = BaseTest.SearchClient.InitIndex(_indexName);
+
+            _indexDeleteByName = TestHelper.GetTestIndexName("delete_by");
+            _indexDeleteBy = BaseTest.SearchClient.InitIndex(_indexDeleteByName);
+
+            _indexMoveName = TestHelper.GetTestIndexName("move_test_source");
+            _indexMove = BaseTest.SearchClient.InitIndex(_indexMoveName);
         }
 
         [Test]
@@ -189,11 +203,56 @@ namespace Algolia.Search.Test.EndToEnd
 
             Assert.True(objectsAfterFullDelete.Count() == 0);
         }
+
+        [Test]
+        [Parallelizable]
+        public async Task DeleteByTest()
+        {
+            List<AlgoliaStub> objectsToBatch = new List<AlgoliaStub>();
+            List<string> ids = new List<string>();
+            for (int i = 0; i < 10; i++)
+            {
+                var id = (i + 1).ToString();
+                objectsToBatch.Add(new AlgoliaStub { ObjectID = id, Tags = new List<string> { "car" } });
+                ids.Add(id);
+            }
+
+            var batch = _indexDeleteBy.SaveObjectsAsync(objectsToBatch);
+            batch.Wait();
+
+            var resp = await _indexDeleteBy.DeleteByAsync(new Query { TagFilters = "car" });
+            resp.Wait();
+
+            var search = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
+            Assert.True(search.Hits.Count == 0);
+        }
+
+        [Test]
+        [Parallelizable]
+        public async Task MoveIndexTest()
+        {
+            var objectOne = new AlgoliaStub { ObjectID = "one" };
+            var addObject = await _indexMove.SaveObjectAsync(objectOne);
+
+            addObject.Wait();
+
+            string indexDestName = TestHelper.GetTestIndexName("move_test_dest");
+
+            var move = await BaseTest.SearchClient.MoveIndexAsync(_indexMoveName, indexDestName);
+            move.Wait();
+
+            var listIndices = await BaseTest.SearchClient.ListIndicesAsync();
+            Assert.True(listIndices.Items.Exists(x => x.Name.Equals(indexDestName)));
+            Assert.True(!listIndices.Items.Exists(x => x.Name.Equals(_indexMoveName)));
+        }
     }
 
     public class AlgoliaStub
     {
         public string ObjectID { get; set; }
         public string Property { get; set; } = "Default";
+
+        [JsonProperty(PropertyName = "_tags")]
+        public List<string> Tags { get; set; }
     }
 }
