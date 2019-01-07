@@ -205,7 +205,7 @@ namespace Algolia.Search.Clients
             }
 
             return await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                    $"/1/indexes/{indexName}", CallType.Write, requestOptions, ct)
+                    $"/1/indexes/{WebUtility.UrlEncode(indexName)}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -244,7 +244,7 @@ namespace Algolia.Search.Clients
             }
 
             return await _transport.ExecuteRequestAsync<ApiKey>(HttpMethod.Get,
-                    $"/1/keys/{apiKey}", CallType.Read, requestOptions, ct)
+                    $"/1/keys/{WebUtility.UrlEncode(apiKey)}", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -292,7 +292,7 @@ namespace Algolia.Search.Clients
             request.Value = null;
 
             var response = await _transport.ExecuteRequestAsync<UpdateApiKeyResponse, ApiKey>(HttpMethod.Put,
-                    $"/1/keys/{key}", CallType.Write, request, requestOptions, ct)
+                    $"/1/keys/{WebUtility.UrlEncode(key)}", CallType.Write, request, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.GetApiKeyDelegate = k => GetApiKey(k);
@@ -316,7 +316,7 @@ namespace Algolia.Search.Clients
 
             DeleteApiKeyResponse response = await _transport.ExecuteRequestAsync<DeleteApiKeyResponse>(
                     HttpMethod.Delete,
-                    $"/1/keys/{apiKey}", CallType.Write, requestOptions, ct)
+                    $"/1/keys/{WebUtility.UrlEncode(apiKey)}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.GetApiKeyDelegate = k => GetApiKey(k);
