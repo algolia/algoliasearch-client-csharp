@@ -31,7 +31,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.Test.EndToEnd
+namespace Algolia.Search.Test.EndToEnd.Analytics
 {
     [TestFixture]
     [Parallelizable]

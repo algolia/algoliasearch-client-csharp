@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.Test.EndToEnd
+namespace Algolia.Search.Test.EndToEnd.Client
 {
     [TestFixture]
     [Parallelizable]

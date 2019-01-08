@@ -26,7 +26,7 @@ using Algolia.Search.Models.Search;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace Algolia.Search.Test.EndToEnd
+namespace Algolia.Search.Test.EndToEnd.Insights
 {
     [TestFixture]
     [Parallelizable]

@@ -26,7 +26,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace Algolia.Search.Test.EndToEnd
+namespace Algolia.Search.Test.EndToEnd.Client
 {
     [TestFixture]
     [Parallelizable]

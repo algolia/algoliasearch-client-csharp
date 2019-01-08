@@ -31,7 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Algolia.Search.Test.EndToEnd
+namespace Algolia.Search.Test.EndToEnd.ApiKeys
 {
     [TestFixture]
     [Parallelizable]
