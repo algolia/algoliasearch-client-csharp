@@ -84,7 +84,6 @@ namespace Algolia.Search.Clients
         MultipleIndexBatchIndexingResponse MultipleBatch<T>(IEnumerable<BatchOperation<T>> operations,
             RequestOptions requestOptions = null) where T : class;
 
-        /// <inheritdoc />
         /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
         /// </summary>
@@ -544,10 +543,10 @@ namespace Algolia.Search.Clients
         /// <typeparam name="TResult">The type of the result</typeparam>
         /// <typeparam name="TData">The type of the input</typeparam>
         /// <returns></returns>
-        TResult CustomRequest<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType, 
+        TResult CustomRequest<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType,
             RequestOptions requestOptions = null)
-                where TResult : class
-                where TData : class;
+            where TResult : class
+            where TData : class;
 
         /// <summary>
         /// Execute a custom request asynchronously
@@ -561,9 +560,10 @@ namespace Algolia.Search.Clients
         /// <typeparam name="TResult">The type of the result</typeparam>
         /// <typeparam name="TData">The type of the input</typeparam>
         /// <returns></returns>
-        Task<TResult> CustomRequestAsync<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType, RequestOptions requestOptions = null,
+        Task<TResult> CustomRequestAsync<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType,
+            RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
-                where TResult : class
-                where TData : class;
+            where TResult : class
+            where TData : class;
     }
 }

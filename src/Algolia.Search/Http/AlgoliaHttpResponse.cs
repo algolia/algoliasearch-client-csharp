@@ -31,22 +31,22 @@ namespace Algolia.Search.Http
     public class AlgoliaHttpResponse
     {
         /// <summary>
-        /// The http status code of the resposne
+        /// Http response code
         /// </summary>
         public int HttpStatusCode { get; set; }
 
         /// <summary>
-        /// Body of the response
+        /// Stream Response body
         /// </summary>
         public Stream Body { get; set; }
 
         /// <summary>
-        /// Is the request timedout
+        /// TimeOut
         /// </summary>
         public bool IsTimedOut { get; set; }
 
         /// <summary>
-        /// Error message if so
+        /// Http Error message
         /// </summary>
         public string Error { get; set; }
     }

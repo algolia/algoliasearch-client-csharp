@@ -70,8 +70,8 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
                 }
             }
 
-            var addOne = await _index1.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
-            var addTwo = await _index2.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
+            var addOne = await _index1.SaveObjectAsync(new AlgoliaStub {ObjectID = "one"});
+            var addTwo = await _index2.SaveObjectAsync(new AlgoliaStub {ObjectID = "one"});
 
             addOne.Wait();
             addTwo.Wait();
@@ -111,7 +111,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             Assert.IsTrue(TestHelper.AreObjectsEqual(
                 listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status"));
 
-            StopABTestResponse stopAbtest = await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId);
+            await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId);
 
             ABTest stoppedAbTest = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId);
             Assert.IsTrue(stoppedAbTest.Status.Equals("stopped"));

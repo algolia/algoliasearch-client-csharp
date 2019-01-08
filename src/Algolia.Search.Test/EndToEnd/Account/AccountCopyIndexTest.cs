@@ -62,13 +62,13 @@ namespace Algolia.Search.Test.EndToEnd.Account
             SearchIndex index1 = BaseTest.SearchClient.InitIndex(indexOneName);
             SearchIndex index2 = BaseTest.SearchClient2.InitIndex(indexTwoName);
 
-            var objectToAdd = new AccountCopyObject { ObjectID = "one" };
+            var objectToAdd = new AccountCopyObject {ObjectID = "one"};
             var addObject = index1.SaveObjectAsync(objectToAdd);
 
             Rule ruleToSave = new Rule
             {
                 ObjectID = "one",
-                Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
+                Condition = new Condition {Anchoring = "is", Pattern = "pattern"},
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -90,14 +90,14 @@ namespace Algolia.Search.Test.EndToEnd.Account
             {
                 ObjectID = "one",
                 Type = SynonymType.Synonym,
-                Synonyms = new List<string> { "one", "two" }
+                Synonyms = new List<string> {"one", "two"}
             };
 
             var saveSynonym = index1.SaveSynonymAsync(synonym);
 
             IndexSettings settings = new IndexSettings
             {
-                AttributesForFaceting = new List<string> { "company" }
+                AttributesForFaceting = new List<string> {"company"}
             };
 
             var saveSettings = index1.SetSettingsAsync(settings);
@@ -124,7 +124,7 @@ namespace Algolia.Search.Test.EndToEnd.Account
             Assert.True(TestHelper.AreObjectsEqual(synonym, await getSynonym));
             Assert.True(TestHelper.AreObjectsEqual(await getOriginalSettings, await getSettings));
 
-            var deleteIndex = await BaseTest.SearchClient2.DeleteIndexAsync(indexTwoName);
+            await BaseTest.SearchClient2.DeleteIndexAsync(indexTwoName);
         }
 
         public class AccountCopyObject

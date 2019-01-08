@@ -124,7 +124,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(queries));
             }
 
-            var request = new MultipleGetObjectsRequest { Requests = queries };
+            var request = new MultipleGetObjectsRequest {Requests = queries};
 
             return await _transport
                 .ExecuteRequestAsync<MultipleGetObjectsResponse<T>, MultipleGetObjectsRequest>(HttpMethod.Post,
@@ -430,9 +430,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(clusterName);
             }
 
-            var data = new AssignUserIdRequest { Cluster = clusterName };
+            var data = new AssignUserIdRequest {Cluster = clusterName};
 
-            var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+            var userIdHeader = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
             requestOptions = requestOptions.AddHeaders(userIdHeader);
 
             AssignUserIdResponse response = await _transport
@@ -458,7 +458,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(userId);
             }
 
-            var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
+            var userIdHeader = new Dictionary<string, string>() {{"X-Algolia-USER-ID", userId}};
             requestOptions = requestOptions.AddHeaders(userIdHeader);
 
             try
@@ -479,7 +479,7 @@ namespace Algolia.Search.Clients
                     throw;
                 }
 
-                return new RemoveUserIdResponse { UserId = userId, RemoveDelegate = u => RemoveUserId(u) };
+                return new RemoveUserIdResponse {UserId = userId, RemoveDelegate = u => RemoveUserId(u)};
             }
         }
 
@@ -518,7 +518,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySettingsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Settings };
+            var scopes = new List<string> {CopyScope.Settings};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
         }
 
@@ -531,7 +531,7 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopyRulesAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Rules };
+            var scopes = new List<string> {CopyScope.Rules};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
         }
 
@@ -544,14 +544,16 @@ namespace Algolia.Search.Clients
         public async Task<CopyToResponse> CopySynonymsAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
         {
-            var scopes = new List<string> { CopyScope.Synonyms };
+            var scopes = new List<string> {CopyScope.Synonyms};
             return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public CopyToResponse CopyIndex(string sourceIndex, string destinationIndex, RequestOptions requestOptions = null,
+        public CopyToResponse CopyIndex(string sourceIndex, string destinationIndex,
+            RequestOptions requestOptions = null,
             IEnumerable<string> scope = null) =>
-            AsyncHelper.RunSync(() => CopyIndexAsync(sourceIndex, destinationIndex, scope: scope, requestOptions: requestOptions));
+            AsyncHelper.RunSync(() =>
+                CopyIndexAsync(sourceIndex, destinationIndex, scope: scope, requestOptions: requestOptions));
 
         /// <inheritdoc />
         public async Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex,
@@ -569,7 +571,7 @@ namespace Algolia.Search.Clients
             }
 
             string encondedSourceIndex = WebUtility.UrlEncode(sourceIndex);
-            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
+            var data = new CopyToRequest {Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope};
 
             CopyToResponse response = await _transport.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
                     HttpMethod.Post, $"/1/indexes/{encondedSourceIndex}/operation", CallType.Write, data,
@@ -596,7 +598,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = destinationIndex };
+            MoveIndexRequest request = new MoveIndexRequest {Operation = MoveType.Move, Destination = destinationIndex};
 
             MoveIndexResponse response = await _transport
                 .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,
@@ -646,15 +648,16 @@ namespace Algolia.Search.Clients
         /// <inheritdoc />
         public TResult CustomRequest<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType,
             RequestOptions requestOptions = null)
-                where TResult : class
-                where TData : class =>
+            where TResult : class
+            where TData : class =>
             AsyncHelper.RunSync(() => CustomRequestAsync<TResult, TData>(data, uri, method, callType, requestOptions));
 
         /// <inheritdoc />
-        public async Task<TResult> CustomRequestAsync<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType, RequestOptions requestOptions = null,
+        public async Task<TResult> CustomRequestAsync<TResult, TData>(TData data, string uri, HttpMethod method,
+            CallType callType, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken))
-                where TResult : class
-                where TData : class
+            where TResult : class
+            where TData : class
         {
             return await _transport.ExecuteRequestAsync<TResult, TData>(method, uri, callType, data, requestOptions, ct)
                 .ConfigureAwait(false);

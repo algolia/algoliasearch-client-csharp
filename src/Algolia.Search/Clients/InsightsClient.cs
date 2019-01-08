@@ -40,7 +40,6 @@ namespace Algolia.Search.Clients
     public class InsightsClient : IInsightsClient
     {
         private readonly IHttpTransport _transport;
-        private readonly InsightsConfig _config;
 
         /// <summary>
         /// Initialize a new insights client
@@ -89,7 +88,6 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
             }
 
-            _config = config;
             _transport = new HttpTransport(config, httpRequester);
         }
 

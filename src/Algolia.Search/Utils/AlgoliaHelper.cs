@@ -25,7 +25,6 @@ using Algolia.Search.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -40,24 +39,27 @@ namespace Algolia.Search.Utils
         public static void EnsureObjectID<T>()
         {
             Type itemType = typeof(T);
-            if (itemType == typeof(JToken) || itemType == typeof(JObject) || itemType == typeof(JArray) || itemType == typeof(JRaw))
+            if (itemType == typeof(JToken) || itemType == typeof(JObject) || itemType == typeof(JArray) ||
+                itemType == typeof(JRaw))
             {
                 return;
             }
-            
+
             var objectIdProperty = PropertyOrJsonAttributeExists<T>("ObjectID");
 
             if (objectIdProperty != null)
             {
                 if (objectIdProperty.PropertyType != typeof(string))
                 {
-                    throw new AlgoliaException($"The ObjectID property or the JsonPropertyAttribute with name='objectID' must be a string");
+                    throw new AlgoliaException(
+                        $"The ObjectID property or the JsonPropertyAttribute with name='objectID' must be a string");
                 }
 
                 return;
             }
 
-            throw new AlgoliaException($"The type {nameof(T)} must have an ObjectID property or a JsonPropertyAttribute with name='objectID'");
+            throw new AlgoliaException(
+                $"The type {nameof(T)} must have an ObjectID property or a JsonPropertyAttribute with name='objectID'");
         }
 
         /// <summary>
@@ -74,13 +76,15 @@ namespace Algolia.Search.Utils
             {
                 if (objectIdProperty.PropertyType != typeof(string))
                 {
-                    throw new AlgoliaException($"The ObjectID property or the JsonPropertyAttribute with name='objectID' must be a string");
+                    throw new AlgoliaException(
+                        $"The ObjectID property or the JsonPropertyAttribute with name='objectID' must be a string");
                 }
 
                 return objectIdProperty.GetValue(data, null).ToString();
             }
 
-            throw new AlgoliaException($"The type {nameof(T)} must have an ObjectID properties or a JsonPropertyAttribute with name='objectID'");
+            throw new AlgoliaException(
+                $"The type {nameof(T)} must have an ObjectID properties or a JsonPropertyAttribute with name='objectID'");
         }
 
         /// <summary>
@@ -105,7 +109,8 @@ namespace Algolia.Search.Utils
 
             if (typeInfo.GetCustomAttribute<JsonPropertyAttribute>() != null)
             {
-                return declaredProperties.FirstOrDefault(p => p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Equals(camelCaseProperty));
+                return declaredProperties.FirstOrDefault(p =>
+                    p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Equals(camelCaseProperty));
             }
 
             return null;

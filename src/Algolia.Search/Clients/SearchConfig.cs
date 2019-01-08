@@ -42,23 +42,25 @@ namespace Algolia.Search.Clients
         /// <param name="apiKey">Your API Key</param>
         public SearchConfig(string applicationId, string apiKey) : base(applicationId, apiKey)
         {
-            List<StatefulHost> hosts = new List<StatefulHost> {
-            new StatefulHost
+            List<StatefulHost> hosts = new List<StatefulHost>
             {
-                Url = $"{applicationId}-dsn.algolia.net",
-                Priority = 10,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Read
-            },
-            new StatefulHost
-            {
-                Url = $"{applicationId}.algolia.net",
-                Priority = 10,
-                Up = true,
-                LastUse = DateTime.UtcNow,
-                Accept = CallType.Write,
-            }};
+                new StatefulHost
+                {
+                    Url = $"{applicationId}-dsn.algolia.net",
+                    Priority = 10,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read
+                },
+                new StatefulHost
+                {
+                    Url = $"{applicationId}.algolia.net",
+                    Priority = 10,
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Write,
+                }
+            };
 
             var commonHosts = new List<StatefulHost>
             {

@@ -121,7 +121,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             Assert.True(multiQueri2.Results.Count() == 2);
             Assert.True(multiQueri2.Results.ElementAt(0).Hits.Count() == 2);
-            Assert.True(multiQueri2.Results.ElementAt(1).Hits.Count() == 0);
+            Assert.True(!multiQueri2.Results.ElementAt(1).Hits.Any());
         }
 
         public class MultipleOperationClass

@@ -54,16 +54,16 @@ namespace Algolia.Search.Test.EndToEnd.ApiKeys
         [Test]
         public async Task TestApiKey()
         {
-            var addOne = await _index1.SaveObjectAsync(new SecuredApiKeyStub { ObjectID = "one" });
-            var addTwo = await _index2.SaveObjectAsync(new SecuredApiKeyStub { ObjectID = "one" });
+            var addOne = await _index1.SaveObjectAsync(new SecuredApiKeyStub {ObjectID = "one"});
+            var addTwo = await _index2.SaveObjectAsync(new SecuredApiKeyStub {ObjectID = "one"});
 
             addOne.Wait();
             addTwo.Wait();
 
             SecuredApiKeyRestriction restriction = new SecuredApiKeyRestriction
             {
-                ValidUntil = DateTimeHelper.ToUnixTimeSeconds(DateTime.UtcNow.AddMinutes(10)),
-                RestrictIndices = new List<string> { _index1Name }
+                ValidUntil = DateTime.UtcNow.AddMinutes(10).ToUnixTimeSeconds(),
+                RestrictIndices = new List<string> {_index1Name}
             };
 
             string key = BaseTest.SearchClient.GenerateSecuredApiKeys(TestHelper.SearchKey1, restriction);
@@ -72,7 +72,7 @@ namespace Algolia.Search.Test.EndToEnd.ApiKeys
             SearchIndex index1WithoutRestriction = clientWithRestriciton.InitIndex(_index1Name);
             SearchIndex index2WithRestriction = clientWithRestriciton.InitIndex(_index2Name);
 
-            var searchOne = await index1WithoutRestriction.SearchAsync<SecuredApiKeyStub>(new Query());
+            await index1WithoutRestriction.SearchAsync<SecuredApiKeyStub>(new Query());
             AlgoliaApiException ex = Assert.ThrowsAsync<AlgoliaApiException>(() =>
                 index2WithRestriction.SearchAsync<SecuredApiKeyStub>(new Query()));
 

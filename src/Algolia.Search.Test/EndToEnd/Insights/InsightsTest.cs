@@ -49,18 +49,18 @@ namespace Algolia.Search.Test.EndToEnd.Insights
             var insights = insightsClient.User("test");
 
             // click
-            insights.ClickedFilters("clickedFilters", _indexName, new List<string> { "brand:apple" });
-            insights.ClickedObjectIDs("clickedObjectEvent", _indexName, new List<string> { "1", "2" });
+            insights.ClickedFilters("clickedFilters", _indexName, new List<string> {"brand:apple"});
+            insights.ClickedObjectIDs("clickedObjectEvent", _indexName, new List<string> {"1", "2"});
 
             // Conversion
-            insights.ConvertedObjectIDs("convertedObjectIDs", _indexName, new List<string> { "1", "2" });
-            insights.ConvertedFilters("converterdFilters", _indexName, new List<string> { "brand:apple" });
+            insights.ConvertedObjectIDs("convertedObjectIDs", _indexName, new List<string> {"1", "2"});
+            insights.ConvertedFilters("converterdFilters", _indexName, new List<string> {"brand:apple"});
 
             // View
-            insights.ViewedFilters("viewedFilters", _indexName, new List<string> { "brand:apple", "brand:google" });
-            insights.ViewedObjectIDs("viewedObjectIDs", _indexName, new List<string> { "1", "2" });
+            insights.ViewedFilters("viewedFilters", _indexName, new List<string> {"brand:apple", "brand:google"});
+            insights.ViewedObjectIDs("viewedObjectIDs", _indexName, new List<string> {"1", "2"});
 
-            _index.SaveObject(new AlgoliaStub { ObjectID = "one" }).Wait();
+            _index.SaveObject(new AlgoliaStub {ObjectID = "one"}).Wait();
 
             var query = new Query()
             {
@@ -69,12 +69,12 @@ namespace Algolia.Search.Test.EndToEnd.Insights
             };
 
             var search1 = _index.Search<AlgoliaStub>(query);
-            insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", _indexName, new List<string> { "1", "2" },
-                new List<uint> { 17, 19 }, search1.QueryID);
+            insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", _indexName, new List<string> {"1", "2"},
+                new List<uint> {17, 19}, search1.QueryID);
 
             var search2 = _index.Search<AlgoliaStub>(query);
             insights.ConvertedObjectIDsAfterSearch("convertedObjectIDsAfterSearch", _indexName,
-                new List<string> { "1", "2" }, search2.QueryID);
+                new List<string> {"1", "2"}, search2.QueryID);
         }
 
         public class AlgoliaStub

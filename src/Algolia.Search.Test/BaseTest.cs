@@ -60,25 +60,27 @@ public class BaseTest
     {
         _indices = SearchClient.ListIndices();
 
-        if (_indices?.Items != null && _indices.Items.Any())
+        if (_indices?.Items == null || !_indices.Items.Any())
+            return;
+
+        var yesterday = DateTime.UtcNow.AddDays(-1);
+        var indicesToDelete = _indices?.Items?.Where(x =>
+            x.Name.Contains($"csharp_{Environment.OSVersion.Platform}") && x.CreatedAt <= yesterday).ToList();
+
+        var operations = new List<BatchOperation<string>>();
+
+        if (!indicesToDelete.Any())
+            return;
+
+        foreach (var index in indicesToDelete)
         {
-            var yesterday = DateTime.UtcNow.AddDays(-1);
-            var indicesToDelete = _indices?.Items?.Where(x => x.Name.Contains($"csharp_{Environment.OSVersion.Platform}") && x.CreatedAt <= yesterday);
-            List<BatchOperation<string>> operations = new List<BatchOperation<string>>();
-
-            if (indicesToDelete != null && indicesToDelete.Count() > 0)
+            operations.Add(new BatchOperation<string>
             {
-                foreach (var index in indicesToDelete)
-                {
-                    operations.Add(new BatchOperation<string>
-                    {
-                        IndexName = index.Name,
-                        Action = BatchActionType.Delete
-                    });
-                }
-
-                SearchClient.MultipleBatch(operations);
-            }
+                IndexName = index.Name,
+                Action = BatchActionType.Delete
+            });
         }
+
+        SearchClient.MultipleBatch(operations);
     }
 }

@@ -53,7 +53,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
-        UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null, bool createIfNotExists = false)
+        UpdateObjectResponse PartialUpdateObject<T>(T data, RequestOptions requestOptions = null,
+            bool createIfNotExists = false)
             where T : class;
 
         /// <summary>
@@ -66,7 +67,8 @@ namespace Algolia.Search.Clients
         /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
         Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool createIfNotExists = false) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            bool createIfNotExists = false) where T : class;
 
         /// <summary>
         /// Update one or more attributes of an existing object.
@@ -77,7 +79,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
-        BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool createIfNotExists = false)
+        BatchIndexingResponse PartialUpdateObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null,
+            bool createIfNotExists = false)
             where T : class;
 
         /// <summary>
@@ -91,7 +94,8 @@ namespace Algolia.Search.Clients
         /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
         Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool createIfNotExists = false) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            bool createIfNotExists = false) where T : class;
 
         /// <summary>
         /// This method allows you to create records on your index by sending one or more objects
@@ -102,7 +106,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="autoGenerateObjectId">Add objectID if not present</param>
         /// <returns></returns>>
-        BatchIndexingResponse SaveObject<T>(T data, RequestOptions requestOptions = null, bool autoGenerateObjectId = false) where T : class;
+        BatchIndexingResponse SaveObject<T>(T data, RequestOptions requestOptions = null,
+            bool autoGenerateObjectId = false) where T : class;
 
         /// <summary>
         /// This method allows you to create records on your index by sending one or more objects
@@ -126,7 +131,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="autoGenerateObjectId">Add objectIDs if not present</param>
         /// <returns></returns>
-        BatchIndexingResponse SaveObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool autoGenerateObjectId = false)
+        BatchIndexingResponse SaveObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null,
+            bool autoGenerateObjectId = false)
             where T : class;
 
         /// <summary>
@@ -151,7 +157,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="safe">Run all api calls synchronously</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
-        MultiResponse ReplaceAllObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool safe = false) where T : class;
+        MultiResponse ReplaceAllObjects<T>(IEnumerable<T> data, RequestOptions requestOptions = null, bool safe = false)
+            where T : class;
 
         /// <summary>
         /// Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
@@ -164,7 +171,8 @@ namespace Algolia.Search.Clients
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
         Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool safe = false) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool safe = false)
+            where T : class;
 
         /// <summary>
         /// Batch the given request
@@ -334,7 +342,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
         /// <returns></returns>
-        T GetObject<T>(string objectId, RequestOptions requestOptions = null, IEnumerable<string> attributesToRetrieve = null) where T : class;
+        T GetObject<T>(string objectId, RequestOptions requestOptions = null,
+            IEnumerable<string> attributesToRetrieve = null) where T : class;
 
         /// <summary>
         /// Get one or more objects using their object ids.
@@ -345,7 +354,8 @@ namespace Algolia.Search.Clients
         /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
         /// <returns></returns>
         Task<T> GetObjectAsync<T>(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null) where T : class;
+            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null)
+            where T : class;
 
         /// <summary>
         /// Retrieve one or more objects, potentially from the index, in a single API call.
@@ -354,7 +364,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
         /// <returns></returns>
-        IEnumerable<T> GetObjects<T>(IEnumerable<string> objectIDs, RequestOptions requestOptions = null, IEnumerable<string> attributesToRetrieve = null) where T : class;
+        IEnumerable<T> GetObjects<T>(IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
+            IEnumerable<string> attributesToRetrieve = null) where T : class;
 
         /// <summary>
         /// Retrieve one or more objects, potentially from the index, in a single API call.
@@ -365,7 +376,8 @@ namespace Algolia.Search.Clients
         /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
         /// <returns></returns>
         Task<IEnumerable<T>> GetObjectsAsync<T>(IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null) where T : class;
+            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null)
+            where T : class;
 
         /// <summary>
         /// This method allows you to retrieve all index content
@@ -511,7 +523,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        DeleteResponse DeleteRule(string objectId, RequestOptions requestOptions = null, bool forwardToReplicas = false);
+        DeleteResponse DeleteRule(string objectId, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Delete the rule for the given ruleId
@@ -567,7 +580,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
-        SetSettingsResponse SetSettings(IndexSettings settings, RequestOptions requestOptions = null, bool forwardToReplicas = false);
+        SetSettingsResponse SetSettings(IndexSettings settings, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Create or change an index’s settings.
@@ -580,7 +594,8 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
         Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Get all synonyms that match a query.
@@ -626,7 +641,8 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <param name="replaceExistingSynonyms"></param>
         /// <returns></returns>
-        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null, bool forwardToReplicas = false,
+        SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false,
             bool replaceExistingSynonyms = false);
 
         /// <summary>
@@ -665,7 +681,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> ReplaceAllSynonymsAsync(IEnumerable<Synonym> synonyms,
-             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
             bool forwardToReplicas = false);
 
         /// <summary>
@@ -675,7 +691,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null, bool forwardToReplicas = false);
+        SaveSynonymResponse SaveSynonym(Synonym synonym, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Create or update a single synonym on an index.
@@ -695,7 +712,8 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
-        DeleteResponse DeleteSynonym(string synonymObjectId, RequestOptions requestOptions = null, bool forwardToReplicas = false);
+        DeleteResponse DeleteSynonym(string synonymObjectId, RequestOptions requestOptions = null,
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Remove a single synonym from an index using its object id.
@@ -706,7 +724,8 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
+            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            bool forwardToReplicas = false);
 
         /// <summary>
         /// Remove all synonyms from an index.

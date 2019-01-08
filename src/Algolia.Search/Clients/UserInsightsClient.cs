@@ -86,7 +86,7 @@ namespace Algolia.Search.Clients
                 Filters = filters
             };
 
-            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct);
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Algolia.Search.Clients
                 ObjectIDs = objectIDs
             };
 
-            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct);
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Algolia.Search.Clients
                 QueryID = queryID
             };
 
-            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct);
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct).ConfigureAwait(false);
         }
 
         // Conversion
@@ -207,7 +207,7 @@ namespace Algolia.Search.Clients
                 ObjectIDs = objectIDs
             };
 
-            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct);
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace Algolia.Search.Clients
                 QueryID = queryID
             };
 
-            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct);
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public InsightsResponse ConvertedFilters(string eventName, string indexName, IEnumerable<string> filters,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) =>
-            AsyncHelper.RunSync(() => ConvertedFiltersAsync(eventName, indexName, filters, requestOptions));
+            AsyncHelper.RunSync(() => ConvertedFiltersAsync(eventName, indexName, filters, requestOptions, ct));
 
         /// <summary>
         /// Send events of filters conversion
@@ -286,7 +286,7 @@ namespace Algolia.Search.Clients
                 Filters = filters,
             };
 
-            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct);
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct).ConfigureAwait(false);
         }
 
         // View
@@ -325,7 +325,7 @@ namespace Algolia.Search.Clients
                 Filters = filters
             };
 
-            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct);
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -362,7 +362,7 @@ namespace Algolia.Search.Clients
                 ObjectIDs = objectIDs
             };
 
-            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct);
+            return await _insightsClient.SendEventAsync(insightEvent, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }

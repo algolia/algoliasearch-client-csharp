@@ -37,7 +37,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
         [OneTimeTearDown]
         public void CleanApiKey()
         {
-            DeleteApiKeyResponse deleteKey = BaseTest.SearchClient.DeleteApiKey(_apiKey);
+            BaseTest.SearchClient.DeleteApiKey(_apiKey);
         }
 
         [Test]
@@ -45,13 +45,13 @@ namespace Algolia.Search.Test.EndToEnd.Client
         {
             ApiKey apiKeyToSend = new ApiKey
             {
-                Acl = new List<string> { "search" },
+                Acl = new List<string> {"search"},
                 Description = "A description",
-                Indexes = new List<string> { "indexes" },
+                Indexes = new List<string> {"indexes"},
                 MaxHitsPerQuery = 1000,
                 MaxQueriesPerIPPerHour = 1000,
                 QueryParameters = "typoTolerance=strict",
-                Referers = new List<string> { "referer" },
+                Referers = new List<string> {"referer"},
                 Validity = 600
             };
 

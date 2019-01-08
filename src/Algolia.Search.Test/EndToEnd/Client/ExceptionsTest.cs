@@ -103,26 +103,26 @@ namespace Algolia.Search.Test.EndToEnd.Client
         public void Objects()
         {
             Assert.Throws<ArgumentNullException>(() => _index.SetSettings(null));
-            Assert.Throws<ArgumentNullException>(() => _index.GetObject<Object>(null));
-            Assert.Throws<ArgumentNullException>(() => _index.GetObjects<Object>(null));
-            Assert.Throws<ArgumentNullException>(() => _index.Browse<Object>(null));
-            Assert.Throws<ArgumentNullException>(() => _index.BrowseFrom<Object>(null));
-            Assert.Throws<ArgumentNullException>(() => _index.PartialUpdateObject<Object>(null));
-            Assert.Throws<ArgumentNullException>(() => _index.SaveObject<Object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.GetObject<object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.GetObjects<object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.Browse<object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.BrowseFrom<object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.PartialUpdateObject<object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.SaveObject<object>(null));
 
-            Assert.Throws<ArgumentNullException>(() => _index.SaveObjects<Object>(null));
-            Assert.Throws<ArgumentNullException>(() => _index.ReplaceAllObjects<Object>(null));
-            Assert.Throws<ArgumentNullException>(() => _index.Batch<Object>(operations: null));
-            Assert.Throws<ArgumentNullException>(() => _index.Batch<Object>(request: null));
+            Assert.Throws<ArgumentNullException>(() => _index.SaveObjects<object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.ReplaceAllObjects<object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.Batch<object>(operations: null));
+            Assert.Throws<ArgumentNullException>(() => _index.Batch<object>(request: null));
             Assert.Throws<ArgumentNullException>(() => _index.DeleteObject(null));
             Assert.Throws<ArgumentNullException>(() => _index.DeleteBy(null));
             Assert.Throws<ArgumentNullException>(() => _index.SearchForFacetValue(null));
-            Assert.Throws<ArgumentNullException>(() => _index.Search<Object>(null));
+            Assert.Throws<ArgumentNullException>(() => _index.Search<object>(null));
             Assert.Throws<ArgumentNullException>(() => _index.CopyTo(""));
             Assert.Throws<ArgumentNullException>(() => _index.MoveFrom(""));
 
-            Assert.Throws<ArgumentException>(() => _index.SaveObject<Object>(new List<Object> { }));
-            Assert.Throws<ArgumentException>(() => _index.PartialUpdateObject<Object>(new List<Object> { }));
+            Assert.Throws<ArgumentException>(() => _index.SaveObject<object>(new List<object> { }));
+            Assert.Throws<ArgumentException>(() => _index.PartialUpdateObject<object>(new List<object> { }));
         }
     }
 }

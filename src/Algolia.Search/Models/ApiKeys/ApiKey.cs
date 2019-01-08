@@ -21,12 +21,10 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Common;
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Models.ApiKeys
 {
@@ -103,7 +101,8 @@ namespace Algolia.Search.Models.ApiKeys
         /// </summary>
         public override string ToString()
         {
-            return $"{Value}{string.Join(",", Acl)}{MaxHitsPerQuery}{MaxQueriesPerIPPerHour}{string.Join(",", Indexes)}{string.Join(",", Referers)}{RestrictSources}{QueryParameters}{Description}";
+            return
+                $"{Value}{string.Join(",", Acl)}{MaxHitsPerQuery}{MaxQueriesPerIPPerHour}{string.Join(",", Indexes)}{string.Join(",", Referers)}{RestrictSources}{QueryParameters}{Description}";
         }
     }
 }

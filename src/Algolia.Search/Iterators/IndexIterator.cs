@@ -48,6 +48,7 @@ namespace Algolia.Search.Iterators
             _query = query;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// GetEnumerator perfom a browse from (api call)
         /// </summary>

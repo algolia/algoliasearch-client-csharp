@@ -94,7 +94,8 @@ namespace Algolia.Search.Test.Serializer
         [Test]
         public void TestSettingsJObjectMigration()
         {
-            var json = JObject.Parse("{\"customRanking\":[\"desc(population)\", \"asc(name)\"], \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}");
+            var json = JObject.Parse(
+                "{\"customRanking\":[\"desc(population)\", \"asc(name)\"], \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}");
             IndexSettings settings = json.ToObject<IndexSettings>();
 
             Assert.IsNotNull(settings.CustomRanking);

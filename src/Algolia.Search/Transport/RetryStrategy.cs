@@ -55,7 +55,7 @@ namespace Algolia.Search.Transport
         /// <param name="config">Client's configuration</param>
         public RetryStrategy(AlgoliaConfig config)
         {
-            _hosts = config.CustomHosts != null ? config.CustomHosts : config.DefaultHosts;
+            _hosts = config.CustomHosts ?? config.DefaultHosts;
         }
 
         /// <inheritdoc />
@@ -117,7 +117,7 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         private bool IsSuccess(int httpResponseCode)
         {
-            return (int)Math.Floor((decimal)httpResponseCode / 100) == 2;
+            return (int) Math.Floor((decimal) httpResponseCode / 100) == 2;
         }
 
         /// <summary>
@@ -127,8 +127,8 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         private bool IsRetryable(int httpResponseCode)
         {
-            return (int)Math.Floor((decimal)httpResponseCode / 100) != 2 &&
-                   (int)Math.Floor((decimal)httpResponseCode / 100) != 4;
+            return (int) Math.Floor((decimal) httpResponseCode / 100) != 2 &&
+                   (int) Math.Floor((decimal) httpResponseCode / 100) != 4;
         }
 
         /// <summary>

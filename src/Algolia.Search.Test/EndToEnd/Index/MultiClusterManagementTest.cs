@@ -39,7 +39,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
         [Test]
         public async Task McmTest()
         {
-            IEnumerable<ClustersResponse> listClusters = await BaseTest.McmClient.ListClustersAsync();
+            IEnumerable<ClustersResponse> listClusters = (await BaseTest.McmClient.ListClustersAsync()).ToList();
             Assert.True(listClusters.Count() >= 2);
 
             string userId = TestHelper.GetMcmUserId();
@@ -49,7 +49,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             SearchResponse<UserIdResponse> searchResponse =
                 await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest
-                { Query = userId, Cluster = listClusters.ElementAt(0).ClusterName });
+                    {Query = userId, Cluster = listClusters.ElementAt(0).ClusterName});
             Assert.True(searchResponse.NbHits == 1);
 
             ListUserIdsResponse listUserIds = await BaseTest.McmClient.ListUserIdsAsync();
@@ -66,9 +66,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
             IEnumerable<UserIdResponse> userIdsToRemove =
                 listUserIdsTwo.UserIds.Where(x => x.UserID.Contains($"csharp-{yesterday}"));
 
-            IEnumerable<Task<RemoveUserIdResponse>> delete =
-                userIdsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID));
-            Task.WaitAll(delete.ToArray());
+            var delete =
+                userIdsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID)).ToArray();
+            await Task.WhenAll(delete);
         }
     }
 }

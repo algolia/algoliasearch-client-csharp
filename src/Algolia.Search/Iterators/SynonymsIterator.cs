@@ -50,6 +50,7 @@ namespace Algolia.Search.Iterators
             _query.Page = 0;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Iterator for synonym (perfom an api call)
         /// </summary>

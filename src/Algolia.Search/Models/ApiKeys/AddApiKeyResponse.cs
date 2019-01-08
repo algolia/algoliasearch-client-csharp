@@ -34,8 +34,7 @@ namespace Algolia.Search.Models.ApiKeys
     /// </summary>
     public class AddApiKeyResponse : IAlgoliaWaitableResponse
     {
-        [JsonIgnore]
-        internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+        [JsonIgnore] internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
 
         /// <summary>
         /// The returned api key
@@ -47,6 +46,7 @@ namespace Algolia.Search.Models.ApiKeys
         /// </summary>
         public DateTime CreatedAt { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Wait until the key exists on the server
         /// </summary>
@@ -68,6 +68,7 @@ namespace Algolia.Search.Models.ApiKeys
                         continue;
                     }
                 }
+
                 break;
             }
         }

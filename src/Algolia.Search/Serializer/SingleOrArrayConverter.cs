@@ -38,33 +38,36 @@ namespace Algolia.Search.Serializer
     {
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(List<T>));
+            return objectType == typeof(List<T>);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
             JToken token = JToken.Load(reader);
             if (token.Type == JTokenType.Array)
             {
                 return token.ToObject<List<T>>();
             }
-            return new List<T> { token.ToObject<T>() };
+
+            return new List<T> {token.ToObject<T>()};
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            List<T> list = (List<T>)value;
+            List<T> list = (List<T>) value;
             if (list.Count == 1)
             {
                 serializer.Serialize(writer, list[0]);
                 return;
             }
-            
+
             writer.WriteStartArray();
             foreach (object item in list)
             {
                 serializer.Serialize(writer, item);
             }
+
             writer.WriteEndArray();
         }
     }

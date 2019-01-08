@@ -38,7 +38,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var listIndices2 = BaseTest.SearchClient.ListIndicesAsync();
             Task.WaitAll(listIndices1, listIndices2);
 
-            var logs = await BaseTest.SearchClient.GetLogsAsync(offset: 0, length: 2, type: "all");
+            var logs = await BaseTest.SearchClient.GetLogsAsync(offset: 0, length: 2);
             Assert.IsTrue(logs.Logs.Count() == 2);
         }
     }

@@ -68,14 +68,14 @@ namespace Algolia.Search.Clients
             catch (AlgoliaApiException ex)
             {
                 // We want to catch an non existing index exception (404) and continue
-                // However we want to throw if it's an ohter http exception
+                // Otherwise, we want to throw if it's another Http exception
                 if (ex.HttpErrorCode != 404)
                 {
                     throw;
                 }
             }
 
-            MultiResponse ret = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
+            MultiResponse ret = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
 
             // Save settings
             IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);
@@ -100,7 +100,8 @@ namespace Algolia.Search.Clients
 
             // Save objects (batched)
             IndexIterator<T> indexIterator = sourceIndex.Browse<T>(new BrowseIndexQuery());
-            BatchIndexingResponse saveObject = await destinationIndex.SaveObjectsAsync(indexIterator, requestOptions, ct)
+            BatchIndexingResponse saveObject = await destinationIndex
+                .SaveObjectsAsync(indexIterator, requestOptions, ct)
                 .ConfigureAwait(false);
             ret.Responses.Add(saveObject);
 

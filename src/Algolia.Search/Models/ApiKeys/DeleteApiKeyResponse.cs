@@ -47,6 +47,7 @@ namespace Algolia.Search.Models.ApiKeys
         /// </summary>
         public DateTime DeletedAt { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Wait that the key doesn't exist anymore on the API side
         /// </summary>

@@ -33,7 +33,7 @@ namespace Algolia.Search.Clients
     /// </summary>
     public abstract class AlgoliaConfig
     {
-        private static readonly string _clientVersion =
+        private static readonly string ClientVersion =
             typeof(AlgoliaConfig).GetTypeInfo().Assembly.GetName().Version.ToString();
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Algolia.Search.Clients
             {
                 {"X-Algolia-Application-Id", AppId},
                 {"X-Algolia-API-Key", ApiKey},
-                {"User-Agent", $"C# {_clientVersion}"},
+                {"User-Agent", $"C# {ClientVersion}"},
                 {"Connection", "keep-alive"},
                 {"Accept", JsonConfig.JsonContentType}
             };
