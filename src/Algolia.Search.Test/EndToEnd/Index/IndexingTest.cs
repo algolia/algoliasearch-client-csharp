@@ -50,6 +50,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
         private SearchIndex _indexMove;
         private string _indexMoveName;
 
+        private SearchIndex _indexClear;
+        private string _indexClearName;
+
         [OneTimeSetUp]
         public void Init()
         {
@@ -61,6 +64,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             _indexMoveName = TestHelper.GetTestIndexName("move_test_source");
             _indexMove = BaseTest.SearchClient.InitIndex(_indexMoveName);
+
+            _indexClearName = TestHelper.GetTestIndexName("clear_objects");
+            _indexClear = BaseTest.SearchClient.InitIndex(_indexClearName);
         }
 
         [Test]
@@ -227,6 +233,29 @@ namespace Algolia.Search.Test.EndToEnd.Index
             resp.Wait();
 
             var search = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
+            Assert.True(search.Hits.Count == 0);
+        }
+
+        [Test]
+        [Parallelizable]
+        public async Task ClearObjects()
+        {
+            List<AlgoliaStub> objectsToBatch = new List<AlgoliaStub>();
+            List<string> ids = new List<string>();
+            for (int i = 0; i < 10; i++)
+            {
+                var id = (i + 1).ToString();
+                objectsToBatch.Add(new AlgoliaStub { ObjectID = id, Tags = new List<string> { "car" } });
+                ids.Add(id);
+            }
+
+            var batch = await _indexClear.SaveObjectsAsync(objectsToBatch);
+            batch.Wait();
+
+            var clear = await _indexClear.ClearObjectsAsync();
+            clear.Wait();
+
+            var search = await _indexClear.SearchAsync<AlgoliaStub>(new Query(""));
             Assert.True(search.Hits.Count == 0);
         }
 
