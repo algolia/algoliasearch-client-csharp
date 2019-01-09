@@ -94,7 +94,7 @@ namespace Algolia.Search.Transport
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
                 request.Uri = BuildUri(host.Url, uri, requestOptions?.QueryParameters);
-                int requestTimeout = SetTimeout(callType) * (host.RetryCount + 1);
+                int requestTimeout = requestOptions?.Timeout ?? SetTimeout(callType) * (host.RetryCount + 1);
 
                 AlgoliaHttpResponse response = await _httpClient
                     .SendRequestAsync(request, requestTimeout, ct)

@@ -39,5 +39,10 @@ namespace Algolia.Search.Http
         /// Add custom queries parameters
         /// </summary>
         public Dictionary<string, string> QueryParameters { get; set; }
+
+        /// <summary>
+        /// Request timeout in seconds
+        /// </summary>
+        public int? Timeout { get; set; }
     }
 }

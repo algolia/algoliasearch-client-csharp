@@ -70,7 +70,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
         public async Task IndexOperationsAsyncTest()
         {
             // AddObject with ID
-            var objectOne = new AlgoliaStub {ObjectID = "one"};
+            var objectOne = new AlgoliaStub { ObjectID = "one" };
             var addObject = _index.SaveObjectAsync(objectOne);
 
             // AddObject without ID
@@ -102,14 +102,14 @@ namespace Algolia.Search.Test.EndToEnd.Index
             for (int i = 0; i < 1000; i++)
             {
                 var id = (i + 1).ToString();
-                objectsToBatch.Add(new AlgoliaStub {ObjectID = id, Property = $"Property{id}"});
+                objectsToBatch.Add(new AlgoliaStub { ObjectID = id, Property = $"Property{id}" });
                 ids.Add(id);
             }
 
             var batch = _index.SaveObjectsAsync(objectsToBatch);
 
             // Wait for all http call to finish
-            var responses = await Task.WhenAll(new[] {addObject, addObjectWoId, addObjects, addObjectsWoId, batch}).ConfigureAwait(false);
+            var responses = await Task.WhenAll(new[] { addObject, addObjectWoId, addObjects, addObjectsWoId, batch }).ConfigureAwait(false);
 
             // Wait for Algolia's task to finish (indexing)
             responses.Wait();
@@ -122,28 +122,32 @@ namespace Algolia.Search.Test.EndToEnd.Index
             objectsWoId[0].ObjectID = generatedIDs.ElementAt(0);
             objectsWoId[1].ObjectID = generatedIDs.ElementAt(1);
 
-            var settedIds = new List<string> {"one", "two", "three"};
+            var settedIds = new List<string> { "one", "two", "three" };
 
             var sixFirstRecordsIds = settedIds.Concat(generatedId).Concat(generatedIDs).ToList();
             var sixFirstRecords = (await _index.GetObjectsAsync<AlgoliaStub>(sixFirstRecordsIds)).ToList();
             Assert.True(sixFirstRecords.Count() == 6);
 
-            var objectsToCompare = new List<AlgoliaStub> {objectOne}.Concat(objectsWithIds)
-                .Concat(new List<AlgoliaStub> {objectWoId})
+            var objectsToCompare = new List<AlgoliaStub> { objectOne }.Concat(objectsWithIds)
+                .Concat(new List<AlgoliaStub> { objectWoId })
                 .Concat(objectsWoId)
                 .ToList();
 
             // Check retrieved objects againt original content
-            for (int i = 0; i < sixFirstRecords.Count; i++)
+            Parallel.For(0, sixFirstRecords.Count, i =>
+            {
                 Assert.True(TestHelper.AreObjectsEqual(sixFirstRecords[i], objectsToCompare[i]));
+            });
 
             // 1000 records
             var batchResponse = (await _index.GetObjectsAsync<AlgoliaStub>(ids)).ToList();
             Assert.True(batchResponse.Count() == 1000);
 
             // Check retrieved objects againt original content
-            for (int i = 0; i < batchResponse.Count; i++)
+            Parallel.For(0, batchResponse.Count, i =>
+            {
                 Assert.True(TestHelper.AreObjectsEqual(objectsToBatch[i], batchResponse[i]));
+            });
 
             // Browse all index to assert that we have 1006 objects
             var objectsBrowsed = new List<AlgoliaStub>();
@@ -216,7 +220,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             for (int i = 0; i < 10; i++)
             {
                 var id = (i + 1).ToString();
-                objectsToBatch.Add(new AlgoliaStub {ObjectID = id, Tags = new List<string> {"car"}});
+                objectsToBatch.Add(new AlgoliaStub { ObjectID = id, Tags = new List<string> { "car" } });
                 ids.Add(id);
             }
 
@@ -226,7 +230,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var delete = await _indexDeleteBy.DeleteObjectAsync("1");
             delete.Wait();
 
-            var resp = await _indexDeleteBy.DeleteByAsync(new Query {TagFilters = "car"});
+            var resp = await _indexDeleteBy.DeleteByAsync(new Query { TagFilters = "car" });
             resp.Wait();
 
             var search = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
@@ -242,7 +246,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             for (int i = 0; i < 10; i++)
             {
                 var id = (i + 1).ToString();
-                objectsToBatch.Add(new AlgoliaStub {ObjectID = id, Tags = new List<string> {"car"}});
+                objectsToBatch.Add(new AlgoliaStub { ObjectID = id, Tags = new List<string> { "car" } });
                 ids.Add(id);
             }
 
@@ -260,7 +264,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
         [Parallelizable]
         public async Task MoveIndexTest()
         {
-            var objectOne = new AlgoliaStub {ObjectID = "one"};
+            var objectOne = new AlgoliaStub { ObjectID = "one" };
             var addObject = await _indexMove.SaveObjectAsync(objectOne);
 
             addObject.Wait();

@@ -36,8 +36,8 @@ namespace Algolia.Search.Http
         /// <summary>
         /// Sends the HTTP request
         /// </summary>
-        /// <param name="request"></param>
-        /// <param name="totalTimeout"></param>
+        /// <param name="request">Request object</param>
+        /// <param name="totalTimeout">Timeout in seconds</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<AlgoliaHttpResponse> SendRequestAsync(Request request, int totalTimeout,
