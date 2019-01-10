@@ -62,18 +62,18 @@ You can find both on [your Algolia account](https://www.algolia.com/api-keys).
 
 ## Push data
 
-Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/movies/actors.json) in the ```contacts``` index using the following code:
+Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the ```contacts``` index using the following code:
 
 ```csharp
-  SearchIndex index = client.InitIndex("actors");
+ SearchIndex index = client.InitIndex("contacts");
 
-  using (StreamReader re = File.OpenText("actors.json"))
+  using (StreamReader re = File.OpenText("contacts.json"))
   using (JsonTextReader reader = new JsonTextReader(re))
   {
       JArray batch = JArray.Load(reader);
-      index.SaveObjects(batch);
+      index.SaveObjects(batch, autoGenerateObjectId: true);
       // Asynchronous
-      // index.SaveObjectsAsync(batch);
+      // index.SaveObjectsAsync(batch, autoGenerateObjectId: true);
   }
 ```
 
@@ -133,10 +133,10 @@ You can now search for contacts using `firstname`, `lastname`, `company`, etc. (
   index.Search<Contact>( new Query { "california paint" });
 
   // Asynchronous
-  await index.SearchAsync<Contact>( new Query { "california paint" });
+  await index.SearchAsync<Contact>(new Query { "california paint" });
   
   // Search for a first name and a company
-  index.Search<Contact>( new Query { "jimmie paint"" });
+  index.Search<Contact>(new Query { "jimmie paint" });
 
   // Asynchronous
   await index.SearchAsync<Contact>(new Query { "jimmie paint" });
