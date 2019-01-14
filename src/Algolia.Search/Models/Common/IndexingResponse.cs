@@ -30,7 +30,7 @@ namespace Algolia.Search.Models.Common
     /// </summary>
     public class IndexingResponse : IAlgoliaWaitableResponse
     {
-        internal Action<long> WaitDelegate { get; set; }
+        internal Action<long> WaitTask { get; set; }
 
         /// <summary>
         /// Algolia's API taskID
@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Common
         /// </summary>
         public void Wait()
         {
-            WaitDelegate(TaskID);
+            WaitTask(TaskID);
         }
     }
 }

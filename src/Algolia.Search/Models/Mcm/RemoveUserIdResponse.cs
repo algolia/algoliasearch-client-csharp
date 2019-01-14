@@ -33,7 +33,7 @@ namespace Algolia.Search.Models.Mcm
     /// </summary>
     public class RemoveUserIdResponse : IAlgoliaWaitableResponse
     {
-        internal Func<string, RemoveUserIdResponse> RemoveDelegate { get; set; }
+        internal Func<string, RemoveUserIdResponse> RemoveUserId { get; set; }
 
         /// <summary>
         /// UserId to remove
@@ -57,7 +57,7 @@ namespace Algolia.Search.Models.Mcm
             {
                 try
                 {
-                    deleteResponse = RemoveDelegate(UserId);
+                    deleteResponse = RemoveUserId(UserId);
                 }
                 catch (AlgoliaApiException ex)
                 {

@@ -33,7 +33,7 @@ namespace Algolia.Search.Models.ApiKeys
     /// </summary>
     public class UpdateApiKeyResponse : IAlgoliaWaitableResponse
     {
-        [JsonIgnore] internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+        [JsonIgnore] internal Func<string, ApiKey> GetApiKey { get; set; }
 
         /// <summary>
         /// The updated key
@@ -58,7 +58,7 @@ namespace Algolia.Search.Models.ApiKeys
         {
             while (true)
             {
-                var actualKey = GetApiKeyDelegate(Key).ToString();
+                var actualKey = GetApiKey(Key).ToString();
 
                 // When the key on the server equals the key we sent we break the loop
                 if (PendingKey.ToString().Equals(actualKey))

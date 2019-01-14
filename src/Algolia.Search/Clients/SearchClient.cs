@@ -174,7 +174,7 @@ namespace Algolia.Search.Clients
                     HttpMethod.Post, "/1/indexes/*/batch", CallType.Write, batch, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            resp.WaitDelegate = (i, t) => WaitTask(i, t);
+            resp.WaitTask = (i, t) => WaitTask(i, t);
             return resp;
         }
 
@@ -265,7 +265,7 @@ namespace Algolia.Search.Clients
                     "/1/keys", CallType.Write, acl, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.GetApiKeyDelegate = k => GetApiKey(k);
+            response.GetApiKey = k => GetApiKey(k);
             return response;
         }
 
@@ -295,7 +295,7 @@ namespace Algolia.Search.Clients
                     $"/1/keys/{WebUtility.UrlEncode(key)}", CallType.Write, request, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.GetApiKeyDelegate = k => GetApiKey(k);
+            response.GetApiKey = k => GetApiKey(k);
             response.PendingKey = request;
             response.PendingKey.Value = key;
             return response;
@@ -319,7 +319,7 @@ namespace Algolia.Search.Clients
                     $"/1/keys/{WebUtility.UrlEncode(apiKey)}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.GetApiKeyDelegate = k => GetApiKey(k);
+            response.GetApiKey = k => GetApiKey(k);
             response.Key = apiKey;
             return response;
         }
@@ -441,7 +441,7 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
 
             response.UserId = userId;
-            response.GetUserDelegate = u => GetUserId(u);
+            response.GetUserId = u => GetUserId(u);
             return response;
         }
 
@@ -469,7 +469,7 @@ namespace Algolia.Search.Clients
                     .ConfigureAwait(false);
 
                 response.UserId = userId;
-                response.RemoveDelegate = u => RemoveUserId(u);
+                response.RemoveUserId = u => RemoveUserId(u);
                 return response;
             }
             catch (AlgoliaApiException ex)
@@ -479,7 +479,7 @@ namespace Algolia.Search.Clients
                     throw;
                 }
 
-                return new RemoveUserIdResponse {UserId = userId, RemoveDelegate = u => RemoveUserId(u)};
+                return new RemoveUserIdResponse {UserId = userId, RemoveUserId = u => RemoveUserId(u)};
             }
         }
 
@@ -579,7 +579,7 @@ namespace Algolia.Search.Clients
                     ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(sourceIndex, t);
+            response.WaitTask = t => WaitTask(sourceIndex, t);
             return response;
         }
 
@@ -605,7 +605,7 @@ namespace Algolia.Search.Clients
                     $"/1/indexes/{sourceIndex}/operation", CallType.Write, request, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(destinationIndex, t);
+            response.WaitTask = t => WaitTask(destinationIndex, t);
             return response;
         }
 

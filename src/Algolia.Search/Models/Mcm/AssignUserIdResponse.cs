@@ -33,7 +33,7 @@ namespace Algolia.Search.Models.Mcm
     /// </summary>
     public class AssignUserIdResponse : IAlgoliaWaitableResponse
     {
-        internal Func<string, UserIdResponse> GetUserDelegate { get; set; }
+        internal Func<string, UserIdResponse> GetUserId { get; set; }
 
         /// <summary>
         /// The user Id
@@ -55,7 +55,7 @@ namespace Algolia.Search.Models.Mcm
             {
                 try
                 {
-                    GetUserDelegate(UserId);
+                    GetUserId(UserId);
                 }
                 catch (AlgoliaApiException ex)
                 {

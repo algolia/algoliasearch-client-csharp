@@ -105,7 +105,7 @@ namespace Algolia.Search.Clients
                     requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -311,7 +311,7 @@ namespace Algolia.Search.Clients
                     ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -332,7 +332,7 @@ namespace Algolia.Search.Clients
                     $"/1/indexes/{_urlEncodedIndexName}/{objectId}", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -374,7 +374,7 @@ namespace Algolia.Search.Clients
                     requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -390,7 +390,7 @@ namespace Algolia.Search.Clients
                     $"/1/indexes/{_urlEncodedIndexName}/clear", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -595,7 +595,7 @@ namespace Algolia.Search.Clients
                     requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -629,7 +629,7 @@ namespace Algolia.Search.Clients
                     requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -675,7 +675,7 @@ namespace Algolia.Search.Clients
                     $"/1/indexes/{_urlEncodedIndexName}/rules/{objectId}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -698,7 +698,7 @@ namespace Algolia.Search.Clients
                     $"/1/indexes/{_urlEncodedIndexName}/rules/clear", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -742,7 +742,7 @@ namespace Algolia.Search.Clients
                     $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Write, settings, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -814,7 +814,7 @@ namespace Algolia.Search.Clients
                     ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -867,7 +867,7 @@ namespace Algolia.Search.Clients
                     synonym, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -898,7 +898,7 @@ namespace Algolia.Search.Clients
                     $"/1/indexes/{_urlEncodedIndexName}/synonyms/{synonymObjectId}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -924,7 +924,7 @@ namespace Algolia.Search.Clients
                     ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -950,7 +950,7 @@ namespace Algolia.Search.Clients
                     ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 
@@ -974,7 +974,7 @@ namespace Algolia.Search.Clients
                     $"/1/indexes/{sourceIndex}/operation", CallType.Write, request, requestOptions, ct)
                 .ConfigureAwait(false);
 
-            response.WaitDelegate = t => WaitTask(t);
+            response.WaitTask = t => WaitTask(t);
             return response;
         }
 

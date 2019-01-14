@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.ApiKeys
     /// </summary>
     public class DeleteApiKeyResponse : IAlgoliaWaitableResponse
     {
-        [JsonIgnore] internal Func<string, ApiKey> GetApiKeyDelegate { get; set; }
+        [JsonIgnore] internal Func<string, ApiKey> GetApiKey { get; set; }
 
         /// <summary>
         /// The key to delete
@@ -58,7 +58,7 @@ namespace Algolia.Search.Models.ApiKeys
             {
                 try
                 {
-                    GetApiKeyDelegate(Key);
+                    GetApiKey(Key);
                 }
                 catch (AlgoliaApiException ex)
                 {

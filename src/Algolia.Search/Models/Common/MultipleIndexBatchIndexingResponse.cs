@@ -31,7 +31,7 @@ namespace Algolia.Search.Models.Common
     /// </summary>
     public class MultipleIndexBatchIndexingResponse : IAlgoliaWaitableResponse
     {
-        internal Action<string, long> WaitDelegate { get; set; }
+        internal Action<string, long> WaitTask { get; set; }
 
         /// <summary>
         /// List of returned objectIDS
@@ -50,7 +50,7 @@ namespace Algolia.Search.Models.Common
         {
             foreach (var item in TaskID)
             {
-                WaitDelegate(item.Key, item.Value);
+                WaitTask(item.Key, item.Value);
             }
         }
     }
