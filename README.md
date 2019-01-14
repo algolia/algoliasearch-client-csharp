@@ -7,6 +7,7 @@ The **Algolia Search API Client for .NET** lets
 you easily use the [Algolia Search REST API](https://www.algolia.com/doc/rest-api/search) from
 your C#/F#/VB code.
 
+  [![NuGet version (Algolia.Search](https://img.shields.io/nuget/v/Algolia.Search.svg?style=flat-square)](https://www.nuget.org/packages/Algolia.Search/)
   [![Build Status](https://dev.azure.com/algolia-api-clients/dotnet/_apis/build/status/Algolia.Search?branchName=client-csharp-v2)](https://dev.azure.com/algolia-api-clients/dotnet/_build/latest?definitionId=2?branchName=client-csharp-v2)
 
 ## API Documentation
