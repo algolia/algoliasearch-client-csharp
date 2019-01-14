@@ -333,7 +333,7 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Search inside a rectangular area (in geo coordinates).
         /// </summary>
-        public List<float> InsideBoundingBox { get; set; }
+        public List<List<float>> InsideBoundingBox { get; set; }
 
         /// <summary>
         /// Search inside a polygon (in geo coordinates).
