@@ -338,7 +338,7 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Search inside a polygon (in geo coordinates).
         /// </summary>
-        public List<float> InsidePolygon { get; set; }
+        public List<List<float>> InsidePolygon { get; set; }
 
         /// <summary>
         /// Treats singular, plurals, and other forms of declensions as matching terms.
