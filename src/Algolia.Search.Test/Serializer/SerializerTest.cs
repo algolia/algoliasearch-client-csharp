@@ -39,6 +39,7 @@ namespace Algolia.Search.Test.Serializer
     public class SerializerTest
     {
         [Test]
+        [Parallelizable]
         public void TestAutomaticFacetFilters()
         {
             string json = "[\"lastname\",\"firstname\"]";
@@ -56,6 +57,7 @@ namespace Algolia.Search.Test.Serializer
         }
 
         [Test]
+        [Parallelizable]
         public void TestEditConverter()
         {
             string json = "[\"lastname\",\"firstname\"]";
@@ -72,6 +74,7 @@ namespace Algolia.Search.Test.Serializer
         }
 
         [Test]
+        [Parallelizable]
         public void TestLegacySettings()
         {
             string json =
@@ -92,6 +95,7 @@ namespace Algolia.Search.Test.Serializer
         }
 
         [Test]
+        [Parallelizable]
         public void TestSettingsJObjectMigration()
         {
             var json = JObject.Parse(
@@ -116,6 +120,7 @@ namespace Algolia.Search.Test.Serializer
         }
 
         [Test]
+        [Parallelizable]
         public void TestPersonalization()
         {
             var strategyToSave = new SetStrategyRequest
