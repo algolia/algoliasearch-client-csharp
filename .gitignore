@@ -108,5 +108,6 @@ Backup*/
 UpgradeLog*.XML
 *.nupkg
 
-# VS code ignore
+# IDE
 .vscode/
+.vs/

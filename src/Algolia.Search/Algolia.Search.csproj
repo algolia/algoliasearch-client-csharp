@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Algolia Search API Client for .NET</Description>
+    <AssemblyTitle>Algolia.Search</AssemblyTitle>
+    <AssemblyName>Algolia.Search</AssemblyName>
+    <Authors>Algolia</Authors>
+    <Owners>Algolia</Owners>
+    <PackageId>Algolia.Search</PackageId>
+    <PackageTags>Algolia;Search;SearchEngine;Service;Instant;Typo-Tolerance;Realtime;Analytics</PackageTags>
+    <PackageReleaseNotes>https://github.com/algolia/algoliasearch-client-csharp/blob/master/ChangeLog</PackageReleaseNotes>
+    <PackageIconUrl>https://www.algolia.com/static_assets/images/press/downloads/algolia-mark-blue.png</PackageIconUrl>
+    <PackageProjectUrl>https://www.algolia.com/doc/api-client/getting-started/install/csharp/</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageDescription>
+      Algolia API Client for .NET  Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries, and pre-built integrations.
+    </PackageDescription>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Copyright>Copyright 2019 Algolia</Copyright>
+    <Version>6.0.0-beta01</Version>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0;netstandard1.3</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;netstandard1.3;net45;</TargetFrameworks>
+  </PropertyGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3' OR '$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+</Project>
