@@ -58,7 +58,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.NotNull(addObjectResponse);
 
             IndexSettings settings = new IndexSettings
-                {AttributesForFaceting = new List<string> {"searchable(company)"}};
+            { AttributesForFaceting = new List<string> { "searchable(company)" } };
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
             setSettingsResponse.Wait();
 
@@ -79,14 +79,14 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Task<SearchResponse<Employee>> searchElonTask1 = _index.SearchAsync<Employee>(new Query
             {
                 SearchQuery = "elon",
-                Facets = new List<string> {"*"},
-                FacetFilters = new List<string> {"company:tesla"}
+                Facets = new List<string> { "*" },
+                FacetFilters = new List<List<string>> { new List<string> { "company:tesla" } }
             });
 
             Task<SearchResponse<Employee>> searchElonTask2 = _index.SearchAsync<Employee>(new Query
             {
                 SearchQuery = "elon",
-                Facets = new List<string> {"*"},
+                Facets = new List<string> { "*" },
                 Filters = "(company:tesla OR company:spacex)"
             });
 
