@@ -38,25 +38,11 @@ You can find the full reference on [Algolia's website](https://deploy-preview-23
 
 ## Supported platforms
 
-<<<<<<< HEAD
-The API client is compatible with:
-  * `.NET Framework 4.6`
-  * `.NET Framework 4.6.2`
-  * `.NET Framework 4.7`
-  * `.NET Framework 4.7.1`
-  * `.NET Core 1.0`
-  * `.NET Core 1.1`
-  * `.NET Core 2.0`
-  * `.NETStandard 1.6`
-  * `.NETStandard 1.3`
-  * `.NETStandard 2.0`
-=======
 Compatibilities:
  * `.NET Standard 1.3` to `.NET Standard 2.0`,
  * `.NET Core 1.0` to `.NET Core 2.2`,
  * `.NET Framework 4.5` to `.NET Framework 4.7.1`
   
->>>>>>> client-csharp-v2
 
 ## Install
 
@@ -80,19 +66,6 @@ You can find both on [your Algolia account](https://www.algolia.com/api-keys).
 Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the ```contacts``` index using the following code:
 
 ```csharp
-<<<<<<< HEAD
-// Load JSON file
-using(StreamReader re = File.OpenText("contacts.json"))
-using(JsonTextReader reader = new JsonTextReader(re))
-{
-   JArray batch = JArray.Load(reader);
-};
-// Add objects
-Index index = client.InitIndex("contacts");
-index.AddObjects(batch);
-// Asynchronous
-// await index.AddObjectsAsync(batch);
-=======
  SearchIndex index = client.InitIndex("contacts");
 
   using (StreamReader re = File.OpenText("contacts.json"))
@@ -103,7 +76,6 @@ index.AddObjects(batch);
       // Asynchronous
       // index.SaveObjectsAsync(batch, autoGenerateObjectId: true);
   }
->>>>>>> client-csharp-v2
 ```
 
 ## Configure
@@ -128,17 +100,6 @@ You can also configure the list of attributes you want to index by order of impo
 In this case, the order of attributes is very important to decide which hit is the best:
 
 ```csharp
-<<<<<<< HEAD
-var settings = new JObject
-{
-  { "searchableAttributes", new JArray { "lastname", "firstname", "company", "email", "city" }}
-};
-
-index.SetSettings(settings);
-
-// Asynchronous
-// await index.SetSettingsAsync(settings);
-=======
   IndexSettings settings = new IndexSettings
   {
       SearchableAttributes = new List<string>
@@ -150,7 +111,6 @@ index.SetSettings(settings);
 
   // Asynchronous
   await index.SetSettingsAsync(settings);
->>>>>>> client-csharp-v2
 ```
 
 ## Search
@@ -158,24 +118,6 @@ index.SetSettings(settings);
 You can now search for contacts using `firstname`, `lastname`, `company`, etc. (even with typos):
 
 ```csharp
-<<<<<<< HEAD
-// Search for a first name
-System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie")));
-// Asynchronous
-// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie")));
-// Search for a first name with typo
-System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimie")));
-// Asynchronous
-// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimie")));
-// Search for a company
-System.Diagnostics.Debug.WriteLine(index.Search(new Query("california paint")));
-// Asynchronous
-// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("california paint")));
-// Search for a first name and a company
-System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
-// Asynchronous
-// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie paint")));
-=======
   // Search for a first name
   index.Search<Contact>(new Query { "jimmie" });
 
@@ -199,7 +141,6 @@ System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
 
   // Asynchronous
   await index.SearchAsync<Contact>(new Query { "jimmie paint" });
->>>>>>> client-csharp-v2
 ```
 
 ## Search UI
@@ -276,139 +217,6 @@ search.addWidget(
 search.start();
 ```
 
-<<<<<<< HEAD
-
-
-
-## List of available methods
-
-
-
-
-
-### Personalization
-
-
-
-
-
-### Search
-
-- [Search index](https://algolia.com/doc/api-reference/api-methods/search/?language=csharp)
-- [Search for facet values](https://algolia.com/doc/api-reference/api-methods/search-for-facet-values/?language=csharp)
-- [Search multiple indices](https://algolia.com/doc/api-reference/api-methods/multiple-queries/?language=csharp)
-- [Browse index](https://algolia.com/doc/api-reference/api-methods/browse/?language=csharp)
-
-
-
-
-### Indexing
-
-- [Add objects](https://algolia.com/doc/api-reference/api-methods/add-objects/?language=csharp)
-- [Update objects](https://algolia.com/doc/api-reference/api-methods/save-objects/?language=csharp)
-- [Partial update objects](https://algolia.com/doc/api-reference/api-methods/partial-update-objects/?language=csharp)
-- [Delete objects](https://algolia.com/doc/api-reference/api-methods/delete-objects/?language=csharp)
-- [Delete by](https://algolia.com/doc/api-reference/api-methods/delete-by/?language=csharp)
-- [Get objects](https://algolia.com/doc/api-reference/api-methods/get-objects/?language=csharp)
-- [Custom batch](https://algolia.com/doc/api-reference/api-methods/batch/?language=csharp)
-
-
-
-
-### Settings
-
-- [Get settings](https://algolia.com/doc/api-reference/api-methods/get-settings/?language=csharp)
-- [Set settings](https://algolia.com/doc/api-reference/api-methods/set-settings/?language=csharp)
-
-
-
-
-### Manage indices
-
-- [List indexes](https://algolia.com/doc/api-reference/api-methods/list-indices/?language=csharp)
-- [Delete index](https://algolia.com/doc/api-reference/api-methods/delete-index/?language=csharp)
-- [Copy index](https://algolia.com/doc/api-reference/api-methods/copy-index/?language=csharp)
-- [Move index](https://algolia.com/doc/api-reference/api-methods/move-index/?language=csharp)
-- [Clear index](https://algolia.com/doc/api-reference/api-methods/clear-index/?language=csharp)
-
-
-
-
-### API Keys
-
-- [Create secured API Key](https://algolia.com/doc/api-reference/api-methods/generate-secured-api-key/?language=csharp)
-- [Add API Key](https://algolia.com/doc/api-reference/api-methods/add-api-key/?language=csharp)
-- [Update API Key](https://algolia.com/doc/api-reference/api-methods/update-api-key/?language=csharp)
-- [Delete API Key](https://algolia.com/doc/api-reference/api-methods/delete-api-key/?language=csharp)
-- [Get API Key permissions](https://algolia.com/doc/api-reference/api-methods/get-api-key/?language=csharp)
-- [List API Keys](https://algolia.com/doc/api-reference/api-methods/list-api-keys/?language=csharp)
-
-
-
-
-### Synonyms
-
-- [Save synonym](https://algolia.com/doc/api-reference/api-methods/save-synonym/?language=csharp)
-- [Batch synonyms](https://algolia.com/doc/api-reference/api-methods/batch-synonyms/?language=csharp)
-- [Delete synonym](https://algolia.com/doc/api-reference/api-methods/delete-synonym/?language=csharp)
-- [Clear all synonyms](https://algolia.com/doc/api-reference/api-methods/clear-synonyms/?language=csharp)
-- [Get synonym](https://algolia.com/doc/api-reference/api-methods/get-synonym/?language=csharp)
-- [Search synonyms](https://algolia.com/doc/api-reference/api-methods/search-synonyms/?language=csharp)
-- [Export Synonyms](https://algolia.com/doc/api-reference/api-methods/export-synonyms/?language=csharp)
-
-
-
-
-### Query rules
-
-- [Save rule](https://algolia.com/doc/api-reference/api-methods/save-rule/?language=csharp)
-- [Batch rules](https://algolia.com/doc/api-reference/api-methods/batch-rules/?language=csharp)
-- [Get rule](https://algolia.com/doc/api-reference/api-methods/get-rule/?language=csharp)
-- [Delete rule](https://algolia.com/doc/api-reference/api-methods/delete-rule/?language=csharp)
-- [Clear rules](https://algolia.com/doc/api-reference/api-methods/clear-rules/?language=csharp)
-- [Search rules](https://algolia.com/doc/api-reference/api-methods/search-rules/?language=csharp)
-- [Export rules](https://algolia.com/doc/api-reference/api-methods/export-rules/?language=csharp)
-
-
-
-
-### A/B Test
-
-- [Add A/B test](https://algolia.com/doc/api-reference/api-methods/add-ab-test/?language=csharp)
-- [Get A/B test](https://algolia.com/doc/api-reference/api-methods/get-ab-test/?language=csharp)
-- [List A/B tests](https://algolia.com/doc/api-reference/api-methods/list-ab-tests/?language=csharp)
-- [Stop A/B test](https://algolia.com/doc/api-reference/api-methods/stop-ab-test/?language=csharp)
-- [Delete A/B test](https://algolia.com/doc/api-reference/api-methods/delete-ab-test/?language=csharp)
-
-
-
-
-### MultiClusters
-
-- [Assign or Move userID](https://algolia.com/doc/api-reference/api-methods/assign-user-id/?language=csharp)
-- [Get top userID](https://algolia.com/doc/api-reference/api-methods/get-top-user-id/?language=csharp)
-- [Get userID](https://algolia.com/doc/api-reference/api-methods/get-user-id/?language=csharp)
-- [List clusters](https://algolia.com/doc/api-reference/api-methods/list-clusters/?language=csharp)
-- [List userIDs](https://algolia.com/doc/api-reference/api-methods/list-user-id/?language=csharp)
-- [Remove userID](https://algolia.com/doc/api-reference/api-methods/remove-user-id/?language=csharp)
-- [Search userID](https://algolia.com/doc/api-reference/api-methods/search-user-id/?language=csharp)
-
-
-
-
-### Advanced
-
-- [Get logs](https://algolia.com/doc/api-reference/api-methods/get-logs/?language=csharp)
-- [Configuring timeouts](https://algolia.com/doc/api-reference/api-methods/configuring-timeouts/?language=csharp)
-- [Set extra header](https://algolia.com/doc/api-reference/api-methods/set-extra-header/?language=csharp)
-- [Wait for operations](https://algolia.com/doc/api-reference/api-methods/wait-task/?language=csharp)
-
-
-
-
-
-=======
->>>>>>> client-csharp-v2
 ## Getting Help
 
 - **Need help**? Ask a question to the [Algolia Community](https://discourse.algolia.com/) or on [Stack Overflow](http://stackoverflow.com/questions/tagged/algolia).
