@@ -12,8 +12,6 @@ your C#/F#/VB code.
 
 ## API Documentation
 
-You can find the full reference on [Algolia's website](https://deploy-preview-2388--algolia-doc.netlify.com/doc/api-client/getting-started/install/csharp/).
-
 1. **[Supported platforms](#supported-platforms)**
 
 
