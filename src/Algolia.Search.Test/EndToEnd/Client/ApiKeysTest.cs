@@ -34,24 +34,18 @@ namespace Algolia.Search.Test.EndToEnd.Client
     {
         private string _apiKey;
 
-        [OneTimeTearDown]
-        public void CleanApiKey()
-        {
-            BaseTest.SearchClient.DeleteApiKey(_apiKey);
-        }
-
         [Test]
         public async Task TestApiKeys()
         {
             ApiKey apiKeyToSend = new ApiKey
             {
-                Acl = new List<string> {"search"},
+                Acl = new List<string> { "search" },
                 Description = "A description",
-                Indexes = new List<string> {"indexes"},
+                Indexes = new List<string> { "indexes" },
                 MaxHitsPerQuery = 1000,
                 MaxQueriesPerIPPerHour = 1000,
                 QueryParameters = "typoTolerance=strict",
-                Referers = new List<string> {"referer"},
+                Referers = new List<string> { "referer" },
                 Validity = 600
             };
 
@@ -75,6 +69,16 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var getUpdatedKey = await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
 
             Assert.IsTrue(getUpdatedKey.MaxHitsPerQuery == 42);
+
+            var deleteApiKey = await BaseTest.SearchClient.DeleteApiKeyAsync(_apiKey);
+            deleteApiKey.Wait();
+
+            var restoreAPIKey = await BaseTest.SearchClient.RestoreApiKeyAsync(_apiKey);
+            restoreAPIKey.Wait();
+
+            await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
+
+            await BaseTest.SearchClient.DeleteApiKeyAsync(_apiKey);
         }
     }
 }

@@ -205,6 +205,23 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
+        /// Restore the given APIKey
+        /// </summary>
+        /// <param name="apiKey">The API Key to restore</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        RestoreApiKeyResponse RestoreApiKey(string apiKey, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Restore the given APIKey
+        /// </summary>
+        /// <param name="apiKey">The API Key to restore</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        Task<RestoreApiKeyResponse> RestoreApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
+            CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
         /// List the clusters available in a multi-clusters setup for a single appID
         /// </summary>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
