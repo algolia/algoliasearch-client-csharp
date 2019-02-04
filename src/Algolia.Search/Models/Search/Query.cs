@@ -37,7 +37,7 @@ namespace Algolia.Search.Models.Search
         /// Create a new query with an empty search query
         /// </summary>
         /// <param name="searchQuery"></param>
-        public Query(string searchQuery = "")
+        public Query(string searchQuery = null)
         {
             SearchQuery = searchQuery;
         }
@@ -343,7 +343,8 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Treats singular, plurals, and other forms of declensions as matching terms.
         /// </summary>
-        public List<string> IgnorePlurals { get; set; }
+        [JsonConverter(typeof(MultiTypeObjectConverter))]
+        public object IgnorePlurals { get; set; }
 
         /// <summary>
         /// Removes stop (common) words from the query before executing it.

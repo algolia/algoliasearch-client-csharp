@@ -24,6 +24,7 @@
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Analytics;
+using Algolia.Search.Models.Search;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -35,49 +36,45 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
 {
     [TestFixture]
     [Parallelizable]
-    public class AnalyticsAbTest
+    public class AnalyticsAATest
     {
-        private SearchIndex _index1;
-        private SearchIndex _index2;
-        private string _index1Name;
-        private string _index2Name;
+        private SearchIndex _index;
+        private string _indexName;
 
         [OneTimeSetUp]
         public void Init()
         {
-            _index1Name = TestHelper.GetTestIndexName("ab_testing");
-            _index2Name = TestHelper.GetTestIndexName("ab_testing_dev");
-            _index1 = BaseTest.SearchClient.InitIndex(_index1Name);
-            _index2 = BaseTest.SearchClient.InitIndex(_index2Name);
+            _indexName = TestHelper.GetTestIndexName("aa_testing_dev");
+            _index = BaseTest.SearchClient.InitIndex(_indexName);
         }
 
         [Test]
         [Parallelizable]
-        public async Task TestAbTest()
+        public async Task TestAATesting()
         {
             var now = DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-            string testName = $"csharp-{now}-{Environment.UserName}";
+            string testName = $"csharp-AA-{now}-{Environment.UserName}";
 
             var abTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
 
             if (abTests.ABTests != null)
             {
                 var abTestsToDelete =
-                    abTests.ABTests?.Where(x => x.Name.Contains("csharp-") && !x.Name.Contains($"csharp-{now}"));
+                    abTests.ABTests?.Where(x => x.Name.Contains("csharp-AA") && !x.Name.Contains($"csharp-AA-{now}"));
 
                 foreach (var item in abTestsToDelete)
                 {
                     await BaseTest.AnalyticsClient.DeleteABTestAsync(item.AbTestId);
                 }
             }
-
-            var addOne = await _index1.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
-            var addTwo = await _index2.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
+            var addOne = await _index.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
 
             // Create tomorrow datetime without seconds/ms to avoid test to fail
             DateTime utcNow = DateTime.UtcNow.AddDays(1);
             DateTime tomorrow = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day, utcNow.Hour, utcNow.Minute, 0,
                 utcNow.Kind);
+
+            addOne.Wait();
 
             var abTest = new ABTest
             {
@@ -86,43 +83,28 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
                 {
                     new Variant
                     {
-                        Index = _index1Name, TrafficPercentage = 60, Description = "a description"
+                        Index = _indexName,
+                        TrafficPercentage = 90,
+                        Description = "a description"
                     },
                     new Variant
                     {
-                        Index = _index2Name, TrafficPercentage = 40, Description = string.Empty
+                        Index = _indexName,
+                        TrafficPercentage = 10,
+                        Description = "Variant number 2",
+                        CustomSearchParameters = new Query { IgnorePlurals = true }
                     }
                 },
                 EndAt = tomorrow
             };
 
-            addOne.Wait();
-            addTwo.Wait();
-
             AddABTestResponse addAbTest = await BaseTest.AnalyticsClient.AddABTestAsync(abTest);
             abTest.AbTestId = addAbTest.ABTestId;
-            _index1.WaitTask(addAbTest.TaskID);
+            _index.WaitTask(addAbTest.TaskID);
 
             ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId);
             Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status"));
-            Assert.IsFalse(abTestToCheck.Status.Equals("stopped"));
-
-            ABTestsReponse listAbTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
-            Assert.IsTrue(listAbTests.ABTests.Any(x => x.AbTestId == abTest.AbTestId));
-            Assert.IsTrue(TestHelper.AreObjectsEqual(
-                listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status"));
-
-            await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId);
-
-            ABTest stoppedAbTest = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId);
-            Assert.IsTrue(stoppedAbTest.Status.Equals("stopped"));
-
-            DeleteABTestResponse deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId);
-            _index1.WaitTask(deleteAbTest.TaskID);
-
-            AlgoliaApiException ex =
-                Assert.ThrowsAsync<AlgoliaApiException>(() => BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId));
-            Assert.That(ex.HttpErrorCode == 404);
+            Assert.IsTrue(abTestToCheck.Status.Equals("active"));
         }
 
         public class AlgoliaStub

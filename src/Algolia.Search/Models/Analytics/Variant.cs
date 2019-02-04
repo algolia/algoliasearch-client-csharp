@@ -21,6 +21,8 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Search;
+
 namespace Algolia.Search.Models.Analytics
 {
     /// <summary>
@@ -82,5 +84,10 @@ namespace Algolia.Search.Models.Analytics
         /// user Count
         /// </summary>
         public int UserCount { get; set; }
+
+        /// <summary>
+        /// Search parameters for AA Testing
+        /// </summary>
+        public Query CustomSearchParameters { get; set; }
     }
 }
