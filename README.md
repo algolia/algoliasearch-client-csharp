@@ -46,7 +46,14 @@ Compatibilities:
 
 ## Install
 
-For the moment this version is not published on Nuget. You'lll have to clone the repo and build the `client-csharp-v2` branch.
+```sh
+dotnet add package Algolia.Search --version 6.0.0-beta02
+```
+
+```sh
+Install-Package Algolia.Search -Version 6.0.0-beta02
+```
+
 ## Quick Start
 
 In 30 seconds, this quick start tutorial will show you how to index and search objects.
