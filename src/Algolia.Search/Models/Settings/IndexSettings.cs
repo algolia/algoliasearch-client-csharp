@@ -207,6 +207,11 @@ namespace Algolia.Search.Models.Settings
         public bool? AdvancedSyntax { get; set; }
 
         /// <summary>
+        /// AdvancedSyntaxFeatures can be exactPhrase or excludeWords
+        /// </summary>
+        public List<string> AdvancedSyntaxFeatures { get; set; }
+
+        /// <summary>
         /// A list of words that should be considered as optional when found in the query.
         /// </summary>
         public List<string> OptionalWords { get; set; }
