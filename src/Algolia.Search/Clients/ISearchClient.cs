@@ -344,8 +344,7 @@ namespace Algolia.Search.Clients
         /// You can retrieve the logs of your last 1,000 API calls. It is designed for immediate, real-time debugging.
         /// </summary>
         /// <returns></returns>
-        LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10,
-            string indexName = null, string type = "all");
+        LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10);
 
         /// <summary>
         /// Get the logs of the latest search and indexing operations
@@ -353,14 +352,11 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
-        /// <param name="offset"></param>
-        /// <param name="length"></param>
-        /// <param name="indexName"></param>
-        /// <param name="type"></param>
+        /// <param name="offset">Specify the first entry to retrieve (0-based, 0 is the most recent log entry).</param>
+        /// <param name="length">Specify the maximum number of entries to retrieve starting at the offset. Maximum allowed value: 1,000.</param>
         /// <returns></returns>
         Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null,
-            string type = "all");
+            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10);
 
         /// <summary>
         /// Copy the settings of an index to another index
