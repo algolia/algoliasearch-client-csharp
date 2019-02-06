@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Clients;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Synonyms;
 using System.Collections;
@@ -36,6 +37,7 @@ namespace Algolia.Search.Iterators
     {
         private readonly ISearchIndex _index;
         private readonly SynonymQuery _query = new SynonymQuery();
+        private readonly RequestOptions _requestOptions;
         private int _hits;
 
         /// <summary>
@@ -43,11 +45,13 @@ namespace Algolia.Search.Iterators
         /// </summary>
         /// <param name="index">The index to fetch the synonym from</param>
         /// <param name="hitsPerpage">Hits per page for each call default = 1000</param>
-        public SynonymsIterator(ISearchIndex index, int hitsPerpage = 1000)
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        public SynonymsIterator(ISearchIndex index, int hitsPerpage = 1000, RequestOptions requestOptions = null)
         {
             _index = index;
             _query.HitsPerPage = hitsPerpage;
             _query.Page = 0;
+            _requestOptions = requestOptions;
         }
 
         /// <inheritdoc />
@@ -59,7 +63,7 @@ namespace Algolia.Search.Iterators
         {
             do
             {
-                SearchResponse<Synonym> result = _index.SearchSynonyms(_query);
+                SearchResponse<Synonym> result = _index.SearchSynonyms(_query, _requestOptions);
                 _hits = result.Hits.Count;
                 _query.Page++;
 
