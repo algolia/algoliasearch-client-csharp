@@ -634,6 +634,14 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
+        /// Retrieve an index’s complete list of synonyms.
+        /// The list includes all synonyms - whether created on the dashboard or pushed by the API.
+        /// The method returns an iterator.
+        /// </summary>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        SynonymsIterator BrowseSynonyms(RequestOptions requestOptions = null); 
+
+        /// <summary>
         /// Create or update multiple synonyms.
         /// </summary>
         /// <param name="synonyms">List of synonyms</param>

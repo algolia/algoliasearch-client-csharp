@@ -154,7 +154,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentException($"{nameof(data)} should not be an IEnumerable/List/Collection");
             }
 
-            return await SaveObjectsAsync(new List<T> {data}, requestOptions, ct, autoGenerateObjectId);
+            return await SaveObjectsAsync(new List<T> { data }, requestOptions, ct, autoGenerateObjectId);
         }
 
         /// <inheritdoc />
@@ -205,8 +205,8 @@ namespace Algolia.Search.Clients
             string tmpIndexName = $"{_indexName}_tmp_{rnd.Next(100)}";
             SearchIndex tmpIndex = new SearchIndex(_transport, Config, tmpIndexName);
 
-            List<string> scopes = new List<string> {CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms};
-            MultiResponse response = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
+            List<string> scopes = new List<string> { CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms };
+            MultiResponse response = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
 
             // Copy index ressources
             CopyToResponse copyResponse =
@@ -270,7 +270,7 @@ namespace Algolia.Search.Clients
         internal async Task<BatchIndexingResponse> SplitIntoBatchesAsync<T>(IEnumerable<T> data, string actionType,
             RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
         {
-            BatchIndexingResponse ret = new BatchIndexingResponse {Responses = new List<BatchResponse>()};
+            BatchIndexingResponse ret = new BatchIndexingResponse { Responses = new List<BatchResponse>() };
             List<T> records = new List<T>();
 
             foreach (var item in data)
@@ -350,7 +350,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(objectIds));
             }
 
-            var request = objectIds.Select(x => new Dictionary<string, string> {{"objectID", x}});
+            var request = objectIds.Select(x => new Dictionary<string, string> { { "objectID", x } });
 
             return await SplitIntoBatchesAsync(request, BatchActionType.DeleteObject, requestOptions, ct)
                 .ConfigureAwait(false);
@@ -497,7 +497,7 @@ namespace Algolia.Search.Clients
                 });
             }
 
-            var request = new MultipleGetObjectsRequest {Requests = queries};
+            var request = new MultipleGetObjectsRequest { Requests = queries };
 
             var response = await _transport
                 .ExecuteRequestAsync<MultipleGetObjectsResponse<T>, MultipleGetObjectsRequest>(HttpMethod.Post,
@@ -783,6 +783,12 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
+        public SynonymsIterator BrowseSynonyms(RequestOptions requestOptions = null) 
+        { 
+            return new SynonymsIterator(this, requestOptions: requestOptions);
+        }
+
+        /// <inheritdoc />
         public SaveSynonymResponse SaveSynonyms(IEnumerable<Synonym> synonyms, RequestOptions requestOptions = null,
             bool forwardToReplicas = false,
             bool replaceExistingSynonyms = false) =>
@@ -942,7 +948,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(destinationIndex);
             }
 
-            var data = new CopyToRequest {Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope};
+            var data = new CopyToRequest { Operation = MoveType.Copy, IndexNameDest = destinationIndex, Scope = scope };
 
             CopyToResponse response = await _transport.ExecuteRequestAsync<CopyToResponse, CopyToRequest>(
                     HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/operation", CallType.Write, data,
@@ -967,7 +973,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(sourceIndex);
             }
 
-            MoveIndexRequest request = new MoveIndexRequest {Operation = MoveType.Move, Destination = _indexName};
+            MoveIndexRequest request = new MoveIndexRequest { Operation = MoveType.Move, Destination = _indexName };
 
             MoveIndexResponse response = await _transport
                 .ExecuteRequestAsync<MoveIndexResponse, MoveIndexRequest>(HttpMethod.Post,
