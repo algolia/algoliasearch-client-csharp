@@ -192,24 +192,6 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public DeleteResponse DeleteIndex(string indexName, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => DeleteIndexAsync(indexName, requestOptions));
-
-        /// <inheritdoc />
-        public async Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
-        {
-            if (string.IsNullOrWhiteSpace(indexName))
-            {
-                throw new ArgumentNullException(indexName);
-            }
-
-            return await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                    $"/1/indexes/{WebUtility.UrlEncode(indexName)}", CallType.Write, requestOptions, ct)
-                .ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
         public string GenerateSecuredApiKeys(string parentApiKey, SecuredApiKeyRestriction restriction)
         {
             string queryParams = QueryStringHelper.BuildRestrictionQueryString(restriction);
