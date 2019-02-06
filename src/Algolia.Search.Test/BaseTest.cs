@@ -65,7 +65,7 @@ public class BaseTest
 
         var yesterday = DateTime.UtcNow.AddDays(-1);
         var indicesToDelete = _indices?.Items?.Where(x =>
-            x.Name.Contains($"csharp_{Environment.OSVersion.Platform}") && x.CreatedAt <= yesterday).ToList();
+            x.Name.Contains($"csharp_") && x.CreatedAt <= yesterday).ToList();
 
         var operations = new List<BatchOperation<string>>();
 
