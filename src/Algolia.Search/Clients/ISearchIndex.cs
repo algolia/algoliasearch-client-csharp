@@ -762,28 +762,6 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
 
         /// <summary>
-        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
-        /// </summary>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="scope">The scope copy</param>
-        /// <returns></returns>
-        CopyToResponse CopyTo(string destinationIndex, RequestOptions requestOptions = null,
-            IEnumerable<string> scope = null);
-
-        /// <summary>
-        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
-        /// </summary>
-        /// <param name="destinationIndex">The destination index</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <param name="scope">The scope copy</param>
-        /// <returns></returns>
-        Task<CopyToResponse> CopyToAsync(string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
-            IEnumerable<string> scope = null);
-
-        /// <summary>
         /// Rename an index. Normally used to reindex your data atomically, without any down time.
         /// </summary>
         /// <param name="sourceIndex"></param>
