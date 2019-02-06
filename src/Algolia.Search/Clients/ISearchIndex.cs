@@ -430,6 +430,14 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
+        /// Retrieve an index’s full list of rules using an iterator.
+        /// The list contains the rule name, plus the complete details of its conditions and consequences.
+        /// The list includes all rules, whether created on the dashboard or pushed by the API.
+        /// </summary>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        RulesIterator BrowseRules(RequestOptions requestOptions = null);
+
+        /// <summary>
         /// Search for rules matching various criteria.
         /// </summary>
         /// <param name="query"></param>
