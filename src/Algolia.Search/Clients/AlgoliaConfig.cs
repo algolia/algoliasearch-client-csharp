@@ -85,6 +85,16 @@ namespace Algolia.Search.Clients
         public int BatchSize { get; set; } = 1000;
 
         /// <summary>
+        /// Set the read timeout in seconds for all requests
+        /// </summary>
+        public int? ReadTimeout { get; set; }
+
+        /// <summary>
+        /// Set the read timeout in seconds for all requests
+        /// </summary>
+        public int? WriteTimeout { get; set; }
+
+        /// <summary>
         /// Configurations hosts
         /// </summary>
         protected internal List<StatefulHost> DefaultHosts { get; set; }
