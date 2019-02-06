@@ -466,22 +466,18 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10,
-            string indexName = null, string type = "all") =>
+        public LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10) =>
             AsyncHelper.RunSync(() =>
-                GetLogsAsync(requestOptions, offset: offset, length: length, indexName: indexName, type: type));
+                GetLogsAsync(requestOptions, offset: offset, length: length));
 
         /// <inheritdoc />
         public async Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10, string indexName = null,
-            string type = "all")
+            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10)
         {
             var queryParams = new Dictionary<string, string>
             {
                 {"offset", offset.ToString()},
-                {"length", length.ToString()},
-                {"indexName", indexName},
-                {"type", type},
+                {"length", length.ToString()}
             };
 
             requestOptions = requestOptions.AddQueryParams(queryParams);
