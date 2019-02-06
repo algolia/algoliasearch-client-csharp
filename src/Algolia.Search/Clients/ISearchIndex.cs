@@ -224,6 +224,21 @@ namespace Algolia.Search.Clients
         DeleteResponse DeleteObject(string objectId, RequestOptions requestOptions = null);
 
         /// <summary>
+        /// Delete the index and all its settings, including links to its replicas.
+        /// </summary>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        DeleteResponse Delete(RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Delete the index and all its settings, including links to its replicas.
+        /// </summary>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<DeleteResponse> DeleteAsync(RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+
+        /// <summary>
         /// Remove objects from an index using their object ids.
         /// </summary>
         /// <param name="objectId">Algolia's objectID</param>

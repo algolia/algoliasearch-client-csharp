@@ -109,24 +109,6 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default(CancellationToken));
 
         /// <summary>
-        /// Delete an index and all its settings, including links to its replicas.
-        /// </summary>
-        /// <param name="indexName"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <returns></returns>
-        DeleteResponse DeleteIndex(string indexName, RequestOptions requestOptions = null);
-
-        /// <summary>
-        /// Delete an index and all its settings, including links to its replicas.
-        /// </summary>
-        /// <param name="indexName"></param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Optional cancellation token</param>
-        /// <returns></returns>
-        Task<DeleteResponse> DeleteIndexAsync(string indexName, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
-
-        /// <summary>
         /// Generate a virtual API Key without any call to the server.
         /// </summary>
         /// <param name="parentApiKey"></param>
