@@ -557,6 +557,12 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
+        public RulesIterator BrowseRules(RequestOptions requestOptions = null) 
+        { 
+            return new RulesIterator(this, requestOptions: requestOptions);
+        }
+
+        /// <inheritdoc />
         public SearchResponse<Rule> SearchRule(RuleQuery query = null, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => SearchRuleAsync(query, requestOptions));
 
