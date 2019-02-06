@@ -940,13 +940,26 @@ namespace Algolia.Search.Clients
             return response;
         }
 
-        /// <inheritdoc />
-        public CopyToResponse CopyTo(string destinationIndex, RequestOptions requestOptions = null,
+        /// <summary>
+        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
+        /// </summary>
+        /// <param name="destinationIndex">The destination index</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="scope">The scope copy</param>
+        /// <returns></returns>
+        internal CopyToResponse CopyTo(string destinationIndex, RequestOptions requestOptions = null,
             IEnumerable<string> scope = null) =>
             AsyncHelper.RunSync(() => CopyToAsync(destinationIndex, requestOptions: requestOptions, scope: scope));
 
-        /// <inheritdoc />
-        public async Task<CopyToResponse> CopyToAsync(string destinationIndex, RequestOptions requestOptions = null,
+        /// <summary>
+        /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
+        /// </summary>
+        /// <param name="destinationIndex">The destination index</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <param name="scope">The scope copy</param>
+        /// <returns></returns>
+        internal async Task<CopyToResponse> CopyToAsync(string destinationIndex, RequestOptions requestOptions = null,
             CancellationToken ct = default(CancellationToken), IEnumerable<string> scope = null)
         {
             if (string.IsNullOrWhiteSpace(destinationIndex))
