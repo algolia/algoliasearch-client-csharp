@@ -1,5 +1,39 @@
 Changelog
 =========
+6.0.0 (2019-02-07)
+
+Big major release for the .NET API Client. 
+There are breaking changes on signatures because every requests/responses are not typed. 
+
+* .NET related:
+- Total rewrite of the code base
+- Implementing .NET Standard 1.3 and .NET Standard 2.0
+- Backward compatible until .NET 4.5 framework
+- Project building cross platform
+
+* Internals related:
+- Async/sync methods with Cancellation token for async
+- Thread safe clients
+- Injectable HTTPClient
+- Types for every request/response
+- Documented types and requests
+- Isolated  and testable Retry Strategy
+- Payload logger in debug mode
+- Implemented the Algolia’s API Client Test suite
+- Parallel test suite
+  
+* Algolia related:
+- AutoSplit objects in Save methods
+- SaveRules, SaveSynonyms, SaveObjects now accept iterators
+- New class: AccountClient
+- New Method: AccountClient.CopyIndex allow you to copy and index from an application to another
+- New method: ReplaceAllRules
+- New method: ReplaceAllSynonyms
+- New method: ReplaceAllObjects
+- New method: CopySettings
+- New method: CopySynonyms
+- New method: CopyRules
+
 5.3.1 (2018-12-18)
 - Added enablePersonalization on SearchQuery
 
