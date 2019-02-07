@@ -7,12 +7,12 @@ you easily use the [Algolia Search REST API](https://www.algolia.com/doc/rest-ap
 your .NET code.
 
 [![NuGet version (Algolia.Search](https://img.shields.io/nuget/v/Algolia.Search.svg?style=flat-square)](https://www.nuget.org/packages/Algolia.Search/)
-[![Build Status](https://dev.azure.com/algolia-api-clients/dotnet/_apis/build/status/Algolia.Search?branchName=master)](https://dev.azure.com/algolia-api-clients/dotnet/_build/latest?definitionId=2?branchName=master)
+[![Build Status](https://dev.azure.com/algolia-api-clients/dotnet/_apis/build/status/Algolia.Search.CI?branchName=master)](https://dev.azure.com/algolia-api-clients/dotnet/_build/latest?definitionId=2&branchName=master)
 
 
 ### Migration note from v5.x to v6.x
 
-In January 2019, we released v6 of our .NET client. If you are using version 5.x of the client, read the [migration guide to version 6.x](../../upgrade-from-v1/csharp).
+In January 2019, we released v6 of our .NET client. If you are using version 5.x of the client, read the [migration guide to version 6.x](https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/csharp/).
 Version 5.x will **no longer** be under active development.
 
 **Note:** If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.com/doc/api-client/getting-started/tutorials/asp.net/csharp/).
