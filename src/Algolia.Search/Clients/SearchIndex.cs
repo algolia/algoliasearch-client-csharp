@@ -328,8 +328,8 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(objectId));
             }
 
-            DeleteResponse response = await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Get,
-                    $"/1/indexes/{_urlEncodedIndexName}/{objectId}", CallType.Read, requestOptions, ct)
+            DeleteResponse response = await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
+                    $"/1/indexes/{_urlEncodedIndexName}/{objectId}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitTask(t);

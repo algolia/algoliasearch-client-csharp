@@ -230,6 +230,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var delete = await _indexDeleteBy.DeleteObjectAsync("1");
             delete.Wait();
 
+            var searchAfterDelete = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
+            Assert.True(searchAfterDelete.Hits.Count == 9);
+
             var resp = await _indexDeleteBy.DeleteByAsync(new Query { TagFilters = "car" });
             resp.Wait();
 
