@@ -1,5 +1,11 @@
 Changelog
 =========
+6.0.1 (2019-02-11)
+
+- Fixed: DeleteObject not working properly because of wrong URI
+- Fixed: SaveObject not working properly with JsonPropertyAttribute
+- Fixed: SaveObject not working properly with POCO that have ObjectID property in base class
+
 6.0.0 (2019-02-07)
 
 Big major release for the .NET API Client. 
