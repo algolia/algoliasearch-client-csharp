@@ -124,10 +124,10 @@ namespace Algolia.Search.Utils
 
             var camelCaseProperty = CamelCaseHelper.ToCamelCase(propertyName);
 
-            if (typeInfo.GetCustomAttribute<JsonPropertyAttribute>() != null)
+            if (declaredProperties.Any(x => x.GetCustomAttribute<JsonPropertyAttribute>() != null))
             {
-                return declaredProperties.FirstOrDefault(p =>
-                    p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Equals(camelCaseProperty));
+                var propertiesWithJsonPropertyattributes = declaredProperties.Where(p => p.GetCustomAttribute<JsonPropertyAttribute>() != null);
+                return propertiesWithJsonPropertyattributes.FirstOrDefault(p => p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName.Contains(camelCaseProperty));
             }
 
             return null;
