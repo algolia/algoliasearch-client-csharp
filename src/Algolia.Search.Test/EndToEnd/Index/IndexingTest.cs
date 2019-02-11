@@ -280,9 +280,13 @@ namespace Algolia.Search.Test.EndToEnd.Index
         }
     }
 
-    public class AlgoliaStub
+    public class AlgoliaObject
     {
         public string ObjectID { get; set; }
+    }
+
+    public class AlgoliaStub : AlgoliaObject
+    {
         public string Property { get; set; } = "Default";
         [JsonProperty(PropertyName = "_tags")]
         public List<string> Tags { get; set; }

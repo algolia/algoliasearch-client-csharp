@@ -25,6 +25,7 @@ using Algolia.Search.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -88,6 +89,22 @@ namespace Algolia.Search.Utils
         }
 
         /// <summary>
+        /// Get all properties of a type (including base class)
+        /// </summary>
+        /// <param name="T"></param>
+        public static IEnumerable<PropertyInfo> GetAllProperties(Type T)
+        {
+            IEnumerable<PropertyInfo> PropertyList = T.GetTypeInfo().DeclaredProperties;
+
+            if (T.GetTypeInfo().BaseType != null)
+            {
+                PropertyList = PropertyList.Concat(GetAllProperties(T.GetTypeInfo().BaseType));
+            }
+
+            return PropertyList;
+        }
+
+        /// <summary>
         /// Check if the Property or JsonPropertyAttribute exists in the given type, return null if not exist otherwise return propertyInfo
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
@@ -96,7 +113,7 @@ namespace Algolia.Search.Utils
         private static PropertyInfo PropertyOrJsonAttributeExists<T>(string propertyName)
         {
             var typeInfo = typeof(T).GetTypeInfo();
-            var declaredProperties = typeInfo.DeclaredProperties;
+            var declaredProperties = GetAllProperties(typeof(T));
 
             var objectIdProperty = declaredProperties.FirstOrDefault(p => p.Name.Equals(propertyName));
 
