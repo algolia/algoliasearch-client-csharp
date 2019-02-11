@@ -70,7 +70,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
         public async Task IndexOperationsAsyncTest()
         {
             // AddObject with ID
-            var objectOne = new AlgoliaStub { ObjectID = "one" };
+            var objectOne = new AlgoliaStub { ObjectId = "one" };
             var addObject = _index.SaveObjectAsync(objectOne);
 
             // AddObject without ID
@@ -80,8 +80,8 @@ namespace Algolia.Search.Test.EndToEnd.Index
             // Save two objects with objectID
             var objectsWithIds = new List<AlgoliaStub>
             {
-                new AlgoliaStub {ObjectID = "two"},
-                new AlgoliaStub {ObjectID = "three"}
+                new AlgoliaStub {ObjectId = "two"},
+                new AlgoliaStub {ObjectId = "three"}
             };
 
             var addObjects = _index.SaveObjectsAsync(objectsWithIds);
@@ -102,7 +102,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             for (int i = 0; i < 1000; i++)
             {
                 var id = (i + 1).ToString();
-                objectsToBatch.Add(new AlgoliaStub { ObjectID = id, Property = $"Property{id}" });
+                objectsToBatch.Add(new AlgoliaStub { ObjectId = id, Property = $"Property{id}" });
                 ids.Add(id);
             }
 
@@ -116,11 +116,11 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             // Six first records
             var generatedId = addObjectWoId.Result.Responses[0].ObjectIDs.ToList();
-            objectWoId.ObjectID = generatedId.ElementAt(0);
+            objectWoId.ObjectId = generatedId.ElementAt(0);
 
             var generatedIDs = addObjectsWoId.Result.Responses[0].ObjectIDs.ToList();
-            objectsWoId[0].ObjectID = generatedIDs.ElementAt(0);
-            objectsWoId[1].ObjectID = generatedIDs.ElementAt(1);
+            objectsWoId[0].ObjectId = generatedIDs.ElementAt(0);
+            objectsWoId[1].ObjectId = generatedIDs.ElementAt(1);
 
             var settedIds = new List<string> { "one", "two", "three" };
 
@@ -164,7 +164,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var partialUpdateObject = await _index.PartialUpdateObjectAsync(objectToPartialUpdate);
             partialUpdateObject.Wait();
 
-            var getUpdatedObject = await _index.GetObjectAsync<AlgoliaStub>(objectToPartialUpdate.ObjectID);
+            var getUpdatedObject = await _index.GetObjectAsync<AlgoliaStub>(objectToPartialUpdate.ObjectId);
             Assert.True(getUpdatedObject.Property.Equals(objectToPartialUpdate.Property));
 
             // Update two objects
@@ -183,8 +183,8 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var getUpdatedObjects = (await _index.GetObjectsAsync<AlgoliaStub>(new List<string>
             {
-                objectToPartialUpdate1.ObjectID,
-                objectToPartialUpdate2.ObjectID
+                objectToPartialUpdate1.ObjectId,
+                objectToPartialUpdate2.ObjectId
             })).ToList();
 
             Assert.True(getUpdatedObjects.ElementAt(0).Property.Equals(objectToPartialUpdate1.Property));
@@ -220,7 +220,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             for (int i = 0; i < 10; i++)
             {
                 var id = (i + 1).ToString();
-                objectsToBatch.Add(new AlgoliaStub { ObjectID = id, Tags = new List<string> { "car" } });
+                objectsToBatch.Add(new AlgoliaStub { ObjectId = id, Tags = new List<string> { "car" } });
                 ids.Add(id);
             }
 
@@ -246,7 +246,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             for (int i = 0; i < 10; i++)
             {
                 var id = (i + 1).ToString();
-                objectsToBatch.Add(new AlgoliaStub { ObjectID = id, Tags = new List<string> { "car" } });
+                objectsToBatch.Add(new AlgoliaStub { ObjectId = id, Tags = new List<string> { "car" } });
                 ids.Add(id);
             }
 
@@ -264,7 +264,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
         [Parallelizable]
         public async Task MoveIndexTest()
         {
-            var objectOne = new AlgoliaStub { ObjectID = "one" };
+            var objectOne = new AlgoliaStub { ObjectId = "one" };
             var addObject = await _indexMove.SaveObjectAsync(objectOne);
 
             addObject.Wait();
@@ -282,7 +282,8 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
     public class AlgoliaObject
     {
-        public string ObjectID { get; set; }
+        [JsonProperty(PropertyName = "objectID")]
+        public string ObjectId { get; set; }
     }
 
     public class AlgoliaStub : AlgoliaObject
