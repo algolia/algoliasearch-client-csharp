@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Search
@@ -74,6 +75,17 @@ namespace Algolia.Search.Models.Search
         /// An echo of the query text.
         /// </summary>
         public bool? ExhaustiveFacetsCount { get; set; }
+
+        /// <summary>
+        /// A mapping of each facet name to the corresponding facet counts.
+        /// </summary>
+        public Dictionary<string, Dictionary<string, long>> Facets { get; set; }
+
+        /// <summary>
+        /// Statistics for numerical facets.
+        /// </summary>
+        [JsonPropertyAttribute("facet_stats")]
+        public Dictionary<string, Dictionary<string, FacetStats>> FacetsStats { get; set; }
 
         /// <summary>
         /// An echo of the query text.
@@ -131,5 +143,15 @@ namespace Algolia.Search.Models.Search
         ///  The query string that will be searched, after normalization.
         /// </summary>
         public string ParsedQuery { get; set; }
+
+        /// <summary>
+        /// Custom user data
+        /// </summary>
+        public object UserData { get; set; }
+
+        /// <summary>
+        /// Rules applied to the query
+        /// </summary>
+        public IEnumerable<Dictionary<string, object>> AppliedRules { get; set; }
     }
 }
