@@ -45,6 +45,16 @@ namespace Algolia.Search.Models.Search
         public int Page { get; set; }
 
         /// <summary>
+        ///  Number of hits returned (used only with offset).
+        /// </summary>
+        public int? Length { get; set; }
+
+        /// <summary>
+        /// The offset of the first hit to returned.
+        /// </summary>
+        public int? Offset { get; set; }
+
+        /// <summary>
         /// Number of hits matched by the query.
         /// </summary>
         public int NbHits { get; set; }
@@ -121,13 +131,18 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// The automatically computed radius. For legacy reasons, this parameter is a string and not an integer..
         /// </summary>
-        public float? AutomaticRadius { get; set; }
+        public string AutomaticRadius { get; set; }
 
         /// <summary>
         /// Actual host name of the server that processed the request.
         /// Our DNS supports automatic failover and load balancing, so this may differ from the host name used in the request.
         /// </summary>
         public string ServerUsed { get; set; }
+
+        /// <summary>
+        ///  Index name used for the query.
+        /// </summary>
+        public string Index { get; set; }
 
         /// <summary>
         ///  Index name used for the query. In case of AB test, the index targetted isn’t always the index used by the query.
