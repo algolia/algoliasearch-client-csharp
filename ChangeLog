@@ -1,5 +1,10 @@
 Changelog
 =========
+6.0.3 (2019-02-13)
+
+- Added: Missing parameters in the SearchResponse object: Facets, FacetsStats, UserData, AppliedRules, Length, Offset
+- Fixed: AutomaticRadius type in SearchResponse float => string
+
 6.0.1 (2019-02-11)
 
 - Fixed: DeleteObject not working properly because of wrong URI
