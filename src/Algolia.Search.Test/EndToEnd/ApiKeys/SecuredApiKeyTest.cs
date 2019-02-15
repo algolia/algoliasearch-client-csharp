@@ -35,7 +35,6 @@ namespace Algolia.Search.Test.EndToEnd.ApiKeys
 {
     [TestFixture]
     [Parallelizable]
-    [Ignore("Key feature down atm")]
     public class SecuredApiKeyTest
     {
         private SearchIndex _index1;
