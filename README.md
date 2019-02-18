@@ -416,6 +416,7 @@ search.start();
 - [Add API Key](https://algolia.com/doc/api-reference/api-methods/add-api-key/?language=csharp)
 - [Update API Key](https://algolia.com/doc/api-reference/api-methods/update-api-key/?language=csharp)
 - [Delete API Key](https://algolia.com/doc/api-reference/api-methods/delete-api-key/?language=csharp)
+- [Restore API Key](https://algolia.com/doc/api-reference/api-methods/restore-api-key/?language=csharp)
 - [Get API Key permissions](https://algolia.com/doc/api-reference/api-methods/get-api-key/?language=csharp)
 - [List API Keys](https://algolia.com/doc/api-reference/api-methods/list-api-keys/?language=csharp)
 
