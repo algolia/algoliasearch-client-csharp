@@ -38,7 +38,7 @@ namespace Algolia.Search.Models.Analytics
         /// <summary>
         /// Percentage of the traffic that should be going to the variant. The sum of the percentage should be equal to 100.
         /// </summary>
-        public int TrafficPercentage { get; set; }
+        public int? TrafficPercentage { get; set; }
 
         /// <summary>
         /// Description of the variant. This is useful when seing the results in the dashboard or via the API.
@@ -48,42 +48,42 @@ namespace Algolia.Search.Models.Analytics
         /// <summary>
         /// Average click position for the variant.
         /// </summary>
-        public int AverageClickPostion { get; set; }
+        public int? AverageClickPostion { get; set; }
 
         /// <summary>
         /// Distinct click count for the variant.
         /// </summary>
-        public int ClickCount { get; set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public float ClickThroughRate { get; set; }
+        public int? ClickCount { get; set; }
 
         /// <summary>
         /// Click through rate for the variant.
         /// </summary>
-        public int ConversionCount { get; set; }
+        public float? ClickThroughRate { get; set; }
+
+        /// <summary>
+        /// Click through rate for the variant.
+        /// </summary>
+        public int? ConversionCount { get; set; }
 
         /// <summary>
         /// Distinct conversion count for the variant.
         /// </summary>
-        public float ConversionRate { get; set; }
+        public float? ConversionRate { get; set; }
 
         /// <summary>
         /// No result count
         /// </summary>
-        public int NoResultCount { get; set; }
+        public int? NoResultCount { get; set; }
 
         /// <summary>
         /// Search count
         /// </summary>
-        public int SearchCount { get; set; }
+        public int? SearchCount { get; set; }
 
         /// <summary>
         /// user Count
         /// </summary>
-        public int UserCount { get; set; }
+        public int? UserCount { get; set; }
 
         /// <summary>
         /// Search parameters for AA Testing

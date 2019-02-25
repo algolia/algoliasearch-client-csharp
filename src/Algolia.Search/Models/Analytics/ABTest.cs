@@ -49,26 +49,26 @@ namespace Algolia.Search.Models.Analytics
         /// <summary>
         /// End date for the AB Test
         /// </summary>
-        public DateTime EndAt { get; set; }
+        public DateTime? EndAt { get; set; }
 
         /// <summary>
         /// Date of creation
         /// </summary>
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         /// <summary>
         /// Ab test ID
         /// </summary>
-        public long AbTestId { get; set; }
+        public long? AbTestId { get; set; }
 
         /// <summary>
         /// ABTest significance based on click data. Should be > 0.95 to be considered significant (no matter which variant is winning).
         /// </summary>
-        public int ClickSignificance { get; set; }
+        public int? ClickSignificance { get; set; }
 
         /// <summary>
         /// ABTest significance based on conversion data. Should be > 0.95 to be considered significant (no matter which variant is winning)
         /// </summary>
-        public int ConversionSignificance { get; set; }
+        public int? ConversionSignificance { get; set; }
     }
 }
