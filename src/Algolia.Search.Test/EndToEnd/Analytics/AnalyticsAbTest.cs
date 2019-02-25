@@ -67,7 +67,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
 
                 foreach (var item in abTestsToDelete)
                 {
-                    await BaseTest.AnalyticsClient.DeleteABTestAsync(item.AbTestId);
+                    await BaseTest.AnalyticsClient.DeleteABTestAsync(item.AbTestId.Value);
                 }
             }
 
@@ -103,25 +103,25 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             abTest.AbTestId = addAbTest.ABTestId;
             _index1.WaitTask(addAbTest.TaskID);
 
-            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId);
-            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status"));
+            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
+            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
             Assert.IsFalse(abTestToCheck.Status.Equals("stopped"));
 
             ABTestsReponse listAbTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
             Assert.IsTrue(listAbTests.ABTests.Any(x => x.AbTestId == abTest.AbTestId));
             Assert.IsTrue(TestHelper.AreObjectsEqual(
-                listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status"));
+                listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
 
-            await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId);
+            await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId.Value);
 
-            ABTest stoppedAbTest = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId);
+            ABTest stoppedAbTest = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
             Assert.IsTrue(stoppedAbTest.Status.Equals("stopped"));
 
-            DeleteABTestResponse deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId);
+            DeleteABTestResponse deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId.Value);
             _index1.WaitTask(deleteAbTest.TaskID);
 
             AlgoliaApiException ex =
-                Assert.ThrowsAsync<AlgoliaApiException>(() => BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId));
+                Assert.ThrowsAsync<AlgoliaApiException>(() => BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value));
             Assert.That(ex.HttpErrorCode == 404);
         }
 

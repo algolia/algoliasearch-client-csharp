@@ -64,7 +64,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
 
                 foreach (var item in abTestsToDelete)
                 {
-                    await BaseTest.AnalyticsClient.DeleteABTestAsync(item.AbTestId);
+                    await BaseTest.AnalyticsClient.DeleteABTestAsync(item.AbTestId.Value);
                 }
             }
             var addOne = await _index.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
@@ -102,8 +102,8 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             abTest.AbTestId = addAbTest.ABTestId;
             _index.WaitTask(addAbTest.TaskID);
 
-            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId);
-            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status"));
+            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
+            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
             Assert.IsTrue(abTestToCheck.Status.Equals("active"));
         }
 
