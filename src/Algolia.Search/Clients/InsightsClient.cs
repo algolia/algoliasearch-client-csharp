@@ -130,7 +130,7 @@ namespace Algolia.Search.Clients
             var request = new InsightsRequest {Events = insightEvents};
 
             return await _transport.ExecuteRequestAsync<InsightsResponse, InsightsRequest>(HttpMethod.Post,
-                    "/1/events", CallType.Read, request, requestOptions, ct)
+                    "/1/events", CallType.Write, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }
     }
