@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Search
@@ -46,7 +47,8 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Search parameters to be used to search the underlying index
         /// </summary>
-        [JsonProperty(PropertyName = "requests")]
+        [JsonProperty(PropertyName = "params")]
+        [JsonConverter(typeof(QuerySerializer))]
         public Query SearchParameters { get; set; }
     }
 }
