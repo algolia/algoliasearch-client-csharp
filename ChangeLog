@@ -1,5 +1,14 @@
 Changelog
 =========
+
+6.1.0 (2019-02-26)
+
+- Added: SearchClient.RestoreAPIKey method 
+- Added: Support for AA Testing (AB testing on the same index with custom parameters)
+- Fixed properties type in the ABTest/Variant class
+- Fixed  wrong JsonProperty name of SearchForFacetRequest
+- Fixed wrong calltype for Insights/SendEvents
+
 6.0.3 (2019-02-13)
 
 - Added: Missing parameters in the SearchResponse object: Facets, FacetsStats, UserData, AppliedRules, Length, Offset

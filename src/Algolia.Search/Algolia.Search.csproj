@@ -14,11 +14,11 @@
     <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageDescription>
-      Algolia API Client for .NET  Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries, and pre-built integrations.
+    Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries, and pre-built integrations. Algolia API Client for the .NET framework lets you easily use the Algolia Search REST API from your .NET code.
     </PackageDescription>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Copyright>Copyright 2019 Algolia</Copyright>
-    <Version>6.0.2</Version>
+    <Version>6.1.0</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0;netstandard1.3</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;netstandard1.3;net45;</TargetFrameworks>
