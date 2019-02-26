@@ -94,8 +94,8 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Statistics for numerical facets.
         /// </summary>
-        [JsonPropertyAttribute("facet_stats")]
-        public Dictionary<string, Dictionary<string, FacetStats>> FacetsStats { get; set; }
+        [JsonPropertyAttribute("facets_stats")]
+        public Dictionary<string, FacetStats> FacetsStats { get; set; }
 
         /// <summary>
         /// An echo of the query text.
