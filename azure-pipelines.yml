@@ -29,6 +29,7 @@ jobs:
       - script: >-
           dotnet pack src -c $(buildConfiguration) -o
           $(Build.ArtifactStagingDirectory)
+        displayName: dotnet pack
       - task: PublishBuildArtifacts@1
         inputs:
           pathtoPublish: $(Build.ArtifactStagingDirectory)
