@@ -27,7 +27,7 @@ jobs:
           testRunner: VSTest
           testResultsFiles: '**/*.trx'
       - script: >-
-          dotnet pack -c $(buildConfiguration) -o
+          dotnet pack src -c $(buildConfiguration) -o
           $(Build.ArtifactStagingDirectory)
       - task: PublishBuildArtifacts@1
         inputs:
