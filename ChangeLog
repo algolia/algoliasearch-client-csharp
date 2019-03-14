@@ -1,6 +1,11 @@
 Changelog
 =========
 
+6.1.2 (2019-03-14)
+
+- Fixed: Package icon URL
+- Fixed: Missing encoding of URL parameters
+
 6.1.1 (2019-02-26)
 
 - Fixed wrong JsonPropertyName for facets_stats
