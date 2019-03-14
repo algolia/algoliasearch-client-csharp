@@ -8,7 +8,7 @@
     <PackageId>Algolia.Search</PackageId>
     <PackageTags>Algolia;Search;SearchEngine;Service;Instant;Typo-Tolerance;Realtime;Analytics</PackageTags>
     <PackageReleaseNotes>https://github.com/algolia/algoliasearch-client-csharp/blob/master/ChangeLog</PackageReleaseNotes>
-    <PackageIconUrl>https://www.algolia.com/static_assets/images/press/downloads/algolia-mark-blue.png</PackageIconUrl>
+    <PackageIconUrl>https://s.gravatar.com/avatar/ef38ca989ef6a4a6373435c257373b84?s=80</PackageIconUrl>
     <PackageProjectUrl>https://www.algolia.com/doc/api-client/getting-started/install/csharp/</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
