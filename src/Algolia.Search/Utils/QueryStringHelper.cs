@@ -24,7 +24,9 @@
 using Algolia.Search.Models.ApiKeys;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -55,7 +57,7 @@ namespace Algolia.Search.Utils
 
             string restrictionQueryParams = ToQueryString(restriction, nameof(restriction.Query),
                 nameof(restriction.RestrictIndices), nameof(restriction.RestrictSources));
-            var array = new[] {restrictionQuery, restrictIndices, restrictSources, restrictionQueryParams};
+            var array = new[] { restrictionQuery, restrictIndices, restrictSources, restrictionQueryParams };
 
             return string.Join("&", array.Where(s => !string.IsNullOrEmpty(s)));
         }
@@ -69,11 +71,54 @@ namespace Algolia.Search.Utils
         /// <returns></returns>
         public static string ToQueryString<T>(T value, params string[] ignoreList)
         {
+            // Flat properties
             IEnumerable<string> properties = typeof(T).GetTypeInfo()
                 .DeclaredProperties.Where(p =>
+                    !(p.PropertyType.GetTypeInfo().IsGenericType && typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(p.PropertyType.GetTypeInfo())) &&
                     p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&
                     p.GetCustomAttribute<JsonPropertyAttribute>() == null)
-                .Select(p => p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
+                .Select(p =>
+                {
+                    string encodedValue = Nullable.GetUnderlyingType(p.PropertyType) == typeof(bool) ? Uri.EscapeDataString(p.GetValue(value, null).ToString().ToLower()) :
+                    Uri.EscapeDataString(p.GetValue(value, null).ToString());
+                    return p.Name.ToCamelCase() + "=" + encodedValue;
+                });
+
+            // List<T> and List<List<T>> properties
+            IEnumerable<string> listProperties = typeof(T).GetTypeInfo()
+                .DeclaredProperties.Where(p =>
+                    p.PropertyType.GetTypeInfo().IsGenericType && typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(p.PropertyType.GetTypeInfo()) &&
+                    p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&
+                    p.GetCustomAttribute<JsonPropertyAttribute>() == null)
+                .Select(p =>
+                {
+                    string encodedValue = null;
+                    var genericTypeArgument = p.PropertyType.GenericTypeArguments[0];
+
+                    // In case of nested lists
+                    if (typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(genericTypeArgument.GetTypeInfo()) && genericTypeArgument != typeof(string))
+                    {
+                        if (typeof(IEnumerable<float>).GetTypeInfo().IsAssignableFrom(genericTypeArgument.GetTypeInfo()))
+                        {
+                            IEnumerable<float> flatList = ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<float>>().SelectMany(i => i).ToList();
+                            // Culture set to en-US to have floating points separators with "."
+                            encodedValue = Uri.EscapeDataString(string.Join(",", flatList.Select(f => f.ToString("0.0", CultureInfo.InvariantCulture))));
+                        }
+                        else
+                        {
+                            IEnumerable<Object> flatList = ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<Object>>().SelectMany(i => i).ToList();
+                            encodedValue = Uri.EscapeDataString(string.Join(",", flatList));
+                        }
+                    }
+                    else
+                    {
+                        // One level list
+                        IEnumerable<Object> flatList = ((IEnumerable)p.GetValue(value, null)).Cast<Object>();
+                        encodedValue = Uri.EscapeDataString(string.Join(",", flatList));
+                    }
+
+                    return p.Name.ToCamelCase() + "=" + encodedValue;
+                });
 
             // Handle properties with JsonPropertyAttribute
             var attr = typeof(T).GetTypeInfo().GetCustomAttribute<JsonPropertyAttribute>();
@@ -83,10 +128,10 @@ namespace Algolia.Search.Utils
                     p.GetCustomAttribute<JsonPropertyAttribute>() != null)
                 .Select(p =>
                     p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName + "=" +
-                    WebUtility.UrlEncode(p.GetValue(value, null).ToString()));
+                    Uri.EscapeDataString(p.GetValue(value, null).ToString()));
 
             // Merge twoListBeforeSending
-            var mergedProperties = propertiesWithJsonAttribute.Concat(properties);
+            var mergedProperties = propertiesWithJsonAttribute.Concat(properties).Concat(listProperties);
 
             return string.Join("&", mergedProperties.ToArray());
         }
@@ -100,7 +145,7 @@ namespace Algolia.Search.Utils
 
             return string.Join("&",
                 dic.Select(kvp =>
-                    string.Format($"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}")));
+                    string.Format($"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}")));
         }
     }
 }
