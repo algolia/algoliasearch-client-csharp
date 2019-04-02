@@ -466,26 +466,10 @@ namespace Algolia.Search.Clients
             var userIdHeader = new Dictionary<string, string>() { { "X-Algolia-USER-ID", userId } };
             requestOptions = requestOptions.AddHeaders(userIdHeader);
 
-            try
-            {
-                RemoveUserIdResponse response = await _transport.ExecuteRequestAsync<RemoveUserIdResponse>(
-                        HttpMethod.Delete,
-                        $"/1/clusters/mapping", CallType.Write, requestOptions, ct)
-                    .ConfigureAwait(false);
-
-                response.UserId = userId;
-                response.RemoveUserId = u => RemoveUserId(u);
-                return response;
-            }
-            catch (AlgoliaApiException ex)
-            {
-                if (!ex.Message.Contains("Another mapping operation is already running for this userID"))
-                {
-                    throw;
-                }
-
-                return new RemoveUserIdResponse { UserId = userId, RemoveUserId = u => RemoveUserId(u) };
-            }
+            return await _transport.ExecuteRequestAsync<RemoveUserIdResponse>(
+                    HttpMethod.Delete,
+                    $"/1/clusters/mapping", CallType.Write, requestOptions, ct)
+                .ConfigureAwait(false);
         }
 
         /// <inheritdoc />

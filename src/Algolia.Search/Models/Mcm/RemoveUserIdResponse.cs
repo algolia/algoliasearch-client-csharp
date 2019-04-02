@@ -31,7 +31,7 @@ namespace Algolia.Search.Models.Mcm
     /// <summary>
     /// Waitable response for removeUserId
     /// </summary>
-    public class RemoveUserIdResponse : IAlgoliaWaitableResponse
+    public class RemoveUserIdResponse
     {
         internal Func<string, RemoveUserIdResponse> RemoveUserId { get; set; }
 
@@ -44,36 +44,5 @@ namespace Algolia.Search.Models.Mcm
         /// Date of deletion
         /// </summary>
         public DateTime DeletedAt { get; set; }
-
-        /// <summary>
-        /// As the delete operation is asynchronous
-        /// Wait until the userId is deleted on the API
-        /// </summary>
-        public void Wait()
-        {
-            RemoveUserIdResponse deleteResponse;
-
-            while (true)
-            {
-                try
-                {
-                    deleteResponse = RemoveUserId(UserId);
-                }
-                catch (AlgoliaApiException ex)
-                {
-                    // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
-                    if (ex.Message.Contains("Another mapping operation is already running for this userID"))
-                    {
-                        Task.Delay(1000);
-                        continue;
-                    }
-
-                    throw;
-                }
-
-                DeletedAt = deleteResponse.DeletedAt;
-                break;
-            }
-        }
     }
 }

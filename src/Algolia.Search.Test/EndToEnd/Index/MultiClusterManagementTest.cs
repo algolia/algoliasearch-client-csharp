@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Search;
 using NUnit.Framework;
@@ -45,7 +46,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             string userId = TestHelper.GetMcmUserId();
             AssignUserIdResponse assignResponse =
                 await BaseTest.McmClient.AssignUserIdAsync(userId, listClusters.ElementAt(0).ClusterName);
-            assignResponse.Wait();
+            WaitUserId(userId);
 
             SearchResponse<UserIdResponse> searchResponse =
                 await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest
@@ -58,8 +59,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             TopUserIdResponse topUserIds = await BaseTest.McmClient.GetTopUserIdAsync();
             Assert.True(topUserIds.TopUsers.Any());
 
-            RemoveUserIdResponse removeResponse = await BaseTest.McmClient.RemoveUserIdAsync(userId);
-            removeResponse.Wait();
+            RemoveUserId(userId);
 
             ListUserIdsResponse listUserIdsTwo = await BaseTest.McmClient.ListUserIdsAsync();
             var yesterday = DateTime.UtcNow.AddDays(-1).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -69,6 +69,56 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var delete =
                 userIdsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID)).ToArray();
             await Task.WhenAll(delete);
+        }
+        
+        private void WaitUserId(string userId)
+        {
+            while (true)
+            {
+                try
+                {
+                    BaseTest.McmClient.GetUserId(userId);
+                }
+                catch (AlgoliaApiException ex)
+                {
+                    // Loop until we have found the userID
+                    if (ex.HttpErrorCode == 404)
+                    {
+                        Task.Delay(1000);
+                        continue;
+                    }
+
+                    throw;
+                }
+
+                break;
+            }
+        }
+        
+        private void RemoveUserId(String userId)
+        {
+            RemoveUserIdResponse deleteResponse;
+
+            while (true)
+            {
+                try
+                {
+                    deleteResponse = BaseTest.McmClient.RemoveUserId(userId);
+                }
+                catch (AlgoliaApiException ex)
+                {
+                    // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
+                    if (ex.Message.Contains("Another mapping operation is already running for this userID"))
+                    {
+                        Task.Delay(1000);
+                        continue;
+                    }
+
+                    throw;
+                }
+
+                break;
+            }
         }
     }
 }
