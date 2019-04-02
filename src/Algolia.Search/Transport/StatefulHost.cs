@@ -42,11 +42,6 @@ namespace Algolia.Search.Transport
         public bool Up { get; set; } = true;
 
         /// <summary>
-        /// Host's priority
-        /// </summary>
-        public int Priority { get; set; }
-
-        /// <summary>
         /// Retry count
         /// </summary>
         public int RetryCount { get; set; }
