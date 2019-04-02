@@ -47,7 +47,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 new StatefulHost
                 {
                     Url = "-1.algolianet.com",
-                    Priority = 0,
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
@@ -55,7 +54,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 new StatefulHost
                 {
                     Url = "-2.algolianet.com",
-                    Priority = 0,
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
@@ -63,7 +61,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
                 new StatefulHost
                 {
                     Url = "-3.algolianet.com",
-                    Priority = 0,
                     Up = false,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,

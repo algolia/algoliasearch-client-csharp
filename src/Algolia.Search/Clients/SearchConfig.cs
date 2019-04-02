@@ -47,7 +47,6 @@ namespace Algolia.Search.Clients
                 new StatefulHost
                 {
                     Url = $"{applicationId}-dsn.algolia.net",
-                    Priority = 10,
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read
@@ -55,7 +54,6 @@ namespace Algolia.Search.Clients
                 new StatefulHost
                 {
                     Url = $"{applicationId}.algolia.net",
-                    Priority = 10,
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Write,
@@ -67,7 +65,6 @@ namespace Algolia.Search.Clients
                 new StatefulHost
                 {
                     Url = $"{applicationId}-1.algolianet.com",
-                    Priority = 0,
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
@@ -75,7 +72,6 @@ namespace Algolia.Search.Clients
                 new StatefulHost
                 {
                     Url = $"{applicationId}-2.algolianet.com",
-                    Priority = 0,
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
@@ -83,7 +79,6 @@ namespace Algolia.Search.Clients
                 new StatefulHost
                 {
                     Url = $"{applicationId}-3.algolianet.com",
-                    Priority = 0,
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
