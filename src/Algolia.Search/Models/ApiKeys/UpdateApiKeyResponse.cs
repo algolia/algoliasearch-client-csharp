@@ -52,7 +52,7 @@ namespace Algolia.Search.Models.ApiKeys
 
         /// <summary>
         /// Wait until the key is updated
-        /// Can be used for debuggin purposes
+        /// Can be used for debugging purposes
         /// </summary>
         public void Wait()
         {
