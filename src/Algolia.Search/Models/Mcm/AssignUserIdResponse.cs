@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Mcm
         public string UserId { get; set; }
 
         /// <summary>
-        /// /// Date of creation of the userId
+        /// Date of creation of the userId
         /// </summary>
         public DateTime CreatedAt { get; set; }
     }
