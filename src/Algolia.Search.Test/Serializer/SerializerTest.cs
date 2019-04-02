@@ -24,6 +24,7 @@
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Rules;
+using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
@@ -38,6 +39,79 @@ namespace Algolia.Search.Test.Serializer
     [Parallelizable]
     public class SerializerTest
     {
+        [Test]
+        [Parallelizable]
+        public void TestQueryStringEmpty()
+        {
+            Query query = new Query();
+            Assert.AreEqual(query.ToQueryString(), "");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestQueryWithHtmlEntities()
+        {
+            Query query = new Query("&?@:=");
+            Assert.AreEqual(query.ToQueryString(), "query=%26%3F%40%3A%3D");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestQueryWithUTF8()
+        {
+            Query query = new Query("é®„");
+            Assert.AreEqual(query.ToQueryString(), "query=%C3%A9%C2%AE%E2%80%9E");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestQueryWithBooleanParam()
+        {
+            Query query = new Query("") { AroundLatLngViaIP = true };
+            Assert.AreEqual(query.ToQueryString(), "query=&aroundLatLngViaIP=true");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestQueryWithDistinct()
+        {
+            Query query = new Query("") { Distinct = 0 };
+            Assert.AreEqual(query.ToQueryString(), "query=&distinct=0");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestQueryWithList()
+        {
+            Query query = new Query("") { Facets = new List<string> { "(attribute)" } };
+            Assert.AreEqual(query.ToQueryString(), "query=&facets=%28attribute%29");
+
+            Query query2 = new Query("") { RestrictSearchableAttributes = new List<string> { "attr1" } };
+            Assert.AreEqual(query2.ToQueryString(), "query=&restrictSearchableAttributes=attr1");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestQueryWithMultipleObjects()
+        {
+            Query query = new Query("") { IgnorePlurals = "true" };
+            Assert.AreEqual(query.ToQueryString(), "query=&ignorePlurals=true");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestQueryWithNestedList()
+        {
+            Query query = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1" }, new List<string> { "facet2" } } };
+            Assert.AreEqual(query.ToQueryString(), "query=&facetFilters=facet1%2Cfacet2");
+
+            Query query2 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1", "facet2" } } };
+            Assert.AreEqual(query2.ToQueryString(), "query=&facetFilters=facet1%2Cfacet2");
+
+            Query query3 = new Query("") { InsideBoundingBox = new List<List<float>> { new List<float> { 10,35f, 1000,42f } } };
+            Assert.AreEqual(query3.ToQueryString(), "query=&insideBoundingBox=10.0%2C35.0%2C1000.0%2C42.0");
+        }
+
         [Test]
         [Parallelizable]
         public void TestAutomaticFacetFilters()

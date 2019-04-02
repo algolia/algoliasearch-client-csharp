@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Serializer;
+using Algolia.Search.Utils;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -353,5 +354,13 @@ namespace Algolia.Search.Models.Search
         /// When true, each hit in the response contains an additional _rankingInfo object
         /// </summary>
         public bool? GetRankingInfo { get; set; }
+
+        /// <summary>
+        /// Returns the Query as a query string 
+        /// Example : "query= distinct=0"
+        /// </summary>
+        public string ToQueryString(){
+            return QueryStringHelper.ToQueryString(this);
+        }
     }
 }
