@@ -31,7 +31,7 @@ namespace Algolia.Search.Models.Mcm
     /// <summary>
     /// Waitable response of assignUserid method
     /// </summary>
-    public class AssignUserIdResponse : IAlgoliaWaitableResponse
+    public class AssignUserIdResponse
     {
         internal Func<string, UserIdResponse> GetUserId { get; set; }
 
@@ -41,36 +41,8 @@ namespace Algolia.Search.Models.Mcm
         public string UserId { get; set; }
 
         /// <summary>
-        /// Date of creation of the userId
+        /// /// Date of creation of the userId
         /// </summary>
         public DateTime CreatedAt { get; set; }
-
-        /// <summary>
-        /// Wait until the userID is created on the API
-        /// Loop until httpErrorCode != 404
-        /// </summary>
-        public void Wait()
-        {
-            while (true)
-            {
-                try
-                {
-                    GetUserId(UserId);
-                }
-                catch (AlgoliaApiException ex)
-                {
-                    // Loop until we have found the userID
-                    if (ex.HttpErrorCode == 404)
-                    {
-                        Task.Delay(1000);
-                        continue;
-                    }
-
-                    throw;
-                }
-
-                break;
-            }
-        }
     }
 }
