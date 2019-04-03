@@ -18,7 +18,7 @@
     </PackageDescription>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Copyright>Copyright 2019 Algolia</Copyright>
-    <Version>6.1.2</Version>
+    <Version>6.1.3</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0;netstandard1.3</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;netstandard1.3;net45;</TargetFrameworks>
