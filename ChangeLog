@@ -4,9 +4,9 @@ Changelog
 6.1.3 (2019-04-03)
 
 - Added: ToQueryString() in Query class - Also added support for list and nested list in QueryStringHelper.
-- Removed: Wait() method for MCM. Methods were unreliable on the engine side, so we decided to remove them. 
+- Fixed: removed Wait() method for MCM. Methods were unreliable on the engine side, so we decided to remove them. 
   You can still find the implementation of the Wait() methods in the MCM tests.
-- Removed: unsued priority property in StatefulHost
+- Fixed: removed unsued priority property in StatefulHost
 
 6.1.2 (2019-03-14)
 
