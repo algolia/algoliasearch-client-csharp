@@ -356,6 +356,13 @@ namespace Algolia.Search.Models.Search
         public bool? GetRankingInfo { get; set; }
 
         /// <summary>
+        /// A user identifier.
+        /// Format: alpha numeric string [a-zA-Z0-9_-]
+        /// Length: between 1 and 64 characters.
+        /// </summary>
+        public string UserToken { get; set; }
+
+        /// <summary>
         /// Returns the Query as a query string 
         /// Example : "query= distinct=0"
         /// </summary>
