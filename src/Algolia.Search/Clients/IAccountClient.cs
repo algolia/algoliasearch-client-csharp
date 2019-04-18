@@ -55,6 +55,6 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex,
             RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class;
+            CancellationToken ct = default) where T : class;
     }
 }

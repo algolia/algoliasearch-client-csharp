@@ -108,7 +108,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<InsightsResponse> SendEventAsync(InsightsEvent insightEvent,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (insightEvent == null)
             {
@@ -120,7 +120,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<InsightsResponse> SendEventsAsync(IEnumerable<InsightsEvent> insightEvents,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (insightEvents == null)
             {

@@ -75,7 +75,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public async Task<InsightsResponse> ClickedFiltersAsync(string eventName, string indexName,
             IEnumerable<string> filters, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             var insightEvent = new InsightsEvent
             {
@@ -112,7 +112,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public async Task<InsightsResponse> ClickedObjectIDsAsync(string eventName, string indexName,
             IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             var insightEvent = new InsightsEvent
             {
@@ -155,7 +155,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public async Task<InsightsResponse> ClickedObjectIDsAfterSearchAsync(string eventName, string indexName,
             IEnumerable<string> objectIDs, IEnumerable<uint> positions, string queryID,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             var insightEvent = new InsightsEvent
             {
@@ -196,7 +196,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public async Task<InsightsResponse> ConvertedObjectIDsAsync(string eventName, string indexName,
             IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             var insightEvent = new InsightsEvent
             {
@@ -236,7 +236,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public async Task<InsightsResponse> ConvertedObjectIDsAfterSearchAsync(string eventName, string indexName,
             IEnumerable<string> objectIDs, string queryID, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             var insightEvent = new InsightsEvent
             {
@@ -261,7 +261,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
         public InsightsResponse ConvertedFilters(string eventName, string indexName, IEnumerable<string> filters,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) =>
+            RequestOptions requestOptions = null, CancellationToken ct = default) =>
             AsyncHelper.RunSync(() => ConvertedFiltersAsync(eventName, indexName, filters, requestOptions, ct));
 
         /// <summary>
@@ -275,7 +275,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public async Task<InsightsResponse> ConvertedFiltersAsync(string eventName, string indexName,
             IEnumerable<string> filters, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             var insightEvent = new InsightsEvent
             {
@@ -314,7 +314,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public async Task<InsightsResponse> ViewedFiltersAsync(string eventName, string indexName,
             IEnumerable<string> filters, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             var insightEvent = new InsightsEvent
             {
@@ -351,7 +351,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         public async Task<InsightsResponse> ViewedObjectIDsAsync(string eventName, string indexName,
             IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             var insightEvent = new InsightsEvent
             {

@@ -117,7 +117,7 @@ namespace Algolia.Search.Clients
         /// <inheritdoc />
         public async Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(
             IEnumerable<MultipleGetObject> queries,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class
         {
             if (queries == null)
             {
@@ -139,7 +139,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest request,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class
         {
             if (request == null)
             {
@@ -160,7 +160,7 @@ namespace Algolia.Search.Clients
         /// <inheritdoc />
         public async Task<MultipleIndexBatchIndexingResponse> MultipleBatchAsync<T>(
             IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class
+            CancellationToken ct = default) where T : class
         {
             if (operations == null)
             {
@@ -184,7 +184,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<ListIndicesResponse> ListIndicesAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<ListIndicesResponse>(HttpMethod.Get,
                     "/1/indexes", CallType.Read, requestOptions, ct)
@@ -205,7 +205,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<ListApiKeysResponse> ListApiKeysAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<ListApiKeysResponse>(HttpMethod.Get,
                     "/1/keys", CallType.Read, requestOptions, ct)
@@ -218,7 +218,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<ApiKey> GetApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -236,7 +236,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey acl, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             if (acl == null)
             {
@@ -257,7 +257,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(ApiKey request,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (request == null)
             {
@@ -289,7 +289,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<DeleteApiKeyResponse> DeleteApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -312,7 +312,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<RestoreApiKeyResponse> RestoreApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -335,7 +335,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             ListClustersResponse response = await _transport
                 .ExecuteRequestAsync<ListClustersResponse>(HttpMethod.Get, "/1/clusters", CallType.Read, requestOptions,
@@ -351,7 +351,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<SearchResponse<UserIdResponse>> SearchUserIDsAsync(SearchUserIdsRequest query,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (query == null)
             {
@@ -370,7 +370,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<ListUserIdsResponse> ListUserIdsAsync(int page = 0, int hitsPerPage = 1000,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             var queryParams = new Dictionary<string, string>
             {
@@ -391,7 +391,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<UserIdResponse> GetUserIdAsync(string userId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
@@ -409,7 +409,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<TopUserIdResponse> GetTopUserIdAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<TopUserIdResponse>(HttpMethod.Get,
                     "/1/clusters/mapping/top", CallType.Read, requestOptions, ct)
@@ -423,7 +423,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<AssignUserIdResponse> AssignUserIdAsync(string userId, string clusterName,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
@@ -456,7 +456,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<RemoveUserIdResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
@@ -479,7 +479,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10)
+            CancellationToken ct = default, int offset = 0, int length = 10)
         {
             var queryParams = new Dictionary<string, string>
             {
@@ -501,7 +501,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<CopyToResponse> CopySettingsAsync(string sourceIndex, string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             var scopes = new List<string> { CopyScope.Settings };
             return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
@@ -514,7 +514,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<CopyToResponse> CopyRulesAsync(string sourceIndex, string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             var scopes = new List<string> { CopyScope.Rules };
             return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
@@ -527,7 +527,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<CopyToResponse> CopySynonymsAsync(string sourceIndex, string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             var scopes = new List<string> { CopyScope.Synonyms };
             return await CopyIndexAsync(sourceIndex, destinationIndex, scope: scopes, ct: ct).ConfigureAwait(false);
@@ -542,7 +542,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             IEnumerable<string> scope = null)
         {
             if (string.IsNullOrWhiteSpace(sourceIndex))
@@ -576,7 +576,7 @@ namespace Algolia.Search.Clients
         /// <inheritdoc />
         public async Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(sourceIndex))
             {
@@ -600,7 +600,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<GetStrategyResponse>(HttpMethod.Get,
                     "/1/recommendation/personalization/strategy", CallType.Read,
@@ -615,7 +615,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<SetStrategyResponse, SetStrategyRequest>(HttpMethod.Post,
                     "/1/recommendation/personalization/strategy", CallType.Write,
@@ -640,7 +640,7 @@ namespace Algolia.Search.Clients
         /// <inheritdoc />
         public async Task<TResult> CustomRequestAsync<TResult, TData>(TData data, string uri, HttpMethod method,
             CallType callType, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
             where TResult : class
             where TData : class
         {

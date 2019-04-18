@@ -95,7 +95,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<ABTest> GetABTestAsync(long abTestId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<ABTest>(HttpMethod.Get,
                     $"/2/abtests/{abTestId}", CallType.Read, requestOptions, ct)
@@ -108,7 +108,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             var queryParams = new Dictionary<string, string>
             {
@@ -129,7 +129,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
                     "/2/abtests", CallType.Write, aBTest, requestOptions, ct)
@@ -142,7 +142,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<StopABTestResponse> StopABTestAsync(long abTestId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<StopABTestResponse>(HttpMethod.Post,
                     $"/2/abtests/{abTestId}/stop", CallType.Write, requestOptions, ct)
@@ -155,7 +155,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<DeleteABTestResponse> DeleteABTestAsync(long abTestId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<DeleteABTestResponse>(HttpMethod.Delete,
                     $"/2/abtests/{abTestId}", CallType.Write, requestOptions, ct)

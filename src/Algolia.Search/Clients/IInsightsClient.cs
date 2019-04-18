@@ -64,7 +64,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
         Task<InsightsResponse> SendEventAsync(InsightsEvent insightEvent, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// This command pushes an array of events to the Insights API.
@@ -74,6 +74,6 @@ namespace Algolia.Search.Clients
         /// <param name="ct">The cancellation token</param>
         /// <returns></returns>
         Task<InsightsResponse> SendEventsAsync(IEnumerable<InsightsEvent> insightEvents,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
     }
 }

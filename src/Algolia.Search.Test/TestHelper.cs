@@ -227,11 +227,9 @@ namespace Algolia.Search.Test
         {
             bool result;
 
-            var selfValueComparer = valueA as IComparable;
-
             if (valueA == null && valueB != null || valueA != null && valueB == null)
                 result = false; // one of the values is null
-            else if (selfValueComparer != null && selfValueComparer.CompareTo(valueB) != 0)
+            else if (valueA is IComparable selfValueComparer && selfValueComparer.CompareTo(valueB) != 0)
                 result = false; // the comparison using IComparable failed
             else if (!Equals(valueA, valueB))
                 result = false; // the comparison using Equals failed

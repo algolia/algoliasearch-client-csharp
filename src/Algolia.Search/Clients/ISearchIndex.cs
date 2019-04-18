@@ -67,7 +67,7 @@ namespace Algolia.Search.Clients
         /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
         Task<UpdateObjectResponse> PartialUpdateObjectAsync<T>(T data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             bool createIfNotExists = false) where T : class;
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Algolia.Search.Clients
         /// <param name="createIfNotExists">When true, a partial update on a nonexistent object will create the object (generating the objectID and using the attributes as defined in the object). WHen false, a partial update on a nonexistent object will be ignored (but no error will be sent back).</param>
         /// <returns></returns>
         Task<BatchIndexingResponse> PartialUpdateObjectsAsync<T>(IEnumerable<T> data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             bool createIfNotExists = false) where T : class;
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Algolia.Search.Clients
         /// <param name="autoGenerateObjectId">Add objectID if not present</param>
         /// <returns></returns>
         Task<BatchIndexingResponse> SaveObjectAsync<T>(T data, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), bool autoGenerateObjectId = false) where T : class;
+            CancellationToken ct = default, bool autoGenerateObjectId = false) where T : class;
 
         /// <summary>
         /// This method allows you to create records on your index by sending one or more objects
@@ -146,7 +146,7 @@ namespace Algolia.Search.Clients
         /// <param name="autoGenerateObjectId">Add objectIDs if not present</param>
         /// <returns></returns>
         Task<BatchIndexingResponse> SaveObjectsAsync<T>(IEnumerable<T> data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             bool autoGenerateObjectId = false) where T : class;
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Algolia.Search.Clients
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
         Task<MultiResponse> ReplaceAllObjectsAsync<T>(IEnumerable<T> data,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken), bool safe = false)
+            RequestOptions requestOptions = null, CancellationToken ct = default, bool safe = false)
             where T : class;
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<BatchResponse> BatchAsync<T>(IEnumerable<BatchOperation<T>> operations,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
 
         /// <summary>
         /// Perform several indexing operations in one API call.
@@ -213,7 +213,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<BatchResponse> BatchAsync<T>(BatchRequest<T> request, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class;
+            CancellationToken ct = default) where T : class;
 
         /// <summary>
         /// Remove objects from an index using their object ids.
@@ -236,7 +236,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<DeleteResponse> DeleteAsync(RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+        Task<DeleteResponse> DeleteAsync(RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Remove objects from an index using their object ids.
@@ -246,7 +246,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteObjectAsync(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Remove objects from an index using their object ids.
@@ -265,7 +265,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<BatchIndexingResponse> DeleteObjectsAsync(IEnumerable<string> objectIds,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Remove all objects matching a filter (including geo filters).
@@ -287,7 +287,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteByAsync(Query query, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Clear the records of an index without affecting its settings.
@@ -305,7 +305,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<DeleteResponse> ClearObjectsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         ///  Method used for querying an index.
@@ -327,7 +327,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SearchResponse<T>> SearchAsync<T>(Query query, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class;
+            CancellationToken ct = default) where T : class;
 
         /// <summary>
         /// Search for a set of values within a given facet attribute. Can be combined with a query.
@@ -348,7 +348,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SearchForFacetResponse> SearchForFacetValueAsync(SearchForFacetRequest query,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get one or more objects using their object ids.
@@ -369,7 +369,7 @@ namespace Algolia.Search.Clients
         /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
         /// <returns></returns>
         Task<T> GetObjectAsync<T>(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null)
+            CancellationToken ct = default, IEnumerable<string> attributesToRetrieve = null)
             where T : class;
 
         /// <summary>
@@ -391,7 +391,7 @@ namespace Algolia.Search.Clients
         /// <param name="attributesToRetrieve">List of attributes to retrieve. By default, all retrievable attributes are returned.</param>
         /// <returns></returns>
         Task<IEnumerable<T>> GetObjectsAsync<T>(IEnumerable<string> objectIDs, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), IEnumerable<string> attributesToRetrieve = null)
+            CancellationToken ct = default, IEnumerable<string> attributesToRetrieve = null)
             where T : class;
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<BrowseIndexResponse<T>> BrowseFromAsync<T>(BrowseIndexQuery query,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
 
         /// <summary>
         /// Get the specified by its objectID
@@ -442,7 +442,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<Rule> GetRuleAsync(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Retrieve an index’s full list of rules using an iterator.
@@ -468,7 +468,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SearchResponse<Rule>> SearchRuleAsync(RuleQuery query = null,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Create or update a single rule.
@@ -488,7 +488,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<SaveRuleResponse> SaveRuleAsync(Rule rule, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
+            CancellationToken ct = default, bool forwardToReplicas = false);
 
         /// <summary>
         /// Create or update a specified set of rules, or all rules.
@@ -511,7 +511,7 @@ namespace Algolia.Search.Clients
         /// <param name="clearExistingRules">Clear all existing rules</param>
         /// <returns></returns>
         Task<BatchResponse> SaveRulesAsync(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false,
+            CancellationToken ct = default, bool forwardToReplicas = false,
             bool clearExistingRules = false);
 
         /// <summary>
@@ -537,7 +537,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
         Task<BatchResponse> ReplaceAllRulesAsync(IEnumerable<Rule> rules, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
+            CancellationToken ct = default, bool forwardToReplicas = false);
 
         /// <summary>
         /// Delete the rule for the given ruleId
@@ -558,7 +558,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteRuleAsync(string objectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
+            CancellationToken ct = default, bool forwardToReplicas = false);
 
         /// <summary>
         /// Delete all rules in an index.
@@ -576,7 +576,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<DeleteResponse> ClearRulesAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
+            CancellationToken ct = default, bool forwardToReplicas = false);
 
         /// <summary>
         /// Get settings for the given index
@@ -592,7 +592,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<IndexSettings> GetSettingsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Create or change an index’s settings.
@@ -617,7 +617,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
         Task<SetSettingsResponse> SetSettingsAsync(IndexSettings settings,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             bool forwardToReplicas = false);
 
         /// <summary>
@@ -636,7 +636,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SearchResponse<Synonym>> SearchSynonymsAsync(SynonymQuery query,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a single synonym using its object id.
@@ -654,7 +654,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<Synonym> GetSynonymAsync(string synonymObjectId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Retrieve an index’s complete list of synonyms.
@@ -686,7 +686,7 @@ namespace Algolia.Search.Clients
         /// <param name="replaceExistingSynonyms">Replace all existing synonyms</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> SaveSynonymsAsync(IEnumerable<Synonym> synonyms,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             bool forwardToReplicas = false, bool replaceExistingSynonyms = false);
 
         /// <summary>
@@ -712,7 +712,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward to the replicas the request</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> ReplaceAllSynonymsAsync(IEnumerable<Synonym> synonyms,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             bool forwardToReplicas = false);
 
         /// <summary>
@@ -734,7 +734,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<SaveSynonymResponse> SaveSynonymAsync(Synonym synonym, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
+            CancellationToken ct = default, bool forwardToReplicas = false);
 
         /// <summary>
         /// Remove a single synonym from an index using its object id.
@@ -755,7 +755,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<DeleteResponse> DeleteSynonymAsync(string synonymObjectId,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             bool forwardToReplicas = false);
 
         /// <summary>
@@ -774,7 +774,7 @@ namespace Algolia.Search.Clients
         /// <param name="forwardToReplicas">Forward the request to the replicas</param>
         /// <returns></returns>
         Task<ClearSynonymsResponse> ClearSynonymsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), bool forwardToReplicas = false);
+            CancellationToken ct = default, bool forwardToReplicas = false);
 
         /// <summary>
         /// Rename an index. Normally used to reindex your data atomically, without any down time.
@@ -792,7 +792,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<MoveIndexResponse> MoveFromAsync(string sourceIndex, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Wait for a task to complete before executing the next line of code, to synchronize index updates.
@@ -813,7 +813,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task WaitTaskAsync(long taskId, int timeToWait = 100, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get the status of the given task
@@ -831,6 +831,6 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<TaskStatusResponse> GetTaskAsync(long taskId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
     }
 }
