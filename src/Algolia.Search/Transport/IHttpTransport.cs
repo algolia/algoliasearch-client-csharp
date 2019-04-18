@@ -46,8 +46,8 @@ namespace Algolia.Search.Transport
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType,
-            TData data = default(TData),
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken))
+            TData data = default,
+            RequestOptions requestOptions = null, CancellationToken ct = default)
             where TResult : class
             where TData : class;
 
@@ -62,7 +62,7 @@ namespace Algolia.Search.Transport
         /// <param name="ct">Optional cancellation token</param>
         Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType,
             RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
             where TResult : class;
     }
 }

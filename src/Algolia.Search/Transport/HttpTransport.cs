@@ -62,15 +62,15 @@ namespace Algolia.Search.Transport
         /// <inheritdoc />
         public async Task<TResult> ExecuteRequestAsync<TResult>(HttpMethod method, string uri, CallType callType,
             RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
             where TResult : class =>
             await ExecuteRequestAsync<TResult, string>(method, uri, callType, requestOptions: requestOptions, ct: ct)
                 .ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<TResult> ExecuteRequestAsync<TResult, TData>(HttpMethod method, string uri, CallType callType,
-            TData data = default(TData), RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            TData data = default, RequestOptions requestOptions = null,
+            CancellationToken ct = default)
             where TResult : class
             where TData : class
         {

@@ -41,6 +41,6 @@ namespace Algolia.Search.Http
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<AlgoliaHttpResponse> SendRequestAsync(Request request, int totalTimeout,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
     }
 }

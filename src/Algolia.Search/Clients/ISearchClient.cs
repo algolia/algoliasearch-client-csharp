@@ -61,7 +61,7 @@ namespace Algolia.Search.Clients
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         Task<MultipleGetObjectsResponse<T>> MultipleGetObjectsAsync<T>(
             IEnumerable<MultipleGetObject> queries,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
 
         /// <summary>
         /// This method allows to send multiple search queries, potentially targeting multiple indices, in a single API call.
@@ -75,7 +75,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         Task<MultipleQueriesResponse<T>> MultipleQueriesAsync<T>(MultipleQueriesRequest request,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class;
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
 
         /// <summary>
         /// Perform multiple write operations, potentially targeting multiple indices, in a single API call.
@@ -90,7 +90,7 @@ namespace Algolia.Search.Clients
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         Task<MultipleIndexBatchIndexingResponse> MultipleBatchAsync<T>(
             IEnumerable<BatchOperation<T>> operations, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken)) where T : class;
+            CancellationToken ct = default) where T : class;
 
         /// <summary>
         /// Get a list of indexes/indices with their associated metadata.
@@ -106,7 +106,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<ListIndicesResponse> ListIndicesAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Generate a virtual API Key without any call to the server.
@@ -130,7 +130,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<ListApiKeysResponse> ListApiKeysAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get the permissions of an API Key.
@@ -148,7 +148,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<ApiKey> GetApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Add a new API Key with specific permissions/restrictions.
@@ -166,7 +166,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey apiKey, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Update the permissions of an existing API Key.
@@ -184,7 +184,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<UpdateApiKeyResponse> UpdateApiKeyAsync(ApiKey request,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Delete an existing API Key
@@ -202,7 +202,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<DeleteApiKeyResponse> DeleteApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Restore the given APIKey
@@ -219,7 +219,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         Task<RestoreApiKeyResponse> RestoreApiKeyAsync(string apiKey, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// List the clusters available in a multi-clusters setup for a single appID
@@ -235,7 +235,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<IEnumerable<ClustersResponse>> ListClustersAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Search for userIDs
@@ -256,7 +256,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<SearchResponse<UserIdResponse>> SearchUserIDsAsync(SearchUserIdsRequest query,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// List the userIDs assigned to a multi-clusters appID.
@@ -277,7 +277,7 @@ namespace Algolia.Search.Clients
         /// <param name="page"></param>
         /// <returns></returns>
         Task<ListUserIdsResponse> ListUserIdsAsync(int page = 0, int hitsPerPage = 1000,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Returns the userID data stored in the mapping.
@@ -295,7 +295,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<UserIdResponse> GetUserIdAsync(string userId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get the top 10 userIDs with the highest number of records per cluster.
@@ -313,7 +313,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<TopUserIdResponse> GetTopUserIdAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Assign or Move a userID to a cluster.
@@ -336,7 +336,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<AssignUserIdResponse> AssignUserIdAsync(string userId, string clusterName,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Remove a userID and its associated data from the multi-clusters.
@@ -354,7 +354,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<RemoveUserIdResponse> RemoveUserIdAsync(string userId, RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get the logs of the latest search and indexing operations
@@ -373,7 +373,7 @@ namespace Algolia.Search.Clients
         /// <param name="length">Specify the maximum number of entries to retrieve starting at the offset. Maximum allowed value: 1,000.</param>
         /// <returns></returns>
         Task<LogResponse> GetLogsAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken), int offset = 0, int length = 10);
+            CancellationToken ct = default, int offset = 0, int length = 10);
 
         /// <summary>
         /// Copy the settings of an index to another index
@@ -394,7 +394,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<CopyToResponse> CopySettingsAsync(string sourceIndex, string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Copy the rules of an index to another index
@@ -415,7 +415,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<CopyToResponse> CopyRulesAsync(string sourceIndex, string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Make a copy of the synonyms of an index
@@ -436,7 +436,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
         Task<CopyToResponse> CopySynonymsAsync(string sourceIndex, string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Make a copy of an index, including its objects, settings, synonyms, and query rules.
@@ -459,7 +459,7 @@ namespace Algolia.Search.Clients
         /// <param name="scope">The scope copy</param>
         /// <returns></returns>
         Task<CopyToResponse> CopyIndexAsync(string sourceIndex, string destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken),
+            RequestOptions requestOptions = null, CancellationToken ct = default,
             IEnumerable<string> scope = null);
 
         /// <summary>
@@ -482,7 +482,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         Task<MoveIndexResponse> MoveIndexAsync(string sourceIndex, string destinationIndex,
             RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// Returns the personalization strategy of the application
@@ -497,7 +497,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions"></param>
         /// <param name="ct">Optional cancellation token</param>
         Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken));
+            CancellationToken ct = default);
 
         /// <summary>
         /// This command configures the personalization strategy
@@ -516,7 +516,7 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Request options for the query</param>
         /// <returns></returns>
         Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken));
+            RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// This function waits for the Algolia's API task to finish
@@ -557,7 +557,7 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         Task<TResult> CustomRequestAsync<TResult, TData>(TData data, string uri, HttpMethod method, CallType callType,
             RequestOptions requestOptions = null,
-            CancellationToken ct = default(CancellationToken))
+            CancellationToken ct = default)
             where TResult : class
             where TData : class;
     }

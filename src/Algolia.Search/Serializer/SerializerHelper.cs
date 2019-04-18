@@ -50,7 +50,7 @@ namespace Algolia.Search.Serializer
         public static T Deserialize<T>(Stream stream, JsonSerializerSettings settings)
         {
             if (stream == null || stream.CanRead == false)
-                return default(T);
+                return default;
 
             using (stream)
             using (var sr = new StreamReader(stream))

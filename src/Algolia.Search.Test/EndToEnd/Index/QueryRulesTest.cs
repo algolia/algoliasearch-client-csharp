@@ -39,20 +39,11 @@ namespace Algolia.Search.Test.EndToEnd.Index
     public class QueryRulesTest
     {
         private SearchIndex _index;
-        private IEnumerable<RuleTest> _objectsToSave;
 
         [OneTimeSetUp]
         public void Init()
         {
             _index = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("rules"));
-            _objectsToSave = new List<RuleTest>
-            {
-                new RuleTest {ObjectID = "iphone_7", Brand = "Apple", Model = "7"},
-                new RuleTest {ObjectID = "iphone_8", Brand = "Apple", Model = "8"},
-                new RuleTest {ObjectID = "iphone_X", Brand = "Apple", Model = "X"},
-                new RuleTest {ObjectID = "one_plus_one", Brand = "OnePlus", Model = "One"},
-                new RuleTest {ObjectID = "one_plus_two", Brand = "OnePlus", Model = "Two"}
-            };
         }
 
         [Test]

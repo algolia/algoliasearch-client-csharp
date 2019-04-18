@@ -46,7 +46,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public async Task<MultiResponse> CopyIndexAsync<T>(ISearchIndex sourceIndex, ISearchIndex destinationIndex,
-            RequestOptions requestOptions = null, CancellationToken ct = default(CancellationToken)) where T : class
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class
         {
             if (sourceIndex.Config.AppId.Equals(destinationIndex.Config.AppId))
             {
