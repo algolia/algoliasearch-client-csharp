@@ -75,7 +75,7 @@ namespace Algolia.Search.Clients
                 }
             }
 
-            MultiResponse ret = new MultiResponse {Responses = new List<IAlgoliaWaitableResponse>()};
+            MultiResponse ret = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
 
             // Save settings
             IndexSettings sourceSettings = await sourceIndex.GetSettingsAsync(ct: ct).ConfigureAwait(false);

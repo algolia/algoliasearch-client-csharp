@@ -39,7 +39,7 @@ namespace Algolia.Search.Utils
         public static long ToUnixTimeSeconds(this DateTime date)
         {
             DateTime sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return (long) (date - sTime).TotalSeconds;
+            return (long)(date - sTime).TotalSeconds;
         }
 
         /// <summary>

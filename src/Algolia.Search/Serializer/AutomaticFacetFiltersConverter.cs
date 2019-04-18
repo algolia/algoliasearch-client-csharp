@@ -59,8 +59,10 @@ namespace Algolia.Search.Serializer
             IEnumerable<AutomaticFacetFilter> existingValue,
             bool hasExistingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            if (reader.TokenType != JsonToken.StartArray) return null;
+            if (reader.TokenType == JsonToken.Null)
+                return null;
+            if (reader.TokenType != JsonToken.StartArray)
+                return null;
 
             var ret = new List<AutomaticFacetFilter>();
 
@@ -71,7 +73,7 @@ namespace Algolia.Search.Serializer
                 bool disjunctive = token.Type != JTokenType.String && token.Value<bool>("disjunctive");
                 int? score = token.Type != JTokenType.String ? token.Value<int?>("score") : null;
 
-                ret.Add(new AutomaticFacetFilter {Facet = facet, Disjunctive = disjunctive, Score = score});
+                ret.Add(new AutomaticFacetFilter { Facet = facet, Disjunctive = disjunctive, Score = score });
             }
 
             return ret;

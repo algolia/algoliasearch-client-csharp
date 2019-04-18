@@ -115,7 +115,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(insightEvent));
             }
 
-            return await SendEventsAsync(new List<InsightsEvent> {insightEvent}, requestOptions, ct);
+            return await SendEventsAsync(new List<InsightsEvent> { insightEvent }, requestOptions, ct);
         }
 
         /// <inheritdoc />
@@ -127,7 +127,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(insightEvents));
             }
 
-            var request = new InsightsRequest {Events = insightEvents};
+            var request = new InsightsRequest { Events = insightEvents };
 
             return await _transport.ExecuteRequestAsync<InsightsResponse, InsightsRequest>(HttpMethod.Post,
                     "/1/events", CallType.Write, request, requestOptions, ct)

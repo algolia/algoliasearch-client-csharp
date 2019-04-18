@@ -108,7 +108,7 @@ namespace Algolia.Search.Test.Serializer
             Query query2 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1", "facet2" } } };
             Assert.AreEqual(query2.ToQueryString(), "query=&facetFilters=facet1%2Cfacet2");
 
-            Query query3 = new Query("") { InsideBoundingBox = new List<List<float>> { new List<float> { 10,35f, 1000,42f } } };
+            Query query3 = new Query("") { InsideBoundingBox = new List<List<float>> { new List<float> { 10, 35f, 1000, 42f } } };
             Assert.AreEqual(query3.ToQueryString(), "query=&insideBoundingBox=10.0%2C35.0%2C1000.0%2C42.0");
         }
 

@@ -84,7 +84,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             IndexSettings settings = new IndexSettings
             {
-                AttributesForFaceting = new List<string> {"company"}
+                AttributesForFaceting = new List<string> { "company" }
             };
 
             var setSettings = _sourceIndex.SetSettingsAsync(settings);
@@ -94,7 +94,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
                 ObjectID = "google_placeholder",
                 Type = SynonymType.Placeholder,
                 Placeholder = "<GOOG>",
-                Replacements = new List<string> {"Google", "GOOG"}
+                Replacements = new List<string> { "Google", "GOOG" }
             };
 
             var saveSynonyms = _sourceIndex.SaveSynonymAsync(synonym);
@@ -102,7 +102,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Rule ruleToSave = new Rule
             {
                 ObjectID = "company_automatic_faceting",
-                Condition = new Condition {Anchoring = "contains", Pattern = "{facet:company}"},
+                Condition = new Condition { Anchoring = "contains", Pattern = "{facet:company}" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams

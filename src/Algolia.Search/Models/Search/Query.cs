@@ -366,7 +366,8 @@ namespace Algolia.Search.Models.Search
         /// Returns the Query as a query string 
         /// Example : "query= distinct=0"
         /// </summary>
-        public string ToQueryString(){
+        public string ToQueryString()
+        {
             return QueryStringHelper.ToQueryString(this);
         }
     }

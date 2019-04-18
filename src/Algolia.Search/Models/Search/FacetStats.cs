@@ -32,17 +32,17 @@ namespace Algolia.Search.Models.Search
         /// The minimum value in the result set.
         /// </summary>
         public float Min { get; set; }
-        
+
         /// <summary>
         /// The maximum value in the result set.
         /// </summary>
         public float Max { get; set; }
-        
+
         /// <summary>
         /// The average facet value in the result set.
         /// </summary>
         public float Avg { get; set; }
-        
+
         /// <summary>
         /// The sum of all values in the result set.
         /// </summary>

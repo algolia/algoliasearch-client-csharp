@@ -45,7 +45,7 @@ namespace Algolia.Search.Http
         private readonly HttpClient _httpClient = new HttpClient(
             new TimeoutHandler
             {
-                InnerHandler = new HttpClientHandler {AutomaticDecompression = DecompressionMethods.GZip}
+                InnerHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip }
             });
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Algolia.Search.Http
                         return new AlgoliaHttpResponse
                         {
                             Body = outputStream,
-                            HttpStatusCode = (int) response.StatusCode
+                            HttpStatusCode = (int)response.StatusCode
                         };
                     }
 
@@ -113,13 +113,13 @@ namespace Algolia.Search.Http
                     return new AlgoliaHttpResponse
                     {
                         Error = content,
-                        HttpStatusCode = (int) response.StatusCode
+                        HttpStatusCode = (int)response.StatusCode
                     };
                 }
             }
             catch (TimeoutException timeOutException)
             {
-                return new AlgoliaHttpResponse {IsTimedOut = true, Error = timeOutException.ToString()};
+                return new AlgoliaHttpResponse { IsTimedOut = true, Error = timeOutException.ToString() };
             }
         }
     }

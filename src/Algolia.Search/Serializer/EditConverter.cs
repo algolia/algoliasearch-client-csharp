@@ -47,8 +47,10 @@ namespace Algolia.Search.Serializer
         public override IEnumerable<Edit> ReadJson(JsonReader reader, Type objectType, IEnumerable<Edit> existingValue,
             bool hasExistingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            if (reader.TokenType != JsonToken.StartArray) return null;
+            if (reader.TokenType == JsonToken.Null)
+                return null;
+            if (reader.TokenType != JsonToken.StartArray)
+                return null;
 
             var ret = new List<Edit>();
 
@@ -61,7 +63,7 @@ namespace Algolia.Search.Serializer
                 string type = isObject ? token.Value<string>("type") : EditType.Remove;
                 string insert = isObject ? token.Value<string>("insert") : null;
 
-                ret.Add(new Edit {Type = type, Delete = delete, Insert = insert});
+                ret.Add(new Edit { Type = type, Delete = delete, Insert = insert });
             }
 
             return ret;

@@ -50,7 +50,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             SearchResponse<UserIdResponse> searchResponse =
                 await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest
-                    {Query = userId, Cluster = listClusters.ElementAt(0).ClusterName});
+                { Query = userId, Cluster = listClusters.ElementAt(0).ClusterName });
             Assert.True(searchResponse.NbHits == 1);
 
             ListUserIdsResponse listUserIds = await BaseTest.McmClient.ListUserIdsAsync();
@@ -70,7 +70,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 userIdsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID)).ToArray();
             await Task.WhenAll(delete);
         }
-        
+
         private void WaitUserId(string userId)
         {
             while (true)
@@ -94,7 +94,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 break;
             }
         }
-        
+
         private void RemoveUserId(String userId)
         {
             RemoveUserIdResponse deleteResponse;
