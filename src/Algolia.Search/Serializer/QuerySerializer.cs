@@ -38,7 +38,7 @@ namespace Algolia.Search.Serializer
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            Query query = (Query) value;
+            Query query = (Query)value;
 
             string queryString = QueryStringHelper.ToQueryString(query);
 

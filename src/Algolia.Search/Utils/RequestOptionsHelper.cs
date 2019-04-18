@@ -42,7 +42,7 @@ namespace Algolia.Search.Utils
         {
             if (requestOptions == null)
             {
-                return new RequestOptions {QueryParameters = queryParams};
+                return new RequestOptions { QueryParameters = queryParams };
             }
 
             if (requestOptions.QueryParameters == null)
@@ -65,7 +65,7 @@ namespace Algolia.Search.Utils
         {
             if (requestOptions == null)
             {
-                return new RequestOptions {Headers = headers};
+                return new RequestOptions { Headers = headers };
             }
 
             if (requestOptions.Headers == null)

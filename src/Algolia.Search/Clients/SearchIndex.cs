@@ -569,8 +569,8 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public RulesIterator BrowseRules(RequestOptions requestOptions = null) 
-        { 
+        public RulesIterator BrowseRules(RequestOptions requestOptions = null)
+        {
             return new RulesIterator(this, requestOptions: requestOptions);
         }
 
@@ -801,8 +801,8 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public SynonymsIterator BrowseSynonyms(RequestOptions requestOptions = null) 
-        { 
+        public SynonymsIterator BrowseSynonyms(RequestOptions requestOptions = null)
+        {
             return new SynonymsIterator(this, requestOptions: requestOptions);
         }
 

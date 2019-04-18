@@ -50,7 +50,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
         public async Task RulesTest()
         {
             // Set attributesForFaceting to [“brand”] using setSettings and collect the taskID
-            IndexSettings settings = new IndexSettings {AttributesForFaceting = new List<string> {"brand"}};
+            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "brand" } };
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
             setSettingsResponse.Wait();
 
@@ -58,7 +58,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             {
                 ObjectID = "brand_automatic_faceting",
                 Enabled = false,
-                Condition = new Condition {Anchoring = "is", Pattern = "{facet:brand}"},
+                Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -90,7 +90,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Rule ruleToSave2 = new Rule
             {
                 ObjectID = "query_edits",
-                Condition = new Condition {Anchoring = "is", Pattern = "mobile phone"},
+                Condition = new Condition { Anchoring = "is", Pattern = "mobile phone" },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -107,7 +107,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 },
             };
 
-            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> {ruleToSave2});
+            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 });
 
             saveRuleResponse.Wait();
             batchRulesResponse.Wait();

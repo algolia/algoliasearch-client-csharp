@@ -39,7 +39,7 @@ namespace Algolia.Search.Serializer
         public static void Serialize<T>(T data, Stream stream, JsonSerializerSettings settings)
         {
             using (var sw = new StreamWriter(stream, _encoding, 1024, true))
-            using (var jtw = new JsonTextWriter(sw) {Formatting = Formatting.None})
+            using (var jtw = new JsonTextWriter(sw) { Formatting = Formatting.None })
             {
                 JsonSerializer serializer = JsonSerializer.Create(settings);
                 serializer.Serialize(jtw, data);

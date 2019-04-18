@@ -141,8 +141,8 @@ namespace Algolia.Search.Test
                         }
                         else if (valueA != null)
                         {
-                            var collectionItems1 = ((IEnumerable) valueA).Cast<object>();
-                            var collectionItems2 = ((IEnumerable) valueB).Cast<object>();
+                            var collectionItems1 = ((IEnumerable)valueA).Cast<object>();
+                            var collectionItems2 = ((IEnumerable)valueB).Cast<object>();
                             var collectionItemsCount1 = collectionItems1.Count();
                             var collectionItemsCount2 = collectionItems2.Count();
 

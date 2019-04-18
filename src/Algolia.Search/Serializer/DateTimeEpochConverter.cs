@@ -35,7 +35,7 @@ namespace Algolia.Search.Serializer
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            long until = ((DateTime) value).ToUnixTimeSeconds();
+            long until = ((DateTime)value).ToUnixTimeSeconds();
             writer.WriteValue(until);
         }
 
@@ -47,7 +47,7 @@ namespace Algolia.Search.Serializer
                 return null;
             }
 
-            return DateTimeHelper.UnixTimeToDateTime((long) reader.Value);
+            return DateTimeHelper.UnixTimeToDateTime((long)reader.Value);
         }
     }
 }
