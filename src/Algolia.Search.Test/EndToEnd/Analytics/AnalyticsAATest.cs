@@ -105,6 +105,9 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
             Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
             Assert.IsTrue(abTestToCheck.Status.Equals("active"));
+
+            var deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId.Value);
+            _index.WaitTask(deleteAbTest.TaskID);
         }
 
         public class AlgoliaStub
