@@ -193,13 +193,13 @@ namespace Algolia.Search.Transport
             switch (callType)
             {
                 case CallType.Read:
-                    return _algoliaConfig.ReadTimeout ?? 5;
+                    return _algoliaConfig.ReadTimeout ?? Defaults.ReadTimeout;
 
                 case CallType.Write:
-                    return _algoliaConfig.WriteTimeout ?? 30;
+                    return _algoliaConfig.WriteTimeout ?? Defaults.WriteTimeut;
 
                 default:
-                    return 30;
+                    return Defaults.WriteTimeut;
             }
         }
     }

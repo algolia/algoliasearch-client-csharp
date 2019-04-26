@@ -48,11 +48,11 @@ namespace Algolia.Search.Clients
 
             DefaultHeaders = new Dictionary<string, string>
             {
-                {"X-Algolia-Application-Id", AppId},
-                {"X-Algolia-API-Key", ApiKey},
-                {"User-Agent", $"C# {ClientVersion}"},
-                {"Connection", "keep-alive"},
-                {"Accept", JsonConfig.JsonContentType}
+                {Defaults.AlgoliaApplicationHeader, AppId},
+                {Defaults.AlgoliaApiKeyHeader, ApiKey},
+                {Defaults.UserAgentHeader, $"C# {ClientVersion}"},
+                {Defaults.Connection, Defaults.KeepAlive},
+                {Defaults.AcceptHeader, JsonConfig.JsonContentType}
             };
         }
 

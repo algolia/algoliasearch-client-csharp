@@ -1035,9 +1035,9 @@ namespace Algolia.Search.Clients
                 await Task.Delay(timeToWait, ct).ConfigureAwait(false);
                 timeToWait *= 2;
 
-                if (timeToWait > 10000)
+                if (timeToWait > Defaults.MaxTimeToWait)
                 {
-                    timeToWait = 10000;
+                    timeToWait = Defaults.MaxTimeToWait;
                 }
             }
         }
