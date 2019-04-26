@@ -34,7 +34,7 @@ namespace Algolia.Search.Serializer
     /// https://www.algolia.com/doc/rest-api/search/#search-endpoints
     /// https://www.newtonsoft.com/json/help/html/JsonConverterAttributeClass.htm
     /// </summary>
-    internal class QuerySerializer : JsonConverter
+    internal class QueryConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
