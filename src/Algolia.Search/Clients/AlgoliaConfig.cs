@@ -60,13 +60,13 @@ namespace Algolia.Search.Clients
         /// The application ID
         /// </summary>
         /// <returns></returns>
-        public string AppId { get; set; }
+        public string AppId { get; }
 
         /// <summary>
         /// The admin API Key
         /// </summary>
         /// <returns></returns>
-        public string ApiKey { get; set; }
+        public string ApiKey { get; }
 
         /// <summary>
         /// Configurations hosts
