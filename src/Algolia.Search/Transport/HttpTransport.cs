@@ -45,7 +45,7 @@ namespace Algolia.Search.Transport
     internal class HttpTransport
     {
         private readonly IHttpRequester _httpClient;
-        private readonly IRetryStrategy _retryStrategy;
+        private readonly RetryStrategy _retryStrategy;
         private readonly AlgoliaConfig _algoliaConfig;
 
         /// <summary>
