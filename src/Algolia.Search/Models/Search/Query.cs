@@ -68,8 +68,10 @@ namespace Algolia.Search.Models.Search
 
         /// <summary>
         /// Filter hits by tags.
+        /// tagFilters is a different way of filtering, which relies on the _tags attribute. It uses a simpler syntax than filters.
+        /// You can use it when you want to do simple filtering based on tags.
         /// </summary>
-        public string TagFilters { get; set; }
+        public IEnumerable<IEnumerable<string>> TagFilters { get; set; }
 
         /// <summary>
         /// Determines how to calculate the total score for filtering.
@@ -363,7 +365,7 @@ namespace Algolia.Search.Models.Search
         public string UserToken { get; set; }
 
         /// <summary>
-        /// Returns the Query as a query string 
+        /// Returns the Query as a query string
         /// Example : "query= distinct=0"
         /// </summary>
         public string ToQueryString()
