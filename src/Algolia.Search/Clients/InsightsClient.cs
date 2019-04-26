@@ -39,7 +39,7 @@ namespace Algolia.Search.Clients
     /// </summary>
     public class InsightsClient : IInsightsClient
     {
-        private readonly IHttpTransport _transport;
+        private readonly HttpTransport _transport;
 
         /// <summary>
         /// Initialize a new insights client
