@@ -285,6 +285,13 @@ namespace Algolia.Search.Models.Search
         public bool? ClickAnalytics { get; set; }
 
         /// <summary>
+        /// The `personalizationImpact` parameter sets the percentage of the impact that personalization has on ranking records.
+        /// The value must be between 0 and 100 (inclusive)
+        /// This parameter will not be taken into account if `enablePersonalization` is **false**.
+        /// </summary>
+        public int? PersonalizationImpact { get; set; }
+
+        /// <summary>
         /// Enable personalization for the query
         /// </summary>
         public bool? EnablePersonalization { get; set; }
