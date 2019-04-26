@@ -39,7 +39,7 @@ namespace Algolia.Search.Clients
     /// </summary>
     public class AnalyticsClient : IAnalyticsClient
     {
-        private readonly IHttpTransport _transport;
+        private readonly HttpTransport _transport;
 
         /// <summary>
         /// Create a new search client for the given appID

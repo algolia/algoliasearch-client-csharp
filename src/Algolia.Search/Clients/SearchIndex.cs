@@ -53,12 +53,12 @@ namespace Algolia.Search.Clients
         /// </summary>
         public AlgoliaConfig Config { get; }
 
-        private readonly IHttpTransport _transport;
+        private readonly HttpTransport _transport;
         private readonly string _urlEncodedIndexName;
         private readonly string _indexName;
 
         /// <inheritdoc />
-        public SearchIndex(IHttpTransport transport, AlgoliaConfig config, string indexName)
+        internal SearchIndex(HttpTransport transport, AlgoliaConfig config, string indexName)
         {
             _transport = transport ?? throw new ArgumentNullException(nameof(transport));
             _indexName = !string.IsNullOrWhiteSpace(indexName)
