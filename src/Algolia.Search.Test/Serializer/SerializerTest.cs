@@ -154,7 +154,7 @@ namespace Algolia.Search.Test.Serializer
             string json =
                 "{ \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}";
 
-            IndexSettings settings = JsonConvert.DeserializeObject<IndexSettings>(json, new SettingsConverter());
+            IndexSettings settings = JsonConvert.DeserializeObject<IndexSettings>(json);
             Assert.IsNotNull(settings.Replicas);
             Assert.True(settings.Replicas.Contains("index1"));
             Assert.True(settings.Replicas.Contains("index2"));

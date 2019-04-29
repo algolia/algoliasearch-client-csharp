@@ -135,7 +135,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             saveSettingsResponse.Wait();
 
             var getSettingsResponse = await _index.GetSettingsAsync();
-            var spceficPropertiesCheck = new List<string> { "Version", "AlternativesAsExact", "DecompoundedAttributes" };
+            var spceficPropertiesCheck = new List<string> { "AlternativesAsExact", "DecompoundedAttributes" };
             Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponse, spceficPropertiesCheck.ToArray()));
 
             // Check specific properties (couldn't be done by the helper)
