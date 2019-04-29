@@ -1,37 +1,39 @@
 /*
-* Copyright (c) 2018 Algolia
-* http://www.algolia.com/
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
-*/
+ * Copyright (c) 2018 Algolia
+ * http://www.algolia.com/
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Settings
 {
+
     /// <summary>
     /// For more informations regarding Index settings
     /// https://www.algolia.com/doc/api-reference/settings-api-parameters/
     /// </summary>
-    [JsonConverter(typeof(SettingsConverter))]
+#pragma warning disable IDE0051 // disable warning for unused private members
     public class IndexSettings
     {
         // Attributes
@@ -40,6 +42,10 @@ namespace Algolia.Search.Models.Settings
         /// The complete list of attributes that will be used for searching.
         /// </summary>
         public List<string> SearchableAttributes { get; set; }
+
+        // Handling legacy index settings
+        [JsonProperty("attributesToIndex")]
+        private List<string> AttributesToIndex { set { if (value != null) { SearchableAttributes = value; } } }
 
         /// <summary>
         /// The complete list of attributes that will be used for faceting
@@ -72,6 +78,9 @@ namespace Algolia.Search.Models.Settings
         /// Creates replicas, exact copies of an index.
         /// </summary>
         public List<string> Replicas { get; set; }
+
+        [JsonProperty("slaves")]
+        private List<string> Slaves { set { if (value != null) { Replicas = value; } } }
 
         // faceting
 
@@ -250,6 +259,10 @@ namespace Algolia.Search.Models.Settings
         /// </summary>
         public List<string> NumericAttributesForFiltering { get; set; }
 
+        // Handling legacy index settings
+        [JsonProperty("numericAttributesToIndex")]
+        private List<string> NumericAttributesToIndex { set { if (value != null) { NumericAttributesForFiltering = value; } } }
+
         /// <summary>
         /// Enables compression of large integer arrays.
         /// </summary>
@@ -304,11 +317,14 @@ namespace Algolia.Search.Models.Settings
         /// </summary>
         public string KeepDiacriticsOnCharacters { get; set; }
 
-        // custom
+        /// <summary>
+        /// Index settings version only for advanced use cases
+        /// </summary>
 
         /// <summary>
-        /// Version
+        /// Custom settings for advanced use cases
         /// </summary>
-        public int? Version { get; set; }
+        [JsonExtensionData]
+        public IDictionary<string, object> CustomSettings;
     }
 }

@@ -728,6 +728,13 @@ namespace Algolia.Search.Clients
         public async Task<IndexSettings> GetSettingsAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default)
         {
+            var dic = new Dictionary<string, string>
+            {
+                {"getVersion","2"}
+            };
+
+            requestOptions = requestOptions.AddQueryParams(dic);
+
             return await _transport.ExecuteRequestAsync<IndexSettings>(HttpMethod.Get,
                     $"/1/indexes/{_urlEncodedIndexName}/settings", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
