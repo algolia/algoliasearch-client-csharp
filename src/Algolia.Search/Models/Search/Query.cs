@@ -322,7 +322,7 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
         /// </summary>
-        public long? AroundPrecision { get; set; }
+        public IEnumerable<AroundPrecision> AroundPrecision { get; set; }
 
         /// <summary>
         /// Minimum radius (in meters) used for a geo search when aroundRadius is not set.
@@ -363,7 +363,7 @@ namespace Algolia.Search.Models.Search
         public string UserToken { get; set; }
 
         /// <summary>
-        /// Returns the Query as a query string 
+        /// Returns the Query as a query string
         /// Example : "query= distinct=0"
         /// </summary>
         public string ToQueryString()
