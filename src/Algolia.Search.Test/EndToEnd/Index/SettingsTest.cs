@@ -104,6 +104,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 DisablePrefixOnAttributes = new List<string> { "attribute1", "attribute2" },
                 DisableExactOnAttributes = new List<string> { "attribute1", "attribute2" },
                 ExactOnSingleWordQuery = "word",
+                QueryLanguages = new List<string> { "fr", "en" },
+                AdvancedSyntaxFeatures = new List<string> { "exactPhrase" },
+                AlternativesAsExact = new List<string> { "ignorePlurals" },
 
                 // Query rules
                 EnableRules = false,
