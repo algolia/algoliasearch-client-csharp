@@ -10,12 +10,16 @@ your .NET code.
 [![Build Status](https://dev.azure.com/algolia-api-clients/dotnet/_apis/build/status/Algolia.Search.CI?branchName=master)](https://dev.azure.com/algolia-api-clients/dotnet/_build/latest?definitionId=2&branchName=master)
 
 
-### Migration note from v5.x to v6.x
+
+  ## Contributing
+
+  ### Migration note from v5.x to v6.x
 
 In January 2019, we released v6 of our .NET client. If you are using version 5.x of the client, read the [migration guide to version 6.x](https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/csharp/).
 Version 5.x will **no longer** be under active development.
 
 **Note:** If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.com/doc/api-client/getting-started/tutorials/asp.net/csharp/).
+
 
 
 
@@ -45,6 +49,12 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 
 
 1. **[Search UI](#search-ui)**
+
+
+1. **[List of available methods](#list-of-available-methods)**
+
+
+1. **[Getting Help](#getting-help)**
 
 
 1. **[List of available methods](#list-of-available-methods)**
@@ -97,7 +107,7 @@ public class Contact
   public int Age { get; set; }
 }
 
-SearchClient client = new SearchClient("YourApplicationID", "YourAPIKey");
+SearchClient client = new SearchClient("YourApplicationID", "YourAdminAPIKey");
 SearchIndex index = client.InitIndex("contact");
 
 IEnumerable<Contact> contacts; // Fetch from DB or a Json file
@@ -156,7 +166,7 @@ Contact res = await index.GetObjectAsync<Contact>("myId");
 ```
 
 #### HttpClient Injection
-The API client is using the built-in `HttpClient` of the .NET Framework. 
+The API client is using the built-in `HttpClient` of the .NET Framework.
 
 The `HttpClient` is wrapped in an interface: `IHttpRequester`.
 If you wish to use another `HttpClient`, you can inject it through the constructor while instantiating a `SearchClient`, `AnalyticsClient`, and `InsightsClient`.
@@ -189,7 +199,7 @@ To start, you need to initialize the client. To do this, you need your **Applica
 You can find both on [your Algolia account](https://www.algolia.com/api-keys).
 
 ```csharp
-SearchClient client = new SearchClient("YourApplicationID", "YourAPIKey");
+SearchClient client = new SearchClient("YourApplicationID", "YourAdminAPIKey");
 SearchIndex index = client.InitIndex("your_index_name");
 ```
 
@@ -284,15 +294,13 @@ The following example shows how to quickly build a front-end search using
 <!doctype html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.0/themes/algolia.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.1/themes/algolia.css" integrity="sha256-4SlodglhMbXjGQfNWiCBLSGNiq90FUw3Mtre9u4vLG8=" crossorigin="anonymous">
 </head>
 <body>
   <header>
-    <div>
-       <input id="search-input" placeholder="Search for products">
-       <!-- We use a specific placeholder in the input to guide users in their search. -->
     
   </header>
+
   <main>
       
       
@@ -307,7 +315,8 @@ The following example shows how to quickly build a front-end search using
     
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@3.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3.32.1/dist/algoliasearchLite.min.js" integrity="sha256-NSTRUP9bvh8kBKi7IHQSmOrMAdVEoSJFBbTA+LoRr3A=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@3.2.0" integrity="sha256-/8usMtTwZ01jujD7KAZctG0UMk2S2NDNirGFVBbBZCM=" crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>
 ```
@@ -316,23 +325,27 @@ The following example shows how to quickly build a front-end search using
 
 ```js
 // Replace with your own values
-var searchClient = algoliasearch(
+const searchClient = algoliasearch(
   'YourApplicationID',
-  'YourAPIKey' // search only API key, no ADMIN key
+  'YourSearchOnlyAPIKey' // search only API key, not admin API key
 );
 
-var search = instantsearch({
+const search = instantsearch({
   indexName: 'instant_search',
-  searchClient: searchClient,
+  searchClient,
   routing: true,
-  searchParameters: {
-    hitsPerPage: 10
-  }
 });
 
 search.addWidget(
+  instantsearch.widgets.configure({
+    hitsPerPage: 10,
+  })
+);
+
+search.addWidget(
   instantsearch.widgets.searchBox({
-    container: '#search-input'
+    container: '#search-box',
+    placeholder: 'Search for products',
   })
 );
 
@@ -341,8 +354,8 @@ search.addWidget(
     container: '#hits',
     templates: {
       item: document.getElementById('hit-template').innerHTML,
-      empty: "We didn't find any results for the search <em>\"{{query}}\"</em>"
-    }
+      empty: `We didn't find any results for the search <em>"{{query}}"</em>`,
+    },
   })
 );
 
@@ -497,6 +510,12 @@ search.start();
 - [Configuring timeouts](https://algolia.com/doc/api-reference/api-methods/configuring-timeouts/?language=csharp)
 - [Set extra header](https://algolia.com/doc/api-reference/api-methods/set-extra-header/?language=csharp)
 - [Wait for operations](https://algolia.com/doc/api-reference/api-methods/wait-task/?language=csharp)
+
+
+
+
+### Vault
+
 
 
 
