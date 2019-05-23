@@ -265,7 +265,7 @@ index.Search<Contact>( new Query { "california paint" });
 await index.SearchAsync<Contact>( new Query { "california paint" });
 
 // Search for a first name and a company
-index.Search<Contact>( new Query { "jimmie paint"" });
+index.Search<Contact>( new Query { "jimmie paint" });
 // Asynchronous
 await index.SearchAsync<Contact>(new Query { "jimmie paint" });
 ```
