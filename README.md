@@ -115,15 +115,15 @@ var result = index.Search<Contact>(new Query("contact"));
 However, it's still possible to use `JObject` to add and retrieve records.
 
 ```csharp
-    using (StreamReader re = File.OpenText("contacts.json"))
-    using (JsonTextReader reader = new JsonTextReader(re))
-    {
-        JArray batch = JArray.Load(reader);
-        index.SaveObjects(batch).Wait();
-    }
+using (StreamReader re = File.OpenText("contacts.json"))
+using (JsonTextReader reader = new JsonTextReader(re))
+{
+  JArray batch = JArray.Load(reader);
+  index.SaveObjects(batch).Wait();
+}
 
-    // Retrieve one JObject Contact
-    JObject contact = index.GetObject<JObject>("myId");
+// Retrieve one JObject Contact
+JObject contact = index.GetObject<JObject>("myId");
 ```
 
  Algolia objects such as `Rule`, `Synonym`, `Settings`, etc., are now typed. You can enjoy the completion of your favorite IDE while developing with the library.
