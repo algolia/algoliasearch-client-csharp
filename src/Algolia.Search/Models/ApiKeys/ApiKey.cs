@@ -76,11 +76,6 @@ namespace Algolia.Search.Models.ApiKeys
         public IEnumerable<string> Referers { get; set; }
 
         /// <summary>
-        /// IPv4 network allowed to use the generated key. This is used for more protection against API key leaking and reuse.
-        /// </summary>
-        public string RestrictSources { get; set; }
-
-        /// <summary>
         /// Specify the list of query parameters. You can force the query parameters for a query using the url string format.
         /// </summary>
         public string QueryParameters { get; set; }
@@ -102,7 +97,7 @@ namespace Algolia.Search.Models.ApiKeys
         public override string ToString()
         {
             return
-                $"{Value}{string.Join(",", Acl)}{MaxHitsPerQuery}{MaxQueriesPerIPPerHour}{string.Join(",", Indexes)}{string.Join(",", Referers)}{RestrictSources}{QueryParameters}{Description}";
+                $"{Value}{string.Join(",", Acl)}{MaxHitsPerQuery}{MaxQueriesPerIPPerHour}{string.Join(",", Indexes)}{string.Join(",", Referers)}{QueryParameters}{Description}";
         }
     }
 }
