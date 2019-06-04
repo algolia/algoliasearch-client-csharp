@@ -23,14 +23,14 @@
 
 ## ✨ Features
 
-* Asynchronous and synchronous API Client to interact with Algolia's API
-* Thread-safe clients
-* Typed requests and responses
-* Injectable HTTP client
 * Compatible with all .NET platforms:
   * `.NET Standard 1.3` to `.NET Standard 2.0`,
   * `.NET Core 1.0` to `.NET Core 2.2`,
   * `.NET Framework 4.5` to `.NET Framework 4.7.1`
+* Asynchronous and synchronous methods to interact with Algolia's API
+* Thread-safe clients
+* Typed requests and responses
+* Injectable HTTP client
 
  **Migration note from v5.x to v6.x**
 >
@@ -235,7 +235,10 @@ The client is designed to be thread-safe. You can use `SearchClient`, `Analytics
 As the API client is following `.NET Standard`, it can be used on **Windows, Linux, or MacOS**.
 The library is continuously tested in all three environments. If you want more information about `.NET Standard`, you can visit [the official page](https://dotnet.microsoft.com/).
 
-If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.com/doc/api-client/getting-started/tutorials/asp.net/csharp/). For full documentation, visit the **[Algolia .NET API Client documentation](https://www.algolia.com/doc/api-client/getting-started/install/csharp/)**.
+#### ASP.NET
+If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.com/doc/api-client/getting-started/tutorials/asp.net/csharp/). 
+
+For full documentation, visit the **[Algolia .NET API Client documentation](https://www.algolia.com/doc/api-client/getting-started/install/csharp/)**.
 
 ## 📄 License
 
