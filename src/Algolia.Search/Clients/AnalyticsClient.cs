@@ -103,11 +103,11 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOptions requestOptions = null) =>
+        public ABTestsResponse GetABTests(int offset = 0, int limit = 10, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetABTestsAsync(offset, limit, requestOptions));
 
         /// <inheritdoc />
-        public async Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10,
+        public async Task<ABTestsResponse> GetABTestsAsync(int offset = 0, int limit = 10,
             RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             var queryParams = new Dictionary<string, string>
@@ -118,7 +118,7 @@ namespace Algolia.Search.Clients
 
             requestOptions = requestOptions.AddQueryParams(queryParams);
 
-            return await _transport.ExecuteRequestAsync<ABTestsReponse>(HttpMethod.Get,
+            return await _transport.ExecuteRequestAsync<ABTestsResponse>(HttpMethod.Get,
                     "/2/abtests", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }

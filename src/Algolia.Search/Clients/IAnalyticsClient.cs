@@ -58,7 +58,7 @@ namespace Algolia.Search.Clients
         /// <param name="limit"></param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
-        ABTestsReponse GetABTests(int offset = 0, int limit = 10, RequestOptions requestOptions = null);
+        ABTestsResponse GetABTests(int offset = 0, int limit = 10, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Fetch all existing AB Tests for App that are available for the current API Key. Returns an array of metadata and metrics.
@@ -68,7 +68,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
-        Task<ABTestsReponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOptions requestOptions = null,
+        Task<ABTestsResponse> GetABTestsAsync(int offset = 0, int limit = 10, RequestOptions requestOptions = null,
             CancellationToken ct = default);
 
         /// <summary>
