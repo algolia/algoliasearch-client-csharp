@@ -107,7 +107,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
             Assert.IsFalse(abTestToCheck.Status.Equals("stopped"));
 
-            ABTestsReponse listAbTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
+            ABTestsResponse listAbTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
             Assert.IsTrue(listAbTests.ABTests.Any(x => x.AbTestId == abTest.AbTestId));
             Assert.IsTrue(TestHelper.AreObjectsEqual(
                 listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));

@@ -29,7 +29,7 @@ namespace Algolia.Search.Models.Analytics
     /// <summary>
     /// Api response
     /// </summary>
-    public class ABTestsReponse
+    public class ABTestsResponse
     {
         /// <summary>
         /// The count
