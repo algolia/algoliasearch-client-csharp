@@ -120,6 +120,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 Distinct = 2,
                 ReplaceSynonymsInHighlight = false,
                 MinProximity = 7,
+                AttributeCriteriaComputedByMinProximity = true,
                 ResponseFields = new List<string> { "hits", "hitsPerPage" },
                 MaxFacetHits = 100,
                 CamelCaseAttributes = new List<string> { "attribute1", "attribute2" },
