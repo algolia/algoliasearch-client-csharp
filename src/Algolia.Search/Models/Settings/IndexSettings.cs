@@ -288,6 +288,11 @@ namespace Algolia.Search.Models.Settings
         public bool? ReplaceSynonymsInHighlight { get; set; }
 
         /// <summary>
+        /// Allows proximity to impact which searchable attribute is matched in the attribute ranking stage.
+        /// </summary>
+        public bool? AttributeCriteriaComputedByMinProximity { get; set; }
+
+        /// <summary>
         /// Precision of the proximity ranking criterion.
         /// </summary>
         public int? MinProximity { get; set; }
