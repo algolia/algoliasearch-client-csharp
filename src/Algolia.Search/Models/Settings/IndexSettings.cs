@@ -23,7 +23,6 @@
 
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Settings
@@ -337,5 +336,11 @@ namespace Algolia.Search.Models.Settings
         /// </summary>
         [JsonExtensionData]
         public IDictionary<string, object> CustomSettings { get; set; }
+
+        /// <summary>
+        /// Custom userData that could be added to the IndexSettings
+        /// </summary>
+        [JsonConverter(typeof(MultiTypeObjectConverter))]
+        public object UserData { get; set; }
     }
 }

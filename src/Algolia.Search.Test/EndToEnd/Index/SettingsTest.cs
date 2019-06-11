@@ -129,14 +129,15 @@ namespace Algolia.Search.Test.EndToEnd.Index
                     {"de", new List<string> {"attribute1", "attribute2"}},
                     {"fi", new List<string> {"attribute3"}}
                 },
-                KeepDiacriticsOnCharacters = "øé"
+                KeepDiacriticsOnCharacters = "øé",
+                UserData = "User data"
             };
 
             var saveSettingsResponse = await _index.SetSettingsAsync(settings);
             saveSettingsResponse.Wait();
 
             var getSettingsResponse = await _index.GetSettingsAsync();
-            var spceficPropertiesCheck = new List<string> { "AlternativesAsExact", "DecompoundedAttributes", "CustomSettings" };
+            var spceficPropertiesCheck = new List<string> { "AlternativesAsExact", "DecompoundedAttributes", "CustomSettings", "UserData" };
             Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponse, spceficPropertiesCheck.ToArray()));
 
             // Check specific properties (couldn't be done by the helper)
@@ -145,6 +146,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.True(getSettingsResponse.DecompoundedAttributes["de"].Contains("attribute2"));
             Assert.True(getSettingsResponse.DecompoundedAttributes.ContainsKey("fi"));
             Assert.True(getSettingsResponse.DecompoundedAttributes["fi"].Contains("attribute3"));
+            Assert.AreEqual(getSettingsResponse.UserData.ToString(), settings.UserData.ToString());
 
             // Set new values
             settings.TypoTolerance = "min";
