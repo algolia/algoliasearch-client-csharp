@@ -102,14 +102,29 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestQueryWithNestedList()
         {
-            Query query = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1" }, new List<string> { "facet2" } } };
-            Assert.AreEqual(query.ToQueryString(), "query=&facetFilters=facet1%2Cfacet2");
+            Query query = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1:true" }, new List<string> { "facet2:true" } } };
+            // Expected: query=&facetFilters=[["facet1:true"],["facet2:true"]]
+            Assert.AreEqual(query.ToQueryString(), "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%5D%2C%5B%22facet2%3Atrue%22%5D%5D");
 
-            Query query2 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1", "facet2" } } };
-            Assert.AreEqual(query2.ToQueryString(), "query=&facetFilters=facet1%2Cfacet2");
+            Query query2 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1:true", "facet2:true" } } };
+            // Expected: query=&facetFilters=[["facet1:true","facet2:true"]]
+            Assert.AreEqual(query2.ToQueryString(), "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%2C%22facet2%3Atrue%22%5D%5D");
 
-            Query query3 = new Query("") { InsideBoundingBox = new List<List<float>> { new List<float> { 10, 35f, 1000, 42f } } };
-            Assert.AreEqual(query3.ToQueryString(), "query=&insideBoundingBox=10.0%2C35.0%2C1000.0%2C42.0");
+            Query query3 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1:true", "facet2:true" }, new List<string> { "facet3:true" } } };
+            // Expected: query=&facetFilters=[["facet1:true","facet2:true"],["facet3:true"]]
+            Assert.AreEqual(query3.ToQueryString(), "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%2C%22facet2%3Atrue%22%5D%2C%5B%22facet3%3Atrue%22%5D%5D");
+
+            Query query4 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1:true" } } };
+            // Expected: query=&facetFilters=[["facet1:true"]]
+            Assert.AreEqual(query4.ToQueryString(), "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%5D%5D");
+
+            Query query5 = new Query("") { InsideBoundingBox = new List<List<float>> { new List<float> { 47.3165f, 4.9665f, 47.3424f, 5.0201f }, new List<float> { 40.9234f, 2.1185f, 38.643f, 1.9916f } } };
+            // Expected: query=&insideBoundingBox=[[47.3165,4.9665,47.3424,5.0201],[40.9234,2.1185,38.643,1.9916]]
+            Assert.AreEqual(query5.ToQueryString(), "query=&insideBoundingBox=%5B%5B47.3165%2C4.9665%2C47.3424%2C5.0201%5D%2C%5B40.9234%2C2.1185%2C38.643%2C1.9916%5D%5D");
+
+            Query query6 = new Query("") { InsideBoundingBox = new List<List<float>> { new List<float> { 47.3165f, 4.9665f, 47.3424f, 5.0201f } } };
+            // Expected: query=&insideBoundingBox=[[47.3165,4.9665,47.3424,5.0201]]
+            Assert.AreEqual(query6.ToQueryString(), "query=&insideBoundingBox=%5B%5B47.3165%2C4.9665%2C47.3424%2C5.0201%5D%5D");
         }
 
         [Test]
