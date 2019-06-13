@@ -28,7 +28,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 
 namespace Algolia.Search.Utils
@@ -92,7 +91,7 @@ namespace Algolia.Search.Utils
                     p.GetCustomAttribute<JsonPropertyAttribute>() == null)
                 .Select(p =>
                 {
-                    string encodedValue = null;
+                    string values = null;
                     var genericTypeArgument = p.PropertyType.GenericTypeArguments[0];
 
                     // In case of nested lists
@@ -100,24 +99,24 @@ namespace Algolia.Search.Utils
                     {
                         if (typeof(IEnumerable<float>).GetTypeInfo().IsAssignableFrom(genericTypeArgument.GetTypeInfo()))
                         {
-                            IEnumerable<float> flatList = ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<float>>().SelectMany(i => i).ToList();
+                            IEnumerable<IEnumerable<float>> nestedParametersLists = ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<float>>();
                             // Culture set to en-US to have floating points separators with "."
-                            encodedValue = Uri.EscapeDataString(string.Join(",", flatList.Select(f => f.ToString("0.0", CultureInfo.InvariantCulture))));
+                            values = WrapValues(string.Join(",", nestedParametersLists.Select(f => WrapValues(string.Join(",", f.Select(x => x.ToString(CultureInfo.InvariantCulture)))))));
                         }
                         else
                         {
-                            IEnumerable<Object> flatList = ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<Object>>().SelectMany(i => i).ToList();
-                            encodedValue = Uri.EscapeDataString(string.Join(",", flatList));
+                            IEnumerable<IEnumerable<object>> nestedParametersLists = ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<object>>();
+                            values = WrapValues(string.Join(",", nestedParametersLists.Select(x => WrapValues(string.Join(",", x.Select(y => "\"" + y + "\""))))));
                         }
                     }
                     else
                     {
                         // One level list
-                        IEnumerable<Object> flatList = ((IEnumerable)p.GetValue(value, null)).Cast<Object>();
-                        encodedValue = Uri.EscapeDataString(string.Join(",", flatList));
+                        IEnumerable<object> parameterList = ((IEnumerable)p.GetValue(value, null)).Cast<object>();
+                        values = string.Join(",", parameterList);
                     }
 
-                    return p.Name.ToCamelCase() + "=" + encodedValue;
+                    return p.Name.ToCamelCase() + "=" + Uri.EscapeDataString(values);
                 });
 
             // Handle properties with JsonPropertyAttribute
@@ -146,6 +145,11 @@ namespace Algolia.Search.Utils
             return string.Join("&",
                 dic.Select(kvp =>
                     string.Format($"{kvp.Key}={Uri.EscapeDataString(kvp.Value)}")));
+        }
+
+        private static string WrapValues(string values)
+        {
+            return "[" + values + "]";
         }
     }
 }
