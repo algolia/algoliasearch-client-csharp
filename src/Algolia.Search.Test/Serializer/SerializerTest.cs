@@ -114,6 +114,15 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
+        public void TestQueryWithCustomParameters()
+        {
+            Query query = new Query("algolia") { CustomParameters = new Dictionary<string, object> { { "newParameter", 10 } } };
+            string json = JsonConvert.SerializeObject(query, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"query\":\"algolia\",\"newParameter\":10}");
+        }
+
+        [Test]
+        [Parallelizable]
         public void TestAutomaticFacetFilters()
         {
             string json = "[\"lastname\",\"firstname\"]";
@@ -191,6 +200,20 @@ namespace Algolia.Search.Test.Serializer
             Assert.IsNotNull(settings.NumericAttributesForFiltering);
             Assert.True(settings.NumericAttributesForFiltering.Contains("attr1"));
             Assert.True(settings.NumericAttributesForFiltering.Contains("attr2"));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestIndexSettingsWithCustomParameters()
+        {
+            IndexSettings settings = new IndexSettings
+            {
+                EnableRules = true,
+                CustomSettings = new Dictionary<string, object> { { "newParameter", 10 } }
+            };
+
+            string json = JsonConvert.SerializeObject(settings, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"enableRules\":true,\"newParameter\":10}");
         }
 
         [Test]

@@ -377,6 +377,12 @@ namespace Algolia.Search.Models.Search
         public string UserToken { get; set; }
 
         /// <summary>
+        /// Custom parameters for advanced use cases
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> CustomParameters { get; set; }
+
+        /// <summary>
         /// Returns the Query as a query string
         /// Example : "query= distinct=0"
         /// </summary>

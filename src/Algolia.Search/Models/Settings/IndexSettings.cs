@@ -325,6 +325,6 @@ namespace Algolia.Search.Models.Settings
         /// Custom settings for advanced use cases
         /// </summary>
         [JsonExtensionData]
-        public IDictionary<string, object> CustomSettings;
+        public IDictionary<string, object> CustomSettings { get; set; }
     }
 }
