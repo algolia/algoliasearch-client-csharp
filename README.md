@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="https://www.algolia.com">
-    <img alt="Algolia for C#" src="https://raw.githubusercontent.com/algolia/algoliasearch-client-common/master/readme-banner.png" >
+    <img alt="Algolia for C#" src="https://user-images.githubusercontent.com/22633119/59595424-10d10880-90f6-11e9-9303-823f70b39d6c.png" >
   </a>
 
   <h4 align="center">The perfect starting point to integrate <a href="https://algolia.com" target="_blank">Algolia</a> within your .NET project</h4>
