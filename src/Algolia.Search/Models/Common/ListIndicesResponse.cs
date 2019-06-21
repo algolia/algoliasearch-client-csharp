@@ -60,17 +60,17 @@ namespace Algolia.Search.Models.Common
         /// <summary>
         /// Number of records contained in the index
         /// </summary>
-        public int Entries { get; set; }
+        public long Entries { get; set; }
 
         /// <summary>
         /// Number of bytes of the index in minified format.
         /// </summary>
-        public int DataSize { get; set; }
+        public long DataSize { get; set; }
 
         /// <summary>
         /// Number of bytes of the index binary file.
         /// </summary>
-        public int FileSize { get; set; }
+        public long FileSize { get; set; }
 
         /// <summary>
         /// Last build time in seconds.
