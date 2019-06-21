@@ -23,6 +23,7 @@
 
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Personalization;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
@@ -239,6 +240,13 @@ namespace Algolia.Search.Test.Serializer
             string expectedJson =
                 "{\"eventsScoring\":{\"Add to cart\":{\"type\":\"conversion\",\"score\":50},\"Purchase\":{\"type\":\"conversion\",\"score\":100}},\"facetsScoring\":{\"brand\":{\"score\":100},\"categories\":{\"score\":10}}}";
             Assert.True(json.Equals(expectedJson));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestListIndicesResponses64BitsIntegers()
+        {
+            Assert.DoesNotThrow(() => { JsonConvert.DeserializeObject<IndicesResponse>("{\"entries\": 100000000000, \"dataSize\": 100000000000, \"fileSize\": 100000000000}"); });
         }
     }
 }
