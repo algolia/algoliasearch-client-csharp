@@ -79,6 +79,12 @@ namespace Algolia.Search.Models.Settings
         /// </summary>
         public List<string> Replicas { get; set; }
 
+        /// <summary>
+        /// The primary parameter is automatically added to a replica's settings when the replica is created and cannot be modified.
+        /// </summary>
+        [JsonProperty]
+        public string Primary { get; private set; }
+
         [JsonProperty("slaves")]
         private List<string> Slaves { set { if (value != null) { Replicas = value; } } }
 
