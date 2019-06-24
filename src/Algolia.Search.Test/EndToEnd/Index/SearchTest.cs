@@ -98,10 +98,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             Task.WaitAll(searchAlgoliaTask, searchElonTask, searchElonTask1, searchElonTask2, searchFacetTask);
 
-            Assert.IsTrue(searchAlgoliaTask.Result.Hits.Count == 2);
-            Assert.IsTrue(searchElonTask.Result.QueryID != null);
-            Assert.IsTrue(searchElonTask1.Result.Hits.Count == 1);
-            Assert.IsTrue(searchElonTask2.Result.Hits.Count == 2);
+            Assert.That(searchAlgoliaTask.Result.Hits, Has.Exactly(2).Items);
+            Assert.That(searchElonTask.Result.QueryID, Is.Not.Null);
+            Assert.That(searchElonTask1.Result.Hits, Has.Exactly(1).Items);
+            Assert.That(searchElonTask2.Result.Hits, Has.Exactly(2).Items);
             Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Algolia")));
             Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Amazon")));
             Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Apple")));

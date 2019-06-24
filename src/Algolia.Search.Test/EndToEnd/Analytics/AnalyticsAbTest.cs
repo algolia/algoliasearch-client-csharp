@@ -105,7 +105,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
 
             ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
             Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
-            Assert.IsFalse(abTestToCheck.Status.Equals("stopped"));
+            Assert.That(abTestToCheck.Status, Is.EqualTo("active"));
 
             ABTestsResponse listAbTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
             Assert.IsTrue(listAbTests.ABTests.Any(x => x.AbTestId == abTest.AbTestId));
@@ -115,14 +115,14 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId.Value);
 
             ABTest stoppedAbTest = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
-            Assert.IsTrue(stoppedAbTest.Status.Equals("stopped"));
+            Assert.That(stoppedAbTest.Status, Is.EqualTo("stopped"));
 
             DeleteABTestResponse deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId.Value);
             _index1.WaitTask(deleteAbTest.TaskID);
 
             AlgoliaApiException ex =
                 Assert.ThrowsAsync<AlgoliaApiException>(() => BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value));
-            Assert.That(ex.HttpErrorCode == 404);
+            Assert.That(ex.HttpErrorCode, Is.EqualTo(404));
         }
 
         public class AlgoliaStub

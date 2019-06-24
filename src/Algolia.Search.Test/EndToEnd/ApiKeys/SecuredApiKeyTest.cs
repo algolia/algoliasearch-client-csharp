@@ -76,8 +76,8 @@ namespace Algolia.Search.Test.EndToEnd.ApiKeys
             AlgoliaApiException ex = Assert.ThrowsAsync<AlgoliaApiException>(() =>
                 index2WithRestriction.SearchAsync<SecuredApiKeyStub>(new Query()));
 
-            Assert.That(ex.Message.Contains("Index not allowed with this API key"));
-            Assert.That(ex.HttpErrorCode == 403);
+            Assert.That(ex.Message, Contains.Substring("Index not allowed with this API key"));
+            Assert.That(ex.HttpErrorCode, Is.EqualTo(403));
         }
 
         public class SecuredApiKeyStub

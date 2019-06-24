@@ -94,7 +94,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 objectsFromIterator.Add(item);
             }
 
-            Assert.True(objectsFromIterator.Count == 6);
+            Assert.That(objectsFromIterator, Has.Exactly(6).Items);
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("zero")),
                 operations.Find(r => r.Body.ObjectID.Equals("zero")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("one")),

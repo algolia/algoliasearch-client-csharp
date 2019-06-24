@@ -68,7 +68,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             var getUpdatedKey = await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
 
-            Assert.IsTrue(getUpdatedKey.MaxHitsPerQuery == 42);
+            Assert.That(getUpdatedKey.MaxHitsPerQuery, Is.EqualTo(42));
 
             var deleteApiKey = await BaseTest.SearchClient.DeleteApiKeyAsync(_apiKey);
             deleteApiKey.Wait();

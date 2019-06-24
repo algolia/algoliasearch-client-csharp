@@ -126,7 +126,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var sixFirstRecordsIds = settedIds.Concat(generatedId).Concat(generatedIDs).ToList();
             var sixFirstRecords = (await _index.GetObjectsAsync<AlgoliaStub>(sixFirstRecordsIds)).ToList();
-            Assert.True(sixFirstRecords.Count() == 6);
+            Assert.That(sixFirstRecords, Has.Exactly(6).Items);
 
             var objectsToCompare = new List<AlgoliaStub> { objectOne }.Concat(objectsWithIds)
                 .Concat(new List<AlgoliaStub> { objectWoId })
@@ -141,7 +141,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             // 1000 records
             var batchResponse = (await _index.GetObjectsAsync<AlgoliaStub>(ids)).ToList();
-            Assert.True(batchResponse.Count() == 1000);
+            Assert.That(batchResponse, Has.Exactly(1000).Items);
 
             // Check retrieved objects againt original content
             Parallel.For(0, batchResponse.Count, i =>
@@ -155,7 +155,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             foreach (var item in _index.Browse<AlgoliaStub>(new BrowseIndexQuery()))
                 objectsBrowsed.Add(item);
 
-            Assert.True(objectsBrowsed.Count() == 1006);
+            Assert.That(objectsBrowsed, Has.Exactly(1006).Items);
 
             // Update one object
             var objectToPartialUpdate = objectsToBatch.ElementAt(0);
@@ -165,7 +165,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             partialUpdateObject.Wait();
 
             var getUpdatedObject = await _index.GetObjectAsync<AlgoliaStub>(objectToPartialUpdate.ObjectId);
-            Assert.True(getUpdatedObject.Property.Equals(objectToPartialUpdate.Property));
+            Assert.That(getUpdatedObject.Property, Is.EqualTo(objectToPartialUpdate.Property));
 
             // Update two objects
             var objectToPartialUpdate1 = objectsToBatch.ElementAt(1);
@@ -187,8 +187,8 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 objectToPartialUpdate2.ObjectId
             })).ToList();
 
-            Assert.True(getUpdatedObjects.ElementAt(0).Property.Equals(objectToPartialUpdate1.Property));
-            Assert.True(getUpdatedObjects.ElementAt(1).Property.Equals(objectToPartialUpdate2.Property));
+            Assert.That(getUpdatedObjects.ElementAt(0).Property, Is.EqualTo(objectToPartialUpdate1.Property));
+            Assert.That(getUpdatedObjects.ElementAt(1).Property, Is.EqualTo(objectToPartialUpdate2.Property));
 
             // Delete six first objects
             var deleteObjects = await _index.DeleteObjectsAsync(sixFirstRecordsIds);
@@ -200,7 +200,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             foreach (var item in _index.Browse<AlgoliaStub>(new BrowseIndexQuery()))
                 objectsBrowsedAfterDelete.Add(item);
 
-            Assert.True(objectsBrowsedAfterDelete.Count() == 1000);
+            Assert.That(objectsBrowsedAfterDelete, Has.Exactly(1000).Items);
 
             // Delete remaining objects
             var deleteRemainingObjects = await _index.DeleteObjectsAsync(ids);
@@ -208,7 +208,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             // Assert that all objects were deleted
             var search = await _index.SearchAsync<AlgoliaStub>(new Query(""));
-            Assert.True(search.Hits.Count == 0);
+            Assert.That(search.Hits, Is.Empty);
         }
 
         [Test]
@@ -231,13 +231,13 @@ namespace Algolia.Search.Test.EndToEnd.Index
             delete.Wait();
 
             var searchAfterDelete = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
-            Assert.True(searchAfterDelete.Hits.Count == 9);
+            Assert.That(searchAfterDelete.Hits, Has.Exactly(9).Items);
 
             var resp = await _indexDeleteBy.DeleteByAsync(new Query { TagFilters = new List<List<string>> { new List<string> { "car" } } });
             resp.Wait();
 
             var search = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
-            Assert.True(search.Hits.Count == 0);
+            Assert.That(search.Hits, Is.Empty);
         }
 
         [Test]
@@ -260,7 +260,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             clear.Wait();
 
             var search = await _indexClear.SearchAsync<AlgoliaStub>(new Query(""));
-            Assert.True(search.Hits.Count == 0);
+            Assert.That(search.Hits, Is.Empty);
         }
 
         [Test]
@@ -279,7 +279,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var listIndices = await BaseTest.SearchClient.ListIndicesAsync();
             Assert.True(listIndices.Items.Exists(x => x.Name.Equals(indexDestName)));
-            Assert.True(!listIndices.Items.Exists(x => x.Name.Equals(_indexMoveName)));
+            Assert.False(listIndices.Items.Exists(x => x.Name.Equals(_indexMoveName)));
         }
     }
 

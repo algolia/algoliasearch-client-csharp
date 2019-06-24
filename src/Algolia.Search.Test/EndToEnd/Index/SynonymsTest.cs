@@ -132,7 +132,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             // Perform a synonym search using searchSynonyms with an empty query, page 0 and hitsPerPage set to 10 and check that the returned synonyms are the same as the 5 originally saved
             SearchResponse<Synonym> searchResponse =
                 await _index.SearchSynonymsAsync(new SynonymQuery { HitsPerPage = 10, Page = 0 });
-            Assert.True(searchResponse.Hits.Count == 5);
+            Assert.That(searchResponse.Hits, Has.Exactly(5).Items);
 
             // Instantiate a new SynonymIterator using newSynonymIterator and iterate over all the synonyms and check that those collected synonyms are the same as the 5 originally saved
             List<Synonym> synonymsFromIterator = new List<Synonym>();
@@ -156,7 +156,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             // Try to get the synonym with getSynonym with objectID “gba” and check that the synonym does not exist anymore (404)
             AlgoliaApiException ex = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("gba"));
-            Assert.That(ex.HttpErrorCode == 404);
+            Assert.That(ex.HttpErrorCode, Is.EqualTo(404));
 
             // Clear all the synonyms using clearSynonyms and wait for the task to terminate using waitTask with the returned taskID
             var clearSynonymResponse = await _index.ClearSynonymsAsync();
@@ -165,7 +165,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             // Perform a synonym search using searchSynonyms with an empty query, page 0 and hitsPerPage set to 10 and check that the number of returned synonyms is equal to 0
             SearchResponse<Synonym> searchAfterClearResponse =
                 await _index.SearchSynonymsAsync(new SynonymQuery { HitsPerPage = 10, Page = 0 });
-            Assert.True(searchAfterClearResponse.Hits.Count == 0);
+            Assert.That(searchAfterClearResponse.Hits, Is.Empty);
         }
 
         public class SynonymTestObject

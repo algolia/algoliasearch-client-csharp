@@ -39,7 +39,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Task.WaitAll(listIndices1, listIndices2);
 
             var logs = await BaseTest.SearchClient.GetLogsAsync(offset: 0, length: 2);
-            Assert.IsTrue(logs.Logs.Count() == 2);
+            Assert.That(logs.Logs, Has.Exactly(2).Items);
         }
     }
 }
