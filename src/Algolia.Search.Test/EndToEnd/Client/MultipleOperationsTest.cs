@@ -86,7 +86,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             var multipleGet =
                 await BaseTest.SearchClient.MultipleGetObjectsAsync<MultipleOperationClass>(objectsToRetrieve);
-            Assert.True(multipleGet.Results.Count() == 4);
+            Assert.That(multipleGet.Results, Has.Exactly(4).Items);
             Assert.True(multipleGet.Results.All(x => x.Firstname.Equals("Jimmie")));
 
             for (int i = 0; i < 4; i++)
@@ -115,13 +115,13 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var multiQueri = await BaseTest.SearchClient.MultipleQueriesAsync<MultipleOperationClass>(request);
             var multiQueri2 = await BaseTest.SearchClient.MultipleQueriesAsync<MultipleOperationClass>(request2);
 
-            Assert.True(multiQueri.Results.Count() == 2);
-            Assert.True(multiQueri.Results.ElementAt(0).Hits.Count() == 2);
-            Assert.True(multiQueri.Results.ElementAt(1).Hits.Count() == 2);
+            Assert.That(multiQueri.Results, Has.Exactly(2).Items);
+            Assert.That(multiQueri.Results.ElementAt(0).Hits, Has.Exactly(2).Items);
+            Assert.That(multiQueri.Results.ElementAt(1).Hits, Has.Exactly(2).Items);
 
-            Assert.True(multiQueri2.Results.Count() == 2);
-            Assert.True(multiQueri2.Results.ElementAt(0).Hits.Count() == 2);
-            Assert.True(!multiQueri2.Results.ElementAt(1).Hits.Any());
+            Assert.That(multiQueri2.Results, Has.Exactly(2).Items);
+            Assert.That(multiQueri2.Results.ElementAt(0).Hits, Has.Exactly(2).Items);
+            Assert.That(multiQueri2.Results.ElementAt(1).Hits, Is.Empty);
         }
 
         public class MultipleOperationClass

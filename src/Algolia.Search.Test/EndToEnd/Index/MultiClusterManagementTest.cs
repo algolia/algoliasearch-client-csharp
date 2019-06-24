@@ -41,7 +41,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
         public async Task McmTest()
         {
             IEnumerable<ClustersResponse> listClusters = (await BaseTest.McmClient.ListClustersAsync()).ToList();
-            Assert.True(listClusters.Count() >= 2);
+            Assert.That(listClusters, Has.Count.GreaterThanOrEqualTo(2));
 
             string userId = TestHelper.GetMcmUserId();
             AssignUserIdResponse assignResponse =
@@ -51,13 +51,13 @@ namespace Algolia.Search.Test.EndToEnd.Index
             SearchResponse<UserIdResponse> searchResponse =
                 await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest
                 { Query = userId, Cluster = listClusters.ElementAt(0).ClusterName });
-            Assert.True(searchResponse.NbHits == 1);
+            Assert.That(searchResponse.Hits, Has.Exactly(1).Items);
 
             ListUserIdsResponse listUserIds = await BaseTest.McmClient.ListUserIdsAsync();
             Assert.True(listUserIds.UserIds.Exists(x => x.UserID.Equals(userId)));
 
             TopUserIdResponse topUserIds = await BaseTest.McmClient.GetTopUserIdAsync();
-            Assert.True(topUserIds.TopUsers.Any());
+            Assert.That(topUserIds.TopUsers, Is.Not.Empty);
 
             RemoveUserId(userId);
 

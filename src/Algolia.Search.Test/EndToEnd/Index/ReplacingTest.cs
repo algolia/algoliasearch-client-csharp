@@ -125,9 +125,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetSynonymAsync("one"));
             AlgoliaApiException getRuleEx = Assert.ThrowsAsync<AlgoliaApiException>(() => _index.GetRuleAsync("one"));
 
-            Assert.That(getObjectEx.HttpErrorCode == 404);
-            Assert.That(getSynonymEx.HttpErrorCode == 404);
-            Assert.That(getRuleEx.HttpErrorCode == 404);
+            Assert.That(getObjectEx.HttpErrorCode, Is.EqualTo(404));
+            Assert.That(getSynonymEx.HttpErrorCode, Is.EqualTo(404));
+            Assert.That(getRuleEx.HttpErrorCode, Is.EqualTo(404));
 
             var ruleAfterReplace = _index.GetRuleAsync("two");
             var synonymAfterReplace = _index.GetSynonymAsync("two");

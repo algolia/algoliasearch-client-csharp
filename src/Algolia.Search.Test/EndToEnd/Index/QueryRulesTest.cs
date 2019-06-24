@@ -121,7 +121,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave2, tasks[1]));
 
             SearchResponse<Rule> searchRules = await _index.SearchRuleAsync(new RuleQuery());
-            Assert.IsTrue(searchRules.Hits.Count == 2);
+            Assert.That(searchRules.Hits, Has.Exactly(2).Items);
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave,
                 searchRules.Hits.Find(r => r.ObjectID.Equals(ruleToSave.ObjectID))));
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave2,
@@ -145,7 +145,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             deleteRule.Wait();
 
             SearchResponse<Rule> searchRulesAfterDelete = await _index.SearchRuleAsync(new RuleQuery());
-            Assert.IsTrue(searchRulesAfterDelete.Hits.Count == 1);
+            Assert.That(searchRulesAfterDelete.Hits, Has.Exactly(1).Items);
             Assert.IsFalse(searchRulesAfterDelete.Hits.Exists(r => r.ObjectID.Equals(ruleToSave.ObjectID)));
 
             // Clear all the remaining rules using clearRules and check that all rules have been correctly removed
@@ -153,7 +153,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             clearRule.Wait();
 
             SearchResponse<Rule> searchRulesAfterClear = await _index.SearchRuleAsync(new RuleQuery());
-            Assert.IsTrue(searchRulesAfterClear.Hits.Count == 0);
+            Assert.That(searchRulesAfterClear.Hits, Is.Empty);
         }
 
         public class RuleTest
