@@ -65,85 +65,7 @@ SearchIndex index = client.InitIndex("your_index_name");
 
 #### Push data
 
-Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the ```contacts``` index using the following code:
-
-```csharp
-SearchIndex index = client.InitIndex("contacts");
-
-using (StreamReader re = File.OpenText("contacts.json"))
-using (JsonTextReader reader = new JsonTextReader(re))
-{
-    JArray batch = JArray.Load(reader);
-    index.SaveObjects(batch, autoGenerateObjectId: true);
-    // Asynchronous
-    // index.SaveObjectsAsync(batch, autoGenerateObjectId: true);
-}
-```
-
-#### Configure
-
-You can customize settings to fine tune the search behavior. For example, you can add a custom ranking by number of followers to further enhance the built-in relevance:
-
-```csharp
-IndexSettings settings = new IndexSettings
-{
-    CustomRanking = new List<string> { "desc(followers)"},
-};
-
-index.SetSettings(settings);
-
-// Asynchronous
-await index.SetSettingsAsync(settings);
-```
-
-You can also configure the list of attributes you want to index by order of importance (most important first).
-
-**Note:** Algolia is designed to suggest results as you type, which means you'll generally search by prefix.
-In this case, the order of attributes is crucial to decide which hit is the best.
-
-```csharp
-IndexSettings settings = new IndexSettings
-{
-    SearchableAttributes = new List<string>
-        {"lastname", "firstname", "company", "email", "city"}
-};
-
-// Synchronous
-index.SetSettings(settings);
-
-// Asynchronous
-await index.SetSettingsAsync(settings);
-```
-
-#### Search
-
-You can now search for contacts by `firstname`, `lastname`, `company`, etc. (even with typos):
-
-```csharp
-// Search for a first name
-index.Search<Contact>(new Query { "jimmie" });
-// Asynchronous
-await index.SearchAsync<Contact>(new Query { "jimmie" });
-
-// Search for a first name with typo
-index.Search<Contact>(new Query { "jimie" });
-// Asynchronous
-await index.SearchAsync<Contact>( new Query { "jimie" });
-
-// Search for a first name and a company
-index.Search<Contact>( new Query { "jimmie paint" });
-// Asynchronous
-await index.SearchAsync<Contact>(new Query { "jimmie paint" });
-```
-
-## 🎓 Client Philosophy
-
-#### POCOs, Types and Json.NET
-
-The Client is meant to be used with POCOs and Types to improve type safety and developer experience. You can directly index your POCOs if they follow the [.NET naming convention](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions) for class and properties:
-
-* PascalCase for property names
-* PascalCase for class name
+Without any prior configuration, you can start indexing contacts in the contacts index using the following code:
 
 ```csharp
 public class Contact
@@ -153,93 +75,34 @@ public class Contact
   public int Age { get; set; }
 }
 
-SearchClient client = new SearchClient("YourApplicationID", "YourAPIKey");
-SearchIndex index = client.InitIndex("contact");
+SearchIndex index = client.InitIndex("contacts");
 
-IEnumerable<Contact> contacts; // Fetch from DB or a Json file
-index.SaveObjects(contacts);
-
-// Retrieve one typed Contact
-Contact contact = index.GetObject<Contact>("myId");
-
-// Search one typed Contact
-var result = index.Search<Contact>(new Query("contact"));
+index.SaveObject(new Contact 
+{ 
+    ObjectID = "ID1",
+    Name = "Jimmie",
+    Age = 30
+});
 ```
 
-**Note:** If you can't follow the convention, you can still override the naming strategy with the following attribute `[JsonProperty(PropertyName = "propertyName")]`
+#### Search
 
-However, it's still possible to use `JObject` to add and retrieve records.
-
-```csharp
-using (StreamReader re = File.OpenText("contacts.json"))
-using (JsonTextReader reader = new JsonTextReader(re))
-{
-  JArray batch = JArray.Load(reader);
-  index.SaveObjects(batch).Wait();
-}
-
-// Retrieve one JObject Contact
-JObject contact = index.GetObject<JObject>("myId");
-```
-
- Algolia objects such as `Rule`, `Synonym`, `Settings`, etc., are now typed. You can enjoy the completion of your favorite IDE while developing with the library.
-
-Example with the `Settings` class:
+You can now search for contacts by `firstname`, `lastname`, `company`, etc. (even with typos):
 
 ```csharp
-IndexSettings settings = new IndexSettings
-{
-    SearchableAttributes = new List<string> {"attribute1", "attribute2"},
-    AttributesForFaceting = new List<string> {"filterOnly(attribute2)"},
-    UnretrievableAttributes = new List<string> {"attribute1", "attribute2"},
-    AttributesToRetrieve = new List<string> {"attribute3", "attribute4"}
-    // etc.
-};
 
-index.SetSettings(settings);
-```
-
-#### Asynchronous & Synchronous Methods
-The API client provides both `Async` and `Sync` methods for every API endpoint. Asynchronous methods are suffixed with the `Async` keyword.
-You can use any of them depending on your needs.
-
-```csharp
 // Synchronous
-Contact res = index.GetObject<Contact>("myId");
+index.Search<Contact>(new Query { "jimmie" });
 
 // Asynchronous
-Contact res = await index.GetObjectAsync<Contact>("myId");
+await index.SearchAsync<Contact>(new Query { "jimmie" });
 ```
 
-#### HttpClient Injection
-The API client is using the built-in `HttpClient` of the .NET Framework.
-
-The `HttpClient` is wrapped in an interface: `IHttpRequester`.
-If you wish to use another `HttpClient`, you can inject it through the constructor while instantiating a `SearchClient`, `AnalyticsClient`, and `InsightsClient`.
-
-Example:
-
-```csharp
-IHttpRequester myCustomHttpClient = new MyCustomHttpClient();
-
-SearchClient client = new SearchClient(
-    new SearchConfig("YourApplicationId", "YourAdminAPIKey"),
-    myCustomHttpClient
-);
-```
-
-#### Multithreading
-The client is designed to be thread-safe. You can use `SearchClient`, `AnalyticsClient`, and `InsightsClient` in a multithreaded environment.
-
-#### Cross-Platform
-As the API client is following `.NET Standard`, it can be used on **Windows, Linux, or MacOS**.
-The library is continuously tested in all three environments. If you want more information about `.NET Standard`, you can visit [the official page](https://dotnet.microsoft.com/).
+For full documentation, visit the **[Algolia .NET API Client documentation](https://www.algolia.com/doc/api-client/getting-started/install/csharp/)**.
 
 #### ASP.NET
 If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.com/doc/api-client/getting-started/tutorials/asp.net/csharp/). 
 
-For full documentation, visit the **[Algolia .NET API Client documentation](https://www.algolia.com/doc/api-client/getting-started/install/csharp/)**.
 
 ## 📄 License
-
 Algolia .NET API Client is an open-sourced software licensed under the [MIT license](LICENSE.md).
