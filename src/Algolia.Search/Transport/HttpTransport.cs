@@ -106,9 +106,11 @@ namespace Algolia.Search.Transport
             var request = new Request
             {
                 Method = method,
-                Body = CreateRequestContent(data),
-                Headers = GenerateHeaders(requestOptions?.Headers)
+                Headers = GenerateHeaders(requestOptions?.Headers),
+                Compression = _algoliaConfig.Compression
             };
+
+            request.Body = CreateRequestContent(data, request.CanCompress);
 
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
@@ -138,14 +140,17 @@ namespace Algolia.Search.Transport
         /// Generate stream for serializing objects
         /// </summary>
         /// <param name="data">Data to send</param>
+        /// <param name="compress">Whether the stream should be compressed or not</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
-        private MemoryStream CreateRequestContent<T>(T data)
+        private MemoryStream CreateRequestContent<T>(T data, bool compress)
         {
             if (data != null)
             {
                 MemoryStream ms = new MemoryStream();
-                SerializerHelper.Serialize(data, ms, JsonConfig.AlgoliaJsonSerializerSettings);
+
+                SerializerHelper.Serialize(data, ms, JsonConfig.AlgoliaJsonSerializerSettings, compress);
+
                 ms.Seek(0, SeekOrigin.Begin);
                 return ms;
             }
