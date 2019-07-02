@@ -21,35 +21,21 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Enums;
-using Algolia.Search.Transport;
-using System.Collections.Generic;
-
-namespace Algolia.Search.Clients
+namespace Algolia.Search.Models.Enums
 {
     /// <summary>
-    /// Analytics client configuration
+    /// Compression type for outgoing HTTP requests
     /// </summary>
-    public class AnalyticsConfig : AlgoliaConfig
+    public enum CompressionType
     {
         /// <summary>
-        /// The configuration of the analytics client
-        /// A client should have it's own configuration ie on configuration per client instance
+        /// No compression
         /// </summary>
-        /// <param name="applicationId">Your application ID</param>
-        /// <param name="apiKey">Your API Key</param>
-        public AnalyticsConfig(string applicationId, string apiKey) : base(applicationId, apiKey)
-        {
-            DefaultHosts = new List<StatefulHost>
-            {
-                new StatefulHost
-                {
-                    Url = "analytics.algolia.com",
-                    Accept = CallType.Read | CallType.Write
-                }
-            };
+        NONE,
 
-            Compression = CompressionType.NONE;
-        }
+        /// <summary>
+        /// GZip Compression. Only supported by Search API.
+        /// </summary>
+        GZIP
     }
 }

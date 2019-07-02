@@ -23,6 +23,7 @@
 
 using Newtonsoft.Json;
 using System.IO;
+using System.IO.Compression;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,16 +35,36 @@ namespace Algolia.Search.Serializer
     /// </summary>
     internal static class SerializerHelper
     {
-        private static readonly UTF8Encoding _encoding = new UTF8Encoding(false);
+        private static readonly UTF8Encoding DefaultEncoding = new UTF8Encoding(false);
+        private static readonly int DefaultBufferSize = 1024;
+        // Buffer sized as recommended by Bradley Grainger, http://faithlife.codes/blog/2012/06/always-wrap-gzipstream-with-bufferedstream/
+        private static readonly int GZipBufferSize = 8192;
 
-        public static void Serialize<T>(T data, Stream stream, JsonSerializerSettings settings)
+        public static void Serialize<T>(T data, Stream stream, JsonSerializerSettings settings, bool gzipCompress)
         {
-            using (var sw = new StreamWriter(stream, _encoding, 1024, true))
-            using (var jtw = new JsonTextWriter(sw) { Formatting = Formatting.None })
+            if (gzipCompress)
+            {
+                using (var gzipStream = new GZipStream(stream, CompressionMode.Compress, true))
+                using (var sw = new StreamWriter(gzipStream, DefaultEncoding, GZipBufferSize))
+                using (var jtw = new JsonTextWriter(sw) { Formatting = Formatting.None })
+                {
+                    JsonSerialize(jtw);
+                }
+            }
+            else
+            {
+                using (var sw = new StreamWriter(stream, DefaultEncoding, DefaultBufferSize, true))
+                using (var jtw = new JsonTextWriter(sw) { Formatting = Formatting.None })
+                {
+                    JsonSerialize(jtw);
+                }
+            }
+
+            void JsonSerialize(JsonTextWriter writer)
             {
                 JsonSerializer serializer = JsonSerializer.Create(settings);
-                serializer.Serialize(jtw, data);
-                jtw.Flush();
+                serializer.Serialize(writer, data);
+                writer.Flush();
             }
         }
 

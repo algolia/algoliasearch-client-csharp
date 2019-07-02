@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Serializer;
 using Algolia.Search.Transport;
 using System.Collections.Generic;
@@ -93,6 +94,11 @@ namespace Algolia.Search.Clients
         /// Set the read timeout in seconds for all requests
         /// </summary>
         public int? WriteTimeout { get; set; }
+
+        /// <summary>
+        /// Compression for outgoing http requests  <see cref="CompressionType"/>
+        /// </summary>
+        public virtual CompressionType Compression { get; protected set; }
 
         /// <summary>
         /// Configurations hosts

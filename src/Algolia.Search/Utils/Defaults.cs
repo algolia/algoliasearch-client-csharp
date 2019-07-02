@@ -47,4 +47,7 @@ internal class Defaults
     public const string UserAgentHeader = "User-Agent";
     public const string Connection = "Connection";
     public const string KeepAlive = "keep-alive";
+    public const string ContentType = "Content-Type";
+    public const string ApplicationJson = "application/json; charset=utf-8";
+    public const string GzipEncoding = "gzip";
 }

@@ -49,6 +49,8 @@ namespace Algolia.Search.Clients
                     Accept = CallType.Read | CallType.Write
                 }
             };
+
+            Compression = CompressionType.NONE;
         }
     }
 }

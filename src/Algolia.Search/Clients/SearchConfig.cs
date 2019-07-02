@@ -88,6 +88,11 @@ namespace Algolia.Search.Clients
             hosts.AddRange(commonHosts);
 
             DefaultHosts = hosts;
+
+            Compression = CompressionType.NONE;
         }
+
+        /// <inheritdoc />
+        public new CompressionType Compression { get; set; }
     }
 }

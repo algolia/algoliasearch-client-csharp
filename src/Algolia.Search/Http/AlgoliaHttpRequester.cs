@@ -80,6 +80,11 @@ namespace Algolia.Search.Http
                 Content = request.Body != null ? new StreamContent(request.Body) : null
             };
 
+            if (request.Body != null)
+            {
+                httpRequestMessage.Content.Headers.Fill(request);
+            }
+
             httpRequestMessage.Headers.Fill(request.Headers);
             httpRequestMessage.SetTimeout(TimeSpan.FromSeconds(totalTimeout));
 
