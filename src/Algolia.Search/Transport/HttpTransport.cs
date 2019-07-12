@@ -196,10 +196,10 @@ namespace Algolia.Search.Transport
                     return _algoliaConfig.ReadTimeout ?? Defaults.ReadTimeout;
 
                 case CallType.Write:
-                    return _algoliaConfig.WriteTimeout ?? Defaults.WriteTimeut;
+                    return _algoliaConfig.WriteTimeout ?? Defaults.WriteTimeout;
 
                 default:
-                    return Defaults.WriteTimeut;
+                    return Defaults.WriteTimeout;
             }
         }
     }
