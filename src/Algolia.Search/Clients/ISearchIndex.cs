@@ -832,5 +832,18 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         Task<TaskStatusResponse> GetTaskAsync(long taskId, RequestOptions requestOptions = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Return whether an index exists or not
+        /// </summary>
+        /// <returns></returns>
+        bool Exists();
+
+        /// <summary>
+        /// Return whether an index exists or not
+        /// </summary>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<bool> ExistsAsync(CancellationToken ct = default);
     }
 }
