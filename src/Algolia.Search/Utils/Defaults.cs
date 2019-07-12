@@ -39,7 +39,7 @@ internal class Defaults
     /// <summary>
     /// Write timeout in seconds
     /// </summary>
-    public const int WriteTimeut = 30;
+    public const int WriteTimeout = 30;
     public const string AcceptHeader = "Accept";
     public const string AlgoliaApplicationHeader = "X-Algolia-Application-Id";
     public const string AlgoliaApiKeyHeader = "X-Algolia-API-Key";
