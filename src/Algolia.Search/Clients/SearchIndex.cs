@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
 using Algolia.Search.Models.Batch;
@@ -1060,6 +1061,23 @@ namespace Algolia.Search.Clients
             return await _transport.ExecuteRequestAsync<TaskStatusResponse>(HttpMethod.Get,
                     $"/1/indexes/{_urlEncodedIndexName}/task/{taskId}", CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public bool Exists() => AsyncHelper.RunSync(() => ExistsAsync());
+
+        /// <inheritdoc />
+        public async Task<bool> ExistsAsync(CancellationToken ct = default)
+        {
+            try
+            {
+                await GetSettingsAsync(ct: ct);
+            }
+            catch (AlgoliaApiException ex) when (ex.HttpErrorCode == 404)
+            {
+                return await Task.FromResult<bool>(false);
+            }
+            return await Task.FromResult<bool>(true);
         }
     }
 }
