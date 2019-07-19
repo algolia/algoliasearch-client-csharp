@@ -94,32 +94,34 @@ namespace Algolia.Search.Http
                 using (HttpResponseMessage response =
                     await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
                 {
-                    var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-
-                    if (response.IsSuccessStatusCode)
+                    using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                     {
-                        MemoryStream outputStream = new MemoryStream();
-                        await stream.CopyToAsync(outputStream).ConfigureAwait(false);
-                        outputStream.Seek(0, SeekOrigin.Begin);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MemoryStream outputStream = new MemoryStream();
+                            await stream.CopyToAsync(outputStream).ConfigureAwait(false);
+                            outputStream.Seek(0, SeekOrigin.Begin);
 
 #if DEBUG
-                        await LogHelper.LogToFile(outputStream);
+                            await LogHelper.LogToFile(outputStream);
 #endif
+
+                            return new AlgoliaHttpResponse
+                            {
+                                Body = outputStream,
+                                HttpStatusCode = (int)response.StatusCode
+                            };
+                        }
+
+                        var content = await SerializerHelper.StreamToStringAsync(stream).ConfigureAwait(false);
 
                         return new AlgoliaHttpResponse
                         {
-                            Body = outputStream,
+                            Error = content,
                             HttpStatusCode = (int)response.StatusCode
                         };
                     }
-
-                    var content = await SerializerHelper.StreamToStringAsync(stream).ConfigureAwait(false);
-
-                    return new AlgoliaHttpResponse
-                    {
-                        Error = content,
-                        HttpStatusCode = (int)response.StatusCode
-                    };
                 }
             }
             catch (TimeoutException timeOutException)
