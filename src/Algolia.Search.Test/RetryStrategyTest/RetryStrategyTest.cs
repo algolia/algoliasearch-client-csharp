@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Clients;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
 using NUnit.Framework;
@@ -91,11 +92,17 @@ namespace Algolia.Search.Test.RetryStrategyTest
             var hosts = retryStrategy.GetTryableHost(callType);
             Assert.True(hosts.Count(h => h.Up) == 4);
 
-            var decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
+            var decision = retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { HttpStatusCode = httpErrorCode });
             Assert.True(decision.HasFlag(RetryOutcomeType.Retry));
 
             var updatedHosts = retryStrategy.GetTryableHost(callType);
             Assert.True(updatedHosts.Count(h => h.Up) == 3);
+
+            var decisionAfterNetworkError = retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { IsNetworkError = true });
+            Assert.True(decision.HasFlag(RetryOutcomeType.Retry));
+
+            var updatedHostsAfterNetworkError = retryStrategy.GetTryableHost(callType);
+            Assert.True(updatedHosts.Count(h => h.Up) == 2);
         }
 
         [TestCase(CallType.Read, 400)]
@@ -110,7 +117,7 @@ namespace Algolia.Search.Test.RetryStrategyTest
 
             var hosts = retryStrategy.GetTryableHost(callType);
 
-            var decision = retryStrategy.Decide(hosts.ElementAt(0), httpErrorCode, false);
+            var decision = retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { HttpStatusCode = httpErrorCode });
 
             Assert.True(decision.HasFlag(RetryOutcomeType.Failure));
         }
@@ -123,25 +130,25 @@ namespace Algolia.Search.Test.RetryStrategyTest
             RetryStrategy retryStrategy = new RetryStrategy(searchConfig);
 
             var initialHosts = retryStrategy.GetTryableHost(callType);
-            Assert.True(initialHosts.Count() == 4);
+            Assert.That(initialHosts, Has.Exactly(4).Items);
 
             Task task1 = Task.Run(() =>
             {
                 var hosts = retryStrategy.GetTryableHost(callType);
-                retryStrategy.Decide(hosts.ElementAt(0), 200, false);
+                retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { HttpStatusCode = 200 });
                 Console.WriteLine(Thread.CurrentThread.Name);
             });
 
             Task task2 = Task.Run(() =>
             {
                 var hosts = retryStrategy.GetTryableHost(callType);
-                retryStrategy.Decide(hosts.ElementAt(0), 500, false);
+                retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { HttpStatusCode = 500 });
             });
 
             Task.WaitAll(task1, task2);
 
             var updatedHosts = retryStrategy.GetTryableHost(callType);
-            Assert.True(updatedHosts.Count() == 3);
+            Assert.That(updatedHosts, Has.Exactly(3).Items);
         }
     }
 }

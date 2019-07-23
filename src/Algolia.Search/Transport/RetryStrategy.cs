@@ -22,6 +22,7 @@
  */
 
 using Algolia.Search.Clients;
+using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -87,26 +88,25 @@ namespace Algolia.Search.Transport
         /// Update host's state
         /// </summary>
         /// <param name="tryableHost">A statefull host</param>
-        /// <param name="httpResponseCode">An http response code</param>
-        /// <param name="isTimedOut">Is the request timed out</param>
+        /// <param name="response">Algolia's API response</param>
         /// <returns></returns>
-        public RetryOutcomeType Decide(StatefulHost tryableHost, int httpResponseCode, bool isTimedOut)
+        public RetryOutcomeType Decide(StatefulHost tryableHost, AlgoliaHttpResponse response)
         {
             lock (_lock)
             {
-                if (!isTimedOut && IsSuccess(httpResponseCode))
+                if (!response.IsTimedOut && IsSuccess(response))
                 {
                     tryableHost.Up = true;
                     tryableHost.LastUse = DateTime.UtcNow;
                     return RetryOutcomeType.Success;
                 }
-                else if (!isTimedOut && IsRetryable(httpResponseCode))
+                else if (!response.IsTimedOut && IsRetryable(response))
                 {
                     tryableHost.Up = false;
                     tryableHost.LastUse = DateTime.UtcNow;
                     return RetryOutcomeType.Retry;
                 }
-                else if (isTimedOut)
+                else if (response.IsTimedOut)
                 {
                     tryableHost.Up = true;
                     tryableHost.LastUse = DateTime.UtcNow;
@@ -121,22 +121,24 @@ namespace Algolia.Search.Transport
         /// <summary>
         ///  Tells if the response is a success or not
         /// </summary>
-        /// <param name="httpResponseCode"></param>
+        /// <param name="response">Aloglia's API response</param>
         /// <returns></returns>
-        private bool IsSuccess(int httpResponseCode)
+        private bool IsSuccess(AlgoliaHttpResponse response)
         {
-            return (int)Math.Floor((decimal)httpResponseCode / 100) == 2;
+            return (int)Math.Floor((decimal)response.HttpStatusCode / 100) == 2;
         }
 
         /// <summary>
         ///  Tells if the response is retryable or not
         /// </summary>
-        /// <param name="httpResponseCode"></param>
+        /// <param name="response">Aloglia's API response</param>
         /// <returns></returns>
-        private bool IsRetryable(int httpResponseCode)
+        private bool IsRetryable(AlgoliaHttpResponse response)
         {
-            return (int)Math.Floor((decimal)httpResponseCode / 100) != 2 &&
-                (int)Math.Floor((decimal)httpResponseCode / 100) != 4;
+            var isRetryableHttpCode = (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 2 &&
+                (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 4;
+
+            return isRetryableHttpCode || response.IsNetworkError;
         }
 
         /// <summary>

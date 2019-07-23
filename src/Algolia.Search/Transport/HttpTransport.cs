@@ -121,7 +121,7 @@ namespace Algolia.Search.Transport
                     .SendRequestAsync(request, requestTimeout, ct)
                     .ConfigureAwait(false);
 
-                switch (_retryStrategy.Decide(host, response.HttpStatusCode, response.IsTimedOut))
+                switch (_retryStrategy.Decide(host, response))
                 {
                     case RetryOutcomeType.Success:
                         return SerializerHelper.Deserialize<TResult>(response.Body,
