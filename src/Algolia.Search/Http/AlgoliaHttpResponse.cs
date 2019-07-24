@@ -46,6 +46,11 @@ namespace Algolia.Search.Http
         public bool IsTimedOut { get; set; }
 
         /// <summary>
+        /// Network connectivity, DNS failure, server certificate validation.
+        /// </summary>
+        public bool IsNetworkError { get; set; }
+
+        /// <summary>
         /// Http Error message
         /// </summary>
         public string Error { get; set; }

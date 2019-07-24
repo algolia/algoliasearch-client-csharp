@@ -124,9 +124,15 @@ namespace Algolia.Search.Http
                     }
                 }
             }
-            catch (TimeoutException timeOutException)
+            catch (TimeoutException e)
             {
-                return new AlgoliaHttpResponse { IsTimedOut = true, Error = timeOutException.ToString() };
+                return new AlgoliaHttpResponse { IsTimedOut = true, Error = e.ToString() };
+            }
+            catch (HttpRequestException e)
+            {
+                // HttpRequestException is thrown when an underlying issue happened such as
+                // network connectivity, DNS failure, server certificate validation.
+                return new AlgoliaHttpResponse { IsNetworkError = true, Error = e.ToString() };
             }
         }
     }
