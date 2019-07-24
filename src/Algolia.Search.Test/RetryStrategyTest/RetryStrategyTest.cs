@@ -99,10 +99,10 @@ namespace Algolia.Search.Test.RetryStrategyTest
             Assert.True(updatedHosts.Count(h => h.Up) == 3);
 
             var decisionAfterNetworkError = retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { IsNetworkError = true });
-            Assert.True(decision.HasFlag(RetryOutcomeType.Retry));
+            Assert.True(decisionAfterNetworkError.HasFlag(RetryOutcomeType.Retry));
 
             var updatedHostsAfterNetworkError = retryStrategy.GetTryableHost(callType);
-            Assert.True(updatedHosts.Count(h => h.Up) == 2);
+            Assert.True(updatedHostsAfterNetworkError.Count(h => h.Up) == 2);
         }
 
         [TestCase(CallType.Read, 400)]
