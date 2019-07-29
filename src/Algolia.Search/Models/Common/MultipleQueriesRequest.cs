@@ -34,9 +34,26 @@ namespace Algolia.Search.Models.Common
     public class MultipleQueriesRequest
     {
         /// <summary>
+        ///
+        /// </summary>
+        public MultipleQueriesRequest()
+        {
+
+        }
+
+        /// <summary>
+        /// Default constructor with requests
+        /// </summary>
+        public MultipleQueriesRequest(ICollection<MultipleQueries> requests, string strategy)
+        {
+            Requests = requests;
+            Strategy = strategy;
+        }
+
+        /// <summary>
         /// List of requests
         /// </summary>
-        public IEnumerable<MultipleQueries> Requests { get; set; }
+        public ICollection<MultipleQueries> Requests { get; set; }
 
         /// <summary>
         /// Request strategy <see cref="Enums.StrategyType"/>
