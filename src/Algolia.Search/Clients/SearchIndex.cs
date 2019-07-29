@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 *
@@ -53,20 +53,21 @@ namespace Algolia.Search.Clients
         /// Index configuration
         /// </summary>
         public AlgoliaConfig Config { get; }
-
+        private readonly SearchClient _client;
         private readonly HttpTransport _transport;
         private readonly string _urlEncodedIndexName;
         private readonly string _indexName;
 
         /// <inheritdoc />
-        internal SearchIndex(HttpTransport transport, AlgoliaConfig config, string indexName)
+        internal SearchIndex(SearchClient client, string indexName)
         {
-            _transport = transport ?? throw new ArgumentNullException(nameof(transport));
+            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _transport = client.transport ?? throw new ArgumentNullException(nameof(client.transport));
             _indexName = !string.IsNullOrWhiteSpace(indexName)
                 ? indexName
                 : throw new ArgumentNullException(nameof(indexName));
             _urlEncodedIndexName = WebUtility.UrlEncode(indexName);
-            Config = config;
+            Config = client.config;
         }
 
         /// <inheritdoc />
@@ -204,7 +205,7 @@ namespace Algolia.Search.Clients
 
             Random rnd = new Random();
             string tmpIndexName = $"{_indexName}_tmp_{rnd.Next(100)}";
-            SearchIndex tmpIndex = new SearchIndex(_transport, Config, tmpIndexName);
+            SearchIndex tmpIndex = new SearchIndex(_client, tmpIndexName);
 
             List<string> scopes = new List<string> { CopyScope.Rules, CopyScope.Settings, CopyScope.Synonyms };
             MultiResponse response = new MultiResponse { Responses = new List<IAlgoliaWaitableResponse>() };
