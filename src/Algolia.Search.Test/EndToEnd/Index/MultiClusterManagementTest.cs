@@ -95,7 +95,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             }
         }
 
-        private void RemoveUserId(String userId)
+        private void RemoveUserId(string userId)
         {
             RemoveUserIdResponse deleteResponse;
 

@@ -504,7 +504,7 @@ namespace Algolia.Search.Clients
             {
                 queries.Add(new MultipleGetObject
                 {
-                    IndexName = this._indexName,
+                    IndexName = _indexName,
                     ObjectID = objectId,
                     AttributesToRetrieve = attributesToRetrieve
                 });
