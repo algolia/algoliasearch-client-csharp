@@ -55,11 +55,6 @@ namespace Algolia.Search.Serializer
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            object ret = new object();
-
-            if (reader.TokenType == JsonToken.Null)
-                return ret;
-
             if (reader.TokenType == JsonToken.StartArray)
             {
                 JToken token = JToken.Load(reader);
@@ -77,6 +72,8 @@ namespace Algolia.Search.Serializer
 
                 return objects;
             }
+
+            object ret;
 
             switch (reader.TokenType)
             {
