@@ -351,6 +351,29 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Perform a search with disjunctive facets, generating the following number of queries.
+        /// nbQueries = 1 + nbDisjunctiveFacets
+        /// </summary>
+        /// <param name="query">The search query</param>
+        /// <param name="disjunctiveFacets">List of disjunctive facets, usually set at the application level.</param>
+        /// <param name="facetsRefinements">A Dictionary representing the selected refinements</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        SearchResponse<T> SearchDisjunctiveFaceting<T>(Query query,
+            IEnumerable<string> disjunctiveFacets, RequestOptions requestOptions = null, IDictionary<string, IEnumerable<string>> facetsRefinements = null) where T : class;
+
+        /// <summary>
+        /// Perform a search with disjunctive facets, generating the following number of queries.
+        /// nbQueries = 1 + nbDisjunctiveFacets
+        /// </summary>
+        /// <param name="query">The search query</param>
+        /// <param name="disjunctiveFacets">List of disjunctive facets, usually set at the application level.</param>
+        /// <param name="facetsRefinements">A Dictionary representing the selected refinements</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        Task<SearchResponse<T>> SearchDisjunctiveFacetingAsync<T>(Query query,
+            IEnumerable<string> disjunctiveFacets, RequestOptions requestOptions = null, CancellationToken ct = default, IDictionary<string, IEnumerable<string>> facetsRefinements = null) where T : class;
+
+        /// <summary>
         /// Get one or more objects using their object ids.
         /// </summary>
         /// <param name="objectId">Algolia's objectID</param>

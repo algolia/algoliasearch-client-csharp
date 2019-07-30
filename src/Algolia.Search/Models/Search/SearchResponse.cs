@@ -87,6 +87,11 @@ namespace Algolia.Search.Models.Search
         public bool? ExhaustiveFacetsCount { get; set; }
 
         /// <summary>
+        /// A mapping of each disjunctive facet name to the corresponding facet counts.
+        /// </summary>
+        public Dictionary<string, Dictionary<string, long>> DisjunctiveFacets { get; set; }
+
+        /// <summary>
         /// A mapping of each facet name to the corresponding facet counts.
         /// </summary>
         public Dictionary<string, Dictionary<string, long>> Facets { get; set; }
