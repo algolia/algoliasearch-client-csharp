@@ -52,6 +52,7 @@ namespace Algolia.Search.Test.EndToEnd.ApiKeys
         }
 
         [Test]
+        [Parallelizable]
         public async Task TestApiKey()
         {
             var addOne = await _index1.SaveObjectAsync(new SecuredApiKeyStub { ObjectID = "one" });
@@ -78,6 +79,55 @@ namespace Algolia.Search.Test.EndToEnd.ApiKeys
 
             Assert.That(ex.Message, Contains.Substring("Index not allowed with this API key"));
             Assert.That(ex.HttpErrorCode, Is.EqualTo(403));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestExpiredKey()
+        {
+            // Test an expired key
+            SecuredApiKeyRestriction restriction = new SecuredApiKeyRestriction
+            {
+                ValidUntil = DateTime.UtcNow.AddMinutes(-10).ToUnixTimeSeconds(),
+                RestrictIndices = new List<string> { "indexName" }
+            };
+
+            string expiredKey = BaseTest.SearchClient.GenerateSecuredApiKeys(TestHelper.SearchKey1, restriction);
+            TimeSpan remainingValidity = BaseTest.SearchClient.GetSecuredApiKeyRemainingValidity(expiredKey);
+
+            Assert.That(remainingValidity.TotalSeconds, Is.LessThan(0));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestValidKey()
+        {
+            // Test a valid key
+            SecuredApiKeyRestriction restriction = new SecuredApiKeyRestriction
+            {
+                ValidUntil = DateTime.UtcNow.AddMinutes(10).ToUnixTimeSeconds(),
+                RestrictIndices = new List<string> { "indexName" }
+            };
+
+            string expiredKey = BaseTest.SearchClient.GenerateSecuredApiKeys(TestHelper.SearchKey1, restriction);
+            TimeSpan remainingValidity = BaseTest.SearchClient.GetSecuredApiKeyRemainingValidity(expiredKey);
+
+            Assert.That(remainingValidity.TotalSeconds, Is.GreaterThan(0));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestRemainingValidityParameters()
+        {
+            // Test a valid key
+            SecuredApiKeyRestriction restriction = new SecuredApiKeyRestriction
+            {
+                RestrictIndices = new List<string> { "indexName" }
+            };
+
+            string keyWithMissingValidUntil = BaseTest.SearchClient.GenerateSecuredApiKeys(TestHelper.SearchKey1, restriction);
+
+            Assert.Throws<AlgoliaException>(() => BaseTest.SearchClient.GetSecuredApiKeyRemainingValidity(keyWithMissingValidUntil));
         }
 
         public class SecuredApiKeyStub
