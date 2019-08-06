@@ -29,6 +29,7 @@ using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Search;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -115,6 +116,12 @@ namespace Algolia.Search.Clients
         /// <param name="restriction"></param>
         /// <returns></returns>
         string GenerateSecuredApiKeys(string parentApiKey, SecuredApiKeyRestriction restriction);
+
+        /// <summary>
+        /// Gets how many seconds are left before the secured API key expires.
+        /// </summary>
+        /// <param name="securedAPIKey">The secured API Key</param>
+        TimeSpan GetSecuredApiKeyRemainingValidity(string securedAPIKey);
 
         /// <summary>
         /// Get the full list of API Keys.
