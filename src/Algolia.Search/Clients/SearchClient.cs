@@ -34,8 +34,11 @@ using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -197,6 +200,33 @@ namespace Algolia.Search.Clients
             string queryParams = QueryStringHelper.BuildRestrictionQueryString(restriction);
             string hash = HmacShaHelper.GetHash(parentApiKey, queryParams);
             return HmacShaHelper.Base64Encode($"{hash}{queryParams}");
+        }
+
+        /// <inheritdoc />
+        public TimeSpan GetSecuredApiKeyRemainingValidity(string securedAPIKey)
+        {
+            if (string.IsNullOrWhiteSpace(securedAPIKey))
+            {
+                throw new ArgumentNullException(nameof(securedAPIKey));
+            }
+
+            var decodedKey = Encoding.UTF8.GetString(Convert.FromBase64String(securedAPIKey));
+
+            var regex = new Regex(@"validUntil=\d+");
+            var matches = regex.Matches(decodedKey);
+
+            if (matches.Count == 0)
+            {
+                throw new AlgoliaException("The SecuredAPIKey doesn't have a validUntil parameter.");
+            }
+
+            // Select the validUntil parameter and its value
+            var validUntilMatch = matches.Cast<Match>().Select(x => x.Value).First();
+
+            // Extracting and converting the timestamp
+            long timeStamp = Convert.ToInt64(validUntilMatch.Replace("validUntil=", string.Empty));
+
+            return TimeSpan.FromSeconds(timeStamp - DateTime.UtcNow.ToUnixTimeSeconds());
         }
 
         /// <inheritdoc />
