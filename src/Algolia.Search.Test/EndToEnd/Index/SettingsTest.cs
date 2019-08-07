@@ -22,7 +22,6 @@
 */
 
 using Algolia.Search.Clients;
-using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Settings;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -105,6 +104,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 DisableExactOnAttributes = new List<string> { "attribute1", "attribute2" },
                 ExactOnSingleWordQuery = "word",
                 QueryLanguages = new List<string> { "fr", "en" },
+                IndexLanguages = new List<string> { "ja" },
                 AdvancedSyntaxFeatures = new List<string> { "exactPhrase" },
                 AlternativesAsExact = new List<string> { "ignorePlurals" },
 
