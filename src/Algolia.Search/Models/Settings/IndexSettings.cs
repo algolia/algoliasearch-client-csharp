@@ -196,6 +196,11 @@ namespace Algolia.Search.Models.Settings
         /// </summary>
         public List<string> QueryLanguages { get; set; }
 
+        /// <summary>
+        /// A list of language ISO code
+        /// </summary>
+        public List<string> IndexLanguages { get; set; }
+
         // query rules
 
         /// <summary>
