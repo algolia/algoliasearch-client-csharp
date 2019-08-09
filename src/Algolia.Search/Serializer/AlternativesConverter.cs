@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 *
@@ -21,37 +21,38 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Serializer;
 using Newtonsoft.Json;
+using System;
 
-namespace Algolia.Search.Models.Rules
+namespace Algolia.Search.Serializer
 {
     /// <summary>
-    /// Condition of a rule
+    /// Custom converter for Alternatives object
     /// </summary>
-    public class Condition
+    public class AlternativesConverter : JsonConverter<Alternatives>
     {
         /// <summary>
-        /// Query patterns are expressed as a string with a specific syntax. A pattern is a sequence of tokens.
+        /// Read the JSON taking into account the polymorphism of Alternatives
         /// </summary>
-        public string Pattern { get; set; }
+        public override Alternatives ReadJson(JsonReader reader, Type objectType, Alternatives existingValue,
+            bool hasExistingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null)
+                return null;
+
+            if (reader.TokenType == JsonToken.Boolean)
+                return Alternatives.Of(Convert.ToBoolean(reader.Value));
+
+            return null;
+        }
 
         /// <summary>
-        /// { is | startsWith | endsWith | contains }: Whether the pattern must match the beginning or the end of the query string, or both, or none.
+        /// Write the JSON taking into account the polymorphism of Alternatives
         /// </summary>
-        public string Anchoring { get; set; }
-
-        /// <summary>
-        /// Rule context (format: [A-Za-z0-9_-]+). When specified, the rule is contextual and applies only when the same context is specified at query time (using the ruleContexts parameter).
-        /// When absent, the rule is generic and always applies (provided that its other conditions are met, of course).
-        /// </summary>
-        public string Context { get; set; }
-
-        /// <summary>
-        /// If set to true, alternatives make the rule to trigger on synonyms, typos and plurals.
-        /// Note that setting ignorePlurals to false overrides this parameter.
-        /// </summary>
-        [JsonConverter(typeof(AlternativesConverter))]
-        public Alternatives Alternatives { get; set; }
+        public override void WriteJson(JsonWriter writer, Alternatives value, JsonSerializer serializer)
+        {
+            if (value.GetType() == typeof(AlternativesBoolean))
+                writer.WriteValue(value.InsideValue);
+        }
     }
 }
