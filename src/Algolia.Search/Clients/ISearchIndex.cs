@@ -29,6 +29,7 @@ using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -349,6 +350,24 @@ namespace Algolia.Search.Clients
         /// <returns></returns>
         Task<SearchForFacetResponse> SearchForFacetValueAsync(SearchForFacetRequest query,
             RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// FindFirstObject searches iteratively through the search response `Hits`
+        /// field to find the first response hit that would match against the given
+        /// `filterFunc` function.
+        ///
+        /// If no object has been found within the first result set, the function
+        /// will perform a new search operation on the next page of results, if any,
+        /// until a matching object is found or the end of results, whichever
+        /// happens first.
+        ///
+        /// To prevent the iteration through pages of results, `doNotPaginate`
+        /// parameter can be set to true. This will stop the function at the end of
+        /// the first page of search results even if no object does match.
+        ///
+        /// If no result found `null` will be returned.
+        /// </summary>
+        HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Get one or more objects using their object ids.
