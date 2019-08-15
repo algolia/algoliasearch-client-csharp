@@ -451,6 +451,30 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
+        public HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false, RequestOptions requestOptions = null) where T : class
+        {
+            var res = Search<T>(query, requestOptions);
+
+            if (res.Hits.Any(match))
+            {
+                return res.Hits.Where(match)
+                    .Select(x => new HitWithPosition<T> { Hit = x, Page = res.Page, Position = res.Hits.FindIndex(new Predicate<T>(match)) })
+                    .First();
+            }
+
+            bool hasNextPage = res.Page + 1 < res.NbPages;
+
+            if (doNotPaginate || !hasNextPage)
+            {
+                return null;
+            }
+
+            query.Page = res.Page + 1;
+
+            return FindFirstObject(match, query, doNotPaginate, requestOptions);
+        }
+
+        /// <inheritdoc />
         public T GetObject<T>(string objectId, RequestOptions requestOptions = null,
             IEnumerable<string> attributesToRetrieve = null) where T : class =>
             AsyncHelper.RunSync(() =>
