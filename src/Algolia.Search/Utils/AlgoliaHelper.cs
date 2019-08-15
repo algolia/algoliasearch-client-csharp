@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Exceptions;
+using Algolia.Search.Models.Search;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -31,13 +32,28 @@ using System.Reflection;
 
 namespace Algolia.Search.Utils
 {
-    internal static class AlgoliaHelper
+    /// <summary>
+    /// A collection of helpers related to Algolia
+    /// </summary>
+    public static class AlgoliaHelper
     {
+        /// <summary>
+        /// GetObjectIDPosition returns the position (0-based) within the `Hits`
+        /// result list of the record matching against the given `objectID`. If the
+        /// `objectID` is not found, `-1` is returned.
+        /// </summary>
+        /// <param name="objectID">ID of the record the check.</param>
+        /// <param name="searchResult">SearchResult to look in. </param>
+        public static int GetObjectIDPosition<T>(this SearchResponse<T> searchResult, string objectID) where T : class
+        {
+            return searchResult.Hits.FindIndex(x => GetObjectID(x).Equals(objectID));
+        }
+
         /// <summary>
         /// Ensure that the type T has a property ObjectID or a JsonPropertyAttribute(Name="objectID")
         /// </summary>
         /// <typeparam name="T">Type to check/type</typeparam>
-        public static void EnsureObjectID<T>()
+        internal static void EnsureObjectID<T>()
         {
             Type itemType = typeof(T);
             if (itemType == typeof(JToken) || itemType == typeof(JObject) || itemType == typeof(JArray) ||
@@ -69,7 +85,7 @@ namespace Algolia.Search.Utils
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <param name="data">Data to send</param>
         /// <returns></returns>
-        public static string GetObjectID<T>(T data)
+        internal static string GetObjectID<T>(T data)
         {
             var objectIdProperty = PropertyOrJsonAttributeExists<T>("ObjectID");
 
@@ -92,7 +108,7 @@ namespace Algolia.Search.Utils
         /// Get all properties of a type (including base class)
         /// </summary>
         /// <param name="T"></param>
-        public static IEnumerable<PropertyInfo> GetAllProperties(Type T)
+        internal static IEnumerable<PropertyInfo> GetAllProperties(Type T)
         {
             IEnumerable<PropertyInfo> PropertyList = T.GetTypeInfo().DeclaredProperties;
 
