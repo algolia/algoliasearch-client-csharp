@@ -25,6 +25,7 @@ using Algolia.Search.Clients;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
+using Algolia.Search.Utils;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,6 +100,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Task.WaitAll(searchAlgoliaTask, searchElonTask, searchElonTask1, searchElonTask2, searchFacetTask);
 
             Assert.That(searchAlgoliaTask.Result.Hits, Has.Exactly(2).Items);
+            Assert.That(searchAlgoliaTask.Result.GetObjectIDPosition("nicolas-dessaigne"), Is.EqualTo(0));
+            Assert.That(searchAlgoliaTask.Result.GetObjectIDPosition("julien-lemoine"), Is.EqualTo(1));
+            Assert.That(searchAlgoliaTask.Result.GetObjectIDPosition(""), Is.EqualTo(-1));
             Assert.That(searchElonTask.Result.QueryID, Is.Not.Null);
             Assert.That(searchElonTask1.Result.Hits, Has.Exactly(1).Items);
             Assert.That(searchElonTask2.Result.Hits, Has.Exactly(2).Items);
@@ -106,14 +110,24 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Amazon")));
             Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Apple")));
             Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Arista Networks")));
+
+            Assert.IsNull(_index.FindFirstObject<Employee>(x => false, new Query("")));
+            var alwaysTrue = _index.FindFirstObject<Employee>(x => true, new Query(""));
+            Assert.That(alwaysTrue.Position, Is.EqualTo(0));
+            Assert.That(alwaysTrue.Page, Is.EqualTo(0));
+            Assert.IsNull(_index.FindFirstObject<Employee>(x => x.Company.Equals("Apple"), new Query("algolia")));
+            Assert.IsNull(_index.FindFirstObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 }, true));
+            var foundObject = _index.FindFirstObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 });
+            Assert.That(foundObject.Position, Is.EqualTo(0));
+            Assert.That(foundObject.Page, Is.EqualTo(2));
         }
 
         private IEnumerable<Employee> InitEmployees()
         {
             return new List<Employee>()
             {
-                new Employee {Company = "Algolia", Name = "Julien Lemoine"},
-                new Employee {Company = "Algolia", Name = "Nicolas Dessaigne"},
+                new Employee {Company = "Algolia", Name = "Julien Lemoine", ObjectID = "julien-lemoine"},
+                new Employee {Company = "Algolia", Name = "Nicolas Dessaigne", ObjectID = "nicolas-dessaigne"},
                 new Employee {Company = "Amazon", Name = "Jeff Bezos"},
                 new Employee {Company = "Apple", Name = "Steve Jobs"},
                 new Employee {Company = "Apple", Name = "Steve Wozniak"},
@@ -130,6 +144,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
         public class Employee
         {
+            public string ObjectID { get; set; }
             public string Company { get; set; }
             public string Name { get; set; }
             public string QueryID { get; set; }
