@@ -157,6 +157,97 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
+        public void TestLegacyFilterFormats()
+        {
+            // Testing "one string" legacy filters => should be converted to "ORED" nested filters
+            // [["color:green","color:yellow"]]
+            string stringFilters = "\"color:green,color:yellow\"";
+
+            var serializedStringFilters =
+                JsonConvert.DeserializeObject<List<List<string>>>(stringFilters, new FiltersConverter());
+
+            AssertOredResult(serializedStringFilters);
+
+            // Testing "one array" legacy filters => should be converted to "ORED" nested filters
+            // [["color:green","color:yellow"]]
+            string arrayFilters = "[\"color:green\",\"color:yellow\"]";
+
+            var serializedArrayFilter =
+                JsonConvert.DeserializeObject<List<List<string>>>(arrayFilters, new FiltersConverter());
+
+            AssertOredResult(serializedArrayFilter);
+
+            string nestedArrayFilters = "[[\"color:green\",\"color:yellow\"]]";
+
+            var serializedNestedArrayFilter =
+                JsonConvert.DeserializeObject<List<List<string>>>(nestedArrayFilters, new FiltersConverter());
+
+            AssertOredResult(serializedNestedArrayFilter);
+
+            // Testing the latest format of filters i.e nested arrays
+            string nestedAndedArrayFilters = "[[\"color:green\",\"color:yellow\"],[\"color:blue\"]]";
+
+            var serializedAdedNestedArrayFilter =
+                JsonConvert.DeserializeObject<List<List<string>>>(nestedAndedArrayFilters, new FiltersConverter());
+
+            Assert.That(serializedAdedNestedArrayFilter, Has.Count.EqualTo(2));
+            Assert.That(serializedAdedNestedArrayFilter.ElementAt(0), Has.Count.EqualTo(2));
+            Assert.That(serializedAdedNestedArrayFilter.ElementAt(0).ElementAt(0), Contains.Substring("color:green"));
+            Assert.That(serializedAdedNestedArrayFilter.ElementAt(0).ElementAt(1), Contains.Substring("color:yellow"));
+            Assert.That(serializedAdedNestedArrayFilter.ElementAt(1), Has.Count.EqualTo(1));
+            Assert.That(serializedAdedNestedArrayFilter.ElementAt(1).ElementAt(0), Contains.Substring("color:blue"));
+
+            // Finally, testing that the custom reader is not breaking current implementation
+            Rule ruleWithFilters = new Rule
+            {
+                Consequence = new Consequence
+                {
+                    Params = new ConsequenceParams
+                    {
+                        OptionalFilters = new List<List<string>> { new List<string> { "a:b" } },
+                        TagFilters = new List<List<string>> { new List<string> { "a:b", "c:d" }, new List<string> { "d:e" } },
+                        FacetFilters = new List<List<string>> { new List<string> { "a:b" }, new List<string> { "c:d" } },
+                        NumericFilters = new List<List<string>> { new List<string> { "a=100" } }
+                    }
+                },
+            };
+
+            // Json "sent" to the API
+            string json = JsonConvert.SerializeObject(ruleWithFilters, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            // Json "retrieved" from the API
+            var newRule = JsonConvert.DeserializeObject<Rule>(json);
+
+            Assert.That(newRule.Consequence.Params.OptionalFilters, Has.Count.EqualTo(1));
+            Assert.That(newRule.Consequence.Params.OptionalFilters.ElementAt(0), Has.Count.EqualTo(1));
+            Assert.That(newRule.Consequence.Params.OptionalFilters.ElementAt(0).ElementAt(0), Contains.Substring("a:b"));
+
+            Assert.That(newRule.Consequence.Params.TagFilters, Has.Count.EqualTo(2));
+            Assert.That(newRule.Consequence.Params.TagFilters.ElementAt(0), Has.Count.EqualTo(2));
+            Assert.That(newRule.Consequence.Params.TagFilters.ElementAt(0).ElementAt(0), Contains.Substring("a:b"));
+            Assert.That(newRule.Consequence.Params.TagFilters.ElementAt(0).ElementAt(1), Contains.Substring("c:d"));
+            Assert.That(newRule.Consequence.Params.TagFilters.ElementAt(1), Has.Count.EqualTo(1));
+            Assert.That(newRule.Consequence.Params.TagFilters.ElementAt(1).ElementAt(0), Contains.Substring("d:e"));
+
+            Assert.That(newRule.Consequence.Params.FacetFilters, Has.Count.EqualTo(2));
+            Assert.That(newRule.Consequence.Params.FacetFilters.ElementAt(0), Has.Count.EqualTo(1));
+            Assert.That(newRule.Consequence.Params.FacetFilters.ElementAt(1), Has.Count.EqualTo(1));
+
+            Assert.That(newRule.Consequence.Params.NumericFilters, Has.Count.EqualTo(1));
+            Assert.That(newRule.Consequence.Params.NumericFilters.ElementAt(0), Has.Count.EqualTo(1));
+            Assert.That(newRule.Consequence.Params.NumericFilters.ElementAt(0).ElementAt(0), Contains.Substring("a=100"));
+
+            void AssertOredResult(List<List<string>> result)
+            {
+                Assert.That(result, Has.Count.EqualTo(1));
+                Assert.That(result.ElementAt(0), Has.Count.EqualTo(2));
+                Assert.That(result.ElementAt(0).ElementAt(0), Contains.Substring("color:green"));
+                Assert.That(result.ElementAt(0).ElementAt(1), Contains.Substring("color:yellow"));
+            }
+        }
+
+        [Test]
+        [Parallelizable]
         public void TestEditConverter()
         {
             string json = "[\"lastname\",\"firstname\"]";
