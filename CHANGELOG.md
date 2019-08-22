@@ -1,5 +1,25 @@
-Changelog
-=========
+# ChangeLog
+
+## [6.3.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.2.0...6.3.0) (2019-08-22)
+
+### Fix
+
+- JsonReader for legacy filters format ([a2a987c](https://github.com/algolia/algoliasearch-client-csharp/commit/a2a987c))
+- Missing catch clause in httpRequester ([626d19d](https://github.com/algolia/algoliasearch-client-csharp/commit/626d19d))
+    The requester was not catching correctly all exceptions, making the
+    retry strategy to fail instead of retrying for network issues such as DNS resolution.
+
+### Feat
+
+- Index.FindFirstObject() method ([4989f48](https://github.com/algolia/algoliasearch-client-csharp/commit/4989f48))
+- GetObjectIDPosition() method ([9aacbf2](https://github.com/algolia/algoliasearch-client-csharp/commit/9aacbf2))
+- GetSecuredApiKeyRemainingValidity ([aa5d5f0](https://github.com/algolia/algoliasearch-client-csharp/commit/aa5d5f0))
+    New SearchClient method to get the remaining validity (seconds)
+    of a securedAPIKey
+
+- Alternatives in QueryRule Conditions ([5d34c97](https://github.com/algolia/algoliasearch-client-csharp/commit/5d34c97))
+- indexLanguages settings properties ([adb7ba3](https://github.com/algolia/algoliasearch-client-csharp/commit/adb7ba3))
+- IndexExists() method ([951ea87](https://github.com/algolia/algoliasearch-client-csharp/commit/951ea87))
 
 6.2.0 (2019-06-25)
 
@@ -671,5 +691,3 @@ There are breaking changes on signatures because every requests/responses are no
 
 - Initial import of Algolia search c# client based on Christopher Maneu
   client. [Julien Lemoine]
-
-
