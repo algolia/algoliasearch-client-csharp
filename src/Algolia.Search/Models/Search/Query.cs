@@ -60,16 +60,19 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Filter hits by facet value.
         /// </summary>
+        [JsonConverter(typeof(FiltersConverter))]
         public IEnumerable<IEnumerable<string>> FacetFilters { get; set; }
 
         /// <summary>
         /// Create filters for ranking purposes, where records that match the filter are ranked highest.
         /// </summary>
+        [JsonConverter(typeof(FiltersConverter))]
         public IEnumerable<IEnumerable<string>> OptionalFilters { get; set; }
 
         /// <summary>
         /// Filter on numeric attributes.
         /// </summary>
+        [JsonConverter(typeof(FiltersConverter))]
         public IEnumerable<IEnumerable<string>> NumericFilters { get; set; }
 
         /// <summary>
@@ -77,6 +80,7 @@ namespace Algolia.Search.Models.Search
         /// tagFilters is a different way of filtering, which relies on the _tags attribute. It uses a simpler syntax than filters.
         /// You can use it when you want to do simple filtering based on tags.
         /// </summary>
+        [JsonConverter(typeof(FiltersConverter))]
         public IEnumerable<IEnumerable<string>> TagFilters { get; set; }
 
         /// <summary>
