@@ -37,6 +37,7 @@ namespace Algolia.Search.Models.Rules
         /// When providing a string, it replaces the entire query string.
         /// When providing an object, it describes incremental edits to be made to the query string (but you can’t do both).
         /// </summary>
+        [JsonConverter(typeof(ConsequenceQueryConverter))]
         public ConsequenceQuery Query { get; set; }
 
         /// <summary>

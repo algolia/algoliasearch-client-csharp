@@ -248,6 +248,28 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
+        public void TestConsequenceQueryConverter()
+        {
+            string json = "{\"remove\": [\"term1\", \"term2\"], \"edits\": [{\"type\": \"remove\", \"delete\": \"term3\"}]}";
+            ConsequenceQuery deserialized = JsonConvert.DeserializeObject<ConsequenceQuery>(json, new ConsequenceQueryConverter());
+
+            Assert.AreEqual(3, deserialized.Edits.Count());
+
+            Assert.True(deserialized.Edits.ElementAt(0).Type.Equals("remove"));
+            Assert.True(deserialized.Edits.ElementAt(0).Delete.Equals("term1"));
+            Assert.Null(deserialized.Edits.ElementAt(0).Insert);
+
+            Assert.True(deserialized.Edits.ElementAt(1).Type.Equals("remove"));
+            Assert.True(deserialized.Edits.ElementAt(1).Delete.Equals("term2"));
+            Assert.Null(deserialized.Edits.ElementAt(1).Insert);
+
+            Assert.True(deserialized.Edits.ElementAt(2).Type.Equals("remove"));
+            Assert.True(deserialized.Edits.ElementAt(2).Delete.Equals("term3"));
+            Assert.Null(deserialized.Edits.ElementAt(2).Insert);
+        }
+
+        [Test]
+        [Parallelizable]
         public void TestEditConverter()
         {
             string json = "[\"lastname\",\"firstname\"]";

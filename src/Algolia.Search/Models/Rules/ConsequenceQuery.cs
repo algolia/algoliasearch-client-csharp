@@ -21,8 +21,6 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Serializer;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Rules
@@ -35,7 +33,6 @@ namespace Algolia.Search.Models.Rules
         /// <summary>
         /// List of edits
         /// </summary>
-        [JsonConverter(typeof(EditConverter))]
         public IEnumerable<Edit> Edits { get; set; }
     }
 }
