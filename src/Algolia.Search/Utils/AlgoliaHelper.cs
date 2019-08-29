@@ -38,15 +38,29 @@ namespace Algolia.Search.Utils
     public static class AlgoliaHelper
     {
         /// <summary>
+        /// GetObjectPosition returns the position (0-based) within the `Hits`
+        /// result list of the record matching against the given `objectID`. If the
+        /// `objectID` is not found, `-1` is returned.
+        /// </summary>
+        /// <param name="objectID">ID of the record the check.</param>
+        /// <param name="searchResult">SearchResult to look in. </param>
+        public static int GetObjectPosition<T>(this SearchResponse<T> searchResult, string objectID) where T : class
+        {
+            return searchResult.Hits.FindIndex(x => GetObjectID(x).Equals(objectID));
+        }
+
+
+        /// <summary>
         /// GetObjectIDPosition returns the position (0-based) within the `Hits`
         /// result list of the record matching against the given `objectID`. If the
         /// `objectID` is not found, `-1` is returned.
         /// </summary>
         /// <param name="objectID">ID of the record the check.</param>
         /// <param name="searchResult">SearchResult to look in. </param>
+        [ObsoleteAttribute("This function will be deprecated. Use GetObjectPosition instead.")]
         public static int GetObjectIDPosition<T>(this SearchResponse<T> searchResult, string objectID) where T : class
         {
-            return searchResult.Hits.FindIndex(x => GetObjectID(x).Equals(objectID));
+            return GetObjectPosition<T>(searchResult, objectID);
         }
 
         /// <summary>
