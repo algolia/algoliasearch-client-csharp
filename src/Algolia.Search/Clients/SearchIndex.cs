@@ -451,7 +451,7 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false, RequestOptions requestOptions = null) where T : class
+        public HitWithPosition<T> FindObject<T>(Func<T, bool> match, Query query, bool paginate = true, RequestOptions requestOptions = null) where T : class
         {
             var res = Search<T>(query, requestOptions);
 
@@ -464,14 +464,21 @@ namespace Algolia.Search.Clients
 
             bool hasNextPage = res.Page + 1 < res.NbPages;
 
-            if (doNotPaginate || !hasNextPage)
+            if (!paginate || !hasNextPage)
             {
                 return null;
             }
 
             query.Page = res.Page + 1;
 
-            return FindFirstObject(match, query, doNotPaginate, requestOptions);
+            return FindObject(match, query, paginate, requestOptions);
+        }
+
+        /// <inheritdoc />
+        [ObsoleteAttribute("This method will be deprecated. Use FindObject instead and negate the `doNotPaginate` boolean since the new parameter is `paginate`")]
+        public HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false, RequestOptions requestOptions = null) where T : class
+        {
+            return FindObject(match, query, !doNotPaginate, requestOptions);
         }
 
         /// <inheritdoc />

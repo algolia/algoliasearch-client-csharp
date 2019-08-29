@@ -111,13 +111,13 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Apple")));
             Assert.IsTrue(searchFacetTask.Result.FacetHits.Any(x => x.Value.Equals("Arista Networks")));
 
-            Assert.IsNull(_index.FindFirstObject<Employee>(x => false, new Query("")));
-            var alwaysTrue = _index.FindFirstObject<Employee>(x => true, new Query(""));
+            Assert.IsNull(_index.FindObject<Employee>(x => false, new Query("")));
+            var alwaysTrue = _index.FindObject<Employee>(x => true, new Query(""));
             Assert.That(alwaysTrue.Position, Is.EqualTo(0));
             Assert.That(alwaysTrue.Page, Is.EqualTo(0));
-            Assert.IsNull(_index.FindFirstObject<Employee>(x => x.Company.Equals("Apple"), new Query("algolia")));
-            Assert.IsNull(_index.FindFirstObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 }, true));
-            var foundObject = _index.FindFirstObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 });
+            Assert.IsNull(_index.FindObject<Employee>(x => x.Company.Equals("Apple"), new Query("algolia")));
+            Assert.IsNull(_index.FindObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 }, false));
+            var foundObject = _index.FindObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 });
             Assert.That(foundObject.Position, Is.EqualTo(0));
             Assert.That(foundObject.Page, Is.EqualTo(2));
         }
