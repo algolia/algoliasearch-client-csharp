@@ -100,9 +100,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Task.WaitAll(searchAlgoliaTask, searchElonTask, searchElonTask1, searchElonTask2, searchFacetTask);
 
             Assert.That(searchAlgoliaTask.Result.Hits, Has.Exactly(2).Items);
-            Assert.That(searchAlgoliaTask.Result.GetObjectIDPosition("nicolas-dessaigne"), Is.EqualTo(0));
-            Assert.That(searchAlgoliaTask.Result.GetObjectIDPosition("julien-lemoine"), Is.EqualTo(1));
-            Assert.That(searchAlgoliaTask.Result.GetObjectIDPosition(""), Is.EqualTo(-1));
+            Assert.That(searchAlgoliaTask.Result.GetObjectPosition("nicolas-dessaigne"), Is.EqualTo(0));
+            Assert.That(searchAlgoliaTask.Result.GetObjectPosition("julien-lemoine"), Is.EqualTo(1));
+            Assert.That(searchAlgoliaTask.Result.GetObjectPosition(""), Is.EqualTo(-1));
             Assert.That(searchElonTask.Result.QueryID, Is.Not.Null);
             Assert.That(searchElonTask1.Result.Hits, Has.Exactly(1).Items);
             Assert.That(searchElonTask2.Result.Hits, Has.Exactly(2).Items);
