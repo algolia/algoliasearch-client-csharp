@@ -1,5 +1,21 @@
 # ChangeLog
 
+## [6.4.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.3.0...6.4.0) (2019-08-30)
+
+### Fix
+
+- **rule**: correctly deserialize legacy 'remove' field in ConsequenceParams ([3ea17d0](https://github.com/algolia/algoliasearch-client-csharp/commit/3ea17d0))
+
+### Feat
+
+- **index**: deprecate GetObjectIDPosition in favor of GetObjectPosition ([0ecdf01](https://github.com/algolia/algoliasearch-client-csharp/commit/0ecdf01))
+- **index**: deprecate index.FindFirstObject in favor of index.FindObject ([7b6625c](https://github.com/algolia/algoliasearch-client-csharp/commit/7b6625c))
+
+    Besides the name, the `doNotPaginate` parameter was also turned into
+    `paginate` so the boolean is easier to read and defaults to true.
+
+
+
 ## [6.3.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.2.0...6.3.0) (2019-08-22)
 
 ### Fix
