@@ -369,7 +369,23 @@ namespace Algolia.Search.Clients
         /// </summary>
         HitWithPosition<T> FindObject<T>(Func<T, bool> match, Query query, bool paginate = true, RequestOptions requestOptions = null) where T : class;
 
-        [ObsoleteAttribute("This method will be deprecated. Use FindObject instead and negate the `doNotPaginate` boolean since the new parameter is `paginate`")]
+        /// <summary>
+        /// FindObject searches iteratively through the search response `Hits`
+        /// field to find the first response hit that would match against the given
+        /// `filterFunc` function.
+        ///
+        /// If no object has been found within the first result set, the function
+        /// will perform a new search operation on the next page of results, if any,
+        /// until a matching object is found or the end of results, whichever
+        /// happens first.
+        ///
+        /// To prevent the iteration through pages of results, `paginate`
+        /// parameter can be set to false. This will stop the function at the end of
+        /// the first page of search results even if no object does match.
+        ///
+        /// If no result found `null` will be returned.
+        /// </summary>
+        [Obsolete("This method will be deprecated. Use FindObject instead and negate the `doNotPaginate` boolean since the new parameter is `paginate`")]
         HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
