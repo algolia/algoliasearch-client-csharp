@@ -480,11 +480,8 @@ namespace Algolia.Search.Clients
 
             facetsRefinements = facetsRefinements ?? new Dictionary<string, IEnumerable<string>>();
 
-            // Extract disjunctive facets & associated refinements (if so)
-            IDictionary<string, IEnumerable<string>> disjunctiveRefinement = facetsRefinements.Where(r => disjunctiveFacets.Contains(r.Key)).ToDictionary(val => val.Key, val => val.Value);
-
             // *** Build the disjunctive queries ***
-            MultipleQueriesRequest disjunctiveQueries = BuildQueries(query, disjunctiveFacets, disjunctiveRefinement, facetsRefinements);
+            MultipleQueriesRequest disjunctiveQueries = BuildQueries(query, disjunctiveFacets, facetsRefinements);
 
             // *** Bulk queries to limit number of operations ***
             MultipleQueriesResponse<T> answers = await _client.MultipleQueriesAsync<T>(disjunctiveQueries, requestOptions, ct).ConfigureAwait(false);
@@ -498,48 +495,42 @@ namespace Algolia.Search.Clients
             // *** Aggregate answers ***
 
             // The first query is the hits query that the one we'll return.
-            SearchResponse<T> disjunctiveResponse = answers.Results.ElementAt(0);
-            disjunctiveResponse.DisjunctiveFacets = new Dictionary<string, Dictionary<string, long>>();
+            SearchResponse<T> response = answers.Results.ElementAt(0);
+            response.Facets = response.Facets ?? new Dictionary<string, Dictionary<string, long>>();
 
             foreach (var result in answers.Results.Skip(1))
             {
-                // add the facet to the disjunctive facet map
-                foreach (var facet in result.Facets)
+                // add disjunctive facets to the facets map
+                foreach (var facet in result.Facets)
                 {
-                    disjunctiveResponse.DisjunctiveFacets.Add(facet.Key, facet.Value);
-
-                    // concatenate missing refinements
-                    if (disjunctiveRefinement.ContainsKey(facet.Key))
+                    foreach (var facetValue in result.Facets.Values)
                     {
-                        foreach (var refine in disjunctiveRefinement[facet.Key])
-                        {
-                            if (!disjunctiveResponse.DisjunctiveFacets[facet.Key].ContainsKey(refine))
-                            {
-                                disjunctiveResponse.DisjunctiveFacets[facet.Key].Add(refine, 0);
-                            }
-                        }
+                        response.Facets[facet.Key] = facetValue;
                     }
                 }
             }
 
-            return disjunctiveResponse;
+            return response;
         }
 
         MultipleQueriesRequest BuildQueries(Query query,
-            IEnumerable<string> disjunctiveFacets,
-            IDictionary<string, IEnumerable<string>> disjunctiveRefinement,
+            IEnumerable<string> disjunctiveFacets,
             IDictionary<string, IEnumerable<string>> facetsRefinements)
         {
             var disjunctiveQueries = new MultipleQueriesRequest(new List<MultipleQueries>(), StrategyType.None);
 
+            // Extract disjunctive facets & associated refinements (if so)
+            IDictionary<string, IEnumerable<string>> disjunctiveRefinement = facetsRefinements.Where(r => disjunctiveFacets.Contains(r.Key)).ToDictionary(val => val.Key, val => val.Value);
+
             // Put the hit query first
             var hitQuery = query.Clone();
             hitQuery.FacetFilters = BuildFacetFilters(facetsRefinements, disjunctiveRefinement);
+            hitQuery.Facets = query.Facets != null ? disjunctiveFacets.Union(query.Facets) : disjunctiveFacets;
             disjunctiveQueries.Requests.Add(new MultipleQueries { IndexName = _indexName, Params = hitQuery });
 
             // Build one query per disjunctive facet
             // Using all refinements but the current one + hitsPerPage=1 + single facet
-            foreach (var disjunctiveFacet in disjunctiveFacets)
+            foreach (var disjunctiveFacet in disjunctiveRefinement.Keys)
             {
                 // Exclude the current one
                 var reducedFacetRefinements = facetsRefinements.Where(r => r.Key != disjunctiveFacet).ToDictionary(val => val.Key, val => val.Value);
