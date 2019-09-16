@@ -270,23 +270,6 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
-        public void TestEditConverter()
-        {
-            string json = "[\"lastname\",\"firstname\"]";
-
-            List<Edit> deserialized = JsonConvert.DeserializeObject<List<Edit>>(json, new EditConverter());
-
-            Assert.True(deserialized.ElementAt(0).Delete.Equals("lastname"));
-            Assert.True(deserialized.ElementAt(0).Type.Equals(EditType.Remove));
-            Assert.IsNull(deserialized.ElementAt(0).Insert);
-
-            Assert.True(deserialized.ElementAt(1).Delete.Equals("firstname"));
-            Assert.True(deserialized.ElementAt(1).Type.Equals(EditType.Remove));
-            Assert.IsNull(deserialized.ElementAt(1).Insert);
-        }
-
-        [Test]
-        [Parallelizable]
         public void TestLegacySettings()
         {
             string json =
