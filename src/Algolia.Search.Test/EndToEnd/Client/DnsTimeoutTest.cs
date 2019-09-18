@@ -82,7 +82,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             for (int i = 0; i < 10; i++)
             {
-                _ = await client.ListIndicesAsync();
+                await client.ListIndicesAsync();
             }
 
             timer.Stop();

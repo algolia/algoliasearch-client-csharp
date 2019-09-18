@@ -121,8 +121,8 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Assert.Throws<ArgumentNullException>(() => _index.CopyTo(""));
             Assert.Throws<ArgumentNullException>(() => _index.MoveFrom(""));
 
-            Assert.Throws<ArgumentException>(() => _index.SaveObject<object>(new List<object> { }));
-            Assert.Throws<ArgumentException>(() => _index.PartialUpdateObject<object>(new List<object> { }));
+            Assert.Throws<ArgumentException>(() => _index.SaveObject<object>(new List<object>()));
+            Assert.Throws<ArgumentException>(() => _index.PartialUpdateObject<object>(new List<object>()));
         }
     }
 }

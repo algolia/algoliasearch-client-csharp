@@ -44,8 +44,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.That(listClusters, Has.Count.GreaterThanOrEqualTo(2));
 
             string userId = TestHelper.GetMcmUserId();
-            AssignUserIdResponse assignResponse =
-                await BaseTest.McmClient.AssignUserIdAsync(userId, listClusters.ElementAt(0).ClusterName);
+            await BaseTest.McmClient.AssignUserIdAsync(userId, listClusters.ElementAt(0).ClusterName);
             WaitUserId(userId);
 
             SearchResponse<UserIdResponse> searchResponse =
@@ -97,13 +96,11 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
         private void RemoveUserId(string userId)
         {
-            RemoveUserIdResponse deleteResponse;
-
             while (true)
             {
                 try
                 {
-                    deleteResponse = BaseTest.McmClient.RemoveUserId(userId);
+                    BaseTest.McmClient.RemoveUserId(userId);
                 }
                 catch (AlgoliaApiException ex)
                 {
