@@ -60,7 +60,7 @@ namespace Algolia.Search.Utils
         [ObsoleteAttribute("This function will be deprecated. Use GetObjectPosition instead.")]
         public static int GetObjectIDPosition<T>(this SearchResponse<T> searchResult, string objectID) where T : class
         {
-            return GetObjectPosition<T>(searchResult, objectID);
+            return GetObjectPosition(searchResult, objectID);
         }
 
         /// <summary>
@@ -142,7 +142,6 @@ namespace Algolia.Search.Utils
         /// <returns></returns>
         private static PropertyInfo PropertyOrJsonAttributeExists<T>(string propertyName)
         {
-            var typeInfo = typeof(T).GetTypeInfo();
             var declaredProperties = GetAllProperties(typeof(T));
 
             var objectIdProperty = declaredProperties.FirstOrDefault(p => p.Name.Equals(propertyName));

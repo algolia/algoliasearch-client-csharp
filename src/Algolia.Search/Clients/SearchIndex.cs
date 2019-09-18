@@ -1106,9 +1106,9 @@ namespace Algolia.Search.Clients
             }
             catch (AlgoliaApiException ex) when (ex.HttpErrorCode == 404)
             {
-                return await Task.FromResult<bool>(false);
+                return await Task.FromResult(false);
             }
-            return await Task.FromResult<bool>(true);
+            return await Task.FromResult(true);
         }
     }
 }

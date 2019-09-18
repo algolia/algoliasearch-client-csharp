@@ -30,7 +30,7 @@ namespace Algolia.Search.Clients
     /// <summary>
     /// Analytics client configuration
     /// </summary>
-    public class AnalyticsConfig : AlgoliaConfig
+    public sealed class AnalyticsConfig : AlgoliaConfig
     {
         /// <summary>
         /// The configuration of the analytics client

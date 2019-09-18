@@ -23,28 +23,31 @@
 
 using System.Collections.Generic;
 
-/// <summary>
-/// When highlighting is enabled, each hit in the response will contain an additional _highlightResult object (provided that at least one of its attributes is highlighted)
-/// </summary>
-public class HighlightResult
+namespace Algolia.Search.Models.Search
 {
     /// <summary>
-    /// Markup text with occurrences highlighted. The tags used for highlighting are specified via highlightPreTag and highlightPostTag.
+    /// When highlighting is enabled, each hit in the response will contain an additional _highlightResult object (provided that at least one of its attributes is highlighted)
     /// </summary>
-    public string Value { get; set; }
+    public class HighlightResult
+    {
+        /// <summary>
+        /// Markup text with occurrences highlighted. The tags used for highlighting are specified via highlightPreTag and highlightPostTag.
+        /// </summary>
+        public string Value { get; set; }
 
-    /// <summary>
-    /// (string, enum) = {none | partial | full}: Indicates how well the attribute matched the search query.
-    /// </summary>
-    public string MatchLevel { get; set; }
+        /// <summary>
+        /// (string, enum) = {none | partial | full}: Indicates how well the attribute matched the search query.
+        /// </summary>
+        public string MatchLevel { get; set; }
 
-    /// <summary>
-    /// Whether the entire attribute value is highlighted.
-    /// </summary>
-    public bool? FullyHighlighted { get; set; }
+        /// <summary>
+        /// Whether the entire attribute value is highlighted.
+        /// </summary>
+        public bool? FullyHighlighted { get; set; }
 
-    /// <summary>
-    ///  List of words from the query that matched the object.
-    /// </summary>
-    public IEnumerable<string> MatchedWords { get; set; }
+        /// <summary>
+        ///  List of words from the query that matched the object.
+        /// </summary>
+        public IEnumerable<string> MatchedWords { get; set; }
+    }
 }

@@ -23,32 +23,35 @@
 
 using Newtonsoft.Json;
 
-/// <summary>
-/// Alternatives make the rule to trigger on synonyms, typos and plurals.
-/// This class is an abstract factory because Alternatives will become in the future a complex JSON Object
-/// </summary>
-public abstract class Alternatives
+namespace Algolia.Search.Models.Rules
 {
     /// <summary>
-    /// Creates the boolean subtype of Alternatives
+    /// Alternatives make the rule to trigger on synonyms, typos and plurals.
+    /// This class is an abstract factory because Alternatives will become in the future a complex JSON Object
     /// </summary>
-    /// <param name="value"></param>
-    public static Alternatives Of(bool value)
+    public abstract class Alternatives
     {
-        return new AlternativesBoolean(value);
+        /// <summary>
+        /// Creates the boolean subtype of Alternatives
+        /// </summary>
+        /// <param name="value"></param>
+        public static Alternatives Of(bool value)
+        {
+            return new AlternativesBoolean(value);
+        }
+
+        /// <summary>
+        /// Alternatives can have multiple subtype such as <see cref="AlternativesBoolean"/>
+        /// </summary>
+        [JsonIgnore]
+        public object InsideValue { get; protected set; }
     }
 
-    /// <summary>
-    /// Alternatives can have multiple subtype such as <see cref="AlternativesBoolean"/>
-    /// </summary>
-    [JsonIgnore]
-    public object InsideValue { get; protected set; }
-}
-
-internal class AlternativesBoolean : Alternatives
-{
-    public AlternativesBoolean(bool value)
+    internal class AlternativesBoolean : Alternatives
     {
-        InsideValue = value;
+        public AlternativesBoolean(bool value)
+        {
+            InsideValue = value;
+        }
     }
 }

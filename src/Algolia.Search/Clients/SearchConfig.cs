@@ -32,7 +32,7 @@ namespace Algolia.Search.Clients
     /// <summary>
     /// Search client configuration
     /// </summary>
-    public class SearchConfig : AlgoliaConfig
+    public sealed class SearchConfig : AlgoliaConfig
     {
         /// <summary>
         /// The configuration of the search client
@@ -92,7 +92,9 @@ namespace Algolia.Search.Clients
             Compression = CompressionType.NONE;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Requests sent over POST,PUT can be compressed see <see cref="CompressionType"/>
+        /// </summary>
         public new CompressionType Compression { get; set; }
     }
 }
