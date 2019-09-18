@@ -30,7 +30,7 @@ namespace Algolia.Search.Clients
     /// <summary>
     /// Insights client configuration
     /// </summary>
-    public class InsightsConfig : AlgoliaConfig
+    public sealed class InsightsConfig : AlgoliaConfig
     {
         /// <summary>
         /// The configuration of the insights client

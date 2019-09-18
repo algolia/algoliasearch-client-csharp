@@ -21,20 +21,23 @@
 * THE SOFTWARE.
 */
 
-/// <summary>
-/// When snippeting is enabled, each hit in the response will contain an additional _snippetResult object (provided that at least one of its attributes is snippeted).
-/// </summary>
-public class SnippetResult
+namespace Algolia.Search.Models.Search
 {
     /// <summary>
-    /// Markup text with occurrences highlighted and optional ellipsis indicators.
-    /// The tags used for highlighting are specified via highlightPreTag and highlightPostTag.
-    /// The text used to indicate ellipsis is specified via snippetEllipsisText.
+    /// When snippeting is enabled, each hit in the response will contain an additional _snippetResult object (provided that at least one of its attributes is snippeted).
     /// </summary>
-    public string Value { get; set; }
+    public class SnippetResult
+    {
+        /// <summary>
+        /// Markup text with occurrences highlighted and optional ellipsis indicators.
+        /// The tags used for highlighting are specified via highlightPreTag and highlightPostTag.
+        /// The text used to indicate ellipsis is specified via snippetEllipsisText.
+        /// </summary>
+        public string Value { get; set; }
 
-    /// <summary>
-    ///  (string, enum) = {none | partial | full}: Indicates how well the attribute matched the search query.
-    /// </summary>
-    public string MatchLevel { get; set; }
+        /// <summary>
+        ///  (string, enum) = {none | partial | full}: Indicates how well the attribute matched the search query.
+        /// </summary>
+        public string MatchLevel { get; set; }
+    }
 }

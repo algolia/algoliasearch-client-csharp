@@ -67,7 +67,6 @@ namespace Algolia.Search.Models.ApiKeys
                 }
 
                 Task.Delay(1000);
-                continue;
             }
         }
     }

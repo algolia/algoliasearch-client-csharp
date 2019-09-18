@@ -23,6 +23,7 @@
 
 using Newtonsoft.Json;
 using System;
+using Algolia.Search.Models.Rules;
 
 namespace Algolia.Search.Serializer
 {

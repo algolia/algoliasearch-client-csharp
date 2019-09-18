@@ -91,7 +91,7 @@ namespace Algolia.Search.Utils
                     p.GetCustomAttribute<JsonPropertyAttribute>() == null)
                 .Select(p =>
                 {
-                    string values = null;
+                    string values;
                     var genericTypeArgument = p.PropertyType.GenericTypeArguments[0];
 
                     // In case of nested lists
@@ -120,7 +120,6 @@ namespace Algolia.Search.Utils
                 });
 
             // Handle properties with JsonPropertyAttribute
-            var attr = typeof(T).GetTypeInfo().GetCustomAttribute<JsonPropertyAttribute>();
             IEnumerable<string> propertiesWithJsonAttribute = typeof(T).GetTypeInfo()
                 .DeclaredProperties.Where(p =>
                     p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&

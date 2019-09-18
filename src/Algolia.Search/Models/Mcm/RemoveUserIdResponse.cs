@@ -21,10 +21,7 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Exceptions;
-using Algolia.Search.Models.Common;
 using System;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Models.Mcm
 {
