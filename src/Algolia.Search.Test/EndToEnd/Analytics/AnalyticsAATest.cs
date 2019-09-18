@@ -22,7 +22,6 @@
 */
 
 using Algolia.Search.Clients;
-using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Analytics;
 using Algolia.Search.Models.Search;
 using NUnit.Framework;
