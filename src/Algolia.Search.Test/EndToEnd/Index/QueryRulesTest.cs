@@ -30,6 +30,7 @@ using Algolia.Search.Models.Settings;
 using Algolia.Search.Utils;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd.Index
@@ -49,9 +50,20 @@ namespace Algolia.Search.Test.EndToEnd.Index
         [Test]
         public async Task RulesTest()
         {
+            var saveObjects = await _index.SaveObjectsAsync(new List<MobilePhone>
+            {
+                new MobilePhone {ObjectID = "iphone_7", Brand = "Apple", Model = "7"},
+                new MobilePhone {ObjectID = "iphone_8", Brand = "Apple", Model = "8"},
+                new MobilePhone {ObjectID = "iphone_x", Brand = "Apple", Model = "X"},
+                new MobilePhone {ObjectID = "one_plus_one", Brand = "OnePlus", Model = "One"},
+                new MobilePhone {ObjectID = "one_plus_two", Brand = "OnePlus", Model = "Two"}
+            });
+
             // Set attributesForFaceting to [“brand”] using setSettings and collect the taskID
-            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "brand" } };
+            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "brand", "model" } };
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
+
+            saveObjects.Wait();
             setSettingsResponse.Wait();
 
             Rule ruleToSave = new Rule
@@ -109,10 +121,39 @@ namespace Algolia.Search.Test.EndToEnd.Index
                             }
                         }
                     }
-                },
+                }
             };
 
-            var batchRulesResponse = await _index.SaveRulesAsync(new List<Rule> { ruleToSave2 });
+            Rule ruleToSave3 = new Rule
+            {
+                ObjectID = "query_promo",
+                Consequence = new Consequence
+                {
+                    Params = new ConsequenceParams
+                    {
+                        Filters = "brand:OnePlus"
+                    }
+                }
+            };
+
+            Rule ruleToSave4 = new Rule
+            {
+                ObjectID = "query_promo_only_summer",
+                Consequence = new Consequence
+                {
+                    Params = new ConsequenceParams
+                    {
+                        Filters = "model:One"
+                    }
+                },
+                Condition = new Condition
+                {
+                    Context = "summer"
+                }
+            };
+
+            var batchRulesResponse =
+                await _index.SaveRulesAsync(new List<Rule> { ruleToSave2, ruleToSave3, ruleToSave4 });
 
             saveRuleResponse.Wait();
             batchRulesResponse.Wait();
@@ -120,37 +161,44 @@ namespace Algolia.Search.Test.EndToEnd.Index
             // Retrieve all the rules using getRule and check that they were correctly saved
             var getRuleToSave = _index.GetRuleAsync(ruleToSave.ObjectID);
             var getRuleToSave2 = _index.GetRuleAsync(ruleToSave2.ObjectID);
+            var getRuleToSave3 = _index.GetRuleAsync(ruleToSave3.ObjectID);
+            var getRuleToSave4 = _index.GetRuleAsync(ruleToSave4.ObjectID);
 
-            Rule[] tasks = await Task.WhenAll(getRuleToSave, getRuleToSave2);
+            Rule[] tasks = await Task.WhenAll(getRuleToSave, getRuleToSave2, getRuleToSave3, getRuleToSave4);
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave, tasks[0]));
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave2, tasks[1]));
+            Assert.True(TestHelper.AreObjectsEqual(ruleToSave3, tasks[2]));
+            Assert.True(TestHelper.AreObjectsEqual(ruleToSave4, tasks[3]));
+
+            var searchWithContext =
+                await _index.SearchAsync<MobilePhone>(new Query { RuleContexts = new List<string> { "summer" } });
+            Assert.That(searchWithContext.Hits, Has.Exactly(1).Items);
 
             SearchResponse<Rule> searchRules = await _index.SearchRuleAsync(new RuleQuery());
-            Assert.That(searchRules.Hits, Has.Exactly(2).Items);
+            Assert.That(searchRules.Hits, Has.Exactly(4).Items);
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave,
                 searchRules.Hits.Find(r => r.ObjectID.Equals(ruleToSave.ObjectID))));
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave2,
                 searchRules.Hits.Find(r => r.ObjectID.Equals(ruleToSave2.ObjectID))));
 
             // Iterate over all the rules using ruleIterator and check that they were correctly saved
-            List<Rule> rulesFromIterator = new List<Rule>();
-
-            foreach (var rule in new RulesIterator(_index))
-            {
-                rulesFromIterator.Add(rule);
-            }
+            List<Rule> rulesFromIterator = new RulesIterator(_index).ToList();
 
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave,
                 rulesFromIterator.Find(r => r.ObjectID.Equals(ruleToSave.ObjectID))));
             Assert.True(TestHelper.AreObjectsEqual(ruleToSave2,
                 rulesFromIterator.Find(r => r.ObjectID.Equals(ruleToSave2.ObjectID))));
+            Assert.True(TestHelper.AreObjectsEqual(ruleToSave3,
+                rulesFromIterator.Find(r => r.ObjectID.Equals(ruleToSave3.ObjectID))));
+            Assert.True(TestHelper.AreObjectsEqual(ruleToSave4,
+                rulesFromIterator.Find(r => r.ObjectID.Equals(ruleToSave4.ObjectID))));
 
             // Delete the first rule using deleteRule and check that it was correctly deleted
             var deleteRule = await _index.DeleteRuleAsync(ruleToSave.ObjectID);
             deleteRule.Wait();
 
             SearchResponse<Rule> searchRulesAfterDelete = await _index.SearchRuleAsync(new RuleQuery());
-            Assert.That(searchRulesAfterDelete.Hits, Has.Exactly(1).Items);
+            Assert.That(searchRulesAfterDelete.Hits, Has.Exactly(3).Items);
             Assert.IsFalse(searchRulesAfterDelete.Hits.Exists(r => r.ObjectID.Equals(ruleToSave.ObjectID)));
 
             // Clear all the remaining rules using clearRules and check that all rules have been correctly removed
@@ -161,7 +209,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.That(searchRulesAfterClear.Hits, Is.Empty);
         }
 
-        public class RuleTest
+        public class MobilePhone
         {
             public string ObjectID { get; set; }
             public string Brand { get; set; }
