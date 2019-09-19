@@ -33,6 +33,7 @@ using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -150,7 +151,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(data));
             }
 
-            if (data is IEnumerable)
+            if (data is IEnumerable && !(data is JObject))
             {
                 throw new ArgumentException($"{nameof(data)} should not be an IEnumerable/List/Collection");
             }

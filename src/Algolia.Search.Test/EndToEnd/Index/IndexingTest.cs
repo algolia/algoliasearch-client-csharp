@@ -30,6 +30,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Algolia.Search.Test.EndToEnd.Index
 {
@@ -267,12 +268,12 @@ namespace Algolia.Search.Test.EndToEnd.Index
         [Parallelizable]
         public async Task MoveIndexTest()
         {
-            var objectOne = new AlgoliaStub { ObjectId = "one" };
+            var objectOne = new JObject { { "objectID", "one" } };
             var addObject = await _indexMove.SaveObjectAsync(objectOne);
 
             addObject.Wait();
 
-            string indexDestName = TestHelper.GetTestIndexName("move_test_dest");
+            var indexDestName = TestHelper.GetTestIndexName("move_test_dest");
 
             var move = await BaseTest.SearchClient.MoveIndexAsync(_indexMoveName, indexDestName);
             move.Wait();
