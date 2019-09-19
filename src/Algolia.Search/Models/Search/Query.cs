@@ -47,7 +47,7 @@ namespace Algolia.Search.Models.Search
         /// The text to search in the index.
         /// </summary>
         [JsonProperty(PropertyName = "query")]
-        public string SearchQuery { get; set; } = string.Empty;
+        public string SearchQuery { get; set; }
 
         /// <summary>
         /// Allows a search for similar objects, but the query has to be constructed on your end and included alongside an empty query.
