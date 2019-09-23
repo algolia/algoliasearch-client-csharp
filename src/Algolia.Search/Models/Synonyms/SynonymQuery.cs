@@ -47,7 +47,7 @@ namespace Algolia.Search.Models.Synonyms
         /// <summary>
         /// There are 4 synonym types. The parameter can be one of the following values <see cref="Enums.SynonymType"/>
         /// </summary>
-        public List<string> Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Page to retrieve
