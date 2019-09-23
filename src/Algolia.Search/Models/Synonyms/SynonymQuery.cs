@@ -21,8 +21,6 @@
 * THE SOFTWARE.
 */
 
-using System.Collections.Generic;
-
 namespace Algolia.Search.Models.Synonyms
 {
     /// <summary>
@@ -42,7 +40,7 @@ namespace Algolia.Search.Models.Synonyms
         /// <summary>
         /// The text to search
         /// </summary>
-        public string Query { get; set; } = string.Empty;
+        public string Query { get; set; }
 
         /// <summary>
         /// There are 4 synonym types. The parameter can be one of the following values <see cref="Enums.SynonymType"/>
