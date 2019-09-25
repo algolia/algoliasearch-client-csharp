@@ -7,6 +7,11 @@ jobs:
     pool:
       vmImage: vs2017-win2016
     steps:
+      - task: UseDotNet@2
+        displayName: Install .NET Core 3.0 SDK
+        inputs:
+            packageType: 'sdk'
+            version: '3.0.100'
       - script: dotnet build src -c $(buildConfiguration)
         displayName: Run build
       - script: >-
@@ -38,11 +43,21 @@ jobs:
     pool:
       vmImage: macOS-10.13
     steps:
+      - task: UseDotNet@2
+        displayName: Install .NET Core 3.0 SDK
+        inputs:
+          packageType: 'sdk'
+          version: '3.0.100'
       - script: dotnet build src -c $(buildConfiguration)
   - job: Linux
     pool:
       vmImage: ubuntu-16.04
     steps:
+      - task: UseDotNet@2
+        displayName: Install .NET Core 3.0 SDK
+        inputs:
+            packageType: 'sdk'
+            version: '3.0.100'
       - script: dotnet build src -c $(buildConfiguration)
         displayName: Run build
       - script: >-
