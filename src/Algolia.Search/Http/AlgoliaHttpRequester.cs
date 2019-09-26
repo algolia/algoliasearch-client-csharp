@@ -114,11 +114,9 @@ namespace Algolia.Search.Http
                             };
                         }
 
-                        var content = await SerializerHelper.StreamToStringAsync(stream).ConfigureAwait(false);
-
                         return new AlgoliaHttpResponse
                         {
-                            Error = content,
+                            Error = await StreamToStringAsync(stream),
                             HttpStatusCode = (int)response.StatusCode
                         };
                     }
@@ -134,6 +132,21 @@ namespace Algolia.Search.Http
                 // network connectivity, DNS failure, server certificate validation.
                 return new AlgoliaHttpResponse { IsNetworkError = true, Error = e.ToString() };
             }
+        }
+
+        private async Task<string> StreamToStringAsync(Stream stream)
+        {
+            string content;
+
+            if (stream == null)
+                return null;
+
+            using (var sr = new StreamReader(stream))
+            {
+                content = await sr.ReadToEndAsync().ConfigureAwait(false);
+            }
+
+            return content;
         }
     }
 }

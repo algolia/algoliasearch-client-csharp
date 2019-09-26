@@ -21,21 +21,31 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Enums
+using System.IO;
+using Algolia.Search.Models.Enums;
+
+namespace Algolia.Search.Serializer
 {
     /// <summary>
-    /// Compression type for outgoing HTTP requests
+    /// Interface representing the expected behavior of the Serializer.
     /// </summary>
-    public enum CompressionType
+    internal interface ISerializer
     {
         /// <summary>
-        /// No compression
+        /// Converts the value of a specified type into a JSON string.
         /// </summary>
-        NONE = 1,
+        /// <param name="data">The value to convert and write.</param>
+        /// <param name="stream">The Stream containing the data to read.</param>
+        /// <param name="compressionType">How the stream should be compressed <see cref="CompressionType"/></param>
+        /// <typeparam name="T">The type of the value to convert.</typeparam>
+        void Serialize<T>(T data, Stream stream, CompressionType compressionType);
 
         /// <summary>
-        /// GZip Compression. Only supported by Search API.
+        /// Parses the stream into an instance of a specified type.
         /// </summary>
-        GZIP = 2
+        /// <param name="stream">The Stream containing the data to read.</param>
+        /// <typeparam name="T">The type of the value to convert.</typeparam>
+        /// <returns></returns>
+        T Deserialize<T>(Stream stream);
     }
 }

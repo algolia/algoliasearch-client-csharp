@@ -45,6 +45,7 @@ namespace Algolia.Search.Transport
     internal class HttpTransport
     {
         private readonly IHttpRequester _httpClient;
+        private readonly ISerializer _serializer;
         private readonly RetryStrategy _retryStrategy;
         private readonly AlgoliaConfig _algoliaConfig;
 
@@ -57,6 +58,7 @@ namespace Algolia.Search.Transport
         {
             _algoliaConfig = config ?? throw new ArgumentNullException(nameof(config));
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            _serializer = new DefaultSerializer();
             _retryStrategy = new RetryStrategy(config);
         }
 
@@ -124,8 +126,7 @@ namespace Algolia.Search.Transport
                 switch (_retryStrategy.Decide(host, response))
                 {
                     case RetryOutcomeType.Success:
-                        return SerializerHelper.Deserialize<TResult>(response.Body,
-                            JsonConfig.AlgoliaJsonSerializerSettings);
+                        return _serializer.Deserialize<TResult>(response.Body);
                     case RetryOutcomeType.Retry:
                         continue;
                     case RetryOutcomeType.Failure:
@@ -145,17 +146,17 @@ namespace Algolia.Search.Transport
         /// <returns></returns>
         private MemoryStream CreateRequestContent<T>(T data, bool compress)
         {
-            if (data != null)
-            {
-                MemoryStream ms = new MemoryStream();
+            if (data == null)
+                return null;
 
-                SerializerHelper.Serialize(data, ms, JsonConfig.AlgoliaJsonSerializerSettings, compress);
+            MemoryStream ms = new MemoryStream();
 
-                ms.Seek(0, SeekOrigin.Begin);
-                return ms;
-            }
+            CompressionType compressionType = compress ? CompressionType.GZIP : CompressionType.NONE;
+            _serializer.Serialize(data, ms, compressionType);
 
-            return null;
+            ms.Seek(0, SeekOrigin.Begin);
+            return ms;
+
         }
 
         /// <summary>
