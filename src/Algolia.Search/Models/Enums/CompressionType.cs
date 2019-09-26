@@ -31,11 +31,11 @@ namespace Algolia.Search.Models.Enums
         /// <summary>
         /// No compression
         /// </summary>
-        NONE,
+        NONE = 1,
 
         /// <summary>
         /// GZip Compression. Only supported by Search API.
         /// </summary>
-        GZIP
+        GZIP = 2
     }
 }

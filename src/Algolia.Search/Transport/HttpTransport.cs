@@ -151,7 +151,8 @@ namespace Algolia.Search.Transport
 
             MemoryStream ms = new MemoryStream();
 
-            _serializer.Serialize(data, ms, compress);
+            CompressionType compressionType = compress ? CompressionType.GZIP : CompressionType.NONE;
+            _serializer.Serialize(data, ms, compressionType);
 
             ms.Seek(0, SeekOrigin.Begin);
             return ms;

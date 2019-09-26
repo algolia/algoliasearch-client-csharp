@@ -22,6 +22,7 @@
 */
 
 using System.IO;
+using Algolia.Search.Models.Enums;
 
 namespace Algolia.Search.Serializer
 {
@@ -35,9 +36,9 @@ namespace Algolia.Search.Serializer
         /// </summary>
         /// <param name="data">The value to convert and write.</param>
         /// <param name="stream">The Stream containing the data to read.</param>
-        /// <param name="gzipCompress">Whether the underlying stream should be compressed or not</param>
+        /// <param name="compressionType">How the stream should be compressed <see cref="CompressionType"/></param>
         /// <typeparam name="T">The type of the value to convert.</typeparam>
-        void Serialize<T>(T data, Stream stream, bool gzipCompress);
+        void Serialize<T>(T data, Stream stream, CompressionType compressionType);
 
         /// <summary>
         /// Parses the stream into an instance of a specified type.

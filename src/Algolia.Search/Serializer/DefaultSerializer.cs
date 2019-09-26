@@ -25,6 +25,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+using Algolia.Search.Models.Enums;
 
 namespace Algolia.Search.Serializer
 {
@@ -40,9 +41,9 @@ namespace Algolia.Search.Serializer
         // Buffer sized as recommended by Bradley Grainger, http://faithlife.codes/blog/2012/06/always-wrap-gzipstream-with-bufferedstream/
         private static readonly int GZipBufferSize = 8192;
 
-        public void Serialize<T>(T data, Stream stream, bool gzipCompress)
+        public void Serialize<T>(T data, Stream stream, CompressionType compressionType)
         {
-            if (gzipCompress)
+            if (compressionType == CompressionType.GZIP)
             {
                 using (var gzipStream = new GZipStream(stream, CompressionMode.Compress, true))
                 using (var sw = new StreamWriter(gzipStream, DefaultEncoding, GZipBufferSize))
