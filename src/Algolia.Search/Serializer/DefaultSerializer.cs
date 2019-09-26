@@ -25,22 +25,22 @@ using Newtonsoft.Json;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Serializer
 {
     /// <summary>
-    /// Helper to improve performance with large json
+    /// Default Serializer using Newtonsoft JSON
+    /// Implementation of <see cref="ISerializer"/>
     /// https://www.newtonsoft.com/json/help/html/performance.htm
     /// </summary>
-    internal static class SerializerHelper
+    internal class DefaultSerializer : ISerializer
     {
         private static readonly UTF8Encoding DefaultEncoding = new UTF8Encoding(false);
         private static readonly int DefaultBufferSize = 1024;
         // Buffer sized as recommended by Bradley Grainger, http://faithlife.codes/blog/2012/06/always-wrap-gzipstream-with-bufferedstream/
         private static readonly int GZipBufferSize = 8192;
 
-        public static void Serialize<T>(T data, Stream stream, JsonSerializerSettings settings, bool gzipCompress)
+        public void Serialize<T>(T data, Stream stream, bool gzipCompress)
         {
             if (gzipCompress)
             {
@@ -62,13 +62,13 @@ namespace Algolia.Search.Serializer
 
             void JsonSerialize(JsonTextWriter writer)
             {
-                JsonSerializer serializer = JsonSerializer.Create(settings);
+                JsonSerializer serializer = JsonSerializer.Create(JsonConfig.AlgoliaJsonSerializerSettings);
                 serializer.Serialize(writer, data);
                 writer.Flush();
             }
         }
 
-        public static T Deserialize<T>(Stream stream, JsonSerializerSettings settings)
+        public T Deserialize<T>(Stream stream)
         {
             if (stream == null || stream.CanRead == false)
                 return default;
@@ -77,24 +77,9 @@ namespace Algolia.Search.Serializer
             using (var sr = new StreamReader(stream))
             using (var jtr = new JsonTextReader(sr))
             {
-                JsonSerializer serializer = JsonSerializer.Create(settings);
+                JsonSerializer serializer = JsonSerializer.Create(JsonConfig.AlgoliaJsonSerializerSettings);
                 return serializer.Deserialize<T>(jtr);
             }
-        }
-
-        public static async Task<string> StreamToStringAsync(Stream stream)
-        {
-            string content = null;
-
-            if (stream != null)
-            {
-                using (var sr = new StreamReader(stream))
-                {
-                    content = await sr.ReadToEndAsync().ConfigureAwait(false);
-                }
-            }
-
-            return content;
         }
     }
 }
