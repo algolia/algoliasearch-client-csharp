@@ -60,14 +60,30 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             RemoveUserId(userId);
 
-            ListUserIdsResponse listUserIdsTwo = await BaseTest.McmClient.ListUserIdsAsync();
-            var yesterday = DateTime.UtcNow.AddDays(-1).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-            IEnumerable<UserIdResponse> userIdsToRemove =
-                listUserIdsTwo.UserIds.Where(x => x.UserID.Contains($"csharp-{yesterday}"));
+            await RemovePastUserIDs();
+        }
 
-            var delete =
-                userIdsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID)).ToArray();
-            await Task.WhenAll(delete);
+        private async Task RemovePastUserIDs()
+        {
+            const int hitsPerPage = 100;
+            int page = 0;
+            var userIDsToRemove = new List<UserIdResponse>();
+
+            while (true)
+            {
+                var response = await BaseTest.McmClient.ListUserIdsAsync(page, hitsPerPage);
+
+                var today = DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                userIDsToRemove.AddRange(response.UserIds.Where(x =>
+                    x.UserID.Contains("csharp-") && !x.UserID.Contains($"csharp-{today}")));
+
+                if (response.UserIds.Count < hitsPerPage)
+                    break;
+
+                page++;
+            }
+
+            await Task.WhenAll(userIDsToRemove.Select(x => BaseTest.McmClient.RemoveUserIdAsync(x.UserID)));
         }
 
         private void WaitUserId(string userId)
