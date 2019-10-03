@@ -10,7 +10,6 @@
 
 - saveObject throwing "data should not be IEnumerable" with JObject ([df6eaf8](https://github.com/algolia/algoliasearch-client-csharp/commit/df6eaf8))
 
-    fix #654
 - Type in synonym query is now a String instead String[] ([9a20b2e](https://github.com/algolia/algoliasearch-client-csharp/commit/9a20b2e))
 
     Fixed the type of "SynonymQuery.Type". It's now a String instead
