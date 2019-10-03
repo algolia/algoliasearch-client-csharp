@@ -41,11 +41,11 @@ namespace Algolia.Search.Models.Mcm
         /// <summary>
         /// Page to fetch.
         /// </summary>
-        public int Page { get; set; }
+        public int? Page { get; set; }
 
         /// <summary>
         /// Number of users to return by page.
         /// </summary>
-        public int HitsPerPage { get; set; }
+        public int? HitsPerPage { get; set; }
     }
 }
