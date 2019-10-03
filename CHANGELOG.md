@@ -1,5 +1,26 @@
 # ChangeLog
 
+## [6.4.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.4.0...6.4.1) (2019-10-03)
+
+### Feat
+
+- bump library to .NET Standard 2.1 ([ad3da9e](https://github.com/algolia/algoliasearch-client-csharp/commit/ad3da9e))
+
+### Fix
+
+- saveObject throwing "data should not be IEnumerable" with JObject ([df6eaf8](https://github.com/algolia/algoliasearch-client-csharp/commit/df6eaf8))
+
+    fix #654
+- Type in synonym query is now a String instead String[] ([9a20b2e](https://github.com/algolia/algoliasearch-client-csharp/commit/9a20b2e))
+
+    Fixed the type of "SynonymQuery.Type". It's now a String instead
+    of a List<string>.
+
+    For example: Type =  "synonym,oneWaySynonym,placeholder";
+
+    https://www.algolia.com/doc/api-reference/api-methods/search-synonyms/#method-param-type
+
+
 ## [6.4.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.3.0...6.4.0) (2019-08-30)
 
 ### Fix
