@@ -43,22 +43,49 @@ namespace Algolia.Search.Test.EndToEnd.Index
             IEnumerable<ClustersResponse> listClusters = (await BaseTest.McmClient.ListClustersAsync()).ToList();
             Assert.That(listClusters, Has.Count.GreaterThanOrEqualTo(2));
 
-            string userId = TestHelper.GetMcmUserId();
-            await BaseTest.McmClient.AssignUserIdAsync(userId, listClusters.ElementAt(0).ClusterName);
-            WaitUserId(userId);
+            string userId = TestHelper.GetMcmUserId() + "-0";
+            string userId1 = TestHelper.GetMcmUserId() + "-1";
+            string userId2 = TestHelper.GetMcmUserId() + "-2";
 
-            SearchResponse<UserIdResponse> searchResponse =
-                await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest
-                { Query = userId, Cluster = listClusters.ElementAt(0).ClusterName });
-            Assert.That(searchResponse.Hits, Has.Exactly(1).Items);
+            var userIDs = new List<string> { userId, userId1, userId2 };
+
+            await BaseTest.McmClient.AssignUserIdAsync(userId, listClusters.ElementAt(0).ClusterName);
+            await BaseTest.McmClient.AssignUserIdsAsync(new List<string> { userId1, userId2 },
+                listClusters.ElementAt(0).ClusterName);
+
+            foreach (var user in userIDs)
+            {
+                WaitUserId(user);
+            }
+
+
+            foreach (var user in userIDs)
+            {
+                SearchResponse<UserIdResponse> searchResponse =
+                    await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest
+                    {
+                        Query = user,
+                        Cluster = listClusters.ElementAt(0).ClusterName
+                    });
+
+                Assert.That(searchResponse.Hits, Has.Exactly(1).Items);
+            }
+
 
             ListUserIdsResponse listUserIds = await BaseTest.McmClient.ListUserIdsAsync();
-            Assert.True(listUserIds.UserIds.Exists(x => x.UserID.Equals(userId)));
+
+            foreach (var user in userIDs)
+            {
+                Assert.True(listUserIds.UserIds.Exists(x => x.UserID.Equals(user)));
+            }
 
             TopUserIdResponse topUserIds = await BaseTest.McmClient.GetTopUserIdAsync();
             Assert.That(topUserIds.TopUsers, Is.Not.Empty);
 
-            RemoveUserId(userId);
+            foreach (var user in userIDs)
+            {
+                RemoveUserId(user);
+            }
 
             await RemovePastUserIDs();
         }
