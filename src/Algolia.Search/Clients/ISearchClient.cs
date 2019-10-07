@@ -346,6 +346,29 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Assign or Move userIDs to a cluster.
+        /// The time it takes to migrate (move) a user is proportional to the amount of data linked to each userID.
+        /// </summary>
+        /// <param name="users">List of users to save</param>
+        /// <param name="clusterName">The cluster name</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        AssignUserIdsResponse AssignUserIds(IEnumerable<string> users, string clusterName,
+            RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Assign or Move userIDs to a cluster.
+        /// The time it takes to migrate (move) a user is proportional to the amount of data linked to each userID.
+        /// </summary>
+        /// <param name="users">List of users to save</param>
+        /// <param name="clusterName">The cluster name</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<AssignUserIdsResponse> AssignUserIdsAsync(IEnumerable<string> users, string clusterName,
+            RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Remove a userID and its associated data from the multi-clusters.
         /// </summary>
         /// <param name="userId"></param>

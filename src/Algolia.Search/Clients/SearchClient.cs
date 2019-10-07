@@ -481,6 +481,41 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
+        public AssignUserIdsResponse AssignUserIds(IEnumerable<string> users, string clusterName,
+            RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => AssignUserIdsAsync(users, clusterName, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<AssignUserIdsResponse> AssignUserIdsAsync(IEnumerable<string> users, string clusterName,
+            RequestOptions requestOptions = null,
+            CancellationToken ct = default)
+        {
+            if (string.IsNullOrWhiteSpace(clusterName))
+            {
+                throw new ArgumentNullException(clusterName);
+            }
+
+            if (users == null)
+            {
+                throw new ArgumentNullException(nameof(users));
+            }
+
+            if (users.Any(string.IsNullOrWhiteSpace))
+            {
+                throw new AlgoliaException("The 'users' parameter should not contain null or empty user name");
+            }
+
+            var data = new AssignUserIdsRequest { Users = users, Cluster = clusterName };
+
+            AssignUserIdsResponse response = await _transport
+                .ExecuteRequestAsync<AssignUserIdsResponse, AssignUserIdsRequest>(HttpMethod.Post,
+                    "/1/clusters/mapping/batch", CallType.Write, data, requestOptions, ct)
+                .ConfigureAwait(false);
+
+            return response;
+        }
+
+        /// <inheritdoc />
         public RemoveUserIdResponse RemoveUserId(string userId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => RemoveUserIdAsync(userId, requestOptions));
 
