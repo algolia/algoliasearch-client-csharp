@@ -387,6 +387,12 @@ namespace Algolia.Search.Models.Search
         public string UserToken { get; set; }
 
         /// <summary>
+        /// Can be to enable or disable A/B tests at query time.
+        /// Engine's default: true
+        /// </summary>
+        public bool? EnableABTest { get; set; }
+
+        /// <summary>
         /// Custom parameters for advanced use cases
         /// </summary>
         [JsonExtensionData]
