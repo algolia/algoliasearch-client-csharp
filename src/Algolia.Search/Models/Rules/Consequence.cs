@@ -46,7 +46,12 @@ namespace Algolia.Search.Models.Rules
         public IEnumerable<Hide> Hide { get; set; }
 
         /// <summary>
-        /// Custom JSON object that will be appended to the userData array in the response. 
+        /// Wheter the QueryRule should promote or not promoted items.
+        /// </summary>
+        public bool? FilterPromotes { get; set; }
+
+        /// <summary>
+        /// Custom JSON object that will be appended to the userData array in the response.
         /// This object is not interpreted by the API. It is limited to 1kB of minified JSON.
         /// </summary>
         public object UserData { get; set; }
