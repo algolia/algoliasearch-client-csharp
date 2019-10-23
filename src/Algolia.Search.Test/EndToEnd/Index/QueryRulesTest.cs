@@ -73,6 +73,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
                 Consequence = new Consequence
                 {
+                    FilterPromotes = false,
                     Params = new ConsequenceParams
                     {
                         AutomaticFacetFilters = new List<AutomaticFacetFilter>
