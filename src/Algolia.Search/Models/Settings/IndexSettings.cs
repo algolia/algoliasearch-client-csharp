@@ -333,8 +333,9 @@ namespace Algolia.Search.Models.Settings
         public string KeepDiacriticsOnCharacters { get; set; }
 
         /// <summary>
-        /// Index settings version only for advanced use cases
+        /// Overrides Algolia's default normalization
         /// </summary>
+        public Dictionary<string, Dictionary<string, string>> CustomNormalization { get; set; }
 
         /// <summary>
         /// Custom settings for advanced use cases
