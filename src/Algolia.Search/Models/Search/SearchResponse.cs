@@ -160,6 +160,11 @@ namespace Algolia.Search.Models.Search
         public string ParsedQuery { get; set; }
 
         /// <summary>
+        /// Explain decompounding at query time
+        /// </summary>
+        public Explain Explain { get; set; }
+
+        /// <summary>
         /// Custom user data
         /// </summary>
         public object UserData { get; set; }

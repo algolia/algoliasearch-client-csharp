@@ -380,6 +380,11 @@ namespace Algolia.Search.Models.Search
         public bool? GetRankingInfo { get; set; }
 
         /// <summary>
+        /// Explain decompounding at query time
+        /// </summary>
+        public List<string> Explain { get; set; }
+
+        /// <summary>
         /// A user identifier.
         /// Format: alpha numeric string [a-zA-Z0-9_-]
         /// Length: between 1 and 64 characters.
