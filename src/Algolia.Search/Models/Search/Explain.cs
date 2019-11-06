@@ -22,7 +22,6 @@
 */
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Search
 {
@@ -34,8 +33,7 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Query match
         /// </summary>
-        [JsonProperty(PropertyName = "match")]
-        public QueryMatch QueryMatch { get; set; }
+        public QueryMatch Match { get; set; }
 
         /// <summary>
         /// Query parameter reporting. Parameters are reported as a JSON object with one field per parameter.
