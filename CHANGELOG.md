@@ -1,5 +1,15 @@
 # ChangeLog
 
+## [6.5.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.4.1...6.5.0) (2019-11-06)
+
+### Feat
+
+- feat(query): explain decompounding at query time([14bf302](https://github.com/algolia/algoliasearch-client-csharp/tree/14bf30229170c67e31d68acad4b8b9b2be5ed431))
+- feat: adds customNormalization in IndexSettings ([a0a9f8](https://github.com/algolia/algoliasearch-client-csharp/tree/a0a9fa8849a10e8775d5f2c4cfa5cbeba9318dfa))
+- feat: adds filterPromotes in QueryRule ([83ecaf0](https://github.com/algolia/algoliasearch-client-csharp/tree/83ecaf01d31681bb43eacbf7b4d672f9303e7b54))
+- feat: adds enableABTest ([a50b533](https://github.com/algolia/algoliasearch-client-csharp/tree/a50b5330e747aa3ba8f735d9296fe542d6f0d6c9))
+- feat(MCM): adds assignUserIDs method ([bb7ee69](https://github.com/algolia/algoliasearch-client-csharp/tree/bb7ee69742d66a85a77028d60149b91911060f09))
+
 ## [6.4.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.4.0...6.4.1) (2019-10-03)
 
 ### Feat
