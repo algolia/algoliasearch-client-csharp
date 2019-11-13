@@ -77,7 +77,7 @@ namespace Algolia.Search.Test.EndToEnd.Account
                         {
                             Edits = new List<Edit>
                             {
-                                new Edit {Type = EditType.Remove, Delete = "patter"}
+                                new Edit { Type = EditType.Remove, Delete = "patter" }
                             }
                         }
                     }
@@ -88,17 +88,12 @@ namespace Algolia.Search.Test.EndToEnd.Account
 
             var synonym = new Synonym
             {
-                ObjectID = "one",
-                Type = SynonymType.Synonym,
-                Synonyms = new List<string> { "one", "two" }
+                ObjectID = "one", Type = SynonymType.Synonym, Synonyms = new List<string> { "one", "two" }
             };
 
             var saveSynonym = index1.SaveSynonymAsync(synonym);
 
-            IndexSettings settings = new IndexSettings
-            {
-                AttributesForFaceting = new List<string> { "company" }
-            };
+            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "company" } };
 
             var saveSettings = index1.SetSettingsAsync(settings);
 

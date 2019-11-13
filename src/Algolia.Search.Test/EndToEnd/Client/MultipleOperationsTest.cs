@@ -53,23 +53,27 @@ namespace Algolia.Search.Test.EndToEnd.Client
             {
                 new BatchOperation<MultipleOperationClass>
                 {
-                    IndexName = _indexName1, Action = BatchActionType.AddObject,
-                    Body = new MultipleOperationClass {Firstname = "Jimmie"}
+                    IndexName = _indexName1,
+                    Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass { Firstname = "Jimmie" }
                 },
                 new BatchOperation<MultipleOperationClass>
                 {
-                    IndexName = _indexName1, Action = BatchActionType.AddObject,
-                    Body = new MultipleOperationClass {Firstname = "Jimmie"}
+                    IndexName = _indexName1,
+                    Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass { Firstname = "Jimmie" }
                 },
                 new BatchOperation<MultipleOperationClass>
                 {
-                    IndexName = _indexName2, Action = BatchActionType.AddObject,
-                    Body = new MultipleOperationClass {Firstname = "Jimmie"}
+                    IndexName = _indexName2,
+                    Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass { Firstname = "Jimmie" }
                 },
                 new BatchOperation<MultipleOperationClass>
                 {
-                    IndexName = _indexName2, Action = BatchActionType.AddObject,
-                    Body = new MultipleOperationClass {Firstname = "Jimmie"}
+                    IndexName = _indexName2,
+                    Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass { Firstname = "Jimmie" }
                 }
             };
 
@@ -78,10 +82,10 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             var objectsToRetrieve = new List<MultipleGetObject>
             {
-                new MultipleGetObject {IndexName = _indexName1, ObjectID = saveMultiple.ObjectIDs.ElementAt(0)},
-                new MultipleGetObject {IndexName = _indexName1, ObjectID = saveMultiple.ObjectIDs.ElementAt(1)},
-                new MultipleGetObject {IndexName = _indexName2, ObjectID = saveMultiple.ObjectIDs.ElementAt(2)},
-                new MultipleGetObject {IndexName = _indexName2, ObjectID = saveMultiple.ObjectIDs.ElementAt(3)}
+                new MultipleGetObject { IndexName = _indexName1, ObjectID = saveMultiple.ObjectIDs.ElementAt(0) },
+                new MultipleGetObject { IndexName = _indexName1, ObjectID = saveMultiple.ObjectIDs.ElementAt(1) },
+                new MultipleGetObject { IndexName = _indexName2, ObjectID = saveMultiple.ObjectIDs.ElementAt(2) },
+                new MultipleGetObject { IndexName = _indexName2, ObjectID = saveMultiple.ObjectIDs.ElementAt(3) }
             };
 
             var multipleGet =
@@ -96,20 +100,18 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             List<MultipleQueries> multipleSearch = new List<MultipleQueries>
             {
-                new MultipleQueries {IndexName = _indexName1, Params = new Query {HitsPerPage = 2}},
-                new MultipleQueries {IndexName = _indexName2, Params = new Query {HitsPerPage = 2}},
+                new MultipleQueries { IndexName = _indexName1, Params = new Query { HitsPerPage = 2 } },
+                new MultipleQueries { IndexName = _indexName2, Params = new Query { HitsPerPage = 2 } },
             };
 
             MultipleQueriesRequest request = new MultipleQueriesRequest
             {
-                Strategy = StrategyType.None,
-                Requests = multipleSearch
+                Strategy = StrategyType.None, Requests = multipleSearch
             };
 
             MultipleQueriesRequest request2 = new MultipleQueriesRequest
             {
-                Strategy = StrategyType.StopIfEnoughMatches,
-                Requests = multipleSearch
+                Strategy = StrategyType.StopIfEnoughMatches, Requests = multipleSearch
             };
 
             var multiQueri = await BaseTest.SearchClient.MultipleQueriesAsync<MultipleOperationClass>(request);

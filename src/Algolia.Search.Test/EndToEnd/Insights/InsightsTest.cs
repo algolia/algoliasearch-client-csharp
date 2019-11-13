@@ -62,14 +62,11 @@ namespace Algolia.Search.Test.EndToEnd.Insights
 
             _index.SaveObject(new AlgoliaStub { ObjectID = "one" }).Wait();
 
-            var query = new Query()
-            {
-                EnablePersonalization = true,
-                ClickAnalytics = true
-            };
+            var query = new Query() { EnablePersonalization = true, ClickAnalytics = true };
 
             var search1 = _index.Search<AlgoliaStub>(query);
-            insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", _indexName, new List<string> { "1", "2" },
+            insights.ClickedObjectIDsAfterSearch("clickedObjectIDsAfterSearch", _indexName,
+                new List<string> { "1", "2" },
                 new List<uint> { 17, 19 }, search1.QueryID);
 
             var search2 = _index.Search<AlgoliaStub>(query);

@@ -66,6 +66,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
                     await BaseTest.AnalyticsClient.DeleteABTestAsync(item.AbTestId.Value);
                 }
             }
+
             var addOne = await _index.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
 
             // Create tomorrow datetime without seconds/ms to avoid test to fail
@@ -80,12 +81,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
                 Name = testName,
                 Variants = new List<Variant>
                 {
-                    new Variant
-                    {
-                        Index = _indexName,
-                        TrafficPercentage = 90,
-                        Description = "a description"
-                    },
+                    new Variant { Index = _indexName, TrafficPercentage = 90, Description = "a description" },
                     new Variant
                     {
                         Index = _indexName,
@@ -102,7 +98,8 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             _index.WaitTask(addAbTest.TaskID);
 
             ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
-            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
+            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount",
+                "ConversionCount"));
             Assert.That(abTestToCheck.Status, Is.EqualTo("active"));
 
             var deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId.Value);

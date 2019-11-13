@@ -64,8 +64,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 SearchResponse<UserIdResponse> searchResponse =
                     await BaseTest.McmClient.SearchUserIDsAsync(new SearchUserIdsRequest
                     {
-                        Query = user,
-                        Cluster = listClusters.ElementAt(0).ClusterName
+                        Query = user, Cluster = listClusters.ElementAt(0).ClusterName
                     });
 
                 Assert.That(searchResponse.Hits, Has.Exactly(1).Items);

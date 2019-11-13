@@ -84,14 +84,8 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
                 Name = testName,
                 Variants = new List<Variant>
                 {
-                    new Variant
-                    {
-                        Index = _index1Name, TrafficPercentage = 60, Description = "a description"
-                    },
-                    new Variant
-                    {
-                        Index = _index2Name, TrafficPercentage = 40, Description = string.Empty
-                    }
+                    new Variant { Index = _index1Name, TrafficPercentage = 60, Description = "a description" },
+                    new Variant { Index = _index2Name, TrafficPercentage = 40, Description = string.Empty }
                 },
                 EndAt = tomorrow
             };
@@ -104,13 +98,15 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             _index1.WaitTask(addAbTest.TaskID);
 
             ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
-            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
+            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount",
+                "ConversionCount"));
             Assert.That(abTestToCheck.Status, Is.EqualTo("active"));
 
             ABTestsResponse listAbTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
             Assert.IsTrue(listAbTests.ABTests.Any(x => x.AbTestId == abTest.AbTestId));
             Assert.IsTrue(TestHelper.AreObjectsEqual(
-                listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status", "ClickCount", "ConversionCount"));
+                listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status",
+                "ClickCount", "ConversionCount"));
 
             await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId.Value);
 
@@ -121,7 +117,8 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             _index1.WaitTask(deleteAbTest.TaskID);
 
             AlgoliaApiException ex =
-                Assert.ThrowsAsync<AlgoliaApiException>(() => BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value));
+                Assert.ThrowsAsync<AlgoliaApiException>(() =>
+                    BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value));
             Assert.That(ex.HttpErrorCode, Is.EqualTo(404));
         }
 

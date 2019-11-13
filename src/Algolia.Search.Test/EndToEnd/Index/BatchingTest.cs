@@ -49,11 +49,11 @@ namespace Algolia.Search.Test.EndToEnd.Index
         {
             List<ObjectToBatch> batchOne = new List<ObjectToBatch>
             {
-                new ObjectToBatch {ObjectID = "one", Key = "value"},
-                new ObjectToBatch {ObjectID = "two", Key = "value"},
-                new ObjectToBatch {ObjectID = "three", Key = "value"},
-                new ObjectToBatch {ObjectID = "four", Key = "value"},
-                new ObjectToBatch {ObjectID = "five", Key = "value"}
+                new ObjectToBatch { ObjectID = "one", Key = "value" },
+                new ObjectToBatch { ObjectID = "two", Key = "value" },
+                new ObjectToBatch { ObjectID = "three", Key = "value" },
+                new ObjectToBatch { ObjectID = "four", Key = "value" },
+                new ObjectToBatch { ObjectID = "five", Key = "value" }
             };
 
             var batchOneResponse = await _index.SaveObjectsAsync(batchOne);
@@ -62,25 +62,33 @@ namespace Algolia.Search.Test.EndToEnd.Index
             List<BatchOperation<ObjectToBatch>> operations = new List<BatchOperation<ObjectToBatch>>
             {
                 new BatchOperation<ObjectToBatch>
-                    {Action = BatchActionType.AddObject, Body = new ObjectToBatch {ObjectID = "zero", Key = "value"}},
-                new BatchOperation<ObjectToBatch>
-                    {Action = BatchActionType.UpdateObject, Body = new ObjectToBatch {ObjectID = "one", Key = "v"}},
+                {
+                    Action = BatchActionType.AddObject,
+                    Body = new ObjectToBatch { ObjectID = "zero", Key = "value" }
+                },
                 new BatchOperation<ObjectToBatch>
                 {
-                    Action = BatchActionType.PartialUpdateObject, Body = new ObjectToBatch {ObjectID = "two", Key = "v"}
+                    Action = BatchActionType.UpdateObject, Body = new ObjectToBatch { ObjectID = "one", Key = "v" }
                 },
                 new BatchOperation<ObjectToBatch>
                 {
                     Action = BatchActionType.PartialUpdateObject,
-                    Body = new ObjectToBatch {ObjectID = "two_bis", Key = "value"}
+                    Body = new ObjectToBatch { ObjectID = "two", Key = "v" }
+                },
+                new BatchOperation<ObjectToBatch>
+                {
+                    Action = BatchActionType.PartialUpdateObject,
+                    Body = new ObjectToBatch { ObjectID = "two_bis", Key = "value" }
                 },
                 new BatchOperation<ObjectToBatch>
                 {
                     Action = BatchActionType.PartialUpdateObjectNoCreate,
-                    Body = new ObjectToBatch {ObjectID = "three", Key = "v"}
+                    Body = new ObjectToBatch { ObjectID = "three", Key = "v" }
                 },
                 new BatchOperation<ObjectToBatch>
-                    {Action = BatchActionType.DeleteObject, Body = new ObjectToBatch {ObjectID = "four"}},
+                {
+                    Action = BatchActionType.DeleteObject, Body = new ObjectToBatch { ObjectID = "four" }
+                },
             };
 
             var batchTwoResponse = await _index.BatchAsync(operations);

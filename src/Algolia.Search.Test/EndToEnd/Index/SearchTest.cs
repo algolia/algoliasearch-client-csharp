@@ -59,7 +59,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.NotNull(addObjectResponse);
 
             IndexSettings settings = new IndexSettings
-            { AttributesForFaceting = new List<string> { "searchable(company)" } };
+            {
+                AttributesForFaceting = new List<string> { "searchable(company)" }
+            };
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
             setSettingsResponse.Wait();
 
@@ -73,8 +75,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             Task<SearchResponse<Employee>> searchElonTask = _index.SearchAsync<Employee>(new Query
             {
-                SearchQuery = "elon",
-                ClickAnalytics = true
+                SearchQuery = "elon", ClickAnalytics = true
             });
 
             Task<SearchResponse<Employee>> searchElonTask1 = _index.SearchAsync<Employee>(new Query
@@ -93,8 +94,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             Task<SearchForFacetResponse> searchFacetTask = _index.SearchForFacetValueAsync(new SearchForFacetRequest
             {
-                FacetName = "company",
-                FacetQuery = "a"
+                FacetName = "company", FacetQuery = "a"
             });
 
             Task.WaitAll(searchAlgoliaTask, searchElonTask, searchElonTask1, searchElonTask2, searchFacetTask);
@@ -116,8 +116,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.That(alwaysTrue.Position, Is.EqualTo(0));
             Assert.That(alwaysTrue.Page, Is.EqualTo(0));
             Assert.IsNull(_index.FindObject<Employee>(x => x.Company.Equals("Apple"), new Query("algolia")));
-            Assert.IsNull(_index.FindObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 }, false));
-            var foundObject = _index.FindObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 });
+            Assert.IsNull(_index.FindObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 },
+                false));
+            var foundObject =
+                _index.FindObject<Employee>(x => x.Company.Equals("Apple"), new Query("") { HitsPerPage = 5 });
             Assert.That(foundObject.Position, Is.EqualTo(0));
             Assert.That(foundObject.Page, Is.EqualTo(2));
         }
@@ -126,19 +128,19 @@ namespace Algolia.Search.Test.EndToEnd.Index
         {
             return new List<Employee>()
             {
-                new Employee {Company = "Algolia", Name = "Julien Lemoine", ObjectID = "julien-lemoine"},
-                new Employee {Company = "Algolia", Name = "Nicolas Dessaigne", ObjectID = "nicolas-dessaigne"},
-                new Employee {Company = "Amazon", Name = "Jeff Bezos"},
-                new Employee {Company = "Apple", Name = "Steve Jobs"},
-                new Employee {Company = "Apple", Name = "Steve Wozniak"},
-                new Employee {Company = "Arista Networks", Name = "Jayshree Ullal"},
-                new Employee {Company = "Google", Name = "Lary Page"},
-                new Employee {Company = "Google", Name = "Rob Pike"},
-                new Employee {Company = "Google", Name = "Sergueï Brin"},
-                new Employee {Company = "Microsoft", Name = "Bill Gates"},
-                new Employee {Company = "SpaceX", Name = "Elon Musk"},
-                new Employee {Company = "Tesla", Name = "Elon Musk"},
-                new Employee {Company = "Yahoo", Name = "Marissa Mayer"}
+                new Employee { Company = "Algolia", Name = "Julien Lemoine", ObjectID = "julien-lemoine" },
+                new Employee { Company = "Algolia", Name = "Nicolas Dessaigne", ObjectID = "nicolas-dessaigne" },
+                new Employee { Company = "Amazon", Name = "Jeff Bezos" },
+                new Employee { Company = "Apple", Name = "Steve Jobs" },
+                new Employee { Company = "Apple", Name = "Steve Wozniak" },
+                new Employee { Company = "Arista Networks", Name = "Jayshree Ullal" },
+                new Employee { Company = "Google", Name = "Lary Page" },
+                new Employee { Company = "Google", Name = "Rob Pike" },
+                new Employee { Company = "Google", Name = "Sergueï Brin" },
+                new Employee { Company = "Microsoft", Name = "Bill Gates" },
+                new Employee { Company = "SpaceX", Name = "Elon Musk" },
+                new Employee { Company = "Tesla", Name = "Elon Musk" },
+                new Employee { Company = "Yahoo", Name = "Marissa Mayer" }
             };
         }
 

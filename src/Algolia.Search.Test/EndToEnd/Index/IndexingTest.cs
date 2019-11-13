@@ -81,8 +81,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             // Save two objects with objectID
             var objectsWithIds = new List<AlgoliaStub>
             {
-                new AlgoliaStub {ObjectId = "two"},
-                new AlgoliaStub {ObjectId = "three"}
+                new AlgoliaStub { ObjectId = "two" }, new AlgoliaStub { ObjectId = "three" }
             };
 
             var addObjects = _index.SaveObjectsAsync(objectsWithIds);
@@ -90,8 +89,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             // Save two objects w/o objectIDs
             var objectsWoId = new List<AlgoliaStub>
             {
-                new AlgoliaStub {Property = "addObjectsWoId"},
-                new AlgoliaStub {Property = "addObjectsWoId"}
+                new AlgoliaStub { Property = "addObjectsWoId" }, new AlgoliaStub { Property = "addObjectsWoId" }
             };
 
             var addObjectsWoId = _index.SaveObjectsAsync(objectsWoId, autoGenerateObjectId: true);
@@ -110,7 +108,8 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var batch = _index.SaveObjectsAsync(objectsToBatch);
 
             // Wait for all http call to finish
-            var responses = await Task.WhenAll(new[] { addObject, addObjectWoId, addObjects, addObjectsWoId, batch }).ConfigureAwait(false);
+            var responses = await Task.WhenAll(new[] { addObject, addObjectWoId, addObjects, addObjectsWoId, batch })
+                .ConfigureAwait(false);
 
             // Wait for Algolia's task to finish (indexing)
             responses.Wait();
@@ -176,16 +175,14 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var partialUpdateObjects = await _index.PartialUpdateObjectsAsync(new List<AlgoliaStub>
             {
-                objectToPartialUpdate1,
-                objectToPartialUpdate2
+                objectToPartialUpdate1, objectToPartialUpdate2
             });
 
             partialUpdateObjects.Wait();
 
             var getUpdatedObjects = (await _index.GetObjectsAsync<AlgoliaStub>(new List<string>
             {
-                objectToPartialUpdate1.ObjectId,
-                objectToPartialUpdate2.ObjectId
+                objectToPartialUpdate1.ObjectId, objectToPartialUpdate2.ObjectId
             })).ToList();
 
             Assert.That(getUpdatedObjects.ElementAt(0).Property, Is.EqualTo(objectToPartialUpdate1.Property));
@@ -234,7 +231,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var searchAfterDelete = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
             Assert.That(searchAfterDelete.Hits, Has.Exactly(9).Items);
 
-            var resp = await _indexDeleteBy.DeleteByAsync(new Query { TagFilters = new List<List<string>> { new List<string> { "car" } } });
+            var resp = await _indexDeleteBy.DeleteByAsync(new Query
+            {
+                TagFilters = new List<List<string>> { new List<string> { "car" } }
+            });
             resp.Wait();
 
             var search = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
@@ -293,7 +293,6 @@ namespace Algolia.Search.Test.EndToEnd.Index
     public class AlgoliaStub : AlgoliaObject
     {
         public string Property { get; set; } = "Default";
-        [JsonProperty(PropertyName = "_tags")]
-        public List<string> Tags { get; set; }
+        [JsonProperty(PropertyName = "_tags")] public List<string> Tags { get; set; }
     }
 }
