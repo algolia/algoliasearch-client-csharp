@@ -30,6 +30,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Algolia.Search.Test")]
+
 namespace Algolia.Search.Transport
 {
     /// <summary>
@@ -136,7 +137,7 @@ namespace Algolia.Search.Transport
         private bool IsRetryable(AlgoliaHttpResponse response)
         {
             var isRetryableHttpCode = (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 2 &&
-                (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 4;
+                                      (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 4;
 
             return isRetryableHttpCode || response.IsNetworkError;
         }

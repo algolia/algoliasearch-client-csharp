@@ -53,10 +53,7 @@ namespace Algolia.Search.Clients
                 },
                 new StatefulHost
                 {
-                    Url = $"{applicationId}.algolia.net",
-                    Up = true,
-                    LastUse = DateTime.UtcNow,
-                    Accept = CallType.Write,
+                    Url = $"{applicationId}.algolia.net", Up = true, LastUse = DateTime.UtcNow, Accept = CallType.Write,
                 }
             };
 

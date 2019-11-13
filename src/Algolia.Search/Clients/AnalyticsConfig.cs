@@ -42,11 +42,7 @@ namespace Algolia.Search.Clients
         {
             DefaultHosts = new List<StatefulHost>
             {
-                new StatefulHost
-                {
-                    Url = "analytics.algolia.com",
-                    Accept = CallType.Read | CallType.Write
-                }
+                new StatefulHost {Url = "analytics.algolia.com", Accept = CallType.Read | CallType.Write}
             };
 
             Compression = CompressionType.NONE;

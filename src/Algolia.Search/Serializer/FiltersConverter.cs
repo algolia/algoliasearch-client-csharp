@@ -86,7 +86,8 @@ namespace Algolia.Search.Serializer
             if (reader.TokenType == JsonToken.String)
                 return new List<List<string>> { Convert.ToString(reader.Value).Split(',').ToList() };
 
-            throw new JsonSerializationException($"Error while reading Token {reader.Value} of type {reader.TokenType}.");
+            throw new JsonSerializationException(
+                $"Error while reading Token {reader.Value} of type {reader.TokenType}.");
         }
 
         /// <summary>

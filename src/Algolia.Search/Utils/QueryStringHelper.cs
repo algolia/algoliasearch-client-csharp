@@ -73,20 +73,23 @@ namespace Algolia.Search.Utils
             // Flat properties
             IEnumerable<string> properties = typeof(T).GetTypeInfo()
                 .DeclaredProperties.Where(p =>
-                    !(p.PropertyType.GetTypeInfo().IsGenericType && typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(p.PropertyType.GetTypeInfo())) &&
+                    !(p.PropertyType.GetTypeInfo().IsGenericType && typeof(IEnumerable).GetTypeInfo()
+                          .IsAssignableFrom(p.PropertyType.GetTypeInfo())) &&
                     p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&
                     p.GetCustomAttribute<JsonPropertyAttribute>() == null)
                 .Select(p =>
                 {
-                    string encodedValue = Nullable.GetUnderlyingType(p.PropertyType) == typeof(bool) ? Uri.EscapeDataString(p.GetValue(value, null).ToString().ToLower()) :
-                    Uri.EscapeDataString(p.GetValue(value, null).ToString());
+                    string encodedValue = Nullable.GetUnderlyingType(p.PropertyType) == typeof(bool)
+                        ? Uri.EscapeDataString(p.GetValue(value, null).ToString().ToLower())
+                        : Uri.EscapeDataString(p.GetValue(value, null).ToString());
                     return p.Name.ToCamelCase() + "=" + encodedValue;
                 });
 
             // List<T> and List<List<T>> properties
             IEnumerable<string> listProperties = typeof(T).GetTypeInfo()
                 .DeclaredProperties.Where(p =>
-                    p.PropertyType.GetTypeInfo().IsGenericType && typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(p.PropertyType.GetTypeInfo()) &&
+                    p.PropertyType.GetTypeInfo().IsGenericType &&
+                    typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(p.PropertyType.GetTypeInfo()) &&
                     p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&
                     p.GetCustomAttribute<JsonPropertyAttribute>() == null)
                 .Select(p =>
@@ -95,18 +98,27 @@ namespace Algolia.Search.Utils
                     var genericTypeArgument = p.PropertyType.GenericTypeArguments[0];
 
                     // In case of nested lists
-                    if (typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(genericTypeArgument.GetTypeInfo()) && genericTypeArgument != typeof(string))
+                    if (typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(genericTypeArgument.GetTypeInfo()) &&
+                        genericTypeArgument != typeof(string))
                     {
-                        if (typeof(IEnumerable<float>).GetTypeInfo().IsAssignableFrom(genericTypeArgument.GetTypeInfo()))
+                        if (typeof(IEnumerable<float>).GetTypeInfo()
+                            .IsAssignableFrom(genericTypeArgument.GetTypeInfo()))
                         {
-                            IEnumerable<IEnumerable<float>> nestedParametersLists = ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<float>>();
+                            IEnumerable<IEnumerable<float>> nestedParametersLists =
+                                ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<float>>();
                             // Culture set to en-US to have floating points separators with "."
-                            values = WrapValues(string.Join(",", nestedParametersLists.Select(f => WrapValues(string.Join(",", f.Select(x => x.ToString(CultureInfo.InvariantCulture)))))));
+                            values = WrapValues(string.Join(",",
+                                nestedParametersLists.Select(f =>
+                                    WrapValues(
+                                        string.Join(",", f.Select(x => x.ToString(CultureInfo.InvariantCulture)))))));
                         }
                         else
                         {
-                            IEnumerable<IEnumerable<object>> nestedParametersLists = ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<object>>();
-                            values = WrapValues(string.Join(",", nestedParametersLists.Select(x => WrapValues(string.Join(",", x.Select(y => "\"" + y + "\""))))));
+                            IEnumerable<IEnumerable<object>> nestedParametersLists =
+                                ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<object>>();
+                            values = WrapValues(string.Join(",",
+                                nestedParametersLists.Select(x =>
+                                    WrapValues(string.Join(",", x.Select(y => "\"" + y + "\""))))));
                         }
                     }
                     else

@@ -156,7 +156,6 @@ namespace Algolia.Search.Transport
 
             ms.Seek(0, SeekOrigin.Begin);
             return ms;
-
         }
 
         /// <summary>

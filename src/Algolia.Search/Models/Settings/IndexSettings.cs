@@ -27,7 +27,6 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Settings
 {
-
     /// <summary>
     /// For more informations regarding Index settings
     /// https://www.algolia.com/doc/api-reference/settings-api-parameters/
@@ -44,7 +43,14 @@ namespace Algolia.Search.Models.Settings
 
         // Handling legacy index settings
         [JsonProperty("attributesToIndex")]
-        private List<string> AttributesToIndex { set { if (value != null) { SearchableAttributes = value; } } }
+        private List<string> AttributesToIndex
+        {
+            set
+            {
+                if (value != null)
+                { SearchableAttributes = value; }
+            }
+        }
 
         /// <summary>
         /// The complete list of attributes that will be used for faceting
@@ -85,7 +91,14 @@ namespace Algolia.Search.Models.Settings
         public string Primary { get; private set; }
 
         [JsonProperty("slaves")]
-        private List<string> Slaves { set { if (value != null) { Replicas = value; } } }
+        private List<string> Slaves
+        {
+            set
+            {
+                if (value != null)
+                { Replicas = value; }
+            }
+        }
 
         // faceting
 
@@ -271,7 +284,14 @@ namespace Algolia.Search.Models.Settings
 
         // Handling legacy index settings
         [JsonProperty("numericAttributesToIndex")]
-        private List<string> NumericAttributesToIndex { set { if (value != null) { NumericAttributesForFiltering = value; } } }
+        private List<string> NumericAttributesToIndex
+        {
+            set
+            {
+                if (value != null)
+                { NumericAttributesForFiltering = value; }
+            }
+        }
 
         /// <summary>
         /// Enables compression of large integer arrays.

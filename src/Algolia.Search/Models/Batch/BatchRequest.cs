@@ -63,11 +63,7 @@ namespace Algolia.Search.Models.Batch
 
             foreach (var item in data)
             {
-                Operations.Add(new BatchOperation<T>
-                {
-                    Action = actionType,
-                    Body = item
-                });
+                Operations.Add(new BatchOperation<T> { Action = actionType, Body = item });
             }
         }
 

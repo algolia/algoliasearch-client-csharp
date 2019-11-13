@@ -37,7 +37,9 @@ namespace Algolia.Search.Serializer
     internal class DefaultSerializer : ISerializer
     {
         private static readonly UTF8Encoding DefaultEncoding = new UTF8Encoding(false);
+
         private static readonly int DefaultBufferSize = 1024;
+
         // Buffer sized as recommended by Bradley Grainger, http://faithlife.codes/blog/2012/06/always-wrap-gzipstream-with-bufferedstream/
         private static readonly int GZipBufferSize = 8192;
 

@@ -38,6 +38,6 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Query parameter reporting. Parameters are reported as a JSON object with one field per parameter.
         /// </summary>
-        public Dictionary<string,object> Params { get; set; }
+        public Dictionary<string, object> Params { get; set; }
     }
 }

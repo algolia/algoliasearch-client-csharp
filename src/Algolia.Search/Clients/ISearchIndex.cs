@@ -367,7 +367,8 @@ namespace Algolia.Search.Clients
         ///
         /// If no result found `null` will be returned.
         /// </summary>
-        HitWithPosition<T> FindObject<T>(Func<T, bool> match, Query query, bool paginate = true, RequestOptions requestOptions = null) where T : class;
+        HitWithPosition<T> FindObject<T>(Func<T, bool> match, Query query, bool paginate = true,
+            RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// FindObject searches iteratively through the search response `Hits`
@@ -385,8 +386,10 @@ namespace Algolia.Search.Clients
         ///
         /// If no result found `null` will be returned.
         /// </summary>
-        [Obsolete("This method will be deprecated. Use FindObject instead and negate the `doNotPaginate` boolean since the new parameter is `paginate`")]
-        HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false, RequestOptions requestOptions = null) where T : class;
+        [Obsolete(
+            "This method will be deprecated. Use FindObject instead and negate the `doNotPaginate` boolean since the new parameter is `paginate`")]
+        HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false,
+            RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Get one or more objects using their object ids.
