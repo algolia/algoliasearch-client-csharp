@@ -53,10 +53,7 @@ namespace Algolia.Search.Models.Rules
 
             set
             {
-                if (Query == null)
-                {
-                    Query = new ConsequenceQuery { SearchQuery = value };
-                }
+                Query = new ConsequenceQuery { SearchQuery = value };
             }
         }
 
