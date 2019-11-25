@@ -21,6 +21,8 @@
 * THE SOFTWARE.
 */
 
+using Algolia.Search.Serializer;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Rules
@@ -28,8 +30,15 @@ namespace Algolia.Search.Models.Rules
     /// <summary>
     /// Consequence query
     /// </summary>
+    [JsonConverter(typeof(ConsequenceQueryConverter))]
     public class ConsequenceQuery
     {
+        /// <summary>
+        /// Stores a SearchQuery if defined.
+        /// Value could be used during deserialization/serialization
+        /// </summary>
+        internal string SearchQuery { get; set; }
+
         /// <summary>
         /// List of edits
         /// </summary>

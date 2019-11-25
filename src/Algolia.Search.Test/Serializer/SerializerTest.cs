@@ -248,10 +248,144 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
-        public void TestConsequenceQueryConverter()
+        public void TestConsequenceQueryAsString()
         {
-            string json = "{\"remove\": [\"term1\", \"term2\"], \"edits\": [{\"type\": \"remove\", \"delete\": \"term3\"}]}";
-            ConsequenceQuery deserialized = JsonConvert.DeserializeObject<ConsequenceQuery>(json, new ConsequenceQueryConverter());
+            var payload =
+                "{\n"
+                + "  \"objectID\": \"rule-2\",\n"
+                + "  \"condition\": {\n"
+                + "    \"pattern\": \"toto\",\n"
+                + "    \"anchoring\": \"is\"\n"
+                + "  },\n"
+                + "  \"consequence\": {\n"
+                + "    \"params\": {\n"
+                + "        \"query\": \"tata\",\n"
+                + "        \"facetFilters\": [[\"facet\"]]\n"
+                + "    }\n"
+                + "  }\n"
+                + "}";
+
+            var rule = JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.That(rule, Is.Not.Null);
+            Assert.That(rule.ObjectID, Is.EqualTo("rule-2"));
+
+            Assert.That(rule.Condition.Pattern, Is.EqualTo("toto"));
+            Assert.That(rule.Condition.Anchoring, Is.EqualTo("is"));
+
+            Assert.That(rule.Consequence.Params.SearchQuery, Is.EqualTo("tata"));
+            Assert.That(rule.Consequence.Params.FacetFilters, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestConsequenceQueryAsRemove()
+        {
+            var payload =
+                "{\n"
+                + "  \"objectID\": \"rule-2\",\n"
+                + "  \"condition\": {\n"
+                + "    \"pattern\": \"toto\",\n"
+                + "    \"anchoring\": \"is\"\n"
+                + "  },\n"
+                + "  \"consequence\": {\n"
+                + "    \"params\": {\n"
+                + "        \"query\": {\"remove\":[\"lastname\",\"firstname\"]},\n"
+                + "        \"facetFilters\": [[\"facet\"]]\n"
+                + "    }\n"
+                + "  }\n"
+                + "}";
+
+            var rule = JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            Assert.That(rule, Is.Not.Null);
+            Assert.That(rule.ObjectID, Is.EqualTo("rule-2"));
+
+            Assert.That(rule.Condition.Pattern, Is.EqualTo("toto"));
+            Assert.That(rule.Condition.Anchoring, Is.EqualTo("is"));
+
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(0).Type, Is.EqualTo(EditType.Remove));
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(0).Delete, Is.EqualTo("lastname"));
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(0).Insert, Is.Null);
+
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(1).Type, Is.EqualTo(EditType.Remove));
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(1).Delete, Is.EqualTo("firstname"));
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(1).Insert, Is.Null);
+
+            Assert.That(rule.Consequence.Params.FacetFilters, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestConsequenceQueryAsEdits()
+        {
+            var payload =
+                "{\n"
+                + "  \"objectID\": \"rule-2\",\n"
+                + "  \"condition\": {\n"
+                + "    \"pattern\": \"toto\",\n"
+                + "    \"anchoring\": \"is\"\n"
+                + "  },\n"
+                + "  \"consequence\": {\n"
+                + "    \"params\": {\n"
+                + "        \"query\":{\n"
+                + "    \"edits\": [\n"
+                + "       { \"type\": \"remove\", \"delete\": \"old\" },\n"
+                + "       { \"type\": \"replace\", \"delete\": \"new\", \"insert\": \"newer\" }\n"
+                + "    ]\n"
+                + "},"
+                + "        \"facetFilters\": [[\"facet\"]]\n"
+                + "    }\n"
+                + "  }\n"
+                + "}";
+
+
+            var rule = JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            Assert.That(rule, Is.Not.Null);
+            Assert.That(rule.ObjectID, Is.EqualTo("rule-2"));
+
+            Assert.That(rule.Condition.Pattern, Is.EqualTo("toto"));
+            Assert.That(rule.Condition.Anchoring, Is.EqualTo("is"));
+
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(0).Type, Is.EqualTo(EditType.Remove));
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(0).Delete, Is.EqualTo("old"));
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(0).Insert, Is.Null);
+
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(1).Type, Is.EqualTo(EditType.Replace));
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(1).Delete, Is.EqualTo("new"));
+            Assert.That(rule.Consequence.Params.Query.Edits.ElementAt(1).Insert, Is.EqualTo("newer"));
+
+            Assert.That(rule.Consequence.Params.FacetFilters, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestConsequenceQueryEditsAndRemove()
+        {
+            var payload =
+                "{\n"
+                + "  \"objectID\": \"rule-2\",\n"
+                + "  \"condition\": {\n"
+                + "    \"pattern\": \"toto\",\n"
+                + "    \"anchoring\": \"is\"\n"
+                + "  },\n"
+                + "  \"consequence\": {\n"
+                + "    \"params\": {\n"
+                + "        \"query\":{\"remove\": [\"term1\", \"term2\"], \"edits\": [{\"type\": \"remove\", \"delete\": \"term3\"}]},"
+                + "        \"facetFilters\": [[\"facet\"]]\n"
+                + "    }\n"
+                + "  }\n"
+                + "}";
+
+            var rule = JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            Assert.That(rule, Is.Not.Null);
+            Assert.That(rule.ObjectID, Is.EqualTo("rule-2"));
+
+            Assert.That(rule.Condition.Pattern, Is.EqualTo("toto"));
+            Assert.That(rule.Condition.Anchoring, Is.EqualTo("is"));
+
+            ConsequenceQuery deserialized = rule.Consequence.Params.Query;
 
             Assert.AreEqual(3, deserialized.Edits.Count());
 
@@ -266,6 +400,142 @@ namespace Algolia.Search.Test.Serializer
             Assert.True(deserialized.Edits.ElementAt(2).Type.Equals("remove"));
             Assert.True(deserialized.Edits.ElementAt(2).Delete.Equals("term3"));
             Assert.Null(deserialized.Edits.ElementAt(2).Insert);
+
+            Assert.That(rule.Consequence.Params.FacetFilters, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestConsequenceQueryQueryStringOverride()
+        {
+            Rule rule = new Rule
+            {
+                ObjectID = "brand_automatic_faceting",
+                Enabled = false,
+                Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
+                Consequence =
+                    new Consequence
+                    {
+                        FilterPromotes = false,
+                        Params = new ConsequenceParams
+                        {
+                            SearchQuery = "test",
+                            Query = new ConsequenceQuery
+                            {
+                                Edits = new List<Edit>
+                                {
+                                    new Edit { Type = EditType.Remove, Delete = "mobile" },
+                                    new Edit
+                                    {
+                                        Type = EditType.Replace, Delete = "phone", Insert = "ihpone"
+                                    },
+                                }
+                            },
+                            Facets = new List<string> { "facet" },
+                            AutomaticFacetFilters = new List<AutomaticFacetFilter>
+                            {
+                                new AutomaticFacetFilter { Facet = "brand", Disjunctive = true, Score = 42 }
+                            }
+                        }
+                    },
+                Description = "Automatic apply the faceting on `brand` if a brand value is found in the query"
+            };
+
+            var payload = JsonConvert.SerializeObject(rule, JsonConfig.AlgoliaJsonSerializerSettings);
+            var deserializedRule =
+                JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            Assert.That(deserializedRule.Consequence.Params.SearchQuery, Is.Null);
+
+            Assert.That(deserializedRule.Consequence.Params.Query.Edits.ElementAt(0).Type, Is.EqualTo(EditType.Remove));
+            Assert.That(deserializedRule.Consequence.Params.Query.Edits.ElementAt(0).Delete, Is.EqualTo("mobile"));
+            Assert.That(deserializedRule.Consequence.Params.Query.Edits.ElementAt(0).Insert, Is.Null);
+
+            Assert.That(deserializedRule.Consequence.Params.Query.Edits.ElementAt(1).Type,
+                Is.EqualTo(EditType.Replace));
+            Assert.That(deserializedRule.Consequence.Params.Query.Edits.ElementAt(1).Delete, Is.EqualTo("phone"));
+            Assert.That(deserializedRule.Consequence.Params.Query.Edits.ElementAt(1).Insert, Is.EqualTo("ihpone"));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void RuleSerializationCycle()
+        {
+            {
+                Rule rule = new Rule
+                {
+                    ObjectID = "brand_automatic_faceting",
+                    Enabled = false,
+                    Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
+                    Consequence =
+                        new Consequence
+                        {
+                            FilterPromotes = false,
+                            Params = new ConsequenceParams
+                            {
+                                SearchQuery = "test",
+                                Facets = new List<string> { "facet" },
+                                AutomaticFacetFilters = new List<AutomaticFacetFilter>
+                                {
+                                    new AutomaticFacetFilter
+                                    {
+                                        Facet = "brand", Disjunctive = true, Score = 42
+                                    }
+                                }
+                            }
+                        },
+                    Description = "Automatic apply the faceting on `brand` if a brand value is found in the query"
+                };
+
+                var payload = JsonConvert.SerializeObject(rule, JsonConfig.AlgoliaJsonSerializerSettings);
+                var deserializedRule =
+                    JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+                Assert.True(TestHelper.AreObjectsEqual(rule, deserializedRule));
+            }
+
+            {
+                Rule rule = new Rule
+                {
+                    ObjectID = "brand_automatic_faceting",
+                    Enabled = false,
+                    Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
+                    Consequence =
+                        new Consequence
+                        {
+                            FilterPromotes = false,
+                            Params = new ConsequenceParams
+                            {
+                                Query = new ConsequenceQuery
+                                {
+                                    Edits = new List<Edit>
+                                    {
+                                        new Edit { Type = EditType.Remove, Delete = "mobile" },
+                                        new Edit
+                                        {
+                                            Type = EditType.Replace,
+                                            Delete = "phone",
+                                            Insert = "ihpone"
+                                        },
+                                    }
+                                },
+                                Facets = new List<string> { "facet" },
+                                AutomaticFacetFilters = new List<AutomaticFacetFilter>
+                                {
+                                    new AutomaticFacetFilter
+                                    {
+                                        Facet = "brand", Disjunctive = true, Score = 42
+                                    }
+                                }
+                            }
+                        },
+                    Description = "Automatic apply the faceting on `brand` if a brand value is found in the query"
+                };
+
+                var payload = JsonConvert.SerializeObject(rule, JsonConfig.AlgoliaJsonSerializerSettings);
+                var deserializedRule =
+                    JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+                Assert.True(TestHelper.AreObjectsEqual(rule, deserializedRule));
+            }
         }
 
         [Test]

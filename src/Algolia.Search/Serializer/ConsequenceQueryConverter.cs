@@ -22,6 +22,7 @@
 */
 
 using Algolia.Search.Models.Enums;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -37,88 +38,103 @@ namespace Algolia.Search.Serializer
     public class ConsequenceQueryConverter : JsonConverter<ConsequenceQuery>
     {
         /// <summary>
-        /// Converter for handling legacy Edit
+        /// Custom deserializer to handle polymorphism/legacy of "query" attributes in ConsequenceQuery
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="objectType"></param>
-        /// <param name="existingValue"></param>
-        /// <param name="hasExistingValue"></param>
-        /// <param name="serializer"></param>
-        /// <returns></returns>
+        /// <example>
+        /// <code>
+        /// // Raw Query String
+        /// "query": "some query string"
+        ///
+        /// // remove attribute (deprecated)
+        ///  "query": { "remove": ["query1", "query2"] }
+        ///
+        /// // edits attribute
+        ///  "query": {
+        ///     "edits": [
+        ///            { "type": "remove", "delete":s "old"},
+        ///            { "type": "replace", "delete": "new", "insert": "newer" } ]
+        ///         }
+        /// </code>
+        /// </example>
         public override ConsequenceQuery ReadJson(JsonReader reader, Type objectType, ConsequenceQuery existingValue,
             bool hasExistingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null)
-                return null;
-            if (reader.TokenType != JsonToken.StartObject)
-                return null;
-
-            ConsequenceQuery ret = new ConsequenceQuery();
-
-            var tokens = JToken.Load(reader);
-            foreach (var token in tokens)
+            switch (reader.TokenType)
             {
-                var isProperty = token.Type == JTokenType.Property;
-                if (!isProperty)
+                case JsonToken.Null:
+                    return null;
+                case JsonToken.StartArray:
+                    throw new AlgoliaException($"Unexpected Array Token in query: {reader.ReadAsString()}");
+                case JsonToken.StartObject:
                 {
-                    continue;
-                }
+                    JObject items = JObject.Load(reader);
+                    var ret = new ConsequenceQuery();
+                    var edits = new List<Edit>();
 
-                var property = (JProperty)token;
-                var isArray = property.Value.Type == JTokenType.Array;
-                if (!isArray)
-                {
-                    continue;
-                }
-
-                var array = (JArray)property.Value;
-                List<Edit> edits = new List<Edit>();
-
-                switch (property.Name)
-                {
-                    case "remove":
-                        List<string> removeList = array.ToObject<List<string>>();
-                        if (removeList.Count > 0)
+                    if (items["remove"] != null)
+                    {
+                        var removeList = items["remove"].ToObject<List<string>>();
+                        foreach (var remove in removeList)
                         {
-                            foreach (var remove in removeList)
-                            {
-                                edits.Add(new Edit { Type = EditType.Remove, Delete = remove });
-                            }
+                            edits.Add(new Edit { Type = EditType.Remove, Delete = remove });
                         }
-                        break;
+                    }
 
-                    case "edits":
-                        edits = array.ToObject<List<Edit>>();
-                        break;
-                }
+                    if (items["edits"] != null)
+                    {
+                        var editsList = items["edits"].ToObject<List<Edit>>();
+                        foreach (var edit in editsList)
+                        {
+                            edits.Add(edit);
+                        }
+                    }
 
-                if (ret.Edits == null)
-                {
                     ret.Edits = edits;
+                    return ret;
                 }
-                else
-                {
-                    ret.Edits = Enumerable.Concat(ret.Edits, edits);
-                }
+                case JsonToken.String:
+                    var jValue = new JValue(reader.Value);
+                    return new ConsequenceQuery { SearchQuery = (string)jValue.Value };
+                default:
+                    throw new AlgoliaException($"Unexpected JSON Token in consequenceQuery: {reader.ReadAsString()}");
             }
-
-            return ret;
         }
 
         /// <summary>
-        /// No need to implement this method as we want to keep the default writer
+        /// Custom serializer to handle polymorphism/legacy of "query" attributes in ConsequenceQuery
         /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="value"></param>
-        /// <param name="serializer"></param>
+        /// <example>
+        /// <code>
+        /// // Raw Query String
+        /// "query": "some query string"
+        ///
+        /// // remove attribute (deprecated)
+        ///  "query": { "remove": ["query1", "query2"] }
+        ///
+        /// // edits attribute
+        ///  "query": {
+        ///     "edits": [
+        ///            { "type": "remove", "delete":s "old"},
+        ///            { "type": "replace", "delete": "new", "insert": "newer" } ]
+        ///         }
+        /// </code>
+        /// </example>
         public override void WriteJson(JsonWriter writer, ConsequenceQuery value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(value.SearchQuery))
+            {
+                writer.WriteValue(value.SearchQuery);
+            }
+            else
+            {
+                writer.WriteStartObject();
+                writer.WritePropertyName("edits");
+                serializer.Serialize(writer, value.Edits);
+                writer.WriteEndObject();
+            }
         }
 
-        /// <summary>
-        /// Disable write JSON
-        /// </summary>
-        public override bool CanWrite => false;
+        /// <inheritdoc />
+        public override bool CanWrite => true;
     }
 }
