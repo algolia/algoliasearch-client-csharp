@@ -1,5 +1,32 @@
 # ChangeLog
 
+## [6.5.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.5.0...6.5.1) (2019-11-26)
+
+### Patch
+
+- patch: serialization/deserialization of ConsequenceQuery([7e8f477](https://github.com/algolia/algoliasearch-client-csharp/commit/7e8f477f94498259b4bd022da6e8d7b2690e456b))
+
+Fixed: Custom serializer to handle polymorphism of "query" attribute
+in ConsequenceQuery
+
+Example:
+
+```json
+// query string
+"query": "some query string"
+
+// remove attribute (deprecated)
+"query": {"remove": ["query1", "query2"]}
+
+// edits attribute
+"query": {
+   "edits": [
+   { "type": "remove", "delete": "old" },
+   { "type": "replace", "delete": "new", "insert": "newer" }
+   ]
+}}
+```
+
 ## [6.5.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.4.1...6.5.0) (2019-11-06)
 
 ### Feat
