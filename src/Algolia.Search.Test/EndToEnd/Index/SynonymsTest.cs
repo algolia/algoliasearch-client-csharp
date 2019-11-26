@@ -50,13 +50,13 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             _objectsToSave = new List<SynonymTestObject>
             {
-                new SynonymTestObject {Console = "Sony PlayStation <PLAYSTATIONVERSION>"},
-                new SynonymTestObject {Console = "Nintendo Switch"},
-                new SynonymTestObject {Console = "Nintendo Wii U"},
-                new SynonymTestObject {Console = "Nintendo Game Boy Advance"},
-                new SynonymTestObject {Console = "Microsoft Xbox"},
-                new SynonymTestObject {Console = "Microsoft Xbox 360"},
-                new SynonymTestObject {Console = "Microsoft Xbox One"}
+                new SynonymTestObject { Console = "Sony PlayStation <PLAYSTATIONVERSION>" },
+                new SynonymTestObject { Console = "Nintendo Switch" },
+                new SynonymTestObject { Console = "Nintendo Wii U" },
+                new SynonymTestObject { Console = "Nintendo Game Boy Advance" },
+                new SynonymTestObject { Console = "Microsoft Xbox" },
+                new SynonymTestObject { Console = "Microsoft Xbox 360" },
+                new SynonymTestObject { Console = "Microsoft Xbox One" }
             };
         }
 
@@ -89,7 +89,15 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 ObjectID = "playstation_version_placeholder",
                 Type = SynonymType.Placeholder,
                 Placeholder = "<PLAYSTATIONVERSION>",
-                Replacements = new List<string> { "1", "One", "2", "3", "4", "4 Pro" }
+                Replacements = new List<string>
+                {
+                    "1",
+                    "One",
+                    "2",
+                    "3",
+                    "4",
+                    "4 Pro"
+                }
             };
 
             Synonym ps4 = new Synonym

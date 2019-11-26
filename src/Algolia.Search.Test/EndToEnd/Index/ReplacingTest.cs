@@ -59,7 +59,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
                     {
                         Query = new ConsequenceQuery
                         {
-                            Edits = new List<Edit> { new Edit { Type = EditType.Remove, Delete = "pattern" } }
+                            Edits = new List<Edit>
+                            {
+                                new Edit { Type = EditType.Remove, Delete = "pattern" }
+                            }
                         }
                     }
                 }
@@ -69,9 +72,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var synonymToSave = new Synonym
             {
-                ObjectID = "one",
-                Type = SynonymType.Synonym,
-                Synonyms = new List<string> { "one", "two" }
+                ObjectID = "one", Type = SynonymType.Synonym, Synonyms = new List<string> { "one", "two" }
             };
 
             var saveSynonymResponse = _index.SaveSynonymAsync(synonymToSave);
@@ -84,7 +85,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var response = await _index.ReplaceAllObjectsAsync(new List<ReplaceAllTestObject>
             {
-                new ReplaceAllTestObject {ObjectID = "two"}
+                new ReplaceAllTestObject { ObjectID = "two" }
             });
 
             response.Wait();
@@ -99,7 +100,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
                     {
                         Query = new ConsequenceQuery
                         {
-                            Edits = new List<Edit> { new Edit { Type = EditType.Remove, Delete = "pattern" } }
+                            Edits = new List<Edit>
+                            {
+                                new Edit { Type = EditType.Remove, Delete = "pattern" }
+                            }
                         }
                     }
                 }
@@ -109,9 +113,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var synonymToSave2 = new Synonym
             {
-                ObjectID = "two",
-                Type = SynonymType.Synonym,
-                Synonyms = new List<string> { "one", "two" }
+                ObjectID = "two", Type = SynonymType.Synonym, Synonyms = new List<string> { "one", "two" }
             };
 
             var replaceAllSynonymsResponse = await _index.ReplaceAllSynonymsAsync(new List<Synonym> { synonymToSave2 });

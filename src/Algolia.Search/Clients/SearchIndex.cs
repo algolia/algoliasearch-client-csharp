@@ -103,7 +103,8 @@ namespace Algolia.Search.Clients
             requestOptions = requestOptions.AddQueryParams(dic);
 
             UpdateObjectResponse response = await _transport.ExecuteRequestAsync<UpdateObjectResponse, T>(
-                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/{WebUtility.UrlEncode(objectId)}/partial", CallType.Write, data,
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/{WebUtility.UrlEncode(objectId)}/partial",
+                    CallType.Write, data,
                     requestOptions, ct)
                 .ConfigureAwait(false);
 
@@ -331,7 +332,8 @@ namespace Algolia.Search.Clients
             }
 
             DeleteResponse response = await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                    $"/1/indexes/{_urlEncodedIndexName}/{WebUtility.UrlEncode(objectId)}", CallType.Write, requestOptions, ct)
+                    $"/1/indexes/{_urlEncodedIndexName}/{WebUtility.UrlEncode(objectId)}", CallType.Write,
+                    requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitTask(t);
@@ -363,7 +365,8 @@ namespace Algolia.Search.Clients
             AsyncHelper.RunSync(() => DeleteAsync(requestOptions));
 
         /// <inheritdoc />
-        public async Task<DeleteResponse> DeleteAsync(RequestOptions requestOptions = null, CancellationToken ct = default)
+        public async Task<DeleteResponse> DeleteAsync(RequestOptions requestOptions = null,
+            CancellationToken ct = default)
         {
             return await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
                     $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, requestOptions, ct)
@@ -452,14 +455,20 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public HitWithPosition<T> FindObject<T>(Func<T, bool> match, Query query, bool paginate = true, RequestOptions requestOptions = null) where T : class
+        public HitWithPosition<T> FindObject<T>(Func<T, bool> match, Query query, bool paginate = true,
+            RequestOptions requestOptions = null) where T : class
         {
             var res = Search<T>(query, requestOptions);
 
             if (res.Hits.Any(match))
             {
                 return res.Hits.Where(match)
-                    .Select(x => new HitWithPosition<T> { Hit = x, Page = res.Page, Position = res.Hits.FindIndex(new Predicate<T>(match)) })
+                    .Select(x => new HitWithPosition<T>
+                    {
+                        Hit = x,
+                        Page = res.Page,
+                        Position = res.Hits.FindIndex(new Predicate<T>(match))
+                    })
                     .First();
             }
 
@@ -476,8 +485,10 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        [ObsoleteAttribute("This method will be deprecated. Use FindObject instead and negate the `doNotPaginate` boolean since the new parameter is `paginate`")]
-        public HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false, RequestOptions requestOptions = null) where T : class
+        [ObsoleteAttribute(
+            "This method will be deprecated. Use FindObject instead and negate the `doNotPaginate` boolean since the new parameter is `paginate`")]
+        public HitWithPosition<T> FindFirstObject<T>(Func<T, bool> match, Query query, bool doNotPaginate = false,
+            RequestOptions requestOptions = null) where T : class
         {
             return FindObject(match, query, !doNotPaginate, requestOptions);
         }
@@ -509,7 +520,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _transport.ExecuteRequestAsync<T>(HttpMethod.Get,
-                    $"/1/indexes/{_urlEncodedIndexName}/{WebUtility.UrlEncode(objectId)}", CallType.Read, requestOptions, ct)
+                    $"/1/indexes/{_urlEncodedIndexName}/{WebUtility.UrlEncode(objectId)}", CallType.Read,
+                    requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -597,7 +609,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _transport.ExecuteRequestAsync<Rule>(HttpMethod.Get,
-                    $"/1/indexes/{_urlEncodedIndexName}/rules/{WebUtility.UrlEncode(objectId)}", CallType.Read, requestOptions, ct)
+                    $"/1/indexes/{_urlEncodedIndexName}/rules/{WebUtility.UrlEncode(objectId)}", CallType.Read,
+                    requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -642,7 +655,8 @@ namespace Algolia.Search.Clients
             requestOptions = requestOptions.AddQueryParams(dic);
 
             SaveRuleResponse response = await _transport.ExecuteRequestAsync<SaveRuleResponse, Rule>(
-                    HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/rules/{WebUtility.UrlEncode(rule.ObjectID)}", CallType.Write, rule,
+                    HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/rules/{WebUtility.UrlEncode(rule.ObjectID)}",
+                    CallType.Write, rule,
                     requestOptions, ct)
                 .ConfigureAwait(false);
 
@@ -723,7 +737,8 @@ namespace Algolia.Search.Clients
             requestOptions = requestOptions.AddQueryParams(dic);
 
             DeleteResponse response = await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                    $"/1/indexes/{_urlEncodedIndexName}/rules/{WebUtility.UrlEncode(objectId)}", CallType.Write, requestOptions, ct)
+                    $"/1/indexes/{_urlEncodedIndexName}/rules/{WebUtility.UrlEncode(objectId)}", CallType.Write,
+                    requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitTask(t);
@@ -761,10 +776,7 @@ namespace Algolia.Search.Clients
         public async Task<IndexSettings> GetSettingsAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"getVersion","2"}
-            };
+            var dic = new Dictionary<string, string> { { "getVersion", "2" } };
 
             requestOptions = requestOptions.AddQueryParams(dic);
 
@@ -836,7 +848,8 @@ namespace Algolia.Search.Clients
             }
 
             return await _transport.ExecuteRequestAsync<Synonym>(HttpMethod.Get,
-                    $"/1/indexes/{_urlEncodedIndexName}/synonyms/{WebUtility.UrlEncode(synonymObjectId)}", CallType.Read, requestOptions, ct)
+                    $"/1/indexes/{_urlEncodedIndexName}/synonyms/{WebUtility.UrlEncode(synonymObjectId)}",
+                    CallType.Read, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -927,7 +940,9 @@ namespace Algolia.Search.Clients
             requestOptions = requestOptions.AddQueryParams(dic);
 
             SaveSynonymResponse response = await _transport.ExecuteRequestAsync<SaveSynonymResponse, Synonym>(
-                    HttpMethod.Put, $"/1/indexes/{_urlEncodedIndexName}/synonyms/{WebUtility.UrlEncode(synonym.ObjectID)}", CallType.Write,
+                    HttpMethod.Put,
+                    $"/1/indexes/{_urlEncodedIndexName}/synonyms/{WebUtility.UrlEncode(synonym.ObjectID)}",
+                    CallType.Write,
                     synonym, requestOptions, ct)
                 .ConfigureAwait(false);
 
@@ -959,7 +974,8 @@ namespace Algolia.Search.Clients
             requestOptions = requestOptions.AddQueryParams(dic);
 
             DeleteResponse response = await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
-                    $"/1/indexes/{_urlEncodedIndexName}/synonyms/{WebUtility.UrlEncode(synonymObjectId)}", CallType.Write, requestOptions, ct)
+                    $"/1/indexes/{_urlEncodedIndexName}/synonyms/{WebUtility.UrlEncode(synonymObjectId)}",
+                    CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitTask(t);
@@ -1109,6 +1125,7 @@ namespace Algolia.Search.Clients
             {
                 return await Task.FromResult(false);
             }
+
             return await Task.FromResult(true);
         }
     }

@@ -78,11 +78,7 @@ public class BaseTest
 
         foreach (var index in indicesToDelete)
         {
-            operations.Add(new BatchOperation<string>
-            {
-                IndexName = index.Name,
-                Action = BatchActionType.Delete
-            });
+            operations.Add(new BatchOperation<string> { IndexName = index.Name, Action = BatchActionType.Delete });
         }
 
         SearchClient.MultipleBatch(operations);

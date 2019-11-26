@@ -68,24 +68,13 @@ namespace Algolia.Search.Test.EndToEnd.Client
         {
             var objectsToAdd = new List<CopyIndexObject>
             {
-                new CopyIndexObject
-                {
-                    ObjectID = "one",
-                    Company = "apple"
-                },
-                new CopyIndexObject
-                {
-                    ObjectID = "two",
-                    Company = "algolia"
-                }
+                new CopyIndexObject { ObjectID = "one", Company = "apple" },
+                new CopyIndexObject { ObjectID = "two", Company = "algolia" }
             };
 
             var addObjectSrcIndex = _sourceIndex.SaveObjectsAsync(objectsToAdd);
 
-            IndexSettings settings = new IndexSettings
-            {
-                AttributesForFaceting = new List<string> { "company" }
-            };
+            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "company" } };
 
             var setSettings = _sourceIndex.SetSettingsAsync(settings);
 
@@ -109,7 +98,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
                     {
                         AutomaticFacetFilters = new List<AutomaticFacetFilter>
                         {
-                            new AutomaticFacetFilter {Facet = "company"}
+                            new AutomaticFacetFilter { Facet = "company" }
                         }
                     }
                 }

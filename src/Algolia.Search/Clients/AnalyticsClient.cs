@@ -112,8 +112,7 @@ namespace Algolia.Search.Clients
         {
             var queryParams = new Dictionary<string, string>
             {
-                {"offset", offset.ToString()},
-                {"limit", limit.ToString()}
+                {"offset", offset.ToString()}, {"limit", limit.ToString()}
             };
 
             requestOptions = requestOptions.AddQueryParams(queryParams);

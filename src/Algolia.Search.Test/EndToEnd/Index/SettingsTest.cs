@@ -52,18 +52,33 @@ namespace Algolia.Search.Test.EndToEnd.Index
             IndexSettings settings = new IndexSettings
             {
                 // Attributes
-                SearchableAttributes = new List<string>
-                    {"attribute1", "attribute2", "attribute3", "ordered(attribute4)", "unordered(attribute5)"},
-                AttributesForFaceting = new List<string>
-                    {"attribute1", "filterOnly(attribute2)", "searchable(attribute3)"},
+                SearchableAttributes =
+                    new List<string>
+                    {
+                        "attribute1",
+                        "attribute2",
+                        "attribute3",
+                        "ordered(attribute4)",
+                        "unordered(attribute5)"
+                    },
+                AttributesForFaceting =
+                    new List<string> { "attribute1", "filterOnly(attribute2)", "searchable(attribute3)" },
                 UnretrievableAttributes = new List<string> { "attribute1", "attribute2" },
                 AttributesToRetrieve = new List<string> { "attribute3", "attribute4" },
 
                 // Ranking
                 Ranking = new List<string>
                 {
-                    "asc(attribute1)", "desc(attribute2)", "attribute", "custom", "exact", "filters", "geo",
-                    "proximity", "typo", "words"
+                    "asc(attribute1)",
+                    "desc(attribute2)",
+                    "attribute",
+                    "custom",
+                    "exact",
+                    "filters",
+                    "geo",
+                    "proximity",
+                    "typo",
+                    "words"
                 },
                 CustomRanking = new List<string> { "asc(attribute1)", "desc(attribute1)" },
                 Replicas = new List<string> { _indexName + "_replica1", _indexName + "_replica2" },
@@ -126,8 +141,8 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 CamelCaseAttributes = new List<string> { "attribute1", "attribute2" },
                 DecompoundedAttributes = new Dictionary<string, List<string>>
                 {
-                    {"de", new List<string> {"attribute1", "attribute2"}},
-                    {"fi", new List<string> {"attribute3"}}
+                    { "de", new List<string> { "attribute1", "attribute2" } },
+                    { "fi", new List<string> { "attribute3" } }
                 },
                 KeepDiacriticsOnCharacters = "øé",
                 UserData = "User data"
@@ -137,7 +152,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
             saveSettingsResponse.Wait();
 
             var getSettingsResponse = await _index.GetSettingsAsync();
-            var spceficPropertiesCheck = new List<string> { "AlternativesAsExact", "DecompoundedAttributes", "CustomSettings", "UserData" };
+            var spceficPropertiesCheck = new List<string>
+            {
+                "AlternativesAsExact", "DecompoundedAttributes", "CustomSettings", "UserData"
+            };
             Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponse, spceficPropertiesCheck.ToArray()));
 
             // Check specific properties (couldn't be done by the helper)

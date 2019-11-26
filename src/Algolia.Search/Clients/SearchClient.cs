@@ -404,8 +404,7 @@ namespace Algolia.Search.Clients
         {
             var queryParams = new Dictionary<string, string>
             {
-                {"page", page.ToString()},
-                {"hitsPerPage", hitsPerPage.ToString()}
+                {"page", page.ToString()}, {"hitsPerPage", hitsPerPage.ToString()}
             };
 
             requestOptions = requestOptions.AddQueryParams(queryParams);
@@ -567,8 +566,7 @@ namespace Algolia.Search.Clients
         {
             var queryParams = new Dictionary<string, string>
             {
-                {"offset", offset.ToString()},
-                {"length", length.ToString()}
+                {"offset", offset.ToString()}, {"length", length.ToString()}
             };
 
             requestOptions = requestOptions.AddQueryParams(queryParams);

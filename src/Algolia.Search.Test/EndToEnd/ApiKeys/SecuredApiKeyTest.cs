@@ -125,9 +125,11 @@ namespace Algolia.Search.Test.EndToEnd.ApiKeys
                 RestrictIndices = new List<string> { "indexName" }
             };
 
-            string keyWithMissingValidUntil = BaseTest.SearchClient.GenerateSecuredApiKeys(TestHelper.SearchKey1, restriction);
+            string keyWithMissingValidUntil =
+                BaseTest.SearchClient.GenerateSecuredApiKeys(TestHelper.SearchKey1, restriction);
 
-            Assert.Throws<AlgoliaException>(() => BaseTest.SearchClient.GetSecuredApiKeyRemainingValidity(keyWithMissingValidUntil));
+            Assert.Throws<AlgoliaException>(() =>
+                BaseTest.SearchClient.GetSecuredApiKeyRemainingValidity(keyWithMissingValidUntil));
         }
 
         public class SecuredApiKeyStub

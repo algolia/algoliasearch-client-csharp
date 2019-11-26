@@ -37,10 +37,7 @@ namespace Algolia.Search.Serializer
         {
             Formatting = Formatting.None,
             NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            },
+            ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             DateParseHandling = DateParseHandling.DateTime
         };

@@ -52,15 +52,16 @@ namespace Algolia.Search.Test.EndToEnd.Index
         {
             var saveObjects = await _index.SaveObjectsAsync(new List<MobilePhone>
             {
-                new MobilePhone {ObjectID = "iphone_7", Brand = "Apple", Model = "7"},
-                new MobilePhone {ObjectID = "iphone_8", Brand = "Apple", Model = "8"},
-                new MobilePhone {ObjectID = "iphone_x", Brand = "Apple", Model = "X"},
-                new MobilePhone {ObjectID = "one_plus_one", Brand = "OnePlus", Model = "One"},
-                new MobilePhone {ObjectID = "one_plus_two", Brand = "OnePlus", Model = "Two"}
+                new MobilePhone { ObjectID = "iphone_7", Brand = "Apple", Model = "7" },
+                new MobilePhone { ObjectID = "iphone_8", Brand = "Apple", Model = "8" },
+                new MobilePhone { ObjectID = "iphone_x", Brand = "Apple", Model = "X" },
+                new MobilePhone { ObjectID = "one_plus_one", Brand = "OnePlus", Model = "One" },
+                new MobilePhone { ObjectID = "one_plus_two", Brand = "OnePlus", Model = "Two" }
             });
 
             // Set attributesForFaceting to [“brand”] using setSettings and collect the taskID
-            IndexSettings settings = new IndexSettings { AttributesForFaceting = new List<string> { "brand", "model" } };
+            IndexSettings settings =
+                new IndexSettings { AttributesForFaceting = new List<string> { "brand", "model" } };
             var setSettingsResponse = await _index.SetSettingsAsync(settings);
 
             saveObjects.Wait();
@@ -78,7 +79,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                     {
                         AutomaticFacetFilters = new List<AutomaticFacetFilter>
                         {
-                            new AutomaticFacetFilter {Facet = "brand", Disjunctive = true, Score = 42}
+                            new AutomaticFacetFilter { Facet = "brand", Disjunctive = true, Score = 42 }
                         }
                     }
                 },
@@ -103,12 +104,11 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Rule ruleToSave2 = new Rule
             {
                 ObjectID = "query_edits",
-                Condition = new Condition
-                {
-                    Anchoring = "is",
-                    Pattern = "mobile phone",
-                    Alternatives = Alternatives.Of(true)
-                },
+                Condition =
+                    new Condition
+                    {
+                        Anchoring = "is", Pattern = "mobile phone", Alternatives = Alternatives.Of(true)
+                    },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -117,8 +117,11 @@ namespace Algolia.Search.Test.EndToEnd.Index
                         {
                             Edits = new List<Edit>
                             {
-                                new Edit {Type = EditType.Remove, Delete = "mobile"},
-                                new Edit {Type = EditType.Replace, Delete = "phone", Insert = "ihpone"},
+                                new Edit { Type = EditType.Remove, Delete = "mobile" },
+                                new Edit
+                                {
+                                    Type = EditType.Replace, Delete = "phone", Insert = "ihpone"
+                                },
                             }
                         }
                     }
@@ -128,29 +131,14 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Rule ruleToSave3 = new Rule
             {
                 ObjectID = "query_promo",
-                Consequence = new Consequence
-                {
-                    Params = new ConsequenceParams
-                    {
-                        Filters = "brand:OnePlus"
-                    }
-                }
+                Consequence = new Consequence { Params = new ConsequenceParams { Filters = "brand:OnePlus" } }
             };
 
             Rule ruleToSave4 = new Rule
             {
                 ObjectID = "query_promo_only_summer",
-                Consequence = new Consequence
-                {
-                    Params = new ConsequenceParams
-                    {
-                        Filters = "model:One"
-                    }
-                },
-                Condition = new Condition
-                {
-                    Context = "summer"
-                }
+                Consequence = new Consequence { Params = new ConsequenceParams { Filters = "model:One" } },
+                Condition = new Condition { Context = "summer" }
             };
 
             var batchRulesResponse =

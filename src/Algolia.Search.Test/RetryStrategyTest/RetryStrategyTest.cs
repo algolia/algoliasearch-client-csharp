@@ -92,13 +92,15 @@ namespace Algolia.Search.Test.RetryStrategyTest
             var hosts = retryStrategy.GetTryableHost(callType);
             Assert.True(hosts.Count(h => h.Up) == 4);
 
-            var decision = retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { HttpStatusCode = httpErrorCode });
+            var decision = retryStrategy.Decide(hosts.ElementAt(0),
+                new AlgoliaHttpResponse { HttpStatusCode = httpErrorCode });
             Assert.True(decision.HasFlag(RetryOutcomeType.Retry));
 
             var updatedHosts = retryStrategy.GetTryableHost(callType);
             Assert.True(updatedHosts.Count(h => h.Up) == 3);
 
-            var decisionAfterNetworkError = retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { IsNetworkError = true });
+            var decisionAfterNetworkError =
+                retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { IsNetworkError = true });
             Assert.True(decisionAfterNetworkError.HasFlag(RetryOutcomeType.Retry));
 
             var updatedHostsAfterNetworkError = retryStrategy.GetTryableHost(callType);
@@ -117,7 +119,8 @@ namespace Algolia.Search.Test.RetryStrategyTest
 
             var hosts = retryStrategy.GetTryableHost(callType);
 
-            var decision = retryStrategy.Decide(hosts.ElementAt(0), new AlgoliaHttpResponse { HttpStatusCode = httpErrorCode });
+            var decision = retryStrategy.Decide(hosts.ElementAt(0),
+                new AlgoliaHttpResponse { HttpStatusCode = httpErrorCode });
 
             Assert.True(decision.HasFlag(RetryOutcomeType.Failure));
         }

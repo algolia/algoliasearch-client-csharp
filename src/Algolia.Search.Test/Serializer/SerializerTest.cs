@@ -103,36 +103,73 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestQueryWithNestedList()
         {
-            Query query = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1:true" }, new List<string> { "facet2:true" } } };
+            Query query = new Query("")
+            {
+                FacetFilters = new List<List<string>>
+                {
+                    new List<string> { "facet1:true" }, new List<string> { "facet2:true" }
+                }
+            };
             // Expected: query=&facetFilters=[["facet1:true"],["facet2:true"]]
-            Assert.AreEqual(query.ToQueryString(), "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%5D%2C%5B%22facet2%3Atrue%22%5D%5D");
+            Assert.AreEqual(query.ToQueryString(),
+                "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%5D%2C%5B%22facet2%3Atrue%22%5D%5D");
 
-            Query query2 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1:true", "facet2:true" } } };
+            Query query2 = new Query("")
+            {
+                FacetFilters = new List<List<string>> { new List<string> { "facet1:true", "facet2:true" } }
+            };
             // Expected: query=&facetFilters=[["facet1:true","facet2:true"]]
-            Assert.AreEqual(query2.ToQueryString(), "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%2C%22facet2%3Atrue%22%5D%5D");
+            Assert.AreEqual(query2.ToQueryString(),
+                "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%2C%22facet2%3Atrue%22%5D%5D");
 
-            Query query3 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1:true", "facet2:true" }, new List<string> { "facet3:true" } } };
+            Query query3 = new Query("")
+            {
+                FacetFilters = new List<List<string>>
+                {
+                    new List<string> { "facet1:true", "facet2:true" }, new List<string> { "facet3:true" }
+                }
+            };
             // Expected: query=&facetFilters=[["facet1:true","facet2:true"],["facet3:true"]]
-            Assert.AreEqual(query3.ToQueryString(), "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%2C%22facet2%3Atrue%22%5D%2C%5B%22facet3%3Atrue%22%5D%5D");
+            Assert.AreEqual(query3.ToQueryString(),
+                "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%2C%22facet2%3Atrue%22%5D%2C%5B%22facet3%3Atrue%22%5D%5D");
 
-            Query query4 = new Query("") { FacetFilters = new List<List<string>> { new List<string> { "facet1:true" } } };
+            Query query4 = new Query("")
+            {
+                FacetFilters = new List<List<string>> { new List<string> { "facet1:true" } }
+            };
             // Expected: query=&facetFilters=[["facet1:true"]]
             Assert.AreEqual(query4.ToQueryString(), "query=&facetFilters=%5B%5B%22facet1%3Atrue%22%5D%5D");
 
-            Query query5 = new Query("") { InsideBoundingBox = new List<List<float>> { new List<float> { 47.3165f, 4.9665f, 47.3424f, 5.0201f }, new List<float> { 40.9234f, 2.1185f, 38.643f, 1.9916f } } };
+            Query query5 = new Query("")
+            {
+                InsideBoundingBox = new List<List<float>>
+                {
+                    new List<float> { 47.3165f, 4.9665f, 47.3424f, 5.0201f },
+                    new List<float> { 40.9234f, 2.1185f, 38.643f, 1.9916f }
+                }
+            };
             // Expected: query=&insideBoundingBox=[[47.3165,4.9665,47.3424,5.0201],[40.9234,2.1185,38.643,1.9916]]
-            Assert.AreEqual(query5.ToQueryString(), "query=&insideBoundingBox=%5B%5B47.3165%2C4.9665%2C47.3424%2C5.0201%5D%2C%5B40.9234%2C2.1185%2C38.643%2C1.9916%5D%5D");
+            Assert.AreEqual(query5.ToQueryString(),
+                "query=&insideBoundingBox=%5B%5B47.3165%2C4.9665%2C47.3424%2C5.0201%5D%2C%5B40.9234%2C2.1185%2C38.643%2C1.9916%5D%5D");
 
-            Query query6 = new Query("") { InsideBoundingBox = new List<List<float>> { new List<float> { 47.3165f, 4.9665f, 47.3424f, 5.0201f } } };
+            Query query6 = new Query("")
+            {
+                InsideBoundingBox =
+                    new List<List<float>> { new List<float> { 47.3165f, 4.9665f, 47.3424f, 5.0201f } }
+            };
             // Expected: query=&insideBoundingBox=[[47.3165,4.9665,47.3424,5.0201]]
-            Assert.AreEqual(query6.ToQueryString(), "query=&insideBoundingBox=%5B%5B47.3165%2C4.9665%2C47.3424%2C5.0201%5D%5D");
+            Assert.AreEqual(query6.ToQueryString(),
+                "query=&insideBoundingBox=%5B%5B47.3165%2C4.9665%2C47.3424%2C5.0201%5D%5D");
         }
 
         [Test]
         [Parallelizable]
         public void TestQueryWithCustomParameters()
         {
-            Query query = new Query("algolia") { CustomParameters = new Dictionary<string, object> { { "newParameter", 10 } } };
+            Query query = new Query("algolia")
+            {
+                CustomParameters = new Dictionary<string, object> { { "newParameter", 10 } }
+            };
             string json = JsonConvert.SerializeObject(query, JsonConfig.AlgoliaJsonSerializerSettings);
             Assert.AreEqual(json, "{\"query\":\"algolia\",\"newParameter\":10}");
         }
@@ -205,8 +242,16 @@ namespace Algolia.Search.Test.Serializer
                     Params = new ConsequenceParams
                     {
                         OptionalFilters = new List<List<string>> { new List<string> { "a:b" } },
-                        TagFilters = new List<List<string>> { new List<string> { "a:b", "c:d" }, new List<string> { "d:e" } },
-                        FacetFilters = new List<List<string>> { new List<string> { "a:b" }, new List<string> { "c:d" } },
+                        TagFilters =
+                            new List<List<string>>
+                            {
+                                new List<string> { "a:b", "c:d" }, new List<string> { "d:e" }
+                            },
+                        FacetFilters =
+                            new List<List<string>>
+                            {
+                                new List<string> { "a:b" }, new List<string> { "c:d" }
+                            },
                         NumericFilters = new List<List<string>> { new List<string> { "a=100" } }
                     }
                 },
@@ -220,7 +265,8 @@ namespace Algolia.Search.Test.Serializer
 
             Assert.That(newRule.Consequence.Params.OptionalFilters, Has.Count.EqualTo(1));
             Assert.That(newRule.Consequence.Params.OptionalFilters.ElementAt(0), Has.Count.EqualTo(1));
-            Assert.That(newRule.Consequence.Params.OptionalFilters.ElementAt(0).ElementAt(0), Contains.Substring("a:b"));
+            Assert.That(newRule.Consequence.Params.OptionalFilters.ElementAt(0).ElementAt(0),
+                Contains.Substring("a:b"));
 
             Assert.That(newRule.Consequence.Params.TagFilters, Has.Count.EqualTo(2));
             Assert.That(newRule.Consequence.Params.TagFilters.ElementAt(0), Has.Count.EqualTo(2));
@@ -235,7 +281,8 @@ namespace Algolia.Search.Test.Serializer
 
             Assert.That(newRule.Consequence.Params.NumericFilters, Has.Count.EqualTo(1));
             Assert.That(newRule.Consequence.Params.NumericFilters.ElementAt(0), Has.Count.EqualTo(1));
-            Assert.That(newRule.Consequence.Params.NumericFilters.ElementAt(0).ElementAt(0), Contains.Substring("a=100"));
+            Assert.That(newRule.Consequence.Params.NumericFilters.ElementAt(0).ElementAt(0),
+                Contains.Substring("a=100"));
 
             void AssertOredResult(List<List<string>> result)
             {
@@ -590,8 +637,7 @@ namespace Algolia.Search.Test.Serializer
         {
             IndexSettings settings = new IndexSettings
             {
-                EnableRules = true,
-                CustomSettings = new Dictionary<string, object> { { "newParameter", 10 } }
+                EnableRules = true, CustomSettings = new Dictionary<string, object> { { "newParameter", 10 } }
             };
 
             string json = JsonConvert.SerializeObject(settings, JsonConfig.AlgoliaJsonSerializerSettings);
@@ -606,13 +652,13 @@ namespace Algolia.Search.Test.Serializer
             {
                 EventsScoring = new Dictionary<string, EventScoring>
                 {
-                    {"Add to cart", new EventScoring {Score = 50, Type = "conversion"}},
-                    {"Purchase", new EventScoring {Score = 100, Type = "conversion"}}
+                    { "Add to cart", new EventScoring { Score = 50, Type = "conversion" } },
+                    { "Purchase", new EventScoring { Score = 100, Type = "conversion" } }
                 },
                 FacetsScoring = new Dictionary<string, FacetScoring>
                 {
-                    {"brand", new FacetScoring {Score = 100}},
-                    {"categories", new FacetScoring {Score = 10}}
+                    { "brand", new FacetScoring { Score = 100 } },
+                    { "categories", new FacetScoring { Score = 10 } }
                 }
             };
 
@@ -627,7 +673,11 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestListIndicesResponses64BitsIntegers()
         {
-            Assert.DoesNotThrow(() => { JsonConvert.DeserializeObject<IndicesResponse>("{\"entries\": 100000000000, \"dataSize\": 100000000000, \"fileSize\": 100000000000}"); });
+            Assert.DoesNotThrow(() =>
+            {
+                JsonConvert.DeserializeObject<IndicesResponse>(
+                    "{\"entries\": 100000000000, \"dataSize\": 100000000000, \"fileSize\": 100000000000}");
+            });
         }
     }
 }

@@ -96,7 +96,6 @@ namespace Algolia.Search.Http
                 {
                     using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                     {
-
                         if (response.IsSuccessStatusCode)
                         {
                             MemoryStream outputStream = new MemoryStream();

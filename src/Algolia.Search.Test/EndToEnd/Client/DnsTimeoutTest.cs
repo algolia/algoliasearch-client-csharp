@@ -44,25 +44,18 @@ namespace Algolia.Search.Test.EndToEnd.Client
             string applicationId = TestHelper.ApplicationId1;
             _hosts = new List<StatefulHost>
             {
+                new StatefulHost { Url = "algolia.biz", Accept = CallType.Read | CallType.Write, },
                 new StatefulHost
                 {
-                    Url = "algolia.biz",
-                    Accept = CallType.Read | CallType.Write,
+                    Url = $"{applicationId}-1.algolianet.com", Accept = CallType.Read | CallType.Write,
                 },
                 new StatefulHost
                 {
-                    Url = $"{applicationId}-1.algolianet.com",
-                    Accept = CallType.Read | CallType.Write,
+                    Url = $"{applicationId}-2.algolianet.com", Accept = CallType.Read | CallType.Write,
                 },
                 new StatefulHost
                 {
-                    Url = $"{applicationId}-2.algolianet.com",
-                    Accept = CallType.Read | CallType.Write,
-                },
-                new StatefulHost
-                {
-                    Url = $"{applicationId}-3.algolianet.com",
-                    Accept = CallType.Read | CallType.Write,
+                    Url = $"{applicationId}-3.algolianet.com", Accept = CallType.Read | CallType.Write,
                 }
             };
         }
