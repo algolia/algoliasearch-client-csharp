@@ -34,11 +34,28 @@ namespace Algolia.Search.Models.Rules
     public class ConsequenceParams : Query
     {
         /// <summary>
-        /// When providing a string, it replaces the entire query string.
-        /// When providing an object, it describes incremental edits to be made to the query string (but you can’t do both).
+        /// When providing an object, it describes incremental edits to be made to the query string.
         /// </summary>
-        [JsonConverter(typeof(ConsequenceQueryConverter))]
+        /// <remarks>Setting a ConsequenceQuery will override SearchQuery if set. Both can't be set at the same time.</remarks>
         public ConsequenceQuery Query { get; set; }
+
+        /// <summary>
+        /// Providing a SearchQuery in ConsequenceParams replaces the entire query string for the given pattern.
+        /// </summary>
+        /// <remarks>Setting a SearchQuery will override ConsequenceQuery if set. Both can't be set at the same time.</remarks>
+        [JsonIgnore]
+        public new string SearchQuery
+        {
+            get
+            {
+                return Query?.SearchQuery;
+            }
+
+            set
+            {
+                Query = new ConsequenceQuery { SearchQuery = value };
+            }
+        }
 
         /// <summary>
         /// Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
