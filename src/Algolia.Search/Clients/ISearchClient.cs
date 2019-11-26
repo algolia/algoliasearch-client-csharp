@@ -387,6 +387,23 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default);
 
         /// <summary>
+        /// Get cluster pending (migrating, creating, deleting) mapping state. Query cluster pending mapping status and get cluster mappings.
+        /// </summary>
+        /// <param name="retrieveMappings">Whether or not the cluster mappings should be retrieved</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        HasPendingMappingsResponse HasPendingMappings(bool retrieveMappings = false,
+            RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Get cluster pending (migrating, creating, deleting) mapping state. Query cluster pending mapping status and get cluster mappings.
+        /// </summary>
+        /// <param name="retrieveMappings">Whether or not the cluster mappings should be retrieved</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        Task<HasPendingMappingsResponse> HasPendingMappingsAsync(bool retrieveMappings = false,
+            RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get the logs of the latest search and indexing operations
         /// You can retrieve the logs of your last 1,000 API calls. It is designed for immediate, real-time debugging.
         /// </summary>

@@ -538,6 +538,25 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
+        public HasPendingMappingsResponse HasPendingMappings(bool retrieveMappings = false,
+            RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => HasPendingMappingsAsync(retrieveMappings, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<HasPendingMappingsResponse> HasPendingMappingsAsync(bool retrieveMappings = false,
+            RequestOptions requestOptions = null, CancellationToken ct = default)
+        {
+            requestOptions = requestOptions.AddQueryParams(
+                new Dictionary<string, string> { { "getClusters", retrieveMappings.ToString().ToLower() } });
+
+            return await _transport.ExecuteRequestAsync<HasPendingMappingsResponse>(
+                    HttpMethod.Get,
+                    "/1/clusters/mapping/pending",
+                    CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
         public LogResponse GetLogs(RequestOptions requestOptions = null, int offset = 0, int length = 10) =>
             AsyncHelper.RunSync(() =>
                 GetLogsAsync(requestOptions, offset: offset, length: length));

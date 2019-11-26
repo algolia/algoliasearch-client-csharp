@@ -88,6 +88,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
             }
 
             await RemovePastUserIDs();
+
+            var hasPendingMappings = await BaseTest.McmClient.HasPendingMappingsAsync(true);
+
+            Assert.That(hasPendingMappings, Is.Not.Null);
         }
 
         private async Task RemovePastUserIDs()
