@@ -38,6 +38,7 @@ public class BaseTest
     internal static SearchClient SearchClient2;
     internal static SearchClient McmClient;
     internal static AnalyticsClient AnalyticsClient;
+    internal static RecommendationClient RecommendationClient;
     private static ListIndicesResponse _indices;
 
     [OneTimeSetUp]
@@ -52,6 +53,7 @@ public class BaseTest
         SearchClient2 = new SearchClient(configClient2);
         McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmAdminKey);
         AnalyticsClient = new AnalyticsClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
+        RecommendationClient = new RecommendationClient(TestHelper.ApplicationId1, TestHelper.AdminKey1, "eu");
     }
 
     [OneTimeTearDown]
