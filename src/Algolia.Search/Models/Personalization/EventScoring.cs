@@ -21,11 +21,14 @@
 * THE SOFTWARE.
 */
 
+using System;
+
 namespace Algolia.Search.Models.Personalization
 {
     /// <summary>
     ///
     /// </summary>
+    [Obsolete("Models are deprecated please use models located in Algolia.Search.Models.Recommendation.")]
     public class EventScoring
     {
         /// <summary>

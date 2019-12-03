@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Personalization
@@ -28,6 +29,7 @@ namespace Algolia.Search.Models.Personalization
     /// <summary>
     /// Set personalization strategy request
     /// </summary>
+    [Obsolete("Models are deprecated please use models located in Algolia.Search.Models.Recommendation.")]
     public class SetStrategyRequest
     {
         /// <summary>
