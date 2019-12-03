@@ -28,6 +28,7 @@ namespace Algolia.Search.Models.Personalization
     /// <summary>
     /// Set strategy response
     /// </summary>
+    [Obsolete("Models are deprecated please use models located in Algolia.Search.Models.Recommendation.")]
     public class SetStrategyResponse
     {
         /// <summary>
