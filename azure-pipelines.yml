@@ -16,7 +16,7 @@ jobs:
         displayName: Run build
       - script: >-
           dotnet test src/Algolia.Search.Test --configuration
-          $(buildConfiguration) --logger trx --framework net45 --collect "Code
+          $(buildConfiguration) --logger trx --framework net461 --collect "Code
           coverage"
         env:
           ALGOLIA_APPLICATION_ID_1: $(ALGOLIA-APPLICATION-ID-1)
@@ -61,7 +61,7 @@ jobs:
       - script: dotnet build src -c $(buildConfiguration)
         displayName: Run build
       - script: >-
-          dotnet test src/Algolia.Search.Test --configuration
+          dotnet test src/Algolia.Search.Test --framework netcoreapp3.0 --configuration
           $(buildConfiguration) --logger trx
         env:
           ALGOLIA_APPLICATION_ID_1: $(ALGOLIA-APPLICATION-ID-1)
