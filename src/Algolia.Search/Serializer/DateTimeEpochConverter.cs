@@ -21,33 +21,51 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Utils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Algolia.Search.Utils;
 
 namespace Algolia.Search.Serializer
 {
     /// <summary>
-    /// Allow Json.NET to serialize/deserialize DateTime in UnixTimeStamp
+    /// Serialize/Deserialize DateTime in UnixTimeStamp
     /// </summary>
-    internal class DateTimeEpochConverter : DateTimeConverterBase
+    internal class DateTimeEpochConverter : JsonConverter<DateTime>
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            long until = ((DateTime)value).ToUnixTimeSeconds();
-            writer.WriteValue(until);
+            return DateTimeHelper.UnixTimeToDateTime(reader.GetInt64());
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-            JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
         {
-            if (reader.Value == null)
+            var until = value.ToUnixTimeSeconds();
+            writer.WriteNumberValue(until);
+        }
+    }
+
+    internal class NullableDateTimeEpochConverter : JsonConverter<DateTime?>
+    {
+        public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            long value;
+
+            if (reader.TryGetInt64(out value))
             {
-                return null;
+                return DateTimeHelper.UnixTimeToDateTime(value);
             }
 
-            return DateTimeHelper.UnixTimeToDateTime((long)reader.Value);
+            return null;
+        }
+
+        public override void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options)
+        {
+            if (value != null)
+            {
+                var until = value.Value.ToUnixTimeSeconds();
+                writer.WriteNumberValue(until);
+            }
         }
     }
 }

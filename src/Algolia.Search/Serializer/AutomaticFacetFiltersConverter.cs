@@ -21,67 +21,109 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Rules;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Algolia.Search.Models.Rules;
 
 namespace Algolia.Search.Serializer
 {
     /// <summary>
     /// Custom converter for legacy AutomaticFacetFilters
     /// </summary>
-    public class AutomaticFacetFiltersConverter : JsonConverter<IEnumerable<AutomaticFacetFilter>>
+    public class AutomaticFacetFiltersConverter : JsonConverter<List<AutomaticFacetFilter>>
     {
-        /// <summary>
-        /// No need to implement this method as we don't want to override default writer
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="value"></param>
-        /// <param name="serializer"></param>
-        public override void WriteJson(JsonWriter writer, IEnumerable<AutomaticFacetFilter> value,
-            JsonSerializer serializer)
-        {
-            throw new NotImplementedException();
-        }
+        private static readonly byte[] BytesFacets = Encoding.UTF8.GetBytes("facet");
+        private static readonly byte[] BytesDisjunctive = Encoding.UTF8.GetBytes("disjunctive");
+        private static readonly byte[] BytesScore = Encoding.UTF8.GetBytes("score");
 
         /// <summary>
         /// Algolia's specific converter to handle this specific object that could be a List of string or AutomaticFacetFilter
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="objectType"></param>
-        /// <param name="existingValue"></param>
-        /// <param name="hasExistingValue"></param>
-        /// <param name="serializer"></param>
-        /// <returns></returns>
-        public override IEnumerable<AutomaticFacetFilter> ReadJson(JsonReader reader, Type objectType,
-            IEnumerable<AutomaticFacetFilter> existingValue,
-            bool hasExistingValue, JsonSerializer serializer)
+        public override List<AutomaticFacetFilter> Read(ref Utf8JsonReader reader, Type typeToConvert,
+            JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonToken.Null)
-                return null;
-            if (reader.TokenType != JsonToken.StartArray)
-                return null;
+            List<AutomaticFacetFilter> ret = null;
 
-            var ret = new List<AutomaticFacetFilter>();
-
-            var tokens = JToken.Load(reader);
-            foreach (var token in tokens)
+            switch (reader.TokenType)
             {
-                string facet = token.Type != JTokenType.String ? token.Value<string>("facet") : token.Value<string>();
-                bool disjunctive = token.Type != JTokenType.String && token.Value<bool>("disjunctive");
-                int? score = token.Type != JTokenType.String ? token.Value<int?>("score") : null;
-
-                ret.Add(new AutomaticFacetFilter { Facet = facet, Disjunctive = disjunctive, Score = score });
+                case JsonTokenType.Null:
+                    break;
+                case JsonTokenType.StartArray:
+                    ret = ReadArray(ref reader);
+                    break;
+                default:
+                    throw new JsonException(
+                        $"Error while reading Token {reader.GetString()} of type {reader.TokenType}.");
             }
 
             return ret;
         }
 
         /// <summary>
-        /// Disable write json
+        /// Using the default writer because only serialization needs custom implementation.
         /// </summary>
-        public override bool CanWrite => false;
+        public override void Write(Utf8JsonWriter writer, List<AutomaticFacetFilter> value,
+            JsonSerializerOptions options)
+        {
+            JsonSerializer.Serialize(writer, value, options);
+        }
+
+        private static List<AutomaticFacetFilter> ReadArray(ref Utf8JsonReader reader)
+        {
+            List<AutomaticFacetFilter> ret = new List<AutomaticFacetFilter>();
+
+            while (reader.Read())
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonTokenType.EndArray:
+                        return ret;
+                    case JsonTokenType.StartObject:
+                        ret.Add(ParseAutomaticFacetFilter(ref reader));
+                        break;
+                    case JsonTokenType.String:
+                        ret.Add(new AutomaticFacetFilter { Facet = reader.GetString(), Disjunctive = false });
+                        break;
+                    default:
+                        throw new JsonException(
+                            $"Unexpected Token{reader.TokenType} for AutomaticFacetFilter.");
+                }
+            }
+
+            return ret;
+        }
+
+        private static AutomaticFacetFilter ParseAutomaticFacetFilter(ref Utf8JsonReader reader)
+        {
+            var automaticFacetFilter = new AutomaticFacetFilter();
+
+            while (reader.Read()
+                   && reader.TokenType != JsonTokenType.EndObject)
+            {
+                var itemPropertyName = reader.ValueSpan;
+
+                if (itemPropertyName.SequenceEqual(BytesFacets))
+                {
+                    reader.Read();
+                    automaticFacetFilter.Facet = reader.GetString();
+                }
+                else if (itemPropertyName.SequenceEqual(BytesDisjunctive))
+                {
+                    reader.Read();
+                    automaticFacetFilter.Disjunctive = reader.GetBoolean();
+                }
+                else if (itemPropertyName.SequenceEqual(BytesScore))
+                {
+                    reader.Read();
+                    bool success = reader.TryGetInt32(out var i);
+                    automaticFacetFilter.Score = success ? (int?)i : null;
+                }
+            }
+
+            return automaticFacetFilter;
+        }
     }
 }
