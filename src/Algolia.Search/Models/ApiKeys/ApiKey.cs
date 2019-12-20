@@ -22,9 +22,9 @@
 */
 
 using Algolia.Search.Serializer;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.ApiKeys
 {
@@ -88,7 +88,7 @@ namespace Algolia.Search.Models.ApiKeys
         /// <summary>
         /// Date of creation
         /// </summary>
-        [JsonConverter(typeof(DateTimeEpochConverter))]
+        [JsonConverter(typeof(NullableDateTimeEpochConverter))]
         public DateTime? CreatedAt { get; set; }
 
         /// <summary>

@@ -21,8 +21,9 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
+
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Common
 {
@@ -85,25 +86,25 @@ namespace Algolia.Search.Models.Common
         /// <summary>
         /// Request Headers (API Key is obfuscated).
         /// </summary>
-        [JsonProperty(PropertyName = "query_headers")]
+        [JsonPropertyName("query_headers")]
         public string QueryHeaders { get; set; }
 
         /// <summary>
         /// Number Of Api Calls
         /// </summary>
-        [JsonProperty(PropertyName = "nb_api_calls")]
+        [JsonPropertyName("nb_api_calls")]
         public string NumberOfApiCalls { get; set; }
 
         /// <summary>
         /// Processing time for the query. This does not include network time.
         /// </summary>
-        [JsonProperty(PropertyName = "processing_time_ms")]
+        [JsonPropertyName("processing_time_ms")]
         public string ProcessingTimeMs { get; set; }
 
         /// <summary>
         /// Number of hits returned for the query.
         /// </summary>
-        [JsonProperty(PropertyName = "query_nb_hits")]
+        [JsonPropertyName("query_nb_hits")]
         public string NumberOfQueryHits { get; set; }
 
         /// <summary>

@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Analytics
 {
@@ -44,7 +44,7 @@ namespace Algolia.Search.Models.Analytics
         /// <summary>
         /// List of AbTests
         /// </summary>
-        [JsonProperty(PropertyName = "abtests")]
+        [JsonPropertyName("abtests")]
         public IEnumerable<ABTest> ABTests { get; set; }
     }
 }

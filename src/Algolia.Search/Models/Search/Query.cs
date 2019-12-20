@@ -23,8 +23,8 @@
 
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Search
 {
@@ -37,16 +37,23 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Create a new query with an empty search query
         /// </summary>
-        /// <param name="searchQuery"></param>
-        public Query(string searchQuery = null)
+        public Query()
         {
-            SearchQuery = searchQuery;
+        }
+
+        /// <summary>
+        /// Create a new query with an empty search query
+        /// </summary>
+        /// <param name="searchSearchQuery"></param>
+        public Query(string searchSearchQuery)
+        {
+            SearchQuery = searchSearchQuery;
         }
 
         /// <summary>
         /// The text to search in the index.
         /// </summary>
-        [JsonProperty(PropertyName = "query")]
+        [JsonPropertyName("query")]
         public string SearchQuery { get; set; }
 
         /// <summary>
@@ -61,19 +68,19 @@ namespace Algolia.Search.Models.Search
         /// Filter hits by facet value.
         /// </summary>
         [JsonConverter(typeof(FiltersConverter))]
-        public IEnumerable<IEnumerable<string>> FacetFilters { get; set; }
+        public List<List<string>> FacetFilters { get; set; }
 
         /// <summary>
         /// Create filters for ranking purposes, where records that match the filter are ranked highest.
         /// </summary>
         [JsonConverter(typeof(FiltersConverter))]
-        public IEnumerable<IEnumerable<string>> OptionalFilters { get; set; }
+        public List<List<string>> OptionalFilters { get; set; }
 
         /// <summary>
         /// Filter on numeric attributes.
         /// </summary>
         [JsonConverter(typeof(FiltersConverter))]
-        public IEnumerable<IEnumerable<string>> NumericFilters { get; set; }
+        public List<List<string>> NumericFilters { get; set; }
 
         /// <summary>
         /// Filter hits by tags.
@@ -81,7 +88,7 @@ namespace Algolia.Search.Models.Search
         /// You can use it when you want to do simple filtering based on tags.
         /// </summary>
         [JsonConverter(typeof(FiltersConverter))]
-        public IEnumerable<IEnumerable<string>> TagFilters { get; set; }
+        public List<List<string>> TagFilters { get; set; }
 
         /// <summary>
         /// Determines how to calculate the total score for filtering.
@@ -325,7 +332,6 @@ namespace Algolia.Search.Models.Search
         /// Controls whether typo tolerance is enabled and how it is applied.
         /// Could be string or bool
         /// </summary>
-        [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object TypoTolerance { get; set; }
 
         /// <summary>
@@ -366,7 +372,6 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Treats singular, plurals, and other forms of declensions as matching terms.
         /// </summary>
-        [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object IgnorePlurals { get; set; }
 
         /// <summary>

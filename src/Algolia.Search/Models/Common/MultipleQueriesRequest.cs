@@ -23,8 +23,8 @@
 
 using Algolia.Search.Models.Search;
 using Algolia.Search.Serializer;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Common
 {

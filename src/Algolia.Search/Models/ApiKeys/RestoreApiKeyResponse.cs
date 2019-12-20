@@ -23,8 +23,8 @@
 
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Common;
-using Newtonsoft.Json;
 using System;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Algolia.Search.Models.ApiKeys

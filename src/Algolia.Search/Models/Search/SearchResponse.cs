@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Search
 {
@@ -94,7 +94,7 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Statistics for numerical facets.
         /// </summary>
-        [JsonPropertyAttribute("facets_stats")]
+        [JsonPropertyName("facets_stats")]
         public Dictionary<string, FacetStats> FacetsStats { get; set; }
 
         /// <summary>

@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Common
 {
@@ -44,7 +44,7 @@ namespace Algolia.Search.Models.Common
         /// <summary>
         /// Destination index name
         /// </summary>
-        [JsonProperty(PropertyName = "destination")]
+        [JsonPropertyName("destination")]
         public string IndexNameDest { get; set; }
     }
 }

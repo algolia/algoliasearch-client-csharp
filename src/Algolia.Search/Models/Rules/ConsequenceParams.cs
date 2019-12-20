@@ -23,8 +23,8 @@
 
 using Algolia.Search.Models.Search;
 using Algolia.Search.Serializer;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Rules
 {
@@ -34,9 +34,17 @@ namespace Algolia.Search.Models.Rules
     public class ConsequenceParams : Query
     {
         /// <summary>
-        /// When providing an object, it describes incremental edits to be made to the query string.
+        ///
         /// </summary>
-        /// <remarks>Setting a ConsequenceQuery will override SearchQuery if set. Both can't be set at the same time.</remarks>
+        public ConsequenceParams()
+        {
+        }
+
+        /// <summary>
+        /// When providing a string, it replaces the entire query string.
+        /// When providing an object, it describes incremental edits to be made to the query string (but you can’t do both).
+        /// </summary>
+        [JsonConverter(typeof(ConsequenceQueryConverter))]
         public ConsequenceQuery Query { get; set; }
 
         /// <summary>

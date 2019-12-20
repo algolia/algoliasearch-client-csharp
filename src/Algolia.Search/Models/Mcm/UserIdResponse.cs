@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Mcm
 {
@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Mcm
         /// <summary>
         /// List of users id
         /// </summary>
-        [JsonProperty(PropertyName = "userIDs")]
+        [JsonPropertyName("userIDs")]
         public List<UserIdResponse> UserIds { get; set; }
     }
 

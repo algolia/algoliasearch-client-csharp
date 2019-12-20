@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
+using System.Text.Json.Serialization;
 using Algolia.Search.Serializer;
-using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Rules
 {
