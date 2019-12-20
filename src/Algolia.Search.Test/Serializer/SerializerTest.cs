@@ -21,18 +21,17 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Serializer;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace Algolia.Search.Test.Serializer
 {
@@ -166,11 +165,9 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestQueryWithCustomParameters()
         {
-            Query query = new Query("algolia")
-            {
-                CustomParameters = new Dictionary<string, object> { { "newParameter", 10 } }
-            };
-            string json = JsonConvert.SerializeObject(query, JsonConfig.AlgoliaJsonSerializerSettings);
+            Query query =
+                new Query("algolia") { CustomParameters = new Dictionary<string, object> { { "newParameter", 10 } } };
+            string json = JsonSerializer.Serialize(query, JsonConfig.AlgoliaJsonSerializerOption);
             Assert.AreEqual(json, "{\"query\":\"algolia\",\"newParameter\":10}");
         }
 
@@ -178,18 +175,20 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestAutomaticFacetFilters()
         {
-            string json = "[\"lastname\",\"firstname\"]";
+            var json = "{\"automaticFacetFilters\":[\"lastname\",\"firstname\"]}";
 
-            List<AutomaticFacetFilter> deserialized =
-                JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(json, new AutomaticFacetFiltersConverter());
+            var consequenceParams =
+                JsonSerializer.Deserialize<ConsequenceParams>(json, JsonConfig.AlgoliaJsonSerializerOption);
 
-            Assert.True(deserialized.ElementAt(0).Facet.Equals("lastname"));
-            Assert.False(deserialized.ElementAt(0).Disjunctive);
-            Assert.IsNull(deserialized.ElementAt(0).Score);
+            var automaticFacetFilters = consequenceParams.AutomaticFacetFilters;
 
-            Assert.True(deserialized.ElementAt(1).Facet.Equals("firstname"));
-            Assert.False(deserialized.ElementAt(1).Disjunctive);
-            Assert.IsNull(deserialized.ElementAt(1).Score);
+            Assert.True(automaticFacetFilters.ElementAt(0).Facet.Equals("lastname"));
+            Assert.False(automaticFacetFilters.ElementAt(0).Disjunctive);
+            Assert.IsNull(automaticFacetFilters.ElementAt(0).Score);
+
+            Assert.True(automaticFacetFilters.ElementAt(1).Facet.Equals("firstname"));
+            Assert.False(automaticFacetFilters.ElementAt(1).Disjunctive);
+            Assert.IsNull(automaticFacetFilters.ElementAt(1).Score);
         }
 
         [Test]
@@ -198,41 +197,47 @@ namespace Algolia.Search.Test.Serializer
         {
             // Testing "one string" legacy filters => should be converted to "ORED" nested filters
             // [["color:green","color:yellow"]]
-            string stringFilters = "\"color:green,color:yellow\"";
+            string stringFilters = "{\"facetFilters\":\"color:green,color:yellow\"}";
 
             var serializedStringFilters =
-                JsonConvert.DeserializeObject<List<List<string>>>(stringFilters, new FiltersConverter());
+                JsonSerializer.Deserialize<Query>(stringFilters, JsonConfig.AlgoliaJsonSerializerOption);
 
-            AssertOredResult(serializedStringFilters);
+            AssertOredResult(serializedStringFilters.FacetFilters);
 
             // Testing "one array" legacy filters => should be converted to "ORED" nested filters
             // [["color:green","color:yellow"]]
-            string arrayFilters = "[\"color:green\",\"color:yellow\"]";
+            string arrayFilters = "{\"facetFilters\": [\"color:green\",\"color:yellow\"]}";
 
             var serializedArrayFilter =
-                JsonConvert.DeserializeObject<List<List<string>>>(arrayFilters, new FiltersConverter());
+                JsonSerializer.Deserialize<Query>(arrayFilters, JsonConfig.AlgoliaJsonSerializerOption);
 
-            AssertOredResult(serializedArrayFilter);
+            AssertOredResult(serializedArrayFilter.FacetFilters);
 
-            string nestedArrayFilters = "[[\"color:green\",\"color:yellow\"]]";
+            string nestedArrayFilters = "{\"facetFilters\": [[\"color:green\",\"color:yellow\"]]}";
 
             var serializedNestedArrayFilter =
-                JsonConvert.DeserializeObject<List<List<string>>>(nestedArrayFilters, new FiltersConverter());
+                JsonSerializer.Deserialize<Query>(nestedArrayFilters,
+                    JsonConfig.AlgoliaJsonSerializerOption);
 
-            AssertOredResult(serializedNestedArrayFilter);
+            AssertOredResult(serializedNestedArrayFilter.FacetFilters);
 
             // Testing the latest format of filters i.e nested arrays
-            string nestedAndedArrayFilters = "[[\"color:green\",\"color:yellow\"],[\"color:blue\"]]";
+            string nestedAndedArrayFilters =
+                "{\"facetFilters\": [[\"color:green\",\"color:yellow\"],[\"color:blue\"]]}";
 
             var serializedAdedNestedArrayFilter =
-                JsonConvert.DeserializeObject<List<List<string>>>(nestedAndedArrayFilters, new FiltersConverter());
+                JsonSerializer.Deserialize<Query>(nestedAndedArrayFilters,
+                    JsonConfig.AlgoliaJsonSerializerOption);
 
-            Assert.That(serializedAdedNestedArrayFilter, Has.Count.EqualTo(2));
-            Assert.That(serializedAdedNestedArrayFilter.ElementAt(0), Has.Count.EqualTo(2));
-            Assert.That(serializedAdedNestedArrayFilter.ElementAt(0).ElementAt(0), Contains.Substring("color:green"));
-            Assert.That(serializedAdedNestedArrayFilter.ElementAt(0).ElementAt(1), Contains.Substring("color:yellow"));
-            Assert.That(serializedAdedNestedArrayFilter.ElementAt(1), Has.Count.EqualTo(1));
-            Assert.That(serializedAdedNestedArrayFilter.ElementAt(1).ElementAt(0), Contains.Substring("color:blue"));
+            Assert.That(serializedAdedNestedArrayFilter.FacetFilters, Has.Count.EqualTo(2));
+            Assert.That(serializedAdedNestedArrayFilter.FacetFilters.ElementAt(0), Has.Count.EqualTo(2));
+            Assert.That(serializedAdedNestedArrayFilter.FacetFilters.ElementAt(0).ElementAt(0),
+                Contains.Substring("color:green"));
+            Assert.That(serializedAdedNestedArrayFilter.FacetFilters.ElementAt(0).ElementAt(1),
+                Contains.Substring("color:yellow"));
+            Assert.That(serializedAdedNestedArrayFilter.FacetFilters.ElementAt(1), Has.Count.EqualTo(1));
+            Assert.That(serializedAdedNestedArrayFilter.FacetFilters.ElementAt(1).ElementAt(0),
+                Contains.Substring("color:blue"));
 
             // Finally, testing that the custom reader is not breaking current implementation
             Rule ruleWithFilters = new Rule
@@ -243,25 +248,19 @@ namespace Algolia.Search.Test.Serializer
                     {
                         OptionalFilters = new List<List<string>> { new List<string> { "a:b" } },
                         TagFilters =
-                            new List<List<string>>
-                            {
-                                new List<string> { "a:b", "c:d" }, new List<string> { "d:e" }
-                            },
+                            new List<List<string>> { new List<string> { "a:b", "c:d" }, new List<string> { "d:e" } },
                         FacetFilters =
-                            new List<List<string>>
-                            {
-                                new List<string> { "a:b" }, new List<string> { "c:d" }
-                            },
+                            new List<List<string>> { new List<string> { "a:b" }, new List<string> { "c:d" } },
                         NumericFilters = new List<List<string>> { new List<string> { "a=100" } }
                     }
                 },
             };
 
             // Json "sent" to the API
-            string json = JsonConvert.SerializeObject(ruleWithFilters, JsonConfig.AlgoliaJsonSerializerSettings);
+            string json = JsonSerializer.Serialize(ruleWithFilters, JsonConfig.AlgoliaJsonSerializerOption);
 
             // Json "retrieved" from the API
-            var newRule = JsonConvert.DeserializeObject<Rule>(json);
+            var newRule = JsonSerializer.Deserialize<Rule>(json, JsonConfig.AlgoliaJsonSerializerOption);
 
             Assert.That(newRule.Consequence.Params.OptionalFilters, Has.Count.EqualTo(1));
             Assert.That(newRule.Consequence.Params.OptionalFilters.ElementAt(0), Has.Count.EqualTo(1));
@@ -284,7 +283,7 @@ namespace Algolia.Search.Test.Serializer
             Assert.That(newRule.Consequence.Params.NumericFilters.ElementAt(0).ElementAt(0),
                 Contains.Substring("a=100"));
 
-            void AssertOredResult(List<List<string>> result)
+            void AssertOredResult(IEnumerable<IEnumerable<string>> result)
             {
                 Assert.That(result, Has.Count.EqualTo(1));
                 Assert.That(result.ElementAt(0), Has.Count.EqualTo(2));
@@ -312,7 +311,7 @@ namespace Algolia.Search.Test.Serializer
                 + "  }\n"
                 + "}";
 
-            var rule = JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+            var rule = JsonSerializer.Deserialize<Rule>(payload, JsonConfig.AlgoliaJsonSerializerOption);
             Assert.That(rule, Is.Not.Null);
             Assert.That(rule.ObjectID, Is.EqualTo("rule-2"));
 
@@ -342,7 +341,7 @@ namespace Algolia.Search.Test.Serializer
                 + "  }\n"
                 + "}";
 
-            var rule = JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+            var rule = JsonSerializer.Deserialize<Rule>(payload, JsonConfig.AlgoliaJsonSerializerOption);
 
             Assert.That(rule, Is.Not.Null);
             Assert.That(rule.ObjectID, Is.EqualTo("rule-2"));
@@ -386,7 +385,7 @@ namespace Algolia.Search.Test.Serializer
                 + "}";
 
 
-            var rule = JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+            var rule = JsonSerializer.Deserialize<Rule>(payload, JsonConfig.AlgoliaJsonSerializerOption);
 
             Assert.That(rule, Is.Not.Null);
             Assert.That(rule.ObjectID, Is.EqualTo("rule-2"));
@@ -424,7 +423,7 @@ namespace Algolia.Search.Test.Serializer
                 + "  }\n"
                 + "}";
 
-            var rule = JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+            var rule = JsonSerializer.Deserialize<Rule>(payload, JsonConfig.AlgoliaJsonSerializerOption);
 
             Assert.That(rule, Is.Not.Null);
             Assert.That(rule.ObjectID, Is.EqualTo("rule-2"));
@@ -488,9 +487,9 @@ namespace Algolia.Search.Test.Serializer
                 Description = "Automatic apply the faceting on `brand` if a brand value is found in the query"
             };
 
-            var payload = JsonConvert.SerializeObject(rule, JsonConfig.AlgoliaJsonSerializerSettings);
+            var payload = JsonSerializer.Serialize(rule, JsonConfig.AlgoliaJsonSerializerOption);
             var deserializedRule =
-                JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+                JsonSerializer.Deserialize<Rule>(payload, JsonConfig.AlgoliaJsonSerializerOption);
 
             Assert.That(deserializedRule.Consequence.Params.SearchQuery, Is.Null);
 
@@ -534,9 +533,9 @@ namespace Algolia.Search.Test.Serializer
                     Description = "Automatic apply the faceting on `brand` if a brand value is found in the query"
                 };
 
-                var payload = JsonConvert.SerializeObject(rule, JsonConfig.AlgoliaJsonSerializerSettings);
+                var payload = JsonSerializer.Serialize(rule, JsonConfig.AlgoliaJsonSerializerOption);
                 var deserializedRule =
-                    JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+                    JsonSerializer.Deserialize<Rule>(payload, JsonConfig.AlgoliaJsonSerializerOption);
                 Assert.True(TestHelper.AreObjectsEqual(rule, deserializedRule));
             }
 
@@ -578,9 +577,9 @@ namespace Algolia.Search.Test.Serializer
                     Description = "Automatic apply the faceting on `brand` if a brand value is found in the query"
                 };
 
-                var payload = JsonConvert.SerializeObject(rule, JsonConfig.AlgoliaJsonSerializerSettings);
+                var payload = JsonSerializer.Serialize(rule, JsonConfig.AlgoliaJsonSerializerOption);
                 var deserializedRule =
-                    JsonConvert.DeserializeObject<Rule>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+                    JsonSerializer.Deserialize<Rule>(payload, JsonConfig.AlgoliaJsonSerializerOption);
                 Assert.True(TestHelper.AreObjectsEqual(rule, deserializedRule));
             }
         }
@@ -590,9 +589,11 @@ namespace Algolia.Search.Test.Serializer
         public void TestLegacySettings()
         {
             string json =
-                "{ \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}";
+                "{\"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\":[\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}";
 
-            IndexSettings settings = JsonConvert.DeserializeObject<IndexSettings>(json);
+            IndexSettings settings =
+                JsonSerializer.Deserialize<IndexSettings>(json, JsonConfig.AlgoliaJsonSerializerOption);
+
             Assert.IsNotNull(settings.Replicas);
             Assert.True(settings.Replicas.Contains("index1"));
             Assert.True(settings.Replicas.Contains("index2"));
@@ -610,9 +611,9 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestSettingsJObjectMigration()
         {
-            var json = JObject.Parse(
-                "{\"customRanking\":[\"desc(population)\", \"asc(name)\"], \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}");
-            IndexSettings settings = json.ToObject<IndexSettings>();
+            var settings = JsonSerializer.Deserialize<IndexSettings>(
+                "{\"customRanking\":[\"desc(population)\", \"asc(name)\"], \"attributesToIndex\":[\"attr1\", \"attr2\"],\"numericAttributesToIndex\": [\"attr1\", \"attr2\"],\"slaves\":[\"index1\", \"index2\"]}",
+                JsonConfig.AlgoliaJsonSerializerOption);
 
             Assert.IsNotNull(settings.CustomRanking);
             Assert.True(settings.CustomRanking.Contains("desc(population)"));
@@ -640,7 +641,7 @@ namespace Algolia.Search.Test.Serializer
                 EnableRules = true, CustomSettings = new Dictionary<string, object> { { "newParameter", 10 } }
             };
 
-            string json = JsonConvert.SerializeObject(settings, JsonConfig.AlgoliaJsonSerializerSettings);
+            string json = JsonSerializer.Serialize(settings, JsonConfig.AlgoliaJsonSerializerOption);
             Assert.AreEqual(json, "{\"enableRules\":true,\"newParameter\":10}");
         }
 
@@ -663,7 +664,7 @@ namespace Algolia.Search.Test.Serializer
             };
 
             // Here we test the payload, as this settings are at app level all tests could overlap
-            string json = JsonConvert.SerializeObject(strategyToSave, JsonConfig.AlgoliaJsonSerializerSettings);
+            string json = JsonSerializer.Serialize(strategyToSave, JsonConfig.AlgoliaJsonSerializerOption);
             string expectedJson =
                 "{\"eventsScoring\":{\"Add to cart\":{\"type\":\"conversion\",\"score\":50},\"Purchase\":{\"type\":\"conversion\",\"score\":100}},\"facetsScoring\":{\"brand\":{\"score\":100},\"categories\":{\"score\":10}}}";
             Assert.True(json.Equals(expectedJson));
@@ -675,8 +676,8 @@ namespace Algolia.Search.Test.Serializer
         {
             Assert.DoesNotThrow(() =>
             {
-                JsonConvert.DeserializeObject<IndicesResponse>(
-                    "{\"entries\": 100000000000, \"dataSize\": 100000000000, \"fileSize\": 100000000000}");
+                JsonSerializer.Deserialize<IndicesResponse>(
+                    "{\"entries\": 100000000000, \"dataSize\": 100000000000, \"fileSize\": 100000000000}", JsonConfig.AlgoliaJsonSerializerOption);
             });
         }
     }
