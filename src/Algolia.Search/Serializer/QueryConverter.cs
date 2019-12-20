@@ -21,10 +21,11 @@
 * THE SOFTWARE.
 */
 
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Utils;
-using Newtonsoft.Json;
-using System;
 
 namespace Algolia.Search.Serializer
 {
@@ -32,28 +33,24 @@ namespace Algolia.Search.Serializer
     /// Custom serializer for the query object because it must math specific syntax
     /// For more informations regarding the syntax
     /// https://www.algolia.com/doc/rest-api/search/#search-endpoints
-    /// https://www.newtonsoft.com/json/help/html/JsonConverterAttributeClass.htm
     /// </summary>
-    internal class QueryConverter : JsonConverter
+    public class QueryConverter : JsonConverter<Query>
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        /// <summary>
+        /// Not implemented because query should be read as query parameters.
+        /// </summary>
+        public override Query Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            Query query = (Query)value;
-
-            string queryString = QueryStringHelper.ToQueryString(query);
-
-            writer.WriteValue(queryString);
+            throw new JsonException("Not implemented because query should be read as query parameters.");
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-            JsonSerializer serializer)
+        /// <summary>
+        /// Write the Query as an URL query string
+        /// </summary>
+        public override void Write(Utf8JsonWriter writer, Query value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException("Unnecessary : we don't need to deserialize the Query");
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(Query);
+            var queryString = QueryStringHelper.ToQueryString(value);
+            writer.WriteStringValue(queryString);
         }
     }
 }

@@ -22,13 +22,13 @@
 */
 
 using Algolia.Search.Models.ApiKeys;
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Utils
 {
@@ -76,7 +76,7 @@ namespace Algolia.Search.Utils
                     !(p.PropertyType.GetTypeInfo().IsGenericType && typeof(IEnumerable).GetTypeInfo()
                           .IsAssignableFrom(p.PropertyType.GetTypeInfo())) &&
                     p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&
-                    p.GetCustomAttribute<JsonPropertyAttribute>() == null)
+                    p.GetCustomAttribute<JsonPropertyNameAttribute>() == null)
                 .Select(p =>
                 {
                     string encodedValue = Nullable.GetUnderlyingType(p.PropertyType) == typeof(bool)
@@ -91,7 +91,7 @@ namespace Algolia.Search.Utils
                     p.PropertyType.GetTypeInfo().IsGenericType &&
                     typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(p.PropertyType.GetTypeInfo()) &&
                     p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&
-                    p.GetCustomAttribute<JsonPropertyAttribute>() == null)
+                    p.GetCustomAttribute<JsonPropertyNameAttribute>() == null)
                 .Select(p =>
                 {
                     string values;
@@ -135,9 +135,9 @@ namespace Algolia.Search.Utils
             IEnumerable<string> propertiesWithJsonAttribute = typeof(T).GetTypeInfo()
                 .DeclaredProperties.Where(p =>
                     p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&
-                    p.GetCustomAttribute<JsonPropertyAttribute>() != null)
+                    p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
                 .Select(p =>
-                    p.GetCustomAttribute<JsonPropertyAttribute>().PropertyName + "=" +
+                    p.GetCustomAttribute<JsonPropertyNameAttribute>().Name + "=" +
                     Uri.EscapeDataString(p.GetValue(value, null).ToString()));
 
             // Merge twoListBeforeSending
