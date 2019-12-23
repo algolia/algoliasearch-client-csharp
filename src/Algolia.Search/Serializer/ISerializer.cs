@@ -22,6 +22,7 @@
 */
 
 using System.IO;
+using System.Threading.Tasks;
 using Algolia.Search.Models.Enums;
 
 namespace Algolia.Search.Serializer
@@ -38,7 +39,7 @@ namespace Algolia.Search.Serializer
         /// <param name="stream">The Stream containing the data to read.</param>
         /// <param name="compressionType">How the stream should be compressed <see cref="CompressionType"/></param>
         /// <typeparam name="T">The type of the value to convert.</typeparam>
-        void Serialize<T>(T data, Stream stream, CompressionType compressionType);
+        Task SerializeAsync<T>(T data, Stream stream, CompressionType compressionType);
 
         /// <summary>
         /// Parses the stream into an instance of a specified type.
@@ -46,6 +47,6 @@ namespace Algolia.Search.Serializer
         /// <param name="stream">The Stream containing the data to read.</param>
         /// <typeparam name="T">The type of the value to convert.</typeparam>
         /// <returns></returns>
-        T Deserialize<T>(Stream stream);
+        Task<T> DeserializeAsync<T>(Stream stream);
     }
 }

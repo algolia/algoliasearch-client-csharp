@@ -21,10 +21,10 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Batch
 {
@@ -70,7 +70,7 @@ namespace Algolia.Search.Models.Batch
         /// <summary>
         /// List of operations of the batch request
         /// </summary>
-        [JsonProperty(PropertyName = "requests")]
+        [JsonPropertyName("requests")]
         public ICollection<BatchOperation<T>> Operations { get; set; }
     }
 }

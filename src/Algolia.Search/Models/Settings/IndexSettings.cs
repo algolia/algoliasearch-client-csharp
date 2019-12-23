@@ -21,17 +21,15 @@
  * THE SOFTWARE.
  */
 
-using Algolia.Search.Serializer;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Settings
 {
     /// <summary>
-    /// For more informations regarding Index settings
+    /// For more information regarding Index settings
     /// https://www.algolia.com/doc/api-reference/settings-api-parameters/
     /// </summary>
-#pragma warning disable IDE0051 // disable warning for unused private members
     public class IndexSettings
     {
         // Attributes
@@ -40,17 +38,6 @@ namespace Algolia.Search.Models.Settings
         /// The complete list of attributes that will be used for searching.
         /// </summary>
         public List<string> SearchableAttributes { get; set; }
-
-        // Handling legacy index settings
-        [JsonProperty("attributesToIndex")]
-        private List<string> AttributesToIndex
-        {
-            set
-            {
-                if (value != null)
-                { SearchableAttributes = value; }
-            }
-        }
 
         /// <summary>
         /// The complete list of attributes that will be used for faceting
@@ -87,18 +74,7 @@ namespace Algolia.Search.Models.Settings
         /// <summary>
         /// The primary parameter is automatically added to a replica's settings when the replica is created and cannot be modified.
         /// </summary>
-        [JsonProperty]
         public string Primary { get; private set; }
-
-        [JsonProperty("slaves")]
-        private List<string> Slaves
-        {
-            set
-            {
-                if (value != null)
-                { Replicas = value; }
-            }
-        }
 
         // faceting
 
@@ -172,7 +148,6 @@ namespace Algolia.Search.Models.Settings
         /// Controls whether typo tolerance is enabled and how it is applied.
         /// Could be string or bool
         /// </summary>
-        [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object TypoTolerance { get; set; }
 
         /// <summary>
@@ -199,7 +174,6 @@ namespace Algolia.Search.Models.Settings
         /// Treats singular, plurals, and other forms of declensions as matching terms.
         /// Could be string[] or bool
         /// </summary>
-        [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object IgnorePlurals { get; set; }
 
         // languages
@@ -272,7 +246,6 @@ namespace Algolia.Search.Models.Settings
         /// Removes stop (common) words from the query before executing it.
         /// Could be string[] or bool
         /// </summary>
-        [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object RemoveStopWords { get; set; }
 
         // performance
@@ -281,17 +254,6 @@ namespace Algolia.Search.Models.Settings
         /// List of numeric attributes that can be used as numerical filters.
         /// </summary>
         public List<string> NumericAttributesForFiltering { get; set; }
-
-        // Handling legacy index settings
-        [JsonProperty("numericAttributesToIndex")]
-        private List<string> NumericAttributesToIndex
-        {
-            set
-            {
-                if (value != null)
-                { NumericAttributesForFiltering = value; }
-            }
-        }
 
         /// <summary>
         /// Enables compression of large integer arrays.
@@ -309,7 +271,6 @@ namespace Algolia.Search.Models.Settings
         /// Enables de-duplication or grouping of results.
         /// Could be int or bool
         /// </summary>
-        [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object Distinct { get; set; }
 
         /// <summary>
@@ -366,7 +327,6 @@ namespace Algolia.Search.Models.Settings
         /// <summary>
         /// Custom userData that could be added to the IndexSettings
         /// </summary>
-        [JsonConverter(typeof(MultiTypeObjectConverter))]
         public object UserData { get; set; }
     }
 }

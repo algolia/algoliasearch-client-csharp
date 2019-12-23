@@ -25,12 +25,11 @@ using Algolia.Search.Clients;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Utils;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace Algolia.Search.Test.EndToEnd.Index
 {
@@ -268,7 +267,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
         [Parallelizable]
         public async Task MoveIndexTest()
         {
-            var objectOne = new JObject { { "objectID", "one" } };
+            var objectOne = new { ObjectID = "one" };
             var addObject = await _indexMove.SaveObjectAsync(objectOne);
 
             addObject.Wait();
@@ -286,13 +285,12 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
     public class AlgoliaObject
     {
-        [JsonProperty(PropertyName = "objectID")]
-        public string ObjectId { get; set; }
+        [JsonPropertyName("objectID")] public string ObjectId { get; set; }
     }
 
     public class AlgoliaStub : AlgoliaObject
     {
         public string Property { get; set; } = "Default";
-        [JsonProperty(PropertyName = "_tags")] public List<string> Tags { get; set; }
+        [JsonPropertyName("_tags")] public List<string> Tags { get; set; }
     }
 }

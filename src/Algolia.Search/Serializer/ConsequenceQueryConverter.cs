@@ -21,14 +21,13 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Enums;
-using Algolia.Search.Exceptions;
-using Algolia.Search.Models.Rules;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Rules;
 
 namespace Algolia.Search.Serializer
 {
@@ -37,68 +36,11 @@ namespace Algolia.Search.Serializer
     /// </summary>
     public class ConsequenceQueryConverter : JsonConverter<ConsequenceQuery>
     {
-        /// <summary>
-        /// Custom deserializer to handle polymorphism/legacy of "query" attributes in ConsequenceQuery
-        /// </summary>
-        /// <example>
-        /// <code>
-        /// // Raw Query String
-        /// "query": "some query string"
-        ///
-        /// // remove attribute (deprecated)
-        ///  "query": { "remove": ["query1", "query2"] }
-        ///
-        /// // edits attribute
-        ///  "query": {
-        ///     "edits": [
-        ///            { "type": "remove", "delete":s "old"},
-        ///            { "type": "replace", "delete": "new", "insert": "newer" } ]
-        ///         }
-        /// </code>
-        /// </example>
-        public override ConsequenceQuery ReadJson(JsonReader reader, Type objectType, ConsequenceQuery existingValue,
-            bool hasExistingValue, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
-            {
-                case JsonToken.Null:
-                    return null;
-                case JsonToken.StartArray:
-                    throw new AlgoliaException($"Unexpected Array Token in query: {reader.ReadAsString()}");
-                case JsonToken.StartObject:
-                {
-                    JObject items = JObject.Load(reader);
-                    var ret = new ConsequenceQuery();
-                    var edits = new List<Edit>();
-
-                    if (items["remove"] != null)
-                    {
-                        var removeList = items["remove"].ToObject<List<string>>();
-                        foreach (var remove in removeList)
-                        {
-                            edits.Add(new Edit { Type = EditType.Remove, Delete = remove });
-                        }
-                    }
-
-                    if (items["edits"] != null)
-                    {
-                        var editsList = items["edits"].ToObject<List<Edit>>();
-                        foreach (var edit in editsList)
-                        {
-                            edits.Add(edit);
-                        }
-                    }
-
-                    ret.Edits = edits;
-                    return ret;
-                }
-                case JsonToken.String:
-                    var jValue = new JValue(reader.Value);
-                    return new ConsequenceQuery { SearchQuery = (string)jValue.Value };
-                default:
-                    throw new AlgoliaException($"Unexpected JSON Token in consequenceQuery: {reader.ReadAsString()}");
-            }
-        }
+        private static readonly byte[] BytesType = Encoding.UTF8.GetBytes("type");
+        private static readonly byte[] BytesDelete = Encoding.UTF8.GetBytes("delete");
+        private static readonly byte[] BytesInsert = Encoding.UTF8.GetBytes("insert");
+        private static readonly byte[] Remove = Encoding.UTF8.GetBytes("remove");
+        private static readonly byte[] Edits = Encoding.UTF8.GetBytes("edits");
 
         /// <summary>
         /// Custom serializer to handle polymorphism/legacy of "query" attributes in ConsequenceQuery
@@ -119,22 +61,130 @@ namespace Algolia.Search.Serializer
         ///         }
         /// </code>
         /// </example>
-        public override void WriteJson(JsonWriter writer, ConsequenceQuery value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, ConsequenceQuery value, JsonSerializerOptions options)
         {
             if (!string.IsNullOrEmpty(value.SearchQuery))
             {
-                writer.WriteValue(value.SearchQuery);
+                writer.WriteStringValue(value.SearchQuery);
             }
             else
             {
                 writer.WriteStartObject();
                 writer.WritePropertyName("edits");
-                serializer.Serialize(writer, value.Edits);
+                JsonSerializer.Serialize(writer, value.Edits, options);
                 writer.WriteEndObject();
             }
         }
 
-        /// <inheritdoc />
-        public override bool CanWrite => true;
+        /// <summary>
+        /// Custom deserializer to handle polymorphism/legacy of "query" attributes in ConsequenceQuery
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// // Raw Query String
+        /// "query": "some query string"
+        ///
+        /// // remove attribute (deprecated)
+        ///  "query": { "remove": ["query1", "query2"] }
+        ///
+        /// // edits attribute
+        ///  "query": {
+        ///     "edits": [
+        ///            { "type": "remove", "delete":s "old"},
+        ///            { "type": "replace", "delete": "new", "insert": "newer" } ]
+        ///         }
+        /// </code>
+        /// </example>
+        public override ConsequenceQuery Read(ref Utf8JsonReader reader, Type typeToConvert,
+            JsonSerializerOptions options)
+        {
+            if (reader.TokenType == JsonTokenType.Null)
+                return null;
+
+            if (reader.TokenType == JsonTokenType.String)
+                return new ConsequenceQuery { SearchQuery = reader.GetString() };
+
+            var ret = new ConsequenceQuery();
+            var edits = new List<Edit>();
+
+            while (reader.Read() && reader.TokenType != JsonTokenType.EndObject &&
+                   reader.TokenType != JsonTokenType.Null)
+            {
+                if (reader.TokenType != JsonTokenType.PropertyName)
+                {
+                    continue;
+                }
+
+                var property = reader.ValueSpan;
+
+                reader.Read();
+
+                if (property.SequenceEqual(Remove))
+                {
+                    edits.AddRange(ReadArray(ref reader));
+                }
+
+                if (property.SequenceEqual(Edits))
+                {
+                    edits.AddRange(ReadArray(ref reader));
+                }
+            }
+
+            ret.Edits = edits;
+            return ret;
+        }
+
+        private static IEnumerable<Edit> ReadArray(ref Utf8JsonReader reader)
+        {
+            List<Edit> ret = new List<Edit>();
+
+            while (reader.Read())
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonTokenType.EndArray:
+                        return ret;
+                    case JsonTokenType.StartObject:
+                        ret.Add(ParseEdit(ref reader));
+                        break;
+                    case JsonTokenType.String:
+                        ret.Add(new Edit { Type = EditType.Remove, Delete = reader.GetString() });
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            throw new ArgumentOutOfRangeException();
+        }
+
+        private static Edit ParseEdit(ref Utf8JsonReader reader)
+        {
+            var edit = new Edit();
+
+            while (reader.Read()
+                   && reader.TokenType != JsonTokenType.EndObject)
+            {
+                var itemPropertyName = reader.ValueSpan;
+
+                if (itemPropertyName.SequenceEqual(BytesDelete))
+                {
+                    reader.Read();
+                    edit.Delete = reader.GetString();
+                }
+                else if (itemPropertyName.SequenceEqual(BytesInsert))
+                {
+                    reader.Read();
+                    edit.Insert = reader.GetString();
+                }
+                else if (itemPropertyName.SequenceEqual(BytesType))
+                {
+                    reader.Read();
+                    edit.Type = reader.GetString();
+                }
+            }
+
+            return edit;
+        }
     }
 }

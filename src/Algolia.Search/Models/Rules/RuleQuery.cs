@@ -40,7 +40,7 @@ namespace Algolia.Search.Models.Rules
         /// <summary>
         /// Full text query.
         /// </summary>
-        public string Query { get; set; } = string.Empty;
+        public string Query { get; set; }
 
         /// <summary>
         /// When specified, restricts matches to rules with a specific anchoring type. When omitted, all anchoring types may match.

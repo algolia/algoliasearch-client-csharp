@@ -21,26 +21,25 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Serializer
 {
     /// <summary>
     /// Custom converter for legacy Filters
     /// </summary>
-    public class FiltersConverter : JsonConverter<IEnumerable<IEnumerable<string>>>
+    public class FiltersConverter : JsonConverter<List<List<string>>>
     {
         /// <summary>
-        /// No need to implement this method as we don't want to override default writer
+        /// Using the default writer because only serilization needs custom implementation.
         /// </summary>
-        public override void WriteJson(JsonWriter writer, IEnumerable<IEnumerable<string>> value,
-            JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, List<List<string>> value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            JsonSerializer.Serialize(writer, value, options);
         }
 
         /// <summary>
@@ -48,51 +47,64 @@ namespace Algolia.Search.Serializer
         /// This reader is converting single string to nested arrays
         /// This reader is also converting single array to nested arrays
         /// </summary>
-        public override IEnumerable<IEnumerable<string>> ReadJson(JsonReader reader, Type objectType,
-            IEnumerable<IEnumerable<string>> existingValue,
-            bool hasExistingValue, JsonSerializer serializer)
+        public override List<List<string>> Read(ref Utf8JsonReader reader, Type typeToConvert,
+            JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonToken.Null)
-                return null;
+            List<List<string>> ret;
 
-            if (reader.TokenType == JsonToken.StartArray)
+            switch (reader.TokenType)
             {
-                JToken token = JToken.Load(reader);
-                var ret = new List<List<string>>();
-                var tmpList = new List<string>();
-
-                foreach (var tokenValue in token)
-                {
-                    switch (tokenValue.Type)
-                    {
-                        case JTokenType.Null:
-                            break;
-                        case JTokenType.String:
-                            tmpList.Add(tokenValue.ToObject<string>());
-                            break;
-                        case JTokenType.Array:
-                            var jArray = (JArray)tokenValue;
-                            ret.Add(jArray.ToObject<List<string>>());
-                            break;
-                    }
-                }
-
-                if (tmpList.Count > 0)
-                    ret.Add(tmpList);
-
-                return ret;
+                case JsonTokenType.String:
+                    ret = new List<List<string>> { reader.GetString().Split(',').ToList() };
+                    break;
+                case JsonTokenType.StartArray:
+                    ret = ReadNestedArray(ref reader);
+                    break;
+                default:
+                    return null;
             }
 
-            if (reader.TokenType == JsonToken.String)
-                return new List<List<string>> { Convert.ToString(reader.Value).Split(',').ToList() };
-
-            throw new JsonSerializationException(
-                $"Error while reading Token {reader.Value} of type {reader.TokenType}.");
+            return ret;
         }
 
-        /// <summary>
-        /// Disable write json
-        /// </summary>
-        public override bool CanWrite => false;
+        private static List<List<string>> ReadNestedArray(ref Utf8JsonReader reader)
+        {
+            var ret = new List<List<string>>();
+            var tmpList = new List<string>();
+
+            while (reader.Read())
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonTokenType.StartArray:
+                        ret.Add(ReadArray(ref reader));
+                        break;
+                    case JsonTokenType.String:
+                        tmpList.Add(reader.GetString());
+                        break;
+                    case JsonTokenType.EndArray:
+                        if (tmpList.Any())
+                        {
+                            ret.Add(tmpList);
+                        }
+
+                        return ret;
+                }
+            }
+
+            return ret;
+        }
+
+        private static List<string> ReadArray(ref Utf8JsonReader reader)
+        {
+            var insideList = new List<string>();
+
+            while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+            {
+                insideList.Add(reader.GetString());
+            }
+
+            return insideList;
+        }
     }
 }

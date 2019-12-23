@@ -112,7 +112,7 @@ namespace Algolia.Search.Transport
                 Compression = _algoliaConfig.Compression
             };
 
-            request.Body = CreateRequestContent(data, request.CanCompress);
+            request.Body = await CreateRequestContent(data, request.CanCompress);
 
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
@@ -126,7 +126,7 @@ namespace Algolia.Search.Transport
                 switch (_retryStrategy.Decide(host, response))
                 {
                     case RetryOutcomeType.Success:
-                        return _serializer.Deserialize<TResult>(response.Body);
+                        return await _serializer.DeserializeAsync<TResult>(response.Body);
                     case RetryOutcomeType.Retry:
                         continue;
                     case RetryOutcomeType.Failure:
@@ -144,7 +144,7 @@ namespace Algolia.Search.Transport
         /// <param name="compress">Whether the stream should be compressed or not</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
-        private MemoryStream CreateRequestContent<T>(T data, bool compress)
+        private async Task<MemoryStream> CreateRequestContent<T>(T data, bool compress)
         {
             if (data == null)
                 return null;
@@ -152,7 +152,7 @@ namespace Algolia.Search.Transport
             MemoryStream ms = new MemoryStream();
 
             CompressionType compressionType = compress ? CompressionType.GZIP : CompressionType.NONE;
-            _serializer.Serialize(data, ms, compressionType);
+            await _serializer.SerializeAsync(data, ms, compressionType);
 
             ms.Seek(0, SeekOrigin.Begin);
             return ms;

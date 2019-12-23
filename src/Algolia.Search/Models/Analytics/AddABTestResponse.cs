@@ -21,7 +21,7 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Algolia.Search.Models.Analytics
 {
@@ -33,7 +33,7 @@ namespace Algolia.Search.Models.Analytics
         /// <summary>
         /// The AbTest ID
         /// </summary>
-        [JsonProperty(PropertyName = "abTestID")]
+        [JsonPropertyName("abTestID")]
         public long ABTestId { get; set; }
 
         /// <summary>

@@ -21,25 +21,43 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
 
 namespace Algolia.Search.Serializer
 {
     /// <summary>
-    /// Used to ensure that all the properties are serialized and deserialized well (because of Pascal and Camel Casing)
+    /// Options for the default serializer
+    /// Naming policy is set to camelCase to respect both C# and JSON standards.
     /// </summary>
     internal static class JsonConfig
     {
+        /// <summary>
+        /// Json content type constant
+        /// </summary>
         public const string JsonContentType = "application/json";
 
-        public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
+        /// <summary>
+        /// Default JSONSerializer options - mostly used to respect Algolia, JSON and C# conventions
+        /// Can be overriden at the class level
+        /// </summary>
+        public static JsonSerializerOptions AlgoliaJsonSerializerOption => new JsonSerializerOptions
         {
-            Formatting = Formatting.None,
-            NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            DateParseHandling = DateParseHandling.DateTime
+            IgnoreNullValues = true,
+            WriteIndented = false,
+            // Algolia API is expecting camel case naming policy
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            Converters =
+            {
+                // Default converters to handle all date time as UTC and not in local time zone
+                new NullableDateTimeConverter(),
+                new DateTimeConverter(),
+                // Default converter for "object"
+                new ObjectToInferredTypesConverter(),
+                // Specific converter for IndexSettings to handle legacy fields.
+                // This one could be deleted when System.Text.Json while handle field
+                // This converter also has it's own Serializer option. You might modify this one as well
+                new IndexSettingsConverter(),
+            }
         };
     }
 }

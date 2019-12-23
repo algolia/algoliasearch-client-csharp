@@ -21,8 +21,9 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Algolia.Search.Models.Rules;
 
 namespace Algolia.Search.Serializer
@@ -35,25 +36,33 @@ namespace Algolia.Search.Serializer
         /// <summary>
         /// Read the JSON taking into account the polymorphism of Alternatives
         /// </summary>
-        public override Alternatives ReadJson(JsonReader reader, Type objectType, Alternatives existingValue,
-            bool hasExistingValue, JsonSerializer serializer)
+        public override Alternatives Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonToken.Null)
-                return null;
+            Alternatives ret;
 
-            if (reader.TokenType == JsonToken.Boolean)
-                return Alternatives.Of(Convert.ToBoolean(reader.Value));
+            switch (reader.TokenType)
+            {
+                case JsonTokenType.Null:
+                    return null;
+                case JsonTokenType.False:
+                case JsonTokenType.True:
+                    ret = Alternatives.Of(reader.GetBoolean());
+                    break;
+                default:
+                    throw new JsonException(
+                        $"Error while reading Token {reader.GetString()} of type {reader.TokenType}.");
+            }
 
-            return null;
+            return ret;
         }
 
         /// <summary>
         /// Write the JSON taking into account the polymorphism of Alternatives
         /// </summary>
-        public override void WriteJson(JsonWriter writer, Alternatives value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, Alternatives value, JsonSerializerOptions options)
         {
             if (value.GetType() == typeof(AlternativesBoolean))
-                writer.WriteValue(value.InsideValue);
+                writer.WriteBooleanValue((bool)value.InsideValue);
         }
     }
 }

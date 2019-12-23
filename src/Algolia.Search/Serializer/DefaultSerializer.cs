@@ -21,67 +21,39 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System.IO;
 using System.IO.Compression;
-using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Algolia.Search.Models.Enums;
 
 namespace Algolia.Search.Serializer
 {
     /// <summary>
-    /// Default Serializer using Newtonsoft JSON
+    /// Default Serializer
     /// Implementation of <see cref="ISerializer"/>
-    /// https://www.newtonsoft.com/json/help/html/performance.htm
     /// </summary>
     internal class DefaultSerializer : ISerializer
     {
-        private static readonly UTF8Encoding DefaultEncoding = new UTF8Encoding(false);
-
-        private static readonly int DefaultBufferSize = 1024;
-
-        // Buffer sized as recommended by Bradley Grainger, http://faithlife.codes/blog/2012/06/always-wrap-gzipstream-with-bufferedstream/
-        private static readonly int GZipBufferSize = 8192;
-
-        public void Serialize<T>(T data, Stream stream, CompressionType compressionType)
+        public Task SerializeAsync<T>(T data, Stream stream, CompressionType compressionType)
         {
-            if (compressionType == CompressionType.GZIP)
-            {
-                using (var gzipStream = new GZipStream(stream, CompressionMode.Compress, true))
-                using (var sw = new StreamWriter(gzipStream, DefaultEncoding, GZipBufferSize))
-                using (var jtw = new JsonTextWriter(sw) { Formatting = Formatting.None })
-                {
-                    JsonSerialize(jtw);
-                }
-            }
-            else
-            {
-                using (var sw = new StreamWriter(stream, DefaultEncoding, DefaultBufferSize, true))
-                using (var jtw = new JsonTextWriter(sw) { Formatting = Formatting.None })
-                {
-                    JsonSerialize(jtw);
-                }
-            }
+            if (compressionType != CompressionType.GZIP)
+                return JsonSerializer.SerializeAsync(stream, data, JsonConfig.AlgoliaJsonSerializerOption);
 
-            void JsonSerialize(JsonTextWriter writer)
+            using (var gzipStream = new GZipStream(stream, CompressionMode.Compress, true))
             {
-                JsonSerializer serializer = JsonSerializer.Create(JsonConfig.AlgoliaJsonSerializerSettings);
-                serializer.Serialize(writer, data);
-                writer.Flush();
+                return JsonSerializer.SerializeAsync(gzipStream, data, JsonConfig.AlgoliaJsonSerializerOption);
             }
         }
 
-        public T Deserialize<T>(Stream stream)
+        public async Task<T> DeserializeAsync<T>(Stream stream)
         {
             if (stream == null || stream.CanRead == false)
                 return default;
 
             using (stream)
-            using (var sr = new StreamReader(stream))
-            using (var jtr = new JsonTextReader(sr))
             {
-                JsonSerializer serializer = JsonSerializer.Create(JsonConfig.AlgoliaJsonSerializerSettings);
-                return serializer.Deserialize<T>(jtr);
+                return await JsonSerializer.DeserializeAsync<T>(stream, JsonConfig.AlgoliaJsonSerializerOption);
             }
         }
     }
