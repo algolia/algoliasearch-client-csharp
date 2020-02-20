@@ -121,8 +121,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             {
                 BaseTest.McmClient.GetUserId(userId);
             }
-            catch (AlgoliaApiException ex) when (ex.HttpErrorCode == 404 &&
-                                                 ex.Message.Contains("Mapping does not exist for this userID"))
+            catch (AlgoliaApiException)
             {
                 Task.Delay(1000);
                 // Loop until we have found the userID
@@ -136,9 +135,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             {
                 BaseTest.McmClient.RemoveUserId(userId);
             }
-            catch (AlgoliaApiException ex) when (ex.HttpErrorCode == 404 &&
-                                                 ex.Message.Contains(
-                                                     "Another mapping operation is already running for this userID"))
+            catch (AlgoliaApiException)
             {
                 // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
                 Task.Delay(1000);
