@@ -58,7 +58,6 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 WaitUserId(user);
             }
 
-
             foreach (var user in userIDs)
             {
                 SearchResponse<UserIdResponse> searchResponse =
@@ -118,48 +117,32 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
         private void WaitUserId(string userId)
         {
-            while (true)
+            try
             {
-                try
-                {
-                    BaseTest.McmClient.GetUserId(userId);
-                }
-                catch (AlgoliaApiException ex)
-                {
-                    // Loop until we have found the userID
-                    if (ex.HttpErrorCode == 404 && ex.Message.Equals("Mapping does not exist for this userID"))
-                    {
-                        Task.Delay(1000);
-                        continue;
-                    }
-
-                    throw;
-                }
-
-                break;
+                BaseTest.McmClient.GetUserId(userId);
+            }
+            catch (AlgoliaApiException ex) when (ex.HttpErrorCode == 404 &&
+                                                 ex.Message.Contains("Mapping does not exist for this userID"))
+            {
+                Task.Delay(1000);
+                // Loop until we have found the userID
+                WaitUserId(userId);
             }
         }
 
         private void RemoveUserId(string userId)
         {
-            while (true)
+            try
             {
-                try
-                {
-                    BaseTest.McmClient.RemoveUserId(userId);
-                }
-                catch (AlgoliaApiException ex)
-                {
-                    // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
-                    if (ex.HttpErrorCode == 400 &&
-                        ex.Message.Contains("Another mapping operation is already running for this userID"))
-                    {
-                        Task.Delay(1000);
-                        continue;
-                    }
-                }
-
-                break;
+                BaseTest.McmClient.RemoveUserId(userId);
+            }
+            catch (AlgoliaApiException ex) when (ex.HttpErrorCode == 404 &&
+                                                 ex.Message.Contains(
+                                                     "Another mapping operation is already running for this userID"))
+            {
+                // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
+                Task.Delay(1000);
+                RemoveUserId(userId);
             }
         }
     }
