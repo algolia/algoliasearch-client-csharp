@@ -54,19 +54,6 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             var now = DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             string testName = $"csharp-AA-{now}-{Environment.UserName}";
 
-            var abTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
-
-            if (abTests.ABTests != null)
-            {
-                var abTestsToDelete =
-                    abTests.ABTests?.Where(x => x.Name.Contains("csharp-AA") && !x.Name.Contains($"csharp-AA-{now}"));
-
-                foreach (var item in abTestsToDelete)
-                {
-                    await BaseTest.AnalyticsClient.DeleteABTestAsync(item.AbTestId.Value);
-                }
-            }
-
             var addOne = await _index.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
 
             // Create tomorrow datetime without seconds/ms to avoid test to fail
