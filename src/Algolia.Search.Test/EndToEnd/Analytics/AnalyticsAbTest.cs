@@ -58,19 +58,6 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             var now = DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             string testName = $"csharp-{now}-{Environment.UserName}";
 
-            var abTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
-
-            if (abTests.ABTests != null)
-            {
-                var abTestsToDelete =
-                    abTests.ABTests?.Where(x => x.Name.Contains("csharp-") && !x.Name.Contains($"csharp-{now}"));
-
-                foreach (var item in abTestsToDelete)
-                {
-                    await BaseTest.AnalyticsClient.DeleteABTestAsync(item.AbTestId.Value);
-                }
-            }
-
             var addOne = await _index1.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
             var addTwo = await _index2.SaveObjectAsync(new AlgoliaStub { ObjectID = "one" });
 

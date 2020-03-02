@@ -39,7 +39,6 @@ public class BaseTest
     internal static SearchClient McmClient;
     internal static AnalyticsClient AnalyticsClient;
     internal static RecommendationClient RecommendationClient;
-    private static ListIndicesResponse _indices;
 
     [OneTimeSetUp]
     public void Setup()
@@ -54,35 +53,5 @@ public class BaseTest
         McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmAdminKey);
         AnalyticsClient = new AnalyticsClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
         RecommendationClient = new RecommendationClient(TestHelper.ApplicationId1, TestHelper.AdminKey1, "eu");
-    }
-
-    [OneTimeTearDown]
-    public void Teardown()
-    {
-        PreviousTestCleanUp();
-    }
-
-    protected void PreviousTestCleanUp()
-    {
-        _indices = SearchClient.ListIndices();
-
-        if (_indices?.Items == null || !_indices.Items.Any())
-            return;
-
-        var yesterday = DateTime.UtcNow.AddDays(-1);
-        var indicesToDelete = _indices?.Items?.Where(x =>
-            x.Name.Contains($"csharp_") && x.CreatedAt <= yesterday).ToList();
-
-        var operations = new List<BatchOperation<string>>();
-
-        if (!indicesToDelete.Any())
-            return;
-
-        foreach (var index in indicesToDelete)
-        {
-            operations.Add(new BatchOperation<string> { IndexName = index.Name, Action = BatchActionType.Delete });
-        }
-
-        SearchClient.MultipleBatch(operations);
     }
 }
