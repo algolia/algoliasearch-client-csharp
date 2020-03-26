@@ -38,11 +38,15 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="applicationId">Your application ID</param>
         /// <param name="apiKey">Your API Key</param>
-        public AnalyticsConfig(string applicationId, string apiKey) : base(applicationId, apiKey)
+        /// <param name="region">Region where your analytics data is stored and processed</param>
+        public AnalyticsConfig(string applicationId, string apiKey, string region = "us") : base(applicationId, apiKey)
         {
             DefaultHosts = new List<StatefulHost>
             {
-                new StatefulHost {Url = "analytics.algolia.com", Accept = CallType.Read | CallType.Write}
+                new StatefulHost
+                {
+                    Url = $"analytics.{region}.algolia.com", Accept = CallType.Read | CallType.Write
+                }
             };
 
             Compression = CompressionType.NONE;
