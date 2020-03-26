@@ -46,8 +46,9 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="applicationId">Your application ID</param>
         /// <param name="apiKey">Your Api KEY</param>
-        public AnalyticsClient(string applicationId, string apiKey) : this(
-            new AnalyticsConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+        /// <param name="region">Region where your analytics data is stored and processed</param>
+        public AnalyticsClient(string applicationId, string apiKey, string region = "us") : this(
+            new AnalyticsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
         {
         }
 
