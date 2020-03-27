@@ -45,13 +45,13 @@ namespace Algolia.Search.Utils
             string restrictIndices = null;
             if (restriction.RestrictIndices != null)
             {
-                restrictIndices = $"restrictIndices={string.Join(";", restriction.RestrictIndices)}";
+                restrictIndices = $"restrictIndices={string.Join(",", restriction.RestrictIndices)}";
             }
 
             string restrictSources = null;
             if (restriction.RestrictSources != null)
             {
-                restrictSources = $"restrictSources={string.Join(";", restriction.RestrictSources)}";
+                restrictSources = $"restrictSources={string.Join(",", restriction.RestrictSources)}";
             }
 
             string restrictionQueryParams = ToQueryString(restriction, nameof(restriction.Query),
