@@ -66,32 +66,32 @@ namespace Algolia.Search.Serializer
                 case JsonToken.StartArray:
                     throw new AlgoliaException($"Unexpected Array Token in query: {reader.ReadAsString()}");
                 case JsonToken.StartObject:
-                {
-                    JObject items = JObject.Load(reader);
-                    var ret = new ConsequenceQuery();
-                    var edits = new List<Edit>();
-
-                    if (items["remove"] != null)
                     {
-                        var removeList = items["remove"].ToObject<List<string>>();
-                        foreach (var remove in removeList)
-                        {
-                            edits.Add(new Edit { Type = EditType.Remove, Delete = remove });
-                        }
-                    }
+                        JObject items = JObject.Load(reader);
+                        var ret = new ConsequenceQuery();
+                        var edits = new List<Edit>();
 
-                    if (items["edits"] != null)
-                    {
-                        var editsList = items["edits"].ToObject<List<Edit>>();
-                        foreach (var edit in editsList)
+                        if (items["remove"] != null)
                         {
-                            edits.Add(edit);
+                            var removeList = items["remove"].ToObject<List<string>>();
+                            foreach (var remove in removeList)
+                            {
+                                edits.Add(new Edit { Type = EditType.Remove, Delete = remove });
+                            }
                         }
-                    }
 
-                    ret.Edits = edits;
-                    return ret;
-                }
+                        if (items["edits"] != null)
+                        {
+                            var editsList = items["edits"].ToObject<List<Edit>>();
+                            foreach (var edit in editsList)
+                            {
+                                edits.Add(edit);
+                            }
+                        }
+
+                        ret.Edits = edits;
+                        return ret;
+                    }
                 case JsonToken.String:
                     var jValue = new JValue(reader.Value);
                     return new ConsequenceQuery { SearchQuery = (string)jValue.Value };

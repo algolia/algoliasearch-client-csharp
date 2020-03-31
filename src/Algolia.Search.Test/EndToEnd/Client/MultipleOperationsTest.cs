@@ -106,12 +106,14 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             MultipleQueriesRequest request = new MultipleQueriesRequest
             {
-                Strategy = StrategyType.None, Requests = multipleSearch
+                Strategy = StrategyType.None,
+                Requests = multipleSearch
             };
 
             MultipleQueriesRequest request2 = new MultipleQueriesRequest
             {
-                Strategy = StrategyType.StopIfEnoughMatches, Requests = multipleSearch
+                Strategy = StrategyType.StopIfEnoughMatches,
+                Requests = multipleSearch
             };
 
             var multiQueri = await BaseTest.SearchClient.MultipleQueriesAsync<MultipleOperationClass>(request);

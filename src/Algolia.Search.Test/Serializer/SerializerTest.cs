@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 *
@@ -637,7 +637,8 @@ namespace Algolia.Search.Test.Serializer
         {
             IndexSettings settings = new IndexSettings
             {
-                EnableRules = true, CustomSettings = new Dictionary<string, object> { { "newParameter", 10 } }
+                EnableRules = true,
+                CustomSettings = new Dictionary<string, object> { { "newParameter", 10 } }
             };
 
             string json = JsonConvert.SerializeObject(settings, JsonConfig.AlgoliaJsonSerializerSettings);

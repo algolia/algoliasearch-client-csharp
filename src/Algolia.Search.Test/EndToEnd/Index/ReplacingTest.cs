@@ -72,7 +72,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var synonymToSave = new Synonym
             {
-                ObjectID = "one", Type = SynonymType.Synonym, Synonyms = new List<string> { "one", "two" }
+                ObjectID = "one",
+                Type = SynonymType.Synonym,
+                Synonyms = new List<string> { "one", "two" }
             };
 
             var saveSynonymResponse = _index.SaveSynonymAsync(synonymToSave);
@@ -113,7 +115,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var synonymToSave2 = new Synonym
             {
-                ObjectID = "two", Type = SynonymType.Synonym, Synonyms = new List<string> { "one", "two" }
+                ObjectID = "two",
+                Type = SynonymType.Synonym,
+                Synonyms = new List<string> { "one", "two" }
             };
 
             var replaceAllSynonymsResponse = await _index.ReplaceAllSynonymsAsync(new List<Synonym> { synonymToSave2 });
