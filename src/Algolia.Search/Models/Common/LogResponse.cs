@@ -38,6 +38,36 @@ namespace Algolia.Search.Models.Common
     }
 
     /// <summary>
+    /// https://www.algolia.com/doc/api-reference/api-methods/get-logs/#method-response-inner_queries
+    /// Contains an object for each performed query with the indexName, queryID, offset, and userToken.
+    /// </summary>
+    public class InnerQueryLog
+    {
+        /// <summary>
+        /// The index used for the given query
+        /// </summary>
+        [JsonProperty(PropertyName = "index_name")]
+        public string IndexName { get; set; }
+
+        /// <summary>
+        /// The QueryID for the given query
+        /// </summary>
+        [JsonProperty(PropertyName = "query_id")]
+        public string QueryId { get; set; }
+
+        /// <summary>
+        /// User identifier
+        /// </summary>
+        [JsonProperty(PropertyName = "user_token")]
+        public string UserToken { get; set; }
+
+        /// <summary>
+        /// Specify the offset of the first hit to return
+        /// </summary>
+        public long? Offset { get; set; }
+    }
+
+    /// <summary>
     /// https://www.algolia.com/doc/api-reference/api-methods/get-logs/
     /// </summary>
     public class Log
@@ -115,5 +145,11 @@ namespace Algolia.Search.Models.Common
         /// Index name of the log
         /// </summary>
         public string Index { get; set; }
+
+        /// <summary>
+        /// Containers for each performed query for the given call.
+        /// </summary>
+        [JsonProperty(PropertyName = "inner_queries")]
+        public IEnumerable<InnerQueryLog> InnerQueries { get; set; }
     }
 }
