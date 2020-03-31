@@ -235,6 +235,12 @@ namespace Algolia.Search.Models.Search
         /// </summary>
         public IEnumerable<string> AlternativesAsExact { get; set; }
 
+        /// <summary>
+        /// List of supported languages with their associated language ISO code.
+        /// Apply a set of natural language best practices such as ignorePlurals, removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts.
+        /// </summary>
+        public IEnumerable<string> NaturalLanguages { get; set; }
+
         // query rules
 
         /// <summary>
