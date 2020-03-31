@@ -88,7 +88,9 @@ namespace Algolia.Search.Test.EndToEnd.Account
 
             var synonym = new Synonym
             {
-                ObjectID = "one", Type = SynonymType.Synonym, Synonyms = new List<string> { "one", "two" }
+                ObjectID = "one",
+                Type = SynonymType.Synonym,
+                Synonyms = new List<string> { "one", "two" }
             };
 
             var saveSynonym = index1.SaveSynonymAsync(synonym);

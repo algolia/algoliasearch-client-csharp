@@ -75,7 +75,8 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             Task<SearchResponse<Employee>> searchElonTask = _index.SearchAsync<Employee>(new Query
             {
-                SearchQuery = "elon", ClickAnalytics = true
+                SearchQuery = "elon",
+                ClickAnalytics = true
             });
 
             Task<SearchResponse<Employee>> searchElonTask1 = _index.SearchAsync<Employee>(new Query
@@ -94,7 +95,8 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             Task<SearchForFacetResponse> searchFacetTask = _index.SearchForFacetValueAsync(new SearchForFacetRequest
             {
-                FacetName = "company", FacetQuery = "a"
+                FacetName = "company",
+                FacetQuery = "a"
             });
 
             Task.WaitAll(searchAlgoliaTask, searchElonTask, searchElonTask1, searchElonTask2, searchFacetTask);

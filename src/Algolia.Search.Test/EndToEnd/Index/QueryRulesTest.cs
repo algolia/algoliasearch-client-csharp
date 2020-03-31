@@ -107,7 +107,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 Condition =
                     new Condition
                     {
-                        Anchoring = "is", Pattern = "mobile phone", Alternatives = Alternatives.Of(true)
+                        Anchoring = "is",
+                        Pattern = "mobile phone",
+                        Alternatives = Alternatives.Of(true)
                     },
                 Consequence = new Consequence
                 {
