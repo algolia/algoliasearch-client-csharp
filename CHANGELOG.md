@@ -1,5 +1,42 @@
 # ChangeLog
 
+## [6.6.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.5.1...6.6.0) (2020-04-01)
+
+### Feat
+
+- adds inner_queries ([931c268](https://github.com/algolia/algoliasearch-client-csharp/commit/931c268))
+- adds naturalLanguages parameter ([d62f15e](https://github.com/algolia/algoliasearch-client-csharp/commit/d62f15e))
+- **analytics**: introduce the region parameter to instantiate the AnalyticsClient ([a710872](https://github.com/algolia/algoliasearch-client-csharp/commit/a710872))
+- adds RecommendationClient ([031c51a](https://github.com/algolia/algoliasearch-client-csharp/commit/031c51a))
+
+    The personalization strategy endpoint is migrating from the Search API
+    to the Recommendation API.
+
+    To use the Recommendation API, one must now use RecommendationClient
+    instead of SearchClient
+
+- **mcm**: has pending mappings (#683) ([7721573](https://github.com/algolia/algoliasearch-client-csharp/commit/7721573))
+
+    Get cluster pending (migrating, creating, deleting) mapping state.
+    Query cluster pending mapping status, and optionally get cluster mappings.
+
+
+### Fix
+
+- bad separator ([2602f2e](https://github.com/algolia/algoliasearch-client-csharp/commit/2602f2e))
+- **MCM**: test flakyness (#690) ([e2d76cd](https://github.com/algolia/algoliasearch-client-csharp/commit/e2d76cd))
+- abTestID ([a2240ad](https://github.com/algolia/algoliasearch-client-csharp/commit/a2240ad))
+
+### Misc
+
+- legacy personalization endpoint ([2048442](https://github.com/algolia/algoliasearch-client-csharp/commit/2048442))
+
+### Refactor
+
+- code format (#680) ([5ded8c0](https://github.com/algolia/algoliasearch-client-csharp/commit/5ded8c0))
+
+
+
 ## [6.5.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.5.0...6.5.1) (2019-11-26)
 
 ### Patch
