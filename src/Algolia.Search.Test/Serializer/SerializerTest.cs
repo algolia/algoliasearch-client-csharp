@@ -655,5 +655,75 @@ namespace Algolia.Search.Test.Serializer
                     "{\"entries\": 100000000000, \"dataSize\": 100000000000, \"fileSize\": 100000000000}");
             });
         }
+
+        [Test]
+        [Parallelizable]
+        public void TestPartialUpdateOperation_Increment()
+        {
+            RecordWithPartialUpdateOperation<int> record = new RecordWithPartialUpdateOperation<int>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<int>.Increment(2),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"Increment\",\"value\":2}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestPartialUpdateOperation_Decrement()
+        {
+            RecordWithPartialUpdateOperation<int> record = new RecordWithPartialUpdateOperation<int>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<int>.Decrement(2),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"Decrement\",\"value\":2}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestPartialUpdateOperation_Add()
+        {
+            RecordWithPartialUpdateOperation<string> record = new RecordWithPartialUpdateOperation<string>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<string>.Add("something"),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"Add\",\"value\":\"something\"}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestPartialUpdateOperation_AddUnique()
+        {
+            RecordWithPartialUpdateOperation<string> record = new RecordWithPartialUpdateOperation<string>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<string>.AddUnique("something"),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"AddUnique\",\"value\":\"something\"}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestPartialUpdateOperation_Remove()
+        {
+            RecordWithPartialUpdateOperation<string> record = new RecordWithPartialUpdateOperation<string>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<string>.Remove("something"),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"Remove\",\"value\":\"something\"}}");
+        }
     }
 }
