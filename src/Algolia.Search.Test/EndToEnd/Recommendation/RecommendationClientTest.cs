@@ -37,6 +37,20 @@ namespace Algolia.Search.Test.EndToEnd.Recommendation
         [Parallelizable]
         public void TestRecommendationClient()
         {
+            var request = new SetStrategyRequest(
+                new List<EventsScoring>
+                {
+                    new EventsScoring("Add to cart", "conversion", 50),
+                    new EventsScoring("Purchase", "conversion", 100),
+                },
+                new List<FacetsScoring>
+                {
+                    new FacetsScoring("brand", 100),
+                    new FacetsScoring("categories", 10),
+                },
+                0
+            );
+            Assert.DoesNotThrow(() => BaseTest.RecommendationClient.SetPersonalizationStrategy(request));
             Assert.DoesNotThrow(() => BaseTest.RecommendationClient.GetPersonalizationStrategy());
         }
 
