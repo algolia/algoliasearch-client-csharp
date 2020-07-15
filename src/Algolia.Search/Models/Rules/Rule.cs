@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Rules
@@ -38,7 +39,13 @@ namespace Algolia.Search.Models.Rules
         /// <summary>
         /// Condition of the rule, expressed using the following variables: pattern, anchoring, context.
         /// </summary>
+        [Obsolete("Single condition is deprecated, use Conditions (plural) which accept one or more condition(s).")]
         public Condition Condition { get; set; }
+
+        /// <summary>
+        /// Conditions of the rule, which can be used to apply more than a single condition to the Rule.
+        /// </summary>
+        public List<Condition> Conditions { get; set; }
 
         /// <summary>
         /// Consequence of the rule. At least one of the following object must be used: params, promote, hide, userData

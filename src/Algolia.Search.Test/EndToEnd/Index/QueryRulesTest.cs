@@ -104,13 +104,15 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Rule ruleToSave2 = new Rule
             {
                 ObjectID = "query_edits",
-                Condition =
+                Conditions = new List<Condition>
+                {
                     new Condition
                     {
                         Anchoring = "is",
                         Pattern = "mobile phone",
                         Alternatives = Alternatives.Of(true)
                     },
+                },
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
