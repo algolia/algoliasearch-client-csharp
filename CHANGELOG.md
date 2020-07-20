@@ -1,5 +1,14 @@
 # ChangeLog
 
+## [6.7.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.6.0...6.7.0) (2020-07-20)
+
+### Feat
+
+- **rule**: implement multi-condition rules ([dfe6daa](https://github.com/algolia/algoliasearch-client-csharp/commit/dfe6daa))
+- **search**: expose built-in operations for partial updates with PartialUpdateOperation<T> ([605ab93](https://github.com/algolia/algoliasearch-client-csharp/commit/605ab93))
+
+
+
 ## [6.6.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.5.1...6.6.0) (2020-04-01)
 
 ### Feat
