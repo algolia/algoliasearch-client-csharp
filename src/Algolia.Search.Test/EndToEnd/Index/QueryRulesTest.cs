@@ -71,7 +71,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
             {
                 ObjectID = "brand_automatic_faceting",
                 Enabled = false,
+#pragma warning disable 612, 618
                 Condition = new Condition { Anchoring = "is", Pattern = "{facet:brand}" },
+#pragma warning restore 612, 618
                 Consequence = new Consequence
                 {
                     FilterPromotes = false,
@@ -141,8 +143,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Rule ruleToSave4 = new Rule
             {
                 ObjectID = "query_promo_only_summer",
-                Consequence = new Consequence { Params = new ConsequenceParams { Filters = "model:One" } },
-                Condition = new Condition { Context = "summer" }
+#pragma warning disable 612, 618
+                Condition = new Condition { Context = "summer" },
+#pragma warning restore 612, 618
+                Consequence = new Consequence { Params = new ConsequenceParams { Filters = "model:One" } }
             };
 
             var batchRulesResponse =

@@ -36,6 +36,8 @@ using System.Linq;
 
 namespace Algolia.Search.Test.Serializer
 {
+#pragma warning disable 612, 618
+
     [TestFixture]
     [Parallelizable]
     public class SerializerTest
@@ -726,4 +728,6 @@ namespace Algolia.Search.Test.Serializer
             Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"Remove\",\"value\":\"something\"}}");
         }
     }
+
+#pragma warning restore 612, 618
 }

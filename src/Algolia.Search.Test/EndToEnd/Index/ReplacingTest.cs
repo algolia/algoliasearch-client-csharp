@@ -52,7 +52,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var ruleToSave = new Rule
             {
                 ObjectID = "one",
+#pragma warning disable 612, 618
                 Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
+#pragma warning restore 612, 618
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
@@ -95,7 +97,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var ruleToSave2 = new Rule
             {
                 ObjectID = "two",
+#pragma warning disable 612, 618
                 Condition = new Condition { Anchoring = "is", Pattern = "pattern" },
+#pragma warning restore 612, 618
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
