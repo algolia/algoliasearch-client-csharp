@@ -9,6 +9,7 @@
     <PackageTags>Algolia;Search;SearchEngine;Service;Instant;Typo-Tolerance;Realtime;Analytics</PackageTags>
     <PackageReleaseNotes>https://github.com/algolia/algoliasearch-client-csharp/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PackageIconUrl>https://s.gravatar.com/avatar/ef38ca989ef6a4a6373435c257373b84?s=80</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://www.algolia.com/doc/api-client/getting-started/install/csharp/</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
@@ -25,5 +26,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2"/>
+    <None Include="images\icon.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
