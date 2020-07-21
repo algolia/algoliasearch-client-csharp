@@ -20,16 +20,10 @@
     <Copyright>Copyright 2019 Algolia</Copyright>
     <Version>6.7.0</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.1;netstandard2.0;netstandard1.3</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.1;netstandard2.0;netstandard1.3;net45;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.3</TargetFrameworks>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3' OR '$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2"/>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2"/>
-    <Reference Include="System"/>
-    <Reference Include="System.Net.Http"/>
   </ItemGroup>
 </Project>
