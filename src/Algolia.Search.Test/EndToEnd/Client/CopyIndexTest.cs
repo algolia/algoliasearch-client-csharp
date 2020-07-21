@@ -91,7 +91,9 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Rule ruleToSave = new Rule
             {
                 ObjectID = "company_automatic_faceting",
+#pragma warning disable 612, 618
                 Condition = new Condition { Anchoring = "contains", Pattern = "{facet:company}" },
+#pragma warning restore 612, 618
                 Consequence = new Consequence
                 {
                     Params = new ConsequenceParams
