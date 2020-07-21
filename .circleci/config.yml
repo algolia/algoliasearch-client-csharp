@@ -1,0 +1,68 @@
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
+jobs:
+  format:
+    docker:
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    steps:
+      - checkout
+      - run:
+          name: "Install dotnet-format subcommand"
+          command: |
+            dotnet tool install -g dotnet-format
+      - run:
+          name: "Check the formatting of the project"
+          command: |
+            export PATH="$PATH:/root/.dotnet/tools"
+            dotnet format --check src/
+  build:
+    docker:
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    steps:
+      - checkout
+      - run:
+          name: "Build the project"
+          command: |
+            dotnet build --configuration release src/
+  test:
+    docker:
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    steps:
+      - checkout
+      - run:
+          name: "Run the tests"
+          command: |
+            dotnet test --configuration release src/Algolia.Search.Test
+  release:
+    docker:
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    steps:
+      - checkout
+      - run:
+          name: "Build the NuPKG release artifact"
+          command: |
+            dotnet pack --configuration release src/Algolia.Search
+      - run:
+          name: "Release the new version"
+          command: |
+            if [[ -z "$NUGET_API_KEY" ]]; then echo "$NUGET_API_KEY is not set"; exit 1; fi
+            dotnet nuget push $(ls src/Algolia.Search/bin/release/*.nupkg) -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+      - test
+      - release:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^[1-9]+.[0-9]+.[0-9]+.*/
