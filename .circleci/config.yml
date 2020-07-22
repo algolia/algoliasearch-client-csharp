@@ -55,10 +55,12 @@ workflows:
   version: 2
   build:
     jobs:
+      - format
       - build
       - test
       - release:
           requires:
+            - format
             - build
             - test
           filters:
