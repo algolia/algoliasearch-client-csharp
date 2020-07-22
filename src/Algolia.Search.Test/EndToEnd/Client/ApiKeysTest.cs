@@ -21,8 +21,10 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Models.ApiKeys;
 using NUnit.Framework;
 
@@ -73,8 +75,21 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var deleteApiKey = await BaseTest.SearchClient.DeleteApiKeyAsync(_apiKey);
             deleteApiKey.Wait();
 
-            var restoreAPIKey = await BaseTest.SearchClient.RestoreApiKeyAsync(_apiKey);
-            restoreAPIKey.Wait();
+            TestHelper.Retry(async () =>
+            {
+                bool shouldRetry;
+                try
+                {
+                    var restoreAPIKey = await BaseTest.SearchClient.RestoreApiKeyAsync(_apiKey);
+                    restoreAPIKey.Wait();
+                    shouldRetry = false;
+                }
+                catch (AlgoliaApiException e)
+                {
+                    shouldRetry = e.HttpErrorCode == 404 && e.Message == "Key already exists";
+                }
+                return shouldRetry;
+            }, TimeSpan.FromSeconds(1), 10);
 
             await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
 
