@@ -26,6 +26,8 @@ using System.Collections;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Algolia.Search.Test
 {
@@ -237,6 +239,20 @@ namespace Algolia.Search.Test
                 result = true; // match
 
             return result;
+        }
+
+        internal static void Retry(Func<Task<bool>> func, TimeSpan delay, int maxNbRetries)
+        {
+            for (int i = 0; i < maxNbRetries; i++)
+            {
+                bool shouldRetry = func().GetAwaiter().GetResult();
+                if (!shouldRetry)
+                {
+                    return;
+                }
+                Thread.Sleep((int)delay.TotalMilliseconds);
+            }
+            throw new Exception("reached the maximum number of retries");
         }
     }
 }
