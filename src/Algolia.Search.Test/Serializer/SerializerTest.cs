@@ -21,9 +21,11 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Linq;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Personalization;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
@@ -31,8 +33,6 @@ using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Algolia.Search.Test.Serializer
 {

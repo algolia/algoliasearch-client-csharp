@@ -21,14 +21,14 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Enums;
-using Algolia.Search.Exceptions;
-using Algolia.Search.Models.Rules;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Algolia.Search.Exceptions;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Rules;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Algolia.Search.Serializer
 {

@@ -21,11 +21,11 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
 using Algolia.Search.Models.Enums;
+using Newtonsoft.Json;
 
 namespace Algolia.Search.Serializer
 {

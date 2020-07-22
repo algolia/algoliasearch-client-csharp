@@ -21,11 +21,11 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Reflection;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Serializer;
 using Algolia.Search.Transport;
-using System.Collections.Generic;
-using System.Reflection;
 using Algolia.Search.Utils;
 
 namespace Algolia.Search.Clients

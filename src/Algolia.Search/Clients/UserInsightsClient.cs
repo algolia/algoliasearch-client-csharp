@@ -21,13 +21,13 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Insights;
 using Algolia.Search.Utils;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {

@@ -21,9 +21,9 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
-using System.Collections.Generic;
 
 namespace Algolia.Search.Clients
 {

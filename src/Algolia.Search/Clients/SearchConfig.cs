@@ -21,11 +21,11 @@
 * THE SOFTWARE.
 */
 
+using System;
+using System.Collections.Generic;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
-using System;
-using System.Collections.Generic;
 
 namespace Algolia.Search.Clients
 {

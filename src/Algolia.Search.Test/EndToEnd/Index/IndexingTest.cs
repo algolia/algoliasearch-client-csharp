@@ -21,16 +21,16 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Utils;
 using Newtonsoft.Json;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace Algolia.Search.Test.EndToEnd.Index
 {

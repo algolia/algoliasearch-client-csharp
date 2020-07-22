@@ -21,9 +21,9 @@
 * THE SOFTWARE.
 */
 
+using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using NUnit.Framework;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd.Index
 {

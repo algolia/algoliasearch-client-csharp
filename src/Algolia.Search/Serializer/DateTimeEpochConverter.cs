@@ -21,10 +21,10 @@
 * THE SOFTWARE.
 */
 
+using System;
 using Algolia.Search.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
 
 namespace Algolia.Search.Serializer
 {

@@ -21,9 +21,9 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Common;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Http
 {

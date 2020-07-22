@@ -21,11 +21,11 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Http;
-using Algolia.Search.Models.Insights;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
+using Algolia.Search.Models.Insights;
 
 namespace Algolia.Search.Clients
 {

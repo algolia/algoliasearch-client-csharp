@@ -21,9 +21,9 @@
 * THE SOFTWARE.
 */
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Analytics
 {

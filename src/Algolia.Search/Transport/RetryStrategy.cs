@@ -21,13 +21,13 @@
  * THE SOFTWARE.
  */
 
-using Algolia.Search.Clients;
-using Algolia.Search.Http;
-using Algolia.Search.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Algolia.Search.Clients;
+using Algolia.Search.Http;
+using Algolia.Search.Models.Enums;
 
 [assembly: InternalsVisibleTo("Algolia.Search.Test")]
 

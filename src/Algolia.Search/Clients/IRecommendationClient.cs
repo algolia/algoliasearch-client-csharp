@@ -21,10 +21,10 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Http;
-using Algolia.Search.Models.Recommendation;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Http;
+using Algolia.Search.Models.Recommendation;
 
 namespace Algolia.Search.Clients
 {

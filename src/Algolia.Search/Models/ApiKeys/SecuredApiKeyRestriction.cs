@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Search;
 using System.Collections.Generic;
+using Algolia.Search.Models.Search;
 
 namespace Algolia.Search.Models.ApiKeys
 {

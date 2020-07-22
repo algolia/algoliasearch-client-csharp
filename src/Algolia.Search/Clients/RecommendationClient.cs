@@ -21,15 +21,15 @@
 * THE SOFTWARE.
 */
 
+using System;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Recommendation;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
-using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {

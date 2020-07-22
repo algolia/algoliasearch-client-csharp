@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using NUnit.Framework;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Algolia.Search.Test.EndToEnd.Client
 {

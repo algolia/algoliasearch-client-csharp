@@ -21,11 +21,11 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Serializer;
+using System.Collections.Generic;
 using Algolia.Search.Models.Recommendation;
+using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace Algolia.Search.Test.EndToEnd.Recommendation
 {
