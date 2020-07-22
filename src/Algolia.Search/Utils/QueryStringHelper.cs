@@ -21,14 +21,14 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.ApiKeys;
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Algolia.Search.Models.ApiKeys;
+using Newtonsoft.Json;
 
 namespace Algolia.Search.Utils
 {

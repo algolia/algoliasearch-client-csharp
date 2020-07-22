@@ -21,15 +21,15 @@
 * THE SOFTWARE.
 */
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.ApiKeys;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Utils;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd.ApiKeys
 {

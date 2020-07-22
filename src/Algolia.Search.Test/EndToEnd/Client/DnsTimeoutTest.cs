@@ -21,13 +21,13 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd.Client
 {

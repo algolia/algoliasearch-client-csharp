@@ -21,6 +21,8 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Enums;
@@ -28,8 +30,6 @@ using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Test.EndToEnd.Account
 {

@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Common;
 using System.Collections.Generic;
+using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Utils
 {

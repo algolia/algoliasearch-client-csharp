@@ -21,15 +21,15 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Common;
-using Algolia.Search.Serializer;
-using Algolia.Search.Utils;
 using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Common;
+using Algolia.Search.Serializer;
+using Algolia.Search.Utils;
 
 namespace Algolia.Search.Http
 {

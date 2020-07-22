@@ -21,10 +21,10 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Search;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace Algolia.Search.Test.EndToEnd.Insights
 {

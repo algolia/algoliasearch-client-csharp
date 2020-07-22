@@ -21,14 +21,14 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Exceptions;
-using Algolia.Search.Models.Search;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Algolia.Search.Exceptions;
+using Algolia.Search.Models.Search;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Algolia.Search.Utils
 {

@@ -21,6 +21,9 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
@@ -28,9 +31,6 @@ using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Settings;
 using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Utils;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {

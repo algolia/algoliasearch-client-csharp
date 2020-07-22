@@ -21,9 +21,9 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Common;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Utils;
 
 namespace Algolia.Search.Http

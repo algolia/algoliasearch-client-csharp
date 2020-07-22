@@ -21,15 +21,15 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Clients;
-using Algolia.Search.Models.Batch;
-using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Common;
-using Algolia.Search.Test;
-using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using Algolia.Search.Clients;
+using Algolia.Search.Models.Batch;
+using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Test;
+using NUnit.Framework;
 
 [SetUpFixture]
 public class BaseTest

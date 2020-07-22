@@ -21,10 +21,10 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Common;
-using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using Algolia.Search.Models.Common;
+using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.ApiKeys
 {

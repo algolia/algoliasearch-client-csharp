@@ -21,6 +21,14 @@
 * THE SOFTWARE.
 */
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
 using Algolia.Search.Iterators;
@@ -34,14 +42,6 @@ using Algolia.Search.Models.Synonyms;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Algolia.Search.Clients
 {

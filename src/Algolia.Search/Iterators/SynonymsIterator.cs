@@ -21,12 +21,12 @@
 * THE SOFTWARE.
 */
 
+using System.Collections;
+using System.Collections.Generic;
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Synonyms;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Algolia.Search.Iterators
 {
