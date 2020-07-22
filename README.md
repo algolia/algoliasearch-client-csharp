@@ -23,10 +23,10 @@
 
 ## ✨ Features
 
-* Compatible with all .NET platforms:
+* Compatible with most .NET platforms:
   * `.NET Standard 1.3` to `.NET Standard 2.1`,
-  * `.NET Core 1.0` to `.NET Core 3.0`,
-  * `.NET Framework 4.5` to `.NET Framework 4.7.1`
+  * `.NET Core 1.0` to `.NET Core 3.1`,
+  * `.NET Framework 4.6` to `.NET Framework 4.8`
 * Asynchronous and synchronous methods to interact with Algolia's API
 * Thread-safe clients
 * Typed requests and responses
@@ -77,8 +77,8 @@ public class Contact
 
 SearchIndex index = client.InitIndex("contacts");
 
-index.SaveObject(new Contact 
-{ 
+index.SaveObject(new Contact
+{
     ObjectID = "ID1",
     Name = "Jimmie",
     Age = 30
@@ -101,7 +101,7 @@ await index.SearchAsync<Contact>(new Query { "jimmie" });
 For full documentation, visit the **[Algolia .NET API Client documentation](https://www.algolia.com/doc/api-client/getting-started/install/csharp/)**.
 
 #### ASP.NET
-If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.com/doc/api-client/getting-started/tutorials/asp.net/csharp/). 
+If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.com/doc/api-client/getting-started/tutorials/asp.net/csharp/).
 
 
 ## 📄 License
