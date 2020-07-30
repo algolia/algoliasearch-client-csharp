@@ -8,7 +8,7 @@
 
   <p align="center">
     <a href="https://www.nuget.org/packages/Algolia.Search/"><img src="https://img.shields.io/nuget/v/Algolia.Search.svg?style=flat-square" alt="Nuget"></img></a>
-    <a href="https://dev.azure.com/algolia-api-clients/dotnet/_build/latest?definitionId=2&branchName=master"><img src="https://dev.azure.com/algolia-api-clients/dotnet/_apis/build/status/Algolia.Search.CI?branchName=master" alt="Build status"></img></a>
+        <a href="https://circleci.com/gh/algolia/algoliasearch-client-csharp"><img src="https://circleci.com/gh/algolia/algoliasearch-client-csharp.svg?style=shield" alt="CircleCI"></img></a>
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="Licence"></img></a>
   </p>
 </p>
