@@ -48,7 +48,7 @@ jobs:
       - run:
           name: "Release the new version"
           command: |
-            if [[ -z "$NUGET_API_KEY" ]]; then echo "$NUGET_API_KEY is not set"; exit 1; fi
+            if [[ -z "$NUGET_API_KEY" ]]; then echo '$NUGET_API_KEY is not set'; exit 1; fi
             dotnet nuget push $(ls src/Algolia.Search/bin/release/*.nupkg) -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
 
 workflows:
