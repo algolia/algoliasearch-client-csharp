@@ -358,6 +358,11 @@ namespace Algolia.Search.Models.Settings
         public Dictionary<string, Dictionary<string, string>> CustomNormalization { get; set; }
 
         /// <summary>
+        /// Enable the Personalization feature. Engine default: false
+        /// </summary>
+        public bool? EnablePersonalization { get; set; }
+
+        /// <summary>
         /// Custom settings for advanced use cases
         /// </summary>
         [JsonExtensionData]
