@@ -145,6 +145,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                     { "fi", new List<string> { "attribute3" } }
                 },
                 KeepDiacriticsOnCharacters = "øé",
+                EnablePersonalization = true,
                 UserData = "User data"
             };
 
