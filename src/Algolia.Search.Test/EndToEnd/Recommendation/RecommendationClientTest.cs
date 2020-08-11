@@ -22,6 +22,7 @@
 */
 
 using System.Collections.Generic;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Recommendation;
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
@@ -50,7 +51,18 @@ namespace Algolia.Search.Test.EndToEnd.Recommendation
                 },
                 0
             );
-            Assert.DoesNotThrow(() => BaseTest.RecommendationClient.SetPersonalizationStrategy(request));
+            try
+            {
+                BaseTest.RecommendationClient.SetPersonalizationStrategy(request);
+            }
+            catch (AlgoliaApiException e)
+            {
+                // The personalization API is now limiting the number of setPersonalizationStrategy()` successful calls
+                // to 15 per day. If the 429 error is returned, the response is considered a "success".
+                if (e.HttpErrorCode != 429) {
+                    Assert.Fail($"RecommendationClient.SetPersonalizationStrategy failure: HttpErrorCode: {e.HttpErrorCode}, HttpMessage {e.Message}");
+                }
+            }
             Assert.DoesNotThrow(() => BaseTest.RecommendationClient.GetPersonalizationStrategy());
         }
 
