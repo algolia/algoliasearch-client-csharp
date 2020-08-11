@@ -58,6 +58,34 @@ namespace Algolia.Search.Models.Search
         }
 
         /// <summary>
+        /// Increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignores the whole object update
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static PartialUpdateOperation<int> IncrementFrom(int value)
+        {
+            return new PartialUpdateOperation<int>
+            {
+                Operation = PartialUpdateOperationType.IncrementFrom,
+                Value = value,
+            };
+        }
+
+        /// <summary>
+        /// Increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise ignore the whole object update
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static PartialUpdateOperation<int> IncrementSet(int value)
+        {
+            return new PartialUpdateOperation<int>
+            {
+                Operation = PartialUpdateOperationType.IncrementSet,
+                Value = value,
+            };
+        }
+
+        /// <summary>
         /// Decrement by an integer value
         /// </summary>
         /// <param name="value"></param>

@@ -674,6 +674,34 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
+        public void TestPartialUpdateOperation_IncrementFrom()
+        {
+            RecordWithPartialUpdateOperation<int> record = new RecordWithPartialUpdateOperation<int>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<int>.IncrementFrom(2),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"IncrementFrom\",\"value\":2}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestPartialUpdateOperation_IncrementSet()
+        {
+            RecordWithPartialUpdateOperation<int> record = new RecordWithPartialUpdateOperation<int>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<int>.IncrementSet(2),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"IncrementSet\",\"value\":2}}");
+        }
+
+        [Test]
+        [Parallelizable]
         public void TestPartialUpdateOperation_Decrement()
         {
             RecordWithPartialUpdateOperation<int> record = new RecordWithPartialUpdateOperation<int>

@@ -34,6 +34,16 @@ namespace Algolia.Search.Models.Enums
         public const string Increment = "Increment";
 
         /// <summary>
+        /// Increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignores the whole object update
+        /// </summary>
+        public const string IncrementFrom = "IncrementFrom";
+
+        /// <summary>
+        /// Increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise ignore the whole object update
+        /// </summary>
+        public const string IncrementSet = "IncrementSet";
+
+        /// <summary>
         /// Decrement by an integer value
         /// </summary>
         public const string Decrement = "Decrement";
