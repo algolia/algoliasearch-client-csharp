@@ -1,5 +1,15 @@
 # ChangeLog
 
+## [6.8.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.7.0...6.8.0) (2020-08-17)
+
+### Feat
+
+- **indexing**: built-in operations 'IncrementFrom' and 'IncrementSet' ([5f2055b](https://github.com/algolia/algoliasearch-client-csharp/commit/5f2055b))
+- Add EnablePersonalization setting parameter ([a86bf1b](https://github.com/algolia/algoliasearch-client-csharp/commit/a86bf1b))
+- Drop official support for .NET Framework 4.5 ([f0a9a21](https://github.com/algolia/algoliasearch-client-csharp/commit/f0a9a21))
+
+
+
 ## [6.7.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.6.0...6.7.0) (2020-07-20)
 
 ### Feat
