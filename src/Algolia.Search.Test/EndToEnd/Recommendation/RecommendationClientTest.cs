@@ -55,14 +55,13 @@ namespace Algolia.Search.Test.EndToEnd.Recommendation
             {
                 BaseTest.RecommendationClient.SetPersonalizationStrategy(request);
             }
-            catch (AlgoliaApiException e)
+            catch (AlgoliaApiException e) when (e.HttpErrorCode != 429)
             {
                 // The personalization API is now limiting the number of setPersonalizationStrategy()` successful calls
                 // to 15 per day. If the 429 error is returned, the response is considered a "success".
-                if (e.HttpErrorCode != 429)
-                {
-                    Assert.Fail($"RecommendationClient.SetPersonalizationStrategy failure: HttpErrorCode: {e.HttpErrorCode}, HttpMessage {e.Message}");
-                }
+                
+                Assert.Fail($"RecommendationClient.SetPersonalizationStrategy failure: HttpErrorCode: {e.HttpErrorCode}, HttpMessage {e.Message}");
+                
             }
             Assert.DoesNotThrow(() => BaseTest.RecommendationClient.GetPersonalizationStrategy());
         }
