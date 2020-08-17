@@ -46,8 +46,6 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Increment by an integer value
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static PartialUpdateOperation<int> Increment(int value)
         {
             return new PartialUpdateOperation<int>
@@ -60,8 +58,6 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignores the whole object update
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static PartialUpdateOperation<int> IncrementFrom(int value)
         {
             return new PartialUpdateOperation<int>
@@ -88,8 +84,6 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Decrement by an integer value
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static PartialUpdateOperation<int> Decrement(int value)
         {
             return new PartialUpdateOperation<int>
@@ -116,8 +110,6 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Add value to a collection if it does not exist
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static PartialUpdateOperation<T> AddUnique(T value)
         {
             return new PartialUpdateOperation<T>
@@ -130,8 +122,6 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Remove value from a collection
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static PartialUpdateOperation<T> Remove(T value)
         {
             return new PartialUpdateOperation<T>
