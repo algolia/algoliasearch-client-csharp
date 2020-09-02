@@ -50,6 +50,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
         private SearchIndex _indexClear;
         private string _indexClearName;
 
+        private SearchIndex _indexWithJObject;
+        private string _indexWithJObjectName;
+
         [OneTimeSetUp]
         public void Init()
         {
@@ -64,6 +67,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             _indexClearName = TestHelper.GetTestIndexName("clear_objects");
             _indexClear = BaseTest.SearchClient.InitIndex(_indexClearName);
+
+            _indexWithJObjectName = TestHelper.GetTestIndexName("indexing_with_JObject");
+            _indexWithJObject = BaseTest.SearchClient.InitIndex(_indexWithJObjectName);
         }
 
         [Test]
@@ -281,6 +287,27 @@ namespace Algolia.Search.Test.EndToEnd.Index
             var listIndices = await BaseTest.SearchClient.ListIndicesAsync();
             Assert.True(listIndices.Items.Exists(x => x.Name.Equals(indexDestName)));
             Assert.False(listIndices.Items.Exists(x => x.Name.Equals(_indexMoveName)));
+        }
+
+        [Test]
+        [Parallelizable]
+        public async Task IndexOperationsAsyncWithJObjectTest()
+        {
+            var objectOne = new JObject { { "objectID", "one" }, { "title", "Foo" } };
+            var addObject = await _indexWithJObject.SaveObjectAsync(objectOne);
+
+            addObject.Wait();
+
+            var objectTwo = new JObject { { "objectID", "one" }, { "title", "Bar" } };
+            var updateObject = await _indexWithJObject.PartialUpdateObjectAsync(objectTwo);
+
+            updateObject.Wait();
+
+            var clear = await _indexWithJObject.ClearObjectsAsync();
+            clear.Wait();
+
+            var search = await _indexClear.SearchAsync<AlgoliaStub>(new Query(""));
+            Assert.That(search.Hits, Is.Empty);
         }
     }
 
