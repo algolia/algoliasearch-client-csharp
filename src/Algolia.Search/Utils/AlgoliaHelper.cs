@@ -101,6 +101,18 @@ namespace Algolia.Search.Utils
         /// <returns></returns>
         internal static string GetObjectID<T>(T data)
         {
+            Type itemType = typeof(T);
+
+            if (itemType == typeof(JObject))
+            {
+                string objectID = JObject.FromObject(data).Property("objectID").ToString();
+
+                if (objectID != null || objectID != "")
+                {
+                    return objectID;
+                }
+            }
+
             var objectIdProperty = PropertyOrJsonAttributeExists<T>("ObjectID");
 
             if (objectIdProperty != null)
