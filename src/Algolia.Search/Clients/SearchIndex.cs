@@ -87,7 +87,7 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(data));
             }
 
-            if (data is IEnumerable)
+            if (data is IEnumerable && !(data is JObject))
             {
                 throw new ArgumentException($"{nameof(data)} should not be an IEnumerable/List/Collection");
             }
