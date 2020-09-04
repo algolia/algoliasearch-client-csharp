@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Algolia.Search.Clients;
+using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Utils;
@@ -293,19 +294,34 @@ namespace Algolia.Search.Test.EndToEnd.Index
         [Parallelizable]
         public async Task IndexOperationsAsyncWithJObjectTest()
         {
+            //Add JObject with ID 
             var objectOne = new JObject { { "objectID", "one" }, { "title", "Foo" } };
             var addObject = await _indexWithJObject.SaveObjectAsync(objectOne);
 
             addObject.Wait();
 
-            var objectTwo = new JObject { { "objectID", "one" }, { "title", "Bar" } };
+            //Add JObject without ID
+            var objectOneWoId = new JObject { { "title", "Bar" } };
+            var addObjectWoId = await _indexWithJObject.SaveObjectAsync(objectOneWoId, autoGenerateObjectId: true);
+
+            addObjectWoId.Wait();
+
+            //Update record with JObject
+            var objectTwo = new JObject { { "objectID", "one" }, { "title", "Baz" } };
             var updateObject = await _indexWithJObject.PartialUpdateObjectAsync(objectTwo);
 
             updateObject.Wait();
 
+            //Update record with JObject without ID
+            var objectTwoWoId = new JObject { { "title", "Bam" } };
+
+            Assert.ThrowsAsync<AlgoliaException>(() => _indexWithJObject.PartialUpdateObjectAsync(objectTwoWoId));
+
+            // Clear the index
             var clear = await _indexWithJObject.ClearObjectsAsync();
             clear.Wait();
 
+            //Check if index is empty
             var search = await _indexClear.SearchAsync<AlgoliaStub>(new Query(""));
             Assert.That(search.Hits, Is.Empty);
         }
