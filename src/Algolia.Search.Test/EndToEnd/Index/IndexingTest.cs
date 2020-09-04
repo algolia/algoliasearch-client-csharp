@@ -300,11 +300,14 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             addObject.Wait();
 
-            //Add JObject without ID
+            //Add JObject without ID with autoGenerateObjectId
             var objectOneWoId = new JObject { { "title", "Bar" } };
             var addObjectWoId = await _indexWithJObject.SaveObjectAsync(objectOneWoId, autoGenerateObjectId: true);
 
             addObjectWoId.Wait();
+
+            //Add JObject without ID without autoGenerateObjectId
+            Assert.ThrowsAsync<AlgoliaApiException>(() => _indexWithJObject.SaveObjectAsync(objectOneWoId, autoGenerateObjectId: false));
 
             //Update record with JObject
             var objectTwo = new JObject { { "objectID", "one" }, { "title", "Baz" } };
