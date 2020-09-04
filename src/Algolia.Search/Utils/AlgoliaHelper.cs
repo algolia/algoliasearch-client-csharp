@@ -107,7 +107,7 @@ namespace Algolia.Search.Utils
             {
                 JProperty objectID = JObject.FromObject(data).Property("objectID");
 
-                if (objectID != null)
+                if (objectID != null && objectID.ToString() != "")
                 {
                     return objectID.ToString();
                 }
