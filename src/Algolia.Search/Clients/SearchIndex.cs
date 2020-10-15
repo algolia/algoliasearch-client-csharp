@@ -328,7 +328,7 @@ namespace Algolia.Search.Clients
         {
             if (string.IsNullOrWhiteSpace(objectId))
             {
-                throw new ArgumentNullException(nameof(objectId));
+                throw new ArgumentNullException(nameof(objectId), "Argument parameter cannot be null");
             }
 
             DeleteResponse response = await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
@@ -351,7 +351,7 @@ namespace Algolia.Search.Clients
         {
             if (objectIds == null || !objectIds.Any())
             {
-                throw new ArgumentNullException(nameof(objectIds));
+                throw new ArgumentNullException(nameof(objectIds), "Argument parameter cannot be null");
             }
 
             var request = objectIds.Select(x => new Dictionary<string, string> { { "objectID", x } });
