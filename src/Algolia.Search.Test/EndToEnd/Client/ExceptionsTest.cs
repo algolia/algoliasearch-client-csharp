@@ -114,7 +114,8 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Assert.Throws<ArgumentNullException>(() => _index.ReplaceAllObjects<object>(null));
             Assert.Throws<ArgumentNullException>(() => _index.Batch<object>(operations: null));
             Assert.Throws<ArgumentNullException>(() => _index.Batch<object>(request: null));
-            Assert.Throws<ArgumentNullException>(() => _index.DeleteObject(null));
+            Assert.That(Assert.Throws<ArgumentNullException>(() => _index.DeleteObject(null)).Message, Is.EqualTo("Argument parameter cannot be null (Parameter 'objectId')"));
+            Assert.That(Assert.Throws<ArgumentNullException>(() => _index.DeleteObjects(null)).Message, Is.EqualTo("Argument parameter cannot be null (Parameter 'objectIds')"));
             Assert.Throws<ArgumentNullException>(() => _index.DeleteBy(null));
             Assert.Throws<ArgumentNullException>(() => _index.SearchForFacetValue(null));
             Assert.Throws<ArgumentNullException>(() => _index.Search<object>(null));
