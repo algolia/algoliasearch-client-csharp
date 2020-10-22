@@ -195,6 +195,15 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.That(getUpdatedObjects.ElementAt(0).Property, Is.EqualTo(objectToPartialUpdate1.Property));
             Assert.That(getUpdatedObjects.ElementAt(1).Property, Is.EqualTo(objectToPartialUpdate2.Property));
 
+            // Add 1 record with saveObject with an objectID and a tag algolia and wait for the task to finish
+            AlgoliaStub taggedRecord = new AlgoliaStub { ObjectId = "taggedObject", Tags = new List<string> { "algolia" } };
+            var saveTaggedObject = await _index.SaveObjectAsync(taggedRecord);
+            saveTaggedObject.Wait();
+
+            // Delete the record containing the tag algolia with deleteBy and the tagFilters option 
+            var deleteByTaggedObject = await _index.DeleteByAsync(new Query { Filters = "algolia" });
+            deleteByTaggedObject.Wait();
+
             // Delete six first objects
             var deleteObjects = await _index.DeleteObjectsAsync(sixFirstRecordsIds);
 
