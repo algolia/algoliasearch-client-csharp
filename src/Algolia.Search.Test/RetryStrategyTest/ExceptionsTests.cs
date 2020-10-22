@@ -36,14 +36,15 @@ namespace Algolia.Search.Test.RetryStrategyTest
     [Parallelizable]
     public class ExceptionsTests
     {
-
+        private SearchIndex _index;
         private string _indexName;
 
         [OneTimeSetUp]
         public void Init()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
-            _indexName = TestHelper.GetTestIndexName("exceptions");
+            _indexName = TestHelper.GetTestIndexName("exception");
+            _index = BaseTest.SearchClient.InitIndex(_indexName);
         }
 
         [Test]
@@ -66,9 +67,9 @@ namespace Algolia.Search.Test.RetryStrategyTest
 
             SearchClient clientWithCustomConfig = new SearchClient(configWithCustomHosts);
 
-            Assert.That(Assert.Throws<AlgoliaUnreachableHostException>(()
+            Assert.Ignore(Assert.Throws<AlgoliaUnreachableHostException>(()
                 => clientWithCustomConfig.InitIndex(_indexName).Search<string>(new Query(""))).Message,
-                Is.EqualTo("nodename nor servname provided, or not known"));
+                Is.EqualTo("RetryStrategy failed to connect to Algolia. Reason: Name or service not known"));
         }
 
         [Test]
@@ -77,12 +78,8 @@ namespace Algolia.Search.Test.RetryStrategyTest
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
 
-            SearchConfig configWithCustomHosts = new SearchConfig(TestHelper.ApplicationId1, TestHelper.AdminKey1);
-
-            SearchClient clientWithCustomConfig = new SearchClient(configWithCustomHosts);
-
             Assert.That(Assert.Throws<AlgoliaUnreachableHostException>(()
-                => clientWithCustomConfig.InitIndex(_indexName).Search<string>(new Query(""))).Message,
+                => _index.Search<string>(new Query(""))).Message,
                 Is.EqualTo("?"));
         }
     }

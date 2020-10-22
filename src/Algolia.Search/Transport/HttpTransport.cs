@@ -137,7 +137,7 @@ namespace Algolia.Search.Transport
                 }
             }
 
-            throw new AlgoliaUnreachableHostException("RetryStrategy failed to connect to Algolia. Reason:" + errorMessage);
+            throw new AlgoliaUnreachableHostException("RetryStrategy failed to connect to Algolia. Reason: " + errorMessage);
         }
 
         /// <summary>
