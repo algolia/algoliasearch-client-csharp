@@ -21,13 +21,13 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+using System.Net;
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Transport;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Net;
 
 namespace Algolia.Search.Test.RetryStrategyTest
 {
