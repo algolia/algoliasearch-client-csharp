@@ -86,10 +86,10 @@ namespace Algolia.Search.Test.EndToEnd.Client
                 }
                 catch (AlgoliaApiException e)
                 {
-                    shouldRetry = e.HttpErrorCode == 404 || e.Message.Contains("Key already exists");
+                    shouldRetry = e.HttpErrorCode == 404 && e.Message.Contains("Key already exists");
                 }
                 return shouldRetry;
-            }, TimeSpan.FromSeconds(1), 10);
+            }, TimeSpan.FromSeconds(1), 30);
 
             await BaseTest.SearchClient.GetApiKeyAsync(_apiKey);
 
