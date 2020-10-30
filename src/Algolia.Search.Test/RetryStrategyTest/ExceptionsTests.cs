@@ -41,7 +41,6 @@ namespace Algolia.Search.Test.RetryStrategyTest
         [OneTimeSetUp]
         public void Init()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
             _indexName = TestHelper.GetTestIndexName("exception");
         }
 
