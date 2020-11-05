@@ -89,5 +89,10 @@ namespace Algolia.Search.Models.Analytics
         /// Search parameters for AA Testing
         /// </summary>
         public Query CustomSearchParameters { get; set; }
+
+        /// <summary>
+        /// Tracked search count
+        /// </summary>
+        public int? TrackedSearchCount { get; set; }
     }
 }
