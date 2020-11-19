@@ -48,6 +48,7 @@ namespace Algolia.Search.Transport
         private readonly ISerializer _serializer;
         private readonly RetryStrategy _retryStrategy;
         private readonly AlgoliaConfig _algoliaConfig;
+        private string errorMessage;
 
         /// <summary>
         /// Instantiate the transport class with the given configuratio and requester
@@ -123,6 +124,8 @@ namespace Algolia.Search.Transport
                     .SendRequestAsync(request, requestTimeout, ct)
                     .ConfigureAwait(false);
 
+                errorMessage = response.Error;
+
                 switch (_retryStrategy.Decide(host, response))
                 {
                     case RetryOutcomeType.Success:
@@ -134,7 +137,7 @@ namespace Algolia.Search.Transport
                 }
             }
 
-            throw new AlgoliaUnreachableHostException("Unreachable hosts");
+            throw new AlgoliaUnreachableHostException("RetryStrategy failed to connect to Algolia. Reason: " + errorMessage);
         }
 
         /// <summary>

@@ -129,7 +129,7 @@ namespace Algolia.Search.Http
             {
                 // HttpRequestException is thrown when an underlying issue happened such as
                 // network connectivity, DNS failure, server certificate validation.
-                return new AlgoliaHttpResponse { IsNetworkError = true, Error = e.ToString() };
+                return new AlgoliaHttpResponse { IsNetworkError = true, Error = e.Message };
             }
         }
 
