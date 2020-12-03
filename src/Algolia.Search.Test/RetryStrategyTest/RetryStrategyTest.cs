@@ -53,23 +53,25 @@ namespace Algolia.Search.Test.RetryStrategyTest
             var hosts = new List<StatefulHost>
             {
                 // Bad host, will fail with
-                // System.Net.Http.HttpRequestException: nodename nor servname provided, or not known
+                // System.Net.Http.HttpRequestException:
+                // The SSL connection could not be established, see inner exception. ---> System.Security.Authentication.AuthenticationException:
                 new StatefulHost
                 {
-                    Url = $"{TestHelper.ApplicationId1}-1.algolianet.co",
+                    Url = "expired.badssl.com",
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
                 },
                 new StatefulHost
                 {
-                    Url = $"{TestHelper.ApplicationId1}-2.algolianet.com",
+                    Url = $"{TestHelper.ApplicationId1}-dsn.algolia.net",
                     Up = true,
                     LastUse = DateTime.UtcNow,
                     Accept = CallType.Read | CallType.Write,
                 }
             };
 
+            // Warning /!\ Only use search key here /!\
             SearchConfig config = new SearchConfig(TestHelper.ApplicationId1, TestHelper.SearchKey1)
             {
                 CustomHosts = hosts
