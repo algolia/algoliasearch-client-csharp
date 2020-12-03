@@ -113,10 +113,9 @@ namespace Algolia.Search.Transport
                 Compression = _algoliaConfig.Compression
             };
 
-            request.Body = CreateRequestContent(data, request.CanCompress);
-
             foreach (var host in _retryStrategy.GetTryableHost(callType))
             {
+                request.Body = CreateRequestContent(data, request.CanCompress);
                 request.Uri = BuildUri(host.Url, uri, requestOptions?.QueryParameters);
                 int requestTimeout = (requestOptions?.Timeout ?? GetTimeOut(callType)) * (host.RetryCount + 1);
 
