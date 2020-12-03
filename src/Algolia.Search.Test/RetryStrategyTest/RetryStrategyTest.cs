@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Search;
 using Algolia.Search.Transport;
 using NUnit.Framework;
 
@@ -38,6 +39,50 @@ namespace Algolia.Search.Test.RetryStrategyTest
     [Parallelizable]
     public class RetryStrategyTest
     {
+        [Test]
+        [Parallelizable]
+        public async Task TestRetryStrategyEndToEnd()
+        {
+            // Create a index with a valid client
+            var indexName = TestHelper.GetTestIndexName("test_retry_e2e");
+            var index = BaseTest.SearchClient.InitIndex(indexName);
+            var res = await index.SaveObjectAsync(new { title = "title" }, autoGenerateObjectId: true);
+            res.Wait();
+
+            // Create a client with a bad host to test that the retry worked as expected
+            var hosts = new List<StatefulHost>
+            {
+                // Bad host, will fail with
+                // System.Net.Http.HttpRequestException:
+                // The SSL connection could not be established, see inner exception. ---> System.Security.Authentication.AuthenticationException:
+                new StatefulHost
+                {
+                    Url = "expired.badssl.com",
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read | CallType.Write,
+                },
+                new StatefulHost
+                {
+                    Url = $"{TestHelper.ApplicationId1}-dsn.algolia.net",
+                    Up = true,
+                    LastUse = DateTime.UtcNow,
+                    Accept = CallType.Read | CallType.Write,
+                }
+            };
+
+            // Warning /!\ Only use search key here /!\
+            SearchConfig config = new SearchConfig(TestHelper.ApplicationId1, TestHelper.SearchKey1)
+            {
+                CustomHosts = hosts
+            };
+            var client = new SearchClient(config);
+            var idx = client.InitIndex(indexName);
+
+            var search = await idx.SearchAsync<Object>(new Query(""));
+            Assert.AreEqual(1, search.NbHits);
+        }
+
         [TestCase(CallType.Read)]
         [TestCase(CallType.Write)]
         [Parallelizable]
