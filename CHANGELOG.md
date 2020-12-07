@@ -1,5 +1,22 @@
 # ChangeLog
 
+## [6.9.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.8.0...6.9.0) (2020-12-7)
+
+### Feat
+
+- feat(analytics): add tracked search count c1f684e57eaee4b7c59874e5e5d1a9134714cc50
+- tests: Add delete by tag CTS test 6e775d90721e1e035e8eb3f68ea0124b5220c8e0
+
+### Fix
+
+- fix(transport): MemoryStream disposed between two retryStrategy call c1bdedf210ba82ad7eddfa4344bd6648f1d40919
+- fix(transport): Improve unreachable host error message 20cf38a00433925713d7aaa9ffad6483f2d30c85
+- fix(client): enhance error message when list is empty 8a625d720ed0b67532b9e72d9432cf658b5a3579
+- fix(code): rename RequestOption.cs to RequestOptions.cs 5df63dec4ecc96dad25effee209de19660b85314
+- fix: PartialUpdateObject() throwing "data should not be IEnumerable" with JObject 79d7a8bbb3d2aacabef7291773160a5f22f31460
+- fix(personalization_strategy): prevent error in CTS personalization test on 429 HTTP code 58c54481ccc3c702721b168453d35274f7c51547
+- chore: fix CircleCI filtering to release only tagged commits 3e849ac44c3df02acee10c45d991fae0c85e7cae
+
 ## [6.8.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.7.0...6.8.0) (2020-08-17)
 
 ### Feat
