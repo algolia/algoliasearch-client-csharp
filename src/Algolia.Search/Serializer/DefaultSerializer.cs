@@ -40,8 +40,8 @@ namespace Algolia.Search.Serializer
 
         private static readonly int DefaultBufferSize = 1024;
 
-        // Re-usable Serializer instance, so it keeps in memory the JsonSerializationContract 
-        private static JsonSerializer Serializer = JsonSerializer.Create(JsonConfig.AlgoliaJsonSerializerSettings);
+        // Re-usable Serializer instance, so it keeps in memory the JsonSerializationContract
+        private static readonly JsonSerializer Serializer = JsonSerializer.Create(JsonConfig.AlgoliaJsonSerializerSettings);
 
         // Buffer sized as recommended by Bradley Grainger, http://faithlife.codes/blog/2012/06/always-wrap-gzipstream-with-bufferedstream/
         private static readonly int GZipBufferSize = 8192;
