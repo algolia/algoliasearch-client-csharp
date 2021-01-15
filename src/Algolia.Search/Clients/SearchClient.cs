@@ -105,7 +105,7 @@ namespace Algolia.Search.Clients
         /// Initialize an index for the given client
         /// </summary>
         /// <param name="indexName">Your index name</param>
-        public SearchIndex InitIndex(string indexName)
+        public ISearchIndex InitIndex(string indexName)
         {
             return string.IsNullOrWhiteSpace(indexName)
                 ? throw new ArgumentNullException(nameof(indexName), "The Index name is required")
