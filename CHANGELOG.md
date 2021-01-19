@@ -6,6 +6,7 @@
 
 - feat(analytics): add tracked search count c1f684e57eaee4b7c59874e5e5d1a9134714cc50
 - tests: Add delete by tag CTS test 6e775d90721e1e035e8eb3f68ea0124b5220c8e0
+- feat(client): allow atomic base changes to multiple typed indexes at once
 
 ### Fix
 
