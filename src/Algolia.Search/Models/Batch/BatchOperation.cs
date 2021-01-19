@@ -26,7 +26,7 @@ namespace Algolia.Search.Models.Batch
     /// <summary>
     /// Represent an algolia batch object
     /// </summary>
-    public class BatchOperation<T> where T : class
+    public class BatchOperation
     {
         /// <summary>
         /// Type of batch see <see cref="Enums.BatchActionType"/>
@@ -41,6 +41,28 @@ namespace Algolia.Search.Models.Batch
         /// <summary>
         /// Body of the batch, objects you want to send
         /// </summary>
-        public T Body { get; set; }
+        public object Body { get; set; }
+    }
+
+    /// <summary>
+    /// Represent an algolia batch object
+    /// </summary>
+    public class BatchOperation<T>: BatchOperation
+        where T : class
+    {
+        /// <summary>
+        /// Body of the batch, objects you want to send, typed
+        /// </summary>
+        public T BodyTyped
+        {
+            get
+            {
+                return Body as T;
+            }
+            set
+            {
+                Body = value;
+            }
+        }
     }
 }

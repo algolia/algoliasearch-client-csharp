@@ -31,6 +31,52 @@ namespace Algolia.Search.Models.Batch
     /// <summary>
     /// Batch request for algoli'as API
     /// </summary>
+    public class BatchRequest
+    {
+        /// <summary>
+        /// Create a new batch request with operations
+        /// </summary>
+        /// <param name="operations"></param>
+        public BatchRequest(IEnumerable<BatchOperation> operations)
+        {
+            if (operations == null)
+            {
+                throw new ArgumentNullException(nameof(operations));
+            }
+
+            Operations = operations.ToList();
+        }
+
+        /// <summary>
+        /// Create a new batch request with action type and data
+        /// </summary>
+        /// <param name="actionType">Batch Action Type</param>
+        /// <param name="data">Data to send</param>
+        public BatchRequest(string actionType, IEnumerable<object> data)
+        {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            Operations = new List<BatchOperation>();
+
+            foreach (var item in data)
+            {
+                Operations.Add(new BatchOperation { Action = actionType, Body = item });
+            }
+        }
+
+        /// <summary>
+        /// List of operations of the batch request
+        /// </summary>
+        [JsonProperty(PropertyName = "requests")]
+        public ICollection<BatchOperation> Operations { get; set; }
+    }
+
+    /// <summary>
+    /// Batch request for algoli'as API
+    /// </summary>
     public class BatchRequest<T> where T : class
     {
         /// <summary>

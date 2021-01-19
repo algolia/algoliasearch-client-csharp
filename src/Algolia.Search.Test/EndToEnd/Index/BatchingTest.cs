@@ -37,11 +37,16 @@ namespace Algolia.Search.Test.EndToEnd.Index
     public class BatchingTest
     {
         private SearchIndex _index;
+        private SearchIndex _index2;
+
+        private const string Index1Name = "index_batching";
+        private const string Index2Name = "index_batching_2";
 
         [OneTimeSetUp]
         public void Init()
         {
-            _index = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName("index_batching"));
+            _index = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName(Index1Name));
+            _index2 = BaseTest.SearchClient.InitIndex(TestHelper.GetTestIndexName(Index2Name));
         }
 
         [Test]
@@ -104,15 +109,15 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             Assert.That(objectsFromIterator, Has.Exactly(6).Items);
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("zero")),
-                operations.Find(r => r.Body.ObjectID.Equals("zero")).Body));
+                operations.Find(r => r.BodyTyped.ObjectID.Equals("zero")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("one")),
-                operations.Find(r => r.Body.ObjectID.Equals("one")).Body));
+                operations.Find(r => r.BodyTyped.ObjectID.Equals("one")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two")),
-                operations.Find(r => r.Body.ObjectID.Equals("two")).Body));
+                operations.Find(r => r.BodyTyped.ObjectID.Equals("two")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two_bis")),
-                operations.Find(r => r.Body.ObjectID.Equals("two_bis")).Body));
+                operations.Find(r => r.BodyTyped.ObjectID.Equals("two_bis")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("three")),
-                operations.Find(r => r.Body.ObjectID.Equals("three")).Body));
+                operations.Find(r => r.BodyTyped.ObjectID.Equals("three")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("five")),
                 batchOne.Find(r => r.ObjectID.Equals("five"))));
             Assert.False(objectsFromIterator.Exists(x => x.ObjectID.Equals("four")));
@@ -122,6 +127,73 @@ namespace Algolia.Search.Test.EndToEnd.Index
         {
             public string ObjectID { get; set; }
             public string Key { get; set; }
+        }
+
+        public class ObjectToBatch2
+        {
+            public string ObjectID { get; set; }
+            public string Key { get; set; }
+        }
+
+
+
+        [Test]
+        public async Task TestBatching_MultipleTypes()
+        {
+            var batchOne = new List<ObjectToBatch>
+            {
+                new ObjectToBatch { ObjectID = "one", Key = "value" },
+            };
+            var batchTwo = new List<ObjectToBatch2>
+            {
+                new ObjectToBatch2 { ObjectID = "two", Key = "value" },
+            };
+
+            var addOneResponse = await _index.SaveObjectsAsync(batchOne);
+            addOneResponse.Wait();
+
+            var addTwoResponse = await _index2.SaveObjectsAsync(batchTwo);
+            addTwoResponse.Wait();
+
+            var operations = new List<BatchOperation>
+            {
+                new BatchOperation
+                {
+                    Action = BatchActionType.UpdateObject,
+                    Body = new ObjectToBatch { ObjectID = "one", Key = "v" },
+                    IndexName = Index1Name,
+                },
+                new BatchOperation
+                {
+                    Action = BatchActionType.UpdateObject,
+                    Body = new ObjectToBatch2 { ObjectID = "two", Key = "v" },
+                    IndexName = Index2Name,
+                },
+            };
+
+            var batchTwoResponse = await _index.BatchAsync(operations);
+            batchTwoResponse.Wait();
+
+            List<ObjectToBatch> objectsFromIterator = new List<ObjectToBatch>();
+            IndexIterator<ObjectToBatch> iterator = new IndexIterator<ObjectToBatch>(_index, new BrowseIndexQuery());
+
+            List<ObjectToBatch2> objectsFromIterator2 = new List<ObjectToBatch2>();
+            IndexIterator<ObjectToBatch2> iterator2 = new IndexIterator<ObjectToBatch2>(_index2, new BrowseIndexQuery());
+
+            foreach (var item in iterator)
+            {
+                objectsFromIterator.Add(item);
+            }
+            foreach (var item in iterator2)
+            {
+                objectsFromIterator2.Add(item);
+            }
+
+            Assert.That(objectsFromIterator, Has.Exactly(6).Items);
+            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("one")),
+                operations.Find(r => (r.Body as ObjectToBatch)?.ObjectID.Equals("one") ?? false).Body));
+            Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two")),
+                operations.Find(r => (r.Body as ObjectToBatch2)?.ObjectID.Equals("two") ?? false).Body));
         }
     }
 }
