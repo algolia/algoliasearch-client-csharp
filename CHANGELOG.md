@@ -1,5 +1,13 @@
 # ChangeLog
 
+# [6.9.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.9.0...6.9.1) (2020-01-28)
+
+### Feat 
+
+- feat(serializer): JsonSerializer re-usable instance
+
+
+
 ## [6.9.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.8.0...6.9.0) (2020-12-7)
 
 ### Feat

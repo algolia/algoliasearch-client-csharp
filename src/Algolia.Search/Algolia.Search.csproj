@@ -19,7 +19,7 @@
     </PackageDescription>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Copyright>Copyright 2019 Algolia</Copyright>
-    <Version>6.9.0</Version>
+    <Version>6.9.1</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.3</TargetFrameworks>
     <LangVersion>7.3</LangVersion>
