@@ -53,15 +53,15 @@ namespace Algolia.Search.Models.Batch
         /// <summary>
         /// Body of the batch, objects you want to send, typed
         /// </summary>
-        public T BodyTyped
+        public new T Body
         {
             get
             {
-                return Body as T;
+                return base.Body as T;
             }
             set
             {
-                Body = value;
+                base.Body = value;
             }
         }
     }

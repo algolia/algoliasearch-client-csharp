@@ -109,15 +109,15 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             Assert.That(objectsFromIterator, Has.Exactly(6).Items);
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("zero")),
-                operations.Find(r => r.BodyTyped.ObjectID.Equals("zero")).Body));
+                operations.Find(r => r.Body.ObjectID.Equals("zero")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("one")),
-                operations.Find(r => r.BodyTyped.ObjectID.Equals("one")).Body));
+                operations.Find(r => r.Body.ObjectID.Equals("one")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two")),
-                operations.Find(r => r.BodyTyped.ObjectID.Equals("two")).Body));
+                operations.Find(r => r.Body.ObjectID.Equals("two")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("two_bis")),
-                operations.Find(r => r.BodyTyped.ObjectID.Equals("two_bis")).Body));
+                operations.Find(r => r.Body.ObjectID.Equals("two_bis")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("three")),
-                operations.Find(r => r.BodyTyped.ObjectID.Equals("three")).Body));
+                operations.Find(r => r.Body.ObjectID.Equals("three")).Body));
             Assert.True(TestHelper.AreObjectsEqual(objectsFromIterator.Find(r => r.ObjectID.Equals("five")),
                 batchOne.Find(r => r.ObjectID.Equals("five"))));
             Assert.False(objectsFromIterator.Exists(x => x.ObjectID.Equals("four")));
