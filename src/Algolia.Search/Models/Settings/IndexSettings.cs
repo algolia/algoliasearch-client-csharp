@@ -214,6 +214,11 @@ namespace Algolia.Search.Models.Settings
         /// </summary>
         public List<string> IndexLanguages { get; set; }
 
+        /// <summary>
+        /// Specify on which attributes to apply transliteration.
+        /// </summary>
+        public List<string> AttributesToTransliterate { get; set; }
+
         // query rules
 
         /// <summary>
