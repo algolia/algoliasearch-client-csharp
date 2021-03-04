@@ -391,6 +391,11 @@ namespace Algolia.Search.Models.Search
         public List<string> Explain { get; set; }
 
         /// <summary>
+        ///  Enable word segmentation (also called decompounding) at query time for compatible languages.
+        /// </summary>
+        public bool? DecompoundQuery { get; set; }
+
+        /// <summary>
         /// A user identifier.
         /// Format: alpha numeric string [a-zA-Z0-9_-]
         /// Length: between 1 and 64 characters.

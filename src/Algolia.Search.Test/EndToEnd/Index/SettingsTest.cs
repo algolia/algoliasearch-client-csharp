@@ -109,7 +109,6 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 DisableTypoToleranceOnWords = new List<string> { "word1", "word2" },
                 SeparatorsToIndex = "()[]",
 
-
                 // Query
                 QueryType = "prefixNone",
                 RemoveWordsIfNoResults = "allOptional",
