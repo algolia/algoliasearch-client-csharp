@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,26 +21,23 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+using System;
+
+namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Objects to edit.
+    /// Represents a linguistic resources provided by Algolia.
     /// </summary>
-    public class Edit
+    public class Dictionary
     {
         /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
+        /// Dictionary name.
         /// </summary>
-        public string Type { get; set; }
+        public String name;
 
         /// <summary>
-        /// Text or patterns to remove from the query string.
+        /// There are 3 dictionaries types. The parameter can be one of the following values <see cref="Enums.DictionaryEntryType"/>
         /// </summary>
-        public string Delete { get; set; }
-
-        /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
-        /// </summary>
-        public string Insert { get; set; }
+        public String Type { get; set; }
     }
 }

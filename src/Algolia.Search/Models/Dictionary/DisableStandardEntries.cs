@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,26 +21,22 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+using System;
+using System.Collections.Generic;
+
+namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Objects to edit.
+    /// Map of language ISO code supported by the dictionary (e.g., “en” for English) to a boolean value.
+    /// When set to true, the standard entries for the language are disabled. Changes are set for the
+    /// given languages only. To re-enable standard entries, set the language to false. To reset settings
+    /// to default values, set dictionary to `null`.
     /// </summary>
-    public class Edit
+    public class DisableStandardEntries
     {
         /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
+        /// Settings for the stop word dictionary.
         /// </summary>
-        public string Type { get; set; }
-
-        /// <summary>
-        /// Text or patterns to remove from the query string.
-        /// </summary>
-        public string Delete { get; set; }
-
-        /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
-        /// </summary>
-        public string Insert { get; set; }
+        private Dictionary<String, Boolean> stopwords { get; set; }
     }
 }

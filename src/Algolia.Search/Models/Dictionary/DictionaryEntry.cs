@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,26 +21,58 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+using System;
+using System.Collections.Generic;
+
+namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Objects to edit.
+    /// Dictionnary Entry interface
     /// </summary>
-    public class Edit
+    public class DictionaryEntry
     {
         /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
+        /// Algolia's objectID
         /// </summary>
-        public string Type { get; set; }
+        String objectID { get; set; }
 
         /// <summary>
-        /// Text or patterns to remove from the query string.
+        /// The state of the entry. Can be either "enabled" or "disabled".
         /// </summary>
-        public string Delete { get; set; }
+        String language { get; set; }
 
         /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
+        /// Language ISO code supported by the dictionary.
         /// </summary>
-        public string Insert { get; set; }
+        String word { get; set; }
+    }
+
+    /// <summary>
+    /// Represents an entry for Compounds dictionary.
+    /// </summary>
+    public class Compound : DictionaryEntry
+    {
+        /// <summary>
+        /// When empty, the key word is considered as a compound atom. Otherwise, it is the decomposition of word.
+        /// </summary>
+        private List<String> decomposition { get; set; }
+    }
+
+    /// <summary>
+    /// Represents an entry for Plural dictionary.
+    /// </summary>
+    public class Plural : DictionaryEntry
+    {
+    }
+
+    /// <summary>
+    /// Represents an entry for Stopword dictionary.
+    /// </summary>
+    public class Stopword
+    {
+        /// <summary>
+        /// The state of the entry. Can be either "enabled" or "disabled".
+        /// </summary>
+        private String state { get; set; }
     }
 }

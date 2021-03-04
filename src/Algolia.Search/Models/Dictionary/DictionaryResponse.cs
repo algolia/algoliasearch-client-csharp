@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,26 +21,29 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+using System;
+using Algolia.Search.Models.Common;
+
+namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Objects to edit.
+    /// API response when restoring an API Key
     /// </summary>
-    public class Edit
+    public class DictionaryResponse : IAlgoliaWaitableResponse
     {
-        /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
-        /// </summary>
-        public string Type { get; set; }
+        internal Action<long> WaitTask { get; set; }
 
         /// <summary>
-        /// Text or patterns to remove from the query string.
+        /// Algolia's API taskID
         /// </summary>
-        public string Delete { get; set; }
+        public long TaskID { get; set; }
 
         /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
+        /// Wait for a task to complete before executing the next line of code, to synchronize index updates.
         /// </summary>
-        public string Insert { get; set; }
+        public void Wait()
+        {
+            WaitTask(TaskID);
+        }
     }
 }
