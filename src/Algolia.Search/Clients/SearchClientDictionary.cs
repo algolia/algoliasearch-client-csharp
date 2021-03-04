@@ -35,13 +35,13 @@ using Algolia.Search.Http;
 using Algolia.Search.Models.ApiKeys;
 using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Common;
+using Algolia.Search.Models.Dictionary;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Models.Mcm;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
-using Algolia.Search.Models.Dictionary;
 
 namespace Algolia.Search.Clients
 {
