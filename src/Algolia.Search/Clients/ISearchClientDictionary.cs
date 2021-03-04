@@ -21,6 +21,15 @@
 * THE SOFTWARE.
 */
 
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Algolia.Search.Http;
+using Algolia.Search.Models.Dictionary;
+using Algolia.Search.Models.Search;
+using Algolia.Search.Models.Common;
+
 namespace Algolia.Search.Clients
 {
     /// <summary>
@@ -29,6 +38,168 @@ namespace Algolia.Search.Clients
 
     public interface ISearchClientDictionary
     {
+        /// <summary>
+        /// Save dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="dictionaryEntries">Dictionary entries to be saved. entries from the dictionary.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <returns></returns>
+        DictionaryResponse SaveDictionaryEntries(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null);
 
+        /// <summary>
+        /// Save dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="dictionaryEntries">Dictionary entries to be saved. entries from the dictionary.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <param name="ct">Cancelation token.</param>
+        /// <returns></returns>
+        Task<DictionaryResponse> SaveDictionaryEntriesAsync(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Replace dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="dictionaryEntries">Dictionary entries to be saved. entries from the dictionary.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <returns></returns>
+        DictionaryResponse ReplaceDictionaryEntries(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Replace dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="dictionaryEntries">Dictionary entries to be saved. entries from the dictionary.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <param name="ct">Cancelation token.</param>
+        /// <returns></returns>
+        Task<DictionaryResponse> ReplaceDictionaryEntriesAsync(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Delete dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="ObjectIDs">List of entries' IDs to delete</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <returns></returns>
+        DictionaryResponse DeleteDictionaryEntries(Dictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Delete dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="ObjectIDs">List of entries' IDs to delete</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <param name="ct">Cancelation token.</param>
+        /// <returns></returns>
+        Task<DictionaryResponse> DeleteDictionaryEntriesAsync(Dictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Clear all dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <returns></returns>
+        DictionaryResponse ClearDictionaryEntries(Dictionary dictionary, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Clear all dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <param name="ct">Cancelation token.</param>
+        /// <returns></returns>
+        Task<DictionaryResponse> ClearDictionaryEntriesAsync(Dictionary dictionary, RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Search the dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="query">The Query used to search./param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <returns></returns>
+        SearchResponse<T> SearchDictionaryEntries<T>(Dictionary dictionary, Query query, RequestOptions requestOptions = null) where T : class;
+
+        /// <summary>
+        /// Search the dictionary entries.
+        /// </summary>
+        /// <param name="dictionary">Target dictionary.</param>
+        /// <param name="query">The Query used to search.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <param name="ct">Cancelation token.</param>
+        /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
+        /// <returns></returns>
+        Task<SearchResponse<T>> SearchDictionaryEntriesAsync<T>(Dictionary dictionary, Query query, RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
+
+        /// <summary>
+        /// Update dictionary settings. Only specified settings are overridden; unspecified settings are 
+        /// left unchanged. Specifying `null` for a setting resets it to its default value.
+        /// </summary>
+        /// <param name="dictionarySettings">Settings to be applied.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <returns></returns>
+        DictionaryResponse SetDictionarySettings(DictionarySettings dictionarySettings, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Update dictionary settings. Only specified settings are overridden; unspecified settings are 
+        /// left unchanged. Specifying `null` for a setting resets it to its default value.
+        /// </summary>
+        /// <param name="dictionarySettings">Settings to be applied.</param>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <param name="ct">Cancelation token.</param>
+        /// <returns></returns>
+        Task<DictionaryResponse> SetDictionarySettingsAsync(DictionarySettings dictionarySettings, RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Retrieve dictionaries settings.
+        /// </summary>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <returns></returns>
+        DictionarySettings GetDictionarySettings(RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Retrieve dictionaries settings.
+        /// </summary>
+        /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
+        /// <param name="ct">Cancelation token.</param>
+        /// <returns></returns>
+        Task<DictionarySettings> GetDictionarySettingsAsync(RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Wait for a dictionary task to complete before executing the next line of code. All write
+        /// operations in Algolia are asynchronous by design.
+        /// </summary>
+        /// <param name="taskId">taskID returned by Algolia API</param>
+        /// <param name="timeToWait"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        void WaitAppTask(long taskId, int timeToWait = 100, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Wait for a dictionary task to complete before executing the next line of code. All write
+        /// operations in Algolia are asynchronous by design.
+        /// </summary>
+        /// <param name="taskId">taskID returned by Algolia API</param>
+        /// <param name="timeToWait"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Cancelation token.</param>
+
+        Task WaitAppTaskAsync(long taskId, int timeToWait = 100, RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the status of the given dictionary task.
+        /// </summary>
+        /// <param name="taskId">taskID returned by Algolia API</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        TaskStatusResponse GetAppTask(long taskId, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Get the status of the given dictionary task.
+        /// </summary>
+        /// <param name="taskId">taskID returned by Algolia API</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Cancelation token.</param>
+        Task<TaskStatusResponse> GetAppTaskAsync(long taskId, RequestOptions requestOptions = null, CancellationToken ct = default);
     }
 }
