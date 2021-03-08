@@ -28,16 +28,11 @@ namespace Algolia.Search.Models.Dictionary
     /// <summary>
     /// Represents a linguistic resources provided by Algolia.
     /// </summary>
-    public class Dictionary
+    public class AlgoliaDictionary
     {
         /// <summary>
-        /// Dictionary name.
+        /// There are 3 synonym types. The parameter can be one of the following values <see cref="Enums.SynonymType"/>
         /// </summary>
-        public String name;
-
-        /// <summary>
-        /// There are 3 dictionaries types. The parameter can be one of the following values <see cref="Enums.DictionaryEntryType"/>
-        /// </summary>
-        public String Type { get; set; }
+        public string Type { get; set; }
     }
 }

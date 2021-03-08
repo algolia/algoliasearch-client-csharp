@@ -21,6 +21,26 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Dictionary
+namespace Algolia.Search.Models.Enums
 {
+    /// <summary>
+    /// https://www.algolia.com/doc/guides/textual-relevance/synonyms/#synonyms-overview
+    /// </summary>
+    public class AlgoliaDictionaryType
+    {
+        /// <summary>
+        /// Plural entry
+        /// </summary>
+        public const string Plurals = "plurals";
+
+        /// <summary>
+        ///  Compound entry
+        /// </summary>
+        public const string Compounds = "compounds";
+
+        /// <summary>
+        ///  Stopword entry
+        /// </summary>
+        public const string Stopwords = "stopwords";
+    }
 }

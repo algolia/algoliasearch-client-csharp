@@ -36,7 +36,7 @@ namespace Algolia.Search.Clients
     /// Search Client Dictionary interface
     /// </summary>
 
-    public interface ISearchClientDictionary
+    public interface IDictionaryClient
     {
         /// <summary>
         /// Save dictionary entries.
@@ -45,7 +45,7 @@ namespace Algolia.Search.Clients
         /// <param name="dictionaryEntries">Dictionary entries to be saved. entries from the dictionary.</param>
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <returns></returns>
-        DictionaryResponse SaveDictionaryEntries(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null);
+        DictionaryResponse SaveDictionaryEntries(AlgoliaDictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Save dictionary entries.
@@ -55,7 +55,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <param name="ct">Cancelation token.</param>
         /// <returns></returns>
-        Task<DictionaryResponse> SaveDictionaryEntriesAsync(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default);
+        Task<DictionaryResponse> SaveDictionaryEntriesAsync(AlgoliaDictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Replace dictionary entries.
@@ -64,7 +64,7 @@ namespace Algolia.Search.Clients
         /// <param name="dictionaryEntries">Dictionary entries to be saved. entries from the dictionary.</param>
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <returns></returns>
-        DictionaryResponse ReplaceDictionaryEntries(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null);
+        DictionaryResponse ReplaceDictionaryEntries(AlgoliaDictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Replace dictionary entries.
@@ -74,7 +74,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <param name="ct">Cancelation token.</param>
         /// <returns></returns>
-        Task<DictionaryResponse> ReplaceDictionaryEntriesAsync(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default);
+        Task<DictionaryResponse> ReplaceDictionaryEntriesAsync(AlgoliaDictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Delete dictionary entries.
@@ -83,7 +83,7 @@ namespace Algolia.Search.Clients
         /// <param name="ObjectIDs">List of entries' IDs to delete</param>
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <returns></returns>
-        DictionaryResponse DeleteDictionaryEntries(Dictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null);
+        DictionaryResponse DeleteDictionaryEntries(AlgoliaDictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Delete dictionary entries.
@@ -93,7 +93,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <param name="ct">Cancelation token.</param>
         /// <returns></returns>
-        Task<DictionaryResponse> DeleteDictionaryEntriesAsync(Dictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null, CancellationToken ct = default);
+        Task<DictionaryResponse> DeleteDictionaryEntriesAsync(AlgoliaDictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Clear all dictionary entries.
@@ -101,7 +101,7 @@ namespace Algolia.Search.Clients
         /// <param name="dictionary">Target dictionary.</param>
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <returns></returns>
-        DictionaryResponse ClearDictionaryEntries(Dictionary dictionary, RequestOptions requestOptions = null);
+        DictionaryResponse ClearDictionaryEntries(AlgoliaDictionary dictionary, RequestOptions requestOptions = null);
 
         /// <summary>
         /// Clear all dictionary entries.
@@ -110,17 +110,17 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <param name="ct">Cancelation token.</param>
         /// <returns></returns>
-        Task<DictionaryResponse> ClearDictionaryEntriesAsync(Dictionary dictionary, RequestOptions requestOptions = null, CancellationToken ct = default);
+        Task<DictionaryResponse> ClearDictionaryEntriesAsync(AlgoliaDictionary dictionary, RequestOptions requestOptions = null, CancellationToken ct = default);
 
         /// <summary>
         /// Search the dictionary entries.
         /// </summary>
         /// <param name="dictionary">Target dictionary.</param>
-        /// <param name="query">The Query used to search./param>
+        /// <param name="query">The Query used to search.</param>
         /// <param name="requestOptions">Configure request locally with RequestOptions.</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
-        SearchResponse<T> SearchDictionaryEntries<T>(Dictionary dictionary, Query query, RequestOptions requestOptions = null) where T : class;
+        SearchResponse<T> SearchDictionaryEntries<T>(AlgoliaDictionary dictionary, Query query, RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Search the dictionary entries.
@@ -131,7 +131,10 @@ namespace Algolia.Search.Clients
         /// <param name="ct">Cancelation token.</param>
         /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
         /// <returns></returns>
-        Task<SearchResponse<T>> SearchDictionaryEntriesAsync<T>(Dictionary dictionary, Query query, RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
+        Task<SearchResponse<T>> SearchDictionaryEntriesAsync<T>(AlgoliaDictionary dictionary,
+                                                                Query query,
+                                                                RequestOptions requestOptions = null,
+                                                                CancellationToken ct = default) where T : class;
 
         /// <summary>
         /// Update dictionary settings. Only specified settings are overridden; unspecified settings are 

@@ -24,42 +24,84 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
-using Algolia.Search.Models.ApiKeys;
-using Algolia.Search.Models.Batch;
 using Algolia.Search.Models.Common;
-using Algolia.Search.Models.Dictionary;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Mcm;
-using Algolia.Search.Models.Personalization;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
+using Algolia.Search.Models.Dictionary;
 
 namespace Algolia.Search.Clients
 {
     /// <summary>
-    /// Algolia search client implementation of <see cref="ISearchClientDictionary"/>
+    /// Algolia search client implementation of <see cref="IDictionaryClient"/>
     /// </summary>
 
-    public class SearchClientDictionary : ISearchClientDictionary
+    public class DictionaryClient : IDictionaryClient
     {
         private readonly HttpTransport _transport;
+        private readonly AlgoliaConfig _config;
+
+        /// <summary>
+        /// Create a new dictionary client for the given appID
+        /// </summary>
+        /// <param name="applicationId">Your application</param>
+        /// <param name="apiKey">Your API key</param>
+        public DictionaryClient(string applicationId, string apiKey) : this(
+            new SearchConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+        {
+        }
+
+        /// <summary>
+        /// Initialize a dictionary client with custom config
+        /// </summary>
+        /// <param name="config">Algolia configuration</param>
+        public DictionaryClient(SearchConfig config) : this(config, new AlgoliaHttpRequester())
+        {
+        }
+
+        /// <summary>
+        /// Initialize the dictionary client with custom config and custom Requester
+        /// </summary>
+        /// <param name="config">Algolia Config</param>
+        /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
+        public DictionaryClient(SearchConfig config, IHttpRequester httpRequester)
+        {
+            if (httpRequester == null)
+            {
+                throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
+            }
+
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config), "A config is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(config.AppId))
+            {
+                throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(config.ApiKey))
+            {
+                throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+            }
+
+            _config = config;
+            _transport = new HttpTransport(config, httpRequester);
+        }
 
         /// <inheritdoc />
-        public DictionaryResponse SaveDictionaryEntries(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries,
+        public DictionaryResponse SaveDictionaryEntries(AlgoliaDictionary dictionary, List<DictionaryEntry> dictionaryEntries,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => SaveDictionaryEntriesAsync(dictionary, dictionaryEntries, requestOptions));
 
         /// <inheritdoc />
-        public async Task<DictionaryResponse> SaveDictionaryEntriesAsync(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default)
+        public async Task<DictionaryResponse> SaveDictionaryEntriesAsync(AlgoliaDictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (dictionary == null)
             {
@@ -71,11 +113,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException("Dictionary entries are required");
             }
 
-            var request = DictionaryRequest;
-
             DictionaryResponse response = await _transport
-                .ExecuteRequestAsync<DictionaryResponse, DictionaryRequest>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, request, requestOptions, ct)
+                .ExecuteRequestAsync<DictionaryResponse>(HttpMethod.Post,
+                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitAppTask(t);
@@ -83,12 +123,12 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public DictionaryResponse ReplaceDictionaryEntries(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries,
+        public DictionaryResponse ReplaceDictionaryEntries(AlgoliaDictionary dictionary, List<DictionaryEntry> dictionaryEntries,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ReplaceDictionaryEntriesAsync(dictionary, dictionaryEntries, requestOptions));
 
         /// <inheritdoc />
-        public async Task<DictionaryResponse> ReplaceDictionaryEntriesAsync(Dictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default)
+        public async Task<DictionaryResponse> ReplaceDictionaryEntriesAsync(AlgoliaDictionary dictionary, List<DictionaryEntry> dictionaryEntries, RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (dictionary == null)
             {
@@ -100,11 +140,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException("Dictionary entries are required");
             }
 
-            var request = DictionaryRequest;
-
             DictionaryResponse response = await _transport
-                .ExecuteRequestAsync<DictionaryResponse, DictionaryRequest>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, request, requestOptions, ct)
+                .ExecuteRequestAsync<DictionaryResponse>(HttpMethod.Post,
+                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitAppTask(t);
@@ -112,12 +150,12 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public DictionaryResponse DeleteDictionaryEntries(Dictionary dictionary, List<String> ObjectIDs,
+        public DictionaryResponse DeleteDictionaryEntries(AlgoliaDictionary dictionary, List<String> ObjectIDs,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => DeleteDictionaryEntriesAsync(dictionary, ObjectIDs, requestOptions));
 
         /// <inheritdoc />
-        public async Task<DictionaryResponse> DeleteDictionaryEntriesAsync(Dictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null, CancellationToken ct = default)
+        public async Task<DictionaryResponse> DeleteDictionaryEntriesAsync(AlgoliaDictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (dictionary == null)
             {
@@ -134,11 +172,9 @@ namespace Algolia.Search.Clients
                 throw new ArgumentException("objectIDs can't be empty");
             }
 
-            var request = DictionaryRequest;
-
             DictionaryResponse response = await _transport
-                .ExecuteRequestAsync<DictionaryResponse, DictionaryRequest>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, request, requestOptions, ct)
+                .ExecuteRequestAsync<DictionaryResponse>(HttpMethod.Post,
+                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitAppTask(t);
@@ -146,22 +182,22 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public DictionaryResponse ClearDictionaryEntries(Dictionary dictionary, RequestOptions requestOptions = null) =>
+        public DictionaryResponse ClearDictionaryEntries(AlgoliaDictionary dictionary, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => ClearDictionaryEntriesAsync(dictionary, requestOptions));
 
         /// <inheritdoc />
-        public async Task<DictionaryResponse> ClearDictionaryEntriesAsync(Dictionary dictionary,
+        public async Task<DictionaryResponse> ClearDictionaryEntriesAsync(AlgoliaDictionary dictionary,
             RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             return await ReplaceDictionaryEntriesAsync(dictionary, new List<DictionaryEntry> { }, requestOptions);
         }
 
         /// <inheritdoc />
-        public SearchResponse<T> SearchDictionaryEntries<T>(Dictionary dictionary, Query query, RequestOptions requestOptions = null) where T : class =>
+        public SearchResponse<T> SearchDictionaryEntries<T>(AlgoliaDictionary dictionary, Query query, RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => SearchDictionaryEntriesAsync<T>(dictionary, query, requestOptions));
 
         /// <inheritdoc />
-        public async Task<SearchResponse<T>> SearchDictionaryEntriesAsync<T>(Dictionary dictionary, Query query,
+        public async Task<SearchResponse<T>> SearchDictionaryEntriesAsync<T>(AlgoliaDictionary dictionary, Query query,
             RequestOptions requestOptions = null, CancellationToken ct = default) where T : class
         {
             if (dictionary == null)
@@ -178,32 +214,6 @@ namespace Algolia.Search.Clients
                 .ExecuteRequestAsync<SearchResponse<T>, Query>(HttpMethod.Post,
                     $"/1/dictionaries/{dictionary}/search", CallType.Read, query, requestOptions, ct)
                 .ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public void WaitAppTask(long taskId, int timeToWait = 100, RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => WaitAppTaskAsync(taskId, timeToWait, requestOptions));
-
-        /// <inheritdoc />
-        public async Task WaitAppTaskAsync(long taskId, int timeToWait = 100, RequestOptions requestOptions = null, CancellationToken ct = default)
-        {
-            while (true)
-            {
-                TaskStatusResponse response = await GetAppTaskAsync(taskId, requestOptions, ct).ConfigureAwait(false);
-
-                if (response.Status.Equals("published"))
-                {
-                    return;
-                }
-
-                await Task.Delay(timeToWait, ct).ConfigureAwait(false);
-                timeToWait *= 2;
-
-                if (timeToWait > Defaults.MaxTimeToWait)
-                {
-                    timeToWait = Defaults.MaxTimeToWait;
-                }
-            }
         }
 
         /// <inheritdoc />
@@ -240,6 +250,33 @@ namespace Algolia.Search.Clients
                .ConfigureAwait(false);
         }
 
+
+        /// <inheritdoc />
+        public void WaitAppTask(long taskId, int timeToWait = 100, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => WaitAppTaskAsync(taskId, timeToWait, requestOptions));
+
+        /// <inheritdoc />
+        public async Task WaitAppTaskAsync(long taskId, int timeToWait = 100, RequestOptions requestOptions = null, CancellationToken ct = default)
+        {
+            while (true)
+            {
+                TaskStatusResponse response = await GetAppTaskAsync(taskId, requestOptions, ct).ConfigureAwait(false);
+
+                if (response.Status.Equals("published"))
+                {
+                    return;
+                }
+
+                await Task.Delay(timeToWait, ct).ConfigureAwait(false);
+                timeToWait *= 2;
+
+                if (timeToWait > Defaults.MaxTimeToWait)
+                {
+                    timeToWait = Defaults.MaxTimeToWait;
+                }
+            }
+        }
+
         /// <inheritdoc />
         public TaskStatusResponse GetAppTask(long taskId, RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetAppTaskAsync(taskId, requestOptions));
@@ -253,5 +290,4 @@ namespace Algolia.Search.Clients
                 .ConfigureAwait(false);
         }
     }
-
 }
