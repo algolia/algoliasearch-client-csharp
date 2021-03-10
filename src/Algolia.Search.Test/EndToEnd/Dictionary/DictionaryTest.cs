@@ -23,9 +23,9 @@
 
 using System;
 using System.Threading.Tasks;
-using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Dictionary;
 using Algolia.Search.Models.Enums;
+using Algolia.Search.Models.Search;
 using NUnit.Framework;
 
 namespace Algolia.Search.Test.EndToEnd.Client
@@ -43,11 +43,11 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             AlgoliaDictionary algoliaDictionary = new AlgoliaDictionary
             {
-                Type = AlgoliaDictionaryType.Stopwords
+                name = AlgoliaDictionaryType.Stopwords
             };
 
-            var searchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync(algoliaDictionary, query);
-            searchDictionaryResponse.Wait();
+            var searchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<string>(algoliaDictionary, query);
+            Assert.That(searchDictionaryResponse.Hits, Is.Empty);
         }
     }
 }

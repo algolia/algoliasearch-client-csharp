@@ -33,6 +33,6 @@ namespace Algolia.Search.Models.Dictionary
         /// <summary>
         /// There are 3 synonym types. The parameter can be one of the following values <see cref="Enums.AlgoliaDictionaryType"/>
         /// </summary>
-        public string Type { get; set; }
+        public string name { get; set; }
     }
 }

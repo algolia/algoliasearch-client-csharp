@@ -39,7 +39,7 @@ public class BaseTest
     internal static SearchClient McmClient;
     internal static AnalyticsClient AnalyticsClient;
     internal static RecommendationClient RecommendationClient;
-    internal static DictionaryClient DictionaryClient; 
+    internal static DictionaryClient DictionaryClient;
 
     [OneTimeSetUp]
     public void Setup()
