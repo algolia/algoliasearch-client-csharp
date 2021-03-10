@@ -49,10 +49,14 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Assert.Throws<ArgumentNullException>(() => new SearchClient("", ""));
             Assert.Throws<ArgumentNullException>(() => new AnalyticsClient("", ""));
             Assert.Throws<ArgumentNullException>(() => new InsightsClient("", ""));
+            Assert.Throws<ArgumentNullException>(() => new DictionaryClient("AppID", ""));
+
 
             Assert.Throws<ArgumentNullException>(() => new SearchClient("AppID", ""));
             Assert.Throws<ArgumentNullException>(() => new AnalyticsClient("AppID", ""));
             Assert.Throws<ArgumentNullException>(() => new InsightsClient("AppID", ""));
+            Assert.Throws<ArgumentNullException>(() => new DictionaryClient("AppID", ""));
+
         }
 
         [Test]
@@ -62,6 +66,8 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Assert.Throws<ArgumentNullException>(() => new SearchClient(null));
             Assert.Throws<ArgumentNullException>(() => new AnalyticsClient(null));
             Assert.Throws<ArgumentNullException>(() => new InsightsClient(null));
+            Assert.Throws<ArgumentNullException>(() => new DictionaryClient(null));
+
         }
 
         [Test]

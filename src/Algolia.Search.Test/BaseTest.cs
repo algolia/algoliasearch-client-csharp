@@ -39,6 +39,7 @@ public class BaseTest
     internal static SearchClient McmClient;
     internal static AnalyticsClient AnalyticsClient;
     internal static RecommendationClient RecommendationClient;
+    internal static DictionaryClient DictionaryClient; 
 
     [OneTimeSetUp]
     public void Setup()
@@ -53,5 +54,6 @@ public class BaseTest
         McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmAdminKey);
         AnalyticsClient = new AnalyticsClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
         RecommendationClient = new RecommendationClient(TestHelper.ApplicationId1, TestHelper.AdminKey1, "eu");
+        DictionaryClient = new DictionaryClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
     }
 }
