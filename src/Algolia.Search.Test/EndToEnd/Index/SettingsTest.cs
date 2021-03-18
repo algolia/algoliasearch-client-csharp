@@ -109,6 +109,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 DisableTypoToleranceOnWords = new List<string> { "word1", "word2" },
                 SeparatorsToIndex = "()[]",
 
+                //Transliteration
+                AttributesToTransliterate = new List<string> { "attribute1", "attribute2" },
+
                 // Query
                 QueryType = "prefixNone",
                 RemoveWordsIfNoResults = "allOptional",
@@ -191,6 +194,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             Assert.True(ignorePlurals.Contains("en") && ignorePlurals.Contains("fr"));
             Assert.True(removeStopWords.Contains("en") && removeStopWords.Contains("fr"));
+
+            // Check specific properties (couldn't be done by the helper)
+            Assert.True(getSettingsResponse.AttributesToTransliterate.Contains("attribute2"));
+
         }
     }
 }
