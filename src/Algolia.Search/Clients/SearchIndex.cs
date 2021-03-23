@@ -368,9 +368,12 @@ namespace Algolia.Search.Clients
         public async Task<DeleteResponse> DeleteAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default)
         {
-            return await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
+            DeleteResponse response = await _transport.ExecuteRequestAsync<DeleteResponse>(HttpMethod.Delete,
                     $"/1/indexes/{_urlEncodedIndexName}", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
+
+            response.WaitTask = t => WaitTask(t);
+            return response;
         }
 
         /// <inheritdoc />

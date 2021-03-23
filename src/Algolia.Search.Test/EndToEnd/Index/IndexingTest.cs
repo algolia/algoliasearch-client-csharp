@@ -45,6 +45,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
         private SearchIndex _indexDeleteBy;
         private string _indexDeleteByName;
 
+        private SearchIndex _indexDelete;
+        private string _indexDeleteName;
+
         private SearchIndex _indexMove;
         private string _indexMoveName;
 
@@ -62,6 +65,9 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             _indexDeleteByName = TestHelper.GetTestIndexName("delete_by");
             _indexDeleteBy = BaseTest.SearchClient.InitIndex(_indexDeleteByName);
+
+            _indexDeleteName = TestHelper.GetTestIndexName("delete");
+            _indexDelete = BaseTest.SearchClient.InitIndex(_indexDeleteName);
 
             _indexMoveName = TestHelper.GetTestIndexName("move_test_source");
             _indexMove = BaseTest.SearchClient.InitIndex(_indexMoveName);
@@ -255,6 +261,30 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var search = await _indexDeleteBy.SearchAsync<AlgoliaStub>(new Query(""));
             Assert.That(search.Hits, Is.Empty);
+        }
+
+        [Test]
+        [Parallelizable]
+        public async Task DeleteTest()
+        {
+            List<AlgoliaStub> objectsToBatch = new List<AlgoliaStub>();
+            List<string> ids = new List<string>();
+            for (int i = 0; i < 10; i++)
+            {
+                var id = (i + 1).ToString();
+                objectsToBatch.Add(new AlgoliaStub { ObjectId = id, Tags = new List<string> { "car" } });
+                ids.Add(id);
+            }
+
+            var batch = await _indexDelete.SaveObjectsAsync(objectsToBatch);
+            batch.Wait();
+
+            var response = await _indexDelete.DeleteAsync();
+            response.Wait();
+
+            AlgoliaApiException ex =
+                 Assert.Throws<AlgoliaApiException>(() => _indexDelete.Search<AlgoliaStub>(new Query("")));
+            Assert.That(ex.Message.Contains("does not exist"));
         }
 
         [Test]
