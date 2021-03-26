@@ -175,7 +175,6 @@ namespace Algolia.Search.Test.EndToEnd.Index
             settings.IgnorePlurals = new List<string> { "en", "fr" };
             settings.RemoveStopWords = new List<string> { "en", "fr" };
             settings.Distinct = true;
-
             var saveSettingsResponseAfterChanges = await _index.SetSettingsAsync(settings);
             saveSettingsResponseAfterChanges.Wait();
 
@@ -183,6 +182,15 @@ namespace Algolia.Search.Test.EndToEnd.Index
             spceficPropertiesCheck.AddRange(new List<string> { "TypoTolerance", "IgnorePlurals", "RemoveStopWords" });
             Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponseAfterChanges,
                 spceficPropertiesCheck.ToArray()));
+
+            // Set new value for NumericAttributesForFiltering
+            settings.NumericAttributesForFiltering = null;
+
+            var saveSettingsResponseAfterChangesNumericAttributesForFiltering = await _index.SetSettingsAsync(settings);
+            saveSettingsResponseAfterChangesNumericAttributesForFiltering.Wait();
+
+            var getSettingsResponseAfterChangesNumericAttributesForFiltering = await _index.GetSettingsAsync();
+            Assert.AreEqual(null, getSettingsResponseAfterChangesNumericAttributesForFiltering.NumericAttributesForFiltering);
 
             // Check specific properties (couldn't be done by test helper)
             Assert.True((string)getSettingsResponseAfterChanges.TypoTolerance == (string)settings.TypoTolerance);
@@ -197,7 +205,6 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             // Check specific properties (couldn't be done by the helper)
             Assert.True(getSettingsResponse.AttributesToTransliterate.Contains("attribute2"));
-
         }
     }
 }

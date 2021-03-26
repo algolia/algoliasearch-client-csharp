@@ -282,10 +282,32 @@ namespace Algolia.Search.Models.Settings
 
         // performance
 
+        private bool _numericAttributesForFilteringWasSet = false;
+
         /// <summary>
         /// List of numeric attributes that can be used as numerical filters.
         /// </summary>
-        public List<string> NumericAttributesForFiltering { get; set; }
+        public bool ShouldSerializeNumericAttributesForFiltering()
+        {
+            return _numericAttributesForFilteringWasSet;
+        }
+
+        /// <summary>
+        /// List of numeric attributes that can be used as numerical filters.
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Include)]
+        public List<string> NumericAttributesForFiltering
+        {
+            get
+            {
+                return this.NumericAttributesForFiltering;
+            }
+            set
+            {
+                this.NumericAttributesForFiltering = value;
+                _numericAttributesForFilteringWasSet = true;
+            }
+        }
 
         // Handling legacy index settings
         [JsonProperty("numericAttributesToIndex")]
