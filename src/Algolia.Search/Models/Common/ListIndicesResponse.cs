@@ -78,6 +78,16 @@ namespace Algolia.Search.Models.Common
         public int LastBuildTimes { get; set; }
 
         /// <summary>
+        /// Name of primary index.
+        /// </summary>
+        public String Primary { get; set; }
+
+        /// <summary>
+        /// List of replicas attach to the index
+        /// </summary>
+        public List<String> Replicas { get; set; }
+
+        /// <summary>
         /// Number of pending indexing operations.
         /// </summary>
         public int NumberOfPendingTasks { get; set; }
