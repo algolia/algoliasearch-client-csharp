@@ -173,5 +173,15 @@ namespace Algolia.Search.Models.Search
         /// Rules applied to the query
         /// </summary>
         public IEnumerable<Dictionary<string, object>> AppliedRules { get; set; }
+
+        /// <summary>
+        /// Relevancy score to apply to the search in virtual index.
+        /// </summary>
+        public int AppliedRelevancyStrictness { get; set; }
+
+        /// <summary>
+        /// Number of relevant hits to display in case of non-zero relevancyStrictness applied
+        /// </summary>
+        public int NbSortedHits { get; set; }
     }
 }
