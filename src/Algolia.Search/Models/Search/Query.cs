@@ -410,6 +410,13 @@ namespace Algolia.Search.Models.Search
         public IDictionary<string, object> CustomParameters { get; set; }
 
         /// <summary>
+        /// Relevancy score to apply to search in virtual index. 
+        /// Bigger value means less, but more relevant results, 
+        /// lesser value - more less relevant results
+        /// </summary>
+        public int? RelevancyStrictness { get; set; }
+
+        /// <summary>
         /// Returns the Query as a query string
         /// Example : "query= distinct=0"
         /// </summary>

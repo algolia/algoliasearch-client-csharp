@@ -85,6 +85,13 @@ namespace Algolia.Search.Models.Settings
         public List<string> Replicas { get; set; }
 
         /// <summary>
+        /// Relevancy score to apply to search in virtual index. 
+        /// Bigger value means less, but more relevant results, 
+        /// lesser value - more less relevant results
+        /// </summary>
+        public int? RelevancyStrictness { get; set; }
+
+        /// <summary>
         /// The primary parameter is automatically added to a replica's settings when the replica is created and cannot be modified.
         /// </summary>
         [JsonProperty]
