@@ -177,11 +177,11 @@ namespace Algolia.Search.Models.Search
         /// <summary>
         /// Relevancy score to apply to the search in virtual index.
         /// </summary>
-        public int AppliedRelevancyStrictness { get; set; }
+        public int? AppliedRelevancyStrictness { get; set; }
 
         /// <summary>
         /// Number of relevant hits to display in case of non-zero relevancyStrictness applied
         /// </summary>
-        public int NbSortedHits { get; set; }
+        public int? NbSortedHits { get; set; }
     }
 }

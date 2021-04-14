@@ -414,7 +414,7 @@ namespace Algolia.Search.Models.Search
         /// Bigger value means less, but more relevant results, 
         /// lesser value - more less relevant results
         /// </summary>
-        public int RelevancyStrictness { get; set; }
+        public int? RelevancyStrictness { get; set; }
 
         /// <summary>
         /// Returns the Query as a query string
