@@ -285,7 +285,7 @@ namespace Algolia.Search.Models.Settings
         private bool _numericAttributesForFilteringWasSet = false;
 
         /// <summary>
-        /// List of numeric attributes that can be used as numerical filters.
+        /// ShouldSerialize predicate from NewtonSoft.json to avoid serializing empty field.
         /// </summary>
         public bool ShouldSerializeNumericAttributesForFiltering()
         {
