@@ -311,13 +311,12 @@ namespace Algolia.Search.Models.Settings
         }
 
         // Handling legacy index settings
-        [JsonProperty("numericAttributesToIndex")]
+        [JsonProperty("numericAttributesToIndex", NullValueHandling = NullValueHandling.Include)]
         private List<string> NumericAttributesToIndex
         {
             set
             {
-                if (value != null)
-                { NumericAttributesForFiltering = value; }
+                NumericAttributesForFiltering = value;
             }
         }
 
