@@ -286,6 +286,7 @@ namespace Algolia.Search.Models.Settings
 
         /// <summary>
         /// ShouldSerialize predicate from NewtonSoft.json to avoid serializing empty field.
+        /// https://www.newtonsoft.com/json/help/html/ConditionalProperties.htm
         /// </summary>
         public bool ShouldSerializeNumericAttributesForFiltering()
         {
