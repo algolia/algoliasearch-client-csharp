@@ -125,6 +125,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 IndexLanguages = new List<string> { "ja" },
                 AdvancedSyntaxFeatures = new List<string> { "exactPhrase" },
                 AlternativesAsExact = new List<string> { "ignorePlurals" },
+                DecompoundQuery = true,
 
                 // Query rules
                 EnableRules = false,
@@ -169,6 +170,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             Assert.True(getSettingsResponse.DecompoundedAttributes.ContainsKey("fi"));
             Assert.True(getSettingsResponse.DecompoundedAttributes["fi"].Contains("attribute3"));
             Assert.AreEqual(getSettingsResponse.UserData.ToString(), settings.UserData.ToString());
+            Assert.True(getSettingsResponse.DecompoundQuery);
 
             // Set new values
             settings.TypoTolerance = "min";

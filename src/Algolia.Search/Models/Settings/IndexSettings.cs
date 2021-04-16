@@ -251,6 +251,11 @@ namespace Algolia.Search.Models.Settings
         public bool? AdvancedSyntax { get; set; }
 
         /// <summary>
+        ///  Enable word segmentation (also called decompounding) at query time for compatible languages.
+        /// </summary>
+        public bool? DecompoundQuery { get; set; }
+
+        /// <summary>
         /// AdvancedSyntaxFeatures can be exactPhrase or excludeWords
         /// </summary>
         public List<string> AdvancedSyntaxFeatures { get; set; }
