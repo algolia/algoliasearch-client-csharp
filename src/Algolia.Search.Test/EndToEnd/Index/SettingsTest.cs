@@ -195,10 +195,10 @@ namespace Algolia.Search.Test.EndToEnd.Index
             settings.NumericAttributesForFiltering = new List<string> { "attribute1", "attribute2" };
 
             var saveSettingsResponseAfterResetNumericAttributesForFiltering = await _index.SetSettingsAsync(settings);
-            saveSettingsResponseAfterChangesNumericAttributesForFiltering.Wait();
+            saveSettingsResponseAfterResetNumericAttributesForFiltering.Wait();
 
             var getSettingsResponseAfterResetNumericAttributesForFiltering = await _index.GetSettingsAsync();
-            Assert.True(TestHelper.AreObjectsEqual(settings, getSettingsResponseAfterResetNumericAttributesForFiltering, specificPropertiesCheck.ToArray()));
+            Assert.AreEqual(new List<string> { "attribute1", "attribute2" }, getSettingsResponseAfterResetNumericAttributesForFiltering.NumericAttributesForFiltering);
 
             // Check specific properties (couldn't be done by test helper)
             Assert.True((string)getSettingsResponseAfterChanges.TypoTolerance == (string)settings.TypoTolerance);
