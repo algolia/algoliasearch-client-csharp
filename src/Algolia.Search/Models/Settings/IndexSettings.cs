@@ -281,7 +281,7 @@ namespace Algolia.Search.Models.Settings
         public object RemoveStopWords { get; set; }
 
         // performance
-
+        [JsonIgnore]
         private bool _numericAttributesForFilteringWasSet = false;
 
         /// <summary>
@@ -293,6 +293,8 @@ namespace Algolia.Search.Models.Settings
             return _numericAttributesForFilteringWasSet;
         }
 
+        private List<string> _numericAttributesForFiltering;
+
         /// <summary>
         /// List of numeric attributes that can be used as numerical filters.
         /// </summary>
@@ -301,11 +303,11 @@ namespace Algolia.Search.Models.Settings
         {
             get
             {
-                return this.NumericAttributesForFiltering;
+                return _numericAttributesForFiltering;
             }
             set
             {
-                this.NumericAttributesForFiltering = value;
+                _numericAttributesForFiltering = value;
                 _numericAttributesForFilteringWasSet = true;
             }
         }
