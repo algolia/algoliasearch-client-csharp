@@ -22,17 +22,42 @@
 */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Represents a linguistic resources provided by Algolia.
+    /// Dictionary request for algoli'as API
     /// </summary>
-    public class AlgoliaDictionary
+    public class DictionaryRequest<T> where T : class
     {
+
         /// <summary>
-        /// There are 3 synonym types. The parameter can be one of the following values <see cref="Enums.AlgoliaDictionaryType"/>
+        /// Create a new dictionary request with action type and body
         /// </summary>
-        public string Name { get; set; }
+        /// <param name="actionType">Dictionary</param>
+        /// <param name="body">Data to send</param>
+        public DictionaryRequest(string actionType, IEnumerable<T> body)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            Operations = new List<DictionaryOperation<T>>();
+
+            foreach (var item in body)
+            {
+                Operations.Add(new DictionaryOperation<T> { Action = actionType, Body = item });
+            }
+        }
+
+        /// <summary>
+        /// List of operations of the dictionary request
+        /// </summary>
+        [JsonProperty(PropertyName = "requests")]
+        public ICollection<DictionaryOperation<T>> Operations { get; set; }
     }
 }

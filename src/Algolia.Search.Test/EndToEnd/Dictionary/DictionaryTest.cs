@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,6 +22,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Algolia.Search.Models.Dictionary;
 using Algolia.Search.Models.Enums;
@@ -35,19 +36,94 @@ namespace Algolia.Search.Test.EndToEnd.Client
     public class DictionaryTest
     {
         [Test]
+        [Parallelizable]
         public async Task TestStopwordsDictionnaries()
         {
+            // Search non-existent
             String objectId = System.Guid.NewGuid().ToString();
 
             Query query = new Query(objectId);
 
             AlgoliaDictionary algoliaDictionary = new AlgoliaDictionary
             {
-                name = AlgoliaDictionaryType.Stopwords
+                Name = AlgoliaDictionaryType.Stopwords
+            };
+
+            var emptySearchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<string>(algoliaDictionary, query);
+            Assert.That(emptySearchDictionaryResponse.Hits, Is.Empty);
+
+            // Save Entry
+            Stopword stopword = new Stopword()
+            {
+                ObjectID = objectId,
+                Language = "en",
+                Word = "upper",
+                State = "enabled"
+            };
+
+            var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { stopword });
+            saveDictionaryResponse.Wait();
+
+        }
+
+        [Test]
+        [Parallelizable]
+        public async Task TestPluralsDictionnaries()
+        {
+            // Search non-existent
+            String objectId = System.Guid.NewGuid().ToString();
+
+            Query query = new Query(objectId);
+
+            AlgoliaDictionary algoliaDictionary = new AlgoliaDictionary
+            {
+                Name = AlgoliaDictionaryType.Plurals
             };
 
             var searchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<string>(algoliaDictionary, query);
             Assert.That(searchDictionaryResponse.Hits, Is.Empty);
+
+            // Save Entry
+            Plural plural = new Plural()
+            {
+                ObjectID = objectId,
+                Language = "en",
+                Words = new List<String>() { "cheval", "chevaux" }
+            };
+
+            var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { plural });
+            saveDictionaryResponse.Wait();
+
+        }
+
+        [Test]
+        [Parallelizable]
+        public async Task TestCompoundsDictionnaries()
+        {
+            // Search non-existent
+            String objectId = System.Guid.NewGuid().ToString();
+
+            Query query = new Query(objectId);
+
+            AlgoliaDictionary algoliaDictionary = new AlgoliaDictionary
+            {
+                Name = AlgoliaDictionaryType.Compounds
+            };
+
+            var searchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<string>(algoliaDictionary, query);
+            Assert.That(searchDictionaryResponse.Hits, Is.Empty);
+
+            // Save Entry
+            Compound compound = new Compound()
+            {
+                ObjectID = objectId,
+                Language = "nl",
+                Word = "kopfschmerztablette",
+                Decomposition = new List<String>() { "kopf", "schmerz", "tablette" }
+            };
+
+            var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { compound });
+            saveDictionaryResponse.Wait();
         }
     }
 }

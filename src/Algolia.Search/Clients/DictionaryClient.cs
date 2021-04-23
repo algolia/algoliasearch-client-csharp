@@ -113,9 +113,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException("Dictionary entries are required");
             }
 
+            var dictionaryRequest = new DictionaryRequest<DictionaryEntry>("addEntry", dictionaryEntries);
+
             DictionaryResponse response = await _transport
-                .ExecuteRequestAsync<DictionaryResponse>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, requestOptions, ct)
+                .ExecuteRequestAsync<DictionaryResponse, DictionaryRequest<DictionaryEntry>>(HttpMethod.Post,
+                    $"/1/dictionaries/{dictionary.Name}/batch", CallType.Write, dictionaryRequest, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitAppTask(t);
@@ -142,7 +144,7 @@ namespace Algolia.Search.Clients
 
             DictionaryResponse response = await _transport
                 .ExecuteRequestAsync<DictionaryResponse>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, requestOptions, ct)
+                    $"/1/dictionaries/{dictionary.Name}/batch", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitAppTask(t);
@@ -174,7 +176,7 @@ namespace Algolia.Search.Clients
 
             DictionaryResponse response = await _transport
                 .ExecuteRequestAsync<DictionaryResponse>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary}/batch", CallType.Write, requestOptions, ct)
+                    $"/1/dictionaries/{dictionary.Name}/batch", CallType.Write, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitAppTask(t);
@@ -212,7 +214,7 @@ namespace Algolia.Search.Clients
 
             return await _transport
                 .ExecuteRequestAsync<SearchResponse<T>, Query>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary}/search", CallType.Read, query, requestOptions, ct)
+                    $"/1/dictionaries/{dictionary.Name}/search", CallType.Read, query, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
@@ -249,7 +251,6 @@ namespace Algolia.Search.Clients
                    $"/1/dictionaries/*/settings", CallType.Write, requestOptions, ct)
                .ConfigureAwait(false);
         }
-
 
         /// <inheritdoc />
         public void WaitAppTask(long taskId, int timeToWait = 100, RequestOptions requestOptions = null) =>

@@ -21,18 +21,21 @@
 * THE SOFTWARE.
 */
 
-using System;
-
 namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Represents a linguistic resources provided by Algolia.
+    /// Represent an algolia batch object
     /// </summary>
-    public class AlgoliaDictionary
+    public class DictionaryOperation<T> where T : class
     {
         /// <summary>
-        /// There are 3 synonym types. The parameter can be one of the following values <see cref="Enums.AlgoliaDictionaryType"/>
+        /// Type of batch see <see cref="Enums.DictionaryActionType"/>
         /// </summary>
-        public string Name { get; set; }
+        public string Action { get; set; }
+
+        /// <summary>
+        /// Body of the batch, objects you want to send
+        /// </summary>
+        public T Body { get; set; }
     }
 }

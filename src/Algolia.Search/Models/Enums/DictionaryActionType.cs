@@ -21,18 +21,21 @@
 * THE SOFTWARE.
 */
 
-using System;
-
-namespace Algolia.Search.Models.Dictionary
+namespace Algolia.Search.Models.Enums
 {
     /// <summary>
-    /// Represents a linguistic resources provided by Algolia.
+    /// Actions that need to be performed
     /// </summary>
-    public class AlgoliaDictionary
+    public static class DictionaryActionType
     {
         /// <summary>
-        /// There are 3 synonym types. The parameter can be one of the following values <see cref="Enums.AlgoliaDictionaryType"/>
+        /// https://www.algolia.com/doc/rest-api/search/#method-param-request
         /// </summary>
-        public string Name { get; set; }
+        public const string AddEntry = "addEntry";
+
+        /// <summary>
+        /// https://www.algolia.com/doc/rest-api/search/#method-param-request
+        /// </summary>
+        public const string DeleteEntry = "deleteEntry";
     }
 }

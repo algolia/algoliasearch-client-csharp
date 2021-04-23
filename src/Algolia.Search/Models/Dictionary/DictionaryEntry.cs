@@ -34,17 +34,13 @@ namespace Algolia.Search.Models.Dictionary
         /// <summary>
         /// Algolia's objectID
         /// </summary>
-        String objectID { get; set; }
-
-        /// <summary>
-        /// The state of the entry. Can be either "enabled" or "disabled".
-        /// </summary>
-        String language { get; set; }
+        public String ObjectID { get; set; }
 
         /// <summary>
         /// Language ISO code supported by the dictionary.
         /// </summary>
-        String word { get; set; }
+        public String Language { get; set; }
+
     }
 
     /// <summary>
@@ -53,9 +49,17 @@ namespace Algolia.Search.Models.Dictionary
     public class Compound : DictionaryEntry
     {
         /// <summary>
+        /// When decomposition is empty: adds word as a compound atom.
+        /// For example, atom “kino” decomposes the query “kopfkino” into “kopf” and “kino”.
+        /// When decomposition isn’t empty: creates a decomposition exception.
+        /// For example, when decomposition is set to ["hund", "hutte"], exception “hundehutte” decomposes the word into “hund” and “hutte”, discarding the linking morpheme “e”.
+        /// </summary>
+        public String Word { get; set; }
+
+        /// <summary>
         /// When empty, the key word is considered as a compound atom. Otherwise, it is the decomposition of word.
         /// </summary>
-        private List<String> decomposition { get; set; }
+        public List<String> Decomposition { get; set; }
     }
 
     /// <summary>
@@ -63,16 +67,28 @@ namespace Algolia.Search.Models.Dictionary
     /// </summary>
     public class Plural : DictionaryEntry
     {
+        /// <summary>
+        /// List of word declensions. 
+        /// The entry overrides existing entries when any of these words are defined in the standard dictionary provided by Algolia.
+        /// </summary>
+        public List<String> Words { get; set; }
     }
 
     /// <summary>
     /// Represents an entry for Stopword dictionary.
     /// </summary>
-    public class Stopword
+    public class Stopword : DictionaryEntry
     {
+        /// <summary>
+        /// The stop word being added or modified. When word already exists in the standard dictionary provided by Algolia, 
+        /// the entry can be overridden by the one provided by the user.
+        /// </summary>
+        public String Word { get; set; }
+
         /// <summary>
         /// The state of the entry. Can be either "enabled" or "disabled".
         /// </summary>
-        private String state { get; set; }
+        public String State { get; set; }
+
     }
 }
