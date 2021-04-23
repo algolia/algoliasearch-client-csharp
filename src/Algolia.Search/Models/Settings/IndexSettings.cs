@@ -281,7 +281,6 @@ namespace Algolia.Search.Models.Settings
         public object RemoveStopWords { get; set; }
 
         // performance
-        [JsonIgnore]
         private bool _numericAttributesForFilteringWasSet = false;
 
         /// <summary>
