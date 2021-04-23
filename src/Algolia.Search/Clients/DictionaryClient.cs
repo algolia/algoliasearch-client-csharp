@@ -142,9 +142,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException("Dictionary entries are required");
             }
 
+            var dictionaryRequest = new DictionaryRequest<DictionaryEntry>("addEntry", dictionaryEntries);
+
             DictionaryResponse response = await _transport
-                .ExecuteRequestAsync<DictionaryResponse>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary.Name}/batch", CallType.Write, requestOptions, ct)
+                .ExecuteRequestAsync<DictionaryResponse, DictionaryRequest<DictionaryEntry>>(HttpMethod.Post,
+                    $"/1/dictionaries/{dictionary.Name}/batch", CallType.Write, dictionaryRequest, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitAppTask(t);
@@ -174,9 +176,11 @@ namespace Algolia.Search.Clients
                 throw new ArgumentException("objectIDs can't be empty");
             }
 
+            var dictionaryRequest = new DictionaryRequest<String>("deleteEntry", ObjectIDs);
+
             DictionaryResponse response = await _transport
-                .ExecuteRequestAsync<DictionaryResponse>(HttpMethod.Post,
-                    $"/1/dictionaries/{dictionary.Name}/batch", CallType.Write, requestOptions, ct)
+                .ExecuteRequestAsync<DictionaryResponse, DictionaryRequest<String>>(HttpMethod.Post,
+                    $"/1/dictionaries/{dictionary.Name}/batch", CallType.Write, dictionaryRequest, requestOptions, ct)
                 .ConfigureAwait(false);
 
             response.WaitTask = t => WaitAppTask(t);

@@ -64,6 +64,14 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { stopword });
             saveDictionaryResponse.Wait();
 
+            //Missing Assert
+
+            // Replace Entry
+            stopword.Word = "uppercase";
+            var replaceDictionaryResponse = await BaseTest.DictionaryClient.ReplaceDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { stopword });
+            replaceDictionaryResponse.Wait();
+
+            // Missing Assert 
         }
 
         [Test]
@@ -94,6 +102,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { plural });
             saveDictionaryResponse.Wait();
 
+            // Missing Assert 
         }
 
         [Test]
@@ -124,6 +133,8 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { compound });
             saveDictionaryResponse.Wait();
+
+            // Missing Assert 
         }
     }
 }
