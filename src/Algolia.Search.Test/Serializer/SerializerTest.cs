@@ -606,6 +606,11 @@ namespace Algolia.Search.Test.Serializer
             Assert.IsNotNull(settings.NumericAttributesForFiltering);
             Assert.True(settings.NumericAttributesForFiltering.Contains("attr1"));
             Assert.True(settings.NumericAttributesForFiltering.Contains("attr2"));
+
+            string jsonWithNumericAttributeToIndexNull =
+                "{ \"numericAttributesToIndex\": null}";
+            IndexSettings settingsNumericAttributesisNull = JsonConvert.DeserializeObject<IndexSettings>(jsonWithNumericAttributeToIndexNull);
+            Assert.AreEqual(null, settingsNumericAttributesisNull.NumericAttributesForFiltering);
         }
 
         [Test]

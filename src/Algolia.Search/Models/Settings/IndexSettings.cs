@@ -293,20 +293,43 @@ namespace Algolia.Search.Models.Settings
         public object RemoveStopWords { get; set; }
 
         // performance
+        private bool _numericAttributesForFilteringWasSet = false;
+
+        /// <summary>
+        /// ShouldSerialize predicate from NewtonSoft.json to avoid serializing empty field.
+        /// https://www.newtonsoft.com/json/help/html/ConditionalProperties.htm
+        /// </summary>
+        public bool ShouldSerializeNumericAttributesForFiltering()
+        {
+            return _numericAttributesForFilteringWasSet;
+        }
+
+        private List<string> _numericAttributesForFiltering;
 
         /// <summary>
         /// List of numeric attributes that can be used as numerical filters.
         /// </summary>
-        public List<string> NumericAttributesForFiltering { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Include)]
+        public List<string> NumericAttributesForFiltering
+        {
+            get
+            {
+                return _numericAttributesForFiltering;
+            }
+            set
+            {
+                _numericAttributesForFiltering = value;
+                _numericAttributesForFilteringWasSet = true;
+            }
+        }
 
         // Handling legacy index settings
-        [JsonProperty("numericAttributesToIndex")]
+        [JsonProperty("numericAttributesToIndex", NullValueHandling = NullValueHandling.Include)]
         private List<string> NumericAttributesToIndex
         {
             set
             {
-                if (value != null)
-                { NumericAttributesForFiltering = value; }
+                NumericAttributesForFiltering = value;
             }
         }
 
