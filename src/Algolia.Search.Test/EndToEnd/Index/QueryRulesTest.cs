@@ -111,6 +111,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                     new Condition
                     {
                         Anchoring = "is",
+                        Filters = "category:TV",
                         Pattern = "mobile phone",
                         Alternatives = Alternatives.Of(true)
                     },
