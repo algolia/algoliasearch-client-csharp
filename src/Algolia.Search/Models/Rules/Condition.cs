@@ -37,6 +37,11 @@ namespace Algolia.Search.Models.Rules
         public string Pattern { get; set; }
 
         /// <summary>
+        /// The primary goal of this condition is to create Rules that are triggered on specific category pages or when a user applies specific filters. 
+        /// </summary>
+        public string Filters { get; set; }
+
+        /// <summary>
         /// { is | startsWith | endsWith | contains }: Whether the pattern must match the beginning or the end of the query string, or both, or none.
         /// </summary>
         public string Anchoring { get; set; }
