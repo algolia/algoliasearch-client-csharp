@@ -23,7 +23,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Dictionary
@@ -38,17 +37,17 @@ namespace Algolia.Search.Models.Dictionary
         /// Create a new dictionary request with action type and body
         /// </summary>
         /// <param name="actionType">Dictionary</param>
-        /// <param name="body">Data to send</param>
-        public DictionaryRequest(string actionType, IEnumerable<T> body)
+        /// <param name="data">Data to send</param>
+        public DictionaryRequest(string actionType, IEnumerable<T> data)
         {
-            if (body == null)
+            if (data == null)
             {
-                throw new ArgumentNullException(nameof(body));
+                throw new ArgumentNullException(nameof(data));
             }
 
             Operations = new List<DictionaryOperation<T>>();
 
-            foreach (var item in body)
+            foreach (var item in data)
             {
                 Operations.Add(new DictionaryOperation<T> { Action = actionType, Body = item });
             }
@@ -59,5 +58,16 @@ namespace Algolia.Search.Models.Dictionary
         /// </summary>
         [JsonProperty(PropertyName = "requests")]
         public ICollection<DictionaryOperation<T>> Operations { get; set; }
+    }
+
+    /// <summary>
+    /// Represent object of delete request body
+    /// </summary>
+    public class DictionaryDeleteRequestBody
+    {
+        /// <summary>
+        /// Algolia's objectID
+        /// </summary>
+        public string ObjectID;
     }
 }

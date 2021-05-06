@@ -28,6 +28,9 @@ namespace Algolia.Search.Models.Dictionary
     /// </summary>
     public class DictionarySettings
     {
-        private DisableStandardEntries disableStandardEntries { get; set; }
+        /// <summary>
+        /// DisableStandardEntries settings
+        /// </summary>
+        public DisableStandardEntries DisableStandardEntries { get; set; }
     }
 }

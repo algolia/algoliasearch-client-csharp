@@ -37,6 +37,6 @@ namespace Algolia.Search.Models.Dictionary
         /// <summary>
         /// Settings for the stop word dictionary.
         /// </summary>
-        private Dictionary<String, Boolean> stopwords { get; set; }
+        public Dictionary<String, Boolean> Stopwords { get; set; }
     }
 }

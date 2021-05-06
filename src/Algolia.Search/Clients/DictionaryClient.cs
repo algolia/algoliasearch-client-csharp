@@ -159,27 +159,34 @@ namespace Algolia.Search.Clients
             AsyncHelper.RunSync(() => DeleteDictionaryEntriesAsync(dictionary, ObjectIDs, requestOptions));
 
         /// <inheritdoc />
-        public async Task<DictionaryResponse> DeleteDictionaryEntriesAsync(AlgoliaDictionary dictionary, List<String> ObjectIDs, RequestOptions requestOptions = null, CancellationToken ct = default)
+        public async Task<DictionaryResponse> DeleteDictionaryEntriesAsync(AlgoliaDictionary dictionary, List<String> objectIDs, RequestOptions requestOptions = null, CancellationToken ct = default)
         {
             if (dictionary == null)
             {
                 throw new ArgumentNullException("a dictionary is required");
             }
 
-            if (ObjectIDs == null)
+            if (objectIDs == null)
             {
-                throw new ArgumentNullException("Dictionary entries are required");
+                throw new ArgumentNullException("objectIDs cannot be null");
             }
 
-            if (!ObjectIDs.Any())
+            if (!objectIDs.Any())
             {
                 throw new ArgumentException("objectIDs can't be empty");
             }
 
-            var dictionaryRequest = new DictionaryRequest<String>("deleteEntry", ObjectIDs);
+            List<DictionaryDeleteRequestBody> listDictionaryDeleteRequestBody = new List<DictionaryDeleteRequestBody>();
+
+            foreach (var objectID in objectIDs)
+            {
+                listDictionaryDeleteRequestBody.Add(new DictionaryDeleteRequestBody() { ObjectID = objectID });
+            }
+
+            var dictionaryRequest = new DictionaryRequest<DictionaryDeleteRequestBody>("deleteEntry", listDictionaryDeleteRequestBody);
 
             DictionaryResponse response = await _transport
-                .ExecuteRequestAsync<DictionaryResponse, DictionaryRequest<String>>(HttpMethod.Post,
+                .ExecuteRequestAsync<DictionaryResponse, DictionaryRequest<DictionaryDeleteRequestBody>>(HttpMethod.Post,
                     $"/1/dictionaries/{dictionary.Name}/batch", CallType.Write, dictionaryRequest, requestOptions, ct)
                 .ConfigureAwait(false);
 
