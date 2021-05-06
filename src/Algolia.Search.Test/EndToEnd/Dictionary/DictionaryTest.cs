@@ -49,7 +49,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
                 Name = AlgoliaDictionaryType.Stopwords
             };
 
-            var emptySearchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<string>(algoliaDictionary, query);
+            var emptySearchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Stopword>(algoliaDictionary, query);
             Assert.That(emptySearchDictionaryResponse.Hits, Is.Empty);
 
             // Save Entry
@@ -64,14 +64,27 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { stopword });
             saveDictionaryResponse.Wait();
 
-            //Missing Assert
+            var searchSaveDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Stopword>(algoliaDictionary, query);
+
+            Assert.That(searchSaveDictionaryResponse.NbHits, Is.EqualTo(1));
+            Assert.AreEqual(searchSaveDictionaryResponse.Hits[0].Word, stopword.Word);
 
             // Replace Entry
             stopword.Word = "uppercase";
             var replaceDictionaryResponse = await BaseTest.DictionaryClient.ReplaceDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { stopword });
             replaceDictionaryResponse.Wait();
 
-            // Missing Assert 
+            var searchReplaceDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Stopword>(algoliaDictionary, query);
+
+            Assert.That(searchReplaceDictionaryResponse.NbHits, Is.EqualTo(1));
+            Assert.AreEqual(searchReplaceDictionaryResponse.Hits[0].Word, stopword.Word);
+
+            // Delete Entry
+            var deleteDictionaryResponse = await BaseTest.DictionaryClient.DeleteDictionaryEntriesAsync(algoliaDictionary, new List<string>() { objectId });
+            deleteDictionaryResponse.Wait();
+
+            var searchDeleteDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Stopword>(algoliaDictionary, query);
+            Assert.That(searchDeleteDictionaryResponse.Hits, Is.Empty);
         }
 
         [Test]
@@ -88,7 +101,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
                 Name = AlgoliaDictionaryType.Plurals
             };
 
-            var searchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<string>(algoliaDictionary, query);
+            var searchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Plural>(algoliaDictionary, query);
             Assert.That(searchDictionaryResponse.Hits, Is.Empty);
 
             // Save Entry
@@ -102,7 +115,17 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { plural });
             saveDictionaryResponse.Wait();
 
-            // Missing Assert 
+            var searchSaveDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Plural>(algoliaDictionary, query);
+
+            Assert.That(searchSaveDictionaryResponse.NbHits, Is.EqualTo(1));
+            Assert.AreEqual(searchSaveDictionaryResponse.Hits[0].Words, plural.Words);
+
+            // Delete Entry
+            var deleteDictionaryResponse = await BaseTest.DictionaryClient.DeleteDictionaryEntriesAsync(algoliaDictionary, new List<string>() { objectId });
+            deleteDictionaryResponse.Wait();
+
+            var searchDeleteDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Stopword>(algoliaDictionary, query);
+            Assert.That(searchDeleteDictionaryResponse.Hits, Is.Empty);
         }
 
         [Test]
@@ -119,7 +142,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
                 Name = AlgoliaDictionaryType.Compounds
             };
 
-            var searchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<string>(algoliaDictionary, query);
+            var searchDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Compound>(algoliaDictionary, query);
             Assert.That(searchDictionaryResponse.Hits, Is.Empty);
 
             // Save Entry
@@ -134,7 +157,33 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var saveDictionaryResponse = await BaseTest.DictionaryClient.SaveDictionaryEntriesAsync(algoliaDictionary, new List<DictionaryEntry>() { compound });
             saveDictionaryResponse.Wait();
 
-            // Missing Assert 
+            var searchSaveDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Compound>(algoliaDictionary, query);
+
+            Assert.That(searchSaveDictionaryResponse.NbHits, Is.EqualTo(1));
+            Assert.AreEqual(searchSaveDictionaryResponse.Hits[0].Word, compound.Word);
+
+            // Delete Entry
+            var deleteDictionaryResponse = await BaseTest.DictionaryClient.DeleteDictionaryEntriesAsync(algoliaDictionary, new List<string>() { objectId });
+            deleteDictionaryResponse.Wait();
+
+            var searchDeleteDictionaryResponse = await BaseTest.DictionaryClient.SearchDictionaryEntriesAsync<Stopword>(algoliaDictionary, query);
+            Assert.That(searchDeleteDictionaryResponse.Hits, Is.Empty);
+        }
+
+        [Test]
+        [Parallelizable]
+        public async Task TestSettings()
+        {
+            DictionarySettings dictionarySettings = new DictionarySettings()
+            {
+                DisableStandardEntries = new DisableStandardEntries() { Stopwords = new Dictionary<String, Boolean>() { { "en", true } } }
+            };
+
+            var SetDictionarySettingsResponse = await BaseTest.DictionaryClient.SetDictionarySettingsAsync(dictionarySettings);
+            SetDictionarySettingsResponse.Wait();
+
+            var DictionarySettingsResponse = BaseTest.DictionaryClient.GetDictionarySettings();
+            Assert.AreEqual(DictionarySettingsResponse.DisableStandardEntries.Stopwords, dictionarySettings.DisableStandardEntries.Stopwords);
         }
     }
 }
