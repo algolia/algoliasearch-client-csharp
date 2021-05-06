@@ -217,6 +217,42 @@ namespace Algolia.Search.Clients
             CancellationToken ct = default) where T : class;
 
         /// <summary>
+        /// Batch the given request
+        /// </summary>
+        /// <param name="operations">Operations to send to the api</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        BatchResponse Batch(IEnumerable<BatchOperation> operations, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Perform several indexing operations in one API call.
+        /// </summary>
+        /// <param name="operations">Operations to send to the api</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<BatchResponse> BatchAsync(IEnumerable<BatchOperation> operations,
+            RequestOptions requestOptions = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Perform several indexing operations in one API call.
+        /// </summary>
+        /// <param name="request">Request to send to the api</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        BatchResponse Batch(BatchRequest request, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Perform several indexing operations in one API call.
+        /// </summary>
+        /// <param name="request">Batch request</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<BatchResponse> BatchAsync(BatchRequest request, RequestOptions requestOptions = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Remove objects from an index using their object ids.
         /// </summary>
         /// <param name="objectId">Algolia's objectID</param>

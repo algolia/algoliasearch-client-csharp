@@ -267,6 +267,52 @@ namespace Algolia.Search.Clients
         public BatchResponse Batch<T>(BatchRequest<T> request, RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => BatchAsync(request, requestOptions));
 
+
+
+
+
+        /// <inheritdoc />
+        public BatchResponse Batch(IEnumerable<BatchOperation> operations, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => BatchAsync(operations, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<BatchResponse> BatchAsync(IEnumerable<BatchOperation> operations,
+            RequestOptions requestOptions = null, CancellationToken ct = default)
+        {
+            if (operations == null)
+            {
+                throw new ArgumentNullException(nameof(operations));
+            }
+
+            var batch = new BatchRequest(operations);
+
+            return await BatchAsync(batch, requestOptions, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public BatchResponse Batch(BatchRequest request, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => BatchAsync(request, requestOptions));
+
+
+        /// <inheritdoc />
+        public async Task<BatchResponse> BatchAsync(BatchRequest request, RequestOptions requestOptions = null,
+            CancellationToken ct = default)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            BatchResponse response = await _transport.ExecuteRequestAsync<BatchResponse, BatchRequest>(
+                    HttpMethod.Post, $"/1/indexes/{_urlEncodedIndexName}/batch", CallType.Write, request,
+                    requestOptions,
+                    ct)
+                .ConfigureAwait(false);
+
+            response.WaitTask = t => WaitTask(t);
+            return response;
+        }
+
         /// <summary>
         /// Split records into smaller chunks before sending them to the API
         /// </summary>
