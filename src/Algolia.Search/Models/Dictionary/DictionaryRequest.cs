@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,26 +21,53 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Objects to edit.
+    /// Dictionary request for algoli'as API
     /// </summary>
-    public class Edit
+    public class DictionaryRequest<T> where T : class
+    {
+
+        /// <summary>
+        /// Create a new dictionary request with action type and body
+        /// </summary>
+        /// <param name="actionType">Dictionary</param>
+        /// <param name="data">Data to send</param>
+        public DictionaryRequest(string actionType, IEnumerable<T> data)
+        {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            Operations = new List<DictionaryOperation<T>>();
+
+            foreach (var item in data)
+            {
+                Operations.Add(new DictionaryOperation<T> { Action = actionType, Body = item });
+            }
+        }
+
+        /// <summary>
+        /// List of operations of the dictionary request
+        /// </summary>
+        [JsonProperty(PropertyName = "requests")]
+        public ICollection<DictionaryOperation<T>> Operations { get; set; }
+    }
+
+    /// <summary>
+    /// Represent object of delete request body
+    /// </summary>
+    public class DictionaryDeleteRequestBody
     {
         /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
+        /// Algolia's objectID
         /// </summary>
-        public string Type { get; set; }
-
-        /// <summary>
-        /// Text or patterns to remove from the query string.
-        /// </summary>
-        public string Delete { get; set; }
-
-        /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
-        /// </summary>
-        public string Insert { get; set; }
+        public string ObjectID;
     }
 }

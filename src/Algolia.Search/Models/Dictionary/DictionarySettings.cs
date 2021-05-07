@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,26 +21,16 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Objects to edit.
+    /// Represents Dictionary settings.
     /// </summary>
-    public class Edit
+    public class DictionarySettings
     {
         /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
+        /// DisableStandardEntries settings
         /// </summary>
-        public string Type { get; set; }
-
-        /// <summary>
-        /// Text or patterns to remove from the query string.
-        /// </summary>
-        public string Delete { get; set; }
-
-        /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
-        /// </summary>
-        public string Insert { get; set; }
+        public DisableStandardEntries DisableStandardEntries { get; set; }
     }
 }

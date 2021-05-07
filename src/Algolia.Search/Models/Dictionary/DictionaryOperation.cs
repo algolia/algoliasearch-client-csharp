@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,27 +20,23 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
+using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Rules
+namespace Algolia.Search.Models.Dictionary
 {
     /// <summary>
-    /// Objects to edit.
+    /// Represent an algolia batch object
     /// </summary>
-    public class Edit
+    public class DictionaryOperation<T> where T : class
     {
         /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
+        /// Type of batch see <see cref="Enums.DictionaryActionType"/>
         /// </summary>
-        public string Type { get; set; }
+        public string Action { get; set; }
 
         /// <summary>
-        /// Text or patterns to remove from the query string.
+        /// Body of the batch, objects you want to send
         /// </summary>
-        public string Delete { get; set; }
-
-        /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
-        /// </summary>
-        public string Insert { get; set; }
+        public T Body { get; set; }
     }
 }

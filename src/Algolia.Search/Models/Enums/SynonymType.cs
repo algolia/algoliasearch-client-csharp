@@ -29,7 +29,7 @@ namespace Algolia.Search.Models.Enums
     public class SynonymType
     {
         /// <summary>
-        /// Synonuym
+        /// Synonym
         /// </summary>
         public const string Synonym = "synonym";
 

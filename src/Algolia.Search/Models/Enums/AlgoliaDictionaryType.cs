@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,26 +21,26 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+namespace Algolia.Search.Models.Enums
 {
     /// <summary>
-    /// Objects to edit.
+    /// https://www.algolia.com/doc/guides/textual-relevance/synonyms/#synonyms-overview
     /// </summary>
-    public class Edit
+    public class AlgoliaDictionaryType
     {
         /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
+        /// Plural entry
         /// </summary>
-        public string Type { get; set; }
+        public const string Plurals = "plurals";
 
         /// <summary>
-        /// Text or patterns to remove from the query string.
+        ///  Compound entry
         /// </summary>
-        public string Delete { get; set; }
+        public const string Compounds = "compounds";
 
         /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
+        ///  Stopword entry
         /// </summary>
-        public string Insert { get; set; }
+        public const string Stopwords = "stopwords";
     }
 }

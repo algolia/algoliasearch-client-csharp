@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,26 +21,21 @@
 * THE SOFTWARE.
 */
 
-namespace Algolia.Search.Models.Rules
+namespace Algolia.Search.Models.Enums
 {
     /// <summary>
-    /// Objects to edit.
+    /// Actions that need to be performed
     /// </summary>
-    public class Edit
+    public static class DictionaryActionType
     {
         /// <summary>
-        /// Type of edit <see cref="Enums.EditType"/>
+        /// https://www.algolia.com/doc/rest-api/search/#method-param-request
         /// </summary>
-        public string Type { get; set; }
+        public const string AddEntry = "addEntry";
 
         /// <summary>
-        /// Text or patterns to remove from the query string.
+        /// https://www.algolia.com/doc/rest-api/search/#method-param-request
         /// </summary>
-        public string Delete { get; set; }
-
-        /// <summary>
-        /// Text that should be inserted in place of the removed text inside the query string.
-        /// </summary>
-        public string Insert { get; set; }
+        public const string DeleteEntry = "deleteEntry";
     }
 }
