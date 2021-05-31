@@ -1,6 +1,6 @@
 ## `algolia/algoliasearch-client-csharp` maintainers
 
-| Name              | Email                         |
-|-------------------|-------------------------------|
-| Antoine Hémery    | antoine.hemery@algolia.com    |
-| Anthony Seure     | anthony.seure@algolia.com     |
+| Name           | Email                      |
+| -------------- | -------------------------- |
+| Antoine Hémery | antoine.hemery@algolia.com |
+| Tom Klotz      | tom.klotz@algolia.com      |
