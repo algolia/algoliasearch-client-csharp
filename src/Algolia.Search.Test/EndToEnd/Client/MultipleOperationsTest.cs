@@ -38,12 +38,15 @@ namespace Algolia.Search.Test.EndToEnd.Client
     {
         private string _indexName1;
         private string _indexName2;
+        private string _indexName3;
 
         [OneTimeSetUp]
         public void Init()
         {
             _indexName1 = TestHelper.GetTestIndexName("multiple_operations");
             _indexName2 = TestHelper.GetTestIndexName("multiple_operations_dev");
+            _indexName3 = TestHelper.GetTestIndexName("multiple_operations_facet");
+
         }
 
         [Test]
@@ -126,6 +129,50 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Assert.That(multiQueri2.Results, Has.Exactly(2).Items);
             Assert.That(multiQueri2.Results.ElementAt(0).Hits, Has.Exactly(2).Items);
             Assert.That(multiQueri2.Results.ElementAt(1).Hits, Is.Empty);
+        }
+        [Test]
+        public async Task TestMultipleQueriesFacet()
+        {
+            var objectsToSave = new List<BatchOperation<MultipleOperationClass>>
+            {
+                new BatchOperation<MultipleOperationClass>
+                {
+                    IndexName = _indexName3,
+                    Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass { Firstname = "Jimmie" }
+                },
+            };
+
+            var saveMultiple = await BaseTest.SearchClient.MultipleBatchAsync(objectsToSave);
+            saveMultiple.Wait();
+
+            var query = new Query()
+            {
+                FacetFilters = new List<List<string>>()
+                {
+                    new List<string>() { "sizeValue:1 \" x 3 \"" }
+                }
+            };
+
+
+            MultipleQueriesRequest request = new MultipleQueriesRequest
+            {
+                Requests = new List<MultipleQueries>()
+                {
+                    new MultipleQueries
+                    {
+                        IndexName = _indexName3,
+                        Params = query
+                    },
+                }
+            };
+
+            var index = BaseTest.SearchClient.InitIndex(_indexName3);
+
+            var responseSearch = index.Search<MultipleOperationClass>(query);
+            var responseMultipleQueries = BaseTest.SearchClient.MultipleQueries<MultipleOperationClass>(request);
+
+            Assert.AreEqual(responseSearch.Params, responseMultipleQueries.Results.First().Params);
         }
 
         public class MultipleOperationClass
