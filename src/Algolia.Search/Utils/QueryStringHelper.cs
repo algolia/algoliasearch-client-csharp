@@ -22,6 +22,7 @@
 */
 
 using System;
+using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -118,7 +119,9 @@ namespace Algolia.Search.Utils
                                 ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<object>>();
                             values = WrapValues(string.Join(",",
                                 nestedParametersLists.Select(x =>
-                                    WrapValues(string.Join(",", x.Select(y => "\"" + y + "\""))))));
+                                    WrapValues(string.Join(",", x.Select(y => "\"" + y.ToString().Replace("\"", "\\\"") + "\""))))));
+
+
                         }
                     }
                     else
@@ -127,8 +130,9 @@ namespace Algolia.Search.Utils
                         IEnumerable<object> parameterList = ((IEnumerable)p.GetValue(value, null)).Cast<object>();
                         values = string.Join(",", parameterList);
                     }
+                    Console.WriteLine(p.Name.ToCamelCase() + "=" + System.Net.WebUtility.UrlEncode(values));
 
-                    return p.Name.ToCamelCase() + "=" + Uri.EscapeDataString(values);
+                    return p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(values);
                 });
 
             // Handle properties with JsonPropertyAttribute
