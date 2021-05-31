@@ -130,7 +130,6 @@ namespace Algolia.Search.Utils
                         IEnumerable<object> parameterList = ((IEnumerable)p.GetValue(value, null)).Cast<object>();
                         values = string.Join(",", parameterList);
                     }
-                    Console.WriteLine(p.Name.ToCamelCase() + "=" + System.Net.WebUtility.UrlEncode(values));
 
                     return p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(values);
                 });
