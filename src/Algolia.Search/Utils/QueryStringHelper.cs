@@ -26,6 +26,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using Algolia.Search.Models.ApiKeys;
 using Newtonsoft.Json;
@@ -118,7 +119,9 @@ namespace Algolia.Search.Utils
                                 ((IEnumerable)p.GetValue(value, null)).Cast<IEnumerable<object>>();
                             values = WrapValues(string.Join(",",
                                 nestedParametersLists.Select(x =>
-                                    WrapValues(string.Join(",", x.Select(y => "\"" + y + "\""))))));
+                                    WrapValues(string.Join(",", x.Select(y => "\"" + y.ToString().Replace("\"", "\\\"") + "\""))))));
+
+
                         }
                     }
                     else
@@ -128,7 +131,7 @@ namespace Algolia.Search.Utils
                         values = string.Join(",", parameterList);
                     }
 
-                    return p.Name.ToCamelCase() + "=" + Uri.EscapeDataString(values);
+                    return p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(values);
                 });
 
             // Handle properties with JsonPropertyAttribute
