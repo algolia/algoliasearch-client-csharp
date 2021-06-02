@@ -87,7 +87,7 @@ namespace Algolia.Search.Test.Serializer
         public void TestQueryWithList()
         {
             Query query = new Query("") { Facets = new List<string> { "(attribute)" } };
-            Assert.AreEqual(query.ToQueryString(), "query=&facets=%28attribute%29");
+            Assert.AreEqual(query.ToQueryString(), "query=&facets=(attribute)");
 
             Query query2 = new Query("") { RestrictSearchableAttributes = new List<string> { "attr1" } };
             Assert.AreEqual(query2.ToQueryString(), "query=&restrictSearchableAttributes=attr1");
