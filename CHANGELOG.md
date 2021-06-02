@@ -1,5 +1,15 @@
 # ChangeLog
 
+# [6.10.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.10.0...6.10.1) (2021-06-2)
+
+### Fix
+
+-   fix(multiple-queries): use web utility to encode query params
+
+### Chore
+
+-   chore: Update maintainer file f76dc7efaa853b7c8c80b177bf43989a1b0a5169
+
 # [6.10.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.9.1...6.10.0) (2021-05-7)
 
 ### Feat
