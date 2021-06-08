@@ -70,8 +70,8 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestQueryWithBooleanParam()
         {
-            Query query = new Query("") { AroundLatLngViaIP = true };
-            Assert.AreEqual(query.ToQueryString(), "query=&aroundLatLngViaIP=true");
+            Query query = new Query("") { AroundLatLngViaIP = true, EnableReRanking = false };
+            Assert.AreEqual(query.ToQueryString(), "query=&aroundLatLngViaIP=true&enableReRanking=false");
         }
 
         [Test]
