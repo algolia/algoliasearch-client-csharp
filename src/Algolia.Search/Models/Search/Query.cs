@@ -422,6 +422,14 @@ namespace Algolia.Search.Models.Search
         public int? RelevancyStrictness { get; set; }
 
         /// <summary>
+        /// You need to turn on Dynamic Re-Ranking on your index 
+        /// for it to have an effect on your search results. 
+        /// You can do this through the Re-Ranking page on the dashboard. 
+        /// This parameter is only used to turn off Dynamic Re-Ranking (with false) at search time.
+        /// </summary>
+        public bool? EnableReRanking { get; set; }
+
+        /// <summary>
         /// Returns the Query as a query string
         /// Example : "query= distinct=0"
         /// </summary>
