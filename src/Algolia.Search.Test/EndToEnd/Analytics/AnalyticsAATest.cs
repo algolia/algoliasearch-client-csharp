@@ -84,12 +84,12 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             abTest.AbTestId = addAbTest.ABTestId;
             _index.WaitTask(addAbTest.TaskID);
 
-            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
+            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId);
             Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount",
                 "ConversionCount"));
             Assert.That(abTestToCheck.Status, Is.EqualTo("active"));
 
-            var deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId.Value);
+            var deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId);
             _index.WaitTask(deleteAbTest.TaskID);
         }
 
