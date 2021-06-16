@@ -67,6 +67,16 @@ namespace Algolia.Search.Models.Search
             };
         }
 
+        ///<inheritdoc cref="IncrementFrom(int)"/>
+        public static PartialUpdateOperation<long> IncrementFrom(long value)
+        {
+            return new PartialUpdateOperation<long>
+            {
+                Operation = PartialUpdateOperationType.IncrementFrom,
+                Value = value,
+            };
+        }
+
         /// <summary>
         /// Increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise ignore the whole object update
         /// </summary>
@@ -75,6 +85,16 @@ namespace Algolia.Search.Models.Search
         public static PartialUpdateOperation<int> IncrementSet(int value)
         {
             return new PartialUpdateOperation<int>
+            {
+                Operation = PartialUpdateOperationType.IncrementSet,
+                Value = value,
+            };
+        }
+
+        ///<inheritdoc cref="IncrementSet(int)"/>
+        public static PartialUpdateOperation<long> IncrementSet(long value)
+        {
+            return new PartialUpdateOperation<long>
             {
                 Operation = PartialUpdateOperationType.IncrementSet,
                 Value = value,

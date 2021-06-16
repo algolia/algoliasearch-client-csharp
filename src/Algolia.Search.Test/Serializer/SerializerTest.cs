@@ -679,7 +679,7 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
-        public void TestPartialUpdateOperation_IncrementFrom()
+        public void TestPartialUpdateOperation_IncrementFrom_int()
         {
             RecordWithPartialUpdateOperation<int> record = new RecordWithPartialUpdateOperation<int>
             {
@@ -693,12 +693,40 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
-        public void TestPartialUpdateOperation_IncrementSet()
+        public void TestPartialUpdateOperation_IncrementFrom_long()
+        {
+            RecordWithPartialUpdateOperation<long> record = new RecordWithPartialUpdateOperation<long>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<long>.IncrementFrom((long) 2),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"IncrementFrom\",\"value\":2}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestPartialUpdateOperation_IncrementSet_int()
         {
             RecordWithPartialUpdateOperation<int> record = new RecordWithPartialUpdateOperation<int>
             {
                 ObjectID = "myID",
                 Update = PartialUpdateOperation<int>.IncrementSet(2),
+            };
+
+            string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"IncrementSet\",\"value\":2}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestPartialUpdateOperation_IncrementSet_long()
+        {
+            RecordWithPartialUpdateOperation<long> record = new RecordWithPartialUpdateOperation<long>
+            {
+                ObjectID = "myID",
+                Update = PartialUpdateOperation<long>.IncrementSet((long) 2),
             };
 
             string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
