@@ -109,5 +109,9 @@ If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.c
 Encountering an issue? Before reaching out to support, we recommend heading to our [FAQ](https://www.algolia.com/doc/api-client/troubleshooting/faq/csharp/) where you will find answers for the most common issues and gotchas with the client.
 
 
+## Use the Dockerfile
+
+If you want to contribute to this project without installing all its dependencies, you can use our Docker image. Please check our [dedicated guide](DOCKER_README.MD) to learn more.
+
 ## 📄 License
 Algolia .NET API Client is an open-sourced software licensed under the [MIT license](LICENSE.md).
