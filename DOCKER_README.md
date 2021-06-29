@@ -52,8 +52,13 @@ docker run -it --rm --env ALGOLIA_APPLICATION_ID=XXXXXX [...] -v $PWD:/app -w /a
 However, we advise you to export them in your `.bashrc` or `.zshrc`. That way, you can use [Docker's shorten syntax](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file) to set your variables.
 
 ```bash
-docker run -it --rm --env ALGOLIA_APPLICATION_ID \
-                    --env ALGOLIA_SEARCH_KEY \
+docker run -it --rm --env ALGOLIA_APPLICATION_ID_1 \
+                    --env ALGOLIA_SEARCH_KEY_1 \
+                    --env ALGOLIA_ADMIN_KEY_1 \
+                    --env ALGOLIA_APPLICATION_ID_2 \
+                    --env ALGOLIA_ADMIN_KEY_2 \
+                    --env ALGOLIA_APPLICATION_ID_MCM \
+                    --env ALGOLIA_ADMIN_KEY_MCM \
 -v $PWD:/app -w /app algolia-csharp bash
 ```
 
@@ -63,9 +68,6 @@ To launch the tests, you can use one of the following commands
 ```shell script
 # run only the unit tests
 dotnet test src/
-
 ```
-
-You can find more commands [here](https://docs.microsoft.com/fr-fr/dotnet/core/tools/dotnet-test).
 
 Feel free to contact us if you have any questions.
