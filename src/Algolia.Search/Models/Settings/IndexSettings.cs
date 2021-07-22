@@ -22,8 +22,8 @@
  */
 
 using System.Collections.Generic;
-using Algolia.Search.Serializer;
 using Algolia.Search.Models.Rules;
+using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Settings

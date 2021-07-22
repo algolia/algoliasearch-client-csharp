@@ -22,9 +22,9 @@
 */
 
 using System.Collections.Generic;
+using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Serializer;
-using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Rules

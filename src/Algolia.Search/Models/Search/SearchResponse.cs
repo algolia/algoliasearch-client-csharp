@@ -21,8 +21,8 @@
 * THE SOFTWARE.
 */
 
-using Algolia.Search.Models.Rules;
 using System.Collections.Generic;
+using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Search
