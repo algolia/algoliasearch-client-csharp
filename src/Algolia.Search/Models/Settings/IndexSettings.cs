@@ -23,6 +23,7 @@
 
 using System.Collections.Generic;
 using Algolia.Search.Serializer;
+using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Settings
@@ -90,6 +91,13 @@ namespace Algolia.Search.Models.Settings
         /// lesser value - more less relevant results
         /// </summary>
         public int? RelevancyStrictness { get; set; }
+
+        /// <summary>
+        /// Content defining how the search interface should be rendered. 
+        /// This is set via the settings for a default value and can be overridden via rules.
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> RenderingContent { get; set; }
 
         /// <summary>
         /// The primary parameter is automatically added to a replica's settings when the replica is created and cannot be modified.

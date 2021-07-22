@@ -24,6 +24,7 @@
 using System.Collections.Generic;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Serializer;
+using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Rules
@@ -68,5 +69,11 @@ namespace Algolia.Search.Models.Rules
         /// Behaves like optionalFilters.
         /// </summary>
         public List<AutomaticFacetFilter> AutomaticOptionalFacetFilters { get; set; }
+
+        /// <summary>
+        /// Content defining how the search interface should be rendered. 
+        /// This is set via the settings for a default value and can be overridden via rules.
+        /// </summary>
+        public RenderingContent RenderingContent { get; set; }
     }
 }
