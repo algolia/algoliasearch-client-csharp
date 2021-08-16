@@ -96,7 +96,6 @@ namespace Algolia.Search.Models.Settings
         /// Content defining how the search interface should be rendered.
         /// This is set via the settings for a default value and can be overridden via rules.
         /// </summary>
-        [JsonExtensionData]
         public IDictionary<string, object> RenderingContent { get; set; }
 
         /// <summary>
