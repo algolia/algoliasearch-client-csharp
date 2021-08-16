@@ -24,7 +24,7 @@
 namespace Algolia.Search.Models.Rules
 {
     /// <summary>
-    /// Content defining how the search interface should be rendered. 
+    /// Content defining how the search interface should be rendered.
     /// This is set via the settings for a default value and can be overridden via rules.
     /// </summary>
     public class RenderingContent
@@ -33,6 +33,5 @@ namespace Algolia.Search.Models.Rules
         /// Facets and facets values ordering rules container.
         /// </summary>
         public FacetOrdering FacetOrdering { get; set; }
-
     }
 }

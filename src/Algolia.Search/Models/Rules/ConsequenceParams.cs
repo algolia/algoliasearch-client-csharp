@@ -71,7 +71,7 @@ namespace Algolia.Search.Models.Rules
         public List<AutomaticFacetFilter> AutomaticOptionalFacetFilters { get; set; }
 
         /// <summary>
-        /// Content defining how the search interface should be rendered. 
+        /// Content defining how the search interface should be rendered.
         /// This is set via the settings for a default value and can be overridden via rules.
         /// </summary>
         public RenderingContent RenderingContent { get; set; }

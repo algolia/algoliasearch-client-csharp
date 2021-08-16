@@ -31,7 +31,7 @@ namespace Algolia.Search.Models.Rules
     public class FacetsOrder
     {
         /// <summary>
-        /// an ordered list of attributes of facets to present.
+        /// An ordered list of attributes of facets to present.
         /// </summary>
         public List<string> Order { get; set; }
     }
