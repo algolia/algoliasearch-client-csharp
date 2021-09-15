@@ -40,6 +40,7 @@ public class BaseTest
     internal static AnalyticsClient AnalyticsClient;
     internal static RecommendationClient RecommendationClient;
     internal static DictionaryClient DictionaryClient;
+    internal static RecommendClient RecommendClient;
 
     [OneTimeSetUp]
     public void Setup()
@@ -55,5 +56,6 @@ public class BaseTest
         AnalyticsClient = new AnalyticsClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
         RecommendationClient = new RecommendationClient(TestHelper.ApplicationId1, TestHelper.AdminKey1, "eu");
         DictionaryClient = new DictionaryClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
+        RecommendClient = new RecommendClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
     }
 }
