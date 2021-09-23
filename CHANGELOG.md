@@ -1,5 +1,15 @@
 # ChangeLog
 
+## [6.10.2](https://github.com/algolia/algoliasearch-client-csharp/compare/6.10.1...6.10.2) (2021-09-23)
+
+### Feat
+
+- **rules**: add ObjectIDs to ConsequencePromote (#784) ([d99397a](https://github.com/algolia/algoliasearch-client-csharp/commit/d99397a))
+- containerize our repository (#779) ([0596eed](https://github.com/algolia/algoliasearch-client-csharp/commit/0596eed))
+- **query**: add enableReRanking query parameter (#774) ([f2c10db](https://github.com/algolia/algoliasearch-client-csharp/commit/f2c10db))
+
+
+
 # [6.10.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.10.0...6.10.1) (2021-06-2)
 
 ### Fix
