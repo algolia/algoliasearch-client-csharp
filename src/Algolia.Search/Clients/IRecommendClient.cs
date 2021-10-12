@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,33 +29,18 @@ using Algolia.Search.Models.Recommend;
 
 namespace Algolia.Search.Clients
 {
-
     /// <summary>
     /// Recommend Client interface
     /// </summary>
     public interface IRecommendClient
     {
         /// <summary>
-        /// Get recommendations for given object
-        /// </summary>
-        /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        RecommendResponse GetRecommendations(RecommendRequestItem requests, RequestOptions requestOptions = null);
-
-        /// <summary>
         /// Get recommendations for given objects
         /// </summary>
         /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        RecommendResponse GetRecommendations(IEnumerable<RecommendRequestItem> requests, RequestOptions requestOptions = null);
-
-        /// <summary>
-        /// Get recommendations for given object
-        /// </summary>
-        /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
-        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        /// <param name="ct">Task CancellationToken</param>
-        Task<RecommendResponse> GetRecommendationsAsync(RecommendRequestItem requests, RequestOptions requestOptions = null, CancellationToken ct = default);
+        RecommendResponse<T> GetRecommendations<T>(IEnumerable<RecommendOptions> requests,
+            RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
         /// Get recommendations for given objects
@@ -63,6 +48,7 @@ namespace Algolia.Search.Clients
         /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Task CancellationToken</param>
-        Task<RecommendResponse> GetRecommendationsAsync(IEnumerable<RecommendRequestItem> requests, RequestOptions requestOptions = null, CancellationToken ct = default);
+        Task<RecommendResponse<T>> GetRecommendationsAsync<T>(IEnumerable<RecommendOptions> requests,
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
     }
 }

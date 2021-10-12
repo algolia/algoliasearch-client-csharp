@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -91,41 +91,28 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public RecommendResponse GetRecommendations(RecommendRequestItem request,
-            RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => GetRecommendationsAsync(new[] { request }, requestOptions));
+        public RecommendResponse<T> GetRecommendations<T>(IEnumerable<RecommendOptions> requests,
+            RequestOptions requestOptions = null)  where T : class =>
+            AsyncHelper.RunSync(() => GetRecommendationsAsync<T>(requests, requestOptions));
 
         /// <inheritdoc />
-        public RecommendResponse GetRecommendations(IEnumerable<RecommendRequestItem> requests,
-            RequestOptions requestOptions = null) =>
-            AsyncHelper.RunSync(() => GetRecommendationsAsync(requests, requestOptions));
-
-        /// <inheritdoc />
-        public Task<RecommendResponse> GetRecommendationsAsync(
-            RecommendRequestItem request, RequestOptions requestOptions = null,
-            CancellationToken ct = default) => GetRecommendationsAsync(new[] { request }, requestOptions);
-
-        /// <inheritdoc />
-        public async Task<RecommendResponse> GetRecommendationsAsync(
-            IEnumerable<RecommendRequestItem> requests, RequestOptions requestOptions = null,
-            CancellationToken ct = default) 
+        public async Task<RecommendResponse<T>> GetRecommendationsAsync<T>(
+            IEnumerable<RecommendOptions> requests, RequestOptions requestOptions = null,
+            CancellationToken ct = default) where T : class
         {
             if (requests == null)
             {
                 throw new ArgumentNullException(nameof(requests));
             }
 
-            var req = new RecommendRequest
+            var request = new RecommendRequest
             {
                 Requests = requests.ToList()
             };
 
-            RecommendResponse resp = await _transport
-                .ExecuteRequestAsync<RecommendResponse, RecommendRequest>(
-                    HttpMethod.Post, "/1/indexes/*/recommendations", CallType.Write, req, requestOptions, ct)
+            return await _transport.ExecuteRequestAsync<RecommendResponse<T>, RecommendRequest>(
+                    HttpMethod.Post, "/1/indexes/*/recommendations", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
-
-            return resp;
         }
     }
 }

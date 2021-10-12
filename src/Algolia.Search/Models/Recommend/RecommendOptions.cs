@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,9 +25,9 @@ using System.Collections.Generic;
 namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Single item for <see cref="RecommendRequest"/>
+    /// Recommendation query options, passed in a <see cref="RecommendRequest"/>
     /// </summary>
-    public class RecommendRequestItem
+    public class RecommendOptions
 
     {
         /// <summary>
@@ -35,7 +35,6 @@ namespace Algolia.Search.Models.Recommend
         /// </summary>
         public string IndexName { get; set; }
 
-        //todo: convert to enum
         /// <summary>
         /// Required. The recommendation model to use, either "related-products" or "bought-together"
         /// </summary>
@@ -54,7 +53,7 @@ namespace Algolia.Search.Models.Recommend
         /// <summary>
         /// Optional. The maximum number of recommendations to retrieve.
         /// </summary>
-        public long MaxRecommendations { get; set; } = 3;
+        public long MaxRecommendations { get; set; } = 0;
 
         /// <summary>
         /// Optional. A key-value mapping of search parameters to filter the recommendations.
