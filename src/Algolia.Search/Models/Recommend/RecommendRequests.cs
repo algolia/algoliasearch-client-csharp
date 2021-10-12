@@ -25,7 +25,7 @@ using System.Collections.Generic;
 namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// List of requests for recommend API
+    /// Contains a list of <see cref="RecommendRequest"/> to send to the Recommend API
     /// </summary>
     public class RecommendRequests
     {

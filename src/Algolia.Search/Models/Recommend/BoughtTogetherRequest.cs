@@ -24,7 +24,7 @@
 namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Recommendation query options, passed in a <see cref="RecommendRequests"/>
+    /// Recommendation request configured to use the "bought-together" model, passed in a <see cref="RecommendRequests"/>
     /// </summary>
     public class BoughtTogetherRequest : RecommendRequest
 
