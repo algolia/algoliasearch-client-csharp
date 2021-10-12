@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,17 +21,18 @@
 * THE SOFTWARE.
 */
 using System.Collections.Generic;
+using Algolia.Search.Models.Search;
 
 namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Response from Recommend api
+    /// Response from Recommend API
     /// </summary>
-    public class RecommendResponse
+    public class RecommendResponse<T> where T : class
     {
         /// <summary>
-        /// Recommendations for all requests
+        /// Recommendations received for each request
         /// </summary>
-        public List<RecommendResponseItem> Items { get; set; }
+        public IEnumerable<SearchResponse<T>> Results { get; set; }
     }
 }

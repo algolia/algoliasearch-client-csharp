@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,15 +24,14 @@ using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Recommend
 {
-
     /// <summary>
-    /// Request for recommend api
+    /// Request for recommend API
     /// </summary>
     public class RecommendRequest
     {
         /// <summary>
         /// All the requests to get recommendations for
         /// </summary>
-        public List<RecommendRequestItem> Requests { get; set; }
+        public List<RecommendOptions> Requests { get; set; }
     }
 }

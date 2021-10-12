@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,21 +20,19 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
+using Newtonsoft.Json;
+
 namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Recommended item based on request
+    /// A recommended object: similar to a search hit but associated with a score.
     /// </summary>
-    public class RecommendSearchResult
-    {
+    public interface IRecommendHit
+    {        
         /// <summary>
-        /// Recommended item based on input and model
+        /// Confidence score of the recommended item, the closer it’s to 100, the more relevant.
         /// </summary>
-        public string ObjectID { get; set; }
-
-        /// <summary>
-        /// Score of the object based on the model
-        /// </summary>
-        public double Score { get; set; }
+        [JsonProperty(PropertyName = "_score")]
+        float Score { get; set; }
     }
 }
