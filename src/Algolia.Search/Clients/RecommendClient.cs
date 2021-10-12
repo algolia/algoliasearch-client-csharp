@@ -91,13 +91,13 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public RecommendResponse<T> GetRecommendations<T>(IEnumerable<RecommendOptions> requests,
+        public RecommendResponse<T> GetRecommendations<T>(IEnumerable<RecommendRequest> requests,
             RequestOptions requestOptions = null)  where T : class =>
             AsyncHelper.RunSync(() => GetRecommendationsAsync<T>(requests, requestOptions));
 
         /// <inheritdoc />
         public async Task<RecommendResponse<T>> GetRecommendationsAsync<T>(
-            IEnumerable<RecommendOptions> requests, RequestOptions requestOptions = null,
+            IEnumerable<RecommendRequest> requests, RequestOptions requestOptions = null,
             CancellationToken ct = default) where T : class
         {
             if (requests == null)
@@ -105,14 +105,40 @@ namespace Algolia.Search.Clients
                 throw new ArgumentNullException(nameof(requests));
             }
 
-            var request = new RecommendRequest
+            var request = new RecommendRequests
             {
                 Requests = requests.ToList()
             };
 
-            return await _transport.ExecuteRequestAsync<RecommendResponse<T>, RecommendRequest>(
+            return await _transport.ExecuteRequestAsync<RecommendResponse<T>, RecommendRequests>(
                     HttpMethod.Post, "/1/indexes/*/recommendations", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public RecommendResponse<T> GetRelatedProducts<T>(IEnumerable<RelatedProductsRequest> requests,
+            RequestOptions requestOptions = null)  where T : class =>
+            AsyncHelper.RunSync(() => GetRelatedProductsAsync<T>(requests, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<RecommendResponse<T>> GetRelatedProductsAsync<T>(
+            IEnumerable<RelatedProductsRequest> requests, RequestOptions requestOptions = null,
+            CancellationToken ct = default) where T : class
+        {
+          return await GetRecommendationsAsync<T>(requests, requestOptions, ct);
+        }
+
+        /// <inheritdoc />
+        public RecommendResponse<T> GetFrequentlyBoughtTogether<T>(IEnumerable<BoughtTogetherRequest> requests,
+            RequestOptions requestOptions = null)  where T : class =>
+            AsyncHelper.RunSync(() => GetFrequentlyBoughtTogetherAsync<T>(requests, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<RecommendResponse<T>> GetFrequentlyBoughtTogetherAsync<T>(
+            IEnumerable<BoughtTogetherRequest> requests, RequestOptions requestOptions = null,
+            CancellationToken ct = default) where T : class
+        {
+            return await GetRecommendationsAsync<T>(requests, requestOptions, ct);
         }
     }
 }

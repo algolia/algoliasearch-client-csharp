@@ -20,18 +20,48 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-using System.Collections.Generic;
+using Algolia.Search.Models.Search;
 
 namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Request for recommend API
+    /// A Recommendation request, passed in a <see cref="RecommendRequests"/>
     /// </summary>
     public class RecommendRequest
     {
         /// <summary>
-        /// All the requests to get recommendations for
+        /// Required. Name of the index to target.
         /// </summary>
-        public List<RecommendOptions> Requests { get; set; }
+        public string IndexName { get; set; }
+
+        /// <summary>
+        /// Required. The recommendation model to use, either "related-products" or "bought-together"
+        /// </summary>
+        public string Model { get; set; }
+
+        /// <summary>
+        /// Required. The objectID to get recommendations for.
+        /// </summary>
+        public string ObjectID { get; set; }
+
+        /// <summary>
+        /// Optional. The threshold to use when filtering recommendations by their score.
+        /// </summary>
+        public long Threshold { get; set; } = 0;
+
+        /// <summary>
+        /// Optional. The maximum number of recommendations to retrieve.
+        /// </summary>
+        public long MaxRecommendations { get; set; } = 0;
+
+        /// <summary>
+        /// Optional. A key-value mapping of search parameters to filter the recommendations.
+        /// </summary>
+        public Query QueryParameters { get; set; }
+
+        /// <summary>
+        /// Optional. A key-value mapping of search parameters to use as fallback when there are no recommendations.
+        /// </summary>
+        public Query FallbackParameters { get; set; }
     }
 }

@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Personalization;
+using Algolia.Search.Models.Recommend;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
@@ -759,6 +759,87 @@ namespace Algolia.Search.Test.Serializer
 
             string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
             Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"Remove\",\"value\":\"something\"}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestRecommendRequest()
+        {
+            RecommendRequest request = new RecommendRequest
+              {
+                IndexName = "products",
+                ObjectID = "B018APC4LE",
+                Model = "bought-together",
+                Threshold = 10,
+                MaxRecommendations = 10,
+                QueryParameters = new Query
+                {
+                  AttributesToRetrieve = new List<string> { "*" }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"indexName\":\"products\",\"model\":\"bought-together\",\"objectID\":\"B018APC4LE\",\"threshold\":10,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestRecommendRequestDefaultThreshold()
+        {
+            RecommendRequest request = new RecommendRequest
+              {
+                IndexName = "products",
+                ObjectID = "B018APC4LE",
+                Model = "bought-together",
+                MaxRecommendations = 10,
+                QueryParameters = new Query
+                {
+                  AttributesToRetrieve = new List<string> { "*" }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"indexName\":\"products\",\"model\":\"bought-together\",\"objectID\":\"B018APC4LE\",\"threshold\":0,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestRelatedProductsRequest()
+        {
+            RelatedProductsRequest request = new RelatedProductsRequest
+              {
+                IndexName = "products",
+                ObjectID = "B018APC4LE",
+                Threshold = 10,
+                MaxRecommendations = 10,
+                QueryParameters = new Query
+                {
+                  AttributesToRetrieve = new List<string> { "*" }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"model\":\"related-products\",\"indexName\":\"products\",\"objectID\":\"B018APC4LE\",\"threshold\":10,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestBoughtTogetherRequest()
+        {
+            BoughtTogetherRequest request = new BoughtTogetherRequest
+              {
+                IndexName = "products",
+                ObjectID = "B018APC4LE",
+                Threshold = 10,
+                MaxRecommendations = 10,
+                QueryParameters = new Query
+                {
+                  AttributesToRetrieve = new List<string> { "*" }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"model\":\"bought-together\",\"indexName\":\"products\",\"objectID\":\"B018APC4LE\",\"threshold\":10,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
         }
     }
 
