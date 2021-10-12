@@ -26,12 +26,12 @@ using Algolia.Search.Models.Search;
 namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Response from Recommend API
+    /// Response from the Recommend API
     /// </summary>
     public class RecommendResponse<T> where T : class
     {
         /// <summary>
-        /// Recommendations received for each request
+        /// List of results in the order they were submitted, one per request.
         /// </summary>
         public IEnumerable<SearchResponse<T>> Results { get; set; }
     }

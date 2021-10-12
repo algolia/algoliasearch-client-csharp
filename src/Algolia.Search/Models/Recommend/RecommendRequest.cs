@@ -25,7 +25,7 @@ using Algolia.Search.Models.Search;
 namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// A Recommendation request, passed in a <see cref="RecommendRequests"/>
+    /// A Recommendation request, passed to a <see cref="RecommendRequests"/>
     /// </summary>
     public class RecommendRequest
     {
@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Recommend
         public string IndexName { get; set; }
 
         /// <summary>
-        /// Required. The recommendation model to use, either "related-products" or "bought-together"
+        /// Required. The name of the Recommendation model to use.
         /// </summary>
         public string Model { get; set; }
 
@@ -45,7 +45,8 @@ namespace Algolia.Search.Models.Recommend
         public string ObjectID { get; set; }
 
         /// <summary>
-        /// Optional. The threshold to use when filtering recommendations by their score.
+        /// Optional. The threshold for the recommendations confidence score (between 0 and 100).
+        /// Only recommendations with a greater score are returned.
         /// </summary>
         public long Threshold { get; set; } = 0;
 
@@ -55,12 +56,12 @@ namespace Algolia.Search.Models.Recommend
         public long MaxRecommendations { get; set; } = 0;
 
         /// <summary>
-        /// Optional. A key-value mapping of search parameters to filter the recommendations.
+        /// Optional. A list of search parameters to filter the recommendations.
         /// </summary>
         public Query QueryParameters { get; set; }
 
         /// <summary>
-        /// Optional. A key-value mapping of search parameters to use as fallback when there are no recommendations.
+        /// Optional. Additional filters to use as fallback when there aren't enough recommendations.
         /// </summary>
         public Query FallbackParameters { get; set; }
     }
