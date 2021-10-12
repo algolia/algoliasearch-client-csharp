@@ -39,7 +39,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
-        RecommendResponse<T> GetRecommendations<T>(IEnumerable<RecommendOptions> requests,
+        RecommendResponse<T> GetRecommendations<T>(IEnumerable<RecommendRequest> requests,
             RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
@@ -48,7 +48,41 @@ namespace Algolia.Search.Clients
         /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Task CancellationToken</param>
-        Task<RecommendResponse<T>> GetRecommendationsAsync<T>(IEnumerable<RecommendOptions> requests,
+        Task<RecommendResponse<T>> GetRecommendationsAsync<T>(IEnumerable<RecommendRequest> requests,
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
+
+        /// <summary>
+        /// Get recommendations for given objects
+        /// </summary>
+        /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        RecommendResponse<T> GetRelatedProducts<T>(IEnumerable<RelatedProductsRequest> requests,
+            RequestOptions requestOptions = null) where T : class;
+
+        /// <summary>
+        /// Get recommendations for given objects
+        /// </summary>
+        /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Task CancellationToken</param>
+        Task<RecommendResponse<T>> GetRelatedProductsAsync<T>(IEnumerable<RelatedProductsRequest> requests,
+            RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
+
+        /// <summary>
+        /// Get recommendations for given objects
+        /// </summary>
+        /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        RecommendResponse<T> GetFrequentlyBoughtTogether<T>(IEnumerable<BoughtTogetherRequest> requests,
+            RequestOptions requestOptions = null) where T : class;
+
+        /// <summary>
+        /// Get recommendations for given objects
+        /// </summary>
+        /// <param name="requests">Object ID and index pairs to retreive recommendations for</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Task CancellationToken</param>
+        Task<RecommendResponse<T>> GetFrequentlyBoughtTogetherAsync<T>(IEnumerable<BoughtTogetherRequest> requests,
             RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
     }
 }
