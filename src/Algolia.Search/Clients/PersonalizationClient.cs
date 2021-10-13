@@ -120,5 +120,39 @@ namespace Algolia.Search.Clients
                     "/1/strategies/personalization", CallType.Write, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public GetPersonalizationProfileResponse GetPersonalizationProfile(string userToken,
+            RequestOptions requestOptions = null)
+        {
+            return AsyncHelper.RunSync(() => GetPersonalizationProfileAsync(userToken, requestOptions));
+        }
+
+        /// <inheritdoc />
+        public async Task<GetPersonalizationProfileResponse> GetPersonalizationProfileAsync(string userToken,
+            RequestOptions requestOptions = null,
+            CancellationToken ct = default)
+        {
+            return await _transport.ExecuteRequestAsync<GetPersonalizationProfileResponse>(HttpMethod.Get,
+                    $"/1/profiles/personalization/{userToken}", CallType.Read, requestOptions, ct)
+                .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public DeletePersonalizationProfileResponse DeletePersonalizationProfile(string userToken,
+            RequestOptions requestOptions = null)
+        {
+            return AsyncHelper.RunSync(() => DeletePersonalizationProfileAsync(userToken, requestOptions));
+        }
+
+        /// <inheritdoc />
+        public async Task<DeletePersonalizationProfileResponse> DeletePersonalizationProfileAsync(string userToken,
+            RequestOptions requestOptions = null,
+            CancellationToken ct = default)
+        {
+            return await _transport.ExecuteRequestAsync<DeletePersonalizationProfileResponse>(HttpMethod.Delete,
+                    $"/1/profiles/{userToken}", CallType.Write, requestOptions, ct)
+                .ConfigureAwait(false);
+        }
     }
 }

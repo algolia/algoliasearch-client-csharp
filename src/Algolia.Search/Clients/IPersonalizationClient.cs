@@ -64,5 +64,39 @@ namespace Algolia.Search.Clients
         Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
             RequestOptions requestOptions = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the user profile built from Personalization strategy
+        /// </summary>
+        /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        GetPersonalizationProfileResponse GetPersonalizationProfile(string userToken, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Get the user profile built from Personalization strategy
+        /// </summary>
+        /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        Task<GetPersonalizationProfileResponse> GetPersonalizationProfileAsync(string userToken,
+            RequestOptions requestOptions = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Delete the user profile and all its associated data
+        /// </summary>
+        /// <param name="userToken">userToken representing the user for which to delete the Personalization profile and associated data</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        DeletePersonalizationProfileResponse DeletePersonalizationProfile(string userToken, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Delete the user profile and all its associated data
+        /// </summary>
+        /// <param name="userToken">userToken representing the user for which to delete the Personalization profile and associated data</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        Task<DeletePersonalizationProfileResponse> DeletePersonalizationProfileAsync(string userToken,
+            RequestOptions requestOptions = null,
+            CancellationToken ct = default);
     }
 }
