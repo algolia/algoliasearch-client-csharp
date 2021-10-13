@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,19 +21,17 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Http;
-using Algolia.Search.Models.Recommendation;
+using Algolia.Search.Models.Personalization;
 
 namespace Algolia.Search.Clients
 {
     /// <summary>
     /// Client for the <see href="https://www.algolia.com/doc/rest-api/personalization/">Personalization API</see>
     /// </summary>
-    [Obsolete("Deprecated, use the IPersonalizationClient instead")]
-    public interface IRecommendationClient
+    public interface IPersonalizationClient
     {
         /// <summary>
         /// Returns the personalization strategy of the application

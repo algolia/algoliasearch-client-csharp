@@ -677,12 +677,12 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        [Obsolete("Endpoint will be deprecated, please use RecommendationClient instead.")]
+        [Obsolete("Endpoint will be deprecated, please use PersonalizationClient instead.")]
         public GetStrategyResponse GetPersonalizationStrategy(RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => GetPersonalizationStrategyAsync(requestOptions));
 
         /// <inheritdoc />
-        [Obsolete("Endpoint will be deprecated, please use RecommendationClient instead.")]
+        [Obsolete("Endpoint will be deprecated, please use PersonalizationClient instead.")]
         public async Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default)
         {
@@ -693,13 +693,13 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        [Obsolete("Endpoint will be deprecated, please use RecommendationClient instead.")]
+        [Obsolete("Endpoint will be deprecated, please use PersonalizationClient instead.")]
         public SetStrategyResponse SetPersonalizationStrategy(SetStrategyRequest request,
             RequestOptions requestOptions = null) =>
             AsyncHelper.RunSync(() => SetPersonalizationStrategyAsync(request, requestOptions));
 
         /// <inheritdoc />
-        [Obsolete("Endpoint will be deprecated, please use RecommendationClient instead.")]
+        [Obsolete("Endpoint will be deprecated, please use PersonalizationClient instead.")]
         public async Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
             RequestOptions requestOptions = null, CancellationToken ct = default)
         {

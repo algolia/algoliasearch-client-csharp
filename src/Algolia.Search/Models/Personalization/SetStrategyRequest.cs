@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,7 +21,6 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Personalization
@@ -29,17 +28,39 @@ namespace Algolia.Search.Models.Personalization
     /// <summary>
     /// Set personalization strategy request
     /// </summary>
-    [Obsolete("Models are deprecated please use models located in Algolia.Search.Models.Recommendation.")]
     public class SetStrategyRequest
     {
         /// <summary>
-        /// Event scoring
+        /// Default constructor
         /// </summary>
-        public Dictionary<string, EventScoring> EventsScoring { get; set; }
+        public SetStrategyRequest()
+        {
+        }
 
         /// <summary>
-        /// Facet scoring
+        /// Default constructor for Strategy Request
         /// </summary>
-        public Dictionary<string, FacetScoring> FacetsScoring { get; set; }
+        public SetStrategyRequest(IEnumerable<EventsScoring> eventsScoring, IEnumerable<FacetsScoring> facetsScoring,
+            long personalizationImpact)
+        {
+            EventsScoring = eventsScoring;
+            FacetsScoring = facetsScoring;
+            PersonalizationImpact = personalizationImpact;
+        }
+
+        /// <summary>
+        ///  Events scoring to save
+        /// </summary>
+        public IEnumerable<EventsScoring> EventsScoring { get; set; }
+
+        /// <summary>
+        ///  Facets scoring to save
+        /// </summary>
+        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
+
+        /// <summary>
+        ///  Personalization impact
+        /// </summary>
+        public long PersonalizationImpact { get; set; }
     }
 }

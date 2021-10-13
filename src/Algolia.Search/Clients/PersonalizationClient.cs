@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2018 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,17 +27,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Recommendation;
+using Algolia.Search.Models.Personalization;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 
 namespace Algolia.Search.Clients
 {
     /// <summary>
-    /// Algolia search client implementation of <see cref="IRecommendationClient"/>
+    /// Algolia personalization client implementation of <see cref="IPersonalizationClient"/>
     /// </summary>
-    [Obsolete("Deprecated, use the PersonalizationClient instead.")]
-    public class RecommendationClient : IRecommendationClient
+    public class PersonalizationClient : IPersonalizationClient
     {
         private readonly HttpTransport _transport;
 
@@ -47,8 +46,8 @@ namespace Algolia.Search.Clients
         /// <param name="applicationId">Your application ID</param>
         /// <param name="apiKey">Your Api KEY</param>
         /// <param name="region">Region where your personalization data is stored and processed</param>
-        public RecommendationClient(string applicationId, string apiKey, string region) : this(
-            new RecommendationConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
+        public PersonalizationClient(string applicationId, string apiKey, string region) : this(
+            new PersonalizationConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
         {
         }
 
@@ -56,7 +55,7 @@ namespace Algolia.Search.Clients
         /// Initialize a client with custom config
         /// </summary>
         /// <param name="config">Algolia config instance</param>
-        public RecommendationClient(RecommendationConfig config) : this(config, new AlgoliaHttpRequester())
+        public PersonalizationClient(PersonalizationConfig config) : this(config, new AlgoliaHttpRequester())
         {
         }
 
@@ -65,7 +64,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="config">Algolia config instance</param>
         /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-        public RecommendationClient(RecommendationConfig config, IHttpRequester httpRequester)
+        public PersonalizationClient(PersonalizationConfig config, IHttpRequester httpRequester)
         {
             if (httpRequester == null)
             {

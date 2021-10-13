@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Transport;
@@ -30,6 +31,7 @@ namespace Algolia.Search.Clients
     /// <summary>
     /// Recommendation client configuration
     /// </summary>
+    [Obsolete("Deprecated, use PersonalizationConfig instead.")]
     public sealed class RecommendationConfig : AlgoliaConfig
     {
         /// <summary>
