@@ -52,7 +52,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
 
         /// <summary>
-        /// Get recommendations for given objects
+        /// Retrieve related products for a set of objectIDs
         /// </summary>
         /// <param name="requests">A list of <see cref="RecommendRequest"/> to execute</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
@@ -60,7 +60,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
-        /// Get recommendations for given objects
+        /// Retrieve related products for a set of objectIDs
         /// </summary>
         /// <param name="requests">A list of <see cref="RecommendRequest"/> to execute</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
@@ -69,7 +69,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default) where T : class;
 
         /// <summary>
-        /// Get recommendations for given objects
+        /// Retrieve frequently bought together items for a set of objectIDs
         /// </summary>
         /// <param name="requests">A list of <see cref="RecommendRequest"/> to execute</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
@@ -77,7 +77,7 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null) where T : class;
 
         /// <summary>
-        /// Get recommendations for given objects
+        /// Retrieve frequently bought together items for a set of objectIDs
         /// </summary>
         /// <param name="requests">A list of <see cref="RecommendRequest"/> to execute</param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
