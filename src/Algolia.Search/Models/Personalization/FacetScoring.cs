@@ -27,15 +27,13 @@ namespace Algolia.Search.Models.Personalization
 {
     /// <summary>
     /// Configure the importance of facets
+    /// https://www.algolia.com/doc/api-reference/api-methods/add-strategy/#method-param-facetscoring
     /// </summary>
     public class FacetsScoring
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public FacetsScoring()
-        {
-        }
 
         /// <summary>
         /// Default constructor for Facets Scoring

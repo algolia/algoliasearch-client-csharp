@@ -33,9 +33,6 @@ namespace Algolia.Search.Models.Personalization
         /// <summary>
         /// Default constructor
         /// </summary>
-        public SetStrategyRequest()
-        {
-        }
 
         /// <summary>
         /// Default constructor for Strategy Request

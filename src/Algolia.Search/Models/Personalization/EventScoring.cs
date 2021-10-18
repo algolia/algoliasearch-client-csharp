@@ -27,15 +27,13 @@ namespace Algolia.Search.Models.Personalization
 {
     /// <summary>
     /// Scoring the event
+    // https://www.algolia.com/doc/api-reference/api-methods/add-strategy/#method-param-eventscoring
     /// </summary>
     public class EventsScoring
     {
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public EventsScoring()
-        {
-        }
 
         /// <summary>
         /// Default constructor for Events Scoring
