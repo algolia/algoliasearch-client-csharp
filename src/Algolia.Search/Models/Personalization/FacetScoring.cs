@@ -32,10 +32,6 @@ namespace Algolia.Search.Models.Personalization
     public class FacetsScoring
     {
         /// <summary>
-        /// Default constructor
-        /// </summary>
-
-        /// <summary>
         /// Default constructor for Facets Scoring
         /// </summary>
         public FacetsScoring(string facetName, long score)

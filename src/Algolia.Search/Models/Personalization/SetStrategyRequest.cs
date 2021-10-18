@@ -31,10 +31,6 @@ namespace Algolia.Search.Models.Personalization
     public class SetStrategyRequest
     {
         /// <summary>
-        /// Default constructor
-        /// </summary>
-
-        /// <summary>
         /// Default constructor for Strategy Request
         /// </summary>
         public SetStrategyRequest(IEnumerable<EventsScoring> eventsScoring, IEnumerable<FacetsScoring> facetsScoring,
