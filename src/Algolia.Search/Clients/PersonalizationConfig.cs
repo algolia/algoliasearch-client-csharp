@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,30 +21,35 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Collections.Generic;
+using Algolia.Search.Models.Enums;
+using Algolia.Search.Transport;
 
-namespace Algolia.Search.Models.Recommendation
+namespace Algolia.Search.Clients
 {
     /// <summary>
-    /// Get Strategy Response
+    /// Personalization client configuration
     /// </summary>
-    [Obsolete("Model is deprecated, please use the model located in Algolia.Search.Models.Personalization.")]
-    public class GetStrategyResponse
+    public sealed class PersonalizationConfig : AlgoliaConfig
     {
         /// <summary>
-        ///  Facets scoring saved on the API
+        /// The configuration of the personalization client
+        /// A client should have it's own configuration ie on configuration per client instance
         /// </summary>
-        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
+        /// <param name="applicationId">Your application ID</param>
+        /// <param name="apiKey">Your API Key</param>
+        /// <param name="region">Region where your personalization data is stored and processed</param>
+        public PersonalizationConfig(string applicationId, string apiKey, string region) : base(applicationId, apiKey)
+        {
+            DefaultHosts = new List<StatefulHost>
+            {
+                new StatefulHost
+                {
+                    Url = $"personalization.{region}.algolia.com", Accept = CallType.Read | CallType.Write
+                }
+            };
 
-        /// <summary>
-        ///  Events scoring saved on the API
-        /// </summary>
-        public IEnumerable<EventsScoring> EventsScoring { get; set; }
-
-        /// <summary>
-        ///  Personalization impact
-        /// </summary>
-        public long PersonalizationImpact { get; set; }
+            Compression = CompressionType.NONE;
+        }
     }
 }

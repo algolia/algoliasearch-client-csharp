@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,20 +23,20 @@
 
 using System.Collections.Generic;
 using Algolia.Search.Exceptions;
-using Algolia.Search.Models.Recommendation;
+using Algolia.Search.Models.Personalization;
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace Algolia.Search.Test.EndToEnd.Recommendation
+namespace Algolia.Search.Test.EndToEnd.Personalization
 {
     [TestFixture]
     [Parallelizable]
-    public class RecommendationClientTest
+    public class PersonalizationClientTest
     {
         [Test]
         [Parallelizable]
-        public void TestRecommendationClient()
+        public void TestPersonalizationClient()
         {
             var request = new SetStrategyRequest(
                 new List<EventsScoring>
@@ -56,17 +56,17 @@ namespace Algolia.Search.Test.EndToEnd.Recommendation
             // to 15 per day. If the 429 error is returned, the response is considered a "success".
             try
             {
-                BaseTest.RecommendationClient.SetPersonalizationStrategy(request);
+                BaseTest.PersonalizationClient.SetPersonalizationStrategy(request);
             }
             catch (AlgoliaApiException e) when (e.HttpErrorCode == 429)
             {
-                Assert.Ignore($"RecommendationClient.SetPersonalizationStrategy failure: HttpErrorCode: {e.HttpErrorCode}, HttpMessage {e.Message}");
+                Assert.Ignore($"PersonalizationClient.SetPersonalizationStrategy failure: HttpErrorCode: {e.HttpErrorCode}, HttpMessage {e.Message}");
             }
             catch (AlgoliaApiException e)
             {
-                Assert.Fail($"RecommendationClient.SetPersonalizationStrategy failure: HttpErrorCode: {e.HttpErrorCode}, HttpMessage {e.Message}");
+                Assert.Fail($"PersonalizationClient.SetPersonalizationStrategy failure: HttpErrorCode: {e.HttpErrorCode}, HttpMessage {e.Message}");
             }
-            Assert.DoesNotThrow(() => BaseTest.RecommendationClient.GetPersonalizationStrategy());
+            Assert.DoesNotThrow(() => BaseTest.PersonalizationClient.GetPersonalizationStrategy());
         }
 
         [Test]
