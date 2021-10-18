@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Recommend
     /// A recommended object: similar to a search hit but associated with a score.
     /// </summary>
     public interface IRecommendHit
-    {        
+    {
         /// <summary>
         /// Confidence score of the recommended item, the closer it’s to 100, the more relevant.
         /// </summary>

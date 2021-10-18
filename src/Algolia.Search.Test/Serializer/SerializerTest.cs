@@ -766,7 +766,7 @@ namespace Algolia.Search.Test.Serializer
         public void TestRecommendRequest()
         {
             var request = new RecommendRequest
-              {
+            {
                 IndexName = "products",
                 ObjectID = "B018APC4LE",
                 Model = "bought-together",
@@ -774,7 +774,7 @@ namespace Algolia.Search.Test.Serializer
                 MaxRecommendations = 10,
                 QueryParameters = new Query
                 {
-                  AttributesToRetrieve = new List<string> { "*" }
+                    AttributesToRetrieve = new List<string> { "*" }
                 }
             };
 
@@ -787,14 +787,14 @@ namespace Algolia.Search.Test.Serializer
         public void TestRecommendRequestDefaultThreshold()
         {
             var request = new RecommendRequest
-              {
+            {
                 IndexName = "products",
                 ObjectID = "B018APC4LE",
                 Model = "bought-together",
                 MaxRecommendations = 10,
                 QueryParameters = new Query
                 {
-                  AttributesToRetrieve = new List<string> { "*" }
+                    AttributesToRetrieve = new List<string> { "*" }
                 }
             };
 
@@ -807,14 +807,14 @@ namespace Algolia.Search.Test.Serializer
         public void TestRelatedProductsRequest()
         {
             var request = new RelatedProductsRequest
-              {
+            {
                 IndexName = "products",
                 ObjectID = "B018APC4LE",
                 Threshold = 10,
                 MaxRecommendations = 10,
                 QueryParameters = new Query
                 {
-                  AttributesToRetrieve = new List<string> { "*" }
+                    AttributesToRetrieve = new List<string> { "*" }
                 }
             };
 
@@ -827,14 +827,14 @@ namespace Algolia.Search.Test.Serializer
         public void TestBoughtTogetherRequest()
         {
             var request = new BoughtTogetherRequest
-              {
+            {
                 IndexName = "products",
                 ObjectID = "B018APC4LE",
                 Threshold = 10,
                 MaxRecommendations = 10,
                 QueryParameters = new Query
                 {
-                  AttributesToRetrieve = new List<string> { "*" }
+                    AttributesToRetrieve = new List<string> { "*" }
                 }
             };
 
@@ -922,7 +922,7 @@ namespace Algolia.Search.Test.Serializer
 
     public class RecommendedProduct : Product, IRecommendHit
     {
-      public float Score { get; set; }
+        public float Score { get; set; }
     }
 
 #pragma warning restore 612, 618

@@ -92,7 +92,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public RecommendResponse<T> GetRecommendations<T>(IEnumerable<RecommendRequest> requests,
-            RequestOptions requestOptions = null)  where T : class =>
+            RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => GetRecommendationsAsync<T>(requests, requestOptions));
 
         /// <inheritdoc />
@@ -117,7 +117,7 @@ namespace Algolia.Search.Clients
 
         /// <inheritdoc />
         public RecommendResponse<T> GetRelatedProducts<T>(IEnumerable<RelatedProductsRequest> requests,
-            RequestOptions requestOptions = null)  where T : class =>
+            RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => GetRelatedProductsAsync<T>(requests, requestOptions));
 
         /// <inheritdoc />
@@ -125,12 +125,12 @@ namespace Algolia.Search.Clients
             IEnumerable<RelatedProductsRequest> requests, RequestOptions requestOptions = null,
             CancellationToken ct = default) where T : class
         {
-          return await GetRecommendationsAsync<T>(requests, requestOptions, ct);
+            return await GetRecommendationsAsync<T>(requests, requestOptions, ct);
         }
 
         /// <inheritdoc />
         public RecommendResponse<T> GetFrequentlyBoughtTogether<T>(IEnumerable<BoughtTogetherRequest> requests,
-            RequestOptions requestOptions = null)  where T : class =>
+            RequestOptions requestOptions = null) where T : class =>
             AsyncHelper.RunSync(() => GetFrequentlyBoughtTogetherAsync<T>(requests, requestOptions));
 
         /// <inheritdoc />
