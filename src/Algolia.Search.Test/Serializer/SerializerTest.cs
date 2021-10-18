@@ -765,7 +765,7 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestRecommendRequest()
         {
-            RecommendRequest request = new RecommendRequest
+            var request = new RecommendRequest
               {
                 IndexName = "products",
                 ObjectID = "B018APC4LE",
@@ -786,7 +786,7 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestRecommendRequestDefaultThreshold()
         {
-            RecommendRequest request = new RecommendRequest
+            var request = new RecommendRequest
               {
                 IndexName = "products",
                 ObjectID = "B018APC4LE",
@@ -806,7 +806,7 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestRelatedProductsRequest()
         {
-            RelatedProductsRequest request = new RelatedProductsRequest
+            var request = new RelatedProductsRequest
               {
                 IndexName = "products",
                 ObjectID = "B018APC4LE",
@@ -826,7 +826,7 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestBoughtTogetherRequest()
         {
-            BoughtTogetherRequest request = new BoughtTogetherRequest
+            var request = new BoughtTogetherRequest
               {
                 IndexName = "products",
                 ObjectID = "B018APC4LE",
@@ -841,6 +841,88 @@ namespace Algolia.Search.Test.Serializer
             string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
             Assert.AreEqual(json, "{\"model\":\"bought-together\",\"indexName\":\"products\",\"objectID\":\"B018APC4LE\",\"threshold\":10,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
         }
+
+        [Test]
+        [Parallelizable]
+        public void TestRecommendResponse()
+        {
+            var payload = @"{
+  ""results"": [
+    {
+      ""hits"": [
+        {
+          ""_highlightResult"": {
+            ""category"": {
+              ""matchLevel"": ""none"",
+              ""matchedWords"": [],
+              ""value"": ""Men - T-Shirts""
+            },
+            ""image_link"": {
+              ""matchLevel"": ""none"",
+              ""matchedWords"": [],
+              ""value"": ""https://example.org/image/D05927-8161-111-F01.jpg""
+            },
+            ""name"": {
+              ""matchLevel"": ""none"",
+              ""matchedWords"": [],
+              ""value"": ""Jirgi Half-Zip T-Shirt""
+            }
+          },
+          ""_score"": 32.72,
+          ""category"": ""Men - T-Shirts"",
+          ""image_link"": ""https://example.org/image/D05927-8161-111-F01.jpg"",
+          ""name"": ""Jirgi Half-Zip T-Shirt"",
+          ""objectID"": ""D05927-8161-111"",
+          ""position"": 105,
+          ""url"": ""men/t-shirts/d05927-8161-111""
+        }
+      ],
+      ""hitsPerPage"": 1,
+      ""nbHits"": 1,
+      ""nbPages"": 1,
+      ""page"": 0,
+      ""processingTimeMS"": 6,
+      ""renderingContent"": {}
+    }
+  ]
+}";
+
+            var response = JsonConvert.DeserializeObject<RecommendResponse<RecommendedProduct>>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.Results.Count, Is.EqualTo(1));
+            Assert.That(response.Results.ElementAt(0).HitsPerPage, Is.EqualTo(1));
+            Assert.That(response.Results.ElementAt(0).NbHits, Is.EqualTo(1));
+            Assert.That(response.Results.ElementAt(0).NbPages, Is.EqualTo(1));
+            Assert.That(response.Results.ElementAt(0).Page, Is.EqualTo(0));
+            Assert.That(response.Results.ElementAt(0).ProcessingTimeMs, Is.EqualTo(6));
+
+            List<RecommendedProduct> recommendedProducts = response.Results.ElementAt(0).Hits;
+            Assert.That(recommendedProducts.Count, Is.EqualTo(1));
+            Assert.That(recommendedProducts.ElementAt(0).Score, Is.EqualTo(32.72f));
+            Assert.That(recommendedProducts.ElementAt(0).ObjectID, Is.EqualTo("D05927-8161-111"));
+            Assert.That(recommendedProducts.ElementAt(0).Name, Is.EqualTo("Jirgi Half-Zip T-Shirt"));
+            Assert.That(recommendedProducts.ElementAt(0).Category, Is.EqualTo("Men - T-Shirts"));
+            Assert.That(recommendedProducts.ElementAt(0).Position, Is.EqualTo(105));
+            Assert.That(recommendedProducts.ElementAt(0).Url, Is.EqualTo("men/t-shirts/d05927-8161-111"));
+            Assert.That(recommendedProducts.ElementAt(0).ImageLink, Is.EqualTo("https://example.org/image/D05927-8161-111-F01.jpg"));
+        }
+    }
+
+    public class Product
+    {
+        public string ObjectID { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public int Position { get; set; }
+        public string Url { get; set; }
+        [JsonProperty(PropertyName = "image_link")]
+        public string ImageLink { get; set; }
+    }
+
+    public class RecommendedProduct : Product, IRecommendHit
+    {
+      public float Score { get; set; }
     }
 
 #pragma warning restore 612, 618

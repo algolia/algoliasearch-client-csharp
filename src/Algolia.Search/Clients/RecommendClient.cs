@@ -107,7 +107,7 @@ namespace Algolia.Search.Clients
 
             var request = new RecommendRequests
             {
-                Requests = requests.ToList()
+                Requests = requests
             };
 
             return await _transport.ExecuteRequestAsync<RecommendResponse<T>, RecommendRequests>(
