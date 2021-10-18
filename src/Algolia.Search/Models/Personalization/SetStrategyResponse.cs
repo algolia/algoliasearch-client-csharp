@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,19 +21,21 @@
 * THE SOFTWARE.
 */
 
-using System;
-
 namespace Algolia.Search.Models.Personalization
 {
     /// <summary>
     /// Set strategy response
     /// </summary>
-    [Obsolete("Models are deprecated please use models located in Algolia.Search.Models.Recommendation.")]
     public class SetStrategyResponse
     {
         /// <summary>
-        /// Date of update (UTC)
+        ///  Status code
         /// </summary>
-        public DateTime UpdatedAt { get; set; }
+        public long? Status { get; set; }
+
+        /// <summary>
+        /// Status message
+        /// </summary>
+        public string Message { get; set; }
     }
 }

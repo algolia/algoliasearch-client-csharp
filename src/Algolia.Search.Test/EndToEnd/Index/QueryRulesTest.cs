@@ -67,7 +67,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
             saveObjects.Wait();
             setSettingsResponse.Wait();
 
-            Rule ruleToSave = new Rule
+            var ruleToSave = new Rule
             {
                 ObjectID = "brand_automatic_faceting",
                 Enabled = false,
@@ -103,7 +103,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
             var saveRuleResponse = await _index.SaveRuleAsync(ruleToSave);
 
-            Rule ruleToSave2 = new Rule
+            var ruleToSave2 = new Rule
             {
                 ObjectID = "query_edits",
                 Conditions = new List<Condition>
@@ -135,13 +135,13 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 }
             };
 
-            Rule ruleToSave3 = new Rule
+            var ruleToSave3 = new Rule
             {
                 ObjectID = "query_promo",
                 Consequence = new Consequence { Params = new ConsequenceParams { Filters = "brand:OnePlus" } }
             };
 
-            Rule ruleToSave4 = new Rule
+            var ruleToSave4 = new Rule
             {
                 ObjectID = "query_promo_only_summer",
 #pragma warning disable 612, 618
@@ -150,7 +150,7 @@ namespace Algolia.Search.Test.EndToEnd.Index
                 Consequence = new Consequence { Params = new ConsequenceParams { Filters = "model:One" } }
             };
 
-            Rule ruleToSave5 = new Rule
+            var ruleToSave5 = new Rule
             {
                 ObjectID = "query_promo_multiple_objects",
                 Conditions = new List<Condition>
