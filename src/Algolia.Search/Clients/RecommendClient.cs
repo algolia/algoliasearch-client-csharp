@@ -125,7 +125,7 @@ namespace Algolia.Search.Clients
             IEnumerable<RelatedProductsRequest> requests, RequestOptions requestOptions = null,
             CancellationToken ct = default) where T : class
         {
-            return await GetRecommendationsAsync<T>(requests, requestOptions, ct);
+            return await GetRecommendationsAsync<T>(requests, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -138,7 +138,7 @@ namespace Algolia.Search.Clients
             IEnumerable<BoughtTogetherRequest> requests, RequestOptions requestOptions = null,
             CancellationToken ct = default) where T : class
         {
-            return await GetRecommendationsAsync<T>(requests, requestOptions, ct);
+            return await GetRecommendationsAsync<T>(requests, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }

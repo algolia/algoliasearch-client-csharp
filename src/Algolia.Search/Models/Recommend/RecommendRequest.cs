@@ -48,12 +48,12 @@ namespace Algolia.Search.Models.Recommend
         /// Optional. The threshold for the recommendations confidence score (between 0 and 100).
         /// Only recommendations with a greater score are returned.
         /// </summary>
-        public long Threshold { get; set; } = 0;
+        public long Threshold { get; set; };
 
         /// <summary>
         /// Optional. The maximum number of recommendations to retrieve.
         /// </summary>
-        public long MaxRecommendations { get; set; } = 0;
+        public long MaxRecommendations { get; set; };
 
         /// <summary>
         /// Optional. A list of search parameters to filter the recommendations.
