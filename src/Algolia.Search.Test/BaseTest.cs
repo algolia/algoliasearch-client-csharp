@@ -48,7 +48,7 @@ public class BaseTest
         SearchClient2 = new SearchClient(configClient2);
         McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmAdminKey);
         AnalyticsClient = new AnalyticsClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
-        PersonalizationClient = new PersonalizationClient(TestHelper.ApplicationId1, TestHelper.AdminKey1, "eu");
+        PersonalizationClient = new PersonalizationClient(TestHelper.ApplicationId1, TestHelper.AdminKey1, "us");
         DictionaryClient = new DictionaryClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
     }
 }
