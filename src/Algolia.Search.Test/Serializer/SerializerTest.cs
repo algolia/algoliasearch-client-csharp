@@ -912,6 +912,7 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestFacetOrdering()
         {
+            // Test serialization
             var settings = new IndexSettings
             {
                 RenderingContent = new RenderingContent
@@ -938,6 +939,38 @@ namespace Algolia.Search.Test.Serializer
 
             string json = JsonConvert.SerializeObject(settings, JsonConfig.AlgoliaJsonSerializerSettings);
             Assert.AreEqual("{\"renderingContent\":{\"facetOrdering\":{\"facets\":{\"order\":[\"size\",\"brand\"]},\"values\":{\"brand\":{\"order\":[\"uniqlo\"]},\"size\":{\"order\":[\"S\",\"M\",\"L\"],\"sortRemainingBy\":\"hidden\"}}}}}", json);
+
+            // Test deserialization
+            var payload = @"{
+  ""renderingContent"": {
+    ""facetOrdering"": {
+      ""facets"": {
+        ""order"": [""brand"", ""color""]
+      },
+      ""values"": {
+        ""brand"": {
+          ""order"": [""uniqlo"", ""sony""],
+          ""sortRemainingBy"": ""alpha""
+        }
+      }
+    }
+  }
+}";
+            var response = JsonConvert.DeserializeObject<SearchResponse<object>>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            Assert.IsNotNull(response.RenderingContent);
+            Assert.IsNotNull(response.RenderingContent.FacetOrdering);
+            Assert.IsNotNull(response.RenderingContent.FacetOrdering.Facets);
+            Assert.IsNotNull(response.RenderingContent.FacetOrdering.Facets.Order);
+            Assert.True(response.RenderingContent.FacetOrdering.Facets.Order.Contains("brand"));
+            Assert.True(response.RenderingContent.FacetOrdering.Facets.Order.Contains("color"));
+
+            Assert.IsNotNull(response.RenderingContent.FacetOrdering.Values);
+            Assert.True(response.RenderingContent.FacetOrdering.Values.ContainsKey("brand"));
+            FacetValuesOrder brandValues = response.RenderingContent.FacetOrdering.Values["brand"];
+            Assert.True(brandValues.Order.Contains("uniqlo"));
+            Assert.True(brandValues.Order.Contains("sony"));
+            Assert.AreEqual("alpha", brandValues.SortRemainingBy);
         }
     }
 
