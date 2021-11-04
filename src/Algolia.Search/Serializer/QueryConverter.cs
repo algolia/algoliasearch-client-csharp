@@ -29,7 +29,7 @@ using Newtonsoft.Json;
 namespace Algolia.Search.Serializer
 {
     /// <summary>
-    /// Custom serializer for the query object because it must math specific syntax
+    /// Custom serializer for the query object because it must match specific syntax
     /// For more informations regarding the syntax
     /// https://www.algolia.com/doc/rest-api/search/#search-endpoints
     /// https://www.newtonsoft.com/json/help/html/JsonConverterAttributeClass.htm

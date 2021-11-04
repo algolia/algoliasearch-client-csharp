@@ -907,6 +907,38 @@ namespace Algolia.Search.Test.Serializer
             Assert.That(recommendedProducts.ElementAt(0).Url, Is.EqualTo("men/t-shirts/d05927-8161-111"));
             Assert.That(recommendedProducts.ElementAt(0).ImageLink, Is.EqualTo("https://example.org/image/D05927-8161-111-F01.jpg"));
         }
+
+        [Test]
+        [Parallelizable]
+        public void TestFacetOrdering()
+        {
+            var settings = new IndexSettings
+            {
+                RenderingContent = new RenderingContent
+                {
+                    FacetOrdering = new FacetOrdering
+                    {
+                        Facets = new FacetsOrder
+                        {
+                            Order = new List<string> { "size", "brand" }
+                        },
+                        Values = new Dictionary<string, FacetValuesOrder>
+                        {
+                            { "brand", new FacetValuesOrder { Order = new List<string> { "uniqlo" } } },
+                            { "size", new FacetValuesOrder
+                                {
+                                    Order = new List<string> { "S", "M", "L" },
+                                    SortRemainingBy = "hidden"
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(settings, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual("{\"renderingContent\":{\"facetOrdering\":{\"facets\":{\"order\":[\"size\",\"brand\"]},\"values\":{\"brand\":{\"order\":[\"uniqlo\"]},\"size\":{\"order\":[\"S\",\"M\",\"L\"],\"sortRemainingBy\":\"hidden\"}}}}}", json);
+        }
     }
 
     public class Product

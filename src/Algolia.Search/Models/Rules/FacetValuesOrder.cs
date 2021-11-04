@@ -37,8 +37,11 @@ namespace Algolia.Search.Models.Rules
         public List<string> Order { get; set; }
 
         /// <summary>
-        /// A constant defining what to do with remaining facet values not included in FacetsOrder.
+        /// A constant defining what to do with remaining facet values not included in Order:
+        ///   - "alpha": sort the remaining values in alphanumeric order
+        ///   - "count": sort the remaining values by count in descending order
+        ///   - "hidden": hide the remaining values
         /// </summary>
-        public SortRemainingByType SortRemainingBy { get; set; }
+        public string SortRemainingBy { get; set; }
     }
 }
