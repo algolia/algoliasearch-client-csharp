@@ -19,13 +19,13 @@
     </PackageDescription>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Copyright>Copyright 2019 Algolia</Copyright>
-    <Version>6.10.1</Version>
+    <Version>6.11.0</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.3</TargetFrameworks>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <None Include="images\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>

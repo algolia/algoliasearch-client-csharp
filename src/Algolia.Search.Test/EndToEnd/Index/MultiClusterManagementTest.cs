@@ -95,30 +95,38 @@ namespace Algolia.Search.Test.EndToEnd.Index
 
         private void WaitUserId(string userId)
         {
-            try
+            bool found = false;
+            // Loop until we have found the userID
+            do
             {
-                BaseTest.McmClient.GetUserId(userId);
-            }
-            catch (AlgoliaApiException)
-            {
-                Task.Delay(1000);
-                // Loop until we have found the userID
-                WaitUserId(userId);
-            }
+                try
+                {
+                    BaseTest.McmClient.GetUserId(userId);
+                    found = true;
+                }
+                catch (AlgoliaApiException)
+                {
+                    Task.Delay(1000).Wait();
+                }
+            } while (!found);
         }
 
         private void RemoveUserId(string userId)
         {
-            try
+            bool removed = false;
+            // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
+            do
             {
-                BaseTest.McmClient.RemoveUserId(userId);
-            }
-            catch (AlgoliaApiException)
-            {
-                // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
-                Task.Delay(1000);
-                RemoveUserId(userId);
-            }
+                try
+                {
+                    BaseTest.McmClient.RemoveUserId(userId);
+                    removed = true;
+                }
+                catch (AlgoliaApiException)
+                {
+                    Task.Delay(1000).Wait();
+                }
+            } while (!removed);
         }
     }
 }

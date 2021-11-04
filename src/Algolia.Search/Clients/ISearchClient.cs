@@ -536,7 +536,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <returns></returns>
-        [Obsolete("Endpoint will be deprecated, please use RecommendationClient instead.")]
+        [Obsolete("Endpoint will be deprecated, please use PersonalizationClient instead.")]
         GetStrategyResponse GetPersonalizationStrategy(RequestOptions requestOptions = null);
 
         /// <summary>
@@ -544,7 +544,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="requestOptions"></param>
         /// <param name="ct">Optional cancellation token</param>
-        [Obsolete("Endpoint will be deprecated, please use RecommendationClient instead.")]
+        [Obsolete("Endpoint will be deprecated, please use PersonalizationClient instead.")]
         Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null,
             CancellationToken ct = default);
 
@@ -554,7 +554,7 @@ namespace Algolia.Search.Clients
         /// <param name="request">The personalization strategy</param>
         /// <param name="requestOptions">Request options for the query</param>
         /// <returns></returns>
-        [Obsolete("Endpoint will be deprecated, please use RecommendationClient instead.")]
+        [Obsolete("Endpoint will be deprecated, please use PersonalizationClient instead.")]
         SetStrategyResponse
             SetPersonalizationStrategy(SetStrategyRequest request, RequestOptions requestOptions = null);
 
@@ -565,7 +565,7 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Request options for the query</param>
         /// <param name="ct">Request options for the query</param>
         /// <returns></returns>
-        [Obsolete("Endpoint will be deprecated, please use RecommendationClient instead.")]
+        [Obsolete("Endpoint will be deprecated, please use PersonalizationClient instead.")]
         Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
             RequestOptions requestOptions = null, CancellationToken ct = default);
 

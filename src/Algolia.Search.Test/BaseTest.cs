@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,12 +21,7 @@
 * THE SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Algolia.Search.Clients;
-using Algolia.Search.Models.Batch;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Test;
 using NUnit.Framework;
@@ -38,7 +33,7 @@ public class BaseTest
     internal static SearchClient SearchClient2;
     internal static SearchClient McmClient;
     internal static AnalyticsClient AnalyticsClient;
-    internal static RecommendationClient RecommendationClient;
+    internal static PersonalizationClient PersonalizationClient;
     internal static DictionaryClient DictionaryClient;
 
     [OneTimeSetUp]
@@ -53,7 +48,7 @@ public class BaseTest
         SearchClient2 = new SearchClient(configClient2);
         McmClient = new SearchClient(TestHelper.McmApplicationId, TestHelper.McmAdminKey);
         AnalyticsClient = new AnalyticsClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
-        RecommendationClient = new RecommendationClient(TestHelper.ApplicationId1, TestHelper.AdminKey1, "eu");
+        PersonalizationClient = new PersonalizationClient(TestHelper.ApplicationId1, TestHelper.AdminKey1, "us");
         DictionaryClient = new DictionaryClient(TestHelper.ApplicationId1, TestHelper.AdminKey1);
     }
 }

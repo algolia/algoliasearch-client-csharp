@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,30 +21,17 @@
 * THE SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-
-namespace Algolia.Search.Models.Recommendation
+namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Get Strategy Response
+    /// Recommendation request configured to use the "related-products" model, passed in a <see cref="RecommendRequests"/>
     /// </summary>
-    [Obsolete("Model is deprecated, please use the model located in Algolia.Search.Models.Personalization.")]
-    public class GetStrategyResponse
+    public class RelatedProductsRequest : RecommendRequest
+
     {
         /// <summary>
-        ///  Facets scoring saved on the API
+        /// The recommendation model to use: "related-products"
         /// </summary>
-        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
-
-        /// <summary>
-        ///  Events scoring saved on the API
-        /// </summary>
-        public IEnumerable<EventsScoring> EventsScoring { get; set; }
-
-        /// <summary>
-        ///  Personalization impact
-        /// </summary>
-        public long PersonalizationImpact { get; set; }
+        public new string Model { get; } = "related-products";
     }
 }

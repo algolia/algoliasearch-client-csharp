@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,7 +21,6 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Personalization
@@ -29,22 +28,21 @@ namespace Algolia.Search.Models.Personalization
     /// <summary>
     /// Get personalization strategy response
     /// </summary>
-    [Obsolete("Models are deprecated please use models located in Algolia.Search.Models.Recommendation.")]
     public class GetStrategyResponse
     {
         /// <summary>
-        /// Event scoring
+        ///  Facets scoring saved on the API
         /// </summary>
-        public Dictionary<string, EventScoring> EventsScoring { get; set; }
+        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
 
         /// <summary>
-        /// Facet scoring
+        ///  Events scoring saved on the API
         /// </summary>
-        public Dictionary<string, FacetScoring> FacetsScoring { get; set; }
+        public IEnumerable<EventsScoring> EventsScoring { get; set; }
 
         /// <summary>
-        /// Task id
+        ///  Personalization impact
         /// </summary>
-        public long TaskId { get; set; }
+        public long PersonalizationImpact { get; set; }
     }
 }

@@ -1,5 +1,31 @@
 # ChangeLog
 
+## [6.11.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.10.2...6.11.0) (2021-10-19)
+
+### Feat
+
+- Recommend client (#789) ([15d2c98](https://github.com/algolia/algoliasearch-client-csharp/commit/15d2c98))
+
+### Fix
+
+- rename RecommandationClient to PersonalizationClient (#787) ([ba53a8a](https://github.com/algolia/algoliasearch-client-csharp/commit/ba53a8a))
+
+### Refactor
+
+- **tests**: use var (#786) ([97b23d8](https://github.com/algolia/algoliasearch-client-csharp/commit/97b23d8))
+
+
+
+## [6.10.2](https://github.com/algolia/algoliasearch-client-csharp/compare/6.10.1...6.10.2) (2021-09-23)
+
+### Feat
+
+- **rules**: add ObjectIDs to ConsequencePromote (#784) ([d99397a](https://github.com/algolia/algoliasearch-client-csharp/commit/d99397a))
+- containerize our repository (#779) ([0596eed](https://github.com/algolia/algoliasearch-client-csharp/commit/0596eed))
+- **query**: add enableReRanking query parameter (#774) ([f2c10db](https://github.com/algolia/algoliasearch-client-csharp/commit/f2c10db))
+
+
+
 # [6.10.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.10.0...6.10.1) (2021-06-2)
 
 ### Fix
