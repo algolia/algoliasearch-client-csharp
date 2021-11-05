@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,30 +21,18 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Recommendation
+namespace Algolia.Search.Models.Rules
 {
     /// <summary>
-    /// Get Strategy Response
+    /// Define or override the way facet attributes are displayed.
     /// </summary>
-    [Obsolete("Model is deprecated, please use the model located in Algolia.Search.Models.Personalization.")]
-    public class GetStrategyResponse
+    public class FacetsOrder
     {
         /// <summary>
-        ///  Facets scoring saved on the API
+        /// An ordered list of attributes of facets to present.
         /// </summary>
-        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
-
-        /// <summary>
-        ///  Events scoring saved on the API
-        /// </summary>
-        public IEnumerable<EventsScoring> EventsScoring { get; set; }
-
-        /// <summary>
-        ///  Personalization impact
-        /// </summary>
-        public long PersonalizationImpact { get; set; }
+        public List<string> Order { get; set; }
     }
 }

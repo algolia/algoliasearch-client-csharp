@@ -21,6 +21,8 @@
 * THE SOFTWARE.
 */
 
+using System.Collections.Generic;
+
 namespace Algolia.Search.Models.Rules
 {
     /// <summary>
@@ -32,6 +34,11 @@ namespace Algolia.Search.Models.Rules
         /// Unique identifier of the object to promote.
         /// </summary>
         public string ObjectID { get; set; }
+
+        /// <summary>
+        /// Unique identifiers of the objects to promote.
+        /// </summary>
+        public IEnumerable<string> ObjectIDs { get; set; }
 
         /// <summary>
         /// Promoted rank for the object (zero-based).

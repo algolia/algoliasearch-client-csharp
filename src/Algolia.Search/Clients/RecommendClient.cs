@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,33 +22,33 @@
 */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Http;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Recommendation;
+using Algolia.Search.Models.Recommend;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
 
 namespace Algolia.Search.Clients
 {
     /// <summary>
-    /// Algolia search client implementation of <see cref="IRecommendationClient"/>
+    /// 
     /// </summary>
-    [Obsolete("Deprecated, use the PersonalizationClient instead.")]
-    public class RecommendationClient : IRecommendationClient
+    public class RecommendClient : IRecommendClient
     {
         private readonly HttpTransport _transport;
 
         /// <summary>
-        /// Create a new search client for the given appID
+        /// Create a new recommend client for the given appID
         /// </summary>
         /// <param name="applicationId">Your application ID</param>
         /// <param name="apiKey">Your Api KEY</param>
-        /// <param name="region">Region where your personalization data is stored and processed</param>
-        public RecommendationClient(string applicationId, string apiKey, string region) : this(
-            new RecommendationConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
+        public RecommendClient(string applicationId, string apiKey) : this(
+            new SearchConfig(applicationId, apiKey), new AlgoliaHttpRequester())
         {
         }
 
@@ -56,7 +56,7 @@ namespace Algolia.Search.Clients
         /// Initialize a client with custom config
         /// </summary>
         /// <param name="config">Algolia config instance</param>
-        public RecommendationClient(RecommendationConfig config) : this(config, new AlgoliaHttpRequester())
+        public RecommendClient(SearchConfig config) : this(config, new AlgoliaHttpRequester())
         {
         }
 
@@ -65,7 +65,7 @@ namespace Algolia.Search.Clients
         /// </summary>
         /// <param name="config">Algolia config instance</param>
         /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-        public RecommendationClient(RecommendationConfig config, IHttpRequester httpRequester)
+        public RecommendClient(SearchConfig config, IHttpRequester httpRequester)
         {
             if (httpRequester == null)
             {
@@ -91,35 +91,54 @@ namespace Algolia.Search.Clients
         }
 
         /// <inheritdoc />
-        public GetStrategyResponse GetPersonalizationStrategy(RequestOptions requestOptions = null)
-        {
-            return AsyncHelper.RunSync(() => GetPersonalizationStrategyAsync(requestOptions));
-        }
+        public RecommendResponse<T> GetRecommendations<T>(IEnumerable<RecommendRequest> requests,
+            RequestOptions requestOptions = null) where T : class =>
+            AsyncHelper.RunSync(() => GetRecommendationsAsync<T>(requests, requestOptions));
 
         /// <inheritdoc />
-        public async Task<GetStrategyResponse> GetPersonalizationStrategyAsync(RequestOptions requestOptions = null,
-            CancellationToken ct = default)
+        public async Task<RecommendResponse<T>> GetRecommendationsAsync<T>(
+            IEnumerable<RecommendRequest> requests, RequestOptions requestOptions = null,
+            CancellationToken ct = default) where T : class
         {
-            return await _transport.ExecuteRequestAsync<GetStrategyResponse>(HttpMethod.Get,
-                    "/1/strategies/personalization", CallType.Write, requestOptions, ct)
+            if (requests == null)
+            {
+                throw new ArgumentNullException(nameof(requests));
+            }
+
+            var request = new RecommendRequests
+            {
+                Requests = requests
+            };
+
+            return await _transport.ExecuteRequestAsync<RecommendResponse<T>, RecommendRequests>(
+                    HttpMethod.Post, "/1/indexes/*/recommendations", CallType.Read, request, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public SetStrategyResponse SetPersonalizationStrategy(SetStrategyRequest request,
-            RequestOptions requestOptions = null)
+        public RecommendResponse<T> GetRelatedProducts<T>(IEnumerable<RelatedProductsRequest> requests,
+            RequestOptions requestOptions = null) where T : class =>
+            AsyncHelper.RunSync(() => GetRelatedProductsAsync<T>(requests, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<RecommendResponse<T>> GetRelatedProductsAsync<T>(
+            IEnumerable<RelatedProductsRequest> requests, RequestOptions requestOptions = null,
+            CancellationToken ct = default) where T : class
         {
-            return AsyncHelper.RunSync(() => SetPersonalizationStrategyAsync(request, requestOptions));
+            return await GetRecommendationsAsync<T>(requests, requestOptions, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
-            RequestOptions requestOptions = null,
-            CancellationToken ct = default)
+        public RecommendResponse<T> GetFrequentlyBoughtTogether<T>(IEnumerable<BoughtTogetherRequest> requests,
+            RequestOptions requestOptions = null) where T : class =>
+            AsyncHelper.RunSync(() => GetFrequentlyBoughtTogetherAsync<T>(requests, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<RecommendResponse<T>> GetFrequentlyBoughtTogetherAsync<T>(
+            IEnumerable<BoughtTogetherRequest> requests, RequestOptions requestOptions = null,
+            CancellationToken ct = default) where T : class
         {
-            return await _transport.ExecuteRequestAsync<SetStrategyResponse, SetStrategyRequest>(HttpMethod.Post,
-                    "/1/strategies/personalization", CallType.Write, request, requestOptions, ct)
-                .ConfigureAwait(false);
+            return await GetRecommendationsAsync<T>(requests, requestOptions, ct).ConfigureAwait(false);
         }
     }
 }

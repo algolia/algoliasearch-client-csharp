@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,19 +26,34 @@ using System;
 namespace Algolia.Search.Models.Personalization
 {
     /// <summary>
-    ///
+    /// Scoring the event
+    /// https://www.algolia.com/doc/api-reference/api-methods/add-strategy/#method-param-eventscoring
     /// </summary>
-    [Obsolete("Models are deprecated please use models located in Algolia.Search.Models.Recommendation.")]
-    public class EventScoring
+    public class EventsScoring
     {
         /// <summary>
-        ///
+        /// Default constructor for Events Scoring
         /// </summary>
-        public string Type { get; set; }
+        public EventsScoring(string eventName, string eventType, long? score)
+        {
+            EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
+            EventType = eventType ?? throw new ArgumentNullException(nameof(eventType));
+            Score = score;
+        }
 
         /// <summary>
-        ///
+        /// Name of the event
         /// </summary>
-        public long Score { get; set; }
+        public string EventName { get; set; }
+
+        /// <summary>
+        /// Type of the event
+        /// </summary>
+        public string EventType { get; set; }
+
+        /// <summary>
+        /// Score of the event
+        /// </summary>
+        public long? Score { get; set; }
     }
 }

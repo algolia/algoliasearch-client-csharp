@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,19 +21,17 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Http;
-using Algolia.Search.Models.Recommendation;
+using Algolia.Search.Models.Personalization;
 
 namespace Algolia.Search.Clients
 {
     /// <summary>
     /// Client for the <see href="https://www.algolia.com/doc/rest-api/personalization/">Personalization API</see>
     /// </summary>
-    [Obsolete("Deprecated, use the IPersonalizationClient instead")]
-    public interface IRecommendationClient
+    public interface IPersonalizationClient
     {
         /// <summary>
         /// Returns the personalization strategy of the application
@@ -64,6 +62,40 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         Task<SetStrategyResponse> SetPersonalizationStrategyAsync(SetStrategyRequest request,
+            RequestOptions requestOptions = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the user profile built from Personalization strategy
+        /// </summary>
+        /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        GetPersonalizationProfileResponse GetPersonalizationProfile(string userToken, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Get the user profile built from Personalization strategy
+        /// </summary>
+        /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        Task<GetPersonalizationProfileResponse> GetPersonalizationProfileAsync(string userToken,
+            RequestOptions requestOptions = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Delete the user profile and all its associated data
+        /// </summary>
+        /// <param name="userToken">userToken representing the user for which to delete the Personalization profile and associated data</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        DeletePersonalizationProfileResponse DeletePersonalizationProfile(string userToken, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Delete the user profile and all its associated data
+        /// </summary>
+        /// <param name="userToken">userToken representing the user for which to delete the Personalization profile and associated data</param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        Task<DeletePersonalizationProfileResponse> DeletePersonalizationProfileAsync(string userToken,
             RequestOptions requestOptions = null,
             CancellationToken ct = default);
     }

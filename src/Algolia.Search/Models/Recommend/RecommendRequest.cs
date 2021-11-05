@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,40 +20,49 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
+using Algolia.Search.Models.Search;
 
-using System.Collections.Generic;
-
-namespace Algolia.Search.Models.Personalization
+namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Set personalization strategy request
+    /// A Recommendation request, passed to a <see cref="RecommendRequests"/>
     /// </summary>
-    public class SetStrategyRequest
+    public class RecommendRequest
     {
         /// <summary>
-        /// Default constructor for Strategy Request
+        /// Required. Name of the index to target.
         /// </summary>
-        public SetStrategyRequest(IEnumerable<EventsScoring> eventsScoring, IEnumerable<FacetsScoring> facetsScoring,
-            long personalizationImpact)
-        {
-            EventsScoring = eventsScoring;
-            FacetsScoring = facetsScoring;
-            PersonalizationImpact = personalizationImpact;
-        }
+        public string IndexName { get; set; }
 
         /// <summary>
-        ///  Events scoring to save
+        /// Required. The name of the Recommendation model to use.
         /// </summary>
-        public IEnumerable<EventsScoring> EventsScoring { get; set; }
+        public string Model { get; set; }
 
         /// <summary>
-        ///  Facets scoring to save
+        /// Required. The objectID to get recommendations for.
         /// </summary>
-        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
+        public string ObjectID { get; set; }
 
         /// <summary>
-        ///  Personalization impact
+        /// Optional. The threshold for the recommendations confidence score (between 0 and 100).
+        /// Only recommendations with a greater score are returned.
         /// </summary>
-        public long PersonalizationImpact { get; set; }
+        public long Threshold { get; set; }
+
+        /// <summary>
+        /// Optional. The maximum number of recommendations to retrieve.
+        /// </summary>
+        public long MaxRecommendations { get; set; }
+
+        /// <summary>
+        /// Optional. A list of search parameters to filter the recommendations.
+        /// </summary>
+        public Query QueryParameters { get; set; }
+
+        /// <summary>
+        /// Optional. Additional filters to use as fallback when there aren't enough recommendations.
+        /// </summary>
+        public Query FallbackParameters { get; set; }
     }
 }

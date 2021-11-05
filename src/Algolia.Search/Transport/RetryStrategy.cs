@@ -122,7 +122,7 @@ namespace Algolia.Search.Transport
         /// <summary>
         ///  Tells if the response is a success or not
         /// </summary>
-        /// <param name="response">Aloglia's API response</param>
+        /// <param name="response">Algolia's API response</param>
         /// <returns></returns>
         private bool IsSuccess(AlgoliaHttpResponse response)
         {
@@ -132,7 +132,7 @@ namespace Algolia.Search.Transport
         /// <summary>
         ///  Tells if the response is retryable or not
         /// </summary>
-        /// <param name="response">Aloglia's API response</param>
+        /// <param name="response">Algolia's API response</param>
         /// <returns></returns>
         private bool IsRetryable(AlgoliaHttpResponse response)
         {

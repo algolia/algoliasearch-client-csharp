@@ -22,6 +22,7 @@
  */
 
 using System.Collections.Generic;
+using Algolia.Search.Models.Rules;
 using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 
@@ -85,11 +86,17 @@ namespace Algolia.Search.Models.Settings
         public List<string> Replicas { get; set; }
 
         /// <summary>
-        /// Relevancy score to apply to search in virtual index. 
-        /// Bigger value means less, but more relevant results, 
+        /// Relevancy score to apply to search in virtual index.
+        /// Bigger value means less, but more relevant results,
         /// lesser value - more less relevant results
         /// </summary>
         public int? RelevancyStrictness { get; set; }
+
+        /// <summary>
+        /// Content defining how the search interface should be rendered.
+        /// This is set via the settings for a default value and can be overridden via rules.
+        /// </summary>
+        public RenderingContent RenderingContent { get; set; }
 
         /// <summary>
         /// The primary parameter is automatically added to a replica's settings when the replica is created and cannot be modified.

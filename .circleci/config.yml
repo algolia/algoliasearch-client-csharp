@@ -1,12 +1,12 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@2.4.1
 
 jobs:
   format:
     docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
       - checkout
       - run:
@@ -20,7 +20,7 @@ jobs:
             dotnet format --check src/
   build:
     docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
       - checkout
       - run:
@@ -29,7 +29,7 @@ jobs:
             dotnet build --configuration release src/
   test:
     docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
       - checkout
       - run:
@@ -38,7 +38,7 @@ jobs:
             dotnet test --configuration release src/Algolia.Search.Test
   release:
     docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
       - checkout
       - run:

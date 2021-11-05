@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,30 +21,27 @@
 * THE SOFTWARE.
 */
 
-using System;
 using System.Collections.Generic;
+using Algolia.Search.Models.Enums;
 
-namespace Algolia.Search.Models.Recommendation
+namespace Algolia.Search.Models.Rules
 {
     /// <summary>
-    /// Get Strategy Response
+    /// Facet values ordering rule container.
     /// </summary>
-    [Obsolete("Model is deprecated, please use the model located in Algolia.Search.Models.Personalization.")]
-    public class GetStrategyResponse
+    public class FacetValuesOrder
     {
         /// <summary>
-        ///  Facets scoring saved on the API
+        /// An ordered list of facet values to present.
         /// </summary>
-        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
+        public List<string> Order { get; set; }
 
         /// <summary>
-        ///  Events scoring saved on the API
+        /// A constant defining what to do with remaining facet values not included in Order:
+        ///   - "alpha": sort the remaining values in alphanumeric order
+        ///   - "count": sort the remaining values by count in descending order
+        ///   - "hidden": hide the remaining values
         /// </summary>
-        public IEnumerable<EventsScoring> EventsScoring { get; set; }
-
-        /// <summary>
-        ///  Personalization impact
-        /// </summary>
-        public long PersonalizationImpact { get; set; }
+        public string SortRemainingBy { get; set; }
     }
 }

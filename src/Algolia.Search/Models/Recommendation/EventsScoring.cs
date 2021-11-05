@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,6 +28,7 @@ namespace Algolia.Search.Models.Recommendation
     /// <summary>
     /// Scoring the event
     /// </summary>
+    [Obsolete("Model is deprecated, please use the model located in Algolia.Search.Models.Personalization.")]
     public class EventsScoring
     {
         /// <summary>

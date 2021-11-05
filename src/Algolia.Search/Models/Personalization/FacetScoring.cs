@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,14 +26,28 @@ using System;
 namespace Algolia.Search.Models.Personalization
 {
     /// <summary>
-    ///
+    /// Configure the importance of facets
+    /// https://www.algolia.com/doc/api-reference/api-methods/add-strategy/#method-param-facetscoring
     /// </summary>
-    [Obsolete("Models are deprecated please use models located in Algolia.Search.Models.Recommendation.")]
-    public class FacetScoring
+    public class FacetsScoring
     {
         /// <summary>
-        ///
+        /// Default constructor for Facets Scoring
         /// </summary>
-        public long Score { get; set; }
+        public FacetsScoring(string facetName, long score)
+        {
+            FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
+            Score = score;
+        }
+
+        /// <summary>
+        /// Attribute name
+        /// </summary>
+        public string FacetName { get; set; }
+
+        /// <summary>
+        /// Score for the facet
+        /// </summary>
+        public long? Score { get; set; }
     }
 }

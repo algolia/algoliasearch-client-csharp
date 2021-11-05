@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,31 +20,19 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
+using Newtonsoft.Json;
 
-using System;
-using System.Collections.Generic;
-
-namespace Algolia.Search.Models.Recommendation
+namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Get Strategy Response
+    /// A recommended object: similar to a search hit but associated with a score.
     /// </summary>
-    [Obsolete("Model is deprecated, please use the model located in Algolia.Search.Models.Personalization.")]
-    public class GetStrategyResponse
+    public interface IRecommendHit
     {
         /// <summary>
-        ///  Facets scoring saved on the API
+        /// Confidence score of the recommended item, the closer it’s to 100, the more relevant.
         /// </summary>
-        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
-
-        /// <summary>
-        ///  Events scoring saved on the API
-        /// </summary>
-        public IEnumerable<EventsScoring> EventsScoring { get; set; }
-
-        /// <summary>
-        ///  Personalization impact
-        /// </summary>
-        public long PersonalizationImpact { get; set; }
+        [JsonProperty(PropertyName = "_score")]
+        float Score { get; set; }
     }
 }

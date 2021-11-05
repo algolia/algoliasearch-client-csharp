@@ -22,6 +22,7 @@
 */
 
 using System.Collections.Generic;
+using Algolia.Search.Models.Rules;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Search
@@ -183,5 +184,11 @@ namespace Algolia.Search.Models.Search
         /// Number of relevant hits to display in case of non-zero relevancyStrictness applied
         /// </summary>
         public int? NbSortedHits { get; set; }
+
+        /// <summary>
+        /// Content defining how the search interface should be rendered.
+        /// This is set via the settings for a default value and can be overridden via rules.
+        /// </summary>
+        public RenderingContent RenderingContent { get; set; }
     }
 }

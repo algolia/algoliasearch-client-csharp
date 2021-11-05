@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Models.Enums;
-using Algolia.Search.Models.Personalization;
+using Algolia.Search.Models.Recommend;
 using Algolia.Search.Models.Rules;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Models.Settings;
@@ -760,6 +760,234 @@ namespace Algolia.Search.Test.Serializer
             string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
             Assert.AreEqual(json, "{\"objectID\":\"myID\",\"update\":{\"_operation\":\"Remove\",\"value\":\"something\"}}");
         }
+
+        [Test]
+        [Parallelizable]
+        public void TestRecommendRequest()
+        {
+            var request = new RecommendRequest
+            {
+                IndexName = "products",
+                ObjectID = "B018APC4LE",
+                Model = "bought-together",
+                Threshold = 10,
+                MaxRecommendations = 10,
+                QueryParameters = new Query
+                {
+                    AttributesToRetrieve = new List<string> { "*" }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"indexName\":\"products\",\"model\":\"bought-together\",\"objectID\":\"B018APC4LE\",\"threshold\":10,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestRecommendRequestDefaultThreshold()
+        {
+            var request = new RecommendRequest
+            {
+                IndexName = "products",
+                ObjectID = "B018APC4LE",
+                Model = "bought-together",
+                MaxRecommendations = 10,
+                QueryParameters = new Query
+                {
+                    AttributesToRetrieve = new List<string> { "*" }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"indexName\":\"products\",\"model\":\"bought-together\",\"objectID\":\"B018APC4LE\",\"threshold\":0,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestRelatedProductsRequest()
+        {
+            var request = new RelatedProductsRequest
+            {
+                IndexName = "products",
+                ObjectID = "B018APC4LE",
+                Threshold = 10,
+                MaxRecommendations = 10,
+                QueryParameters = new Query
+                {
+                    AttributesToRetrieve = new List<string> { "*" }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"model\":\"related-products\",\"indexName\":\"products\",\"objectID\":\"B018APC4LE\",\"threshold\":10,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestBoughtTogetherRequest()
+        {
+            var request = new BoughtTogetherRequest
+            {
+                IndexName = "products",
+                ObjectID = "B018APC4LE",
+                Threshold = 10,
+                MaxRecommendations = 10,
+                QueryParameters = new Query
+                {
+                    AttributesToRetrieve = new List<string> { "*" }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(request, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual(json, "{\"model\":\"bought-together\",\"indexName\":\"products\",\"objectID\":\"B018APC4LE\",\"threshold\":10,\"maxRecommendations\":10,\"queryParameters\":{\"attributesToRetrieve\":[\"*\"]}}");
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestRecommendResponse()
+        {
+            var payload = @"{
+  ""results"": [
+    {
+      ""hits"": [
+        {
+          ""_highlightResult"": {
+            ""category"": {
+              ""matchLevel"": ""none"",
+              ""matchedWords"": [],
+              ""value"": ""Men - T-Shirts""
+            },
+            ""image_link"": {
+              ""matchLevel"": ""none"",
+              ""matchedWords"": [],
+              ""value"": ""https://example.org/image/D05927-8161-111-F01.jpg""
+            },
+            ""name"": {
+              ""matchLevel"": ""none"",
+              ""matchedWords"": [],
+              ""value"": ""Jirgi Half-Zip T-Shirt""
+            }
+          },
+          ""_score"": 32.72,
+          ""category"": ""Men - T-Shirts"",
+          ""image_link"": ""https://example.org/image/D05927-8161-111-F01.jpg"",
+          ""name"": ""Jirgi Half-Zip T-Shirt"",
+          ""objectID"": ""D05927-8161-111"",
+          ""position"": 105,
+          ""url"": ""men/t-shirts/d05927-8161-111""
+        }
+      ],
+      ""hitsPerPage"": 1,
+      ""nbHits"": 1,
+      ""nbPages"": 1,
+      ""page"": 0,
+      ""processingTimeMS"": 6,
+      ""renderingContent"": {}
+    }
+  ]
+}";
+
+            var response = JsonConvert.DeserializeObject<RecommendResponse<RecommendedProduct>>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.Results.Count, Is.EqualTo(1));
+            Assert.That(response.Results.ElementAt(0).HitsPerPage, Is.EqualTo(1));
+            Assert.That(response.Results.ElementAt(0).NbHits, Is.EqualTo(1));
+            Assert.That(response.Results.ElementAt(0).NbPages, Is.EqualTo(1));
+            Assert.That(response.Results.ElementAt(0).Page, Is.EqualTo(0));
+            Assert.That(response.Results.ElementAt(0).ProcessingTimeMs, Is.EqualTo(6));
+
+            List<RecommendedProduct> recommendedProducts = response.Results.ElementAt(0).Hits;
+            Assert.That(recommendedProducts.Count, Is.EqualTo(1));
+            Assert.That(recommendedProducts.ElementAt(0).Score, Is.EqualTo(32.72f));
+            Assert.That(recommendedProducts.ElementAt(0).ObjectID, Is.EqualTo("D05927-8161-111"));
+            Assert.That(recommendedProducts.ElementAt(0).Name, Is.EqualTo("Jirgi Half-Zip T-Shirt"));
+            Assert.That(recommendedProducts.ElementAt(0).Category, Is.EqualTo("Men - T-Shirts"));
+            Assert.That(recommendedProducts.ElementAt(0).Position, Is.EqualTo(105));
+            Assert.That(recommendedProducts.ElementAt(0).Url, Is.EqualTo("men/t-shirts/d05927-8161-111"));
+            Assert.That(recommendedProducts.ElementAt(0).ImageLink, Is.EqualTo("https://example.org/image/D05927-8161-111-F01.jpg"));
+        }
+
+        [Test]
+        [Parallelizable]
+        public void TestFacetOrdering()
+        {
+            // Test serialization
+            var settings = new IndexSettings
+            {
+                RenderingContent = new RenderingContent
+                {
+                    FacetOrdering = new FacetOrdering
+                    {
+                        Facets = new FacetsOrder
+                        {
+                            Order = new List<string> { "size", "brand" }
+                        },
+                        Values = new Dictionary<string, FacetValuesOrder>
+                        {
+                            { "brand", new FacetValuesOrder { Order = new List<string> { "uniqlo" } } },
+                            { "size", new FacetValuesOrder
+                                {
+                                    Order = new List<string> { "S", "M", "L" },
+                                    SortRemainingBy = "hidden"
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(settings, JsonConfig.AlgoliaJsonSerializerSettings);
+            Assert.AreEqual("{\"renderingContent\":{\"facetOrdering\":{\"facets\":{\"order\":[\"size\",\"brand\"]},\"values\":{\"brand\":{\"order\":[\"uniqlo\"]},\"size\":{\"order\":[\"S\",\"M\",\"L\"],\"sortRemainingBy\":\"hidden\"}}}}}", json);
+
+            // Test deserialization
+            var payload = @"{
+  ""renderingContent"": {
+    ""facetOrdering"": {
+      ""facets"": {
+        ""order"": [""brand"", ""color""]
+      },
+      ""values"": {
+        ""brand"": {
+          ""order"": [""uniqlo"", ""sony""],
+          ""sortRemainingBy"": ""alpha""
+        }
+      }
+    }
+  }
+}";
+            var response = JsonConvert.DeserializeObject<SearchResponse<object>>(payload, JsonConfig.AlgoliaJsonSerializerSettings);
+
+            Assert.IsNotNull(response.RenderingContent);
+            Assert.IsNotNull(response.RenderingContent.FacetOrdering);
+            Assert.IsNotNull(response.RenderingContent.FacetOrdering.Facets);
+            Assert.IsNotNull(response.RenderingContent.FacetOrdering.Facets.Order);
+            Assert.True(response.RenderingContent.FacetOrdering.Facets.Order.Contains("brand"));
+            Assert.True(response.RenderingContent.FacetOrdering.Facets.Order.Contains("color"));
+
+            Assert.IsNotNull(response.RenderingContent.FacetOrdering.Values);
+            Assert.True(response.RenderingContent.FacetOrdering.Values.ContainsKey("brand"));
+            FacetValuesOrder brandValues = response.RenderingContent.FacetOrdering.Values["brand"];
+            Assert.True(brandValues.Order.Contains("uniqlo"));
+            Assert.True(brandValues.Order.Contains("sony"));
+            Assert.AreEqual("alpha", brandValues.SortRemainingBy);
+        }
+    }
+
+    public class Product
+    {
+        public string ObjectID { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public int Position { get; set; }
+        public string Url { get; set; }
+        [JsonProperty(PropertyName = "image_link")]
+        public string ImageLink { get; set; }
+    }
+
+    public class RecommendedProduct : Product, IRecommendHit
+    {
+        public float Score { get; set; }
     }
 
 #pragma warning restore 612, 618

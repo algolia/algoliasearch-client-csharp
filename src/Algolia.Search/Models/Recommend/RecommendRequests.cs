@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018-2021 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,31 +20,18 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-
-using System;
 using System.Collections.Generic;
 
-namespace Algolia.Search.Models.Recommendation
+namespace Algolia.Search.Models.Recommend
 {
     /// <summary>
-    /// Get Strategy Response
+    /// Contains a list of <see cref="RecommendRequest"/> to send to the Recommend API
     /// </summary>
-    [Obsolete("Model is deprecated, please use the model located in Algolia.Search.Models.Personalization.")]
-    public class GetStrategyResponse
+    public class RecommendRequests
     {
         /// <summary>
-        ///  Facets scoring saved on the API
+        /// All the requests to get recommendations for
         /// </summary>
-        public IEnumerable<FacetsScoring> FacetsScoring { get; set; }
-
-        /// <summary>
-        ///  Events scoring saved on the API
-        /// </summary>
-        public IEnumerable<EventsScoring> EventsScoring { get; set; }
-
-        /// <summary>
-        ///  Personalization impact
-        /// </summary>
-        public long PersonalizationImpact { get; set; }
+        public IEnumerable<RecommendRequest> Requests { get; set; }
     }
 }
