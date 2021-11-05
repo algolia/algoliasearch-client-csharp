@@ -10,14 +10,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Install dotnet-format subcommand"
-          command: |
-            dotnet tool install -g dotnet-format
-      - run:
           name: "Check the formatting of the project"
           command: |
             export PATH="$PATH:/root/.dotnet/tools"
-            dotnet format --check src/
+            dotnet format --verify-no-changes src/
   build:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
