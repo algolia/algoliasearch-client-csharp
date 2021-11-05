@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Http;
@@ -77,6 +78,7 @@ namespace Algolia.Search.Clients
         /// <param name="aBTest"></param>
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <returns></returns>
+        [Obsolete("Deprecated, use the version with an AddABTestRequest parameter instead.")]
         AddABTestResponse AddABTest(ABTest aBTest, RequestOptions requestOptions = null);
 
         /// <summary>
@@ -86,7 +88,26 @@ namespace Algolia.Search.Clients
         /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
         /// <param name="ct">Optional cancellation token</param>
         /// <returns></returns>
+        [Obsolete("Deprecated, use the version with an AddABTestRequest parameter instead.")]
         Task<AddABTestResponse> AddABTestAsync(ABTest aBTest, RequestOptions requestOptions = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Creates a new AB Test with the provided configuration.
+        /// </summary>
+        /// <param name="aBTestRequest"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <returns></returns>
+        AddABTestResponse AddABTest(AddABTestRequest aBTestRequest, RequestOptions requestOptions = null);
+
+        /// <summary>
+        /// Creates a new AB Test with the provided configuration.
+        /// </summary>
+        /// <param name="aBTestRequest"></param>
+        /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+        /// <param name="ct">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<AddABTestResponse> AddABTestAsync(AddABTestRequest aBTestRequest, RequestOptions requestOptions = null,
             CancellationToken ct = default);
 
         /// <summary>

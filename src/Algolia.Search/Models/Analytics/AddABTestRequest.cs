@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,24 +23,18 @@
 
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Algolia.Search.Models.Analytics
 {
     /// <summary>
-    /// https://www.algolia.com/doc/rest-api/ab-test/
+    /// https://www.algolia.com/doc/rest-api/ab-test/#add-ab-test
     /// </summary>
-    public class ABTest
+    public class AddABTestRequest
     {
         /// <summary>
         /// AB Test name.
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Status
-        /// </summary>
-        public string Status { get; set; }
 
         /// <summary>
         /// List of variants for the ab test
@@ -51,26 +45,5 @@ namespace Algolia.Search.Models.Analytics
         /// End date for the AB Test
         /// </summary>
         public DateTime EndAt { get; set; }
-
-        /// <summary>
-        /// Date of creation
-        /// </summary>
-        public DateTime CreatedAt { get; set; }
-
-        /// <summary>
-        /// Ab test ID
-        /// </summary>
-        [JsonProperty(PropertyName = "abTestID")]
-        public long AbTestId { get; set; }
-
-        /// <summary>
-        /// ABTest significance based on click data. Should be > 0.95 to be considered significant (no matter which variant is winning).
-        /// </summary>
-        public int? ClickSignificance { get; set; }
-
-        /// <summary>
-        /// ABTest significance based on conversion data. Should be > 0.95 to be considered significant (no matter which variant is winning)
-        /// </summary>
-        public int? ConversionSignificance { get; set; }
     }
 }

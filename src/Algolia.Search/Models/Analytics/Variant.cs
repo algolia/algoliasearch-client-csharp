@@ -38,7 +38,7 @@ namespace Algolia.Search.Models.Analytics
         /// <summary>
         /// Percentage of the traffic that should be going to the variant. The sum of the percentage should be equal to 100.
         /// </summary>
-        public int? TrafficPercentage { get; set; }
+        public int TrafficPercentage { get; set; }
 
         /// <summary>
         /// Description of the variant. This is useful when seing the results in the dashboard or via the API.

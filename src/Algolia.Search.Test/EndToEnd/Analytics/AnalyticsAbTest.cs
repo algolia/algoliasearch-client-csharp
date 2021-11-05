@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -66,7 +66,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             DateTime tomorrow = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day, utcNow.Hour, utcNow.Minute, 0,
                 utcNow.Kind);
 
-            var abTest = new ABTest
+            var abTest = new AddABTestRequest
             {
                 Name = testName,
                 Variants = new List<Variant>
@@ -81,31 +81,38 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             addTwo.Wait();
 
             AddABTestResponse addAbTest = await BaseTest.AnalyticsClient.AddABTestAsync(abTest);
-            abTest.AbTestId = addAbTest.ABTestId;
             _index1.WaitTask(addAbTest.TaskID);
 
-            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
-            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount",
-                "ConversionCount", "TrackedSearchCount"));
+            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(addAbTest.ABTestId);
+            Assert.AreEqual(abTest.Name, abTestToCheck.Name);
+            Assert.IsTrue(TestHelper.AreObjectsEqual(abTest.Variants.ElementAt(0), abTestToCheck.Variants.ElementAt(0), "ClickCount", "ConversionCount"));
+            Assert.IsTrue(TestHelper.AreObjectsEqual(abTest.Variants.ElementAt(1), abTestToCheck.Variants.ElementAt(1), "ClickCount", "ConversionCount"));
+            Assert.AreEqual(abTest.EndAt, abTestToCheck.EndAt);
             Assert.That(abTestToCheck.Status, Is.EqualTo("active"));
 
             ABTestsResponse listAbTests = await BaseTest.AnalyticsClient.GetABTestsAsync();
-            Assert.IsTrue(listAbTests.ABTests.Any(x => x.AbTestId == abTest.AbTestId));
+            Assert.IsTrue(listAbTests.ABTests.Any(x => x.AbTestId == addAbTest.ABTestId));
+            ABTest abTestFromList = listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == addAbTest.ABTestId);
+            Assert.AreEqual(abTestFromList.Name, abTestToCheck.Name);
             Assert.IsTrue(TestHelper.AreObjectsEqual(
-                listAbTests.ABTests.FirstOrDefault(x => x.AbTestId == abTest.AbTestId), abTest, "CreatedAt", "Status",
-                "ClickCount", "ConversionCount", "TrackedSearchCount"));
+                abTestFromList.Variants.ElementAt(0), abTest.Variants.ElementAt(0),
+                "ClickCount", "ConversionCount"));
+            Assert.IsTrue(TestHelper.AreObjectsEqual(
+                abTestFromList.Variants.ElementAt(1), abTest.Variants.ElementAt(1),
+                "ClickCount", "ConversionCount"));
+            Assert.AreEqual(abTestFromList.EndAt, abTestToCheck.EndAt);
 
-            await BaseTest.AnalyticsClient.StopABTestAsync(abTest.AbTestId.Value);
+            await BaseTest.AnalyticsClient.StopABTestAsync(addAbTest.ABTestId);
 
-            ABTest stoppedAbTest = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value);
+            ABTest stoppedAbTest = await BaseTest.AnalyticsClient.GetABTestAsync(addAbTest.ABTestId);
             Assert.That(stoppedAbTest.Status, Is.EqualTo("stopped"));
 
-            DeleteABTestResponse deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId.Value);
+            DeleteABTestResponse deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(addAbTest.ABTestId);
             _index1.WaitTask(deleteAbTest.TaskID);
 
             AlgoliaApiException ex =
                 Assert.ThrowsAsync<AlgoliaApiException>(() =>
-                    BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId.Value));
+                    BaseTest.AnalyticsClient.GetABTestAsync(addAbTest.ABTestId));
             Assert.That(ex.HttpErrorCode, Is.EqualTo(404));
         }
 

@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -133,6 +133,19 @@ namespace Algolia.Search.Clients
         {
             return await _transport.ExecuteRequestAsync<AddABTestResponse, ABTest>(HttpMethod.Post,
                     "/2/abtests", CallType.Write, aBTest, requestOptions, ct)
+                .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public AddABTestResponse AddABTest(AddABTestRequest aBTestRequest, RequestOptions requestOptions = null) =>
+            AsyncHelper.RunSync(() => AddABTestAsync(aBTestRequest, requestOptions));
+
+        /// <inheritdoc />
+        public async Task<AddABTestResponse> AddABTestAsync(AddABTestRequest aBTestRequest, RequestOptions requestOptions = null,
+            CancellationToken ct = default)
+        {
+            return await _transport.ExecuteRequestAsync<AddABTestResponse, AddABTestRequest>(HttpMethod.Post,
+                    "/2/abtests", CallType.Write, aBTestRequest, requestOptions, ct)
                 .ConfigureAwait(false);
         }
 
