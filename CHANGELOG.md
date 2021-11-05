@@ -1,5 +1,19 @@
 # ChangeLog
 
+## [6.12.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.11.0...6.12.0) (2021-11-05)
+
+### Fix
+
+- ab test nullability keys (#776) ([cbafb8f](https://github.com/algolia/algoliasearch-client-csharp/commit/cbafb8f))
+- StackOverflow in MCM test (#791) ([01155f6](https://github.com/algolia/algoliasearch-client-csharp/commit/01155f6))
+
+### Feat
+
+- support `long` in IncrementSet/IncrementFrom (#799) ([939f399](https://github.com/algolia/algoliasearch-client-csharp/commit/939f399))
+- support facet ordering (#780) ([f4f34fe](https://github.com/algolia/algoliasearch-client-csharp/commit/f4f34fe))
+
+
+
 ## [6.11.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.10.2...6.11.0) (2021-10-19)
 
 ### Feat
