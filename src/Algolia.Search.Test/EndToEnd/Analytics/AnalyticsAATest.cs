@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Algolia
+* Copyright (c) 2018-2021 Algolia
 * http://www.algolia.com/
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -63,7 +63,7 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
 
             addOne.Wait();
 
-            var abTest = new ABTest
+            var abTest = new AddABTestRequest
             {
                 Name = testName,
                 Variants = new List<Variant>
@@ -81,15 +81,16 @@ namespace Algolia.Search.Test.EndToEnd.Analytics
             };
 
             AddABTestResponse addAbTest = await BaseTest.AnalyticsClient.AddABTestAsync(abTest);
-            abTest.AbTestId = addAbTest.ABTestId;
             _index.WaitTask(addAbTest.TaskID);
 
-            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(abTest.AbTestId);
-            Assert.IsTrue(TestHelper.AreObjectsEqual(abTestToCheck, abTest, "CreatedAt", "Status", "ClickCount",
-                "ConversionCount"));
+            ABTest abTestToCheck = await BaseTest.AnalyticsClient.GetABTestAsync(addAbTest.ABTestId);
+            Assert.AreEqual(abTest.Name, abTestToCheck.Name);
+            Assert.IsTrue(TestHelper.AreObjectsEqual(abTest.Variants.ElementAt(0), abTestToCheck.Variants.ElementAt(0), "ClickCount", "ConversionCount"));
+            Assert.IsTrue(TestHelper.AreObjectsEqual(abTest.Variants.ElementAt(1), abTestToCheck.Variants.ElementAt(1), "ClickCount", "ConversionCount"));
+            Assert.AreEqual(abTest.EndAt, abTestToCheck.EndAt);
             Assert.That(abTestToCheck.Status, Is.EqualTo("active"));
 
-            var deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(abTest.AbTestId);
+            var deleteAbTest = await BaseTest.AnalyticsClient.DeleteABTestAsync(addAbTest.ABTestId);
             _index.WaitTask(deleteAbTest.TaskID);
         }
 
