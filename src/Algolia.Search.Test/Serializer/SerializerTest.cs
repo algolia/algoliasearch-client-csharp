@@ -698,7 +698,7 @@ namespace Algolia.Search.Test.Serializer
             RecordWithPartialUpdateOperation<long> record = new RecordWithPartialUpdateOperation<long>
             {
                 ObjectID = "myID",
-                Update = PartialUpdateOperation<long>.IncrementFrom((long) 2),
+                Update = PartialUpdateOperation<long>.IncrementFrom((long)2),
             };
 
             string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
@@ -726,7 +726,7 @@ namespace Algolia.Search.Test.Serializer
             RecordWithPartialUpdateOperation<long> record = new RecordWithPartialUpdateOperation<long>
             {
                 ObjectID = "myID",
-                Update = PartialUpdateOperation<long>.IncrementSet((long) 2),
+                Update = PartialUpdateOperation<long>.IncrementSet((long)2),
             };
 
             string json = JsonConvert.SerializeObject(record, JsonConfig.AlgoliaJsonSerializerSettings);
