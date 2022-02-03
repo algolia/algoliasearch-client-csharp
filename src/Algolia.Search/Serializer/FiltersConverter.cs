@@ -87,16 +87,20 @@ namespace Algolia.Search.Serializer
         }
 
         /** Build filters from (legacy) string */
-        private IEnumerable<List<string>> buildFilters(string str) {
+        private IEnumerable<List<string>> buildFilters(string str)
+        {
             // Extract groups: "(A:1,B:2),C:3" -> ["(A:1,B:2)","C:3"]
             var groups = System.Text.RegularExpressions.Regex.Split(str, ",(?![^()]*\\))");
             return groups.Select(group =>
             {
-                if (group.StartsWith("(") && group.EndsWith(")")) {
+                if (group.StartsWith("(") && group.EndsWith(")"))
+                {
                     var input = group.Substring(1, group.Length - 1);
                     return input.Split(',').ToList();
-                } else {
-                    return new List<string> {group};
+                }
+                else
+                {
+                    return new List<string> { group };
                 }
             });
         }
