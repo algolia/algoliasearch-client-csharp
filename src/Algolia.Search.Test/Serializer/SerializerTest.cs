@@ -198,23 +198,23 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestLegacyFilterFormats()
         {
-            // Testing "one string" legacy filters => should be converted to "ORED" nested filters
-            // [["color:green","color:yellow"]]
+            // Testing "one string" legacy filters => should be converted to "ANDED" nested filters
+            // [["color:green"],["color:yellow"]]
             string stringFilters = "\"color:green,color:yellow\"";
 
             var serializedStringFilters =
                 JsonConvert.DeserializeObject<List<List<string>>>(stringFilters, new FiltersConverter());
 
-            AssertOredResult(serializedStringFilters);
+            AssertAndedResult(serializedStringFilters);
 
-            // Testing "one array" legacy filters => should be converted to "ORED" nested filters
-            // [["color:green","color:yellow"]]
+            // Testing "one array" legacy filters => should be converted to "ANDED" nested filters
+            // [["color:green"],["color:yellow"]]
             string arrayFilters = "[\"color:green\",\"color:yellow\"]";
 
             var serializedArrayFilter =
                 JsonConvert.DeserializeObject<List<List<string>>>(arrayFilters, new FiltersConverter());
 
-            AssertOredResult(serializedArrayFilter);
+            AssertAndedResult(serializedArrayFilter);
 
             string nestedArrayFilters = "[[\"color:green\",\"color:yellow\"]]";
 
@@ -292,6 +292,15 @@ namespace Algolia.Search.Test.Serializer
                 Assert.That(result.ElementAt(0), Has.Count.EqualTo(2));
                 Assert.That(result.ElementAt(0).ElementAt(0), Contains.Substring("color:green"));
                 Assert.That(result.ElementAt(0).ElementAt(1), Contains.Substring("color:yellow"));
+            }
+
+            void AssertAndedResult(List<List<string>> result)
+            {
+                Assert.That(result, Has.Count.EqualTo(2));
+                Assert.That(result.ElementAt(0), Has.Count.EqualTo(1));
+                Assert.That(result.ElementAt(0).ElementAt(0), Contains.Substring("color:green"));
+                Assert.That(result.ElementAt(1), Has.Count.EqualTo(1));
+                Assert.That(result.ElementAt(1).ElementAt(0), Contains.Substring("color:yellow"));
             }
         }
 

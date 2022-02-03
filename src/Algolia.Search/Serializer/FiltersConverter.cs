@@ -59,7 +59,6 @@ namespace Algolia.Search.Serializer
             {
                 JToken token = JToken.Load(reader);
                 var ret = new List<List<string>>();
-                var tmpList = new List<string>();
 
                 foreach (var tokenValue in token)
                 {
@@ -68,7 +67,7 @@ namespace Algolia.Search.Serializer
                         case JTokenType.Null:
                             break;
                         case JTokenType.String:
-                            tmpList.Add(tokenValue.ToObject<string>());
+                            ret.AddRange(buildFilters(tokenValue.ToObject<string>()));
                             break;
                         case JTokenType.Array:
                             var jArray = (JArray)tokenValue;
@@ -77,17 +76,29 @@ namespace Algolia.Search.Serializer
                     }
                 }
 
-                if (tmpList.Count > 0)
-                    ret.Add(tmpList);
-
                 return ret;
             }
 
             if (reader.TokenType == JsonToken.String)
-                return new List<List<string>> { Convert.ToString(reader.Value).Split(',').ToList() };
+                return buildFilters(Convert.ToString(reader.Value)).ToList();
 
             throw new JsonSerializationException(
                 $"Error while reading Token {reader.Value} of type {reader.TokenType}.");
+        }
+
+        /** Build filters from (legacy) string */
+        private IEnumerable<List<string>> buildFilters(string str) {
+            // Extract groups: "(A:1,B:2),C:3" -> ["(A:1,B:2)","C:3"]
+            var groups = System.Text.RegularExpressions.Regex.Split(str, ",(?![^()]*\\))");
+            return groups.Select(group =>
+            {
+                if (group.StartsWith("(") && group.EndsWith(")")) {
+                    var input = group.Substring(1, group.Length - 1);
+                    return input.Split(',').ToList();
+                } else {
+                    return new List<string> {group};
+                }
+            });
         }
 
         /// <summary>
