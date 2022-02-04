@@ -205,7 +205,7 @@ namespace Algolia.Search.Test.Serializer
             var serializedStringFilters =
                 JsonConvert.DeserializeObject<List<List<string>>>(stringFilters, new FiltersConverter());
 
-            AssertAndedResult(serializedStringFilters);
+            AssertAndedResult(serializedStringFilters, "color:green", "color:yellow");
 
             // Testing "one array" legacy filters => should be converted to "ANDED" nested filters
             // [["color:green"],["color:yellow"]]
@@ -214,7 +214,13 @@ namespace Algolia.Search.Test.Serializer
             var serializedArrayFilter =
                 JsonConvert.DeserializeObject<List<List<string>>>(arrayFilters, new FiltersConverter());
 
-            AssertAndedResult(serializedArrayFilter);
+            AssertAndedResult(serializedArrayFilter, "color:green", "color:yellow");
+
+            // Strings inside an array should not be modified (i.e. not split into AND filter)
+            string arrayFilters2 = "[\"color:green,color:yellow\",\"color:blue\"]";
+            var serializedArrayFilter2 =
+                JsonConvert.DeserializeObject<List<List<string>>>(arrayFilters2, new FiltersConverter());
+            AssertAndedResult(serializedArrayFilter2, "color:green,color:yellow", "color:blue");
 
             string nestedArrayFilters = "[[\"color:green\",\"color:yellow\"]]";
 
@@ -226,11 +232,9 @@ namespace Algolia.Search.Test.Serializer
             // Testing "one string with parenthesis" legacy filters => should be converted to "ORED" filters
             // [["color:green", "color:yellow"], ["color:blue"]]
             string stringParenthesisFilters = "\"(color:green,color:yellow),color:blue\"";
-
             var serializedStringParenthesisFilters =
                 JsonConvert.DeserializeObject<List<List<string>>>(stringParenthesisFilters, new FiltersConverter());
-
-            AssertOredLatestResult(serializedStringParenthesisFilters);
+            AssertOredLatestResult(serializedStringParenthesisFilters, "color:green", "color:yellow", "color:blue");
 
             // Testing the latest format of filters i.e nested arrays
             string nestedAndedArrayFilters = "[[\"color:green\",\"color:yellow\"],[\"color:blue\"]]";
@@ -238,7 +242,7 @@ namespace Algolia.Search.Test.Serializer
             var serializedAndedNestedArrayFilter =
                 JsonConvert.DeserializeObject<List<List<string>>>(nestedAndedArrayFilters, new FiltersConverter());
 
-            AssertOredLatestResult(serializedAndedNestedArrayFilter);
+            AssertOredLatestResult(serializedAndedNestedArrayFilter, "color:green", "color:yellow", "color:blue");
 
             // Finally, testing that the custom reader is not breaking current implementation
             Rule ruleWithFilters = new Rule
@@ -298,23 +302,23 @@ namespace Algolia.Search.Test.Serializer
                 Assert.That(result.ElementAt(0).ElementAt(1), Contains.Substring("color:yellow"));
             }
 
-            void AssertAndedResult(List<List<string>> result)
+            void AssertAndedResult(List<List<string>> result, string expectedElement1, string expectedElement2)
             {
                 Assert.That(result, Has.Count.EqualTo(2));
                 Assert.That(result.ElementAt(0), Has.Count.EqualTo(1));
-                Assert.That(result.ElementAt(0).ElementAt(0), Contains.Substring("color:green"));
+                Assert.That(result.ElementAt(0).ElementAt(0), Contains.Substring(expectedElement1));
                 Assert.That(result.ElementAt(1), Has.Count.EqualTo(1));
-                Assert.That(result.ElementAt(1).ElementAt(0), Contains.Substring("color:yellow"));
+                Assert.That(result.ElementAt(1).ElementAt(0), Contains.Substring(expectedElement2));
             }
 
-            void AssertOredLatestResult(List<List<string>> result)
+            void AssertOredLatestResult(List<List<string>> result, string expectedAnd1, string expectedAnd2, string expectedOr)
             {
                 Assert.That(result, Has.Count.EqualTo(2));
                 Assert.That(result.ElementAt(0), Has.Count.EqualTo(2));
-                Assert.That(result.ElementAt(0).ElementAt(0), Contains.Substring("color:green"));
-                Assert.That(result.ElementAt(0).ElementAt(1), Contains.Substring("color:yellow"));
+                Assert.That(result.ElementAt(0).ElementAt(0), Contains.Substring(expectedAnd1));
+                Assert.That(result.ElementAt(0).ElementAt(1), Contains.Substring(expectedAnd2));
                 Assert.That(result.ElementAt(1), Has.Count.EqualTo(1));
-                Assert.That(result.ElementAt(1).ElementAt(0), Contains.Substring("color:blue"));
+                Assert.That(result.ElementAt(1).ElementAt(0), Contains.Substring(expectedOr));
             }
         }
 
