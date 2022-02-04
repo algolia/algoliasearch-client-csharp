@@ -67,7 +67,7 @@ namespace Algolia.Search.Serializer
                         case JTokenType.Null:
                             break;
                         case JTokenType.String:
-                            ret.Add(new List<string>{tokenValue.ToObject<string>()});
+                            ret.Add(new List<string> { tokenValue.ToObject<string>() });
                             break;
                         case JTokenType.Array:
                             var jArray = (JArray)tokenValue;
