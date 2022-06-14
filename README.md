@@ -24,10 +24,9 @@
 
 ## ✨ Features
 
-* Compatible with most .NET platforms:
-  * `.NET Standard 1.3` to `.NET Standard 2.1`,
-  * `.NET Core 1.0` to `.NET Core 3.1`,
-  * `.NET Framework 4.6` to `.NET Framework 4.8`
+* Targets .NET Standard:
+  * `.NET Standard 1.3` to `.NET Standard 2.1`. 
+  * For more details about support .NET implementations, please see .NET Standard official [page](https://docs.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-1).
 * Asynchronous and synchronous methods to interact with Algolia's API
 * Thread-safe clients
 * Typed requests and responses
