@@ -1,5 +1,13 @@
 # ChangeLog
 
+## [6.13.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.12.1...6.13.0) (2022-08-31)
+
+### Fix
+
+- support preformatted json (JRaw) (#816) ([fa59bc0](https://github.com/algolia/algoliasearch-client-csharp/commit/fa59bc0))
+
+
+
 ## [6.12.1](https://github.com/algolia/algoliasearch-client-csharp/compare/6.12.0...6.12.1) (2022-02-14)
 
 ### Fix
