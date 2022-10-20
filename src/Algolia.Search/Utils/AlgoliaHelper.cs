@@ -105,11 +105,11 @@ namespace Algolia.Search.Utils
 
             if (itemType == typeof(JObject))
             {
-                JProperty objectID = JObject.FromObject(data).Property("objectID");
+                var objectIdJProperty = JObject.FromObject(data).Property("objectID");
 
-                if (objectID != null && objectID.ToString() != "")
+                if (objectIdJProperty != null && !string.IsNullOrWhiteSpace(objectIdJProperty.Value.ToString()))
                 {
-                    return objectID.ToString();
+                    return objectIdJProperty.Value.ToString();
                 }
             }
 
