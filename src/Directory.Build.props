@@ -1,5 +1,5 @@
 <Project>
-  <PropertyGroup Condition="'$(CIRCLECI)' == 'true'">
+  <PropertyGroup Condition="'$(CI)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 </Project>

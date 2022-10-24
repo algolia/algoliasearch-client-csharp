@@ -14,10 +14,6 @@
 
 - optional filters deserialization (#803) ([5c4515c](https://github.com/algolia/algoliasearch-client-csharp/commit/5c4515c))
 
-### Feat
-
-- support NuGet.org debug symbols with SourceLink support, for better debugging experience (seamless step into).
-
 
 
 ## [6.12.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.11.0...6.12.0) (2021-11-05)
