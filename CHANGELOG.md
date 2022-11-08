@@ -1,5 +1,17 @@
 # ChangeLog
 
+## [6.14.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.13.0...6.14.0) (2022-11-08)
+
+### Feat
+
+- Add SourceLink and push symbols to NuGet.org (#825) ([bd35dd6](https://github.com/algolia/algoliasearch-client-csharp/commit/bd35dd6))
+
+### Fix
+
+- AlgoliaHelper.GetObjectID (#824) ([88b0095](https://github.com/algolia/algoliasearch-client-csharp/commit/88b0095))
+
+
+
 ## [6.13.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.12.1...6.13.0) (2022-08-31)
 
 ### Fix
