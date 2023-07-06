@@ -126,6 +126,12 @@ namespace Algolia.Search.Utils
                     }
                     else
                     {
+                        if (p.Name.Equals("CustomParameters"))
+                        {
+                            return string.Join("&",
+                                ((IEnumerable)p.GetValue(value, null)).Cast<KeyValuePair<string, object>>()
+                                .Select(x => string.Join("=", x.Key.ToCamelCase(), x.Value)));
+                        }
                         // One level list
                         IEnumerable<object> parameterList = ((IEnumerable)p.GetValue(value, null)).Cast<object>();
                         values = string.Join(",", parameterList);

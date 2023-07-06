@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using System;
 using Algolia.Search.Clients;
 using Algolia.Search.Models.Enums;
 using Algolia.Search.Test;

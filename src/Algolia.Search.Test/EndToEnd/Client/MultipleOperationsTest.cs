@@ -46,7 +46,6 @@ namespace Algolia.Search.Test.EndToEnd.Client
             _indexName1 = TestHelper.GetTestIndexName("multiple_operations");
             _indexName2 = TestHelper.GetTestIndexName("multiple_operations_dev");
             _indexName3 = TestHelper.GetTestIndexName("multiple_operations_facet");
-
         }
 
         [Test]
@@ -173,6 +172,74 @@ namespace Algolia.Search.Test.EndToEnd.Client
             var responseMultipleQueries = BaseTest.SearchClient.MultipleQueries<MultipleOperationClass>(request);
 
             Assert.AreEqual(responseSearch.Params, responseMultipleQueries.Results.First().Params);
+        }
+        [Test]
+        public async Task TestMultipleQueriesCustomParameters()
+        {
+            var index = BaseTest.SearchClient.InitIndex(_indexName1);
+
+            var customParameters = new Dictionary<string, object>
+            {
+                {"hitsPerPage", "30"}
+            };
+
+            var query = new Query("Jimmie")
+            {
+                CustomParameters = customParameters
+            };
+
+            var singleReqResult = await index.SearchAsync<object>(query);
+
+            MultipleQueriesRequest request = new MultipleQueriesRequest
+            {
+                Requests = new List<MultipleQueries>()
+                {
+                    new MultipleQueries
+                    {
+                        IndexName = _indexName1,
+                        Params = query
+                    },
+                }
+            };
+
+            var responseMultipleQueries = await BaseTest.SearchClient.MultipleQueriesAsync<object>(request);
+
+            Assert.AreEqual(singleReqResult.Params, responseMultipleQueries.Results.First().Params);
+        }
+        [Test]
+        public async Task TestMultipleQueriesComplexCustomParameters()
+        {
+            var index = BaseTest.SearchClient.InitIndex(_indexName1);
+
+            var customParameters = new Dictionary<string, object>
+            {
+                {"hitsPerPage", "30"},
+                { "enableABTest", false },
+                { "explain", new List<string> { "type:A", "category:B" } }
+            };
+
+            var query = new Query("Jimmie")
+            {
+                CustomParameters = customParameters
+            };
+
+            var singleReqResult = await index.SearchAsync<object>(query);
+
+            MultipleQueriesRequest request = new MultipleQueriesRequest
+            {
+                Requests = new List<MultipleQueries>()
+                {
+                    new MultipleQueries
+                    {
+                        IndexName = _indexName1,
+                        Params = query
+                    },
+                }
+            };
+
+            var responseMultipleQueries = await BaseTest.SearchClient.MultipleQueriesAsync<object>(request);
+
+            Assert.AreEqual(singleReqResult.Params, responseMultipleQueries.Results.First().Params);
         }
 
         public class MultipleOperationClass
