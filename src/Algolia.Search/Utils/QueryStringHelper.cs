@@ -29,6 +29,8 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using Algolia.Search.Models.ApiKeys;
+using Algolia.Search.Models.Search;
+using Algolia.Search.Serializer;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Utils
@@ -127,8 +129,13 @@ namespace Algolia.Search.Utils
                     else
                     {
                         // One level list
-                        IEnumerable<object> parameterList = ((IEnumerable)p.GetValue(value, null)).Cast<object>();
-                        values = string.Join(",", parameterList);
+                        var list = (IEnumerable)p.GetValue(value, null);
+                        var shouldSerialize = list.GetType().GenericTypeArguments.FirstOrDefault().GetTypeInfo().GetCustomAttribute(typeof(SerializeIntoUrlAttribute)) != null;
+                        values = string.Join(",", list.Cast<object>().Select(parameter => shouldSerialize ? JsonConvert.SerializeObject(parameter, JsonConfig.AlgoliaJsonSerializerSettings) : parameter));
+                        if (shouldSerialize)
+                        {
+                            values = WrapValues(values);
+                        }
                     }
 
                     return p.Name.ToCamelCase() + "=" + WebUtility.UrlEncode(values);

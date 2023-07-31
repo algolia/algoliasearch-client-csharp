@@ -27,6 +27,7 @@ namespace Algolia.Search.Models.Search
     /// Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
     /// https://www.algolia.com/doc/api-reference/api-parameters/aroundPrecision/
     /// </summary>
+    [SerializeIntoUrl]
     public class AroundPrecision
     {
         /// <summary>
