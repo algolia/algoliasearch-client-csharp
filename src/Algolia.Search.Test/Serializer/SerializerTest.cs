@@ -87,7 +87,7 @@ namespace Algolia.Search.Test.Serializer
         [Parallelizable]
         public void TestQueryWithAroundPrecision()
         {
-            var queryWithAroundPrecisionList = new Query("") { AroundPrecision = new List<AroundPrecision> { new(){ From = 0, Value = 10}, new(){ From = 1000, Value = 100}} };
+            var queryWithAroundPrecisionList = new Query("") { AroundPrecision = new List<AroundPrecision> { new() { From = 0, Value = 10 }, new() { From = 1000, Value = 100 } } };
             // Expected: query=&aroundPrecision=[{"from":0,"value": 10},{"from":1000,"value": 100}]
             Console.WriteLine(queryWithAroundPrecisionList.ToQueryString());
             Assert.AreEqual("query=&aroundPrecision=%5B%7B%22from%22%3A0%2C%22value%22%3A10%7D%2C%7B%22from%22%3A1000%2C%22value%22%3A100%7D%5D", queryWithAroundPrecisionList.ToQueryString());
