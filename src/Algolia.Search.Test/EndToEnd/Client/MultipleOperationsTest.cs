@@ -148,7 +148,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
 
             var query = new Query()
             {
-                Explain = new List<string> {"test1", "test2"},
+                Explain = new List<string> { "test1", "test2" },
                 AroundPrecision = new List<AroundPrecision>
                 {
                     new(){From = 0, Value = 1},

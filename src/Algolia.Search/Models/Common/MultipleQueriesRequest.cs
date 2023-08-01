@@ -52,7 +52,7 @@ namespace Algolia.Search.Models.Common
     /// <summary>
     /// Multiple queries
     /// </summary>
-    public class MultipleQueries: IMultipleQueries
+    public class MultipleQueries : IMultipleQueries
     {
         /// <summary>
         /// The name of the index to perform the operation
