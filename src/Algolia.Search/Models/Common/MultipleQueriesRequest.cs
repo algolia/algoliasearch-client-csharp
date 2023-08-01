@@ -36,7 +36,7 @@ namespace Algolia.Search.Models.Common
         /// <summary>
         /// List of requests
         /// </summary>
-        public IEnumerable<MultipleQueries> Requests { get; set; }
+        public IEnumerable<IMultipleQueries> Requests { get; set; }
 
         /// <summary>
         /// Request strategy <see cref="Enums.StrategyType"/>
@@ -45,9 +45,14 @@ namespace Algolia.Search.Models.Common
     }
 
     /// <summary>
+    /// Multiple queries interface
+    /// </summary>
+    public interface IMultipleQueries { }
+
+    /// <summary>
     /// Multiple queries
     /// </summary>
-    public class MultipleQueries
+    public class MultipleQueries: IMultipleQueries
     {
         /// <summary>
         /// The name of the index to perform the operation

@@ -131,6 +131,73 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Assert.That(multiQueri2.Results.ElementAt(1).Hits, Is.Empty);
         }
         [Test]
+        public async Task TestMultipleQueriesWithQueryMultiIndicesObject()
+        {
+            var objectsToSave = new List<BatchOperation<MultipleOperationClass>>
+            {
+                new BatchOperation<MultipleOperationClass>
+                {
+                    IndexName = _indexName3,
+                    Action = BatchActionType.AddObject,
+                    Body = new MultipleOperationClass { Firstname = "Jimmie" }
+                },
+            };
+
+            var saveMultiple = await BaseTest.SearchClient.MultipleBatchAsync(objectsToSave);
+            saveMultiple.Wait();
+
+            var query = new Query()
+            {
+                Explain = new List<string> {"test1", "test2"},
+                AroundPrecision = new List<AroundPrecision>
+                {
+                    new(){From = 0, Value = 1},
+                    new(){From = 100, Value = 10}
+                },
+                CustomParameters = new Dictionary<string, object>()
+                {
+                    {"hitsPerPage", 10}
+                },
+                TagFilters = new List<IEnumerable<string>>()
+                {
+                    new List<string>{ "one", "two"},
+                    new List<string>{ "one-two", "two-two"}
+                }
+            };
+
+            var request = new MultipleQueriesRequest
+            {
+                Requests = new List<QueryMultiIndices>{
+                    new QueryMultiIndices(_indexName3)
+                    {
+                        Explain = new List<string>{"test1", "test2"},
+                        AroundPrecision = new List<AroundPrecision>
+                        {
+                            new(){From = 0, Value = 1},
+                            new(){From = 100, Value = 10}
+                        },
+                        CustomParameters = new Dictionary<string, object>()
+                        {
+                            {"hitsPerPage", 10}
+                        },
+                        TagFilters = new List<IEnumerable<string>>()
+                        {
+                            new List<string>{ "one", "two"},
+                            new List<string>{ "one-two", "two-two"}
+                        }
+                    }
+                }
+            };
+
+            var index = BaseTest.SearchClient.InitIndex(_indexName3);
+
+            var responseSearch = index.Search<MultipleOperationClass>(query);
+            var responseMultipleQueries = BaseTest.SearchClient.MultipleQueries<MultipleOperationClass>(request);
+
+            Assert.AreEqual(responseSearch.Params, responseMultipleQueries.Results.First().Params);
+        }
+
+        [Test]
         public async Task TestMultipleQueriesFacet()
         {
             var objectsToSave = new List<BatchOperation<MultipleOperationClass>>
