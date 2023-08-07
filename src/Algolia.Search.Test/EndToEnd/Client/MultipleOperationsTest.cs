@@ -131,7 +131,7 @@ namespace Algolia.Search.Test.EndToEnd.Client
             Assert.That(multiQueri2.Results.ElementAt(1).Hits, Is.Empty);
         }
 
-                [Test]
+        [Test]
         public async Task TestMultipleOperationsUsingQueryMultiIndices()
         {
             var objectsToSave = new List<BatchOperation<MultipleOperationClass>>
