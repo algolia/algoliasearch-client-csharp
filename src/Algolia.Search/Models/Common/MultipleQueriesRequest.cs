@@ -21,6 +21,7 @@
 * THE SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 using Algolia.Search.Models.Search;
 using Algolia.Search.Serializer;
@@ -52,6 +53,7 @@ namespace Algolia.Search.Models.Common
     /// <summary>
     /// Multiple queries
     /// </summary>
+    [Obsolete("The recommended approach is to use a list of `QueryMultiIndices`.")]
     public class MultipleQueries : IMultipleQueries
     {
         /// <summary>
