@@ -1,5 +1,13 @@
 # ChangeLog
 
+## [6.15.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.14.0...6.15.0) (2023-08-08)
+
+### Fix
+
+- multi indices search serialization (#841) ([ad71b7e](https://github.com/algolia/algoliasearch-client-csharp/commit/ad71b7e))
+
+
+
 ## [6.14.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.13.0...6.14.0) (2022-11-08)
 
 ### Feat
