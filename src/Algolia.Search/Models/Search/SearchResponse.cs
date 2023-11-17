@@ -156,6 +156,11 @@ namespace Algolia.Search.Models.Search
         public int AbTestVariantID { get; set; }
 
         /// <summary>
+        ///  A/B test ID. This is only included in the response for indices that are part of an A/B test.
+        /// </summary>
+        public int? AbTestID { get; set; }
+
+        /// <summary>
         ///  The query string that will be searched, after normalization.
         /// </summary>
         public string ParsedQuery { get; set; }
