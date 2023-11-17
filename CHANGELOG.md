@@ -1,5 +1,13 @@
 # ChangeLog
 
+## [6.16.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.15.0...6.16.0) (2023-11-17)
+
+### Fix
+
+- **search**: add missing AbTestID property (#847) ([795f8aa](https://github.com/algolia/algoliasearch-client-csharp/commit/795f8aa))
+
+
+
 ## [6.15.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.14.0...6.15.0) (2023-08-08)
 
 ### Fix
