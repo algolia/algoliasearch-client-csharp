@@ -32,6 +32,7 @@ jobs:
           name: "Run the tests"
           command: |
             dotnet test --configuration release src/Algolia.Search.Test
+          no_output_timeout: 30m
   release:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
