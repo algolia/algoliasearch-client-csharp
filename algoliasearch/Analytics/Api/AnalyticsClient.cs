@@ -31,7 +31,7 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> DelAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     /// <summary>
     /// Send requests to the Algolia REST API.
@@ -44,7 +44,7 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> DelWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    System.Threading.Tasks.Task<ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -56,7 +56,7 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> GetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     /// <summary>
     /// Send requests to the Algolia REST API.
@@ -69,7 +69,61 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> GetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    System.Threading.Tasks.Task<ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    /// <summary>
+    /// Send requests to the Algolia REST API.
+    /// </summary>
+    /// <remarks>
+    /// This method allow you to send requests to the Algolia REST API.
+    /// </remarks>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Object</returns>
+    System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    /// <summary>
+    /// Send requests to the Algolia REST API.
+    /// </summary>
+    /// <remarks>
+    /// This method allow you to send requests to the Algolia REST API.
+    /// </remarks>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (Object)</returns>
+    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    /// <summary>
+    /// Send requests to the Algolia REST API.
+    /// </summary>
+    /// <remarks>
+    /// This method allow you to send requests to the Algolia REST API.
+    /// </remarks>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Object</returns>
+    System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    /// <summary>
+    /// Send requests to the Algolia REST API.
+    /// </summary>
+    /// <remarks>
+    /// This method allow you to send requests to the Algolia REST API.
+    /// </remarks>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (Object)</returns>
+    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     /// <summary>
     /// Get average click position.
     /// </summary>
@@ -607,60 +661,6 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ApiResponse (GetUsersCountResponse)</returns>
     System.Threading.Tasks.Task<ApiResponse<GetUsersCountResponse>> GetUsersCountWithHttpInfoAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> PostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> PostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> PutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> PutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
   }
 
 
@@ -873,9 +873,9 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <returns>Object</returns>
-    public Object Del(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
+    public Object CustomDelete(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
     {
-      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = DelWithHttpInfo(path, parameters);
+      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = CustomDeleteWithHttpInfo(path, parameters);
       return localVarResponse.Data;
     }
 
@@ -886,11 +886,11 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Analytics.Client.ApiResponse<Object> DelWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
+    public Algolia.Search.Analytics.Client.ApiResponse<Object> CustomDeleteWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->Del");
+        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomDelete");
 
       Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
 
@@ -932,7 +932,7 @@ namespace Algolia.Search.Analytics.Api
 
       if (this.ExceptionFactory != null)
       {
-        Exception _exception = this.ExceptionFactory("Del", localVarResponse);
+        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
         if (_exception != null) throw _exception;
       }
 
@@ -947,9 +947,9 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> DelAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
     {
-      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = await DelWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
+      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = await CustomDeleteWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
       return localVarResponse.Data;
     }
 
@@ -961,11 +961,11 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Analytics.Client.ApiResponse<Object>> DelWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async System.Threading.Tasks.Task<Algolia.Search.Analytics.Client.ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->Del");
+        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomDelete");
 
 
       Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
@@ -1010,7 +1010,7 @@ namespace Algolia.Search.Analytics.Api
 
       if (this.ExceptionFactory != null)
       {
-        Exception _exception = this.ExceptionFactory("Del", localVarResponse);
+        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
         if (_exception != null) throw _exception;
       }
 
@@ -1024,9 +1024,9 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <returns>Object</returns>
-    public Object Get(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
+    public Object CustomGet(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
     {
-      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = GetWithHttpInfo(path, parameters);
+      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = CustomGetWithHttpInfo(path, parameters);
       return localVarResponse.Data;
     }
 
@@ -1037,11 +1037,11 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Analytics.Client.ApiResponse<Object> GetWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
+    public Algolia.Search.Analytics.Client.ApiResponse<Object> CustomGetWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->Get");
+        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomGet");
 
       Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
 
@@ -1083,7 +1083,7 @@ namespace Algolia.Search.Analytics.Api
 
       if (this.ExceptionFactory != null)
       {
-        Exception _exception = this.ExceptionFactory("Get", localVarResponse);
+        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
         if (_exception != null) throw _exception;
       }
 
@@ -1098,9 +1098,9 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> GetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
     {
-      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = await GetWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
+      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = await CustomGetWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
       return localVarResponse.Data;
     }
 
@@ -1112,11 +1112,11 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Analytics.Client.ApiResponse<Object>> GetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async System.Threading.Tasks.Task<Algolia.Search.Analytics.Client.ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->Get");
+        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomGet");
 
 
       Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
@@ -1161,7 +1161,325 @@ namespace Algolia.Search.Analytics.Api
 
       if (this.ExceptionFactory != null)
       {
-        Exception _exception = this.ExceptionFactory("Get", localVarResponse);
+        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
+        if (_exception != null) throw _exception;
+      }
+
+      return localVarResponse;
+    }
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <returns>Object</returns>
+    public Object CustomPost(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
+    {
+      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = CustomPostWithHttpInfo(path, parameters, body);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <returns>ApiResponse of Object</returns>
+    public Algolia.Search.Analytics.Client.ApiResponse<Object> CustomPostWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
+    {
+      // verify the required parameter 'path' is set
+      if (path == null)
+        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomPost");
+
+      Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
+
+      string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+      // to determine the Accept header
+      string[] _accepts = new string[] {
+                "application/json"
+            };
+
+      var localVarContentType = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderAccept(_accepts);
+      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Analytics.Client.ClientUtils.ParameterToString(path)); // path parameter
+      if (parameters != null)
+      {
+        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Analytics.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+      }
+      localVarRequestOptions.Data = body;
+
+      // authentication (apiKey) required
+      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
+      {
+        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
+      }
+
+      // authentication (appId) required
+      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
+      {
+        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+      }
+
+
+      // make the HTTP request
+      var localVarResponse = this.Client.Post<Object>("/1{path}", localVarRequestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
+        if (_exception != null) throw _exception;
+      }
+
+      return localVarResponse;
+    }
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Object</returns>
+    public async System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = await CustomPostWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (Object)</returns>
+    public async System.Threading.Tasks.Task<Algolia.Search.Analytics.Client.ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+      // verify the required parameter 'path' is set
+      if (path == null)
+        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomPost");
+
+
+      Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
+
+      string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+      // to determine the Accept header
+      string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+      var localVarContentType = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderAccept(_accepts);
+      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Analytics.Client.ClientUtils.ParameterToString(path)); // path parameter
+      if (parameters != null)
+      {
+        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Analytics.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+      }
+      localVarRequestOptions.Data = body;
+
+      // authentication (apiKey) required
+      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
+      {
+        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
+      }
+
+      // authentication (appId) required
+      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
+      {
+        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+      }
+
+
+      // make the HTTP request
+
+      var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
+        if (_exception != null) throw _exception;
+      }
+
+      return localVarResponse;
+    }
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <returns>Object</returns>
+    public Object CustomPut(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
+    {
+      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = CustomPutWithHttpInfo(path, parameters, body);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <returns>ApiResponse of Object</returns>
+    public Algolia.Search.Analytics.Client.ApiResponse<Object> CustomPutWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
+    {
+      // verify the required parameter 'path' is set
+      if (path == null)
+        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomPut");
+
+      Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
+
+      string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+      // to determine the Accept header
+      string[] _accepts = new string[] {
+                "application/json"
+            };
+
+      var localVarContentType = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderAccept(_accepts);
+      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Analytics.Client.ClientUtils.ParameterToString(path)); // path parameter
+      if (parameters != null)
+      {
+        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Analytics.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+      }
+      localVarRequestOptions.Data = body;
+
+      // authentication (apiKey) required
+      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
+      {
+        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
+      }
+
+      // authentication (appId) required
+      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
+      {
+        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+      }
+
+
+      // make the HTTP request
+      var localVarResponse = this.Client.Put<Object>("/1{path}", localVarRequestOptions, this.Configuration);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
+        if (_exception != null) throw _exception;
+      }
+
+      return localVarResponse;
+    }
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Object</returns>
+    public async System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = await CustomPutWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
+      return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (Object)</returns>
+    public async System.Threading.Tasks.Task<Algolia.Search.Analytics.Client.ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+      // verify the required parameter 'path' is set
+      if (path == null)
+        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomPut");
+
+
+      Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
+
+      string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+      // to determine the Accept header
+      string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+      var localVarContentType = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+      var localVarAccept = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderAccept(_accepts);
+      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Analytics.Client.ClientUtils.ParameterToString(path)); // path parameter
+      if (parameters != null)
+      {
+        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Analytics.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+      }
+      localVarRequestOptions.Data = body;
+
+      // authentication (apiKey) required
+      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
+      {
+        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
+      }
+
+      // authentication (appId) required
+      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
+      {
+        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+      }
+
+
+      // make the HTTP request
+
+      var localVarResponse = await this.AsynchronousClient.PutAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+      if (this.ExceptionFactory != null)
+      {
+        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
         if (_exception != null) throw _exception;
       }
 
@@ -4403,324 +4721,6 @@ namespace Algolia.Search.Analytics.Api
       if (this.ExceptionFactory != null)
       {
         Exception _exception = this.ExceptionFactory("GetUsersCount", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object Post(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = PostWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Analytics.Client.ApiResponse<Object> PostWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->Post");
-
-      Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Analytics.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Analytics.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("Post", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> PostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = await PostWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Analytics.Client.ApiResponse<Object>> PostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->Post");
-
-
-      Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Analytics.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Analytics.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("Post", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object Put(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = PutWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Analytics.Client.ApiResponse<Object> PutWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->Put");
-
-      Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Analytics.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Analytics.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Put<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("Put", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> PutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Analytics.Client.ApiResponse<Object> localVarResponse = await PutWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Analytics.Client.ApiResponse<Object>> PutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Analytics.Client.ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->Put");
-
-
-      Algolia.Search.Analytics.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Analytics.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Analytics.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Analytics.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Analytics.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PutAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("Put", localVarResponse);
         if (_exception != null) throw _exception;
       }
 
