@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Abtesting.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Abtesting.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Abtesting.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Abtesting.Models
   /// Applies search parameters from [a restricted set of options](https://www.algolia.com/doc/api-reference/api-methods/add-ab-test/#method-param-customsearchparameters). Only use this parameter if the two variants use the same index.
   /// </summary>
   [DataContract(Name = "customSearchParams")]
-  public partial class CustomSearchParams : IEquatable<CustomSearchParams>, IValidatableObject
+  public partial class CustomSearchParams : IEquatable<CustomSearchParams>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="CustomSearchParams" /> class.
@@ -119,15 +117,6 @@ namespace Algolia.Search.Abtesting.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
-    }
   }
 
 }

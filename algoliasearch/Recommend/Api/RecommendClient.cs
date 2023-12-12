@@ -4,13 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
+using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Recommend.Client;
 using Algolia.Search.Recommend.Models;
+using Algolia.Search.Transport;
+using Algolia.Search.Http;
+using Algolia.Search.Client;
 
 namespace Algolia.Search.Recommend.Api
 {
@@ -29,10 +30,10 @@ namespace Algolia.Search.Recommend.Api
     /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -42,34 +43,10 @@ namespace Algolia.Search.Recommend.Api
     /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -80,10 +57,10 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -94,36 +71,10 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Delete a Recommend rule.
     /// </summary>
@@ -134,23 +85,10 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="indexName">Index on which to perform the request.</param>
     /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
     /// <param name="objectID">Unique record (object) identifier.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of DeletedAtResponse</returns>
-    System.Threading.Tasks.Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Delete a Recommend rule.
-    /// </summary>
-    /// <remarks>
-    /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="objectID">Unique record (object) identifier.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (DeletedAtResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<DeletedAtResponse>> DeleteRecommendRuleWithHttpInfoAsync(string indexName, RecommendModels model, string objectID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get a Recommend rule.
     /// </summary>
@@ -161,23 +99,10 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="indexName">Index on which to perform the request.</param>
     /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
     /// <param name="objectID">Unique record (object) identifier.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of RuleResponse</returns>
-    System.Threading.Tasks.Task<RuleResponse> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get a Recommend rule.
-    /// </summary>
-    /// <remarks>
-    /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="objectID">Unique record (object) identifier.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (RuleResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<RuleResponse>> GetRecommendRuleWithHttpInfoAsync(string indexName, RecommendModels model, string objectID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<RuleResponse> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get a Recommend task's status.
     /// </summary>
@@ -188,23 +113,10 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="indexName">Index on which to perform the request.</param>
     /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
     /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetRecommendTaskResponse</returns>
-    System.Threading.Tasks.Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get a Recommend task's status.
-    /// </summary>
-    /// <remarks>
-    /// Some operations, such as deleting a Recommend rule, will respond with a &#x60;taskID&#x60; value. Use this value here to check the status of that task.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (GetRecommendTaskResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<GetRecommendTaskResponse>> GetRecommendStatusWithHttpInfoAsync(string indexName, RecommendModels model, long taskID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get recommendations and trending items.
     /// </summary>
@@ -213,21 +125,10 @@ namespace Algolia.Search.Recommend.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="getRecommendationsParams"></param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetRecommendationsResponse</returns>
-    System.Threading.Tasks.Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get recommendations and trending items.
-    /// </summary>
-    /// <remarks>
-    /// Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="getRecommendationsParams"></param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (GetRecommendationsResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<GetRecommendationsResponse>> GetRecommendationsWithHttpInfoAsync(GetRecommendationsParams getRecommendationsParams, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List Recommend rules.
     /// </summary>
@@ -238,227 +139,69 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="indexName">Index on which to perform the request.</param>
     /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
     /// <param name="searchRecommendRulesParams"> (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of SearchRecommendRulesResponse</returns>
-    System.Threading.Tasks.Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default(SearchRecommendRulesParams), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// List Recommend rules.
-    /// </summary>
-    /// <remarks>
-    /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="searchRecommendRulesParams"> (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (SearchRecommendRulesResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<SearchRecommendRulesResponse>> SearchRecommendRulesWithHttpInfoAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default(SearchRecommendRulesParams), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default(SearchRecommendRulesParams), RequestOptions options = null, CancellationToken cancellationToken = default);
   }
 
 
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
-  public partial class RecommendClient : IDisposable, IRecommendClient
+  public partial class RecommendClient : IRecommendClient
   {
-    private Algolia.Search.Recommend.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+    private readonly HttpTransport _transport;
+    private readonly AlgoliaConfig _config;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendClient"/> class.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+    /// Create a new Recommend client for the given appID and apiKey.
     /// </summary>
-    /// <returns></returns>
-    public RecommendClient() : this((string)null)
+    /// <param name="applicationId">Your application</param>
+    /// <param name="apiKey">Your API key</param>
+    public RecommendClient(string applicationId, string apiKey) : this(new RecommendConfig(applicationId, apiKey), new AlgoliaHttpRequester())
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendClient"/> class.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+    /// Initialize a client with custom config
     /// </summary>
-    /// <param name="basePath">The target service's base path in URL format.</param>
-    /// <exception cref="ArgumentException"></exception>
-    /// <returns></returns>
-    public RecommendClient(string basePath)
-    {
-      this.Configuration = Algolia.Search.Recommend.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Recommend.Client.GlobalConfiguration.Instance,
-          new Algolia.Search.Recommend.Client.Configuration { BasePath = basePath }
-      );
-      this.ApiClient = new Algolia.Search.Recommend.Client.ApiClient(this.Configuration.BasePath);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      this.ExceptionFactory = Algolia.Search.Recommend.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendClient"/> class using Configuration object.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
-    /// </summary>
-    /// <param name="configuration">An instance of Configuration.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    public RecommendClient(Algolia.Search.Recommend.Client.Configuration configuration)
-    {
-      if (configuration == null) throw new ArgumentNullException("configuration");
-
-      this.Configuration = Algolia.Search.Recommend.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Recommend.Client.GlobalConfiguration.Instance,
-          configuration
-      );
-      this.ApiClient = new Algolia.Search.Recommend.Client.ApiClient(this.Configuration.BasePath);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      ExceptionFactory = Algolia.Search.Recommend.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendClient"/> class.
-    /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public RecommendClient(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
+    /// <param name="config">Algolia configuration</param>
+    public RecommendClient(RecommendConfig config) : this(config, new AlgoliaHttpRequester())
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendClient"/> class.
+    /// Initialize the client with custom config and custom Requester
     /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="basePath">The target service's base path in URL format.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="ArgumentException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public RecommendClient(HttpClient client, string basePath, HttpClientHandler handler = null)
+    /// <param name="config">Algolia Config</param>
+    /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
+    public RecommendClient(RecommendConfig config, IHttpRequester httpRequester)
     {
-      if (client == null) throw new ArgumentNullException("client");
-
-      this.Configuration = Algolia.Search.Recommend.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Recommend.Client.GlobalConfiguration.Instance,
-          new Algolia.Search.Recommend.Client.Configuration { BasePath = basePath }
-      );
-      this.ApiClient = new Algolia.Search.Recommend.Client.ApiClient(client, this.Configuration.BasePath, handler);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      this.ExceptionFactory = Algolia.Search.Recommend.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendClient"/> class using Configuration object.
-    /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="configuration">An instance of Configuration.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public RecommendClient(HttpClient client, Algolia.Search.Recommend.Client.Configuration configuration, HttpClientHandler handler = null)
-    {
-      if (configuration == null) throw new ArgumentNullException("configuration");
-      if (client == null) throw new ArgumentNullException("client");
-
-      this.Configuration = Algolia.Search.Recommend.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Recommend.Client.GlobalConfiguration.Instance,
-          configuration
-      );
-      this.ApiClient = new Algolia.Search.Recommend.Client.ApiClient(client, this.Configuration.BasePath, handler);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      ExceptionFactory = Algolia.Search.Recommend.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendClient"/> class
-    /// using a Configuration object and client instance.
-    /// </summary>
-    /// <param name="client">The client interface for synchronous API access.</param>
-    /// <param name="asyncClient">The client interface for asynchronous API access.</param>
-    /// <param name="configuration">The configuration object.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    public RecommendClient(Algolia.Search.Recommend.Client.ISynchronousClient client, Algolia.Search.Recommend.Client.IAsynchronousClient asyncClient, Algolia.Search.Recommend.Client.IReadableConfiguration configuration)
-    {
-      if (client == null) throw new ArgumentNullException("client");
-      if (asyncClient == null) throw new ArgumentNullException("asyncClient");
-      if (configuration == null) throw new ArgumentNullException("configuration");
-
-      this.Client = client;
-      this.AsynchronousClient = asyncClient;
-      this.Configuration = configuration;
-      this.ExceptionFactory = Algolia.Search.Recommend.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Disposes resources if they were created by us
-    /// </summary>
-    public void Dispose()
-    {
-      this.ApiClient?.Dispose();
-    }
-
-    /// <summary>
-    /// Holds the ApiClient if created
-    /// </summary>
-    public Algolia.Search.Recommend.Client.ApiClient ApiClient { get; set; } = null;
-
-    /// <summary>
-    /// The client for accessing this underlying API asynchronously.
-    /// </summary>
-    public Algolia.Search.Recommend.Client.IAsynchronousClient AsynchronousClient { get; set; }
-
-    /// <summary>
-    /// The client for accessing this underlying API synchronously.
-    /// </summary>
-    public Algolia.Search.Recommend.Client.ISynchronousClient Client { get; set; }
-
-    /// <summary>
-    /// Gets the base path of the API client.
-    /// </summary>
-    /// <value>The base path</value>
-    public string GetBasePath()
-    {
-      return this.Configuration.BasePath;
-    }
-
-    /// <summary>
-    /// Gets or sets the configuration object
-    /// </summary>
-    /// <value>An instance of the Configuration</value>
-    public Algolia.Search.Recommend.Client.IReadableConfiguration Configuration { get; set; }
-
-    /// <summary>
-    /// Provides a factory method hook for the creation of exceptions.
-    /// </summary>
-    public Algolia.Search.Recommend.Client.ExceptionFactory ExceptionFactory
-    {
-      get
+      if (httpRequester == null)
       {
-        if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-        {
-          throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-        }
-        return _exceptionFactory;
+        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-      set { _exceptionFactory = value; }
+
+      if (config == null)
+      {
+        throw new ArgumentNullException(nameof(config), "A config is required");
+      }
+
+      if (string.IsNullOrWhiteSpace(config.AppId))
+      {
+        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+      }
+
+      if (string.IsNullOrWhiteSpace(config.ApiKey))
+      {
+        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+      }
+
+      _config = config;
+      _transport = new HttpTransport(config, httpRequester);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -466,150 +209,27 @@ namespace Algolia.Search.Recommend.Api
     /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomDelete(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<Object> localVarResponse = CustomDeleteWithHttpInfo(path, parameters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<Object> CustomDeleteWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomDelete");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Recommend.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Delete<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<Object> localVarResponse = await CustomDeleteWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomDelete");
+        throw new ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomDelete");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Recommend.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.DeleteAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -617,150 +237,27 @@ namespace Algolia.Search.Recommend.Api
     /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomGet(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<Object> localVarResponse = CustomGetWithHttpInfo(path, parameters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<Object> CustomGetWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomGet");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Recommend.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<Object> localVarResponse = await CustomGetWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomGet");
+        throw new ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomGet");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Recommend.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -769,157 +266,28 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomPost(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<Object> localVarResponse = CustomPostWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<Object> CustomPostWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomPost");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Recommend.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<Object> localVarResponse = await CustomPostWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomPost");
+        throw new ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomPost");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Recommend.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
+      requestOptions.Data = body;
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -928,157 +296,28 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomPut(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<Object> localVarResponse = CustomPutWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<Object> CustomPutWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomPut");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Recommend.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Put<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<Object> localVarResponse = await CustomPutWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomPut");
+        throw new ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomPut");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Recommend.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
+      requestOptions.Data = body;
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PutAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Delete a Recommend rule. Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
@@ -1087,165 +326,33 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="indexName">Index on which to perform the request.</param>
     /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
     /// <param name="objectID">Unique record (object) identifier.</param>
-    /// <returns>DeletedAtResponse</returns>
-    public DeletedAtResponse DeleteRecommendRule(string indexName, RecommendModels model, string objectID)
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<DeletedAtResponse> localVarResponse = DeleteRecommendRuleWithHttpInfo(indexName, model, objectID);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Delete a Recommend rule. Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="objectID">Unique record (object) identifier.</param>
-    /// <returns>ApiResponse of DeletedAtResponse</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<DeletedAtResponse> DeleteRecommendRuleWithHttpInfo(string indexName, RecommendModels model, string objectID)
-    {
-      // verify the required parameter 'indexName' is set
-      if (indexName == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->DeleteRecommendRule");
-
-      // verify the required parameter 'model' is set
-      if (model == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'model' when calling RecommendClient->DeleteRecommendRule");
-
-      // verify the required parameter 'objectID' is set
-      if (objectID == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'objectID' when calling RecommendClient->DeleteRecommendRule");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("indexName", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(indexName)); // path parameter
-      localVarRequestOptions.PathParameters.Add("model", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(model)); // path parameter
-      localVarRequestOptions.PathParameters.Add("objectID", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(objectID)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Delete<DeletedAtResponse>("/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("DeleteRecommendRule", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Delete a Recommend rule. Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="objectID">Unique record (object) identifier.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of DeletedAtResponse</returns>
-    public async System.Threading.Tasks.Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<DeletedAtResponse> localVarResponse = await DeleteRecommendRuleWithHttpInfoAsync(indexName, model, objectID, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Delete a Recommend rule. Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="objectID">Unique record (object) identifier.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (DeletedAtResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<DeletedAtResponse>> DeleteRecommendRuleWithHttpInfoAsync(string indexName, RecommendModels model, string objectID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'indexName' is set
       if (indexName == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->DeleteRecommendRule");
+        throw new ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->DeleteRecommendRule");
 
       // verify the required parameter 'model' is set
       if (model == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'model' when calling RecommendClient->DeleteRecommendRule");
+        throw new ApiException(400, "Missing required parameter 'model' when calling RecommendClient->DeleteRecommendRule");
 
       // verify the required parameter 'objectID' is set
       if (objectID == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'objectID' when calling RecommendClient->DeleteRecommendRule");
+        throw new ApiException(400, "Missing required parameter 'objectID' when calling RecommendClient->DeleteRecommendRule");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+      requestOptions.PathParameters.Add("model", ClientUtils.ParameterToString(model));
+      requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
 
 
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("indexName", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(indexName)); // path parameter
-      localVarRequestOptions.PathParameters.Add("model", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(model)); // path parameter
-      localVarRequestOptions.PathParameters.Add("objectID", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(objectID)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.DeleteAsync<DeletedAtResponse>("/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("DeleteRecommendRule", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get a Recommend rule. Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
@@ -1254,165 +361,33 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="indexName">Index on which to perform the request.</param>
     /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
     /// <param name="objectID">Unique record (object) identifier.</param>
-    /// <returns>RuleResponse</returns>
-    public RuleResponse GetRecommendRule(string indexName, RecommendModels model, string objectID)
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<RuleResponse> localVarResponse = GetRecommendRuleWithHttpInfo(indexName, model, objectID);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get a Recommend rule. Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="objectID">Unique record (object) identifier.</param>
-    /// <returns>ApiResponse of RuleResponse</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<RuleResponse> GetRecommendRuleWithHttpInfo(string indexName, RecommendModels model, string objectID)
-    {
-      // verify the required parameter 'indexName' is set
-      if (indexName == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->GetRecommendRule");
-
-      // verify the required parameter 'model' is set
-      if (model == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'model' when calling RecommendClient->GetRecommendRule");
-
-      // verify the required parameter 'objectID' is set
-      if (objectID == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'objectID' when calling RecommendClient->GetRecommendRule");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("indexName", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(indexName)); // path parameter
-      localVarRequestOptions.PathParameters.Add("model", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(model)); // path parameter
-      localVarRequestOptions.PathParameters.Add("objectID", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(objectID)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<RuleResponse>("/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetRecommendRule", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get a Recommend rule. Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="objectID">Unique record (object) identifier.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of RuleResponse</returns>
-    public async System.Threading.Tasks.Task<RuleResponse> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<RuleResponse> localVarResponse = await GetRecommendRuleWithHttpInfoAsync(indexName, model, objectID, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get a Recommend rule. Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="objectID">Unique record (object) identifier.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (RuleResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<RuleResponse>> GetRecommendRuleWithHttpInfoAsync(string indexName, RecommendModels model, string objectID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<RuleResponse> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'indexName' is set
       if (indexName == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->GetRecommendRule");
+        throw new ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->GetRecommendRule");
 
       // verify the required parameter 'model' is set
       if (model == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'model' when calling RecommendClient->GetRecommendRule");
+        throw new ApiException(400, "Missing required parameter 'model' when calling RecommendClient->GetRecommendRule");
 
       // verify the required parameter 'objectID' is set
       if (objectID == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'objectID' when calling RecommendClient->GetRecommendRule");
+        throw new ApiException(400, "Missing required parameter 'objectID' when calling RecommendClient->GetRecommendRule");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+      requestOptions.PathParameters.Add("model", ClientUtils.ParameterToString(model));
+      requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
 
 
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("indexName", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(indexName)); // path parameter
-      localVarRequestOptions.PathParameters.Add("model", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(model)); // path parameter
-      localVarRequestOptions.PathParameters.Add("objectID", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(objectID)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<RuleResponse>("/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetRecommendRule", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<RuleResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get a Recommend task's status. Some operations, such as deleting a Recommend rule, will respond with a &#x60;taskID&#x60; value. Use this value here to check the status of that task.
@@ -1421,298 +396,53 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="indexName">Index on which to perform the request.</param>
     /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
     /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
-    /// <returns>GetRecommendTaskResponse</returns>
-    public GetRecommendTaskResponse GetRecommendStatus(string indexName, RecommendModels model, long taskID)
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<GetRecommendTaskResponse> localVarResponse = GetRecommendStatusWithHttpInfo(indexName, model, taskID);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get a Recommend task's status. Some operations, such as deleting a Recommend rule, will respond with a &#x60;taskID&#x60; value. Use this value here to check the status of that task.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
-    /// <returns>ApiResponse of GetRecommendTaskResponse</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<GetRecommendTaskResponse> GetRecommendStatusWithHttpInfo(string indexName, RecommendModels model, long taskID)
-    {
-      // verify the required parameter 'indexName' is set
-      if (indexName == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->GetRecommendStatus");
-
-      // verify the required parameter 'model' is set
-      if (model == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'model' when calling RecommendClient->GetRecommendStatus");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("indexName", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(indexName)); // path parameter
-      localVarRequestOptions.PathParameters.Add("model", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(model)); // path parameter
-      localVarRequestOptions.PathParameters.Add("taskID", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(taskID)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<GetRecommendTaskResponse>("/1/indexes/{indexName}/{model}/task/{taskID}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetRecommendStatus", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get a Recommend task's status. Some operations, such as deleting a Recommend rule, will respond with a &#x60;taskID&#x60; value. Use this value here to check the status of that task.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetRecommendTaskResponse</returns>
-    public async System.Threading.Tasks.Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<GetRecommendTaskResponse> localVarResponse = await GetRecommendStatusWithHttpInfoAsync(indexName, model, taskID, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get a Recommend task's status. Some operations, such as deleting a Recommend rule, will respond with a &#x60;taskID&#x60; value. Use this value here to check the status of that task.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (GetRecommendTaskResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<GetRecommendTaskResponse>> GetRecommendStatusWithHttpInfoAsync(string indexName, RecommendModels model, long taskID, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'indexName' is set
       if (indexName == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->GetRecommendStatus");
+        throw new ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->GetRecommendStatus");
 
       // verify the required parameter 'model' is set
       if (model == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'model' when calling RecommendClient->GetRecommendStatus");
+        throw new ApiException(400, "Missing required parameter 'model' when calling RecommendClient->GetRecommendStatus");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+      requestOptions.PathParameters.Add("model", ClientUtils.ParameterToString(model));
+      requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
 
 
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("indexName", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(indexName)); // path parameter
-      localVarRequestOptions.PathParameters.Add("model", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(model)); // path parameter
-      localVarRequestOptions.PathParameters.Add("taskID", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(taskID)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<GetRecommendTaskResponse>("/1/indexes/{indexName}/{model}/task/{taskID}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetRecommendStatus", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<GetRecommendTaskResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/{model}/task/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get recommendations and trending items. Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
     /// </summary>
     /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="getRecommendationsParams"></param>
-    /// <returns>GetRecommendationsResponse</returns>
-    public GetRecommendationsResponse GetRecommendations(GetRecommendationsParams getRecommendationsParams)
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<GetRecommendationsResponse> localVarResponse = GetRecommendationsWithHttpInfo(getRecommendationsParams);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get recommendations and trending items. Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="getRecommendationsParams"></param>
-    /// <returns>ApiResponse of GetRecommendationsResponse</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<GetRecommendationsResponse> GetRecommendationsWithHttpInfo(GetRecommendationsParams getRecommendationsParams)
-    {
-      // verify the required parameter 'getRecommendationsParams' is set
-      if (getRecommendationsParams == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'getRecommendationsParams' when calling RecommendClient->GetRecommendations");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.Data = getRecommendationsParams;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<GetRecommendationsResponse>("/1/indexes/*/recommendations", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetRecommendations", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get recommendations and trending items. Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="getRecommendationsParams"></param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetRecommendationsResponse</returns>
-    public async System.Threading.Tasks.Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<GetRecommendationsResponse> localVarResponse = await GetRecommendationsWithHttpInfoAsync(getRecommendationsParams, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get recommendations and trending items. Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="getRecommendationsParams"></param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (GetRecommendationsResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<GetRecommendationsResponse>> GetRecommendationsWithHttpInfoAsync(GetRecommendationsParams getRecommendationsParams, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'getRecommendationsParams' is set
       if (getRecommendationsParams == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'getRecommendationsParams' when calling RecommendClient->GetRecommendations");
+        throw new ApiException(400, "Missing required parameter 'getRecommendationsParams' when calling RecommendClient->GetRecommendations");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.Data = getRecommendationsParams;
 
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
+      requestOptions.UseReadTransporter = true;
 
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.Data = getRecommendationsParams;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<GetRecommendationsResponse>("/1/indexes/*/recommendations", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetRecommendations", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<GetRecommendationsResponse>(new HttpMethod("POST"), "/1/indexes/*/recommendations", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// List Recommend rules. List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
@@ -1721,158 +451,28 @@ namespace Algolia.Search.Recommend.Api
     /// <param name="indexName">Index on which to perform the request.</param>
     /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
     /// <param name="searchRecommendRulesParams"> (optional)</param>
-    /// <returns>SearchRecommendRulesResponse</returns>
-    public SearchRecommendRulesResponse SearchRecommendRules(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default(SearchRecommendRulesParams))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<SearchRecommendRulesResponse> localVarResponse = SearchRecommendRulesWithHttpInfo(indexName, model, searchRecommendRulesParams);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List Recommend rules. List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="searchRecommendRulesParams"> (optional)</param>
-    /// <returns>ApiResponse of SearchRecommendRulesResponse</returns>
-    public Algolia.Search.Recommend.Client.ApiResponse<SearchRecommendRulesResponse> SearchRecommendRulesWithHttpInfo(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default(SearchRecommendRulesParams))
-    {
-      // verify the required parameter 'indexName' is set
-      if (indexName == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->SearchRecommendRules");
-
-      // verify the required parameter 'model' is set
-      if (model == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'model' when calling RecommendClient->SearchRecommendRules");
-
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("indexName", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(indexName)); // path parameter
-      localVarRequestOptions.PathParameters.Add("model", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(model)); // path parameter
-      localVarRequestOptions.Data = searchRecommendRulesParams;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<SearchRecommendRulesResponse>("/1/indexes/{indexName}/{model}/recommend/rules/search", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("SearchRecommendRules", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// List Recommend rules. List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="searchRecommendRulesParams"> (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of SearchRecommendRulesResponse</returns>
-    public async System.Threading.Tasks.Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default(SearchRecommendRulesParams), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Recommend.Client.ApiResponse<SearchRecommendRulesResponse> localVarResponse = await SearchRecommendRulesWithHttpInfoAsync(indexName, model, searchRecommendRulesParams, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List Recommend rules. List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-    /// </summary>
-    /// <exception cref="Algolia.Search.Recommend.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-    /// <param name="searchRecommendRulesParams"> (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (SearchRecommendRulesResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Recommend.Client.ApiResponse<SearchRecommendRulesResponse>> SearchRecommendRulesWithHttpInfoAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default(SearchRecommendRulesParams), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default(SearchRecommendRulesParams), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'indexName' is set
       if (indexName == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->SearchRecommendRules");
+        throw new ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->SearchRecommendRules");
 
       // verify the required parameter 'model' is set
       if (model == null)
-        throw new Algolia.Search.Recommend.Client.ApiException(400, "Missing required parameter 'model' when calling RecommendClient->SearchRecommendRules");
+        throw new ApiException(400, "Missing required parameter 'model' when calling RecommendClient->SearchRecommendRules");
 
 
-      Algolia.Search.Recommend.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Recommend.Client.RequestOptions();
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+      requestOptions.PathParameters.Add("model", ClientUtils.ParameterToString(model));
+      requestOptions.Data = searchRecommendRulesParams;
 
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
+      requestOptions.UseReadTransporter = true;
 
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Recommend.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("indexName", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(indexName)); // path parameter
-      localVarRequestOptions.PathParameters.Add("model", Algolia.Search.Recommend.Client.ClientUtils.ParameterToString(model)); // path parameter
-      localVarRequestOptions.Data = searchRecommendRulesParams;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<SearchRecommendRulesResponse>("/1/indexes/{indexName}/{model}/recommend/rules/search", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("SearchRecommendRules", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<SearchRecommendRulesResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/{model}/recommend/rules/search", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
   }

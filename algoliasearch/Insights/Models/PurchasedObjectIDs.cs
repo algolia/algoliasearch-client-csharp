@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Insights.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Insights.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Insights.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Insights.Models
   /// Use this event to track when users make a purchase unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track purchase events related to Algolia requests, use the \&quot;Purchased object IDs after search\&quot; event. 
   /// </summary>
   [DataContract(Name = "PurchasedObjectIDs")]
-  public partial class PurchasedObjectIDs : IEquatable<PurchasedObjectIDs>, IValidatableObject
+  public partial class PurchasedObjectIDs : IEquatable<PurchasedObjectIDs>
   {
 
     /// <summary>
@@ -294,59 +292,6 @@ namespace Algolia.Search.Insights.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      // EventName (string) maxLength
-      if (this.EventName != null && this.EventName.Length > 64)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EventName, length must be less than 64.", new[] { "EventName" });
-      }
-
-      // EventName (string) minLength
-      if (this.EventName != null && this.EventName.Length < 1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EventName, length must be greater than 1.", new[] { "EventName" });
-      }
-
-      if (this.EventName != null)
-      {
-        // EventName (string) pattern
-        Regex regexEventName = new Regex(@"[\x20-\x7E]{1,64}", RegexOptions.CultureInvariant);
-        if (!regexEventName.Match(this.EventName).Success)
-        {
-          yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EventName, must match a pattern of " + regexEventName, new[] { "EventName" });
-        }
-      }
-
-      // UserToken (string) maxLength
-      if (this.UserToken != null && this.UserToken.Length > 129)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UserToken, length must be less than 129.", new[] { "UserToken" });
-      }
-
-      // UserToken (string) minLength
-      if (this.UserToken != null && this.UserToken.Length < 1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UserToken, length must be greater than 1.", new[] { "UserToken" });
-      }
-
-      if (this.UserToken != null)
-      {
-        // UserToken (string) pattern
-        Regex regexUserToken = new Regex(@"[a-zA-Z0-9_=/+-]{1,129}", RegexOptions.CultureInvariant);
-        if (!regexUserToken.Match(this.UserToken).Success)
-        {
-          yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UserToken, must match a pattern of " + regexUserToken, new[] { "UserToken" });
-        }
-      }
-
-      yield break;
-    }
   }
 
 }

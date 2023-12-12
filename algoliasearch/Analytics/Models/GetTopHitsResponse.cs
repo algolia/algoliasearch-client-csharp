@@ -14,10 +14,8 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Analytics.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Analytics.Client.OpenAPIDateConverter;
 using System.Reflection;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Analytics.Models
 {
@@ -26,7 +24,7 @@ namespace Algolia.Search.Analytics.Models
   /// </summary>
   [JsonConverter(typeof(GetTopHitsResponseJsonConverter))]
   [DataContract(Name = "getTopHitsResponse")]
-  public partial class GetTopHitsResponse : AbstractOpenAPISchema, IEquatable<GetTopHitsResponse>, IValidatableObject
+  public partial class GetTopHitsResponse : AbstractSchema, IEquatable<GetTopHitsResponse>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetTopHitsResponse" /> class
@@ -228,16 +226,6 @@ namespace Algolia.Search.Analytics.Models
           hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
         return hashCode;
       }
-    }
-
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
     }
   }
 

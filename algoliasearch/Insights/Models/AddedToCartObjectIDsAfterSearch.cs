@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Insights.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Insights.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Insights.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Insights.Models
   /// Use this event to track when users add items to their shopping cart after a previous Algolia request. If you&#39;re building your category pages with Algolia, you&#39;ll also use this event. 
   /// </summary>
   [DataContract(Name = "AddedToCartObjectIDsAfterSearch")]
-  public partial class AddedToCartObjectIDsAfterSearch : IEquatable<AddedToCartObjectIDsAfterSearch>, IValidatableObject
+  public partial class AddedToCartObjectIDsAfterSearch : IEquatable<AddedToCartObjectIDsAfterSearch>
   {
 
     /// <summary>
@@ -318,81 +316,6 @@ namespace Algolia.Search.Insights.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      // EventName (string) maxLength
-      if (this.EventName != null && this.EventName.Length > 64)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EventName, length must be less than 64.", new[] { "EventName" });
-      }
-
-      // EventName (string) minLength
-      if (this.EventName != null && this.EventName.Length < 1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EventName, length must be greater than 1.", new[] { "EventName" });
-      }
-
-      if (this.EventName != null)
-      {
-        // EventName (string) pattern
-        Regex regexEventName = new Regex(@"[\x20-\x7E]{1,64}", RegexOptions.CultureInvariant);
-        if (!regexEventName.Match(this.EventName).Success)
-        {
-          yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EventName, must match a pattern of " + regexEventName, new[] { "EventName" });
-        }
-      }
-
-      // QueryID (string) maxLength
-      if (this.QueryID != null && this.QueryID.Length > 32)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for QueryID, length must be less than 32.", new[] { "QueryID" });
-      }
-
-      // QueryID (string) minLength
-      if (this.QueryID != null && this.QueryID.Length < 32)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for QueryID, length must be greater than 32.", new[] { "QueryID" });
-      }
-
-      if (this.QueryID != null)
-      {
-        // QueryID (string) pattern
-        Regex regexQueryID = new Regex(@"[0-9a-f]{32}", RegexOptions.CultureInvariant);
-        if (!regexQueryID.Match(this.QueryID).Success)
-        {
-          yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for QueryID, must match a pattern of " + regexQueryID, new[] { "QueryID" });
-        }
-      }
-
-      // UserToken (string) maxLength
-      if (this.UserToken != null && this.UserToken.Length > 129)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UserToken, length must be less than 129.", new[] { "UserToken" });
-      }
-
-      // UserToken (string) minLength
-      if (this.UserToken != null && this.UserToken.Length < 1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UserToken, length must be greater than 1.", new[] { "UserToken" });
-      }
-
-      if (this.UserToken != null)
-      {
-        // UserToken (string) pattern
-        Regex regexUserToken = new Regex(@"[a-zA-Z0-9_=/+-]{1,129}", RegexOptions.CultureInvariant);
-        if (!regexUserToken.Match(this.UserToken).Success)
-        {
-          yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UserToken, must match a pattern of " + regexUserToken, new[] { "UserToken" });
-        }
-      }
-
-      yield break;
-    }
   }
 
 }

@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Ingestion.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Ingestion.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Ingestion.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// An event describe a step of the task execution flow..
   /// </summary>
   [DataContract(Name = "Event")]
-  public partial class Event : IEquatable<Event>, IValidatableObject
+  public partial class Event : IEquatable<Event>
   {
 
     /// <summary>
@@ -249,21 +247,6 @@ namespace Algolia.Search.Ingestion.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      // BatchSize (int) minimum
-      if (this.BatchSize < (int)0)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BatchSize, must be a value greater than or equal to 0.", new[] { "BatchSize" });
-      }
-
-      yield break;
-    }
   }
 
 }

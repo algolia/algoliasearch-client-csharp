@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Recommend.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Recommend.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Recommend.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// Recommend rules search parameters.
   /// </summary>
   [DataContract(Name = "searchRecommendRulesParams")]
-  public partial class SearchRecommendRulesParams : IEquatable<SearchRecommendRulesParams>, IValidatableObject
+  public partial class SearchRecommendRulesParams : IEquatable<SearchRecommendRulesParams>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchRecommendRulesParams" /> class.
@@ -199,33 +197,6 @@ namespace Algolia.Search.Recommend.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      // Page (int) minimum
-      if (this.Page < (int)0)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Page, must be a value greater than or equal to 0.", new[] { "Page" });
-      }
-
-      // HitsPerPage (int) maximum
-      if (this.HitsPerPage > (int)1000)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for HitsPerPage, must be a value less than or equal to 1000.", new[] { "HitsPerPage" });
-      }
-
-      // HitsPerPage (int) minimum
-      if (this.HitsPerPage < (int)1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for HitsPerPage, must be a value greater than or equal to 1.", new[] { "HitsPerPage" });
-      }
-
-      yield break;
-    }
   }
 
 }

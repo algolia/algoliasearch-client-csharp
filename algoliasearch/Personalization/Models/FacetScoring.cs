@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Personalization.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Personalization.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Personalization.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Personalization.Models
   /// FacetScoring
   /// </summary>
   [DataContract(Name = "facetScoring")]
-  public partial class FacetScoring : IEquatable<FacetScoring>, IValidatableObject
+  public partial class FacetScoring : IEquatable<FacetScoring>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="FacetScoring" /> class.
@@ -135,15 +133,6 @@ namespace Algolia.Search.Personalization.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
-    }
   }
 
 }

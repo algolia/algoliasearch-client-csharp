@@ -4,13 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
+using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Abtesting.Client;
 using Algolia.Search.Abtesting.Models;
+using Algolia.Search.Transport;
+using Algolia.Search.Http;
+using Algolia.Search.Client;
 
 namespace Algolia.Search.Abtesting.Api
 {
@@ -28,21 +29,10 @@ namespace Algolia.Search.Abtesting.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="addABTestsRequest"></param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ABTestResponse</returns>
-    System.Threading.Tasks.Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Create an A/B test.
-    /// </summary>
-    /// <remarks>
-    /// Creates an A/B test.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="addABTestsRequest"></param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ABTestResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<ABTestResponse>> AddABTestsWithHttpInfoAsync(AddABTestsRequest addABTestsRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -52,10 +42,10 @@ namespace Algolia.Search.Abtesting.Api
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -65,34 +55,10 @@ namespace Algolia.Search.Abtesting.Api
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -103,10 +69,10 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -117,36 +83,10 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Delete an A/B test.
     /// </summary>
@@ -155,21 +95,10 @@ namespace Algolia.Search.Abtesting.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="id">Unique A/B test ID.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ABTestResponse</returns>
-    System.Threading.Tasks.Task<ABTestResponse> DeleteABTestAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Delete an A/B test.
-    /// </summary>
-    /// <remarks>
-    /// Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ABTestResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<ABTestResponse>> DeleteABTestWithHttpInfoAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<ABTestResponse> DeleteABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get A/B test details.
     /// </summary>
@@ -178,21 +107,10 @@ namespace Algolia.Search.Abtesting.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="id">Unique A/B test ID.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ABTest</returns>
-    System.Threading.Tasks.Task<ABTest> GetABTestAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get A/B test details.
-    /// </summary>
-    /// <remarks>
-    /// Get specific details for an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ABTest)</returns>
-    System.Threading.Tasks.Task<ApiResponse<ABTest>> GetABTestWithHttpInfoAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<ABTest> GetABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List all A/B tests.
     /// </summary>
@@ -204,24 +122,10 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
     /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListABTestsResponse</returns>
-    System.Threading.Tasks.Task<ListABTestsResponse> ListABTestsAsync(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// List all A/B tests.
-    /// </summary>
-    /// <remarks>
-    /// List all A/B tests.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-    /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
-    /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ListABTestsResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<ListABTestsResponse>> ListABTestsWithHttpInfoAsync(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<ListABTestsResponse> ListABTestsAsync(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Stop an A/B test.
     /// </summary>
@@ -230,1248 +134,246 @@ namespace Algolia.Search.Abtesting.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="id">Unique A/B test ID.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ABTestResponse</returns>
-    System.Threading.Tasks.Task<ABTestResponse> StopABTestAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Stop an A/B test.
-    /// </summary>
-    /// <remarks>
-    /// If stopped, the test is over and can&#39;t be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ABTestResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<ABTestResponse>> StopABTestWithHttpInfoAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<ABTestResponse> StopABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
   }
 
 
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
-  public partial class AbtestingClient : IDisposable, IAbtestingClient
+  public partial class AbtestingClient : IAbtestingClient
   {
-    private Algolia.Search.Abtesting.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+    private readonly HttpTransport _transport;
+    private readonly AlgoliaConfig _config;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AbtestingClient"/> class.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+    /// Create a new Abtesting client for the given appID and apiKey.
     /// </summary>
-    /// <returns></returns>
-    public AbtestingClient() : this((string)null)
+    /// <param name="applicationId">Your application</param>
+    /// <param name="apiKey">Your API key</param>
+    public AbtestingClient(string applicationId, string apiKey) : this(new AbtestingConfig(applicationId, apiKey), new AlgoliaHttpRequester())
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AbtestingClient"/> class.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+    /// Initialize a client with custom config
     /// </summary>
-    /// <param name="basePath">The target service's base path in URL format.</param>
-    /// <exception cref="ArgumentException"></exception>
-    /// <returns></returns>
-    public AbtestingClient(string basePath)
-    {
-      this.Configuration = Algolia.Search.Abtesting.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Abtesting.Client.GlobalConfiguration.Instance,
-          new Algolia.Search.Abtesting.Client.Configuration { BasePath = basePath }
-      );
-      this.ApiClient = new Algolia.Search.Abtesting.Client.ApiClient(this.Configuration.BasePath);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      this.ExceptionFactory = Algolia.Search.Abtesting.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AbtestingClient"/> class using Configuration object.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
-    /// </summary>
-    /// <param name="configuration">An instance of Configuration.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    public AbtestingClient(Algolia.Search.Abtesting.Client.Configuration configuration)
-    {
-      if (configuration == null) throw new ArgumentNullException("configuration");
-
-      this.Configuration = Algolia.Search.Abtesting.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Abtesting.Client.GlobalConfiguration.Instance,
-          configuration
-      );
-      this.ApiClient = new Algolia.Search.Abtesting.Client.ApiClient(this.Configuration.BasePath);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      ExceptionFactory = Algolia.Search.Abtesting.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AbtestingClient"/> class.
-    /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public AbtestingClient(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
+    /// <param name="config">Algolia configuration</param>
+    public AbtestingClient(AbtestingConfig config) : this(config, new AlgoliaHttpRequester())
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AbtestingClient"/> class.
+    /// Initialize the client with custom config and custom Requester
     /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="basePath">The target service's base path in URL format.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="ArgumentException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public AbtestingClient(HttpClient client, string basePath, HttpClientHandler handler = null)
+    /// <param name="config">Algolia Config</param>
+    /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
+    public AbtestingClient(AbtestingConfig config, IHttpRequester httpRequester)
     {
-      if (client == null) throw new ArgumentNullException("client");
-
-      this.Configuration = Algolia.Search.Abtesting.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Abtesting.Client.GlobalConfiguration.Instance,
-          new Algolia.Search.Abtesting.Client.Configuration { BasePath = basePath }
-      );
-      this.ApiClient = new Algolia.Search.Abtesting.Client.ApiClient(client, this.Configuration.BasePath, handler);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      this.ExceptionFactory = Algolia.Search.Abtesting.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AbtestingClient"/> class using Configuration object.
-    /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="configuration">An instance of Configuration.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public AbtestingClient(HttpClient client, Algolia.Search.Abtesting.Client.Configuration configuration, HttpClientHandler handler = null)
-    {
-      if (configuration == null) throw new ArgumentNullException("configuration");
-      if (client == null) throw new ArgumentNullException("client");
-
-      this.Configuration = Algolia.Search.Abtesting.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Abtesting.Client.GlobalConfiguration.Instance,
-          configuration
-      );
-      this.ApiClient = new Algolia.Search.Abtesting.Client.ApiClient(client, this.Configuration.BasePath, handler);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      ExceptionFactory = Algolia.Search.Abtesting.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AbtestingClient"/> class
-    /// using a Configuration object and client instance.
-    /// </summary>
-    /// <param name="client">The client interface for synchronous API access.</param>
-    /// <param name="asyncClient">The client interface for asynchronous API access.</param>
-    /// <param name="configuration">The configuration object.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AbtestingClient(Algolia.Search.Abtesting.Client.ISynchronousClient client, Algolia.Search.Abtesting.Client.IAsynchronousClient asyncClient, Algolia.Search.Abtesting.Client.IReadableConfiguration configuration)
-    {
-      if (client == null) throw new ArgumentNullException("client");
-      if (asyncClient == null) throw new ArgumentNullException("asyncClient");
-      if (configuration == null) throw new ArgumentNullException("configuration");
-
-      this.Client = client;
-      this.AsynchronousClient = asyncClient;
-      this.Configuration = configuration;
-      this.ExceptionFactory = Algolia.Search.Abtesting.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Disposes resources if they were created by us
-    /// </summary>
-    public void Dispose()
-    {
-      this.ApiClient?.Dispose();
-    }
-
-    /// <summary>
-    /// Holds the ApiClient if created
-    /// </summary>
-    public Algolia.Search.Abtesting.Client.ApiClient ApiClient { get; set; } = null;
-
-    /// <summary>
-    /// The client for accessing this underlying API asynchronously.
-    /// </summary>
-    public Algolia.Search.Abtesting.Client.IAsynchronousClient AsynchronousClient { get; set; }
-
-    /// <summary>
-    /// The client for accessing this underlying API synchronously.
-    /// </summary>
-    public Algolia.Search.Abtesting.Client.ISynchronousClient Client { get; set; }
-
-    /// <summary>
-    /// Gets the base path of the API client.
-    /// </summary>
-    /// <value>The base path</value>
-    public string GetBasePath()
-    {
-      return this.Configuration.BasePath;
-    }
-
-    /// <summary>
-    /// Gets or sets the configuration object
-    /// </summary>
-    /// <value>An instance of the Configuration</value>
-    public Algolia.Search.Abtesting.Client.IReadableConfiguration Configuration { get; set; }
-
-    /// <summary>
-    /// Provides a factory method hook for the creation of exceptions.
-    /// </summary>
-    public Algolia.Search.Abtesting.Client.ExceptionFactory ExceptionFactory
-    {
-      get
+      if (httpRequester == null)
       {
-        if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-        {
-          throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-        }
-        return _exceptionFactory;
+        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-      set { _exceptionFactory = value; }
+
+      if (config == null)
+      {
+        throw new ArgumentNullException(nameof(config), "A config is required");
+      }
+
+      if (string.IsNullOrWhiteSpace(config.AppId))
+      {
+        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+      }
+
+      if (string.IsNullOrWhiteSpace(config.ApiKey))
+      {
+        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+      }
+
+      _config = config;
+      _transport = new HttpTransport(config, httpRequester);
     }
+
 
     /// <summary>
     /// Create an A/B test. Creates an A/B test.
     /// </summary>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="addABTestsRequest"></param>
-    /// <returns>ABTestResponse</returns>
-    public ABTestResponse AddABTests(AddABTestsRequest addABTestsRequest)
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> localVarResponse = AddABTestsWithHttpInfo(addABTestsRequest);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Create an A/B test. Creates an A/B test.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="addABTestsRequest"></param>
-    /// <returns>ApiResponse of ABTestResponse</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> AddABTestsWithHttpInfo(AddABTestsRequest addABTestsRequest)
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ABTestResponse</returns>
+    public async Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'addABTestsRequest' is set
       if (addABTestsRequest == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'addABTestsRequest' when calling AbtestingClient->AddABTests");
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.Data = addABTestsRequest;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
+        throw new ApiException(400, "Missing required parameter 'addABTestsRequest' when calling AbtestingClient->AddABTests");
 
 
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<ABTestResponse>("/2/abtests", localVarRequestOptions, this.Configuration);
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.Data = addABTestsRequest;
 
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("AddABTests", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
 
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("POST"), "/2/abtests", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
+
     /// <summary>
-    /// Create an A/B test. Creates an A/B test.
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="addABTestsRequest"></param>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Object</returns>
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    {
+      // verify the required parameter 'path' is set
+      if (path == null)
+        throw new ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomDelete");
+
+
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
+      if (parameters != null)
+      {
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
+      }
+
+
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    }
+
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Object</returns>
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    {
+      // verify the required parameter 'path' is set
+      if (path == null)
+        throw new ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomGet");
+
+
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
+      if (parameters != null)
+      {
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
+      }
+
+
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    }
+
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Object</returns>
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    {
+      // verify the required parameter 'path' is set
+      if (path == null)
+        throw new ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomPost");
+
+
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
+      if (parameters != null)
+      {
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
+      }
+      requestOptions.Data = body;
+
+
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    }
+
+
+    /// <summary>
+    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Object</returns>
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    {
+      // verify the required parameter 'path' is set
+      if (path == null)
+        throw new ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomPut");
+
+
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
+      if (parameters != null)
+      {
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
+      }
+      requestOptions.Data = body;
+
+
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    }
+
+
+    /// <summary>
+    /// Delete an A/B test. Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
+    /// </summary>
+    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="id">Unique A/B test ID.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ABTestResponse</returns>
-    public async System.Threading.Tasks.Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> localVarResponse = await AddABTestsWithHttpInfoAsync(addABTestsRequest, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Create an A/B test. Creates an A/B test.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="addABTestsRequest"></param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ABTestResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse>> AddABTestsWithHttpInfoAsync(AddABTestsRequest addABTestsRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      // verify the required parameter 'addABTestsRequest' is set
-      if (addABTestsRequest == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'addABTestsRequest' when calling AbtestingClient->AddABTests");
-
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.Data = addABTestsRequest;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<ABTestResponse>("/2/abtests", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("AddABTests", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomDelete(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<Object> localVarResponse = CustomDeleteWithHttpInfo(path, parameters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<Object> CustomDeleteWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomDelete");
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Delete<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<Object> localVarResponse = await CustomDeleteWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomDelete");
-
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.DeleteAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomGet(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<Object> localVarResponse = CustomGetWithHttpInfo(path, parameters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<Object> CustomGetWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomGet");
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<Object> localVarResponse = await CustomGetWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomGet");
-
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomPost(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<Object> localVarResponse = CustomPostWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<Object> CustomPostWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomPost");
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<Object> localVarResponse = await CustomPostWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomPost");
-
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomPut(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<Object> localVarResponse = CustomPutWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<Object> CustomPutWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomPut");
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Put<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<Object> localVarResponse = await CustomPutWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Abtesting.Client.ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomPut");
-
-
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PutAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Delete an A/B test. Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <returns>ABTestResponse</returns>
-    public ABTestResponse DeleteABTest(int id)
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> localVarResponse = DeleteABTestWithHttpInfo(id);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Delete an A/B test. Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <returns>ApiResponse of ABTestResponse</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> DeleteABTestWithHttpInfo(int id)
-    {
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("id", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(id)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Delete<ABTestResponse>("/2/abtests/{id}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("DeleteABTest", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Delete an A/B test. Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ABTestResponse</returns>
-    public async System.Threading.Tasks.Task<ABTestResponse> DeleteABTestAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> localVarResponse = await DeleteABTestWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Delete an A/B test. Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ABTestResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse>> DeleteABTestWithHttpInfoAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<ABTestResponse> DeleteABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
 
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("id", ClientUtils.ParameterToString(id));
 
 
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("id", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(id)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.DeleteAsync<ABTestResponse>("/2/abtests/{id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("DeleteABTest", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("DELETE"), "/2/abtests/{id}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get A/B test details. Get specific details for an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
     /// </summary>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="id">Unique A/B test ID.</param>
-    /// <returns>ABTest</returns>
-    public ABTest GetABTest(int id)
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ABTest> localVarResponse = GetABTestWithHttpInfo(id);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get A/B test details. Get specific details for an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <returns>ApiResponse of ABTest</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<ABTest> GetABTestWithHttpInfo(int id)
-    {
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("id", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(id)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<ABTest>("/2/abtests/{id}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetABTest", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get A/B test details. Get specific details for an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ABTest</returns>
-    public async System.Threading.Tasks.Task<ABTest> GetABTestAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ABTest> localVarResponse = await GetABTestWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get A/B test details. Get specific details for an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ABTest)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<ABTest>> GetABTestWithHttpInfoAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<ABTest> GetABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
 
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("id", ClientUtils.ParameterToString(id));
 
 
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("id", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(id)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<ABTest>("/2/abtests/{id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetABTest", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<ABTest>(new HttpMethod("GET"), "/2/abtests/{id}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// List all A/B tests. List all A/B tests.
@@ -1481,300 +383,51 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
     /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
-    /// <returns>ListABTestsResponse</returns>
-    public ListABTestsResponse ListABTests(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ListABTestsResponse> localVarResponse = ListABTestsWithHttpInfo(offset, limit, indexPrefix, indexSuffix);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List all A/B tests. List all A/B tests.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-    /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
-    /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
-    /// <returns>ApiResponse of ListABTestsResponse</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<ListABTestsResponse> ListABTestsWithHttpInfo(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string))
-    {
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      if (offset != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "offset", offset));
-      }
-      if (limit != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
-      }
-      if (indexPrefix != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "indexPrefix", indexPrefix));
-      }
-      if (indexSuffix != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "indexSuffix", indexSuffix));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<ListABTestsResponse>("/2/abtests", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("ListABTests", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// List all A/B tests. List all A/B tests.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-    /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
-    /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListABTestsResponse</returns>
-    public async System.Threading.Tasks.Task<ListABTestsResponse> ListABTestsAsync(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ListABTestsResponse> localVarResponse = await ListABTestsWithHttpInfoAsync(offset, limit, indexPrefix, indexSuffix, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List all A/B tests. List all A/B tests.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-    /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
-    /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ListABTestsResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<ListABTestsResponse>> ListABTestsWithHttpInfoAsync(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<ListABTestsResponse> ListABTestsAsync(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
 
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
+      RequestOptions requestOptions = new RequestOptions();
       if (offset != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "offset", offset));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
       }
       if (limit != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
       }
       if (indexPrefix != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "indexPrefix", indexPrefix));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "indexPrefix", indexPrefix);
       }
       if (indexSuffix != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Abtesting.Client.ClientUtils.ParameterToMultiMap("", "indexSuffix", indexSuffix));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "indexSuffix", indexSuffix);
       }
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<ListABTestsResponse>("/2/abtests", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("ListABTests", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<ListABTestsResponse>(new HttpMethod("GET"), "/2/abtests", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Stop an A/B test. If stopped, the test is over and can&#39;t be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
     /// </summary>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="id">Unique A/B test ID.</param>
-    /// <returns>ABTestResponse</returns>
-    public ABTestResponse StopABTest(int id)
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> localVarResponse = StopABTestWithHttpInfo(id);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Stop an A/B test. If stopped, the test is over and can&#39;t be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <returns>ApiResponse of ABTestResponse</returns>
-    public Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> StopABTestWithHttpInfo(int id)
-    {
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("id", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(id)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<ABTestResponse>("/2/abtests/{id}/stop", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("StopABTest", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Stop an A/B test. If stopped, the test is over and can&#39;t be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ABTestResponse</returns>
-    public async System.Threading.Tasks.Task<ABTestResponse> StopABTestAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse> localVarResponse = await StopABTestWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Stop an A/B test. If stopped, the test is over and can&#39;t be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="id">Unique A/B test ID.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (ABTestResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Abtesting.Client.ApiResponse<ABTestResponse>> StopABTestWithHttpInfoAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<ABTestResponse> StopABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
 
-      Algolia.Search.Abtesting.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Abtesting.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("id", ClientUtils.ParameterToString(id));
 
 
-      var localVarContentType = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Abtesting.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("id", Algolia.Search.Abtesting.Client.ClientUtils.ParameterToString(id)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<ABTestResponse>("/2/abtests/{id}/stop", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("StopABTest", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("POST"), "/2/abtests/{id}/stop", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
   }

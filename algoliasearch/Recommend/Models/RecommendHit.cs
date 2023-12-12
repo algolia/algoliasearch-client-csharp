@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Recommend.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Recommend.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Recommend.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// Recommend hit.
   /// </summary>
   [DataContract(Name = "recommendHit")]
-  public partial class RecommendHit : Dictionary<String, Object>, IEquatable<RecommendHit>, IValidatableObject
+  public partial class RecommendHit : Dictionary<String, Object>, IEquatable<RecommendHit>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="RecommendHit" /> class.
@@ -224,37 +222,6 @@ namespace Algolia.Search.Recommend.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      return this.BaseValidate(validationContext);
-    }
-
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
-    {
-      // Score (double) maximum
-      if (this.Score > (double)100)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Score, must be a value less than or equal to 100.", new[] { "Score" });
-      }
-
-      // Score (double) minimum
-      if (this.Score < (double)0)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Score, must be a value greater than or equal to 0.", new[] { "Score" });
-      }
-
-      yield break;
-    }
   }
 
 }

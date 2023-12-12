@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.QuerySuggestions.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.QuerySuggestions.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.QuerySuggestions.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.QuerySuggestions.Models
   /// BaseQuerySuggestionsConfigurationWithIndex
   /// </summary>
   [DataContract(Name = "baseQuerySuggestionsConfigurationWithIndex")]
-  public partial class BaseQuerySuggestionsConfigurationWithIndex : IEquatable<BaseQuerySuggestionsConfigurationWithIndex>, IValidatableObject
+  public partial class BaseQuerySuggestionsConfigurationWithIndex : IEquatable<BaseQuerySuggestionsConfigurationWithIndex>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseQuerySuggestionsConfigurationWithIndex" /> class.
@@ -120,15 +118,6 @@ namespace Algolia.Search.QuerySuggestions.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
-    }
   }
 
 }

@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Search.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Search.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Search.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// UserHit
   /// </summary>
   [DataContract(Name = "userHit")]
-  public partial class UserHit : IEquatable<UserHit>, IValidatableObject
+  public partial class UserHit : IEquatable<UserHit>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="UserHit" /> class.
@@ -221,25 +219,6 @@ namespace Algolia.Search.Search.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      if (this.UserID != null)
-      {
-        // UserID (string) pattern
-        Regex regexUserID = new Regex(@"^[a-zA-Z0-9 \-*.]+$", RegexOptions.CultureInvariant);
-        if (!regexUserID.Match(this.UserID).Success)
-        {
-          yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UserID, must match a pattern of " + regexUserID, new[] { "UserID" });
-        }
-      }
-
-      yield break;
-    }
   }
 
 }

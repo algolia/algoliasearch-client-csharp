@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Ingestion.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Ingestion.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Ingestion.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// SourceCSV
   /// </summary>
   [DataContract(Name = "SourceCSV")]
-  public partial class SourceCSV : IEquatable<SourceCSV>, IValidatableObject
+  public partial class SourceCSV : IEquatable<SourceCSV>
   {
 
     /// <summary>
@@ -193,27 +191,6 @@ namespace Algolia.Search.Ingestion.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      // Delimiter (string) maxLength
-      if (this.Delimiter != null && this.Delimiter.Length > 1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Delimiter, length must be less than 1.", new[] { "Delimiter" });
-      }
-
-      // Delimiter (string) minLength
-      if (this.Delimiter != null && this.Delimiter.Length < 1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Delimiter, length must be greater than 1.", new[] { "Delimiter" });
-      }
-
-      yield break;
-    }
   }
 
 }

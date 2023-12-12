@@ -4,13 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
+using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Monitoring.Client;
 using Algolia.Search.Monitoring.Models;
+using Algolia.Search.Transport;
+using Algolia.Search.Http;
+using Algolia.Search.Client;
 
 namespace Algolia.Search.Monitoring.Api
 {
@@ -29,10 +30,10 @@ namespace Algolia.Search.Monitoring.Api
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -42,34 +43,10 @@ namespace Algolia.Search.Monitoring.Api
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -80,10 +57,10 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -94,36 +71,10 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List incidents for selected clusters.
     /// </summary>
@@ -132,21 +83,10 @@ namespace Algolia.Search.Monitoring.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of IncidentsResponse</returns>
-    System.Threading.Tasks.Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// List incidents for selected clusters.
-    /// </summary>
-    /// <remarks>
-    /// List known incidents for selected clusters.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (IncidentsResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<IncidentsResponse>> GetClusterIncidentsWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List statuses of selected clusters.
     /// </summary>
@@ -155,21 +95,10 @@ namespace Algolia.Search.Monitoring.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of StatusResponse</returns>
-    System.Threading.Tasks.Task<StatusResponse> GetClusterStatusAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// List statuses of selected clusters.
-    /// </summary>
-    /// <remarks>
-    /// Report whether a cluster is operational.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (StatusResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<StatusResponse>> GetClusterStatusWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<StatusResponse> GetClusterStatusAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List incidents.
     /// </summary>
@@ -177,20 +106,10 @@ namespace Algolia.Search.Monitoring.Api
     /// List known incidents for all clusters.
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of IncidentsResponse</returns>
-    System.Threading.Tasks.Task<IncidentsResponse> GetIncidentsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// List incidents.
-    /// </summary>
-    /// <remarks>
-    /// List known incidents for all clusters.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (IncidentsResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<IncidentsResponse>> GetIncidentsWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<IncidentsResponse> GetIncidentsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get indexing times.
     /// </summary>
@@ -199,21 +118,10 @@ namespace Algolia.Search.Monitoring.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of IndexingTimeResponse</returns>
-    System.Threading.Tasks.Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get indexing times.
-    /// </summary>
-    /// <remarks>
-    /// List the average times for indexing operations for selected clusters.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (IndexingTimeResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<IndexingTimeResponse>> GetIndexingTimeWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List servers.
     /// </summary>
@@ -221,20 +129,10 @@ namespace Algolia.Search.Monitoring.Api
     /// List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application&#39;s cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of InventoryResponse</returns>
-    System.Threading.Tasks.Task<InventoryResponse> GetInventoryAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// List servers.
-    /// </summary>
-    /// <remarks>
-    /// List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application&#39;s cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (InventoryResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<InventoryResponse>> GetInventoryWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<InventoryResponse> GetInventoryAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get search latency times.
     /// </summary>
@@ -243,21 +141,10 @@ namespace Algolia.Search.Monitoring.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of LatencyResponse</returns>
-    System.Threading.Tasks.Task<LatencyResponse> GetLatencyAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get search latency times.
-    /// </summary>
-    /// <remarks>
-    /// List the average latency for search requests for selected clusters.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (LatencyResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<LatencyResponse>> GetLatencyWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<LatencyResponse> GetLatencyAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get metrics for a given period.
     /// </summary>
@@ -267,22 +154,10 @@ namespace Algolia.Search.Monitoring.Api
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
     /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of InfrastructureResponse</returns>
-    System.Threading.Tasks.Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get metrics for a given period.
-    /// </summary>
-    /// <remarks>
-    /// Report the aggregate value of a metric for a selected period of time.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
-    /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (InfrastructureResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<InfrastructureResponse>> GetMetricsWithHttpInfoAsync(Metric metric, Period period, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Test the reachability of clusters.
     /// </summary>
@@ -291,21 +166,10 @@ namespace Algolia.Search.Monitoring.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Dictionary&lt;string, Dictionary&lt;string, bool&gt;&gt;</returns>
-    System.Threading.Tasks.Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Test the reachability of clusters.
-    /// </summary>
-    /// <remarks>
-    /// Test whether clusters are reachable or not.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Dictionary&lt;string, Dictionary&lt;string, bool&gt;&gt;)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Dictionary<string, Dictionary<string, bool>>>> GetReachabilityWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List cluster statuses.
     /// </summary>
@@ -313,224 +177,69 @@ namespace Algolia.Search.Monitoring.Api
     /// Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of StatusResponse</returns>
-    System.Threading.Tasks.Task<StatusResponse> GetStatusAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// List cluster statuses.
-    /// </summary>
-    /// <remarks>
-    /// Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (StatusResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<StatusResponse>> GetStatusWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<StatusResponse> GetStatusAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
   }
 
 
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
-  public partial class MonitoringClient : IDisposable, IMonitoringClient
+  public partial class MonitoringClient : IMonitoringClient
   {
-    private Algolia.Search.Monitoring.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+    private readonly HttpTransport _transport;
+    private readonly AlgoliaConfig _config;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MonitoringClient"/> class.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+    /// Create a new Monitoring client for the given appID and apiKey.
     /// </summary>
-    /// <returns></returns>
-    public MonitoringClient() : this((string)null)
+    /// <param name="applicationId">Your application</param>
+    /// <param name="apiKey">Your API key</param>
+    public MonitoringClient(string applicationId, string apiKey) : this(new MonitoringConfig(applicationId, apiKey), new AlgoliaHttpRequester())
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MonitoringClient"/> class.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+    /// Initialize a client with custom config
     /// </summary>
-    /// <param name="basePath">The target service's base path in URL format.</param>
-    /// <exception cref="ArgumentException"></exception>
-    /// <returns></returns>
-    public MonitoringClient(string basePath)
-    {
-      this.Configuration = Algolia.Search.Monitoring.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Monitoring.Client.GlobalConfiguration.Instance,
-          new Algolia.Search.Monitoring.Client.Configuration { BasePath = basePath }
-      );
-      this.ApiClient = new Algolia.Search.Monitoring.Client.ApiClient(this.Configuration.BasePath);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      this.ExceptionFactory = Algolia.Search.Monitoring.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MonitoringClient"/> class using Configuration object.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
-    /// </summary>
-    /// <param name="configuration">An instance of Configuration.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    public MonitoringClient(Algolia.Search.Monitoring.Client.Configuration configuration)
-    {
-      if (configuration == null) throw new ArgumentNullException("configuration");
-
-      this.Configuration = Algolia.Search.Monitoring.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Monitoring.Client.GlobalConfiguration.Instance,
-          configuration
-      );
-      this.ApiClient = new Algolia.Search.Monitoring.Client.ApiClient(this.Configuration.BasePath);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      ExceptionFactory = Algolia.Search.Monitoring.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MonitoringClient"/> class.
-    /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public MonitoringClient(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
+    /// <param name="config">Algolia configuration</param>
+    public MonitoringClient(MonitoringConfig config) : this(config, new AlgoliaHttpRequester())
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MonitoringClient"/> class.
+    /// Initialize the client with custom config and custom Requester
     /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="basePath">The target service's base path in URL format.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="ArgumentException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public MonitoringClient(HttpClient client, string basePath, HttpClientHandler handler = null)
+    /// <param name="config">Algolia Config</param>
+    /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
+    public MonitoringClient(MonitoringConfig config, IHttpRequester httpRequester)
     {
-      if (client == null) throw new ArgumentNullException("client");
-
-      this.Configuration = Algolia.Search.Monitoring.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Monitoring.Client.GlobalConfiguration.Instance,
-          new Algolia.Search.Monitoring.Client.Configuration { BasePath = basePath }
-      );
-      this.ApiClient = new Algolia.Search.Monitoring.Client.ApiClient(client, this.Configuration.BasePath, handler);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      this.ExceptionFactory = Algolia.Search.Monitoring.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MonitoringClient"/> class using Configuration object.
-    /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="configuration">An instance of Configuration.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public MonitoringClient(HttpClient client, Algolia.Search.Monitoring.Client.Configuration configuration, HttpClientHandler handler = null)
-    {
-      if (configuration == null) throw new ArgumentNullException("configuration");
-      if (client == null) throw new ArgumentNullException("client");
-
-      this.Configuration = Algolia.Search.Monitoring.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Monitoring.Client.GlobalConfiguration.Instance,
-          configuration
-      );
-      this.ApiClient = new Algolia.Search.Monitoring.Client.ApiClient(client, this.Configuration.BasePath, handler);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      ExceptionFactory = Algolia.Search.Monitoring.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MonitoringClient"/> class
-    /// using a Configuration object and client instance.
-    /// </summary>
-    /// <param name="client">The client interface for synchronous API access.</param>
-    /// <param name="asyncClient">The client interface for asynchronous API access.</param>
-    /// <param name="configuration">The configuration object.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    public MonitoringClient(Algolia.Search.Monitoring.Client.ISynchronousClient client, Algolia.Search.Monitoring.Client.IAsynchronousClient asyncClient, Algolia.Search.Monitoring.Client.IReadableConfiguration configuration)
-    {
-      if (client == null) throw new ArgumentNullException("client");
-      if (asyncClient == null) throw new ArgumentNullException("asyncClient");
-      if (configuration == null) throw new ArgumentNullException("configuration");
-
-      this.Client = client;
-      this.AsynchronousClient = asyncClient;
-      this.Configuration = configuration;
-      this.ExceptionFactory = Algolia.Search.Monitoring.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Disposes resources if they were created by us
-    /// </summary>
-    public void Dispose()
-    {
-      this.ApiClient?.Dispose();
-    }
-
-    /// <summary>
-    /// Holds the ApiClient if created
-    /// </summary>
-    public Algolia.Search.Monitoring.Client.ApiClient ApiClient { get; set; } = null;
-
-    /// <summary>
-    /// The client for accessing this underlying API asynchronously.
-    /// </summary>
-    public Algolia.Search.Monitoring.Client.IAsynchronousClient AsynchronousClient { get; set; }
-
-    /// <summary>
-    /// The client for accessing this underlying API synchronously.
-    /// </summary>
-    public Algolia.Search.Monitoring.Client.ISynchronousClient Client { get; set; }
-
-    /// <summary>
-    /// Gets the base path of the API client.
-    /// </summary>
-    /// <value>The base path</value>
-    public string GetBasePath()
-    {
-      return this.Configuration.BasePath;
-    }
-
-    /// <summary>
-    /// Gets or sets the configuration object
-    /// </summary>
-    /// <value>An instance of the Configuration</value>
-    public Algolia.Search.Monitoring.Client.IReadableConfiguration Configuration { get; set; }
-
-    /// <summary>
-    /// Provides a factory method hook for the creation of exceptions.
-    /// </summary>
-    public Algolia.Search.Monitoring.Client.ExceptionFactory ExceptionFactory
-    {
-      get
+      if (httpRequester == null)
       {
-        if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-        {
-          throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-        }
-        return _exceptionFactory;
+        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-      set { _exceptionFactory = value; }
+
+      if (config == null)
+      {
+        throw new ArgumentNullException(nameof(config), "A config is required");
+      }
+
+      if (string.IsNullOrWhiteSpace(config.AppId))
+      {
+        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+      }
+
+      if (string.IsNullOrWhiteSpace(config.ApiKey))
+      {
+        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+      }
+
+      _config = config;
+      _transport = new HttpTransport(config, httpRequester);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -538,126 +247,27 @@ namespace Algolia.Search.Monitoring.Api
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomDelete(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Object> localVarResponse = CustomDeleteWithHttpInfo(path, parameters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<Object> CustomDeleteWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomDelete");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Monitoring.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Delete<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Object> localVarResponse = await CustomDeleteWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomDelete");
+        throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomDelete");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Monitoring.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.DeleteAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -665,126 +275,27 @@ namespace Algolia.Search.Monitoring.Api
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomGet(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Object> localVarResponse = CustomGetWithHttpInfo(path, parameters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<Object> CustomGetWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomGet");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Monitoring.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Object> localVarResponse = await CustomGetWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomGet");
+        throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomGet");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Monitoring.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -793,133 +304,28 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomPost(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Object> localVarResponse = CustomPostWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<Object> CustomPostWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPost");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Monitoring.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Object> localVarResponse = await CustomPostWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPost");
+        throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPost");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Monitoring.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
-      localVarRequestOptions.Data = body;
+      requestOptions.Data = body;
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -928,825 +334,154 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomPut(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Object> localVarResponse = CustomPutWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<Object> CustomPutWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPut");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Monitoring.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Put<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Object> localVarResponse = await CustomPutWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPut");
+        throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPut");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Monitoring.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
-      localVarRequestOptions.Data = body;
+      requestOptions.Data = body;
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PutAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// List incidents for selected clusters. List known incidents for selected clusters.
     /// </summary>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>IncidentsResponse</returns>
-    public IncidentsResponse GetClusterIncidents(string clusters)
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<IncidentsResponse> localVarResponse = GetClusterIncidentsWithHttpInfo(clusters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List incidents for selected clusters. List known incidents for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>ApiResponse of IncidentsResponse</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<IncidentsResponse> GetClusterIncidentsWithHttpInfo(string clusters)
-    {
-      // verify the required parameter 'clusters' is set
-      if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterIncidents");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json",
-                "text/plain"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<IncidentsResponse>("/1/incidents/{clusters}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetClusterIncidents", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// List incidents for selected clusters. List known incidents for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of IncidentsResponse</returns>
-    public async System.Threading.Tasks.Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<IncidentsResponse> localVarResponse = await GetClusterIncidentsWithHttpInfoAsync(clusters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List incidents for selected clusters. List known incidents for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (IncidentsResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<IncidentsResponse>> GetClusterIncidentsWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'clusters' is set
       if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterIncidents");
+        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterIncidents");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json",
-                "text/plain"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<IncidentsResponse>("/1/incidents/{clusters}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetClusterIncidents", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<IncidentsResponse>(new HttpMethod("GET"), "/1/incidents/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// List statuses of selected clusters. Report whether a cluster is operational.
     /// </summary>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>StatusResponse</returns>
-    public StatusResponse GetClusterStatus(string clusters)
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<StatusResponse> localVarResponse = GetClusterStatusWithHttpInfo(clusters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List statuses of selected clusters. Report whether a cluster is operational.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>ApiResponse of StatusResponse</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<StatusResponse> GetClusterStatusWithHttpInfo(string clusters)
-    {
-      // verify the required parameter 'clusters' is set
-      if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterStatus");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json",
-                "text/plain"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<StatusResponse>("/1/status/{clusters}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetClusterStatus", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// List statuses of selected clusters. Report whether a cluster is operational.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of StatusResponse</returns>
-    public async System.Threading.Tasks.Task<StatusResponse> GetClusterStatusAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<StatusResponse> localVarResponse = await GetClusterStatusWithHttpInfoAsync(clusters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List statuses of selected clusters. Report whether a cluster is operational.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (StatusResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<StatusResponse>> GetClusterStatusWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<StatusResponse> GetClusterStatusAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'clusters' is set
       if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterStatus");
+        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterStatus");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json",
-                "text/plain"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<StatusResponse>("/1/status/{clusters}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetClusterStatus", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<StatusResponse>(new HttpMethod("GET"), "/1/status/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// List incidents. List known incidents for all clusters.
     /// </summary>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <returns>IncidentsResponse</returns>
-    public IncidentsResponse GetIncidents()
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<IncidentsResponse> localVarResponse = GetIncidentsWithHttpInfo();
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List incidents. List known incidents for all clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <returns>ApiResponse of IncidentsResponse</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<IncidentsResponse> GetIncidentsWithHttpInfo()
-    {
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json",
-                "text/plain"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<IncidentsResponse>("/1/incidents", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetIncidents", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// List incidents. List known incidents for all clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of IncidentsResponse</returns>
-    public async System.Threading.Tasks.Task<IncidentsResponse> GetIncidentsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<IncidentsResponse> localVarResponse = await GetIncidentsWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List incidents. List known incidents for all clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (IncidentsResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<IncidentsResponse>> GetIncidentsWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<IncidentsResponse> GetIncidentsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json",
-                "text/plain"
-            };
+      RequestOptions requestOptions = new RequestOptions();
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<IncidentsResponse>("/1/incidents", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetIncidents", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<IncidentsResponse>(new HttpMethod("GET"), "/1/incidents", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get indexing times. List the average times for indexing operations for selected clusters.
     /// </summary>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>IndexingTimeResponse</returns>
-    public IndexingTimeResponse GetIndexingTime(string clusters)
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<IndexingTimeResponse> localVarResponse = GetIndexingTimeWithHttpInfo(clusters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get indexing times. List the average times for indexing operations for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>ApiResponse of IndexingTimeResponse</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<IndexingTimeResponse> GetIndexingTimeWithHttpInfo(string clusters)
-    {
-      // verify the required parameter 'clusters' is set
-      if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetIndexingTime");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<IndexingTimeResponse>("/1/indexing/{clusters}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetIndexingTime", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get indexing times. List the average times for indexing operations for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of IndexingTimeResponse</returns>
-    public async System.Threading.Tasks.Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<IndexingTimeResponse> localVarResponse = await GetIndexingTimeWithHttpInfoAsync(clusters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get indexing times. List the average times for indexing operations for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (IndexingTimeResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<IndexingTimeResponse>> GetIndexingTimeWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'clusters' is set
       if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetIndexingTime");
+        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetIndexingTime");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<IndexingTimeResponse>("/1/indexing/{clusters}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetIndexingTime", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<IndexingTimeResponse>(new HttpMethod("GET"), "/1/indexing/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// List servers. List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application&#39;s cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
     /// </summary>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <returns>InventoryResponse</returns>
-    public InventoryResponse GetInventory()
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<InventoryResponse> localVarResponse = GetInventoryWithHttpInfo();
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List servers. List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application&#39;s cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <returns>ApiResponse of InventoryResponse</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<InventoryResponse> GetInventoryWithHttpInfo()
-    {
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<InventoryResponse>("/1/inventory/servers", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetInventory", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// List servers. List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application&#39;s cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of InventoryResponse</returns>
-    public async System.Threading.Tasks.Task<InventoryResponse> GetInventoryAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<InventoryResponse> localVarResponse = await GetInventoryWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List servers. List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application&#39;s cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (InventoryResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<InventoryResponse>> GetInventoryWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<InventoryResponse> GetInventoryAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<InventoryResponse>("/1/inventory/servers", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetInventory", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<InventoryResponse>(new HttpMethod("GET"), "/1/inventory/servers", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get search latency times. List the average latency for search requests for selected clusters.
     /// </summary>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>LatencyResponse</returns>
-    public LatencyResponse GetLatency(string clusters)
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<LatencyResponse> localVarResponse = GetLatencyWithHttpInfo(clusters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get search latency times. List the average latency for search requests for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>ApiResponse of LatencyResponse</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<LatencyResponse> GetLatencyWithHttpInfo(string clusters)
-    {
-      // verify the required parameter 'clusters' is set
-      if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetLatency");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<LatencyResponse>("/1/latency/{clusters}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetLatency", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get search latency times. List the average latency for search requests for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of LatencyResponse</returns>
-    public async System.Threading.Tasks.Task<LatencyResponse> GetLatencyAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<LatencyResponse> localVarResponse = await GetLatencyWithHttpInfoAsync(clusters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get search latency times. List the average latency for search requests for selected clusters.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (LatencyResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<LatencyResponse>> GetLatencyWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<LatencyResponse> GetLatencyAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'clusters' is set
       if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetLatency");
+        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetLatency");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<LatencyResponse>("/1/latency/{clusters}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetLatency", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<LatencyResponse>(new HttpMethod("GET"), "/1/latency/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get metrics for a given period. Report the aggregate value of a metric for a selected period of time.
@@ -1754,369 +489,66 @@ namespace Algolia.Search.Monitoring.Api
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
     /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
-    /// <returns>InfrastructureResponse</returns>
-    public InfrastructureResponse GetMetrics(Metric metric, Period period)
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<InfrastructureResponse> localVarResponse = GetMetricsWithHttpInfo(metric, period);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get metrics for a given period. Report the aggregate value of a metric for a selected period of time.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
-    /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
-    /// <returns>ApiResponse of InfrastructureResponse</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<InfrastructureResponse> GetMetricsWithHttpInfo(Metric metric, Period period)
-    {
-      // verify the required parameter 'metric' is set
-      if (metric == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'metric' when calling MonitoringClient->GetMetrics");
-
-      // verify the required parameter 'period' is set
-      if (period == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'period' when calling MonitoringClient->GetMetrics");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("metric", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(metric)); // path parameter
-      localVarRequestOptions.PathParameters.Add("period", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(period)); // path parameter
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<InfrastructureResponse>("/1/infrastructure/{metric}/period/{period}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetMetrics", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get metrics for a given period. Report the aggregate value of a metric for a selected period of time.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
-    /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of InfrastructureResponse</returns>
-    public async System.Threading.Tasks.Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<InfrastructureResponse> localVarResponse = await GetMetricsWithHttpInfoAsync(metric, period, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get metrics for a given period. Report the aggregate value of a metric for a selected period of time.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
-    /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (InfrastructureResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<InfrastructureResponse>> GetMetricsWithHttpInfoAsync(Metric metric, Period period, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'metric' is set
       if (metric == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'metric' when calling MonitoringClient->GetMetrics");
+        throw new ApiException(400, "Missing required parameter 'metric' when calling MonitoringClient->GetMetrics");
 
       // verify the required parameter 'period' is set
       if (period == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'period' when calling MonitoringClient->GetMetrics");
+        throw new ApiException(400, "Missing required parameter 'period' when calling MonitoringClient->GetMetrics");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("metric", ClientUtils.ParameterToString(metric));
+      requestOptions.PathParameters.Add("period", ClientUtils.ParameterToString(period));
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("metric", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(metric)); // path parameter
-      localVarRequestOptions.PathParameters.Add("period", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(period)); // path parameter
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<InfrastructureResponse>("/1/infrastructure/{metric}/period/{period}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetMetrics", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<InfrastructureResponse>(new HttpMethod("GET"), "/1/infrastructure/{metric}/period/{period}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Test the reachability of clusters. Test whether clusters are reachable or not.
     /// </summary>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>Dictionary&lt;string, Dictionary&lt;string, bool&gt;&gt;</returns>
-    public Dictionary<string, Dictionary<string, bool>> GetReachability(string clusters)
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Dictionary<string, Dictionary<string, bool>>> localVarResponse = GetReachabilityWithHttpInfo(clusters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Test the reachability of clusters. Test whether clusters are reachable or not.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <returns>ApiResponse of Dictionary&lt;string, Dictionary&lt;string, bool&gt;&gt;</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<Dictionary<string, Dictionary<string, bool>>> GetReachabilityWithHttpInfo(string clusters)
-    {
-      // verify the required parameter 'clusters' is set
-      if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetReachability");
-
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<Dictionary<string, Dictionary<string, bool>>>("/1/reachability/{clusters}/probes", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetReachability", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Test the reachability of clusters. Test whether clusters are reachable or not.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Dictionary&lt;string, Dictionary&lt;string, bool&gt;&gt;</returns>
-    public async System.Threading.Tasks.Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<Dictionary<string, Dictionary<string, bool>>> localVarResponse = await GetReachabilityWithHttpInfoAsync(clusters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Test the reachability of clusters. Test whether clusters are reachable or not.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="clusters">Subset of clusters, separated by comma.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Dictionary&lt;string, Dictionary&lt;string, bool&gt;&gt;)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<Dictionary<string, Dictionary<string, bool>>>> GetReachabilityWithHttpInfoAsync(string clusters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'clusters' is set
       if (clusters == null)
-        throw new Algolia.Search.Monitoring.Client.ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetReachability");
+        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetReachability");
 
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("clusters", Algolia.Search.Monitoring.Client.ClientUtils.ParameterToString(clusters)); // path parameter
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<Dictionary<string, Dictionary<string, bool>>>("/1/reachability/{clusters}/probes", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetReachability", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Dictionary<string, Dictionary<string, bool>>>(new HttpMethod("GET"), "/1/reachability/{clusters}/probes", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// List cluster statuses. Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
     /// </summary>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <returns>StatusResponse</returns>
-    public StatusResponse GetStatus()
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<StatusResponse> localVarResponse = GetStatusWithHttpInfo();
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List cluster statuses. Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <returns>ApiResponse of StatusResponse</returns>
-    public Algolia.Search.Monitoring.Client.ApiResponse<StatusResponse> GetStatusWithHttpInfo()
-    {
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json",
-                "text/plain"
-            };
-
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<StatusResponse>("/1/status", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetStatus", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// List cluster statuses. Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of StatusResponse</returns>
-    public async System.Threading.Tasks.Task<StatusResponse> GetStatusAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Monitoring.Client.ApiResponse<StatusResponse> localVarResponse = await GetStatusWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// List cluster statuses. Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (StatusResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Monitoring.Client.ApiResponse<StatusResponse>> GetStatusWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<StatusResponse> GetStatusAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
 
-      Algolia.Search.Monitoring.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Monitoring.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json",
-                "text/plain"
-            };
+      RequestOptions requestOptions = new RequestOptions();
 
 
-      var localVarContentType = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Monitoring.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<StatusResponse>("/1/status", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetStatus", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<StatusResponse>(new HttpMethod("GET"), "/1/status", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
   }

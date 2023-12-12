@@ -4,13 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
+using System.Threading;
+using System.Threading.Tasks;
 using Algolia.Search.Personalization.Client;
 using Algolia.Search.Personalization.Models;
+using Algolia.Search.Transport;
+using Algolia.Search.Http;
+using Algolia.Search.Client;
 
 namespace Algolia.Search.Personalization.Api
 {
@@ -29,10 +30,10 @@ namespace Algolia.Search.Personalization.Api
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -42,34 +43,10 @@ namespace Algolia.Search.Personalization.Api
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -80,10 +57,10 @@ namespace Algolia.Search.Personalization.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -94,36 +71,10 @@ namespace Algolia.Search.Personalization.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Send requests to the Algolia REST API.
-    /// </summary>
-    /// <remarks>
-    /// This method allow you to send requests to the Algolia REST API.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    System.Threading.Tasks.Task<ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Delete a user profile.
     /// </summary>
@@ -132,21 +83,10 @@ namespace Algolia.Search.Personalization.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of DeleteUserProfileResponse</returns>
-    System.Threading.Tasks.Task<DeleteUserProfileResponse> DeleteUserProfileAsync(string userToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Delete a user profile.
-    /// </summary>
-    /// <remarks>
-    /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (DeleteUserProfileResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<DeleteUserProfileResponse>> DeleteUserProfileWithHttpInfoAsync(string userToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<DeleteUserProfileResponse> DeleteUserProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get the current strategy.
     /// </summary>
@@ -154,20 +94,10 @@ namespace Algolia.Search.Personalization.Api
     /// The strategy contains information on the events and facets that impact user profiles and personalized search results.
     /// </remarks>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of PersonalizationStrategyParams</returns>
-    System.Threading.Tasks.Task<PersonalizationStrategyParams> GetPersonalizationStrategyAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get the current strategy.
-    /// </summary>
-    /// <remarks>
-    /// The strategy contains information on the events and facets that impact user profiles and personalized search results.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (PersonalizationStrategyParams)</returns>
-    System.Threading.Tasks.Task<ApiResponse<PersonalizationStrategyParams>> GetPersonalizationStrategyWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<PersonalizationStrategyParams> GetPersonalizationStrategyAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get a user profile.
     /// </summary>
@@ -176,21 +106,10 @@ namespace Algolia.Search.Personalization.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetUserTokenResponse</returns>
-    System.Threading.Tasks.Task<GetUserTokenResponse> GetUserTokenProfileAsync(string userToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Get a user profile.
-    /// </summary>
-    /// <remarks>
-    /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (GetUserTokenResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<GetUserTokenResponse>> GetUserTokenProfileWithHttpInfoAsync(string userToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<GetUserTokenResponse> GetUserTokenProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Set a new strategy.
     /// </summary>
@@ -199,225 +118,69 @@ namespace Algolia.Search.Personalization.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="personalizationStrategyParams"></param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of SetPersonalizationStrategyResponse</returns>
-    System.Threading.Tasks.Task<SetPersonalizationStrategyResponse> SetPersonalizationStrategyAsync(PersonalizationStrategyParams personalizationStrategyParams, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    /// <summary>
-    /// Set a new strategy.
-    /// </summary>
-    /// <remarks>
-    /// A strategy defines the events and facets that impact user profiles and personalized search results.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="personalizationStrategyParams"></param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (SetPersonalizationStrategyResponse)</returns>
-    System.Threading.Tasks.Task<ApiResponse<SetPersonalizationStrategyResponse>> SetPersonalizationStrategyWithHttpInfoAsync(PersonalizationStrategyParams personalizationStrategyParams, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    Task<SetPersonalizationStrategyResponse> SetPersonalizationStrategyAsync(PersonalizationStrategyParams personalizationStrategyParams, RequestOptions options = null, CancellationToken cancellationToken = default);
   }
 
 
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
-  public partial class PersonalizationClient : IDisposable, IPersonalizationClient
+  public partial class PersonalizationClient : IPersonalizationClient
   {
-    private Algolia.Search.Personalization.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+    private readonly HttpTransport _transport;
+    private readonly AlgoliaConfig _config;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PersonalizationClient"/> class.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+    /// Create a new Personalization client for the given appID and apiKey.
     /// </summary>
-    /// <returns></returns>
-    public PersonalizationClient() : this((string)null)
+    /// <param name="applicationId">Your application</param>
+    /// <param name="apiKey">Your API key</param>
+    public PersonalizationClient(string applicationId, string apiKey) : this(new PersonalizationConfig(applicationId, apiKey), new AlgoliaHttpRequester())
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PersonalizationClient"/> class.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+    /// Initialize a client with custom config
     /// </summary>
-    /// <param name="basePath">The target service's base path in URL format.</param>
-    /// <exception cref="ArgumentException"></exception>
-    /// <returns></returns>
-    public PersonalizationClient(string basePath)
-    {
-      this.Configuration = Algolia.Search.Personalization.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Personalization.Client.GlobalConfiguration.Instance,
-          new Algolia.Search.Personalization.Client.Configuration { BasePath = basePath }
-      );
-      this.ApiClient = new Algolia.Search.Personalization.Client.ApiClient(this.Configuration.BasePath);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      this.ExceptionFactory = Algolia.Search.Personalization.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PersonalizationClient"/> class using Configuration object.
-    /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-    /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
-    /// </summary>
-    /// <param name="configuration">An instance of Configuration.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    public PersonalizationClient(Algolia.Search.Personalization.Client.Configuration configuration)
-    {
-      if (configuration == null) throw new ArgumentNullException("configuration");
-
-      this.Configuration = Algolia.Search.Personalization.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Personalization.Client.GlobalConfiguration.Instance,
-          configuration
-      );
-      this.ApiClient = new Algolia.Search.Personalization.Client.ApiClient(this.Configuration.BasePath);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      ExceptionFactory = Algolia.Search.Personalization.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PersonalizationClient"/> class.
-    /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public PersonalizationClient(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
+    /// <param name="config">Algolia configuration</param>
+    public PersonalizationClient(PersonalizationConfig config) : this(config, new AlgoliaHttpRequester())
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PersonalizationClient"/> class.
+    /// Initialize the client with custom config and custom Requester
     /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="basePath">The target service's base path in URL format.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="ArgumentException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public PersonalizationClient(HttpClient client, string basePath, HttpClientHandler handler = null)
+    /// <param name="config">Algolia Config</param>
+    /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
+    public PersonalizationClient(PersonalizationConfig config, IHttpRequester httpRequester)
     {
-      if (client == null) throw new ArgumentNullException("client");
-
-      this.Configuration = Algolia.Search.Personalization.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Personalization.Client.GlobalConfiguration.Instance,
-          new Algolia.Search.Personalization.Client.Configuration { BasePath = basePath }
-      );
-      this.ApiClient = new Algolia.Search.Personalization.Client.ApiClient(client, this.Configuration.BasePath, handler);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      this.ExceptionFactory = Algolia.Search.Personalization.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PersonalizationClient"/> class using Configuration object.
-    /// </summary>
-    /// <param name="client">An instance of HttpClient.</param>
-    /// <param name="configuration">An instance of Configuration.</param>
-    /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <returns></returns>
-    /// <remarks>
-    /// Some configuration settings will not be applied without passing an HttpClientHandler.
-    /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
-    /// </remarks>
-    public PersonalizationClient(HttpClient client, Algolia.Search.Personalization.Client.Configuration configuration, HttpClientHandler handler = null)
-    {
-      if (configuration == null) throw new ArgumentNullException("configuration");
-      if (client == null) throw new ArgumentNullException("client");
-
-      this.Configuration = Algolia.Search.Personalization.Client.Configuration.MergeConfigurations(
-          Algolia.Search.Personalization.Client.GlobalConfiguration.Instance,
-          configuration
-      );
-      this.ApiClient = new Algolia.Search.Personalization.Client.ApiClient(client, this.Configuration.BasePath, handler);
-      this.Client = this.ApiClient;
-      this.AsynchronousClient = this.ApiClient;
-      ExceptionFactory = Algolia.Search.Personalization.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PersonalizationClient"/> class
-    /// using a Configuration object and client instance.
-    /// </summary>
-    /// <param name="client">The client interface for synchronous API access.</param>
-    /// <param name="asyncClient">The client interface for asynchronous API access.</param>
-    /// <param name="configuration">The configuration object.</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    public PersonalizationClient(Algolia.Search.Personalization.Client.ISynchronousClient client, Algolia.Search.Personalization.Client.IAsynchronousClient asyncClient, Algolia.Search.Personalization.Client.IReadableConfiguration configuration)
-    {
-      if (client == null) throw new ArgumentNullException("client");
-      if (asyncClient == null) throw new ArgumentNullException("asyncClient");
-      if (configuration == null) throw new ArgumentNullException("configuration");
-
-      this.Client = client;
-      this.AsynchronousClient = asyncClient;
-      this.Configuration = configuration;
-      this.ExceptionFactory = Algolia.Search.Personalization.Client.Configuration.DefaultExceptionFactory;
-    }
-
-    /// <summary>
-    /// Disposes resources if they were created by us
-    /// </summary>
-    public void Dispose()
-    {
-      this.ApiClient?.Dispose();
-    }
-
-    /// <summary>
-    /// Holds the ApiClient if created
-    /// </summary>
-    public Algolia.Search.Personalization.Client.ApiClient ApiClient { get; set; } = null;
-
-    /// <summary>
-    /// The client for accessing this underlying API asynchronously.
-    /// </summary>
-    public Algolia.Search.Personalization.Client.IAsynchronousClient AsynchronousClient { get; set; }
-
-    /// <summary>
-    /// The client for accessing this underlying API synchronously.
-    /// </summary>
-    public Algolia.Search.Personalization.Client.ISynchronousClient Client { get; set; }
-
-    /// <summary>
-    /// Gets the base path of the API client.
-    /// </summary>
-    /// <value>The base path</value>
-    public string GetBasePath()
-    {
-      return this.Configuration.BasePath;
-    }
-
-    /// <summary>
-    /// Gets or sets the configuration object
-    /// </summary>
-    /// <value>An instance of the Configuration</value>
-    public Algolia.Search.Personalization.Client.IReadableConfiguration Configuration { get; set; }
-
-    /// <summary>
-    /// Provides a factory method hook for the creation of exceptions.
-    /// </summary>
-    public Algolia.Search.Personalization.Client.ExceptionFactory ExceptionFactory
-    {
-      get
+      if (httpRequester == null)
       {
-        if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-        {
-          throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-        }
-        return _exceptionFactory;
+        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-      set { _exceptionFactory = value; }
+
+      if (config == null)
+      {
+        throw new ArgumentNullException(nameof(config), "A config is required");
+      }
+
+      if (string.IsNullOrWhiteSpace(config.AppId))
+      {
+        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+      }
+
+      if (string.IsNullOrWhiteSpace(config.ApiKey))
+      {
+        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+      }
+
+      _config = config;
+      _transport = new HttpTransport(config, httpRequester);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -425,150 +188,27 @@ namespace Algolia.Search.Personalization.Api
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomDelete(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<Object> localVarResponse = CustomDeleteWithHttpInfo(path, parameters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Personalization.Client.ApiResponse<Object> CustomDeleteWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomDelete");
-
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Personalization.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Delete<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<Object> localVarResponse = await CustomDeleteWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Personalization.Client.ApiResponse<Object>> CustomDeleteWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomDelete");
+        throw new ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomDelete");
 
 
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Personalization.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.DeleteAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomDelete", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -576,150 +216,27 @@ namespace Algolia.Search.Personalization.Api
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomGet(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<Object> localVarResponse = CustomGetWithHttpInfo(path, parameters);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Personalization.Client.ApiResponse<Object> CustomGetWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomGet");
-
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Personalization.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<Object> localVarResponse = await CustomGetWithHttpInfoAsync(path, parameters, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Personalization.Client.ApiResponse<Object>> CustomGetWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomGet");
+        throw new ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomGet");
 
 
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Personalization.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomGet", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -728,157 +245,28 @@ namespace Algolia.Search.Personalization.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomPost(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<Object> localVarResponse = CustomPostWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Personalization.Client.ApiResponse<Object> CustomPostWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomPost");
-
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Personalization.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<Object> localVarResponse = await CustomPostWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Personalization.Client.ApiResponse<Object>> CustomPostWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomPost");
+        throw new ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomPost");
 
 
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Personalization.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
+      requestOptions.Data = body;
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPost", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -887,700 +275,112 @@ namespace Algolia.Search.Personalization.Api
     /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>Object</returns>
-    public Object CustomPut(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<Object> localVarResponse = CustomPutWithHttpInfo(path, parameters, body);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <returns>ApiResponse of Object</returns>
-    public Algolia.Search.Personalization.Client.ApiResponse<Object> CustomPutWithHttpInfo(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object))
-    {
-      // verify the required parameter 'path' is set
-      if (path == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomPut");
-
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(path)); // path parameter
-      if (parameters != null)
-      {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Personalization.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
-      }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Put<Object>("/1{path}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async System.Threading.Tasks.Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<Object> localVarResponse = await CustomPutWithHttpInfoAsync(path, parameters, body, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-    /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-    /// <param name="body">Parameters to send with the custom request. (optional)</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (Object)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Personalization.Client.ApiResponse<Object>> CustomPutWithHttpInfoAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'path' is set
       if (path == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomPut");
+        throw new ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomPut");
 
 
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("path", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(path)); // path parameter
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
       if (parameters != null)
       {
-        localVarRequestOptions.QueryParameters.Add(Algolia.Search.Personalization.Client.ClientUtils.ParameterToMultiMap("", "parameters", parameters));
+        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
       }
-      localVarRequestOptions.Data = body;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
+      requestOptions.Data = body;
 
 
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PutAsync<Object>("/1{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("CustomPut", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Delete a user profile. Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
     /// </summary>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
-    /// <returns>DeleteUserProfileResponse</returns>
-    public DeleteUserProfileResponse DeleteUserProfile(string userToken)
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<DeleteUserProfileResponse> localVarResponse = DeleteUserProfileWithHttpInfo(userToken);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Delete a user profile. Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
-    /// <returns>ApiResponse of DeleteUserProfileResponse</returns>
-    public Algolia.Search.Personalization.Client.ApiResponse<DeleteUserProfileResponse> DeleteUserProfileWithHttpInfo(string userToken)
-    {
-      // verify the required parameter 'userToken' is set
-      if (userToken == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'userToken' when calling PersonalizationClient->DeleteUserProfile");
-
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("userToken", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(userToken)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Delete<DeleteUserProfileResponse>("/1/profiles/{userToken}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("DeleteUserProfile", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Delete a user profile. Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of DeleteUserProfileResponse</returns>
-    public async System.Threading.Tasks.Task<DeleteUserProfileResponse> DeleteUserProfileAsync(string userToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<DeleteUserProfileResponse> localVarResponse = await DeleteUserProfileWithHttpInfoAsync(userToken, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Delete a user profile. Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (DeleteUserProfileResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Personalization.Client.ApiResponse<DeleteUserProfileResponse>> DeleteUserProfileWithHttpInfoAsync(string userToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<DeleteUserProfileResponse> DeleteUserProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'userToken' is set
       if (userToken == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'userToken' when calling PersonalizationClient->DeleteUserProfile");
+        throw new ApiException(400, "Missing required parameter 'userToken' when calling PersonalizationClient->DeleteUserProfile");
 
 
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("userToken", ClientUtils.ParameterToString(userToken));
 
 
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("userToken", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(userToken)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.DeleteAsync<DeleteUserProfileResponse>("/1/profiles/{userToken}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("DeleteUserProfile", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<DeleteUserProfileResponse>(new HttpMethod("DELETE"), "/1/profiles/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get the current strategy. The strategy contains information on the events and facets that impact user profiles and personalized search results.
     /// </summary>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <returns>PersonalizationStrategyParams</returns>
-    public PersonalizationStrategyParams GetPersonalizationStrategy()
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<PersonalizationStrategyParams> localVarResponse = GetPersonalizationStrategyWithHttpInfo();
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get the current strategy. The strategy contains information on the events and facets that impact user profiles and personalized search results.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <returns>ApiResponse of PersonalizationStrategyParams</returns>
-    public Algolia.Search.Personalization.Client.ApiResponse<PersonalizationStrategyParams> GetPersonalizationStrategyWithHttpInfo()
-    {
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<PersonalizationStrategyParams>("/1/strategies/personalization", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetPersonalizationStrategy", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get the current strategy. The strategy contains information on the events and facets that impact user profiles and personalized search results.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of PersonalizationStrategyParams</returns>
-    public async System.Threading.Tasks.Task<PersonalizationStrategyParams> GetPersonalizationStrategyAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<PersonalizationStrategyParams> localVarResponse = await GetPersonalizationStrategyWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get the current strategy. The strategy contains information on the events and facets that impact user profiles and personalized search results.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (PersonalizationStrategyParams)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Personalization.Client.ApiResponse<PersonalizationStrategyParams>> GetPersonalizationStrategyWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<PersonalizationStrategyParams> GetPersonalizationStrategyAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
 
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
 
 
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<PersonalizationStrategyParams>("/1/strategies/personalization", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetPersonalizationStrategy", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<PersonalizationStrategyParams>(new HttpMethod("GET"), "/1/strategies/personalization", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Get a user profile. Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
     /// </summary>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
-    /// <returns>GetUserTokenResponse</returns>
-    public GetUserTokenResponse GetUserTokenProfile(string userToken)
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<GetUserTokenResponse> localVarResponse = GetUserTokenProfileWithHttpInfo(userToken);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get a user profile. Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
-    /// <returns>ApiResponse of GetUserTokenResponse</returns>
-    public Algolia.Search.Personalization.Client.ApiResponse<GetUserTokenResponse> GetUserTokenProfileWithHttpInfo(string userToken)
-    {
-      // verify the required parameter 'userToken' is set
-      if (userToken == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'userToken' when calling PersonalizationClient->GetUserTokenProfile");
-
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("userToken", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(userToken)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Get<GetUserTokenResponse>("/1/profiles/personalization/{userToken}", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetUserTokenProfile", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Get a user profile. Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetUserTokenResponse</returns>
-    public async System.Threading.Tasks.Task<GetUserTokenResponse> GetUserTokenProfileAsync(string userToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<GetUserTokenResponse> localVarResponse = await GetUserTokenProfileWithHttpInfoAsync(userToken, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Get a user profile. Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (GetUserTokenResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Personalization.Client.ApiResponse<GetUserTokenResponse>> GetUserTokenProfileWithHttpInfoAsync(string userToken, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<GetUserTokenResponse> GetUserTokenProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'userToken' is set
       if (userToken == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'userToken' when calling PersonalizationClient->GetUserTokenProfile");
+        throw new ApiException(400, "Missing required parameter 'userToken' when calling PersonalizationClient->GetUserTokenProfile");
 
 
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.PathParameters.Add("userToken", ClientUtils.ParameterToString(userToken));
 
 
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.PathParameters.Add("userToken", Algolia.Search.Personalization.Client.ClientUtils.ParameterToString(userToken)); // path parameter
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.GetAsync<GetUserTokenResponse>("/1/profiles/personalization/{userToken}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("GetUserTokenProfile", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<GetUserTokenResponse>(new HttpMethod("GET"), "/1/profiles/personalization/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <summary>
     /// Set a new strategy. A strategy defines the events and facets that impact user profiles and personalized search results.
     /// </summary>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="personalizationStrategyParams"></param>
-    /// <returns>SetPersonalizationStrategyResponse</returns>
-    public SetPersonalizationStrategyResponse SetPersonalizationStrategy(PersonalizationStrategyParams personalizationStrategyParams)
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<SetPersonalizationStrategyResponse> localVarResponse = SetPersonalizationStrategyWithHttpInfo(personalizationStrategyParams);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Set a new strategy. A strategy defines the events and facets that impact user profiles and personalized search results.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="personalizationStrategyParams"></param>
-    /// <returns>ApiResponse of SetPersonalizationStrategyResponse</returns>
-    public Algolia.Search.Personalization.Client.ApiResponse<SetPersonalizationStrategyResponse> SetPersonalizationStrategyWithHttpInfo(PersonalizationStrategyParams personalizationStrategyParams)
-    {
-      // verify the required parameter 'personalizationStrategyParams' is set
-      if (personalizationStrategyParams == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'personalizationStrategyParams' when calling PersonalizationClient->SetPersonalizationStrategy");
-
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
-
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.Data = personalizationStrategyParams;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-      var localVarResponse = this.Client.Post<SetPersonalizationStrategyResponse>("/1/strategies/personalization", localVarRequestOptions, this.Configuration);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("SetPersonalizationStrategy", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
-    }
-
-    /// <summary>
-    /// Set a new strategy. A strategy defines the events and facets that impact user profiles and personalized search results.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="personalizationStrategyParams"></param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of SetPersonalizationStrategyResponse</returns>
-    public async System.Threading.Tasks.Task<SetPersonalizationStrategyResponse> SetPersonalizationStrategyAsync(PersonalizationStrategyParams personalizationStrategyParams, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-    {
-      Algolia.Search.Personalization.Client.ApiResponse<SetPersonalizationStrategyResponse> localVarResponse = await SetPersonalizationStrategyWithHttpInfoAsync(personalizationStrategyParams, cancellationToken).ConfigureAwait(false);
-      return localVarResponse.Data;
-    }
-
-    /// <summary>
-    /// Set a new strategy. A strategy defines the events and facets that impact user profiles and personalized search results.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="personalizationStrategyParams"></param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of ApiResponse (SetPersonalizationStrategyResponse)</returns>
-    public async System.Threading.Tasks.Task<Algolia.Search.Personalization.Client.ApiResponse<SetPersonalizationStrategyResponse>> SetPersonalizationStrategyWithHttpInfoAsync(PersonalizationStrategyParams personalizationStrategyParams, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    public async Task<SetPersonalizationStrategyResponse> SetPersonalizationStrategyAsync(PersonalizationStrategyParams personalizationStrategyParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       // verify the required parameter 'personalizationStrategyParams' is set
       if (personalizationStrategyParams == null)
-        throw new Algolia.Search.Personalization.Client.ApiException(400, "Missing required parameter 'personalizationStrategyParams' when calling PersonalizationClient->SetPersonalizationStrategy");
+        throw new ApiException(400, "Missing required parameter 'personalizationStrategyParams' when calling PersonalizationClient->SetPersonalizationStrategy");
 
 
-      Algolia.Search.Personalization.Client.RequestOptions localVarRequestOptions = new Algolia.Search.Personalization.Client.RequestOptions();
-
-      string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-      // to determine the Accept header
-      string[] _accepts = new string[] {
-                "application/json"
-            };
+      RequestOptions requestOptions = new RequestOptions();
+      requestOptions.Data = personalizationStrategyParams;
 
 
-      var localVarContentType = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-      if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-      var localVarAccept = Algolia.Search.Personalization.Client.ClientUtils.SelectHeaderAccept(_accepts);
-      if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-      localVarRequestOptions.Data = personalizationStrategyParams;
-
-      // authentication (apiKey) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-API-Key", this.Configuration.GetApiKeyWithPrefix("X-Algolia-API-Key"));
-      }
-
-      // authentication (appId) required
-      if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id")))
-      {
-        localVarRequestOptions.HeaderParameters.Add("X-Algolia-Application-Id", this.Configuration.GetApiKeyWithPrefix("X-Algolia-Application-Id"));
-      }
-
-
-      // make the HTTP request
-
-      var localVarResponse = await this.AsynchronousClient.PostAsync<SetPersonalizationStrategyResponse>("/1/strategies/personalization", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-      if (this.ExceptionFactory != null)
-      {
-        Exception _exception = this.ExceptionFactory("SetPersonalizationStrategy", localVarResponse);
-        if (_exception != null) throw _exception;
-      }
-
-      return localVarResponse;
+      return await _transport.ExecuteRequestAsync<SetPersonalizationStrategyResponse>(new HttpMethod("POST"), "/1/strategies/personalization", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
   }

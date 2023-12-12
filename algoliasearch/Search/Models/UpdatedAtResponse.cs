@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Search.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Search.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Search.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Response, taskID, and update timestamp.
   /// </summary>
   [DataContract(Name = "updatedAtResponse")]
-  public partial class UpdatedAtResponse : IEquatable<UpdatedAtResponse>, IValidatableObject
+  public partial class UpdatedAtResponse : IEquatable<UpdatedAtResponse>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="UpdatedAtResponse" /> class.
@@ -135,15 +133,6 @@ namespace Algolia.Search.Search.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
-    }
   }
 
 }

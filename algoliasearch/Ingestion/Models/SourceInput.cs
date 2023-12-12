@@ -14,10 +14,8 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Ingestion.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Ingestion.Client.OpenAPIDateConverter;
 using System.Reflection;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Ingestion.Models
 {
@@ -26,7 +24,7 @@ namespace Algolia.Search.Ingestion.Models
   /// </summary>
   [JsonConverter(typeof(SourceInputJsonConverter))]
   [DataContract(Name = "SourceInput")]
-  public partial class SourceInput : AbstractOpenAPISchema, IEquatable<SourceInput>, IValidatableObject
+  public partial class SourceInput : AbstractSchema, IEquatable<SourceInput>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceInput" /> class
@@ -412,16 +410,6 @@ namespace Algolia.Search.Ingestion.Models
           hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
         return hashCode;
       }
-    }
-
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
     }
   }
 

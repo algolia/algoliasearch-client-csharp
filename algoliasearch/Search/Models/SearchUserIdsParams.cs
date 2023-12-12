@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Search.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Search.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Search.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// OK
   /// </summary>
   [DataContract(Name = "searchUserIdsParams")]
-  public partial class SearchUserIdsParams : IEquatable<SearchUserIdsParams>, IValidatableObject
+  public partial class SearchUserIdsParams : IEquatable<SearchUserIdsParams>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchUserIdsParams" /> class.
@@ -169,27 +167,6 @@ namespace Algolia.Search.Search.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      // HitsPerPage (int) maximum
-      if (this.HitsPerPage > (int)1000)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for HitsPerPage, must be a value less than or equal to 1000.", new[] { "HitsPerPage" });
-      }
-
-      // HitsPerPage (int) minimum
-      if (this.HitsPerPage < (int)1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for HitsPerPage, must be a value greater than or equal to 1.", new[] { "HitsPerPage" });
-      }
-
-      yield break;
-    }
   }
 
 }

@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Insights.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Insights.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Insights.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Insights.Models
   /// The response of the Insights API.
   /// </summary>
   [DataContract(Name = "EventsResponse")]
-  public partial class EventsResponse : IEquatable<EventsResponse>, IValidatableObject
+  public partial class EventsResponse : IEquatable<EventsResponse>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="EventsResponse" /> class.
@@ -125,15 +123,6 @@ namespace Algolia.Search.Insights.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
-    }
   }
 
 }

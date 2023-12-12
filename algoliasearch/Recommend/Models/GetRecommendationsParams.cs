@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Recommend.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Recommend.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Recommend.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// Recommend parameters.
   /// </summary>
   [DataContract(Name = "getRecommendationsParams")]
-  public partial class GetRecommendationsParams : IEquatable<GetRecommendationsParams>, IValidatableObject
+  public partial class GetRecommendationsParams : IEquatable<GetRecommendationsParams>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetRecommendationsParams" /> class.
@@ -121,15 +119,6 @@ namespace Algolia.Search.Recommend.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
-    }
   }
 
 }

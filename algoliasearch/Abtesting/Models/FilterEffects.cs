@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Abtesting.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Abtesting.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Abtesting.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Abtesting.Models
   /// A/B test filter effects resulting from configuration settings.
   /// </summary>
   [DataContract(Name = "filterEffects")]
-  public partial class FilterEffects : IEquatable<FilterEffects>, IValidatableObject
+  public partial class FilterEffects : IEquatable<FilterEffects>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="FilterEffects" /> class.
@@ -127,15 +125,6 @@ namespace Algolia.Search.Abtesting.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
-    }
   }
 
 }

@@ -14,10 +14,8 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.QuerySuggestions.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.QuerySuggestions.Client.OpenAPIDateConverter;
 using System.Reflection;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.QuerySuggestions.Models
 {
@@ -26,7 +24,7 @@ namespace Algolia.Search.QuerySuggestions.Models
   /// </summary>
   [JsonConverter(typeof(LanguagesJsonConverter))]
   [DataContract(Name = "Languages")]
-  public partial class Languages : AbstractOpenAPISchema, IEquatable<Languages>, IValidatableObject
+  public partial class Languages : AbstractSchema, IEquatable<Languages>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Languages" /> class
@@ -228,16 +226,6 @@ namespace Algolia.Search.QuerySuggestions.Models
           hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
         return hashCode;
       }
-    }
-
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
     }
   }
 

@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Ingestion.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Ingestion.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Ingestion.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// The input for a &#x60;schedule&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
   /// </summary>
   [DataContract(Name = "ScheduleDateUtilsInput")]
-  public partial class ScheduleDateUtilsInput : IEquatable<ScheduleDateUtilsInput>, IValidatableObject
+  public partial class ScheduleDateUtilsInput : IEquatable<ScheduleDateUtilsInput>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ScheduleDateUtilsInput" /> class.
@@ -111,27 +109,6 @@ namespace Algolia.Search.Ingestion.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      // Timeframe (int) maximum
-      if (this.Timeframe > (int)30)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Timeframe, must be a value less than or equal to 30.", new[] { "Timeframe" });
-      }
-
-      // Timeframe (int) minimum
-      if (this.Timeframe < (int)1)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Timeframe, must be a value greater than or equal to 1.", new[] { "Timeframe" });
-      }
-
-      yield break;
-    }
   }
 
 }

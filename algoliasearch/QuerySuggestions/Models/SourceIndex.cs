@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.QuerySuggestions.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.QuerySuggestions.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.QuerySuggestions.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.QuerySuggestions.Models
   /// Configuration of an Algolia index for Query Suggestions.
   /// </summary>
   [DataContract(Name = "SourceIndex")]
-  public partial class SourceIndex : IEquatable<SourceIndex>, IValidatableObject
+  public partial class SourceIndex : IEquatable<SourceIndex>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceIndex" /> class.
@@ -244,27 +242,6 @@ namespace Algolia.Search.QuerySuggestions.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      // MinHits (int) minimum
-      if (this.MinHits < (int)0)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MinHits, must be a value greater than or equal to 0.", new[] { "MinHits" });
-      }
-
-      // MinLetters (int) minimum
-      if (this.MinLetters < (int)0)
-      {
-        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MinLetters, must be a value greater than or equal to 0.", new[] { "MinLetters" });
-      }
-
-      yield break;
-    }
   }
 
 }

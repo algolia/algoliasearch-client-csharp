@@ -14,9 +14,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using FileParameter = Algolia.Search.Personalization.Client.FileParameter;
-using OpenAPIDateConverter = Algolia.Search.Personalization.Client.OpenAPIDateConverter;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Personalization.Models
 {
@@ -24,7 +22,7 @@ namespace Algolia.Search.Personalization.Models
   /// DeleteUserProfileResponse
   /// </summary>
   [DataContract(Name = "deleteUserProfileResponse")]
-  public partial class DeleteUserProfileResponse : IEquatable<DeleteUserProfileResponse>, IValidatableObject
+  public partial class DeleteUserProfileResponse : IEquatable<DeleteUserProfileResponse>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="DeleteUserProfileResponse" /> class.
@@ -144,15 +142,6 @@ namespace Algolia.Search.Personalization.Models
       }
     }
 
-    /// <summary>
-    /// To validate all properties of the instance
-    /// </summary>
-    /// <param name="validationContext">Validation context</param>
-    /// <returns>Validation Result</returns>
-    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-    {
-      yield break;
-    }
   }
 
 }
