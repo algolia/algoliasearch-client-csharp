@@ -24,7 +24,7 @@ namespace Algolia.Search.Recommend.Models
   /// </summary>
   [JsonConverter(typeof(OptionalFiltersJsonConverter))]
   [DataContract(Name = "optionalFilters")]
-  public partial class OptionalFilters : AbstractSchema, IEquatable<OptionalFilters>
+  public partial class OptionalFilters : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="OptionalFilters" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Recommend.Models
       return newOptionalFilters;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as OptionalFilters);
-    }
-
-    /// <summary>
-    /// Returns true if OptionalFilters instances are equal
-    /// </summary>
-    /// <param name="input">Instance of OptionalFilters to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(OptionalFilters input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

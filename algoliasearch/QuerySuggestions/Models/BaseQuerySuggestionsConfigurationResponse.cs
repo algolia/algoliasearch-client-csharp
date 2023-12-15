@@ -22,7 +22,7 @@ namespace Algolia.Search.QuerySuggestions.Models
   /// BaseQuerySuggestionsConfigurationResponse
   /// </summary>
   [DataContract(Name = "baseQuerySuggestionsConfigurationResponse")]
-  public partial class BaseQuerySuggestionsConfigurationResponse : IEquatable<BaseQuerySuggestionsConfigurationResponse>
+  public partial class BaseQuerySuggestionsConfigurationResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseQuerySuggestionsConfigurationResponse" /> class.
@@ -91,79 +91,6 @@ namespace Algolia.Search.QuerySuggestions.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BaseQuerySuggestionsConfigurationResponse);
-    }
-
-    /// <summary>
-    /// Returns true if BaseQuerySuggestionsConfigurationResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BaseQuerySuggestionsConfigurationResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BaseQuerySuggestionsConfigurationResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.AppId == input.AppId ||
-              (this.AppId != null &&
-              this.AppId.Equals(input.AppId))
-          ) &&
-          (
-              this.SourceIndicesAPIKey == input.SourceIndicesAPIKey ||
-              (this.SourceIndicesAPIKey != null &&
-              this.SourceIndicesAPIKey.Equals(input.SourceIndicesAPIKey))
-          ) &&
-          (
-              this.SuggestionsIndicesAPIKey == input.SuggestionsIndicesAPIKey ||
-              (this.SuggestionsIndicesAPIKey != null &&
-              this.SuggestionsIndicesAPIKey.Equals(input.SuggestionsIndicesAPIKey))
-          ) &&
-          (
-              this.ExternalIndicesAPIKey == input.ExternalIndicesAPIKey ||
-              (this.ExternalIndicesAPIKey != null &&
-              this.ExternalIndicesAPIKey.Equals(input.ExternalIndicesAPIKey))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.AppId != null)
-        {
-          hashCode = (hashCode * 59) + this.AppId.GetHashCode();
-        }
-        if (this.SourceIndicesAPIKey != null)
-        {
-          hashCode = (hashCode * 59) + this.SourceIndicesAPIKey.GetHashCode();
-        }
-        if (this.SuggestionsIndicesAPIKey != null)
-        {
-          hashCode = (hashCode * 59) + this.SuggestionsIndicesAPIKey.GetHashCode();
-        }
-        if (this.ExternalIndicesAPIKey != null)
-        {
-          hashCode = (hashCode * 59) + this.ExternalIndicesAPIKey.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

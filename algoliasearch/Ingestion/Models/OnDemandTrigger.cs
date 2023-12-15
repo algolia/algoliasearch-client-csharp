@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// The trigger information of a task of type &#x60;onDemand&#x60;.
   /// </summary>
   [DataContract(Name = "OnDemandTrigger")]
-  public partial class OnDemandTrigger : IEquatable<OnDemandTrigger>
+  public partial class OnDemandTrigger
   {
 
     /// <summary>
@@ -74,57 +74,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as OnDemandTrigger);
-    }
-
-    /// <summary>
-    /// Returns true if OnDemandTrigger instances are equal
-    /// </summary>
-    /// <param name="input">Instance of OnDemandTrigger to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(OnDemandTrigger input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Type == input.Type ||
-              this.Type.Equals(input.Type)
-          ) &&
-          (
-              this.LastRun == input.LastRun ||
-              (this.LastRun != null &&
-              this.LastRun.Equals(input.LastRun))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Type.GetHashCode();
-        if (this.LastRun != null)
-        {
-          hashCode = (hashCode * 59) + this.LastRun.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

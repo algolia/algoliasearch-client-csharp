@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// GetApiKeyResponse
   /// </summary>
   [DataContract(Name = "getApiKeyResponse")]
-  public partial class GetApiKeyResponse : IEquatable<GetApiKeyResponse>
+  public partial class GetApiKeyResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetApiKeyResponse" /> class.
@@ -162,120 +162,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetApiKeyResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetApiKeyResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetApiKeyResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetApiKeyResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Value == input.Value ||
-              (this.Value != null &&
-              this.Value.Equals(input.Value))
-          ) &&
-          (
-              this.CreatedAt == input.CreatedAt ||
-              this.CreatedAt.Equals(input.CreatedAt)
-          ) &&
-          (
-              this.Acl == input.Acl ||
-              this.Acl != null &&
-              input.Acl != null &&
-              this.Acl.SequenceEqual(input.Acl)
-          ) &&
-          (
-              this.Description == input.Description ||
-              (this.Description != null &&
-              this.Description.Equals(input.Description))
-          ) &&
-          (
-              this.Indexes == input.Indexes ||
-              this.Indexes != null &&
-              input.Indexes != null &&
-              this.Indexes.SequenceEqual(input.Indexes)
-          ) &&
-          (
-              this.MaxHitsPerQuery == input.MaxHitsPerQuery ||
-              this.MaxHitsPerQuery.Equals(input.MaxHitsPerQuery)
-          ) &&
-          (
-              this.MaxQueriesPerIPPerHour == input.MaxQueriesPerIPPerHour ||
-              this.MaxQueriesPerIPPerHour.Equals(input.MaxQueriesPerIPPerHour)
-          ) &&
-          (
-              this.QueryParameters == input.QueryParameters ||
-              (this.QueryParameters != null &&
-              this.QueryParameters.Equals(input.QueryParameters))
-          ) &&
-          (
-              this.Referers == input.Referers ||
-              this.Referers != null &&
-              input.Referers != null &&
-              this.Referers.SequenceEqual(input.Referers)
-          ) &&
-          (
-              this.Validity == input.Validity ||
-              this.Validity.Equals(input.Validity)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Value != null)
-        {
-          hashCode = (hashCode * 59) + this.Value.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.CreatedAt.GetHashCode();
-        if (this.Acl != null)
-        {
-          hashCode = (hashCode * 59) + this.Acl.GetHashCode();
-        }
-        if (this.Description != null)
-        {
-          hashCode = (hashCode * 59) + this.Description.GetHashCode();
-        }
-        if (this.Indexes != null)
-        {
-          hashCode = (hashCode * 59) + this.Indexes.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.MaxHitsPerQuery.GetHashCode();
-        hashCode = (hashCode * 59) + this.MaxQueriesPerIPPerHour.GetHashCode();
-        if (this.QueryParameters != null)
-        {
-          hashCode = (hashCode * 59) + this.QueryParameters.GetHashCode();
-        }
-        if (this.Referers != null)
-        {
-          hashCode = (hashCode * 59) + this.Referers.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Validity.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

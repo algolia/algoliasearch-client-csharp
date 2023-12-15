@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// BigCommerceMetafield
   /// </summary>
   [DataContract(Name = "BigCommerceMetafield")]
-  public partial class BigCommerceMetafield : IEquatable<BigCommerceMetafield>
+  public partial class BigCommerceMetafield
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BigCommerceMetafield" /> class.
@@ -85,61 +85,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BigCommerceMetafield);
-    }
-
-    /// <summary>
-    /// Returns true if BigCommerceMetafield instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BigCommerceMetafield to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BigCommerceMetafield input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.VarNamespace == input.VarNamespace ||
-              (this.VarNamespace != null &&
-              this.VarNamespace.Equals(input.VarNamespace))
-          ) &&
-          (
-              this.Key == input.Key ||
-              (this.Key != null &&
-              this.Key.Equals(input.Key))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.VarNamespace != null)
-        {
-          hashCode = (hashCode * 59) + this.VarNamespace.GetHashCode();
-        }
-        if (this.Key != null)
-        {
-          hashCode = (hashCode * 59) + this.Key.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

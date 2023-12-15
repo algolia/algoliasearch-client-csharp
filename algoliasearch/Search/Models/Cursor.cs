@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Cursor
   /// </summary>
   [DataContract(Name = "cursor")]
-  public partial class Cursor : IEquatable<Cursor>
+  public partial class Cursor
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Cursor" /> class.
@@ -60,52 +60,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Cursor);
-    }
-
-    /// <summary>
-    /// Returns true if Cursor instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Cursor to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Cursor input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.VarCursor == input.VarCursor ||
-              (this.VarCursor != null &&
-              this.VarCursor.Equals(input.VarCursor))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.VarCursor != null)
-        {
-          hashCode = (hashCode * 59) + this.VarCursor.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

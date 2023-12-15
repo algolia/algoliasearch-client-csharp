@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// MultipleBatchResponse
   /// </summary>
   [DataContract(Name = "multipleBatchResponse")]
-  public partial class MultipleBatchResponse : IEquatable<MultipleBatchResponse>
+  public partial class MultipleBatchResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="MultipleBatchResponse" /> class.
@@ -85,63 +85,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as MultipleBatchResponse);
-    }
-
-    /// <summary>
-    /// Returns true if MultipleBatchResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of MultipleBatchResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(MultipleBatchResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.TaskID == input.TaskID ||
-              this.TaskID != null &&
-              input.TaskID != null &&
-              this.TaskID.SequenceEqual(input.TaskID)
-          ) &&
-          (
-              this.ObjectIDs == input.ObjectIDs ||
-              this.ObjectIDs != null &&
-              input.ObjectIDs != null &&
-              this.ObjectIDs.SequenceEqual(input.ObjectIDs)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.TaskID != null)
-        {
-          hashCode = (hashCode * 59) + this.TaskID.GetHashCode();
-        }
-        if (this.ObjectIDs != null)
-        {
-          hashCode = (hashCode * 59) + this.ObjectIDs.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

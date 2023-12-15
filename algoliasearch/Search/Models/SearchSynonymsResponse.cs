@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// SearchSynonymsResponse
   /// </summary>
   [DataContract(Name = "searchSynonymsResponse")]
-  public partial class SearchSynonymsResponse : Dictionary<String, Object>, IEquatable<SearchSynonymsResponse>
+  public partial class SearchSynonymsResponse : Dictionary<String, Object>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchSynonymsResponse" /> class.
@@ -92,63 +92,6 @@ namespace Algolia.Search.Search.Models
     public string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SearchSynonymsResponse);
-    }
-
-    /// <summary>
-    /// Returns true if SearchSynonymsResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SearchSynonymsResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SearchSynonymsResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return base.Equals(input) &&
-          (
-              this.Hits == input.Hits ||
-              this.Hits != null &&
-              input.Hits != null &&
-              this.Hits.SequenceEqual(input.Hits)
-          ) && base.Equals(input) &&
-          (
-              this.NbHits == input.NbHits ||
-              this.NbHits.Equals(input.NbHits)
-          )
-          && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = base.GetHashCode();
-        if (this.Hits != null)
-        {
-          hashCode = (hashCode * 59) + this.Hits.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.NbHits.GetHashCode();
-        if (this.AdditionalProperties != null)
-        {
-          hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

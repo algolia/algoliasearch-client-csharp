@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// GetDictionarySettingsResponse
   /// </summary>
   [DataContract(Name = "getDictionarySettingsResponse")]
-  public partial class GetDictionarySettingsResponse : IEquatable<GetDictionarySettingsResponse>
+  public partial class GetDictionarySettingsResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetDictionarySettingsResponse" /> class.
@@ -69,52 +69,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetDictionarySettingsResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetDictionarySettingsResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetDictionarySettingsResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetDictionarySettingsResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.DisableStandardEntries == input.DisableStandardEntries ||
-              (this.DisableStandardEntries != null &&
-              this.DisableStandardEntries.Equals(input.DisableStandardEntries))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.DisableStandardEntries != null)
-        {
-          hashCode = (hashCode * 59) + this.DisableStandardEntries.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

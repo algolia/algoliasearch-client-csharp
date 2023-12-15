@@ -24,7 +24,7 @@ namespace Algolia.Search.Recommend.Models
   /// </summary>
   [JsonConverter(typeof(HighlightResultJsonConverter))]
   [DataContract(Name = "highlightResult")]
-  public partial class HighlightResult : AbstractSchema, IEquatable<HighlightResult>
+  public partial class HighlightResult : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="HighlightResult" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Recommend.Models
       return newHighlightResult;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as HighlightResult);
-    }
-
-    /// <summary>
-    /// Returns true if HighlightResult instances are equal
-    /// </summary>
-    /// <param name="input">Instance of HighlightResult to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(HighlightResult input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

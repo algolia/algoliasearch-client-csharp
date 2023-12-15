@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// BaseTrendingItemsQuery
   /// </summary>
   [DataContract(Name = "baseTrendingItemsQuery")]
-  public partial class BaseTrendingItemsQuery : IEquatable<BaseTrendingItemsQuery>
+  public partial class BaseTrendingItemsQuery
   {
 
     /// <summary>
@@ -97,84 +97,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BaseTrendingItemsQuery);
-    }
-
-    /// <summary>
-    /// Returns true if BaseTrendingItemsQuery instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BaseTrendingItemsQuery to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BaseTrendingItemsQuery input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.FacetName == input.FacetName ||
-              (this.FacetName != null &&
-              this.FacetName.Equals(input.FacetName))
-          ) &&
-          (
-              this.FacetValue == input.FacetValue ||
-              (this.FacetValue != null &&
-              this.FacetValue.Equals(input.FacetValue))
-          ) &&
-          (
-              this.Model == input.Model ||
-              this.Model.Equals(input.Model)
-          ) &&
-          (
-              this.QueryParameters == input.QueryParameters ||
-              (this.QueryParameters != null &&
-              this.QueryParameters.Equals(input.QueryParameters))
-          ) &&
-          (
-              this.FallbackParameters == input.FallbackParameters ||
-              (this.FallbackParameters != null &&
-              this.FallbackParameters.Equals(input.FallbackParameters))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.FacetName != null)
-        {
-          hashCode = (hashCode * 59) + this.FacetName.GetHashCode();
-        }
-        if (this.FacetValue != null)
-        {
-          hashCode = (hashCode * 59) + this.FacetValue.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Model.GetHashCode();
-        if (this.QueryParameters != null)
-        {
-          hashCode = (hashCode * 59) + this.QueryParameters.GetHashCode();
-        }
-        if (this.FallbackParameters != null)
-        {
-          hashCode = (hashCode * 59) + this.FallbackParameters.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

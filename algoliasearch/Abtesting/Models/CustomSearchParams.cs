@@ -22,7 +22,7 @@ namespace Algolia.Search.Abtesting.Models
   /// Applies search parameters from [a restricted set of options](https://www.algolia.com/doc/api-reference/api-methods/add-ab-test/#method-param-customsearchparameters). Only use this parameter if the two variants use the same index.
   /// </summary>
   [DataContract(Name = "customSearchParams")]
-  public partial class CustomSearchParams : IEquatable<CustomSearchParams>
+  public partial class CustomSearchParams
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="CustomSearchParams" /> class.
@@ -69,52 +69,6 @@ namespace Algolia.Search.Abtesting.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as CustomSearchParams);
-    }
-
-    /// <summary>
-    /// Returns true if CustomSearchParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of CustomSearchParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(CustomSearchParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.CustomSearchParameters == input.CustomSearchParameters ||
-              (this.CustomSearchParameters != null &&
-              this.CustomSearchParameters.Equals(input.CustomSearchParameters))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.CustomSearchParameters != null)
-        {
-          hashCode = (hashCode * 59) + this.CustomSearchParameters.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

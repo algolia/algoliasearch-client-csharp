@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// SearchForFacetValuesResponse
   /// </summary>
   [DataContract(Name = "searchForFacetValuesResponse")]
-  public partial class SearchForFacetValuesResponse : IEquatable<SearchForFacetValuesResponse>
+  public partial class SearchForFacetValuesResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchForFacetValuesResponse" /> class.
@@ -69,53 +69,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SearchForFacetValuesResponse);
-    }
-
-    /// <summary>
-    /// Returns true if SearchForFacetValuesResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SearchForFacetValuesResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SearchForFacetValuesResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.FacetHits == input.FacetHits ||
-              this.FacetHits != null &&
-              input.FacetHits != null &&
-              this.FacetHits.SequenceEqual(input.FacetHits)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.FacetHits != null)
-        {
-          hashCode = (hashCode * 59) + this.FacetHits.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

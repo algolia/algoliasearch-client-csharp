@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// MatchedGeoLocation
   /// </summary>
   [DataContract(Name = "matchedGeoLocation")]
-  public partial class MatchedGeoLocation : IEquatable<MatchedGeoLocation>
+  public partial class MatchedGeoLocation
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="MatchedGeoLocation" /> class.
@@ -80,58 +80,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as MatchedGeoLocation);
-    }
-
-    /// <summary>
-    /// Returns true if MatchedGeoLocation instances are equal
-    /// </summary>
-    /// <param name="input">Instance of MatchedGeoLocation to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(MatchedGeoLocation input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Lat == input.Lat ||
-              this.Lat.Equals(input.Lat)
-          ) &&
-          (
-              this.Lng == input.Lng ||
-              this.Lng.Equals(input.Lng)
-          ) &&
-          (
-              this.Distance == input.Distance ||
-              this.Distance.Equals(input.Distance)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Lat.GetHashCode();
-        hashCode = (hashCode * 59) + this.Lng.GetHashCode();
-        hashCode = (hashCode * 59) + this.Distance.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Rules search parameters.
   /// </summary>
   [DataContract(Name = "searchRulesParams")]
-  public partial class SearchRulesParams : IEquatable<SearchRulesParams>
+  public partial class SearchRulesParams
   {
 
     /// <summary>
@@ -120,95 +120,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SearchRulesParams);
-    }
-
-    /// <summary>
-    /// Returns true if SearchRulesParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SearchRulesParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SearchRulesParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Query == input.Query ||
-              (this.Query != null &&
-              this.Query.Equals(input.Query))
-          ) &&
-          (
-              this.Anchoring == input.Anchoring ||
-              this.Anchoring.Equals(input.Anchoring)
-          ) &&
-          (
-              this.Context == input.Context ||
-              (this.Context != null &&
-              this.Context.Equals(input.Context))
-          ) &&
-          (
-              this.Page == input.Page ||
-              this.Page.Equals(input.Page)
-          ) &&
-          (
-              this.HitsPerPage == input.HitsPerPage ||
-              this.HitsPerPage.Equals(input.HitsPerPage)
-          ) &&
-          (
-              this.Enabled == input.Enabled ||
-              (this.Enabled != null &&
-              this.Enabled.Equals(input.Enabled))
-          ) &&
-          (
-              this.RequestOptions == input.RequestOptions ||
-              this.RequestOptions != null &&
-              input.RequestOptions != null &&
-              this.RequestOptions.SequenceEqual(input.RequestOptions)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Query != null)
-        {
-          hashCode = (hashCode * 59) + this.Query.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Anchoring.GetHashCode();
-        if (this.Context != null)
-        {
-          hashCode = (hashCode * 59) + this.Context.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Page.GetHashCode();
-        hashCode = (hashCode * 59) + this.HitsPerPage.GetHashCode();
-        if (this.Enabled != null)
-        {
-          hashCode = (hashCode * 59) + this.Enabled.GetHashCode();
-        }
-        if (this.RequestOptions != null)
-        {
-          hashCode = (hashCode * 59) + this.RequestOptions.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// RecommendHits
   /// </summary>
   [DataContract(Name = "recommendHits")]
-  public partial class RecommendHits : IEquatable<RecommendHits>
+  public partial class RecommendHits
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="RecommendHits" /> class.
@@ -90,71 +90,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as RecommendHits);
-    }
-
-    /// <summary>
-    /// Returns true if RecommendHits instances are equal
-    /// </summary>
-    /// <param name="input">Instance of RecommendHits to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(RecommendHits input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Hits == input.Hits ||
-              this.Hits != null &&
-              input.Hits != null &&
-              this.Hits.SequenceEqual(input.Hits)
-          ) &&
-          (
-              this.Query == input.Query ||
-              (this.Query != null &&
-              this.Query.Equals(input.Query))
-          ) &&
-          (
-              this.VarParams == input.VarParams ||
-              (this.VarParams != null &&
-              this.VarParams.Equals(input.VarParams))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Hits != null)
-        {
-          hashCode = (hashCode * 59) + this.Hits.GetHashCode();
-        }
-        if (this.Query != null)
-        {
-          hashCode = (hashCode * 59) + this.Query.GetHashCode();
-        }
-        if (this.VarParams != null)
-        {
-          hashCode = (hashCode * 59) + this.VarParams.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

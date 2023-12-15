@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences) of a rule. 
   /// </summary>
   [DataContract(Name = "consequence")]
-  public partial class Consequence : IEquatable<Consequence>
+  public partial class Consequence
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Consequence" /> class.
@@ -99,86 +99,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Consequence);
-    }
-
-    /// <summary>
-    /// Returns true if Consequence instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Consequence to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Consequence input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.VarParams == input.VarParams ||
-              (this.VarParams != null &&
-              this.VarParams.Equals(input.VarParams))
-          ) &&
-          (
-              this.Promote == input.Promote ||
-              this.Promote != null &&
-              input.Promote != null &&
-              this.Promote.SequenceEqual(input.Promote)
-          ) &&
-          (
-              this.FilterPromotes == input.FilterPromotes ||
-              this.FilterPromotes.Equals(input.FilterPromotes)
-          ) &&
-          (
-              this.Hide == input.Hide ||
-              this.Hide != null &&
-              input.Hide != null &&
-              this.Hide.SequenceEqual(input.Hide)
-          ) &&
-          (
-              this.UserData == input.UserData ||
-              (this.UserData != null &&
-              this.UserData.Equals(input.UserData))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.VarParams != null)
-        {
-          hashCode = (hashCode * 59) + this.VarParams.GetHashCode();
-        }
-        if (this.Promote != null)
-        {
-          hashCode = (hashCode * 59) + this.Promote.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.FilterPromotes.GetHashCode();
-        if (this.Hide != null)
-        {
-          hashCode = (hashCode * 59) + this.Hide.GetHashCode();
-        }
-        if (this.UserData != null)
-        {
-          hashCode = (hashCode * 59) + this.UserData.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

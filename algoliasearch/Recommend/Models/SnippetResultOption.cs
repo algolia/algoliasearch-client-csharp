@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
   /// </summary>
   [DataContract(Name = "snippetResultOption")]
-  public partial class SnippetResultOption : IEquatable<SnippetResultOption>
+  public partial class SnippetResultOption
   {
 
     /// <summary>
@@ -79,57 +79,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SnippetResultOption);
-    }
-
-    /// <summary>
-    /// Returns true if SnippetResultOption instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SnippetResultOption to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SnippetResultOption input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Value == input.Value ||
-              (this.Value != null &&
-              this.Value.Equals(input.Value))
-          ) &&
-          (
-              this.MatchLevel == input.MatchLevel ||
-              this.MatchLevel.Equals(input.MatchLevel)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Value != null)
-        {
-          hashCode = (hashCode * 59) + this.Value.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.MatchLevel.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

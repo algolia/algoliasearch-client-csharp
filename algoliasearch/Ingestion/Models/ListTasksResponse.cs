@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// A list of tasks with pagination details.
   /// </summary>
   [DataContract(Name = "listTasksResponse")]
-  public partial class ListTasksResponse : IEquatable<ListTasksResponse>
+  public partial class ListTasksResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ListTasksResponse" /> class.
@@ -83,62 +83,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ListTasksResponse);
-    }
-
-    /// <summary>
-    /// Returns true if ListTasksResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ListTasksResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ListTasksResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Tasks == input.Tasks ||
-              this.Tasks != null &&
-              input.Tasks != null &&
-              this.Tasks.SequenceEqual(input.Tasks)
-          ) &&
-          (
-              this.Pagination == input.Pagination ||
-              (this.Pagination != null &&
-              this.Pagination.Equals(input.Pagination))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Tasks != null)
-        {
-          hashCode = (hashCode * 59) + this.Tasks.GetHashCode();
-        }
-        if (this.Pagination != null)
-        {
-          hashCode = (hashCode * 59) + this.Pagination.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

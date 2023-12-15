@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Batch parameters.
   /// </summary>
   [DataContract(Name = "batchParams")]
-  public partial class BatchParams : IEquatable<BatchParams>
+  public partial class BatchParams
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchParams" /> class.
@@ -69,53 +69,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BatchParams);
-    }
-
-    /// <summary>
-    /// Returns true if BatchParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BatchParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BatchParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Requests == input.Requests ||
-              this.Requests != null &&
-              input.Requests != null &&
-              this.Requests.SequenceEqual(input.Requests)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Requests != null)
-        {
-          hashCode = (hashCode * 59) + this.Requests.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

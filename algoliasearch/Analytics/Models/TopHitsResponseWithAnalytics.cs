@@ -22,7 +22,7 @@ namespace Algolia.Search.Analytics.Models
   /// TopHitsResponseWithAnalytics
   /// </summary>
   [DataContract(Name = "topHitsResponseWithAnalytics")]
-  public partial class TopHitsResponseWithAnalytics : IEquatable<TopHitsResponseWithAnalytics>
+  public partial class TopHitsResponseWithAnalytics
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="TopHitsResponseWithAnalytics" /> class.
@@ -70,53 +70,6 @@ namespace Algolia.Search.Analytics.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as TopHitsResponseWithAnalytics);
-    }
-
-    /// <summary>
-    /// Returns true if TopHitsResponseWithAnalytics instances are equal
-    /// </summary>
-    /// <param name="input">Instance of TopHitsResponseWithAnalytics to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(TopHitsResponseWithAnalytics input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Hits == input.Hits ||
-              this.Hits != null &&
-              input.Hits != null &&
-              this.Hits.SequenceEqual(input.Hits)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Hits != null)
-        {
-          hashCode = (hashCode * 59) + this.Hits.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// DockerSourceDiscover
   /// </summary>
   [DataContract(Name = "dockerSourceDiscover")]
-  public partial class DockerSourceDiscover : IEquatable<DockerSourceDiscover>
+  public partial class DockerSourceDiscover
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="DockerSourceDiscover" /> class.
@@ -85,61 +85,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as DockerSourceDiscover);
-    }
-
-    /// <summary>
-    /// Returns true if DockerSourceDiscover instances are equal
-    /// </summary>
-    /// <param name="input">Instance of DockerSourceDiscover to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(DockerSourceDiscover input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.RunID == input.RunID ||
-              (this.RunID != null &&
-              this.RunID.Equals(input.RunID))
-          ) &&
-          (
-              this.CreatedAt == input.CreatedAt ||
-              (this.CreatedAt != null &&
-              this.CreatedAt.Equals(input.CreatedAt))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.RunID != null)
-        {
-          hashCode = (hashCode * 59) + this.RunID.GetHashCode();
-        }
-        if (this.CreatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.CreatedAt.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

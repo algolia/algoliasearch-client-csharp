@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// GetRecommendationsResponse
   /// </summary>
   [DataContract(Name = "getRecommendationsResponse")]
-  public partial class GetRecommendationsResponse : IEquatable<GetRecommendationsResponse>
+  public partial class GetRecommendationsResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetRecommendationsResponse" /> class.
@@ -59,53 +59,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetRecommendationsResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetRecommendationsResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetRecommendationsResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetRecommendationsResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Results == input.Results ||
-              this.Results != null &&
-              input.Results != null &&
-              this.Results.SequenceEqual(input.Results)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Results != null)
-        {
-          hashCode = (hashCode * 59) + this.Results.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

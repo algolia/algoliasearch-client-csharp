@@ -22,7 +22,7 @@ namespace Algolia.Search.Insights.Models
   /// Use this event to track when users click facet filters in your user interface.
   /// </summary>
   [DataContract(Name = "ClickedFilters")]
-  public partial class ClickedFilters : IEquatable<ClickedFilters>
+  public partial class ClickedFilters
   {
 
     /// <summary>
@@ -144,99 +144,6 @@ namespace Algolia.Search.Insights.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ClickedFilters);
-    }
-
-    /// <summary>
-    /// Returns true if ClickedFilters instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ClickedFilters to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ClickedFilters input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.EventName == input.EventName ||
-              (this.EventName != null &&
-              this.EventName.Equals(input.EventName))
-          ) &&
-          (
-              this.EventType == input.EventType ||
-              this.EventType.Equals(input.EventType)
-          ) &&
-          (
-              this.Index == input.Index ||
-              (this.Index != null &&
-              this.Index.Equals(input.Index))
-          ) &&
-          (
-              this.Filters == input.Filters ||
-              this.Filters != null &&
-              input.Filters != null &&
-              this.Filters.SequenceEqual(input.Filters)
-          ) &&
-          (
-              this.UserToken == input.UserToken ||
-              (this.UserToken != null &&
-              this.UserToken.Equals(input.UserToken))
-          ) &&
-          (
-              this.Timestamp == input.Timestamp ||
-              this.Timestamp.Equals(input.Timestamp)
-          ) &&
-          (
-              this.AuthenticatedUserToken == input.AuthenticatedUserToken ||
-              (this.AuthenticatedUserToken != null &&
-              this.AuthenticatedUserToken.Equals(input.AuthenticatedUserToken))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.EventName != null)
-        {
-          hashCode = (hashCode * 59) + this.EventName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.EventType.GetHashCode();
-        if (this.Index != null)
-        {
-          hashCode = (hashCode * 59) + this.Index.GetHashCode();
-        }
-        if (this.Filters != null)
-        {
-          hashCode = (hashCode * 59) + this.Filters.GetHashCode();
-        }
-        if (this.UserToken != null)
-        {
-          hashCode = (hashCode * 59) + this.UserToken.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Timestamp.GetHashCode();
-        if (this.AuthenticatedUserToken != null)
-        {
-          hashCode = (hashCode * 59) + this.AuthenticatedUserToken.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

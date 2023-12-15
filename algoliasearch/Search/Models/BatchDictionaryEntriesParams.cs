@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// &#x60;batchDictionaryEntries&#x60; parameters. 
   /// </summary>
   [DataContract(Name = "batchDictionaryEntriesParams")]
-  public partial class BatchDictionaryEntriesParams : IEquatable<BatchDictionaryEntriesParams>
+  public partial class BatchDictionaryEntriesParams
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchDictionaryEntriesParams" /> class.
@@ -80,58 +80,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BatchDictionaryEntriesParams);
-    }
-
-    /// <summary>
-    /// Returns true if BatchDictionaryEntriesParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BatchDictionaryEntriesParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BatchDictionaryEntriesParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.ClearExistingDictionaryEntries == input.ClearExistingDictionaryEntries ||
-              this.ClearExistingDictionaryEntries.Equals(input.ClearExistingDictionaryEntries)
-          ) &&
-          (
-              this.Requests == input.Requests ||
-              this.Requests != null &&
-              input.Requests != null &&
-              this.Requests.SequenceEqual(input.Requests)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.ClearExistingDictionaryEntries.GetHashCode();
-        if (this.Requests != null)
-        {
-          hashCode = (hashCode * 59) + this.Requests.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

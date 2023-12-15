@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// ListApiKeysResponse
   /// </summary>
   [DataContract(Name = "listApiKeysResponse")]
-  public partial class ListApiKeysResponse : IEquatable<ListApiKeysResponse>
+  public partial class ListApiKeysResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ListApiKeysResponse" /> class.
@@ -70,53 +70,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ListApiKeysResponse);
-    }
-
-    /// <summary>
-    /// Returns true if ListApiKeysResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ListApiKeysResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ListApiKeysResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Keys == input.Keys ||
-              this.Keys != null &&
-              input.Keys != null &&
-              this.Keys.SequenceEqual(input.Keys)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Keys != null)
-        {
-          hashCode = (hashCode * 59) + this.Keys.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Insights.Models
   /// Use this event to track when users make a purchase after a previous Algolia request. If you&#39;re building your category pages with Algolia, you&#39;ll also use this event. 
   /// </summary>
   [DataContract(Name = "PurchasedObjectIDsAfterSearch")]
-  public partial class PurchasedObjectIDsAfterSearch : IEquatable<PurchasedObjectIDsAfterSearch>
+  public partial class PurchasedObjectIDsAfterSearch
   {
 
     /// <summary>
@@ -188,132 +188,6 @@ namespace Algolia.Search.Insights.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as PurchasedObjectIDsAfterSearch);
-    }
-
-    /// <summary>
-    /// Returns true if PurchasedObjectIDsAfterSearch instances are equal
-    /// </summary>
-    /// <param name="input">Instance of PurchasedObjectIDsAfterSearch to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(PurchasedObjectIDsAfterSearch input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.EventName == input.EventName ||
-              (this.EventName != null &&
-              this.EventName.Equals(input.EventName))
-          ) &&
-          (
-              this.EventType == input.EventType ||
-              this.EventType.Equals(input.EventType)
-          ) &&
-          (
-              this.EventSubtype == input.EventSubtype ||
-              this.EventSubtype.Equals(input.EventSubtype)
-          ) &&
-          (
-              this.Index == input.Index ||
-              (this.Index != null &&
-              this.Index.Equals(input.Index))
-          ) &&
-          (
-              this.QueryID == input.QueryID ||
-              (this.QueryID != null &&
-              this.QueryID.Equals(input.QueryID))
-          ) &&
-          (
-              this.ObjectIDs == input.ObjectIDs ||
-              this.ObjectIDs != null &&
-              input.ObjectIDs != null &&
-              this.ObjectIDs.SequenceEqual(input.ObjectIDs)
-          ) &&
-          (
-              this.ObjectData == input.ObjectData ||
-              this.ObjectData != null &&
-              input.ObjectData != null &&
-              this.ObjectData.SequenceEqual(input.ObjectData)
-          ) &&
-          (
-              this.Currency == input.Currency ||
-              (this.Currency != null &&
-              this.Currency.Equals(input.Currency))
-          ) &&
-          (
-              this.UserToken == input.UserToken ||
-              (this.UserToken != null &&
-              this.UserToken.Equals(input.UserToken))
-          ) &&
-          (
-              this.Timestamp == input.Timestamp ||
-              this.Timestamp.Equals(input.Timestamp)
-          ) &&
-          (
-              this.AuthenticatedUserToken == input.AuthenticatedUserToken ||
-              (this.AuthenticatedUserToken != null &&
-              this.AuthenticatedUserToken.Equals(input.AuthenticatedUserToken))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.EventName != null)
-        {
-          hashCode = (hashCode * 59) + this.EventName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.EventType.GetHashCode();
-        hashCode = (hashCode * 59) + this.EventSubtype.GetHashCode();
-        if (this.Index != null)
-        {
-          hashCode = (hashCode * 59) + this.Index.GetHashCode();
-        }
-        if (this.QueryID != null)
-        {
-          hashCode = (hashCode * 59) + this.QueryID.GetHashCode();
-        }
-        if (this.ObjectIDs != null)
-        {
-          hashCode = (hashCode * 59) + this.ObjectIDs.GetHashCode();
-        }
-        if (this.ObjectData != null)
-        {
-          hashCode = (hashCode * 59) + this.ObjectData.GetHashCode();
-        }
-        if (this.Currency != null)
-        {
-          hashCode = (hashCode * 59) + this.Currency.GetHashCode();
-        }
-        if (this.UserToken != null)
-        {
-          hashCode = (hashCode * 59) + this.UserToken.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Timestamp.GetHashCode();
-        if (this.AuthenticatedUserToken != null)
-        {
-          hashCode = (hashCode * 59) + this.AuthenticatedUserToken.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Run
   /// </summary>
   [DataContract(Name = "Run")]
-  public partial class Run : IEquatable<Run>
+  public partial class Run
   {
 
     /// <summary>
@@ -199,140 +199,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Run);
-    }
-
-    /// <summary>
-    /// Returns true if Run instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Run to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Run input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.RunID == input.RunID ||
-              (this.RunID != null &&
-              this.RunID.Equals(input.RunID))
-          ) &&
-          (
-              this.AppID == input.AppID ||
-              (this.AppID != null &&
-              this.AppID.Equals(input.AppID))
-          ) &&
-          (
-              this.TaskID == input.TaskID ||
-              (this.TaskID != null &&
-              this.TaskID.Equals(input.TaskID))
-          ) &&
-          (
-              this.Status == input.Status ||
-              this.Status.Equals(input.Status)
-          ) &&
-          (
-              this.Progress == input.Progress ||
-              (this.Progress != null &&
-              this.Progress.Equals(input.Progress))
-          ) &&
-          (
-              this.Outcome == input.Outcome ||
-              this.Outcome.Equals(input.Outcome)
-          ) &&
-          (
-              this.FailureThreshold == input.FailureThreshold ||
-              this.FailureThreshold.Equals(input.FailureThreshold)
-          ) &&
-          (
-              this.Reason == input.Reason ||
-              (this.Reason != null &&
-              this.Reason.Equals(input.Reason))
-          ) &&
-          (
-              this.ReasonCode == input.ReasonCode ||
-              this.ReasonCode.Equals(input.ReasonCode)
-          ) &&
-          (
-              this.Type == input.Type ||
-              this.Type.Equals(input.Type)
-          ) &&
-          (
-              this.CreatedAt == input.CreatedAt ||
-              (this.CreatedAt != null &&
-              this.CreatedAt.Equals(input.CreatedAt))
-          ) &&
-          (
-              this.StartedAt == input.StartedAt ||
-              (this.StartedAt != null &&
-              this.StartedAt.Equals(input.StartedAt))
-          ) &&
-          (
-              this.FinishedAt == input.FinishedAt ||
-              (this.FinishedAt != null &&
-              this.FinishedAt.Equals(input.FinishedAt))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.RunID != null)
-        {
-          hashCode = (hashCode * 59) + this.RunID.GetHashCode();
-        }
-        if (this.AppID != null)
-        {
-          hashCode = (hashCode * 59) + this.AppID.GetHashCode();
-        }
-        if (this.TaskID != null)
-        {
-          hashCode = (hashCode * 59) + this.TaskID.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Status.GetHashCode();
-        if (this.Progress != null)
-        {
-          hashCode = (hashCode * 59) + this.Progress.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Outcome.GetHashCode();
-        hashCode = (hashCode * 59) + this.FailureThreshold.GetHashCode();
-        if (this.Reason != null)
-        {
-          hashCode = (hashCode * 59) + this.Reason.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.ReasonCode.GetHashCode();
-        hashCode = (hashCode * 59) + this.Type.GetHashCode();
-        if (this.CreatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.CreatedAt.GetHashCode();
-        }
-        if (this.StartedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.StartedAt.GetHashCode();
-        }
-        if (this.FinishedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.FinishedAt.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

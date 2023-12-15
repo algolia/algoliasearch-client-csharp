@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// GetLogsResponse
   /// </summary>
   [DataContract(Name = "getLogsResponse")]
-  public partial class GetLogsResponse : IEquatable<GetLogsResponse>
+  public partial class GetLogsResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetLogsResponse" /> class.
@@ -69,53 +69,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetLogsResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetLogsResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetLogsResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetLogsResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Logs == input.Logs ||
-              this.Logs != null &&
-              input.Logs != null &&
-              this.Logs.SequenceEqual(input.Logs)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Logs != null)
-        {
-          hashCode = (hashCode * 59) + this.Logs.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

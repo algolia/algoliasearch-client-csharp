@@ -22,7 +22,7 @@ namespace Algolia.Search.Analytics.Models
   /// GetUsersCountResponse
   /// </summary>
   [DataContract(Name = "getUsersCountResponse")]
-  public partial class GetUsersCountResponse : IEquatable<GetUsersCountResponse>
+  public partial class GetUsersCountResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetUsersCountResponse" /> class.
@@ -80,58 +80,6 @@ namespace Algolia.Search.Analytics.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetUsersCountResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetUsersCountResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetUsersCountResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetUsersCountResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Count == input.Count ||
-              this.Count.Equals(input.Count)
-          ) &&
-          (
-              this.Dates == input.Dates ||
-              this.Dates != null &&
-              input.Dates != null &&
-              this.Dates.SequenceEqual(input.Dates)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Count.GetHashCode();
-        if (this.Dates != null)
-        {
-          hashCode = (hashCode * 59) + this.Dates.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// SearchForHitsOptions
   /// </summary>
   [DataContract(Name = "searchForHitsOptions")]
-  public partial class SearchForHitsOptions : IEquatable<SearchForHitsOptions>
+  public partial class SearchForHitsOptions
   {
 
     /// <summary>
@@ -79,57 +79,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SearchForHitsOptions);
-    }
-
-    /// <summary>
-    /// Returns true if SearchForHitsOptions instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SearchForHitsOptions to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SearchForHitsOptions input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.IndexName == input.IndexName ||
-              (this.IndexName != null &&
-              this.IndexName.Equals(input.IndexName))
-          ) &&
-          (
-              this.Type == input.Type ||
-              this.Type.Equals(input.Type)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.IndexName != null)
-        {
-          hashCode = (hashCode * 59) + this.IndexName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Type.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

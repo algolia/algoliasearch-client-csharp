@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Enable or turn off the built-in Algolia stop words for a specific language.
   /// </summary>
   [DataContract(Name = "dictionarySettingsParams")]
-  public partial class DictionarySettingsParams : IEquatable<DictionarySettingsParams>
+  public partial class DictionarySettingsParams
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="DictionarySettingsParams" /> class.
@@ -69,52 +69,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as DictionarySettingsParams);
-    }
-
-    /// <summary>
-    /// Returns true if DictionarySettingsParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of DictionarySettingsParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(DictionarySettingsParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.DisableStandardEntries == input.DisableStandardEntries ||
-              (this.DisableStandardEntries != null &&
-              this.DisableStandardEntries.Equals(input.DisableStandardEntries))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.DisableStandardEntries != null)
-        {
-          hashCode = (hashCode * 59) + this.DisableStandardEntries.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

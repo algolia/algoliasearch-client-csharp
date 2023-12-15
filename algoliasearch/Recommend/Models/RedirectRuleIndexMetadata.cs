@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// RedirectRuleIndexMetadata
   /// </summary>
   [DataContract(Name = "RedirectRuleIndexMetadata")]
-  public partial class RedirectRuleIndexMetadata : IEquatable<RedirectRuleIndexMetadata>
+  public partial class RedirectRuleIndexMetadata
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectRuleIndexMetadata" /> class.
@@ -124,84 +124,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as RedirectRuleIndexMetadata);
-    }
-
-    /// <summary>
-    /// Returns true if RedirectRuleIndexMetadata instances are equal
-    /// </summary>
-    /// <param name="input">Instance of RedirectRuleIndexMetadata to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(RedirectRuleIndexMetadata input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Source == input.Source ||
-              (this.Source != null &&
-              this.Source.Equals(input.Source))
-          ) &&
-          (
-              this.Dest == input.Dest ||
-              (this.Dest != null &&
-              this.Dest.Equals(input.Dest))
-          ) &&
-          (
-              this.Reason == input.Reason ||
-              (this.Reason != null &&
-              this.Reason.Equals(input.Reason))
-          ) &&
-          (
-              this.Succeed == input.Succeed ||
-              this.Succeed.Equals(input.Succeed)
-          ) &&
-          (
-              this.Data == input.Data ||
-              (this.Data != null &&
-              this.Data.Equals(input.Data))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Source != null)
-        {
-          hashCode = (hashCode * 59) + this.Source.GetHashCode();
-        }
-        if (this.Dest != null)
-        {
-          hashCode = (hashCode * 59) + this.Dest.GetHashCode();
-        }
-        if (this.Reason != null)
-        {
-          hashCode = (hashCode * 59) + this.Reason.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Succeed.GetHashCode();
-        if (this.Data != null)
-        {
-          hashCode = (hashCode * 59) + this.Data.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

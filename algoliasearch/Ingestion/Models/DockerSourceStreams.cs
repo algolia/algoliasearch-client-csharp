@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// DockerSourceStreams
   /// </summary>
   [DataContract(Name = "dockerSourceStreams")]
-  public partial class DockerSourceStreams : IEquatable<DockerSourceStreams>
+  public partial class DockerSourceStreams
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="DockerSourceStreams" /> class.
@@ -69,53 +69,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as DockerSourceStreams);
-    }
-
-    /// <summary>
-    /// Returns true if DockerSourceStreams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of DockerSourceStreams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(DockerSourceStreams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Streams == input.Streams ||
-              this.Streams != null &&
-              input.Streams != null &&
-              this.Streams.SequenceEqual(input.Streams)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Streams != null)
-        {
-          hashCode = (hashCode * 59) + this.Streams.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

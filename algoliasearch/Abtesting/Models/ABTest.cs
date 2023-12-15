@@ -22,7 +22,7 @@ namespace Algolia.Search.Abtesting.Models
   /// ABTest
   /// </summary>
   [DataContract(Name = "ABTest")]
-  public partial class ABTest : IEquatable<ABTest>
+  public partial class ABTest
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ABTest" /> class.
@@ -210,133 +210,6 @@ namespace Algolia.Search.Abtesting.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ABTest);
-    }
-
-    /// <summary>
-    /// Returns true if ABTest instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ABTest to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ABTest input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.AbTestID == input.AbTestID ||
-              this.AbTestID.Equals(input.AbTestID)
-          ) &&
-          (
-              this.ClickSignificance == input.ClickSignificance ||
-              this.ClickSignificance.Equals(input.ClickSignificance)
-          ) &&
-          (
-              this.ConversionSignificance == input.ConversionSignificance ||
-              this.ConversionSignificance.Equals(input.ConversionSignificance)
-          ) &&
-          (
-              this.AddToCartSignificance == input.AddToCartSignificance ||
-              this.AddToCartSignificance.Equals(input.AddToCartSignificance)
-          ) &&
-          (
-              this.PurchaseSignificance == input.PurchaseSignificance ||
-              this.PurchaseSignificance.Equals(input.PurchaseSignificance)
-          ) &&
-          (
-              this.RevenueSignificance == input.RevenueSignificance ||
-              this.RevenueSignificance != null &&
-              input.RevenueSignificance != null &&
-              this.RevenueSignificance.SequenceEqual(input.RevenueSignificance)
-          ) &&
-          (
-              this.UpdatedAt == input.UpdatedAt ||
-              (this.UpdatedAt != null &&
-              this.UpdatedAt.Equals(input.UpdatedAt))
-          ) &&
-          (
-              this.CreatedAt == input.CreatedAt ||
-              (this.CreatedAt != null &&
-              this.CreatedAt.Equals(input.CreatedAt))
-          ) &&
-          (
-              this.EndAt == input.EndAt ||
-              (this.EndAt != null &&
-              this.EndAt.Equals(input.EndAt))
-          ) &&
-          (
-              this.Name == input.Name ||
-              (this.Name != null &&
-              this.Name.Equals(input.Name))
-          ) &&
-          (
-              this.Status == input.Status ||
-              (this.Status != null &&
-              this.Status.Equals(input.Status))
-          ) &&
-          (
-              this.Variants == input.Variants ||
-              this.Variants != null &&
-              input.Variants != null &&
-              this.Variants.SequenceEqual(input.Variants)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.AbTestID.GetHashCode();
-        hashCode = (hashCode * 59) + this.ClickSignificance.GetHashCode();
-        hashCode = (hashCode * 59) + this.ConversionSignificance.GetHashCode();
-        hashCode = (hashCode * 59) + this.AddToCartSignificance.GetHashCode();
-        hashCode = (hashCode * 59) + this.PurchaseSignificance.GetHashCode();
-        if (this.RevenueSignificance != null)
-        {
-          hashCode = (hashCode * 59) + this.RevenueSignificance.GetHashCode();
-        }
-        if (this.UpdatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.UpdatedAt.GetHashCode();
-        }
-        if (this.CreatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.CreatedAt.GetHashCode();
-        }
-        if (this.EndAt != null)
-        {
-          hashCode = (hashCode * 59) + this.EndAt.GetHashCode();
-        }
-        if (this.Name != null)
-        {
-          hashCode = (hashCode * 59) + this.Name.GetHashCode();
-        }
-        if (this.Status != null)
-        {
-          hashCode = (hashCode * 59) + this.Status.GetHashCode();
-        }
-        if (this.Variants != null)
-        {
-          hashCode = (hashCode * 59) + this.Variants.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

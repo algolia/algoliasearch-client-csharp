@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Pagination
   /// </summary>
   [DataContract(Name = "Pagination")]
-  public partial class Pagination : IEquatable<Pagination>
+  public partial class Pagination
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Pagination" /> class.
@@ -91,63 +91,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Pagination);
-    }
-
-    /// <summary>
-    /// Returns true if Pagination instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Pagination to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Pagination input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.NbPages == input.NbPages ||
-              this.NbPages.Equals(input.NbPages)
-          ) &&
-          (
-              this.Page == input.Page ||
-              this.Page.Equals(input.Page)
-          ) &&
-          (
-              this.NbItems == input.NbItems ||
-              this.NbItems.Equals(input.NbItems)
-          ) &&
-          (
-              this.ItemsPerPage == input.ItemsPerPage ||
-              this.ItemsPerPage.Equals(input.ItemsPerPage)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.NbPages.GetHashCode();
-        hashCode = (hashCode * 59) + this.Page.GetHashCode();
-        hashCode = (hashCode * 59) + this.NbItems.GetHashCode();
-        hashCode = (hashCode * 59) + this.ItemsPerPage.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

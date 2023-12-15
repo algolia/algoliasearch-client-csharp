@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// SourceBigCommerce
   /// </summary>
   [DataContract(Name = "SourceBigCommerce")]
-  public partial class SourceBigCommerce : IEquatable<SourceBigCommerce>
+  public partial class SourceBigCommerce
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceBigCommerce" /> class.
@@ -96,91 +96,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SourceBigCommerce);
-    }
-
-    /// <summary>
-    /// Returns true if SourceBigCommerce instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SourceBigCommerce to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SourceBigCommerce input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.StoreHash == input.StoreHash ||
-              (this.StoreHash != null &&
-              this.StoreHash.Equals(input.StoreHash))
-          ) &&
-          (
-              this.Channel == input.Channel ||
-              (this.Channel != null &&
-              this.Channel.Equals(input.Channel))
-          ) &&
-          (
-              this.CustomFields == input.CustomFields ||
-              this.CustomFields != null &&
-              input.CustomFields != null &&
-              this.CustomFields.SequenceEqual(input.CustomFields)
-          ) &&
-          (
-              this.ProductMetafields == input.ProductMetafields ||
-              this.ProductMetafields != null &&
-              input.ProductMetafields != null &&
-              this.ProductMetafields.SequenceEqual(input.ProductMetafields)
-          ) &&
-          (
-              this.VariantMetafields == input.VariantMetafields ||
-              this.VariantMetafields != null &&
-              input.VariantMetafields != null &&
-              this.VariantMetafields.SequenceEqual(input.VariantMetafields)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.StoreHash != null)
-        {
-          hashCode = (hashCode * 59) + this.StoreHash.GetHashCode();
-        }
-        if (this.Channel != null)
-        {
-          hashCode = (hashCode * 59) + this.Channel.GetHashCode();
-        }
-        if (this.CustomFields != null)
-        {
-          hashCode = (hashCode * 59) + this.CustomFields.GetHashCode();
-        }
-        if (this.ProductMetafields != null)
-        {
-          hashCode = (hashCode * 59) + this.ProductMetafields.GetHashCode();
-        }
-        if (this.VariantMetafields != null)
-        {
-          hashCode = (hashCode * 59) + this.VariantMetafields.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

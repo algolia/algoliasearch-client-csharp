@@ -22,7 +22,7 @@ namespace Algolia.Search.Analytics.Models
   /// ClickThroughRateEvent
   /// </summary>
   [DataContract(Name = "clickThroughRateEvent")]
-  public partial class ClickThroughRateEvent : IEquatable<ClickThroughRateEvent>
+  public partial class ClickThroughRateEvent
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ClickThroughRateEvent" /> class.
@@ -100,67 +100,6 @@ namespace Algolia.Search.Analytics.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ClickThroughRateEvent);
-    }
-
-    /// <summary>
-    /// Returns true if ClickThroughRateEvent instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ClickThroughRateEvent to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ClickThroughRateEvent input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Rate == input.Rate ||
-              this.Rate.Equals(input.Rate)
-          ) &&
-          (
-              this.ClickCount == input.ClickCount ||
-              this.ClickCount.Equals(input.ClickCount)
-          ) &&
-          (
-              this.TrackedSearchCount == input.TrackedSearchCount ||
-              this.TrackedSearchCount.Equals(input.TrackedSearchCount)
-          ) &&
-          (
-              this.Date == input.Date ||
-              (this.Date != null &&
-              this.Date.Equals(input.Date))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Rate.GetHashCode();
-        hashCode = (hashCode * 59) + this.ClickCount.GetHashCode();
-        hashCode = (hashCode * 59) + this.TrackedSearchCount.GetHashCode();
-        if (this.Date != null)
-        {
-          hashCode = (hashCode * 59) + this.Date.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

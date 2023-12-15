@@ -22,7 +22,7 @@ namespace Algolia.Search.QuerySuggestions.Models
   /// QuerySuggestionsConfigurationResponse
   /// </summary>
   [DataContract(Name = "QuerySuggestionsConfigurationResponse")]
-  public partial class QuerySuggestionsConfigurationResponse : IEquatable<QuerySuggestionsConfigurationResponse>
+  public partial class QuerySuggestionsConfigurationResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="QuerySuggestionsConfigurationResponse" /> class.
@@ -165,127 +165,6 @@ namespace Algolia.Search.QuerySuggestions.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as QuerySuggestionsConfigurationResponse);
-    }
-
-    /// <summary>
-    /// Returns true if QuerySuggestionsConfigurationResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of QuerySuggestionsConfigurationResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(QuerySuggestionsConfigurationResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.AppId == input.AppId ||
-              (this.AppId != null &&
-              this.AppId.Equals(input.AppId))
-          ) &&
-          (
-              this.SourceIndicesAPIKey == input.SourceIndicesAPIKey ||
-              (this.SourceIndicesAPIKey != null &&
-              this.SourceIndicesAPIKey.Equals(input.SourceIndicesAPIKey))
-          ) &&
-          (
-              this.SuggestionsIndicesAPIKey == input.SuggestionsIndicesAPIKey ||
-              (this.SuggestionsIndicesAPIKey != null &&
-              this.SuggestionsIndicesAPIKey.Equals(input.SuggestionsIndicesAPIKey))
-          ) &&
-          (
-              this.ExternalIndicesAPIKey == input.ExternalIndicesAPIKey ||
-              (this.ExternalIndicesAPIKey != null &&
-              this.ExternalIndicesAPIKey.Equals(input.ExternalIndicesAPIKey))
-          ) &&
-          (
-              this.IndexName == input.IndexName ||
-              (this.IndexName != null &&
-              this.IndexName.Equals(input.IndexName))
-          ) &&
-          (
-              this.SourceIndices == input.SourceIndices ||
-              this.SourceIndices != null &&
-              input.SourceIndices != null &&
-              this.SourceIndices.SequenceEqual(input.SourceIndices)
-          ) &&
-          (
-              this.Languages == input.Languages ||
-              (this.Languages != null &&
-              this.Languages.Equals(input.Languages))
-          ) &&
-          (
-              this.Exclude == input.Exclude ||
-              this.Exclude != null &&
-              input.Exclude != null &&
-              this.Exclude.SequenceEqual(input.Exclude)
-          ) &&
-          (
-              this.EnablePersonalization == input.EnablePersonalization ||
-              this.EnablePersonalization.Equals(input.EnablePersonalization)
-          ) &&
-          (
-              this.AllowSpecialCharacters == input.AllowSpecialCharacters ||
-              this.AllowSpecialCharacters.Equals(input.AllowSpecialCharacters)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.AppId != null)
-        {
-          hashCode = (hashCode * 59) + this.AppId.GetHashCode();
-        }
-        if (this.SourceIndicesAPIKey != null)
-        {
-          hashCode = (hashCode * 59) + this.SourceIndicesAPIKey.GetHashCode();
-        }
-        if (this.SuggestionsIndicesAPIKey != null)
-        {
-          hashCode = (hashCode * 59) + this.SuggestionsIndicesAPIKey.GetHashCode();
-        }
-        if (this.ExternalIndicesAPIKey != null)
-        {
-          hashCode = (hashCode * 59) + this.ExternalIndicesAPIKey.GetHashCode();
-        }
-        if (this.IndexName != null)
-        {
-          hashCode = (hashCode * 59) + this.IndexName.GetHashCode();
-        }
-        if (this.SourceIndices != null)
-        {
-          hashCode = (hashCode * 59) + this.SourceIndices.GetHashCode();
-        }
-        if (this.Languages != null)
-        {
-          hashCode = (hashCode * 59) + this.Languages.GetHashCode();
-        }
-        if (this.Exclude != null)
-        {
-          hashCode = (hashCode * 59) + this.Exclude.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.EnablePersonalization.GetHashCode();
-        hashCode = (hashCode * 59) + this.AllowSpecialCharacters.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

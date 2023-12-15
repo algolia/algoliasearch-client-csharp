@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// TrendingFacetsQuery
   /// </summary>
   [DataContract(Name = "trendingFacetsQuery")]
-  public partial class TrendingFacetsQuery : IEquatable<TrendingFacetsQuery>
+  public partial class TrendingFacetsQuery
   {
 
     /// <summary>
@@ -114,76 +114,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as TrendingFacetsQuery);
-    }
-
-    /// <summary>
-    /// Returns true if TrendingFacetsQuery instances are equal
-    /// </summary>
-    /// <param name="input">Instance of TrendingFacetsQuery to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(TrendingFacetsQuery input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.FacetName == input.FacetName ||
-              (this.FacetName != null &&
-              this.FacetName.Equals(input.FacetName))
-          ) &&
-          (
-              this.Model == input.Model ||
-              this.Model.Equals(input.Model)
-          ) &&
-          (
-              this.IndexName == input.IndexName ||
-              (this.IndexName != null &&
-              this.IndexName.Equals(input.IndexName))
-          ) &&
-          (
-              this.Threshold == input.Threshold ||
-              this.Threshold.Equals(input.Threshold)
-          ) &&
-          (
-              this.MaxRecommendations == input.MaxRecommendations ||
-              this.MaxRecommendations.Equals(input.MaxRecommendations)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.FacetName != null)
-        {
-          hashCode = (hashCode * 59) + this.FacetName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Model.GetHashCode();
-        if (this.IndexName != null)
-        {
-          hashCode = (hashCode * 59) + this.IndexName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Threshold.GetHashCode();
-        hashCode = (hashCode * 59) + this.MaxRecommendations.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

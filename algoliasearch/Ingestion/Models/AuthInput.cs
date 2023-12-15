@@ -24,7 +24,7 @@ namespace Algolia.Search.Ingestion.Models
   /// </summary>
   [JsonConverter(typeof(AuthInputJsonConverter))]
   [DataContract(Name = "AuthInput")]
-  public partial class AuthInput : AbstractSchema, IEquatable<AuthInput>
+  public partial class AuthInput : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthInput" /> class
@@ -328,43 +328,6 @@ namespace Algolia.Search.Ingestion.Models
       return newAuthInput;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as AuthInput);
-    }
-
-    /// <summary>
-    /// Returns true if AuthInput instances are equal
-    /// </summary>
-    /// <param name="input">Instance of AuthInput to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(AuthInput input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

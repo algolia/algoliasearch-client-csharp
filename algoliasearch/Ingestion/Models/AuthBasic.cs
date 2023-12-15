@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Authentication input for Basic login with username and password.
   /// </summary>
   [DataContract(Name = "AuthBasic")]
-  public partial class AuthBasic : IEquatable<AuthBasic>
+  public partial class AuthBasic
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthBasic" /> class.
@@ -83,61 +83,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as AuthBasic);
-    }
-
-    /// <summary>
-    /// Returns true if AuthBasic instances are equal
-    /// </summary>
-    /// <param name="input">Instance of AuthBasic to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(AuthBasic input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Username == input.Username ||
-              (this.Username != null &&
-              this.Username.Equals(input.Username))
-          ) &&
-          (
-              this.Password == input.Password ||
-              (this.Password != null &&
-              this.Password.Equals(input.Password))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Username != null)
-        {
-          hashCode = (hashCode * 59) + this.Username.GetHashCode();
-        }
-        if (this.Password != null)
-        {
-          hashCode = (hashCode * 59) + this.Password.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// The input for a &#x60;schedule&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
   /// </summary>
   [DataContract(Name = "ScheduleDateUtilsInput")]
-  public partial class ScheduleDateUtilsInput : IEquatable<ScheduleDateUtilsInput>
+  public partial class ScheduleDateUtilsInput
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ScheduleDateUtilsInput" /> class.
@@ -65,48 +65,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ScheduleDateUtilsInput);
-    }
-
-    /// <summary>
-    /// Returns true if ScheduleDateUtilsInput instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ScheduleDateUtilsInput to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ScheduleDateUtilsInput input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Timeframe == input.Timeframe ||
-              this.Timeframe.Equals(input.Timeframe)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Timeframe.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// Extra content for the search UI, for example, to control the [ordering and display of facets](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/merchandising-facets/#merchandise-facets-and-their-values-in-the-manual-editor). You can set a default value and dynamically override it with [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/).
   /// </summary>
   [DataContract(Name = "renderingContent")]
-  public partial class RenderingContent : IEquatable<RenderingContent>
+  public partial class RenderingContent
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="RenderingContent" /> class.
@@ -59,52 +59,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as RenderingContent);
-    }
-
-    /// <summary>
-    /// Returns true if RenderingContent instances are equal
-    /// </summary>
-    /// <param name="input">Instance of RenderingContent to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(RenderingContent input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.FacetOrdering == input.FacetOrdering ||
-              (this.FacetOrdering != null &&
-              this.FacetOrdering.Equals(input.FacetOrdering))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.FacetOrdering != null)
-        {
-          hashCode = (hashCode * 59) + this.FacetOrdering.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

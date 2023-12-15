@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// RankingInfo
   /// </summary>
   [DataContract(Name = "rankingInfo")]
-  public partial class RankingInfo : IEquatable<RankingInfo>
+  public partial class RankingInfo
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="RankingInfo" /> class.
@@ -183,116 +183,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as RankingInfo);
-    }
-
-    /// <summary>
-    /// Returns true if RankingInfo instances are equal
-    /// </summary>
-    /// <param name="input">Instance of RankingInfo to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(RankingInfo input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Filters == input.Filters ||
-              this.Filters.Equals(input.Filters)
-          ) &&
-          (
-              this.FirstMatchedWord == input.FirstMatchedWord ||
-              this.FirstMatchedWord.Equals(input.FirstMatchedWord)
-          ) &&
-          (
-              this.GeoDistance == input.GeoDistance ||
-              this.GeoDistance.Equals(input.GeoDistance)
-          ) &&
-          (
-              this.GeoPrecision == input.GeoPrecision ||
-              this.GeoPrecision.Equals(input.GeoPrecision)
-          ) &&
-          (
-              this.MatchedGeoLocation == input.MatchedGeoLocation ||
-              (this.MatchedGeoLocation != null &&
-              this.MatchedGeoLocation.Equals(input.MatchedGeoLocation))
-          ) &&
-          (
-              this.Personalization == input.Personalization ||
-              (this.Personalization != null &&
-              this.Personalization.Equals(input.Personalization))
-          ) &&
-          (
-              this.NbExactWords == input.NbExactWords ||
-              this.NbExactWords.Equals(input.NbExactWords)
-          ) &&
-          (
-              this.NbTypos == input.NbTypos ||
-              this.NbTypos.Equals(input.NbTypos)
-          ) &&
-          (
-              this.Promoted == input.Promoted ||
-              this.Promoted.Equals(input.Promoted)
-          ) &&
-          (
-              this.ProximityDistance == input.ProximityDistance ||
-              this.ProximityDistance.Equals(input.ProximityDistance)
-          ) &&
-          (
-              this.UserScore == input.UserScore ||
-              this.UserScore.Equals(input.UserScore)
-          ) &&
-          (
-              this.Words == input.Words ||
-              this.Words.Equals(input.Words)
-          ) &&
-          (
-              this.PromotedByReRanking == input.PromotedByReRanking ||
-              this.PromotedByReRanking.Equals(input.PromotedByReRanking)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Filters.GetHashCode();
-        hashCode = (hashCode * 59) + this.FirstMatchedWord.GetHashCode();
-        hashCode = (hashCode * 59) + this.GeoDistance.GetHashCode();
-        hashCode = (hashCode * 59) + this.GeoPrecision.GetHashCode();
-        if (this.MatchedGeoLocation != null)
-        {
-          hashCode = (hashCode * 59) + this.MatchedGeoLocation.GetHashCode();
-        }
-        if (this.Personalization != null)
-        {
-          hashCode = (hashCode * 59) + this.Personalization.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.NbExactWords.GetHashCode();
-        hashCode = (hashCode * 59) + this.NbTypos.GetHashCode();
-        hashCode = (hashCode * 59) + this.Promoted.GetHashCode();
-        hashCode = (hashCode * 59) + this.ProximityDistance.GetHashCode();
-        hashCode = (hashCode * 59) + this.UserScore.GetHashCode();
-        hashCode = (hashCode * 59) + this.Words.GetHashCode();
-        hashCode = (hashCode * 59) + this.PromotedByReRanking.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

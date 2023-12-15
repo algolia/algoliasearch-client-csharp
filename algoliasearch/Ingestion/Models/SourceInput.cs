@@ -24,7 +24,7 @@ namespace Algolia.Search.Ingestion.Models
   /// </summary>
   [JsonConverter(typeof(SourceInputJsonConverter))]
   [DataContract(Name = "SourceInput")]
-  public partial class SourceInput : AbstractSchema, IEquatable<SourceInput>
+  public partial class SourceInput : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceInput" /> class
@@ -374,43 +374,6 @@ namespace Algolia.Search.Ingestion.Models
       return newSourceInput;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SourceInput);
-    }
-
-    /// <summary>
-    /// Returns true if SourceInput instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SourceInput to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SourceInput input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

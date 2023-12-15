@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Response from the API when the Destination is successfully updated.
   /// </summary>
   [DataContract(Name = "DestinationUpdateResponse")]
-  public partial class DestinationUpdateResponse : IEquatable<DestinationUpdateResponse>
+  public partial class DestinationUpdateResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="DestinationUpdateResponse" /> class.
@@ -100,70 +100,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as DestinationUpdateResponse);
-    }
-
-    /// <summary>
-    /// Returns true if DestinationUpdateResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of DestinationUpdateResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(DestinationUpdateResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.DestinationID == input.DestinationID ||
-              (this.DestinationID != null &&
-              this.DestinationID.Equals(input.DestinationID))
-          ) &&
-          (
-              this.Name == input.Name ||
-              (this.Name != null &&
-              this.Name.Equals(input.Name))
-          ) &&
-          (
-              this.UpdatedAt == input.UpdatedAt ||
-              (this.UpdatedAt != null &&
-              this.UpdatedAt.Equals(input.UpdatedAt))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.DestinationID != null)
-        {
-          hashCode = (hashCode * 59) + this.DestinationID.GetHashCode();
-        }
-        if (this.Name != null)
-        {
-          hashCode = (hashCode * 59) + this.Name.GetHashCode();
-        }
-        if (this.UpdatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.UpdatedAt.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

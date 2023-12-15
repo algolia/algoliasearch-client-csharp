@@ -24,7 +24,7 @@ namespace Algolia.Search.Insights.Models
   /// </summary>
   [JsonConverter(typeof(DiscountJsonConverter))]
   [DataContract(Name = "discount")]
-  public partial class Discount : AbstractSchema, IEquatable<Discount>
+  public partial class Discount : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Discount" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Insights.Models
       return newDiscount;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Discount);
-    }
-
-    /// <summary>
-    /// Returns true if Discount instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Discount to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Discount input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

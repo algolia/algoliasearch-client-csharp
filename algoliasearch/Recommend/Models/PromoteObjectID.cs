@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// Record to promote.
   /// </summary>
   [DataContract(Name = "promoteObjectID")]
-  public partial class PromoteObjectID : IEquatable<PromoteObjectID>
+  public partial class PromoteObjectID
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="PromoteObjectID" /> class.
@@ -80,57 +80,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as PromoteObjectID);
-    }
-
-    /// <summary>
-    /// Returns true if PromoteObjectID instances are equal
-    /// </summary>
-    /// <param name="input">Instance of PromoteObjectID to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(PromoteObjectID input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.ObjectID == input.ObjectID ||
-              (this.ObjectID != null &&
-              this.ObjectID.Equals(input.ObjectID))
-          ) &&
-          (
-              this.Position == input.Position ||
-              this.Position.Equals(input.Position)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ObjectID != null)
-        {
-          hashCode = (hashCode * 59) + this.ObjectID.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Position.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

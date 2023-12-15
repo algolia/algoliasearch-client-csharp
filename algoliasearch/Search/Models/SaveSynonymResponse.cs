@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// SaveSynonymResponse
   /// </summary>
   [DataContract(Name = "saveSynonymResponse")]
-  public partial class SaveSynonymResponse : IEquatable<SaveSynonymResponse>
+  public partial class SaveSynonymResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SaveSynonymResponse" /> class.
@@ -95,66 +95,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SaveSynonymResponse);
-    }
-
-    /// <summary>
-    /// Returns true if SaveSynonymResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SaveSynonymResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SaveSynonymResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.TaskID == input.TaskID ||
-              this.TaskID.Equals(input.TaskID)
-          ) &&
-          (
-              this.UpdatedAt == input.UpdatedAt ||
-              (this.UpdatedAt != null &&
-              this.UpdatedAt.Equals(input.UpdatedAt))
-          ) &&
-          (
-              this.Id == input.Id ||
-              (this.Id != null &&
-              this.Id.Equals(input.Id))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.TaskID.GetHashCode();
-        if (this.UpdatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.UpdatedAt.GetHashCode();
-        }
-        if (this.Id != null)
-        {
-          hashCode = (hashCode * 59) + this.Id.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

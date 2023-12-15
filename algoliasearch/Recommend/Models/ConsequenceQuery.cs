@@ -24,7 +24,7 @@ namespace Algolia.Search.Recommend.Models
   /// </summary>
   [JsonConverter(typeof(ConsequenceQueryJsonConverter))]
   [DataContract(Name = "consequenceQuery")]
-  public partial class ConsequenceQuery : AbstractSchema, IEquatable<ConsequenceQuery>
+  public partial class ConsequenceQuery : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsequenceQuery" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Recommend.Models
       return newConsequenceQuery;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ConsequenceQuery);
-    }
-
-    /// <summary>
-    /// Returns true if ConsequenceQuery instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ConsequenceQuery to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ConsequenceQuery input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

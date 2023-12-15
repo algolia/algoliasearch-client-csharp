@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Source
   /// </summary>
   [DataContract(Name = "Source")]
-  public partial class Source : IEquatable<Source>
+  public partial class Source
   {
 
     /// <summary>
@@ -142,102 +142,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Source);
-    }
-
-    /// <summary>
-    /// Returns true if Source instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Source to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Source input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.SourceID == input.SourceID ||
-              (this.SourceID != null &&
-              this.SourceID.Equals(input.SourceID))
-          ) &&
-          (
-              this.Type == input.Type ||
-              this.Type.Equals(input.Type)
-          ) &&
-          (
-              this.Name == input.Name ||
-              (this.Name != null &&
-              this.Name.Equals(input.Name))
-          ) &&
-          (
-              this.Input == input.Input ||
-              (this.Input != null &&
-              this.Input.Equals(input.Input))
-          ) &&
-          (
-              this.AuthenticationID == input.AuthenticationID ||
-              (this.AuthenticationID != null &&
-              this.AuthenticationID.Equals(input.AuthenticationID))
-          ) &&
-          (
-              this.CreatedAt == input.CreatedAt ||
-              (this.CreatedAt != null &&
-              this.CreatedAt.Equals(input.CreatedAt))
-          ) &&
-          (
-              this.UpdatedAt == input.UpdatedAt ||
-              (this.UpdatedAt != null &&
-              this.UpdatedAt.Equals(input.UpdatedAt))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.SourceID != null)
-        {
-          hashCode = (hashCode * 59) + this.SourceID.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Type.GetHashCode();
-        if (this.Name != null)
-        {
-          hashCode = (hashCode * 59) + this.Name.GetHashCode();
-        }
-        if (this.Input != null)
-        {
-          hashCode = (hashCode * 59) + this.Input.GetHashCode();
-        }
-        if (this.AuthenticationID != null)
-        {
-          hashCode = (hashCode * 59) + this.AuthenticationID.GetHashCode();
-        }
-        if (this.CreatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.CreatedAt.GetHashCode();
-        }
-        if (this.UpdatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.UpdatedAt.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

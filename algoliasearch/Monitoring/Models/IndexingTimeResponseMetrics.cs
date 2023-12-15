@@ -22,7 +22,7 @@ namespace Algolia.Search.Monitoring.Models
   /// IndexingTimeResponseMetrics
   /// </summary>
   [DataContract(Name = "IndexingTimeResponse_metrics")]
-  public partial class IndexingTimeResponseMetrics : IEquatable<IndexingTimeResponseMetrics>
+  public partial class IndexingTimeResponseMetrics
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="IndexingTimeResponseMetrics" /> class.
@@ -59,53 +59,6 @@ namespace Algolia.Search.Monitoring.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as IndexingTimeResponseMetrics);
-    }
-
-    /// <summary>
-    /// Returns true if IndexingTimeResponseMetrics instances are equal
-    /// </summary>
-    /// <param name="input">Instance of IndexingTimeResponseMetrics to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(IndexingTimeResponseMetrics input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Indexing == input.Indexing ||
-              this.Indexing != null &&
-              input.Indexing != null &&
-              this.Indexing.SequenceEqual(input.Indexing)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Indexing != null)
-        {
-          hashCode = (hashCode * 59) + this.Indexing.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

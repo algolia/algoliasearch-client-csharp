@@ -24,7 +24,7 @@ namespace Algolia.Search.Ingestion.Models
   /// </summary>
   [JsonConverter(typeof(TaskCreateTriggerJsonConverter))]
   [DataContract(Name = "TaskCreateTrigger")]
-  public partial class TaskCreateTrigger : AbstractSchema, IEquatable<TaskCreateTrigger>
+  public partial class TaskCreateTrigger : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="TaskCreateTrigger" /> class
@@ -236,43 +236,6 @@ namespace Algolia.Search.Ingestion.Models
       return newTaskCreateTrigger;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as TaskCreateTrigger);
-    }
-
-    /// <summary>
-    /// Returns true if TaskCreateTrigger instances are equal
-    /// </summary>
-    /// <param name="input">Instance of TaskCreateTrigger to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(TaskCreateTrigger input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

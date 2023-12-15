@@ -22,7 +22,7 @@ namespace Algolia.Search.Analytics.Models
   /// ClickPosition
   /// </summary>
   [DataContract(Name = "clickPosition")]
-  public partial class ClickPosition : IEquatable<ClickPosition>
+  public partial class ClickPosition
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ClickPosition" /> class.
@@ -80,58 +80,6 @@ namespace Algolia.Search.Analytics.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ClickPosition);
-    }
-
-    /// <summary>
-    /// Returns true if ClickPosition instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ClickPosition to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ClickPosition input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Position == input.Position ||
-              this.Position != null &&
-              input.Position != null &&
-              this.Position.SequenceEqual(input.Position)
-          ) &&
-          (
-              this.ClickCount == input.ClickCount ||
-              this.ClickCount.Equals(input.ClickCount)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Position != null)
-        {
-          hashCode = (hashCode * 59) + this.Position.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.ClickCount.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

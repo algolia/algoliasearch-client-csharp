@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// RunProgress
   /// </summary>
   [DataContract(Name = "Run_progress")]
-  public partial class RunProgress : IEquatable<RunProgress>
+  public partial class RunProgress
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="RunProgress" /> class.
@@ -68,53 +68,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as RunProgress);
-    }
-
-    /// <summary>
-    /// Returns true if RunProgress instances are equal
-    /// </summary>
-    /// <param name="input">Instance of RunProgress to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(RunProgress input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.ExpectedNbOfEvents == input.ExpectedNbOfEvents ||
-              this.ExpectedNbOfEvents.Equals(input.ExpectedNbOfEvents)
-          ) &&
-          (
-              this.ReceivedNbOfEvents == input.ReceivedNbOfEvents ||
-              this.ReceivedNbOfEvents.Equals(input.ReceivedNbOfEvents)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.ExpectedNbOfEvents.GetHashCode();
-        hashCode = (hashCode * 59) + this.ReceivedNbOfEvents.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

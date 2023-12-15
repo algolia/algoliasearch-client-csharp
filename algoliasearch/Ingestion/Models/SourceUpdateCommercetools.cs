@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// SourceUpdateCommercetools
   /// </summary>
   [DataContract(Name = "SourceUpdateCommercetools")]
-  public partial class SourceUpdateCommercetools : IEquatable<SourceUpdateCommercetools>
+  public partial class SourceUpdateCommercetools
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceUpdateCommercetools" /> class.
@@ -70,63 +70,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SourceUpdateCommercetools);
-    }
-
-    /// <summary>
-    /// Returns true if SourceUpdateCommercetools instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SourceUpdateCommercetools to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SourceUpdateCommercetools input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.StoreKeys == input.StoreKeys ||
-              this.StoreKeys != null &&
-              input.StoreKeys != null &&
-              this.StoreKeys.SequenceEqual(input.StoreKeys)
-          ) &&
-          (
-              this.Locales == input.Locales ||
-              this.Locales != null &&
-              input.Locales != null &&
-              this.Locales.SequenceEqual(input.Locales)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.StoreKeys != null)
-        {
-          hashCode = (hashCode * 59) + this.StoreKeys.GetHashCode();
-        }
-        if (this.Locales != null)
-        {
-          hashCode = (hashCode * 59) + this.Locales.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

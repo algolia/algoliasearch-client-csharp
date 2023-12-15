@@ -22,7 +22,7 @@ namespace Algolia.Search.QuerySuggestions.Models
   /// GetConfigStatus200Response
   /// </summary>
   [DataContract(Name = "getConfigStatus_200_response")]
-  public partial class GetConfigStatus200Response : IEquatable<GetConfigStatus200Response>
+  public partial class GetConfigStatus200Response
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetConfigStatus200Response" /> class.
@@ -100,84 +100,6 @@ namespace Algolia.Search.QuerySuggestions.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetConfigStatus200Response);
-    }
-
-    /// <summary>
-    /// Returns true if GetConfigStatus200Response instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetConfigStatus200Response to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetConfigStatus200Response input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.IndexName == input.IndexName ||
-              (this.IndexName != null &&
-              this.IndexName.Equals(input.IndexName))
-          ) &&
-          (
-              this.IsRunning == input.IsRunning ||
-              this.IsRunning.Equals(input.IsRunning)
-          ) &&
-          (
-              this.LastBuiltAt == input.LastBuiltAt ||
-              (this.LastBuiltAt != null &&
-              this.LastBuiltAt.Equals(input.LastBuiltAt))
-          ) &&
-          (
-              this.LastSuccessfulBuiltAt == input.LastSuccessfulBuiltAt ||
-              (this.LastSuccessfulBuiltAt != null &&
-              this.LastSuccessfulBuiltAt.Equals(input.LastSuccessfulBuiltAt))
-          ) &&
-          (
-              this.LastSuccessfulBuildDuration == input.LastSuccessfulBuildDuration ||
-              (this.LastSuccessfulBuildDuration != null &&
-              this.LastSuccessfulBuildDuration.Equals(input.LastSuccessfulBuildDuration))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.IndexName != null)
-        {
-          hashCode = (hashCode * 59) + this.IndexName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.IsRunning.GetHashCode();
-        if (this.LastBuiltAt != null)
-        {
-          hashCode = (hashCode * 59) + this.LastBuiltAt.GetHashCode();
-        }
-        if (this.LastSuccessfulBuiltAt != null)
-        {
-          hashCode = (hashCode * 59) + this.LastSuccessfulBuiltAt.GetHashCode();
-        }
-        if (this.LastSuccessfulBuildDuration != null)
-        {
-          hashCode = (hashCode * 59) + this.LastSuccessfulBuildDuration.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

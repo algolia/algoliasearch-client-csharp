@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Value
   /// </summary>
   [DataContract(Name = "value")]
-  public partial class Value : IEquatable<Value>
+  public partial class Value
   {
 
     /// <summary>
@@ -69,58 +69,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Value);
-    }
-
-    /// <summary>
-    /// Returns true if Value instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Value to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Value input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Order == input.Order ||
-              this.Order != null &&
-              input.Order != null &&
-              this.Order.SequenceEqual(input.Order)
-          ) &&
-          (
-              this.SortRemainingBy == input.SortRemainingBy ||
-              this.SortRemainingBy.Equals(input.SortRemainingBy)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Order != null)
-        {
-          hashCode = (hashCode * 59) + this.Order.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.SortRemainingBy.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

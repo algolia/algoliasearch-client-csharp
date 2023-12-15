@@ -22,7 +22,7 @@ namespace Algolia.Search.Monitoring.Models
   /// LatencyResponse
   /// </summary>
   [DataContract(Name = "LatencyResponse")]
-  public partial class LatencyResponse : IEquatable<LatencyResponse>
+  public partial class LatencyResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="LatencyResponse" /> class.
@@ -59,52 +59,6 @@ namespace Algolia.Search.Monitoring.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as LatencyResponse);
-    }
-
-    /// <summary>
-    /// Returns true if LatencyResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of LatencyResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(LatencyResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Metrics == input.Metrics ||
-              (this.Metrics != null &&
-              this.Metrics.Equals(input.Metrics))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Metrics != null)
-        {
-          hashCode = (hashCode * 59) + this.Metrics.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

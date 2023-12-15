@@ -22,7 +22,7 @@ namespace Algolia.Search.Analytics.Models
   /// GetConversationRateResponse
   /// </summary>
   [DataContract(Name = "getConversationRateResponse")]
-  public partial class GetConversationRateResponse : IEquatable<GetConversationRateResponse>
+  public partial class GetConversationRateResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetConversationRateResponse" /> class.
@@ -100,68 +100,6 @@ namespace Algolia.Search.Analytics.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetConversationRateResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetConversationRateResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetConversationRateResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetConversationRateResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Rate == input.Rate ||
-              this.Rate.Equals(input.Rate)
-          ) &&
-          (
-              this.TrackedSearchCount == input.TrackedSearchCount ||
-              this.TrackedSearchCount.Equals(input.TrackedSearchCount)
-          ) &&
-          (
-              this.ConversionCount == input.ConversionCount ||
-              this.ConversionCount.Equals(input.ConversionCount)
-          ) &&
-          (
-              this.Dates == input.Dates ||
-              this.Dates != null &&
-              input.Dates != null &&
-              this.Dates.SequenceEqual(input.Dates)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Rate.GetHashCode();
-        hashCode = (hashCode * 59) + this.TrackedSearchCount.GetHashCode();
-        hashCode = (hashCode * 59) + this.ConversionCount.GetHashCode();
-        if (this.Dates != null)
-        {
-          hashCode = (hashCode * 59) + this.Dates.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

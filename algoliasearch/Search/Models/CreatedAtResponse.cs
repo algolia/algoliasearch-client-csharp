@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Response and creation timestamp.
   /// </summary>
   [DataContract(Name = "createdAtResponse")]
-  public partial class CreatedAtResponse : IEquatable<CreatedAtResponse>
+  public partial class CreatedAtResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="CreatedAtResponse" /> class.
@@ -70,52 +70,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as CreatedAtResponse);
-    }
-
-    /// <summary>
-    /// Returns true if CreatedAtResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of CreatedAtResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(CreatedAtResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.CreatedAt == input.CreatedAt ||
-              (this.CreatedAt != null &&
-              this.CreatedAt.Equals(input.CreatedAt))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.CreatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.CreatedAt.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

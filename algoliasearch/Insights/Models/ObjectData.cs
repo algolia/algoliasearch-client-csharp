@@ -22,7 +22,7 @@ namespace Algolia.Search.Insights.Models
   /// ObjectData
   /// </summary>
   [DataContract(Name = "objectData")]
-  public partial class ObjectData : IEquatable<ObjectData>
+  public partial class ObjectData
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ObjectData" /> class.
@@ -78,66 +78,6 @@ namespace Algolia.Search.Insights.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ObjectData);
-    }
-
-    /// <summary>
-    /// Returns true if ObjectData instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ObjectData to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ObjectData input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Price == input.Price ||
-              (this.Price != null &&
-              this.Price.Equals(input.Price))
-          ) &&
-          (
-              this.Quantity == input.Quantity ||
-              this.Quantity.Equals(input.Quantity)
-          ) &&
-          (
-              this.Discount == input.Discount ||
-              (this.Discount != null &&
-              this.Discount.Equals(input.Discount))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Price != null)
-        {
-          hashCode = (hashCode * 59) + this.Price.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Quantity.GetHashCode();
-        if (this.Discount != null)
-        {
-          hashCode = (hashCode * 59) + this.Discount.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

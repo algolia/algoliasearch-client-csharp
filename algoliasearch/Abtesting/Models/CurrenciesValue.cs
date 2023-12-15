@@ -22,7 +22,7 @@ namespace Algolia.Search.Abtesting.Models
   /// CurrenciesValue
   /// </summary>
   [DataContract(Name = "currencies_value")]
-  public partial class CurrenciesValue : IEquatable<CurrenciesValue>
+  public partial class CurrenciesValue
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="CurrenciesValue" /> class.
@@ -90,67 +90,6 @@ namespace Algolia.Search.Abtesting.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as CurrenciesValue);
-    }
-
-    /// <summary>
-    /// Returns true if CurrenciesValue instances are equal
-    /// </summary>
-    /// <param name="input">Instance of CurrenciesValue to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(CurrenciesValue input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Currency == input.Currency ||
-              (this.Currency != null &&
-              this.Currency.Equals(input.Currency))
-          ) &&
-          (
-              this.Revenue == input.Revenue ||
-              this.Revenue.Equals(input.Revenue)
-          ) &&
-          (
-              this.Mean == input.Mean ||
-              this.Mean.Equals(input.Mean)
-          ) &&
-          (
-              this.StandardDeviation == input.StandardDeviation ||
-              this.StandardDeviation.Equals(input.StandardDeviation)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Currency != null)
-        {
-          hashCode = (hashCode * 59) + this.Currency.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Revenue.GetHashCode();
-        hashCode = (hashCode * 59) + this.Mean.GetHashCode();
-        hashCode = (hashCode * 59) + this.StandardDeviation.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

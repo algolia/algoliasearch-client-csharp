@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// BigCommerceChannel
   /// </summary>
   [DataContract(Name = "BigCommerceChannel")]
-  public partial class BigCommerceChannel : IEquatable<BigCommerceChannel>
+  public partial class BigCommerceChannel
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BigCommerceChannel" /> class.
@@ -75,58 +75,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BigCommerceChannel);
-    }
-
-    /// <summary>
-    /// Returns true if BigCommerceChannel instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BigCommerceChannel to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BigCommerceChannel input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Id == input.Id ||
-              this.Id.Equals(input.Id)
-          ) &&
-          (
-              this.Currencies == input.Currencies ||
-              this.Currencies != null &&
-              input.Currencies != null &&
-              this.Currencies.SequenceEqual(input.Currencies)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Id.GetHashCode();
-        if (this.Currencies != null)
-        {
-          hashCode = (hashCode * 59) + this.Currencies.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

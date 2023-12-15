@@ -22,7 +22,7 @@ namespace Algolia.Search.Abtesting.Models
   /// Empty searches removed from the A/B test as a result of configuration settings.
   /// </summary>
   [DataContract(Name = "filterEffects_emptySearch")]
-  public partial class FilterEffectsEmptySearch : IEquatable<FilterEffectsEmptySearch>
+  public partial class FilterEffectsEmptySearch
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="FilterEffectsEmptySearch" /> class.
@@ -70,53 +70,6 @@ namespace Algolia.Search.Abtesting.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as FilterEffectsEmptySearch);
-    }
-
-    /// <summary>
-    /// Returns true if FilterEffectsEmptySearch instances are equal
-    /// </summary>
-    /// <param name="input">Instance of FilterEffectsEmptySearch to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(FilterEffectsEmptySearch input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.UsersCount == input.UsersCount ||
-              this.UsersCount.Equals(input.UsersCount)
-          ) &&
-          (
-              this.TrackedSearchesCount == input.TrackedSearchesCount ||
-              this.TrackedSearchesCount.Equals(input.TrackedSearchesCount)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.UsersCount.GetHashCode();
-        hashCode = (hashCode * 59) + this.TrackedSearchesCount.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

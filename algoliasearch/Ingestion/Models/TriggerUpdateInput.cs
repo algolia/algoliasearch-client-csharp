@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// The trigger input for a task update.
   /// </summary>
   [DataContract(Name = "TriggerUpdateInput")]
-  public partial class TriggerUpdateInput : IEquatable<TriggerUpdateInput>
+  public partial class TriggerUpdateInput
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="TriggerUpdateInput" /> class.
@@ -70,52 +70,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as TriggerUpdateInput);
-    }
-
-    /// <summary>
-    /// Returns true if TriggerUpdateInput instances are equal
-    /// </summary>
-    /// <param name="input">Instance of TriggerUpdateInput to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(TriggerUpdateInput input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Cron == input.Cron ||
-              (this.Cron != null &&
-              this.Cron.Equals(input.Cron))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Cron != null)
-        {
-          hashCode = (hashCode * 59) + this.Cron.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

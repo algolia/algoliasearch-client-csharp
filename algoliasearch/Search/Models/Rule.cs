@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Rule object.
   /// </summary>
   [DataContract(Name = "rule")]
-  public partial class Rule : IEquatable<Rule>
+  public partial class Rule
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Rule" /> class.
@@ -119,95 +119,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Rule);
-    }
-
-    /// <summary>
-    /// Returns true if Rule instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Rule to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Rule input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.ObjectID == input.ObjectID ||
-              (this.ObjectID != null &&
-              this.ObjectID.Equals(input.ObjectID))
-          ) &&
-          (
-              this.Conditions == input.Conditions ||
-              this.Conditions != null &&
-              input.Conditions != null &&
-              this.Conditions.SequenceEqual(input.Conditions)
-          ) &&
-          (
-              this.Consequence == input.Consequence ||
-              (this.Consequence != null &&
-              this.Consequence.Equals(input.Consequence))
-          ) &&
-          (
-              this.Description == input.Description ||
-              (this.Description != null &&
-              this.Description.Equals(input.Description))
-          ) &&
-          (
-              this.Enabled == input.Enabled ||
-              this.Enabled.Equals(input.Enabled)
-          ) &&
-          (
-              this.Validity == input.Validity ||
-              this.Validity != null &&
-              input.Validity != null &&
-              this.Validity.SequenceEqual(input.Validity)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ObjectID != null)
-        {
-          hashCode = (hashCode * 59) + this.ObjectID.GetHashCode();
-        }
-        if (this.Conditions != null)
-        {
-          hashCode = (hashCode * 59) + this.Conditions.GetHashCode();
-        }
-        if (this.Consequence != null)
-        {
-          hashCode = (hashCode * 59) + this.Consequence.GetHashCode();
-        }
-        if (this.Description != null)
-        {
-          hashCode = (hashCode * 59) + this.Description.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Enabled.GetHashCode();
-        if (this.Validity != null)
-        {
-          hashCode = (hashCode * 59) + this.Validity.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

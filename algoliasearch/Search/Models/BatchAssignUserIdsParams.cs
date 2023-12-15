@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Assign userID parameters.
   /// </summary>
   [DataContract(Name = "batchAssignUserIdsParams")]
-  public partial class BatchAssignUserIdsParams : IEquatable<BatchAssignUserIdsParams>
+  public partial class BatchAssignUserIdsParams
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchAssignUserIdsParams" /> class.
@@ -85,62 +85,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BatchAssignUserIdsParams);
-    }
-
-    /// <summary>
-    /// Returns true if BatchAssignUserIdsParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BatchAssignUserIdsParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BatchAssignUserIdsParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Cluster == input.Cluster ||
-              (this.Cluster != null &&
-              this.Cluster.Equals(input.Cluster))
-          ) &&
-          (
-              this.Users == input.Users ||
-              this.Users != null &&
-              input.Users != null &&
-              this.Users.SequenceEqual(input.Users)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Cluster != null)
-        {
-          hashCode = (hashCode * 59) + this.Cluster.GetHashCode();
-        }
-        if (this.Users != null)
-        {
-          hashCode = (hashCode * 59) + this.Users.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

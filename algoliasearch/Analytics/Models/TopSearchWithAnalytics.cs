@@ -22,7 +22,7 @@ namespace Algolia.Search.Analytics.Models
   /// TopSearchWithAnalytics
   /// </summary>
   [DataContract(Name = "topSearchWithAnalytics")]
-  public partial class TopSearchWithAnalytics : IEquatable<TopSearchWithAnalytics>
+  public partial class TopSearchWithAnalytics
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="TopSearchWithAnalytics" /> class.
@@ -150,92 +150,6 @@ namespace Algolia.Search.Analytics.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as TopSearchWithAnalytics);
-    }
-
-    /// <summary>
-    /// Returns true if TopSearchWithAnalytics instances are equal
-    /// </summary>
-    /// <param name="input">Instance of TopSearchWithAnalytics to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(TopSearchWithAnalytics input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Search == input.Search ||
-              (this.Search != null &&
-              this.Search.Equals(input.Search))
-          ) &&
-          (
-              this.Count == input.Count ||
-              this.Count.Equals(input.Count)
-          ) &&
-          (
-              this.ClickThroughRate == input.ClickThroughRate ||
-              this.ClickThroughRate.Equals(input.ClickThroughRate)
-          ) &&
-          (
-              this.AverageClickPosition == input.AverageClickPosition ||
-              this.AverageClickPosition.Equals(input.AverageClickPosition)
-          ) &&
-          (
-              this.ConversionRate == input.ConversionRate ||
-              this.ConversionRate.Equals(input.ConversionRate)
-          ) &&
-          (
-              this.TrackedSearchCount == input.TrackedSearchCount ||
-              this.TrackedSearchCount.Equals(input.TrackedSearchCount)
-          ) &&
-          (
-              this.ClickCount == input.ClickCount ||
-              this.ClickCount.Equals(input.ClickCount)
-          ) &&
-          (
-              this.ConversionCount == input.ConversionCount ||
-              this.ConversionCount.Equals(input.ConversionCount)
-          ) &&
-          (
-              this.NbHits == input.NbHits ||
-              this.NbHits.Equals(input.NbHits)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Search != null)
-        {
-          hashCode = (hashCode * 59) + this.Search.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Count.GetHashCode();
-        hashCode = (hashCode * 59) + this.ClickThroughRate.GetHashCode();
-        hashCode = (hashCode * 59) + this.AverageClickPosition.GetHashCode();
-        hashCode = (hashCode * 59) + this.ConversionRate.GetHashCode();
-        hashCode = (hashCode * 59) + this.TrackedSearchCount.GetHashCode();
-        hashCode = (hashCode * 59) + this.ClickCount.GetHashCode();
-        hashCode = (hashCode * 59) + this.ConversionCount.GetHashCode();
-        hashCode = (hashCode * 59) + this.NbHits.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Analytics.Models
   /// SearchEvent
   /// </summary>
   [DataContract(Name = "searchEvent")]
-  public partial class SearchEvent : IEquatable<SearchEvent>
+  public partial class SearchEvent
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchEvent" /> class.
@@ -80,57 +80,6 @@ namespace Algolia.Search.Analytics.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SearchEvent);
-    }
-
-    /// <summary>
-    /// Returns true if SearchEvent instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SearchEvent to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SearchEvent input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Date == input.Date ||
-              (this.Date != null &&
-              this.Date.Equals(input.Date))
-          ) &&
-          (
-              this.Count == input.Count ||
-              this.Count.Equals(input.Count)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Date != null)
-        {
-          hashCode = (hashCode * 59) + this.Date.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Count.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

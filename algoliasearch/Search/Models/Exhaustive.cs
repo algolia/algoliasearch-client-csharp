@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Whether certain properties of the search response are calculated exhaustive (exact) or approximated.
   /// </summary>
   [DataContract(Name = "exhaustive")]
-  public partial class Exhaustive : IEquatable<Exhaustive>
+  public partial class Exhaustive
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Exhaustive" /> class.
@@ -100,68 +100,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Exhaustive);
-    }
-
-    /// <summary>
-    /// Returns true if Exhaustive instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Exhaustive to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Exhaustive input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.FacetsCount == input.FacetsCount ||
-              this.FacetsCount.Equals(input.FacetsCount)
-          ) &&
-          (
-              this.FacetValues == input.FacetValues ||
-              this.FacetValues.Equals(input.FacetValues)
-          ) &&
-          (
-              this.NbHits == input.NbHits ||
-              this.NbHits.Equals(input.NbHits)
-          ) &&
-          (
-              this.RulesMatch == input.RulesMatch ||
-              this.RulesMatch.Equals(input.RulesMatch)
-          ) &&
-          (
-              this.Typo == input.Typo ||
-              this.Typo.Equals(input.Typo)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.FacetsCount.GetHashCode();
-        hashCode = (hashCode * 59) + this.FacetValues.GetHashCode();
-        hashCode = (hashCode * 59) + this.NbHits.GetHashCode();
-        hashCode = (hashCode * 59) + this.RulesMatch.GetHashCode();
-        hashCode = (hashCode * 59) + this.Typo.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

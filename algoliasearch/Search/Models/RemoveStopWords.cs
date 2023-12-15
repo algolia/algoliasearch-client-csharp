@@ -24,7 +24,7 @@ namespace Algolia.Search.Search.Models
   /// </summary>
   [JsonConverter(typeof(RemoveStopWordsJsonConverter))]
   [DataContract(Name = "removeStopWords")]
-  public partial class RemoveStopWords : AbstractSchema, IEquatable<RemoveStopWords>
+  public partial class RemoveStopWords : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveStopWords" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Search.Models
       return newRemoveStopWords;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as RemoveStopWords);
-    }
-
-    /// <summary>
-    /// Returns true if RemoveStopWords instances are equal
-    /// </summary>
-    /// <param name="input">Instance of RemoveStopWords to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(RemoveStopWords input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

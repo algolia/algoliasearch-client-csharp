@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// UserHit
   /// </summary>
   [DataContract(Name = "userHit")]
-  public partial class UserHit : IEquatable<UserHit>
+  public partial class UserHit
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="UserHit" /> class.
@@ -134,89 +134,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as UserHit);
-    }
-
-    /// <summary>
-    /// Returns true if UserHit instances are equal
-    /// </summary>
-    /// <param name="input">Instance of UserHit to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(UserHit input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.UserID == input.UserID ||
-              (this.UserID != null &&
-              this.UserID.Equals(input.UserID))
-          ) &&
-          (
-              this.ClusterName == input.ClusterName ||
-              (this.ClusterName != null &&
-              this.ClusterName.Equals(input.ClusterName))
-          ) &&
-          (
-              this.NbRecords == input.NbRecords ||
-              this.NbRecords.Equals(input.NbRecords)
-          ) &&
-          (
-              this.DataSize == input.DataSize ||
-              this.DataSize.Equals(input.DataSize)
-          ) &&
-          (
-              this.ObjectID == input.ObjectID ||
-              (this.ObjectID != null &&
-              this.ObjectID.Equals(input.ObjectID))
-          ) &&
-          (
-              this.HighlightResult == input.HighlightResult ||
-              (this.HighlightResult != null &&
-              this.HighlightResult.Equals(input.HighlightResult))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.UserID != null)
-        {
-          hashCode = (hashCode * 59) + this.UserID.GetHashCode();
-        }
-        if (this.ClusterName != null)
-        {
-          hashCode = (hashCode * 59) + this.ClusterName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.NbRecords.GetHashCode();
-        hashCode = (hashCode * 59) + this.DataSize.GetHashCode();
-        if (this.ObjectID != null)
-        {
-          hashCode = (hashCode * 59) + this.ObjectID.GetHashCode();
-        }
-        if (this.HighlightResult != null)
-        {
-          hashCode = (hashCode * 59) + this.HighlightResult.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

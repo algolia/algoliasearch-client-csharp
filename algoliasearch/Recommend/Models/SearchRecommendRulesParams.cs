@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// Recommend rules search parameters.
   /// </summary>
   [DataContract(Name = "searchRecommendRulesParams")]
-  public partial class SearchRecommendRulesParams : IEquatable<SearchRecommendRulesParams>
+  public partial class SearchRecommendRulesParams
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchRecommendRulesParams" /> class.
@@ -111,90 +111,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SearchRecommendRulesParams);
-    }
-
-    /// <summary>
-    /// Returns true if SearchRecommendRulesParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SearchRecommendRulesParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SearchRecommendRulesParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Query == input.Query ||
-              (this.Query != null &&
-              this.Query.Equals(input.Query))
-          ) &&
-          (
-              this.Context == input.Context ||
-              (this.Context != null &&
-              this.Context.Equals(input.Context))
-          ) &&
-          (
-              this.Page == input.Page ||
-              this.Page.Equals(input.Page)
-          ) &&
-          (
-              this.HitsPerPage == input.HitsPerPage ||
-              this.HitsPerPage.Equals(input.HitsPerPage)
-          ) &&
-          (
-              this.Enabled == input.Enabled ||
-              (this.Enabled != null &&
-              this.Enabled.Equals(input.Enabled))
-          ) &&
-          (
-              this.RequestOptions == input.RequestOptions ||
-              this.RequestOptions != null &&
-              input.RequestOptions != null &&
-              this.RequestOptions.SequenceEqual(input.RequestOptions)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Query != null)
-        {
-          hashCode = (hashCode * 59) + this.Query.GetHashCode();
-        }
-        if (this.Context != null)
-        {
-          hashCode = (hashCode * 59) + this.Context.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Page.GetHashCode();
-        hashCode = (hashCode * 59) + this.HitsPerPage.GetHashCode();
-        if (this.Enabled != null)
-        {
-          hashCode = (hashCode * 59) + this.Enabled.GetHashCode();
-        }
-        if (this.RequestOptions != null)
-        {
-          hashCode = (hashCode * 59) + this.RequestOptions.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -24,7 +24,7 @@ namespace Algolia.Search.Recommend.Models
   /// </summary>
   [JsonConverter(typeof(AutomaticFacetFiltersJsonConverter))]
   [DataContract(Name = "automaticFacetFilters")]
-  public partial class AutomaticFacetFilters : AbstractSchema, IEquatable<AutomaticFacetFilters>
+  public partial class AutomaticFacetFilters : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="AutomaticFacetFilters" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Recommend.Models
       return newAutomaticFacetFilters;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as AutomaticFacetFilters);
-    }
-
-    /// <summary>
-    /// Returns true if AutomaticFacetFilters instances are equal
-    /// </summary>
-    /// <param name="input">Instance of AutomaticFacetFilters to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(AutomaticFacetFilters input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

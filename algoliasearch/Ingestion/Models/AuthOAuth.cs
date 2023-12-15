@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Authentication input for OAuth login.
   /// </summary>
   [DataContract(Name = "AuthOAuth")]
-  public partial class AuthOAuth : IEquatable<AuthOAuth>
+  public partial class AuthOAuth
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthOAuth" /> class.
@@ -100,70 +100,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as AuthOAuth);
-    }
-
-    /// <summary>
-    /// Returns true if AuthOAuth instances are equal
-    /// </summary>
-    /// <param name="input">Instance of AuthOAuth to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(AuthOAuth input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Url == input.Url ||
-              (this.Url != null &&
-              this.Url.Equals(input.Url))
-          ) &&
-          (
-              this.ClientId == input.ClientId ||
-              (this.ClientId != null &&
-              this.ClientId.Equals(input.ClientId))
-          ) &&
-          (
-              this.ClientSecret == input.ClientSecret ||
-              (this.ClientSecret != null &&
-              this.ClientSecret.Equals(input.ClientSecret))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Url != null)
-        {
-          hashCode = (hashCode * 59) + this.Url.GetHashCode();
-        }
-        if (this.ClientId != null)
-        {
-          hashCode = (hashCode * 59) + this.ClientId.GetHashCode();
-        }
-        if (this.ClientSecret != null)
-        {
-          hashCode = (hashCode * 59) + this.ClientSecret.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

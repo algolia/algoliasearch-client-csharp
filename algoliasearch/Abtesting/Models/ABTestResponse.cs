@@ -22,7 +22,7 @@ namespace Algolia.Search.Abtesting.Models
   /// ABTestResponse
   /// </summary>
   [DataContract(Name = "ABTestResponse")]
-  public partial class ABTestResponse : IEquatable<ABTestResponse>
+  public partial class ABTestResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ABTestResponse" /> class.
@@ -90,62 +90,6 @@ namespace Algolia.Search.Abtesting.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ABTestResponse);
-    }
-
-    /// <summary>
-    /// Returns true if ABTestResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ABTestResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ABTestResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Index == input.Index ||
-              (this.Index != null &&
-              this.Index.Equals(input.Index))
-          ) &&
-          (
-              this.AbTestID == input.AbTestID ||
-              this.AbTestID.Equals(input.AbTestID)
-          ) &&
-          (
-              this.TaskID == input.TaskID ||
-              this.TaskID.Equals(input.TaskID)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Index != null)
-        {
-          hashCode = (hashCode * 59) + this.Index.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.AbTestID.GetHashCode();
-        hashCode = (hashCode * 59) + this.TaskID.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

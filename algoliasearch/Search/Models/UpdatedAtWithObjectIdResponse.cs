@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Response, taskID, unique object identifier, and an update timestamp.
   /// </summary>
   [DataContract(Name = "updatedAtWithObjectIdResponse")]
-  public partial class UpdatedAtWithObjectIdResponse : IEquatable<UpdatedAtWithObjectIdResponse>
+  public partial class UpdatedAtWithObjectIdResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="UpdatedAtWithObjectIdResponse" /> class.
@@ -80,66 +80,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as UpdatedAtWithObjectIdResponse);
-    }
-
-    /// <summary>
-    /// Returns true if UpdatedAtWithObjectIdResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of UpdatedAtWithObjectIdResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(UpdatedAtWithObjectIdResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.TaskID == input.TaskID ||
-              this.TaskID.Equals(input.TaskID)
-          ) &&
-          (
-              this.UpdatedAt == input.UpdatedAt ||
-              (this.UpdatedAt != null &&
-              this.UpdatedAt.Equals(input.UpdatedAt))
-          ) &&
-          (
-              this.ObjectID == input.ObjectID ||
-              (this.ObjectID != null &&
-              this.ObjectID.Equals(input.ObjectID))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.TaskID.GetHashCode();
-        if (this.UpdatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.UpdatedAt.GetHashCode();
-        }
-        if (this.ObjectID != null)
-        {
-          hashCode = (hashCode * 59) + this.ObjectID.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

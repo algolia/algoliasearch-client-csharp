@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Key-value pairs of [supported language ISO codes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) and boolean values. 
   /// </summary>
   [DataContract(Name = "standardEntries")]
-  public partial class StandardEntries : IEquatable<StandardEntries>
+  public partial class StandardEntries
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="StandardEntries" /> class.
@@ -80,73 +80,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as StandardEntries);
-    }
-
-    /// <summary>
-    /// Returns true if StandardEntries instances are equal
-    /// </summary>
-    /// <param name="input">Instance of StandardEntries to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(StandardEntries input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Plurals == input.Plurals ||
-              this.Plurals != null &&
-              input.Plurals != null &&
-              this.Plurals.SequenceEqual(input.Plurals)
-          ) &&
-          (
-              this.Stopwords == input.Stopwords ||
-              this.Stopwords != null &&
-              input.Stopwords != null &&
-              this.Stopwords.SequenceEqual(input.Stopwords)
-          ) &&
-          (
-              this.Compounds == input.Compounds ||
-              this.Compounds != null &&
-              input.Compounds != null &&
-              this.Compounds.SequenceEqual(input.Compounds)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Plurals != null)
-        {
-          hashCode = (hashCode * 59) + this.Plurals.GetHashCode();
-        }
-        if (this.Stopwords != null)
-        {
-          hashCode = (hashCode * 59) + this.Stopwords.GetHashCode();
-        }
-        if (this.Compounds != null)
-        {
-          hashCode = (hashCode * 59) + this.Compounds.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

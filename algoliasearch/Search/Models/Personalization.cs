@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Personalization
   /// </summary>
   [DataContract(Name = "personalization")]
-  public partial class Personalization : IEquatable<Personalization>
+  public partial class Personalization
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Personalization" /> class.
@@ -80,58 +80,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Personalization);
-    }
-
-    /// <summary>
-    /// Returns true if Personalization instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Personalization to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Personalization input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.FiltersScore == input.FiltersScore ||
-              this.FiltersScore.Equals(input.FiltersScore)
-          ) &&
-          (
-              this.RankingScore == input.RankingScore ||
-              this.RankingScore.Equals(input.RankingScore)
-          ) &&
-          (
-              this.Score == input.Score ||
-              this.Score.Equals(input.Score)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.FiltersScore.GetHashCode();
-        hashCode = (hashCode * 59) + this.RankingScore.GetHashCode();
-        hashCode = (hashCode * 59) + this.Score.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

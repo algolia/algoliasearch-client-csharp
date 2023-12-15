@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// An event describe a step of the task execution flow..
   /// </summary>
   [DataContract(Name = "Event")]
-  public partial class Event : IEquatable<Event>
+  public partial class Event
   {
 
     /// <summary>
@@ -147,104 +147,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Event);
-    }
-
-    /// <summary>
-    /// Returns true if Event instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Event to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Event input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.EventID == input.EventID ||
-              (this.EventID != null &&
-              this.EventID.Equals(input.EventID))
-          ) &&
-          (
-              this.RunID == input.RunID ||
-              (this.RunID != null &&
-              this.RunID.Equals(input.RunID))
-          ) &&
-          (
-              this.ParentID == input.ParentID ||
-              (this.ParentID != null &&
-              this.ParentID.Equals(input.ParentID))
-          ) &&
-          (
-              this.Status == input.Status ||
-              this.Status.Equals(input.Status)
-          ) &&
-          (
-              this.Type == input.Type ||
-              this.Type.Equals(input.Type)
-          ) &&
-          (
-              this.BatchSize == input.BatchSize ||
-              this.BatchSize.Equals(input.BatchSize)
-          ) &&
-          (
-              this.Data == input.Data ||
-              this.Data != null &&
-              input.Data != null &&
-              this.Data.SequenceEqual(input.Data)
-          ) &&
-          (
-              this.PublishedAt == input.PublishedAt ||
-              (this.PublishedAt != null &&
-              this.PublishedAt.Equals(input.PublishedAt))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.EventID != null)
-        {
-          hashCode = (hashCode * 59) + this.EventID.GetHashCode();
-        }
-        if (this.RunID != null)
-        {
-          hashCode = (hashCode * 59) + this.RunID.GetHashCode();
-        }
-        if (this.ParentID != null)
-        {
-          hashCode = (hashCode * 59) + this.ParentID.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Status.GetHashCode();
-        hashCode = (hashCode * 59) + this.Type.GetHashCode();
-        hashCode = (hashCode * 59) + this.BatchSize.GetHashCode();
-        if (this.Data != null)
-        {
-          hashCode = (hashCode * 59) + this.Data.GetHashCode();
-        }
-        if (this.PublishedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.PublishedAt.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -24,7 +24,7 @@ namespace Algolia.Search.Abtesting.Models
   /// </summary>
   [JsonConverter(typeof(AddABTestsVariantJsonConverter))]
   [DataContract(Name = "AddABTestsVariant")]
-  public partial class AddABTestsVariant : AbstractSchema, IEquatable<AddABTestsVariant>
+  public partial class AddABTestsVariant : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="AddABTestsVariant" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Abtesting.Models
       return newAddABTestsVariant;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as AddABTestsVariant);
-    }
-
-    /// <summary>
-    /// Returns true if AddABTestsVariant instances are equal
-    /// </summary>
-    /// <param name="input">Instance of AddABTestsVariant to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(AddABTestsVariant input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// The input for an &#x60;onDemand&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a given time range.
   /// </summary>
   [DataContract(Name = "OnDemandDateUtilsInput")]
-  public partial class OnDemandDateUtilsInput : IEquatable<OnDemandDateUtilsInput>
+  public partial class OnDemandDateUtilsInput
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="OnDemandDateUtilsInput" /> class.
@@ -85,61 +85,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as OnDemandDateUtilsInput);
-    }
-
-    /// <summary>
-    /// Returns true if OnDemandDateUtilsInput instances are equal
-    /// </summary>
-    /// <param name="input">Instance of OnDemandDateUtilsInput to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(OnDemandDateUtilsInput input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.StartDate == input.StartDate ||
-              (this.StartDate != null &&
-              this.StartDate.Equals(input.StartDate))
-          ) &&
-          (
-              this.EndDate == input.EndDate ||
-              (this.EndDate != null &&
-              this.EndDate.Equals(input.EndDate))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.StartDate != null)
-        {
-          hashCode = (hashCode * 59) + this.StartDate.GetHashCode();
-        }
-        if (this.EndDate != null)
-        {
-          hashCode = (hashCode * 59) + this.EndDate.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

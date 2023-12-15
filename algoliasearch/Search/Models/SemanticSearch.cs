@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Settings for the semantic search part of NeuralSearch. Only used when &#x60;mode&#x60; is _neuralSearch_. 
   /// </summary>
   [DataContract(Name = "semanticSearch")]
-  public partial class SemanticSearch : IEquatable<SemanticSearch>
+  public partial class SemanticSearch
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SemanticSearch" /> class.
@@ -60,53 +60,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SemanticSearch);
-    }
-
-    /// <summary>
-    /// Returns true if SemanticSearch instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SemanticSearch to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SemanticSearch input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.EventSources == input.EventSources ||
-              this.EventSources != null &&
-              input.EventSources != null &&
-              this.EventSources.SequenceEqual(input.EventSources)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.EventSources != null)
-        {
-          hashCode = (hashCode * 59) + this.EventSources.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Clusters.
   /// </summary>
   [DataContract(Name = "listClustersResponse")]
-  public partial class ListClustersResponse : IEquatable<ListClustersResponse>
+  public partial class ListClustersResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ListClustersResponse" /> class.
@@ -70,53 +70,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ListClustersResponse);
-    }
-
-    /// <summary>
-    /// Returns true if ListClustersResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ListClustersResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ListClustersResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.TopUsers == input.TopUsers ||
-              this.TopUsers != null &&
-              input.TopUsers != null &&
-              this.TopUsers.SequenceEqual(input.TopUsers)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.TopUsers != null)
-        {
-          hashCode = (hashCode * 59) + this.TopUsers.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

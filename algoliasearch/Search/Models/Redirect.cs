@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/). 
   /// </summary>
   [DataContract(Name = "redirect")]
-  public partial class Redirect : IEquatable<Redirect>
+  public partial class Redirect
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Redirect" /> class.
@@ -59,53 +59,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Redirect);
-    }
-
-    /// <summary>
-    /// Returns true if Redirect instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Redirect to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Redirect input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Index == input.Index ||
-              this.Index != null &&
-              input.Index != null &&
-              this.Index.SequenceEqual(input.Index)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Index != null)
-        {
-          hashCode = (hashCode * 59) + this.Index.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

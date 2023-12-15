@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// SourceJSON
   /// </summary>
   [DataContract(Name = "SourceJSON")]
-  public partial class SourceJSON : IEquatable<SourceJSON>
+  public partial class SourceJSON
   {
 
     /// <summary>
@@ -89,66 +89,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SourceJSON);
-    }
-
-    /// <summary>
-    /// Returns true if SourceJSON instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SourceJSON to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SourceJSON input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Url == input.Url ||
-              (this.Url != null &&
-              this.Url.Equals(input.Url))
-          ) &&
-          (
-              this.UniqueIDColumn == input.UniqueIDColumn ||
-              (this.UniqueIDColumn != null &&
-              this.UniqueIDColumn.Equals(input.UniqueIDColumn))
-          ) &&
-          (
-              this.Method == input.Method ||
-              this.Method.Equals(input.Method)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Url != null)
-        {
-          hashCode = (hashCode * 59) + this.Url.GetHashCode();
-        }
-        if (this.UniqueIDColumn != null)
-        {
-          hashCode = (hashCode * 59) + this.UniqueIDColumn.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Method.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

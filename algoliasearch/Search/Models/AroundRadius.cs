@@ -24,7 +24,7 @@ namespace Algolia.Search.Search.Models
   /// </summary>
   [JsonConverter(typeof(AroundRadiusJsonConverter))]
   [DataContract(Name = "aroundRadius")]
-  public partial class AroundRadius : AbstractSchema, IEquatable<AroundRadius>
+  public partial class AroundRadius : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="AroundRadius" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Search.Models
       return newAroundRadius;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as AroundRadius);
-    }
-
-    /// <summary>
-    /// Returns true if AroundRadius instances are equal
-    /// </summary>
-    /// <param name="input">Instance of AroundRadius to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(AroundRadius input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

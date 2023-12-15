@@ -22,7 +22,7 @@ namespace Algolia.Search.Monitoring.Models
   /// Incident details.
   /// </summary>
   [DataContract(Name = "Incident")]
-  public partial class Incident : IEquatable<Incident>
+  public partial class Incident
   {
 
     /// <summary>
@@ -69,57 +69,6 @@ namespace Algolia.Search.Monitoring.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Incident);
-    }
-
-    /// <summary>
-    /// Returns true if Incident instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Incident to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Incident input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Title == input.Title ||
-              (this.Title != null &&
-              this.Title.Equals(input.Title))
-          ) &&
-          (
-              this.Status == input.Status ||
-              this.Status.Equals(input.Status)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Title != null)
-        {
-          hashCode = (hashCode * 59) + this.Title.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Status.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Batch parameters.
   /// </summary>
   [DataContract(Name = "batchWriteParams")]
-  public partial class BatchWriteParams : IEquatable<BatchWriteParams>
+  public partial class BatchWriteParams
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchWriteParams" /> class.
@@ -69,53 +69,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BatchWriteParams);
-    }
-
-    /// <summary>
-    /// Returns true if BatchWriteParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BatchWriteParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BatchWriteParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Requests == input.Requests ||
-              this.Requests != null &&
-              input.Requests != null &&
-              this.Requests.SequenceEqual(input.Requests)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Requests != null)
-        {
-          hashCode = (hashCode * 59) + this.Requests.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

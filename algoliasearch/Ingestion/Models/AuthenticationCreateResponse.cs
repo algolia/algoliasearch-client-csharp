@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Response from the API when the Authentication is successfully created.
   /// </summary>
   [DataContract(Name = "AuthenticationCreateResponse")]
-  public partial class AuthenticationCreateResponse : IEquatable<AuthenticationCreateResponse>
+  public partial class AuthenticationCreateResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationCreateResponse" /> class.
@@ -100,70 +100,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as AuthenticationCreateResponse);
-    }
-
-    /// <summary>
-    /// Returns true if AuthenticationCreateResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of AuthenticationCreateResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(AuthenticationCreateResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.AuthenticationID == input.AuthenticationID ||
-              (this.AuthenticationID != null &&
-              this.AuthenticationID.Equals(input.AuthenticationID))
-          ) &&
-          (
-              this.Name == input.Name ||
-              (this.Name != null &&
-              this.Name.Equals(input.Name))
-          ) &&
-          (
-              this.CreatedAt == input.CreatedAt ||
-              (this.CreatedAt != null &&
-              this.CreatedAt.Equals(input.CreatedAt))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.AuthenticationID != null)
-        {
-          hashCode = (hashCode * 59) + this.AuthenticationID.GetHashCode();
-        }
-        if (this.Name != null)
-        {
-          hashCode = (hashCode * 59) + this.Name.GetHashCode();
-        }
-        if (this.CreatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.CreatedAt.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

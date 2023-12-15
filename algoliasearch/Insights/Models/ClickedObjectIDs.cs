@@ -22,7 +22,7 @@ namespace Algolia.Search.Insights.Models
   /// Use this event to track when users click items unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track click events related to Algolia requests, use the \&quot;Clicked object IDs after search\&quot; event. 
   /// </summary>
   [DataContract(Name = "ClickedObjectIDs")]
-  public partial class ClickedObjectIDs : IEquatable<ClickedObjectIDs>
+  public partial class ClickedObjectIDs
   {
 
     /// <summary>
@@ -134,90 +134,6 @@ namespace Algolia.Search.Insights.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ClickedObjectIDs);
-    }
-
-    /// <summary>
-    /// Returns true if ClickedObjectIDs instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ClickedObjectIDs to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ClickedObjectIDs input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.EventName == input.EventName ||
-              (this.EventName != null &&
-              this.EventName.Equals(input.EventName))
-          ) &&
-          (
-              this.EventType == input.EventType ||
-              this.EventType.Equals(input.EventType)
-          ) &&
-          (
-              this.Index == input.Index ||
-              (this.Index != null &&
-              this.Index.Equals(input.Index))
-          ) &&
-          (
-              this.ObjectIDs == input.ObjectIDs ||
-              this.ObjectIDs != null &&
-              input.ObjectIDs != null &&
-              this.ObjectIDs.SequenceEqual(input.ObjectIDs)
-          ) &&
-          (
-              this.UserToken == input.UserToken ||
-              (this.UserToken != null &&
-              this.UserToken.Equals(input.UserToken))
-          ) &&
-          (
-              this.Timestamp == input.Timestamp ||
-              this.Timestamp.Equals(input.Timestamp)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.EventName != null)
-        {
-          hashCode = (hashCode * 59) + this.EventName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.EventType.GetHashCode();
-        if (this.Index != null)
-        {
-          hashCode = (hashCode * 59) + this.Index.GetHashCode();
-        }
-        if (this.ObjectIDs != null)
-        {
-          hashCode = (hashCode * 59) + this.ObjectIDs.GetHashCode();
-        }
-        if (this.UserToken != null)
-        {
-          hashCode = (hashCode * 59) + this.UserToken.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Timestamp.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

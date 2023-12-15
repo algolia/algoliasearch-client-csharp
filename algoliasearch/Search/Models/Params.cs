@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Additional search parameters.
   /// </summary>
   [DataContract(Name = "varParams")]
-  public partial class Params : IEquatable<Params>
+  public partial class Params
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Params" /> class.
@@ -86,79 +86,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as Params);
-    }
-
-    /// <summary>
-    /// Returns true if Params instances are equal
-    /// </summary>
-    /// <param name="input">Instance of Params to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(Params input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Query == input.Query ||
-              (this.Query != null &&
-              this.Query.Equals(input.Query))
-          ) &&
-          (
-              this.AutomaticFacetFilters == input.AutomaticFacetFilters ||
-              (this.AutomaticFacetFilters != null &&
-              this.AutomaticFacetFilters.Equals(input.AutomaticFacetFilters))
-          ) &&
-          (
-              this.AutomaticOptionalFacetFilters == input.AutomaticOptionalFacetFilters ||
-              (this.AutomaticOptionalFacetFilters != null &&
-              this.AutomaticOptionalFacetFilters.Equals(input.AutomaticOptionalFacetFilters))
-          ) &&
-          (
-              this.RenderingContent == input.RenderingContent ||
-              (this.RenderingContent != null &&
-              this.RenderingContent.Equals(input.RenderingContent))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Query != null)
-        {
-          hashCode = (hashCode * 59) + this.Query.GetHashCode();
-        }
-        if (this.AutomaticFacetFilters != null)
-        {
-          hashCode = (hashCode * 59) + this.AutomaticFacetFilters.GetHashCode();
-        }
-        if (this.AutomaticOptionalFacetFilters != null)
-        {
-          hashCode = (hashCode * 59) + this.AutomaticOptionalFacetFilters.GetHashCode();
-        }
-        if (this.RenderingContent != null)
-        {
-          hashCode = (hashCode * 59) + this.RenderingContent.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

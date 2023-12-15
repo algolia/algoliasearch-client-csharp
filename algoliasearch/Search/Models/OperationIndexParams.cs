@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// OperationIndexParams
   /// </summary>
   [DataContract(Name = "operationIndexParams")]
-  public partial class OperationIndexParams : IEquatable<OperationIndexParams>
+  public partial class OperationIndexParams
   {
 
     /// <summary>
@@ -89,67 +89,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as OperationIndexParams);
-    }
-
-    /// <summary>
-    /// Returns true if OperationIndexParams instances are equal
-    /// </summary>
-    /// <param name="input">Instance of OperationIndexParams to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(OperationIndexParams input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Operation == input.Operation ||
-              this.Operation.Equals(input.Operation)
-          ) &&
-          (
-              this.Destination == input.Destination ||
-              (this.Destination != null &&
-              this.Destination.Equals(input.Destination))
-          ) &&
-          (
-              this.Scope == input.Scope ||
-              this.Scope != null &&
-              input.Scope != null &&
-              this.Scope.SequenceEqual(input.Scope)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Operation.GetHashCode();
-        if (this.Destination != null)
-        {
-          hashCode = (hashCode * 59) + this.Destination.GetHashCode();
-        }
-        if (this.Scope != null)
-        {
-          hashCode = (hashCode * 59) + this.Scope.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

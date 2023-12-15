@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Unique user ID.
   /// </summary>
   [DataContract(Name = "userId")]
-  public partial class UserId : IEquatable<UserId>
+  public partial class UserId
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="UserId" /> class.
@@ -105,71 +105,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as UserId);
-    }
-
-    /// <summary>
-    /// Returns true if UserId instances are equal
-    /// </summary>
-    /// <param name="input">Instance of UserId to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(UserId input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.VarUserID == input.VarUserID ||
-              (this.VarUserID != null &&
-              this.VarUserID.Equals(input.VarUserID))
-          ) &&
-          (
-              this.ClusterName == input.ClusterName ||
-              (this.ClusterName != null &&
-              this.ClusterName.Equals(input.ClusterName))
-          ) &&
-          (
-              this.NbRecords == input.NbRecords ||
-              this.NbRecords.Equals(input.NbRecords)
-          ) &&
-          (
-              this.DataSize == input.DataSize ||
-              this.DataSize.Equals(input.DataSize)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.VarUserID != null)
-        {
-          hashCode = (hashCode * 59) + this.VarUserID.GetHashCode();
-        }
-        if (this.ClusterName != null)
-        {
-          hashCode = (hashCode * 59) + this.ClusterName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.NbRecords.GetHashCode();
-        hashCode = (hashCode * 59) + this.DataSize.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

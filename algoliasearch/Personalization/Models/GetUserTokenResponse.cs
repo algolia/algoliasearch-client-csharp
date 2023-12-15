@@ -22,7 +22,7 @@ namespace Algolia.Search.Personalization.Models
   /// GetUserTokenResponse
   /// </summary>
   [DataContract(Name = "getUserTokenResponse")]
-  public partial class GetUserTokenResponse : IEquatable<GetUserTokenResponse>
+  public partial class GetUserTokenResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetUserTokenResponse" /> class.
@@ -100,70 +100,6 @@ namespace Algolia.Search.Personalization.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetUserTokenResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetUserTokenResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetUserTokenResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetUserTokenResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.UserToken == input.UserToken ||
-              (this.UserToken != null &&
-              this.UserToken.Equals(input.UserToken))
-          ) &&
-          (
-              this.LastEventAt == input.LastEventAt ||
-              (this.LastEventAt != null &&
-              this.LastEventAt.Equals(input.LastEventAt))
-          ) &&
-          (
-              this.Scores == input.Scores ||
-              (this.Scores != null &&
-              this.Scores.Equals(input.Scores))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.UserToken != null)
-        {
-          hashCode = (hashCode * 59) + this.UserToken.GetHashCode();
-        }
-        if (this.LastEventAt != null)
-        {
-          hashCode = (hashCode * 59) + this.LastEventAt.GetHashCode();
-        }
-        if (this.Scores != null)
-        {
-          hashCode = (hashCode * 59) + this.Scores.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

@@ -24,7 +24,7 @@ namespace Algolia.Search.Analytics.Models
   /// </summary>
   [JsonConverter(typeof(GetTopSearchesResponseJsonConverter))]
   [DataContract(Name = "getTopSearchesResponse")]
-  public partial class GetTopSearchesResponse : AbstractSchema, IEquatable<GetTopSearchesResponse>
+  public partial class GetTopSearchesResponse : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetTopSearchesResponse" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Analytics.Models
       return newGetTopSearchesResponse;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetTopSearchesResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetTopSearchesResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetTopSearchesResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetTopSearchesResponse input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

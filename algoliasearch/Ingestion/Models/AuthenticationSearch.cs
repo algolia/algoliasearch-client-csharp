@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Payload to search for multiple authentications, based on the given &#x60;authenticationIDs&#x60;.
   /// </summary>
   [DataContract(Name = "AuthenticationSearch")]
-  public partial class AuthenticationSearch : IEquatable<AuthenticationSearch>
+  public partial class AuthenticationSearch
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationSearch" /> class.
@@ -69,53 +69,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as AuthenticationSearch);
-    }
-
-    /// <summary>
-    /// Returns true if AuthenticationSearch instances are equal
-    /// </summary>
-    /// <param name="input">Instance of AuthenticationSearch to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(AuthenticationSearch input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.AuthenticationIDs == input.AuthenticationIDs ||
-              this.AuthenticationIDs != null &&
-              input.AuthenticationIDs != null &&
-              this.AuthenticationIDs.SequenceEqual(input.AuthenticationIDs)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.AuthenticationIDs != null)
-        {
-          hashCode = (hashCode * 59) + this.AuthenticationIDs.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

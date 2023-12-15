@@ -22,7 +22,7 @@ namespace Algolia.Search.Monitoring.Models
   /// ProbesMetric
   /// </summary>
   [DataContract(Name = "ProbesMetric")]
-  public partial class ProbesMetric : IEquatable<ProbesMetric>
+  public partial class ProbesMetric
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ProbesMetric" /> class.
@@ -70,53 +70,6 @@ namespace Algolia.Search.Monitoring.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as ProbesMetric);
-    }
-
-    /// <summary>
-    /// Returns true if ProbesMetric instances are equal
-    /// </summary>
-    /// <param name="input">Instance of ProbesMetric to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(ProbesMetric input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.T == input.T ||
-              this.T.Equals(input.T)
-          ) &&
-          (
-              this.V == input.V ||
-              this.V.Equals(input.V)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.T.GetHashCode();
-        hashCode = (hashCode * 59) + this.V.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

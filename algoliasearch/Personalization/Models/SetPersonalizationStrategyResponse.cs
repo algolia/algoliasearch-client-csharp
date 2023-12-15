@@ -22,7 +22,7 @@ namespace Algolia.Search.Personalization.Models
   /// SetPersonalizationStrategyResponse
   /// </summary>
   [DataContract(Name = "setPersonalizationStrategyResponse")]
-  public partial class SetPersonalizationStrategyResponse : IEquatable<SetPersonalizationStrategyResponse>
+  public partial class SetPersonalizationStrategyResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SetPersonalizationStrategyResponse" /> class.
@@ -70,52 +70,6 @@ namespace Algolia.Search.Personalization.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SetPersonalizationStrategyResponse);
-    }
-
-    /// <summary>
-    /// Returns true if SetPersonalizationStrategyResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SetPersonalizationStrategyResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SetPersonalizationStrategyResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Message == input.Message ||
-              (this.Message != null &&
-              this.Message.Equals(input.Message))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Message != null)
-        {
-          hashCode = (hashCode * 59) + this.Message.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

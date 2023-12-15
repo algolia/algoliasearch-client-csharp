@@ -24,7 +24,7 @@ namespace Algolia.Search.Search.Models
   /// </summary>
   [JsonConverter(typeof(MixedSearchFiltersJsonConverter))]
   [DataContract(Name = "mixedSearchFilters")]
-  public partial class MixedSearchFilters : AbstractSchema, IEquatable<MixedSearchFilters>
+  public partial class MixedSearchFilters : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="MixedSearchFilters" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Search.Models
       return newMixedSearchFilters;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as MixedSearchFilters);
-    }
-
-    /// <summary>
-    /// Returns true if MixedSearchFilters instances are equal
-    /// </summary>
-    /// <param name="input">Instance of MixedSearchFilters to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(MixedSearchFilters input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

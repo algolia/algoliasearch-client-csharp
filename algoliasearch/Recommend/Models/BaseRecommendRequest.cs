@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// BaseRecommendRequest
   /// </summary>
   [DataContract(Name = "baseRecommendRequest")]
-  public partial class BaseRecommendRequest : IEquatable<BaseRecommendRequest>
+  public partial class BaseRecommendRequest
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseRecommendRequest" /> class.
@@ -90,62 +90,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BaseRecommendRequest);
-    }
-
-    /// <summary>
-    /// Returns true if BaseRecommendRequest instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BaseRecommendRequest to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BaseRecommendRequest input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.IndexName == input.IndexName ||
-              (this.IndexName != null &&
-              this.IndexName.Equals(input.IndexName))
-          ) &&
-          (
-              this.Threshold == input.Threshold ||
-              this.Threshold.Equals(input.Threshold)
-          ) &&
-          (
-              this.MaxRecommendations == input.MaxRecommendations ||
-              this.MaxRecommendations.Equals(input.MaxRecommendations)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.IndexName != null)
-        {
-          hashCode = (hashCode * 59) + this.IndexName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Threshold.GetHashCode();
-        hashCode = (hashCode * 59) + this.MaxRecommendations.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

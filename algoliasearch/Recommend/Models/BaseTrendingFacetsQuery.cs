@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// BaseTrendingFacetsQuery
   /// </summary>
   [DataContract(Name = "baseTrendingFacetsQuery")]
-  public partial class BaseTrendingFacetsQuery : IEquatable<BaseTrendingFacetsQuery>
+  public partial class BaseTrendingFacetsQuery
   {
 
     /// <summary>
@@ -79,57 +79,6 @@ namespace Algolia.Search.Recommend.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as BaseTrendingFacetsQuery);
-    }
-
-    /// <summary>
-    /// Returns true if BaseTrendingFacetsQuery instances are equal
-    /// </summary>
-    /// <param name="input">Instance of BaseTrendingFacetsQuery to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(BaseTrendingFacetsQuery input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.FacetName == input.FacetName ||
-              (this.FacetName != null &&
-              this.FacetName.Equals(input.FacetName))
-          ) &&
-          (
-              this.Model == input.Model ||
-              this.Model.Equals(input.Model)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.FacetName != null)
-        {
-          hashCode = (hashCode * 59) + this.FacetName.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Model.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

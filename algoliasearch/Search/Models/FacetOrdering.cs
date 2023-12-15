@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Defines the ordering of facets (widgets).
   /// </summary>
   [DataContract(Name = "facetOrdering")]
-  public partial class FacetOrdering : IEquatable<FacetOrdering>
+  public partial class FacetOrdering
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="FacetOrdering" /> class.
@@ -69,62 +69,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as FacetOrdering);
-    }
-
-    /// <summary>
-    /// Returns true if FacetOrdering instances are equal
-    /// </summary>
-    /// <param name="input">Instance of FacetOrdering to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(FacetOrdering input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Facets == input.Facets ||
-              (this.Facets != null &&
-              this.Facets.Equals(input.Facets))
-          ) &&
-          (
-              this.Values == input.Values ||
-              this.Values != null &&
-              input.Values != null &&
-              this.Values.SequenceEqual(input.Values)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Facets != null)
-        {
-          hashCode = (hashCode * 59) + this.Facets.GetHashCode();
-        }
-        if (this.Values != null)
-        {
-          hashCode = (hashCode * 59) + this.Values.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

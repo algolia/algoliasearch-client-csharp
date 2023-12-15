@@ -22,7 +22,7 @@ namespace Algolia.Search.Analytics.Models
   /// NoResultsRateEvent
   /// </summary>
   [DataContract(Name = "noResultsRateEvent")]
-  public partial class NoResultsRateEvent : IEquatable<NoResultsRateEvent>
+  public partial class NoResultsRateEvent
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="NoResultsRateEvent" /> class.
@@ -100,67 +100,6 @@ namespace Algolia.Search.Analytics.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as NoResultsRateEvent);
-    }
-
-    /// <summary>
-    /// Returns true if NoResultsRateEvent instances are equal
-    /// </summary>
-    /// <param name="input">Instance of NoResultsRateEvent to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(NoResultsRateEvent input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Date == input.Date ||
-              (this.Date != null &&
-              this.Date.Equals(input.Date))
-          ) &&
-          (
-              this.NoResultCount == input.NoResultCount ||
-              this.NoResultCount.Equals(input.NoResultCount)
-          ) &&
-          (
-              this.Count == input.Count ||
-              this.Count.Equals(input.Count)
-          ) &&
-          (
-              this.Rate == input.Rate ||
-              this.Rate.Equals(input.Rate)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.Date != null)
-        {
-          hashCode = (hashCode * 59) + this.Date.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.NoResultCount.GetHashCode();
-        hashCode = (hashCode * 59) + this.Count.GetHashCode();
-        hashCode = (hashCode * 59) + this.Rate.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

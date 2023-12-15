@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// Payload to search for multiple destinations, based on the given &#x60;destinationIDs&#x60;.
   /// </summary>
   [DataContract(Name = "DestinationSearch")]
-  public partial class DestinationSearch : IEquatable<DestinationSearch>
+  public partial class DestinationSearch
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="DestinationSearch" /> class.
@@ -69,53 +69,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as DestinationSearch);
-    }
-
-    /// <summary>
-    /// Returns true if DestinationSearch instances are equal
-    /// </summary>
-    /// <param name="input">Instance of DestinationSearch to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(DestinationSearch input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.DestinationIDs == input.DestinationIDs ||
-              this.DestinationIDs != null &&
-              input.DestinationIDs != null &&
-              this.DestinationIDs.SequenceEqual(input.DestinationIDs)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.DestinationIDs != null)
-        {
-          hashCode = (hashCode * 59) + this.DestinationIDs.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

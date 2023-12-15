@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// The trigger input for a task of type &#39;subscription&#39;.
   /// </summary>
   [DataContract(Name = "SubscriptionTrigger")]
-  public partial class SubscriptionTrigger : IEquatable<SubscriptionTrigger>
+  public partial class SubscriptionTrigger
   {
 
     /// <summary>
@@ -64,48 +64,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SubscriptionTrigger);
-    }
-
-    /// <summary>
-    /// Returns true if SubscriptionTrigger instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SubscriptionTrigger to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SubscriptionTrigger input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Type == input.Type ||
-              this.Type.Equals(input.Type)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Type.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

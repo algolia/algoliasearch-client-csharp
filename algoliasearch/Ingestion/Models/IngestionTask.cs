@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// IngestionTask
   /// </summary>
   [DataContract(Name = "Task")]
-  public partial class IngestionTask : IEquatable<IngestionTask>
+  public partial class IngestionTask
   {
 
     /// <summary>
@@ -177,121 +177,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as IngestionTask);
-    }
-
-    /// <summary>
-    /// Returns true if IngestionTask instances are equal
-    /// </summary>
-    /// <param name="input">Instance of IngestionTask to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(IngestionTask input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.TaskID == input.TaskID ||
-              (this.TaskID != null &&
-              this.TaskID.Equals(input.TaskID))
-          ) &&
-          (
-              this.SourceID == input.SourceID ||
-              (this.SourceID != null &&
-              this.SourceID.Equals(input.SourceID))
-          ) &&
-          (
-              this.DestinationID == input.DestinationID ||
-              (this.DestinationID != null &&
-              this.DestinationID.Equals(input.DestinationID))
-          ) &&
-          (
-              this.Trigger == input.Trigger ||
-              (this.Trigger != null &&
-              this.Trigger.Equals(input.Trigger))
-          ) &&
-          (
-              this.Input == input.Input ||
-              (this.Input != null &&
-              this.Input.Equals(input.Input))
-          ) &&
-          (
-              this.Enabled == input.Enabled ||
-              this.Enabled.Equals(input.Enabled)
-          ) &&
-          (
-              this.FailureThreshold == input.FailureThreshold ||
-              this.FailureThreshold.Equals(input.FailureThreshold)
-          ) &&
-          (
-              this.Action == input.Action ||
-              this.Action.Equals(input.Action)
-          ) &&
-          (
-              this.CreatedAt == input.CreatedAt ||
-              (this.CreatedAt != null &&
-              this.CreatedAt.Equals(input.CreatedAt))
-          ) &&
-          (
-              this.UpdatedAt == input.UpdatedAt ||
-              (this.UpdatedAt != null &&
-              this.UpdatedAt.Equals(input.UpdatedAt))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.TaskID != null)
-        {
-          hashCode = (hashCode * 59) + this.TaskID.GetHashCode();
-        }
-        if (this.SourceID != null)
-        {
-          hashCode = (hashCode * 59) + this.SourceID.GetHashCode();
-        }
-        if (this.DestinationID != null)
-        {
-          hashCode = (hashCode * 59) + this.DestinationID.GetHashCode();
-        }
-        if (this.Trigger != null)
-        {
-          hashCode = (hashCode * 59) + this.Trigger.GetHashCode();
-        }
-        if (this.Input != null)
-        {
-          hashCode = (hashCode * 59) + this.Input.GetHashCode();
-        }
-        hashCode = (hashCode * 59) + this.Enabled.GetHashCode();
-        hashCode = (hashCode * 59) + this.FailureThreshold.GetHashCode();
-        hashCode = (hashCode * 59) + this.Action.GetHashCode();
-        if (this.CreatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.CreatedAt.GetHashCode();
-        }
-        if (this.UpdatedAt != null)
-        {
-          hashCode = (hashCode * 59) + this.UpdatedAt.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }

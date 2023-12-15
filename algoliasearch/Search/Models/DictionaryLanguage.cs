@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Custom entries for a dictionary.
   /// </summary>
   [DataContract(Name = "dictionaryLanguage")]
-  public partial class DictionaryLanguage : IEquatable<DictionaryLanguage>
+  public partial class DictionaryLanguage
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="DictionaryLanguage" /> class.
@@ -60,48 +60,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as DictionaryLanguage);
-    }
-
-    /// <summary>
-    /// Returns true if DictionaryLanguage instances are equal
-    /// </summary>
-    /// <param name="input">Instance of DictionaryLanguage to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(DictionaryLanguage input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.NbCustomEntries == input.NbCustomEntries ||
-              this.NbCustomEntries.Equals(input.NbCustomEntries)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.NbCustomEntries.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

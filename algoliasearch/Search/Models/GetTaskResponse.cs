@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// GetTaskResponse
   /// </summary>
   [DataContract(Name = "getTaskResponse")]
-  public partial class GetTaskResponse : IEquatable<GetTaskResponse>
+  public partial class GetTaskResponse
   {
 
     /// <summary>
@@ -64,48 +64,6 @@ namespace Algolia.Search.Search.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as GetTaskResponse);
-    }
-
-    /// <summary>
-    /// Returns true if GetTaskResponse instances are equal
-    /// </summary>
-    /// <param name="input">Instance of GetTaskResponse to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(GetTaskResponse input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.Status == input.Status ||
-              this.Status.Equals(input.Status)
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.Status.GetHashCode();
-        return hashCode;
-      }
     }
 
   }

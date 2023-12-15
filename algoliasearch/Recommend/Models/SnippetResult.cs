@@ -24,7 +24,7 @@ namespace Algolia.Search.Recommend.Models
   /// </summary>
   [JsonConverter(typeof(SnippetResultJsonConverter))]
   [DataContract(Name = "snippetResult")]
-  public partial class SnippetResult : AbstractSchema, IEquatable<SnippetResult>
+  public partial class SnippetResult : AbstractSchema
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SnippetResult" /> class
@@ -190,43 +190,6 @@ namespace Algolia.Search.Recommend.Models
       return newSnippetResult;
     }
 
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SnippetResult);
-    }
-
-    /// <summary>
-    /// Returns true if SnippetResult instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SnippetResult to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SnippetResult input)
-    {
-      if (input == null)
-        return false;
-
-      return this.ActualInstance.Equals(input.ActualInstance);
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        if (this.ActualInstance != null)
-          hashCode = hashCode * 59 + this.ActualInstance.GetHashCode();
-        return hashCode;
-      }
-    }
   }
 
   /// <summary>

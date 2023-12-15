@@ -22,7 +22,7 @@ namespace Algolia.Search.Ingestion.Models
   /// SourceDocker
   /// </summary>
   [DataContract(Name = "SourceDocker")]
-  public partial class SourceDocker : IEquatable<SourceDocker>
+  public partial class SourceDocker
   {
 
     /// <summary>
@@ -113,80 +113,6 @@ namespace Algolia.Search.Ingestion.Models
     public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-    }
-
-    /// <summary>
-    /// Returns true if objects are equal
-    /// </summary>
-    /// <param name="input">Object to be compared</param>
-    /// <returns>Boolean</returns>
-    public override bool Equals(object input)
-    {
-      return this.Equals(input as SourceDocker);
-    }
-
-    /// <summary>
-    /// Returns true if SourceDocker instances are equal
-    /// </summary>
-    /// <param name="input">Instance of SourceDocker to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(SourceDocker input)
-    {
-      if (input == null)
-      {
-        return false;
-      }
-      return
-          (
-              this.ImageType == input.ImageType ||
-              this.ImageType.Equals(input.ImageType)
-          ) &&
-          (
-              this.Registry == input.Registry ||
-              this.Registry.Equals(input.Registry)
-          ) &&
-          (
-              this.Image == input.Image ||
-              (this.Image != null &&
-              this.Image.Equals(input.Image))
-          ) &&
-          (
-              this.VarVersion == input.VarVersion ||
-              (this.VarVersion != null &&
-              this.VarVersion.Equals(input.VarVersion))
-          ) &&
-          (
-              this.VarConfiguration == input.VarConfiguration ||
-              (this.VarConfiguration != null &&
-              this.VarConfiguration.Equals(input.VarConfiguration))
-          );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-      unchecked // Overflow is fine, just wrap
-      {
-        int hashCode = 41;
-        hashCode = (hashCode * 59) + this.ImageType.GetHashCode();
-        hashCode = (hashCode * 59) + this.Registry.GetHashCode();
-        if (this.Image != null)
-        {
-          hashCode = (hashCode * 59) + this.Image.GetHashCode();
-        }
-        if (this.VarVersion != null)
-        {
-          hashCode = (hashCode * 59) + this.VarVersion.GetHashCode();
-        }
-        if (this.VarConfiguration != null)
-        {
-          hashCode = (hashCode * 59) + this.VarConfiguration.GetHashCode();
-        }
-        return hashCode;
-      }
     }
 
   }
