@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// A single hit.
   /// </summary>
   [DataContract(Name = "hit")]
-  public partial class Hit : Dictionary<String, Object>
+  public partial class Hit
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Hit" /> class.
@@ -40,7 +40,7 @@ namespace Algolia.Search.Search.Models
     /// <param name="snippetResult">Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty..</param>
     /// <param name="rankingInfo">rankingInfo.</param>
     /// <param name="distinctSeqID">distinctSeqID.</param>
-    public Hit(string objectID = default(string), Dictionary<string, HighlightResult> highlightResult = default(Dictionary<string, HighlightResult>), Dictionary<string, SnippetResult> snippetResult = default(Dictionary<string, SnippetResult>), RankingInfo rankingInfo = default(RankingInfo), int distinctSeqID = default(int)) : base()
+    public Hit(string objectID = default(string), Dictionary<string, HighlightResult> highlightResult = default(Dictionary<string, HighlightResult>), Dictionary<string, SnippetResult> snippetResult = default(Dictionary<string, SnippetResult>), RankingInfo rankingInfo = default(RankingInfo), int distinctSeqID = default(int))
     {
       // to ensure "objectID" is required (not null)
       if (objectID == null)
@@ -102,7 +102,6 @@ namespace Algolia.Search.Search.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class Hit {\n");
-      sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
       sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
       sb.Append("  HighlightResult: ").Append(HighlightResult).Append("\n");
       sb.Append("  SnippetResult: ").Append(SnippetResult).Append("\n");
@@ -117,7 +116,7 @@ namespace Algolia.Search.Search.Models
     /// Returns the JSON string presentation of the object
     /// </summary>
     /// <returns>JSON string presentation of the object</returns>
-    public string ToJson()
+    public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
     }

@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// Dictionary entry.
   /// </summary>
   [DataContract(Name = "dictionaryEntry")]
-  public partial class DictionaryEntry : Dictionary<String, Object>
+  public partial class DictionaryEntry
   {
 
     /// <summary>
@@ -47,7 +47,7 @@ namespace Algolia.Search.Search.Models
     /// <param name="words">Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia&#39;s standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its &#x60;state&#x60; to &#x60;disabled&#x60;. .</param>
     /// <param name="decomposition">For compound entries, governs the behavior of the &#x60;word&#x60; parameter..</param>
     /// <param name="state">state.</param>
-    public DictionaryEntry(string objectID = default(string), string language = default(string), string word = default(string), List<string> words = default(List<string>), List<string> decomposition = default(List<string>), DictionaryEntryState? state = default(DictionaryEntryState?)) : base()
+    public DictionaryEntry(string objectID = default(string), string language = default(string), string word = default(string), List<string> words = default(List<string>), List<string> decomposition = default(List<string>), DictionaryEntryState? state = default(DictionaryEntryState?))
     {
       // to ensure "objectID" is required (not null)
       if (objectID == null)
@@ -117,7 +117,6 @@ namespace Algolia.Search.Search.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class DictionaryEntry {\n");
-      sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
       sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
       sb.Append("  Language: ").Append(Language).Append("\n");
       sb.Append("  Word: ").Append(Word).Append("\n");
@@ -133,7 +132,7 @@ namespace Algolia.Search.Search.Models
     /// Returns the JSON string presentation of the object
     /// </summary>
     /// <returns>JSON string presentation of the object</returns>
-    public string ToJson()
+    public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
     }

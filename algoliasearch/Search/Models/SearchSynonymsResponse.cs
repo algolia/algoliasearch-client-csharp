@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// SearchSynonymsResponse
   /// </summary>
   [DataContract(Name = "searchSynonymsResponse")]
-  public partial class SearchSynonymsResponse : Dictionary<String, Object>
+  public partial class SearchSynonymsResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchSynonymsResponse" /> class.
@@ -37,7 +37,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <param name="hits">Synonym objects. (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public SearchSynonymsResponse(List<SynonymHit> hits = default(List<SynonymHit>), int nbHits = default(int)) : base()
+    public SearchSynonymsResponse(List<SynonymHit> hits = default(List<SynonymHit>), int nbHits = default(int))
     {
       // to ensure "hits" is required (not null)
       if (hits == null)
@@ -77,7 +77,6 @@ namespace Algolia.Search.Search.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class SearchSynonymsResponse {\n");
-      sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
       sb.Append("  Hits: ").Append(Hits).Append("\n");
       sb.Append("  NbHits: ").Append(NbHits).Append("\n");
       sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -89,7 +88,7 @@ namespace Algolia.Search.Search.Models
     /// Returns the JSON string presentation of the object
     /// </summary>
     /// <returns>JSON string presentation of the object</returns>
-    public string ToJson()
+    public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
     }

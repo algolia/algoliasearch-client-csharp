@@ -22,7 +22,7 @@ namespace Algolia.Search.Recommend.Models
   /// Recommend hit.
   /// </summary>
   [DataContract(Name = "recommendHit")]
-  public partial class RecommendHit : Dictionary<String, Object>
+  public partial class RecommendHit
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="RecommendHit" /> class.
@@ -41,7 +41,7 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="rankingInfo">rankingInfo.</param>
     /// <param name="distinctSeqID">distinctSeqID.</param>
     /// <param name="score">Recommendation score. (required).</param>
-    public RecommendHit(string objectID = default(string), Dictionary<string, HighlightResult> highlightResult = default(Dictionary<string, HighlightResult>), Dictionary<string, SnippetResult> snippetResult = default(Dictionary<string, SnippetResult>), RankingInfo rankingInfo = default(RankingInfo), int distinctSeqID = default(int), double score = default(double)) : base()
+    public RecommendHit(string objectID = default(string), Dictionary<string, HighlightResult> highlightResult = default(Dictionary<string, HighlightResult>), Dictionary<string, SnippetResult> snippetResult = default(Dictionary<string, SnippetResult>), RankingInfo rankingInfo = default(RankingInfo), int distinctSeqID = default(int), double score = default(double))
     {
       // to ensure "objectID" is required (not null)
       if (objectID == null)
@@ -111,7 +111,6 @@ namespace Algolia.Search.Recommend.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class RecommendHit {\n");
-      sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
       sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
       sb.Append("  HighlightResult: ").Append(HighlightResult).Append("\n");
       sb.Append("  SnippetResult: ").Append(SnippetResult).Append("\n");
@@ -127,7 +126,7 @@ namespace Algolia.Search.Recommend.Models
     /// Returns the JSON string presentation of the object
     /// </summary>
     /// <returns>JSON string presentation of the object</returns>
-    public string ToJson()
+    public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
     }

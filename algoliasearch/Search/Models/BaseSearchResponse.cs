@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// BaseSearchResponse
   /// </summary>
   [DataContract(Name = "baseSearchResponse")]
-  public partial class BaseSearchResponse : Dictionary<String, Object>
+  public partial class BaseSearchResponse
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseSearchResponse" /> class.
@@ -62,7 +62,7 @@ namespace Algolia.Search.Search.Models
     /// <param name="serverTimeMS">Time the server took to process the request, in milliseconds..</param>
     /// <param name="serverUsed">Host name of the server that processed the request..</param>
     /// <param name="userData">Lets you store custom data in your indices..</param>
-    public BaseSearchResponse(int abTestID = default(int), int abTestVariantID = default(int), string aroundLatLng = default(string), string automaticRadius = default(string), Exhaustive exhaustive = default(Exhaustive), bool exhaustiveFacetsCount = default(bool), bool exhaustiveNbHits = default(bool), bool exhaustiveTypo = default(bool), Dictionary<string, Dictionary<string, int>> facets = default(Dictionary<string, Dictionary<string, int>>), Dictionary<string, FacetsStats> facetsStats = default(Dictionary<string, FacetsStats>), int hitsPerPage = 20, string index = default(string), string indexUsed = default(string), string message = default(string), int nbHits = default(int), int nbPages = default(int), int nbSortedHits = default(int), int page = 0, string parsedQuery = default(string), int processingTimeMS = default(int), Object processingTimingsMS = default(Object), string queryAfterRemoval = default(string), Redirect redirect = default(Redirect), RenderingContent renderingContent = default(RenderingContent), int serverTimeMS = default(int), string serverUsed = default(string), Object userData = default(Object)) : base()
+    public BaseSearchResponse(int abTestID = default(int), int abTestVariantID = default(int), string aroundLatLng = default(string), string automaticRadius = default(string), Exhaustive exhaustive = default(Exhaustive), bool exhaustiveFacetsCount = default(bool), bool exhaustiveNbHits = default(bool), bool exhaustiveTypo = default(bool), Dictionary<string, Dictionary<string, int>> facets = default(Dictionary<string, Dictionary<string, int>>), Dictionary<string, FacetsStats> facetsStats = default(Dictionary<string, FacetsStats>), int hitsPerPage = 20, string index = default(string), string indexUsed = default(string), string message = default(string), int nbHits = default(int), int nbPages = default(int), int nbSortedHits = default(int), int page = 0, string parsedQuery = default(string), int processingTimeMS = default(int), Object processingTimingsMS = default(Object), string queryAfterRemoval = default(string), Redirect redirect = default(Redirect), RenderingContent renderingContent = default(RenderingContent), int serverTimeMS = default(int), string serverUsed = default(string), Object userData = default(Object))
     {
       this.HitsPerPage = hitsPerPage;
       this.NbHits = nbHits;
@@ -297,7 +297,6 @@ namespace Algolia.Search.Search.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class BaseSearchResponse {\n");
-      sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
       sb.Append("  AbTestID: ").Append(AbTestID).Append("\n");
       sb.Append("  AbTestVariantID: ").Append(AbTestVariantID).Append("\n");
       sb.Append("  AroundLatLng: ").Append(AroundLatLng).Append("\n");
@@ -334,7 +333,7 @@ namespace Algolia.Search.Search.Models
     /// Returns the JSON string presentation of the object
     /// </summary>
     /// <returns>JSON string presentation of the object</returns>
-    public string ToJson()
+    public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
     }

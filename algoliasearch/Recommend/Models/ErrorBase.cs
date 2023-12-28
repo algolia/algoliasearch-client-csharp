@@ -22,13 +22,13 @@ namespace Algolia.Search.Recommend.Models
   /// Error.
   /// </summary>
   [DataContract(Name = "ErrorBase")]
-  public partial class ErrorBase : Dictionary<String, Object>
+  public partial class ErrorBase
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ErrorBase" /> class.
     /// </summary>
     /// <param name="message">message.</param>
-    public ErrorBase(string message = default(string)) : base()
+    public ErrorBase(string message = default(string))
     {
       this.Message = message;
       this.AdditionalProperties = new Dictionary<string, object>();
@@ -54,7 +54,6 @@ namespace Algolia.Search.Recommend.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class ErrorBase {\n");
-      sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
       sb.Append("  Message: ").Append(Message).Append("\n");
       sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
       sb.Append("}\n");
@@ -65,7 +64,7 @@ namespace Algolia.Search.Recommend.Models
     /// Returns the JSON string presentation of the object
     /// </summary>
     /// <returns>JSON string presentation of the object</returns>
-    public string ToJson()
+    public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
     }

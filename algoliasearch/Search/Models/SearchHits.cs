@@ -22,7 +22,7 @@ namespace Algolia.Search.Search.Models
   /// SearchHits
   /// </summary>
   [DataContract(Name = "searchHits")]
-  public partial class SearchHits : Dictionary<String, Object>
+  public partial class SearchHits
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchHits" /> class.
@@ -38,7 +38,7 @@ namespace Algolia.Search.Search.Models
     /// <param name="hits">hits (required).</param>
     /// <param name="query">Text to search for in an index. (required) (default to &quot;&quot;).</param>
     /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
-    public SearchHits(List<Hit> hits = default(List<Hit>), string query = @"", string varParams = default(string)) : base()
+    public SearchHits(List<Hit> hits = default(List<Hit>), string query = @"", string varParams = default(string))
     {
       // to ensure "hits" is required (not null)
       if (hits == null)
@@ -95,7 +95,6 @@ namespace Algolia.Search.Search.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class SearchHits {\n");
-      sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
       sb.Append("  Hits: ").Append(Hits).Append("\n");
       sb.Append("  Query: ").Append(Query).Append("\n");
       sb.Append("  VarParams: ").Append(VarParams).Append("\n");
@@ -108,7 +107,7 @@ namespace Algolia.Search.Search.Models
     /// Returns the JSON string presentation of the object
     /// </summary>
     /// <returns>JSON string presentation of the object</returns>
-    public string ToJson()
+    public virtual string ToJson()
     {
       return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
     }
