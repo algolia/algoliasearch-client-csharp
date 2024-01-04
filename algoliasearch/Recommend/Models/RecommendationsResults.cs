@@ -19,18 +19,18 @@ using Algolia.Search.Models;
 namespace Algolia.Search.Recommend.Models
 {
   /// <summary>
-  /// RecommendationsResponse
+  /// RecommendationsResults
   /// </summary>
-  [DataContract(Name = "recommendationsResponse")]
-  public partial class RecommendationsResponse
+  [DataContract(Name = "recommendationsResults")]
+  public partial class RecommendationsResults
   {
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendationsResponse" /> class.
+    /// Initializes a new instance of the <see cref="RecommendationsResults" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RecommendationsResponse() { }
+    protected RecommendationsResults() { }
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendationsResponse" /> class.
+    /// Initializes a new instance of the <see cref="RecommendationsResults" /> class.
     /// </summary>
     /// <param name="abTestID">A/B test ID. This is only included in the response for indices that are part of an A/B test..</param>
     /// <param name="abTestVariantID">Variant ID. This is only included in the response for indices that are part of an A/B test..</param>
@@ -62,7 +62,7 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="hits">hits (required).</param>
     /// <param name="query">Text to search for in an index. (default to &quot;&quot;).</param>
     /// <param name="varParams">URL-encoded string of all search parameters..</param>
-    public RecommendationsResponse(int abTestID = default(int), int abTestVariantID = default(int), string aroundLatLng = default(string), string automaticRadius = default(string), Exhaustive exhaustive = default(Exhaustive), bool exhaustiveFacetsCount = default(bool), bool exhaustiveNbHits = default(bool), bool exhaustiveTypo = default(bool), Dictionary<string, Dictionary<string, int>> facets = default(Dictionary<string, Dictionary<string, int>>), Dictionary<string, FacetsStats> facetsStats = default(Dictionary<string, FacetsStats>), int hitsPerPage = 20, string index = default(string), string indexUsed = default(string), string message = default(string), int nbHits = default(int), int nbPages = default(int), int nbSortedHits = default(int), int page = 0, string parsedQuery = default(string), int processingTimeMS = default(int), Object processingTimingsMS = default(Object), string queryAfterRemoval = default(string), Redirect redirect = default(Redirect), RenderingContent renderingContent = default(RenderingContent), int serverTimeMS = default(int), string serverUsed = default(string), Object userData = default(Object), List<RecommendHit> hits = default(List<RecommendHit>), string query = @"", string varParams = default(string))
+    public RecommendationsResults(int abTestID = default(int), int abTestVariantID = default(int), string aroundLatLng = default(string), string automaticRadius = default(string), Exhaustive exhaustive = default(Exhaustive), bool exhaustiveFacetsCount = default(bool), bool exhaustiveNbHits = default(bool), bool exhaustiveTypo = default(bool), Dictionary<string, Dictionary<string, int>> facets = default(Dictionary<string, Dictionary<string, int>>), Dictionary<string, FacetsStats> facetsStats = default(Dictionary<string, FacetsStats>), int hitsPerPage = 20, string index = default(string), string indexUsed = default(string), string message = default(string), int nbHits = default(int), int nbPages = default(int), int nbSortedHits = default(int), int page = 0, string parsedQuery = default(string), int processingTimeMS = default(int), Object processingTimingsMS = default(Object), string queryAfterRemoval = default(string), Redirect redirect = default(Redirect), RenderingContent renderingContent = default(RenderingContent), int serverTimeMS = default(int), string serverUsed = default(string), Object userData = default(Object), List<RecommendationsHit> hits = default(List<RecommendationsHit>), string query = @"", string varParams = default(string))
     {
       this.HitsPerPage = hitsPerPage;
       this.NbHits = nbHits;
@@ -72,7 +72,7 @@ namespace Algolia.Search.Recommend.Models
       // to ensure "hits" is required (not null)
       if (hits == null)
       {
-        throw new ArgumentNullException("hits is a required property for RecommendationsResponse and cannot be null");
+        throw new ArgumentNullException("hits is a required property for RecommendationsResults and cannot be null");
       }
       this.Hits = hits;
       this.AbTestID = abTestID;
@@ -295,7 +295,7 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets Hits
     /// </summary>
     [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = true)]
-    public List<RecommendHit> Hits { get; set; }
+    public List<RecommendationsHit> Hits { get; set; }
 
     /// <summary>
     /// Text to search for in an index.
@@ -318,7 +318,7 @@ namespace Algolia.Search.Recommend.Models
     public override string ToString()
     {
       StringBuilder sb = new StringBuilder();
-      sb.Append("class RecommendationsResponse {\n");
+      sb.Append("class RecommendationsResults {\n");
       sb.Append("  AbTestID: ").Append(AbTestID).Append("\n");
       sb.Append("  AbTestVariantID: ").Append(AbTestVariantID).Append("\n");
       sb.Append("  AroundLatLng: ").Append(AroundLatLng).Append("\n");

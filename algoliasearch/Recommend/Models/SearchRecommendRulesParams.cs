@@ -32,8 +32,7 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="page">Requested page (the first page is page 0)..</param>
     /// <param name="hitsPerPage">Maximum number of hits per page. (default to 20).</param>
     /// <param name="enabled">Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved..</param>
-    /// <param name="requestOptions">Request options to send with the API call..</param>
-    public SearchRecommendRulesParams(string query = @"", string context = default(string), int page = default(int), int hitsPerPage = 20, bool? enabled = default(bool?), List<Object> requestOptions = default(List<Object>))
+    public SearchRecommendRulesParams(string query = @"", string context = default(string), int page = default(int), int hitsPerPage = 20, bool? enabled = default(bool?))
     {
       // use default value if no "query" provided
       this.Query = query ?? @"";
@@ -41,7 +40,6 @@ namespace Algolia.Search.Recommend.Models
       this.Page = page;
       this.HitsPerPage = hitsPerPage;
       this.Enabled = enabled;
-      this.RequestOptions = requestOptions;
     }
 
     /// <summary>
@@ -80,13 +78,6 @@ namespace Algolia.Search.Recommend.Models
     public bool? Enabled { get; set; }
 
     /// <summary>
-    /// Request options to send with the API call.
-    /// </summary>
-    /// <value>Request options to send with the API call.</value>
-    [DataMember(Name = "requestOptions", EmitDefaultValue = false)]
-    public List<Object> RequestOptions { get; set; }
-
-    /// <summary>
     /// Returns the string presentation of the object
     /// </summary>
     /// <returns>String presentation of the object</returns>
@@ -99,7 +90,6 @@ namespace Algolia.Search.Recommend.Models
       sb.Append("  Page: ").Append(Page).Append("\n");
       sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
       sb.Append("  Enabled: ").Append(Enabled).Append("\n");
-      sb.Append("  RequestOptions: ").Append(RequestOptions).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }

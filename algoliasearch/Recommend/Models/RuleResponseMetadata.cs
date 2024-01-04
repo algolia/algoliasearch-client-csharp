@@ -21,7 +21,7 @@ namespace Algolia.Search.Recommend.Models
   /// <summary>
   /// RuleResponseMetadata
   /// </summary>
-  [DataContract(Name = "ruleResponse__metadata")]
+  [DataContract(Name = "RuleResponse__metadata")]
   public partial class RuleResponseMetadata
   {
     /// <summary>

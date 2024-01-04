@@ -19,28 +19,28 @@ using Algolia.Search.Models;
 namespace Algolia.Search.Recommend.Models
 {
   /// <summary>
-  /// RecommendHits
+  /// RecommendationsHits
   /// </summary>
-  [DataContract(Name = "recommendHits")]
-  public partial class RecommendHits
+  [DataContract(Name = "recommendationsHits")]
+  public partial class RecommendationsHits
   {
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendHits" /> class.
+    /// Initializes a new instance of the <see cref="RecommendationsHits" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RecommendHits() { }
+    protected RecommendationsHits() { }
     /// <summary>
-    /// Initializes a new instance of the <see cref="RecommendHits" /> class.
+    /// Initializes a new instance of the <see cref="RecommendationsHits" /> class.
     /// </summary>
     /// <param name="hits">hits (required).</param>
     /// <param name="query">Text to search for in an index. (default to &quot;&quot;).</param>
     /// <param name="varParams">URL-encoded string of all search parameters..</param>
-    public RecommendHits(List<RecommendHit> hits = default(List<RecommendHit>), string query = @"", string varParams = default(string))
+    public RecommendationsHits(List<RecommendationsHit> hits = default(List<RecommendationsHit>), string query = @"", string varParams = default(string))
     {
       // to ensure "hits" is required (not null)
       if (hits == null)
       {
-        throw new ArgumentNullException("hits is a required property for RecommendHits and cannot be null");
+        throw new ArgumentNullException("hits is a required property for RecommendationsHits and cannot be null");
       }
       this.Hits = hits;
       // use default value if no "query" provided
@@ -52,7 +52,7 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets Hits
     /// </summary>
     [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = true)]
-    public List<RecommendHit> Hits { get; set; }
+    public List<RecommendationsHit> Hits { get; set; }
 
     /// <summary>
     /// Text to search for in an index.
@@ -75,7 +75,7 @@ namespace Algolia.Search.Recommend.Models
     public override string ToString()
     {
       StringBuilder sb = new StringBuilder();
-      sb.Append("class RecommendHits {\n");
+      sb.Append("class RecommendationsHits {\n");
       sb.Append("  Hits: ").Append(Hits).Append("\n");
       sb.Append("  Query: ").Append(Query).Append("\n");
       sb.Append("  VarParams: ").Append(VarParams).Append("\n");

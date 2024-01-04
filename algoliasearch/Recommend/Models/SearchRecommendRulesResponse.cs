@@ -33,10 +33,10 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="SearchRecommendRulesResponse" /> class.
     /// </summary>
     /// <param name="hits">Fetched rules. (required).</param>
-    /// <param name="nbHits">Number of fetched rules. (required).</param>
-    /// <param name="page">Current page. (required).</param>
-    /// <param name="nbPages">Number of pages. (required).</param>
-    public SearchRecommendRulesResponse(List<RuleResponse> hits = default(List<RuleResponse>), int nbHits = default(int), int page = default(int), int nbPages = default(int))
+    /// <param name="nbHits">Number of hits the search query matched. (required).</param>
+    /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
+    /// <param name="nbPages">Number of pages of results for the current query. (required).</param>
+    public SearchRecommendRulesResponse(List<RuleResponse> hits = default(List<RuleResponse>), int nbHits = default(int), int page = 0, int nbPages = default(int))
     {
       // to ensure "hits" is required (not null)
       if (hits == null)
@@ -57,23 +57,23 @@ namespace Algolia.Search.Recommend.Models
     public List<RuleResponse> Hits { get; set; }
 
     /// <summary>
-    /// Number of fetched rules.
+    /// Number of hits the search query matched.
     /// </summary>
-    /// <value>Number of fetched rules.</value>
+    /// <value>Number of hits the search query matched.</value>
     [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = true)]
     public int NbHits { get; set; }
 
     /// <summary>
-    /// Current page.
+    /// Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).
     /// </summary>
-    /// <value>Current page.</value>
+    /// <value>Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).</value>
     [DataMember(Name = "page", IsRequired = true, EmitDefaultValue = true)]
     public int Page { get; set; }
 
     /// <summary>
-    /// Number of pages.
+    /// Number of pages of results for the current query.
     /// </summary>
-    /// <value>Number of pages.</value>
+    /// <value>Number of pages of results for the current query.</value>
     [DataMember(Name = "nbPages", IsRequired = true, EmitDefaultValue = true)]
     public int NbPages { get; set; }
 

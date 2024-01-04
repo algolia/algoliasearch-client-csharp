@@ -28,7 +28,7 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="GetRecommendationsResponse" /> class.
     /// </summary>
     /// <param name="results">results.</param>
-    public GetRecommendationsResponse(List<RecommendationsResponse> results = default(List<RecommendationsResponse>))
+    public GetRecommendationsResponse(List<RecommendationsResults> results = default(List<RecommendationsResults>))
     {
       this.Results = results;
     }
@@ -37,7 +37,7 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets Results
     /// </summary>
     [DataMember(Name = "results", EmitDefaultValue = false)]
-    public List<RecommendationsResponse> Results { get; set; }
+    public List<RecommendationsResults> Results { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

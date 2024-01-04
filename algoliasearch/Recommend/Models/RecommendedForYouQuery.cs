@@ -19,46 +19,42 @@ using Algolia.Search.Models;
 namespace Algolia.Search.Recommend.Models
 {
   /// <summary>
-  /// TrendingItemsQuery
+  /// RecommendedForYouQuery
   /// </summary>
-  [DataContract(Name = "trendingItemsQuery")]
-  public partial class TrendingItemsQuery
+  [DataContract(Name = "recommendedForYouQuery")]
+  public partial class RecommendedForYouQuery
   {
 
     /// <summary>
     /// Gets or Sets Model
     /// </summary>
-    [DataMember(Name = "model", EmitDefaultValue = false)]
-    public TrendingItemsModel? Model { get; set; }
+    [DataMember(Name = "model", IsRequired = true, EmitDefaultValue = true)]
+    public RecommendedForYouModel Model { get; set; }
     /// <summary>
-    /// Initializes a new instance of the <see cref="TrendingItemsQuery" /> class.
+    /// Initializes a new instance of the <see cref="RecommendedForYouQuery" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TrendingItemsQuery() { }
+    protected RecommendedForYouQuery() { }
     /// <summary>
-    /// Initializes a new instance of the <see cref="TrendingItemsQuery" /> class.
+    /// Initializes a new instance of the <see cref="RecommendedForYouQuery" /> class.
     /// </summary>
     /// <param name="indexName">Algolia index name. (required).</param>
     /// <param name="threshold">Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. .</param>
     /// <param name="maxRecommendations">Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. (default to 0).</param>
-    /// <param name="facetName">Facet name for trending models..</param>
-    /// <param name="facetValue">Facet value for trending models..</param>
-    /// <param name="model">model.</param>
+    /// <param name="model">model (required).</param>
     /// <param name="queryParameters">queryParameters.</param>
     /// <param name="fallbackParameters">fallbackParameters.</param>
-    public TrendingItemsQuery(string indexName = default(string), int threshold = default(int), int maxRecommendations = 0, string facetName = default(string), string facetValue = default(string), TrendingItemsModel? model = default(TrendingItemsModel?), SearchParamsObject queryParameters = default(SearchParamsObject), SearchParamsObject fallbackParameters = default(SearchParamsObject))
+    public RecommendedForYouQuery(string indexName = default(string), int threshold = default(int), int maxRecommendations = 0, RecommendedForYouModel model = default(RecommendedForYouModel), RecommendedForYouQueryParameters queryParameters = default(RecommendedForYouQueryParameters), RecommendedForYouQueryParameters fallbackParameters = default(RecommendedForYouQueryParameters))
     {
       // to ensure "indexName" is required (not null)
       if (indexName == null)
       {
-        throw new ArgumentNullException("indexName is a required property for TrendingItemsQuery and cannot be null");
+        throw new ArgumentNullException("indexName is a required property for RecommendedForYouQuery and cannot be null");
       }
       this.IndexName = indexName;
+      this.Model = model;
       this.Threshold = threshold;
       this.MaxRecommendations = maxRecommendations;
-      this.FacetName = facetName;
-      this.FacetValue = facetValue;
-      this.Model = model;
       this.QueryParameters = queryParameters;
       this.FallbackParameters = fallbackParameters;
     }
@@ -85,30 +81,16 @@ namespace Algolia.Search.Recommend.Models
     public int MaxRecommendations { get; set; }
 
     /// <summary>
-    /// Facet name for trending models.
-    /// </summary>
-    /// <value>Facet name for trending models.</value>
-    [DataMember(Name = "facetName", EmitDefaultValue = false)]
-    public string FacetName { get; set; }
-
-    /// <summary>
-    /// Facet value for trending models.
-    /// </summary>
-    /// <value>Facet value for trending models.</value>
-    [DataMember(Name = "facetValue", EmitDefaultValue = false)]
-    public string FacetValue { get; set; }
-
-    /// <summary>
     /// Gets or Sets QueryParameters
     /// </summary>
     [DataMember(Name = "queryParameters", EmitDefaultValue = false)]
-    public SearchParamsObject QueryParameters { get; set; }
+    public RecommendedForYouQueryParameters QueryParameters { get; set; }
 
     /// <summary>
     /// Gets or Sets FallbackParameters
     /// </summary>
     [DataMember(Name = "fallbackParameters", EmitDefaultValue = false)]
-    public SearchParamsObject FallbackParameters { get; set; }
+    public RecommendedForYouQueryParameters FallbackParameters { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object
@@ -117,12 +99,10 @@ namespace Algolia.Search.Recommend.Models
     public override string ToString()
     {
       StringBuilder sb = new StringBuilder();
-      sb.Append("class TrendingItemsQuery {\n");
+      sb.Append("class RecommendedForYouQuery {\n");
       sb.Append("  IndexName: ").Append(IndexName).Append("\n");
       sb.Append("  Threshold: ").Append(Threshold).Append("\n");
       sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
-      sb.Append("  FacetName: ").Append(FacetName).Append("\n");
-      sb.Append("  FacetValue: ").Append(FacetValue).Append("\n");
       sb.Append("  Model: ").Append(Model).Append("\n");
       sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
       sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");

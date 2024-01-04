@@ -38,36 +38,29 @@ namespace Algolia.Search.Recommend.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="TrendingFacetsQuery" /> class.
     /// </summary>
-    /// <param name="facetName">Facet name for trending models. (required).</param>
-    /// <param name="model">model.</param>
     /// <param name="indexName">Algolia index name. (required).</param>
     /// <param name="threshold">Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. .</param>
     /// <param name="maxRecommendations">Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. (default to 0).</param>
-    public TrendingFacetsQuery(string facetName = default(string), TrendingFacetsModel? model = default(TrendingFacetsModel?), string indexName = default(string), int threshold = default(int), int maxRecommendations = 0)
+    /// <param name="facetName">Facet name for trending models. (required).</param>
+    /// <param name="model">model.</param>
+    public TrendingFacetsQuery(string indexName = default(string), int threshold = default(int), int maxRecommendations = 0, string facetName = default(string), TrendingFacetsModel? model = default(TrendingFacetsModel?))
     {
-      // to ensure "facetName" is required (not null)
-      if (facetName == null)
-      {
-        throw new ArgumentNullException("facetName is a required property for TrendingFacetsQuery and cannot be null");
-      }
-      this.FacetName = facetName;
       // to ensure "indexName" is required (not null)
       if (indexName == null)
       {
         throw new ArgumentNullException("indexName is a required property for TrendingFacetsQuery and cannot be null");
       }
       this.IndexName = indexName;
-      this.Model = model;
+      // to ensure "facetName" is required (not null)
+      if (facetName == null)
+      {
+        throw new ArgumentNullException("facetName is a required property for TrendingFacetsQuery and cannot be null");
+      }
+      this.FacetName = facetName;
       this.Threshold = threshold;
       this.MaxRecommendations = maxRecommendations;
+      this.Model = model;
     }
-
-    /// <summary>
-    /// Facet name for trending models.
-    /// </summary>
-    /// <value>Facet name for trending models.</value>
-    [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = true)]
-    public string FacetName { get; set; }
 
     /// <summary>
     /// Algolia index name.
@@ -91,6 +84,13 @@ namespace Algolia.Search.Recommend.Models
     public int MaxRecommendations { get; set; }
 
     /// <summary>
+    /// Facet name for trending models.
+    /// </summary>
+    /// <value>Facet name for trending models.</value>
+    [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = true)]
+    public string FacetName { get; set; }
+
+    /// <summary>
     /// Returns the string presentation of the object
     /// </summary>
     /// <returns>String presentation of the object</returns>
@@ -98,11 +98,11 @@ namespace Algolia.Search.Recommend.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class TrendingFacetsQuery {\n");
-      sb.Append("  FacetName: ").Append(FacetName).Append("\n");
-      sb.Append("  Model: ").Append(Model).Append("\n");
       sb.Append("  IndexName: ").Append(IndexName).Append("\n");
       sb.Append("  Threshold: ").Append(Threshold).Append("\n");
       sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
+      sb.Append("  FacetName: ").Append(FacetName).Append("\n");
+      sb.Append("  Model: ").Append(Model).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }

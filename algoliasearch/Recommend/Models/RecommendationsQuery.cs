@@ -38,15 +38,21 @@ namespace Algolia.Search.Recommend.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="RecommendationsQuery" /> class.
     /// </summary>
+    /// <param name="indexName">Algolia index name. (required).</param>
+    /// <param name="threshold">Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. .</param>
+    /// <param name="maxRecommendations">Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. (default to 0).</param>
     /// <param name="model">model (required).</param>
     /// <param name="objectID">Unique object identifier. (required).</param>
     /// <param name="queryParameters">queryParameters.</param>
     /// <param name="fallbackParameters">fallbackParameters.</param>
-    /// <param name="indexName">Algolia index name. (required).</param>
-    /// <param name="threshold">Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. .</param>
-    /// <param name="maxRecommendations">Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. (default to 0).</param>
-    public RecommendationsQuery(RecommendationModels model = default(RecommendationModels), string objectID = default(string), SearchParamsObject queryParameters = default(SearchParamsObject), SearchParamsObject fallbackParameters = default(SearchParamsObject), string indexName = default(string), int threshold = default(int), int maxRecommendations = 0)
+    public RecommendationsQuery(string indexName = default(string), int threshold = default(int), int maxRecommendations = 0, RecommendationModels model = default(RecommendationModels), string objectID = default(string), SearchParamsObject queryParameters = default(SearchParamsObject), SearchParamsObject fallbackParameters = default(SearchParamsObject))
     {
+      // to ensure "indexName" is required (not null)
+      if (indexName == null)
+      {
+        throw new ArgumentNullException("indexName is a required property for RecommendationsQuery and cannot be null");
+      }
+      this.IndexName = indexName;
       this.Model = model;
       // to ensure "objectID" is required (not null)
       if (objectID == null)
@@ -54,36 +60,11 @@ namespace Algolia.Search.Recommend.Models
         throw new ArgumentNullException("objectID is a required property for RecommendationsQuery and cannot be null");
       }
       this.ObjectID = objectID;
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for RecommendationsQuery and cannot be null");
-      }
-      this.IndexName = indexName;
-      this.QueryParameters = queryParameters;
-      this.FallbackParameters = fallbackParameters;
       this.Threshold = threshold;
       this.MaxRecommendations = maxRecommendations;
+      this.QueryParameters = queryParameters;
+      this.FallbackParameters = fallbackParameters;
     }
-
-    /// <summary>
-    /// Unique object identifier.
-    /// </summary>
-    /// <value>Unique object identifier.</value>
-    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
-    public string ObjectID { get; set; }
-
-    /// <summary>
-    /// Gets or Sets QueryParameters
-    /// </summary>
-    [DataMember(Name = "queryParameters", EmitDefaultValue = false)]
-    public SearchParamsObject QueryParameters { get; set; }
-
-    /// <summary>
-    /// Gets or Sets FallbackParameters
-    /// </summary>
-    [DataMember(Name = "fallbackParameters", EmitDefaultValue = false)]
-    public SearchParamsObject FallbackParameters { get; set; }
 
     /// <summary>
     /// Algolia index name.
@@ -107,6 +88,25 @@ namespace Algolia.Search.Recommend.Models
     public int MaxRecommendations { get; set; }
 
     /// <summary>
+    /// Unique object identifier.
+    /// </summary>
+    /// <value>Unique object identifier.</value>
+    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
+    public string ObjectID { get; set; }
+
+    /// <summary>
+    /// Gets or Sets QueryParameters
+    /// </summary>
+    [DataMember(Name = "queryParameters", EmitDefaultValue = false)]
+    public SearchParamsObject QueryParameters { get; set; }
+
+    /// <summary>
+    /// Gets or Sets FallbackParameters
+    /// </summary>
+    [DataMember(Name = "fallbackParameters", EmitDefaultValue = false)]
+    public SearchParamsObject FallbackParameters { get; set; }
+
+    /// <summary>
     /// Returns the string presentation of the object
     /// </summary>
     /// <returns>String presentation of the object</returns>
@@ -114,13 +114,13 @@ namespace Algolia.Search.Recommend.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class RecommendationsQuery {\n");
+      sb.Append("  IndexName: ").Append(IndexName).Append("\n");
+      sb.Append("  Threshold: ").Append(Threshold).Append("\n");
+      sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
       sb.Append("  Model: ").Append(Model).Append("\n");
       sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
       sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
       sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
-      sb.Append("  IndexName: ").Append(IndexName).Append("\n");
-      sb.Append("  Threshold: ").Append(Threshold).Append("\n");
-      sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }

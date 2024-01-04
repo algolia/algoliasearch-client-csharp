@@ -62,6 +62,18 @@ namespace Algolia.Search.Recommend.Models
       this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RecommendationsRequest" /> class
+    /// with the <see cref="RecommendedForYouQuery" /> class
+    /// </summary>
+    /// <param name="actualInstance">An instance of RecommendedForYouQuery.</param>
+    public RecommendationsRequest(RecommendedForYouQuery actualInstance)
+    {
+      this.IsNullable = false;
+      this.SchemaType = "oneOf";
+      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    }
+
 
     private Object _actualInstance;
 
@@ -80,6 +92,10 @@ namespace Algolia.Search.Recommend.Models
         {
           this._actualInstance = value;
         }
+        else if (value.GetType() == typeof(RecommendedForYouQuery))
+        {
+          this._actualInstance = value;
+        }
         else if (value.GetType() == typeof(TrendingFacetsQuery))
         {
           this._actualInstance = value;
@@ -90,7 +106,7 @@ namespace Algolia.Search.Recommend.Models
         }
         else
         {
-          throw new ArgumentException("Invalid instance found. Must be the following types: RecommendationsQuery, TrendingFacetsQuery, TrendingItemsQuery");
+          throw new ArgumentException("Invalid instance found. Must be the following types: RecommendationsQuery, RecommendedForYouQuery, TrendingFacetsQuery, TrendingItemsQuery");
         }
       }
     }
@@ -123,6 +139,16 @@ namespace Algolia.Search.Recommend.Models
     public RecommendationsQuery GetterRecommendationsQuery()
     {
       return (RecommendationsQuery)this.ActualInstance;
+    }
+
+    /// <summary>
+    /// Get the actual instance of `RecommendedForYouQuery`. If the actual instance is not `RecommendedForYouQuery`,
+    /// the InvalidClassException will be thrown
+    /// </summary>
+    /// <returns>An instance of RecommendedForYouQuery</returns>
+    public RecommendedForYouQuery GetterRecommendedForYouQuery()
+    {
+      return (RecommendedForYouQuery)this.ActualInstance;
     }
 
     /// <summary>
@@ -181,6 +207,26 @@ namespace Algolia.Search.Recommend.Models
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into RecommendationsQuery: {1}", jsonString, exception.ToString()));
+      }
+
+      try
+      {
+        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+        if (typeof(RecommendedForYouQuery).GetProperty("AdditionalProperties") == null)
+        {
+          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, RecommendationsRequest.SerializerSettings));
+        }
+        else
+        {
+          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, RecommendationsRequest.AdditionalPropertiesSerializerSettings));
+        }
+        matchedTypes.Add("RecommendedForYouQuery");
+        match++;
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into RecommendedForYouQuery: {1}", jsonString, exception.ToString()));
       }
 
       try
