@@ -1,3 +1,7 @@
+## [7.0.0-alpha.2](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.1...7.0.0-alpha.2)
+
+- [ae6adfbf7](https://github.com/algolia/api-clients-automation/commit/ae6adfbf7) fix(specs): port recommend changes ([#2476](https://github.com/algolia/api-clients-automation/pull/2476)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [7.0.0-alpha.1](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.0...7.0.0-alpha.1)
 
 - [30014c7c6](https://github.com/algolia/api-clients-automation/commit/30014c7c6) refactor(csharp): remove useless code ([#2377](https://github.com/algolia/api-clients-automation/pull/2377)) by [@morganleroi](https://github.com/morganleroi/)
