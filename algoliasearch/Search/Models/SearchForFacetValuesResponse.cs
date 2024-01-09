@@ -33,7 +33,9 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SearchForFacetValuesResponse" /> class.
     /// </summary>
     /// <param name="facetHits">facetHits (required).</param>
-    public SearchForFacetValuesResponse(List<FacetHits> facetHits = default(List<FacetHits>))
+    /// <param name="exhaustiveFacetsCount">See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response. (required).</param>
+    /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds..</param>
+    public SearchForFacetValuesResponse(List<FacetHits> facetHits = default(List<FacetHits>), bool exhaustiveFacetsCount = default(bool), int processingTimeMS = default(int))
     {
       // to ensure "facetHits" is required (not null)
       if (facetHits == null)
@@ -41,6 +43,8 @@ namespace Algolia.Search.Search.Models
         throw new ArgumentNullException("facetHits is a required property for SearchForFacetValuesResponse and cannot be null");
       }
       this.FacetHits = facetHits;
+      this.ExhaustiveFacetsCount = exhaustiveFacetsCount;
+      this.ProcessingTimeMS = processingTimeMS;
     }
 
     /// <summary>
@@ -48,6 +52,21 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     [DataMember(Name = "facetHits", IsRequired = true, EmitDefaultValue = true)]
     public List<FacetHits> FacetHits { get; set; }
+
+    /// <summary>
+    /// See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response.
+    /// </summary>
+    /// <value>See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response.</value>
+    [DataMember(Name = "exhaustiveFacetsCount", IsRequired = true, EmitDefaultValue = true)]
+    [Obsolete]
+    public bool ExhaustiveFacetsCount { get; set; }
+
+    /// <summary>
+    /// Time the server took to process the request, in milliseconds.
+    /// </summary>
+    /// <value>Time the server took to process the request, in milliseconds.</value>
+    [DataMember(Name = "processingTimeMS", EmitDefaultValue = false)]
+    public int ProcessingTimeMS { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object
@@ -58,6 +77,8 @@ namespace Algolia.Search.Search.Models
       StringBuilder sb = new StringBuilder();
       sb.Append("class SearchForFacetValuesResponse {\n");
       sb.Append("  FacetHits: ").Append(FacetHits).Append("\n");
+      sb.Append("  ExhaustiveFacetsCount: ").Append(ExhaustiveFacetsCount).Append("\n");
+      sb.Append("  ProcessingTimeMS: ").Append(ProcessingTimeMS).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
