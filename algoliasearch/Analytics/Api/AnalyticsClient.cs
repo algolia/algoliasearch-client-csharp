@@ -7,15 +7,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Analytics.Client;
-using Algolia.Search.Analytics.Models;
+using Algolia.Search.Clients;
+using Algolia.Search.Models;
+using Algolia.Search.Models.Analytics;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
-using Algolia.Search.Client;
 
-namespace Algolia.Search.Analytics.Api
+namespace Algolia.Search.Clients
 {
-
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
@@ -28,12 +27,12 @@ namespace Algolia.Search.Analytics.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -41,12 +40,12 @@ namespace Algolia.Search.Analytics.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -54,13 +53,13 @@ namespace Algolia.Search.Analytics.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -68,43 +67,43 @@ namespace Algolia.Search.Analytics.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get average click position.
     /// </summary>
     /// <remarks>
-    /// Return the average click position for the complete time range and for individual days. &gt; **Note**: If all &#x60;positions&#x60; have a &#x60;clickCount&#x60; of &#x60;0&#x60; or &#x60;null&#x60;, it means Algolia didn&#39;t receive any click events for tracked searches. A _tracked_ search is a search request where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. 
+    /// Return the average click position for the complete time range and for individual days. > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`. 
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetAverageClickPositionResponse</returns>
-    Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get click positions.
     /// </summary>
     /// <remarks>
-    /// Show the number of clicks events and their associated position in the search results.  &gt; **Note**: If all &#x60;positions&#x60; have a &#x60;clickCount&#x60; of &#x60;0&#x60; or &#x60;null&#x60;, it means Algolia didn&#39;t receive any click events for tracked searches. A _tracked_ search is a search request where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. 
+    /// Show the number of clicks events and their associated position in the search results.  > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`. 
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetClickPositionsResponse</returns>
-    Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get click-through rate (CTR).
     /// </summary>
@@ -113,13 +112,13 @@ namespace Algolia.Search.Analytics.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetClickThroughRateResponse</returns>
-    Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get conversion rate (CR).
     /// </summary>
@@ -128,43 +127,43 @@ namespace Algolia.Search.Analytics.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetConversationRateResponse</returns>
-    Task<GetConversationRateResponse> GetConversationRateAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetConversationRateResponse> GetConversationRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get no click rate.
     /// </summary>
     /// <remarks>
-    /// Returns the rate at which searches don&#39;t lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks.
+    /// Returns the rate at which searches don't lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetNoClickRateResponse</returns>
-    Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get no results rate.
     /// </summary>
     /// <remarks>
-    /// Returns the rate at which searches didn&#39;t return any results.
+    /// Returns the rate at which searches didn't return any results.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetNoResultsRateResponse</returns>
-    Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get number of searches.
     /// </summary>
@@ -173,52 +172,52 @@ namespace Algolia.Search.Analytics.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetSearchesCountResponse</returns>
-    Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get top searches with no clicks.
     /// </summary>
     /// <remarks>
-    /// Return the most popular of the last 1,000 searches that didn&#39;t lead to any clicks.
+    /// Return the most popular of the last 1,000 searches that didn't lead to any clicks.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetSearchesNoClicksResponse</returns>
-    Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get top searches with no results.
     /// </summary>
     /// <remarks>
-    /// Returns the most popular of the latest 1,000 searches that didn&#39;t return any results.
+    /// Returns the most popular of the latest 1,000 searches that didn't return any results.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetSearchesNoResultsResponse</returns>
-    Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get Analytics API status.
     /// </summary>
     /// <remarks>
-    /// Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, &#x60;updatedAt&#x60; will be &#x60;null&#x60;. &gt; **Note**: The Analytics API is updated every 5&amp;nbsp;minutes. 
+    /// Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, `updatedAt` will be `null`. > **Note**: The Analytics API is updated every 5&nbsp;minutes. 
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
@@ -234,15 +233,15 @@ namespace Algolia.Search.Analytics.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopCountriesResponse</returns>
-    Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get top filterable attributes.
     /// </summary>
@@ -252,15 +251,15 @@ namespace Algolia.Search.Analytics.Api
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
     /// <param name="search">User query. (optional)</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopFilterAttributesResponse</returns>
-    Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default(string), string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get top filter values for an attribute.
     /// </summary>
@@ -271,33 +270,33 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="attribute">Attribute name.</param>
     /// <param name="index">Index name to target.</param>
     /// <param name="search">User query. (optional)</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopFilterForAttributeResponse</returns>
-    Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default(string), string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get top filters for a no result search.
     /// </summary>
     /// <remarks>
-    /// Returns top filters for filter-enabled searches that don&#39;t return results. Limited to the 1,000 most recently used filters.
+    /// Returns top filters for filter-enabled searches that don't return results. Limited to the 1,000 most recently used filters.
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
     /// <param name="search">User query. (optional)</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopFiltersNoResultsResponse</returns>
-    Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default(string), string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get top hits.
     /// </summary>
@@ -308,15 +307,15 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="index">Index name to target.</param>
     /// <param name="search">User query. (optional)</param>
     /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopHitsResponse</returns>
-    Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default(string), bool? clickAnalytics = default(bool?), string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default, bool? clickAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get top searches.
     /// </summary>
@@ -326,17 +325,17 @@ namespace Algolia.Search.Analytics.Api
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
     /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
     /// <param name="orderBy">Reorder the results. (optional)</param>
     /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
     /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
     /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopSearchesResponse</returns>
-    Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default(bool?), string startDate = default(string), string endDate = default(string), OrderBy orderBy = default(OrderBy), Direction direction = default(Direction), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get user count.
     /// </summary>
@@ -345,13 +344,13 @@ namespace Algolia.Search.Analytics.Api
     /// </remarks>
     /// <exception cref="Algolia.Search.Analytics.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="index">Index name to target.</param>
-    /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-    /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
+    /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+    /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetUsersCountResponse</returns>
-    Task<GetUsersCountResponse> GetUsersCountAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<GetUsersCountResponse> GetUsersCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
   }
 
 
@@ -368,7 +367,8 @@ namespace Algolia.Search.Analytics.Api
     /// </summary>
     /// <param name="applicationId">Your application</param>
     /// <param name="apiKey">Your API key</param>
-    public AnalyticsClient(string applicationId, string apiKey) : this(new AnalyticsConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+    /// <param name="region">The targeted region</param>
+    public AnalyticsClient(string applicationId, string apiKey, string region = null) : this(new AnalyticsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
     {
     }
 
@@ -391,17 +391,14 @@ namespace Algolia.Search.Analytics.Api
       {
         throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-
       if (config == null)
       {
         throw new ArgumentNullException(nameof(config), "A config is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
         throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
         throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
@@ -421,25 +418,18 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomDelete");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -449,25 +439,18 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomGet");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -478,25 +461,18 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomPost");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -508,25 +484,18 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomPut");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get average click position. Return the average click position for the complete time range and for individual days. &gt; **Note**: If all &#x60;positions&#x60; have a &#x60;clickCount&#x60; of &#x60;0&#x60; or &#x60;null&#x60;, it means Algolia didn&#39;t receive any click events for tracked searches. A _tracked_ search is a search request where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. 
@@ -539,32 +508,20 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetAverageClickPositionResponse</returns>
-    public async Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetAverageClickPosition");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetAverageClickPositionResponse>(new HttpMethod("GET"), "/2/clicks/averageClickPosition", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get click positions. Show the number of clicks events and their associated position in the search results.  &gt; **Note**: If all &#x60;positions&#x60; have a &#x60;clickCount&#x60; of &#x60;0&#x60; or &#x60;null&#x60;, it means Algolia didn&#39;t receive any click events for tracked searches. A _tracked_ search is a search request where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. 
@@ -577,32 +534,20 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetClickPositionsResponse</returns>
-    public async Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetClickPositions");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetClickPositionsResponse>(new HttpMethod("GET"), "/2/clicks/positions", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get click-through rate (CTR). Returns a [click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
@@ -615,32 +560,20 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetClickThroughRateResponse</returns>
-    public async Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetClickThroughRate");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetClickThroughRateResponse>(new HttpMethod("GET"), "/2/clicks/clickThroughRate", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get conversion rate (CR). Return a [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
@@ -653,32 +586,20 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetConversationRateResponse</returns>
-    public async Task<GetConversationRateResponse> GetConversationRateAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetConversationRateResponse> GetConversationRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetConversationRate");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetConversationRateResponse>(new HttpMethod("GET"), "/2/conversions/conversionRate", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get no click rate. Returns the rate at which searches don&#39;t lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks.
@@ -691,32 +612,20 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetNoClickRateResponse</returns>
-    public async Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetNoClickRate");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetNoClickRateResponse>(new HttpMethod("GET"), "/2/searches/noClickRate", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get no results rate. Returns the rate at which searches didn&#39;t return any results.
@@ -729,32 +638,20 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetNoResultsRateResponse</returns>
-    public async Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetNoResultsRate");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetNoResultsRateResponse>(new HttpMethod("GET"), "/2/searches/noResultRate", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get number of searches. Returns the number of searches within a time range.
@@ -767,32 +664,20 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetSearchesCountResponse</returns>
-    public async Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetSearchesCount");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetSearchesCountResponse>(new HttpMethod("GET"), "/2/searches/count", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get top searches with no clicks. Return the most popular of the last 1,000 searches that didn&#39;t lead to any clicks.
@@ -807,40 +692,22 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetSearchesNoClicksResponse</returns>
-    public async Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetSearchesNoClicks");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetSearchesNoClicksResponse>(new HttpMethod("GET"), "/2/searches/noClicks", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get top searches with no results. Returns the most popular of the latest 1,000 searches that didn&#39;t return any results.
@@ -855,40 +722,22 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetSearchesNoResultsResponse</returns>
-    public async Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetSearchesNoResults");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetSearchesNoResultsResponse>(new HttpMethod("GET"), "/2/searches/noResults", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get Analytics API status. Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, &#x60;updatedAt&#x60; will be &#x60;null&#x60;. &gt; **Note**: The Analytics API is updated every 5&amp;nbsp;minutes. 
@@ -900,18 +749,15 @@ namespace Algolia.Search.Analytics.Api
     /// <returns>Task of GetStatusResponse</returns>
     public async Task<GetStatusResponse> GetStatusAsync(string index, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetStatus");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
       return await _transport.ExecuteRequestAsync<GetStatusResponse>(new HttpMethod("GET"), "/2/status", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get top countries. Returns top countries. Limited to the 1,000 most frequent ones.
@@ -926,40 +772,22 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopCountriesResponse</returns>
-    public async Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopCountries");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetTopCountriesResponse>(new HttpMethod("GET"), "/2/countries", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get top filterable attributes. Return the most popular [filterable attributes](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) in the 1,000 most recently used filters.
@@ -975,44 +803,23 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopFilterAttributesResponse</returns>
-    public async Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default(string), string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopFilterAttributes");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (search != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "search", search);
-      }
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("search", search);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetTopFilterAttributesResponse>(new HttpMethod("GET"), "/2/filters", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get top filter values for an attribute. Returns the most popular filter values for an attribute in the 1,000 most recently used filters.
@@ -1029,49 +836,27 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopFilterForAttributeResponse</returns>
-    public async Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default(string), string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'attribute' is set
       if (attribute == null)
         throw new ApiException(400, "Missing required parameter 'attribute' when calling AnalyticsClient->GetTopFilterForAttribute");
 
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopFilterForAttribute");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("attribute", ClientUtils.ParameterToString(attribute));
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (search != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "search", search);
-      }
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
 
-
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("search", search);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetTopFilterForAttributeResponse>(new HttpMethod("GET"), "/2/filters/{attribute}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get top filters for a no result search. Returns top filters for filter-enabled searches that don&#39;t return results. Limited to the 1,000 most recently used filters.
@@ -1087,44 +872,23 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopFiltersNoResultsResponse</returns>
-    public async Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default(string), string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopFiltersNoResults");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (search != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "search", search);
-      }
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("search", search);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetTopFiltersNoResultsResponse>(new HttpMethod("GET"), "/2/filters/noResults", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get top hits. Return the most popular clicked results in the last 1,000 searches.
@@ -1141,48 +905,24 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopHitsResponse</returns>
-    public async Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default(string), bool? clickAnalytics = default(bool?), string startDate = default(string), string endDate = default(string), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default, bool? clickAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopHits");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (search != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "search", search);
-      }
-      if (clickAnalytics != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "clickAnalytics", clickAnalytics);
-      }
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("search", search);
+      requestOptions.AddQueryParameter("clickAnalytics", clickAnalytics);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetTopHitsResponse>(new HttpMethod("GET"), "/2/hits", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get top searches. Returns the most popular of the latest 1,000 searches. For each search, also returns the number of hits.
@@ -1200,52 +940,25 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetTopSearchesResponse</returns>
-    public async Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default(bool?), string startDate = default(string), string endDate = default(string), OrderBy orderBy = default(OrderBy), Direction direction = default(Direction), int? limit = default(int?), int? offset = default(int?), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopSearches");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (clickAnalytics != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "clickAnalytics", clickAnalytics);
-      }
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (orderBy != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "orderBy", orderBy);
-      }
-      if (direction != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "direction", direction);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("clickAnalytics", clickAnalytics);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("orderBy", orderBy);
+      requestOptions.AddQueryParameter("direction", direction);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetTopSearchesResponse>(new HttpMethod("GET"), "/2/searches", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get user count. Return the count of unique users.
@@ -1258,31 +971,19 @@ namespace Algolia.Search.Analytics.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of GetUsersCountResponse</returns>
-    public async Task<GetUsersCountResponse> GetUsersCountAsync(string index, string startDate = default(string), string endDate = default(string), string tags = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<GetUsersCountResponse> GetUsersCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'index' is set
       if (index == null)
         throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetUsersCount");
 
-
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "index", index);
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
-      if (tags != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "tags", tags);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("index", index);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
+      requestOptions.AddQueryParameter("tags", tags);
       return await _transport.ExecuteRequestAsync<GetUsersCountResponse>(new HttpMethod("GET"), "/2/users/count", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
   }
 }

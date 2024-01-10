@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// How to display the remaining items:    - &#x60;count&#x60;: facet count (descending).   - &#x60;alpha&#x60;: alphabetical (ascending).   - &#x60;hidden&#x60;: show only pinned values. 

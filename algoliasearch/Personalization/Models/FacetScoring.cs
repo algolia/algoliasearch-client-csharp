@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Personalization.Models
+namespace Algolia.Search.Models.Personalization
 {
   /// <summary>
   /// FacetScoring
@@ -28,21 +28,16 @@ namespace Algolia.Search.Personalization.Models
     /// Initializes a new instance of the <see cref="FacetScoring" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected FacetScoring() { }
+    public FacetScoring() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="FacetScoring" /> class.
     /// </summary>
     /// <param name="score">The score for the event. (required).</param>
     /// <param name="facetName">The name of the facet. (required).</param>
-    public FacetScoring(int score = default(int), string facetName = default(string))
+    public FacetScoring(int score, string facetName)
     {
       this.Score = score;
-      // to ensure "facetName" is required (not null)
-      if (facetName == null)
-      {
-        throw new ArgumentNullException("facetName is a required property for FacetScoring and cannot be null");
-      }
-      this.FacetName = facetName;
+      this.FacetName = facetName ?? throw new ArgumentNullException("facetName is a required property for FacetScoring and cannot be null");
     }
 
     /// <summary>

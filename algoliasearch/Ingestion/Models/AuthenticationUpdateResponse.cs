@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Response from the API when the Authentication is successfully updated.
@@ -28,33 +28,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="AuthenticationUpdateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthenticationUpdateResponse() { }
+    public AuthenticationUpdateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationUpdateResponse" /> class.
     /// </summary>
     /// <param name="authenticationID">The authentication UUID. (required).</param>
     /// <param name="name">An human readable name describing the object. (required).</param>
     /// <param name="updatedAt">Date of last update (RFC3339 format). (required).</param>
-    public AuthenticationUpdateResponse(string authenticationID = default(string), string name = default(string), string updatedAt = default(string))
+    public AuthenticationUpdateResponse(string authenticationID, string name, string updatedAt)
     {
-      // to ensure "authenticationID" is required (not null)
-      if (authenticationID == null)
-      {
-        throw new ArgumentNullException("authenticationID is a required property for AuthenticationUpdateResponse and cannot be null");
-      }
-      this.AuthenticationID = authenticationID;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for AuthenticationUpdateResponse and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for AuthenticationUpdateResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.AuthenticationID = authenticationID ?? throw new ArgumentNullException("authenticationID is a required property for AuthenticationUpdateResponse and cannot be null");
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for AuthenticationUpdateResponse and cannot be null");
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for AuthenticationUpdateResponse and cannot be null");
     }
 
     /// <summary>

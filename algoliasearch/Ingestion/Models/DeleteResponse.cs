@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// DeleteResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="DeleteResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DeleteResponse() { }
+    public DeleteResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DeleteResponse" /> class.
     /// </summary>
     /// <param name="deletedAt">Date of deletion (RFC3339 format). (required).</param>
-    public DeleteResponse(string deletedAt = default(string))
+    public DeleteResponse(string deletedAt)
     {
-      // to ensure "deletedAt" is required (not null)
-      if (deletedAt == null)
-      {
-        throw new ArgumentNullException("deletedAt is a required property for DeleteResponse and cannot be null");
-      }
-      this.DeletedAt = deletedAt;
+      this.DeletedAt = deletedAt ?? throw new ArgumentNullException("deletedAt is a required property for DeleteResponse and cannot be null");
     }
 
     /// <summary>

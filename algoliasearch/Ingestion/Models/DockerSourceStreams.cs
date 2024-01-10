@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// DockerSourceStreams
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="DockerSourceStreams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DockerSourceStreams() { }
+    public DockerSourceStreams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DockerSourceStreams" /> class.
     /// </summary>
     /// <param name="streams">streams (required).</param>
-    public DockerSourceStreams(List<Object> streams = default(List<Object>))
+    public DockerSourceStreams(List<Object> streams)
     {
-      // to ensure "streams" is required (not null)
-      if (streams == null)
-      {
-        throw new ArgumentNullException("streams is a required property for DockerSourceStreams and cannot be null");
-      }
-      this.Streams = streams;
+      this.Streams = streams ?? throw new ArgumentNullException("streams is a required property for DockerSourceStreams and cannot be null");
     }
 
     /// <summary>

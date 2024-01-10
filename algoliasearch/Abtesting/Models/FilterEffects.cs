@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// A/B test filter effects resulting from configuration settings.
@@ -27,12 +27,8 @@ namespace Algolia.Search.Abtesting.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="FilterEffects" /> class.
     /// </summary>
-    /// <param name="outliers">outliers.</param>
-    /// <param name="emptySearch">emptySearch.</param>
-    public FilterEffects(FilterEffectsOutliers outliers = default(FilterEffectsOutliers), FilterEffectsEmptySearch emptySearch = default(FilterEffectsEmptySearch))
+    public FilterEffects()
     {
-      this.Outliers = outliers;
-      this.EmptySearch = emptySearch;
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Cursor
@@ -27,10 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="Cursor" /> class.
     /// </summary>
-    /// <param name="varCursor">Cursor indicating the location to resume browsing from. Must match the value returned by the previous call. Pass this value to the subsequent browse call to get the next page of results. When the end of the index has been reached, &#x60;cursor&#x60; is absent from the response. .</param>
-    public Cursor(string varCursor = default(string))
+    public Cursor()
     {
-      this.VarCursor = varCursor;
     }
 
     /// <summary>

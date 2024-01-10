@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// ListIndicesResponse
@@ -28,21 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="ListIndicesResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListIndicesResponse() { }
+    public ListIndicesResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListIndicesResponse" /> class.
     /// </summary>
     /// <param name="items">All indices in your Algolia application. (required).</param>
-    /// <param name="nbPages">Number of pages..</param>
-    public ListIndicesResponse(List<FetchedIndex> items = default(List<FetchedIndex>), int nbPages = default(int))
+    public ListIndicesResponse(List<FetchedIndex> items)
     {
-      // to ensure "items" is required (not null)
-      if (items == null)
-      {
-        throw new ArgumentNullException("items is a required property for ListIndicesResponse and cannot be null");
-      }
-      this.Items = items;
-      this.NbPages = nbPages;
+      this.Items = items ?? throw new ArgumentNullException("items is a required property for ListIndicesResponse and cannot be null");
     }
 
     /// <summary>
@@ -57,7 +50,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Number of pages.</value>
     [DataMember(Name = "nbPages", EmitDefaultValue = false)]
-    public int NbPages { get; set; }
+    public int? NbPages { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

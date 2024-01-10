@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// Configuration of an Algolia index for Query Suggestions.
@@ -28,33 +28,14 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// Initializes a new instance of the <see cref="SourceIndex" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceIndex() { }
+    public SourceIndex() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceIndex" /> class.
     /// </summary>
     /// <param name="indexName">Name of the Algolia index to use as source for query suggestions. (required).</param>
-    /// <param name="replicas">If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.   (default to false).</param>
-    /// <param name="analyticsTags">[Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches. .</param>
-    /// <param name="facets">Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion. .</param>
-    /// <param name="minHits">Minimum number of hits required to be included as a suggestion.  A search query must at least generate &#x60;minHits&#x60; hits to be included in the Query Suggestions index.  (default to 5).</param>
-    /// <param name="minLetters">Minimum letters required to be included as a suggestion.  A search query must be at least &#x60;minLetters&#x60; long to be included in the Query Suggestions index.  (default to 4).</param>
-    /// <param name="generate">generate.</param>
-    /// <param name="external">Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - &#x60;query&#x60;: search query which will be added as a suggestion   - &#x60;count&#x60;: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data. .</param>
-    public SourceIndex(string indexName = default(string), bool replicas = false, List<string> analyticsTags = default(List<string>), List<Facet> facets = default(List<Facet>), int minHits = 5, int minLetters = 4, List<List<string>> generate = default(List<List<string>>), List<string> external = default(List<string>))
+    public SourceIndex(string indexName)
     {
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for SourceIndex and cannot be null");
-      }
-      this.IndexName = indexName;
-      this.Replicas = replicas;
-      this.AnalyticsTags = analyticsTags;
-      this.Facets = facets;
-      this.MinHits = minHits;
-      this.MinLetters = minLetters;
-      this.Generate = generate;
-      this.External = external;
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for SourceIndex and cannot be null");
     }
 
     /// <summary>
@@ -69,7 +50,7 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// </summary>
     /// <value>If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.  </value>
     [DataMember(Name = "replicas", EmitDefaultValue = true)]
-    public bool Replicas { get; set; }
+    public bool? Replicas { get; set; }
 
     /// <summary>
     /// [Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches. 
@@ -90,14 +71,14 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// </summary>
     /// <value>Minimum number of hits required to be included as a suggestion.  A search query must at least generate &#x60;minHits&#x60; hits to be included in the Query Suggestions index. </value>
     [DataMember(Name = "minHits", EmitDefaultValue = false)]
-    public int MinHits { get; set; }
+    public int? MinHits { get; set; }
 
     /// <summary>
     /// Minimum letters required to be included as a suggestion.  A search query must be at least &#x60;minLetters&#x60; long to be included in the Query Suggestions index. 
     /// </summary>
     /// <value>Minimum letters required to be included as a suggestion.  A search query must be at least &#x60;minLetters&#x60; long to be included in the Query Suggestions index. </value>
     [DataMember(Name = "minLetters", EmitDefaultValue = false)]
-    public int MinLetters { get; set; }
+    public int? MinLetters { get; set; }
 
     /// <summary>
     /// Gets or Sets Generate

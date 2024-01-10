@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Insights.Models
+namespace Algolia.Search.Models.Insights
 {
   /// <summary>
   /// EventsItems
@@ -33,9 +33,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of ClickedObjectIDsAfterSearch.</param>
     public EventsItems(ClickedObjectIDsAfterSearch actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of ConvertedObjectIDsAfterSearch.</param>
     public EventsItems(ConvertedObjectIDsAfterSearch actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -57,9 +57,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of ClickedObjectIDs.</param>
     public EventsItems(ClickedObjectIDs actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -69,9 +69,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of ConvertedObjectIDs.</param>
     public EventsItems(ConvertedObjectIDs actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -81,9 +81,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of ClickedFilters.</param>
     public EventsItems(ClickedFilters actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -93,9 +93,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of ConvertedFilters.</param>
     public EventsItems(ConvertedFilters actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -105,9 +105,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of ViewedObjectIDs.</param>
     public EventsItems(ViewedObjectIDs actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -117,9 +117,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of ViewedFilters.</param>
     public EventsItems(ViewedFilters actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -129,9 +129,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of AddedToCartObjectIDsAfterSearch.</param>
     public EventsItems(AddedToCartObjectIDsAfterSearch actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -141,9 +141,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of AddedToCartObjectIDs.</param>
     public EventsItems(AddedToCartObjectIDs actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -153,9 +153,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of PurchasedObjectIDs.</param>
     public EventsItems(PurchasedObjectIDs actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -165,9 +165,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of PurchasedObjectIDsAfterSearch.</param>
     public EventsItems(PurchasedObjectIDsAfterSearch actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -184,58 +184,7 @@ namespace Algolia.Search.Insights.Models
       }
       set
       {
-        if (value.GetType() == typeof(AddedToCartObjectIDs))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AddedToCartObjectIDsAfterSearch))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ClickedFilters))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ClickedObjectIDs))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ClickedObjectIDsAfterSearch))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ConvertedFilters))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ConvertedObjectIDs))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ConvertedObjectIDsAfterSearch))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(PurchasedObjectIDs))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(PurchasedObjectIDsAfterSearch))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ViewedFilters))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ViewedObjectIDs))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: AddedToCartObjectIDs, AddedToCartObjectIDsAfterSearch, ClickedFilters, ClickedObjectIDs, ClickedObjectIDsAfterSearch, ConvertedFilters, ConvertedObjectIDs, ConvertedObjectIDsAfterSearch, PurchasedObjectIDs, PurchasedObjectIDsAfterSearch, ViewedFilters, ViewedObjectIDs");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -244,9 +193,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ClickedObjectIDsAfterSearch</returns>
-    public ClickedObjectIDsAfterSearch GetterClickedObjectIDsAfterSearch()
+    public ClickedObjectIDsAfterSearch AsClickedObjectIDsAfterSearch()
     {
-      return (ClickedObjectIDsAfterSearch)this.ActualInstance;
+      return (ClickedObjectIDsAfterSearch)ActualInstance;
     }
 
     /// <summary>
@@ -254,9 +203,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ConvertedObjectIDsAfterSearch</returns>
-    public ConvertedObjectIDsAfterSearch GetterConvertedObjectIDsAfterSearch()
+    public ConvertedObjectIDsAfterSearch AsConvertedObjectIDsAfterSearch()
     {
-      return (ConvertedObjectIDsAfterSearch)this.ActualInstance;
+      return (ConvertedObjectIDsAfterSearch)ActualInstance;
     }
 
     /// <summary>
@@ -264,9 +213,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ClickedObjectIDs</returns>
-    public ClickedObjectIDs GetterClickedObjectIDs()
+    public ClickedObjectIDs AsClickedObjectIDs()
     {
-      return (ClickedObjectIDs)this.ActualInstance;
+      return (ClickedObjectIDs)ActualInstance;
     }
 
     /// <summary>
@@ -274,9 +223,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ConvertedObjectIDs</returns>
-    public ConvertedObjectIDs GetterConvertedObjectIDs()
+    public ConvertedObjectIDs AsConvertedObjectIDs()
     {
-      return (ConvertedObjectIDs)this.ActualInstance;
+      return (ConvertedObjectIDs)ActualInstance;
     }
 
     /// <summary>
@@ -284,9 +233,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ClickedFilters</returns>
-    public ClickedFilters GetterClickedFilters()
+    public ClickedFilters AsClickedFilters()
     {
-      return (ClickedFilters)this.ActualInstance;
+      return (ClickedFilters)ActualInstance;
     }
 
     /// <summary>
@@ -294,9 +243,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ConvertedFilters</returns>
-    public ConvertedFilters GetterConvertedFilters()
+    public ConvertedFilters AsConvertedFilters()
     {
-      return (ConvertedFilters)this.ActualInstance;
+      return (ConvertedFilters)ActualInstance;
     }
 
     /// <summary>
@@ -304,9 +253,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ViewedObjectIDs</returns>
-    public ViewedObjectIDs GetterViewedObjectIDs()
+    public ViewedObjectIDs AsViewedObjectIDs()
     {
-      return (ViewedObjectIDs)this.ActualInstance;
+      return (ViewedObjectIDs)ActualInstance;
     }
 
     /// <summary>
@@ -314,9 +263,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ViewedFilters</returns>
-    public ViewedFilters GetterViewedFilters()
+    public ViewedFilters AsViewedFilters()
     {
-      return (ViewedFilters)this.ActualInstance;
+      return (ViewedFilters)ActualInstance;
     }
 
     /// <summary>
@@ -324,9 +273,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AddedToCartObjectIDsAfterSearch</returns>
-    public AddedToCartObjectIDsAfterSearch GetterAddedToCartObjectIDsAfterSearch()
+    public AddedToCartObjectIDsAfterSearch AsAddedToCartObjectIDsAfterSearch()
     {
-      return (AddedToCartObjectIDsAfterSearch)this.ActualInstance;
+      return (AddedToCartObjectIDsAfterSearch)ActualInstance;
     }
 
     /// <summary>
@@ -334,9 +283,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AddedToCartObjectIDs</returns>
-    public AddedToCartObjectIDs GetterAddedToCartObjectIDs()
+    public AddedToCartObjectIDs AsAddedToCartObjectIDs()
     {
-      return (AddedToCartObjectIDs)this.ActualInstance;
+      return (AddedToCartObjectIDs)ActualInstance;
     }
 
     /// <summary>
@@ -344,9 +293,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of PurchasedObjectIDs</returns>
-    public PurchasedObjectIDs GetterPurchasedObjectIDs()
+    public PurchasedObjectIDs AsPurchasedObjectIDs()
     {
-      return (PurchasedObjectIDs)this.ActualInstance;
+      return (PurchasedObjectIDs)ActualInstance;
     }
 
     /// <summary>
@@ -354,9 +303,118 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of PurchasedObjectIDsAfterSearch</returns>
-    public PurchasedObjectIDsAfterSearch GetterPurchasedObjectIDsAfterSearch()
+    public PurchasedObjectIDsAfterSearch AsPurchasedObjectIDsAfterSearch()
     {
-      return (PurchasedObjectIDsAfterSearch)this.ActualInstance;
+      return (PurchasedObjectIDsAfterSearch)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `ClickedObjectIDsAfterSearch` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsClickedObjectIDsAfterSearch()
+    {
+      return ActualInstance.GetType() == typeof(ClickedObjectIDsAfterSearch);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ConvertedObjectIDsAfterSearch` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsConvertedObjectIDsAfterSearch()
+    {
+      return ActualInstance.GetType() == typeof(ConvertedObjectIDsAfterSearch);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ClickedObjectIDs` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsClickedObjectIDs()
+    {
+      return ActualInstance.GetType() == typeof(ClickedObjectIDs);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ConvertedObjectIDs` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsConvertedObjectIDs()
+    {
+      return ActualInstance.GetType() == typeof(ConvertedObjectIDs);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ClickedFilters` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsClickedFilters()
+    {
+      return ActualInstance.GetType() == typeof(ClickedFilters);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ConvertedFilters` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsConvertedFilters()
+    {
+      return ActualInstance.GetType() == typeof(ConvertedFilters);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ViewedObjectIDs` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsViewedObjectIDs()
+    {
+      return ActualInstance.GetType() == typeof(ViewedObjectIDs);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ViewedFilters` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsViewedFilters()
+    {
+      return ActualInstance.GetType() == typeof(ViewedFilters);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AddedToCartObjectIDsAfterSearch` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAddedToCartObjectIDsAfterSearch()
+    {
+      return ActualInstance.GetType() == typeof(AddedToCartObjectIDsAfterSearch);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AddedToCartObjectIDs` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAddedToCartObjectIDs()
+    {
+      return ActualInstance.GetType() == typeof(AddedToCartObjectIDs);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `PurchasedObjectIDs` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsPurchasedObjectIDs()
+    {
+      return ActualInstance.GetType() == typeof(PurchasedObjectIDs);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `PurchasedObjectIDsAfterSearch` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsPurchasedObjectIDsAfterSearch()
+    {
+      return ActualInstance.GetType() == typeof(PurchasedObjectIDsAfterSearch);
     }
 
     /// <summary>
@@ -367,7 +425,7 @@ namespace Algolia.Search.Insights.Models
     {
       var sb = new StringBuilder();
       sb.Append("class EventsItems {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -378,7 +436,7 @@ namespace Algolia.Search.Insights.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, EventsItems.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -394,202 +452,108 @@ namespace Algolia.Search.Insights.Models
       {
         return newEventsItems;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AddedToCartObjectIDs).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AddedToCartObjectIDs");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AddedToCartObjectIDs: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AddedToCartObjectIDsAfterSearch).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AddedToCartObjectIDsAfterSearch");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AddedToCartObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ClickedFilters).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ClickedFilters>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ClickedFilters>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ClickedFilters");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ClickedFilters: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ClickedObjectIDs).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDs>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDs>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ClickedObjectIDs");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ClickedObjectIDs: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ClickedObjectIDsAfterSearch).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDsAfterSearch>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDsAfterSearch>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ClickedObjectIDsAfterSearch");
-        match++;
+        return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ClickedObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ConvertedFilters).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ConvertedFilters>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ConvertedFilters>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ConvertedFilters");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ConvertedFilters: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ConvertedObjectIDs).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDs>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDs>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ConvertedObjectIDs");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ConvertedObjectIDs: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ConvertedObjectIDsAfterSearch).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDsAfterSearch>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDsAfterSearch>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ConvertedObjectIDsAfterSearch");
-        match++;
+        return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ConvertedObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(PurchasedObjectIDs).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("PurchasedObjectIDs");
-        match++;
+        return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ClickedObjectIDs: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ConvertedObjectIDs: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ClickedFilters>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ClickedFilters: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ConvertedFilters>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ConvertedFilters: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ViewedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ViewedObjectIDs: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ViewedFilters>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ViewedFilters: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AddedToCartObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AddedToCartObjectIDs: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into PurchasedObjectIDs: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(PurchasedObjectIDsAfterSearch).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("PurchasedObjectIDsAfterSearch");
-        match++;
+        return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -597,57 +561,7 @@ namespace Algolia.Search.Insights.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into PurchasedObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
       }
 
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ViewedFilters).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ViewedFilters>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ViewedFilters>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ViewedFilters");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ViewedFilters: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ViewedObjectIDs).GetProperty("AdditionalProperties") == null)
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ViewedObjectIDs>(jsonString, EventsItems.SerializerSettings));
-        }
-        else
-        {
-          newEventsItems = new EventsItems(JsonConvert.DeserializeObject<ViewedObjectIDs>(jsonString, EventsItems.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ViewedObjectIDs");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ViewedObjectIDs: {1}", jsonString, exception.ToString()));
-      }
-
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newEventsItems;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -680,7 +594,7 @@ namespace Algolia.Search.Insights.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return EventsItems.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

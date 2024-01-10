@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Assign userID parameters.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="AssignUserIdParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AssignUserIdParams() { }
+    public AssignUserIdParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AssignUserIdParams" /> class.
     /// </summary>
     /// <param name="cluster">Cluster name. (required).</param>
-    public AssignUserIdParams(string cluster = default(string))
+    public AssignUserIdParams(string cluster)
     {
-      // to ensure "cluster" is required (not null)
-      if (cluster == null)
-      {
-        throw new ArgumentNullException("cluster is a required property for AssignUserIdParams and cannot be null");
-      }
-      this.Cluster = cluster;
+      this.Cluster = cluster ?? throw new ArgumentNullException("cluster is a required property for AssignUserIdParams and cannot be null");
     }
 
     /// <summary>

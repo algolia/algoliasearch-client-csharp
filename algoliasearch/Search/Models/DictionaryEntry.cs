@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Dictionary entry.
@@ -29,12 +29,12 @@ namespace Algolia.Search.Search.Models
     /// Gets or Sets State
     /// </summary>
     [DataMember(Name = "state", EmitDefaultValue = false)]
-    public DictionaryEntryState? State { get; set; }
+    public DictionaryEntryState State { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="DictionaryEntry" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DictionaryEntry()
+    public DictionaryEntry()
     {
       this.AdditionalProperties = new Dictionary<string, object>();
     }
@@ -43,28 +43,10 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <param name="objectID">Unique identifier for a dictionary object. (required).</param>
     /// <param name="language">[Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).  (required).</param>
-    /// <param name="word">Dictionary entry word. Usage depends on the type of dictionary entry. **&#x60;stopwordEntry&#x60;** The stop word you want to add or update. If the entry already exists in Algolia&#39;s standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its &#x60;state&#x60; to &#x60;disabled&#x60;. **&#x60;compoundEntry&#x60;** When &#x60;decomposition&#x60; is empty: adds &#x60;word&#x60; as a compound atom. For example, atom “kino” decomposes the query “kopfkino” into \&quot;kopf\&quot; and \&quot;kino\&quot;. When &#x60;decomposition&#x60; isn&#39;t empty: creates a decomposition exception. For example, when decomposition is set to the [\&quot;hund\&quot;, \&quot;hutte\&quot;] exception, \&quot;hundehutte\&quot; decomposes into “hund” and “hutte”, discarding the linking \&quot;e\&quot;. .</param>
-    /// <param name="words">Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia&#39;s standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its &#x60;state&#x60; to &#x60;disabled&#x60;. .</param>
-    /// <param name="decomposition">For compound entries, governs the behavior of the &#x60;word&#x60; parameter..</param>
-    /// <param name="state">state.</param>
-    public DictionaryEntry(string objectID = default(string), string language = default(string), string word = default(string), List<string> words = default(List<string>), List<string> decomposition = default(List<string>), DictionaryEntryState? state = default(DictionaryEntryState?))
+    public DictionaryEntry(string objectID, string language)
     {
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for DictionaryEntry and cannot be null");
-      }
-      this.ObjectID = objectID;
-      // to ensure "language" is required (not null)
-      if (language == null)
-      {
-        throw new ArgumentNullException("language is a required property for DictionaryEntry and cannot be null");
-      }
-      this.Language = language;
-      this.Word = word;
-      this.Words = words;
-      this.Decomposition = decomposition;
-      this.State = state;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for DictionaryEntry and cannot be null");
+      this.Language = language ?? throw new ArgumentNullException("language is a required property for DictionaryEntry and cannot be null");
       this.AdditionalProperties = new Dictionary<string, object>();
     }
 

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// AddABTestsRequest
@@ -28,33 +28,18 @@ namespace Algolia.Search.Abtesting.Models
     /// Initializes a new instance of the <see cref="AddABTestsRequest" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AddABTestsRequest() { }
+    public AddABTestsRequest() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AddABTestsRequest" /> class.
     /// </summary>
     /// <param name="name">A/B test name. (required).</param>
     /// <param name="variants">A/B test variants. (required).</param>
     /// <param name="endAt">End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public AddABTestsRequest(string name = default(string), List<AddABTestsVariant> variants = default(List<AddABTestsVariant>), string endAt = default(string))
+    public AddABTestsRequest(string name, List<AddABTestsVariant> variants, string endAt)
     {
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for AddABTestsRequest and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "variants" is required (not null)
-      if (variants == null)
-      {
-        throw new ArgumentNullException("variants is a required property for AddABTestsRequest and cannot be null");
-      }
-      this.Variants = variants;
-      // to ensure "endAt" is required (not null)
-      if (endAt == null)
-      {
-        throw new ArgumentNullException("endAt is a required property for AddABTestsRequest and cannot be null");
-      }
-      this.EndAt = endAt;
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for AddABTestsRequest and cannot be null");
+      this.Variants = variants ?? throw new ArgumentNullException("variants is a required property for AddABTestsRequest and cannot be null");
+      this.EndAt = endAt ?? throw new ArgumentNullException("endAt is a required property for AddABTestsRequest and cannot be null");
     }
 
     /// <summary>

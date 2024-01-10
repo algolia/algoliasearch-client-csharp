@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// MultipleBatchResponse
@@ -28,26 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="MultipleBatchResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected MultipleBatchResponse() { }
+    public MultipleBatchResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="MultipleBatchResponse" /> class.
     /// </summary>
     /// <param name="taskID">TaskIDs per index. (required).</param>
     /// <param name="objectIDs">Unique object (record) identifiers. (required).</param>
-    public MultipleBatchResponse(Dictionary<string, long> taskID = default(Dictionary<string, long>), List<string> objectIDs = default(List<string>))
+    public MultipleBatchResponse(Dictionary<string, long> taskID, List<string> objectIDs)
     {
-      // to ensure "taskID" is required (not null)
-      if (taskID == null)
-      {
-        throw new ArgumentNullException("taskID is a required property for MultipleBatchResponse and cannot be null");
-      }
-      this.TaskID = taskID;
-      // to ensure "objectIDs" is required (not null)
-      if (objectIDs == null)
-      {
-        throw new ArgumentNullException("objectIDs is a required property for MultipleBatchResponse and cannot be null");
-      }
-      this.ObjectIDs = objectIDs;
+      this.TaskID = taskID ?? throw new ArgumentNullException("taskID is a required property for MultipleBatchResponse and cannot be null");
+      this.ObjectIDs = objectIDs ?? throw new ArgumentNullException("objectIDs is a required property for MultipleBatchResponse and cannot be null");
     }
 
     /// <summary>

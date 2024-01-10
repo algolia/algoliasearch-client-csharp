@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// UpdatedRuleResponse
@@ -28,27 +28,17 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="UpdatedRuleResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected UpdatedRuleResponse() { }
+    public UpdatedRuleResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="UpdatedRuleResponse" /> class.
     /// </summary>
     /// <param name="objectID">Unique object identifier. (required).</param>
     /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
     /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
-    public UpdatedRuleResponse(string objectID = default(string), string updatedAt = default(string), long taskID = default(long))
+    public UpdatedRuleResponse(string objectID, string updatedAt, long taskID)
     {
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for UpdatedRuleResponse and cannot be null");
-      }
-      this.ObjectID = objectID;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for UpdatedRuleResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for UpdatedRuleResponse and cannot be null");
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for UpdatedRuleResponse and cannot be null");
       this.TaskID = taskID;
     }
 

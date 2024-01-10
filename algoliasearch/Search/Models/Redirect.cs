@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/). 
@@ -27,10 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="Redirect" /> class.
     /// </summary>
-    /// <param name="index">index.</param>
-    public Redirect(List<RedirectRuleIndexMetadata> index = default(List<RedirectRuleIndexMetadata>))
+    public Redirect()
     {
-      this.Index = index;
     }
 
     /// <summary>

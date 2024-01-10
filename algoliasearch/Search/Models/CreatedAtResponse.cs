@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Response and creation timestamp.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="CreatedAtResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected CreatedAtResponse() { }
+    public CreatedAtResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="CreatedAtResponse" /> class.
     /// </summary>
     /// <param name="createdAt">Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public CreatedAtResponse(string createdAt = default(string))
+    public CreatedAtResponse(string createdAt)
     {
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for CreatedAtResponse and cannot be null");
-      }
-      this.CreatedAt = createdAt;
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for CreatedAtResponse and cannot be null");
     }
 
     /// <summary>

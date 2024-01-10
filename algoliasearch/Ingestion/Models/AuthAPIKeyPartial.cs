@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Authentication input used for token credentials.
@@ -27,10 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthAPIKeyPartial" /> class.
     /// </summary>
-    /// <param name="key">key.</param>
-    public AuthAPIKeyPartial(string key = default(string))
+    public AuthAPIKeyPartial()
     {
-      this.Key = key;
     }
 
     /// <summary>

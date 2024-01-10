@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceCSV
@@ -29,33 +29,19 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets Method
     /// </summary>
     [DataMember(Name = "method", EmitDefaultValue = false)]
-    public MethodType? Method { get; set; }
+    public MethodType Method { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceCSV" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceCSV() { }
+    public SourceCSV() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceCSV" /> class.
     /// </summary>
     /// <param name="url">The URL of the file. (required).</param>
-    /// <param name="uniqueIDColumn">The name of the column that contains the unique ID, used as &#x60;objectID&#x60; in Algolia..</param>
-    /// <param name="mapping">Mapping of type for every column. For example {\&quot;myColumn\&quot;: \&quot;boolean\&quot;, \&quot;myOtherColumn\&quot;: \&quot;json\&quot;}. .</param>
-    /// <param name="method">method.</param>
-    /// <param name="delimiter">The character used to split the value on each line, default to a comma (\\r, \\n, 0xFFFD, and space are forbidden). (default to &quot;,&quot;).</param>
-    public SourceCSV(string url = default(string), string uniqueIDColumn = default(string), Dictionary<string, MappingTypeCSV> mapping = default(Dictionary<string, MappingTypeCSV>), MethodType? method = default(MethodType?), string delimiter = @",")
+    public SourceCSV(string url)
     {
-      // to ensure "url" is required (not null)
-      if (url == null)
-      {
-        throw new ArgumentNullException("url is a required property for SourceCSV and cannot be null");
-      }
-      this.Url = url;
-      this.UniqueIDColumn = uniqueIDColumn;
-      this.Mapping = mapping;
-      this.Method = method;
-      // use default value if no "delimiter" provided
-      this.Delimiter = delimiter ?? @",";
+      this.Url = url ?? throw new ArgumentNullException("url is a required property for SourceCSV and cannot be null");
     }
 
     /// <summary>

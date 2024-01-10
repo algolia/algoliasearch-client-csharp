@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// AuthInput
@@ -33,9 +33,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthGoogleServiceAccount.</param>
     public AuthInput(AuthGoogleServiceAccount actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthBasic.</param>
     public AuthInput(AuthBasic actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -57,9 +57,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthAPIKey.</param>
     public AuthInput(AuthAPIKey actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -69,9 +69,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthOAuth.</param>
     public AuthInput(AuthOAuth actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -81,9 +81,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthAlgolia.</param>
     public AuthInput(AuthAlgolia actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -100,30 +100,7 @@ namespace Algolia.Search.Ingestion.Models
       }
       set
       {
-        if (value.GetType() == typeof(AuthAPIKey))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AuthAlgolia))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AuthBasic))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AuthGoogleServiceAccount))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AuthOAuth))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: AuthAPIKey, AuthAlgolia, AuthBasic, AuthGoogleServiceAccount, AuthOAuth");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -132,9 +109,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthGoogleServiceAccount</returns>
-    public AuthGoogleServiceAccount GetterAuthGoogleServiceAccount()
+    public AuthGoogleServiceAccount AsAuthGoogleServiceAccount()
     {
-      return (AuthGoogleServiceAccount)this.ActualInstance;
+      return (AuthGoogleServiceAccount)ActualInstance;
     }
 
     /// <summary>
@@ -142,9 +119,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthBasic</returns>
-    public AuthBasic GetterAuthBasic()
+    public AuthBasic AsAuthBasic()
     {
-      return (AuthBasic)this.ActualInstance;
+      return (AuthBasic)ActualInstance;
     }
 
     /// <summary>
@@ -152,9 +129,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthAPIKey</returns>
-    public AuthAPIKey GetterAuthAPIKey()
+    public AuthAPIKey AsAuthAPIKey()
     {
-      return (AuthAPIKey)this.ActualInstance;
+      return (AuthAPIKey)ActualInstance;
     }
 
     /// <summary>
@@ -162,9 +139,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthOAuth</returns>
-    public AuthOAuth GetterAuthOAuth()
+    public AuthOAuth AsAuthOAuth()
     {
-      return (AuthOAuth)this.ActualInstance;
+      return (AuthOAuth)ActualInstance;
     }
 
     /// <summary>
@@ -172,9 +149,55 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthAlgolia</returns>
-    public AuthAlgolia GetterAuthAlgolia()
+    public AuthAlgolia AsAuthAlgolia()
     {
-      return (AuthAlgolia)this.ActualInstance;
+      return (AuthAlgolia)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthGoogleServiceAccount` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthGoogleServiceAccount()
+    {
+      return ActualInstance.GetType() == typeof(AuthGoogleServiceAccount);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthBasic` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthBasic()
+    {
+      return ActualInstance.GetType() == typeof(AuthBasic);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthAPIKey` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthAPIKey()
+    {
+      return ActualInstance.GetType() == typeof(AuthAPIKey);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthOAuth` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthOAuth()
+    {
+      return ActualInstance.GetType() == typeof(AuthOAuth);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthAlgolia` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthAlgolia()
+    {
+      return ActualInstance.GetType() == typeof(AuthAlgolia);
     }
 
     /// <summary>
@@ -185,7 +208,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       var sb = new StringBuilder();
       sb.Append("class AuthInput {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -196,7 +219,7 @@ namespace Algolia.Search.Ingestion.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, AuthInput.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -212,42 +235,45 @@ namespace Algolia.Search.Ingestion.Models
       {
         return newAuthInput;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthAPIKey).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthAPIKey>(jsonString, AuthInput.SerializerSettings));
-        }
-        else
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthAPIKey>(jsonString, AuthInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthAPIKey");
-        match++;
+        return new AuthInput(JsonConvert.DeserializeObject<AuthGoogleServiceAccount>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthGoogleServiceAccount: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new AuthInput(JsonConvert.DeserializeObject<AuthBasic>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthBasic: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new AuthInput(JsonConvert.DeserializeObject<AuthAPIKey>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthAPIKey: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthAlgolia).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthAlgolia>(jsonString, AuthInput.SerializerSettings));
-        }
-        else
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthAlgolia>(jsonString, AuthInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthAlgolia");
-        match++;
+        return new AuthInput(JsonConvert.DeserializeObject<AuthOAuth>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthOAuth: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new AuthInput(JsonConvert.DeserializeObject<AuthAlgolia>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -255,77 +281,7 @@ namespace Algolia.Search.Ingestion.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthAlgolia: {1}", jsonString, exception.ToString()));
       }
 
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthBasic).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthBasic>(jsonString, AuthInput.SerializerSettings));
-        }
-        else
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthBasic>(jsonString, AuthInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthBasic");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthBasic: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthGoogleServiceAccount).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthGoogleServiceAccount>(jsonString, AuthInput.SerializerSettings));
-        }
-        else
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthGoogleServiceAccount>(jsonString, AuthInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthGoogleServiceAccount");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthGoogleServiceAccount: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthOAuth).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthOAuth>(jsonString, AuthInput.SerializerSettings));
-        }
-        else
-        {
-          newAuthInput = new AuthInput(JsonConvert.DeserializeObject<AuthOAuth>(jsonString, AuthInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthOAuth");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthOAuth: {1}", jsonString, exception.ToString()));
-      }
-
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newAuthInput;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -358,7 +314,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return AuthInput.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

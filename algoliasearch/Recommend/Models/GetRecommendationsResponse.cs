@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// GetRecommendationsResponse
@@ -27,10 +27,8 @@ namespace Algolia.Search.Recommend.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="GetRecommendationsResponse" /> class.
     /// </summary>
-    /// <param name="results">results.</param>
-    public GetRecommendationsResponse(List<RecommendationsResults> results = default(List<RecommendationsResults>))
+    public GetRecommendationsResponse()
     {
-      this.Results = results;
     }
 
     /// <summary>

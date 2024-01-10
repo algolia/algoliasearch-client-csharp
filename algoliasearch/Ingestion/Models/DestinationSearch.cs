@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Payload to search for multiple destinations, based on the given &#x60;destinationIDs&#x60;.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="DestinationSearch" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DestinationSearch() { }
+    public DestinationSearch() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DestinationSearch" /> class.
     /// </summary>
     /// <param name="destinationIDs">destinationIDs (required).</param>
-    public DestinationSearch(List<string> destinationIDs = default(List<string>))
+    public DestinationSearch(List<string> destinationIDs)
     {
-      // to ensure "destinationIDs" is required (not null)
-      if (destinationIDs == null)
-      {
-        throw new ArgumentNullException("destinationIDs is a required property for DestinationSearch and cannot be null");
-      }
-      this.DestinationIDs = destinationIDs;
+      this.DestinationIDs = destinationIDs ?? throw new ArgumentNullException("destinationIDs is a required property for DestinationSearch and cannot be null");
     }
 
     /// <summary>

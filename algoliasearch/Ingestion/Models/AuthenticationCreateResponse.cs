@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Response from the API when the Authentication is successfully created.
@@ -28,33 +28,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="AuthenticationCreateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthenticationCreateResponse() { }
+    public AuthenticationCreateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationCreateResponse" /> class.
     /// </summary>
     /// <param name="authenticationID">The authentication UUID. (required).</param>
     /// <param name="name">An human readable name describing the object. (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    public AuthenticationCreateResponse(string authenticationID = default(string), string name = default(string), string createdAt = default(string))
+    public AuthenticationCreateResponse(string authenticationID, string name, string createdAt)
     {
-      // to ensure "authenticationID" is required (not null)
-      if (authenticationID == null)
-      {
-        throw new ArgumentNullException("authenticationID is a required property for AuthenticationCreateResponse and cannot be null");
-      }
-      this.AuthenticationID = authenticationID;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for AuthenticationCreateResponse and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for AuthenticationCreateResponse and cannot be null");
-      }
-      this.CreatedAt = createdAt;
+      this.AuthenticationID = authenticationID ?? throw new ArgumentNullException("authenticationID is a required property for AuthenticationCreateResponse and cannot be null");
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for AuthenticationCreateResponse and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for AuthenticationCreateResponse and cannot be null");
     }
 
     /// <summary>

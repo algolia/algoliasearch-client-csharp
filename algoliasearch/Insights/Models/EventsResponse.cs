@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Insights.Models
+namespace Algolia.Search.Models.Insights
 {
   /// <summary>
   /// The response of the Insights API.
@@ -27,12 +27,8 @@ namespace Algolia.Search.Insights.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="EventsResponse" /> class.
     /// </summary>
-    /// <param name="message">Details about the response, such as error messages..</param>
-    /// <param name="status">The HTTP status code of the response..</param>
-    public EventsResponse(string message = default(string), int status = default(int))
+    public EventsResponse()
     {
-      this.Message = message;
-      this.Status = status;
     }
 
     /// <summary>
@@ -47,7 +43,7 @@ namespace Algolia.Search.Insights.Models
     /// </summary>
     /// <value>The HTTP status code of the response.</value>
     [DataMember(Name = "status", EmitDefaultValue = false)]
-    public int Status { get; set; }
+    public int? Status { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

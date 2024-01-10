@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// RuleResponseMetadata
@@ -27,10 +27,8 @@ namespace Algolia.Search.Recommend.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="RuleResponseMetadata" /> class.
     /// </summary>
-    /// <param name="lastUpdate">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format..</param>
-    public RuleResponseMetadata(string lastUpdate = default(string))
+    public RuleResponseMetadata()
     {
-      this.LastUpdate = lastUpdate;
     }
 
     /// <summary>

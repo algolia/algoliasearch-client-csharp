@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// TimeInner
@@ -27,12 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="TimeInner" /> class.
     /// </summary>
-    /// <param name="t">Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds..</param>
-    /// <param name="v">Time in ms..</param>
-    public TimeInner(long t = default(long), int v = default(int))
+    public TimeInner()
     {
-      this.T = t;
-      this.V = v;
     }
 
     /// <summary>
@@ -47,7 +43,7 @@ namespace Algolia.Search.Monitoring.Models
     /// </summary>
     /// <value>Time in ms.</value>
     [DataMember(Name = "v", EmitDefaultValue = false)]
-    public int V { get; set; }
+    public int? V { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

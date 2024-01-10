@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Response, taskID, and update timestamp.
@@ -28,21 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="UpdatedAtResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected UpdatedAtResponse() { }
+    public UpdatedAtResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="UpdatedAtResponse" /> class.
     /// </summary>
     /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
     /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public UpdatedAtResponse(long taskID = default(long), string updatedAt = default(string))
+    public UpdatedAtResponse(long taskID, string updatedAt)
     {
       this.TaskID = taskID;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for UpdatedAtResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for UpdatedAtResponse and cannot be null");
     }
 
     /// <summary>

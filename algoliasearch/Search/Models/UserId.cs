@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Unique user ID.
@@ -28,7 +28,7 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="UserId" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected UserId() { }
+    public UserId() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="UserId" /> class.
     /// </summary>
@@ -36,20 +36,10 @@ namespace Algolia.Search.Search.Models
     /// <param name="clusterName">Cluster to which the user is assigned. (required).</param>
     /// <param name="nbRecords">Number of records belonging to the user. (required).</param>
     /// <param name="dataSize">Data size used by the user. (required).</param>
-    public UserId(string varUserID = default(string), string clusterName = default(string), int nbRecords = default(int), int dataSize = default(int))
+    public UserId(string varUserID, string clusterName, int nbRecords, int dataSize)
     {
-      // to ensure "varUserID" is required (not null)
-      if (varUserID == null)
-      {
-        throw new ArgumentNullException("varUserID is a required property for UserId and cannot be null");
-      }
-      this.VarUserID = varUserID;
-      // to ensure "clusterName" is required (not null)
-      if (clusterName == null)
-      {
-        throw new ArgumentNullException("clusterName is a required property for UserId and cannot be null");
-      }
-      this.ClusterName = clusterName;
+      this.VarUserID = varUserID ?? throw new ArgumentNullException("varUserID is a required property for UserId and cannot be null");
+      this.ClusterName = clusterName ?? throw new ArgumentNullException("clusterName is a required property for UserId and cannot be null");
       this.NbRecords = nbRecords;
       this.DataSize = dataSize;
     }

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// Defines ServerStatus

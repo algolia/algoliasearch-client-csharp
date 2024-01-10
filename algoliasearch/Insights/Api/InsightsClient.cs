@@ -7,15 +7,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Insights.Client;
-using Algolia.Search.Insights.Models;
+using Algolia.Search.Clients;
+using Algolia.Search.Models;
+using Algolia.Search.Models.Insights;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
-using Algolia.Search.Client;
 
-namespace Algolia.Search.Insights.Api
+namespace Algolia.Search.Clients
 {
-
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
@@ -28,12 +27,12 @@ namespace Algolia.Search.Insights.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Insights.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -41,12 +40,12 @@ namespace Algolia.Search.Insights.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Insights.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -54,13 +53,13 @@ namespace Algolia.Search.Insights.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Insights.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -68,18 +67,18 @@ namespace Algolia.Search.Insights.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Insights.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send events.
     /// </summary>
     /// <remarks>
-    /// Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&amp;nbsp;MB. 
+    /// Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB. 
     /// </remarks>
     /// <exception cref="Algolia.Search.Insights.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="insightsEvents"></param>
@@ -103,7 +102,8 @@ namespace Algolia.Search.Insights.Api
     /// </summary>
     /// <param name="applicationId">Your application</param>
     /// <param name="apiKey">Your API key</param>
-    public InsightsClient(string applicationId, string apiKey) : this(new InsightsConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+    /// <param name="region">The targeted region</param>
+    public InsightsClient(string applicationId, string apiKey, string region = null) : this(new InsightsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
     {
     }
 
@@ -126,17 +126,14 @@ namespace Algolia.Search.Insights.Api
       {
         throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-
       if (config == null)
       {
         throw new ArgumentNullException(nameof(config), "A config is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
         throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
         throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
@@ -156,25 +153,18 @@ namespace Algolia.Search.Insights.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling InsightsClient->CustomDelete");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -184,25 +174,18 @@ namespace Algolia.Search.Insights.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling InsightsClient->CustomGet");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -213,25 +196,18 @@ namespace Algolia.Search.Insights.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling InsightsClient->CustomPost");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -243,25 +219,18 @@ namespace Algolia.Search.Insights.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling InsightsClient->CustomPut");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Send events. Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&amp;nbsp;MB. 
@@ -273,17 +242,14 @@ namespace Algolia.Search.Insights.Api
     /// <returns>Task of EventsResponse</returns>
     public async Task<EventsResponse> PushEventsAsync(InsightsEvents insightsEvents, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'insightsEvents' is set
       if (insightsEvents == null)
         throw new ApiException(400, "Missing required parameter 'insightsEvents' when calling InsightsClient->PushEvents");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = insightsEvents;
-
-
       return await _transport.ExecuteRequestAsync<EventsResponse>(new HttpMethod("POST"), "/1/events", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
   }
 }

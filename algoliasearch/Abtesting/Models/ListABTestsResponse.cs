@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// ListABTestsResponse
@@ -28,21 +28,16 @@ namespace Algolia.Search.Abtesting.Models
     /// Initializes a new instance of the <see cref="ListABTestsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListABTestsResponse() { }
+    public ListABTestsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListABTestsResponse" /> class.
     /// </summary>
     /// <param name="abtests">A/B tests. (required).</param>
     /// <param name="count">Number of A/B tests implemented. (required).</param>
     /// <param name="total">Number of retrievable A/B tests. (required).</param>
-    public ListABTestsResponse(List<ABTest> abtests = default(List<ABTest>), int count = default(int), int total = default(int))
+    public ListABTestsResponse(List<ABTest> abtests, int count, int total)
     {
-      // to ensure "abtests" is required (not null)
-      if (abtests == null)
-      {
-        throw new ArgumentNullException("abtests is a required property for ListABTestsResponse and cannot be null");
-      }
-      this.Abtests = abtests;
+      this.Abtests = abtests ?? throw new ArgumentNullException("abtests is a required property for ListABTestsResponse and cannot be null");
       this.Count = count;
       this.Total = total;
     }

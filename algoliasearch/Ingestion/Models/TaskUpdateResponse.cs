@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The response from the API after a task update.
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="TaskUpdateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TaskUpdateResponse() { }
+    public TaskUpdateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TaskUpdateResponse" /> class.
     /// </summary>
     /// <param name="taskID">The task UUID. (required).</param>
     /// <param name="updatedAt">Date of last update (RFC3339 format). (required).</param>
-    public TaskUpdateResponse(string taskID = default(string), string updatedAt = default(string))
+    public TaskUpdateResponse(string taskID, string updatedAt)
     {
-      // to ensure "taskID" is required (not null)
-      if (taskID == null)
-      {
-        throw new ArgumentNullException("taskID is a required property for TaskUpdateResponse and cannot be null");
-      }
-      this.TaskID = taskID;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for TaskUpdateResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.TaskID = taskID ?? throw new ArgumentNullException("taskID is a required property for TaskUpdateResponse and cannot be null");
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for TaskUpdateResponse and cannot be null");
     }
 
     /// <summary>

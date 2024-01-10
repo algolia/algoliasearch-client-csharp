@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SaveObjectResponse
@@ -28,23 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SaveObjectResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SaveObjectResponse() { }
+    public SaveObjectResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SaveObjectResponse" /> class.
     /// </summary>
     /// <param name="createdAt">Date of creation (ISO-8601 format). (required).</param>
     /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
-    /// <param name="objectID">Unique object identifier..</param>
-    public SaveObjectResponse(string createdAt = default(string), long taskID = default(long), string objectID = default(string))
+    public SaveObjectResponse(string createdAt, long taskID)
     {
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for SaveObjectResponse and cannot be null");
-      }
-      this.CreatedAt = createdAt;
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for SaveObjectResponse and cannot be null");
       this.TaskID = taskID;
-      this.ObjectID = objectID;
     }
 
     /// <summary>

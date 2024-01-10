@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The payload when creating an authentication.
@@ -35,35 +35,23 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets Platform
     /// </summary>
     [DataMember(Name = "platform", EmitDefaultValue = false)]
-    public Platform? Platform { get; set; }
+    public Platform Platform { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationCreate" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthenticationCreate() { }
+    public AuthenticationCreate() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationCreate" /> class.
     /// </summary>
     /// <param name="type">type (required).</param>
     /// <param name="name">An human readable name describing the object. (required).</param>
-    /// <param name="platform">platform.</param>
     /// <param name="input">input (required).</param>
-    public AuthenticationCreate(AuthenticationType type = default(AuthenticationType), string name = default(string), Platform? platform = default(Platform?), AuthInput input = default(AuthInput))
+    public AuthenticationCreate(AuthenticationType type, string name, AuthInput input)
     {
       this.Type = type;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for AuthenticationCreate and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "input" is required (not null)
-      if (input == null)
-      {
-        throw new ArgumentNullException("input is a required property for AuthenticationCreate and cannot be null");
-      }
-      this.Input = input;
-      this.Platform = platform;
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for AuthenticationCreate and cannot be null");
+      this.Input = input ?? throw new ArgumentNullException("input is a required property for AuthenticationCreate and cannot be null");
     }
 
     /// <summary>

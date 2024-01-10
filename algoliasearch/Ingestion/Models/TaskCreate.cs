@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The payload for a task creation.
@@ -34,7 +34,7 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="TaskCreate" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TaskCreate() { }
+    public TaskCreate() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TaskCreate" /> class.
     /// </summary>
@@ -42,33 +42,12 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="destinationID">The destination UUID. (required).</param>
     /// <param name="trigger">trigger (required).</param>
     /// <param name="action">action (required).</param>
-    /// <param name="enabled">Whether the task is enabled or not..</param>
-    /// <param name="failureThreshold">A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not..</param>
-    /// <param name="input">input.</param>
-    public TaskCreate(string sourceID = default(string), string destinationID = default(string), TaskCreateTrigger trigger = default(TaskCreateTrigger), ActionType action = default(ActionType), bool enabled = default(bool), int failureThreshold = default(int), TaskInput input = default(TaskInput))
+    public TaskCreate(string sourceID, string destinationID, TaskCreateTrigger trigger, ActionType action)
     {
-      // to ensure "sourceID" is required (not null)
-      if (sourceID == null)
-      {
-        throw new ArgumentNullException("sourceID is a required property for TaskCreate and cannot be null");
-      }
-      this.SourceID = sourceID;
-      // to ensure "destinationID" is required (not null)
-      if (destinationID == null)
-      {
-        throw new ArgumentNullException("destinationID is a required property for TaskCreate and cannot be null");
-      }
-      this.DestinationID = destinationID;
-      // to ensure "trigger" is required (not null)
-      if (trigger == null)
-      {
-        throw new ArgumentNullException("trigger is a required property for TaskCreate and cannot be null");
-      }
-      this.Trigger = trigger;
+      this.SourceID = sourceID ?? throw new ArgumentNullException("sourceID is a required property for TaskCreate and cannot be null");
+      this.DestinationID = destinationID ?? throw new ArgumentNullException("destinationID is a required property for TaskCreate and cannot be null");
+      this.Trigger = trigger ?? throw new ArgumentNullException("trigger is a required property for TaskCreate and cannot be null");
       this.Action = action;
-      this.Enabled = enabled;
-      this.FailureThreshold = failureThreshold;
-      this.Input = input;
     }
 
     /// <summary>
@@ -96,14 +75,14 @@ namespace Algolia.Search.Ingestion.Models
     /// </summary>
     /// <value>Whether the task is enabled or not.</value>
     [DataMember(Name = "enabled", EmitDefaultValue = true)]
-    public bool Enabled { get; set; }
+    public bool? Enabled { get; set; }
 
     /// <summary>
     /// A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not.
     /// </summary>
     /// <value>A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not.</value>
     [DataMember(Name = "failureThreshold", EmitDefaultValue = false)]
-    public int FailureThreshold { get; set; }
+    public int? FailureThreshold { get; set; }
 
     /// <summary>
     /// Gets or Sets Input

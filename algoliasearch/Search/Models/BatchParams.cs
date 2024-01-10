@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Batch parameters.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="BatchParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BatchParams() { }
+    public BatchParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchParams" /> class.
     /// </summary>
     /// <param name="requests">requests (required).</param>
-    public BatchParams(List<MultipleBatchRequest> requests = default(List<MultipleBatchRequest>))
+    public BatchParams(List<MultipleBatchRequest> requests)
     {
-      // to ensure "requests" is required (not null)
-      if (requests == null)
-      {
-        throw new ArgumentNullException("requests is a required property for BatchParams and cannot be null");
-      }
-      this.Requests = requests;
+      this.Requests = requests ?? throw new ArgumentNullException("requests is a required property for BatchParams and cannot be null");
     }
 
     /// <summary>

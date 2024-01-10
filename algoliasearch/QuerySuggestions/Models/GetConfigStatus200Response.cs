@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// GetConfigStatus200Response
@@ -27,18 +27,8 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="GetConfigStatus200Response" /> class.
     /// </summary>
-    /// <param name="indexName">Query Suggestions index name..</param>
-    /// <param name="isRunning">Indicates whether the creation or update of the Query Suggestions is in progress..</param>
-    /// <param name="lastBuiltAt">Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built..</param>
-    /// <param name="lastSuccessfulBuiltAt">Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully..</param>
-    /// <param name="lastSuccessfulBuildDuration">Duration of the last successful build in seconds..</param>
-    public GetConfigStatus200Response(string indexName = default(string), bool isRunning = default(bool), string lastBuiltAt = default(string), string lastSuccessfulBuiltAt = default(string), string lastSuccessfulBuildDuration = default(string))
+    public GetConfigStatus200Response()
     {
-      this.IndexName = indexName;
-      this.IsRunning = isRunning;
-      this.LastBuiltAt = lastBuiltAt;
-      this.LastSuccessfulBuiltAt = lastSuccessfulBuiltAt;
-      this.LastSuccessfulBuildDuration = lastSuccessfulBuildDuration;
     }
 
     /// <summary>
@@ -53,7 +43,7 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// </summary>
     /// <value>Indicates whether the creation or update of the Query Suggestions is in progress.</value>
     [DataMember(Name = "isRunning", EmitDefaultValue = true)]
-    public bool IsRunning { get; set; }
+    public bool? IsRunning { get; set; }
 
     /// <summary>
     /// Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.

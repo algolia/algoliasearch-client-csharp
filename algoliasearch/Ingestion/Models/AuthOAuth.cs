@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Authentication input for OAuth login.
@@ -28,33 +28,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="AuthOAuth" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthOAuth() { }
+    public AuthOAuth() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthOAuth" /> class.
     /// </summary>
     /// <param name="url">The OAuth endpoint URL. (required).</param>
     /// <param name="clientId">The clientID. (required).</param>
     /// <param name="clientSecret">The secret. (required).</param>
-    public AuthOAuth(string url = default(string), string clientId = default(string), string clientSecret = default(string))
+    public AuthOAuth(string url, string clientId, string clientSecret)
     {
-      // to ensure "url" is required (not null)
-      if (url == null)
-      {
-        throw new ArgumentNullException("url is a required property for AuthOAuth and cannot be null");
-      }
-      this.Url = url;
-      // to ensure "clientId" is required (not null)
-      if (clientId == null)
-      {
-        throw new ArgumentNullException("clientId is a required property for AuthOAuth and cannot be null");
-      }
-      this.ClientId = clientId;
-      // to ensure "clientSecret" is required (not null)
-      if (clientSecret == null)
-      {
-        throw new ArgumentNullException("clientSecret is a required property for AuthOAuth and cannot be null");
-      }
-      this.ClientSecret = clientSecret;
+      this.Url = url ?? throw new ArgumentNullException("url is a required property for AuthOAuth and cannot be null");
+      this.ClientId = clientId ?? throw new ArgumentNullException("clientId is a required property for AuthOAuth and cannot be null");
+      this.ClientSecret = clientSecret ?? throw new ArgumentNullException("clientSecret is a required property for AuthOAuth and cannot be null");
     }
 
     /// <summary>

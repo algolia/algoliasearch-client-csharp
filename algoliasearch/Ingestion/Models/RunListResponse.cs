@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// RunListResponse
@@ -28,33 +28,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="RunListResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RunListResponse() { }
+    public RunListResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="RunListResponse" /> class.
     /// </summary>
     /// <param name="runs">runs (required).</param>
     /// <param name="pagination">pagination (required).</param>
     /// <param name="window">window (required).</param>
-    public RunListResponse(List<Run> runs = default(List<Run>), Pagination pagination = default(Pagination), Window window = default(Window))
+    public RunListResponse(List<Run> runs, Pagination pagination, Window window)
     {
-      // to ensure "runs" is required (not null)
-      if (runs == null)
-      {
-        throw new ArgumentNullException("runs is a required property for RunListResponse and cannot be null");
-      }
-      this.Runs = runs;
-      // to ensure "pagination" is required (not null)
-      if (pagination == null)
-      {
-        throw new ArgumentNullException("pagination is a required property for RunListResponse and cannot be null");
-      }
-      this.Pagination = pagination;
-      // to ensure "window" is required (not null)
-      if (window == null)
-      {
-        throw new ArgumentNullException("window is a required property for RunListResponse and cannot be null");
-      }
-      this.Window = window;
+      this.Runs = runs ?? throw new ArgumentNullException("runs is a required property for RunListResponse and cannot be null");
+      this.Pagination = pagination ?? throw new ArgumentNullException("pagination is a required property for RunListResponse and cannot be null");
+      this.Window = window ?? throw new ArgumentNullException("window is a required property for RunListResponse and cannot be null");
     }
 
     /// <summary>

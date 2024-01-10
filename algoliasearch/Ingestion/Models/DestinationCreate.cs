@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The payload when creating a destination.
@@ -34,30 +34,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="DestinationCreate" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DestinationCreate() { }
+    public DestinationCreate() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DestinationCreate" /> class.
     /// </summary>
     /// <param name="type">type (required).</param>
     /// <param name="name">An human readable name describing the object. (required).</param>
     /// <param name="input">input (required).</param>
-    /// <param name="authenticationID">The authentication UUID..</param>
-    public DestinationCreate(DestinationType type = default(DestinationType), string name = default(string), DestinationInput input = default(DestinationInput), string authenticationID = default(string))
+    public DestinationCreate(DestinationType type, string name, DestinationInput input)
     {
       this.Type = type;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for DestinationCreate and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "input" is required (not null)
-      if (input == null)
-      {
-        throw new ArgumentNullException("input is a required property for DestinationCreate and cannot be null");
-      }
-      this.Input = input;
-      this.AuthenticationID = authenticationID;
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for DestinationCreate and cannot be null");
+      this.Input = input ?? throw new ArgumentNullException("input is a required property for DestinationCreate and cannot be null");
     }
 
     /// <summary>

@@ -7,15 +7,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.QuerySuggestions.Client;
-using Algolia.Search.QuerySuggestions.Models;
+using Algolia.Search.Clients;
+using Algolia.Search.Models;
+using Algolia.Search.Models.QuerySuggestions;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
-using Algolia.Search.Client;
 
-namespace Algolia.Search.QuerySuggestions.Api
+namespace Algolia.Search.Clients
 {
-
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
@@ -40,12 +39,12 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.QuerySuggestions.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -53,12 +52,12 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.QuerySuggestions.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -66,13 +65,13 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.QuerySuggestions.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -80,13 +79,13 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.QuerySuggestions.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Delete a configuration.
     /// </summary>
@@ -108,7 +107,7 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <exception cref="Algolia.Search.QuerySuggestions.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;QuerySuggestionsConfigurationResponse&gt;</returns>
+    /// <returns>Task of List<QuerySuggestionsConfigurationResponse></returns>
     Task<List<QuerySuggestionsConfigurationResponse>> GetAllConfigsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get a configuration.
@@ -175,7 +174,8 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// </summary>
     /// <param name="applicationId">Your application</param>
     /// <param name="apiKey">Your API key</param>
-    public QuerySuggestionsClient(string applicationId, string apiKey) : this(new QuerySuggestionsConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+    /// <param name="region">The targeted region</param>
+    public QuerySuggestionsClient(string applicationId, string apiKey, string region) : this(new QuerySuggestionsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
     {
     }
 
@@ -198,17 +198,14 @@ namespace Algolia.Search.QuerySuggestions.Api
       {
         throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-
       if (config == null)
       {
         throw new ArgumentNullException(nameof(config), "A config is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
         throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
         throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
@@ -229,19 +226,16 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <returns>Task of BaseResponse</returns>
     public async Task<BaseResponse> CreateConfigAsync(QuerySuggestionsConfigurationWithIndex querySuggestionsConfigurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'querySuggestionsConfigurationWithIndex' is set
       if (querySuggestionsConfigurationWithIndex == null)
         throw new ApiException(400, "Missing required parameter 'querySuggestionsConfigurationWithIndex' when calling QuerySuggestionsClient->CreateConfig");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = querySuggestionsConfigurationWithIndex;
-
-
       return await _transport.ExecuteRequestAsync<BaseResponse>(new HttpMethod("POST"), "/1/configs", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -251,25 +245,18 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling QuerySuggestionsClient->CustomDelete");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -279,25 +266,18 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling QuerySuggestionsClient->CustomGet");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -308,25 +288,18 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling QuerySuggestionsClient->CustomPost");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -338,25 +311,18 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling QuerySuggestionsClient->CustomPut");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Delete a configuration. Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted. 
@@ -368,18 +334,15 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <returns>Task of BaseResponse</returns>
     public async Task<BaseResponse> DeleteConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'indexName' is set
       if (indexName == null)
         throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->DeleteConfig");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-
 
       return await _transport.ExecuteRequestAsync<BaseResponse>(new HttpMethod("DELETE"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// List configurations. List all Query Suggestions configurations of your Algolia application.
@@ -387,16 +350,14 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <exception cref="Algolia.Search.QuerySuggestions.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;QuerySuggestionsConfigurationResponse&gt;</returns>
+    /// <returns>Task of List<QuerySuggestionsConfigurationResponse></returns>
     public async Task<List<QuerySuggestionsConfigurationResponse>> GetAllConfigsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
+      var requestOptions = new InternalRequestOptions(options);
 
 
       return await _transport.ExecuteRequestAsync<List<QuerySuggestionsConfigurationResponse>>(new HttpMethod("GET"), "/1/configs", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a configuration. Get a single Query Suggestions configuration.
@@ -408,18 +369,15 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <returns>Task of QuerySuggestionsConfigurationResponse</returns>
     public async Task<QuerySuggestionsConfigurationResponse> GetConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'indexName' is set
       if (indexName == null)
         throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->GetConfig");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-
 
       return await _transport.ExecuteRequestAsync<QuerySuggestionsConfigurationResponse>(new HttpMethod("GET"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get configuration status. Report the status of a Query Suggestions index.
@@ -431,18 +389,15 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <returns>Task of GetConfigStatus200Response</returns>
     public async Task<GetConfigStatus200Response> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'indexName' is set
       if (indexName == null)
         throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->GetConfigStatus");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-
 
       return await _transport.ExecuteRequestAsync<GetConfigStatus200Response>(new HttpMethod("GET"), "/1/configs/{indexName}/status", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get logs. Get the logs for a single Query Suggestions index.
@@ -454,18 +409,15 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <returns>Task of GetLogFile200Response</returns>
     public async Task<GetLogFile200Response> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'indexName' is set
       if (indexName == null)
         throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->GetLogFile");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-
 
       return await _transport.ExecuteRequestAsync<GetLogFile200Response>(new HttpMethod("GET"), "/1/logs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Update a configuration. Update a QuerySuggestions configuration.
@@ -478,22 +430,18 @@ namespace Algolia.Search.QuerySuggestions.Api
     /// <returns>Task of BaseResponse</returns>
     public async Task<BaseResponse> UpdateConfigAsync(string indexName, QuerySuggestionsConfiguration querySuggestionsConfiguration, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'indexName' is set
       if (indexName == null)
         throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->UpdateConfig");
 
-      // verify the required parameter 'querySuggestionsConfiguration' is set
       if (querySuggestionsConfiguration == null)
         throw new ApiException(400, "Missing required parameter 'querySuggestionsConfiguration' when calling QuerySuggestionsClient->UpdateConfig");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+
       requestOptions.Data = querySuggestionsConfiguration;
-
-
       return await _transport.ExecuteRequestAsync<BaseResponse>(new HttpMethod("PUT"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
   }
 }

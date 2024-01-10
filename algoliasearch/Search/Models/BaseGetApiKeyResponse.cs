@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// BaseGetApiKeyResponse
@@ -28,16 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="BaseGetApiKeyResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BaseGetApiKeyResponse() { }
+    public BaseGetApiKeyResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseGetApiKeyResponse" /> class.
     /// </summary>
-    /// <param name="value">API key..</param>
     /// <param name="createdAt">Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). (required).</param>
-    public BaseGetApiKeyResponse(string value = default(string), long createdAt = default(long))
+    public BaseGetApiKeyResponse(long createdAt)
     {
       this.CreatedAt = createdAt;
-      this.Value = value;
     }
 
     /// <summary>

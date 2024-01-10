@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Trigger
@@ -33,9 +33,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of OnDemandTrigger.</param>
     public Trigger(OnDemandTrigger actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of ScheduleTrigger.</param>
     public Trigger(ScheduleTrigger actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -57,9 +57,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of SubscriptionTrigger.</param>
     public Trigger(SubscriptionTrigger actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -76,22 +76,7 @@ namespace Algolia.Search.Ingestion.Models
       }
       set
       {
-        if (value.GetType() == typeof(OnDemandTrigger))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ScheduleTrigger))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(SubscriptionTrigger))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: OnDemandTrigger, ScheduleTrigger, SubscriptionTrigger");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -100,9 +85,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of OnDemandTrigger</returns>
-    public OnDemandTrigger GetterOnDemandTrigger()
+    public OnDemandTrigger AsOnDemandTrigger()
     {
-      return (OnDemandTrigger)this.ActualInstance;
+      return (OnDemandTrigger)ActualInstance;
     }
 
     /// <summary>
@@ -110,9 +95,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ScheduleTrigger</returns>
-    public ScheduleTrigger GetterScheduleTrigger()
+    public ScheduleTrigger AsScheduleTrigger()
     {
-      return (ScheduleTrigger)this.ActualInstance;
+      return (ScheduleTrigger)ActualInstance;
     }
 
     /// <summary>
@@ -120,9 +105,37 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of SubscriptionTrigger</returns>
-    public SubscriptionTrigger GetterSubscriptionTrigger()
+    public SubscriptionTrigger AsSubscriptionTrigger()
     {
-      return (SubscriptionTrigger)this.ActualInstance;
+      return (SubscriptionTrigger)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `OnDemandTrigger` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsOnDemandTrigger()
+    {
+      return ActualInstance.GetType() == typeof(OnDemandTrigger);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ScheduleTrigger` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsScheduleTrigger()
+    {
+      return ActualInstance.GetType() == typeof(ScheduleTrigger);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `SubscriptionTrigger` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSubscriptionTrigger()
+    {
+      return ActualInstance.GetType() == typeof(SubscriptionTrigger);
     }
 
     /// <summary>
@@ -133,7 +146,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       var sb = new StringBuilder();
       sb.Append("class Trigger {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -144,7 +157,7 @@ namespace Algolia.Search.Ingestion.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, Trigger.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -160,62 +173,27 @@ namespace Algolia.Search.Ingestion.Models
       {
         return newTrigger;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(OnDemandTrigger).GetProperty("AdditionalProperties") == null)
-        {
-          newTrigger = new Trigger(JsonConvert.DeserializeObject<OnDemandTrigger>(jsonString, Trigger.SerializerSettings));
-        }
-        else
-        {
-          newTrigger = new Trigger(JsonConvert.DeserializeObject<OnDemandTrigger>(jsonString, Trigger.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("OnDemandTrigger");
-        match++;
+        return new Trigger(JsonConvert.DeserializeObject<OnDemandTrigger>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into OnDemandTrigger: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ScheduleTrigger).GetProperty("AdditionalProperties") == null)
-        {
-          newTrigger = new Trigger(JsonConvert.DeserializeObject<ScheduleTrigger>(jsonString, Trigger.SerializerSettings));
-        }
-        else
-        {
-          newTrigger = new Trigger(JsonConvert.DeserializeObject<ScheduleTrigger>(jsonString, Trigger.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ScheduleTrigger");
-        match++;
+        return new Trigger(JsonConvert.DeserializeObject<ScheduleTrigger>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ScheduleTrigger: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SubscriptionTrigger).GetProperty("AdditionalProperties") == null)
-        {
-          newTrigger = new Trigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, Trigger.SerializerSettings));
-        }
-        else
-        {
-          newTrigger = new Trigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, Trigger.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SubscriptionTrigger");
-        match++;
+        return new Trigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -223,17 +201,7 @@ namespace Algolia.Search.Ingestion.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SubscriptionTrigger: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newTrigger;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -266,7 +234,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return Trigger.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

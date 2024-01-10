@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Run
@@ -35,13 +35,13 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets Outcome
     /// </summary>
     [DataMember(Name = "outcome", EmitDefaultValue = false)]
-    public RunOutcome? Outcome { get; set; }
+    public RunOutcome Outcome { get; set; }
 
     /// <summary>
     /// Gets or Sets ReasonCode
     /// </summary>
     [DataMember(Name = "reasonCode", EmitDefaultValue = false)]
-    public RunReasonCode? ReasonCode { get; set; }
+    public RunReasonCode ReasonCode { get; set; }
 
     /// <summary>
     /// Gets or Sets Type
@@ -52,7 +52,7 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="Run" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Run() { }
+    public Run() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Run" /> class.
     /// </summary>
@@ -60,50 +60,16 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="appID">appID (required).</param>
     /// <param name="taskID">The task UUID. (required).</param>
     /// <param name="status">status (required).</param>
-    /// <param name="progress">progress.</param>
-    /// <param name="outcome">outcome.</param>
-    /// <param name="failureThreshold">A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not..</param>
-    /// <param name="reason">Explains the result of outcome..</param>
-    /// <param name="reasonCode">reasonCode.</param>
     /// <param name="type">type (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    /// <param name="startedAt">Date of start (RFC3339 format)..</param>
-    /// <param name="finishedAt">Date of finish (RFC3339 format)..</param>
-    public Run(string runID = default(string), string appID = default(string), string taskID = default(string), RunStatus status = default(RunStatus), RunProgress progress = default(RunProgress), RunOutcome? outcome = default(RunOutcome?), int failureThreshold = default(int), string reason = default(string), RunReasonCode? reasonCode = default(RunReasonCode?), RunType type = default(RunType), string createdAt = default(string), string startedAt = default(string), string finishedAt = default(string))
+    public Run(string runID, string appID, string taskID, RunStatus status, RunType type, string createdAt)
     {
-      // to ensure "runID" is required (not null)
-      if (runID == null)
-      {
-        throw new ArgumentNullException("runID is a required property for Run and cannot be null");
-      }
-      this.RunID = runID;
-      // to ensure "appID" is required (not null)
-      if (appID == null)
-      {
-        throw new ArgumentNullException("appID is a required property for Run and cannot be null");
-      }
-      this.AppID = appID;
-      // to ensure "taskID" is required (not null)
-      if (taskID == null)
-      {
-        throw new ArgumentNullException("taskID is a required property for Run and cannot be null");
-      }
-      this.TaskID = taskID;
+      this.RunID = runID ?? throw new ArgumentNullException("runID is a required property for Run and cannot be null");
+      this.AppID = appID ?? throw new ArgumentNullException("appID is a required property for Run and cannot be null");
+      this.TaskID = taskID ?? throw new ArgumentNullException("taskID is a required property for Run and cannot be null");
       this.Status = status;
       this.Type = type;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for Run and cannot be null");
-      }
-      this.CreatedAt = createdAt;
-      this.Progress = progress;
-      this.Outcome = outcome;
-      this.FailureThreshold = failureThreshold;
-      this.Reason = reason;
-      this.ReasonCode = reasonCode;
-      this.StartedAt = startedAt;
-      this.FinishedAt = finishedAt;
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for Run and cannot be null");
     }
 
     /// <summary>
@@ -137,7 +103,7 @@ namespace Algolia.Search.Ingestion.Models
     /// </summary>
     /// <value>A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not.</value>
     [DataMember(Name = "failureThreshold", EmitDefaultValue = false)]
-    public int FailureThreshold { get; set; }
+    public int? FailureThreshold { get; set; }
 
     /// <summary>
     /// Explains the result of outcome.

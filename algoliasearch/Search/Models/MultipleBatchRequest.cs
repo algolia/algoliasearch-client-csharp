@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// MultipleBatchRequest
@@ -34,28 +34,18 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="MultipleBatchRequest" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected MultipleBatchRequest() { }
+    public MultipleBatchRequest() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="MultipleBatchRequest" /> class.
     /// </summary>
     /// <param name="action">action (required).</param>
     /// <param name="body">Operation arguments (varies with specified &#x60;action&#x60;). (required).</param>
     /// <param name="indexName">Index to target for this operation. (required).</param>
-    public MultipleBatchRequest(Action action = default(Action), Object body = default(Object), string indexName = default(string))
+    public MultipleBatchRequest(Action action, Object body, string indexName)
     {
       this.Action = action;
-      // to ensure "body" is required (not null)
-      if (body == null)
-      {
-        throw new ArgumentNullException("body is a required property for MultipleBatchRequest and cannot be null");
-      }
-      this.Body = body;
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for MultipleBatchRequest and cannot be null");
-      }
-      this.IndexName = indexName;
+      this.Body = body ?? throw new ArgumentNullException("body is a required property for MultipleBatchRequest and cannot be null");
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for MultipleBatchRequest and cannot be null");
     }
 
     /// <summary>

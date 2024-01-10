@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Personalization.Models
+namespace Algolia.Search.Models.Personalization
 {
   /// <summary>
   /// SetPersonalizationStrategyResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Personalization.Models
     /// Initializes a new instance of the <see cref="SetPersonalizationStrategyResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SetPersonalizationStrategyResponse() { }
+    public SetPersonalizationStrategyResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SetPersonalizationStrategyResponse" /> class.
     /// </summary>
     /// <param name="message">A message confirming the strategy update. (required).</param>
-    public SetPersonalizationStrategyResponse(string message = default(string))
+    public SetPersonalizationStrategyResponse(string message)
     {
-      // to ensure "message" is required (not null)
-      if (message == null)
-      {
-        throw new ArgumentNullException("message is a required property for SetPersonalizationStrategyResponse and cannot be null");
-      }
-      this.Message = message;
+      this.Message = message ?? throw new ArgumentNullException("message is a required property for SetPersonalizationStrategyResponse and cannot be null");
     }
 
     /// <summary>

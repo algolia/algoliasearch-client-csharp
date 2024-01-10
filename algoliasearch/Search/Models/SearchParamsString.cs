@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchParamsString
@@ -27,11 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchParamsString" /> class.
     /// </summary>
-    /// <param name="varParams">Search parameters as a URL-encoded query string. (default to &quot;&quot;).</param>
-    public SearchParamsString(string varParams = @"")
+    public SearchParamsString()
     {
-      // use default value if no "varParams" provided
-      this.VarParams = varParams ?? @"";
     }
 
     /// <summary>

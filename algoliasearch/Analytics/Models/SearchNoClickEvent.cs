@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// SearchNoClickEvent
@@ -28,21 +28,16 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="SearchNoClickEvent" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchNoClickEvent() { }
+    public SearchNoClickEvent() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchNoClickEvent" /> class.
     /// </summary>
     /// <param name="search">User query. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
     /// <param name="withFilterCount">Number of occurrences. (required).</param>
-    public SearchNoClickEvent(string search = default(string), int count = default(int), int withFilterCount = default(int))
+    public SearchNoClickEvent(string search, int count, int withFilterCount)
     {
-      // to ensure "search" is required (not null)
-      if (search == null)
-      {
-        throw new ArgumentNullException("search is a required property for SearchNoClickEvent and cannot be null");
-      }
-      this.Search = search;
+      this.Search = search ?? throw new ArgumentNullException("search is a required property for SearchNoClickEvent and cannot be null");
       this.Count = count;
       this.WithFilterCount = withFilterCount;
     }

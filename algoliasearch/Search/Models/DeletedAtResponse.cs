@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Response, taskID, and deletion timestamp.
@@ -28,21 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="DeletedAtResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DeletedAtResponse() { }
+    public DeletedAtResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DeletedAtResponse" /> class.
     /// </summary>
     /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
     /// <param name="deletedAt">Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public DeletedAtResponse(long taskID = default(long), string deletedAt = default(string))
+    public DeletedAtResponse(long taskID, string deletedAt)
     {
       this.TaskID = taskID;
-      // to ensure "deletedAt" is required (not null)
-      if (deletedAt == null)
-      {
-        throw new ArgumentNullException("deletedAt is a required property for DeletedAtResponse and cannot be null");
-      }
-      this.DeletedAt = deletedAt;
+      this.DeletedAt = deletedAt ?? throw new ArgumentNullException("deletedAt is a required property for DeletedAtResponse and cannot be null");
     }
 
     /// <summary>

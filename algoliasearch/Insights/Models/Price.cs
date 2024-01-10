@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Insights.Models
+namespace Algolia.Search.Models.Insights
 {
   /// <summary>
   /// The price of the item. This should be the final price, inclusive of any discounts in effect.
@@ -33,9 +33,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of double.</param>
     public Price(double actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Insights.Models
     /// <param name="actualInstance">An instance of string.</param>
     public Price(string actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Insights.Models
       }
       set
       {
-        if (value.GetType() == typeof(double))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(string))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: double, string");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of double</returns>
-    public double GetterDouble()
+    public double AsDouble()
     {
-      return (double)this.ActualInstance;
+      return (double)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Insights.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of string</returns>
-    public string GetterString()
+    public string AsString()
     {
-      return (string)this.ActualInstance;
+      return (string)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `double` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsDouble()
+    {
+      return ActualInstance.GetType() == typeof(double);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `string` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsString()
+    {
+      return ActualInstance.GetType() == typeof(string);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Insights.Models
     {
       var sb = new StringBuilder();
       sb.Append("class Price {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Insights.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, Price.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Insights.Models
       {
         return newPrice;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(double).GetProperty("AdditionalProperties") == null)
-        {
-          newPrice = new Price(JsonConvert.DeserializeObject<double>(jsonString, Price.SerializerSettings));
-        }
-        else
-        {
-          newPrice = new Price(JsonConvert.DeserializeObject<double>(jsonString, Price.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("double");
-        match++;
+        return new Price(JsonConvert.DeserializeObject<double>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into double: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(string).GetProperty("AdditionalProperties") == null)
-        {
-          newPrice = new Price(JsonConvert.DeserializeObject<string>(jsonString, Price.SerializerSettings));
-        }
-        else
-        {
-          newPrice = new Price(JsonConvert.DeserializeObject<string>(jsonString, Price.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("string");
-        match++;
+        return new Price(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Insights.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into string: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newPrice;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Insights.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return Price.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

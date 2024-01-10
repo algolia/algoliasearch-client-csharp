@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Recommend parameters.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="GetRecommendationsParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetRecommendationsParams() { }
+    public GetRecommendationsParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetRecommendationsParams" /> class.
     /// </summary>
     /// <param name="requests">Request parameters depend on the model (recommendations or trending). (required).</param>
-    public GetRecommendationsParams(List<RecommendationsRequest> requests = default(List<RecommendationsRequest>))
+    public GetRecommendationsParams(List<RecommendationsRequest> requests)
     {
-      // to ensure "requests" is required (not null)
-      if (requests == null)
-      {
-        throw new ArgumentNullException("requests is a required property for GetRecommendationsParams and cannot be null");
-      }
-      this.Requests = requests;
+      this.Requests = requests ?? throw new ArgumentNullException("requests is a required property for GetRecommendationsParams and cannot be null");
     }
 
     /// <summary>

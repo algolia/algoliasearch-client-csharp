@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// TopHitWithAnalytics
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="TopHitWithAnalytics" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TopHitWithAnalytics() { }
+    public TopHitWithAnalytics() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TopHitWithAnalytics" /> class.
     /// </summary>
@@ -39,14 +39,9 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="conversionCount">Number of converted clicks. (required).</param>
-    public TopHitWithAnalytics(string hit = default(string), int count = default(int), double clickThroughRate = default(double), double conversionRate = default(double), int trackedSearchCount = default(int), int clickCount = default(int), int conversionCount = default(int))
+    public TopHitWithAnalytics(string hit, int count, double clickThroughRate, double conversionRate, int trackedSearchCount, int clickCount, int conversionCount)
     {
-      // to ensure "hit" is required (not null)
-      if (hit == null)
-      {
-        throw new ArgumentNullException("hit is a required property for TopHitWithAnalytics and cannot be null");
-      }
-      this.Hit = hit;
+      this.Hit = hit ?? throw new ArgumentNullException("hit is a required property for TopHitWithAnalytics and cannot be null");
       this.Count = count;
       this.ClickThroughRate = clickThroughRate;
       this.ConversionRate = conversionRate;

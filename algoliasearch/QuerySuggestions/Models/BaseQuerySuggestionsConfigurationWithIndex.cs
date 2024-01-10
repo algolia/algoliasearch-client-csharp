@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// BaseQuerySuggestionsConfigurationWithIndex
@@ -28,19 +28,14 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// Initializes a new instance of the <see cref="BaseQuerySuggestionsConfigurationWithIndex" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BaseQuerySuggestionsConfigurationWithIndex() { }
+    public BaseQuerySuggestionsConfigurationWithIndex() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseQuerySuggestionsConfigurationWithIndex" /> class.
     /// </summary>
     /// <param name="indexName">Query Suggestions index name. (required).</param>
-    public BaseQuerySuggestionsConfigurationWithIndex(string indexName = default(string))
+    public BaseQuerySuggestionsConfigurationWithIndex(string indexName)
     {
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for BaseQuerySuggestionsConfigurationWithIndex and cannot be null");
-      }
-      this.IndexName = indexName;
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for BaseQuerySuggestionsConfigurationWithIndex and cannot be null");
     }
 
     /// <summary>

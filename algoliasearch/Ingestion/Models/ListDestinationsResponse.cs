@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// ListDestinationsResponse
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="ListDestinationsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListDestinationsResponse() { }
+    public ListDestinationsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListDestinationsResponse" /> class.
     /// </summary>
     /// <param name="destinations">destinations (required).</param>
     /// <param name="pagination">pagination (required).</param>
-    public ListDestinationsResponse(List<Destination> destinations = default(List<Destination>), Pagination pagination = default(Pagination))
+    public ListDestinationsResponse(List<Destination> destinations, Pagination pagination)
     {
-      // to ensure "destinations" is required (not null)
-      if (destinations == null)
-      {
-        throw new ArgumentNullException("destinations is a required property for ListDestinationsResponse and cannot be null");
-      }
-      this.Destinations = destinations;
-      // to ensure "pagination" is required (not null)
-      if (pagination == null)
-      {
-        throw new ArgumentNullException("pagination is a required property for ListDestinationsResponse and cannot be null");
-      }
-      this.Pagination = pagination;
+      this.Destinations = destinations ?? throw new ArgumentNullException("destinations is a required property for ListDestinationsResponse and cannot be null");
+      this.Pagination = pagination ?? throw new ArgumentNullException("pagination is a required property for ListDestinationsResponse and cannot be null");
     }
 
     /// <summary>

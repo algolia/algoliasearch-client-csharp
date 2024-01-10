@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// BaseIndexSettings
@@ -27,41 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseIndexSettings" /> class.
     /// </summary>
-    /// <param name="replicas">Creates [replicas](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/), which are copies of a primary index with the same records but different settings..</param>
-    /// <param name="paginationLimitedTo">Maximum number of hits accessible through pagination. (default to 1000).</param>
-    /// <param name="unretrievableAttributes">Attributes that can&#39;t be retrieved at query time..</param>
-    /// <param name="disableTypoToleranceOnWords">Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/)..</param>
-    /// <param name="attributesToTransliterate">Attributes in your index to which [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead) applies. This will ensure that words indexed in Katakana or Kanji can also be searched in Hiragana..</param>
-    /// <param name="camelCaseAttributes">Attributes on which to split [camel case](https://wikipedia.org/wiki/Camel_case) words..</param>
-    /// <param name="decompoundedAttributes">Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies..</param>
-    /// <param name="indexLanguages">Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/)..</param>
-    /// <param name="disablePrefixOnAttributes">Attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search)..</param>
-    /// <param name="allowCompressionOfIntegerArray">Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered.  (default to false).</param>
-    /// <param name="numericAttributesForFiltering">Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters)..</param>
-    /// <param name="separatorsToIndex">Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥. (default to &quot;&quot;).</param>
-    /// <param name="searchableAttributes">[Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position). .</param>
-    /// <param name="userData">Lets you store custom data in your indices..</param>
-    /// <param name="customNormalization">A list of characters and their normalized replacements to override Algolia&#39;s default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/)..</param>
-    /// <param name="attributeForDistinct">Name of the deduplication attribute to be used with Algolia&#39;s [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature)..</param>
-    public BaseIndexSettings(List<string> replicas = default(List<string>), int paginationLimitedTo = 1000, List<string> unretrievableAttributes = default(List<string>), List<string> disableTypoToleranceOnWords = default(List<string>), List<string> attributesToTransliterate = default(List<string>), List<string> camelCaseAttributes = default(List<string>), Object decompoundedAttributes = default(Object), List<string> indexLanguages = default(List<string>), List<string> disablePrefixOnAttributes = default(List<string>), bool allowCompressionOfIntegerArray = false, List<string> numericAttributesForFiltering = default(List<string>), string separatorsToIndex = @"", List<string> searchableAttributes = default(List<string>), Object userData = default(Object), Dictionary<string, Dictionary<string, string>> customNormalization = default(Dictionary<string, Dictionary<string, string>>), string attributeForDistinct = default(string))
+    public BaseIndexSettings()
     {
-      this.Replicas = replicas;
-      this.PaginationLimitedTo = paginationLimitedTo;
-      this.UnretrievableAttributes = unretrievableAttributes;
-      this.DisableTypoToleranceOnWords = disableTypoToleranceOnWords;
-      this.AttributesToTransliterate = attributesToTransliterate;
-      this.CamelCaseAttributes = camelCaseAttributes;
-      this.DecompoundedAttributes = decompoundedAttributes;
-      this.IndexLanguages = indexLanguages;
-      this.DisablePrefixOnAttributes = disablePrefixOnAttributes;
-      this.AllowCompressionOfIntegerArray = allowCompressionOfIntegerArray;
-      this.NumericAttributesForFiltering = numericAttributesForFiltering;
-      // use default value if no "separatorsToIndex" provided
-      this.SeparatorsToIndex = separatorsToIndex ?? @"";
-      this.SearchableAttributes = searchableAttributes;
-      this.UserData = userData;
-      this.CustomNormalization = customNormalization;
-      this.AttributeForDistinct = attributeForDistinct;
     }
 
     /// <summary>
@@ -76,7 +43,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Maximum number of hits accessible through pagination.</value>
     [DataMember(Name = "paginationLimitedTo", EmitDefaultValue = false)]
-    public int PaginationLimitedTo { get; set; }
+    public int? PaginationLimitedTo { get; set; }
 
     /// <summary>
     /// Attributes that can&#39;t be retrieved at query time.
@@ -132,7 +99,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered. </value>
     [DataMember(Name = "allowCompressionOfIntegerArray", EmitDefaultValue = true)]
-    public bool AllowCompressionOfIntegerArray { get; set; }
+    public bool? AllowCompressionOfIntegerArray { get; set; }
 
     /// <summary>
     /// Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters).

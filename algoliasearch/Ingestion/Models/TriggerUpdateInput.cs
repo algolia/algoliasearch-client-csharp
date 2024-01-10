@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The trigger input for a task update.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="TriggerUpdateInput" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TriggerUpdateInput() { }
+    public TriggerUpdateInput() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TriggerUpdateInput" /> class.
     /// </summary>
     /// <param name="cron">A cron expression that represent at which regularity the task should run. (required).</param>
-    public TriggerUpdateInput(string cron = default(string))
+    public TriggerUpdateInput(string cron)
     {
-      // to ensure "cron" is required (not null)
-      if (cron == null)
-      {
-        throw new ArgumentNullException("cron is a required property for TriggerUpdateInput and cannot be null");
-      }
-      this.Cron = cron;
+      this.Cron = cron ?? throw new ArgumentNullException("cron is a required property for TriggerUpdateInput and cannot be null");
     }
 
     /// <summary>

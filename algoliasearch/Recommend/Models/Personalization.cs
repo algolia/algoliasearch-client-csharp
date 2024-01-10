@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Personalization
@@ -27,14 +27,8 @@ namespace Algolia.Search.Recommend.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="Personalization" /> class.
     /// </summary>
-    /// <param name="filtersScore">The score of the filters..</param>
-    /// <param name="rankingScore">The score of the ranking..</param>
-    /// <param name="score">The score of the event..</param>
-    public Personalization(int filtersScore = default(int), int rankingScore = default(int), int score = default(int))
+    public Personalization()
     {
-      this.FiltersScore = filtersScore;
-      this.RankingScore = rankingScore;
-      this.Score = score;
     }
 
     /// <summary>
@@ -42,21 +36,21 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>The score of the filters.</value>
     [DataMember(Name = "filtersScore", EmitDefaultValue = false)]
-    public int FiltersScore { get; set; }
+    public int? FiltersScore { get; set; }
 
     /// <summary>
     /// The score of the ranking.
     /// </summary>
     /// <value>The score of the ranking.</value>
     [DataMember(Name = "rankingScore", EmitDefaultValue = false)]
-    public int RankingScore { get; set; }
+    public int? RankingScore { get; set; }
 
     /// <summary>
     /// The score of the event.
     /// </summary>
     /// <value>The score of the event.</value>
     [DataMember(Name = "score", EmitDefaultValue = false)]
-    public int Score { get; set; }
+    public int? Score { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

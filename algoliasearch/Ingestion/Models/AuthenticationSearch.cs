@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Payload to search for multiple authentications, based on the given &#x60;authenticationIDs&#x60;.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="AuthenticationSearch" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthenticationSearch() { }
+    public AuthenticationSearch() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationSearch" /> class.
     /// </summary>
     /// <param name="authenticationIDs">authenticationIDs (required).</param>
-    public AuthenticationSearch(List<string> authenticationIDs = default(List<string>))
+    public AuthenticationSearch(List<string> authenticationIDs)
     {
-      // to ensure "authenticationIDs" is required (not null)
-      if (authenticationIDs == null)
-      {
-        throw new ArgumentNullException("authenticationIDs is a required property for AuthenticationSearch and cannot be null");
-      }
-      this.AuthenticationIDs = authenticationIDs;
+      this.AuthenticationIDs = authenticationIDs ?? throw new ArgumentNullException("authenticationIDs is a required property for AuthenticationSearch and cannot be null");
     }
 
     /// <summary>

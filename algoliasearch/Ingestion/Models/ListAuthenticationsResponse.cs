@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// ListAuthenticationsResponse
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="ListAuthenticationsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListAuthenticationsResponse() { }
+    public ListAuthenticationsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListAuthenticationsResponse" /> class.
     /// </summary>
     /// <param name="authentications">authentications (required).</param>
     /// <param name="pagination">pagination (required).</param>
-    public ListAuthenticationsResponse(List<Authentication> authentications = default(List<Authentication>), Pagination pagination = default(Pagination))
+    public ListAuthenticationsResponse(List<Authentication> authentications, Pagination pagination)
     {
-      // to ensure "authentications" is required (not null)
-      if (authentications == null)
-      {
-        throw new ArgumentNullException("authentications is a required property for ListAuthenticationsResponse and cannot be null");
-      }
-      this.Authentications = authentications;
-      // to ensure "pagination" is required (not null)
-      if (pagination == null)
-      {
-        throw new ArgumentNullException("pagination is a required property for ListAuthenticationsResponse and cannot be null");
-      }
-      this.Pagination = pagination;
+      this.Authentications = authentications ?? throw new ArgumentNullException("authentications is a required property for ListAuthenticationsResponse and cannot be null");
+      this.Pagination = pagination ?? throw new ArgumentNullException("pagination is a required property for ListAuthenticationsResponse and cannot be null");
     }
 
     /// <summary>

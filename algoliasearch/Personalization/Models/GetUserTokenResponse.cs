@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Personalization.Models
+namespace Algolia.Search.Models.Personalization
 {
   /// <summary>
   /// GetUserTokenResponse
@@ -28,33 +28,18 @@ namespace Algolia.Search.Personalization.Models
     /// Initializes a new instance of the <see cref="GetUserTokenResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetUserTokenResponse() { }
+    public GetUserTokenResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetUserTokenResponse" /> class.
     /// </summary>
     /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile. (required).</param>
     /// <param name="lastEventAt">Date of last event update. (ISO-8601 format). (required).</param>
     /// <param name="scores">The userToken scores. (required).</param>
-    public GetUserTokenResponse(string userToken = default(string), string lastEventAt = default(string), Object scores = default(Object))
+    public GetUserTokenResponse(string userToken, string lastEventAt, Object scores)
     {
-      // to ensure "userToken" is required (not null)
-      if (userToken == null)
-      {
-        throw new ArgumentNullException("userToken is a required property for GetUserTokenResponse and cannot be null");
-      }
-      this.UserToken = userToken;
-      // to ensure "lastEventAt" is required (not null)
-      if (lastEventAt == null)
-      {
-        throw new ArgumentNullException("lastEventAt is a required property for GetUserTokenResponse and cannot be null");
-      }
-      this.LastEventAt = lastEventAt;
-      // to ensure "scores" is required (not null)
-      if (scores == null)
-      {
-        throw new ArgumentNullException("scores is a required property for GetUserTokenResponse and cannot be null");
-      }
-      this.Scores = scores;
+      this.UserToken = userToken ?? throw new ArgumentNullException("userToken is a required property for GetUserTokenResponse and cannot be null");
+      this.LastEventAt = lastEventAt ?? throw new ArgumentNullException("lastEventAt is a required property for GetUserTokenResponse and cannot be null");
+      this.Scores = scores ?? throw new ArgumentNullException("scores is a required property for GetUserTokenResponse and cannot be null");
     }
 
     /// <summary>

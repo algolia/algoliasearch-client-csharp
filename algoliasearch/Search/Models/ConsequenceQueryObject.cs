@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// ConsequenceQueryObject
@@ -27,12 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsequenceQueryObject" /> class.
     /// </summary>
-    /// <param name="remove">Words to remove..</param>
-    /// <param name="edits">Edits to apply..</param>
-    public ConsequenceQueryObject(List<string> remove = default(List<string>), List<Edit> edits = default(List<Edit>))
+    public ConsequenceQueryObject()
     {
-      this.Remove = remove;
-      this.Edits = edits;
     }
 
     /// <summary>

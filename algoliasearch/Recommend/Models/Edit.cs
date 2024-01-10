@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Edit
@@ -29,18 +29,12 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets Type
     /// </summary>
     [DataMember(Name = "type", EmitDefaultValue = false)]
-    public EditType? Type { get; set; }
+    public EditType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="Edit" /> class.
     /// </summary>
-    /// <param name="type">type.</param>
-    /// <param name="delete">Text or patterns to remove from the query string..</param>
-    /// <param name="insert">Text that should be inserted in place of the removed text inside the query string..</param>
-    public Edit(EditType? type = default(EditType?), string delete = default(string), string insert = default(string))
+    public Edit()
     {
-      this.Type = type;
-      this.Delete = delete;
-      this.Insert = insert;
     }
 
     /// <summary>

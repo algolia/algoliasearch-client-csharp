@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceBigQuery
@@ -29,41 +29,21 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets DataType
     /// </summary>
     [DataMember(Name = "dataType", EmitDefaultValue = false)]
-    public BigQueryDataType? DataType { get; set; }
+    public BigQueryDataType DataType { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceBigQuery" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceBigQuery() { }
+    public SourceBigQuery() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceBigQuery" /> class.
     /// </summary>
     /// <param name="projectID">Project ID of the BigQuery Source. (required).</param>
     /// <param name="datasetID">Dataset ID of the BigQuery Source. (required).</param>
-    /// <param name="dataType">dataType.</param>
-    /// <param name="table">Table name (for default BQ)..</param>
-    /// <param name="tablePrefix">Table prefix (for Google Analytics)..</param>
-    /// <param name="customSQLRequest">Custom SQL request to extract data from the BigQuery table..</param>
-    /// <param name="uniqueIDColumn">The name of the column that contains the unique ID, used as &#x60;objectID&#x60; in Algolia..</param>
-    public SourceBigQuery(string projectID = default(string), string datasetID = default(string), BigQueryDataType? dataType = default(BigQueryDataType?), string table = default(string), string tablePrefix = default(string), string customSQLRequest = default(string), string uniqueIDColumn = default(string))
+    public SourceBigQuery(string projectID, string datasetID)
     {
-      // to ensure "projectID" is required (not null)
-      if (projectID == null)
-      {
-        throw new ArgumentNullException("projectID is a required property for SourceBigQuery and cannot be null");
-      }
-      this.ProjectID = projectID;
-      // to ensure "datasetID" is required (not null)
-      if (datasetID == null)
-      {
-        throw new ArgumentNullException("datasetID is a required property for SourceBigQuery and cannot be null");
-      }
-      this.DatasetID = datasetID;
-      this.DataType = dataType;
-      this.Table = table;
-      this.TablePrefix = tablePrefix;
-      this.CustomSQLRequest = customSQLRequest;
-      this.UniqueIDColumn = uniqueIDColumn;
+      this.ProjectID = projectID ?? throw new ArgumentNullException("projectID is a required property for SourceBigQuery and cannot be null");
+      this.DatasetID = datasetID ?? throw new ArgumentNullException("datasetID is a required property for SourceBigQuery and cannot be null");
     }
 
     /// <summary>

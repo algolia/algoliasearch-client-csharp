@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Whether the pattern parameter matches the beginning (&#x60;startsWith&#x60;) or end (&#x60;endsWith&#x60;) of the query string, is an exact match (&#x60;is&#x60;), or a partial match (&#x60;contains&#x60;).

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetUsersCountResponse
@@ -28,21 +28,16 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetUsersCountResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetUsersCountResponse() { }
+    public GetUsersCountResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetUsersCountResponse" /> class.
     /// </summary>
     /// <param name="count">Number of occurrences. (required).</param>
     /// <param name="dates">User count. (required).</param>
-    public GetUsersCountResponse(int count = default(int), List<UserWithDate> dates = default(List<UserWithDate>))
+    public GetUsersCountResponse(int count, List<UserWithDate> dates)
     {
       this.Count = count;
-      // to ensure "dates" is required (not null)
-      if (dates == null)
-      {
-        throw new ArgumentNullException("dates is a required property for GetUsersCountResponse and cannot be null");
-      }
-      this.Dates = dates;
+      this.Dates = dates ?? throw new ArgumentNullException("dates is a required property for GetUsersCountResponse and cannot be null");
     }
 
     /// <summary>

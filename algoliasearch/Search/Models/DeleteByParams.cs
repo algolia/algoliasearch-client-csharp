@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// DeleteByParams
@@ -27,26 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="DeleteByParams" /> class.
     /// </summary>
-    /// <param name="facetFilters">facetFilters.</param>
-    /// <param name="filters">[Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters.  (default to &quot;&quot;).</param>
-    /// <param name="numericFilters">numericFilters.</param>
-    /// <param name="tagFilters">tagFilters.</param>
-    /// <param name="aroundLatLng">Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area. (default to &quot;&quot;).</param>
-    /// <param name="aroundRadius">aroundRadius.</param>
-    /// <param name="insideBoundingBox">Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates)..</param>
-    /// <param name="insidePolygon">Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates)..</param>
-    public DeleteByParams(FacetFilters facetFilters = default(FacetFilters), string filters = @"", NumericFilters numericFilters = default(NumericFilters), TagFilters tagFilters = default(TagFilters), string aroundLatLng = @"", AroundRadius aroundRadius = default(AroundRadius), List<List<double>> insideBoundingBox = default(List<List<double>>), List<List<double>> insidePolygon = default(List<List<double>>))
+    public DeleteByParams()
     {
-      this.FacetFilters = facetFilters;
-      // use default value if no "filters" provided
-      this.Filters = filters ?? @"";
-      this.NumericFilters = numericFilters;
-      this.TagFilters = tagFilters;
-      // use default value if no "aroundLatLng" provided
-      this.AroundLatLng = aroundLatLng ?? @"";
-      this.AroundRadius = aroundRadius;
-      this.InsideBoundingBox = insideBoundingBox;
-      this.InsidePolygon = insidePolygon;
     }
 
     /// <summary>

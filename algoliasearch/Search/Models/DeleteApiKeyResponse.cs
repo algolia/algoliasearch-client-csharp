@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// DeleteApiKeyResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="DeleteApiKeyResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DeleteApiKeyResponse() { }
+    public DeleteApiKeyResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DeleteApiKeyResponse" /> class.
     /// </summary>
     /// <param name="deletedAt">Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public DeleteApiKeyResponse(string deletedAt = default(string))
+    public DeleteApiKeyResponse(string deletedAt)
     {
-      // to ensure "deletedAt" is required (not null)
-      if (deletedAt == null)
-      {
-        throw new ArgumentNullException("deletedAt is a required property for DeleteApiKeyResponse and cannot be null");
-      }
-      this.DeletedAt = deletedAt;
+      this.DeletedAt = deletedAt ?? throw new ArgumentNullException("deletedAt is a required property for DeleteApiKeyResponse and cannot be null");
     }
 
     /// <summary>

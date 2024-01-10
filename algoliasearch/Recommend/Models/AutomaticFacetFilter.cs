@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Automatic facet Filter.
@@ -28,23 +28,14 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="AutomaticFacetFilter" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AutomaticFacetFilter() { }
+    public AutomaticFacetFilter() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AutomaticFacetFilter" /> class.
     /// </summary>
     /// <param name="facet">Attribute to filter on. This must match a facet placeholder in the Rule&#39;s pattern. (required).</param>
-    /// <param name="score">Score for the filter. Typically used for optional or disjunctive filters. (default to 1).</param>
-    /// <param name="disjunctive">Whether the filter is disjunctive (true) or conjunctive (false). (default to false).</param>
-    public AutomaticFacetFilter(string facet = default(string), int score = 1, bool disjunctive = false)
+    public AutomaticFacetFilter(string facet)
     {
-      // to ensure "facet" is required (not null)
-      if (facet == null)
-      {
-        throw new ArgumentNullException("facet is a required property for AutomaticFacetFilter and cannot be null");
-      }
-      this.Facet = facet;
-      this.Score = score;
-      this.Disjunctive = disjunctive;
+      this.Facet = facet ?? throw new ArgumentNullException("facet is a required property for AutomaticFacetFilter and cannot be null");
     }
 
     /// <summary>
@@ -59,14 +50,14 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>Score for the filter. Typically used for optional or disjunctive filters.</value>
     [DataMember(Name = "score", EmitDefaultValue = false)]
-    public int Score { get; set; }
+    public int? Score { get; set; }
 
     /// <summary>
     /// Whether the filter is disjunctive (true) or conjunctive (false).
     /// </summary>
     /// <value>Whether the filter is disjunctive (true) or conjunctive (false).</value>
     [DataMember(Name = "disjunctive", EmitDefaultValue = true)]
-    public bool Disjunctive { get; set; }
+    public bool? Disjunctive { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

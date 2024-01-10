@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// MatchedGeoLocation
@@ -27,14 +27,8 @@ namespace Algolia.Search.Recommend.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="MatchedGeoLocation" /> class.
     /// </summary>
-    /// <param name="lat">Latitude of the matched location..</param>
-    /// <param name="lng">Longitude of the matched location..</param>
-    /// <param name="distance">Distance between the matched location and the search location (in meters)..</param>
-    public MatchedGeoLocation(double lat = default(double), double lng = default(double), int distance = default(int))
+    public MatchedGeoLocation()
     {
-      this.Lat = lat;
-      this.Lng = lng;
-      this.Distance = distance;
     }
 
     /// <summary>
@@ -56,7 +50,7 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>Distance between the matched location and the search location (in meters).</value>
     [DataMember(Name = "distance", EmitDefaultValue = false)]
-    public int Distance { get; set; }
+    public int? Distance { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetTopHitsResponse
@@ -33,9 +33,9 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="actualInstance">An instance of TopHitsResponse.</param>
     public GetTopHitsResponse(TopHitsResponse actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="actualInstance">An instance of TopHitsResponseWithAnalytics.</param>
     public GetTopHitsResponse(TopHitsResponseWithAnalytics actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Analytics.Models
       }
       set
       {
-        if (value.GetType() == typeof(TopHitsResponse))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(TopHitsResponseWithAnalytics))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: TopHitsResponse, TopHitsResponseWithAnalytics");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Analytics.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of TopHitsResponse</returns>
-    public TopHitsResponse GetterTopHitsResponse()
+    public TopHitsResponse AsTopHitsResponse()
     {
-      return (TopHitsResponse)this.ActualInstance;
+      return (TopHitsResponse)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Analytics.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of TopHitsResponseWithAnalytics</returns>
-    public TopHitsResponseWithAnalytics GetterTopHitsResponseWithAnalytics()
+    public TopHitsResponseWithAnalytics AsTopHitsResponseWithAnalytics()
     {
-      return (TopHitsResponseWithAnalytics)this.ActualInstance;
+      return (TopHitsResponseWithAnalytics)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `TopHitsResponse` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsTopHitsResponse()
+    {
+      return ActualInstance.GetType() == typeof(TopHitsResponse);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `TopHitsResponseWithAnalytics` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsTopHitsResponseWithAnalytics()
+    {
+      return ActualInstance.GetType() == typeof(TopHitsResponseWithAnalytics);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Analytics.Models
     {
       var sb = new StringBuilder();
       sb.Append("class GetTopHitsResponse {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Analytics.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, GetTopHitsResponse.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Analytics.Models
       {
         return newGetTopHitsResponse;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(TopHitsResponse).GetProperty("AdditionalProperties") == null)
-        {
-          newGetTopHitsResponse = new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponse>(jsonString, GetTopHitsResponse.SerializerSettings));
-        }
-        else
-        {
-          newGetTopHitsResponse = new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponse>(jsonString, GetTopHitsResponse.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("TopHitsResponse");
-        match++;
+        return new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponse>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into TopHitsResponse: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(TopHitsResponseWithAnalytics).GetProperty("AdditionalProperties") == null)
-        {
-          newGetTopHitsResponse = new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponseWithAnalytics>(jsonString, GetTopHitsResponse.SerializerSettings));
-        }
-        else
-        {
-          newGetTopHitsResponse = new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponseWithAnalytics>(jsonString, GetTopHitsResponse.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("TopHitsResponseWithAnalytics");
-        match++;
+        return new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponseWithAnalytics>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Analytics.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into TopHitsResponseWithAnalytics: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newGetTopHitsResponse;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Analytics.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return GetTopHitsResponse.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

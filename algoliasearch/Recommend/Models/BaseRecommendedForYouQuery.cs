@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// BaseRecommendedForYouQuery
@@ -34,18 +34,14 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="BaseRecommendedForYouQuery" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BaseRecommendedForYouQuery() { }
+    public BaseRecommendedForYouQuery() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseRecommendedForYouQuery" /> class.
     /// </summary>
     /// <param name="model">model (required).</param>
-    /// <param name="queryParameters">queryParameters.</param>
-    /// <param name="fallbackParameters">fallbackParameters.</param>
-    public BaseRecommendedForYouQuery(RecommendedForYouModel model = default(RecommendedForYouModel), RecommendedForYouQueryParameters queryParameters = default(RecommendedForYouQueryParameters), RecommendedForYouQueryParameters fallbackParameters = default(RecommendedForYouQueryParameters))
+    public BaseRecommendedForYouQuery(RecommendedForYouModel model)
     {
       this.Model = model;
-      this.QueryParameters = queryParameters;
-      this.FallbackParameters = fallbackParameters;
     }
 
     /// <summary>

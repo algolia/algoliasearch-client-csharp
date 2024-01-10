@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceUpdateCommercetools
@@ -27,12 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceUpdateCommercetools" /> class.
     /// </summary>
-    /// <param name="storeKeys">Unique and immutable key of the referenced Store..</param>
-    /// <param name="locales">Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\&quot;fr-FR\&quot;, \&quot;en\&quot;]. .</param>
-    public SourceUpdateCommercetools(List<string> storeKeys = default(List<string>), List<string> locales = default(List<string>))
+    public SourceUpdateCommercetools()
     {
-      this.StoreKeys = storeKeys;
-      this.Locales = locales;
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// AbTestsVariantSearchParams
@@ -28,30 +28,18 @@ namespace Algolia.Search.Abtesting.Models
     /// Initializes a new instance of the <see cref="AbTestsVariantSearchParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AbTestsVariantSearchParams() { }
+    public AbTestsVariantSearchParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AbTestsVariantSearchParams" /> class.
     /// </summary>
     /// <param name="index">A/B test index. (required).</param>
     /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
-    /// <param name="description">A/B test description..</param>
     /// <param name="customSearchParameters">customSearchParameters (required).</param>
-    public AbTestsVariantSearchParams(string index = default(string), int trafficPercentage = default(int), string description = default(string), Object customSearchParameters = default(Object))
+    public AbTestsVariantSearchParams(string index, int trafficPercentage, Object customSearchParameters)
     {
-      // to ensure "index" is required (not null)
-      if (index == null)
-      {
-        throw new ArgumentNullException("index is a required property for AbTestsVariantSearchParams and cannot be null");
-      }
-      this.Index = index;
+      this.Index = index ?? throw new ArgumentNullException("index is a required property for AbTestsVariantSearchParams and cannot be null");
       this.TrafficPercentage = trafficPercentage;
-      // to ensure "customSearchParameters" is required (not null)
-      if (customSearchParameters == null)
-      {
-        throw new ArgumentNullException("customSearchParameters is a required property for AbTestsVariantSearchParams and cannot be null");
-      }
-      this.CustomSearchParameters = customSearchParameters;
-      this.Description = description;
+      this.CustomSearchParameters = customSearchParameters ?? throw new ArgumentNullException("customSearchParameters is a required property for AbTestsVariantSearchParams and cannot be null");
     }
 
     /// <summary>

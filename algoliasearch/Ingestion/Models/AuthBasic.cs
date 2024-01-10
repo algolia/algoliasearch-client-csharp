@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Authentication input for Basic login with username and password.
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="AuthBasic" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthBasic() { }
+    public AuthBasic() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthBasic" /> class.
     /// </summary>
     /// <param name="username">username (required).</param>
     /// <param name="password">password (required).</param>
-    public AuthBasic(string username = default(string), string password = default(string))
+    public AuthBasic(string username, string password)
     {
-      // to ensure "username" is required (not null)
-      if (username == null)
-      {
-        throw new ArgumentNullException("username is a required property for AuthBasic and cannot be null");
-      }
-      this.Username = username;
-      // to ensure "password" is required (not null)
-      if (password == null)
-      {
-        throw new ArgumentNullException("password is a required property for AuthBasic and cannot be null");
-      }
-      this.Password = password;
+      this.Username = username ?? throw new ArgumentNullException("username is a required property for AuthBasic and cannot be null");
+      this.Password = password ?? throw new ArgumentNullException("password is a required property for AuthBasic and cannot be null");
     }
 
     /// <summary>

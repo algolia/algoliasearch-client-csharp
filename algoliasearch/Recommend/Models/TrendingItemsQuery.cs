@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// TrendingItemsQuery
@@ -29,38 +29,19 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets Model
     /// </summary>
     [DataMember(Name = "model", EmitDefaultValue = false)]
-    public TrendingItemsModel? Model { get; set; }
+    public TrendingItemsModel Model { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="TrendingItemsQuery" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TrendingItemsQuery() { }
+    public TrendingItemsQuery() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TrendingItemsQuery" /> class.
     /// </summary>
     /// <param name="indexName">Algolia index name. (required).</param>
-    /// <param name="threshold">Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. .</param>
-    /// <param name="maxRecommendations">Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. (default to 0).</param>
-    /// <param name="facetName">Facet name for trending models..</param>
-    /// <param name="facetValue">Facet value for trending models..</param>
-    /// <param name="model">model.</param>
-    /// <param name="queryParameters">queryParameters.</param>
-    /// <param name="fallbackParameters">fallbackParameters.</param>
-    public TrendingItemsQuery(string indexName = default(string), int threshold = default(int), int maxRecommendations = 0, string facetName = default(string), string facetValue = default(string), TrendingItemsModel? model = default(TrendingItemsModel?), SearchParamsObject queryParameters = default(SearchParamsObject), SearchParamsObject fallbackParameters = default(SearchParamsObject))
+    public TrendingItemsQuery(string indexName)
     {
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for TrendingItemsQuery and cannot be null");
-      }
-      this.IndexName = indexName;
-      this.Threshold = threshold;
-      this.MaxRecommendations = maxRecommendations;
-      this.FacetName = facetName;
-      this.FacetValue = facetValue;
-      this.Model = model;
-      this.QueryParameters = queryParameters;
-      this.FallbackParameters = fallbackParameters;
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for TrendingItemsQuery and cannot be null");
     }
 
     /// <summary>
@@ -75,14 +56,14 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. </value>
     [DataMember(Name = "threshold", EmitDefaultValue = false)]
-    public int Threshold { get; set; }
+    public int? Threshold { get; set; }
 
     /// <summary>
     /// Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
     /// </summary>
     /// <value>Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.</value>
     [DataMember(Name = "maxRecommendations", EmitDefaultValue = false)]
-    public int MaxRecommendations { get; set; }
+    public int? MaxRecommendations { get; set; }
 
     /// <summary>
     /// Facet name for trending models.

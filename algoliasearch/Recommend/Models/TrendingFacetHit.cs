@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Trending facet hit.
@@ -28,28 +28,18 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="TrendingFacetHit" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TrendingFacetHit() { }
+    public TrendingFacetHit() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TrendingFacetHit" /> class.
     /// </summary>
     /// <param name="score">Recommendation score. (required).</param>
     /// <param name="facetName">Facet name for trending models. (required).</param>
     /// <param name="facetValue">Facet value for trending models. (required).</param>
-    public TrendingFacetHit(double score = default(double), string facetName = default(string), string facetValue = default(string))
+    public TrendingFacetHit(double score, string facetName, string facetValue)
     {
       this.Score = score;
-      // to ensure "facetName" is required (not null)
-      if (facetName == null)
-      {
-        throw new ArgumentNullException("facetName is a required property for TrendingFacetHit and cannot be null");
-      }
-      this.FacetName = facetName;
-      // to ensure "facetValue" is required (not null)
-      if (facetValue == null)
-      {
-        throw new ArgumentNullException("facetValue is a required property for TrendingFacetHit and cannot be null");
-      }
-      this.FacetValue = facetValue;
+      this.FacetName = facetName ?? throw new ArgumentNullException("facetName is a required property for TrendingFacetHit and cannot be null");
+      this.FacetValue = facetValue ?? throw new ArgumentNullException("facetValue is a required property for TrendingFacetHit and cannot be null");
     }
 
     /// <summary>

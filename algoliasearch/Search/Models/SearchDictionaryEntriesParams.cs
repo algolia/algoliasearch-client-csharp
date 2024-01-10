@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// &#x60;searchDictionaryEntries&#x60; parameters. 
@@ -28,25 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SearchDictionaryEntriesParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchDictionaryEntriesParams() { }
+    public SearchDictionaryEntriesParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchDictionaryEntriesParams" /> class.
     /// </summary>
     /// <param name="query">Text to search for in an index. (required) (default to &quot;&quot;).</param>
-    /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (default to 0).</param>
-    /// <param name="hitsPerPage">Number of hits per page. (default to 20).</param>
-    /// <param name="language">[Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). .</param>
-    public SearchDictionaryEntriesParams(string query = @"", int page = 0, int hitsPerPage = 20, string language = default(string))
+    public SearchDictionaryEntriesParams(string query)
     {
-      // to ensure "query" is required (not null)
-      if (query == null)
-      {
-        throw new ArgumentNullException("query is a required property for SearchDictionaryEntriesParams and cannot be null");
-      }
-      this.Query = query;
-      this.Page = page;
-      this.HitsPerPage = hitsPerPage;
-      this.Language = language;
+      this.Query = query ?? throw new ArgumentNullException("query is a required property for SearchDictionaryEntriesParams and cannot be null");
     }
 
     /// <summary>
@@ -61,14 +50,14 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).</value>
     [DataMember(Name = "page", EmitDefaultValue = false)]
-    public int Page { get; set; }
+    public int? Page { get; set; }
 
     /// <summary>
     /// Number of hits per page.
     /// </summary>
     /// <value>Number of hits per page.</value>
     [DataMember(Name = "hitsPerPage", EmitDefaultValue = false)]
-    public int HitsPerPage { get; set; }
+    public int? HitsPerPage { get; set; }
 
     /// <summary>
     /// [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). 

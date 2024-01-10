@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Authentication input for Basic login with username and password.
@@ -27,12 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthBasicPartial" /> class.
     /// </summary>
-    /// <param name="username">username.</param>
-    /// <param name="password">password.</param>
-    public AuthBasicPartial(string username = default(string), string password = default(string))
+    public AuthBasicPartial()
     {
-      this.Username = username;
-      this.Password = password;
     }
 
     /// <summary>

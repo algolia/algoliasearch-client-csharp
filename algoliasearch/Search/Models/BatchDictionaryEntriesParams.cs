@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// &#x60;batchDictionaryEntries&#x60; parameters. 
@@ -28,21 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="BatchDictionaryEntriesParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BatchDictionaryEntriesParams() { }
+    public BatchDictionaryEntriesParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchDictionaryEntriesParams" /> class.
     /// </summary>
-    /// <param name="clearExistingDictionaryEntries">Incidates whether to replace all custom entries in the dictionary with the ones sent with this request. (default to false).</param>
     /// <param name="requests">Operations to batch. (required).</param>
-    public BatchDictionaryEntriesParams(bool clearExistingDictionaryEntries = false, List<BatchDictionaryEntriesRequest> requests = default(List<BatchDictionaryEntriesRequest>))
+    public BatchDictionaryEntriesParams(List<BatchDictionaryEntriesRequest> requests)
     {
-      // to ensure "requests" is required (not null)
-      if (requests == null)
-      {
-        throw new ArgumentNullException("requests is a required property for BatchDictionaryEntriesParams and cannot be null");
-      }
-      this.Requests = requests;
-      this.ClearExistingDictionaryEntries = clearExistingDictionaryEntries;
+      this.Requests = requests ?? throw new ArgumentNullException("requests is a required property for BatchDictionaryEntriesParams and cannot be null");
     }
 
     /// <summary>
@@ -50,7 +43,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Incidates whether to replace all custom entries in the dictionary with the ones sent with this request.</value>
     [DataMember(Name = "clearExistingDictionaryEntries", EmitDefaultValue = true)]
-    public bool ClearExistingDictionaryEntries { get; set; }
+    public bool? ClearExistingDictionaryEntries { get; set; }
 
     /// <summary>
     /// Operations to batch.

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// Outliers removed from the A/B test as a result of configuration settings.
@@ -27,12 +27,8 @@ namespace Algolia.Search.Abtesting.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="FilterEffectsOutliers" /> class.
     /// </summary>
-    /// <param name="usersCount">Number of users removed from the A/B test..</param>
-    /// <param name="trackedSearchesCount">Number of tracked searches removed from the A/B test..</param>
-    public FilterEffectsOutliers(int usersCount = default(int), int trackedSearchesCount = default(int))
+    public FilterEffectsOutliers()
     {
-      this.UsersCount = usersCount;
-      this.TrackedSearchesCount = trackedSearchesCount;
     }
 
     /// <summary>
@@ -40,14 +36,14 @@ namespace Algolia.Search.Abtesting.Models
     /// </summary>
     /// <value>Number of users removed from the A/B test.</value>
     [DataMember(Name = "usersCount", EmitDefaultValue = false)]
-    public int UsersCount { get; set; }
+    public int? UsersCount { get; set; }
 
     /// <summary>
     /// Number of tracked searches removed from the A/B test.
     /// </summary>
     /// <value>Number of tracked searches removed from the A/B test.</value>
     [DataMember(Name = "trackedSearchesCount", EmitDefaultValue = false)]
-    public int TrackedSearchesCount { get; set; }
+    public int? TrackedSearchesCount { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

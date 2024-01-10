@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// RecommendationsHits
@@ -28,24 +28,14 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="RecommendationsHits" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RecommendationsHits() { }
+    public RecommendationsHits() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="RecommendationsHits" /> class.
     /// </summary>
     /// <param name="hits">hits (required).</param>
-    /// <param name="query">Text to search for in an index. (default to &quot;&quot;).</param>
-    /// <param name="varParams">URL-encoded string of all search parameters..</param>
-    public RecommendationsHits(List<RecommendationsHit> hits = default(List<RecommendationsHit>), string query = @"", string varParams = default(string))
+    public RecommendationsHits(List<RecommendationsHit> hits)
     {
-      // to ensure "hits" is required (not null)
-      if (hits == null)
-      {
-        throw new ArgumentNullException("hits is a required property for RecommendationsHits and cannot be null");
-      }
-      this.Hits = hits;
-      // use default value if no "query" provided
-      this.Query = query ?? @"";
-      this.VarParams = varParams;
+      this.Hits = hits ?? throw new ArgumentNullException("hits is a required property for RecommendationsHits and cannot be null");
     }
 
     /// <summary>

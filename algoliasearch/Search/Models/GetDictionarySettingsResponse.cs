@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// GetDictionarySettingsResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="GetDictionarySettingsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetDictionarySettingsResponse() { }
+    public GetDictionarySettingsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetDictionarySettingsResponse" /> class.
     /// </summary>
     /// <param name="disableStandardEntries">disableStandardEntries (required).</param>
-    public GetDictionarySettingsResponse(StandardEntries disableStandardEntries = default(StandardEntries))
+    public GetDictionarySettingsResponse(StandardEntries disableStandardEntries)
     {
-      // to ensure "disableStandardEntries" is required (not null)
-      if (disableStandardEntries == null)
-      {
-        throw new ArgumentNullException("disableStandardEntries is a required property for GetDictionarySettingsResponse and cannot be null");
-      }
-      this.DisableStandardEntries = disableStandardEntries;
+      this.DisableStandardEntries = disableStandardEntries ?? throw new ArgumentNullException("disableStandardEntries is a required property for GetDictionarySettingsResponse and cannot be null");
     }
 
     /// <summary>

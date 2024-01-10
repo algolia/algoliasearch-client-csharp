@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceUpdateDocker
@@ -29,30 +29,19 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets Registry
     /// </summary>
     [DataMember(Name = "registry", EmitDefaultValue = false)]
-    public DockerRegistry? Registry { get; set; }
+    public DockerRegistry Registry { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceUpdateDocker" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceUpdateDocker() { }
+    public SourceUpdateDocker() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceUpdateDocker" /> class.
     /// </summary>
-    /// <param name="registry">registry.</param>
-    /// <param name="image">The name of the image to pull..</param>
-    /// <param name="varVersion">The version of the image, defaults to &#x60;latest&#x60;..</param>
     /// <param name="varConfiguration">The configuration of the spec. (required).</param>
-    public SourceUpdateDocker(DockerRegistry? registry = default(DockerRegistry?), string image = default(string), string varVersion = default(string), Object varConfiguration = default(Object))
+    public SourceUpdateDocker(Object varConfiguration)
     {
-      // to ensure "varConfiguration" is required (not null)
-      if (varConfiguration == null)
-      {
-        throw new ArgumentNullException("varConfiguration is a required property for SourceUpdateDocker and cannot be null");
-      }
-      this.VarConfiguration = varConfiguration;
-      this.Registry = registry;
-      this.Image = image;
-      this.VarVersion = varVersion;
+      this.VarConfiguration = varConfiguration ?? throw new ArgumentNullException("varConfiguration is a required property for SourceUpdateDocker and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Defines the ordering of facets (widgets).
@@ -27,12 +27,8 @@ namespace Algolia.Search.Recommend.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="FacetOrdering" /> class.
     /// </summary>
-    /// <param name="facets">facets.</param>
-    /// <param name="values">Ordering of facet values within an individual facet..</param>
-    public FacetOrdering(Facets facets = default(Facets), Dictionary<string, Value> values = default(Dictionary<string, Value>))
+    public FacetOrdering()
     {
-      this.Facets = facets;
-      this.Values = values;
     }
 
     /// <summary>

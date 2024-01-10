@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// Server
@@ -29,38 +29,24 @@ namespace Algolia.Search.Monitoring.Models
     /// Gets or Sets Region
     /// </summary>
     [DataMember(Name = "region", EmitDefaultValue = false)]
-    public Region? Region { get; set; }
+    public Region Region { get; set; }
 
     /// <summary>
     /// Gets or Sets Status
     /// </summary>
     [DataMember(Name = "status", EmitDefaultValue = false)]
-    public ServerStatus? Status { get; set; }
+    public ServerStatus Status { get; set; }
 
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
     [DataMember(Name = "type", EmitDefaultValue = false)]
-    public Type? Type { get; set; }
+    public Type Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="Server" /> class.
     /// </summary>
-    /// <param name="name">Server name..</param>
-    /// <param name="region">region.</param>
-    /// <param name="isSlave">Included to support legacy applications. Do not rely on this attribute being present in the response. Use &#x60;is_replica&#x60; instead.  (default to false).</param>
-    /// <param name="isReplica">Indicates whether this server is a replica of another server. (default to false).</param>
-    /// <param name="cluster">Name of the cluster to which this server belongs..</param>
-    /// <param name="status">status.</param>
-    /// <param name="type">type.</param>
-    public Server(string name = default(string), Region? region = default(Region?), bool isSlave = false, bool isReplica = false, string cluster = default(string), ServerStatus? status = default(ServerStatus?), Type? type = default(Type?))
+    public Server()
     {
-      this.Name = name;
-      this.Region = region;
-      this.IsSlave = isSlave;
-      this.IsReplica = isReplica;
-      this.Cluster = cluster;
-      this.Status = status;
-      this.Type = type;
     }
 
     /// <summary>
@@ -76,14 +62,14 @@ namespace Algolia.Search.Monitoring.Models
     /// <value>Included to support legacy applications. Do not rely on this attribute being present in the response. Use &#x60;is_replica&#x60; instead. </value>
     [DataMember(Name = "is_slave", EmitDefaultValue = true)]
     [Obsolete]
-    public bool IsSlave { get; set; }
+    public bool? IsSlave { get; set; }
 
     /// <summary>
     /// Indicates whether this server is a replica of another server.
     /// </summary>
     /// <value>Indicates whether this server is a replica of another server.</value>
     [DataMember(Name = "is_replica", EmitDefaultValue = true)]
-    public bool IsReplica { get; set; }
+    public bool? IsReplica { get; set; }
 
     /// <summary>
     /// Name of the cluster to which this server belongs.

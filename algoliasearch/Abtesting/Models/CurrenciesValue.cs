@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// CurrenciesValue
@@ -27,16 +27,8 @@ namespace Algolia.Search.Abtesting.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="CurrenciesValue" /> class.
     /// </summary>
-    /// <param name="currency">Currency code..</param>
-    /// <param name="revenue">Revenue for this currency..</param>
-    /// <param name="mean">Mean for this currency..</param>
-    /// <param name="standardDeviation">Standard deviation for this currency..</param>
-    public CurrenciesValue(string currency = default(string), double revenue = default(double), double mean = default(double), double standardDeviation = default(double))
+    public CurrenciesValue()
     {
-      this.Currency = currency;
-      this.Revenue = revenue;
-      this.Mean = mean;
-      this.StandardDeviation = standardDeviation;
     }
 
     /// <summary>

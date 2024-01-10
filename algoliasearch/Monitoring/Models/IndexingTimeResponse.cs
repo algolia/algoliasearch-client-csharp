@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// IndexingTimeResponse
@@ -27,10 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="IndexingTimeResponse" /> class.
     /// </summary>
-    /// <param name="metrics">metrics.</param>
-    public IndexingTimeResponse(IndexingTimeResponseMetrics metrics = default(IndexingTimeResponseMetrics))
+    public IndexingTimeResponse()
     {
-      this.Metrics = metrics;
     }
 
     /// <summary>

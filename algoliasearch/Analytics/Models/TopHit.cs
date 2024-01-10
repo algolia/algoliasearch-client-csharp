@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// TopHit
@@ -28,20 +28,15 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="TopHit" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TopHit() { }
+    public TopHit() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TopHit" /> class.
     /// </summary>
     /// <param name="hit">Hit. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
-    public TopHit(string hit = default(string), int count = default(int))
+    public TopHit(string hit, int count)
     {
-      // to ensure "hit" is required (not null)
-      if (hit == null)
-      {
-        throw new ArgumentNullException("hit is a required property for TopHit and cannot be null");
-      }
-      this.Hit = hit;
+      this.Hit = hit ?? throw new ArgumentNullException("hit is a required property for TopHit and cannot be null");
       this.Count = count;
     }
 

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// ReplaceSourceResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="ReplaceSourceResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ReplaceSourceResponse() { }
+    public ReplaceSourceResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ReplaceSourceResponse" /> class.
     /// </summary>
     /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public ReplaceSourceResponse(string updatedAt = default(string))
+    public ReplaceSourceResponse(string updatedAt)
     {
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for ReplaceSourceResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for ReplaceSourceResponse and cannot be null");
     }
 
     /// <summary>

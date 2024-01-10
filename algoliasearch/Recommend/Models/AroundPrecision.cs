@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Precision of a geographical search (in meters), to [group results that are more or less the same distance from a central point](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/in-depth/geo-ranking-precision/).
@@ -33,9 +33,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of int.</param>
     public AroundPrecision(int actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of List&lt;AroundPrecisionFromValueInner&gt;.</param>
     public AroundPrecision(List<AroundPrecisionFromValueInner> actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Recommend.Models
       }
       set
       {
-        if (value.GetType() == typeof(List<AroundPrecisionFromValueInner>))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(int))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: List<AroundPrecisionFromValueInner>, int");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of int</returns>
-    public int GetterInt()
+    public int AsInt()
     {
-      return (int)this.ActualInstance;
+      return (int)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of List&lt;AroundPrecisionFromValueInner&gt;</returns>
-    public List<AroundPrecisionFromValueInner> GetterList()
+    public List<AroundPrecisionFromValueInner> AsList()
     {
-      return (List<AroundPrecisionFromValueInner>)this.ActualInstance;
+      return (List<AroundPrecisionFromValueInner>)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `int` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsInt()
+    {
+      return ActualInstance.GetType() == typeof(int);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `List&lt;AroundPrecisionFromValueInner&gt;` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsList()
+    {
+      return ActualInstance.GetType() == typeof(List<AroundPrecisionFromValueInner>);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Recommend.Models
     {
       var sb = new StringBuilder();
       sb.Append("class AroundPrecision {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Recommend.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, AroundPrecision.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,22 +142,18 @@ namespace Algolia.Search.Recommend.Models
       {
         return newAroundPrecision;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(List<AroundPrecisionFromValueInner>).GetProperty("AdditionalProperties") == null)
-        {
-          newAroundPrecision = new AroundPrecision(JsonConvert.DeserializeObject<List<AroundPrecisionFromValueInner>>(jsonString, AroundPrecision.SerializerSettings));
-        }
-        else
-        {
-          newAroundPrecision = new AroundPrecision(JsonConvert.DeserializeObject<List<AroundPrecisionFromValueInner>>(jsonString, AroundPrecision.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("List<AroundPrecisionFromValueInner>");
-        match++;
+        return new AroundPrecision(JsonConvert.DeserializeObject<int>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into int: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new AroundPrecision(JsonConvert.DeserializeObject<List<AroundPrecisionFromValueInner>>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -157,37 +161,7 @@ namespace Algolia.Search.Recommend.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into List<AroundPrecisionFromValueInner>: {1}", jsonString, exception.ToString()));
       }
 
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(int).GetProperty("AdditionalProperties") == null)
-        {
-          newAroundPrecision = new AroundPrecision(JsonConvert.DeserializeObject<int>(jsonString, AroundPrecision.SerializerSettings));
-        }
-        else
-        {
-          newAroundPrecision = new AroundPrecision(JsonConvert.DeserializeObject<int>(jsonString, AroundPrecision.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("int");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into int: {1}", jsonString, exception.ToString()));
-      }
-
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newAroundPrecision;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Recommend.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return AroundPrecision.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// TaskSearch
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="TaskSearch" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TaskSearch() { }
+    public TaskSearch() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TaskSearch" /> class.
     /// </summary>
     /// <param name="taskIDs">taskIDs (required).</param>
-    public TaskSearch(List<string> taskIDs = default(List<string>))
+    public TaskSearch(List<string> taskIDs)
     {
-      // to ensure "taskIDs" is required (not null)
-      if (taskIDs == null)
-      {
-        throw new ArgumentNullException("taskIDs is a required property for TaskSearch and cannot be null");
-      }
-      this.TaskIDs = taskIDs;
+      this.TaskIDs = taskIDs ?? throw new ArgumentNullException("taskIDs is a required property for TaskSearch and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Show highlighted section and words matched on a query.
@@ -34,30 +34,18 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="HighlightResultOption" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected HighlightResultOption() { }
+    public HighlightResultOption() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="HighlightResultOption" /> class.
     /// </summary>
     /// <param name="value">Markup text with &#x60;facetQuery&#x60; matches highlighted. (required).</param>
     /// <param name="matchLevel">matchLevel (required).</param>
     /// <param name="matchedWords">List of words from the query that matched the object. (required).</param>
-    /// <param name="fullyHighlighted">Whether the entire attribute value is highlighted..</param>
-    public HighlightResultOption(string value = default(string), MatchLevel matchLevel = default(MatchLevel), List<string> matchedWords = default(List<string>), bool fullyHighlighted = default(bool))
+    public HighlightResultOption(string value, MatchLevel matchLevel, List<string> matchedWords)
     {
-      // to ensure "value" is required (not null)
-      if (value == null)
-      {
-        throw new ArgumentNullException("value is a required property for HighlightResultOption and cannot be null");
-      }
-      this.Value = value;
+      this.Value = value ?? throw new ArgumentNullException("value is a required property for HighlightResultOption and cannot be null");
       this.MatchLevel = matchLevel;
-      // to ensure "matchedWords" is required (not null)
-      if (matchedWords == null)
-      {
-        throw new ArgumentNullException("matchedWords is a required property for HighlightResultOption and cannot be null");
-      }
-      this.MatchedWords = matchedWords;
-      this.FullyHighlighted = fullyHighlighted;
+      this.MatchedWords = matchedWords ?? throw new ArgumentNullException("matchedWords is a required property for HighlightResultOption and cannot be null");
     }
 
     /// <summary>
@@ -79,7 +67,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Whether the entire attribute value is highlighted.</value>
     [DataMember(Name = "fullyHighlighted", EmitDefaultValue = true)]
-    public bool FullyHighlighted { get; set; }
+    public bool? FullyHighlighted { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

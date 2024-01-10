@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Assign userID parameters.
@@ -28,26 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="BatchAssignUserIdsParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BatchAssignUserIdsParams() { }
+    public BatchAssignUserIdsParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchAssignUserIdsParams" /> class.
     /// </summary>
     /// <param name="cluster">Cluster name. (required).</param>
     /// <param name="users">User IDs to assign. (required).</param>
-    public BatchAssignUserIdsParams(string cluster = default(string), List<string> users = default(List<string>))
+    public BatchAssignUserIdsParams(string cluster, List<string> users)
     {
-      // to ensure "cluster" is required (not null)
-      if (cluster == null)
-      {
-        throw new ArgumentNullException("cluster is a required property for BatchAssignUserIdsParams and cannot be null");
-      }
-      this.Cluster = cluster;
-      // to ensure "users" is required (not null)
-      if (users == null)
-      {
-        throw new ArgumentNullException("users is a required property for BatchAssignUserIdsParams and cannot be null");
-      }
-      this.Users = users;
+      this.Cluster = cluster ?? throw new ArgumentNullException("cluster is a required property for BatchAssignUserIdsParams and cannot be null");
+      this.Users = users ?? throw new ArgumentNullException("users is a required property for BatchAssignUserIdsParams and cannot be null");
     }
 
     /// <summary>

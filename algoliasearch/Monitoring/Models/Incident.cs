@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// Incident details.
@@ -29,16 +29,12 @@ namespace Algolia.Search.Monitoring.Models
     /// Gets or Sets Status
     /// </summary>
     [DataMember(Name = "status", EmitDefaultValue = false)]
-    public Status? Status { get; set; }
+    public Status Status { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="Incident" /> class.
     /// </summary>
-    /// <param name="title">Description of the incident..</param>
-    /// <param name="status">status.</param>
-    public Incident(string title = default(string), Status? status = default(Status?))
+    public Incident()
     {
-      this.Title = title;
-      this.Status = status;
     }
 
     /// <summary>

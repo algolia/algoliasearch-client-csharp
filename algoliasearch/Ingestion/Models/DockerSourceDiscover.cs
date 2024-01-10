@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// DockerSourceDiscover
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="DockerSourceDiscover" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DockerSourceDiscover() { }
+    public DockerSourceDiscover() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DockerSourceDiscover" /> class.
     /// </summary>
     /// <param name="runID">The run UUID. (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    public DockerSourceDiscover(string runID = default(string), string createdAt = default(string))
+    public DockerSourceDiscover(string runID, string createdAt)
     {
-      // to ensure "runID" is required (not null)
-      if (runID == null)
-      {
-        throw new ArgumentNullException("runID is a required property for DockerSourceDiscover and cannot be null");
-      }
-      this.RunID = runID;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for DockerSourceDiscover and cannot be null");
-      }
-      this.CreatedAt = createdAt;
+      this.RunID = runID ?? throw new ArgumentNullException("runID is a required property for DockerSourceDiscover and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for DockerSourceDiscover and cannot be null");
     }
 
     /// <summary>

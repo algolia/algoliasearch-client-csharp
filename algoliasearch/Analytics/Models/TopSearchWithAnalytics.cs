@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// TopSearchWithAnalytics
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="TopSearchWithAnalytics" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TopSearchWithAnalytics() { }
+    public TopSearchWithAnalytics() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TopSearchWithAnalytics" /> class.
     /// </summary>
@@ -41,14 +41,9 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="conversionCount">Number of converted clicks. (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public TopSearchWithAnalytics(string search = default(string), int count = default(int), double clickThroughRate = default(double), int averageClickPosition = default(int), double conversionRate = default(double), int trackedSearchCount = default(int), int clickCount = default(int), int conversionCount = default(int), int nbHits = default(int))
+    public TopSearchWithAnalytics(string search, int count, double clickThroughRate, int averageClickPosition, double conversionRate, int trackedSearchCount, int clickCount, int conversionCount, int nbHits)
     {
-      // to ensure "search" is required (not null)
-      if (search == null)
-      {
-        throw new ArgumentNullException("search is a required property for TopSearchWithAnalytics and cannot be null");
-      }
-      this.Search = search;
+      this.Search = search ?? throw new ArgumentNullException("search is a required property for TopSearchWithAnalytics and cannot be null");
       this.Count = count;
       this.ClickThroughRate = clickThroughRate;
       this.AverageClickPosition = averageClickPosition;

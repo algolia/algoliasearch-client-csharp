@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// UpdateApiKeyResponse
@@ -28,26 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="UpdateApiKeyResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected UpdateApiKeyResponse() { }
+    public UpdateApiKeyResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="UpdateApiKeyResponse" /> class.
     /// </summary>
     /// <param name="key">API key. (required).</param>
     /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public UpdateApiKeyResponse(string key = default(string), string updatedAt = default(string))
+    public UpdateApiKeyResponse(string key, string updatedAt)
     {
-      // to ensure "key" is required (not null)
-      if (key == null)
-      {
-        throw new ArgumentNullException("key is a required property for UpdateApiKeyResponse and cannot be null");
-      }
-      this.Key = key;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for UpdateApiKeyResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.Key = key ?? throw new ArgumentNullException("key is a required property for UpdateApiKeyResponse and cannot be null");
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for UpdateApiKeyResponse and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// AuthAlgolia
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="AuthAlgolia" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthAlgolia() { }
+    public AuthAlgolia() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthAlgolia" /> class.
     /// </summary>
     /// <param name="appID">Algolia Application ID. (required).</param>
     /// <param name="apiKey">Algolia API Key, with the correct rights to push to an index and change settings. (required).</param>
-    public AuthAlgolia(string appID = default(string), string apiKey = default(string))
+    public AuthAlgolia(string appID, string apiKey)
     {
-      // to ensure "appID" is required (not null)
-      if (appID == null)
-      {
-        throw new ArgumentNullException("appID is a required property for AuthAlgolia and cannot be null");
-      }
-      this.AppID = appID;
-      // to ensure "apiKey" is required (not null)
-      if (apiKey == null)
-      {
-        throw new ArgumentNullException("apiKey is a required property for AuthAlgolia and cannot be null");
-      }
-      this.ApiKey = apiKey;
+      this.AppID = appID ?? throw new ArgumentNullException("appID is a required property for AuthAlgolia and cannot be null");
+      this.ApiKey = apiKey ?? throw new ArgumentNullException("apiKey is a required property for AuthAlgolia and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// FetchedIndex
@@ -28,7 +28,7 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="FetchedIndex" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected FetchedIndex() { }
+    public FetchedIndex() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="FetchedIndex" /> class.
     /// </summary>
@@ -41,36 +41,17 @@ namespace Algolia.Search.Search.Models
     /// <param name="lastBuildTimeS">Last build time. (required).</param>
     /// <param name="numberOfPendingTasks">Number of pending indexing operations. This value is deprecated and should not be used. (required) (default to 0).</param>
     /// <param name="pendingTask">A boolean which says whether the index has pending tasks. This value is deprecated and should not be used. (required) (default to false).</param>
-    /// <param name="primary">Only present if the index is a replica. Contains the name of the related primary index..</param>
-    /// <param name="replicas">Only present if the index is a primary index with replicas. Contains the names of all linked replicas..</param>
-    public FetchedIndex(string name = default(string), string createdAt = default(string), string updatedAt = default(string), int entries = default(int), int dataSize = default(int), int fileSize = default(int), int lastBuildTimeS = default(int), int numberOfPendingTasks = 0, bool pendingTask = false, string primary = default(string), List<string> replicas = default(List<string>))
+    public FetchedIndex(string name, string createdAt, string updatedAt, int entries, int dataSize, int fileSize, int lastBuildTimeS, int numberOfPendingTasks, bool pendingTask)
     {
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for FetchedIndex and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for FetchedIndex and cannot be null");
-      }
-      this.CreatedAt = createdAt;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for FetchedIndex and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for FetchedIndex and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for FetchedIndex and cannot be null");
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for FetchedIndex and cannot be null");
       this.Entries = entries;
       this.DataSize = dataSize;
       this.FileSize = fileSize;
       this.LastBuildTimeS = lastBuildTimeS;
       this.NumberOfPendingTasks = numberOfPendingTasks;
       this.PendingTask = pendingTask;
-      this.Primary = primary;
-      this.Replicas = replicas;
     }
 
     /// <summary>

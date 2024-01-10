@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceCommercetools
@@ -28,32 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="SourceCommercetools" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceCommercetools() { }
+    public SourceCommercetools() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceCommercetools" /> class.
     /// </summary>
-    /// <param name="storeKeys">storeKeys.</param>
-    /// <param name="locales">Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\&quot;fr-FR\&quot;, \&quot;en\&quot;]. .</param>
     /// <param name="url">url (required).</param>
     /// <param name="projectKey">projectKey (required).</param>
-    /// <param name="fallbackIsInStockValue">Determines the value that will be stored in the Algolia record if there&#39;s no inventory information on the product.  (default to true).</param>
-    public SourceCommercetools(List<string> storeKeys = default(List<string>), List<string> locales = default(List<string>), string url = default(string), string projectKey = default(string), bool fallbackIsInStockValue = true)
+    public SourceCommercetools(string url, string projectKey)
     {
-      // to ensure "url" is required (not null)
-      if (url == null)
-      {
-        throw new ArgumentNullException("url is a required property for SourceCommercetools and cannot be null");
-      }
-      this.Url = url;
-      // to ensure "projectKey" is required (not null)
-      if (projectKey == null)
-      {
-        throw new ArgumentNullException("projectKey is a required property for SourceCommercetools and cannot be null");
-      }
-      this.ProjectKey = projectKey;
-      this.StoreKeys = storeKeys;
-      this.Locales = locales;
-      this.FallbackIsInStockValue = fallbackIsInStockValue;
+      this.Url = url ?? throw new ArgumentNullException("url is a required property for SourceCommercetools and cannot be null");
+      this.ProjectKey = projectKey ?? throw new ArgumentNullException("projectKey is a required property for SourceCommercetools and cannot be null");
     }
 
     /// <summary>
@@ -86,7 +70,7 @@ namespace Algolia.Search.Ingestion.Models
     /// </summary>
     /// <value>Determines the value that will be stored in the Algolia record if there&#39;s no inventory information on the product. </value>
     [DataMember(Name = "fallbackIsInStockValue", EmitDefaultValue = true)]
-    public bool FallbackIsInStockValue { get; set; }
+    public bool? FallbackIsInStockValue { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

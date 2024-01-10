@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Insights.Models
+namespace Algolia.Search.Models.Insights
 {
   /// <summary>
   /// ObjectData
@@ -27,14 +27,8 @@ namespace Algolia.Search.Insights.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="ObjectData" /> class.
     /// </summary>
-    /// <param name="price">price.</param>
-    /// <param name="quantity">The quantity of the purchased or added-to-cart item. The total value of a purchase is the sum of &#x60;quantity&#x60; multiplied with the &#x60;price&#x60; for each purchased item..</param>
-    /// <param name="discount">discount.</param>
-    public ObjectData(Price price = default(Price), int quantity = default(int), Discount discount = default(Discount))
+    public ObjectData()
     {
-      this.Price = price;
-      this.Quantity = quantity;
-      this.Discount = discount;
     }
 
     /// <summary>
@@ -48,7 +42,7 @@ namespace Algolia.Search.Insights.Models
     /// </summary>
     /// <value>The quantity of the purchased or added-to-cart item. The total value of a purchase is the sum of &#x60;quantity&#x60; multiplied with the &#x60;price&#x60; for each purchased item.</value>
     [DataMember(Name = "quantity", EmitDefaultValue = false)]
-    public int Quantity { get; set; }
+    public int? Quantity { get; set; }
 
     /// <summary>
     /// Gets or Sets Discount

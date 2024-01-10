@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Removes stop (common) words from the query before executing it. &#x60;removeStopWords&#x60; is used in conjunction with the &#x60;queryLanguages&#x60; setting. _list_: language ISO codes for which stop words should be enabled. This list will override any values that you may have set in &#x60;queryLanguages&#x60;. _true_: enables the stop words feature, ensuring that stop words are removed from consideration in a search. The languages supported here are either [every language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) (this is the default) or those set by &#x60;queryLanguages&#x60;. _false_: turns off the stop words feature, allowing stop words to be taken into account in a search. 
@@ -33,9 +33,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="actualInstance">An instance of List&lt;string&gt;.</param>
     public RemoveStopWords(List<string> actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="actualInstance">An instance of bool.</param>
     public RemoveStopWords(bool actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Search.Models
       }
       set
       {
-        if (value.GetType() == typeof(List<string>))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(bool))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: List<string>, bool");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of List&lt;string&gt;</returns>
-    public List<string> GetterListString()
+    public List<string> AsListString()
     {
-      return (List<string>)this.ActualInstance;
+      return (List<string>)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of bool</returns>
-    public bool GetterBool()
+    public bool AsBool()
     {
-      return (bool)this.ActualInstance;
+      return (bool)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `List&lt;string&gt;` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsListString()
+    {
+      return ActualInstance.GetType() == typeof(List<string>);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `bool` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsBool()
+    {
+      return ActualInstance.GetType() == typeof(bool);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Search.Models
     {
       var sb = new StringBuilder();
       sb.Append("class RemoveStopWords {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Search.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, RemoveStopWords.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Search.Models
       {
         return newRemoveStopWords;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(List<string>).GetProperty("AdditionalProperties") == null)
-        {
-          newRemoveStopWords = new RemoveStopWords(JsonConvert.DeserializeObject<List<string>>(jsonString, RemoveStopWords.SerializerSettings));
-        }
-        else
-        {
-          newRemoveStopWords = new RemoveStopWords(JsonConvert.DeserializeObject<List<string>>(jsonString, RemoveStopWords.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("List<string>");
-        match++;
+        return new RemoveStopWords(JsonConvert.DeserializeObject<List<string>>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into List<string>: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(bool).GetProperty("AdditionalProperties") == null)
-        {
-          newRemoveStopWords = new RemoveStopWords(JsonConvert.DeserializeObject<bool>(jsonString, RemoveStopWords.SerializerSettings));
-        }
-        else
-        {
-          newRemoveStopWords = new RemoveStopWords(JsonConvert.DeserializeObject<bool>(jsonString, RemoveStopWords.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("bool");
-        match++;
+        return new RemoveStopWords(JsonConvert.DeserializeObject<bool>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Search.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into bool: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newRemoveStopWords;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Search.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return RemoveStopWords.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

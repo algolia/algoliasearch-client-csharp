@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Rule object.
@@ -28,29 +28,14 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="RuleResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RuleResponse() { }
+    public RuleResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="RuleResponse" /> class.
     /// </summary>
-    /// <param name="metadata">metadata.</param>
     /// <param name="objectID">Unique identifier for a rule object. (required).</param>
-    /// <param name="conditions">[Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. .</param>
-    /// <param name="consequence">consequence.</param>
-    /// <param name="description">Description of the rule&#39;s purpose. This can be helpful for display in the Algolia dashboard..</param>
-    /// <param name="enabled">Indicates whether to enable the rule. If it isn&#39;t enabled, it isn&#39;t applied at query time. (default to true).</param>
-    public RuleResponse(RuleResponseMetadata metadata = default(RuleResponseMetadata), string objectID = default(string), List<Condition> conditions = default(List<Condition>), Consequence consequence = default(Consequence), string description = default(string), bool enabled = true)
+    public RuleResponse(string objectID)
     {
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for RuleResponse and cannot be null");
-      }
-      this.ObjectID = objectID;
-      this.Metadata = metadata;
-      this.Conditions = conditions;
-      this.Consequence = consequence;
-      this.Description = description;
-      this.Enabled = enabled;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for RuleResponse and cannot be null");
     }
 
     /// <summary>
@@ -91,7 +76,7 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>Indicates whether to enable the rule. If it isn&#39;t enabled, it isn&#39;t applied at query time.</value>
     [DataMember(Name = "enabled", EmitDefaultValue = true)]
-    public bool Enabled { get; set; }
+    public bool? Enabled { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

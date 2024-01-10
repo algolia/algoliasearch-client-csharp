@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// OK
@@ -28,25 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SearchUserIdsParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchUserIdsParams() { }
+    public SearchUserIdsParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchUserIdsParams" /> class.
     /// </summary>
     /// <param name="query">Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users. (required).</param>
-    /// <param name="clusterName">Cluster name..</param>
-    /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (default to 0).</param>
-    /// <param name="hitsPerPage">Number of hits per page. (default to 20).</param>
-    public SearchUserIdsParams(string query = default(string), string clusterName = default(string), int page = 0, int hitsPerPage = 20)
+    public SearchUserIdsParams(string query)
     {
-      // to ensure "query" is required (not null)
-      if (query == null)
-      {
-        throw new ArgumentNullException("query is a required property for SearchUserIdsParams and cannot be null");
-      }
-      this.Query = query;
-      this.ClusterName = clusterName;
-      this.Page = page;
-      this.HitsPerPage = hitsPerPage;
+      this.Query = query ?? throw new ArgumentNullException("query is a required property for SearchUserIdsParams and cannot be null");
     }
 
     /// <summary>
@@ -68,14 +57,14 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).</value>
     [DataMember(Name = "page", EmitDefaultValue = false)]
-    public int Page { get; set; }
+    public int? Page { get; set; }
 
     /// <summary>
     /// Number of hits per page.
     /// </summary>
     /// <value>Number of hits per page.</value>
     [DataMember(Name = "hitsPerPage", EmitDefaultValue = false)]
-    public int HitsPerPage { get; set; }
+    public int? HitsPerPage { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

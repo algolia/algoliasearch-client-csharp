@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The trigger input for a task of type &#39;schedule&#39;.
@@ -34,21 +34,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="ScheduleTriggerInput" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ScheduleTriggerInput() { }
+    public ScheduleTriggerInput() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ScheduleTriggerInput" /> class.
     /// </summary>
     /// <param name="type">type (required).</param>
     /// <param name="cron">A cron expression that represent at which regularity the task should run. (required).</param>
-    public ScheduleTriggerInput(ScheduleTriggerType type = default(ScheduleTriggerType), string cron = default(string))
+    public ScheduleTriggerInput(ScheduleTriggerType type, string cron)
     {
       this.Type = type;
-      // to ensure "cron" is required (not null)
-      if (cron == null)
-      {
-        throw new ArgumentNullException("cron is a required property for ScheduleTriggerInput and cannot be null");
-      }
-      this.Cron = cron;
+      this.Cron = cron ?? throw new ArgumentNullException("cron is a required property for ScheduleTriggerInput and cannot be null");
     }
 
     /// <summary>

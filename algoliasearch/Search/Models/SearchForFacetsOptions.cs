@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchForFacetsOptions
@@ -34,33 +34,18 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SearchForFacetsOptions" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchForFacetsOptions() { }
+    public SearchForFacetsOptions() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchForFacetsOptions" /> class.
     /// </summary>
     /// <param name="facet">Facet name. (required).</param>
     /// <param name="indexName">Algolia index name. (required).</param>
-    /// <param name="facetQuery">Text to search inside the facet&#39;s values. (default to &quot;&quot;).</param>
-    /// <param name="maxFacetHits">Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). (default to 10).</param>
     /// <param name="type">type (required).</param>
-    public SearchForFacetsOptions(string facet = default(string), string indexName = default(string), string facetQuery = @"", int maxFacetHits = 10, SearchTypeFacet type = default(SearchTypeFacet))
+    public SearchForFacetsOptions(string facet, string indexName, SearchTypeFacet type)
     {
-      // to ensure "facet" is required (not null)
-      if (facet == null)
-      {
-        throw new ArgumentNullException("facet is a required property for SearchForFacetsOptions and cannot be null");
-      }
-      this.Facet = facet;
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for SearchForFacetsOptions and cannot be null");
-      }
-      this.IndexName = indexName;
+      this.Facet = facet ?? throw new ArgumentNullException("facet is a required property for SearchForFacetsOptions and cannot be null");
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for SearchForFacetsOptions and cannot be null");
       this.Type = type;
-      // use default value if no "facetQuery" provided
-      this.FacetQuery = facetQuery ?? @"";
-      this.MaxFacetHits = maxFacetHits;
     }
 
     /// <summary>
@@ -89,7 +74,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
     [DataMember(Name = "maxFacetHits", EmitDefaultValue = false)]
-    public int MaxFacetHits { get; set; }
+    public int? MaxFacetHits { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// FacetHits
@@ -28,27 +28,17 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="FacetHits" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected FacetHits() { }
+    public FacetHits() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="FacetHits" /> class.
     /// </summary>
     /// <param name="value">Facet value. (required).</param>
     /// <param name="highlighted">Markup text with &#x60;facetQuery&#x60; matches highlighted. (required).</param>
     /// <param name="count">Number of records containing this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the [counts may not be exhaustive](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). (required).</param>
-    public FacetHits(string value = default(string), string highlighted = default(string), int count = default(int))
+    public FacetHits(string value, string highlighted, int count)
     {
-      // to ensure "value" is required (not null)
-      if (value == null)
-      {
-        throw new ArgumentNullException("value is a required property for FacetHits and cannot be null");
-      }
-      this.Value = value;
-      // to ensure "highlighted" is required (not null)
-      if (highlighted == null)
-      {
-        throw new ArgumentNullException("highlighted is a required property for FacetHits and cannot be null");
-      }
-      this.Highlighted = highlighted;
+      this.Value = value ?? throw new ArgumentNullException("value is a required property for FacetHits and cannot be null");
+      this.Highlighted = highlighted ?? throw new ArgumentNullException("highlighted is a required property for FacetHits and cannot be null");
       this.Count = count;
     }
 

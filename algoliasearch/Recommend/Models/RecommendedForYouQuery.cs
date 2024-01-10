@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// RecommendedForYouQuery
@@ -34,29 +34,16 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="RecommendedForYouQuery" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RecommendedForYouQuery() { }
+    public RecommendedForYouQuery() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="RecommendedForYouQuery" /> class.
     /// </summary>
     /// <param name="indexName">Algolia index name. (required).</param>
-    /// <param name="threshold">Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. .</param>
-    /// <param name="maxRecommendations">Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. (default to 0).</param>
     /// <param name="model">model (required).</param>
-    /// <param name="queryParameters">queryParameters.</param>
-    /// <param name="fallbackParameters">fallbackParameters.</param>
-    public RecommendedForYouQuery(string indexName = default(string), int threshold = default(int), int maxRecommendations = 0, RecommendedForYouModel model = default(RecommendedForYouModel), RecommendedForYouQueryParameters queryParameters = default(RecommendedForYouQueryParameters), RecommendedForYouQueryParameters fallbackParameters = default(RecommendedForYouQueryParameters))
+    public RecommendedForYouQuery(string indexName, RecommendedForYouModel model)
     {
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for RecommendedForYouQuery and cannot be null");
-      }
-      this.IndexName = indexName;
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for RecommendedForYouQuery and cannot be null");
       this.Model = model;
-      this.Threshold = threshold;
-      this.MaxRecommendations = maxRecommendations;
-      this.QueryParameters = queryParameters;
-      this.FallbackParameters = fallbackParameters;
     }
 
     /// <summary>
@@ -71,14 +58,14 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. </value>
     [DataMember(Name = "threshold", EmitDefaultValue = false)]
-    public int Threshold { get; set; }
+    public int? Threshold { get; set; }
 
     /// <summary>
     /// Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
     /// </summary>
     /// <value>Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.</value>
     [DataMember(Name = "maxRecommendations", EmitDefaultValue = false)]
-    public int MaxRecommendations { get; set; }
+    public int? MaxRecommendations { get; set; }
 
     /// <summary>
     /// Gets or Sets QueryParameters

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// FacetsStats
@@ -27,16 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="FacetsStats" /> class.
     /// </summary>
-    /// <param name="min">Minimum value in the results..</param>
-    /// <param name="max">Maximum value in the results..</param>
-    /// <param name="avg">Average facet value in the results..</param>
-    /// <param name="sum">Sum of all values in the results..</param>
-    public FacetsStats(double min = default(double), double max = default(double), double avg = default(double), double sum = default(double))
+    public FacetsStats()
     {
-      this.Min = min;
-      this.Max = max;
-      this.Avg = avg;
-      this.Sum = sum;
     }
 
     /// <summary>

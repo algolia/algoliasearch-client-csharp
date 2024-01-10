@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Authentication input for OAuth login.
@@ -27,14 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthOAuthPartial" /> class.
     /// </summary>
-    /// <param name="url">The OAuth endpoint URL..</param>
-    /// <param name="clientId">The clientID..</param>
-    /// <param name="clientSecret">The secret..</param>
-    public AuthOAuthPartial(string url = default(string), string clientId = default(string), string clientSecret = default(string))
+    public AuthOAuthPartial()
     {
-      this.Url = url;
-      this.ClientId = clientId;
-      this.ClientSecret = clientSecret;
     }
 
     /// <summary>

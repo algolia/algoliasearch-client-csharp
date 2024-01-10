@@ -7,15 +7,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Personalization.Client;
-using Algolia.Search.Personalization.Models;
+using Algolia.Search.Clients;
+using Algolia.Search.Models;
+using Algolia.Search.Models.Personalization;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
-using Algolia.Search.Client;
 
-namespace Algolia.Search.Personalization.Api
+namespace Algolia.Search.Clients
 {
-
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
@@ -28,12 +27,12 @@ namespace Algolia.Search.Personalization.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -41,12 +40,12 @@ namespace Algolia.Search.Personalization.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -54,13 +53,13 @@ namespace Algolia.Search.Personalization.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -68,13 +67,13 @@ namespace Algolia.Search.Personalization.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Personalization.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Delete a user profile.
     /// </summary>
@@ -138,7 +137,8 @@ namespace Algolia.Search.Personalization.Api
     /// </summary>
     /// <param name="applicationId">Your application</param>
     /// <param name="apiKey">Your API key</param>
-    public PersonalizationClient(string applicationId, string apiKey) : this(new PersonalizationConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+    /// <param name="region">The targeted region</param>
+    public PersonalizationClient(string applicationId, string apiKey, string region) : this(new PersonalizationConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
     {
     }
 
@@ -161,17 +161,14 @@ namespace Algolia.Search.Personalization.Api
       {
         throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-
       if (config == null)
       {
         throw new ArgumentNullException(nameof(config), "A config is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
         throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
         throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
@@ -191,25 +188,18 @@ namespace Algolia.Search.Personalization.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomDelete");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -219,25 +209,18 @@ namespace Algolia.Search.Personalization.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomGet");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -248,25 +231,18 @@ namespace Algolia.Search.Personalization.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomPost");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -278,25 +254,18 @@ namespace Algolia.Search.Personalization.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling PersonalizationClient->CustomPut");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Delete a user profile. Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
@@ -308,18 +277,15 @@ namespace Algolia.Search.Personalization.Api
     /// <returns>Task of DeleteUserProfileResponse</returns>
     public async Task<DeleteUserProfileResponse> DeleteUserProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'userToken' is set
       if (userToken == null)
         throw new ApiException(400, "Missing required parameter 'userToken' when calling PersonalizationClient->DeleteUserProfile");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("userToken", ClientUtils.ParameterToString(userToken));
-
 
       return await _transport.ExecuteRequestAsync<DeleteUserProfileResponse>(new HttpMethod("DELETE"), "/1/profiles/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get the current strategy. The strategy contains information on the events and facets that impact user profiles and personalized search results.
@@ -330,13 +296,11 @@ namespace Algolia.Search.Personalization.Api
     /// <returns>Task of PersonalizationStrategyParams</returns>
     public async Task<PersonalizationStrategyParams> GetPersonalizationStrategyAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
+      var requestOptions = new InternalRequestOptions(options);
 
 
       return await _transport.ExecuteRequestAsync<PersonalizationStrategyParams>(new HttpMethod("GET"), "/1/strategies/personalization", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a user profile. Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
@@ -348,18 +312,15 @@ namespace Algolia.Search.Personalization.Api
     /// <returns>Task of GetUserTokenResponse</returns>
     public async Task<GetUserTokenResponse> GetUserTokenProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'userToken' is set
       if (userToken == null)
         throw new ApiException(400, "Missing required parameter 'userToken' when calling PersonalizationClient->GetUserTokenProfile");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("userToken", ClientUtils.ParameterToString(userToken));
-
 
       return await _transport.ExecuteRequestAsync<GetUserTokenResponse>(new HttpMethod("GET"), "/1/profiles/personalization/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Set a new strategy. A strategy defines the events and facets that impact user profiles and personalized search results.
@@ -371,17 +332,14 @@ namespace Algolia.Search.Personalization.Api
     /// <returns>Task of SetPersonalizationStrategyResponse</returns>
     public async Task<SetPersonalizationStrategyResponse> SetPersonalizationStrategyAsync(PersonalizationStrategyParams personalizationStrategyParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'personalizationStrategyParams' is set
       if (personalizationStrategyParams == null)
         throw new ApiException(400, "Missing required parameter 'personalizationStrategyParams' when calling PersonalizationClient->SetPersonalizationStrategy");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = personalizationStrategyParams;
-
-
       return await _transport.ExecuteRequestAsync<SetPersonalizationStrategyResponse>(new HttpMethod("POST"), "/1/strategies/personalization", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
   }
 }

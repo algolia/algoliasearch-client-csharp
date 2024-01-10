@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchRulesResponse
@@ -28,7 +28,7 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SearchRulesResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchRulesResponse() { }
+    public SearchRulesResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchRulesResponse" /> class.
     /// </summary>
@@ -36,14 +36,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="nbHits">Number of fetched rules. (required).</param>
     /// <param name="page">Current page. (required).</param>
     /// <param name="nbPages">Number of pages. (required).</param>
-    public SearchRulesResponse(List<Rule> hits = default(List<Rule>), int nbHits = default(int), int page = default(int), int nbPages = default(int))
+    public SearchRulesResponse(List<Rule> hits, int nbHits, int page, int nbPages)
     {
-      // to ensure "hits" is required (not null)
-      if (hits == null)
-      {
-        throw new ArgumentNullException("hits is a required property for SearchRulesResponse and cannot be null");
-      }
-      this.Hits = hits;
+      this.Hits = hits ?? throw new ArgumentNullException("hits is a required property for SearchRulesResponse and cannot be null");
       this.NbHits = nbHits;
       this.Page = page;
       this.NbPages = nbPages;

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The window parameter represents the holds the dates used to query the Observability data from the database in a given window.
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="Window" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Window() { }
+    public Window() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Window" /> class.
     /// </summary>
     /// <param name="startDate">A date in format RFC3339 representing the oldest possible data in query window. (required).</param>
     /// <param name="endDate">A date in format RFC3339 representing the newest possible data in query window. (required).</param>
-    public Window(string startDate = default(string), string endDate = default(string))
+    public Window(string startDate, string endDate)
     {
-      // to ensure "startDate" is required (not null)
-      if (startDate == null)
-      {
-        throw new ArgumentNullException("startDate is a required property for Window and cannot be null");
-      }
-      this.StartDate = startDate;
-      // to ensure "endDate" is required (not null)
-      if (endDate == null)
-      {
-        throw new ArgumentNullException("endDate is a required property for Window and cannot be null");
-      }
-      this.EndDate = endDate;
+      this.StartDate = startDate ?? throw new ArgumentNullException("startDate is a required property for Window and cannot be null");
+      this.EndDate = endDate ?? throw new ArgumentNullException("endDate is a required property for Window and cannot be null");
     }
 
     /// <summary>

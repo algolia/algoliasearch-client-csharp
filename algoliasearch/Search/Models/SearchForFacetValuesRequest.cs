@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchForFacetValuesRequest
@@ -27,16 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchForFacetValuesRequest" /> class.
     /// </summary>
-    /// <param name="varParams">Search parameters as a URL-encoded query string. (default to &quot;&quot;).</param>
-    /// <param name="facetQuery">Text to search inside the facet&#39;s values. (default to &quot;&quot;).</param>
-    /// <param name="maxFacetHits">Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). (default to 10).</param>
-    public SearchForFacetValuesRequest(string varParams = @"", string facetQuery = @"", int maxFacetHits = 10)
+    public SearchForFacetValuesRequest()
     {
-      // use default value if no "varParams" provided
-      this.VarParams = varParams ?? @"";
-      // use default value if no "facetQuery" provided
-      this.FacetQuery = facetQuery ?? @"";
-      this.MaxFacetHits = maxFacetHits;
     }
 
     /// <summary>
@@ -58,7 +50,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
     [DataMember(Name = "maxFacetHits", EmitDefaultValue = false)]
-    public int MaxFacetHits { get; set; }
+    public int? MaxFacetHits { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

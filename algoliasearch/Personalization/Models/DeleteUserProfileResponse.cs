@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Personalization.Models
+namespace Algolia.Search.Models.Personalization
 {
   /// <summary>
   /// DeleteUserProfileResponse
@@ -28,26 +28,16 @@ namespace Algolia.Search.Personalization.Models
     /// Initializes a new instance of the <see cref="DeleteUserProfileResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DeleteUserProfileResponse() { }
+    public DeleteUserProfileResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DeleteUserProfileResponse" /> class.
     /// </summary>
     /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile. (required).</param>
     /// <param name="deletedUntil">A date until which the data can safely be considered as deleted for the given user. Any data received after the &#x60;deletedUntil&#x60; date will start building a new user profile. (required).</param>
-    public DeleteUserProfileResponse(string userToken = default(string), string deletedUntil = default(string))
+    public DeleteUserProfileResponse(string userToken, string deletedUntil)
     {
-      // to ensure "userToken" is required (not null)
-      if (userToken == null)
-      {
-        throw new ArgumentNullException("userToken is a required property for DeleteUserProfileResponse and cannot be null");
-      }
-      this.UserToken = userToken;
-      // to ensure "deletedUntil" is required (not null)
-      if (deletedUntil == null)
-      {
-        throw new ArgumentNullException("deletedUntil is a required property for DeleteUserProfileResponse and cannot be null");
-      }
-      this.DeletedUntil = deletedUntil;
+      this.UserToken = userToken ?? throw new ArgumentNullException("userToken is a required property for DeleteUserProfileResponse and cannot be null");
+      this.DeletedUntil = deletedUntil ?? throw new ArgumentNullException("deletedUntil is a required property for DeleteUserProfileResponse and cannot be null");
     }
 
     /// <summary>

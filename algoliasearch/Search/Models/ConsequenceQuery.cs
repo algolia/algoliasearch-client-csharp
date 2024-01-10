@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// When providing a string, it replaces the entire query string. When providing an object, it describes incremental edits to be made to the query string (but you can&#39;t do both).
@@ -33,9 +33,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="actualInstance">An instance of ConsequenceQueryObject.</param>
     public ConsequenceQuery(ConsequenceQueryObject actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="actualInstance">An instance of string.</param>
     public ConsequenceQuery(string actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Search.Models
       }
       set
       {
-        if (value.GetType() == typeof(ConsequenceQueryObject))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(string))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: ConsequenceQueryObject, string");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ConsequenceQueryObject</returns>
-    public ConsequenceQueryObject GetterConsequenceQueryObject()
+    public ConsequenceQueryObject AsConsequenceQueryObject()
     {
-      return (ConsequenceQueryObject)this.ActualInstance;
+      return (ConsequenceQueryObject)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of string</returns>
-    public string GetterString()
+    public string AsString()
     {
-      return (string)this.ActualInstance;
+      return (string)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `ConsequenceQueryObject` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsConsequenceQueryObject()
+    {
+      return ActualInstance.GetType() == typeof(ConsequenceQueryObject);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `string` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsString()
+    {
+      return ActualInstance.GetType() == typeof(string);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Search.Models
     {
       var sb = new StringBuilder();
       sb.Append("class ConsequenceQuery {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Search.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, ConsequenceQuery.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Search.Models
       {
         return newConsequenceQuery;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ConsequenceQueryObject).GetProperty("AdditionalProperties") == null)
-        {
-          newConsequenceQuery = new ConsequenceQuery(JsonConvert.DeserializeObject<ConsequenceQueryObject>(jsonString, ConsequenceQuery.SerializerSettings));
-        }
-        else
-        {
-          newConsequenceQuery = new ConsequenceQuery(JsonConvert.DeserializeObject<ConsequenceQueryObject>(jsonString, ConsequenceQuery.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ConsequenceQueryObject");
-        match++;
+        return new ConsequenceQuery(JsonConvert.DeserializeObject<ConsequenceQueryObject>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ConsequenceQueryObject: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(string).GetProperty("AdditionalProperties") == null)
-        {
-          newConsequenceQuery = new ConsequenceQuery(JsonConvert.DeserializeObject<string>(jsonString, ConsequenceQuery.SerializerSettings));
-        }
-        else
-        {
-          newConsequenceQuery = new ConsequenceQuery(JsonConvert.DeserializeObject<string>(jsonString, ConsequenceQuery.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("string");
-        match++;
+        return new ConsequenceQuery(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Search.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into string: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newConsequenceQuery;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Search.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return ConsequenceQuery.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

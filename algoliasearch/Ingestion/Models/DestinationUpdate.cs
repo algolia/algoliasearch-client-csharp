@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Payload to partially update a Destination.
@@ -29,20 +29,12 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets Type
     /// </summary>
     [DataMember(Name = "type", EmitDefaultValue = false)]
-    public DestinationType? Type { get; set; }
+    public DestinationType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="DestinationUpdate" /> class.
     /// </summary>
-    /// <param name="type">type.</param>
-    /// <param name="name">An human readable name describing the object..</param>
-    /// <param name="input">input.</param>
-    /// <param name="authenticationID">authenticationID.</param>
-    public DestinationUpdate(DestinationType? type = default(DestinationType?), string name = default(string), DestinationInput input = default(DestinationInput), string authenticationID = default(string))
+    public DestinationUpdate()
     {
-      this.Type = type;
-      this.Name = name;
-      this.Input = input;
-      this.AuthenticationID = authenticationID;
     }
 
     /// <summary>

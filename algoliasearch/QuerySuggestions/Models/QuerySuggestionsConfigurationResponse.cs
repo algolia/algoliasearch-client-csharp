@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// QuerySuggestionsConfigurationResponse
@@ -28,43 +28,16 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// Initializes a new instance of the <see cref="QuerySuggestionsConfigurationResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected QuerySuggestionsConfigurationResponse() { }
+    public QuerySuggestionsConfigurationResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="QuerySuggestionsConfigurationResponse" /> class.
     /// </summary>
-    /// <param name="appId">Your Algolia application ID..</param>
-    /// <param name="sourceIndicesAPIKey">API key used to read from your source index..</param>
-    /// <param name="suggestionsIndicesAPIKey">API key used to write and configure your Query Suggestions index..</param>
-    /// <param name="externalIndicesAPIKey">API key used to read from external Algolia indices. (default to &quot;&quot;).</param>
     /// <param name="indexName">Query Suggestions index name. (required).</param>
     /// <param name="sourceIndices">Algolia indices from which to get the popular searches for query suggestions. (required).</param>
-    /// <param name="languages">languages.</param>
-    /// <param name="exclude">Patterns to exclude from query suggestions..</param>
-    /// <param name="enablePersonalization">Turn on personalized query suggestions. (default to false).</param>
-    /// <param name="allowSpecialCharacters">Allow suggestions with special characters. (default to false).</param>
-    public QuerySuggestionsConfigurationResponse(string appId = default(string), string sourceIndicesAPIKey = default(string), string suggestionsIndicesAPIKey = default(string), string externalIndicesAPIKey = @"", string indexName = default(string), List<SourceIndex> sourceIndices = default(List<SourceIndex>), Languages languages = default(Languages), List<string> exclude = default(List<string>), bool enablePersonalization = false, bool allowSpecialCharacters = false)
+    public QuerySuggestionsConfigurationResponse(string indexName, List<SourceIndex> sourceIndices)
     {
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for QuerySuggestionsConfigurationResponse and cannot be null");
-      }
-      this.IndexName = indexName;
-      // to ensure "sourceIndices" is required (not null)
-      if (sourceIndices == null)
-      {
-        throw new ArgumentNullException("sourceIndices is a required property for QuerySuggestionsConfigurationResponse and cannot be null");
-      }
-      this.SourceIndices = sourceIndices;
-      this.AppId = appId;
-      this.SourceIndicesAPIKey = sourceIndicesAPIKey;
-      this.SuggestionsIndicesAPIKey = suggestionsIndicesAPIKey;
-      // use default value if no "externalIndicesAPIKey" provided
-      this.ExternalIndicesAPIKey = externalIndicesAPIKey ?? @"";
-      this.Languages = languages;
-      this.Exclude = exclude;
-      this.EnablePersonalization = enablePersonalization;
-      this.AllowSpecialCharacters = allowSpecialCharacters;
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for QuerySuggestionsConfigurationResponse and cannot be null");
+      this.SourceIndices = sourceIndices ?? throw new ArgumentNullException("sourceIndices is a required property for QuerySuggestionsConfigurationResponse and cannot be null");
     }
 
     /// <summary>
@@ -127,14 +100,14 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// </summary>
     /// <value>Turn on personalized query suggestions.</value>
     [DataMember(Name = "enablePersonalization", EmitDefaultValue = true)]
-    public bool EnablePersonalization { get; set; }
+    public bool? EnablePersonalization { get; set; }
 
     /// <summary>
     /// Allow suggestions with special characters.
     /// </summary>
     /// <value>Allow suggestions with special characters.</value>
     [DataMember(Name = "allowSpecialCharacters", EmitDefaultValue = true)]
-    public bool AllowSpecialCharacters { get; set; }
+    public bool? AllowSpecialCharacters { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

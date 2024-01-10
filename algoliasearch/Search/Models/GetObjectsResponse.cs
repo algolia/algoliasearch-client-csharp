@@ -16,31 +16,26 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// GetObjectsResponse
   /// </summary>
   [DataContract(Name = "getObjectsResponse")]
-  public partial class GetObjectsResponse
+  public partial class GetObjectsResponse<T>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetObjectsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetObjectsResponse() { }
+    public GetObjectsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetObjectsResponse" /> class.
     /// </summary>
     /// <param name="results">Retrieved results. (required).</param>
-    public GetObjectsResponse(List<Object> results = default(List<Object>))
+    public GetObjectsResponse(List<T> results)
     {
-      // to ensure "results" is required (not null)
-      if (results == null)
-      {
-        throw new ArgumentNullException("results is a required property for GetObjectsResponse and cannot be null");
-      }
-      this.Results = results;
+      this.Results = results ?? throw new ArgumentNullException("results is a required property for GetObjectsResponse and cannot be null");
     }
 
     /// <summary>
@@ -48,7 +43,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Retrieved results.</value>
     [DataMember(Name = "results", IsRequired = true, EmitDefaultValue = true)]
-    public List<Object> Results { get; set; }
+    public List<T> Results { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

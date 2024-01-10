@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences) of a rule. 
@@ -27,18 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="Consequence" /> class.
     /// </summary>
-    /// <param name="varParams">varParams.</param>
-    /// <param name="promote">Records to promote..</param>
-    /// <param name="filterPromotes">Only use in combination with the &#x60;promote&#x60; consequence. When &#x60;true&#x60;, promoted results will be restricted to match the filters of the current search. When &#x60;false&#x60;, the promoted results will show up regardless of the filters. (default to false).</param>
-    /// <param name="hide">Records to hide. By default, you can hide up to 50 records per rule..</param>
-    /// <param name="userData">Custom JSON object that will be appended to the userData array in the response. This object isn&#39;t interpreted by the API. It&#39;s limited to 1kB of minified JSON..</param>
-    public Consequence(ConsequenceParams varParams = default(ConsequenceParams), List<Promote> promote = default(List<Promote>), bool filterPromotes = false, List<ConsequenceHide> hide = default(List<ConsequenceHide>), Object userData = default(Object))
+    public Consequence()
     {
-      this.VarParams = varParams;
-      this.Promote = promote;
-      this.FilterPromotes = filterPromotes;
-      this.Hide = hide;
-      this.UserData = userData;
     }
 
     /// <summary>
@@ -59,7 +49,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Only use in combination with the &#x60;promote&#x60; consequence. When &#x60;true&#x60;, promoted results will be restricted to match the filters of the current search. When &#x60;false&#x60;, the promoted results will show up regardless of the filters.</value>
     [DataMember(Name = "filterPromotes", EmitDefaultValue = true)]
-    public bool FilterPromotes { get; set; }
+    public bool? FilterPromotes { get; set; }
 
     /// <summary>
     /// Records to hide. By default, you can hide up to 50 records per rule.

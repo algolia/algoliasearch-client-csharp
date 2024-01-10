@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// RankingInfo
@@ -28,24 +28,19 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="RankingInfo" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RankingInfo() { }
+    public RankingInfo() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="RankingInfo" /> class.
     /// </summary>
     /// <param name="filters">This field is reserved for advanced usage. (required).</param>
     /// <param name="firstMatchedWord">Position of the most important matched attribute in the attributes to index list. (required).</param>
     /// <param name="geoDistance">Distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters). (required).</param>
-    /// <param name="geoPrecision">Precision used when computing the geo distance, in meters..</param>
-    /// <param name="matchedGeoLocation">matchedGeoLocation.</param>
-    /// <param name="personalization">personalization.</param>
     /// <param name="nbExactWords">Number of exactly matched words. (required).</param>
     /// <param name="nbTypos">Number of typos encountered when matching the record. (required).</param>
     /// <param name="promoted">Present and set to true if a Rule promoted the hit. (required).</param>
-    /// <param name="proximityDistance">When the query contains more than one word, the sum of the distances between matched words (in meters)..</param>
     /// <param name="userScore">Custom ranking for the object, expressed as a single integer value. (required).</param>
     /// <param name="words">Number of matched words, including prefixes and typos. (required).</param>
-    /// <param name="promotedByReRanking">Wether the record are promoted by the re-ranking strategy..</param>
-    public RankingInfo(int filters = default(int), int firstMatchedWord = default(int), int geoDistance = default(int), int geoPrecision = default(int), MatchedGeoLocation matchedGeoLocation = default(MatchedGeoLocation), Personalization personalization = default(Personalization), int nbExactWords = default(int), int nbTypos = default(int), bool promoted = default(bool), int proximityDistance = default(int), int userScore = default(int), int words = default(int), bool promotedByReRanking = default(bool))
+    public RankingInfo(int filters, int firstMatchedWord, int geoDistance, int nbExactWords, int nbTypos, bool promoted, int userScore, int words)
     {
       this.Filters = filters;
       this.FirstMatchedWord = firstMatchedWord;
@@ -55,11 +50,6 @@ namespace Algolia.Search.Recommend.Models
       this.Promoted = promoted;
       this.UserScore = userScore;
       this.Words = words;
-      this.GeoPrecision = geoPrecision;
-      this.MatchedGeoLocation = matchedGeoLocation;
-      this.Personalization = personalization;
-      this.ProximityDistance = proximityDistance;
-      this.PromotedByReRanking = promotedByReRanking;
     }
 
     /// <summary>
@@ -88,7 +78,7 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>Precision used when computing the geo distance, in meters.</value>
     [DataMember(Name = "geoPrecision", EmitDefaultValue = false)]
-    public int GeoPrecision { get; set; }
+    public int? GeoPrecision { get; set; }
 
     /// <summary>
     /// Gets or Sets MatchedGeoLocation
@@ -128,7 +118,7 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>When the query contains more than one word, the sum of the distances between matched words (in meters).</value>
     [DataMember(Name = "proximityDistance", EmitDefaultValue = false)]
-    public int ProximityDistance { get; set; }
+    public int? ProximityDistance { get; set; }
 
     /// <summary>
     /// Custom ranking for the object, expressed as a single integer value.
@@ -149,7 +139,7 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>Wether the record are promoted by the re-ranking strategy.</value>
     [DataMember(Name = "promotedByReRanking", EmitDefaultValue = true)]
-    public bool PromotedByReRanking { get; set; }
+    public bool? PromotedByReRanking { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// AverageClickEvent
@@ -28,23 +28,18 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="AverageClickEvent" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AverageClickEvent() { }
+    public AverageClickEvent() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AverageClickEvent" /> class.
     /// </summary>
     /// <param name="average">Average count of all click events. (required).</param>
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-    public AverageClickEvent(double average = default(double), int clickCount = default(int), string date = default(string))
+    public AverageClickEvent(double average, int clickCount, string date)
     {
       this.Average = average;
       this.ClickCount = clickCount;
-      // to ensure "date" is required (not null)
-      if (date == null)
-      {
-        throw new ArgumentNullException("date is a required property for AverageClickEvent and cannot be null");
-      }
-      this.Date = date;
+      this.Date = date ?? throw new ArgumentNullException("date is a required property for AverageClickEvent and cannot be null");
     }
 
     /// <summary>

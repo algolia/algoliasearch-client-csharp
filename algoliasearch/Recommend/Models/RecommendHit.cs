@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Recommend hit.
@@ -28,7 +28,7 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="RecommendHit" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RecommendHit()
+    public RecommendHit()
     {
       this.AdditionalProperties = new Dictionary<string, object>();
     }
@@ -36,24 +36,11 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="RecommendHit" /> class.
     /// </summary>
     /// <param name="objectID">Unique object identifier. (required).</param>
-    /// <param name="highlightResult">Show highlighted section and words matched on a query..</param>
-    /// <param name="snippetResult">Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty..</param>
-    /// <param name="rankingInfo">rankingInfo.</param>
-    /// <param name="distinctSeqID">distinctSeqID.</param>
     /// <param name="score">Recommendation score. (required).</param>
-    public RecommendHit(string objectID = default(string), Dictionary<string, HighlightResult> highlightResult = default(Dictionary<string, HighlightResult>), Dictionary<string, SnippetResult> snippetResult = default(Dictionary<string, SnippetResult>), RankingInfo rankingInfo = default(RankingInfo), int distinctSeqID = default(int), double score = default(double))
+    public RecommendHit(string objectID, double score)
     {
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for RecommendHit and cannot be null");
-      }
-      this.ObjectID = objectID;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for RecommendHit and cannot be null");
       this.Score = score;
-      this.HighlightResult = highlightResult;
-      this.SnippetResult = snippetResult;
-      this.RankingInfo = rankingInfo;
-      this.DistinctSeqID = distinctSeqID;
       this.AdditionalProperties = new Dictionary<string, object>();
     }
 
@@ -88,7 +75,7 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets DistinctSeqID
     /// </summary>
     [DataMember(Name = "_distinctSeqID", EmitDefaultValue = false)]
-    public int DistinctSeqID { get; set; }
+    public int? DistinctSeqID { get; set; }
 
     /// <summary>
     /// Recommendation score.

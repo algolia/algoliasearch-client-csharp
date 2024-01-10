@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// HasPendingMappingsResponse
@@ -28,16 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="HasPendingMappingsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected HasPendingMappingsResponse() { }
+    public HasPendingMappingsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="HasPendingMappingsResponse" /> class.
     /// </summary>
     /// <param name="pending">Indicates whether there are clusters undergoing migration, creation, or deletion. (required).</param>
-    /// <param name="clusters">Cluster pending mapping state: migrating, creating, deleting. .</param>
-    public HasPendingMappingsResponse(bool pending = default(bool), Dictionary<string, List<string>> clusters = default(Dictionary<string, List<string>>))
+    public HasPendingMappingsResponse(bool pending)
     {
       this.Pending = pending;
-      this.Clusters = clusters;
     }
 
     /// <summary>

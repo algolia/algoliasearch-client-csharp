@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Record retrieval operation.
@@ -28,28 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="GetObjectsRequest" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetObjectsRequest() { }
+    public GetObjectsRequest() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetObjectsRequest" /> class.
     /// </summary>
-    /// <param name="attributesToRetrieve">Attributes to retrieve. If not specified, all retrievable attributes are returned..</param>
     /// <param name="objectID">Record&#39;s objectID. (required).</param>
     /// <param name="indexName">Name of the index containing the required records. (required).</param>
-    public GetObjectsRequest(List<string> attributesToRetrieve = default(List<string>), string objectID = default(string), string indexName = default(string))
+    public GetObjectsRequest(string objectID, string indexName)
     {
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for GetObjectsRequest and cannot be null");
-      }
-      this.ObjectID = objectID;
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for GetObjectsRequest and cannot be null");
-      }
-      this.IndexName = indexName;
-      this.AttributesToRetrieve = attributesToRetrieve;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for GetObjectsRequest and cannot be null");
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for GetObjectsRequest and cannot be null");
     }
 
     /// <summary>

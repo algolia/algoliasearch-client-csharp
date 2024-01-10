@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// TaskCreateTrigger
@@ -33,9 +33,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of OnDemandTriggerInput.</param>
     public TaskCreateTrigger(OnDemandTriggerInput actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of ScheduleTriggerInput.</param>
     public TaskCreateTrigger(ScheduleTriggerInput actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -57,9 +57,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of SubscriptionTrigger.</param>
     public TaskCreateTrigger(SubscriptionTrigger actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -76,22 +76,7 @@ namespace Algolia.Search.Ingestion.Models
       }
       set
       {
-        if (value.GetType() == typeof(OnDemandTriggerInput))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ScheduleTriggerInput))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(SubscriptionTrigger))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: OnDemandTriggerInput, ScheduleTriggerInput, SubscriptionTrigger");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -100,9 +85,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of OnDemandTriggerInput</returns>
-    public OnDemandTriggerInput GetterOnDemandTriggerInput()
+    public OnDemandTriggerInput AsOnDemandTriggerInput()
     {
-      return (OnDemandTriggerInput)this.ActualInstance;
+      return (OnDemandTriggerInput)ActualInstance;
     }
 
     /// <summary>
@@ -110,9 +95,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ScheduleTriggerInput</returns>
-    public ScheduleTriggerInput GetterScheduleTriggerInput()
+    public ScheduleTriggerInput AsScheduleTriggerInput()
     {
-      return (ScheduleTriggerInput)this.ActualInstance;
+      return (ScheduleTriggerInput)ActualInstance;
     }
 
     /// <summary>
@@ -120,9 +105,37 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of SubscriptionTrigger</returns>
-    public SubscriptionTrigger GetterSubscriptionTrigger()
+    public SubscriptionTrigger AsSubscriptionTrigger()
     {
-      return (SubscriptionTrigger)this.ActualInstance;
+      return (SubscriptionTrigger)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `OnDemandTriggerInput` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsOnDemandTriggerInput()
+    {
+      return ActualInstance.GetType() == typeof(OnDemandTriggerInput);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ScheduleTriggerInput` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsScheduleTriggerInput()
+    {
+      return ActualInstance.GetType() == typeof(ScheduleTriggerInput);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `SubscriptionTrigger` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSubscriptionTrigger()
+    {
+      return ActualInstance.GetType() == typeof(SubscriptionTrigger);
     }
 
     /// <summary>
@@ -133,7 +146,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       var sb = new StringBuilder();
       sb.Append("class TaskCreateTrigger {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -144,7 +157,7 @@ namespace Algolia.Search.Ingestion.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, TaskCreateTrigger.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -160,62 +173,27 @@ namespace Algolia.Search.Ingestion.Models
       {
         return newTaskCreateTrigger;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(OnDemandTriggerInput).GetProperty("AdditionalProperties") == null)
-        {
-          newTaskCreateTrigger = new TaskCreateTrigger(JsonConvert.DeserializeObject<OnDemandTriggerInput>(jsonString, TaskCreateTrigger.SerializerSettings));
-        }
-        else
-        {
-          newTaskCreateTrigger = new TaskCreateTrigger(JsonConvert.DeserializeObject<OnDemandTriggerInput>(jsonString, TaskCreateTrigger.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("OnDemandTriggerInput");
-        match++;
+        return new TaskCreateTrigger(JsonConvert.DeserializeObject<OnDemandTriggerInput>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into OnDemandTriggerInput: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ScheduleTriggerInput).GetProperty("AdditionalProperties") == null)
-        {
-          newTaskCreateTrigger = new TaskCreateTrigger(JsonConvert.DeserializeObject<ScheduleTriggerInput>(jsonString, TaskCreateTrigger.SerializerSettings));
-        }
-        else
-        {
-          newTaskCreateTrigger = new TaskCreateTrigger(JsonConvert.DeserializeObject<ScheduleTriggerInput>(jsonString, TaskCreateTrigger.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ScheduleTriggerInput");
-        match++;
+        return new TaskCreateTrigger(JsonConvert.DeserializeObject<ScheduleTriggerInput>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ScheduleTriggerInput: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SubscriptionTrigger).GetProperty("AdditionalProperties") == null)
-        {
-          newTaskCreateTrigger = new TaskCreateTrigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, TaskCreateTrigger.SerializerSettings));
-        }
-        else
-        {
-          newTaskCreateTrigger = new TaskCreateTrigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, TaskCreateTrigger.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SubscriptionTrigger");
-        match++;
+        return new TaskCreateTrigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -223,17 +201,7 @@ namespace Algolia.Search.Ingestion.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SubscriptionTrigger: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newTaskCreateTrigger;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -266,7 +234,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return TaskCreateTrigger.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

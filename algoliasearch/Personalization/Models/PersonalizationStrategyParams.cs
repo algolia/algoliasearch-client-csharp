@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Personalization.Models
+namespace Algolia.Search.Models.Personalization
 {
   /// <summary>
   /// PersonalizationStrategyParams
@@ -28,27 +28,17 @@ namespace Algolia.Search.Personalization.Models
     /// Initializes a new instance of the <see cref="PersonalizationStrategyParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected PersonalizationStrategyParams() { }
+    public PersonalizationStrategyParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="PersonalizationStrategyParams" /> class.
     /// </summary>
     /// <param name="eventScoring">Scores associated with the events. (required).</param>
     /// <param name="facetScoring">Scores associated with the facets. (required).</param>
     /// <param name="personalizationImpact">The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled). (required).</param>
-    public PersonalizationStrategyParams(List<EventScoring> eventScoring = default(List<EventScoring>), List<FacetScoring> facetScoring = default(List<FacetScoring>), int personalizationImpact = default(int))
+    public PersonalizationStrategyParams(List<EventScoring> eventScoring, List<FacetScoring> facetScoring, int personalizationImpact)
     {
-      // to ensure "eventScoring" is required (not null)
-      if (eventScoring == null)
-      {
-        throw new ArgumentNullException("eventScoring is a required property for PersonalizationStrategyParams and cannot be null");
-      }
-      this.EventScoring = eventScoring;
-      // to ensure "facetScoring" is required (not null)
-      if (facetScoring == null)
-      {
-        throw new ArgumentNullException("facetScoring is a required property for PersonalizationStrategyParams and cannot be null");
-      }
-      this.FacetScoring = facetScoring;
+      this.EventScoring = eventScoring ?? throw new ArgumentNullException("eventScoring is a required property for PersonalizationStrategyParams and cannot be null");
+      this.FacetScoring = facetScoring ?? throw new ArgumentNullException("facetScoring is a required property for PersonalizationStrategyParams and cannot be null");
       this.PersonalizationImpact = personalizationImpact;
     }
 

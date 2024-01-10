@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Synonym object.
@@ -34,33 +34,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SynonymHit" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SynonymHit() { }
+    public SynonymHit() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SynonymHit" /> class.
     /// </summary>
     /// <param name="objectID">Unique identifier of a synonym object. (required).</param>
     /// <param name="type">type (required).</param>
-    /// <param name="synonyms">Words or phrases considered equivalent..</param>
-    /// <param name="input">Word or phrase to appear in query strings (for [&#x60;onewaysynonym&#x60;s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/))..</param>
-    /// <param name="word">Word or phrase to appear in query strings (for [&#x60;altcorrection1&#x60; and &#x60;altcorrection2&#x60;](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/))..</param>
-    /// <param name="corrections">Words to be matched in records..</param>
-    /// <param name="placeholder">[Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records. .</param>
-    /// <param name="replacements">Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/)..</param>
-    public SynonymHit(string objectID = default(string), SynonymType type = default(SynonymType), List<string> synonyms = default(List<string>), string input = default(string), string word = default(string), List<string> corrections = default(List<string>), string placeholder = default(string), List<string> replacements = default(List<string>))
+    public SynonymHit(string objectID, SynonymType type)
     {
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for SynonymHit and cannot be null");
-      }
-      this.ObjectID = objectID;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for SynonymHit and cannot be null");
       this.Type = type;
-      this.Synonyms = synonyms;
-      this.Input = input;
-      this.Word = word;
-      this.Corrections = corrections;
-      this.Placeholder = placeholder;
-      this.Replacements = replacements;
     }
 
     /// <summary>

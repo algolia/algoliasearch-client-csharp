@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The input for a &#x60;schedule&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
@@ -28,12 +28,12 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="ScheduleDateUtilsInput" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ScheduleDateUtilsInput() { }
+    public ScheduleDateUtilsInput() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ScheduleDateUtilsInput" /> class.
     /// </summary>
     /// <param name="timeframe">The timeframe of the extraction, in number of days from today. (required).</param>
-    public ScheduleDateUtilsInput(int timeframe = default(int))
+    public ScheduleDateUtilsInput(int timeframe)
     {
       this.Timeframe = timeframe;
     }

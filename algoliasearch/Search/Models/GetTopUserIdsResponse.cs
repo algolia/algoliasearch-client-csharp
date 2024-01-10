@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// User IDs and clusters.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="GetTopUserIdsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetTopUserIdsResponse() { }
+    public GetTopUserIdsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetTopUserIdsResponse" /> class.
     /// </summary>
     /// <param name="topUsers">Key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values. (required).</param>
-    public GetTopUserIdsResponse(List<Dictionary<string, List<UserId>>> topUsers = default(List<Dictionary<string, List<UserId>>>))
+    public GetTopUserIdsResponse(List<Dictionary<string, List<UserId>>> topUsers)
     {
-      // to ensure "topUsers" is required (not null)
-      if (topUsers == null)
-      {
-        throw new ArgumentNullException("topUsers is a required property for GetTopUserIdsResponse and cannot be null");
-      }
-      this.TopUsers = topUsers;
+      this.TopUsers = topUsers ?? throw new ArgumentNullException("topUsers is a required property for GetTopUserIdsResponse and cannot be null");
     }
 
     /// <summary>

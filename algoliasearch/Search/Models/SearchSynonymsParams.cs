@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchSynonymsParams
@@ -27,11 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchSynonymsParams" /> class.
     /// </summary>
-    /// <param name="query">Text to search for in an index. (default to &quot;&quot;).</param>
-    public SearchSynonymsParams(string query = @"")
+    public SearchSynonymsParams()
     {
-      // use default value if no "query" provided
-      this.Query = query ?? @"";
     }
 
     /// <summary>

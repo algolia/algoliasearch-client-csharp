@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Log
@@ -28,7 +28,7 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="Log" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Log() { }
+    public Log() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Log" /> class.
     /// </summary>
@@ -43,82 +43,19 @@ namespace Algolia.Search.Search.Models
     /// <param name="sha1">SHA1 signature of the log entry. (required).</param>
     /// <param name="nbApiCalls">Number of API calls. (required).</param>
     /// <param name="processingTimeMs">Processing time for the query. Doesn&#39;t include network time. (required).</param>
-    /// <param name="index">Index targeted by the query..</param>
-    /// <param name="queryParams">Query parameters sent with the request..</param>
-    /// <param name="queryNbHits">Number of hits returned for the query..</param>
-    /// <param name="innerQueries">Performed queries for the given request..</param>
-    public Log(string timestamp = default(string), string method = default(string), string answerCode = default(string), string queryBody = default(string), string answer = default(string), string url = default(string), string ip = default(string), string queryHeaders = default(string), string sha1 = default(string), string nbApiCalls = default(string), string processingTimeMs = default(string), string index = default(string), string queryParams = default(string), string queryNbHits = default(string), List<LogQuery> innerQueries = default(List<LogQuery>))
+    public Log(string timestamp, string method, string answerCode, string queryBody, string answer, string url, string ip, string queryHeaders, string sha1, string nbApiCalls, string processingTimeMs)
     {
-      // to ensure "timestamp" is required (not null)
-      if (timestamp == null)
-      {
-        throw new ArgumentNullException("timestamp is a required property for Log and cannot be null");
-      }
-      this.Timestamp = timestamp;
-      // to ensure "method" is required (not null)
-      if (method == null)
-      {
-        throw new ArgumentNullException("method is a required property for Log and cannot be null");
-      }
-      this.Method = method;
-      // to ensure "answerCode" is required (not null)
-      if (answerCode == null)
-      {
-        throw new ArgumentNullException("answerCode is a required property for Log and cannot be null");
-      }
-      this.AnswerCode = answerCode;
-      // to ensure "queryBody" is required (not null)
-      if (queryBody == null)
-      {
-        throw new ArgumentNullException("queryBody is a required property for Log and cannot be null");
-      }
-      this.QueryBody = queryBody;
-      // to ensure "answer" is required (not null)
-      if (answer == null)
-      {
-        throw new ArgumentNullException("answer is a required property for Log and cannot be null");
-      }
-      this.Answer = answer;
-      // to ensure "url" is required (not null)
-      if (url == null)
-      {
-        throw new ArgumentNullException("url is a required property for Log and cannot be null");
-      }
-      this.Url = url;
-      // to ensure "ip" is required (not null)
-      if (ip == null)
-      {
-        throw new ArgumentNullException("ip is a required property for Log and cannot be null");
-      }
-      this.Ip = ip;
-      // to ensure "queryHeaders" is required (not null)
-      if (queryHeaders == null)
-      {
-        throw new ArgumentNullException("queryHeaders is a required property for Log and cannot be null");
-      }
-      this.QueryHeaders = queryHeaders;
-      // to ensure "sha1" is required (not null)
-      if (sha1 == null)
-      {
-        throw new ArgumentNullException("sha1 is a required property for Log and cannot be null");
-      }
-      this.Sha1 = sha1;
-      // to ensure "nbApiCalls" is required (not null)
-      if (nbApiCalls == null)
-      {
-        throw new ArgumentNullException("nbApiCalls is a required property for Log and cannot be null");
-      }
-      this.NbApiCalls = nbApiCalls;
-      // to ensure "processingTimeMs" is required (not null)
-      if (processingTimeMs == null)
-      {
-        throw new ArgumentNullException("processingTimeMs is a required property for Log and cannot be null");
-      }
-      this.ProcessingTimeMs = processingTimeMs;
-      this.Index = index;
-      this.QueryParams = queryParams;
-      this.QueryNbHits = queryNbHits;
-      this.InnerQueries = innerQueries;
+      this.Timestamp = timestamp ?? throw new ArgumentNullException("timestamp is a required property for Log and cannot be null");
+      this.Method = method ?? throw new ArgumentNullException("method is a required property for Log and cannot be null");
+      this.AnswerCode = answerCode ?? throw new ArgumentNullException("answerCode is a required property for Log and cannot be null");
+      this.QueryBody = queryBody ?? throw new ArgumentNullException("queryBody is a required property for Log and cannot be null");
+      this.Answer = answer ?? throw new ArgumentNullException("answer is a required property for Log and cannot be null");
+      this.Url = url ?? throw new ArgumentNullException("url is a required property for Log and cannot be null");
+      this.Ip = ip ?? throw new ArgumentNullException("ip is a required property for Log and cannot be null");
+      this.QueryHeaders = queryHeaders ?? throw new ArgumentNullException("queryHeaders is a required property for Log and cannot be null");
+      this.Sha1 = sha1 ?? throw new ArgumentNullException("sha1 is a required property for Log and cannot be null");
+      this.NbApiCalls = nbApiCalls ?? throw new ArgumentNullException("nbApiCalls is a required property for Log and cannot be null");
+      this.ProcessingTimeMs = processingTimeMs ?? throw new ArgumentNullException("processingTimeMs is a required property for Log and cannot be null");
     }
 
     /// <summary>

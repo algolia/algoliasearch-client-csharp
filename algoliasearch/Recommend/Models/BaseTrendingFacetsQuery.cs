@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// BaseTrendingFacetsQuery
@@ -29,26 +29,19 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets Model
     /// </summary>
     [DataMember(Name = "model", EmitDefaultValue = false)]
-    public TrendingFacetsModel? Model { get; set; }
+    public TrendingFacetsModel Model { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseTrendingFacetsQuery" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BaseTrendingFacetsQuery() { }
+    public BaseTrendingFacetsQuery() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseTrendingFacetsQuery" /> class.
     /// </summary>
     /// <param name="facetName">Facet name for trending models. (required).</param>
-    /// <param name="model">model.</param>
-    public BaseTrendingFacetsQuery(string facetName = default(string), TrendingFacetsModel? model = default(TrendingFacetsModel?))
+    public BaseTrendingFacetsQuery(string facetName)
     {
-      // to ensure "facetName" is required (not null)
-      if (facetName == null)
-      {
-        throw new ArgumentNullException("facetName is a required property for BaseTrendingFacetsQuery and cannot be null");
-      }
-      this.FacetName = facetName;
-      this.Model = model;
+      this.FacetName = facetName ?? throw new ArgumentNullException("facetName is a required property for BaseTrendingFacetsQuery and cannot be null");
     }
 
     /// <summary>

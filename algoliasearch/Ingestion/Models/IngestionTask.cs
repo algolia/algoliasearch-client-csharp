@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// IngestionTask
@@ -34,7 +34,7 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="IngestionTask" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected IngestionTask() { }
+    public IngestionTask() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="IngestionTask" /> class.
     /// </summary>
@@ -42,49 +42,18 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="sourceID">The source UUID. (required).</param>
     /// <param name="destinationID">The destination UUID. (required).</param>
     /// <param name="trigger">trigger (required).</param>
-    /// <param name="input">input.</param>
     /// <param name="enabled">Whether the task is enabled or not. (required) (default to true).</param>
-    /// <param name="failureThreshold">A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not..</param>
     /// <param name="action">action (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    /// <param name="updatedAt">Date of last update (RFC3339 format)..</param>
-    public IngestionTask(string taskID = default(string), string sourceID = default(string), string destinationID = default(string), Trigger trigger = default(Trigger), TaskInput input = default(TaskInput), bool enabled = true, int failureThreshold = default(int), ActionType action = default(ActionType), string createdAt = default(string), string updatedAt = default(string))
+    public IngestionTask(string taskID, string sourceID, string destinationID, Trigger trigger, bool enabled, ActionType action, string createdAt)
     {
-      // to ensure "taskID" is required (not null)
-      if (taskID == null)
-      {
-        throw new ArgumentNullException("taskID is a required property for IngestionTask and cannot be null");
-      }
-      this.TaskID = taskID;
-      // to ensure "sourceID" is required (not null)
-      if (sourceID == null)
-      {
-        throw new ArgumentNullException("sourceID is a required property for IngestionTask and cannot be null");
-      }
-      this.SourceID = sourceID;
-      // to ensure "destinationID" is required (not null)
-      if (destinationID == null)
-      {
-        throw new ArgumentNullException("destinationID is a required property for IngestionTask and cannot be null");
-      }
-      this.DestinationID = destinationID;
-      // to ensure "trigger" is required (not null)
-      if (trigger == null)
-      {
-        throw new ArgumentNullException("trigger is a required property for IngestionTask and cannot be null");
-      }
-      this.Trigger = trigger;
+      this.TaskID = taskID ?? throw new ArgumentNullException("taskID is a required property for IngestionTask and cannot be null");
+      this.SourceID = sourceID ?? throw new ArgumentNullException("sourceID is a required property for IngestionTask and cannot be null");
+      this.DestinationID = destinationID ?? throw new ArgumentNullException("destinationID is a required property for IngestionTask and cannot be null");
+      this.Trigger = trigger ?? throw new ArgumentNullException("trigger is a required property for IngestionTask and cannot be null");
       this.Enabled = enabled;
       this.Action = action;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for IngestionTask and cannot be null");
-      }
-      this.CreatedAt = createdAt;
-      this.Input = input;
-      this.FailureThreshold = failureThreshold;
-      this.UpdatedAt = updatedAt;
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for IngestionTask and cannot be null");
     }
 
     /// <summary>
@@ -132,7 +101,7 @@ namespace Algolia.Search.Ingestion.Models
     /// </summary>
     /// <value>A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not.</value>
     [DataMember(Name = "failureThreshold", EmitDefaultValue = false)]
-    public int FailureThreshold { get; set; }
+    public int? FailureThreshold { get; set; }
 
     /// <summary>
     /// Date of creation (RFC3339 format).

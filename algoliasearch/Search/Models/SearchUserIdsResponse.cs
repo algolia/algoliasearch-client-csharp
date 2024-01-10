@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// userIDs data.
@@ -28,7 +28,7 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SearchUserIdsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchUserIdsResponse() { }
+    public SearchUserIdsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchUserIdsResponse" /> class.
     /// </summary>
@@ -37,23 +37,13 @@ namespace Algolia.Search.Search.Models
     /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
     /// <param name="hitsPerPage">Maximum number of hits per page. (required) (default to 20).</param>
     /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public SearchUserIdsResponse(List<UserHit> hits = default(List<UserHit>), int nbHits = default(int), int page = 0, int hitsPerPage = 20, string updatedAt = default(string))
+    public SearchUserIdsResponse(List<UserHit> hits, int nbHits, int page, int hitsPerPage, string updatedAt)
     {
-      // to ensure "hits" is required (not null)
-      if (hits == null)
-      {
-        throw new ArgumentNullException("hits is a required property for SearchUserIdsResponse and cannot be null");
-      }
-      this.Hits = hits;
+      this.Hits = hits ?? throw new ArgumentNullException("hits is a required property for SearchUserIdsResponse and cannot be null");
       this.NbHits = nbHits;
       this.Page = page;
       this.HitsPerPage = hitsPerPage;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for SearchUserIdsResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for SearchUserIdsResponse and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// LatencyResponse
@@ -27,10 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="LatencyResponse" /> class.
     /// </summary>
-    /// <param name="metrics">metrics.</param>
-    public LatencyResponse(LatencyResponseMetrics metrics = default(LatencyResponseMetrics))
+    public LatencyResponse()
     {
-      this.Metrics = metrics;
     }
 
     /// <summary>

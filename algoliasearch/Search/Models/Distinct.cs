@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Enables [deduplication or grouping of results (Algolia&#39;s _distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature)).
@@ -33,9 +33,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="actualInstance">An instance of bool.</param>
     public Distinct(bool actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="actualInstance">An instance of int.</param>
     public Distinct(int actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Search.Models
       }
       set
       {
-        if (value.GetType() == typeof(bool))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(int))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: bool, int");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of bool</returns>
-    public bool GetterBool()
+    public bool AsBool()
     {
-      return (bool)this.ActualInstance;
+      return (bool)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of int</returns>
-    public int GetterInt()
+    public int AsInt()
     {
-      return (int)this.ActualInstance;
+      return (int)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `bool` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsBool()
+    {
+      return ActualInstance.GetType() == typeof(bool);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `int` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsInt()
+    {
+      return ActualInstance.GetType() == typeof(int);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Search.Models
     {
       var sb = new StringBuilder();
       sb.Append("class Distinct {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Search.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, Distinct.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Search.Models
       {
         return newDistinct;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(bool).GetProperty("AdditionalProperties") == null)
-        {
-          newDistinct = new Distinct(JsonConvert.DeserializeObject<bool>(jsonString, Distinct.SerializerSettings));
-        }
-        else
-        {
-          newDistinct = new Distinct(JsonConvert.DeserializeObject<bool>(jsonString, Distinct.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("bool");
-        match++;
+        return new Distinct(JsonConvert.DeserializeObject<bool>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into bool: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(int).GetProperty("AdditionalProperties") == null)
-        {
-          newDistinct = new Distinct(JsonConvert.DeserializeObject<int>(jsonString, Distinct.SerializerSettings));
-        }
-        else
-        {
-          newDistinct = new Distinct(JsonConvert.DeserializeObject<int>(jsonString, Distinct.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("int");
-        match++;
+        return new Distinct(JsonConvert.DeserializeObject<int>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Search.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into int: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newDistinct;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Search.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return Distinct.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

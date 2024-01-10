@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceSearch
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="SourceSearch" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceSearch() { }
+    public SourceSearch() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceSearch" /> class.
     /// </summary>
     /// <param name="sourceIDs">sourceIDs (required).</param>
-    public SourceSearch(List<string> sourceIDs = default(List<string>))
+    public SourceSearch(List<string> sourceIDs)
     {
-      // to ensure "sourceIDs" is required (not null)
-      if (sourceIDs == null)
-      {
-        throw new ArgumentNullException("sourceIDs is a required property for SourceSearch and cannot be null");
-      }
-      this.SourceIDs = sourceIDs;
+      this.SourceIDs = sourceIDs ?? throw new ArgumentNullException("sourceIDs is a required property for SourceSearch and cannot be null");
     }
 
     /// <summary>

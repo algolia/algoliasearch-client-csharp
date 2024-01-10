@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// StatusResponse
@@ -27,10 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="StatusResponse" /> class.
     /// </summary>
-    /// <param name="status">status.</param>
-    public StatusResponse(Dictionary<string, Status> status = default(Dictionary<string, Status>))
+    public StatusResponse()
     {
-      this.Status = status;
     }
 
     /// <summary>

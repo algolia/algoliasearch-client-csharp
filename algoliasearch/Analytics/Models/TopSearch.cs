@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// TopSearch
@@ -28,21 +28,16 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="TopSearch" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TopSearch() { }
+    public TopSearch() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TopSearch" /> class.
     /// </summary>
     /// <param name="search">User query. (required).</param>
     /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public TopSearch(string search = default(string), int count = default(int), int nbHits = default(int))
+    public TopSearch(string search, int count, int nbHits)
     {
-      // to ensure "search" is required (not null)
-      if (search == null)
-      {
-        throw new ArgumentNullException("search is a required property for TopSearch and cannot be null");
-      }
-      this.Search = search;
+      this.Search = search ?? throw new ArgumentNullException("search is a required property for TopSearch and cannot be null");
       this.Count = count;
       this.NbHits = nbHits;
     }

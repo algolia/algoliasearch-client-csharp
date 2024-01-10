@@ -16,19 +16,19 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchHits
   /// </summary>
   [DataContract(Name = "searchHits")]
-  public partial class SearchHits
+  public partial class SearchHits<T>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchHits" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchHits()
+    public SearchHits()
     {
       this.AdditionalProperties = new Dictionary<string, object>();
     }
@@ -38,26 +38,11 @@ namespace Algolia.Search.Search.Models
     /// <param name="hits">hits (required).</param>
     /// <param name="query">Text to search for in an index. (required) (default to &quot;&quot;).</param>
     /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
-    public SearchHits(List<Hit> hits = default(List<Hit>), string query = @"", string varParams = default(string))
+    public SearchHits(List<T> hits, string query, string varParams)
     {
-      // to ensure "hits" is required (not null)
-      if (hits == null)
-      {
-        throw new ArgumentNullException("hits is a required property for SearchHits and cannot be null");
-      }
-      this.Hits = hits;
-      // to ensure "query" is required (not null)
-      if (query == null)
-      {
-        throw new ArgumentNullException("query is a required property for SearchHits and cannot be null");
-      }
-      this.Query = query;
-      // to ensure "varParams" is required (not null)
-      if (varParams == null)
-      {
-        throw new ArgumentNullException("varParams is a required property for SearchHits and cannot be null");
-      }
-      this.VarParams = varParams;
+      this.Hits = hits ?? throw new ArgumentNullException("hits is a required property for SearchHits and cannot be null");
+      this.Query = query ?? throw new ArgumentNullException("query is a required property for SearchHits and cannot be null");
+      this.VarParams = varParams ?? throw new ArgumentNullException("varParams is a required property for SearchHits and cannot be null");
       this.AdditionalProperties = new Dictionary<string, object>();
     }
 
@@ -65,7 +50,7 @@ namespace Algolia.Search.Search.Models
     /// Gets or Sets Hits
     /// </summary>
     [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = true)]
-    public List<Hit> Hits { get; set; }
+    public List<T> Hits { get; set; }
 
     /// <summary>
     /// Text to search for in an index.

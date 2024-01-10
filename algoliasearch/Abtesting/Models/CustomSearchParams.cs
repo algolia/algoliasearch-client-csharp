@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// Applies search parameters from [a restricted set of options](https://www.algolia.com/doc/api-reference/api-methods/add-ab-test/#method-param-customsearchparameters). Only use this parameter if the two variants use the same index.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Abtesting.Models
     /// Initializes a new instance of the <see cref="CustomSearchParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected CustomSearchParams() { }
+    public CustomSearchParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="CustomSearchParams" /> class.
     /// </summary>
     /// <param name="customSearchParameters">customSearchParameters (required).</param>
-    public CustomSearchParams(Object customSearchParameters = default(Object))
+    public CustomSearchParams(Object customSearchParameters)
     {
-      // to ensure "customSearchParameters" is required (not null)
-      if (customSearchParameters == null)
-      {
-        throw new ArgumentNullException("customSearchParameters is a required property for CustomSearchParams and cannot be null");
-      }
-      this.CustomSearchParameters = customSearchParameters;
+      this.CustomSearchParameters = customSearchParameters ?? throw new ArgumentNullException("customSearchParameters is a required property for CustomSearchParams and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Enable or turn off the built-in Algolia stop words for a specific language.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="DictionarySettingsParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DictionarySettingsParams() { }
+    public DictionarySettingsParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DictionarySettingsParams" /> class.
     /// </summary>
     /// <param name="disableStandardEntries">disableStandardEntries (required).</param>
-    public DictionarySettingsParams(StandardEntries disableStandardEntries = default(StandardEntries))
+    public DictionarySettingsParams(StandardEntries disableStandardEntries)
     {
-      // to ensure "disableStandardEntries" is required (not null)
-      if (disableStandardEntries == null)
-      {
-        throw new ArgumentNullException("disableStandardEntries is a required property for DictionarySettingsParams and cannot be null");
-      }
-      this.DisableStandardEntries = disableStandardEntries;
+      this.DisableStandardEntries = disableStandardEntries ?? throw new ArgumentNullException("disableStandardEntries is a required property for DictionarySettingsParams and cannot be null");
     }
 
     /// <summary>

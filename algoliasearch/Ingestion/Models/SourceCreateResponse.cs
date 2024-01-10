@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceCreateResponse
@@ -28,33 +28,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="SourceCreateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceCreateResponse() { }
+    public SourceCreateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceCreateResponse" /> class.
     /// </summary>
     /// <param name="sourceID">The source UUID. (required).</param>
     /// <param name="name">name (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    public SourceCreateResponse(string sourceID = default(string), string name = default(string), string createdAt = default(string))
+    public SourceCreateResponse(string sourceID, string name, string createdAt)
     {
-      // to ensure "sourceID" is required (not null)
-      if (sourceID == null)
-      {
-        throw new ArgumentNullException("sourceID is a required property for SourceCreateResponse and cannot be null");
-      }
-      this.SourceID = sourceID;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for SourceCreateResponse and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for SourceCreateResponse and cannot be null");
-      }
-      this.CreatedAt = createdAt;
+      this.SourceID = sourceID ?? throw new ArgumentNullException("sourceID is a required property for SourceCreateResponse and cannot be null");
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for SourceCreateResponse and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for SourceCreateResponse and cannot be null");
     }
 
     /// <summary>

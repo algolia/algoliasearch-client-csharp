@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetClickThroughRateResponse
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetClickThroughRateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetClickThroughRateResponse() { }
+    public GetClickThroughRateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetClickThroughRateResponse" /> class.
     /// </summary>
@@ -36,17 +36,12 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
     /// <param name="dates">Click-through rate events. (required).</param>
-    public GetClickThroughRateResponse(double rate = default(double), int clickCount = default(int), int trackedSearchCount = default(int), List<ClickThroughRateEvent> dates = default(List<ClickThroughRateEvent>))
+    public GetClickThroughRateResponse(double rate, int clickCount, int trackedSearchCount, List<ClickThroughRateEvent> dates)
     {
       this.Rate = rate;
       this.ClickCount = clickCount;
       this.TrackedSearchCount = trackedSearchCount;
-      // to ensure "dates" is required (not null)
-      if (dates == null)
-      {
-        throw new ArgumentNullException("dates is a required property for GetClickThroughRateResponse and cannot be null");
-      }
-      this.Dates = dates;
+      this.Dates = dates ?? throw new ArgumentNullException("dates is a required property for GetClickThroughRateResponse and cannot be null");
     }
 
     /// <summary>

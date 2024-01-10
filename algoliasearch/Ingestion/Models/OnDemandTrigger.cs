@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The trigger information of a task of type &#x60;onDemand&#x60;.
@@ -34,16 +34,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="OnDemandTrigger" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected OnDemandTrigger() { }
+    public OnDemandTrigger() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="OnDemandTrigger" /> class.
     /// </summary>
     /// <param name="type">type (required).</param>
-    /// <param name="lastRun">The last time the scheduled task ran (RFC3339 format)..</param>
-    public OnDemandTrigger(OnDemandTriggerType type = default(OnDemandTriggerType), string lastRun = default(string))
+    public OnDemandTrigger(OnDemandTriggerType type)
     {
       this.Type = type;
-      this.LastRun = lastRun;
     }
 
     /// <summary>

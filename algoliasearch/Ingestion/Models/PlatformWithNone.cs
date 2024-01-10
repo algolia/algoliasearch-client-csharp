@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// PlatformWithNone
@@ -33,9 +33,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of Platform.</param>
     public PlatformWithNone(Platform actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of PlatformNone.</param>
     public PlatformWithNone(PlatformNone actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Ingestion.Models
       }
       set
       {
-        if (value.GetType() == typeof(Platform))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(PlatformNone))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: Platform, PlatformNone");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of Platform</returns>
-    public Platform GetterPlatform()
+    public Platform AsPlatform()
     {
-      return (Platform)this.ActualInstance;
+      return (Platform)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of PlatformNone</returns>
-    public PlatformNone GetterPlatformNone()
+    public PlatformNone AsPlatformNone()
     {
-      return (PlatformNone)this.ActualInstance;
+      return (PlatformNone)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `Platform` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsPlatform()
+    {
+      return ActualInstance.GetType() == typeof(Platform);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `PlatformNone` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsPlatformNone()
+    {
+      return ActualInstance.GetType() == typeof(PlatformNone);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       var sb = new StringBuilder();
       sb.Append("class PlatformWithNone {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Ingestion.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, PlatformWithNone.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Ingestion.Models
       {
         return newPlatformWithNone;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(Platform).GetProperty("AdditionalProperties") == null)
-        {
-          newPlatformWithNone = new PlatformWithNone(JsonConvert.DeserializeObject<Platform>(jsonString, PlatformWithNone.SerializerSettings));
-        }
-        else
-        {
-          newPlatformWithNone = new PlatformWithNone(JsonConvert.DeserializeObject<Platform>(jsonString, PlatformWithNone.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("Platform");
-        match++;
+        return new PlatformWithNone(JsonConvert.DeserializeObject<Platform>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into Platform: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(PlatformNone).GetProperty("AdditionalProperties") == null)
-        {
-          newPlatformWithNone = new PlatformWithNone(JsonConvert.DeserializeObject<PlatformNone>(jsonString, PlatformWithNone.SerializerSettings));
-        }
-        else
-        {
-          newPlatformWithNone = new PlatformWithNone(JsonConvert.DeserializeObject<PlatformNone>(jsonString, PlatformWithNone.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("PlatformNone");
-        match++;
+        return new PlatformWithNone(JsonConvert.DeserializeObject<PlatformNone>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Ingestion.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into PlatformNone: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newPlatformWithNone;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return PlatformWithNone.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// SearchRecommendRulesResponse
@@ -28,7 +28,7 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="SearchRecommendRulesResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchRecommendRulesResponse() { }
+    public SearchRecommendRulesResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchRecommendRulesResponse" /> class.
     /// </summary>
@@ -36,14 +36,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
     /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
     /// <param name="nbPages">Number of pages of results for the current query. (required).</param>
-    public SearchRecommendRulesResponse(List<RuleResponse> hits = default(List<RuleResponse>), int nbHits = default(int), int page = 0, int nbPages = default(int))
+    public SearchRecommendRulesResponse(List<RuleResponse> hits, int nbHits, int page, int nbPages)
     {
-      // to ensure "hits" is required (not null)
-      if (hits == null)
-      {
-        throw new ArgumentNullException("hits is a required property for SearchRecommendRulesResponse and cannot be null");
-      }
-      this.Hits = hits;
+      this.Hits = hits ?? throw new ArgumentNullException("hits is a required property for SearchRecommendRulesResponse and cannot be null");
       this.NbHits = nbHits;
       this.Page = page;
       this.NbPages = nbPages;

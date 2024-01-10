@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// User ID data.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="ListUserIdsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListUserIdsResponse() { }
+    public ListUserIdsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListUserIdsResponse" /> class.
     /// </summary>
     /// <param name="userIDs">User IDs. (required).</param>
-    public ListUserIdsResponse(List<UserId> userIDs = default(List<UserId>))
+    public ListUserIdsResponse(List<UserId> userIDs)
     {
-      // to ensure "userIDs" is required (not null)
-      if (userIDs == null)
-      {
-        throw new ArgumentNullException("userIDs is a required property for ListUserIdsResponse and cannot be null");
-      }
-      this.UserIDs = userIDs;
+      this.UserIDs = userIDs ?? throw new ArgumentNullException("userIDs is a required property for ListUserIdsResponse and cannot be null");
     }
 
     /// <summary>

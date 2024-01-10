@@ -7,15 +7,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Ingestion.Client;
-using Algolia.Search.Ingestion.Models;
+using Algolia.Search.Clients;
+using Algolia.Search.Models;
+using Algolia.Search.Models.Ingestion;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
-using Algolia.Search.Client;
 
-namespace Algolia.Search.Ingestion.Api
+namespace Algolia.Search.Clients
 {
-
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
@@ -76,12 +75,12 @@ namespace Algolia.Search.Ingestion.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Ingestion.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -89,12 +88,12 @@ namespace Algolia.Search.Ingestion.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Ingestion.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -102,13 +101,13 @@ namespace Algolia.Search.Ingestion.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Ingestion.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -116,13 +115,13 @@ namespace Algolia.Search.Ingestion.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Ingestion.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Delete a authentication.
     /// </summary>
@@ -223,7 +222,7 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListAuthenticationsResponse</returns>
-    Task<ListAuthenticationsResponse> GetAuthenticationsAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<AuthenticationType> type = default(List<AuthenticationType>), List<PlatformWithNone> platform = default(List<PlatformWithNone>), AuthenticationSortKeys sort = default(AuthenticationSortKeys), OrderKeys order = default(OrderKeys), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<ListAuthenticationsResponse> GetAuthenticationsAsync(int? itemsPerPage = default, int? page = default, List<AuthenticationType> type = default, List<PlatformWithNone> platform = default, AuthenticationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get a destination.
     /// </summary>
@@ -252,7 +251,7 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListDestinationsResponse</returns>
-    Task<ListDestinationsResponse> GetDestinationsAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<DestinationType> type = default(List<DestinationType>), List<string> authenticationID = default(List<string>), DestinationSortKeys sort = default(DestinationSortKeys), OrderKeys order = default(OrderKeys), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<ListDestinationsResponse> GetDestinationsAsync(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Retrieve a stream listing.
     /// </summary>
@@ -292,12 +291,12 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="type">Filter the type of the events. (optional)</param>
     /// <param name="sort">The key by which the list should be sorted. (optional)</param>
     /// <param name="order">The order of the returned list. (optional)</param>
-    /// <param name="startDate">The start date (in RFC3339 format) of the events fetching window. Defaults to &#39;now&#39;-3 hours if omitted. (optional)</param>
-    /// <param name="endDate">The end date (in RFC3339 format) of the events fetching window. Defaults to &#39;now&#39; days if omitted. (optional)</param>
+    /// <param name="startDate">The start date (in RFC3339 format) of the events fetching window. Defaults to 'now'-3 hours if omitted. (optional)</param>
+    /// <param name="endDate">The end date (in RFC3339 format) of the events fetching window. Defaults to 'now' days if omitted. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListEventsResponse</returns>
-    Task<ListEventsResponse> GetEventsAsync(string runID, int? itemsPerPage = default(int?), int? page = default(int?), List<EventStatus> status = default(List<EventStatus>), List<EventType> type = default(List<EventType>), EventSortKeys sort = default(EventSortKeys), OrderKeys order = default(OrderKeys), string startDate = default(string), string endDate = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<ListEventsResponse> GetEventsAsync(string runID, int? itemsPerPage = default, int? page = default, List<EventStatus> status = default, List<EventType> type = default, EventSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get a run.
     /// </summary>
@@ -323,12 +322,12 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="taskID">Filter by taskID. (optional)</param>
     /// <param name="sort">The key by which the list should be sorted. (optional)</param>
     /// <param name="order">The order of the returned list. (optional)</param>
-    /// <param name="startDate">The start date (in RFC3339 format) of the runs fetching window. Defaults to &#39;now&#39;-7 days if omitted. (optional)</param>
-    /// <param name="endDate">The end date (in RFC3339 format) of the runs fetching window. Defaults to &#39;now&#39; days if omitted. (optional)</param>
+    /// <param name="startDate">The start date (in RFC3339 format) of the runs fetching window. Defaults to 'now'-7 days if omitted. (optional)</param>
+    /// <param name="endDate">The end date (in RFC3339 format) of the runs fetching window. Defaults to 'now' days if omitted. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of RunListResponse</returns>
-    Task<RunListResponse> GetRunsAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<RunStatus> status = default(List<RunStatus>), string taskID = default(string), RunSortKeys sort = default(RunSortKeys), OrderKeys order = default(OrderKeys), string startDate = default(string), string endDate = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<RunListResponse> GetRunsAsync(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get a source.
     /// </summary>
@@ -351,13 +350,13 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
     /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
     /// <param name="type">The type of the sources to retrieve. (optional)</param>
-    /// <param name="authenticationID">The authenticationIDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication.  (optional)</param>
+    /// <param name="authenticationID">The authenticationIDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.  (optional)</param>
     /// <param name="sort">The key by which the list should be sorted. (optional)</param>
     /// <param name="order">The order of the returned list. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListSourcesResponse</returns>
-    Task<ListSourcesResponse> GetSourcesAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<SourceType> type = default(List<SourceType>), List<string> authenticationID = default(List<string>), SourceSortKeys sort = default(SourceSortKeys), OrderKeys order = default(OrderKeys), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<ListSourcesResponse> GetSourcesAsync(int? itemsPerPage = default, int? page = default, List<SourceType> type = default, List<string> authenticationID = default, SourceSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Get a task.
     /// </summary>
@@ -389,7 +388,7 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListTasksResponse</returns>
-    Task<ListTasksResponse> GetTasksAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<ActionType> action = default(List<ActionType>), bool? enabled = default(bool?), List<string> sourceID = default(List<string>), List<string> destinationID = default(List<string>), List<TriggerType> triggerType = default(List<TriggerType>), TaskSortKeys sort = default(TaskSortKeys), OrderKeys order = default(OrderKeys), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<ListTasksResponse> GetTasksAsync(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Run a task.
     /// </summary>
@@ -412,7 +411,7 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="authenticationSearch"></param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;Authentication&gt;</returns>
+    /// <returns>Task of List<Authentication></returns>
     Task<List<Authentication>> SearchAuthenticationsAsync(AuthenticationSearch authenticationSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Search among destinations.
@@ -424,7 +423,7 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="destinationSearch"></param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;Destination&gt;</returns>
+    /// <returns>Task of List<Destination></returns>
     Task<List<Destination>> SearchDestinationsAsync(DestinationSearch destinationSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Search among sources.
@@ -436,7 +435,7 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="sourceSearch"></param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;Source&gt;</returns>
+    /// <returns>Task of List<Source></returns>
     Task<List<Source>> SearchSourcesAsync(SourceSearch sourceSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Search among tasks.
@@ -448,7 +447,7 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="taskSearch"></param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;IngestionTask&gt;</returns>
+    /// <returns>Task of List<IngestionTask></returns>
     Task<List<IngestionTask>> SearchTasksAsync(TaskSearch taskSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Trigger a stream listing request.
@@ -530,7 +529,8 @@ namespace Algolia.Search.Ingestion.Api
     /// </summary>
     /// <param name="applicationId">Your application</param>
     /// <param name="apiKey">Your API key</param>
-    public IngestionClient(string applicationId, string apiKey) : this(new IngestionConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+    /// <param name="region">The targeted region</param>
+    public IngestionClient(string applicationId, string apiKey, string region) : this(new IngestionConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
     {
     }
 
@@ -553,17 +553,14 @@ namespace Algolia.Search.Ingestion.Api
       {
         throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-
       if (config == null)
       {
         throw new ArgumentNullException(nameof(config), "A config is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
         throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
         throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
@@ -584,18 +581,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of AuthenticationCreateResponse</returns>
     public async Task<AuthenticationCreateResponse> CreateAuthenticationAsync(AuthenticationCreate authenticationCreate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'authenticationCreate' is set
       if (authenticationCreate == null)
         throw new ApiException(400, "Missing required parameter 'authenticationCreate' when calling IngestionClient->CreateAuthentication");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = authenticationCreate;
-
-
       return await _transport.ExecuteRequestAsync<AuthenticationCreateResponse>(new HttpMethod("POST"), "/1/authentications", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Create a destination. Create a destination.
@@ -607,18 +601,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of DestinationCreateResponse</returns>
     public async Task<DestinationCreateResponse> CreateDestinationAsync(DestinationCreate destinationCreate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'destinationCreate' is set
       if (destinationCreate == null)
         throw new ApiException(400, "Missing required parameter 'destinationCreate' when calling IngestionClient->CreateDestination");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = destinationCreate;
-
-
       return await _transport.ExecuteRequestAsync<DestinationCreateResponse>(new HttpMethod("POST"), "/1/destinations", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Create a source. Create a source.
@@ -630,18 +621,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of SourceCreateResponse</returns>
     public async Task<SourceCreateResponse> CreateSourceAsync(SourceCreate sourceCreate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'sourceCreate' is set
       if (sourceCreate == null)
         throw new ApiException(400, "Missing required parameter 'sourceCreate' when calling IngestionClient->CreateSource");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = sourceCreate;
-
-
       return await _transport.ExecuteRequestAsync<SourceCreateResponse>(new HttpMethod("POST"), "/1/sources", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Create a task. Create a task.
@@ -653,19 +641,16 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of TaskCreateResponse</returns>
     public async Task<TaskCreateResponse> CreateTaskAsync(TaskCreate taskCreate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'taskCreate' is set
       if (taskCreate == null)
         throw new ApiException(400, "Missing required parameter 'taskCreate' when calling IngestionClient->CreateTask");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = taskCreate;
-
-
       return await _transport.ExecuteRequestAsync<TaskCreateResponse>(new HttpMethod("POST"), "/1/tasks", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -675,25 +660,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling IngestionClient->CustomDelete");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -703,25 +681,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling IngestionClient->CustomGet");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -732,25 +703,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling IngestionClient->CustomPost");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -762,25 +726,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling IngestionClient->CustomPut");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Delete a authentication. Soft delete the authentication of the given authenticationID.
@@ -792,18 +749,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of DeleteResponse</returns>
     public async Task<DeleteResponse> DeleteAuthenticationAsync(string authenticationID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'authenticationID' is set
       if (authenticationID == null)
         throw new ApiException(400, "Missing required parameter 'authenticationID' when calling IngestionClient->DeleteAuthentication");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
-
 
       return await _transport.ExecuteRequestAsync<DeleteResponse>(new HttpMethod("DELETE"), "/1/authentications/{authenticationID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Delete a destination. Soft delete the destination of the given destinationID.
@@ -815,18 +769,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of DeleteResponse</returns>
     public async Task<DeleteResponse> DeleteDestinationAsync(string destinationID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'destinationID' is set
       if (destinationID == null)
         throw new ApiException(400, "Missing required parameter 'destinationID' when calling IngestionClient->DeleteDestination");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
-
 
       return await _transport.ExecuteRequestAsync<DeleteResponse>(new HttpMethod("DELETE"), "/1/destinations/{destinationID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Delete a source. Soft delete the source of the given sourceID.
@@ -838,18 +789,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of DeleteResponse</returns>
     public async Task<DeleteResponse> DeleteSourceAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'sourceID' is set
       if (sourceID == null)
         throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->DeleteSource");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
-
 
       return await _transport.ExecuteRequestAsync<DeleteResponse>(new HttpMethod("DELETE"), "/1/sources/{sourceID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Delete a task. Soft delete the task of the given taskID.
@@ -861,18 +809,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of DeleteResponse</returns>
     public async Task<DeleteResponse> DeleteTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'taskID' is set
       if (taskID == null)
         throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->DeleteTask");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
-
 
       return await _transport.ExecuteRequestAsync<DeleteResponse>(new HttpMethod("DELETE"), "/1/tasks/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Disable a task. Disable the task of the given taskID.
@@ -884,18 +829,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of TaskUpdateResponse</returns>
     public async Task<TaskUpdateResponse> DisableTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'taskID' is set
       if (taskID == null)
         throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->DisableTask");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
-
 
       return await _transport.ExecuteRequestAsync<TaskUpdateResponse>(new HttpMethod("PUT"), "/1/tasks/{taskID}/disable", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Enable a task. Enable the task of the given taskID.
@@ -907,18 +849,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of TaskUpdateResponse</returns>
     public async Task<TaskUpdateResponse> EnableTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'taskID' is set
       if (taskID == null)
         throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->EnableTask");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
-
 
       return await _transport.ExecuteRequestAsync<TaskUpdateResponse>(new HttpMethod("PUT"), "/1/tasks/{taskID}/enable", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a authentication. Get the authentication of the given authenticationID.
@@ -930,18 +869,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of Authentication</returns>
     public async Task<Authentication> GetAuthenticationAsync(string authenticationID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'authenticationID' is set
       if (authenticationID == null)
         throw new ApiException(400, "Missing required parameter 'authenticationID' when calling IngestionClient->GetAuthentication");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
-
 
       return await _transport.ExecuteRequestAsync<Authentication>(new HttpMethod("GET"), "/1/authentications/{authenticationID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a list of authentications. Get a list of authentications for the given query parameters, with pagination details.
@@ -956,39 +892,19 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListAuthenticationsResponse</returns>
-    public async Task<ListAuthenticationsResponse> GetAuthenticationsAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<AuthenticationType> type = default(List<AuthenticationType>), List<PlatformWithNone> platform = default(List<PlatformWithNone>), AuthenticationSortKeys sort = default(AuthenticationSortKeys), OrderKeys order = default(OrderKeys), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<ListAuthenticationsResponse> GetAuthenticationsAsync(int? itemsPerPage = default, int? page = default, List<AuthenticationType> type = default, List<PlatformWithNone> platform = default, AuthenticationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
-      if (itemsPerPage != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "itemsPerPage", itemsPerPage);
-      }
-      if (page != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "page", page);
-      }
-      if (type != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "type", type);
-      }
-      if (platform != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "platform", platform);
-      }
-      if (sort != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "sort", sort);
-      }
-      if (order != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "order", order);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+      requestOptions.AddQueryParameter("page", page);
+      requestOptions.AddQueryParameter("type", type);
+      requestOptions.AddQueryParameter("platform", platform);
+      requestOptions.AddQueryParameter("sort", sort);
+      requestOptions.AddQueryParameter("order", order);
       return await _transport.ExecuteRequestAsync<ListAuthenticationsResponse>(new HttpMethod("GET"), "/1/authentications", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a destination. Get the destination of the given destinationID.
@@ -1000,18 +916,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of Destination</returns>
     public async Task<Destination> GetDestinationAsync(string destinationID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'destinationID' is set
       if (destinationID == null)
         throw new ApiException(400, "Missing required parameter 'destinationID' when calling IngestionClient->GetDestination");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
-
 
       return await _transport.ExecuteRequestAsync<Destination>(new HttpMethod("GET"), "/1/destinations/{destinationID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a list of destinations. Get a list of destinations for the given query parameters, with pagination details.
@@ -1026,39 +939,19 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListDestinationsResponse</returns>
-    public async Task<ListDestinationsResponse> GetDestinationsAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<DestinationType> type = default(List<DestinationType>), List<string> authenticationID = default(List<string>), DestinationSortKeys sort = default(DestinationSortKeys), OrderKeys order = default(OrderKeys), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<ListDestinationsResponse> GetDestinationsAsync(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
-      if (itemsPerPage != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "itemsPerPage", itemsPerPage);
-      }
-      if (page != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "page", page);
-      }
-      if (type != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "type", type);
-      }
-      if (authenticationID != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "authenticationID", authenticationID);
-      }
-      if (sort != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "sort", sort);
-      }
-      if (order != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "order", order);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+      requestOptions.AddQueryParameter("page", page);
+      requestOptions.AddQueryParameter("type", type);
+      requestOptions.AddQueryParameter("authenticationID", authenticationID);
+      requestOptions.AddQueryParameter("sort", sort);
+      requestOptions.AddQueryParameter("order", order);
       return await _transport.ExecuteRequestAsync<ListDestinationsResponse>(new HttpMethod("GET"), "/1/destinations", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Retrieve a stream listing. Retrieve a stream listing for a given Singer specification compatible docker type source ID.
@@ -1070,18 +963,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of DockerSourceStreams</returns>
     public async Task<DockerSourceStreams> GetDockerSourceStreamsAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'sourceID' is set
       if (sourceID == null)
         throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->GetDockerSourceStreams");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
-
 
       return await _transport.ExecuteRequestAsync<DockerSourceStreams>(new HttpMethod("GET"), "/1/sources/{sourceID}/discover", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get an event. Get a single event for a specific runID.
@@ -1094,23 +984,19 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of Event</returns>
     public async Task<Event> GetEventAsync(string runID, string eventID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'runID' is set
       if (runID == null)
         throw new ApiException(400, "Missing required parameter 'runID' when calling IngestionClient->GetEvent");
 
-      // verify the required parameter 'eventID' is set
       if (eventID == null)
         throw new ApiException(400, "Missing required parameter 'eventID' when calling IngestionClient->GetEvent");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
       requestOptions.PathParameters.Add("eventID", ClientUtils.ParameterToString(eventID));
 
-
       return await _transport.ExecuteRequestAsync<Event>(new HttpMethod("GET"), "/1/runs/{runID}/events/{eventID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a list of events. Get a list of events associated to the given runID, for the given query parameters.
@@ -1128,52 +1014,25 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListEventsResponse</returns>
-    public async Task<ListEventsResponse> GetEventsAsync(string runID, int? itemsPerPage = default(int?), int? page = default(int?), List<EventStatus> status = default(List<EventStatus>), List<EventType> type = default(List<EventType>), EventSortKeys sort = default(EventSortKeys), OrderKeys order = default(OrderKeys), string startDate = default(string), string endDate = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<ListEventsResponse> GetEventsAsync(string runID, int? itemsPerPage = default, int? page = default, List<EventStatus> status = default, List<EventType> type = default, EventSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'runID' is set
       if (runID == null)
         throw new ApiException(400, "Missing required parameter 'runID' when calling IngestionClient->GetEvents");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
-      if (itemsPerPage != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "itemsPerPage", itemsPerPage);
-      }
-      if (page != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "page", page);
-      }
-      if (status != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("multi", "status", status);
-      }
-      if (type != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("multi", "type", type);
-      }
-      if (sort != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "sort", sort);
-      }
-      if (order != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "order", order);
-      }
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
 
-
+      requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+      requestOptions.AddQueryParameter("page", page);
+      requestOptions.AddQueryParameter("status", status);
+      requestOptions.AddQueryParameter("type", type);
+      requestOptions.AddQueryParameter("sort", sort);
+      requestOptions.AddQueryParameter("order", order);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
       return await _transport.ExecuteRequestAsync<ListEventsResponse>(new HttpMethod("GET"), "/1/runs/{runID}/events", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a run. Get a single run for the given ID.
@@ -1185,18 +1044,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of Run</returns>
     public async Task<Run> GetRunAsync(string runID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'runID' is set
       if (runID == null)
         throw new ApiException(400, "Missing required parameter 'runID' when calling IngestionClient->GetRun");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
-
 
       return await _transport.ExecuteRequestAsync<Run>(new HttpMethod("GET"), "/1/runs/{runID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a list of runs. Get a list of runs for the given query parameters, with pagination details.
@@ -1213,47 +1069,21 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of RunListResponse</returns>
-    public async Task<RunListResponse> GetRunsAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<RunStatus> status = default(List<RunStatus>), string taskID = default(string), RunSortKeys sort = default(RunSortKeys), OrderKeys order = default(OrderKeys), string startDate = default(string), string endDate = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<RunListResponse> GetRunsAsync(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
-      if (itemsPerPage != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "itemsPerPage", itemsPerPage);
-      }
-      if (page != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "page", page);
-      }
-      if (status != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("multi", "status", status);
-      }
-      if (taskID != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "taskID", taskID);
-      }
-      if (sort != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "sort", sort);
-      }
-      if (order != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "order", order);
-      }
-      if (startDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "startDate", startDate);
-      }
-      if (endDate != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "endDate", endDate);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+      requestOptions.AddQueryParameter("page", page);
+      requestOptions.AddQueryParameter("status", status);
+      requestOptions.AddQueryParameter("taskID", taskID);
+      requestOptions.AddQueryParameter("sort", sort);
+      requestOptions.AddQueryParameter("order", order);
+      requestOptions.AddQueryParameter("startDate", startDate);
+      requestOptions.AddQueryParameter("endDate", endDate);
       return await _transport.ExecuteRequestAsync<RunListResponse>(new HttpMethod("GET"), "/1/runs", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a source. Get the source of the given sourceID.
@@ -1265,18 +1095,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of Source</returns>
     public async Task<Source> GetSourceAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'sourceID' is set
       if (sourceID == null)
         throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->GetSource");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
-
 
       return await _transport.ExecuteRequestAsync<Source>(new HttpMethod("GET"), "/1/sources/{sourceID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a list of sources. Get a list of sources for the given query parameters, with pagination details.
@@ -1291,39 +1118,19 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListSourcesResponse</returns>
-    public async Task<ListSourcesResponse> GetSourcesAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<SourceType> type = default(List<SourceType>), List<string> authenticationID = default(List<string>), SourceSortKeys sort = default(SourceSortKeys), OrderKeys order = default(OrderKeys), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<ListSourcesResponse> GetSourcesAsync(int? itemsPerPage = default, int? page = default, List<SourceType> type = default, List<string> authenticationID = default, SourceSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
-      if (itemsPerPage != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "itemsPerPage", itemsPerPage);
-      }
-      if (page != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "page", page);
-      }
-      if (type != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "type", type);
-      }
-      if (authenticationID != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "authenticationID", authenticationID);
-      }
-      if (sort != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "sort", sort);
-      }
-      if (order != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "order", order);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+      requestOptions.AddQueryParameter("page", page);
+      requestOptions.AddQueryParameter("type", type);
+      requestOptions.AddQueryParameter("authenticationID", authenticationID);
+      requestOptions.AddQueryParameter("sort", sort);
+      requestOptions.AddQueryParameter("order", order);
       return await _transport.ExecuteRequestAsync<ListSourcesResponse>(new HttpMethod("GET"), "/1/sources", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a task. Get the task of the given taskID.
@@ -1335,18 +1142,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of IngestionTask</returns>
     public async Task<IngestionTask> GetTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'taskID' is set
       if (taskID == null)
         throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->GetTask");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
-
 
       return await _transport.ExecuteRequestAsync<IngestionTask>(new HttpMethod("GET"), "/1/tasks/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get a list of tasks. Get a list of tasks for the given query parameters, with pagination details.
@@ -1364,51 +1168,22 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListTasksResponse</returns>
-    public async Task<ListTasksResponse> GetTasksAsync(int? itemsPerPage = default(int?), int? page = default(int?), List<ActionType> action = default(List<ActionType>), bool? enabled = default(bool?), List<string> sourceID = default(List<string>), List<string> destinationID = default(List<string>), List<TriggerType> triggerType = default(List<TriggerType>), TaskSortKeys sort = default(TaskSortKeys), OrderKeys order = default(OrderKeys), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<ListTasksResponse> GetTasksAsync(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
-      if (itemsPerPage != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "itemsPerPage", itemsPerPage);
-      }
-      if (page != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "page", page);
-      }
-      if (action != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "action", action);
-      }
-      if (enabled != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "enabled", enabled);
-      }
-      if (sourceID != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "sourceID", sourceID);
-      }
-      if (destinationID != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "destinationID", destinationID);
-      }
-      if (triggerType != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("csv", "triggerType", triggerType);
-      }
-      if (sort != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "sort", sort);
-      }
-      if (order != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "order", order);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+      requestOptions.AddQueryParameter("page", page);
+      requestOptions.AddQueryParameter("action", action);
+      requestOptions.AddQueryParameter("enabled", enabled);
+      requestOptions.AddQueryParameter("sourceID", sourceID);
+      requestOptions.AddQueryParameter("destinationID", destinationID);
+      requestOptions.AddQueryParameter("triggerType", triggerType);
+      requestOptions.AddQueryParameter("sort", sort);
+      requestOptions.AddQueryParameter("order", order);
       return await _transport.ExecuteRequestAsync<ListTasksResponse>(new HttpMethod("GET"), "/1/tasks", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Run a task. Run the task of the given taskID.
@@ -1420,18 +1195,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of RunResponse</returns>
     public async Task<RunResponse> RunTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'taskID' is set
       if (taskID == null)
         throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->RunTask");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
-
 
       return await _transport.ExecuteRequestAsync<RunResponse>(new HttpMethod("POST"), "/1/tasks/{taskID}/run", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Search among authentications. Search among authentications with a defined set of parameters.
@@ -1440,21 +1212,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="authenticationSearch"></param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;Authentication&gt;</returns>
+    /// <returns>Task of List<Authentication></returns>
     public async Task<List<Authentication>> SearchAuthenticationsAsync(AuthenticationSearch authenticationSearch, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'authenticationSearch' is set
       if (authenticationSearch == null)
         throw new ApiException(400, "Missing required parameter 'authenticationSearch' when calling IngestionClient->SearchAuthentications");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = authenticationSearch;
-
-
       return await _transport.ExecuteRequestAsync<List<Authentication>>(new HttpMethod("POST"), "/1/authentications/search", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Search among destinations. Search among destinations with a defined set of parameters.
@@ -1463,21 +1232,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="destinationSearch"></param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;Destination&gt;</returns>
+    /// <returns>Task of List<Destination></returns>
     public async Task<List<Destination>> SearchDestinationsAsync(DestinationSearch destinationSearch, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'destinationSearch' is set
       if (destinationSearch == null)
         throw new ApiException(400, "Missing required parameter 'destinationSearch' when calling IngestionClient->SearchDestinations");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = destinationSearch;
-
-
       return await _transport.ExecuteRequestAsync<List<Destination>>(new HttpMethod("POST"), "/1/destinations/search", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Search among sources. Search among sources with a defined set of parameters.
@@ -1486,21 +1252,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="sourceSearch"></param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;Source&gt;</returns>
+    /// <returns>Task of List<Source></returns>
     public async Task<List<Source>> SearchSourcesAsync(SourceSearch sourceSearch, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'sourceSearch' is set
       if (sourceSearch == null)
         throw new ApiException(400, "Missing required parameter 'sourceSearch' when calling IngestionClient->SearchSources");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = sourceSearch;
-
-
       return await _transport.ExecuteRequestAsync<List<Source>>(new HttpMethod("POST"), "/1/sources/search", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Search among tasks. Search among tasks with a defined set of parameters.
@@ -1509,21 +1272,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <param name="taskSearch"></param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of List&lt;IngestionTask&gt;</returns>
+    /// <returns>Task of List<IngestionTask></returns>
     public async Task<List<IngestionTask>> SearchTasksAsync(TaskSearch taskSearch, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'taskSearch' is set
       if (taskSearch == null)
         throw new ApiException(400, "Missing required parameter 'taskSearch' when calling IngestionClient->SearchTasks");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = taskSearch;
-
-
       return await _transport.ExecuteRequestAsync<List<IngestionTask>>(new HttpMethod("POST"), "/1/tasks/search", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Trigger a stream listing request. Trigger a stream listing request for a Singer specification compatible docker type source.
@@ -1535,18 +1295,15 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of DockerSourceDiscover</returns>
     public async Task<DockerSourceDiscover> TriggerDockerSourceDiscoverAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'sourceID' is set
       if (sourceID == null)
         throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->TriggerDockerSourceDiscover");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
-
 
       return await _transport.ExecuteRequestAsync<DockerSourceDiscover>(new HttpMethod("POST"), "/1/sources/{sourceID}/discover", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Update a authentication. Update the authentication of the given authenticationID.
@@ -1559,23 +1316,19 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of AuthenticationUpdateResponse</returns>
     public async Task<AuthenticationUpdateResponse> UpdateAuthenticationAsync(string authenticationID, AuthenticationUpdate authenticationUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'authenticationID' is set
       if (authenticationID == null)
         throw new ApiException(400, "Missing required parameter 'authenticationID' when calling IngestionClient->UpdateAuthentication");
 
-      // verify the required parameter 'authenticationUpdate' is set
       if (authenticationUpdate == null)
         throw new ApiException(400, "Missing required parameter 'authenticationUpdate' when calling IngestionClient->UpdateAuthentication");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
+
       requestOptions.Data = authenticationUpdate;
-
-
       return await _transport.ExecuteRequestAsync<AuthenticationUpdateResponse>(new HttpMethod("PATCH"), "/1/authentications/{authenticationID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Update a destination. Update the destination of the given destinationID.
@@ -1588,23 +1341,19 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of DestinationUpdateResponse</returns>
     public async Task<DestinationUpdateResponse> UpdateDestinationAsync(string destinationID, DestinationUpdate destinationUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'destinationID' is set
       if (destinationID == null)
         throw new ApiException(400, "Missing required parameter 'destinationID' when calling IngestionClient->UpdateDestination");
 
-      // verify the required parameter 'destinationUpdate' is set
       if (destinationUpdate == null)
         throw new ApiException(400, "Missing required parameter 'destinationUpdate' when calling IngestionClient->UpdateDestination");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
+
       requestOptions.Data = destinationUpdate;
-
-
       return await _transport.ExecuteRequestAsync<DestinationUpdateResponse>(new HttpMethod("PATCH"), "/1/destinations/{destinationID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Update a source. Update the source of the given sourceID.
@@ -1617,23 +1366,19 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of SourceUpdateResponse</returns>
     public async Task<SourceUpdateResponse> UpdateSourceAsync(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'sourceID' is set
       if (sourceID == null)
         throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->UpdateSource");
 
-      // verify the required parameter 'sourceUpdate' is set
       if (sourceUpdate == null)
         throw new ApiException(400, "Missing required parameter 'sourceUpdate' when calling IngestionClient->UpdateSource");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
+
       requestOptions.Data = sourceUpdate;
-
-
       return await _transport.ExecuteRequestAsync<SourceUpdateResponse>(new HttpMethod("PATCH"), "/1/sources/{sourceID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Update a task. Update the task of the given taskID.
@@ -1646,22 +1391,18 @@ namespace Algolia.Search.Ingestion.Api
     /// <returns>Task of TaskUpdateResponse</returns>
     public async Task<TaskUpdateResponse> UpdateTaskAsync(string taskID, TaskUpdate taskUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'taskID' is set
       if (taskID == null)
         throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->UpdateTask");
 
-      // verify the required parameter 'taskUpdate' is set
       if (taskUpdate == null)
         throw new ApiException(400, "Missing required parameter 'taskUpdate' when calling IngestionClient->UpdateTask");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+
       requestOptions.Data = taskUpdate;
-
-
       return await _transport.ExecuteRequestAsync<TaskUpdateResponse>(new HttpMethod("PATCH"), "/1/tasks/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
   }
 }

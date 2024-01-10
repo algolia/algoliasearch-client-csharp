@@ -1,13 +1,9 @@
 ../.gitignore
 ../Algolia.Search.sln
 Algolia.Search.csproj
-Lib/ClientUtils.cs
-Lib/RequestOptions.cs
 Models/AbstractSchema.cs
 Search/Api/SearchClient.cs
-Search/Client/ApiException.cs
 Search/Client/Configuration.cs
-Search/Client/Multimap.cs
 Search/Models/Acl.cs
 Search/Models/Action.cs
 Search/Models/AddApiKeyResponse.cs

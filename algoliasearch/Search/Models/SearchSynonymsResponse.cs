@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchSynonymsResponse
@@ -28,7 +28,7 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SearchSynonymsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchSynonymsResponse()
+    public SearchSynonymsResponse()
     {
       this.AdditionalProperties = new Dictionary<string, object>();
     }
@@ -37,14 +37,9 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <param name="hits">Synonym objects. (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public SearchSynonymsResponse(List<SynonymHit> hits = default(List<SynonymHit>), int nbHits = default(int))
+    public SearchSynonymsResponse(List<SynonymHit> hits, int nbHits)
     {
-      // to ensure "hits" is required (not null)
-      if (hits == null)
-      {
-        throw new ArgumentNullException("hits is a required property for SearchSynonymsResponse and cannot be null");
-      }
-      this.Hits = hits;
+      this.Hits = hits ?? throw new ArgumentNullException("hits is a required property for SearchSynonymsResponse and cannot be null");
       this.NbHits = nbHits;
       this.AdditionalProperties = new Dictionary<string, object>();
     }

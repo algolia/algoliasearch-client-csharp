@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// SearchEvent
@@ -28,20 +28,15 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="SearchEvent" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchEvent() { }
+    public SearchEvent() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchEvent" /> class.
     /// </summary>
     /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
-    public SearchEvent(string date = default(string), int count = default(int))
+    public SearchEvent(string date, int count)
     {
-      // to ensure "date" is required (not null)
-      if (date == null)
-      {
-        throw new ArgumentNullException("date is a required property for SearchEvent and cannot be null");
-      }
-      this.Date = date;
+      this.Date = date ?? throw new ArgumentNullException("date is a required property for SearchEvent and cannot be null");
       this.Count = count;
     }
 

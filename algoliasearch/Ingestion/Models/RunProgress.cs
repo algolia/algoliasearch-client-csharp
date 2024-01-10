@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// RunProgress
@@ -27,25 +27,21 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="RunProgress" /> class.
     /// </summary>
-    /// <param name="expectedNbOfEvents">expectedNbOfEvents.</param>
-    /// <param name="receivedNbOfEvents">receivedNbOfEvents.</param>
-    public RunProgress(int expectedNbOfEvents = default(int), int receivedNbOfEvents = default(int))
+    public RunProgress()
     {
-      this.ExpectedNbOfEvents = expectedNbOfEvents;
-      this.ReceivedNbOfEvents = receivedNbOfEvents;
     }
 
     /// <summary>
     /// Gets or Sets ExpectedNbOfEvents
     /// </summary>
     [DataMember(Name = "expectedNbOfEvents", EmitDefaultValue = false)]
-    public int ExpectedNbOfEvents { get; set; }
+    public int? ExpectedNbOfEvents { get; set; }
 
     /// <summary>
     /// Gets or Sets ReceivedNbOfEvents
     /// </summary>
     [DataMember(Name = "receivedNbOfEvents", EmitDefaultValue = false)]
-    public int ReceivedNbOfEvents { get; set; }
+    public int? ReceivedNbOfEvents { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// BaseRecommendRequest
@@ -28,23 +28,14 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="BaseRecommendRequest" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BaseRecommendRequest() { }
+    public BaseRecommendRequest() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseRecommendRequest" /> class.
     /// </summary>
     /// <param name="indexName">Algolia index name. (required).</param>
-    /// <param name="threshold">Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. .</param>
-    /// <param name="maxRecommendations">Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. (default to 0).</param>
-    public BaseRecommendRequest(string indexName = default(string), int threshold = default(int), int maxRecommendations = 0)
+    public BaseRecommendRequest(string indexName)
     {
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for BaseRecommendRequest and cannot be null");
-      }
-      this.IndexName = indexName;
-      this.Threshold = threshold;
-      this.MaxRecommendations = maxRecommendations;
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for BaseRecommendRequest and cannot be null");
     }
 
     /// <summary>
@@ -59,14 +50,14 @@ namespace Algolia.Search.Recommend.Models
     /// </summary>
     /// <value>Recommendations with a confidence score lower than &#x60;threshold&#x60; won&#39;t appear in results. &gt; **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. </value>
     [DataMember(Name = "threshold", EmitDefaultValue = false)]
-    public int Threshold { get; set; }
+    public int? Threshold { get; set; }
 
     /// <summary>
     /// Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
     /// </summary>
     /// <value>Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.</value>
     [DataMember(Name = "maxRecommendations", EmitDefaultValue = false)]
-    public int MaxRecommendations { get; set; }
+    public int? MaxRecommendations { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

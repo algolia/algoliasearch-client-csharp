@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// RecommendationsRequest
@@ -33,9 +33,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of TrendingItemsQuery.</param>
     public RecommendationsRequest(TrendingItemsQuery actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of TrendingFacetsQuery.</param>
     public RecommendationsRequest(TrendingFacetsQuery actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -57,9 +57,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of RecommendationsQuery.</param>
     public RecommendationsRequest(RecommendationsQuery actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -69,9 +69,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of RecommendedForYouQuery.</param>
     public RecommendationsRequest(RecommendedForYouQuery actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -88,26 +88,7 @@ namespace Algolia.Search.Recommend.Models
       }
       set
       {
-        if (value.GetType() == typeof(RecommendationsQuery))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(RecommendedForYouQuery))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(TrendingFacetsQuery))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(TrendingItemsQuery))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: RecommendationsQuery, RecommendedForYouQuery, TrendingFacetsQuery, TrendingItemsQuery");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -116,9 +97,9 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of TrendingItemsQuery</returns>
-    public TrendingItemsQuery GetterTrendingItemsQuery()
+    public TrendingItemsQuery AsTrendingItemsQuery()
     {
-      return (TrendingItemsQuery)this.ActualInstance;
+      return (TrendingItemsQuery)ActualInstance;
     }
 
     /// <summary>
@@ -126,9 +107,9 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of TrendingFacetsQuery</returns>
-    public TrendingFacetsQuery GetterTrendingFacetsQuery()
+    public TrendingFacetsQuery AsTrendingFacetsQuery()
     {
-      return (TrendingFacetsQuery)this.ActualInstance;
+      return (TrendingFacetsQuery)ActualInstance;
     }
 
     /// <summary>
@@ -136,9 +117,9 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of RecommendationsQuery</returns>
-    public RecommendationsQuery GetterRecommendationsQuery()
+    public RecommendationsQuery AsRecommendationsQuery()
     {
-      return (RecommendationsQuery)this.ActualInstance;
+      return (RecommendationsQuery)ActualInstance;
     }
 
     /// <summary>
@@ -146,9 +127,46 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of RecommendedForYouQuery</returns>
-    public RecommendedForYouQuery GetterRecommendedForYouQuery()
+    public RecommendedForYouQuery AsRecommendedForYouQuery()
     {
-      return (RecommendedForYouQuery)this.ActualInstance;
+      return (RecommendedForYouQuery)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `TrendingItemsQuery` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsTrendingItemsQuery()
+    {
+      return ActualInstance.GetType() == typeof(TrendingItemsQuery);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `TrendingFacetsQuery` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsTrendingFacetsQuery()
+    {
+      return ActualInstance.GetType() == typeof(TrendingFacetsQuery);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `RecommendationsQuery` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsRecommendationsQuery()
+    {
+      return ActualInstance.GetType() == typeof(RecommendationsQuery);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `RecommendedForYouQuery` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsRecommendedForYouQuery()
+    {
+      return ActualInstance.GetType() == typeof(RecommendedForYouQuery);
     }
 
     /// <summary>
@@ -159,7 +177,7 @@ namespace Algolia.Search.Recommend.Models
     {
       var sb = new StringBuilder();
       sb.Append("class RecommendationsRequest {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -170,7 +188,7 @@ namespace Algolia.Search.Recommend.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, RecommendationsRequest.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -186,42 +204,36 @@ namespace Algolia.Search.Recommend.Models
       {
         return newRecommendationsRequest;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(RecommendationsQuery).GetProperty("AdditionalProperties") == null)
-        {
-          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendationsQuery>(jsonString, RecommendationsRequest.SerializerSettings));
-        }
-        else
-        {
-          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendationsQuery>(jsonString, RecommendationsRequest.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("RecommendationsQuery");
-        match++;
+        return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingItemsQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into TrendingItemsQuery: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingFacetsQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into TrendingFacetsQuery: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendationsQuery>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into RecommendationsQuery: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(RecommendedForYouQuery).GetProperty("AdditionalProperties") == null)
-        {
-          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, RecommendationsRequest.SerializerSettings));
-        }
-        else
-        {
-          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, RecommendationsRequest.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("RecommendedForYouQuery");
-        match++;
+        return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -229,57 +241,7 @@ namespace Algolia.Search.Recommend.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into RecommendedForYouQuery: {1}", jsonString, exception.ToString()));
       }
 
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(TrendingFacetsQuery).GetProperty("AdditionalProperties") == null)
-        {
-          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingFacetsQuery>(jsonString, RecommendationsRequest.SerializerSettings));
-        }
-        else
-        {
-          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingFacetsQuery>(jsonString, RecommendationsRequest.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("TrendingFacetsQuery");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into TrendingFacetsQuery: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(TrendingItemsQuery).GetProperty("AdditionalProperties") == null)
-        {
-          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingItemsQuery>(jsonString, RecommendationsRequest.SerializerSettings));
-        }
-        else
-        {
-          newRecommendationsRequest = new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingItemsQuery>(jsonString, RecommendationsRequest.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("TrendingItemsQuery");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into TrendingItemsQuery: {1}", jsonString, exception.ToString()));
-      }
-
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newRecommendationsRequest;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -312,7 +274,7 @@ namespace Algolia.Search.Recommend.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return RecommendationsRequest.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

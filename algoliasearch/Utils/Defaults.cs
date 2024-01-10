@@ -1,6 +1,6 @@
 using System;
 
-namespace Algolia.Search.Client
+namespace Algolia.Search.Utils
 {
   /// <summary>
   /// Holding all default values of the library

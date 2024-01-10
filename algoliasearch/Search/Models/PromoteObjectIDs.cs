@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Records to promote.
@@ -28,20 +28,15 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="PromoteObjectIDs" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected PromoteObjectIDs() { }
+    public PromoteObjectIDs() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="PromoteObjectIDs" /> class.
     /// </summary>
     /// <param name="objectIDs">Unique identifiers of the records to promote. (required).</param>
     /// <param name="position">The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions. (required).</param>
-    public PromoteObjectIDs(List<string> objectIDs = default(List<string>), int position = default(int))
+    public PromoteObjectIDs(List<string> objectIDs, int position)
     {
-      // to ensure "objectIDs" is required (not null)
-      if (objectIDs == null)
-      {
-        throw new ArgumentNullException("objectIDs is a required property for PromoteObjectIDs and cannot be null");
-      }
-      this.ObjectIDs = objectIDs;
+      this.ObjectIDs = objectIDs ?? throw new ArgumentNullException("objectIDs is a required property for PromoteObjectIDs and cannot be null");
       this.Position = position;
     }
 

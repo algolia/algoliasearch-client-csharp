@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Payload to partially update an Authentication.
@@ -29,26 +29,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets Type
     /// </summary>
     [DataMember(Name = "type", EmitDefaultValue = false)]
-    public AuthenticationType? Type { get; set; }
+    public AuthenticationType Type { get; set; }
 
     /// <summary>
     /// Gets or Sets Platform
     /// </summary>
     [DataMember(Name = "platform", EmitDefaultValue = false)]
-    public Platform? Platform { get; set; }
+    public Platform Platform { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationUpdate" /> class.
     /// </summary>
-    /// <param name="type">type.</param>
-    /// <param name="name">An human readable name describing the object..</param>
-    /// <param name="platform">platform.</param>
-    /// <param name="input">input.</param>
-    public AuthenticationUpdate(AuthenticationType? type = default(AuthenticationType?), string name = default(string), Platform? platform = default(Platform?), AuthInputPartial input = default(AuthInputPartial))
+    public AuthenticationUpdate()
     {
-      this.Type = type;
-      this.Name = name;
-      this.Platform = platform;
-      this.Input = input;
     }
 
     /// <summary>

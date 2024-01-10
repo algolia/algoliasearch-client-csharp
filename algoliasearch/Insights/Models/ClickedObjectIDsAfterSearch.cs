@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Insights.Models
+namespace Algolia.Search.Models.Insights
 {
   /// <summary>
   /// Click event after an Algolia request.  Use this event to track when users click items in the search results. If you&#39;re building your category pages with Algolia, you&#39;ll also use this event. 
@@ -34,7 +34,7 @@ namespace Algolia.Search.Insights.Models
     /// Initializes a new instance of the <see cref="ClickedObjectIDsAfterSearch" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ClickedObjectIDsAfterSearch() { }
+    public ClickedObjectIDsAfterSearch() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ClickedObjectIDsAfterSearch" /> class.
     /// </summary>
@@ -45,49 +45,15 @@ namespace Algolia.Search.Insights.Models
     /// <param name="positions">Position of the clicked objects in the search results.  The first search result has a position of 1 (not 0). You must provide 1 &#x60;position&#x60; for each &#x60;objectID&#x60;.  (required).</param>
     /// <param name="queryID">Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add &#x60;clickAnalytics: true&#x60; as a search request parameter, the query ID is included in the API response.  (required).</param>
     /// <param name="userToken">Anonymous or pseudonymous user identifier.   &gt; **Note**: Never include personally identifiable information in user tokens.  (required).</param>
-    /// <param name="timestamp">Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. .</param>
-    /// <param name="authenticatedUserToken">User token for authenticated users..</param>
-    public ClickedObjectIDsAfterSearch(string eventName = default(string), ClickEvent eventType = default(ClickEvent), string index = default(string), List<string> objectIDs = default(List<string>), List<int> positions = default(List<int>), string queryID = default(string), string userToken = default(string), long timestamp = default(long), string authenticatedUserToken = default(string))
+    public ClickedObjectIDsAfterSearch(string eventName, ClickEvent eventType, string index, List<string> objectIDs, List<int> positions, string queryID, string userToken)
     {
-      // to ensure "eventName" is required (not null)
-      if (eventName == null)
-      {
-        throw new ArgumentNullException("eventName is a required property for ClickedObjectIDsAfterSearch and cannot be null");
-      }
-      this.EventName = eventName;
+      this.EventName = eventName ?? throw new ArgumentNullException("eventName is a required property for ClickedObjectIDsAfterSearch and cannot be null");
       this.EventType = eventType;
-      // to ensure "index" is required (not null)
-      if (index == null)
-      {
-        throw new ArgumentNullException("index is a required property for ClickedObjectIDsAfterSearch and cannot be null");
-      }
-      this.Index = index;
-      // to ensure "objectIDs" is required (not null)
-      if (objectIDs == null)
-      {
-        throw new ArgumentNullException("objectIDs is a required property for ClickedObjectIDsAfterSearch and cannot be null");
-      }
-      this.ObjectIDs = objectIDs;
-      // to ensure "positions" is required (not null)
-      if (positions == null)
-      {
-        throw new ArgumentNullException("positions is a required property for ClickedObjectIDsAfterSearch and cannot be null");
-      }
-      this.Positions = positions;
-      // to ensure "queryID" is required (not null)
-      if (queryID == null)
-      {
-        throw new ArgumentNullException("queryID is a required property for ClickedObjectIDsAfterSearch and cannot be null");
-      }
-      this.QueryID = queryID;
-      // to ensure "userToken" is required (not null)
-      if (userToken == null)
-      {
-        throw new ArgumentNullException("userToken is a required property for ClickedObjectIDsAfterSearch and cannot be null");
-      }
-      this.UserToken = userToken;
-      this.Timestamp = timestamp;
-      this.AuthenticatedUserToken = authenticatedUserToken;
+      this.Index = index ?? throw new ArgumentNullException("index is a required property for ClickedObjectIDsAfterSearch and cannot be null");
+      this.ObjectIDs = objectIDs ?? throw new ArgumentNullException("objectIDs is a required property for ClickedObjectIDsAfterSearch and cannot be null");
+      this.Positions = positions ?? throw new ArgumentNullException("positions is a required property for ClickedObjectIDsAfterSearch and cannot be null");
+      this.QueryID = queryID ?? throw new ArgumentNullException("queryID is a required property for ClickedObjectIDsAfterSearch and cannot be null");
+      this.UserToken = userToken ?? throw new ArgumentNullException("userToken is a required property for ClickedObjectIDsAfterSearch and cannot be null");
     }
 
     /// <summary>

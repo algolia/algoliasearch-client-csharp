@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// ABTestResponse
@@ -28,21 +28,16 @@ namespace Algolia.Search.Abtesting.Models
     /// Initializes a new instance of the <see cref="ABTestResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ABTestResponse() { }
+    public ABTestResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ABTestResponse" /> class.
     /// </summary>
     /// <param name="index">A/B test index. (required).</param>
     /// <param name="abTestID">Unique A/B test ID. (required).</param>
     /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
-    public ABTestResponse(string index = default(string), int abTestID = default(int), long taskID = default(long))
+    public ABTestResponse(string index, int abTestID, long taskID)
     {
-      // to ensure "index" is required (not null)
-      if (index == null)
-      {
-        throw new ArgumentNullException("index is a required property for ABTestResponse and cannot be null");
-      }
-      this.Index = index;
+      this.Index = index ?? throw new ArgumentNullException("index is a required property for ABTestResponse and cannot be null");
       this.AbTestID = abTestID;
       this.TaskID = taskID;
     }

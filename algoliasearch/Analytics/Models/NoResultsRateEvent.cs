@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// NoResultsRateEvent
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="NoResultsRateEvent" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected NoResultsRateEvent() { }
+    public NoResultsRateEvent() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="NoResultsRateEvent" /> class.
     /// </summary>
@@ -36,14 +36,9 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="noResultCount">Number of occurences. (required).</param>
     /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
     /// <param name="rate">[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).  (required).</param>
-    public NoResultsRateEvent(string date = default(string), int noResultCount = default(int), int count = default(int), double rate = default(double))
+    public NoResultsRateEvent(string date, int noResultCount, int count, double rate)
     {
-      // to ensure "date" is required (not null)
-      if (date == null)
-      {
-        throw new ArgumentNullException("date is a required property for NoResultsRateEvent and cannot be null");
-      }
-      this.Date = date;
+      this.Date = date ?? throw new ArgumentNullException("date is a required property for NoResultsRateEvent and cannot be null");
       this.NoResultCount = noResultCount;
       this.Count = count;
       this.Rate = rate;

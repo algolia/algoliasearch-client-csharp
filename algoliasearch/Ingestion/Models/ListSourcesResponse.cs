@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// ListSourcesResponse
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="ListSourcesResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListSourcesResponse() { }
+    public ListSourcesResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListSourcesResponse" /> class.
     /// </summary>
     /// <param name="sources">sources (required).</param>
     /// <param name="pagination">pagination (required).</param>
-    public ListSourcesResponse(List<Source> sources = default(List<Source>), Pagination pagination = default(Pagination))
+    public ListSourcesResponse(List<Source> sources, Pagination pagination)
     {
-      // to ensure "sources" is required (not null)
-      if (sources == null)
-      {
-        throw new ArgumentNullException("sources is a required property for ListSourcesResponse and cannot be null");
-      }
-      this.Sources = sources;
-      // to ensure "pagination" is required (not null)
-      if (pagination == null)
-      {
-        throw new ArgumentNullException("pagination is a required property for ListSourcesResponse and cannot be null");
-      }
-      this.Pagination = pagination;
+      this.Sources = sources ?? throw new ArgumentNullException("sources is a required property for ListSourcesResponse and cannot be null");
+      this.Pagination = pagination ?? throw new ArgumentNullException("pagination is a required property for ListSourcesResponse and cannot be null");
     }
 
     /// <summary>

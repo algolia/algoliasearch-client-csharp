@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetConversationRateResponse
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetConversationRateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetConversationRateResponse() { }
+    public GetConversationRateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetConversationRateResponse" /> class.
     /// </summary>
@@ -36,17 +36,12 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
     /// <param name="conversionCount">Number of converted clicks. (required).</param>
     /// <param name="dates">Conversion events. (required).</param>
-    public GetConversationRateResponse(double rate = default(double), int trackedSearchCount = default(int), int conversionCount = default(int), List<ConversionRateEvent> dates = default(List<ConversionRateEvent>))
+    public GetConversationRateResponse(double rate, int trackedSearchCount, int conversionCount, List<ConversionRateEvent> dates)
     {
       this.Rate = rate;
       this.TrackedSearchCount = trackedSearchCount;
       this.ConversionCount = conversionCount;
-      // to ensure "dates" is required (not null)
-      if (dates == null)
-      {
-        throw new ArgumentNullException("dates is a required property for GetConversationRateResponse and cannot be null");
-      }
-      this.Dates = dates;
+      this.Dates = dates ?? throw new ArgumentNullException("dates is a required property for GetConversationRateResponse and cannot be null");
     }
 
     /// <summary>

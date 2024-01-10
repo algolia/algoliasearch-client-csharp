@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Value
@@ -29,16 +29,12 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets SortRemainingBy
     /// </summary>
     [DataMember(Name = "sortRemainingBy", EmitDefaultValue = false)]
-    public SortRemainingBy? SortRemainingBy { get; set; }
+    public SortRemainingBy SortRemainingBy { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="Value" /> class.
     /// </summary>
-    /// <param name="order">Pinned order of facet lists..</param>
-    /// <param name="sortRemainingBy">sortRemainingBy.</param>
-    public Value(List<string> order = default(List<string>), SortRemainingBy? sortRemainingBy = default(SortRemainingBy?))
+    public Value()
     {
-      this.Order = order;
-      this.SortRemainingBy = sortRemainingBy;
     }
 
     /// <summary>

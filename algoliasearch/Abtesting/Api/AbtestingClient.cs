@@ -7,15 +7,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Abtesting.Client;
-using Algolia.Search.Abtesting.Models;
+using Algolia.Search.Clients;
+using Algolia.Search.Models;
+using Algolia.Search.Models.Abtesting;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
-using Algolia.Search.Client;
 
-namespace Algolia.Search.Abtesting.Api
+namespace Algolia.Search.Clients
 {
-
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
@@ -40,12 +39,12 @@ namespace Algolia.Search.Abtesting.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -53,12 +52,12 @@ namespace Algolia.Search.Abtesting.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -66,13 +65,13 @@ namespace Algolia.Search.Abtesting.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -80,18 +79,18 @@ namespace Algolia.Search.Abtesting.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Delete an A/B test.
     /// </summary>
     /// <remarks>
-    /// Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
+    /// Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="id">Unique A/B test ID.</param>
@@ -103,7 +102,7 @@ namespace Algolia.Search.Abtesting.Api
     /// Get A/B test details.
     /// </summary>
     /// <remarks>
-    /// Get specific details for an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
+    /// Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="id">Unique A/B test ID.</param>
@@ -125,12 +124,12 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListABTestsResponse</returns>
-    Task<ListABTestsResponse> ListABTestsAsync(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<ListABTestsResponse> ListABTestsAsync(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Stop an A/B test.
     /// </summary>
     /// <remarks>
-    /// If stopped, the test is over and can&#39;t be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
+    /// If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
     /// </remarks>
     /// <exception cref="Algolia.Search.Abtesting.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="id">Unique A/B test ID.</param>
@@ -154,7 +153,8 @@ namespace Algolia.Search.Abtesting.Api
     /// </summary>
     /// <param name="applicationId">Your application</param>
     /// <param name="apiKey">Your API key</param>
-    public AbtestingClient(string applicationId, string apiKey) : this(new AbtestingConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+    /// <param name="region">The targeted region</param>
+    public AbtestingClient(string applicationId, string apiKey, string region = null) : this(new AbtestingConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
     {
     }
 
@@ -177,17 +177,14 @@ namespace Algolia.Search.Abtesting.Api
       {
         throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-
       if (config == null)
       {
         throw new ArgumentNullException(nameof(config), "A config is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
         throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
         throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
@@ -208,19 +205,16 @@ namespace Algolia.Search.Abtesting.Api
     /// <returns>Task of ABTestResponse</returns>
     public async Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'addABTestsRequest' is set
       if (addABTestsRequest == null)
         throw new ApiException(400, "Missing required parameter 'addABTestsRequest' when calling AbtestingClient->AddABTests");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
+
       requestOptions.Data = addABTestsRequest;
-
-
       return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("POST"), "/2/abtests", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -230,25 +224,18 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomDelete");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -258,25 +245,18 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomGet");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -287,25 +267,18 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomPost");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -317,25 +290,18 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling AbtestingClient->CustomPut");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Delete an A/B test. Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
@@ -347,14 +313,12 @@ namespace Algolia.Search.Abtesting.Api
     /// <returns>Task of ABTestResponse</returns>
     public async Task<ABTestResponse> DeleteABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("id", ClientUtils.ParameterToString(id));
-
 
       return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("DELETE"), "/2/abtests/{id}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get A/B test details. Get specific details for an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
@@ -366,14 +330,12 @@ namespace Algolia.Search.Abtesting.Api
     /// <returns>Task of ABTest</returns>
     public async Task<ABTest> GetABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("id", ClientUtils.ParameterToString(id));
-
 
       return await _transport.ExecuteRequestAsync<ABTest>(new HttpMethod("GET"), "/2/abtests/{id}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// List all A/B tests. List all A/B tests.
@@ -386,31 +348,17 @@ namespace Algolia.Search.Abtesting.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of ListABTestsResponse</returns>
-    public async Task<ListABTestsResponse> ListABTestsAsync(int? offset = default(int?), int? limit = default(int?), string indexPrefix = default(string), string indexSuffix = default(string), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<ListABTestsResponse> ListABTestsAsync(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
-      if (offset != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "offset", offset);
-      }
-      if (limit != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "limit", limit);
-      }
-      if (indexPrefix != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "indexPrefix", indexPrefix);
-      }
-      if (indexSuffix != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "indexSuffix", indexSuffix);
-      }
+      var requestOptions = new InternalRequestOptions(options);
 
 
+      requestOptions.AddQueryParameter("offset", offset);
+      requestOptions.AddQueryParameter("limit", limit);
+      requestOptions.AddQueryParameter("indexPrefix", indexPrefix);
+      requestOptions.AddQueryParameter("indexSuffix", indexSuffix);
       return await _transport.ExecuteRequestAsync<ListABTestsResponse>(new HttpMethod("GET"), "/2/abtests", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Stop an A/B test. If stopped, the test is over and can&#39;t be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
@@ -422,13 +370,11 @@ namespace Algolia.Search.Abtesting.Api
     /// <returns>Task of ABTestResponse</returns>
     public async Task<ABTestResponse> StopABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("id", ClientUtils.ParameterToString(id));
-
 
       return await _transport.ExecuteRequestAsync<ABTestResponse>(new HttpMethod("POST"), "/2/abtests/{id}/stop", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
   }
 }

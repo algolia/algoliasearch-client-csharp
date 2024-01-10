@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// An event describe a step of the task execution flow..
@@ -40,43 +40,24 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="Event" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Event() { }
+    public Event() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Event" /> class.
     /// </summary>
     /// <param name="eventID">The event UUID. (required).</param>
     /// <param name="runID">The run UUID. (required).</param>
-    /// <param name="parentID">The parent event, the cause of this event..</param>
     /// <param name="status">status (required).</param>
     /// <param name="type">type (required).</param>
     /// <param name="batchSize">The extracted record batch size. (required).</param>
-    /// <param name="data">data.</param>
     /// <param name="publishedAt">Date of publish (RFC3339 format). (required).</param>
-    public Event(string eventID = default(string), string runID = default(string), string parentID = default(string), EventStatus status = default(EventStatus), EventType type = default(EventType), int batchSize = default(int), Dictionary<string, Object> data = default(Dictionary<string, Object>), string publishedAt = default(string))
+    public Event(string eventID, string runID, EventStatus status, EventType type, int batchSize, string publishedAt)
     {
-      // to ensure "eventID" is required (not null)
-      if (eventID == null)
-      {
-        throw new ArgumentNullException("eventID is a required property for Event and cannot be null");
-      }
-      this.EventID = eventID;
-      // to ensure "runID" is required (not null)
-      if (runID == null)
-      {
-        throw new ArgumentNullException("runID is a required property for Event and cannot be null");
-      }
-      this.RunID = runID;
+      this.EventID = eventID ?? throw new ArgumentNullException("eventID is a required property for Event and cannot be null");
+      this.RunID = runID ?? throw new ArgumentNullException("runID is a required property for Event and cannot be null");
       this.Status = status;
       this.Type = type;
       this.BatchSize = batchSize;
-      // to ensure "publishedAt" is required (not null)
-      if (publishedAt == null)
-      {
-        throw new ArgumentNullException("publishedAt is a required property for Event and cannot be null");
-      }
-      this.PublishedAt = publishedAt;
-      this.ParentID = parentID;
-      this.Data = data;
+      this.PublishedAt = publishedAt ?? throw new ArgumentNullException("publishedAt is a required property for Event and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Settings for the semantic search part of NeuralSearch. Only used when &#x60;mode&#x60; is _neuralSearch_. 
@@ -27,10 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="SemanticSearch" /> class.
     /// </summary>
-    /// <param name="eventSources">Indices from which to collect click and conversion events. If null, the current index and replica group will be used as the event source..</param>
-    public SemanticSearch(List<string> eventSources = default(List<string>))
+    public SemanticSearch()
     {
-      this.EventSources = eventSources;
     }
 
     /// <summary>

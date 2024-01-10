@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchQuery
@@ -28,26 +28,26 @@ namespace Algolia.Search.Search.Models
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchQuery" /> class
-    /// with the <see cref="SearchForHits" /> class
-    /// </summary>
-    /// <param name="actualInstance">An instance of SearchForHits.</param>
-    public SearchQuery(SearchForHits actualInstance)
-    {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SearchQuery" /> class
     /// with the <see cref="SearchForFacets" /> class
     /// </summary>
     /// <param name="actualInstance">An instance of SearchForFacets.</param>
     public SearchQuery(SearchForFacets actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SearchQuery" /> class
+    /// with the <see cref="SearchForHits" /> class
+    /// </summary>
+    /// <param name="actualInstance">An instance of SearchForHits.</param>
+    public SearchQuery(SearchForHits actualInstance)
+    {
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,29 +64,8 @@ namespace Algolia.Search.Search.Models
       }
       set
       {
-        if (value.GetType() == typeof(SearchForFacets))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(SearchForHits))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: SearchForFacets, SearchForHits");
-        }
+        this._actualInstance = value;
       }
-    }
-
-    /// <summary>
-    /// Get the actual instance of `SearchForHits`. If the actual instance is not `SearchForHits`,
-    /// the InvalidClassException will be thrown
-    /// </summary>
-    /// <returns>An instance of SearchForHits</returns>
-    public SearchForHits GetterSearchForHits()
-    {
-      return (SearchForHits)this.ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +73,38 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of SearchForFacets</returns>
-    public SearchForFacets GetterSearchForFacets()
+    public SearchForFacets AsSearchForFacets()
     {
-      return (SearchForFacets)this.ActualInstance;
+      return (SearchForFacets)ActualInstance;
+    }
+
+    /// <summary>
+    /// Get the actual instance of `SearchForHits`. If the actual instance is not `SearchForHits`,
+    /// the InvalidClassException will be thrown
+    /// </summary>
+    /// <returns>An instance of SearchForHits</returns>
+    public SearchForHits AsSearchForHits()
+    {
+      return (SearchForHits)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `SearchForFacets` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSearchForFacets()
+    {
+      return ActualInstance.GetType() == typeof(SearchForFacets);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `SearchForHits` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSearchForHits()
+    {
+      return ActualInstance.GetType() == typeof(SearchForHits);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Search.Models
     {
       var sb = new StringBuilder();
       sb.Append("class SearchQuery {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Search.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, SearchQuery.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Search.Models
       {
         return newSearchQuery;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SearchForFacets).GetProperty("AdditionalProperties") == null)
-        {
-          newSearchQuery = new SearchQuery(JsonConvert.DeserializeObject<SearchForFacets>(jsonString, SearchQuery.SerializerSettings));
-        }
-        else
-        {
-          newSearchQuery = new SearchQuery(JsonConvert.DeserializeObject<SearchForFacets>(jsonString, SearchQuery.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SearchForFacets");
-        match++;
+        return new SearchQuery(JsonConvert.DeserializeObject<SearchForFacets>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SearchForFacets: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SearchForHits).GetProperty("AdditionalProperties") == null)
-        {
-          newSearchQuery = new SearchQuery(JsonConvert.DeserializeObject<SearchForHits>(jsonString, SearchQuery.SerializerSettings));
-        }
-        else
-        {
-          newSearchQuery = new SearchQuery(JsonConvert.DeserializeObject<SearchForHits>(jsonString, SearchQuery.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SearchForHits");
-        match++;
+        return new SearchQuery(JsonConvert.DeserializeObject<SearchForHits>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Search.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SearchForHits: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newSearchQuery;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Search.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return SearchQuery.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

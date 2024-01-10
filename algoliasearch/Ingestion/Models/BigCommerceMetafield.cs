@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// BigCommerceMetafield
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="BigCommerceMetafield" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BigCommerceMetafield() { }
+    public BigCommerceMetafield() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BigCommerceMetafield" /> class.
     /// </summary>
     /// <param name="varNamespace">The namespace of the metafield. (required).</param>
     /// <param name="key">The key identifier of the metafield. (required).</param>
-    public BigCommerceMetafield(string varNamespace = default(string), string key = default(string))
+    public BigCommerceMetafield(string varNamespace, string key)
     {
-      // to ensure "varNamespace" is required (not null)
-      if (varNamespace == null)
-      {
-        throw new ArgumentNullException("varNamespace is a required property for BigCommerceMetafield and cannot be null");
-      }
-      this.VarNamespace = varNamespace;
-      // to ensure "key" is required (not null)
-      if (key == null)
-      {
-        throw new ArgumentNullException("key is a required property for BigCommerceMetafield and cannot be null");
-      }
-      this.Key = key;
+      this.VarNamespace = varNamespace ?? throw new ArgumentNullException("varNamespace is a required property for BigCommerceMetafield and cannot be null");
+      this.Key = key ?? throw new ArgumentNullException("key is a required property for BigCommerceMetafield and cannot be null");
     }
 
     /// <summary>

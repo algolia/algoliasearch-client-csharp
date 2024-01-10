@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// TopSearchesResponseWithAnalytics
@@ -28,19 +28,14 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="TopSearchesResponseWithAnalytics" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TopSearchesResponseWithAnalytics() { }
+    public TopSearchesResponseWithAnalytics() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TopSearchesResponseWithAnalytics" /> class.
     /// </summary>
     /// <param name="searches">Top searches with their hits count and analytics. (required).</param>
-    public TopSearchesResponseWithAnalytics(List<TopSearchWithAnalytics> searches = default(List<TopSearchWithAnalytics>))
+    public TopSearchesResponseWithAnalytics(List<TopSearchWithAnalytics> searches)
     {
-      // to ensure "searches" is required (not null)
-      if (searches == null)
-      {
-        throw new ArgumentNullException("searches is a required property for TopSearchesResponseWithAnalytics and cannot be null");
-      }
-      this.Searches = searches;
+      this.Searches = searches ?? throw new ArgumentNullException("searches is a required property for TopSearchesResponseWithAnalytics and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// BaseTrendingItemsQuery
@@ -29,22 +29,12 @@ namespace Algolia.Search.Recommend.Models
     /// Gets or Sets Model
     /// </summary>
     [DataMember(Name = "model", EmitDefaultValue = false)]
-    public TrendingItemsModel? Model { get; set; }
+    public TrendingItemsModel Model { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseTrendingItemsQuery" /> class.
     /// </summary>
-    /// <param name="facetName">Facet name for trending models..</param>
-    /// <param name="facetValue">Facet value for trending models..</param>
-    /// <param name="model">model.</param>
-    /// <param name="queryParameters">queryParameters.</param>
-    /// <param name="fallbackParameters">fallbackParameters.</param>
-    public BaseTrendingItemsQuery(string facetName = default(string), string facetValue = default(string), TrendingItemsModel? model = default(TrendingItemsModel?), SearchParamsObject queryParameters = default(SearchParamsObject), SearchParamsObject fallbackParameters = default(SearchParamsObject))
+    public BaseTrendingItemsQuery()
     {
-      this.FacetName = facetName;
-      this.FacetValue = facetValue;
-      this.Model = model;
-      this.QueryParameters = queryParameters;
-      this.FallbackParameters = fallbackParameters;
     }
 
     /// <summary>

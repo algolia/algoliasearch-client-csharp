@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// AroundPrecisionFromValueInner
@@ -27,25 +27,21 @@ namespace Algolia.Search.Recommend.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="AroundPrecisionFromValueInner" /> class.
     /// </summary>
-    /// <param name="from">from.</param>
-    /// <param name="value">value.</param>
-    public AroundPrecisionFromValueInner(int from = default(int), int value = default(int))
+    public AroundPrecisionFromValueInner()
     {
-      this.From = from;
-      this.Value = value;
     }
 
     /// <summary>
     /// Gets or Sets From
     /// </summary>
     [DataMember(Name = "from", EmitDefaultValue = false)]
-    public int From { get; set; }
+    public int? From { get; set; }
 
     /// <summary>
     /// Gets or Sets Value
     /// </summary>
     [DataMember(Name = "value", EmitDefaultValue = false)]
-    public int Value { get; set; }
+    public int? Value { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

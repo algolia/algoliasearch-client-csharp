@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// HighlightResult
@@ -33,9 +33,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of HighlightResultOption.</param>
     public HighlightResult(HighlightResultOption actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of Dictionary&lt;string, HighlightResultOption&gt;.</param>
     public HighlightResult(Dictionary<string, HighlightResultOption> actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Recommend.Models
       }
       set
       {
-        if (value.GetType() == typeof(Dictionary<string, HighlightResultOption>))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(HighlightResultOption))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: Dictionary<string, HighlightResultOption>, HighlightResultOption");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of HighlightResultOption</returns>
-    public HighlightResultOption GetterHighlightResultOption()
+    public HighlightResultOption AsHighlightResultOption()
     {
-      return (HighlightResultOption)this.ActualInstance;
+      return (HighlightResultOption)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of Dictionary&lt;string, HighlightResultOption&gt;</returns>
-    public Dictionary<string, HighlightResultOption> GetterDictionary()
+    public Dictionary<string, HighlightResultOption> AsDictionary()
     {
-      return (Dictionary<string, HighlightResultOption>)this.ActualInstance;
+      return (Dictionary<string, HighlightResultOption>)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `HighlightResultOption` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsHighlightResultOption()
+    {
+      return ActualInstance.GetType() == typeof(HighlightResultOption);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `Dictionary&lt;string, HighlightResultOption&gt;` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsDictionary()
+    {
+      return ActualInstance.GetType() == typeof(Dictionary<string, HighlightResultOption>);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Recommend.Models
     {
       var sb = new StringBuilder();
       sb.Append("class HighlightResult {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Recommend.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, HighlightResult.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,22 +142,18 @@ namespace Algolia.Search.Recommend.Models
       {
         return newHighlightResult;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(Dictionary<string, HighlightResultOption>).GetProperty("AdditionalProperties") == null)
-        {
-          newHighlightResult = new HighlightResult(JsonConvert.DeserializeObject<Dictionary<string, HighlightResultOption>>(jsonString, HighlightResult.SerializerSettings));
-        }
-        else
-        {
-          newHighlightResult = new HighlightResult(JsonConvert.DeserializeObject<Dictionary<string, HighlightResultOption>>(jsonString, HighlightResult.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("Dictionary<string, HighlightResultOption>");
-        match++;
+        return new HighlightResult(JsonConvert.DeserializeObject<HighlightResultOption>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into HighlightResultOption: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new HighlightResult(JsonConvert.DeserializeObject<Dictionary<string, HighlightResultOption>>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -157,37 +161,7 @@ namespace Algolia.Search.Recommend.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into Dictionary<string, HighlightResultOption>: {1}", jsonString, exception.ToString()));
       }
 
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(HighlightResultOption).GetProperty("AdditionalProperties") == null)
-        {
-          newHighlightResult = new HighlightResult(JsonConvert.DeserializeObject<HighlightResultOption>(jsonString, HighlightResult.SerializerSettings));
-        }
-        else
-        {
-          newHighlightResult = new HighlightResult(JsonConvert.DeserializeObject<HighlightResultOption>(jsonString, HighlightResult.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("HighlightResultOption");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into HighlightResultOption: {1}", jsonString, exception.ToString()));
-      }
-
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newHighlightResult;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Recommend.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return HighlightResult.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

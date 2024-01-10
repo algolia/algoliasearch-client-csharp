@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The trigger information for a task of type &#39;schedule&#39;.
@@ -34,30 +34,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="ScheduleTrigger" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ScheduleTrigger() { }
+    public ScheduleTrigger() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ScheduleTrigger" /> class.
     /// </summary>
     /// <param name="type">type (required).</param>
     /// <param name="cron">A cron expression that represent at which regularity the task should run. (required).</param>
-    /// <param name="lastRun">The last time the scheduled task ran (RFC3339 format)..</param>
     /// <param name="nextRun">The next scheduled run of the task (RFC3339 format). (required).</param>
-    public ScheduleTrigger(ScheduleTriggerType type = default(ScheduleTriggerType), string cron = default(string), string lastRun = default(string), string nextRun = default(string))
+    public ScheduleTrigger(ScheduleTriggerType type, string cron, string nextRun)
     {
       this.Type = type;
-      // to ensure "cron" is required (not null)
-      if (cron == null)
-      {
-        throw new ArgumentNullException("cron is a required property for ScheduleTrigger and cannot be null");
-      }
-      this.Cron = cron;
-      // to ensure "nextRun" is required (not null)
-      if (nextRun == null)
-      {
-        throw new ArgumentNullException("nextRun is a required property for ScheduleTrigger and cannot be null");
-      }
-      this.NextRun = nextRun;
-      this.LastRun = lastRun;
+      this.Cron = cron ?? throw new ArgumentNullException("cron is a required property for ScheduleTrigger and cannot be null");
+      this.NextRun = nextRun ?? throw new ArgumentNullException("nextRun is a required property for ScheduleTrigger and cannot be null");
     }
 
     /// <summary>

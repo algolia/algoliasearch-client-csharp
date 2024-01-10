@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// UserHighlightResult
@@ -28,26 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="UserHighlightResult" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected UserHighlightResult() { }
+    public UserHighlightResult() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="UserHighlightResult" /> class.
     /// </summary>
     /// <param name="userID">userID (required).</param>
     /// <param name="clusterName">clusterName (required).</param>
-    public UserHighlightResult(HighlightResult userID = default(HighlightResult), HighlightResult clusterName = default(HighlightResult))
+    public UserHighlightResult(HighlightResult userID, HighlightResult clusterName)
     {
-      // to ensure "userID" is required (not null)
-      if (userID == null)
-      {
-        throw new ArgumentNullException("userID is a required property for UserHighlightResult and cannot be null");
-      }
-      this.UserID = userID;
-      // to ensure "clusterName" is required (not null)
-      if (clusterName == null)
-      {
-        throw new ArgumentNullException("clusterName is a required property for UserHighlightResult and cannot be null");
-      }
-      this.ClusterName = clusterName;
+      this.UserID = userID ?? throw new ArgumentNullException("userID is a required property for UserHighlightResult and cannot be null");
+      this.ClusterName = clusterName ?? throw new ArgumentNullException("clusterName is a required property for UserHighlightResult and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchMethodParams
@@ -29,26 +29,19 @@ namespace Algolia.Search.Search.Models
     /// Gets or Sets Strategy
     /// </summary>
     [DataMember(Name = "strategy", EmitDefaultValue = false)]
-    public SearchStrategy? Strategy { get; set; }
+    public SearchStrategy Strategy { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchMethodParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchMethodParams() { }
+    public SearchMethodParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchMethodParams" /> class.
     /// </summary>
     /// <param name="requests">requests (required).</param>
-    /// <param name="strategy">strategy.</param>
-    public SearchMethodParams(List<SearchQuery> requests = default(List<SearchQuery>), SearchStrategy? strategy = default(SearchStrategy?))
+    public SearchMethodParams(List<SearchQuery> requests)
     {
-      // to ensure "requests" is required (not null)
-      if (requests == null)
-      {
-        throw new ArgumentNullException("requests is a required property for SearchMethodParams and cannot be null");
-      }
-      this.Requests = requests;
-      this.Strategy = strategy;
+      this.Requests = requests ?? throw new ArgumentNullException("requests is a required property for SearchMethodParams and cannot be null");
     }
 
     /// <summary>

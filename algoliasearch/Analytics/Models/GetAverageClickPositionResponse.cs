@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetAverageClickPositionResponse
@@ -28,23 +28,18 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetAverageClickPositionResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetAverageClickPositionResponse() { }
+    public GetAverageClickPositionResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetAverageClickPositionResponse" /> class.
     /// </summary>
     /// <param name="average">Average count of all click events. (required).</param>
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="dates">Average click positions. (required).</param>
-    public GetAverageClickPositionResponse(double average = default(double), int clickCount = default(int), List<AverageClickEvent> dates = default(List<AverageClickEvent>))
+    public GetAverageClickPositionResponse(double average, int clickCount, List<AverageClickEvent> dates)
     {
       this.Average = average;
       this.ClickCount = clickCount;
-      // to ensure "dates" is required (not null)
-      if (dates == null)
-      {
-        throw new ArgumentNullException("dates is a required property for GetAverageClickPositionResponse and cannot be null");
-      }
-      this.Dates = dates;
+      this.Dates = dates ?? throw new ArgumentNullException("dates is a required property for GetAverageClickPositionResponse and cannot be null");
     }
 
     /// <summary>

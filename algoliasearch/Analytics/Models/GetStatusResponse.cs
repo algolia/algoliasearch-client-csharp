@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetStatusResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetStatusResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetStatusResponse() { }
+    public GetStatusResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetStatusResponse" /> class.
     /// </summary>
     /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public GetStatusResponse(string updatedAt = default(string))
+    public GetStatusResponse(string updatedAt)
     {
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for GetStatusResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for GetStatusResponse and cannot be null");
     }
 
     /// <summary>

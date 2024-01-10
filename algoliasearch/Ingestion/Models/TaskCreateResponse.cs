@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The response from the API after a task creation.
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="TaskCreateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected TaskCreateResponse() { }
+    public TaskCreateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="TaskCreateResponse" /> class.
     /// </summary>
     /// <param name="taskID">The task UUID. (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    public TaskCreateResponse(string taskID = default(string), string createdAt = default(string))
+    public TaskCreateResponse(string taskID, string createdAt)
     {
-      // to ensure "taskID" is required (not null)
-      if (taskID == null)
-      {
-        throw new ArgumentNullException("taskID is a required property for TaskCreateResponse and cannot be null");
-      }
-      this.TaskID = taskID;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for TaskCreateResponse and cannot be null");
-      }
-      this.CreatedAt = createdAt;
+      this.TaskID = taskID ?? throw new ArgumentNullException("taskID is a required property for TaskCreateResponse and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for TaskCreateResponse and cannot be null");
     }
 
     /// <summary>

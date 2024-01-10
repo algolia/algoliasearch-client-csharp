@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// ConversionRateEvent
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="ConversionRateEvent" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ConversionRateEvent() { }
+    public ConversionRateEvent() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ConversionRateEvent" /> class.
     /// </summary>
@@ -36,17 +36,12 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
     /// <param name="conversionCount">Number of converted clicks. (required).</param>
     /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-    public ConversionRateEvent(double rate = default(double), int trackedSearchCount = default(int), int conversionCount = default(int), string date = default(string))
+    public ConversionRateEvent(double rate, int trackedSearchCount, int conversionCount, string date)
     {
       this.Rate = rate;
       this.TrackedSearchCount = trackedSearchCount;
       this.ConversionCount = conversionCount;
-      // to ensure "date" is required (not null)
-      if (date == null)
-      {
-        throw new ArgumentNullException("date is a required property for ConversionRateEvent and cannot be null");
-      }
-      this.Date = date;
+      this.Date = date ?? throw new ArgumentNullException("date is a required property for ConversionRateEvent and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// Facet to use as category.
@@ -27,12 +27,8 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="Facet" /> class.
     /// </summary>
-    /// <param name="attribute">Facet name..</param>
-    /// <param name="amount">Number of suggestions..</param>
-    public Facet(string attribute = default(string), int amount = default(int))
+    public Facet()
     {
-      this.Attribute = attribute;
-      this.Amount = amount;
     }
 
     /// <summary>
@@ -47,7 +43,7 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// </summary>
     /// <value>Number of suggestions.</value>
     [DataMember(Name = "amount", EmitDefaultValue = false)]
-    public int Amount { get; set; }
+    public int? Amount { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

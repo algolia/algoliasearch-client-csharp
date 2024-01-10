@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The input for an &#x60;onDemand&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a given time range.
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="OnDemandDateUtilsInput" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected OnDemandDateUtilsInput() { }
+    public OnDemandDateUtilsInput() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="OnDemandDateUtilsInput" /> class.
     /// </summary>
     /// <param name="startDate">The start date of the extraction (RFC3339 format). (required).</param>
     /// <param name="endDate">The end date of the extraction (RFC3339 format). (required).</param>
-    public OnDemandDateUtilsInput(string startDate = default(string), string endDate = default(string))
+    public OnDemandDateUtilsInput(string startDate, string endDate)
     {
-      // to ensure "startDate" is required (not null)
-      if (startDate == null)
-      {
-        throw new ArgumentNullException("startDate is a required property for OnDemandDateUtilsInput and cannot be null");
-      }
-      this.StartDate = startDate;
-      // to ensure "endDate" is required (not null)
-      if (endDate == null)
-      {
-        throw new ArgumentNullException("endDate is a required property for OnDemandDateUtilsInput and cannot be null");
-      }
-      this.EndDate = endDate;
+      this.StartDate = startDate ?? throw new ArgumentNullException("startDate is a required property for OnDemandDateUtilsInput and cannot be null");
+      this.EndDate = endDate ?? throw new ArgumentNullException("endDate is a required property for OnDemandDateUtilsInput and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// BatchDictionaryEntriesRequest
@@ -34,21 +34,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="BatchDictionaryEntriesRequest" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BatchDictionaryEntriesRequest() { }
+    public BatchDictionaryEntriesRequest() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchDictionaryEntriesRequest" /> class.
     /// </summary>
     /// <param name="action">action (required).</param>
     /// <param name="body">body (required).</param>
-    public BatchDictionaryEntriesRequest(DictionaryAction action = default(DictionaryAction), DictionaryEntry body = default(DictionaryEntry))
+    public BatchDictionaryEntriesRequest(DictionaryAction action, DictionaryEntry body)
     {
       this.Action = action;
-      // to ensure "body" is required (not null)
-      if (body == null)
-      {
-        throw new ArgumentNullException("body is a required property for BatchDictionaryEntriesRequest and cannot be null");
-      }
-      this.Body = body;
+      this.Body = body ?? throw new ArgumentNullException("body is a required property for BatchDictionaryEntriesRequest and cannot be null");
     }
 
     /// <summary>

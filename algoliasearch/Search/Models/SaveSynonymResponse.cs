@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SaveSynonymResponse
@@ -28,28 +28,18 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SaveSynonymResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SaveSynonymResponse() { }
+    public SaveSynonymResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SaveSynonymResponse" /> class.
     /// </summary>
     /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
     /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
     /// <param name="id">Unique identifier of a synonym object. (required).</param>
-    public SaveSynonymResponse(long taskID = default(long), string updatedAt = default(string), string id = default(string))
+    public SaveSynonymResponse(long taskID, string updatedAt, string id)
     {
       this.TaskID = taskID;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for SaveSynonymResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
-      // to ensure "id" is required (not null)
-      if (id == null)
-      {
-        throw new ArgumentNullException("id is a required property for SaveSynonymResponse and cannot be null");
-      }
-      this.Id = id;
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for SaveSynonymResponse and cannot be null");
+      this.Id = id ?? throw new ArgumentNullException("id is a required property for SaveSynonymResponse and cannot be null");
     }
 
     /// <summary>

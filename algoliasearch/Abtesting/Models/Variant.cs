@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// Variant
@@ -28,7 +28,7 @@ namespace Algolia.Search.Abtesting.Models
     /// Initializes a new instance of the <see cref="Variant" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Variant() { }
+    public Variant() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Variant" /> class.
     /// </summary>
@@ -41,7 +41,6 @@ namespace Algolia.Search.Abtesting.Models
     /// <param name="conversionRate">Variant&#39;s [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate). (required).</param>
     /// <param name="currencies">A/B test currencies. (required).</param>
     /// <param name="description">A/B test description. (required).</param>
-    /// <param name="filterEffects">filterEffects.</param>
     /// <param name="index">A/B test index. (required).</param>
     /// <param name="noResultCount">Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant. (required).</param>
     /// <param name="purchaseCount">Number of purchase events for this variant. (required).</param>
@@ -50,7 +49,7 @@ namespace Algolia.Search.Abtesting.Models
     /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
     /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
     /// <param name="userCount">Number of users during the A/B test. (required).</param>
-    public Variant(int addToCartCount = default(int), double addToCartRate = default(double), int averageClickPosition = default(int), int clickCount = default(int), double clickThroughRate = default(double), int conversionCount = default(int), double conversionRate = default(double), Dictionary<string, CurrenciesValue> currencies = default(Dictionary<string, CurrenciesValue>), string description = default(string), FilterEffects filterEffects = default(FilterEffects), string index = default(string), int noResultCount = default(int), int purchaseCount = default(int), double purchaseRate = default(double), int searchCount = default(int), int trackedSearchCount = default(int), int trafficPercentage = default(int), int userCount = default(int))
+    public Variant(int addToCartCount, double addToCartRate, int averageClickPosition, int clickCount, double clickThroughRate, int conversionCount, double conversionRate, Dictionary<string, CurrenciesValue> currencies, string description, string index, int noResultCount, int purchaseCount, double purchaseRate, int searchCount, int trackedSearchCount, int trafficPercentage, int userCount)
     {
       this.AddToCartCount = addToCartCount;
       this.AddToCartRate = addToCartRate;
@@ -59,24 +58,9 @@ namespace Algolia.Search.Abtesting.Models
       this.ClickThroughRate = clickThroughRate;
       this.ConversionCount = conversionCount;
       this.ConversionRate = conversionRate;
-      // to ensure "currencies" is required (not null)
-      if (currencies == null)
-      {
-        throw new ArgumentNullException("currencies is a required property for Variant and cannot be null");
-      }
-      this.Currencies = currencies;
-      // to ensure "description" is required (not null)
-      if (description == null)
-      {
-        throw new ArgumentNullException("description is a required property for Variant and cannot be null");
-      }
-      this.Description = description;
-      // to ensure "index" is required (not null)
-      if (index == null)
-      {
-        throw new ArgumentNullException("index is a required property for Variant and cannot be null");
-      }
-      this.Index = index;
+      this.Currencies = currencies ?? throw new ArgumentNullException("currencies is a required property for Variant and cannot be null");
+      this.Description = description ?? throw new ArgumentNullException("description is a required property for Variant and cannot be null");
+      this.Index = index ?? throw new ArgumentNullException("index is a required property for Variant and cannot be null");
       this.NoResultCount = noResultCount;
       this.PurchaseCount = purchaseCount;
       this.PurchaseRate = purchaseRate;
@@ -84,7 +68,6 @@ namespace Algolia.Search.Abtesting.Models
       this.TrackedSearchCount = trackedSearchCount;
       this.TrafficPercentage = trafficPercentage;
       this.UserCount = userCount;
-      this.FilterEffects = filterEffects;
     }
 
     /// <summary>

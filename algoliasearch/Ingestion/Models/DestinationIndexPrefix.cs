@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// DestinationIndexPrefix
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="DestinationIndexPrefix" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DestinationIndexPrefix() { }
+    public DestinationIndexPrefix() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DestinationIndexPrefix" /> class.
     /// </summary>
     /// <param name="indexPrefix">The prefix of the final index name. (required).</param>
-    public DestinationIndexPrefix(string indexPrefix = default(string))
+    public DestinationIndexPrefix(string indexPrefix)
     {
-      // to ensure "indexPrefix" is required (not null)
-      if (indexPrefix == null)
-      {
-        throw new ArgumentNullException("indexPrefix is a required property for DestinationIndexPrefix and cannot be null");
-      }
-      this.IndexPrefix = indexPrefix;
+      this.IndexPrefix = indexPrefix ?? throw new ArgumentNullException("indexPrefix is a required property for DestinationIndexPrefix and cannot be null");
     }
 
     /// <summary>

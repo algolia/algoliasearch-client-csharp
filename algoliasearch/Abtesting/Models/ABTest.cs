@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// ABTest
@@ -28,7 +28,7 @@ namespace Algolia.Search.Abtesting.Models
     /// Initializes a new instance of the <see cref="ABTest" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ABTest() { }
+    public ABTest() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ABTest" /> class.
     /// </summary>
@@ -44,55 +44,20 @@ namespace Algolia.Search.Abtesting.Models
     /// <param name="name">A/B test name. (required).</param>
     /// <param name="status">A/B test status. (required).</param>
     /// <param name="variants">A/B test variants. (required).</param>
-    public ABTest(int abTestID = default(int), double clickSignificance = default(double), double conversionSignificance = default(double), double addToCartSignificance = default(double), double purchaseSignificance = default(double), Dictionary<string, double> revenueSignificance = default(Dictionary<string, double>), string updatedAt = default(string), string createdAt = default(string), string endAt = default(string), string name = default(string), string status = default(string), List<Variant> variants = default(List<Variant>))
+    public ABTest(int abTestID, double clickSignificance, double conversionSignificance, double addToCartSignificance, double purchaseSignificance, Dictionary<string, double> revenueSignificance, string updatedAt, string createdAt, string endAt, string name, string status, List<Variant> variants)
     {
       this.AbTestID = abTestID;
       this.ClickSignificance = clickSignificance;
       this.ConversionSignificance = conversionSignificance;
       this.AddToCartSignificance = addToCartSignificance;
       this.PurchaseSignificance = purchaseSignificance;
-      // to ensure "revenueSignificance" is required (not null)
-      if (revenueSignificance == null)
-      {
-        throw new ArgumentNullException("revenueSignificance is a required property for ABTest and cannot be null");
-      }
-      this.RevenueSignificance = revenueSignificance;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for ABTest and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for ABTest and cannot be null");
-      }
-      this.CreatedAt = createdAt;
-      // to ensure "endAt" is required (not null)
-      if (endAt == null)
-      {
-        throw new ArgumentNullException("endAt is a required property for ABTest and cannot be null");
-      }
-      this.EndAt = endAt;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for ABTest and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "status" is required (not null)
-      if (status == null)
-      {
-        throw new ArgumentNullException("status is a required property for ABTest and cannot be null");
-      }
-      this.Status = status;
-      // to ensure "variants" is required (not null)
-      if (variants == null)
-      {
-        throw new ArgumentNullException("variants is a required property for ABTest and cannot be null");
-      }
-      this.Variants = variants;
+      this.RevenueSignificance = revenueSignificance ?? throw new ArgumentNullException("revenueSignificance is a required property for ABTest and cannot be null");
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for ABTest and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for ABTest and cannot be null");
+      this.EndAt = endAt ?? throw new ArgumentNullException("endAt is a required property for ABTest and cannot be null");
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for ABTest and cannot be null");
+      this.Status = status ?? throw new ArgumentNullException("status is a required property for ABTest and cannot be null");
+      this.Variants = variants ?? throw new ArgumentNullException("variants is a required property for ABTest and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// Query Suggestions configuration.
@@ -28,27 +28,14 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// Initializes a new instance of the <see cref="QuerySuggestionsConfiguration" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected QuerySuggestionsConfiguration() { }
+    public QuerySuggestionsConfiguration() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="QuerySuggestionsConfiguration" /> class.
     /// </summary>
     /// <param name="sourceIndices">Algolia indices from which to get the popular searches for query suggestions. (required).</param>
-    /// <param name="languages">languages.</param>
-    /// <param name="exclude">Patterns to exclude from query suggestions..</param>
-    /// <param name="enablePersonalization">Turn on personalized query suggestions. (default to false).</param>
-    /// <param name="allowSpecialCharacters">Allow suggestions with special characters. (default to false).</param>
-    public QuerySuggestionsConfiguration(List<SourceIndex> sourceIndices = default(List<SourceIndex>), Languages languages = default(Languages), List<string> exclude = default(List<string>), bool enablePersonalization = false, bool allowSpecialCharacters = false)
+    public QuerySuggestionsConfiguration(List<SourceIndex> sourceIndices)
     {
-      // to ensure "sourceIndices" is required (not null)
-      if (sourceIndices == null)
-      {
-        throw new ArgumentNullException("sourceIndices is a required property for QuerySuggestionsConfiguration and cannot be null");
-      }
-      this.SourceIndices = sourceIndices;
-      this.Languages = languages;
-      this.Exclude = exclude;
-      this.EnablePersonalization = enablePersonalization;
-      this.AllowSpecialCharacters = allowSpecialCharacters;
+      this.SourceIndices = sourceIndices ?? throw new ArgumentNullException("sourceIndices is a required property for QuerySuggestionsConfiguration and cannot be null");
     }
 
     /// <summary>
@@ -76,14 +63,14 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// </summary>
     /// <value>Turn on personalized query suggestions.</value>
     [DataMember(Name = "enablePersonalization", EmitDefaultValue = true)]
-    public bool EnablePersonalization { get; set; }
+    public bool? EnablePersonalization { get; set; }
 
     /// <summary>
     /// Allow suggestions with special characters.
     /// </summary>
     /// <value>Allow suggestions with special characters.</value>
     [DataMember(Name = "allowSpecialCharacters", EmitDefaultValue = true)]
-    public bool AllowSpecialCharacters { get; set; }
+    public bool? AllowSpecialCharacters { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

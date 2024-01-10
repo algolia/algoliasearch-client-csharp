@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Source
@@ -34,7 +34,7 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="Source" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Source() { }
+    public Source() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Source" /> class.
     /// </summary>
@@ -42,38 +42,14 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="type">type (required).</param>
     /// <param name="name">name (required).</param>
     /// <param name="input">input (required).</param>
-    /// <param name="authenticationID">The authentication UUID..</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    /// <param name="updatedAt">Date of last update (RFC3339 format)..</param>
-    public Source(string sourceID = default(string), SourceType type = default(SourceType), string name = default(string), SourceInput input = default(SourceInput), string authenticationID = default(string), string createdAt = default(string), string updatedAt = default(string))
+    public Source(string sourceID, SourceType type, string name, SourceInput input, string createdAt)
     {
-      // to ensure "sourceID" is required (not null)
-      if (sourceID == null)
-      {
-        throw new ArgumentNullException("sourceID is a required property for Source and cannot be null");
-      }
-      this.SourceID = sourceID;
+      this.SourceID = sourceID ?? throw new ArgumentNullException("sourceID is a required property for Source and cannot be null");
       this.Type = type;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for Source and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "input" is required (not null)
-      if (input == null)
-      {
-        throw new ArgumentNullException("input is a required property for Source and cannot be null");
-      }
-      this.Input = input;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for Source and cannot be null");
-      }
-      this.CreatedAt = createdAt;
-      this.AuthenticationID = authenticationID;
-      this.UpdatedAt = updatedAt;
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for Source and cannot be null");
+      this.Input = input ?? throw new ArgumentNullException("input is a required property for Source and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for Source and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetTopFilterForAttribute
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetTopFilterForAttribute" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetTopFilterForAttribute() { }
+    public GetTopFilterForAttribute() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetTopFilterForAttribute" /> class.
     /// </summary>
@@ -36,26 +36,11 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="varOperator">Operator. (required).</param>
     /// <param name="value">Attribute value. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
-    public GetTopFilterForAttribute(string attribute = default(string), string varOperator = default(string), string value = default(string), int count = default(int))
+    public GetTopFilterForAttribute(string attribute, string varOperator, string value, int count)
     {
-      // to ensure "attribute" is required (not null)
-      if (attribute == null)
-      {
-        throw new ArgumentNullException("attribute is a required property for GetTopFilterForAttribute and cannot be null");
-      }
-      this.Attribute = attribute;
-      // to ensure "varOperator" is required (not null)
-      if (varOperator == null)
-      {
-        throw new ArgumentNullException("varOperator is a required property for GetTopFilterForAttribute and cannot be null");
-      }
-      this.VarOperator = varOperator;
-      // to ensure "value" is required (not null)
-      if (value == null)
-      {
-        throw new ArgumentNullException("value is a required property for GetTopFilterForAttribute and cannot be null");
-      }
-      this.Value = value;
+      this.Attribute = attribute ?? throw new ArgumentNullException("attribute is a required property for GetTopFilterForAttribute and cannot be null");
+      this.VarOperator = varOperator ?? throw new ArgumentNullException("varOperator is a required property for GetTopFilterForAttribute and cannot be null");
+      this.Value = value ?? throw new ArgumentNullException("value is a required property for GetTopFilterForAttribute and cannot be null");
       this.Count = count;
     }
 

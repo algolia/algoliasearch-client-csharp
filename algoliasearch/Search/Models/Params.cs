@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Additional search parameters.
@@ -27,16 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="Params" /> class.
     /// </summary>
-    /// <param name="query">query.</param>
-    /// <param name="automaticFacetFilters">automaticFacetFilters.</param>
-    /// <param name="automaticOptionalFacetFilters">automaticOptionalFacetFilters.</param>
-    /// <param name="renderingContent">renderingContent.</param>
-    public Params(ConsequenceQuery query = default(ConsequenceQuery), AutomaticFacetFilters automaticFacetFilters = default(AutomaticFacetFilters), AutomaticFacetFilters automaticOptionalFacetFilters = default(AutomaticFacetFilters), RenderingContent renderingContent = default(RenderingContent))
+    public Params()
     {
-      this.Query = query;
-      this.AutomaticFacetFilters = automaticFacetFilters;
-      this.AutomaticOptionalFacetFilters = automaticOptionalFacetFilters;
-      this.RenderingContent = renderingContent;
     }
 
     /// <summary>

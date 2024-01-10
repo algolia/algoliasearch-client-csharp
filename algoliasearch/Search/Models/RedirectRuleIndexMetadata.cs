@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// RedirectRuleIndexMetadata
@@ -28,42 +28,22 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="RedirectRuleIndexMetadata" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RedirectRuleIndexMetadata() { }
+    public RedirectRuleIndexMetadata() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectRuleIndexMetadata" /> class.
     /// </summary>
-    /// <param name="source">Source index for the redirect rule. (required).</param>
+    /// <param name="varSource">Source index for the redirect rule. (required).</param>
     /// <param name="dest">Destination index for the redirect rule. (required).</param>
     /// <param name="reason">Reason for the redirect rule. (required).</param>
     /// <param name="succeed">Redirect rule status. (required).</param>
     /// <param name="data">data (required).</param>
-    public RedirectRuleIndexMetadata(string source = default(string), string dest = default(string), string reason = default(string), bool succeed = default(bool), RedirectRuleIndexMetadataData data = default(RedirectRuleIndexMetadataData))
+    public RedirectRuleIndexMetadata(string varSource, string dest, string reason, bool succeed, RedirectRuleIndexMetadataData data)
     {
-      // to ensure "source" is required (not null)
-      if (source == null)
-      {
-        throw new ArgumentNullException("source is a required property for RedirectRuleIndexMetadata and cannot be null");
-      }
-      this.Source = source;
-      // to ensure "dest" is required (not null)
-      if (dest == null)
-      {
-        throw new ArgumentNullException("dest is a required property for RedirectRuleIndexMetadata and cannot be null");
-      }
-      this.Dest = dest;
-      // to ensure "reason" is required (not null)
-      if (reason == null)
-      {
-        throw new ArgumentNullException("reason is a required property for RedirectRuleIndexMetadata and cannot be null");
-      }
-      this.Reason = reason;
+      this.VarSource = varSource ?? throw new ArgumentNullException("varSource is a required property for RedirectRuleIndexMetadata and cannot be null");
+      this.Dest = dest ?? throw new ArgumentNullException("dest is a required property for RedirectRuleIndexMetadata and cannot be null");
+      this.Reason = reason ?? throw new ArgumentNullException("reason is a required property for RedirectRuleIndexMetadata and cannot be null");
       this.Succeed = succeed;
-      // to ensure "data" is required (not null)
-      if (data == null)
-      {
-        throw new ArgumentNullException("data is a required property for RedirectRuleIndexMetadata and cannot be null");
-      }
-      this.Data = data;
+      this.Data = data ?? throw new ArgumentNullException("data is a required property for RedirectRuleIndexMetadata and cannot be null");
     }
 
     /// <summary>
@@ -71,7 +51,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Source index for the redirect rule.</value>
     [DataMember(Name = "source", IsRequired = true, EmitDefaultValue = true)]
-    public string Source { get; set; }
+    public string VarSource { get; set; }
 
     /// <summary>
     /// Destination index for the redirect rule.
@@ -108,7 +88,7 @@ namespace Algolia.Search.Search.Models
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("class RedirectRuleIndexMetadata {\n");
-      sb.Append("  Source: ").Append(Source).Append("\n");
+      sb.Append("  VarSource: ").Append(VarSource).Append("\n");
       sb.Append("  Dest: ").Append(Dest).Append("\n");
       sb.Append("  Reason: ").Append(Reason).Append("\n");
       sb.Append("  Succeed: ").Append(Succeed).Append("\n");

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// BaseRecommendedForYouQueryParameters
@@ -28,19 +28,14 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="BaseRecommendedForYouQueryParameters" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BaseRecommendedForYouQueryParameters() { }
+    public BaseRecommendedForYouQueryParameters() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseRecommendedForYouQueryParameters" /> class.
     /// </summary>
     /// <param name="userToken">Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search. (required).</param>
-    public BaseRecommendedForYouQueryParameters(string userToken = default(string))
+    public BaseRecommendedForYouQueryParameters(string userToken)
     {
-      // to ensure "userToken" is required (not null)
-      if (userToken == null)
-      {
-        throw new ArgumentNullException("userToken is a required property for BaseRecommendedForYouQueryParameters and cannot be null");
-      }
-      this.UserToken = userToken;
+      this.UserToken = userToken ?? throw new ArgumentNullException("userToken is a required property for BaseRecommendedForYouQueryParameters and cannot be null");
     }
 
     /// <summary>

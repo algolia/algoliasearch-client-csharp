@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetSearchesNoClicksResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetSearchesNoClicksResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetSearchesNoClicksResponse() { }
+    public GetSearchesNoClicksResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetSearchesNoClicksResponse" /> class.
     /// </summary>
     /// <param name="searches">Searches with no clicks. (required).</param>
-    public GetSearchesNoClicksResponse(List<SearchNoClickEvent> searches = default(List<SearchNoClickEvent>))
+    public GetSearchesNoClicksResponse(List<SearchNoClickEvent> searches)
     {
-      // to ensure "searches" is required (not null)
-      if (searches == null)
-      {
-        throw new ArgumentNullException("searches is a required property for GetSearchesNoClicksResponse and cannot be null");
-      }
-      this.Searches = searches;
+      this.Searches = searches ?? throw new ArgumentNullException("searches is a required property for GetSearchesNoClicksResponse and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// A destination describe how the data is indexed on the Algolia side.
@@ -34,7 +34,7 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="Destination" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Destination() { }
+    public Destination() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Destination" /> class.
     /// </summary>
@@ -43,37 +43,13 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="name">An human readable name describing the object. (required).</param>
     /// <param name="input">input (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    /// <param name="updatedAt">Date of last update (RFC3339 format)..</param>
-    /// <param name="authenticationID">authenticationID.</param>
-    public Destination(string destinationID = default(string), DestinationType type = default(DestinationType), string name = default(string), DestinationInput input = default(DestinationInput), string createdAt = default(string), string updatedAt = default(string), string authenticationID = default(string))
+    public Destination(string destinationID, DestinationType type, string name, DestinationInput input, string createdAt)
     {
-      // to ensure "destinationID" is required (not null)
-      if (destinationID == null)
-      {
-        throw new ArgumentNullException("destinationID is a required property for Destination and cannot be null");
-      }
-      this.DestinationID = destinationID;
+      this.DestinationID = destinationID ?? throw new ArgumentNullException("destinationID is a required property for Destination and cannot be null");
       this.Type = type;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for Destination and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "input" is required (not null)
-      if (input == null)
-      {
-        throw new ArgumentNullException("input is a required property for Destination and cannot be null");
-      }
-      this.Input = input;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for Destination and cannot be null");
-      }
-      this.CreatedAt = createdAt;
-      this.UpdatedAt = updatedAt;
-      this.AuthenticationID = authenticationID;
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for Destination and cannot be null");
+      this.Input = input ?? throw new ArgumentNullException("input is a required property for Destination and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for Destination and cannot be null");
     }
 
     /// <summary>

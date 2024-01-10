@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// LogQuery
@@ -27,14 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="LogQuery" /> class.
     /// </summary>
-    /// <param name="indexName">Index targeted by the query..</param>
-    /// <param name="userToken">User identifier..</param>
-    /// <param name="queryId">Unique query identifier..</param>
-    public LogQuery(string indexName = default(string), string userToken = default(string), string queryId = default(string))
+    public LogQuery()
     {
-      this.IndexName = indexName;
-      this.UserToken = userToken;
-      this.QueryId = queryId;
     }
 
     /// <summary>

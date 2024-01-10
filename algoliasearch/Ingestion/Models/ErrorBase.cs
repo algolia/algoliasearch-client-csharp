@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Error.
@@ -27,10 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="ErrorBase" /> class.
     /// </summary>
-    /// <param name="message">message.</param>
-    public ErrorBase(string message = default(string))
+    public ErrorBase()
     {
-      this.Message = message;
       this.AdditionalProperties = new Dictionary<string, object>();
     }
 

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// InfrastructureResponse
@@ -27,10 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="InfrastructureResponse" /> class.
     /// </summary>
-    /// <param name="metrics">metrics.</param>
-    public InfrastructureResponse(InfrastructureResponseMetrics metrics = default(InfrastructureResponseMetrics))
+    public InfrastructureResponse()
     {
-      this.Metrics = metrics;
     }
 
     /// <summary>

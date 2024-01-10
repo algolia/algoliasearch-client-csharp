@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetTopCountriesResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetTopCountriesResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetTopCountriesResponse() { }
+    public GetTopCountriesResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetTopCountriesResponse" /> class.
     /// </summary>
     /// <param name="countries">Countries (required).</param>
-    public GetTopCountriesResponse(List<TopCountry> countries = default(List<TopCountry>))
+    public GetTopCountriesResponse(List<TopCountry> countries)
     {
-      // to ensure "countries" is required (not null)
-      if (countries == null)
-      {
-        throw new ArgumentNullException("countries is a required property for GetTopCountriesResponse and cannot be null");
-      }
-      this.Countries = countries;
+      this.Countries = countries ?? throw new ArgumentNullException("countries is a required property for GetTopCountriesResponse and cannot be null");
     }
 
     /// <summary>

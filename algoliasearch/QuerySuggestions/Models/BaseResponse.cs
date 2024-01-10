@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// BaseResponse
@@ -27,12 +27,8 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseResponse" /> class.
     /// </summary>
-    /// <param name="status">HTTP status code..</param>
-    /// <param name="message">Details about the response, such as error messages..</param>
-    public BaseResponse(int status = default(int), string message = default(string))
+    public BaseResponse()
     {
-      this.Status = status;
-      this.Message = message;
     }
 
     /// <summary>
@@ -40,7 +36,7 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// </summary>
     /// <value>HTTP status code.</value>
     [DataMember(Name = "status", EmitDefaultValue = false)]
-    public int Status { get; set; }
+    public int? Status { get; set; }
 
     /// <summary>
     /// Details about the response, such as error messages.

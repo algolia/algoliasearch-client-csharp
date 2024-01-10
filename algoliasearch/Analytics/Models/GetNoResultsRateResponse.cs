@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetNoResultsRateResponse
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetNoResultsRateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetNoResultsRateResponse() { }
+    public GetNoResultsRateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetNoResultsRateResponse" /> class.
     /// </summary>
@@ -36,17 +36,12 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="count">Number of occurrences. (required).</param>
     /// <param name="noResultCount">Number of occurrences. (required).</param>
     /// <param name="dates">Overall count of searches without results plus a daily breakdown. (required).</param>
-    public GetNoResultsRateResponse(double rate = default(double), int count = default(int), int noResultCount = default(int), List<NoResultsRateEvent> dates = default(List<NoResultsRateEvent>))
+    public GetNoResultsRateResponse(double rate, int count, int noResultCount, List<NoResultsRateEvent> dates)
     {
       this.Rate = rate;
       this.Count = count;
       this.NoResultCount = noResultCount;
-      // to ensure "dates" is required (not null)
-      if (dates == null)
-      {
-        throw new ArgumentNullException("dates is a required property for GetNoResultsRateResponse and cannot be null");
-      }
-      this.Dates = dates;
+      this.Dates = dates ?? throw new ArgumentNullException("dates is a required property for GetNoResultsRateResponse and cannot be null");
     }
 
     /// <summary>

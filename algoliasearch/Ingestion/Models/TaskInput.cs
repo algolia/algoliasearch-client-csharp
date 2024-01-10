@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// TaskInput
@@ -33,9 +33,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of OnDemandDateUtilsInput.</param>
     public TaskInput(OnDemandDateUtilsInput actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of ScheduleDateUtilsInput.</param>
     public TaskInput(ScheduleDateUtilsInput actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Ingestion.Models
       }
       set
       {
-        if (value.GetType() == typeof(OnDemandDateUtilsInput))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(ScheduleDateUtilsInput))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: OnDemandDateUtilsInput, ScheduleDateUtilsInput");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of OnDemandDateUtilsInput</returns>
-    public OnDemandDateUtilsInput GetterOnDemandDateUtilsInput()
+    public OnDemandDateUtilsInput AsOnDemandDateUtilsInput()
     {
-      return (OnDemandDateUtilsInput)this.ActualInstance;
+      return (OnDemandDateUtilsInput)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of ScheduleDateUtilsInput</returns>
-    public ScheduleDateUtilsInput GetterScheduleDateUtilsInput()
+    public ScheduleDateUtilsInput AsScheduleDateUtilsInput()
     {
-      return (ScheduleDateUtilsInput)this.ActualInstance;
+      return (ScheduleDateUtilsInput)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `OnDemandDateUtilsInput` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsOnDemandDateUtilsInput()
+    {
+      return ActualInstance.GetType() == typeof(OnDemandDateUtilsInput);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `ScheduleDateUtilsInput` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsScheduleDateUtilsInput()
+    {
+      return ActualInstance.GetType() == typeof(ScheduleDateUtilsInput);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       var sb = new StringBuilder();
       sb.Append("class TaskInput {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Ingestion.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, TaskInput.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Ingestion.Models
       {
         return newTaskInput;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(OnDemandDateUtilsInput).GetProperty("AdditionalProperties") == null)
-        {
-          newTaskInput = new TaskInput(JsonConvert.DeserializeObject<OnDemandDateUtilsInput>(jsonString, TaskInput.SerializerSettings));
-        }
-        else
-        {
-          newTaskInput = new TaskInput(JsonConvert.DeserializeObject<OnDemandDateUtilsInput>(jsonString, TaskInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("OnDemandDateUtilsInput");
-        match++;
+        return new TaskInput(JsonConvert.DeserializeObject<OnDemandDateUtilsInput>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into OnDemandDateUtilsInput: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(ScheduleDateUtilsInput).GetProperty("AdditionalProperties") == null)
-        {
-          newTaskInput = new TaskInput(JsonConvert.DeserializeObject<ScheduleDateUtilsInput>(jsonString, TaskInput.SerializerSettings));
-        }
-        else
-        {
-          newTaskInput = new TaskInput(JsonConvert.DeserializeObject<ScheduleDateUtilsInput>(jsonString, TaskInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("ScheduleDateUtilsInput");
-        match++;
+        return new TaskInput(JsonConvert.DeserializeObject<ScheduleDateUtilsInput>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Ingestion.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ScheduleDateUtilsInput: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newTaskInput;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return TaskInput.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

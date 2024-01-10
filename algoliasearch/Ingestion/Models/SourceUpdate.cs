@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceUpdate
@@ -27,14 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceUpdate" /> class.
     /// </summary>
-    /// <param name="name">name.</param>
-    /// <param name="input">input.</param>
-    /// <param name="authenticationID">The authentication UUID..</param>
-    public SourceUpdate(string name = default(string), SourceUpdateInput input = default(SourceUpdateInput), string authenticationID = default(string))
+    public SourceUpdate()
     {
-      this.Name = name;
-      this.Input = input;
-      this.AuthenticationID = authenticationID;
     }
 
     /// <summary>

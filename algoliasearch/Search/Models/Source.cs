@@ -16,33 +16,26 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Source.
   /// </summary>
-  [DataContract(Name = "source")]
+  [DataContract(Name = "varSource")]
   public partial class Source
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="Source" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Source() { }
+    public Source() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Source" /> class.
     /// </summary>
     /// <param name="varSource">IP address range of the source. (required).</param>
-    /// <param name="description">Source description..</param>
-    public Source(string varSource = default(string), string description = default(string))
+    public Source(string varSource)
     {
-      // to ensure "varSource" is required (not null)
-      if (varSource == null)
-      {
-        throw new ArgumentNullException("varSource is a required property for Source and cannot be null");
-      }
-      this.VarSource = varSource;
-      this.Description = description;
+      this.VarSource = varSource ?? throw new ArgumentNullException("varSource is a required property for Source and cannot be null");
     }
 
     /// <summary>

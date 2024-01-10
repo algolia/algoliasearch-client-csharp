@@ -3,20 +3,12 @@
 //
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Net.Http;
-using System.Net.Security;
-using Algolia.Search.Client;
+using Algolia.Search.Models;
 using Algolia.Search.Transport;
+using Algolia.Search.Utils;
 
-namespace Algolia.Search.Abtesting.Client
+namespace Algolia.Search.Clients
 {
   /// <summary>
   /// Abtesting client configuration
@@ -29,8 +21,13 @@ namespace Algolia.Search.Abtesting.Client
     /// </summary>
     /// <param name="applicationId">Your application ID</param>
     /// <param name="apiKey">Your API Key</param>
-    /// <param name="region">The region</param>
+    /// <param name="region">Targeted region (optional)</param>
     public AbtestingConfig(string applicationId, string apiKey, string region = null) : base(applicationId, apiKey)
+    {
+      DefaultHosts = GetDefaultHosts(region);
+      Compression = CompressionType.NONE;
+    }
+    private static List<StatefulHost> GetDefaultHosts(string region)
     {
       var regions = new List<string> { "de", "us" };
       if (region != null && !regions.Contains(region))
@@ -41,15 +38,13 @@ namespace Algolia.Search.Abtesting.Client
       var selectedRegion = region == null ? "analytics.algolia.com" : "analytics.{region}.algolia.com".Replace("{region}", region);
 
       List<StatefulHost> hosts = new List<StatefulHost>
+    {
+      new StatefulHost
       {
-        new StatefulHost
-        {
-          Url = selectedRegion, Accept = CallType.Read | CallType.Write
-        }
-      };
-
-      DefaultHosts = hosts;
-      Compression = CompressionType.NONE;
+        Url = selectedRegion, Accept = CallType.Read | CallType.Write
+      }
+    };
+      return hosts;
     }
   }
 }

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Request parameters.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="GetObjectsParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetObjectsParams() { }
+    public GetObjectsParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetObjectsParams" /> class.
     /// </summary>
     /// <param name="requests">requests (required).</param>
-    public GetObjectsParams(List<GetObjectsRequest> requests = default(List<GetObjectsRequest>))
+    public GetObjectsParams(List<GetObjectsRequest> requests)
     {
-      // to ensure "requests" is required (not null)
-      if (requests == null)
-      {
-        throw new ArgumentNullException("requests is a required property for GetObjectsParams and cannot be null");
-      }
-      this.Requests = requests;
+      this.Requests = requests ?? throw new ArgumentNullException("requests is a required property for GetObjectsParams and cannot be null");
     }
 
     /// <summary>

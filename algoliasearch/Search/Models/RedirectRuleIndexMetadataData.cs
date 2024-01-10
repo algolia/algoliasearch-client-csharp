@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Redirect rule data.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="RedirectRuleIndexMetadataData" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RedirectRuleIndexMetadataData() { }
+    public RedirectRuleIndexMetadataData() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectRuleIndexMetadataData" /> class.
     /// </summary>
     /// <param name="ruleObjectID">ruleObjectID (required).</param>
-    public RedirectRuleIndexMetadataData(string ruleObjectID = default(string))
+    public RedirectRuleIndexMetadataData(string ruleObjectID)
     {
-      // to ensure "ruleObjectID" is required (not null)
-      if (ruleObjectID == null)
-      {
-        throw new ArgumentNullException("ruleObjectID is a required property for RedirectRuleIndexMetadataData and cannot be null");
-      }
-      this.RuleObjectID = ruleObjectID;
+      this.RuleObjectID = ruleObjectID ?? throw new ArgumentNullException("ruleObjectID is a required property for RedirectRuleIndexMetadataData and cannot be null");
     }
 
     /// <summary>

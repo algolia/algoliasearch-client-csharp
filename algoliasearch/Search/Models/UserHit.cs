@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// UserHit
@@ -28,7 +28,7 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="UserHit" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected UserHit() { }
+    public UserHit() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="UserHit" /> class.
     /// </summary>
@@ -38,34 +38,14 @@ namespace Algolia.Search.Search.Models
     /// <param name="dataSize">Data size taken by all the users assigned to the cluster. (required).</param>
     /// <param name="objectID">userID of the requested user. Same as userID. (required).</param>
     /// <param name="highlightResult">highlightResult (required).</param>
-    public UserHit(string userID = default(string), string clusterName = default(string), int nbRecords = default(int), int dataSize = default(int), string objectID = default(string), UserHighlightResult highlightResult = default(UserHighlightResult))
+    public UserHit(string userID, string clusterName, int nbRecords, int dataSize, string objectID, UserHighlightResult highlightResult)
     {
-      // to ensure "userID" is required (not null)
-      if (userID == null)
-      {
-        throw new ArgumentNullException("userID is a required property for UserHit and cannot be null");
-      }
-      this.UserID = userID;
-      // to ensure "clusterName" is required (not null)
-      if (clusterName == null)
-      {
-        throw new ArgumentNullException("clusterName is a required property for UserHit and cannot be null");
-      }
-      this.ClusterName = clusterName;
+      this.UserID = userID ?? throw new ArgumentNullException("userID is a required property for UserHit and cannot be null");
+      this.ClusterName = clusterName ?? throw new ArgumentNullException("clusterName is a required property for UserHit and cannot be null");
       this.NbRecords = nbRecords;
       this.DataSize = dataSize;
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for UserHit and cannot be null");
-      }
-      this.ObjectID = objectID;
-      // to ensure "highlightResult" is required (not null)
-      if (highlightResult == null)
-      {
-        throw new ArgumentNullException("highlightResult is a required property for UserHit and cannot be null");
-      }
-      this.HighlightResult = highlightResult;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for UserHit and cannot be null");
+      this.HighlightResult = highlightResult ?? throw new ArgumentNullException("highlightResult is a required property for UserHit and cannot be null");
     }
 
     /// <summary>

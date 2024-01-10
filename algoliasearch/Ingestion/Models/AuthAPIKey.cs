@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Authentication input used for token credentials.
@@ -28,19 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="AuthAPIKey" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthAPIKey() { }
+    public AuthAPIKey() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthAPIKey" /> class.
     /// </summary>
     /// <param name="key">key (required).</param>
-    public AuthAPIKey(string key = default(string))
+    public AuthAPIKey(string key)
     {
-      // to ensure "key" is required (not null)
-      if (key == null)
-      {
-        throw new ArgumentNullException("key is a required property for AuthAPIKey and cannot be null");
-      }
-      this.Key = key;
+      this.Key = key ?? throw new ArgumentNullException("key is a required property for AuthAPIKey and cannot be null");
     }
 
     /// <summary>

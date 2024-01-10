@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// ProbesMetric
@@ -27,12 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="ProbesMetric" /> class.
     /// </summary>
-    /// <param name="t">Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds..</param>
-    /// <param name="v">Value of the metric..</param>
-    public ProbesMetric(long t = default(long), int v = default(int))
+    public ProbesMetric()
     {
-      this.T = t;
-      this.V = v;
     }
 
     /// <summary>
@@ -47,7 +43,7 @@ namespace Algolia.Search.Monitoring.Models
     /// </summary>
     /// <value>Value of the metric.</value>
     [DataMember(Name = "v", EmitDefaultValue = false)]
-    public int V { get; set; }
+    public int? V { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

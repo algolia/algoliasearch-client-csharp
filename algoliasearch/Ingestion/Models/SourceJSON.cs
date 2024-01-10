@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceJSON
@@ -29,28 +29,19 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets Method
     /// </summary>
     [DataMember(Name = "method", EmitDefaultValue = false)]
-    public MethodType? Method { get; set; }
+    public MethodType Method { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceJSON" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceJSON() { }
+    public SourceJSON() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceJSON" /> class.
     /// </summary>
     /// <param name="url">The URL of the file. (required).</param>
-    /// <param name="uniqueIDColumn">The name of the column that contains the unique ID, used as &#x60;objectID&#x60; in Algolia..</param>
-    /// <param name="method">method.</param>
-    public SourceJSON(string url = default(string), string uniqueIDColumn = default(string), MethodType? method = default(MethodType?))
+    public SourceJSON(string url)
     {
-      // to ensure "url" is required (not null)
-      if (url == null)
-      {
-        throw new ArgumentNullException("url is a required property for SourceJSON and cannot be null");
-      }
-      this.Url = url;
-      this.UniqueIDColumn = uniqueIDColumn;
-      this.Method = method;
+      this.Url = url ?? throw new ArgumentNullException("url is a required property for SourceJSON and cannot be null");
     }
 
     /// <summary>

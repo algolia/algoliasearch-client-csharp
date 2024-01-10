@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Authentication input to connect to a Google service (e.g. BigQuery).
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="AuthGoogleServiceAccount" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AuthGoogleServiceAccount() { }
+    public AuthGoogleServiceAccount() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthGoogleServiceAccount" /> class.
     /// </summary>
     /// <param name="clientEmail">Email address of the Service Account. (required).</param>
     /// <param name="privateKey">Private key of the Service Account. (required).</param>
-    public AuthGoogleServiceAccount(string clientEmail = default(string), string privateKey = default(string))
+    public AuthGoogleServiceAccount(string clientEmail, string privateKey)
     {
-      // to ensure "clientEmail" is required (not null)
-      if (clientEmail == null)
-      {
-        throw new ArgumentNullException("clientEmail is a required property for AuthGoogleServiceAccount and cannot be null");
-      }
-      this.ClientEmail = clientEmail;
-      // to ensure "privateKey" is required (not null)
-      if (privateKey == null)
-      {
-        throw new ArgumentNullException("privateKey is a required property for AuthGoogleServiceAccount and cannot be null");
-      }
-      this.PrivateKey = privateKey;
+      this.ClientEmail = clientEmail ?? throw new ArgumentNullException("clientEmail is a required property for AuthGoogleServiceAccount and cannot be null");
+      this.PrivateKey = privateKey ?? throw new ArgumentNullException("privateKey is a required property for AuthGoogleServiceAccount and cannot be null");
     }
 
     /// <summary>

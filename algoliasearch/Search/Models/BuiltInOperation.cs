@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// To update an attribute without pushing the entire record, you can use these built-in operations.
@@ -34,21 +34,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="BuiltInOperation" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BuiltInOperation() { }
+    public BuiltInOperation() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BuiltInOperation" /> class.
     /// </summary>
     /// <param name="operation">operation (required).</param>
     /// <param name="value">Value that corresponds to the operation, for example an &#x60;Increment&#x60; or &#x60;Decrement&#x60; step, &#x60;Add&#x60; or &#x60;Remove&#x60; value. (required).</param>
-    public BuiltInOperation(BuiltInOperationType operation = default(BuiltInOperationType), string value = default(string))
+    public BuiltInOperation(BuiltInOperationType operation, string value)
     {
       this.Operation = operation;
-      // to ensure "value" is required (not null)
-      if (value == null)
-      {
-        throw new ArgumentNullException("value is a required property for BuiltInOperation and cannot be null");
-      }
-      this.Value = value;
+      this.Value = value ?? throw new ArgumentNullException("value is a required property for BuiltInOperation and cannot be null");
     }
 
     /// <summary>

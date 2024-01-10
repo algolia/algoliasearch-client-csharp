@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// AbTestsVariant
@@ -28,23 +28,16 @@ namespace Algolia.Search.Abtesting.Models
     /// Initializes a new instance of the <see cref="AbTestsVariant" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected AbTestsVariant() { }
+    public AbTestsVariant() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="AbTestsVariant" /> class.
     /// </summary>
     /// <param name="index">A/B test index. (required).</param>
     /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
-    /// <param name="description">A/B test description..</param>
-    public AbTestsVariant(string index = default(string), int trafficPercentage = default(int), string description = default(string))
+    public AbTestsVariant(string index, int trafficPercentage)
     {
-      // to ensure "index" is required (not null)
-      if (index == null)
-      {
-        throw new ArgumentNullException("index is a required property for AbTestsVariant and cannot be null");
-      }
-      this.Index = index;
+      this.Index = index ?? throw new ArgumentNullException("index is a required property for AbTestsVariant and cannot be null");
       this.TrafficPercentage = trafficPercentage;
-      this.Description = description;
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Ordering of facets (widgets).
@@ -27,10 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="Facets" /> class.
     /// </summary>
-    /// <param name="order">Pinned order of facet lists..</param>
-    public Facets(List<string> order = default(List<string>))
+    public Facets()
     {
-      this.Order = order;
     }
 
     /// <summary>

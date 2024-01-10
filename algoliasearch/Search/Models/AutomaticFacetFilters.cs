@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
@@ -33,9 +33,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="actualInstance">An instance of List&lt;AutomaticFacetFilter&gt;.</param>
     public AutomaticFacetFilters(List<AutomaticFacetFilter> actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Search.Models
     /// <param name="actualInstance">An instance of List&lt;string&gt;.</param>
     public AutomaticFacetFilters(List<string> actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Search.Models
       }
       set
       {
-        if (value.GetType() == typeof(List<AutomaticFacetFilter>))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(List<string>))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: List<AutomaticFacetFilter>, List<string>");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of List&lt;AutomaticFacetFilter&gt;</returns>
-    public List<AutomaticFacetFilter> GetterList()
+    public List<AutomaticFacetFilter> AsList()
     {
-      return (List<AutomaticFacetFilter>)this.ActualInstance;
+      return (List<AutomaticFacetFilter>)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Search.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of List&lt;string&gt;</returns>
-    public List<string> GetterListString()
+    public List<string> AsListString()
     {
-      return (List<string>)this.ActualInstance;
+      return (List<string>)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `List&lt;AutomaticFacetFilter&gt;` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsList()
+    {
+      return ActualInstance.GetType() == typeof(List<AutomaticFacetFilter>);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `List&lt;string&gt;` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsListString()
+    {
+      return ActualInstance.GetType() == typeof(List<string>);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Search.Models
     {
       var sb = new StringBuilder();
       sb.Append("class AutomaticFacetFilters {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Search.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, AutomaticFacetFilters.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Search.Models
       {
         return newAutomaticFacetFilters;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(List<AutomaticFacetFilter>).GetProperty("AdditionalProperties") == null)
-        {
-          newAutomaticFacetFilters = new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(jsonString, AutomaticFacetFilters.SerializerSettings));
-        }
-        else
-        {
-          newAutomaticFacetFilters = new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(jsonString, AutomaticFacetFilters.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("List<AutomaticFacetFilter>");
-        match++;
+        return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into List<AutomaticFacetFilter>: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(List<string>).GetProperty("AdditionalProperties") == null)
-        {
-          newAutomaticFacetFilters = new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, AutomaticFacetFilters.SerializerSettings));
-        }
-        else
-        {
-          newAutomaticFacetFilters = new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, AutomaticFacetFilters.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("List<string>");
-        match++;
+        return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Search.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into List<string>: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newAutomaticFacetFilters;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Search.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return AutomaticFacetFilters.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

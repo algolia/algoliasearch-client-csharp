@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetNoClickRateResponse
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetNoClickRateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetNoClickRateResponse() { }
+    public GetNoClickRateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetNoClickRateResponse" /> class.
     /// </summary>
@@ -36,17 +36,12 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="count">Number of click events. (required).</param>
     /// <param name="noClickCount">Number of click events. (required).</param>
     /// <param name="dates">Overall count of searches without clicks plus a daily breakdown. (required).</param>
-    public GetNoClickRateResponse(double rate = default(double), int count = default(int), int noClickCount = default(int), List<NoClickRateEvent> dates = default(List<NoClickRateEvent>))
+    public GetNoClickRateResponse(double rate, int count, int noClickCount, List<NoClickRateEvent> dates)
     {
       this.Rate = rate;
       this.Count = count;
       this.NoClickCount = noClickCount;
-      // to ensure "dates" is required (not null)
-      if (dates == null)
-      {
-        throw new ArgumentNullException("dates is a required property for GetNoClickRateResponse and cannot be null");
-      }
-      this.Dates = dates;
+      this.Dates = dates ?? throw new ArgumentNullException("dates is a required property for GetNoClickRateResponse and cannot be null");
     }
 
     /// <summary>

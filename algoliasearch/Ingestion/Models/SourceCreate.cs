@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceCreate
@@ -34,30 +34,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="SourceCreate" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceCreate() { }
+    public SourceCreate() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceCreate" /> class.
     /// </summary>
     /// <param name="type">type (required).</param>
     /// <param name="name">name (required).</param>
     /// <param name="input">input (required).</param>
-    /// <param name="authenticationID">The authentication UUID..</param>
-    public SourceCreate(SourceType type = default(SourceType), string name = default(string), SourceInput input = default(SourceInput), string authenticationID = default(string))
+    public SourceCreate(SourceType type, string name, SourceInput input)
     {
       this.Type = type;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for SourceCreate and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "input" is required (not null)
-      if (input == null)
-      {
-        throw new ArgumentNullException("input is a required property for SourceCreate and cannot be null");
-      }
-      this.Input = input;
-      this.AuthenticationID = authenticationID;
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for SourceCreate and cannot be null");
+      this.Input = input ?? throw new ArgumentNullException("input is a required property for SourceCreate and cannot be null");
     }
 
     /// <summary>

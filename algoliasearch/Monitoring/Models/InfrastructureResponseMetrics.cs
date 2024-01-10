@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// InfrastructureResponseMetrics
@@ -27,18 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="InfrastructureResponseMetrics" /> class.
     /// </summary>
-    /// <param name="cpuUsage">CPU idleness in %..</param>
-    /// <param name="ramIndexingUsage">RAM used for indexing in MB..</param>
-    /// <param name="ramSearchUsage">RAM used for search in MB..</param>
-    /// <param name="ssdUsage">Solid-state disk (SSD) usage expressed as % of RAM.  0% means no SSD usage. A value of 50% indicates 32&amp;nbsp;GB SSD usage for a machine with 64&amp;nbsp;RAM. .</param>
-    /// <param name="avgBuildTime">Average build time of the indices in seconds..</param>
-    public InfrastructureResponseMetrics(Dictionary<string, List<ProbesMetric>> cpuUsage = default(Dictionary<string, List<ProbesMetric>>), Dictionary<string, List<ProbesMetric>> ramIndexingUsage = default(Dictionary<string, List<ProbesMetric>>), Dictionary<string, List<ProbesMetric>> ramSearchUsage = default(Dictionary<string, List<ProbesMetric>>), Dictionary<string, List<ProbesMetric>> ssdUsage = default(Dictionary<string, List<ProbesMetric>>), Dictionary<string, List<ProbesMetric>> avgBuildTime = default(Dictionary<string, List<ProbesMetric>>))
+    public InfrastructureResponseMetrics()
     {
-      this.CpuUsage = cpuUsage;
-      this.RamIndexingUsage = ramIndexingUsage;
-      this.RamSearchUsage = ramSearchUsage;
-      this.SsdUsage = ssdUsage;
-      this.AvgBuildTime = avgBuildTime;
     }
 
     /// <summary>

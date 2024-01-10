@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// AuthInputPartial
@@ -33,9 +33,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthGoogleServiceAccountPartial.</param>
     public AuthInputPartial(AuthGoogleServiceAccountPartial actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthBasicPartial.</param>
     public AuthInputPartial(AuthBasicPartial actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -57,9 +57,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthAPIKeyPartial.</param>
     public AuthInputPartial(AuthAPIKeyPartial actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -69,9 +69,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthOAuthPartial.</param>
     public AuthInputPartial(AuthOAuthPartial actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -81,9 +81,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of AuthAlgoliaPartial.</param>
     public AuthInputPartial(AuthAlgoliaPartial actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -100,30 +100,7 @@ namespace Algolia.Search.Ingestion.Models
       }
       set
       {
-        if (value.GetType() == typeof(AuthAPIKeyPartial))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AuthAlgoliaPartial))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AuthBasicPartial))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AuthGoogleServiceAccountPartial))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AuthOAuthPartial))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: AuthAPIKeyPartial, AuthAlgoliaPartial, AuthBasicPartial, AuthGoogleServiceAccountPartial, AuthOAuthPartial");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -132,9 +109,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthGoogleServiceAccountPartial</returns>
-    public AuthGoogleServiceAccountPartial GetterAuthGoogleServiceAccountPartial()
+    public AuthGoogleServiceAccountPartial AsAuthGoogleServiceAccountPartial()
     {
-      return (AuthGoogleServiceAccountPartial)this.ActualInstance;
+      return (AuthGoogleServiceAccountPartial)ActualInstance;
     }
 
     /// <summary>
@@ -142,9 +119,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthBasicPartial</returns>
-    public AuthBasicPartial GetterAuthBasicPartial()
+    public AuthBasicPartial AsAuthBasicPartial()
     {
-      return (AuthBasicPartial)this.ActualInstance;
+      return (AuthBasicPartial)ActualInstance;
     }
 
     /// <summary>
@@ -152,9 +129,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthAPIKeyPartial</returns>
-    public AuthAPIKeyPartial GetterAuthAPIKeyPartial()
+    public AuthAPIKeyPartial AsAuthAPIKeyPartial()
     {
-      return (AuthAPIKeyPartial)this.ActualInstance;
+      return (AuthAPIKeyPartial)ActualInstance;
     }
 
     /// <summary>
@@ -162,9 +139,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthOAuthPartial</returns>
-    public AuthOAuthPartial GetterAuthOAuthPartial()
+    public AuthOAuthPartial AsAuthOAuthPartial()
     {
-      return (AuthOAuthPartial)this.ActualInstance;
+      return (AuthOAuthPartial)ActualInstance;
     }
 
     /// <summary>
@@ -172,9 +149,55 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AuthAlgoliaPartial</returns>
-    public AuthAlgoliaPartial GetterAuthAlgoliaPartial()
+    public AuthAlgoliaPartial AsAuthAlgoliaPartial()
     {
-      return (AuthAlgoliaPartial)this.ActualInstance;
+      return (AuthAlgoliaPartial)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthGoogleServiceAccountPartial` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthGoogleServiceAccountPartial()
+    {
+      return ActualInstance.GetType() == typeof(AuthGoogleServiceAccountPartial);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthBasicPartial` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthBasicPartial()
+    {
+      return ActualInstance.GetType() == typeof(AuthBasicPartial);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthAPIKeyPartial` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthAPIKeyPartial()
+    {
+      return ActualInstance.GetType() == typeof(AuthAPIKeyPartial);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthOAuthPartial` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthOAuthPartial()
+    {
+      return ActualInstance.GetType() == typeof(AuthOAuthPartial);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AuthAlgoliaPartial` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAuthAlgoliaPartial()
+    {
+      return ActualInstance.GetType() == typeof(AuthAlgoliaPartial);
     }
 
     /// <summary>
@@ -185,7 +208,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       var sb = new StringBuilder();
       sb.Append("class AuthInputPartial {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -196,7 +219,7 @@ namespace Algolia.Search.Ingestion.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, AuthInputPartial.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -212,42 +235,45 @@ namespace Algolia.Search.Ingestion.Models
       {
         return newAuthInputPartial;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthAPIKeyPartial).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthAPIKeyPartial>(jsonString, AuthInputPartial.SerializerSettings));
-        }
-        else
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthAPIKeyPartial>(jsonString, AuthInputPartial.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthAPIKeyPartial");
-        match++;
+        return new AuthInputPartial(JsonConvert.DeserializeObject<AuthGoogleServiceAccountPartial>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthGoogleServiceAccountPartial: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new AuthInputPartial(JsonConvert.DeserializeObject<AuthBasicPartial>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthBasicPartial: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new AuthInputPartial(JsonConvert.DeserializeObject<AuthAPIKeyPartial>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthAPIKeyPartial: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthAlgoliaPartial).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthAlgoliaPartial>(jsonString, AuthInputPartial.SerializerSettings));
-        }
-        else
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthAlgoliaPartial>(jsonString, AuthInputPartial.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthAlgoliaPartial");
-        match++;
+        return new AuthInputPartial(JsonConvert.DeserializeObject<AuthOAuthPartial>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthOAuthPartial: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new AuthInputPartial(JsonConvert.DeserializeObject<AuthAlgoliaPartial>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -255,77 +281,7 @@ namespace Algolia.Search.Ingestion.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthAlgoliaPartial: {1}", jsonString, exception.ToString()));
       }
 
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthBasicPartial).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthBasicPartial>(jsonString, AuthInputPartial.SerializerSettings));
-        }
-        else
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthBasicPartial>(jsonString, AuthInputPartial.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthBasicPartial");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthBasicPartial: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthGoogleServiceAccountPartial).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthGoogleServiceAccountPartial>(jsonString, AuthInputPartial.SerializerSettings));
-        }
-        else
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthGoogleServiceAccountPartial>(jsonString, AuthInputPartial.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthGoogleServiceAccountPartial");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthGoogleServiceAccountPartial: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AuthOAuthPartial).GetProperty("AdditionalProperties") == null)
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthOAuthPartial>(jsonString, AuthInputPartial.SerializerSettings));
-        }
-        else
-        {
-          newAuthInputPartial = new AuthInputPartial(JsonConvert.DeserializeObject<AuthOAuthPartial>(jsonString, AuthInputPartial.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AuthOAuthPartial");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AuthOAuthPartial: {1}", jsonString, exception.ToString()));
-      }
-
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newAuthInputPartial;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -358,7 +314,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return AuthInputPartial.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

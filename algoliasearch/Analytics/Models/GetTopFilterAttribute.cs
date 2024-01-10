@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetTopFilterAttribute
@@ -28,20 +28,15 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetTopFilterAttribute" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetTopFilterAttribute() { }
+    public GetTopFilterAttribute() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetTopFilterAttribute" /> class.
     /// </summary>
     /// <param name="attribute">Attribute name. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
-    public GetTopFilterAttribute(string attribute = default(string), int count = default(int))
+    public GetTopFilterAttribute(string attribute, int count)
     {
-      // to ensure "attribute" is required (not null)
-      if (attribute == null)
-      {
-        throw new ArgumentNullException("attribute is a required property for GetTopFilterAttribute and cannot be null");
-      }
-      this.Attribute = attribute;
+      this.Attribute = attribute ?? throw new ArgumentNullException("attribute is a required property for GetTopFilterAttribute and cannot be null");
       this.Count = count;
     }
 

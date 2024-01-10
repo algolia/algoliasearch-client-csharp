@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// BatchResponse
@@ -28,21 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="BatchResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BatchResponse() { }
+    public BatchResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchResponse" /> class.
     /// </summary>
     /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
     /// <param name="objectIDs">Unique object (record) identifiers. (required).</param>
-    public BatchResponse(long taskID = default(long), List<string> objectIDs = default(List<string>))
+    public BatchResponse(long taskID, List<string> objectIDs)
     {
       this.TaskID = taskID;
-      // to ensure "objectIDs" is required (not null)
-      if (objectIDs == null)
-      {
-        throw new ArgumentNullException("objectIDs is a required property for BatchResponse and cannot be null");
-      }
-      this.ObjectIDs = objectIDs;
+      this.ObjectIDs = objectIDs ?? throw new ArgumentNullException("objectIDs is a required property for BatchResponse and cannot be null");
     }
 
     /// <summary>

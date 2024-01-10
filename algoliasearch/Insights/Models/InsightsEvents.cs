@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Insights.Models
+namespace Algolia.Search.Models.Insights
 {
   /// <summary>
   /// InsightsEvents
@@ -28,19 +28,14 @@ namespace Algolia.Search.Insights.Models
     /// Initializes a new instance of the <see cref="InsightsEvents" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected InsightsEvents() { }
+    public InsightsEvents() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="InsightsEvents" /> class.
     /// </summary>
     /// <param name="events">List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token. Some attributes require other attributes to be declared, and some attributes can&#39;t be declared at the same time.  **All** events must be valid, otherwise the API returns an error.  (required).</param>
-    public InsightsEvents(List<EventsItems> events = default(List<EventsItems>))
+    public InsightsEvents(List<EventsItems> events)
     {
-      // to ensure "events" is required (not null)
-      if (events == null)
-      {
-        throw new ArgumentNullException("events is a required property for InsightsEvents and cannot be null");
-      }
-      this.Events = events;
+      this.Events = events ?? throw new ArgumentNullException("events is a required property for InsightsEvents and cannot be null");
     }
 
     /// <summary>

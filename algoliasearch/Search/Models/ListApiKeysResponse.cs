@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// ListApiKeysResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="ListApiKeysResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListApiKeysResponse() { }
+    public ListApiKeysResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListApiKeysResponse" /> class.
     /// </summary>
     /// <param name="keys">API keys. (required).</param>
-    public ListApiKeysResponse(List<GetApiKeyResponse> keys = default(List<GetApiKeyResponse>))
+    public ListApiKeysResponse(List<GetApiKeyResponse> keys)
     {
-      // to ensure "keys" is required (not null)
-      if (keys == null)
-      {
-        throw new ArgumentNullException("keys is a required property for ListApiKeysResponse and cannot be null");
-      }
-      this.Keys = keys;
+      this.Keys = keys ?? throw new ArgumentNullException("keys is a required property for ListApiKeysResponse and cannot be null");
     }
 
     /// <summary>

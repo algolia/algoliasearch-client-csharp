@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchForHitsOptions
@@ -29,26 +29,19 @@ namespace Algolia.Search.Search.Models
     /// Gets or Sets Type
     /// </summary>
     [DataMember(Name = "type", EmitDefaultValue = false)]
-    public SearchTypeDefault? Type { get; set; }
+    public SearchTypeDefault Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchForHitsOptions" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchForHitsOptions() { }
+    public SearchForHitsOptions() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchForHitsOptions" /> class.
     /// </summary>
     /// <param name="indexName">Algolia index name. (required).</param>
-    /// <param name="type">type.</param>
-    public SearchForHitsOptions(string indexName = default(string), SearchTypeDefault? type = default(SearchTypeDefault?))
+    public SearchForHitsOptions(string indexName)
     {
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for SearchForHitsOptions and cannot be null");
-      }
-      this.IndexName = indexName;
-      this.Type = type;
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for SearchForHitsOptions and cannot be null");
     }
 
     /// <summary>

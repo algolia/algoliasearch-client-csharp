@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// DestinationIndexName
@@ -29,28 +29,19 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets RecordType
     /// </summary>
     [DataMember(Name = "recordType", EmitDefaultValue = false)]
-    public RecordType? RecordType { get; set; }
+    public RecordType RecordType { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="DestinationIndexName" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected DestinationIndexName() { }
+    public DestinationIndexName() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="DestinationIndexName" /> class.
     /// </summary>
     /// <param name="indexName">The index name to store data in. (required).</param>
-    /// <param name="recordType">recordType.</param>
-    /// <param name="attributesToExclude">Determines the attributes to exclude from an Algolia record. To remove nested element, you can separate the path to the element with dots (&#x60;.&#x60;):   - \&quot;foo.bar\&quot;: will remove &#x60;bar&#x60; from &#x60;foo&#x60;. To remove elements from an array, you can use the following:   - \&quot;foo.[0].bar\&quot;: will only remove &#x60;bar&#x60; from the first element of &#x60;foo&#x60;.   - \&quot;foo.[*].bar\&quot;: will remove &#x60;bar&#x60; from every elements of &#x60;foo&#x60;. .</param>
-    public DestinationIndexName(string indexName = default(string), RecordType? recordType = default(RecordType?), List<string> attributesToExclude = default(List<string>))
+    public DestinationIndexName(string indexName)
     {
-      // to ensure "indexName" is required (not null)
-      if (indexName == null)
-      {
-        throw new ArgumentNullException("indexName is a required property for DestinationIndexName and cannot be null");
-      }
-      this.IndexName = indexName;
-      this.RecordType = recordType;
-      this.AttributesToExclude = attributesToExclude;
+      this.IndexName = indexName ?? throw new ArgumentNullException("indexName is a required property for DestinationIndexName and cannot be null");
     }
 
     /// <summary>

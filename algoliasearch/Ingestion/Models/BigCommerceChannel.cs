@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// BigCommerceChannel
@@ -28,16 +28,14 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="BigCommerceChannel" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BigCommerceChannel() { }
+    public BigCommerceChannel() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BigCommerceChannel" /> class.
     /// </summary>
     /// <param name="id">The ID of the bigcommerce channel. (required).</param>
-    /// <param name="currencies">An array of currencies for the given channel &#x60;ID&#x60;, a currency is a trigram string that represents the currency code..</param>
-    public BigCommerceChannel(int id = default(int), List<string> currencies = default(List<string>))
+    public BigCommerceChannel(int id)
     {
       this.Id = id;
-      this.Currencies = currencies;
     }
 
     /// <summary>

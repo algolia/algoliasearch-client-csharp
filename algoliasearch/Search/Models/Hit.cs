@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// A single hit.
@@ -28,7 +28,7 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="Hit" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Hit()
+    public Hit()
     {
       this.AdditionalProperties = new Dictionary<string, object>();
     }
@@ -36,22 +36,9 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="Hit" /> class.
     /// </summary>
     /// <param name="objectID">Unique object identifier. (required).</param>
-    /// <param name="highlightResult">Show highlighted section and words matched on a query..</param>
-    /// <param name="snippetResult">Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty..</param>
-    /// <param name="rankingInfo">rankingInfo.</param>
-    /// <param name="distinctSeqID">distinctSeqID.</param>
-    public Hit(string objectID = default(string), Dictionary<string, HighlightResult> highlightResult = default(Dictionary<string, HighlightResult>), Dictionary<string, SnippetResult> snippetResult = default(Dictionary<string, SnippetResult>), RankingInfo rankingInfo = default(RankingInfo), int distinctSeqID = default(int))
+    public Hit(string objectID)
     {
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for Hit and cannot be null");
-      }
-      this.ObjectID = objectID;
-      this.HighlightResult = highlightResult;
-      this.SnippetResult = snippetResult;
-      this.RankingInfo = rankingInfo;
-      this.DistinctSeqID = distinctSeqID;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for Hit and cannot be null");
       this.AdditionalProperties = new Dictionary<string, object>();
     }
 
@@ -86,7 +73,7 @@ namespace Algolia.Search.Search.Models
     /// Gets or Sets DistinctSeqID
     /// </summary>
     [DataMember(Name = "_distinctSeqID", EmitDefaultValue = false)]
-    public int DistinctSeqID { get; set; }
+    public int? DistinctSeqID { get; set; }
 
     /// <summary>
     /// Gets or Sets additional properties

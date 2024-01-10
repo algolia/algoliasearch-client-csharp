@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetClickPositionsResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetClickPositionsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetClickPositionsResponse() { }
+    public GetClickPositionsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetClickPositionsResponse" /> class.
     /// </summary>
     /// <param name="positions">Click positions. (required).</param>
-    public GetClickPositionsResponse(List<ClickPosition> positions = default(List<ClickPosition>))
+    public GetClickPositionsResponse(List<ClickPosition> positions)
     {
-      // to ensure "positions" is required (not null)
-      if (positions == null)
-      {
-        throw new ArgumentNullException("positions is a required property for GetClickPositionsResponse and cannot be null");
-      }
-      this.Positions = positions;
+      this.Positions = positions ?? throw new ArgumentNullException("positions is a required property for GetClickPositionsResponse and cannot be null");
     }
 
     /// <summary>

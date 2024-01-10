@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceBigCommerce
@@ -27,18 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceBigCommerce" /> class.
     /// </summary>
-    /// <param name="storeHash">The store hash identifying the store the shopper is signing in to..</param>
-    /// <param name="channel">channel.</param>
-    /// <param name="customFields">customFields.</param>
-    /// <param name="productMetafields">productMetafields.</param>
-    /// <param name="variantMetafields">variantMetafields.</param>
-    public SourceBigCommerce(string storeHash = default(string), BigCommerceChannel channel = default(BigCommerceChannel), List<string> customFields = default(List<string>), List<BigCommerceMetafield> productMetafields = default(List<BigCommerceMetafield>), List<BigCommerceMetafield> variantMetafields = default(List<BigCommerceMetafield>))
+    public SourceBigCommerce()
     {
-      this.StoreHash = storeHash;
-      this.Channel = channel;
-      this.CustomFields = customFields;
-      this.ProductMetafields = productMetafields;
-      this.VariantMetafields = variantMetafields;
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceUpdateResponse
@@ -28,33 +28,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="SourceUpdateResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceUpdateResponse() { }
+    public SourceUpdateResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceUpdateResponse" /> class.
     /// </summary>
     /// <param name="sourceID">The source UUID. (required).</param>
     /// <param name="name">name (required).</param>
     /// <param name="updatedAt">Date of last update (RFC3339 format). (required).</param>
-    public SourceUpdateResponse(string sourceID = default(string), string name = default(string), string updatedAt = default(string))
+    public SourceUpdateResponse(string sourceID, string name, string updatedAt)
     {
-      // to ensure "sourceID" is required (not null)
-      if (sourceID == null)
-      {
-        throw new ArgumentNullException("sourceID is a required property for SourceUpdateResponse and cannot be null");
-      }
-      this.SourceID = sourceID;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for SourceUpdateResponse and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "updatedAt" is required (not null)
-      if (updatedAt == null)
-      {
-        throw new ArgumentNullException("updatedAt is a required property for SourceUpdateResponse and cannot be null");
-      }
-      this.UpdatedAt = updatedAt;
+      this.SourceID = sourceID ?? throw new ArgumentNullException("sourceID is a required property for SourceUpdateResponse and cannot be null");
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for SourceUpdateResponse and cannot be null");
+      this.UpdatedAt = updatedAt ?? throw new ArgumentNullException("updatedAt is a required property for SourceUpdateResponse and cannot be null");
     }
 
     /// <summary>

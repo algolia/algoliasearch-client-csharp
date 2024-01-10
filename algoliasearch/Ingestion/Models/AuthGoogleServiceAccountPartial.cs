@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// Authentication input to connect to a Google service (e.g. BigQuery).
@@ -27,12 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthGoogleServiceAccountPartial" /> class.
     /// </summary>
-    /// <param name="clientEmail">Email address of the Service Account..</param>
-    /// <param name="privateKey">Private key of the Service Account..</param>
-    public AuthGoogleServiceAccountPartial(string clientEmail = default(string), string privateKey = default(string))
+    public AuthGoogleServiceAccountPartial()
     {
-      this.ClientEmail = clientEmail;
-      this.PrivateKey = privateKey;
     }
 
     /// <summary>

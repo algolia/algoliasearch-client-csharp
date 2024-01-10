@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using Algolia.Search.Client;
+using Algolia.Search.Models;
 
 namespace Algolia.Search.Http
 {
@@ -24,7 +23,7 @@ namespace Algolia.Search.Http
     /// <summary>
     /// Headers a dictionary
     /// </summary>
-    public Dictionary<string, string> Headers { get; set; }
+    public IDictionary<string, string> Headers { get; set; }
 
     /// <summary>
     /// Body of the request

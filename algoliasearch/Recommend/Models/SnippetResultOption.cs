@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
@@ -34,20 +34,15 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="SnippetResultOption" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SnippetResultOption() { }
+    public SnippetResultOption() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SnippetResultOption" /> class.
     /// </summary>
     /// <param name="value">Markup text with &#x60;facetQuery&#x60; matches highlighted. (required).</param>
     /// <param name="matchLevel">matchLevel (required).</param>
-    public SnippetResultOption(string value = default(string), MatchLevel matchLevel = default(MatchLevel))
+    public SnippetResultOption(string value, MatchLevel matchLevel)
     {
-      // to ensure "value" is required (not null)
-      if (value == null)
-      {
-        throw new ArgumentNullException("value is a required property for SnippetResultOption and cannot be null");
-      }
-      this.Value = value;
+      this.Value = value ?? throw new ArgumentNullException("value is a required property for SnippetResultOption and cannot be null");
       this.MatchLevel = matchLevel;
     }
 

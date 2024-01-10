@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// GetTopFiltersNoResultsResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="GetTopFiltersNoResultsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetTopFiltersNoResultsResponse() { }
+    public GetTopFiltersNoResultsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetTopFiltersNoResultsResponse" /> class.
     /// </summary>
     /// <param name="values">Filters with no results. (required).</param>
-    public GetTopFiltersNoResultsResponse(List<GetTopFiltersNoResultsValues> values = default(List<GetTopFiltersNoResultsValues>))
+    public GetTopFiltersNoResultsResponse(List<GetTopFiltersNoResultsValues> values)
     {
-      // to ensure "values" is required (not null)
-      if (values == null)
-      {
-        throw new ArgumentNullException("values is a required property for GetTopFiltersNoResultsResponse and cannot be null");
-      }
-      this.Values = values;
+      this.Values = values ?? throw new ArgumentNullException("values is a required property for GetTopFiltersNoResultsResponse and cannot be null");
     }
 
     /// <summary>

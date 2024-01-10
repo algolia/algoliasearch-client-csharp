@@ -16,38 +16,33 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchResponses
   /// </summary>
   [DataContract(Name = "searchResponses")]
-  public partial class SearchResponses
+  public partial class SearchResponses<T>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchResponses" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchResponses() { }
+    public SearchResponses() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchResponses" /> class.
     /// </summary>
     /// <param name="results">results (required).</param>
-    public SearchResponses(List<SearchResult> results = default(List<SearchResult>))
+    public SearchResponses(List<SearchResult<T>> results)
     {
-      // to ensure "results" is required (not null)
-      if (results == null)
-      {
-        throw new ArgumentNullException("results is a required property for SearchResponses and cannot be null");
-      }
-      this.Results = results;
+      this.Results = results ?? throw new ArgumentNullException("results is a required property for SearchResponses and cannot be null");
     }
 
     /// <summary>
     /// Gets or Sets Results
     /// </summary>
     [DataMember(Name = "results", IsRequired = true, EmitDefaultValue = true)]
-    public List<SearchResult> Results { get; set; }
+    public List<SearchResult<T>> Results { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

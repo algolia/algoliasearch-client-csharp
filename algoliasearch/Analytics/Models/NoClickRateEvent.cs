@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// NoClickRateEvent
@@ -28,7 +28,7 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="NoClickRateEvent" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected NoClickRateEvent() { }
+    public NoClickRateEvent() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="NoClickRateEvent" /> class.
     /// </summary>
@@ -36,17 +36,12 @@ namespace Algolia.Search.Analytics.Models
     /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
     /// <param name="noClickCount">Number of click events. (required).</param>
     /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-    public NoClickRateEvent(double rate = default(double), int count = default(int), int noClickCount = default(int), string date = default(string))
+    public NoClickRateEvent(double rate, int count, int noClickCount, string date)
     {
       this.Rate = rate;
       this.Count = count;
       this.NoClickCount = noClickCount;
-      // to ensure "date" is required (not null)
-      if (date == null)
-      {
-        throw new ArgumentNullException("date is a required property for NoClickRateEvent and cannot be null");
-      }
-      this.Date = date;
+      this.Date = date ?? throw new ArgumentNullException("date is a required property for NoClickRateEvent and cannot be null");
     }
 
     /// <summary>

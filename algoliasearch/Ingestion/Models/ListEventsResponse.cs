@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// ListEventsResponse
@@ -28,33 +28,18 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="ListEventsResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListEventsResponse() { }
+    public ListEventsResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListEventsResponse" /> class.
     /// </summary>
     /// <param name="events">events (required).</param>
     /// <param name="pagination">pagination (required).</param>
     /// <param name="window">window (required).</param>
-    public ListEventsResponse(List<Event> events = default(List<Event>), Pagination pagination = default(Pagination), Window window = default(Window))
+    public ListEventsResponse(List<Event> events, Pagination pagination, Window window)
     {
-      // to ensure "events" is required (not null)
-      if (events == null)
-      {
-        throw new ArgumentNullException("events is a required property for ListEventsResponse and cannot be null");
-      }
-      this.Events = events;
-      // to ensure "pagination" is required (not null)
-      if (pagination == null)
-      {
-        throw new ArgumentNullException("pagination is a required property for ListEventsResponse and cannot be null");
-      }
-      this.Pagination = pagination;
-      // to ensure "window" is required (not null)
-      if (window == null)
-      {
-        throw new ArgumentNullException("window is a required property for ListEventsResponse and cannot be null");
-      }
-      this.Window = window;
+      this.Events = events ?? throw new ArgumentNullException("events is a required property for ListEventsResponse and cannot be null");
+      this.Pagination = pagination ?? throw new ArgumentNullException("pagination is a required property for ListEventsResponse and cannot be null");
+      this.Window = window ?? throw new ArgumentNullException("window is a required property for ListEventsResponse and cannot be null");
     }
 
     /// <summary>

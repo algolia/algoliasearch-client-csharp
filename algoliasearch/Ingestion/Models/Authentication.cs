@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// An authentication is used to login into a Source or a Destination.
@@ -35,51 +35,27 @@ namespace Algolia.Search.Ingestion.Models
     /// Gets or Sets Platform
     /// </summary>
     [DataMember(Name = "platform", EmitDefaultValue = false)]
-    public Platform? Platform { get; set; }
+    public Platform Platform { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="Authentication" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Authentication() { }
+    public Authentication() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Authentication" /> class.
     /// </summary>
     /// <param name="authenticationID">The authentication UUID. (required).</param>
     /// <param name="type">type (required).</param>
     /// <param name="name">An human readable name describing the object. (required).</param>
-    /// <param name="platform">platform.</param>
     /// <param name="input">input (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    /// <param name="updatedAt">Date of last update (RFC3339 format)..</param>
-    public Authentication(string authenticationID = default(string), AuthenticationType type = default(AuthenticationType), string name = default(string), Platform? platform = default(Platform?), AuthInput input = default(AuthInput), string createdAt = default(string), string updatedAt = default(string))
+    public Authentication(string authenticationID, AuthenticationType type, string name, AuthInput input, string createdAt)
     {
-      // to ensure "authenticationID" is required (not null)
-      if (authenticationID == null)
-      {
-        throw new ArgumentNullException("authenticationID is a required property for Authentication and cannot be null");
-      }
-      this.AuthenticationID = authenticationID;
+      this.AuthenticationID = authenticationID ?? throw new ArgumentNullException("authenticationID is a required property for Authentication and cannot be null");
       this.Type = type;
-      // to ensure "name" is required (not null)
-      if (name == null)
-      {
-        throw new ArgumentNullException("name is a required property for Authentication and cannot be null");
-      }
-      this.Name = name;
-      // to ensure "input" is required (not null)
-      if (input == null)
-      {
-        throw new ArgumentNullException("input is a required property for Authentication and cannot be null");
-      }
-      this.Input = input;
-      // to ensure "createdAt" is required (not null)
-      if (createdAt == null)
-      {
-        throw new ArgumentNullException("createdAt is a required property for Authentication and cannot be null");
-      }
-      this.CreatedAt = createdAt;
-      this.Platform = platform;
-      this.UpdatedAt = updatedAt;
+      this.Name = name ?? throw new ArgumentNullException("name is a required property for Authentication and cannot be null");
+      this.Input = input ?? throw new ArgumentNullException("input is a required property for Authentication and cannot be null");
+      this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for Authentication and cannot be null");
     }
 
     /// <summary>

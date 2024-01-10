@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchForFacetValuesResponse
@@ -28,23 +28,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="SearchForFacetValuesResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchForFacetValuesResponse() { }
+    public SearchForFacetValuesResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchForFacetValuesResponse" /> class.
     /// </summary>
     /// <param name="facetHits">facetHits (required).</param>
     /// <param name="exhaustiveFacetsCount">See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response. (required).</param>
-    /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds..</param>
-    public SearchForFacetValuesResponse(List<FacetHits> facetHits = default(List<FacetHits>), bool exhaustiveFacetsCount = default(bool), int processingTimeMS = default(int))
+    public SearchForFacetValuesResponse(List<FacetHits> facetHits, bool exhaustiveFacetsCount)
     {
-      // to ensure "facetHits" is required (not null)
-      if (facetHits == null)
-      {
-        throw new ArgumentNullException("facetHits is a required property for SearchForFacetValuesResponse and cannot be null");
-      }
-      this.FacetHits = facetHits;
+      this.FacetHits = facetHits ?? throw new ArgumentNullException("facetHits is a required property for SearchForFacetValuesResponse and cannot be null");
       this.ExhaustiveFacetsCount = exhaustiveFacetsCount;
-      this.ProcessingTimeMS = processingTimeMS;
     }
 
     /// <summary>
@@ -66,7 +59,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Time the server took to process the request, in milliseconds.</value>
     [DataMember(Name = "processingTimeMS", EmitDefaultValue = false)]
-    public int ProcessingTimeMS { get; set; }
+    public int? ProcessingTimeMS { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// ClickPosition
@@ -28,20 +28,15 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="ClickPosition" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ClickPosition() { }
+    public ClickPosition() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ClickPosition" /> class.
     /// </summary>
     /// <param name="position">Range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped.  (required).</param>
     /// <param name="clickCount">Number of click events. (required).</param>
-    public ClickPosition(List<int> position = default(List<int>), int clickCount = default(int))
+    public ClickPosition(List<int> position, int clickCount)
     {
-      // to ensure "position" is required (not null)
-      if (position == null)
-      {
-        throw new ArgumentNullException("position is a required property for ClickPosition and cannot be null");
-      }
-      this.Position = position;
+      this.Position = position ?? throw new ArgumentNullException("position is a required property for ClickPosition and cannot be null");
       this.ClickCount = clickCount;
     }
 

@@ -9,57 +9,13 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Algolia.Search.Client
+namespace Algolia.Search.Http
 {
   /// <summary>
   /// Utility functions providing some benefit to API client consumers.
   /// </summary>
   public static class ClientUtils
   {
-    /// <summary>
-    /// Convert params to key/value pairs.
-    /// Use collectionFormat to properly format lists and collections.
-    /// </summary>
-    /// <param name="collectionFormat">The swagger-supported collection format, one of: csv, tsv, ssv, pipes, multi</param>
-    /// <param name="name">Key name.</param>
-    /// <param name="value">Value object.</param>
-    /// <returns>A multimap of keys with 1..n associated values.</returns>
-    public static Dictionary<string, string> ParameterToDictionary(string collectionFormat, string name, object value)
-    {
-      var parameters = new Dictionary<string, string>();
-
-      if (value is ICollection collection && collectionFormat == "multi")
-      {
-        foreach (var item in collection)
-        {
-          parameters.Add(name, ParameterToString(item));
-        }
-      }
-      else if (value is IDictionary dictionary)
-      {
-        if (collectionFormat == "deepObject")
-        {
-          foreach (DictionaryEntry entry in dictionary)
-          {
-            parameters.Add(name + "[" + entry.Key + "]", ParameterToString(entry.Value));
-          }
-        }
-        else
-        {
-          foreach (DictionaryEntry entry in dictionary)
-          {
-            parameters.Add(entry.Key.ToString(), ParameterToString(entry.Value));
-          }
-        }
-      }
-      else
-      {
-        parameters.Add(name, ParameterToString(value));
-      }
-
-      return parameters;
-    }
-
     /// <summary>
     /// If parameter is a list, join the list with ",".
     /// Otherwise just return the string.
@@ -77,6 +33,7 @@ namespace Algolia.Search.Client
           entries.Add(ParameterToString(entry));
         return string.Join(",", entries);
       }
+
       if (obj is Enum && HasEnumMemberAttrValue(obj))
         return GetEnumMemberAttrValue(obj);
 
@@ -115,6 +72,7 @@ namespace Algolia.Search.Client
       {
         return attr.Value;
       }
+
       return null;
     }
   }

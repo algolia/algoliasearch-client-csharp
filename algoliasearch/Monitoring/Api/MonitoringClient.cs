@@ -7,15 +7,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Monitoring.Client;
-using Algolia.Search.Monitoring.Models;
+using Algolia.Search.Clients;
+using Algolia.Search.Models;
+using Algolia.Search.Models.Monitoring;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
-using Algolia.Search.Client;
 
-namespace Algolia.Search.Monitoring.Api
+namespace Algolia.Search.Clients
 {
-
   /// <summary>
   /// Represents a collection of functions to interact with the API endpoints
   /// </summary>
@@ -28,12 +27,12 @@ namespace Algolia.Search.Monitoring.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -41,12 +40,12 @@ namespace Algolia.Search.Monitoring.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -54,13 +53,13 @@ namespace Algolia.Search.Monitoring.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -68,13 +67,13 @@ namespace Algolia.Search.Monitoring.Api
     /// This method allow you to send requests to the Algolia REST API.
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+    /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
     /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
     /// <param name="body">Parameters to send with the custom request. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List incidents for selected clusters.
     /// </summary>
@@ -126,7 +125,7 @@ namespace Algolia.Search.Monitoring.Api
     /// List servers.
     /// </summary>
     /// <remarks>
-    /// List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application&#39;s cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
+    /// List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -152,8 +151,8 @@ namespace Algolia.Search.Monitoring.Api
     /// Report the aggregate value of a metric for a selected period of time.
     /// </remarks>
     /// <exception cref="Algolia.Search.Monitoring.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
-    /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
+    /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use `*` as the parameter. </param>
+    /// <param name="period">Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day. </param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of InfrastructureResponse</returns>
@@ -168,7 +167,7 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Dictionary&lt;string, Dictionary&lt;string, bool&gt;&gt;</returns>
+    /// <returns>Task of Dictionary<string, Dictionary<string, bool>></returns>
     Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// List cluster statuses.
@@ -197,6 +196,7 @@ namespace Algolia.Search.Monitoring.Api
     /// </summary>
     /// <param name="applicationId">Your application</param>
     /// <param name="apiKey">Your API key</param>
+
     public MonitoringClient(string applicationId, string apiKey) : this(new MonitoringConfig(applicationId, apiKey), new AlgoliaHttpRequester())
     {
     }
@@ -220,17 +220,14 @@ namespace Algolia.Search.Monitoring.Api
       {
         throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
       }
-
       if (config == null)
       {
         throw new ArgumentNullException(nameof(config), "A config is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
         throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
       }
-
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
         throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
@@ -250,25 +247,18 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomDelete");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -278,25 +268,18 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomGet");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
-
-
+      requestOptions.AddCustomQueryParameters(parameters);
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
-
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
     /// </summary>
@@ -307,25 +290,18 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPost");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
@@ -337,25 +313,18 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of Object</returns>
-    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default(Dictionary<string, Object>), Object body = default(Object), RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'path' is set
       if (path == null)
         throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPut");
 
+      var requestOptions = new InternalRequestOptions(options);
+      requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
-      RequestOptions requestOptions = new RequestOptions();
-      requestOptions.PathParameters.Add("path", ClientUtils.ParameterToString(path));
-      if (parameters != null)
-      {
-        requestOptions.QueryParameters = ClientUtils.ParameterToDictionary("", "parameters", parameters);
-      }
+      requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
-
-
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// List incidents for selected clusters. List known incidents for selected clusters.
@@ -367,18 +336,15 @@ namespace Algolia.Search.Monitoring.Api
     /// <returns>Task of IncidentsResponse</returns>
     public async Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'clusters' is set
       if (clusters == null)
         throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterIncidents");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
-
 
       return await _transport.ExecuteRequestAsync<IncidentsResponse>(new HttpMethod("GET"), "/1/incidents/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// List statuses of selected clusters. Report whether a cluster is operational.
@@ -390,18 +356,15 @@ namespace Algolia.Search.Monitoring.Api
     /// <returns>Task of StatusResponse</returns>
     public async Task<StatusResponse> GetClusterStatusAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'clusters' is set
       if (clusters == null)
         throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterStatus");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
-
 
       return await _transport.ExecuteRequestAsync<StatusResponse>(new HttpMethod("GET"), "/1/status/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// List incidents. List known incidents for all clusters.
@@ -412,13 +375,11 @@ namespace Algolia.Search.Monitoring.Api
     /// <returns>Task of IncidentsResponse</returns>
     public async Task<IncidentsResponse> GetIncidentsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
+      var requestOptions = new InternalRequestOptions(options);
 
 
       return await _transport.ExecuteRequestAsync<IncidentsResponse>(new HttpMethod("GET"), "/1/incidents", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get indexing times. List the average times for indexing operations for selected clusters.
@@ -430,18 +391,15 @@ namespace Algolia.Search.Monitoring.Api
     /// <returns>Task of IndexingTimeResponse</returns>
     public async Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'clusters' is set
       if (clusters == null)
         throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetIndexingTime");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
-
 
       return await _transport.ExecuteRequestAsync<IndexingTimeResponse>(new HttpMethod("GET"), "/1/indexing/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// List servers. List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application&#39;s cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
@@ -452,13 +410,11 @@ namespace Algolia.Search.Monitoring.Api
     /// <returns>Task of InventoryResponse</returns>
     public async Task<InventoryResponse> GetInventoryAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
+      var requestOptions = new InternalRequestOptions(options);
 
 
       return await _transport.ExecuteRequestAsync<InventoryResponse>(new HttpMethod("GET"), "/1/inventory/servers", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get search latency times. List the average latency for search requests for selected clusters.
@@ -470,18 +426,15 @@ namespace Algolia.Search.Monitoring.Api
     /// <returns>Task of LatencyResponse</returns>
     public async Task<LatencyResponse> GetLatencyAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'clusters' is set
       if (clusters == null)
         throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetLatency");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
-
 
       return await _transport.ExecuteRequestAsync<LatencyResponse>(new HttpMethod("GET"), "/1/latency/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Get metrics for a given period. Report the aggregate value of a metric for a selected period of time.
@@ -494,23 +447,19 @@ namespace Algolia.Search.Monitoring.Api
     /// <returns>Task of InfrastructureResponse</returns>
     public async Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'metric' is set
       if (metric == null)
         throw new ApiException(400, "Missing required parameter 'metric' when calling MonitoringClient->GetMetrics");
 
-      // verify the required parameter 'period' is set
       if (period == null)
         throw new ApiException(400, "Missing required parameter 'period' when calling MonitoringClient->GetMetrics");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("metric", ClientUtils.ParameterToString(metric));
       requestOptions.PathParameters.Add("period", ClientUtils.ParameterToString(period));
 
-
       return await _transport.ExecuteRequestAsync<InfrastructureResponse>(new HttpMethod("GET"), "/1/infrastructure/{metric}/period/{period}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// Test the reachability of clusters. Test whether clusters are reachable or not.
@@ -519,21 +468,18 @@ namespace Algolia.Search.Monitoring.Api
     /// <param name="clusters">Subset of clusters, separated by comma.</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of Dictionary&lt;string, Dictionary&lt;string, bool&gt;&gt;</returns>
+    /// <returns>Task of Dictionary<string, Dictionary<string, bool>></returns>
     public async Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-      // verify the required parameter 'clusters' is set
       if (clusters == null)
         throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetReachability");
 
+      var requestOptions = new InternalRequestOptions(options);
 
-      RequestOptions requestOptions = new RequestOptions();
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
-
 
       return await _transport.ExecuteRequestAsync<Dictionary<string, Dictionary<string, bool>>>(new HttpMethod("GET"), "/1/reachability/{clusters}/probes", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
 
     /// <summary>
     /// List cluster statuses. Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
@@ -544,12 +490,10 @@ namespace Algolia.Search.Monitoring.Api
     /// <returns>Task of StatusResponse</returns>
     public async Task<StatusResponse> GetStatusAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
     {
-
-      RequestOptions requestOptions = new RequestOptions();
+      var requestOptions = new InternalRequestOptions(options);
 
 
       return await _transport.ExecuteRequestAsync<StatusResponse>(new HttpMethod("GET"), "/1/status", requestOptions, cancellationToken).ConfigureAwait(false);
     }
-
   }
 }

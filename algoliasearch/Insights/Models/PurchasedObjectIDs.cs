@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Insights.Models
+namespace Algolia.Search.Models.Insights
 {
   /// <summary>
   /// Use this event to track when users make a purchase unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track purchase events related to Algolia requests, use the \&quot;Purchased object IDs after search\&quot; event. 
@@ -40,7 +40,7 @@ namespace Algolia.Search.Insights.Models
     /// Initializes a new instance of the <see cref="PurchasedObjectIDs" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected PurchasedObjectIDs() { }
+    public PurchasedObjectIDs() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="PurchasedObjectIDs" /> class.
     /// </summary>
@@ -49,43 +49,15 @@ namespace Algolia.Search.Insights.Models
     /// <param name="eventSubtype">eventSubtype (required).</param>
     /// <param name="index">Name of the Algolia index. (required).</param>
     /// <param name="objectIDs">List of object identifiers for items of an Algolia index. (required).</param>
-    /// <param name="objectData">Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as &#x60;objectIDs&#x60;. .</param>
-    /// <param name="currency">If you include pricing information in the &#x60;objectData&#x60; parameter, you must also specify the currency as ISO-4217 currency code, such as USD or EUR..</param>
     /// <param name="userToken">Anonymous or pseudonymous user identifier.   &gt; **Note**: Never include personally identifiable information in user tokens.  (required).</param>
-    /// <param name="timestamp">Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. .</param>
-    /// <param name="authenticatedUserToken">User token for authenticated users..</param>
-    public PurchasedObjectIDs(string eventName = default(string), ConversionEvent eventType = default(ConversionEvent), PurchaseEvent eventSubtype = default(PurchaseEvent), string index = default(string), List<string> objectIDs = default(List<string>), List<ObjectData> objectData = default(List<ObjectData>), string currency = default(string), string userToken = default(string), long timestamp = default(long), string authenticatedUserToken = default(string))
+    public PurchasedObjectIDs(string eventName, ConversionEvent eventType, PurchaseEvent eventSubtype, string index, List<string> objectIDs, string userToken)
     {
-      // to ensure "eventName" is required (not null)
-      if (eventName == null)
-      {
-        throw new ArgumentNullException("eventName is a required property for PurchasedObjectIDs and cannot be null");
-      }
-      this.EventName = eventName;
+      this.EventName = eventName ?? throw new ArgumentNullException("eventName is a required property for PurchasedObjectIDs and cannot be null");
       this.EventType = eventType;
       this.EventSubtype = eventSubtype;
-      // to ensure "index" is required (not null)
-      if (index == null)
-      {
-        throw new ArgumentNullException("index is a required property for PurchasedObjectIDs and cannot be null");
-      }
-      this.Index = index;
-      // to ensure "objectIDs" is required (not null)
-      if (objectIDs == null)
-      {
-        throw new ArgumentNullException("objectIDs is a required property for PurchasedObjectIDs and cannot be null");
-      }
-      this.ObjectIDs = objectIDs;
-      // to ensure "userToken" is required (not null)
-      if (userToken == null)
-      {
-        throw new ArgumentNullException("userToken is a required property for PurchasedObjectIDs and cannot be null");
-      }
-      this.UserToken = userToken;
-      this.ObjectData = objectData;
-      this.Currency = currency;
-      this.Timestamp = timestamp;
-      this.AuthenticatedUserToken = authenticatedUserToken;
+      this.Index = index ?? throw new ArgumentNullException("index is a required property for PurchasedObjectIDs and cannot be null");
+      this.ObjectIDs = objectIDs ?? throw new ArgumentNullException("objectIDs is a required property for PurchasedObjectIDs and cannot be null");
+      this.UserToken = userToken ?? throw new ArgumentNullException("userToken is a required property for PurchasedObjectIDs and cannot be null");
     }
 
     /// <summary>

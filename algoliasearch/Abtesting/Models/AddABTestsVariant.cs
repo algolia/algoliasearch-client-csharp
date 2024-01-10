@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Abtesting.Models
+namespace Algolia.Search.Models.Abtesting
 {
   /// <summary>
   /// AddABTestsVariant
@@ -33,9 +33,9 @@ namespace Algolia.Search.Abtesting.Models
     /// <param name="actualInstance">An instance of AbTestsVariant.</param>
     public AddABTestsVariant(AbTestsVariant actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Abtesting.Models
     /// <param name="actualInstance">An instance of AbTestsVariantSearchParams.</param>
     public AddABTestsVariant(AbTestsVariantSearchParams actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Abtesting.Models
       }
       set
       {
-        if (value.GetType() == typeof(AbTestsVariant))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(AbTestsVariantSearchParams))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: AbTestsVariant, AbTestsVariantSearchParams");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Abtesting.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AbTestsVariant</returns>
-    public AbTestsVariant GetterAbTestsVariant()
+    public AbTestsVariant AsAbTestsVariant()
     {
-      return (AbTestsVariant)this.ActualInstance;
+      return (AbTestsVariant)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Abtesting.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of AbTestsVariantSearchParams</returns>
-    public AbTestsVariantSearchParams GetterAbTestsVariantSearchParams()
+    public AbTestsVariantSearchParams AsAbTestsVariantSearchParams()
     {
-      return (AbTestsVariantSearchParams)this.ActualInstance;
+      return (AbTestsVariantSearchParams)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `AbTestsVariant` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAbTestsVariant()
+    {
+      return ActualInstance.GetType() == typeof(AbTestsVariant);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AbTestsVariantSearchParams` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAbTestsVariantSearchParams()
+    {
+      return ActualInstance.GetType() == typeof(AbTestsVariantSearchParams);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Abtesting.Models
     {
       var sb = new StringBuilder();
       sb.Append("class AddABTestsVariant {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Abtesting.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, AddABTestsVariant.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,42 +142,18 @@ namespace Algolia.Search.Abtesting.Models
       {
         return newAddABTestsVariant;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AbTestsVariant).GetProperty("AdditionalProperties") == null)
-        {
-          newAddABTestsVariant = new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariant>(jsonString, AddABTestsVariant.SerializerSettings));
-        }
-        else
-        {
-          newAddABTestsVariant = new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariant>(jsonString, AddABTestsVariant.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AbTestsVariant");
-        match++;
+        return new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariant>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AbTestsVariant: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(AbTestsVariantSearchParams).GetProperty("AdditionalProperties") == null)
-        {
-          newAddABTestsVariant = new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariantSearchParams>(jsonString, AddABTestsVariant.SerializerSettings));
-        }
-        else
-        {
-          newAddABTestsVariant = new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariantSearchParams>(jsonString, AddABTestsVariant.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("AbTestsVariantSearchParams");
-        match++;
+        return new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariantSearchParams>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -177,17 +161,7 @@ namespace Algolia.Search.Abtesting.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AbTestsVariantSearchParams: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newAddABTestsVariant;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Abtesting.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return AddABTestsVariant.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

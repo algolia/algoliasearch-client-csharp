@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// BaseQuerySuggestionsConfigurationResponse
@@ -27,17 +27,8 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseQuerySuggestionsConfigurationResponse" /> class.
     /// </summary>
-    /// <param name="appId">Your Algolia application ID..</param>
-    /// <param name="sourceIndicesAPIKey">API key used to read from your source index..</param>
-    /// <param name="suggestionsIndicesAPIKey">API key used to write and configure your Query Suggestions index..</param>
-    /// <param name="externalIndicesAPIKey">API key used to read from external Algolia indices. (default to &quot;&quot;).</param>
-    public BaseQuerySuggestionsConfigurationResponse(string appId = default(string), string sourceIndicesAPIKey = default(string), string suggestionsIndicesAPIKey = default(string), string externalIndicesAPIKey = @"")
+    public BaseQuerySuggestionsConfigurationResponse()
     {
-      this.AppId = appId;
-      this.SourceIndicesAPIKey = sourceIndicesAPIKey;
-      this.SuggestionsIndicesAPIKey = suggestionsIndicesAPIKey;
-      // use default value if no "externalIndicesAPIKey" provided
-      this.ExternalIndicesAPIKey = externalIndicesAPIKey ?? @"";
     }
 
     /// <summary>

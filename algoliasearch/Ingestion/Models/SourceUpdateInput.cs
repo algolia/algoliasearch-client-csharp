@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceUpdateInput
@@ -33,9 +33,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of SourceUpdateCommercetools.</param>
     public SourceUpdateInput(SourceUpdateCommercetools actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of SourceJSON.</param>
     public SourceUpdateInput(SourceJSON actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -57,9 +57,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of SourceCSV.</param>
     public SourceUpdateInput(SourceCSV actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -69,9 +69,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of SourceBigQuery.</param>
     public SourceUpdateInput(SourceBigQuery actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -81,9 +81,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of SourceUpdateDocker.</param>
     public SourceUpdateInput(SourceUpdateDocker actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -100,30 +100,7 @@ namespace Algolia.Search.Ingestion.Models
       }
       set
       {
-        if (value.GetType() == typeof(SourceBigQuery))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(SourceCSV))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(SourceJSON))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(SourceUpdateCommercetools))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(SourceUpdateDocker))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: SourceBigQuery, SourceCSV, SourceJSON, SourceUpdateCommercetools, SourceUpdateDocker");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -132,9 +109,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of SourceUpdateCommercetools</returns>
-    public SourceUpdateCommercetools GetterSourceUpdateCommercetools()
+    public SourceUpdateCommercetools AsSourceUpdateCommercetools()
     {
-      return (SourceUpdateCommercetools)this.ActualInstance;
+      return (SourceUpdateCommercetools)ActualInstance;
     }
 
     /// <summary>
@@ -142,9 +119,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of SourceJSON</returns>
-    public SourceJSON GetterSourceJSON()
+    public SourceJSON AsSourceJSON()
     {
-      return (SourceJSON)this.ActualInstance;
+      return (SourceJSON)ActualInstance;
     }
 
     /// <summary>
@@ -152,9 +129,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of SourceCSV</returns>
-    public SourceCSV GetterSourceCSV()
+    public SourceCSV AsSourceCSV()
     {
-      return (SourceCSV)this.ActualInstance;
+      return (SourceCSV)ActualInstance;
     }
 
     /// <summary>
@@ -162,9 +139,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of SourceBigQuery</returns>
-    public SourceBigQuery GetterSourceBigQuery()
+    public SourceBigQuery AsSourceBigQuery()
     {
-      return (SourceBigQuery)this.ActualInstance;
+      return (SourceBigQuery)ActualInstance;
     }
 
     /// <summary>
@@ -172,9 +149,55 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of SourceUpdateDocker</returns>
-    public SourceUpdateDocker GetterSourceUpdateDocker()
+    public SourceUpdateDocker AsSourceUpdateDocker()
     {
-      return (SourceUpdateDocker)this.ActualInstance;
+      return (SourceUpdateDocker)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `SourceUpdateCommercetools` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSourceUpdateCommercetools()
+    {
+      return ActualInstance.GetType() == typeof(SourceUpdateCommercetools);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `SourceJSON` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSourceJSON()
+    {
+      return ActualInstance.GetType() == typeof(SourceJSON);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `SourceCSV` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSourceCSV()
+    {
+      return ActualInstance.GetType() == typeof(SourceCSV);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `SourceBigQuery` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSourceBigQuery()
+    {
+      return ActualInstance.GetType() == typeof(SourceBigQuery);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `SourceUpdateDocker` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsSourceUpdateDocker()
+    {
+      return ActualInstance.GetType() == typeof(SourceUpdateDocker);
     }
 
     /// <summary>
@@ -185,7 +208,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       var sb = new StringBuilder();
       sb.Append("class SourceUpdateInput {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -196,7 +219,7 @@ namespace Algolia.Search.Ingestion.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, SourceUpdateInput.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -212,102 +235,45 @@ namespace Algolia.Search.Ingestion.Models
       {
         return newSourceUpdateInput;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SourceBigQuery).GetProperty("AdditionalProperties") == null)
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceBigQuery>(jsonString, SourceUpdateInput.SerializerSettings));
-        }
-        else
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceBigQuery>(jsonString, SourceUpdateInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SourceBigQuery");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SourceBigQuery: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SourceCSV).GetProperty("AdditionalProperties") == null)
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceCSV>(jsonString, SourceUpdateInput.SerializerSettings));
-        }
-        else
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceCSV>(jsonString, SourceUpdateInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SourceCSV");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SourceCSV: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SourceJSON).GetProperty("AdditionalProperties") == null)
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceJSON>(jsonString, SourceUpdateInput.SerializerSettings));
-        }
-        else
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceJSON>(jsonString, SourceUpdateInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SourceJSON");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SourceJSON: {1}", jsonString, exception.ToString()));
-      }
-
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SourceUpdateCommercetools).GetProperty("AdditionalProperties") == null)
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateCommercetools>(jsonString, SourceUpdateInput.SerializerSettings));
-        }
-        else
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateCommercetools>(jsonString, SourceUpdateInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SourceUpdateCommercetools");
-        match++;
+        return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateCommercetools>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SourceUpdateCommercetools: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(SourceUpdateDocker).GetProperty("AdditionalProperties") == null)
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateDocker>(jsonString, SourceUpdateInput.SerializerSettings));
-        }
-        else
-        {
-          newSourceUpdateInput = new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateDocker>(jsonString, SourceUpdateInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("SourceUpdateDocker");
-        match++;
+        return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceJSON>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SourceJSON: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceCSV>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SourceCSV: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceBigQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SourceBigQuery: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateDocker>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -315,17 +281,7 @@ namespace Algolia.Search.Ingestion.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into SourceUpdateDocker: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newSourceUpdateInput;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -358,7 +314,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return SourceUpdateInput.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

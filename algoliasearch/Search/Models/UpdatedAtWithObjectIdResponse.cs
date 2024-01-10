@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Response, taskID, unique object identifier, and an update timestamp.
@@ -27,14 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="UpdatedAtWithObjectIdResponse" /> class.
     /// </summary>
-    /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;. .</param>
-    /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format..</param>
-    /// <param name="objectID">Unique object identifier..</param>
-    public UpdatedAtWithObjectIdResponse(long taskID = default(long), string updatedAt = default(string), string objectID = default(string))
+    public UpdatedAtWithObjectIdResponse()
     {
-      this.TaskID = taskID;
-      this.UpdatedAt = updatedAt;
-      this.ObjectID = objectID;
     }
 
     /// <summary>

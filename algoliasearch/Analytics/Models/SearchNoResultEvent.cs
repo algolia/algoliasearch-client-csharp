@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Analytics.Models
+namespace Algolia.Search.Models.Analytics
 {
   /// <summary>
   /// SearchNoResultEvent
@@ -28,21 +28,16 @@ namespace Algolia.Search.Analytics.Models
     /// Initializes a new instance of the <see cref="SearchNoResultEvent" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SearchNoResultEvent() { }
+    public SearchNoResultEvent() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchNoResultEvent" /> class.
     /// </summary>
     /// <param name="search">User query. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public SearchNoResultEvent(string search = default(string), int count = default(int), int nbHits = default(int))
+    public SearchNoResultEvent(string search, int count, int nbHits)
     {
-      // to ensure "search" is required (not null)
-      if (search == null)
-      {
-        throw new ArgumentNullException("search is a required property for SearchNoResultEvent and cannot be null");
-      }
-      this.Search = search;
+      this.Search = search ?? throw new ArgumentNullException("search is a required property for SearchNoResultEvent and cannot be null");
       this.Count = count;
       this.NbHits = nbHits;
     }

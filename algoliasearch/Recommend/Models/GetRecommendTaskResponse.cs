@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// GetRecommendTaskResponse
@@ -34,12 +34,12 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="GetRecommendTaskResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected GetRecommendTaskResponse() { }
+    public GetRecommendTaskResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetRecommendTaskResponse" /> class.
     /// </summary>
     /// <param name="status">status (required).</param>
-    public GetRecommendTaskResponse(TaskStatus status = default(TaskStatus))
+    public GetRecommendTaskResponse(TaskStatus status)
     {
       this.Status = status;
     }

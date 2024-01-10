@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The trigger input for a task of type &#39;subscription&#39;.
@@ -34,12 +34,12 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="SubscriptionTrigger" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SubscriptionTrigger() { }
+    public SubscriptionTrigger() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SubscriptionTrigger" /> class.
     /// </summary>
     /// <param name="type">type (required).</param>
-    public SubscriptionTrigger(SubscriptionTriggerType type = default(SubscriptionTriggerType))
+    public SubscriptionTrigger(SubscriptionTriggerType type)
     {
       this.Type = type;
     }

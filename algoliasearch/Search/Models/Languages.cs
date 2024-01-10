@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Dictionary language.
@@ -28,33 +28,18 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="Languages" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Languages() { }
+    public Languages() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Languages" /> class.
     /// </summary>
     /// <param name="plurals">plurals (required).</param>
     /// <param name="stopwords">stopwords (required).</param>
     /// <param name="compounds">compounds (required).</param>
-    public Languages(DictionaryLanguage plurals = default(DictionaryLanguage), DictionaryLanguage stopwords = default(DictionaryLanguage), DictionaryLanguage compounds = default(DictionaryLanguage))
+    public Languages(DictionaryLanguage plurals, DictionaryLanguage stopwords, DictionaryLanguage compounds)
     {
-      // to ensure "plurals" is required (not null)
-      if (plurals == null)
-      {
-        throw new ArgumentNullException("plurals is a required property for Languages and cannot be null");
-      }
-      this.Plurals = plurals;
-      // to ensure "stopwords" is required (not null)
-      if (stopwords == null)
-      {
-        throw new ArgumentNullException("stopwords is a required property for Languages and cannot be null");
-      }
-      this.Stopwords = stopwords;
-      // to ensure "compounds" is required (not null)
-      if (compounds == null)
-      {
-        throw new ArgumentNullException("compounds is a required property for Languages and cannot be null");
-      }
-      this.Compounds = compounds;
+      this.Plurals = plurals ?? throw new ArgumentNullException("plurals is a required property for Languages and cannot be null");
+      this.Stopwords = stopwords ?? throw new ArgumentNullException("stopwords is a required property for Languages and cannot be null");
+      this.Compounds = compounds ?? throw new ArgumentNullException("compounds is a required property for Languages and cannot be null");
     }
 
     /// <summary>

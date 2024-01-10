@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// DestinationInput
@@ -33,9 +33,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of DestinationIndexPrefix.</param>
     public DestinationInput(DestinationIndexPrefix actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
     /// <summary>
@@ -45,9 +45,9 @@ namespace Algolia.Search.Ingestion.Models
     /// <param name="actualInstance">An instance of DestinationIndexName.</param>
     public DestinationInput(DestinationIndexName actualInstance)
     {
-      this.IsNullable = false;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
 
@@ -64,18 +64,7 @@ namespace Algolia.Search.Ingestion.Models
       }
       set
       {
-        if (value.GetType() == typeof(DestinationIndexName))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(DestinationIndexPrefix))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: DestinationIndexName, DestinationIndexPrefix");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -84,9 +73,9 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of DestinationIndexPrefix</returns>
-    public DestinationIndexPrefix GetterDestinationIndexPrefix()
+    public DestinationIndexPrefix AsDestinationIndexPrefix()
     {
-      return (DestinationIndexPrefix)this.ActualInstance;
+      return (DestinationIndexPrefix)ActualInstance;
     }
 
     /// <summary>
@@ -94,9 +83,28 @@ namespace Algolia.Search.Ingestion.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of DestinationIndexName</returns>
-    public DestinationIndexName GetterDestinationIndexName()
+    public DestinationIndexName AsDestinationIndexName()
     {
-      return (DestinationIndexName)this.ActualInstance;
+      return (DestinationIndexName)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `DestinationIndexPrefix` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsDestinationIndexPrefix()
+    {
+      return ActualInstance.GetType() == typeof(DestinationIndexPrefix);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `DestinationIndexName` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsDestinationIndexName()
+    {
+      return ActualInstance.GetType() == typeof(DestinationIndexName);
     }
 
     /// <summary>
@@ -107,7 +115,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       var sb = new StringBuilder();
       sb.Append("class DestinationInput {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -118,7 +126,7 @@ namespace Algolia.Search.Ingestion.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, DestinationInput.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -134,22 +142,18 @@ namespace Algolia.Search.Ingestion.Models
       {
         return newDestinationInput;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(DestinationIndexName).GetProperty("AdditionalProperties") == null)
-        {
-          newDestinationInput = new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexName>(jsonString, DestinationInput.SerializerSettings));
-        }
-        else
-        {
-          newDestinationInput = new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexName>(jsonString, DestinationInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("DestinationIndexName");
-        match++;
+        return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexPrefix>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into DestinationIndexPrefix: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexName>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -157,37 +161,7 @@ namespace Algolia.Search.Ingestion.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into DestinationIndexName: {1}", jsonString, exception.ToString()));
       }
 
-      try
-      {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(DestinationIndexPrefix).GetProperty("AdditionalProperties") == null)
-        {
-          newDestinationInput = new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexPrefix>(jsonString, DestinationInput.SerializerSettings));
-        }
-        else
-        {
-          newDestinationInput = new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexPrefix>(jsonString, DestinationInput.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("DestinationIndexPrefix");
-        match++;
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into DestinationIndexPrefix: {1}", jsonString, exception.ToString()));
-      }
-
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newDestinationInput;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -220,7 +194,7 @@ namespace Algolia.Search.Ingestion.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return DestinationInput.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

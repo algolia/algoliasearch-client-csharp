@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// AuthAlgoliaPartial
@@ -27,12 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthAlgoliaPartial" /> class.
     /// </summary>
-    /// <param name="appID">Algolia Application ID..</param>
-    /// <param name="apiKey">Algolia API Key, with the correct rights to push to an index and change settings..</param>
-    public AuthAlgoliaPartial(string appID = default(string), string apiKey = default(string))
+    public AuthAlgoliaPartial()
     {
-      this.AppID = appID;
-      this.ApiKey = apiKey;
     }
 
     /// <summary>

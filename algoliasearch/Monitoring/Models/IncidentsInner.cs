@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// IncidentsInner
@@ -27,12 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="IncidentsInner" /> class.
     /// </summary>
-    /// <param name="t">Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds..</param>
-    /// <param name="v">v.</param>
-    public IncidentsInner(long t = default(long), Incident v = default(Incident))
+    public IncidentsInner()
     {
-      this.T = t;
-      this.V = v;
     }
 
     /// <summary>

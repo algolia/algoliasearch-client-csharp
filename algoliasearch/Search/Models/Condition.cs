@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Condition
@@ -29,20 +29,12 @@ namespace Algolia.Search.Search.Models
     /// Gets or Sets Anchoring
     /// </summary>
     [DataMember(Name = "anchoring", EmitDefaultValue = false)]
-    public Anchoring? Anchoring { get; set; }
+    public Anchoring Anchoring { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="Condition" /> class.
     /// </summary>
-    /// <param name="pattern">Query pattern syntax..</param>
-    /// <param name="anchoring">anchoring.</param>
-    /// <param name="alternatives">Whether the pattern matches on plurals, synonyms, and typos. (default to false).</param>
-    /// <param name="context">Rule context format: [A-Za-z0-9_-]+)..</param>
-    public Condition(string pattern = default(string), Anchoring? anchoring = default(Anchoring?), bool alternatives = false, string context = default(string))
+    public Condition()
     {
-      this.Pattern = pattern;
-      this.Anchoring = anchoring;
-      this.Alternatives = alternatives;
-      this.Context = context;
     }
 
     /// <summary>
@@ -57,7 +49,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Whether the pattern matches on plurals, synonyms, and typos.</value>
     [DataMember(Name = "alternatives", EmitDefaultValue = true)]
-    public bool Alternatives { get; set; }
+    public bool? Alternatives { get; set; }
 
     /// <summary>
     /// Rule context format: [A-Za-z0-9_-]+).

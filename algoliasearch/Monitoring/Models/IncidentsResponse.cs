@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Monitoring.Models
+namespace Algolia.Search.Models.Monitoring
 {
   /// <summary>
   /// IncidentsResponse
@@ -27,10 +27,8 @@ namespace Algolia.Search.Monitoring.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="IncidentsResponse" /> class.
     /// </summary>
-    /// <param name="incidents">incidents.</param>
-    public IncidentsResponse(Dictionary<string, List<IncidentsInner>> incidents = default(Dictionary<string, List<IncidentsInner>>))
+    public IncidentsResponse()
     {
-      this.Incidents = incidents;
     }
 
     /// <summary>

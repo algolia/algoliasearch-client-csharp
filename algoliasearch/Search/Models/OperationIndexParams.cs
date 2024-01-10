@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// OperationIndexParams
@@ -34,23 +34,16 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="OperationIndexParams" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected OperationIndexParams() { }
+    public OperationIndexParams() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="OperationIndexParams" /> class.
     /// </summary>
     /// <param name="operation">operation (required).</param>
     /// <param name="destination">Algolia index name. (required).</param>
-    /// <param name="scope">**This only applies to the _copy_ operation.**  If you omit &#x60;scope&#x60;, the copy command copies all records, settings, synonyms, and rules.  If you specify &#x60;scope&#x60;, only the specified scopes are copied..</param>
-    public OperationIndexParams(OperationType operation = default(OperationType), string destination = default(string), List<ScopeType> scope = default(List<ScopeType>))
+    public OperationIndexParams(OperationType operation, string destination)
     {
       this.Operation = operation;
-      // to ensure "destination" is required (not null)
-      if (destination == null)
-      {
-        throw new ArgumentNullException("destination is a required property for OperationIndexParams and cannot be null");
-      }
-      this.Destination = destination;
-      this.Scope = scope;
+      this.Destination = destination ?? throw new ArgumentNullException("destination is a required property for OperationIndexParams and cannot be null");
     }
 
     /// <summary>

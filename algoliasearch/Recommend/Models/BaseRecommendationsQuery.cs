@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// BaseRecommendationsQuery
@@ -34,25 +34,16 @@ namespace Algolia.Search.Recommend.Models
     /// Initializes a new instance of the <see cref="BaseRecommendationsQuery" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected BaseRecommendationsQuery() { }
+    public BaseRecommendationsQuery() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseRecommendationsQuery" /> class.
     /// </summary>
     /// <param name="model">model (required).</param>
     /// <param name="objectID">Unique object identifier. (required).</param>
-    /// <param name="queryParameters">queryParameters.</param>
-    /// <param name="fallbackParameters">fallbackParameters.</param>
-    public BaseRecommendationsQuery(RecommendationModels model = default(RecommendationModels), string objectID = default(string), SearchParamsObject queryParameters = default(SearchParamsObject), SearchParamsObject fallbackParameters = default(SearchParamsObject))
+    public BaseRecommendationsQuery(RecommendationModels model, string objectID)
     {
       this.Model = model;
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for BaseRecommendationsQuery and cannot be null");
-      }
-      this.ObjectID = objectID;
-      this.QueryParameters = queryParameters;
-      this.FallbackParameters = fallbackParameters;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for BaseRecommendationsQuery and cannot be null");
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// RemoveUserIdResponse
@@ -28,19 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="RemoveUserIdResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected RemoveUserIdResponse() { }
+    public RemoveUserIdResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveUserIdResponse" /> class.
     /// </summary>
     /// <param name="deletedAt">Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-    public RemoveUserIdResponse(string deletedAt = default(string))
+    public RemoveUserIdResponse(string deletedAt)
     {
-      // to ensure "deletedAt" is required (not null)
-      if (deletedAt == null)
-      {
-        throw new ArgumentNullException("deletedAt is a required property for RemoveUserIdResponse and cannot be null");
-      }
-      this.DeletedAt = deletedAt;
+      this.DeletedAt = deletedAt ?? throw new ArgumentNullException("deletedAt is a required property for RemoveUserIdResponse and cannot be null");
     }
 
     /// <summary>

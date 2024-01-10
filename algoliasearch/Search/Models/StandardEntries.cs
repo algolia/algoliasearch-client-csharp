@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Key-value pairs of [supported language ISO codes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) and boolean values. 
@@ -27,14 +27,8 @@ namespace Algolia.Search.Search.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="StandardEntries" /> class.
     /// </summary>
-    /// <param name="plurals">Key-value pair of a language ISO code and a boolean value..</param>
-    /// <param name="stopwords">Key-value pair of a language ISO code and a boolean value..</param>
-    /// <param name="compounds">Key-value pair of a language ISO code and a boolean value..</param>
-    public StandardEntries(Dictionary<string, bool> plurals = default(Dictionary<string, bool>), Dictionary<string, bool> stopwords = default(Dictionary<string, bool>), Dictionary<string, bool> compounds = default(Dictionary<string, bool>))
+    public StandardEntries()
     {
-      this.Plurals = plurals;
-      this.Stopwords = stopwords;
-      this.Compounds = compounds;
     }
 
     /// <summary>

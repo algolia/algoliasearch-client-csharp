@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.QuerySuggestions.Models
+namespace Algolia.Search.Models.QuerySuggestions
 {
   /// <summary>
   /// GetLogFile200Response
@@ -29,20 +29,12 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// Gets or Sets Level
     /// </summary>
     [DataMember(Name = "level", EmitDefaultValue = false)]
-    public LogLevel? Level { get; set; }
+    public LogLevel Level { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetLogFile200Response" /> class.
     /// </summary>
-    /// <param name="timestamp">Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format..</param>
-    /// <param name="level">level.</param>
-    /// <param name="message">Details about this log entry..</param>
-    /// <param name="contextLevel">Level indicating the position of a suggestion in a hierarchy of records.   For example, a &#x60;contextLevel&#x60; of 1 indicates that this suggestion belongs to a previous suggestion with &#x60;contextLevel&#x60; 0. .</param>
-    public GetLogFile200Response(string timestamp = default(string), LogLevel? level = default(LogLevel?), string message = default(string), int contextLevel = default(int))
+    public GetLogFile200Response()
     {
-      this.Timestamp = timestamp;
-      this.Level = level;
-      this.Message = message;
-      this.ContextLevel = contextLevel;
     }
 
     /// <summary>
@@ -64,7 +56,7 @@ namespace Algolia.Search.QuerySuggestions.Models
     /// </summary>
     /// <value>Level indicating the position of a suggestion in a hierarchy of records.   For example, a &#x60;contextLevel&#x60; of 1 indicates that this suggestion belongs to a previous suggestion with &#x60;contextLevel&#x60; 0. </value>
     [DataMember(Name = "contextLevel", EmitDefaultValue = false)]
-    public int ContextLevel { get; set; }
+    public int? ContextLevel { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

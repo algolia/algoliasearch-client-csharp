@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Recommend.Models
+namespace Algolia.Search.Models.Recommend
 {
   /// <summary>
   /// When [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/) is enabled, only records that match these filters will be affected by Dynamic Re-Ranking.
@@ -42,9 +42,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of List&lt;MixedSearchFilters&gt;.</param>
     public ReRankingApplyFilter(List<MixedSearchFilters> actualInstance)
     {
-      this.IsNullable = true;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = true;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
     /// <summary>
@@ -54,9 +54,9 @@ namespace Algolia.Search.Recommend.Models
     /// <param name="actualInstance">An instance of string.</param>
     public ReRankingApplyFilter(string actualInstance)
     {
-      this.IsNullable = true;
-      this.SchemaType = "oneOf";
-      this.ActualInstance = actualInstance;
+      IsNullable = true;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance;
     }
 
 
@@ -73,18 +73,7 @@ namespace Algolia.Search.Recommend.Models
       }
       set
       {
-        if (value.GetType() == typeof(List<MixedSearchFilters>))
-        {
-          this._actualInstance = value;
-        }
-        else if (value.GetType() == typeof(string))
-        {
-          this._actualInstance = value;
-        }
-        else
-        {
-          throw new ArgumentException("Invalid instance found. Must be the following types: List<MixedSearchFilters>, string");
-        }
+        this._actualInstance = value;
       }
     }
 
@@ -93,9 +82,9 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of List&lt;MixedSearchFilters&gt;</returns>
-    public List<MixedSearchFilters> GetterList()
+    public List<MixedSearchFilters> AsList()
     {
-      return (List<MixedSearchFilters>)this.ActualInstance;
+      return (List<MixedSearchFilters>)ActualInstance;
     }
 
     /// <summary>
@@ -103,9 +92,28 @@ namespace Algolia.Search.Recommend.Models
     /// the InvalidClassException will be thrown
     /// </summary>
     /// <returns>An instance of string</returns>
-    public string GetterString()
+    public string AsString()
     {
-      return (string)this.ActualInstance;
+      return (string)ActualInstance;
+    }
+
+
+    /// <summary>
+    /// Check if the actual instance is of `List&lt;MixedSearchFilters&gt;` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsList()
+    {
+      return ActualInstance.GetType() == typeof(List<MixedSearchFilters>);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `string` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsString()
+    {
+      return ActualInstance.GetType() == typeof(string);
     }
 
     /// <summary>
@@ -116,7 +124,7 @@ namespace Algolia.Search.Recommend.Models
     {
       var sb = new StringBuilder();
       sb.Append("class ReRankingApplyFilter {\n");
-      sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
+      sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
@@ -127,7 +135,7 @@ namespace Algolia.Search.Recommend.Models
     /// <returns>JSON string presentation of the object</returns>
     public override string ToJson()
     {
-      return JsonConvert.SerializeObject(this.ActualInstance, ReRankingApplyFilter.SerializerSettings);
+      return JsonConvert.SerializeObject(ActualInstance, SerializerSettings);
     }
 
     /// <summary>
@@ -143,42 +151,18 @@ namespace Algolia.Search.Recommend.Models
       {
         return newReRankingApplyFilter;
       }
-      int match = 0;
-      List<string> matchedTypes = new List<string>();
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(List<MixedSearchFilters>).GetProperty("AdditionalProperties") == null)
-        {
-          newReRankingApplyFilter = new ReRankingApplyFilter(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, ReRankingApplyFilter.SerializerSettings));
-        }
-        else
-        {
-          newReRankingApplyFilter = new ReRankingApplyFilter(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, ReRankingApplyFilter.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("List<MixedSearchFilters>");
-        match++;
+        return new ReRankingApplyFilter(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into List<MixedSearchFilters>: {1}", jsonString, exception.ToString()));
       }
-
       try
       {
-        // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
-        if (typeof(string).GetProperty("AdditionalProperties") == null)
-        {
-          newReRankingApplyFilter = new ReRankingApplyFilter(JsonConvert.DeserializeObject<string>(jsonString, ReRankingApplyFilter.SerializerSettings));
-        }
-        else
-        {
-          newReRankingApplyFilter = new ReRankingApplyFilter(JsonConvert.DeserializeObject<string>(jsonString, ReRankingApplyFilter.AdditionalPropertiesSerializerSettings));
-        }
-        matchedTypes.Add("string");
-        match++;
+        return new ReRankingApplyFilter(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -186,17 +170,7 @@ namespace Algolia.Search.Recommend.Models
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into string: {1}", jsonString, exception.ToString()));
       }
 
-      if (match == 0)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
-      }
-      else if (match > 1)
-      {
-        throw new InvalidDataException("The JSON string `" + jsonString + "` incorrectly matches more than one schema (should be exactly one match): " + String.Join(",", matchedTypes));
-      }
-
-      // deserialization is considered successful at this point if no exception has been thrown.
-      return newReRankingApplyFilter;
+      throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");
     }
 
   }
@@ -229,7 +203,7 @@ namespace Algolia.Search.Recommend.Models
     {
       if (reader.TokenType != JsonToken.Null)
       {
-        return ReRankingApplyFilter.FromJson(JObject.Load(reader).ToString(Formatting.None));
+        return objectType.GetMethod("FromJson").Invoke(null, new[] { JObject.Load(reader).ToString(Formatting.None) });
       }
       return null;
     }

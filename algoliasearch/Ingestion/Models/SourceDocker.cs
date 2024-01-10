@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// SourceDocker
@@ -40,32 +40,20 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="SourceDocker" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected SourceDocker() { }
+    public SourceDocker() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceDocker" /> class.
     /// </summary>
     /// <param name="imageType">imageType (required).</param>
     /// <param name="registry">registry (required).</param>
     /// <param name="image">The name of the image to pull. (required).</param>
-    /// <param name="varVersion">The version of the image, defaults to &#x60;latest&#x60;..</param>
     /// <param name="varConfiguration">The configuration of the spec. (required).</param>
-    public SourceDocker(DockerImageType imageType = default(DockerImageType), DockerRegistry registry = default(DockerRegistry), string image = default(string), string varVersion = default(string), Object varConfiguration = default(Object))
+    public SourceDocker(DockerImageType imageType, DockerRegistry registry, string image, Object varConfiguration)
     {
       this.ImageType = imageType;
       this.Registry = registry;
-      // to ensure "image" is required (not null)
-      if (image == null)
-      {
-        throw new ArgumentNullException("image is a required property for SourceDocker and cannot be null");
-      }
-      this.Image = image;
-      // to ensure "varConfiguration" is required (not null)
-      if (varConfiguration == null)
-      {
-        throw new ArgumentNullException("varConfiguration is a required property for SourceDocker and cannot be null");
-      }
-      this.VarConfiguration = varConfiguration;
-      this.VarVersion = varVersion;
+      this.Image = image ?? throw new ArgumentNullException("image is a required property for SourceDocker and cannot be null");
+      this.VarConfiguration = varConfiguration ?? throw new ArgumentNullException("varConfiguration is a required property for SourceDocker and cannot be null");
     }
 
     /// <summary>

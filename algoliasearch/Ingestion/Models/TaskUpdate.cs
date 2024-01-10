@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// The payload for a task update.
@@ -27,18 +27,8 @@ namespace Algolia.Search.Ingestion.Models
     /// <summary>
     /// Initializes a new instance of the <see cref="TaskUpdate" /> class.
     /// </summary>
-    /// <param name="destinationID">The destination UUID..</param>
-    /// <param name="trigger">trigger.</param>
-    /// <param name="input">input.</param>
-    /// <param name="enabled">Whether the task is enabled or not..</param>
-    /// <param name="failureThreshold">A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not..</param>
-    public TaskUpdate(string destinationID = default(string), TriggerUpdateInput trigger = default(TriggerUpdateInput), TaskInput input = default(TaskInput), bool enabled = default(bool), int failureThreshold = default(int))
+    public TaskUpdate()
     {
-      this.DestinationID = destinationID;
-      this.Trigger = trigger;
-      this.Input = input;
-      this.Enabled = enabled;
-      this.FailureThreshold = failureThreshold;
     }
 
     /// <summary>
@@ -65,14 +55,14 @@ namespace Algolia.Search.Ingestion.Models
     /// </summary>
     /// <value>Whether the task is enabled or not.</value>
     [DataMember(Name = "enabled", EmitDefaultValue = true)]
-    public bool Enabled { get; set; }
+    public bool? Enabled { get; set; }
 
     /// <summary>
     /// A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not.
     /// </summary>
     /// <value>A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not.</value>
     [DataMember(Name = "failureThreshold", EmitDefaultValue = false)]
-    public int FailureThreshold { get; set; }
+    public int? FailureThreshold { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

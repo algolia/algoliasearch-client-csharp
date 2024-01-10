@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Ingestion.Models
+namespace Algolia.Search.Models.Ingestion
 {
   /// <summary>
   /// A list of tasks with pagination details.
@@ -28,26 +28,16 @@ namespace Algolia.Search.Ingestion.Models
     /// Initializes a new instance of the <see cref="ListTasksResponse" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected ListTasksResponse() { }
+    public ListTasksResponse() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ListTasksResponse" /> class.
     /// </summary>
     /// <param name="tasks">tasks (required).</param>
     /// <param name="pagination">pagination (required).</param>
-    public ListTasksResponse(List<IngestionTask> tasks = default(List<IngestionTask>), Pagination pagination = default(Pagination))
+    public ListTasksResponse(List<IngestionTask> tasks, Pagination pagination)
     {
-      // to ensure "tasks" is required (not null)
-      if (tasks == null)
-      {
-        throw new ArgumentNullException("tasks is a required property for ListTasksResponse and cannot be null");
-      }
-      this.Tasks = tasks;
-      // to ensure "pagination" is required (not null)
-      if (pagination == null)
-      {
-        throw new ArgumentNullException("pagination is a required property for ListTasksResponse and cannot be null");
-      }
-      this.Pagination = pagination;
+      this.Tasks = tasks ?? throw new ArgumentNullException("tasks is a required property for ListTasksResponse and cannot be null");
+      this.Pagination = pagination ?? throw new ArgumentNullException("pagination is a required property for ListTasksResponse and cannot be null");
     }
 
     /// <summary>

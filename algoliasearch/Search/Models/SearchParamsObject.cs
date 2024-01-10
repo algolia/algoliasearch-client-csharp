@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// SearchParamsObject
@@ -29,195 +29,30 @@ namespace Algolia.Search.Search.Models
     /// Gets or Sets QueryType
     /// </summary>
     [DataMember(Name = "queryType", EmitDefaultValue = false)]
-    public QueryType? QueryType { get; set; }
+    public QueryType QueryType { get; set; }
 
     /// <summary>
     /// Gets or Sets RemoveWordsIfNoResults
     /// </summary>
     [DataMember(Name = "removeWordsIfNoResults", EmitDefaultValue = false)]
-    public RemoveWordsIfNoResults? RemoveWordsIfNoResults { get; set; }
+    public RemoveWordsIfNoResults RemoveWordsIfNoResults { get; set; }
 
     /// <summary>
     /// Gets or Sets Mode
     /// </summary>
     [DataMember(Name = "mode", EmitDefaultValue = false)]
-    public Mode? Mode { get; set; }
+    public Mode Mode { get; set; }
 
     /// <summary>
     /// Gets or Sets ExactOnSingleWordQuery
     /// </summary>
     [DataMember(Name = "exactOnSingleWordQuery", EmitDefaultValue = false)]
-    public ExactOnSingleWordQuery? ExactOnSingleWordQuery { get; set; }
+    public ExactOnSingleWordQuery ExactOnSingleWordQuery { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchParamsObject" /> class.
     /// </summary>
-    /// <param name="query">Text to search for in an index. (default to &quot;&quot;).</param>
-    /// <param name="similarQuery">Overrides the query parameter and performs a more generic search. (default to &quot;&quot;).</param>
-    /// <param name="filters">[Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters.  (default to &quot;&quot;).</param>
-    /// <param name="facetFilters">facetFilters.</param>
-    /// <param name="optionalFilters">optionalFilters.</param>
-    /// <param name="numericFilters">numericFilters.</param>
-    /// <param name="tagFilters">tagFilters.</param>
-    /// <param name="sumOrFiltersScores">Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If &#x60;false&#x60;, maximum score is kept. If &#x60;true&#x60;, score is summed.  (default to false).</param>
-    /// <param name="restrictSearchableAttributes">Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/)..</param>
-    /// <param name="facets">Returns [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts), their facet values, and the number of matching facet values..</param>
-    /// <param name="facetingAfterDistinct">Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the &#x60;afterDistinct&#x60; [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of &#x60;attributesForFaceting&#x60; allows for more granular control.  (default to false).</param>
-    /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (default to 0).</param>
-    /// <param name="offset">Specifies the offset of the first hit to return. &gt; **Note**: Using &#x60;page&#x60; and &#x60;hitsPerPage&#x60; is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use &#x60;offset&#x60; and &#x60;length&#x60; to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). .</param>
-    /// <param name="length">Sets the number of hits to retrieve (for use with &#x60;offset&#x60;). &gt; **Note**: Using &#x60;page&#x60; and &#x60;hitsPerPage&#x60; is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use &#x60;offset&#x60; and &#x60;length&#x60; to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). .</param>
-    /// <param name="aroundLatLng">Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area. (default to &quot;&quot;).</param>
-    /// <param name="aroundLatLngViaIP">Search for entries around a location. The location is automatically computed from the requester&#39;s IP address. (default to false).</param>
-    /// <param name="aroundRadius">aroundRadius.</param>
-    /// <param name="aroundPrecision">aroundPrecision.</param>
-    /// <param name="minimumAroundRadius">Minimum radius (in meters) used for a geographical search when &#x60;aroundRadius&#x60; isn&#39;t set..</param>
-    /// <param name="insideBoundingBox">Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates)..</param>
-    /// <param name="insidePolygon">Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates)..</param>
-    /// <param name="naturalLanguages">Changes the default values of parameters that work best for a natural language query, such as &#x60;ignorePlurals&#x60;, &#x60;removeStopWords&#x60;, &#x60;removeWordsIfNoResults&#x60;, &#x60;analyticsTags&#x60;, and &#x60;ruleContexts&#x60;. These parameters work well together when the query consists of fuller natural language strings instead of keywords, for example when processing voice search queries..</param>
-    /// <param name="ruleContexts">Assigns [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) to search queries..</param>
-    /// <param name="personalizationImpact">Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact). (default to 100).</param>
-    /// <param name="userToken">Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search..</param>
-    /// <param name="getRankingInfo">Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information). (default to false).</param>
-    /// <param name="explain">Enriches the API&#39;s response with information about how the query was processed..</param>
-    /// <param name="synonyms">Whether to take into account an index&#39;s synonyms for a particular search. (default to true).</param>
-    /// <param name="clickAnalytics">Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests). (default to false).</param>
-    /// <param name="analytics">Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/). (default to true).</param>
-    /// <param name="analyticsTags">Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/)..</param>
-    /// <param name="percentileComputation">Whether to include or exclude a query from the processing-time percentile computation. (default to true).</param>
-    /// <param name="enableABTest">Incidates whether this search will be considered in A/B testing. (default to true).</param>
-    /// <param name="attributesForFaceting">Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/) and the [modifiers](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) that can be applied: &#x60;filterOnly&#x60;, &#x60;searchable&#x60;, and &#x60;afterDistinct&#x60;. .</param>
-    /// <param name="attributesToRetrieve">Attributes to include in the API response. To reduce the size of your response, you can retrieve only some of the attributes. By default, the response includes all attributes..</param>
-    /// <param name="ranking">Determines the order in which Algolia [returns your results](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/)..</param>
-    /// <param name="customRanking">Specifies the [Custom ranking criterion](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Use the &#x60;asc&#x60; and &#x60;desc&#x60; modifiers to specify the ranking order: ascending or descending. .</param>
-    /// <param name="relevancyStrictness">Relevancy threshold below which less relevant results aren&#39;t included in the results. (default to 100).</param>
-    /// <param name="attributesToHighlight">Attributes to highlight. Strings that match the search query in the attributes are highlighted by surrounding them with HTML tags (&#x60;highlightPreTag&#x60; and &#x60;highlightPostTag&#x60;)..</param>
-    /// <param name="attributesToSnippet">Attributes to _snippet_. &#39;Snippeting&#39; is shortening the attribute to a certain number of words. If not specified, the attribute is shortened to the 10 words around the matching string but you can specify the number. For example: &#x60;body:20&#x60;. .</param>
-    /// <param name="highlightPreTag">HTML string to insert before the highlighted parts in all highlight and snippet results. (default to &quot;&lt;em&gt;&quot;).</param>
-    /// <param name="highlightPostTag">HTML string to insert after the highlighted parts in all highlight and snippet results. (default to &quot;&lt;/em&gt;&quot;).</param>
-    /// <param name="snippetEllipsisText">String used as an ellipsis indicator when a snippet is truncated. (default to &quot;…&quot;).</param>
-    /// <param name="restrictHighlightAndSnippetArrays">Restrict highlighting and snippeting to items that matched the query. (default to false).</param>
-    /// <param name="hitsPerPage">Number of hits per page. (default to 20).</param>
-    /// <param name="minWordSizefor1Typo">Minimum number of characters a word in the query string must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos). (default to 4).</param>
-    /// <param name="minWordSizefor2Typos">Minimum number of characters a word in the query string must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos). (default to 8).</param>
-    /// <param name="typoTolerance">typoTolerance.</param>
-    /// <param name="allowTyposOnNumericTokens">Whether to allow typos on numbers (\&quot;numeric tokens\&quot;) in the query string. (default to true).</param>
-    /// <param name="disableTypoToleranceOnAttributes">Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/)..</param>
-    /// <param name="ignorePlurals">ignorePlurals.</param>
-    /// <param name="removeStopWords">removeStopWords.</param>
-    /// <param name="keepDiacriticsOnCharacters">Characters that the engine shouldn&#39;t automatically [normalize](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/). (default to &quot;&quot;).</param>
-    /// <param name="queryLanguages">Sets your user&#39;s search language. This adjusts language-specific settings and features such as &#x60;ignorePlurals&#x60;, &#x60;removeStopWords&#x60;, and [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) word detection..</param>
-    /// <param name="decompoundQuery">[Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query.  (default to true).</param>
-    /// <param name="enableRules">Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled. (default to true).</param>
-    /// <param name="enablePersonalization">Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled. (default to false).</param>
-    /// <param name="queryType">queryType.</param>
-    /// <param name="removeWordsIfNoResults">removeWordsIfNoResults.</param>
-    /// <param name="mode">mode.</param>
-    /// <param name="semanticSearch">semanticSearch.</param>
-    /// <param name="advancedSyntax">Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax). (default to false).</param>
-    /// <param name="optionalWords">Words which should be considered [optional](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words) when found in a query..</param>
-    /// <param name="disableExactOnAttributes">Attributes for which you want to [turn off the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes)..</param>
-    /// <param name="exactOnSingleWordQuery">exactOnSingleWordQuery.</param>
-    /// <param name="alternativesAsExact">Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes)..</param>
-    /// <param name="advancedSyntaxFeatures">Allows you to specify which advanced syntax features are active when &#x60;advancedSyntax&#x60; is enabled..</param>
-    /// <param name="distinct">distinct.</param>
-    /// <param name="replaceSynonymsInHighlight">Whether to highlight and snippet the original word that matches the synonym or the synonym itself. (default to false).</param>
-    /// <param name="minProximity">Precision of the [proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity). (default to 1).</param>
-    /// <param name="responseFields">Attributes to include in the API response for search and browse queries..</param>
-    /// <param name="maxFacetHits">Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). (default to 10).</param>
-    /// <param name="maxValuesPerFacet">Maximum number of facet values to return for each facet. (default to 100).</param>
-    /// <param name="sortFacetValuesBy">Controls how facet values are fetched. (default to &quot;count&quot;).</param>
-    /// <param name="attributeCriteriaComputedByMinProximity">When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage. (default to false).</param>
-    /// <param name="renderingContent">renderingContent.</param>
-    /// <param name="enableReRanking">Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/). (default to true).</param>
-    /// <param name="reRankingApplyFilter">reRankingApplyFilter.</param>
-    public SearchParamsObject(string query = @"", string similarQuery = @"", string filters = @"", FacetFilters facetFilters = default(FacetFilters), OptionalFilters optionalFilters = default(OptionalFilters), NumericFilters numericFilters = default(NumericFilters), TagFilters tagFilters = default(TagFilters), bool sumOrFiltersScores = false, List<string> restrictSearchableAttributes = default(List<string>), List<string> facets = default(List<string>), bool facetingAfterDistinct = false, int page = 0, int offset = default(int), int length = default(int), string aroundLatLng = @"", bool aroundLatLngViaIP = false, AroundRadius aroundRadius = default(AroundRadius), AroundPrecision aroundPrecision = default(AroundPrecision), int minimumAroundRadius = default(int), List<List<double>> insideBoundingBox = default(List<List<double>>), List<List<double>> insidePolygon = default(List<List<double>>), List<string> naturalLanguages = default(List<string>), List<string> ruleContexts = default(List<string>), int personalizationImpact = 100, string userToken = default(string), bool getRankingInfo = false, List<string> explain = default(List<string>), bool synonyms = true, bool clickAnalytics = false, bool analytics = true, List<string> analyticsTags = default(List<string>), bool percentileComputation = true, bool enableABTest = true, List<string> attributesForFaceting = default(List<string>), List<string> attributesToRetrieve = default(List<string>), List<string> ranking = default(List<string>), List<string> customRanking = default(List<string>), int relevancyStrictness = 100, List<string> attributesToHighlight = default(List<string>), List<string> attributesToSnippet = default(List<string>), string highlightPreTag = @"<em>", string highlightPostTag = @"</em>", string snippetEllipsisText = @"…", bool restrictHighlightAndSnippetArrays = false, int hitsPerPage = 20, int minWordSizefor1Typo = 4, int minWordSizefor2Typos = 8, TypoTolerance typoTolerance = default(TypoTolerance), bool allowTyposOnNumericTokens = true, List<string> disableTypoToleranceOnAttributes = default(List<string>), IgnorePlurals ignorePlurals = default(IgnorePlurals), RemoveStopWords removeStopWords = default(RemoveStopWords), string keepDiacriticsOnCharacters = @"", List<string> queryLanguages = default(List<string>), bool decompoundQuery = true, bool enableRules = true, bool enablePersonalization = false, QueryType? queryType = default(QueryType?), RemoveWordsIfNoResults? removeWordsIfNoResults = default(RemoveWordsIfNoResults?), Mode? mode = default(Mode?), SemanticSearch semanticSearch = default(SemanticSearch), bool advancedSyntax = false, List<string> optionalWords = default(List<string>), List<string> disableExactOnAttributes = default(List<string>), ExactOnSingleWordQuery? exactOnSingleWordQuery = default(ExactOnSingleWordQuery?), List<AlternativesAsExact> alternativesAsExact = default(List<AlternativesAsExact>), List<AdvancedSyntaxFeatures> advancedSyntaxFeatures = default(List<AdvancedSyntaxFeatures>), Distinct distinct = default(Distinct), bool replaceSynonymsInHighlight = false, int minProximity = 1, List<string> responseFields = default(List<string>), int maxFacetHits = 10, int maxValuesPerFacet = 100, string sortFacetValuesBy = @"count", bool attributeCriteriaComputedByMinProximity = false, RenderingContent renderingContent = default(RenderingContent), bool enableReRanking = true, ReRankingApplyFilter reRankingApplyFilter = default(ReRankingApplyFilter))
+    public SearchParamsObject()
     {
-      // use default value if no "query" provided
-      this.Query = query ?? @"";
-      // use default value if no "similarQuery" provided
-      this.SimilarQuery = similarQuery ?? @"";
-      // use default value if no "filters" provided
-      this.Filters = filters ?? @"";
-      this.FacetFilters = facetFilters;
-      this.OptionalFilters = optionalFilters;
-      this.NumericFilters = numericFilters;
-      this.TagFilters = tagFilters;
-      this.SumOrFiltersScores = sumOrFiltersScores;
-      this.RestrictSearchableAttributes = restrictSearchableAttributes;
-      this.Facets = facets;
-      this.FacetingAfterDistinct = facetingAfterDistinct;
-      this.Page = page;
-      this.Offset = offset;
-      this.Length = length;
-      // use default value if no "aroundLatLng" provided
-      this.AroundLatLng = aroundLatLng ?? @"";
-      this.AroundLatLngViaIP = aroundLatLngViaIP;
-      this.AroundRadius = aroundRadius;
-      this.AroundPrecision = aroundPrecision;
-      this.MinimumAroundRadius = minimumAroundRadius;
-      this.InsideBoundingBox = insideBoundingBox;
-      this.InsidePolygon = insidePolygon;
-      this.NaturalLanguages = naturalLanguages;
-      this.RuleContexts = ruleContexts;
-      this.PersonalizationImpact = personalizationImpact;
-      this.UserToken = userToken;
-      this.GetRankingInfo = getRankingInfo;
-      this.Explain = explain;
-      this.Synonyms = synonyms;
-      this.ClickAnalytics = clickAnalytics;
-      this.Analytics = analytics;
-      this.AnalyticsTags = analyticsTags;
-      this.PercentileComputation = percentileComputation;
-      this.EnableABTest = enableABTest;
-      this.AttributesForFaceting = attributesForFaceting;
-      this.AttributesToRetrieve = attributesToRetrieve;
-      this.Ranking = ranking;
-      this.CustomRanking = customRanking;
-      this.RelevancyStrictness = relevancyStrictness;
-      this.AttributesToHighlight = attributesToHighlight;
-      this.AttributesToSnippet = attributesToSnippet;
-      // use default value if no "highlightPreTag" provided
-      this.HighlightPreTag = highlightPreTag ?? @"<em>";
-      // use default value if no "highlightPostTag" provided
-      this.HighlightPostTag = highlightPostTag ?? @"</em>";
-      // use default value if no "snippetEllipsisText" provided
-      this.SnippetEllipsisText = snippetEllipsisText ?? @"…";
-      this.RestrictHighlightAndSnippetArrays = restrictHighlightAndSnippetArrays;
-      this.HitsPerPage = hitsPerPage;
-      this.MinWordSizefor1Typo = minWordSizefor1Typo;
-      this.MinWordSizefor2Typos = minWordSizefor2Typos;
-      this.TypoTolerance = typoTolerance;
-      this.AllowTyposOnNumericTokens = allowTyposOnNumericTokens;
-      this.DisableTypoToleranceOnAttributes = disableTypoToleranceOnAttributes;
-      this.IgnorePlurals = ignorePlurals;
-      this.RemoveStopWords = removeStopWords;
-      // use default value if no "keepDiacriticsOnCharacters" provided
-      this.KeepDiacriticsOnCharacters = keepDiacriticsOnCharacters ?? @"";
-      this.QueryLanguages = queryLanguages;
-      this.DecompoundQuery = decompoundQuery;
-      this.EnableRules = enableRules;
-      this.EnablePersonalization = enablePersonalization;
-      this.QueryType = queryType;
-      this.RemoveWordsIfNoResults = removeWordsIfNoResults;
-      this.Mode = mode;
-      this.SemanticSearch = semanticSearch;
-      this.AdvancedSyntax = advancedSyntax;
-      this.OptionalWords = optionalWords;
-      this.DisableExactOnAttributes = disableExactOnAttributes;
-      this.ExactOnSingleWordQuery = exactOnSingleWordQuery;
-      this.AlternativesAsExact = alternativesAsExact;
-      this.AdvancedSyntaxFeatures = advancedSyntaxFeatures;
-      this.Distinct = distinct;
-      this.ReplaceSynonymsInHighlight = replaceSynonymsInHighlight;
-      this.MinProximity = minProximity;
-      this.ResponseFields = responseFields;
-      this.MaxFacetHits = maxFacetHits;
-      this.MaxValuesPerFacet = maxValuesPerFacet;
-      // use default value if no "sortFacetValuesBy" provided
-      this.SortFacetValuesBy = sortFacetValuesBy ?? @"count";
-      this.AttributeCriteriaComputedByMinProximity = attributeCriteriaComputedByMinProximity;
-      this.RenderingContent = renderingContent;
-      this.EnableReRanking = enableReRanking;
-      this.ReRankingApplyFilter = reRankingApplyFilter;
     }
 
     /// <summary>
@@ -270,7 +105,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If &#x60;false&#x60;, maximum score is kept. If &#x60;true&#x60;, score is summed. </value>
     [DataMember(Name = "sumOrFiltersScores", EmitDefaultValue = true)]
-    public bool SumOrFiltersScores { get; set; }
+    public bool? SumOrFiltersScores { get; set; }
 
     /// <summary>
     /// Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
@@ -291,28 +126,28 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the &#x60;afterDistinct&#x60; [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of &#x60;attributesForFaceting&#x60; allows for more granular control. </value>
     [DataMember(Name = "facetingAfterDistinct", EmitDefaultValue = true)]
-    public bool FacetingAfterDistinct { get; set; }
+    public bool? FacetingAfterDistinct { get; set; }
 
     /// <summary>
     /// Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).
     /// </summary>
     /// <value>Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).</value>
     [DataMember(Name = "page", EmitDefaultValue = false)]
-    public int Page { get; set; }
+    public int? Page { get; set; }
 
     /// <summary>
     /// Specifies the offset of the first hit to return. &gt; **Note**: Using &#x60;page&#x60; and &#x60;hitsPerPage&#x60; is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use &#x60;offset&#x60; and &#x60;length&#x60; to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). 
     /// </summary>
     /// <value>Specifies the offset of the first hit to return. &gt; **Note**: Using &#x60;page&#x60; and &#x60;hitsPerPage&#x60; is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use &#x60;offset&#x60; and &#x60;length&#x60; to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). </value>
     [DataMember(Name = "offset", EmitDefaultValue = false)]
-    public int Offset { get; set; }
+    public int? Offset { get; set; }
 
     /// <summary>
     /// Sets the number of hits to retrieve (for use with &#x60;offset&#x60;). &gt; **Note**: Using &#x60;page&#x60; and &#x60;hitsPerPage&#x60; is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use &#x60;offset&#x60; and &#x60;length&#x60; to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). 
     /// </summary>
     /// <value>Sets the number of hits to retrieve (for use with &#x60;offset&#x60;). &gt; **Note**: Using &#x60;page&#x60; and &#x60;hitsPerPage&#x60; is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use &#x60;offset&#x60; and &#x60;length&#x60; to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). </value>
     [DataMember(Name = "length", EmitDefaultValue = false)]
-    public int Length { get; set; }
+    public int? Length { get; set; }
 
     /// <summary>
     /// Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
@@ -326,7 +161,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Search for entries around a location. The location is automatically computed from the requester&#39;s IP address.</value>
     [DataMember(Name = "aroundLatLngViaIP", EmitDefaultValue = true)]
-    public bool AroundLatLngViaIP { get; set; }
+    public bool? AroundLatLngViaIP { get; set; }
 
     /// <summary>
     /// Gets or Sets AroundRadius
@@ -345,7 +180,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Minimum radius (in meters) used for a geographical search when &#x60;aroundRadius&#x60; isn&#39;t set.</value>
     [DataMember(Name = "minimumAroundRadius", EmitDefaultValue = false)]
-    public int MinimumAroundRadius { get; set; }
+    public int? MinimumAroundRadius { get; set; }
 
     /// <summary>
     /// Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
@@ -380,7 +215,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).</value>
     [DataMember(Name = "personalizationImpact", EmitDefaultValue = false)]
-    public int PersonalizationImpact { get; set; }
+    public int? PersonalizationImpact { get; set; }
 
     /// <summary>
     /// Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
@@ -394,7 +229,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).</value>
     [DataMember(Name = "getRankingInfo", EmitDefaultValue = true)]
-    public bool GetRankingInfo { get; set; }
+    public bool? GetRankingInfo { get; set; }
 
     /// <summary>
     /// Enriches the API&#39;s response with information about how the query was processed.
@@ -408,21 +243,21 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Whether to take into account an index&#39;s synonyms for a particular search.</value>
     [DataMember(Name = "synonyms", EmitDefaultValue = true)]
-    public bool Synonyms { get; set; }
+    public bool? Synonyms { get; set; }
 
     /// <summary>
     /// Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).
     /// </summary>
     /// <value>Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).</value>
     [DataMember(Name = "clickAnalytics", EmitDefaultValue = true)]
-    public bool ClickAnalytics { get; set; }
+    public bool? ClickAnalytics { get; set; }
 
     /// <summary>
     /// Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).
     /// </summary>
     /// <value>Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).</value>
     [DataMember(Name = "analytics", EmitDefaultValue = true)]
-    public bool Analytics { get; set; }
+    public bool? Analytics { get; set; }
 
     /// <summary>
     /// Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
@@ -436,14 +271,14 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Whether to include or exclude a query from the processing-time percentile computation.</value>
     [DataMember(Name = "percentileComputation", EmitDefaultValue = true)]
-    public bool PercentileComputation { get; set; }
+    public bool? PercentileComputation { get; set; }
 
     /// <summary>
     /// Incidates whether this search will be considered in A/B testing.
     /// </summary>
     /// <value>Incidates whether this search will be considered in A/B testing.</value>
     [DataMember(Name = "enableABTest", EmitDefaultValue = true)]
-    public bool EnableABTest { get; set; }
+    public bool? EnableABTest { get; set; }
 
     /// <summary>
     /// Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/) and the [modifiers](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) that can be applied: &#x60;filterOnly&#x60;, &#x60;searchable&#x60;, and &#x60;afterDistinct&#x60;. 
@@ -478,7 +313,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Relevancy threshold below which less relevant results aren&#39;t included in the results.</value>
     [DataMember(Name = "relevancyStrictness", EmitDefaultValue = false)]
-    public int RelevancyStrictness { get; set; }
+    public int? RelevancyStrictness { get; set; }
 
     /// <summary>
     /// Attributes to highlight. Strings that match the search query in the attributes are highlighted by surrounding them with HTML tags (&#x60;highlightPreTag&#x60; and &#x60;highlightPostTag&#x60;).
@@ -520,28 +355,28 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Restrict highlighting and snippeting to items that matched the query.</value>
     [DataMember(Name = "restrictHighlightAndSnippetArrays", EmitDefaultValue = true)]
-    public bool RestrictHighlightAndSnippetArrays { get; set; }
+    public bool? RestrictHighlightAndSnippetArrays { get; set; }
 
     /// <summary>
     /// Number of hits per page.
     /// </summary>
     /// <value>Number of hits per page.</value>
     [DataMember(Name = "hitsPerPage", EmitDefaultValue = false)]
-    public int HitsPerPage { get; set; }
+    public int? HitsPerPage { get; set; }
 
     /// <summary>
     /// Minimum number of characters a word in the query string must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
     /// </summary>
     /// <value>Minimum number of characters a word in the query string must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
     [DataMember(Name = "minWordSizefor1Typo", EmitDefaultValue = false)]
-    public int MinWordSizefor1Typo { get; set; }
+    public int? MinWordSizefor1Typo { get; set; }
 
     /// <summary>
     /// Minimum number of characters a word in the query string must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
     /// </summary>
     /// <value>Minimum number of characters a word in the query string must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
     [DataMember(Name = "minWordSizefor2Typos", EmitDefaultValue = false)]
-    public int MinWordSizefor2Typos { get; set; }
+    public int? MinWordSizefor2Typos { get; set; }
 
     /// <summary>
     /// Gets or Sets TypoTolerance
@@ -554,7 +389,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Whether to allow typos on numbers (\&quot;numeric tokens\&quot;) in the query string.</value>
     [DataMember(Name = "allowTyposOnNumericTokens", EmitDefaultValue = true)]
-    public bool AllowTyposOnNumericTokens { get; set; }
+    public bool? AllowTyposOnNumericTokens { get; set; }
 
     /// <summary>
     /// Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
@@ -594,21 +429,21 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>[Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query. </value>
     [DataMember(Name = "decompoundQuery", EmitDefaultValue = true)]
-    public bool DecompoundQuery { get; set; }
+    public bool? DecompoundQuery { get; set; }
 
     /// <summary>
     /// Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.
     /// </summary>
     /// <value>Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.</value>
     [DataMember(Name = "enableRules", EmitDefaultValue = true)]
-    public bool EnableRules { get; set; }
+    public bool? EnableRules { get; set; }
 
     /// <summary>
     /// Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.
     /// </summary>
     /// <value>Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.</value>
     [DataMember(Name = "enablePersonalization", EmitDefaultValue = true)]
-    public bool EnablePersonalization { get; set; }
+    public bool? EnablePersonalization { get; set; }
 
     /// <summary>
     /// Gets or Sets SemanticSearch
@@ -621,7 +456,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).</value>
     [DataMember(Name = "advancedSyntax", EmitDefaultValue = true)]
-    public bool AdvancedSyntax { get; set; }
+    public bool? AdvancedSyntax { get; set; }
 
     /// <summary>
     /// Words which should be considered [optional](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words) when found in a query.
@@ -662,14 +497,14 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Whether to highlight and snippet the original word that matches the synonym or the synonym itself.</value>
     [DataMember(Name = "replaceSynonymsInHighlight", EmitDefaultValue = true)]
-    public bool ReplaceSynonymsInHighlight { get; set; }
+    public bool? ReplaceSynonymsInHighlight { get; set; }
 
     /// <summary>
     /// Precision of the [proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity).
     /// </summary>
     /// <value>Precision of the [proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity).</value>
     [DataMember(Name = "minProximity", EmitDefaultValue = false)]
-    public int MinProximity { get; set; }
+    public int? MinProximity { get; set; }
 
     /// <summary>
     /// Attributes to include in the API response for search and browse queries.
@@ -683,14 +518,14 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
     [DataMember(Name = "maxFacetHits", EmitDefaultValue = false)]
-    public int MaxFacetHits { get; set; }
+    public int? MaxFacetHits { get; set; }
 
     /// <summary>
     /// Maximum number of facet values to return for each facet.
     /// </summary>
     /// <value>Maximum number of facet values to return for each facet.</value>
     [DataMember(Name = "maxValuesPerFacet", EmitDefaultValue = false)]
-    public int MaxValuesPerFacet { get; set; }
+    public int? MaxValuesPerFacet { get; set; }
 
     /// <summary>
     /// Controls how facet values are fetched.
@@ -704,7 +539,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.</value>
     [DataMember(Name = "attributeCriteriaComputedByMinProximity", EmitDefaultValue = true)]
-    public bool AttributeCriteriaComputedByMinProximity { get; set; }
+    public bool? AttributeCriteriaComputedByMinProximity { get; set; }
 
     /// <summary>
     /// Gets or Sets RenderingContent
@@ -717,7 +552,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).</value>
     [DataMember(Name = "enableReRanking", EmitDefaultValue = true)]
-    public bool EnableReRanking { get; set; }
+    public bool? EnableReRanking { get; set; }
 
     /// <summary>
     /// Gets or Sets ReRankingApplyFilter

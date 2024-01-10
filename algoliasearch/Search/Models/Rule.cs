@@ -16,7 +16,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Algolia.Search.Models;
 
-namespace Algolia.Search.Search.Models
+namespace Algolia.Search.Models.Search
 {
   /// <summary>
   /// Rule object.
@@ -28,29 +28,14 @@ namespace Algolia.Search.Search.Models
     /// Initializes a new instance of the <see cref="Rule" /> class.
     /// </summary>
     [JsonConstructorAttribute]
-    protected Rule() { }
+    public Rule() { }
     /// <summary>
     /// Initializes a new instance of the <see cref="Rule" /> class.
     /// </summary>
     /// <param name="objectID">Unique identifier for a rule object. (required).</param>
-    /// <param name="conditions">[Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. .</param>
-    /// <param name="consequence">consequence.</param>
-    /// <param name="description">Description of the rule&#39;s purpose. This can be helpful for display in the Algolia dashboard..</param>
-    /// <param name="enabled">Indicates whether to enable the rule. If it isn&#39;t enabled, it isn&#39;t applied at query time. (default to true).</param>
-    /// <param name="validity">If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty..</param>
-    public Rule(string objectID = default(string), List<Condition> conditions = default(List<Condition>), Consequence consequence = default(Consequence), string description = default(string), bool enabled = true, List<TimeRange> validity = default(List<TimeRange>))
+    public Rule(string objectID)
     {
-      // to ensure "objectID" is required (not null)
-      if (objectID == null)
-      {
-        throw new ArgumentNullException("objectID is a required property for Rule and cannot be null");
-      }
-      this.ObjectID = objectID;
-      this.Conditions = conditions;
-      this.Consequence = consequence;
-      this.Description = description;
-      this.Enabled = enabled;
-      this.Validity = validity;
+      this.ObjectID = objectID ?? throw new ArgumentNullException("objectID is a required property for Rule and cannot be null");
     }
 
     /// <summary>
@@ -85,7 +70,7 @@ namespace Algolia.Search.Search.Models
     /// </summary>
     /// <value>Indicates whether to enable the rule. If it isn&#39;t enabled, it isn&#39;t applied at query time.</value>
     [DataMember(Name = "enabled", EmitDefaultValue = true)]
-    public bool Enabled { get; set; }
+    public bool? Enabled { get; set; }
 
     /// <summary>
     /// If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
