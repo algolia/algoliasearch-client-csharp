@@ -1,5 +1,6 @@
 ../.gitignore
 ../Algolia.Search.sln
+../global.json
 Algolia.Search.csproj
 Models/AbstractSchema.cs
 Search/Api/SearchClient.cs
