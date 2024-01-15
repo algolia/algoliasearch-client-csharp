@@ -44,12 +44,12 @@ namespace Algolia.Search.Models.Insights
     /// <summary>
     /// Initializes a new instance of the <see cref="AddedToCartObjectIDs" /> class.
     /// </summary>
-    /// <param name="eventName">Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
+    /// <param name="eventName">The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
     /// <param name="eventType">eventType (required).</param>
     /// <param name="eventSubtype">eventSubtype (required).</param>
-    /// <param name="index">Name of the Algolia index. (required).</param>
-    /// <param name="objectIDs">List of object identifiers for items of an Algolia index. (required).</param>
-    /// <param name="userToken">Anonymous or pseudonymous user identifier.   &gt; **Note**: Never include personally identifiable information in user tokens.  (required).</param>
+    /// <param name="index">The name of an Algolia index. (required).</param>
+    /// <param name="objectIDs">The object IDs of the records that are part of the event. (required).</param>
+    /// <param name="userToken">An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens.  (required).</param>
     public AddedToCartObjectIDs(string eventName, ConversionEvent eventType, AddToCartEvent eventSubtype, string index, List<string> objectIDs, string userToken)
     {
       this.EventName = eventName ?? throw new ArgumentNullException("eventName is a required property for AddedToCartObjectIDs and cannot be null");
@@ -61,60 +61,66 @@ namespace Algolia.Search.Models.Insights
     }
 
     /// <summary>
-    /// Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
+    /// The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
     /// </summary>
-    /// <value>Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
+    /// <value>The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
     [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = true)]
     public string EventName { get; set; }
 
     /// <summary>
-    /// Name of the Algolia index.
+    /// The name of an Algolia index.
     /// </summary>
-    /// <value>Name of the Algolia index.</value>
+    /// <value>The name of an Algolia index.</value>
     [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = true)]
     public string Index { get; set; }
 
     /// <summary>
-    /// List of object identifiers for items of an Algolia index.
+    /// The object IDs of the records that are part of the event.
     /// </summary>
-    /// <value>List of object identifiers for items of an Algolia index.</value>
+    /// <value>The object IDs of the records that are part of the event.</value>
     [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = true)]
     public List<string> ObjectIDs { get; set; }
 
     /// <summary>
-    /// Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as &#x60;objectIDs&#x60;. 
+    /// An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. 
     /// </summary>
-    /// <value>Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as &#x60;objectIDs&#x60;. </value>
-    [DataMember(Name = "objectData", EmitDefaultValue = false)]
-    public List<ObjectData> ObjectData { get; set; }
-
-    /// <summary>
-    /// If you include pricing information in the &#x60;objectData&#x60; parameter, you must also specify the currency as ISO-4217 currency code, such as USD or EUR.
-    /// </summary>
-    /// <value>If you include pricing information in the &#x60;objectData&#x60; parameter, you must also specify the currency as ISO-4217 currency code, such as USD or EUR.</value>
-    [DataMember(Name = "currency", EmitDefaultValue = false)]
-    public string Currency { get; set; }
-
-    /// <summary>
-    /// Anonymous or pseudonymous user identifier.   &gt; **Note**: Never include personally identifiable information in user tokens. 
-    /// </summary>
-    /// <value>Anonymous or pseudonymous user identifier.   &gt; **Note**: Never include personally identifiable information in user tokens. </value>
+    /// <value>An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. </value>
     [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = true)]
     public string UserToken { get; set; }
 
     /// <summary>
-    /// Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
+    /// An identifier for authenticated users.  &gt; **Note**: Never include personally identifiable information in user tokens. 
     /// </summary>
-    /// <value>Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
+    /// <value>An identifier for authenticated users.  &gt; **Note**: Never include personally identifiable information in user tokens. </value>
+    [DataMember(Name = "authenticatedUserToken", EmitDefaultValue = false)]
+    public string AuthenticatedUserToken { get; set; }
+
+    /// <summary>
+    /// Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).
+    /// </summary>
+    /// <value>Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).</value>
+    [DataMember(Name = "currency", EmitDefaultValue = false)]
+    public string Currency { get; set; }
+
+    /// <summary>
+    /// Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as &#x60;objectIDs&#x60;. 
+    /// </summary>
+    /// <value>Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as &#x60;objectIDs&#x60;. </value>
+    [DataMember(Name = "objectData", EmitDefaultValue = false)]
+    public List<ObjectData> ObjectData { get; set; }
+
+    /// <summary>
+    /// The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
+    /// </summary>
+    /// <value>The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
     [DataMember(Name = "timestamp", EmitDefaultValue = false)]
     public long Timestamp { get; set; }
 
     /// <summary>
-    /// User token for authenticated users.
+    /// Gets or Sets Value
     /// </summary>
-    /// <value>User token for authenticated users.</value>
-    [DataMember(Name = "authenticatedUserToken", EmitDefaultValue = false)]
-    public string AuthenticatedUserToken { get; set; }
+    [DataMember(Name = "value", EmitDefaultValue = false)]
+    public Value Value { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object
@@ -129,11 +135,12 @@ namespace Algolia.Search.Models.Insights
       sb.Append("  EventSubtype: ").Append(EventSubtype).Append("\n");
       sb.Append("  Index: ").Append(Index).Append("\n");
       sb.Append("  ObjectIDs: ").Append(ObjectIDs).Append("\n");
-      sb.Append("  ObjectData: ").Append(ObjectData).Append("\n");
-      sb.Append("  Currency: ").Append(Currency).Append("\n");
       sb.Append("  UserToken: ").Append(UserToken).Append("\n");
-      sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
       sb.Append("  AuthenticatedUserToken: ").Append(AuthenticatedUserToken).Append("\n");
+      sb.Append("  Currency: ").Append(Currency).Append("\n");
+      sb.Append("  ObjectData: ").Append(ObjectData).Append("\n");
+      sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+      sb.Append("  Value: ").Append(Value).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }

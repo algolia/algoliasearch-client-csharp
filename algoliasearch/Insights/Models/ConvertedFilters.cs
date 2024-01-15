@@ -38,11 +38,11 @@ namespace Algolia.Search.Models.Insights
     /// <summary>
     /// Initializes a new instance of the <see cref="ConvertedFilters" /> class.
     /// </summary>
-    /// <param name="eventName">Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
+    /// <param name="eventName">The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
     /// <param name="eventType">eventType (required).</param>
-    /// <param name="index">Name of the Algolia index. (required).</param>
+    /// <param name="index">The name of an Algolia index. (required).</param>
     /// <param name="filters">Facet filters.  Each facet filter string must be URL-encoded, such as, &#x60;discount:10%25&#x60;.  (required).</param>
-    /// <param name="userToken">Anonymous or pseudonymous user identifier.   &gt; **Note**: Never include personally identifiable information in user tokens.  (required).</param>
+    /// <param name="userToken">An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens.  (required).</param>
     public ConvertedFilters(string eventName, ConversionEvent eventType, string index, List<string> filters, string userToken)
     {
       this.EventName = eventName ?? throw new ArgumentNullException("eventName is a required property for ConvertedFilters and cannot be null");
@@ -53,16 +53,16 @@ namespace Algolia.Search.Models.Insights
     }
 
     /// <summary>
-    /// Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
+    /// The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
     /// </summary>
-    /// <value>Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
+    /// <value>The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
     [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = true)]
     public string EventName { get; set; }
 
     /// <summary>
-    /// Name of the Algolia index.
+    /// The name of an Algolia index.
     /// </summary>
-    /// <value>Name of the Algolia index.</value>
+    /// <value>The name of an Algolia index.</value>
     [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = true)]
     public string Index { get; set; }
 
@@ -74,25 +74,25 @@ namespace Algolia.Search.Models.Insights
     public List<string> Filters { get; set; }
 
     /// <summary>
-    /// Anonymous or pseudonymous user identifier.   &gt; **Note**: Never include personally identifiable information in user tokens. 
+    /// An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. 
     /// </summary>
-    /// <value>Anonymous or pseudonymous user identifier.   &gt; **Note**: Never include personally identifiable information in user tokens. </value>
+    /// <value>An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. </value>
     [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = true)]
     public string UserToken { get; set; }
 
     /// <summary>
-    /// Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
+    /// An identifier for authenticated users.  &gt; **Note**: Never include personally identifiable information in user tokens. 
     /// </summary>
-    /// <value>Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
-    [DataMember(Name = "timestamp", EmitDefaultValue = false)]
-    public long Timestamp { get; set; }
-
-    /// <summary>
-    /// User token for authenticated users.
-    /// </summary>
-    /// <value>User token for authenticated users.</value>
+    /// <value>An identifier for authenticated users.  &gt; **Note**: Never include personally identifiable information in user tokens. </value>
     [DataMember(Name = "authenticatedUserToken", EmitDefaultValue = false)]
     public string AuthenticatedUserToken { get; set; }
+
+    /// <summary>
+    /// The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
+    /// </summary>
+    /// <value>The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
+    [DataMember(Name = "timestamp", EmitDefaultValue = false)]
+    public long Timestamp { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object
@@ -107,8 +107,8 @@ namespace Algolia.Search.Models.Insights
       sb.Append("  Index: ").Append(Index).Append("\n");
       sb.Append("  Filters: ").Append(Filters).Append("\n");
       sb.Append("  UserToken: ").Append(UserToken).Append("\n");
-      sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
       sb.Append("  AuthenticatedUserToken: ").Append(AuthenticatedUserToken).Append("\n");
+      sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }

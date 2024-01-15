@@ -32,9 +32,9 @@ namespace Algolia.Search.Models.Insights
     }
 
     /// <summary>
-    /// ID of the query that this specific record is attributable to. Used to track purchase events with multiple items originating from different searches.
+    /// Unique identifier for a search query, used to track purchase events with multiple records that originate from different searches.
     /// </summary>
-    /// <value>ID of the query that this specific record is attributable to. Used to track purchase events with multiple items originating from different searches.</value>
+    /// <value>Unique identifier for a search query, used to track purchase events with multiple records that originate from different searches.</value>
     [DataMember(Name = "queryID", EmitDefaultValue = false)]
     public string QueryID { get; set; }
 
@@ -45,9 +45,9 @@ namespace Algolia.Search.Models.Insights
     public Price Price { get; set; }
 
     /// <summary>
-    /// The quantity of the purchased or added-to-cart item. The total value of a purchase is the sum of &#x60;quantity&#x60; multiplied with the &#x60;price&#x60; for each purchased item.
+    /// The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of &#x60;quantity&#x60; multiplied with the &#x60;price&#x60; for each purchased item. 
     /// </summary>
-    /// <value>The quantity of the purchased or added-to-cart item. The total value of a purchase is the sum of &#x60;quantity&#x60; multiplied with the &#x60;price&#x60; for each purchased item.</value>
+    /// <value>The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of &#x60;quantity&#x60; multiplied with the &#x60;price&#x60; for each purchased item. </value>
     [DataMember(Name = "quantity", EmitDefaultValue = false)]
     public int? Quantity { get; set; }
 

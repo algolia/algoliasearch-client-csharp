@@ -75,6 +75,18 @@ namespace Algolia.Search.Clients
     /// <returns>Task of Object</returns>
     Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
+    /// Delete user token.
+    /// </summary>
+    /// <remarks>
+    /// Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile). 
+    /// </remarks>
+    /// <exception cref="Algolia.Search.Insights.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="userToken">The user token for which to delete all associated events.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of  </returns>
+    Task DeleteUserTokenAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
+    /// <summary>
     /// Send events.
     /// </summary>
     /// <remarks>
@@ -230,6 +242,26 @@ namespace Algolia.Search.Clients
       requestOptions.AddCustomQueryParameters(parameters);
       requestOptions.Data = body;
       return await _transport.ExecuteRequestAsync<Object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Delete user token. Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile). 
+    /// </summary>
+    /// <exception cref="Algolia.Search.Insights.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="userToken">The user token for which to delete all associated events.</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of  </returns>
+    public async Task DeleteUserTokenAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default)
+    {
+      if (userToken == null)
+        throw new ApiException(400, "Missing required parameter 'userToken' when calling InsightsClient->DeleteUserToken");
+
+      var requestOptions = new InternalRequestOptions(options);
+
+      requestOptions.PathParameters.Add("userToken", ClientUtils.ParameterToString(userToken));
+
+      await _transport.ExecuteRequestAsync(new HttpMethod("DELETE"), "/1/usertokens/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>

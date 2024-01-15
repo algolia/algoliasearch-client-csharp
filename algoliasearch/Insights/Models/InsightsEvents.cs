@@ -32,16 +32,16 @@ namespace Algolia.Search.Models.Insights
     /// <summary>
     /// Initializes a new instance of the <see cref="InsightsEvents" /> class.
     /// </summary>
-    /// <param name="events">List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token. Some attributes require other attributes to be declared, and some attributes can&#39;t be declared at the same time.  **All** events must be valid, otherwise the API returns an error.  (required).</param>
+    /// <param name="events">List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error.  (required).</param>
     public InsightsEvents(List<EventsItems> events)
     {
       this.Events = events ?? throw new ArgumentNullException("events is a required property for InsightsEvents and cannot be null");
     }
 
     /// <summary>
-    /// List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token. Some attributes require other attributes to be declared, and some attributes can&#39;t be declared at the same time.  **All** events must be valid, otherwise the API returns an error. 
+    /// List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. 
     /// </summary>
-    /// <value>List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token. Some attributes require other attributes to be declared, and some attributes can&#39;t be declared at the same time.  **All** events must be valid, otherwise the API returns an error. </value>
+    /// <value>List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. </value>
     [DataMember(Name = "events", IsRequired = true, EmitDefaultValue = true)]
     public List<EventsItems> Events { get; set; }
 

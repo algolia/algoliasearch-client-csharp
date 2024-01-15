@@ -20,18 +20,18 @@ using Algolia.Search.Models;
 namespace Algolia.Search.Models.Insights
 {
   /// <summary>
-  /// The total price of a product, including any discounts, in units of &#x60;currency&#x60;. 
+  /// Total monetary value of this event in units of &#x60;currency&#x60;.
   /// </summary>
-  [JsonConverter(typeof(PriceJsonConverter))]
-  [DataContract(Name = "price")]
-  public partial class Price : AbstractSchema
+  [JsonConverter(typeof(ValueJsonConverter))]
+  [DataContract(Name = "value")]
+  public partial class Value : AbstractSchema
   {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Price" /> class
+    /// Initializes a new instance of the <see cref="Value" /> class
     /// with the <see cref="double" /> class
     /// </summary>
     /// <param name="actualInstance">An instance of double.</param>
-    public Price(double actualInstance)
+    public Value(double actualInstance)
     {
       IsNullable = false;
       SchemaType = "oneOf";
@@ -39,11 +39,11 @@ namespace Algolia.Search.Models.Insights
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Price" /> class
+    /// Initializes a new instance of the <see cref="Value" /> class
     /// with the <see cref="string" /> class
     /// </summary>
     /// <param name="actualInstance">An instance of string.</param>
-    public Price(string actualInstance)
+    public Value(string actualInstance)
     {
       IsNullable = false;
       SchemaType = "oneOf";
@@ -114,7 +114,7 @@ namespace Algolia.Search.Models.Insights
     public override string ToString()
     {
       var sb = new StringBuilder();
-      sb.Append("class Price {\n");
+      sb.Append("class Value {\n");
       sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
@@ -130,21 +130,21 @@ namespace Algolia.Search.Models.Insights
     }
 
     /// <summary>
-    /// Converts the JSON string into an instance of Price
+    /// Converts the JSON string into an instance of Value
     /// </summary>
     /// <param name="jsonString">JSON string</param>
-    /// <returns>An instance of Price</returns>
-    public static Price FromJson(string jsonString)
+    /// <returns>An instance of Value</returns>
+    public static Value FromJson(string jsonString)
     {
-      Price newPrice = null;
+      Value newValue = null;
 
       if (string.IsNullOrEmpty(jsonString))
       {
-        return newPrice;
+        return newValue;
       }
       try
       {
-        return new Price(JsonConvert.DeserializeObject<double>(jsonString, AdditionalPropertiesSerializerSettings));
+        return new Value(JsonConvert.DeserializeObject<double>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -153,7 +153,7 @@ namespace Algolia.Search.Models.Insights
       }
       try
       {
-        return new Price(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
+        return new Value(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
       {
@@ -167,9 +167,9 @@ namespace Algolia.Search.Models.Insights
   }
 
   /// <summary>
-  /// Custom JSON converter for Price
+  /// Custom JSON converter for Value
   /// </summary>
-  public class PriceJsonConverter : JsonConverter
+  public class ValueJsonConverter : JsonConverter
   {
     /// <summary>
     /// To write the JSON string
@@ -179,7 +179,7 @@ namespace Algolia.Search.Models.Insights
     /// <param name="serializer">JSON Serializer</param>
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-      writer.WriteRawValue((string)(typeof(Price).GetMethod("ToJson").Invoke(value, null)));
+      writer.WriteRawValue((string)(typeof(Value).GetMethod("ToJson").Invoke(value, null)));
     }
 
     /// <summary>

@@ -40,6 +40,30 @@ namespace Algolia.Search.Models.Insights
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EventsItems" /> class
+    /// with the <see cref="AddedToCartObjectIDsAfterSearch" /> class
+    /// </summary>
+    /// <param name="actualInstance">An instance of AddedToCartObjectIDsAfterSearch.</param>
+    public EventsItems(AddedToCartObjectIDsAfterSearch actualInstance)
+    {
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EventsItems" /> class
+    /// with the <see cref="PurchasedObjectIDsAfterSearch" /> class
+    /// </summary>
+    /// <param name="actualInstance">An instance of PurchasedObjectIDsAfterSearch.</param>
+    public EventsItems(PurchasedObjectIDsAfterSearch actualInstance)
+    {
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EventsItems" /> class
     /// with the <see cref="ConvertedObjectIDsAfterSearch" /> class
     /// </summary>
     /// <param name="actualInstance">An instance of ConvertedObjectIDsAfterSearch.</param>
@@ -56,6 +80,30 @@ namespace Algolia.Search.Models.Insights
     /// </summary>
     /// <param name="actualInstance">An instance of ClickedObjectIDs.</param>
     public EventsItems(ClickedObjectIDs actualInstance)
+    {
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EventsItems" /> class
+    /// with the <see cref="PurchasedObjectIDs" /> class
+    /// </summary>
+    /// <param name="actualInstance">An instance of PurchasedObjectIDs.</param>
+    public EventsItems(PurchasedObjectIDs actualInstance)
+    {
+      IsNullable = false;
+      SchemaType = "oneOf";
+      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EventsItems" /> class
+    /// with the <see cref="AddedToCartObjectIDs" /> class
+    /// </summary>
+    /// <param name="actualInstance">An instance of AddedToCartObjectIDs.</param>
+    public EventsItems(AddedToCartObjectIDs actualInstance)
     {
       IsNullable = false;
       SchemaType = "oneOf";
@@ -122,54 +170,6 @@ namespace Algolia.Search.Models.Insights
       ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EventsItems" /> class
-    /// with the <see cref="AddedToCartObjectIDsAfterSearch" /> class
-    /// </summary>
-    /// <param name="actualInstance">An instance of AddedToCartObjectIDsAfterSearch.</param>
-    public EventsItems(AddedToCartObjectIDsAfterSearch actualInstance)
-    {
-      IsNullable = false;
-      SchemaType = "oneOf";
-      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EventsItems" /> class
-    /// with the <see cref="AddedToCartObjectIDs" /> class
-    /// </summary>
-    /// <param name="actualInstance">An instance of AddedToCartObjectIDs.</param>
-    public EventsItems(AddedToCartObjectIDs actualInstance)
-    {
-      IsNullable = false;
-      SchemaType = "oneOf";
-      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EventsItems" /> class
-    /// with the <see cref="PurchasedObjectIDs" /> class
-    /// </summary>
-    /// <param name="actualInstance">An instance of PurchasedObjectIDs.</param>
-    public EventsItems(PurchasedObjectIDs actualInstance)
-    {
-      IsNullable = false;
-      SchemaType = "oneOf";
-      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EventsItems" /> class
-    /// with the <see cref="PurchasedObjectIDsAfterSearch" /> class
-    /// </summary>
-    /// <param name="actualInstance">An instance of PurchasedObjectIDsAfterSearch.</param>
-    public EventsItems(PurchasedObjectIDsAfterSearch actualInstance)
-    {
-      IsNullable = false;
-      SchemaType = "oneOf";
-      ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-    }
-
 
     private Object _actualInstance;
 
@@ -199,6 +199,26 @@ namespace Algolia.Search.Models.Insights
     }
 
     /// <summary>
+    /// Get the actual instance of `AddedToCartObjectIDsAfterSearch`. If the actual instance is not `AddedToCartObjectIDsAfterSearch`,
+    /// the InvalidClassException will be thrown
+    /// </summary>
+    /// <returns>An instance of AddedToCartObjectIDsAfterSearch</returns>
+    public AddedToCartObjectIDsAfterSearch AsAddedToCartObjectIDsAfterSearch()
+    {
+      return (AddedToCartObjectIDsAfterSearch)ActualInstance;
+    }
+
+    /// <summary>
+    /// Get the actual instance of `PurchasedObjectIDsAfterSearch`. If the actual instance is not `PurchasedObjectIDsAfterSearch`,
+    /// the InvalidClassException will be thrown
+    /// </summary>
+    /// <returns>An instance of PurchasedObjectIDsAfterSearch</returns>
+    public PurchasedObjectIDsAfterSearch AsPurchasedObjectIDsAfterSearch()
+    {
+      return (PurchasedObjectIDsAfterSearch)ActualInstance;
+    }
+
+    /// <summary>
     /// Get the actual instance of `ConvertedObjectIDsAfterSearch`. If the actual instance is not `ConvertedObjectIDsAfterSearch`,
     /// the InvalidClassException will be thrown
     /// </summary>
@@ -216,6 +236,26 @@ namespace Algolia.Search.Models.Insights
     public ClickedObjectIDs AsClickedObjectIDs()
     {
       return (ClickedObjectIDs)ActualInstance;
+    }
+
+    /// <summary>
+    /// Get the actual instance of `PurchasedObjectIDs`. If the actual instance is not `PurchasedObjectIDs`,
+    /// the InvalidClassException will be thrown
+    /// </summary>
+    /// <returns>An instance of PurchasedObjectIDs</returns>
+    public PurchasedObjectIDs AsPurchasedObjectIDs()
+    {
+      return (PurchasedObjectIDs)ActualInstance;
+    }
+
+    /// <summary>
+    /// Get the actual instance of `AddedToCartObjectIDs`. If the actual instance is not `AddedToCartObjectIDs`,
+    /// the InvalidClassException will be thrown
+    /// </summary>
+    /// <returns>An instance of AddedToCartObjectIDs</returns>
+    public AddedToCartObjectIDs AsAddedToCartObjectIDs()
+    {
+      return (AddedToCartObjectIDs)ActualInstance;
     }
 
     /// <summary>
@@ -268,46 +308,6 @@ namespace Algolia.Search.Models.Insights
       return (ViewedFilters)ActualInstance;
     }
 
-    /// <summary>
-    /// Get the actual instance of `AddedToCartObjectIDsAfterSearch`. If the actual instance is not `AddedToCartObjectIDsAfterSearch`,
-    /// the InvalidClassException will be thrown
-    /// </summary>
-    /// <returns>An instance of AddedToCartObjectIDsAfterSearch</returns>
-    public AddedToCartObjectIDsAfterSearch AsAddedToCartObjectIDsAfterSearch()
-    {
-      return (AddedToCartObjectIDsAfterSearch)ActualInstance;
-    }
-
-    /// <summary>
-    /// Get the actual instance of `AddedToCartObjectIDs`. If the actual instance is not `AddedToCartObjectIDs`,
-    /// the InvalidClassException will be thrown
-    /// </summary>
-    /// <returns>An instance of AddedToCartObjectIDs</returns>
-    public AddedToCartObjectIDs AsAddedToCartObjectIDs()
-    {
-      return (AddedToCartObjectIDs)ActualInstance;
-    }
-
-    /// <summary>
-    /// Get the actual instance of `PurchasedObjectIDs`. If the actual instance is not `PurchasedObjectIDs`,
-    /// the InvalidClassException will be thrown
-    /// </summary>
-    /// <returns>An instance of PurchasedObjectIDs</returns>
-    public PurchasedObjectIDs AsPurchasedObjectIDs()
-    {
-      return (PurchasedObjectIDs)ActualInstance;
-    }
-
-    /// <summary>
-    /// Get the actual instance of `PurchasedObjectIDsAfterSearch`. If the actual instance is not `PurchasedObjectIDsAfterSearch`,
-    /// the InvalidClassException will be thrown
-    /// </summary>
-    /// <returns>An instance of PurchasedObjectIDsAfterSearch</returns>
-    public PurchasedObjectIDsAfterSearch AsPurchasedObjectIDsAfterSearch()
-    {
-      return (PurchasedObjectIDsAfterSearch)ActualInstance;
-    }
-
 
     /// <summary>
     /// Check if the actual instance is of `ClickedObjectIDsAfterSearch` type.
@@ -316,6 +316,24 @@ namespace Algolia.Search.Models.Insights
     public bool IsClickedObjectIDsAfterSearch()
     {
       return ActualInstance.GetType() == typeof(ClickedObjectIDsAfterSearch);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AddedToCartObjectIDsAfterSearch` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAddedToCartObjectIDsAfterSearch()
+    {
+      return ActualInstance.GetType() == typeof(AddedToCartObjectIDsAfterSearch);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `PurchasedObjectIDsAfterSearch` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsPurchasedObjectIDsAfterSearch()
+    {
+      return ActualInstance.GetType() == typeof(PurchasedObjectIDsAfterSearch);
     }
 
     /// <summary>
@@ -334,6 +352,24 @@ namespace Algolia.Search.Models.Insights
     public bool IsClickedObjectIDs()
     {
       return ActualInstance.GetType() == typeof(ClickedObjectIDs);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `PurchasedObjectIDs` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsPurchasedObjectIDs()
+    {
+      return ActualInstance.GetType() == typeof(PurchasedObjectIDs);
+    }
+
+    /// <summary>
+    /// Check if the actual instance is of `AddedToCartObjectIDs` type.
+    /// </summary>
+    /// <returns>Whether or not the instance is the type</returns>
+    public bool IsAddedToCartObjectIDs()
+    {
+      return ActualInstance.GetType() == typeof(AddedToCartObjectIDs);
     }
 
     /// <summary>
@@ -382,42 +418,6 @@ namespace Algolia.Search.Models.Insights
     }
 
     /// <summary>
-    /// Check if the actual instance is of `AddedToCartObjectIDsAfterSearch` type.
-    /// </summary>
-    /// <returns>Whether or not the instance is the type</returns>
-    public bool IsAddedToCartObjectIDsAfterSearch()
-    {
-      return ActualInstance.GetType() == typeof(AddedToCartObjectIDsAfterSearch);
-    }
-
-    /// <summary>
-    /// Check if the actual instance is of `AddedToCartObjectIDs` type.
-    /// </summary>
-    /// <returns>Whether or not the instance is the type</returns>
-    public bool IsAddedToCartObjectIDs()
-    {
-      return ActualInstance.GetType() == typeof(AddedToCartObjectIDs);
-    }
-
-    /// <summary>
-    /// Check if the actual instance is of `PurchasedObjectIDs` type.
-    /// </summary>
-    /// <returns>Whether or not the instance is the type</returns>
-    public bool IsPurchasedObjectIDs()
-    {
-      return ActualInstance.GetType() == typeof(PurchasedObjectIDs);
-    }
-
-    /// <summary>
-    /// Check if the actual instance is of `PurchasedObjectIDsAfterSearch` type.
-    /// </summary>
-    /// <returns>Whether or not the instance is the type</returns>
-    public bool IsPurchasedObjectIDsAfterSearch()
-    {
-      return ActualInstance.GetType() == typeof(PurchasedObjectIDsAfterSearch);
-    }
-
-    /// <summary>
     /// Returns the string presentation of the object
     /// </summary>
     /// <returns>String presentation of the object</returns>
@@ -463,6 +463,24 @@ namespace Algolia.Search.Models.Insights
       }
       try
       {
+        return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AddedToCartObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into PurchasedObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
         return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
       }
       catch (Exception exception)
@@ -478,6 +496,24 @@ namespace Algolia.Search.Models.Insights
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ClickedObjectIDs: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into PurchasedObjectIDs: {1}", jsonString, exception.ToString()));
+      }
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AddedToCartObjectIDs: {1}", jsonString, exception.ToString()));
       }
       try
       {
@@ -523,42 +559,6 @@ namespace Algolia.Search.Models.Insights
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into ViewedFilters: {1}", jsonString, exception.ToString()));
-      }
-      try
-      {
-        return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AddedToCartObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
-      }
-      try
-      {
-        return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AddedToCartObjectIDs: {1}", jsonString, exception.ToString()));
-      }
-      try
-      {
-        return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into PurchasedObjectIDs: {1}", jsonString, exception.ToString()));
-      }
-      try
-      {
-        return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into PurchasedObjectIDsAfterSearch: {1}", jsonString, exception.ToString()));
       }
 
       throw new InvalidDataException("The JSON string `" + jsonString + "` cannot be deserialized into any schema defined.");

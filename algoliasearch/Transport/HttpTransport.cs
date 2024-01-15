@@ -24,6 +24,10 @@ namespace Algolia.Search.Transport
     private readonly AlgoliaConfig _algoliaConfig;
     private string _errorMessage;
 
+    private class VoidResult
+    {
+    }
+
     /// <summary>
     /// Instantiate the transport class with the given configuration and requester
     /// </summary>
@@ -50,6 +54,19 @@ namespace Algolia.Search.Transport
       CancellationToken ct = default)
       where TResult : class =>
       await ExecuteRequestAsync<TResult, object>(method, uri, requestOptions, ct)
+        .ConfigureAwait(false);
+
+    /// <summary>
+    /// Execute the request, without response
+    /// </summary>
+    /// <param name="method">The HttpMethod <see cref="HttpMethod"/></param>
+    /// <param name="uri">The endpoint URI</param>
+    /// <param name="requestOptions">Add extra http header or query parameters to Algolia</param>
+    /// <param name="ct">Optional cancellation token</param>
+    public async Task ExecuteRequestAsync(HttpMethod method, string uri,
+      InternalRequestOptions requestOptions = null,
+      CancellationToken ct = default) =>
+      await ExecuteRequestAsync<VoidResult>(method, uri, requestOptions, ct)
         .ConfigureAwait(false);
 
     /// <summary>
@@ -93,7 +110,8 @@ namespace Algolia.Search.Transport
       foreach (var host in _retryStrategy.GetTryableHost(callType))
       {
         request.Body = CreateRequestContent(requestOptions?.Data, request.CanCompress);
-        request.Uri = BuildUri(host.Url, uri, requestOptions?.CustomPathParameters, requestOptions?.PathParameters, requestOptions?.QueryParameters);
+        request.Uri = BuildUri(host.Url, uri, requestOptions?.CustomPathParameters, requestOptions?.PathParameters,
+          requestOptions?.QueryParameters);
         var requestTimeout =
           TimeSpan.FromTicks((requestOptions?.Timeout ?? GetTimeOut(callType)).Ticks * (host.RetryCount + 1));
 
@@ -111,6 +129,11 @@ namespace Algolia.Search.Transport
         switch (_retryStrategy.Decide(host, response))
         {
           case RetryOutcomeType.Success:
+            if (typeof(TResult) == typeof(VoidResult))
+            {
+              return new VoidResult() as TResult;
+            }
+
             return await _serializer.Deserialize<TResult>(response.Body);
           case RetryOutcomeType.Retry:
             continue;
@@ -158,7 +181,8 @@ namespace Algolia.Search.Transport
     /// <param name="pathParameters"></param>
     /// <param name="optionalQueryParameters"></param>
     /// <returns></returns>
-    private Uri BuildUri(string url, string baseUri, IDictionary<string, string> customPathParameters = null, IDictionary<string, string> pathParameters = null,
+    private Uri BuildUri(string url, string baseUri, IDictionary<string, string> customPathParameters = null,
+      IDictionary<string, string> pathParameters = null,
       IDictionary<string, string> optionalQueryParameters = null)
     {
       var path = $"{baseUri}";

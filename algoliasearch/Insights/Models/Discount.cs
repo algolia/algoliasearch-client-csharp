@@ -20,7 +20,7 @@ using Algolia.Search.Models;
 namespace Algolia.Search.Models.Insights
 {
   /// <summary>
-  /// Absolute value of the discount in effect for this object, measured in &#x60;currency&#x60;.
+  /// The absolute value of the discount for this product, in units of &#x60;currency&#x60;. 
   /// </summary>
   [JsonConverter(typeof(DiscountJsonConverter))]
   [DataContract(Name = "discount")]
