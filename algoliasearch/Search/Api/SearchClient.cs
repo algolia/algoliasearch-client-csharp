@@ -844,19 +844,19 @@ namespace Algolia.Search.Clients
     {
       if (httpRequester == null)
       {
-        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
+        throw new ArgumentException("An httpRequester is required");
       }
       if (config == null)
       {
-        throw new ArgumentNullException(nameof(config), "A config is required");
+        throw new ArgumentException("A config is required");
       }
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
-        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+        throw new ArgumentException("`AppId` is missing.");
       }
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
-        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+        throw new ArgumentException("`ApiKey` is missing.");
       }
 
       _config = config;
@@ -875,8 +875,7 @@ namespace Algolia.Search.Clients
     public async Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (apiKey == null)
-        throw new ApiException(400, "Missing required parameter 'apiKey' when calling SearchClient->AddApiKey");
-
+        throw new ApiException(400, "Parameter `apiKey` is required when calling `AddApiKey`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -897,14 +896,11 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtWithObjectIdResponse> AddOrUpdateObjectAsync(string indexName, string objectID, Object body, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->AddOrUpdateObject");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `AddOrUpdateObject`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->AddOrUpdateObject");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `AddOrUpdateObject`.");
       if (body == null)
-        throw new ApiException(400, "Missing required parameter 'body' when calling SearchClient->AddOrUpdateObject");
-
+        throw new ApiException(400, "Parameter `body` is required when calling `AddOrUpdateObject`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -925,8 +921,7 @@ namespace Algolia.Search.Clients
     public async Task<CreatedAtResponse> AppendSourceAsync(Source varSource, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (varSource == null)
-        throw new ApiException(400, "Missing required parameter 'varSource' when calling SearchClient->AppendSource");
-
+        throw new ApiException(400, "Parameter `varSource` is required when calling `AppendSource`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -946,11 +941,9 @@ namespace Algolia.Search.Clients
     public async Task<CreatedAtResponse> AssignUserIdAsync(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (xAlgoliaUserID == null)
-        throw new ApiException(400, "Missing required parameter 'xAlgoliaUserID' when calling SearchClient->AssignUserId");
-
+        throw new ApiException(400, "Parameter `xAlgoliaUserID` is required when calling `AssignUserId`.");
       if (assignUserIdParams == null)
-        throw new ApiException(400, "Missing required parameter 'assignUserIdParams' when calling SearchClient->AssignUserId");
-
+        throw new ApiException(400, "Parameter `assignUserIdParams` is required when calling `AssignUserId`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -971,11 +964,9 @@ namespace Algolia.Search.Clients
     public async Task<BatchResponse> BatchAsync(string indexName, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->Batch");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `Batch`.");
       if (batchWriteParams == null)
-        throw new ApiException(400, "Missing required parameter 'batchWriteParams' when calling SearchClient->Batch");
-
+        throw new ApiException(400, "Parameter `batchWriteParams` is required when calling `Batch`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -996,11 +987,9 @@ namespace Algolia.Search.Clients
     public async Task<CreatedAtResponse> BatchAssignUserIdsAsync(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (xAlgoliaUserID == null)
-        throw new ApiException(400, "Missing required parameter 'xAlgoliaUserID' when calling SearchClient->BatchAssignUserIds");
-
+        throw new ApiException(400, "Parameter `xAlgoliaUserID` is required when calling `BatchAssignUserIds`.");
       if (batchAssignUserIdsParams == null)
-        throw new ApiException(400, "Missing required parameter 'batchAssignUserIdsParams' when calling SearchClient->BatchAssignUserIds");
-
+        throw new ApiException(400, "Parameter `batchAssignUserIdsParams` is required when calling `BatchAssignUserIds`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -1021,11 +1010,9 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> BatchDictionaryEntriesAsync(DictionaryType dictionaryName, BatchDictionaryEntriesParams batchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (dictionaryName == null)
-        throw new ApiException(400, "Missing required parameter 'dictionaryName' when calling SearchClient->BatchDictionaryEntries");
-
+        throw new ApiException(400, "Parameter `dictionaryName` is required when calling `BatchDictionaryEntries`.");
       if (batchDictionaryEntriesParams == null)
-        throw new ApiException(400, "Missing required parameter 'batchDictionaryEntriesParams' when calling SearchClient->BatchDictionaryEntries");
-
+        throw new ApiException(400, "Parameter `batchDictionaryEntriesParams` is required when calling `BatchDictionaryEntries`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("dictionaryName", ClientUtils.ParameterToString(dictionaryName));
@@ -1046,8 +1033,7 @@ namespace Algolia.Search.Clients
     public async Task<BrowseResponse<T>> BrowseAsync<T>(string indexName, BrowseParams browseParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->Browse");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `Browse`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1068,8 +1054,7 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> ClearAllSynonymsAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->ClearAllSynonyms");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `ClearAllSynonyms`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1089,8 +1074,7 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> ClearObjectsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->ClearObjects");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `ClearObjects`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1110,8 +1094,7 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> ClearRulesAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->ClearRules");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `ClearRules`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1132,8 +1115,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling SearchClient->CustomDelete");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomDelete`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -1153,8 +1135,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling SearchClient->CustomGet");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomGet`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -1175,8 +1156,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling SearchClient->CustomPost");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPost`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -1198,8 +1178,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling SearchClient->CustomPut");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPut`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -1219,8 +1198,7 @@ namespace Algolia.Search.Clients
     public async Task<DeleteApiKeyResponse> DeleteApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (key == null)
-        throw new ApiException(400, "Missing required parameter 'key' when calling SearchClient->DeleteApiKey");
-
+        throw new ApiException(400, "Parameter `key` is required when calling `DeleteApiKey`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("key", ClientUtils.ParameterToString(key));
@@ -1240,11 +1218,9 @@ namespace Algolia.Search.Clients
     public async Task<DeletedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->DeleteBy");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `DeleteBy`.");
       if (deleteByParams == null)
-        throw new ApiException(400, "Missing required parameter 'deleteByParams' when calling SearchClient->DeleteBy");
-
+        throw new ApiException(400, "Parameter `deleteByParams` is required when calling `DeleteBy`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1264,8 +1240,7 @@ namespace Algolia.Search.Clients
     public async Task<DeletedAtResponse> DeleteIndexAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->DeleteIndex");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `DeleteIndex`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1285,11 +1260,9 @@ namespace Algolia.Search.Clients
     public async Task<DeletedAtResponse> DeleteObjectAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->DeleteObject");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `DeleteObject`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->DeleteObject");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `DeleteObject`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1311,11 +1284,9 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> DeleteRuleAsync(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->DeleteRule");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `DeleteRule`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->DeleteRule");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `DeleteRule`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1336,8 +1307,7 @@ namespace Algolia.Search.Clients
     public async Task<DeleteSourceResponse> DeleteSourceAsync(string varSource, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (varSource == null)
-        throw new ApiException(400, "Missing required parameter 'varSource' when calling SearchClient->DeleteSource");
-
+        throw new ApiException(400, "Parameter `varSource` is required when calling `DeleteSource`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("source", ClientUtils.ParameterToString(varSource));
@@ -1358,11 +1328,9 @@ namespace Algolia.Search.Clients
     public async Task<DeletedAtResponse> DeleteSynonymAsync(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->DeleteSynonym");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `DeleteSynonym`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->DeleteSynonym");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `DeleteSynonym`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1383,8 +1351,7 @@ namespace Algolia.Search.Clients
     public async Task<GetApiKeyResponse> GetApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (key == null)
-        throw new ApiException(400, "Missing required parameter 'key' when calling SearchClient->GetApiKey");
-
+        throw new ApiException(400, "Parameter `key` is required when calling `GetApiKey`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("key", ClientUtils.ParameterToString(key));
@@ -1458,11 +1425,9 @@ namespace Algolia.Search.Clients
     public async Task<Dictionary<string, string>> GetObjectAsync(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->GetObject");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetObject`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->GetObject");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `GetObject`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1483,8 +1448,7 @@ namespace Algolia.Search.Clients
     public async Task<GetObjectsResponse<T>> GetObjectsAsync<T>(GetObjectsParams getObjectsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (getObjectsParams == null)
-        throw new ApiException(400, "Missing required parameter 'getObjectsParams' when calling SearchClient->GetObjects");
-
+        throw new ApiException(400, "Parameter `getObjectsParams` is required when calling `GetObjects`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -1505,11 +1469,9 @@ namespace Algolia.Search.Clients
     public async Task<Rule> GetRuleAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->GetRule");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetRule`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->GetRule");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `GetRule`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1529,8 +1491,7 @@ namespace Algolia.Search.Clients
     public async Task<IndexSettings> GetSettingsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->GetSettings");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetSettings`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1565,11 +1526,9 @@ namespace Algolia.Search.Clients
     public async Task<SynonymHit> GetSynonymAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->GetSynonym");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetSynonym`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->GetSynonym");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `GetSynonym`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1590,8 +1549,7 @@ namespace Algolia.Search.Clients
     public async Task<GetTaskResponse> GetTaskAsync(string indexName, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->GetTask");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetTask`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1626,8 +1584,7 @@ namespace Algolia.Search.Clients
     public async Task<UserId> GetUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (userID == null)
-        throw new ApiException(400, "Missing required parameter 'userID' when calling SearchClient->GetUserId");
-
+        throw new ApiException(400, "Parameter `userID` is required when calling `GetUserId`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("userID", ClientUtils.ParameterToString(userID));
@@ -1731,8 +1688,7 @@ namespace Algolia.Search.Clients
     public async Task<MultipleBatchResponse> MultipleBatchAsync(BatchParams batchParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (batchParams == null)
-        throw new ApiException(400, "Missing required parameter 'batchParams' when calling SearchClient->MultipleBatch");
-
+        throw new ApiException(400, "Parameter `batchParams` is required when calling `MultipleBatch`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -1752,11 +1708,9 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> OperationIndexAsync(string indexName, OperationIndexParams operationIndexParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->OperationIndex");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `OperationIndex`.");
       if (operationIndexParams == null)
-        throw new ApiException(400, "Missing required parameter 'operationIndexParams' when calling SearchClient->OperationIndex");
-
+        throw new ApiException(400, "Parameter `operationIndexParams` is required when calling `OperationIndex`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1779,14 +1733,11 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtWithObjectIdResponse> PartialUpdateObjectAsync(string indexName, string objectID, Dictionary<string, AttributeToUpdate> attributesToUpdate, bool? createIfNotExists = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->PartialUpdateObject");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `PartialUpdateObject`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->PartialUpdateObject");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `PartialUpdateObject`.");
       if (attributesToUpdate == null)
-        throw new ApiException(400, "Missing required parameter 'attributesToUpdate' when calling SearchClient->PartialUpdateObject");
-
+        throw new ApiException(400, "Parameter `attributesToUpdate` is required when calling `PartialUpdateObject`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1808,8 +1759,7 @@ namespace Algolia.Search.Clients
     public async Task<RemoveUserIdResponse> RemoveUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (userID == null)
-        throw new ApiException(400, "Missing required parameter 'userID' when calling SearchClient->RemoveUserId");
-
+        throw new ApiException(400, "Parameter `userID` is required when calling `RemoveUserId`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("userID", ClientUtils.ParameterToString(userID));
@@ -1828,8 +1778,7 @@ namespace Algolia.Search.Clients
     public async Task<ReplaceSourceResponse> ReplaceSourcesAsync(List<Source> varSource, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (varSource == null)
-        throw new ApiException(400, "Missing required parameter 'varSource' when calling SearchClient->ReplaceSources");
-
+        throw new ApiException(400, "Parameter `varSource` is required when calling `ReplaceSources`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -1848,8 +1797,7 @@ namespace Algolia.Search.Clients
     public async Task<AddApiKeyResponse> RestoreApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (key == null)
-        throw new ApiException(400, "Missing required parameter 'key' when calling SearchClient->RestoreApiKey");
-
+        throw new ApiException(400, "Parameter `key` is required when calling `RestoreApiKey`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("key", ClientUtils.ParameterToString(key));
@@ -1869,11 +1817,9 @@ namespace Algolia.Search.Clients
     public async Task<SaveObjectResponse> SaveObjectAsync(string indexName, Object body, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SaveObject");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SaveObject`.");
       if (body == null)
-        throw new ApiException(400, "Missing required parameter 'body' when calling SearchClient->SaveObject");
-
+        throw new ApiException(400, "Parameter `body` is required when calling `SaveObject`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1896,14 +1842,11 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedRuleResponse> SaveRuleAsync(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SaveRule");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SaveRule`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->SaveRule");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `SaveRule`.");
       if (rule == null)
-        throw new ApiException(400, "Missing required parameter 'rule' when calling SearchClient->SaveRule");
-
+        throw new ApiException(400, "Parameter `rule` is required when calling `SaveRule`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1928,11 +1871,9 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> SaveRulesAsync(string indexName, List<Rule> rules, bool? forwardToReplicas = default, bool? clearExistingRules = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SaveRules");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SaveRules`.");
       if (rules == null)
-        throw new ApiException(400, "Missing required parameter 'rules' when calling SearchClient->SaveRules");
-
+        throw new ApiException(400, "Parameter `rules` is required when calling `SaveRules`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1957,14 +1898,11 @@ namespace Algolia.Search.Clients
     public async Task<SaveSynonymResponse> SaveSynonymAsync(string indexName, string objectID, SynonymHit synonymHit, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SaveSynonym");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SaveSynonym`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling SearchClient->SaveSynonym");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `SaveSynonym`.");
       if (synonymHit == null)
-        throw new ApiException(400, "Missing required parameter 'synonymHit' when calling SearchClient->SaveSynonym");
-
+        throw new ApiException(400, "Parameter `synonymHit` is required when calling `SaveSynonym`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -1989,11 +1927,9 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> SaveSynonymsAsync(string indexName, List<SynonymHit> synonymHit, bool? forwardToReplicas = default, bool? replaceExistingSynonyms = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SaveSynonyms");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SaveSynonyms`.");
       if (synonymHit == null)
-        throw new ApiException(400, "Missing required parameter 'synonymHit' when calling SearchClient->SaveSynonyms");
-
+        throw new ApiException(400, "Parameter `synonymHit` is required when calling `SaveSynonyms`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -2015,8 +1951,7 @@ namespace Algolia.Search.Clients
     public async Task<SearchResponses<T>> SearchAsync<T>(SearchMethodParams searchMethodParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (searchMethodParams == null)
-        throw new ApiException(400, "Missing required parameter 'searchMethodParams' when calling SearchClient->Search");
-
+        throw new ApiException(400, "Parameter `searchMethodParams` is required when calling `Search`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -2037,11 +1972,9 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> SearchDictionaryEntriesAsync(DictionaryType dictionaryName, SearchDictionaryEntriesParams searchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (dictionaryName == null)
-        throw new ApiException(400, "Missing required parameter 'dictionaryName' when calling SearchClient->SearchDictionaryEntries");
-
+        throw new ApiException(400, "Parameter `dictionaryName` is required when calling `SearchDictionaryEntries`.");
       if (searchDictionaryEntriesParams == null)
-        throw new ApiException(400, "Missing required parameter 'searchDictionaryEntriesParams' when calling SearchClient->SearchDictionaryEntries");
-
+        throw new ApiException(400, "Parameter `searchDictionaryEntriesParams` is required when calling `SearchDictionaryEntries`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("dictionaryName", ClientUtils.ParameterToString(dictionaryName));
@@ -2064,11 +1997,9 @@ namespace Algolia.Search.Clients
     public async Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(string indexName, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SearchForFacetValues");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SearchForFacetValues`.");
       if (facetName == null)
-        throw new ApiException(400, "Missing required parameter 'facetName' when calling SearchClient->SearchForFacetValues");
-
+        throw new ApiException(400, "Parameter `facetName` is required when calling `SearchForFacetValues`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -2091,8 +2022,7 @@ namespace Algolia.Search.Clients
     public async Task<SearchRulesResponse> SearchRulesAsync(string indexName, SearchRulesParams searchRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SearchRules");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SearchRules`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -2114,8 +2044,7 @@ namespace Algolia.Search.Clients
     public async Task<SearchResponse<T>> SearchSingleIndexAsync<T>(string indexName, SearchParams searchParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SearchSingleIndex");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SearchSingleIndex`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -2140,8 +2069,7 @@ namespace Algolia.Search.Clients
     public async Task<SearchSynonymsResponse> SearchSynonymsAsync(string indexName, SynonymType? type = default, int? page = default, int? hitsPerPage = default, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SearchSynonyms");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SearchSynonyms`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -2165,8 +2093,7 @@ namespace Algolia.Search.Clients
     public async Task<SearchUserIdsResponse> SearchUserIdsAsync(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (searchUserIdsParams == null)
-        throw new ApiException(400, "Missing required parameter 'searchUserIdsParams' when calling SearchClient->SearchUserIds");
-
+        throw new ApiException(400, "Parameter `searchUserIdsParams` is required when calling `SearchUserIds`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -2186,8 +2113,7 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> SetDictionarySettingsAsync(DictionarySettingsParams dictionarySettingsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (dictionarySettingsParams == null)
-        throw new ApiException(400, "Missing required parameter 'dictionarySettingsParams' when calling SearchClient->SetDictionarySettings");
-
+        throw new ApiException(400, "Parameter `dictionarySettingsParams` is required when calling `SetDictionarySettings`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -2208,11 +2134,9 @@ namespace Algolia.Search.Clients
     public async Task<UpdatedAtResponse> SetSettingsAsync(string indexName, IndexSettings indexSettings, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling SearchClient->SetSettings");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SetSettings`.");
       if (indexSettings == null)
-        throw new ApiException(400, "Missing required parameter 'indexSettings' when calling SearchClient->SetSettings");
-
+        throw new ApiException(400, "Parameter `indexSettings` is required when calling `SetSettings`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -2234,11 +2158,9 @@ namespace Algolia.Search.Clients
     public async Task<UpdateApiKeyResponse> UpdateApiKeyAsync(string key, ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (key == null)
-        throw new ApiException(400, "Missing required parameter 'key' when calling SearchClient->UpdateApiKey");
-
+        throw new ApiException(400, "Parameter `key` is required when calling `UpdateApiKey`.");
       if (apiKey == null)
-        throw new ApiException(400, "Missing required parameter 'apiKey' when calling SearchClient->UpdateApiKey");
-
+        throw new ApiException(400, "Parameter `apiKey` is required when calling `UpdateApiKey`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("key", ClientUtils.ParameterToString(key));

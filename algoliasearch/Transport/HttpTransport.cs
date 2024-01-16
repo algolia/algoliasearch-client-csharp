@@ -121,7 +121,7 @@ namespace Algolia.Search.Transport
         }
 
         AlgoliaHttpResponse response = await _httpClient
-          .SendRequestAsync(request, requestTimeout, ct)
+          .SendRequestAsync(request, requestTimeout, _algoliaConfig.ConnectTimeout ?? Defaults.ConnectTimeout, ct)
           .ConfigureAwait(false);
 
         _errorMessage = response.Error;

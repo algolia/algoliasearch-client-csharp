@@ -389,19 +389,19 @@ namespace Algolia.Search.Clients
     {
       if (httpRequester == null)
       {
-        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
+        throw new ArgumentException("An httpRequester is required");
       }
       if (config == null)
       {
-        throw new ArgumentNullException(nameof(config), "A config is required");
+        throw new ArgumentException("A config is required");
       }
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
-        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+        throw new ArgumentException("`AppId` is missing.");
       }
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
-        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+        throw new ArgumentException("`ApiKey` is missing.");
       }
 
       _config = config;
@@ -421,8 +421,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomDelete");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomDelete`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -442,8 +441,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomGet");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomGet`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -464,8 +462,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomPost");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPost`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -487,8 +484,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling AnalyticsClient->CustomPut");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPut`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -511,8 +507,7 @@ namespace Algolia.Search.Clients
     public async Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetAverageClickPosition");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetAverageClickPosition`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -537,8 +532,7 @@ namespace Algolia.Search.Clients
     public async Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetClickPositions");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetClickPositions`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -563,8 +557,7 @@ namespace Algolia.Search.Clients
     public async Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetClickThroughRate");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetClickThroughRate`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -589,8 +582,7 @@ namespace Algolia.Search.Clients
     public async Task<GetConversationRateResponse> GetConversationRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetConversationRate");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetConversationRate`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -615,8 +607,7 @@ namespace Algolia.Search.Clients
     public async Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetNoClickRate");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetNoClickRate`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -641,8 +632,7 @@ namespace Algolia.Search.Clients
     public async Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetNoResultsRate");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetNoResultsRate`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -667,8 +657,7 @@ namespace Algolia.Search.Clients
     public async Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetSearchesCount");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetSearchesCount`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -695,8 +684,7 @@ namespace Algolia.Search.Clients
     public async Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetSearchesNoClicks");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetSearchesNoClicks`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -725,8 +713,7 @@ namespace Algolia.Search.Clients
     public async Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetSearchesNoResults");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetSearchesNoResults`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -750,8 +737,7 @@ namespace Algolia.Search.Clients
     public async Task<GetStatusResponse> GetStatusAsync(string index, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetStatus");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetStatus`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -775,8 +761,7 @@ namespace Algolia.Search.Clients
     public async Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopCountries");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetTopCountries`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -806,8 +791,7 @@ namespace Algolia.Search.Clients
     public async Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopFilterAttributes");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetTopFilterAttributes`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -839,11 +823,9 @@ namespace Algolia.Search.Clients
     public async Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (attribute == null)
-        throw new ApiException(400, "Missing required parameter 'attribute' when calling AnalyticsClient->GetTopFilterForAttribute");
-
+        throw new ApiException(400, "Parameter `attribute` is required when calling `GetTopFilterForAttribute`.");
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopFilterForAttribute");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetTopFilterForAttribute`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("attribute", ClientUtils.ParameterToString(attribute));
@@ -875,8 +857,7 @@ namespace Algolia.Search.Clients
     public async Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopFiltersNoResults");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetTopFiltersNoResults`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -908,8 +889,7 @@ namespace Algolia.Search.Clients
     public async Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default, bool? clickAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopHits");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetTopHits`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -943,8 +923,7 @@ namespace Algolia.Search.Clients
     public async Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetTopSearches");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetTopSearches`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -974,8 +953,7 @@ namespace Algolia.Search.Clients
     public async Task<GetUsersCountResponse> GetUsersCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (index == null)
-        throw new ApiException(400, "Missing required parameter 'index' when calling AnalyticsClient->GetUsersCount");
-
+        throw new ApiException(400, "Parameter `index` is required when calling `GetUsersCount`.");
       var requestOptions = new InternalRequestOptions(options);
 
 

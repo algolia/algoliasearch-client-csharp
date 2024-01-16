@@ -21,16 +21,21 @@ namespace Algolia.Search.Http
       return collection.AllKeys.ToDictionary(key => key, key => collection[key]);
     }
 
-    public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan totalTimeout,
+    public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout,
+      TimeSpan connectTimeout,
       CancellationToken ct = default)
     {
-      EchoResponse echo = new EchoResponse();
-      echo.Path = request.Uri.AbsolutePath;
-      echo.Host = request.Uri.Host;
-      echo.Method = request.Method;
-      echo.Body = request.Body;
-      echo.QueryParameters = SplitQuery(request.Uri.Query);
-      echo.Headers = new Dictionary<string, string>(request.Headers);
+      EchoResponse echo = new EchoResponse
+      {
+        Path = request.Uri.AbsolutePath,
+        Host = request.Uri.Host,
+        Method = request.Method,
+        Body = request.Body,
+        QueryParameters = SplitQuery(request.Uri.Query),
+        Headers = new Dictionary<string, string>(request.Headers),
+        ConnectTimeout = connectTimeout,
+        ResponseTimeout = requestTimeout
+      };
 
       LastResponse = echo;
 

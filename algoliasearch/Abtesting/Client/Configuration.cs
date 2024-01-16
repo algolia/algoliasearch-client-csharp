@@ -19,10 +19,10 @@ namespace Algolia.Search.Clients
     /// The configuration of the Abtesting client
     /// A client should have it's own configuration ie on configuration per client instance
     /// </summary>
-    /// <param name="applicationId">Your application ID</param>
+    /// <param name="appId">Your application ID</param>
     /// <param name="apiKey">Your API Key</param>
     /// <param name="region">Targeted region (optional)</param>
-    public AbtestingConfig(string applicationId, string apiKey, string region = null) : base(applicationId, apiKey)
+    public AbtestingConfig(string appId, string apiKey, string region = null) : base(appId, apiKey, "Abtesting")
     {
       DefaultHosts = GetDefaultHosts(region);
       Compression = CompressionType.NONE;
@@ -32,7 +32,7 @@ namespace Algolia.Search.Clients
       var regions = new List<string> { "de", "us" };
       if (region != null && !regions.Contains(region))
       {
-        throw new ArgumentException($"`region` must be one of the following {regions}");
+        throw new ArgumentException($"`region` must be one of the following: {string.Join(", ", regions)}");
       }
 
       var selectedRegion = region == null ? "analytics.algolia.com" : "analytics.{region}.algolia.com".Replace("{region}", region);

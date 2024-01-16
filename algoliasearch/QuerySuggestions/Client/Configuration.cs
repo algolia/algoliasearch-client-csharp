@@ -19,10 +19,10 @@ namespace Algolia.Search.Clients
     /// The configuration of the QuerySuggestions client
     /// A client should have it's own configuration ie on configuration per client instance
     /// </summary>
-    /// <param name="applicationId">Your application ID</param>
+    /// <param name="appId">Your application ID</param>
     /// <param name="apiKey">Your API Key</param>
     /// <param name="region">Targeted region </param>
-    public QuerySuggestionsConfig(string applicationId, string apiKey, string region) : base(applicationId, apiKey)
+    public QuerySuggestionsConfig(string appId, string apiKey, string region) : base(appId, apiKey, "QuerySuggestions")
     {
       DefaultHosts = GetDefaultHosts(region);
       Compression = CompressionType.NONE;
@@ -30,9 +30,9 @@ namespace Algolia.Search.Clients
     private static List<StatefulHost> GetDefaultHosts(string region)
     {
       var regions = new List<string> { "eu", "us" };
-      if (region != null && !regions.Contains(region))
+      if (region == null || !regions.Contains(region))
       {
-        throw new ArgumentException($"`region` must be one of the following {regions}");
+        throw new ArgumentException($"`region` is required and must be one of the following: {string.Join(", ", regions)}");
       }
 
       var selectedRegion = "query-suggestions.{region}.algolia.com".Replace("{region}", region);

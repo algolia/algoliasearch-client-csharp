@@ -19,27 +19,27 @@ namespace Algolia.Search.Clients
     /// The configuration of the Recommend client
     /// A client should have it's own configuration ie on configuration per client instance
     /// </summary>
-    /// <param name="applicationId">Your application ID</param>
+    /// <param name="appId">Your application ID</param>
     /// <param name="apiKey">Your API Key</param>
-    public RecommendConfig(string applicationId, string apiKey) : base(applicationId, apiKey)
+    public RecommendConfig(string appId, string apiKey) : base(appId, apiKey, "Recommend")
     {
-      DefaultHosts = GetDefaultHosts(applicationId);
+      DefaultHosts = GetDefaultHosts(appId);
       Compression = CompressionType.NONE;
     }
-    private static List<StatefulHost> GetDefaultHosts(string applicationId)
+    private static List<StatefulHost> GetDefaultHosts(string appId)
     {
       List<StatefulHost> hosts = new List<StatefulHost>
     {
       new StatefulHost
       {
-        Url = $"{applicationId}-dsn.algolia.net",
+        Url = $"{appId}-dsn.algolia.net",
         Up = true,
         LastUse = DateTime.UtcNow,
         Accept = CallType.Read
       },
       new StatefulHost
       {
-        Url = $"{applicationId}.algolia.net", Up = true, LastUse = DateTime.UtcNow, Accept = CallType.Write,
+        Url = $"{appId}.algolia.net", Up = true, LastUse = DateTime.UtcNow, Accept = CallType.Write,
       }
     };
 
@@ -47,21 +47,21 @@ namespace Algolia.Search.Clients
     {
       new StatefulHost
       {
-        Url = $"{applicationId}-1.algolianet.com",
+        Url = $"{appId}-1.algolianet.com",
         Up = true,
         LastUse = DateTime.UtcNow,
         Accept = CallType.Read | CallType.Write,
       },
       new StatefulHost
       {
-        Url = $"{applicationId}-2.algolianet.com",
+        Url = $"{appId}-2.algolianet.com",
         Up = true,
         LastUse = DateTime.UtcNow,
         Accept = CallType.Read | CallType.Write,
       },
       new StatefulHost
       {
-        Url = $"{applicationId}-3.algolianet.com",
+        Url = $"{appId}-3.algolianet.com",
         Up = true,
         LastUse = DateTime.UtcNow,
         Accept = CallType.Read | CallType.Write,

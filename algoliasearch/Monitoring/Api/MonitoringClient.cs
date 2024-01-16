@@ -218,19 +218,19 @@ namespace Algolia.Search.Clients
     {
       if (httpRequester == null)
       {
-        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
+        throw new ArgumentException("An httpRequester is required");
       }
       if (config == null)
       {
-        throw new ArgumentNullException(nameof(config), "A config is required");
+        throw new ArgumentException("A config is required");
       }
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
-        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+        throw new ArgumentException("`AppId` is missing.");
       }
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
-        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+        throw new ArgumentException("`ApiKey` is missing.");
       }
 
       _config = config;
@@ -250,8 +250,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomDelete");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomDelete`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -271,8 +270,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomGet");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomGet`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -293,8 +291,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPost");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPost`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -316,8 +313,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling MonitoringClient->CustomPut");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPut`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -337,8 +333,7 @@ namespace Algolia.Search.Clients
     public async Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (clusters == null)
-        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterIncidents");
-
+        throw new ApiException(400, "Parameter `clusters` is required when calling `GetClusterIncidents`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
@@ -357,8 +352,7 @@ namespace Algolia.Search.Clients
     public async Task<StatusResponse> GetClusterStatusAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (clusters == null)
-        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetClusterStatus");
-
+        throw new ApiException(400, "Parameter `clusters` is required when calling `GetClusterStatus`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
@@ -392,8 +386,7 @@ namespace Algolia.Search.Clients
     public async Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (clusters == null)
-        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetIndexingTime");
-
+        throw new ApiException(400, "Parameter `clusters` is required when calling `GetIndexingTime`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
@@ -427,8 +420,7 @@ namespace Algolia.Search.Clients
     public async Task<LatencyResponse> GetLatencyAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (clusters == null)
-        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetLatency");
-
+        throw new ApiException(400, "Parameter `clusters` is required when calling `GetLatency`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
@@ -448,11 +440,9 @@ namespace Algolia.Search.Clients
     public async Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (metric == null)
-        throw new ApiException(400, "Missing required parameter 'metric' when calling MonitoringClient->GetMetrics");
-
+        throw new ApiException(400, "Parameter `metric` is required when calling `GetMetrics`.");
       if (period == null)
-        throw new ApiException(400, "Missing required parameter 'period' when calling MonitoringClient->GetMetrics");
-
+        throw new ApiException(400, "Parameter `period` is required when calling `GetMetrics`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("metric", ClientUtils.ParameterToString(metric));
@@ -472,8 +462,7 @@ namespace Algolia.Search.Clients
     public async Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (clusters == null)
-        throw new ApiException(400, "Missing required parameter 'clusters' when calling MonitoringClient->GetReachability");
-
+        throw new ApiException(400, "Parameter `clusters` is required when calling `GetReachability`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));

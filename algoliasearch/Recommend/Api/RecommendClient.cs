@@ -180,19 +180,19 @@ namespace Algolia.Search.Clients
     {
       if (httpRequester == null)
       {
-        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
+        throw new ArgumentException("An httpRequester is required");
       }
       if (config == null)
       {
-        throw new ArgumentNullException(nameof(config), "A config is required");
+        throw new ArgumentException("A config is required");
       }
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
-        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+        throw new ArgumentException("`AppId` is missing.");
       }
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
-        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+        throw new ArgumentException("`ApiKey` is missing.");
       }
 
       _config = config;
@@ -212,8 +212,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomDelete");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomDelete`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -233,8 +232,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomGet");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomGet`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -255,8 +253,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomPost");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPost`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -278,8 +275,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling RecommendClient->CustomPut");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPut`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -301,14 +297,11 @@ namespace Algolia.Search.Clients
     public async Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->DeleteRecommendRule");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `DeleteRecommendRule`.");
       if (model == null)
-        throw new ApiException(400, "Missing required parameter 'model' when calling RecommendClient->DeleteRecommendRule");
-
+        throw new ApiException(400, "Parameter `model` is required when calling `DeleteRecommendRule`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling RecommendClient->DeleteRecommendRule");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `DeleteRecommendRule`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -331,14 +324,11 @@ namespace Algolia.Search.Clients
     public async Task<RuleResponse> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->GetRecommendRule");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetRecommendRule`.");
       if (model == null)
-        throw new ApiException(400, "Missing required parameter 'model' when calling RecommendClient->GetRecommendRule");
-
+        throw new ApiException(400, "Parameter `model` is required when calling `GetRecommendRule`.");
       if (objectID == null)
-        throw new ApiException(400, "Missing required parameter 'objectID' when calling RecommendClient->GetRecommendRule");
-
+        throw new ApiException(400, "Parameter `objectID` is required when calling `GetRecommendRule`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -361,11 +351,9 @@ namespace Algolia.Search.Clients
     public async Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->GetRecommendStatus");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetRecommendStatus`.");
       if (model == null)
-        throw new ApiException(400, "Missing required parameter 'model' when calling RecommendClient->GetRecommendStatus");
-
+        throw new ApiException(400, "Parameter `model` is required when calling `GetRecommendStatus`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -386,8 +374,7 @@ namespace Algolia.Search.Clients
     public async Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (getRecommendationsParams == null)
-        throw new ApiException(400, "Missing required parameter 'getRecommendationsParams' when calling RecommendClient->GetRecommendations");
-
+        throw new ApiException(400, "Parameter `getRecommendationsParams` is required when calling `GetRecommendations`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -409,11 +396,9 @@ namespace Algolia.Search.Clients
     public async Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling RecommendClient->SearchRecommendRules");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `SearchRecommendRules`.");
       if (model == null)
-        throw new ApiException(400, "Missing required parameter 'model' when calling RecommendClient->SearchRecommendRules");
-
+        throw new ApiException(400, "Parameter `model` is required when calling `SearchRecommendRules`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));

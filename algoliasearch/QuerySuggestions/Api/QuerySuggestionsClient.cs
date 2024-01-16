@@ -196,19 +196,19 @@ namespace Algolia.Search.Clients
     {
       if (httpRequester == null)
       {
-        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
+        throw new ArgumentException("An httpRequester is required");
       }
       if (config == null)
       {
-        throw new ArgumentNullException(nameof(config), "A config is required");
+        throw new ArgumentException("A config is required");
       }
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
-        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+        throw new ArgumentException("`AppId` is missing.");
       }
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
-        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+        throw new ArgumentException("`ApiKey` is missing.");
       }
 
       _config = config;
@@ -227,8 +227,7 @@ namespace Algolia.Search.Clients
     public async Task<BaseResponse> CreateConfigAsync(QuerySuggestionsConfigurationWithIndex querySuggestionsConfigurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (querySuggestionsConfigurationWithIndex == null)
-        throw new ApiException(400, "Missing required parameter 'querySuggestionsConfigurationWithIndex' when calling QuerySuggestionsClient->CreateConfig");
-
+        throw new ApiException(400, "Parameter `querySuggestionsConfigurationWithIndex` is required when calling `CreateConfig`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -248,8 +247,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling QuerySuggestionsClient->CustomDelete");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomDelete`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -269,8 +267,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling QuerySuggestionsClient->CustomGet");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomGet`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -291,8 +288,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling QuerySuggestionsClient->CustomPost");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPost`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -314,8 +310,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling QuerySuggestionsClient->CustomPut");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPut`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -335,8 +330,7 @@ namespace Algolia.Search.Clients
     public async Task<BaseResponse> DeleteConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->DeleteConfig");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `DeleteConfig`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -370,8 +364,7 @@ namespace Algolia.Search.Clients
     public async Task<QuerySuggestionsConfigurationResponse> GetConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->GetConfig");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetConfig`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -390,8 +383,7 @@ namespace Algolia.Search.Clients
     public async Task<GetConfigStatus200Response> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->GetConfigStatus");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetConfigStatus`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -410,8 +402,7 @@ namespace Algolia.Search.Clients
     public async Task<GetLogFile200Response> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->GetLogFile");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `GetLogFile`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
@@ -431,11 +422,9 @@ namespace Algolia.Search.Clients
     public async Task<BaseResponse> UpdateConfigAsync(string indexName, QuerySuggestionsConfiguration querySuggestionsConfiguration, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
-        throw new ApiException(400, "Missing required parameter 'indexName' when calling QuerySuggestionsClient->UpdateConfig");
-
+        throw new ApiException(400, "Parameter `indexName` is required when calling `UpdateConfig`.");
       if (querySuggestionsConfiguration == null)
-        throw new ApiException(400, "Missing required parameter 'querySuggestionsConfiguration' when calling QuerySuggestionsClient->UpdateConfig");
-
+        throw new ApiException(400, "Parameter `querySuggestionsConfiguration` is required when calling `UpdateConfig`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));

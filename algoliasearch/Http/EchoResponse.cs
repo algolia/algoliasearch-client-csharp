@@ -13,7 +13,7 @@ namespace Algolia.Search.Http
     public String Body;
     public Dictionary<string, string> QueryParameters;
     public Dictionary<string, string> Headers;
-    public int ConnectTimeout;
-    public int ResponseTimeout;
+    public TimeSpan ConnectTimeout;
+    public TimeSpan ResponseTimeout;
   }
 }

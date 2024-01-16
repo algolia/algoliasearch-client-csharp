@@ -27,11 +27,12 @@ namespace Algolia.Search.Http
     /// Send request to the REST API
     /// </summary>
     /// <param name="request">Request</param>
-    /// <param name="totalTimeout">Timeout</param>
+    /// <param name="requestTimeout">Request timeout</param>
+    /// <param name="connectTimeout">Connect timeout</param>
     /// <param name="ct">Optional cancellation token</param>
     /// <returns></returns>
-    public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan totalTimeout,
-        CancellationToken ct = default)
+    public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout, TimeSpan connectTimeout,
+      CancellationToken ct = default)
     {
       if (request.Method == null)
       {
@@ -57,7 +58,7 @@ namespace Algolia.Search.Http
       }
 
       httpRequestMessage.Headers.Fill(request.Headers);
-      httpRequestMessage.SetTimeout(totalTimeout);
+      httpRequestMessage.SetTimeout(requestTimeout + connectTimeout);
 
       try
       {

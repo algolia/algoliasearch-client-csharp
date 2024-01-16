@@ -16,21 +16,25 @@ namespace Algolia.Search.Clients
     private static readonly string ClientVersion =
       typeof(AlgoliaConfig).GetTypeInfo().Assembly.GetName().Version.ToString();
 
+    // get the dotnet runtime version
+    private static readonly string DotnetVersion = Environment.Version.ToString();
+
     /// <summary>
     /// Create a new Algolia's configuration for the given credentials
     /// </summary>
-    /// <param name="applicationId">Your application ID</param>
+    /// <param name="appId">Your application ID</param>
     /// <param name="apiKey">Your API Key</param>
-    protected AlgoliaConfig(string applicationId, string apiKey)
+    /// <param name="client">The client name</param>
+    protected AlgoliaConfig(string appId, string apiKey, string client)
     {
-      AppId = applicationId;
+      AppId = appId;
       ApiKey = apiKey;
 
       DefaultHeaders = new Dictionary<string, string>
       {
         { Defaults.AlgoliaApplicationHeader.ToLowerInvariant(), AppId },
         { Defaults.AlgoliaApiKeyHeader.ToLowerInvariant(), ApiKey },
-        { Defaults.UserAgentHeader.ToLowerInvariant(), $"Algolia For Csharp {ClientVersion}" },
+        { Defaults.UserAgentHeader.ToLowerInvariant(), $"Algolia for Csharp ({ClientVersion}); {client} ({ClientVersion}); Dotnet ({DotnetVersion})" },
         { Defaults.Connection.ToLowerInvariant(), Defaults.KeepAlive },
         { Defaults.AcceptHeader.ToLowerInvariant(), JsonConfig.JsonContentType }
       };
@@ -68,6 +72,11 @@ namespace Algolia.Search.Clients
     /// Set the read timeout for all requests
     /// </summary>
     public TimeSpan? WriteTimeout { get; set; }
+
+    /// <summary>
+    /// Set the connect timeout for all requests
+    /// </summary>
+    public TimeSpan? ConnectTimeout { get; set; }
 
     /// <summary>
     /// Compression for outgoing http requests  <see cref="CompressionType"/>

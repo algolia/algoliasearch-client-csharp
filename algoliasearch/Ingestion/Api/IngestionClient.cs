@@ -551,19 +551,19 @@ namespace Algolia.Search.Clients
     {
       if (httpRequester == null)
       {
-        throw new ArgumentNullException(nameof(httpRequester), "An httpRequester is required");
+        throw new ArgumentException("An httpRequester is required");
       }
       if (config == null)
       {
-        throw new ArgumentNullException(nameof(config), "A config is required");
+        throw new ArgumentException("A config is required");
       }
       if (string.IsNullOrWhiteSpace(config.AppId))
       {
-        throw new ArgumentNullException(nameof(config.AppId), "Application ID is required");
+        throw new ArgumentException("`AppId` is missing.");
       }
       if (string.IsNullOrWhiteSpace(config.ApiKey))
       {
-        throw new ArgumentNullException(nameof(config.ApiKey), "An API key is required");
+        throw new ArgumentException("`ApiKey` is missing.");
       }
 
       _config = config;
@@ -582,8 +582,7 @@ namespace Algolia.Search.Clients
     public async Task<AuthenticationCreateResponse> CreateAuthenticationAsync(AuthenticationCreate authenticationCreate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (authenticationCreate == null)
-        throw new ApiException(400, "Missing required parameter 'authenticationCreate' when calling IngestionClient->CreateAuthentication");
-
+        throw new ApiException(400, "Parameter `authenticationCreate` is required when calling `CreateAuthentication`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -602,8 +601,7 @@ namespace Algolia.Search.Clients
     public async Task<DestinationCreateResponse> CreateDestinationAsync(DestinationCreate destinationCreate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (destinationCreate == null)
-        throw new ApiException(400, "Missing required parameter 'destinationCreate' when calling IngestionClient->CreateDestination");
-
+        throw new ApiException(400, "Parameter `destinationCreate` is required when calling `CreateDestination`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -622,8 +620,7 @@ namespace Algolia.Search.Clients
     public async Task<SourceCreateResponse> CreateSourceAsync(SourceCreate sourceCreate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (sourceCreate == null)
-        throw new ApiException(400, "Missing required parameter 'sourceCreate' when calling IngestionClient->CreateSource");
-
+        throw new ApiException(400, "Parameter `sourceCreate` is required when calling `CreateSource`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -642,8 +639,7 @@ namespace Algolia.Search.Clients
     public async Task<TaskCreateResponse> CreateTaskAsync(TaskCreate taskCreate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (taskCreate == null)
-        throw new ApiException(400, "Missing required parameter 'taskCreate' when calling IngestionClient->CreateTask");
-
+        throw new ApiException(400, "Parameter `taskCreate` is required when calling `CreateTask`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -663,8 +659,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomDeleteAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling IngestionClient->CustomDelete");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomDelete`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -684,8 +679,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomGetAsync(string path, Dictionary<string, Object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling IngestionClient->CustomGet");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomGet`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -706,8 +700,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPostAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling IngestionClient->CustomPost");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPost`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -729,8 +722,7 @@ namespace Algolia.Search.Clients
     public async Task<Object> CustomPutAsync(string path, Dictionary<string, Object> parameters = default, Object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (path == null)
-        throw new ApiException(400, "Missing required parameter 'path' when calling IngestionClient->CustomPut");
-
+        throw new ApiException(400, "Parameter `path` is required when calling `CustomPut`.");
       var requestOptions = new InternalRequestOptions(options);
       requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
 
@@ -750,8 +742,7 @@ namespace Algolia.Search.Clients
     public async Task<DeleteResponse> DeleteAuthenticationAsync(string authenticationID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (authenticationID == null)
-        throw new ApiException(400, "Missing required parameter 'authenticationID' when calling IngestionClient->DeleteAuthentication");
-
+        throw new ApiException(400, "Parameter `authenticationID` is required when calling `DeleteAuthentication`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
@@ -770,8 +761,7 @@ namespace Algolia.Search.Clients
     public async Task<DeleteResponse> DeleteDestinationAsync(string destinationID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (destinationID == null)
-        throw new ApiException(400, "Missing required parameter 'destinationID' when calling IngestionClient->DeleteDestination");
-
+        throw new ApiException(400, "Parameter `destinationID` is required when calling `DeleteDestination`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
@@ -790,8 +780,7 @@ namespace Algolia.Search.Clients
     public async Task<DeleteResponse> DeleteSourceAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (sourceID == null)
-        throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->DeleteSource");
-
+        throw new ApiException(400, "Parameter `sourceID` is required when calling `DeleteSource`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
@@ -810,8 +799,7 @@ namespace Algolia.Search.Clients
     public async Task<DeleteResponse> DeleteTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (taskID == null)
-        throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->DeleteTask");
-
+        throw new ApiException(400, "Parameter `taskID` is required when calling `DeleteTask`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
@@ -830,8 +818,7 @@ namespace Algolia.Search.Clients
     public async Task<TaskUpdateResponse> DisableTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (taskID == null)
-        throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->DisableTask");
-
+        throw new ApiException(400, "Parameter `taskID` is required when calling `DisableTask`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
@@ -850,8 +837,7 @@ namespace Algolia.Search.Clients
     public async Task<TaskUpdateResponse> EnableTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (taskID == null)
-        throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->EnableTask");
-
+        throw new ApiException(400, "Parameter `taskID` is required when calling `EnableTask`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
@@ -870,8 +856,7 @@ namespace Algolia.Search.Clients
     public async Task<Authentication> GetAuthenticationAsync(string authenticationID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (authenticationID == null)
-        throw new ApiException(400, "Missing required parameter 'authenticationID' when calling IngestionClient->GetAuthentication");
-
+        throw new ApiException(400, "Parameter `authenticationID` is required when calling `GetAuthentication`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
@@ -917,8 +902,7 @@ namespace Algolia.Search.Clients
     public async Task<Destination> GetDestinationAsync(string destinationID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (destinationID == null)
-        throw new ApiException(400, "Missing required parameter 'destinationID' when calling IngestionClient->GetDestination");
-
+        throw new ApiException(400, "Parameter `destinationID` is required when calling `GetDestination`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
@@ -964,8 +948,7 @@ namespace Algolia.Search.Clients
     public async Task<DockerSourceStreams> GetDockerSourceStreamsAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (sourceID == null)
-        throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->GetDockerSourceStreams");
-
+        throw new ApiException(400, "Parameter `sourceID` is required when calling `GetDockerSourceStreams`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
@@ -985,11 +968,9 @@ namespace Algolia.Search.Clients
     public async Task<Event> GetEventAsync(string runID, string eventID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (runID == null)
-        throw new ApiException(400, "Missing required parameter 'runID' when calling IngestionClient->GetEvent");
-
+        throw new ApiException(400, "Parameter `runID` is required when calling `GetEvent`.");
       if (eventID == null)
-        throw new ApiException(400, "Missing required parameter 'eventID' when calling IngestionClient->GetEvent");
-
+        throw new ApiException(400, "Parameter `eventID` is required when calling `GetEvent`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
@@ -1017,8 +998,7 @@ namespace Algolia.Search.Clients
     public async Task<ListEventsResponse> GetEventsAsync(string runID, int? itemsPerPage = default, int? page = default, List<EventStatus> status = default, List<EventType> type = default, EventSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (runID == null)
-        throw new ApiException(400, "Missing required parameter 'runID' when calling IngestionClient->GetEvents");
-
+        throw new ApiException(400, "Parameter `runID` is required when calling `GetEvents`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
@@ -1045,8 +1025,7 @@ namespace Algolia.Search.Clients
     public async Task<Run> GetRunAsync(string runID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (runID == null)
-        throw new ApiException(400, "Missing required parameter 'runID' when calling IngestionClient->GetRun");
-
+        throw new ApiException(400, "Parameter `runID` is required when calling `GetRun`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
@@ -1096,8 +1075,7 @@ namespace Algolia.Search.Clients
     public async Task<Source> GetSourceAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (sourceID == null)
-        throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->GetSource");
-
+        throw new ApiException(400, "Parameter `sourceID` is required when calling `GetSource`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
@@ -1143,8 +1121,7 @@ namespace Algolia.Search.Clients
     public async Task<IngestionTask> GetTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (taskID == null)
-        throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->GetTask");
-
+        throw new ApiException(400, "Parameter `taskID` is required when calling `GetTask`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
@@ -1196,8 +1173,7 @@ namespace Algolia.Search.Clients
     public async Task<RunResponse> RunTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (taskID == null)
-        throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->RunTask");
-
+        throw new ApiException(400, "Parameter `taskID` is required when calling `RunTask`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
@@ -1216,8 +1192,7 @@ namespace Algolia.Search.Clients
     public async Task<List<Authentication>> SearchAuthenticationsAsync(AuthenticationSearch authenticationSearch, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (authenticationSearch == null)
-        throw new ApiException(400, "Missing required parameter 'authenticationSearch' when calling IngestionClient->SearchAuthentications");
-
+        throw new ApiException(400, "Parameter `authenticationSearch` is required when calling `SearchAuthentications`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -1236,8 +1211,7 @@ namespace Algolia.Search.Clients
     public async Task<List<Destination>> SearchDestinationsAsync(DestinationSearch destinationSearch, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (destinationSearch == null)
-        throw new ApiException(400, "Missing required parameter 'destinationSearch' when calling IngestionClient->SearchDestinations");
-
+        throw new ApiException(400, "Parameter `destinationSearch` is required when calling `SearchDestinations`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -1256,8 +1230,7 @@ namespace Algolia.Search.Clients
     public async Task<List<Source>> SearchSourcesAsync(SourceSearch sourceSearch, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (sourceSearch == null)
-        throw new ApiException(400, "Missing required parameter 'sourceSearch' when calling IngestionClient->SearchSources");
-
+        throw new ApiException(400, "Parameter `sourceSearch` is required when calling `SearchSources`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -1276,8 +1249,7 @@ namespace Algolia.Search.Clients
     public async Task<List<IngestionTask>> SearchTasksAsync(TaskSearch taskSearch, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (taskSearch == null)
-        throw new ApiException(400, "Missing required parameter 'taskSearch' when calling IngestionClient->SearchTasks");
-
+        throw new ApiException(400, "Parameter `taskSearch` is required when calling `SearchTasks`.");
       var requestOptions = new InternalRequestOptions(options);
 
 
@@ -1296,8 +1268,7 @@ namespace Algolia.Search.Clients
     public async Task<DockerSourceDiscover> TriggerDockerSourceDiscoverAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (sourceID == null)
-        throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->TriggerDockerSourceDiscover");
-
+        throw new ApiException(400, "Parameter `sourceID` is required when calling `TriggerDockerSourceDiscover`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
@@ -1317,11 +1288,9 @@ namespace Algolia.Search.Clients
     public async Task<AuthenticationUpdateResponse> UpdateAuthenticationAsync(string authenticationID, AuthenticationUpdate authenticationUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (authenticationID == null)
-        throw new ApiException(400, "Missing required parameter 'authenticationID' when calling IngestionClient->UpdateAuthentication");
-
+        throw new ApiException(400, "Parameter `authenticationID` is required when calling `UpdateAuthentication`.");
       if (authenticationUpdate == null)
-        throw new ApiException(400, "Missing required parameter 'authenticationUpdate' when calling IngestionClient->UpdateAuthentication");
-
+        throw new ApiException(400, "Parameter `authenticationUpdate` is required when calling `UpdateAuthentication`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
@@ -1342,11 +1311,9 @@ namespace Algolia.Search.Clients
     public async Task<DestinationUpdateResponse> UpdateDestinationAsync(string destinationID, DestinationUpdate destinationUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (destinationID == null)
-        throw new ApiException(400, "Missing required parameter 'destinationID' when calling IngestionClient->UpdateDestination");
-
+        throw new ApiException(400, "Parameter `destinationID` is required when calling `UpdateDestination`.");
       if (destinationUpdate == null)
-        throw new ApiException(400, "Missing required parameter 'destinationUpdate' when calling IngestionClient->UpdateDestination");
-
+        throw new ApiException(400, "Parameter `destinationUpdate` is required when calling `UpdateDestination`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
@@ -1367,11 +1334,9 @@ namespace Algolia.Search.Clients
     public async Task<SourceUpdateResponse> UpdateSourceAsync(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (sourceID == null)
-        throw new ApiException(400, "Missing required parameter 'sourceID' when calling IngestionClient->UpdateSource");
-
+        throw new ApiException(400, "Parameter `sourceID` is required when calling `UpdateSource`.");
       if (sourceUpdate == null)
-        throw new ApiException(400, "Missing required parameter 'sourceUpdate' when calling IngestionClient->UpdateSource");
-
+        throw new ApiException(400, "Parameter `sourceUpdate` is required when calling `UpdateSource`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
@@ -1392,11 +1357,9 @@ namespace Algolia.Search.Clients
     public async Task<TaskUpdateResponse> UpdateTaskAsync(string taskID, TaskUpdate taskUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (taskID == null)
-        throw new ApiException(400, "Missing required parameter 'taskID' when calling IngestionClient->UpdateTask");
-
+        throw new ApiException(400, "Parameter `taskID` is required when calling `UpdateTask`.");
       if (taskUpdate == null)
-        throw new ApiException(400, "Missing required parameter 'taskUpdate' when calling IngestionClient->UpdateTask");
-
+        throw new ApiException(400, "Parameter `taskUpdate` is required when calling `UpdateTask`.");
       var requestOptions = new InternalRequestOptions(options);
 
       requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));

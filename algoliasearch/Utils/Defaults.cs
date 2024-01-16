@@ -17,6 +17,11 @@ namespace Algolia.Search.Utils
     /// </summary>
     public static TimeSpan WriteTimeout = TimeSpan.FromSeconds(30);
 
+    /// <summary>
+    /// Connect timeout
+    /// </summary>
+    public static TimeSpan ConnectTimeout = TimeSpan.FromSeconds(2);
+
     public const string AcceptHeader = "Accept";
     public const string AlgoliaApplicationHeader = "X-Algolia-Application-Id";
     public const string AlgoliaApiKeyHeader = "X-Algolia-API-Key";
