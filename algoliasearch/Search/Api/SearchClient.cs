@@ -124,19 +124,6 @@ namespace Algolia.Search.Clients
     /// <returns>Task of BrowseResponse<T></returns>
     Task<BrowseResponse<T>> BrowseAsync<T>(string indexName, BrowseParams browseParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
-    /// Delete all synonyms.
-    /// </summary>
-    /// <remarks>
-    /// Delete all synonyms in the index.
-    /// </remarks>
-    /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
-    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of UpdatedAtResponse</returns>
-    Task<UpdatedAtResponse> ClearAllSynonymsAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
-    /// <summary>
     /// Delete all records from an index.
     /// </summary>
     /// <remarks>
@@ -161,6 +148,19 @@ namespace Algolia.Search.Clients
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of UpdatedAtResponse</returns>
     Task<UpdatedAtResponse> ClearRulesAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+    /// <summary>
+    /// Delete all synonyms.
+    /// </summary>
+    /// <remarks>
+    /// Delete all synonyms in the index.
+    /// </remarks>
+    /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="indexName">Index on which to perform the request.</param>
+    /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of UpdatedAtResponse</returns>
+    Task<UpdatedAtResponse> ClearSynonymsAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Send requests to the Algolia REST API.
     /// </summary>
@@ -1043,27 +1043,6 @@ namespace Algolia.Search.Clients
     }
 
     /// <summary>
-    /// Delete all synonyms. Delete all synonyms in the index.
-    /// </summary>
-    /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
-    /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
-    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-    /// <returns>Task of UpdatedAtResponse</returns>
-    public async Task<UpdatedAtResponse> ClearAllSynonymsAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
-    {
-      if (indexName == null)
-        throw new ApiException(400, "Parameter `indexName` is required when calling `ClearAllSynonyms`.");
-      var requestOptions = new InternalRequestOptions(options);
-
-      requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-
-      requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
-      return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/synonyms/clear", requestOptions, cancellationToken).ConfigureAwait(false);
-    }
-
-    /// <summary>
     /// Delete all records from an index. Delete the records but leave settings and index-specific API keys untouched.
     /// </summary>
     /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1101,6 +1080,27 @@ namespace Algolia.Search.Clients
 
       requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
       return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/rules/clear", requestOptions, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Delete all synonyms. Delete all synonyms in the index.
+    /// </summary>
+    /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="indexName">Index on which to perform the request.</param>
+    /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
+    /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of UpdatedAtResponse</returns>
+    public async Task<UpdatedAtResponse> ClearSynonymsAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+    {
+      if (indexName == null)
+        throw new ApiException(400, "Parameter `indexName` is required when calling `ClearSynonyms`.");
+      var requestOptions = new InternalRequestOptions(options);
+
+      requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+
+      requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
+      return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/synonyms/clear", requestOptions, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
