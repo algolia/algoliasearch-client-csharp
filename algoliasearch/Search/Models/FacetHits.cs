@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Search
     /// <param name="value">Facet value. (required).</param>
     /// <param name="highlighted">Markup text with &#x60;facetQuery&#x60; matches highlighted. (required).</param>
     /// <param name="count">Number of records containing this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the [counts may not be exhaustive](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). (required).</param>
-    public FacetHits(string value, string highlighted, int count)
+    public FacetHits(string value, string highlighted, int? count)
     {
       this.Value = value ?? throw new ArgumentNullException("value is a required property for FacetHits and cannot be null");
       this.Highlighted = highlighted ?? throw new ArgumentNullException("highlighted is a required property for FacetHits and cannot be null");
@@ -46,22 +46,22 @@ namespace Algolia.Search.Models.Search
     /// Facet value.
     /// </summary>
     /// <value>Facet value.</value>
-    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
     public string Value { get; set; }
 
     /// <summary>
     /// Markup text with &#x60;facetQuery&#x60; matches highlighted.
     /// </summary>
     /// <value>Markup text with &#x60;facetQuery&#x60; matches highlighted.</value>
-    [DataMember(Name = "highlighted", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "highlighted", IsRequired = true, EmitDefaultValue = false)]
     public string Highlighted { get; set; }
 
     /// <summary>
     /// Number of records containing this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the [counts may not be exhaustive](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
     /// </summary>
     /// <value>Number of records containing this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the [counts may not be exhaustive](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -48,7 +48,7 @@ namespace Algolia.Search.Models.Ingestion
     /// The index name to store data in.
     /// </summary>
     /// <value>The index name to store data in.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>

@@ -43,13 +43,13 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets UserID
     /// </summary>
-    [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = false)]
     public HighlightResult UserID { get; set; }
 
     /// <summary>
     /// Gets or Sets ClusterName
     /// </summary>
-    [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = false)]
     public HighlightResult ClusterName { get; set; }
 
     /// <summary>

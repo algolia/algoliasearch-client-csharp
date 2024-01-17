@@ -28,13 +28,13 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Status
     /// </summary>
-    [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = false)]
     public EventStatus Status { get; set; }
 
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public EventType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="Event" /> class.
@@ -50,7 +50,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <param name="type">type (required).</param>
     /// <param name="batchSize">The extracted record batch size. (required).</param>
     /// <param name="publishedAt">Date of publish (RFC3339 format). (required).</param>
-    public Event(string eventID, string runID, EventStatus status, EventType type, int batchSize, string publishedAt)
+    public Event(string eventID, string runID, EventStatus status, EventType type, int? batchSize, string publishedAt)
     {
       this.EventID = eventID ?? throw new ArgumentNullException("eventID is a required property for Event and cannot be null");
       this.RunID = runID ?? throw new ArgumentNullException("runID is a required property for Event and cannot be null");
@@ -64,14 +64,14 @@ namespace Algolia.Search.Models.Ingestion
     /// The event UUID.
     /// </summary>
     /// <value>The event UUID.</value>
-    [DataMember(Name = "eventID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventID", IsRequired = true, EmitDefaultValue = false)]
     public string EventID { get; set; }
 
     /// <summary>
     /// The run UUID.
     /// </summary>
     /// <value>The run UUID.</value>
-    [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = false)]
     public string RunID { get; set; }
 
     /// <summary>
@@ -85,8 +85,8 @@ namespace Algolia.Search.Models.Ingestion
     /// The extracted record batch size.
     /// </summary>
     /// <value>The extracted record batch size.</value>
-    [DataMember(Name = "batchSize", IsRequired = true, EmitDefaultValue = true)]
-    public int BatchSize { get; set; }
+    [DataMember(Name = "batchSize", IsRequired = true, EmitDefaultValue = false)]
+    public int? BatchSize { get; set; }
 
     /// <summary>
     /// Gets or Sets Data
@@ -98,7 +98,7 @@ namespace Algolia.Search.Models.Ingestion
     /// Date of publish (RFC3339 format).
     /// </summary>
     /// <value>Date of publish (RFC3339 format).</value>
-    [DataMember(Name = "publishedAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "publishedAt", IsRequired = true, EmitDefaultValue = false)]
     public string PublishedAt { get; set; }
 
     /// <summary>

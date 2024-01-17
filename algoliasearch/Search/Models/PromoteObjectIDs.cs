@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Search
     /// </summary>
     /// <param name="objectIDs">Unique identifiers of the records to promote. (required).</param>
     /// <param name="position">The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions. (required).</param>
-    public PromoteObjectIDs(List<string> objectIDs, int position)
+    public PromoteObjectIDs(List<string> objectIDs, int? position)
     {
       this.ObjectIDs = objectIDs ?? throw new ArgumentNullException("objectIDs is a required property for PromoteObjectIDs and cannot be null");
       this.Position = position;
@@ -44,15 +44,15 @@ namespace Algolia.Search.Models.Search
     /// Unique identifiers of the records to promote.
     /// </summary>
     /// <value>Unique identifiers of the records to promote.</value>
-    [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = false)]
     public List<string> ObjectIDs { get; set; }
 
     /// <summary>
     /// The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.
     /// </summary>
     /// <value>The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.</value>
-    [DataMember(Name = "position", IsRequired = true, EmitDefaultValue = true)]
-    public int Position { get; set; }
+    [DataMember(Name = "position", IsRequired = true, EmitDefaultValue = false)]
+    public int? Position { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

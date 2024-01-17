@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Abtesting
     /// <param name="abtests">A/B tests. (required).</param>
     /// <param name="count">Number of A/B tests implemented. (required).</param>
     /// <param name="total">Number of retrievable A/B tests. (required).</param>
-    public ListABTestsResponse(List<ABTest> abtests, int count, int total)
+    public ListABTestsResponse(List<ABTest> abtests, int? count, int? total)
     {
       this.Abtests = abtests ?? throw new ArgumentNullException("abtests is a required property for ListABTestsResponse and cannot be null");
       this.Count = count;
@@ -46,22 +46,22 @@ namespace Algolia.Search.Models.Abtesting
     /// A/B tests.
     /// </summary>
     /// <value>A/B tests.</value>
-    [DataMember(Name = "abtests", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "abtests", IsRequired = true, EmitDefaultValue = false)]
     public List<ABTest> Abtests { get; set; }
 
     /// <summary>
     /// Number of A/B tests implemented.
     /// </summary>
     /// <value>Number of A/B tests implemented.</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Number of retrievable A/B tests.
     /// </summary>
     /// <value>Number of retrievable A/B tests.</value>
-    [DataMember(Name = "total", IsRequired = true, EmitDefaultValue = true)]
-    public int Total { get; set; }
+    [DataMember(Name = "total", IsRequired = true, EmitDefaultValue = false)]
+    public int? Total { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Analytics
     /// Countries
     /// </summary>
     /// <value>Countries</value>
-    [DataMember(Name = "countries", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "countries", IsRequired = true, EmitDefaultValue = false)]
     public List<TopCountry> Countries { get; set; }
 
     /// <summary>

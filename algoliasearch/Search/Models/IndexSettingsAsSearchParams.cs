@@ -129,7 +129,7 @@ namespace Algolia.Search.Models.Search
     /// Restrict highlighting and snippeting to items that matched the query.
     /// </summary>
     /// <value>Restrict highlighting and snippeting to items that matched the query.</value>
-    [DataMember(Name = "restrictHighlightAndSnippetArrays", EmitDefaultValue = true)]
+    [DataMember(Name = "restrictHighlightAndSnippetArrays", EmitDefaultValue = false)]
     public bool? RestrictHighlightAndSnippetArrays { get; set; }
 
     /// <summary>
@@ -163,7 +163,7 @@ namespace Algolia.Search.Models.Search
     /// Whether to allow typos on numbers (\&quot;numeric tokens\&quot;) in the query string.
     /// </summary>
     /// <value>Whether to allow typos on numbers (\&quot;numeric tokens\&quot;) in the query string.</value>
-    [DataMember(Name = "allowTyposOnNumericTokens", EmitDefaultValue = true)]
+    [DataMember(Name = "allowTyposOnNumericTokens", EmitDefaultValue = false)]
     public bool? AllowTyposOnNumericTokens { get; set; }
 
     /// <summary>
@@ -203,21 +203,21 @@ namespace Algolia.Search.Models.Search
     /// [Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query. 
     /// </summary>
     /// <value>[Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query. </value>
-    [DataMember(Name = "decompoundQuery", EmitDefaultValue = true)]
+    [DataMember(Name = "decompoundQuery", EmitDefaultValue = false)]
     public bool? DecompoundQuery { get; set; }
 
     /// <summary>
     /// Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.
     /// </summary>
     /// <value>Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.</value>
-    [DataMember(Name = "enableRules", EmitDefaultValue = true)]
+    [DataMember(Name = "enableRules", EmitDefaultValue = false)]
     public bool? EnableRules { get; set; }
 
     /// <summary>
     /// Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.
     /// </summary>
     /// <value>Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.</value>
-    [DataMember(Name = "enablePersonalization", EmitDefaultValue = true)]
+    [DataMember(Name = "enablePersonalization", EmitDefaultValue = false)]
     public bool? EnablePersonalization { get; set; }
 
     /// <summary>
@@ -230,7 +230,7 @@ namespace Algolia.Search.Models.Search
     /// Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).
     /// </summary>
     /// <value>Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).</value>
-    [DataMember(Name = "advancedSyntax", EmitDefaultValue = true)]
+    [DataMember(Name = "advancedSyntax", EmitDefaultValue = false)]
     public bool? AdvancedSyntax { get; set; }
 
     /// <summary>
@@ -271,7 +271,7 @@ namespace Algolia.Search.Models.Search
     /// Whether to highlight and snippet the original word that matches the synonym or the synonym itself.
     /// </summary>
     /// <value>Whether to highlight and snippet the original word that matches the synonym or the synonym itself.</value>
-    [DataMember(Name = "replaceSynonymsInHighlight", EmitDefaultValue = true)]
+    [DataMember(Name = "replaceSynonymsInHighlight", EmitDefaultValue = false)]
     public bool? ReplaceSynonymsInHighlight { get; set; }
 
     /// <summary>
@@ -313,7 +313,7 @@ namespace Algolia.Search.Models.Search
     /// When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.
     /// </summary>
     /// <value>When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.</value>
-    [DataMember(Name = "attributeCriteriaComputedByMinProximity", EmitDefaultValue = true)]
+    [DataMember(Name = "attributeCriteriaComputedByMinProximity", EmitDefaultValue = false)]
     public bool? AttributeCriteriaComputedByMinProximity { get; set; }
 
     /// <summary>
@@ -326,13 +326,13 @@ namespace Algolia.Search.Models.Search
     /// Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
     /// </summary>
     /// <value>Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).</value>
-    [DataMember(Name = "enableReRanking", EmitDefaultValue = true)]
+    [DataMember(Name = "enableReRanking", EmitDefaultValue = false)]
     public bool? EnableReRanking { get; set; }
 
     /// <summary>
     /// Gets or Sets ReRankingApplyFilter
     /// </summary>
-    [DataMember(Name = "reRankingApplyFilter", EmitDefaultValue = true)]
+    [DataMember(Name = "reRankingApplyFilter", EmitDefaultValue = false)]
     public ReRankingApplyFilter ReRankingApplyFilter { get; set; }
 
     /// <summary>

@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Ingestion
     /// Algolia Application ID.
     /// </summary>
     /// <value>Algolia Application ID.</value>
-    [DataMember(Name = "appID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "appID", IsRequired = true, EmitDefaultValue = false)]
     public string AppID { get; set; }
 
     /// <summary>
     /// Algolia API Key, with the correct rights to push to an index and change settings.
     /// </summary>
     /// <value>Algolia API Key, with the correct rights to push to an index and change settings.</value>
-    [DataMember(Name = "apiKey", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "apiKey", IsRequired = true, EmitDefaultValue = false)]
     public string ApiKey { get; set; }
 
     /// <summary>

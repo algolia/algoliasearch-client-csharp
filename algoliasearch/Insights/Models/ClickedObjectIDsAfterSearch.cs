@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Insights
     /// <summary>
     /// Gets or Sets EventType
     /// </summary>
-    [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = false)]
     public ClickEvent EventType { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="ClickedObjectIDsAfterSearch" /> class.
@@ -60,42 +60,42 @@ namespace Algolia.Search.Models.Insights
     /// The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
     /// </summary>
     /// <value>The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
-    [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = false)]
     public string EventName { get; set; }
 
     /// <summary>
     /// The name of an Algolia index.
     /// </summary>
     /// <value>The name of an Algolia index.</value>
-    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
     public string Index { get; set; }
 
     /// <summary>
     /// The object IDs of the records that are part of the event.
     /// </summary>
     /// <value>The object IDs of the records that are part of the event.</value>
-    [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = false)]
     public List<string> ObjectIDs { get; set; }
 
     /// <summary>
     /// The position of the clicked item the search results.  The first search result has a position of 1 (not 0). You must provide 1 &#x60;position&#x60; for each &#x60;objectID&#x60;. 
     /// </summary>
     /// <value>The position of the clicked item the search results.  The first search result has a position of 1 (not 0). You must provide 1 &#x60;position&#x60; for each &#x60;objectID&#x60;. </value>
-    [DataMember(Name = "positions", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "positions", IsRequired = true, EmitDefaultValue = false)]
     public List<int> Positions { get; set; }
 
     /// <summary>
     /// Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add &#x60;clickAnalytics: true&#x60; as a search request parameter, the query ID is included in the API response. 
     /// </summary>
     /// <value>Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add &#x60;clickAnalytics: true&#x60; as a search request parameter, the query ID is included in the API response. </value>
-    [DataMember(Name = "queryID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "queryID", IsRequired = true, EmitDefaultValue = false)]
     public string QueryID { get; set; }
 
     /// <summary>
     /// An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. 
     /// </summary>
     /// <value>An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. </value>
-    [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = false)]
     public string UserToken { get; set; }
 
     /// <summary>

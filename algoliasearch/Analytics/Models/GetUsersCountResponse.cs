@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Analytics
     /// </summary>
     /// <param name="count">Number of occurrences. (required).</param>
     /// <param name="dates">User count. (required).</param>
-    public GetUsersCountResponse(int count, List<UserWithDate> dates)
+    public GetUsersCountResponse(int? count, List<UserWithDate> dates)
     {
       this.Count = count;
       this.Dates = dates ?? throw new ArgumentNullException("dates is a required property for GetUsersCountResponse and cannot be null");
@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Analytics
     /// Number of occurrences.
     /// </summary>
     /// <value>Number of occurrences.</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// User count.
     /// </summary>
     /// <value>User count.</value>
-    [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = false)]
     public List<UserWithDate> Dates { get; set; }
 
     /// <summary>

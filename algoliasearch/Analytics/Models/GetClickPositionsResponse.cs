@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Analytics
     /// Click positions.
     /// </summary>
     /// <value>Click positions.</value>
-    [DataMember(Name = "positions", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "positions", IsRequired = true, EmitDefaultValue = false)]
     public List<ClickPosition> Positions { get; set; }
 
     /// <summary>

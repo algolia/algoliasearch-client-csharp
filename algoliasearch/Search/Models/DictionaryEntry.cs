@@ -54,14 +54,14 @@ namespace Algolia.Search.Models.Search
     /// Unique identifier for a dictionary object.
     /// </summary>
     /// <value>Unique identifier for a dictionary object.</value>
-    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
     public string ObjectID { get; set; }
 
     /// <summary>
     /// [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). 
     /// </summary>
     /// <value>[Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). </value>
-    [DataMember(Name = "language", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "language", IsRequired = true, EmitDefaultValue = false)]
     public string Language { get; set; }
 
     /// <summary>

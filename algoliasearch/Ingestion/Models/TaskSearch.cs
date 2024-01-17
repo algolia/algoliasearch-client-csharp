@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets TaskIDs
     /// </summary>
-    [DataMember(Name = "taskIDs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "taskIDs", IsRequired = true, EmitDefaultValue = false)]
     public List<string> TaskIDs { get; set; }
 
     /// <summary>

@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Abtesting
     /// <summary>
     /// Gets or Sets CustomSearchParameters
     /// </summary>
-    [DataMember(Name = "customSearchParameters", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "customSearchParameters", IsRequired = true, EmitDefaultValue = false)]
     public Object CustomSearchParameters { get; set; }
 
     /// <summary>

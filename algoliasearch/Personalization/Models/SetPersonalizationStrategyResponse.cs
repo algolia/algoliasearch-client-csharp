@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Personalization
     /// A message confirming the strategy update.
     /// </summary>
     /// <value>A message confirming the strategy update.</value>
-    [DataMember(Name = "message", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "message", IsRequired = true, EmitDefaultValue = false)]
     public string Message { get; set; }
 
     /// <summary>

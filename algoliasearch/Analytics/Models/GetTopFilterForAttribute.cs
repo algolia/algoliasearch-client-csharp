@@ -36,7 +36,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="varOperator">Operator. (required).</param>
     /// <param name="value">Attribute value. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
-    public GetTopFilterForAttribute(string attribute, string varOperator, string value, int count)
+    public GetTopFilterForAttribute(string attribute, string varOperator, string value, int? count)
     {
       this.Attribute = attribute ?? throw new ArgumentNullException("attribute is a required property for GetTopFilterForAttribute and cannot be null");
       this.VarOperator = varOperator ?? throw new ArgumentNullException("varOperator is a required property for GetTopFilterForAttribute and cannot be null");
@@ -48,29 +48,29 @@ namespace Algolia.Search.Models.Analytics
     /// Attribute name.
     /// </summary>
     /// <value>Attribute name.</value>
-    [DataMember(Name = "attribute", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "attribute", IsRequired = true, EmitDefaultValue = false)]
     public string Attribute { get; set; }
 
     /// <summary>
     /// Operator.
     /// </summary>
     /// <value>Operator.</value>
-    [DataMember(Name = "operator", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "operator", IsRequired = true, EmitDefaultValue = false)]
     public string VarOperator { get; set; }
 
     /// <summary>
     /// Attribute value.
     /// </summary>
     /// <value>Attribute value.</value>
-    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
     public string Value { get; set; }
 
     /// <summary>
     /// Number of occurrences.
     /// </summary>
     /// <value>Number of occurrences.</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Search
     /// </summary>
     /// <param name="facetHits">facetHits (required).</param>
     /// <param name="exhaustiveFacetsCount">See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response. (required).</param>
-    public SearchForFacetValuesResponse(List<FacetHits> facetHits, bool exhaustiveFacetsCount)
+    public SearchForFacetValuesResponse(List<FacetHits> facetHits, bool? exhaustiveFacetsCount)
     {
       this.FacetHits = facetHits ?? throw new ArgumentNullException("facetHits is a required property for SearchForFacetValuesResponse and cannot be null");
       this.ExhaustiveFacetsCount = exhaustiveFacetsCount;
@@ -43,16 +43,16 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets FacetHits
     /// </summary>
-    [DataMember(Name = "facetHits", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "facetHits", IsRequired = true, EmitDefaultValue = false)]
     public List<FacetHits> FacetHits { get; set; }
 
     /// <summary>
     /// See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response.
     /// </summary>
     /// <value>See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response.</value>
-    [DataMember(Name = "exhaustiveFacetsCount", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "exhaustiveFacetsCount", IsRequired = true, EmitDefaultValue = false)]
     [Obsolete]
-    public bool ExhaustiveFacetsCount { get; set; }
+    public bool? ExhaustiveFacetsCount { get; set; }
 
     /// <summary>
     /// Time the server took to process the request, in milliseconds.

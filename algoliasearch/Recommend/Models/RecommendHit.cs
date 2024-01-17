@@ -48,7 +48,7 @@ namespace Algolia.Search.Models.Recommend
     /// Unique object identifier.
     /// </summary>
     /// <value>Unique object identifier.</value>
-    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
     public string ObjectID { get; set; }
 
     /// <summary>
@@ -81,7 +81,7 @@ namespace Algolia.Search.Models.Recommend
     /// Recommendation score.
     /// </summary>
     /// <value>Recommendation score.</value>
-    [DataMember(Name = "_score", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "_score", IsRequired = true, EmitDefaultValue = false)]
     public double Score { get; set; }
 
     /// <summary>

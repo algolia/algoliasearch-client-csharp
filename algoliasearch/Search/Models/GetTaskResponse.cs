@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Status
     /// </summary>
-    [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = false)]
     public TaskStatus Status { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="GetTaskResponse" /> class.

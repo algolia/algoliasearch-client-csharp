@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Ingestion
     /// A cron expression that represent at which regularity the task should run.
     /// </summary>
     /// <value>A cron expression that represent at which regularity the task should run.</value>
-    [DataMember(Name = "cron", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "cron", IsRequired = true, EmitDefaultValue = false)]
     public string Cron { get; set; }
 
     /// <summary>

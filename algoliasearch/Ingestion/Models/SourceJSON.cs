@@ -48,7 +48,7 @@ namespace Algolia.Search.Models.Ingestion
     /// The URL of the file.
     /// </summary>
     /// <value>The URL of the file.</value>
-    [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = false)]
     public string Url { get; set; }
 
     /// <summary>

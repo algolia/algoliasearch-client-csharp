@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Ingestion
     /// The prefix of the final index name.
     /// </summary>
     /// <value>The prefix of the final index name.</value>
-    [DataMember(Name = "indexPrefix", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexPrefix", IsRequired = true, EmitDefaultValue = false)]
     public string IndexPrefix { get; set; }
 
     /// <summary>

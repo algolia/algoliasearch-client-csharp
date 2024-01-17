@@ -46,20 +46,20 @@ namespace Algolia.Search.Models.Ingestion
     /// The source UUID.
     /// </summary>
     /// <value>The source UUID.</value>
-    [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = false)]
     public string SourceID { get; set; }
 
     /// <summary>
     /// Gets or Sets Name
     /// </summary>
-    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
     public string Name { get; set; }
 
     /// <summary>
     /// Date of creation (RFC3339 format).
     /// </summary>
     /// <value>Date of creation (RFC3339 format).</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public string CreatedAt { get; set; }
 
     /// <summary>

@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Search
     /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;. 
     /// </summary>
     /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;. </value>
-    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
     public long TaskID { get; set; }
 
     /// <summary>
     /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
     /// </summary>
     /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
     public string UpdatedAt { get; set; }
 
     /// <summary>

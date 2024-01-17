@@ -36,7 +36,7 @@ namespace Algolia.Search.Models.Search
     /// <param name="clusterName">Cluster to which the user is assigned. (required).</param>
     /// <param name="nbRecords">Number of records belonging to the user. (required).</param>
     /// <param name="dataSize">Data size used by the user. (required).</param>
-    public UserId(string varUserID, string clusterName, int nbRecords, int dataSize)
+    public UserId(string varUserID, string clusterName, int? nbRecords, int? dataSize)
     {
       this.VarUserID = varUserID ?? throw new ArgumentNullException("varUserID is a required property for UserId and cannot be null");
       this.ClusterName = clusterName ?? throw new ArgumentNullException("clusterName is a required property for UserId and cannot be null");
@@ -48,29 +48,29 @@ namespace Algolia.Search.Models.Search
     /// userID of the user.
     /// </summary>
     /// <value>userID of the user.</value>
-    [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = false)]
     public string VarUserID { get; set; }
 
     /// <summary>
     /// Cluster to which the user is assigned.
     /// </summary>
     /// <value>Cluster to which the user is assigned.</value>
-    [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = false)]
     public string ClusterName { get; set; }
 
     /// <summary>
     /// Number of records belonging to the user.
     /// </summary>
     /// <value>Number of records belonging to the user.</value>
-    [DataMember(Name = "nbRecords", IsRequired = true, EmitDefaultValue = true)]
-    public int NbRecords { get; set; }
+    [DataMember(Name = "nbRecords", IsRequired = true, EmitDefaultValue = false)]
+    public int? NbRecords { get; set; }
 
     /// <summary>
     /// Data size used by the user.
     /// </summary>
     /// <value>Data size used by the user.</value>
-    [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = true)]
-    public int DataSize { get; set; }
+    [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = false)]
+    public int? DataSize { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

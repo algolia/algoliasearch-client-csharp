@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
     /// </summary>
     /// <value>Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public string CreatedAt { get; set; }
 
     /// <summary>

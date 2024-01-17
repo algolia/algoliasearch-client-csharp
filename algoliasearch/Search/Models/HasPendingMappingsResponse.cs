@@ -33,7 +33,7 @@ namespace Algolia.Search.Models.Search
     /// Initializes a new instance of the <see cref="HasPendingMappingsResponse" /> class.
     /// </summary>
     /// <param name="pending">Indicates whether there are clusters undergoing migration, creation, or deletion. (required).</param>
-    public HasPendingMappingsResponse(bool pending)
+    public HasPendingMappingsResponse(bool? pending)
     {
       this.Pending = pending;
     }
@@ -42,8 +42,8 @@ namespace Algolia.Search.Models.Search
     /// Indicates whether there are clusters undergoing migration, creation, or deletion.
     /// </summary>
     /// <value>Indicates whether there are clusters undergoing migration, creation, or deletion.</value>
-    [DataMember(Name = "pending", IsRequired = true, EmitDefaultValue = true)]
-    public bool Pending { get; set; }
+    [DataMember(Name = "pending", IsRequired = true, EmitDefaultValue = false)]
+    public bool? Pending { get; set; }
 
     /// <summary>
     /// Cluster pending mapping state: migrating, creating, deleting. 

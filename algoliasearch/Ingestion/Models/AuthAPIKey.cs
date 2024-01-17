@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Key
     /// </summary>
-    [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = false)]
     public string Key { get; set; }
 
     /// <summary>

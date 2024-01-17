@@ -45,19 +45,19 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Runs
     /// </summary>
-    [DataMember(Name = "runs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "runs", IsRequired = true, EmitDefaultValue = false)]
     public List<Run> Runs { get; set; }
 
     /// <summary>
     /// Gets or Sets Pagination
     /// </summary>
-    [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = false)]
     public Pagination Pagination { get; set; }
 
     /// <summary>
     /// Gets or Sets Window
     /// </summary>
-    [DataMember(Name = "window", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "window", IsRequired = true, EmitDefaultValue = false)]
     public Window Window { get; set; }
 
     /// <summary>

@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets MatchLevel
     /// </summary>
-    [DataMember(Name = "matchLevel", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "matchLevel", IsRequired = true, EmitDefaultValue = false)]
     public MatchLevel MatchLevel { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="HighlightResultOption" /> class.
@@ -52,21 +52,21 @@ namespace Algolia.Search.Models.Search
     /// Markup text with &#x60;facetQuery&#x60; matches highlighted.
     /// </summary>
     /// <value>Markup text with &#x60;facetQuery&#x60; matches highlighted.</value>
-    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
     public string Value { get; set; }
 
     /// <summary>
     /// List of words from the query that matched the object.
     /// </summary>
     /// <value>List of words from the query that matched the object.</value>
-    [DataMember(Name = "matchedWords", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "matchedWords", IsRequired = true, EmitDefaultValue = false)]
     public List<string> MatchedWords { get; set; }
 
     /// <summary>
     /// Whether the entire attribute value is highlighted.
     /// </summary>
     /// <value>Whether the entire attribute value is highlighted.</value>
-    [DataMember(Name = "fullyHighlighted", EmitDefaultValue = true)]
+    [DataMember(Name = "fullyHighlighted", EmitDefaultValue = false)]
     public bool? FullyHighlighted { get; set; }
 
     /// <summary>

@@ -40,7 +40,7 @@ namespace Algolia.Search.Models.Search
     /// <param name="nbPages">Number of pages of results for the current query. (required).</param>
     /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
     /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
-    public BaseSearchResponse(int hitsPerPage, int nbHits, int nbPages, int page, int processingTimeMS)
+    public BaseSearchResponse(int? hitsPerPage, int? nbHits, int? nbPages, int? page, int? processingTimeMS)
     {
       this.HitsPerPage = hitsPerPage;
       this.NbHits = nbHits;
@@ -88,7 +88,7 @@ namespace Algolia.Search.Models.Search
     /// See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response.
     /// </summary>
     /// <value>See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response.</value>
-    [DataMember(Name = "exhaustiveFacetsCount", EmitDefaultValue = true)]
+    [DataMember(Name = "exhaustiveFacetsCount", EmitDefaultValue = false)]
     [Obsolete]
     public bool? ExhaustiveFacetsCount { get; set; }
 
@@ -96,7 +96,7 @@ namespace Algolia.Search.Models.Search
     /// See the &#x60;nbHits&#x60; field of the &#x60;exhaustive&#x60; object in the response.
     /// </summary>
     /// <value>See the &#x60;nbHits&#x60; field of the &#x60;exhaustive&#x60; object in the response.</value>
-    [DataMember(Name = "exhaustiveNbHits", EmitDefaultValue = true)]
+    [DataMember(Name = "exhaustiveNbHits", EmitDefaultValue = false)]
     [Obsolete]
     public bool? ExhaustiveNbHits { get; set; }
 
@@ -104,7 +104,7 @@ namespace Algolia.Search.Models.Search
     /// See the &#x60;typo&#x60; field of the &#x60;exhaustive&#x60; object in the response.
     /// </summary>
     /// <value>See the &#x60;typo&#x60; field of the &#x60;exhaustive&#x60; object in the response.</value>
-    [DataMember(Name = "exhaustiveTypo", EmitDefaultValue = true)]
+    [DataMember(Name = "exhaustiveTypo", EmitDefaultValue = false)]
     [Obsolete]
     public bool? ExhaustiveTypo { get; set; }
 
@@ -126,8 +126,8 @@ namespace Algolia.Search.Models.Search
     /// Number of hits per page.
     /// </summary>
     /// <value>Number of hits per page.</value>
-    [DataMember(Name = "hitsPerPage", IsRequired = true, EmitDefaultValue = true)]
-    public int HitsPerPage { get; set; }
+    [DataMember(Name = "hitsPerPage", IsRequired = true, EmitDefaultValue = false)]
+    public int? HitsPerPage { get; set; }
 
     /// <summary>
     /// Index name used for the query.
@@ -154,15 +154,15 @@ namespace Algolia.Search.Models.Search
     /// Number of hits the search query matched.
     /// </summary>
     /// <value>Number of hits the search query matched.</value>
-    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = true)]
-    public int NbHits { get; set; }
+    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
+    public int? NbHits { get; set; }
 
     /// <summary>
     /// Number of pages of results for the current query.
     /// </summary>
     /// <value>Number of pages of results for the current query.</value>
-    [DataMember(Name = "nbPages", IsRequired = true, EmitDefaultValue = true)]
-    public int NbPages { get; set; }
+    [DataMember(Name = "nbPages", IsRequired = true, EmitDefaultValue = false)]
+    public int? NbPages { get; set; }
 
     /// <summary>
     /// Number of hits selected and sorted by the relevant sort algorithm.
@@ -175,8 +175,8 @@ namespace Algolia.Search.Models.Search
     /// Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).
     /// </summary>
     /// <value>Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).</value>
-    [DataMember(Name = "page", IsRequired = true, EmitDefaultValue = true)]
-    public int Page { get; set; }
+    [DataMember(Name = "page", IsRequired = true, EmitDefaultValue = false)]
+    public int? Page { get; set; }
 
     /// <summary>
     /// Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.
@@ -189,8 +189,8 @@ namespace Algolia.Search.Models.Search
     /// Time the server took to process the request, in milliseconds.
     /// </summary>
     /// <value>Time the server took to process the request, in milliseconds.</value>
-    [DataMember(Name = "processingTimeMS", IsRequired = true, EmitDefaultValue = true)]
-    public int ProcessingTimeMS { get; set; }
+    [DataMember(Name = "processingTimeMS", IsRequired = true, EmitDefaultValue = false)]
+    public int? ProcessingTimeMS { get; set; }
 
     /// <summary>
     /// Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.
@@ -236,7 +236,7 @@ namespace Algolia.Search.Models.Search
     /// Lets you store custom data in your indices.
     /// </summary>
     /// <value>Lets you store custom data in your indices.</value>
-    [DataMember(Name = "userData", EmitDefaultValue = true)]
+    [DataMember(Name = "userData", EmitDefaultValue = false)]
     public Object UserData { get; set; }
 
     /// <summary>

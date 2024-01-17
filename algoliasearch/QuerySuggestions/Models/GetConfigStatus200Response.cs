@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.QuerySuggestions
     /// Indicates whether the creation or update of the Query Suggestions is in progress.
     /// </summary>
     /// <value>Indicates whether the creation or update of the Query Suggestions is in progress.</value>
-    [DataMember(Name = "isRunning", EmitDefaultValue = true)]
+    [DataMember(Name = "isRunning", EmitDefaultValue = false)]
     public bool? IsRunning { get; set; }
 
     /// <summary>

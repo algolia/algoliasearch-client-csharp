@@ -48,7 +48,7 @@ namespace Algolia.Search.Models.Recommend
     /// Only use in combination with the &#x60;promote&#x60; consequence. When &#x60;true&#x60;, promoted results will be restricted to match the filters of the current search. When &#x60;false&#x60;, the promoted results will show up regardless of the filters.
     /// </summary>
     /// <value>Only use in combination with the &#x60;promote&#x60; consequence. When &#x60;true&#x60;, promoted results will be restricted to match the filters of the current search. When &#x60;false&#x60;, the promoted results will show up regardless of the filters.</value>
-    [DataMember(Name = "filterPromotes", EmitDefaultValue = true)]
+    [DataMember(Name = "filterPromotes", EmitDefaultValue = false)]
     public bool? FilterPromotes { get; set; }
 
     /// <summary>
@@ -62,7 +62,7 @@ namespace Algolia.Search.Models.Recommend
     /// Custom JSON object that will be appended to the userData array in the response. This object isn&#39;t interpreted by the API. It&#39;s limited to 1kB of minified JSON.
     /// </summary>
     /// <value>Custom JSON object that will be appended to the userData array in the response. This object isn&#39;t interpreted by the API. It&#39;s limited to 1kB of minified JSON.</value>
-    [DataMember(Name = "userData", EmitDefaultValue = true)]
+    [DataMember(Name = "userData", EmitDefaultValue = false)]
     public Object UserData { get; set; }
 
     /// <summary>

@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Search
     /// TaskIDs per index.
     /// </summary>
     /// <value>TaskIDs per index.</value>
-    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
     public Dictionary<string, long> TaskID { get; set; }
 
     /// <summary>
     /// Unique object (record) identifiers.
     /// </summary>
     /// <value>Unique object (record) identifiers.</value>
-    [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = false)]
     public List<string> ObjectIDs { get; set; }
 
     /// <summary>

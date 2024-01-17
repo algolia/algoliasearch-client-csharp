@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Action
     /// </summary>
-    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = false)]
     public DictionaryAction Action { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchDictionaryEntriesRequest" /> class.
@@ -49,7 +49,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Body
     /// </summary>
-    [DataMember(Name = "body", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "body", IsRequired = true, EmitDefaultValue = false)]
     public DictionaryEntry Body { get; set; }
 
     /// <summary>

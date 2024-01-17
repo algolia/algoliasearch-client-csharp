@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Insights
     /// List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. 
     /// </summary>
     /// <value>List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. </value>
-    [DataMember(Name = "events", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "events", IsRequired = true, EmitDefaultValue = false)]
     public List<EventsItems> Events { get; set; }
 
     /// <summary>

@@ -62,77 +62,77 @@ namespace Algolia.Search.Models.Search
     /// Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
     /// </summary>
     /// <value>Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-    [DataMember(Name = "timestamp", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "timestamp", IsRequired = true, EmitDefaultValue = false)]
     public string Timestamp { get; set; }
 
     /// <summary>
     /// HTTP method of the performed request.
     /// </summary>
     /// <value>HTTP method of the performed request.</value>
-    [DataMember(Name = "method", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "method", IsRequired = true, EmitDefaultValue = false)]
     public string Method { get; set; }
 
     /// <summary>
     /// HTTP response code.
     /// </summary>
     /// <value>HTTP response code.</value>
-    [DataMember(Name = "answer_code", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "answer_code", IsRequired = true, EmitDefaultValue = false)]
     public string AnswerCode { get; set; }
 
     /// <summary>
     /// Request body. Truncated after 1,000 characters.
     /// </summary>
     /// <value>Request body. Truncated after 1,000 characters.</value>
-    [DataMember(Name = "query_body", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "query_body", IsRequired = true, EmitDefaultValue = false)]
     public string QueryBody { get; set; }
 
     /// <summary>
     /// Answer body. Truncated after 1,000 characters.
     /// </summary>
     /// <value>Answer body. Truncated after 1,000 characters.</value>
-    [DataMember(Name = "answer", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "answer", IsRequired = true, EmitDefaultValue = false)]
     public string Answer { get; set; }
 
     /// <summary>
     /// Request URL.
     /// </summary>
     /// <value>Request URL.</value>
-    [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = false)]
     public string Url { get; set; }
 
     /// <summary>
     /// IP address of the client that performed the request.
     /// </summary>
     /// <value>IP address of the client that performed the request.</value>
-    [DataMember(Name = "ip", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "ip", IsRequired = true, EmitDefaultValue = false)]
     public string Ip { get; set; }
 
     /// <summary>
     /// Request headers (API key is obfuscated).
     /// </summary>
     /// <value>Request headers (API key is obfuscated).</value>
-    [DataMember(Name = "query_headers", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "query_headers", IsRequired = true, EmitDefaultValue = false)]
     public string QueryHeaders { get; set; }
 
     /// <summary>
     /// SHA1 signature of the log entry.
     /// </summary>
     /// <value>SHA1 signature of the log entry.</value>
-    [DataMember(Name = "sha1", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "sha1", IsRequired = true, EmitDefaultValue = false)]
     public string Sha1 { get; set; }
 
     /// <summary>
     /// Number of API calls.
     /// </summary>
     /// <value>Number of API calls.</value>
-    [DataMember(Name = "nb_api_calls", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "nb_api_calls", IsRequired = true, EmitDefaultValue = false)]
     public string NbApiCalls { get; set; }
 
     /// <summary>
     /// Processing time for the query. Doesn&#39;t include network time.
     /// </summary>
     /// <value>Processing time for the query. Doesn&#39;t include network time.</value>
-    [DataMember(Name = "processing_time_ms", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "processing_time_ms", IsRequired = true, EmitDefaultValue = false)]
     public string ProcessingTimeMs { get; set; }
 
     /// <summary>

@@ -28,13 +28,13 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets ImageType
     /// </summary>
-    [DataMember(Name = "imageType", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "imageType", IsRequired = true, EmitDefaultValue = false)]
     public DockerImageType ImageType { get; set; }
 
     /// <summary>
     /// Gets or Sets Registry
     /// </summary>
-    [DataMember(Name = "registry", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "registry", IsRequired = true, EmitDefaultValue = false)]
     public DockerRegistry Registry { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceDocker" /> class.
@@ -60,7 +60,7 @@ namespace Algolia.Search.Models.Ingestion
     /// The name of the image to pull.
     /// </summary>
     /// <value>The name of the image to pull.</value>
-    [DataMember(Name = "image", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "image", IsRequired = true, EmitDefaultValue = false)]
     public string Image { get; set; }
 
     /// <summary>
@@ -74,7 +74,7 @@ namespace Algolia.Search.Models.Ingestion
     /// The configuration of the spec.
     /// </summary>
     /// <value>The configuration of the spec.</value>
-    [DataMember(Name = "configuration", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "configuration", IsRequired = true, EmitDefaultValue = false)]
     public Object VarConfiguration { get; set; }
 
     /// <summary>

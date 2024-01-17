@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Analytics
     /// </summary>
     /// <param name="country">Country. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
-    public TopCountry(string country, int count)
+    public TopCountry(string country, int? count)
     {
       this.Country = country ?? throw new ArgumentNullException("country is a required property for TopCountry and cannot be null");
       this.Count = count;
@@ -44,15 +44,15 @@ namespace Algolia.Search.Models.Analytics
     /// Country.
     /// </summary>
     /// <value>Country.</value>
-    [DataMember(Name = "country", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "country", IsRequired = true, EmitDefaultValue = false)]
     public string Country { get; set; }
 
     /// <summary>
     /// Number of occurrences.
     /// </summary>
     /// <value>Number of occurrences.</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

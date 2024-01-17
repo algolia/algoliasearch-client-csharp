@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.
     /// </summary>
     /// <value>Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.</value>
-    [DataMember(Name = "query", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "query", IsRequired = true, EmitDefaultValue = false)]
     public string Query { get; set; }
 
     /// <summary>

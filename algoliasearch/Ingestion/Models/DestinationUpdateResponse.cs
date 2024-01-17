@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Ingestion
     /// The destination UUID.
     /// </summary>
     /// <value>The destination UUID.</value>
-    [DataMember(Name = "destinationID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "destinationID", IsRequired = true, EmitDefaultValue = false)]
     public string DestinationID { get; set; }
 
     /// <summary>
     /// An human readable name describing the object.
     /// </summary>
     /// <value>An human readable name describing the object.</value>
-    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
     public string Name { get; set; }
 
     /// <summary>
     /// Date of last update (RFC3339 format).
     /// </summary>
     /// <value>Date of last update (RFC3339 format).</value>
-    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
     public string UpdatedAt { get; set; }
 
     /// <summary>

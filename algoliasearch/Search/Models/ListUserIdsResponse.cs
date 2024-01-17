@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// User IDs.
     /// </summary>
     /// <value>User IDs.</value>
-    [DataMember(Name = "userIDs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "userIDs", IsRequired = true, EmitDefaultValue = false)]
     public List<UserId> UserIDs { get; set; }
 
     /// <summary>

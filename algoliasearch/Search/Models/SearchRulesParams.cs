@@ -69,7 +69,7 @@ namespace Algolia.Search.Models.Search
     /// Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.
     /// </summary>
     /// <value>Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.</value>
-    [DataMember(Name = "enabled", EmitDefaultValue = true)]
+    [DataMember(Name = "enabled", EmitDefaultValue = false)]
     public bool? Enabled { get; set; }
 
     /// <summary>

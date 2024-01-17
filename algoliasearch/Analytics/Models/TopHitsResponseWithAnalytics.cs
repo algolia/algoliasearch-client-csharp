@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Analytics
     /// Top hits.
     /// </summary>
     /// <value>Top hits.</value>
-    [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
     public List<TopHitWithAnalytics> Hits { get; set; }
 
     /// <summary>

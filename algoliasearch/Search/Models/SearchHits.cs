@@ -49,21 +49,21 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Hits
     /// </summary>
-    [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
     public List<T> Hits { get; set; }
 
     /// <summary>
     /// Text to search for in an index.
     /// </summary>
     /// <value>Text to search for in an index.</value>
-    [DataMember(Name = "query", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "query", IsRequired = true, EmitDefaultValue = false)]
     public string Query { get; set; }
 
     /// <summary>
     /// URL-encoded string of all search parameters.
     /// </summary>
     /// <value>URL-encoded string of all search parameters.</value>
-    [DataMember(Name = "params", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "params", IsRequired = true, EmitDefaultValue = false)]
     public string VarParams { get; set; }
 
     /// <summary>

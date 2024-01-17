@@ -51,14 +51,14 @@ namespace Algolia.Search.Models.Search
     /// Record&#39;s objectID.
     /// </summary>
     /// <value>Record&#39;s objectID.</value>
-    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
     public string ObjectID { get; set; }
 
     /// <summary>
     /// Name of the index containing the required records.
     /// </summary>
     /// <value>Name of the index containing the required records.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>

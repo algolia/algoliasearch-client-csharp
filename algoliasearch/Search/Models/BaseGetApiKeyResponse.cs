@@ -49,7 +49,7 @@ namespace Algolia.Search.Models.Search
     /// Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).
     /// </summary>
     /// <value>Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public long CreatedAt { get; set; }
 
     /// <summary>

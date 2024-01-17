@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Text to search for in an index.
     /// </summary>
     /// <value>Text to search for in an index.</value>
-    [DataMember(Name = "query", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "query", IsRequired = true, EmitDefaultValue = false)]
     public string Query { get; set; }
 
     /// <summary>

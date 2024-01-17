@@ -28,13 +28,13 @@ namespace Algolia.Search.Models.Insights
     /// <summary>
     /// Gets or Sets EventType
     /// </summary>
-    [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = false)]
     public ConversionEvent EventType { get; set; }
 
     /// <summary>
     /// Gets or Sets EventSubtype
     /// </summary>
-    [DataMember(Name = "eventSubtype", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventSubtype", IsRequired = true, EmitDefaultValue = false)]
     public AddToCartEvent EventSubtype { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="AddedToCartObjectIDs" /> class.
@@ -64,28 +64,28 @@ namespace Algolia.Search.Models.Insights
     /// The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
     /// </summary>
     /// <value>The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
-    [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = false)]
     public string EventName { get; set; }
 
     /// <summary>
     /// The name of an Algolia index.
     /// </summary>
     /// <value>The name of an Algolia index.</value>
-    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
     public string Index { get; set; }
 
     /// <summary>
     /// The object IDs of the records that are part of the event.
     /// </summary>
     /// <value>The object IDs of the records that are part of the event.</value>
-    [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = false)]
     public List<string> ObjectIDs { get; set; }
 
     /// <summary>
     /// An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. 
     /// </summary>
     /// <value>An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. </value>
-    [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = false)]
     public string UserToken { get; set; }
 
     /// <summary>

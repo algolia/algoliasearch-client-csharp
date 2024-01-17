@@ -63,7 +63,7 @@ namespace Algolia.Search.Models.Recommend
     /// Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
     /// </summary>
     /// <value>Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.</value>
-    [DataMember(Name = "enabled", EmitDefaultValue = true)]
+    [DataMember(Name = "enabled", EmitDefaultValue = false)]
     public bool? Enabled { get; set; }
 
     /// <summary>

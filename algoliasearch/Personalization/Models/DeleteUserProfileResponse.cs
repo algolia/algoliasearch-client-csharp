@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Personalization
     /// userToken representing the user for which to fetch the Personalization profile.
     /// </summary>
     /// <value>userToken representing the user for which to fetch the Personalization profile.</value>
-    [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = false)]
     public string UserToken { get; set; }
 
     /// <summary>
     /// A date until which the data can safely be considered as deleted for the given user. Any data received after the &#x60;deletedUntil&#x60; date will start building a new user profile.
     /// </summary>
     /// <value>A date until which the data can safely be considered as deleted for the given user. Any data received after the &#x60;deletedUntil&#x60; date will start building a new user profile.</value>
-    [DataMember(Name = "deletedUntil", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "deletedUntil", IsRequired = true, EmitDefaultValue = false)]
     public string DeletedUntil { get; set; }
 
     /// <summary>

@@ -43,13 +43,13 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Username
     /// </summary>
-    [DataMember(Name = "username", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "username", IsRequired = true, EmitDefaultValue = false)]
     public string Username { get; set; }
 
     /// <summary>
     /// Gets or Sets Password
     /// </summary>
-    [DataMember(Name = "password", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "password", IsRequired = true, EmitDefaultValue = false)]
     public string Password { get; set; }
 
     /// <summary>

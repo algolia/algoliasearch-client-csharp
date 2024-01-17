@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Analytics
     /// Filterable attributes.
     /// </summary>
     /// <value>Filterable attributes.</value>
-    [DataMember(Name = "attributes", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "attributes", IsRequired = true, EmitDefaultValue = false)]
     public List<GetTopFilterAttribute> Attributes { get; set; }
 
     /// <summary>

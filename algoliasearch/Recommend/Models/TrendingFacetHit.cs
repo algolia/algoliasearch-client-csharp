@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Recommend
     /// Recommendation score.
     /// </summary>
     /// <value>Recommendation score.</value>
-    [DataMember(Name = "_score", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "_score", IsRequired = true, EmitDefaultValue = false)]
     public double Score { get; set; }
 
     /// <summary>
     /// Facet name for trending models.
     /// </summary>
     /// <value>Facet name for trending models.</value>
-    [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = false)]
     public string FacetName { get; set; }
 
     /// <summary>
     /// Facet value for trending models.
     /// </summary>
     /// <value>Facet value for trending models.</value>
-    [DataMember(Name = "facetValue", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "facetValue", IsRequired = true, EmitDefaultValue = false)]
     public string FacetValue { get; set; }
 
     /// <summary>

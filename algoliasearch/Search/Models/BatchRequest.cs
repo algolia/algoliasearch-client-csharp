@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Action
     /// </summary>
-    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = false)]
     public Action Action { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchRequest" /> class.
@@ -50,7 +50,7 @@ namespace Algolia.Search.Models.Search
     /// Operation arguments (varies with specified &#x60;action&#x60;).
     /// </summary>
     /// <value>Operation arguments (varies with specified &#x60;action&#x60;).</value>
-    [DataMember(Name = "body", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "body", IsRequired = true, EmitDefaultValue = false)]
     public Object Body { get; set; }
 
     /// <summary>

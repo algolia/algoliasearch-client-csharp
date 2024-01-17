@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Abtesting
     /// <param name="index">A/B test index. (required).</param>
     /// <param name="abTestID">Unique A/B test ID. (required).</param>
     /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
-    public ABTestResponse(string index, int abTestID, long taskID)
+    public ABTestResponse(string index, int? abTestID, long taskID)
     {
       this.Index = index ?? throw new ArgumentNullException("index is a required property for ABTestResponse and cannot be null");
       this.AbTestID = abTestID;
@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Abtesting
     /// A/B test index.
     /// </summary>
     /// <value>A/B test index.</value>
-    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
     public string Index { get; set; }
 
     /// <summary>
     /// Unique A/B test ID.
     /// </summary>
     /// <value>Unique A/B test ID.</value>
-    [DataMember(Name = "abTestID", IsRequired = true, EmitDefaultValue = true)]
-    public int AbTestID { get; set; }
+    [DataMember(Name = "abTestID", IsRequired = true, EmitDefaultValue = false)]
+    public int? AbTestID { get; set; }
 
     /// <summary>
     /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;. 
     /// </summary>
     /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;. </value>
-    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
     public long TaskID { get; set; }
 
     /// <summary>

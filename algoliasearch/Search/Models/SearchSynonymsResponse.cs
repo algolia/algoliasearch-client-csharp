@@ -37,7 +37,7 @@ namespace Algolia.Search.Models.Search
     /// </summary>
     /// <param name="hits">Synonym objects. (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public SearchSynonymsResponse(List<SynonymHit> hits, int nbHits)
+    public SearchSynonymsResponse(List<SynonymHit> hits, int? nbHits)
     {
       this.Hits = hits ?? throw new ArgumentNullException("hits is a required property for SearchSynonymsResponse and cannot be null");
       this.NbHits = nbHits;
@@ -48,15 +48,15 @@ namespace Algolia.Search.Models.Search
     /// Synonym objects.
     /// </summary>
     /// <value>Synonym objects.</value>
-    [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
     public List<SynonymHit> Hits { get; set; }
 
     /// <summary>
     /// Number of hits the search query matched.
     /// </summary>
     /// <value>Number of hits the search query matched.</value>
-    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = true)]
-    public int NbHits { get; set; }
+    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
+    public int? NbHits { get; set; }
 
     /// <summary>
     /// Gets or Sets additional properties

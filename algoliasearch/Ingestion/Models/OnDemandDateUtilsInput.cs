@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Ingestion
     /// The start date of the extraction (RFC3339 format).
     /// </summary>
     /// <value>The start date of the extraction (RFC3339 format).</value>
-    [DataMember(Name = "startDate", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "startDate", IsRequired = true, EmitDefaultValue = false)]
     public string StartDate { get; set; }
 
     /// <summary>
     /// The end date of the extraction (RFC3339 format).
     /// </summary>
     /// <value>The end date of the extraction (RFC3339 format).</value>
-    [DataMember(Name = "endDate", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "endDate", IsRequired = true, EmitDefaultValue = false)]
     public string EndDate { get; set; }
 
     /// <summary>

@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public AuthenticationType Type { get; set; }
 
     /// <summary>
@@ -58,13 +58,13 @@ namespace Algolia.Search.Models.Ingestion
     /// An human readable name describing the object.
     /// </summary>
     /// <value>An human readable name describing the object.</value>
-    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
     public string Name { get; set; }
 
     /// <summary>
     /// Gets or Sets Input
     /// </summary>
-    [DataMember(Name = "input", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "input", IsRequired = true, EmitDefaultValue = false)]
     public AuthInput Input { get; set; }
 
     /// <summary>

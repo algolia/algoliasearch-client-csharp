@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Recommend
     /// <summary>
     /// Gets or Sets Model
     /// </summary>
-    [DataMember(Name = "model", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "model", IsRequired = true, EmitDefaultValue = false)]
     public RecommendedForYouModel Model { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseRecommendedForYouQuery" /> class.

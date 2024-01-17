@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Cluster name.
     /// </summary>
     /// <value>Cluster name.</value>
-    [DataMember(Name = "cluster", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "cluster", IsRequired = true, EmitDefaultValue = false)]
     public string Cluster { get; set; }
 
     /// <summary>

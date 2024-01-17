@@ -36,7 +36,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="count">Number of occurrences. (required).</param>
     /// <param name="noResultCount">Number of occurrences. (required).</param>
     /// <param name="dates">Overall count of searches without results plus a daily breakdown. (required).</param>
-    public GetNoResultsRateResponse(double rate, int count, int noResultCount, List<NoResultsRateEvent> dates)
+    public GetNoResultsRateResponse(double rate, int? count, int? noResultCount, List<NoResultsRateEvent> dates)
     {
       this.Rate = rate;
       this.Count = count;
@@ -48,28 +48,28 @@ namespace Algolia.Search.Models.Analytics
     /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
     /// </summary>
     /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
-    [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = false)]
     public double Rate { get; set; }
 
     /// <summary>
     /// Number of occurrences.
     /// </summary>
     /// <value>Number of occurrences.</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Number of occurrences.
     /// </summary>
     /// <value>Number of occurrences.</value>
-    [DataMember(Name = "noResultCount", IsRequired = true, EmitDefaultValue = true)]
-    public int NoResultCount { get; set; }
+    [DataMember(Name = "noResultCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? NoResultCount { get; set; }
 
     /// <summary>
     /// Overall count of searches without results plus a daily breakdown.
     /// </summary>
     /// <value>Overall count of searches without results plus a daily breakdown.</value>
-    [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = false)]
     public List<NoResultsRateEvent> Dates { get; set; }
 
     /// <summary>

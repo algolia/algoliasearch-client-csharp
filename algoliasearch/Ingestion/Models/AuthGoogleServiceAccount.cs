@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Ingestion
     /// Email address of the Service Account.
     /// </summary>
     /// <value>Email address of the Service Account.</value>
-    [DataMember(Name = "clientEmail", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "clientEmail", IsRequired = true, EmitDefaultValue = false)]
     public string ClientEmail { get; set; }
 
     /// <summary>
     /// Private key of the Service Account.
     /// </summary>
     /// <value>Private key of the Service Account.</value>
-    [DataMember(Name = "privateKey", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "privateKey", IsRequired = true, EmitDefaultValue = false)]
     public string PrivateKey { get; set; }
 
     /// <summary>

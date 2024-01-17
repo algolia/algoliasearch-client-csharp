@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Unique identifier for a rule object.
     /// </summary>
     /// <value>Unique identifier for a rule object.</value>
-    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
     public string ObjectID { get; set; }
 
     /// <summary>
@@ -69,7 +69,7 @@ namespace Algolia.Search.Models.Search
     /// Indicates whether to enable the rule. If it isn&#39;t enabled, it isn&#39;t applied at query time.
     /// </summary>
     /// <value>Indicates whether to enable the rule. If it isn&#39;t enabled, it isn&#39;t applied at query time.</value>
-    [DataMember(Name = "enabled", EmitDefaultValue = true)]
+    [DataMember(Name = "enabled", EmitDefaultValue = false)]
     public bool? Enabled { get; set; }
 
     /// <summary>

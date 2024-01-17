@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Analytics
     /// Filters with no results.
     /// </summary>
     /// <value>Filters with no results.</value>
-    [DataMember(Name = "values", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "values", IsRequired = true, EmitDefaultValue = false)]
     public List<GetTopFiltersNoResultsValues> Values { get; set; }
 
     /// <summary>

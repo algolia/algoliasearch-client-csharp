@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Abtesting
     /// A/B test name.
     /// </summary>
     /// <value>A/B test name.</value>
-    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
     public string Name { get; set; }
 
     /// <summary>
     /// A/B test variants.
     /// </summary>
     /// <value>A/B test variants.</value>
-    [DataMember(Name = "variants", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "variants", IsRequired = true, EmitDefaultValue = false)]
     public List<AddABTestsVariant> Variants { get; set; }
 
     /// <summary>
     /// End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
     /// </summary>
     /// <value>End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-    [DataMember(Name = "endAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "endAt", IsRequired = true, EmitDefaultValue = false)]
     public string EndAt { get; set; }
 
     /// <summary>

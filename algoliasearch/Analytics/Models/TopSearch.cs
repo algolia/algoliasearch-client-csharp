@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="search">User query. (required).</param>
     /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public TopSearch(string search, int count, int nbHits)
+    public TopSearch(string search, int? count, int? nbHits)
     {
       this.Search = search ?? throw new ArgumentNullException("search is a required property for TopSearch and cannot be null");
       this.Count = count;
@@ -46,22 +46,22 @@ namespace Algolia.Search.Models.Analytics
     /// User query.
     /// </summary>
     /// <value>User query.</value>
-    [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = false)]
     public string Search { get; set; }
 
     /// <summary>
     /// Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;).
     /// </summary>
     /// <value>Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;).</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Number of hits the search query matched.
     /// </summary>
     /// <value>Number of hits the search query matched.</value>
-    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = true)]
-    public int NbHits { get; set; }
+    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
+    public int? NbHits { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

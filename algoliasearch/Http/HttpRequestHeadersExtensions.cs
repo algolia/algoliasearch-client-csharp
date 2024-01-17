@@ -16,7 +16,7 @@ namespace Algolia.Search.Http
     {
       foreach (var header in dictionary)
       {
-        headers.Add(header.Key, header.Value);
+        headers.TryAddWithoutValidation(header.Key, header.Value);
       }
 
       return headers;

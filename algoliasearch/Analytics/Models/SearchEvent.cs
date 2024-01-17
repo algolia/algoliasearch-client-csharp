@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Analytics
     /// </summary>
     /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
-    public SearchEvent(string date, int count)
+    public SearchEvent(string date, int? count)
     {
       this.Date = date ?? throw new ArgumentNullException("date is a required property for SearchEvent and cannot be null");
       this.Count = count;
@@ -44,15 +44,15 @@ namespace Algolia.Search.Models.Analytics
     /// Date of the event in the format YYYY-MM-DD.
     /// </summary>
     /// <value>Date of the event in the format YYYY-MM-DD.</value>
-    [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
     public string Date { get; set; }
 
     /// <summary>
     /// Number of occurrences.
     /// </summary>
     /// <value>Number of occurrences.</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

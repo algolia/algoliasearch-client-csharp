@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Insights
     /// <summary>
     /// Gets or Sets EventType
     /// </summary>
-    [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = false)]
     public ClickEvent EventType { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="ClickedFilters" /> class.
@@ -56,28 +56,28 @@ namespace Algolia.Search.Models.Insights
     /// The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
     /// </summary>
     /// <value>The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
-    [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = false)]
     public string EventName { get; set; }
 
     /// <summary>
     /// The name of an Algolia index.
     /// </summary>
     /// <value>The name of an Algolia index.</value>
-    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
     public string Index { get; set; }
 
     /// <summary>
     /// Facet filters.  Each facet filter string must be URL-encoded, such as, &#x60;discount:10%25&#x60;. 
     /// </summary>
     /// <value>Facet filters.  Each facet filter string must be URL-encoded, such as, &#x60;discount:10%25&#x60;. </value>
-    [DataMember(Name = "filters", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "filters", IsRequired = true, EmitDefaultValue = false)]
     public List<string> Filters { get; set; }
 
     /// <summary>
     /// An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. 
     /// </summary>
     /// <value>An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens. </value>
-    [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = false)]
     public string UserToken { get; set; }
 
     /// <summary>

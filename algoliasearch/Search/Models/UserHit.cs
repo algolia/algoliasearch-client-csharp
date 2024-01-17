@@ -38,7 +38,7 @@ namespace Algolia.Search.Models.Search
     /// <param name="dataSize">Data size taken by all the users assigned to the cluster. (required).</param>
     /// <param name="objectID">userID of the requested user. Same as userID. (required).</param>
     /// <param name="highlightResult">highlightResult (required).</param>
-    public UserHit(string userID, string clusterName, int nbRecords, int dataSize, string objectID, UserHighlightResult highlightResult)
+    public UserHit(string userID, string clusterName, int? nbRecords, int? dataSize, string objectID, UserHighlightResult highlightResult)
     {
       this.UserID = userID ?? throw new ArgumentNullException("userID is a required property for UserHit and cannot be null");
       this.ClusterName = clusterName ?? throw new ArgumentNullException("clusterName is a required property for UserHit and cannot be null");
@@ -52,41 +52,41 @@ namespace Algolia.Search.Models.Search
     /// userID of the user.
     /// </summary>
     /// <value>userID of the user.</value>
-    [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = false)]
     public string UserID { get; set; }
 
     /// <summary>
     /// Cluster name.
     /// </summary>
     /// <value>Cluster name.</value>
-    [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = false)]
     public string ClusterName { get; set; }
 
     /// <summary>
     /// Number of records in the cluster.
     /// </summary>
     /// <value>Number of records in the cluster.</value>
-    [DataMember(Name = "nbRecords", IsRequired = true, EmitDefaultValue = true)]
-    public int NbRecords { get; set; }
+    [DataMember(Name = "nbRecords", IsRequired = true, EmitDefaultValue = false)]
+    public int? NbRecords { get; set; }
 
     /// <summary>
     /// Data size taken by all the users assigned to the cluster.
     /// </summary>
     /// <value>Data size taken by all the users assigned to the cluster.</value>
-    [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = true)]
-    public int DataSize { get; set; }
+    [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = false)]
+    public int? DataSize { get; set; }
 
     /// <summary>
     /// userID of the requested user. Same as userID.
     /// </summary>
     /// <value>userID of the requested user. Same as userID.</value>
-    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
     public string ObjectID { get; set; }
 
     /// <summary>
     /// Gets or Sets HighlightResult
     /// </summary>
-    [DataMember(Name = "_highlightResult", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "_highlightResult", IsRequired = true, EmitDefaultValue = false)]
     public UserHighlightResult HighlightResult { get; set; }
 
     /// <summary>

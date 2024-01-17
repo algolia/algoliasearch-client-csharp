@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Ingestion
     /// Date of deletion (RFC3339 format).
     /// </summary>
     /// <value>Date of deletion (RFC3339 format).</value>
-    [DataMember(Name = "deletedAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "deletedAt", IsRequired = true, EmitDefaultValue = false)]
     public string DeletedAt { get; set; }
 
     /// <summary>

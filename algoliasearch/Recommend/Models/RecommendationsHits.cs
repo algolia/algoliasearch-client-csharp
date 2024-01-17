@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Recommend
     /// <summary>
     /// Gets or Sets Hits
     /// </summary>
-    [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
     public List<RecommendationsHit> Hits { get; set; }
 
     /// <summary>

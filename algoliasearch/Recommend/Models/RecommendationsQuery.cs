@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Recommend
     /// <summary>
     /// Gets or Sets Model
     /// </summary>
-    [DataMember(Name = "model", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "model", IsRequired = true, EmitDefaultValue = false)]
     public RecommendationModels Model { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="RecommendationsQuery" /> class.
@@ -52,7 +52,7 @@ namespace Algolia.Search.Models.Recommend
     /// Algolia index name.
     /// </summary>
     /// <value>Algolia index name.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>
@@ -73,7 +73,7 @@ namespace Algolia.Search.Models.Recommend
     /// Unique object identifier.
     /// </summary>
     /// <value>Unique object identifier.</value>
-    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
     public string ObjectID { get; set; }
 
     /// <summary>

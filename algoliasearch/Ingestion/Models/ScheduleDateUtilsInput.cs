@@ -33,7 +33,7 @@ namespace Algolia.Search.Models.Ingestion
     /// Initializes a new instance of the <see cref="ScheduleDateUtilsInput" /> class.
     /// </summary>
     /// <param name="timeframe">The timeframe of the extraction, in number of days from today. (required).</param>
-    public ScheduleDateUtilsInput(int timeframe)
+    public ScheduleDateUtilsInput(int? timeframe)
     {
       this.Timeframe = timeframe;
     }
@@ -42,8 +42,8 @@ namespace Algolia.Search.Models.Ingestion
     /// The timeframe of the extraction, in number of days from today.
     /// </summary>
     /// <value>The timeframe of the extraction, in number of days from today.</value>
-    [DataMember(Name = "timeframe", IsRequired = true, EmitDefaultValue = true)]
-    public int Timeframe { get; set; }
+    [DataMember(Name = "timeframe", IsRequired = true, EmitDefaultValue = false)]
+    public int? Timeframe { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

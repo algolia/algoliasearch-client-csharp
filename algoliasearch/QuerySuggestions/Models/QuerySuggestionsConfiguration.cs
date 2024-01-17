@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.QuerySuggestions
     /// Algolia indices from which to get the popular searches for query suggestions.
     /// </summary>
     /// <value>Algolia indices from which to get the popular searches for query suggestions.</value>
-    [DataMember(Name = "sourceIndices", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "sourceIndices", IsRequired = true, EmitDefaultValue = false)]
     public List<SourceIndex> SourceIndices { get; set; }
 
     /// <summary>
@@ -55,21 +55,21 @@ namespace Algolia.Search.Models.QuerySuggestions
     /// Patterns to exclude from query suggestions.
     /// </summary>
     /// <value>Patterns to exclude from query suggestions.</value>
-    [DataMember(Name = "exclude", EmitDefaultValue = true)]
+    [DataMember(Name = "exclude", EmitDefaultValue = false)]
     public List<string> Exclude { get; set; }
 
     /// <summary>
     /// Turn on personalized query suggestions.
     /// </summary>
     /// <value>Turn on personalized query suggestions.</value>
-    [DataMember(Name = "enablePersonalization", EmitDefaultValue = true)]
+    [DataMember(Name = "enablePersonalization", EmitDefaultValue = false)]
     public bool? EnablePersonalization { get; set; }
 
     /// <summary>
     /// Allow suggestions with special characters.
     /// </summary>
     /// <value>Allow suggestions with special characters.</value>
-    [DataMember(Name = "allowSpecialCharacters", EmitDefaultValue = true)]
+    [DataMember(Name = "allowSpecialCharacters", EmitDefaultValue = false)]
     public bool? AllowSpecialCharacters { get; set; }
 
     /// <summary>

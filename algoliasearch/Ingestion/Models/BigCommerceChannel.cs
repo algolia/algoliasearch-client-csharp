@@ -33,7 +33,7 @@ namespace Algolia.Search.Models.Ingestion
     /// Initializes a new instance of the <see cref="BigCommerceChannel" /> class.
     /// </summary>
     /// <param name="id">The ID of the bigcommerce channel. (required).</param>
-    public BigCommerceChannel(int id)
+    public BigCommerceChannel(int? id)
     {
       this.Id = id;
     }
@@ -42,8 +42,8 @@ namespace Algolia.Search.Models.Ingestion
     /// The ID of the bigcommerce channel.
     /// </summary>
     /// <value>The ID of the bigcommerce channel.</value>
-    [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
-    public int Id { get; set; }
+    [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = false)]
+    public int? Id { get; set; }
 
     /// <summary>
     /// An array of currencies for the given channel &#x60;ID&#x60;, a currency is a trigram string that represents the currency code.

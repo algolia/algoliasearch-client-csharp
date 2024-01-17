@@ -42,14 +42,14 @@ namespace Algolia.Search.Models.Search
     /// Incidates whether to replace all custom entries in the dictionary with the ones sent with this request.
     /// </summary>
     /// <value>Incidates whether to replace all custom entries in the dictionary with the ones sent with this request.</value>
-    [DataMember(Name = "clearExistingDictionaryEntries", EmitDefaultValue = true)]
+    [DataMember(Name = "clearExistingDictionaryEntries", EmitDefaultValue = false)]
     public bool? ClearExistingDictionaryEntries { get; set; }
 
     /// <summary>
     /// Operations to batch.
     /// </summary>
     /// <value>Operations to batch.</value>
-    [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = false)]
     public List<BatchDictionaryEntriesRequest> Requests { get; set; }
 
     /// <summary>

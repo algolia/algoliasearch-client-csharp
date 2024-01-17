@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets DisableStandardEntries
     /// </summary>
-    [DataMember(Name = "disableStandardEntries", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "disableStandardEntries", IsRequired = true, EmitDefaultValue = false)]
     public StandardEntries DisableStandardEntries { get; set; }
 
     /// <summary>

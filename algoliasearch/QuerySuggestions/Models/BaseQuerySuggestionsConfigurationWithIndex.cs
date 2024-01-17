@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.QuerySuggestions
     /// Query Suggestions index name.
     /// </summary>
     /// <value>Query Suggestions index name.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>

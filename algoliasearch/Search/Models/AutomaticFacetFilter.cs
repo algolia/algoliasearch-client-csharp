@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Attribute to filter on. This must match a facet placeholder in the Rule&#39;s pattern.
     /// </summary>
     /// <value>Attribute to filter on. This must match a facet placeholder in the Rule&#39;s pattern.</value>
-    [DataMember(Name = "facet", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "facet", IsRequired = true, EmitDefaultValue = false)]
     public string Facet { get; set; }
 
     /// <summary>
@@ -56,7 +56,7 @@ namespace Algolia.Search.Models.Search
     /// Whether the filter is disjunctive (true) or conjunctive (false).
     /// </summary>
     /// <value>Whether the filter is disjunctive (true) or conjunctive (false).</value>
-    [DataMember(Name = "disjunctive", EmitDefaultValue = true)]
+    [DataMember(Name = "disjunctive", EmitDefaultValue = false)]
     public bool? Disjunctive { get; set; }
 
     /// <summary>

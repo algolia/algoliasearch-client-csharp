@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Analytics
     /// Attribute name.
     /// </summary>
     /// <value>Attribute name.</value>
-    [DataMember(Name = "attribute", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "attribute", IsRequired = true, EmitDefaultValue = false)]
     public string Attribute { get; set; }
 
     /// <summary>
     /// Operator.
     /// </summary>
     /// <value>Operator.</value>
-    [DataMember(Name = "operator", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "operator", IsRequired = true, EmitDefaultValue = false)]
     public string VarOperator { get; set; }
 
     /// <summary>
     /// Attribute value.
     /// </summary>
     /// <value>Attribute value.</value>
-    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
     public string Value { get; set; }
 
     /// <summary>

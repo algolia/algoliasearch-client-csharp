@@ -50,14 +50,14 @@ namespace Algolia.Search.Models.Ingestion
     /// Project ID of the BigQuery Source.
     /// </summary>
     /// <value>Project ID of the BigQuery Source.</value>
-    [DataMember(Name = "projectID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "projectID", IsRequired = true, EmitDefaultValue = false)]
     public string ProjectID { get; set; }
 
     /// <summary>
     /// Dataset ID of the BigQuery Source.
     /// </summary>
     /// <value>Dataset ID of the BigQuery Source.</value>
-    [DataMember(Name = "datasetID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "datasetID", IsRequired = true, EmitDefaultValue = false)]
     public string DatasetID { get; set; }
 
     /// <summary>

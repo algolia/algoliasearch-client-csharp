@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Action
     /// </summary>
-    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = false)]
     public Action Action { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="MultipleBatchRequest" /> class.
@@ -52,14 +52,14 @@ namespace Algolia.Search.Models.Search
     /// Operation arguments (varies with specified &#x60;action&#x60;).
     /// </summary>
     /// <value>Operation arguments (varies with specified &#x60;action&#x60;).</value>
-    [DataMember(Name = "body", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "body", IsRequired = true, EmitDefaultValue = false)]
     public Object Body { get; set; }
 
     /// <summary>
     /// Index to target for this operation.
     /// </summary>
     /// <value>Index to target for this operation.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>

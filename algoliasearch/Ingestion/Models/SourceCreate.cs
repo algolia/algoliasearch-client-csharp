@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public SourceType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SourceCreate" /> class.
@@ -51,13 +51,13 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Name
     /// </summary>
-    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
     public string Name { get; set; }
 
     /// <summary>
     /// Gets or Sets Input
     /// </summary>
-    [DataMember(Name = "input", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "input", IsRequired = true, EmitDefaultValue = false)]
     public SourceInput Input { get; set; }
 
     /// <summary>

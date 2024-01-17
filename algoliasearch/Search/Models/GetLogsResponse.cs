@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Logs
     /// </summary>
-    [DataMember(Name = "logs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "logs", IsRequired = true, EmitDefaultValue = false)]
     public List<Log> Logs { get; set; }
 
     /// <summary>

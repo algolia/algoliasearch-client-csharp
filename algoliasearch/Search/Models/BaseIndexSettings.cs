@@ -98,7 +98,7 @@ namespace Algolia.Search.Models.Search
     /// Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered. 
     /// </summary>
     /// <value>Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered. </value>
-    [DataMember(Name = "allowCompressionOfIntegerArray", EmitDefaultValue = true)]
+    [DataMember(Name = "allowCompressionOfIntegerArray", EmitDefaultValue = false)]
     public bool? AllowCompressionOfIntegerArray { get; set; }
 
     /// <summary>
@@ -126,7 +126,7 @@ namespace Algolia.Search.Models.Search
     /// Lets you store custom data in your indices.
     /// </summary>
     /// <value>Lets you store custom data in your indices.</value>
-    [DataMember(Name = "userData", EmitDefaultValue = true)]
+    [DataMember(Name = "userData", EmitDefaultValue = false)]
     public Object UserData { get; set; }
 
     /// <summary>

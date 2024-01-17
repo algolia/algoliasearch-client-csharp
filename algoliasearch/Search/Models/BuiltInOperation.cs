@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Operation
     /// </summary>
-    [DataMember(Name = "_operation", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "_operation", IsRequired = true, EmitDefaultValue = false)]
     public BuiltInOperationType Operation { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="BuiltInOperation" /> class.
@@ -50,7 +50,7 @@ namespace Algolia.Search.Models.Search
     /// Value that corresponds to the operation, for example an &#x60;Increment&#x60; or &#x60;Decrement&#x60; step, &#x60;Add&#x60; or &#x60;Remove&#x60; value.
     /// </summary>
     /// <value>Value that corresponds to the operation, for example an &#x60;Increment&#x60; or &#x60;Decrement&#x60; step, &#x60;Add&#x60; or &#x60;Remove&#x60; value.</value>
-    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
     public string Value { get; set; }
 
     /// <summary>

@@ -42,28 +42,28 @@ namespace Algolia.Search.Models.QuerySuggestions
     /// Name of the Algolia index to use as source for query suggestions.
     /// </summary>
     /// <value>Name of the Algolia index to use as source for query suggestions.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>
     /// If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.  
     /// </summary>
     /// <value>If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.  </value>
-    [DataMember(Name = "replicas", EmitDefaultValue = true)]
+    [DataMember(Name = "replicas", EmitDefaultValue = false)]
     public bool? Replicas { get; set; }
 
     /// <summary>
     /// [Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches. 
     /// </summary>
     /// <value>[Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches. </value>
-    [DataMember(Name = "analyticsTags", EmitDefaultValue = true)]
+    [DataMember(Name = "analyticsTags", EmitDefaultValue = false)]
     public List<string> AnalyticsTags { get; set; }
 
     /// <summary>
     /// Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion. 
     /// </summary>
     /// <value>Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion. </value>
-    [DataMember(Name = "facets", EmitDefaultValue = true)]
+    [DataMember(Name = "facets", EmitDefaultValue = false)]
     public List<Facet> Facets { get; set; }
 
     /// <summary>
@@ -90,7 +90,7 @@ namespace Algolia.Search.Models.QuerySuggestions
     /// Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - &#x60;query&#x60;: search query which will be added as a suggestion   - &#x60;count&#x60;: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data. 
     /// </summary>
     /// <value>Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - &#x60;query&#x60;: search query which will be added as a suggestion   - &#x60;count&#x60;: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data. </value>
-    [DataMember(Name = "external", EmitDefaultValue = true)]
+    [DataMember(Name = "external", EmitDefaultValue = false)]
     public List<string> External { get; set; }
 
     /// <summary>

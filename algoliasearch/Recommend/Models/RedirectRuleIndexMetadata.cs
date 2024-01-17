@@ -37,7 +37,7 @@ namespace Algolia.Search.Models.Recommend
     /// <param name="reason">Reason for the redirect rule. (required).</param>
     /// <param name="succeed">Redirect rule status. (required).</param>
     /// <param name="data">data (required).</param>
-    public RedirectRuleIndexMetadata(string varSource, string dest, string reason, bool succeed, RedirectRuleIndexMetadataData data)
+    public RedirectRuleIndexMetadata(string varSource, string dest, string reason, bool? succeed, RedirectRuleIndexMetadataData data)
     {
       this.VarSource = varSource ?? throw new ArgumentNullException("varSource is a required property for RedirectRuleIndexMetadata and cannot be null");
       this.Dest = dest ?? throw new ArgumentNullException("dest is a required property for RedirectRuleIndexMetadata and cannot be null");
@@ -50,34 +50,34 @@ namespace Algolia.Search.Models.Recommend
     /// Source index for the redirect rule.
     /// </summary>
     /// <value>Source index for the redirect rule.</value>
-    [DataMember(Name = "source", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "source", IsRequired = true, EmitDefaultValue = false)]
     public string VarSource { get; set; }
 
     /// <summary>
     /// Destination index for the redirect rule.
     /// </summary>
     /// <value>Destination index for the redirect rule.</value>
-    [DataMember(Name = "dest", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "dest", IsRequired = true, EmitDefaultValue = false)]
     public string Dest { get; set; }
 
     /// <summary>
     /// Reason for the redirect rule.
     /// </summary>
     /// <value>Reason for the redirect rule.</value>
-    [DataMember(Name = "reason", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "reason", IsRequired = true, EmitDefaultValue = false)]
     public string Reason { get; set; }
 
     /// <summary>
     /// Redirect rule status.
     /// </summary>
     /// <value>Redirect rule status.</value>
-    [DataMember(Name = "succeed", IsRequired = true, EmitDefaultValue = true)]
-    public bool Succeed { get; set; }
+    [DataMember(Name = "succeed", IsRequired = true, EmitDefaultValue = false)]
+    public bool? Succeed { get; set; }
 
     /// <summary>
     /// Gets or Sets Data
     /// </summary>
-    [DataMember(Name = "data", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "data", IsRequired = true, EmitDefaultValue = false)]
     public RedirectRuleIndexMetadataData Data { get; set; }
 
     /// <summary>

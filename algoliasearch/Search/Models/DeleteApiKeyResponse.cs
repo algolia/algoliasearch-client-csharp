@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
     /// </summary>
     /// <value>Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-    [DataMember(Name = "deletedAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "deletedAt", IsRequired = true, EmitDefaultValue = false)]
     public string DeletedAt { get; set; }
 
     /// <summary>

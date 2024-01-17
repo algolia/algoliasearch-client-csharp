@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Search
     /// API key.
     /// </summary>
     /// <value>API key.</value>
-    [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = false)]
     public string Key { get; set; }
 
     /// <summary>
     /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
     /// </summary>
     /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
     public string UpdatedAt { get; set; }
 
     /// <summary>

@@ -45,19 +45,19 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Plurals
     /// </summary>
-    [DataMember(Name = "plurals", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "plurals", IsRequired = true, EmitDefaultValue = false)]
     public DictionaryLanguage Plurals { get; set; }
 
     /// <summary>
     /// Gets or Sets Stopwords
     /// </summary>
-    [DataMember(Name = "stopwords", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "stopwords", IsRequired = true, EmitDefaultValue = false)]
     public DictionaryLanguage Stopwords { get; set; }
 
     /// <summary>
     /// Gets or Sets Compounds
     /// </summary>
-    [DataMember(Name = "compounds", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "compounds", IsRequired = true, EmitDefaultValue = false)]
     public DictionaryLanguage Compounds { get; set; }
 
     /// <summary>

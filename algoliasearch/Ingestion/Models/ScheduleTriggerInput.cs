@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public ScheduleTriggerType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="ScheduleTriggerInput" /> class.
@@ -50,7 +50,7 @@ namespace Algolia.Search.Models.Ingestion
     /// A cron expression that represent at which regularity the task should run.
     /// </summary>
     /// <value>A cron expression that represent at which regularity the task should run.</value>
-    [DataMember(Name = "cron", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "cron", IsRequired = true, EmitDefaultValue = false)]
     public string Cron { get; set; }
 
     /// <summary>

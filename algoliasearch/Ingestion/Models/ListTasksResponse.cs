@@ -43,13 +43,13 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Tasks
     /// </summary>
-    [DataMember(Name = "tasks", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "tasks", IsRequired = true, EmitDefaultValue = false)]
     public List<IngestionTask> Tasks { get; set; }
 
     /// <summary>
     /// Gets or Sets Pagination
     /// </summary>
-    [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = false)]
     public Pagination Pagination { get; set; }
 
     /// <summary>

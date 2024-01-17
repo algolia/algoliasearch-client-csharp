@@ -73,7 +73,7 @@ namespace Algolia.Search.Models.Search
     /// Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If &#x60;false&#x60;, maximum score is kept. If &#x60;true&#x60;, score is summed. 
     /// </summary>
     /// <value>Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If &#x60;false&#x60;, maximum score is kept. If &#x60;true&#x60;, score is summed. </value>
-    [DataMember(Name = "sumOrFiltersScores", EmitDefaultValue = true)]
+    [DataMember(Name = "sumOrFiltersScores", EmitDefaultValue = false)]
     public bool? SumOrFiltersScores { get; set; }
 
     /// <summary>
@@ -94,7 +94,7 @@ namespace Algolia.Search.Models.Search
     /// Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the &#x60;afterDistinct&#x60; [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of &#x60;attributesForFaceting&#x60; allows for more granular control. 
     /// </summary>
     /// <value>Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the &#x60;afterDistinct&#x60; [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of &#x60;attributesForFaceting&#x60; allows for more granular control. </value>
-    [DataMember(Name = "facetingAfterDistinct", EmitDefaultValue = true)]
+    [DataMember(Name = "facetingAfterDistinct", EmitDefaultValue = false)]
     public bool? FacetingAfterDistinct { get; set; }
 
     /// <summary>
@@ -129,7 +129,7 @@ namespace Algolia.Search.Models.Search
     /// Search for entries around a location. The location is automatically computed from the requester&#39;s IP address.
     /// </summary>
     /// <value>Search for entries around a location. The location is automatically computed from the requester&#39;s IP address.</value>
-    [DataMember(Name = "aroundLatLngViaIP", EmitDefaultValue = true)]
+    [DataMember(Name = "aroundLatLngViaIP", EmitDefaultValue = false)]
     public bool? AroundLatLngViaIP { get; set; }
 
     /// <summary>
@@ -197,7 +197,7 @@ namespace Algolia.Search.Models.Search
     /// Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).
     /// </summary>
     /// <value>Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).</value>
-    [DataMember(Name = "getRankingInfo", EmitDefaultValue = true)]
+    [DataMember(Name = "getRankingInfo", EmitDefaultValue = false)]
     public bool? GetRankingInfo { get; set; }
 
     /// <summary>
@@ -211,21 +211,21 @@ namespace Algolia.Search.Models.Search
     /// Whether to take into account an index&#39;s synonyms for a particular search.
     /// </summary>
     /// <value>Whether to take into account an index&#39;s synonyms for a particular search.</value>
-    [DataMember(Name = "synonyms", EmitDefaultValue = true)]
+    [DataMember(Name = "synonyms", EmitDefaultValue = false)]
     public bool? Synonyms { get; set; }
 
     /// <summary>
     /// Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).
     /// </summary>
     /// <value>Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).</value>
-    [DataMember(Name = "clickAnalytics", EmitDefaultValue = true)]
+    [DataMember(Name = "clickAnalytics", EmitDefaultValue = false)]
     public bool? ClickAnalytics { get; set; }
 
     /// <summary>
     /// Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).
     /// </summary>
     /// <value>Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).</value>
-    [DataMember(Name = "analytics", EmitDefaultValue = true)]
+    [DataMember(Name = "analytics", EmitDefaultValue = false)]
     public bool? Analytics { get; set; }
 
     /// <summary>
@@ -239,14 +239,14 @@ namespace Algolia.Search.Models.Search
     /// Whether to include or exclude a query from the processing-time percentile computation.
     /// </summary>
     /// <value>Whether to include or exclude a query from the processing-time percentile computation.</value>
-    [DataMember(Name = "percentileComputation", EmitDefaultValue = true)]
+    [DataMember(Name = "percentileComputation", EmitDefaultValue = false)]
     public bool? PercentileComputation { get; set; }
 
     /// <summary>
     /// Incidates whether this search will be considered in A/B testing.
     /// </summary>
     /// <value>Incidates whether this search will be considered in A/B testing.</value>
-    [DataMember(Name = "enableABTest", EmitDefaultValue = true)]
+    [DataMember(Name = "enableABTest", EmitDefaultValue = false)]
     public bool? EnableABTest { get; set; }
 
     /// <summary>

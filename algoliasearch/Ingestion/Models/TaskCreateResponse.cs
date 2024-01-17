@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Ingestion
     /// The task UUID.
     /// </summary>
     /// <value>The task UUID.</value>
-    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
     public string TaskID { get; set; }
 
     /// <summary>
     /// Date of creation (RFC3339 format).
     /// </summary>
     /// <value>Date of creation (RFC3339 format).</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public string CreatedAt { get; set; }
 
     /// <summary>

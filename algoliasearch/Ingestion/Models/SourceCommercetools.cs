@@ -56,20 +56,20 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Url
     /// </summary>
-    [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = false)]
     public string Url { get; set; }
 
     /// <summary>
     /// Gets or Sets ProjectKey
     /// </summary>
-    [DataMember(Name = "projectKey", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "projectKey", IsRequired = true, EmitDefaultValue = false)]
     public string ProjectKey { get; set; }
 
     /// <summary>
     /// Determines the value that will be stored in the Algolia record if there&#39;s no inventory information on the product. 
     /// </summary>
     /// <value>Determines the value that will be stored in the Algolia record if there&#39;s no inventory information on the product. </value>
-    [DataMember(Name = "fallbackIsInStockValue", EmitDefaultValue = true)]
+    [DataMember(Name = "fallbackIsInStockValue", EmitDefaultValue = false)]
     public bool? FallbackIsInStockValue { get; set; }
 
     /// <summary>

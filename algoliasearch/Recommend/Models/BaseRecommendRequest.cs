@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Recommend
     /// Algolia index name.
     /// </summary>
     /// <value>Algolia index name.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>

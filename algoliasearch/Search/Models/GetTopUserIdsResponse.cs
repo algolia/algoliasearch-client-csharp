@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values.
     /// </summary>
     /// <value>Key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values.</value>
-    [DataMember(Name = "topUsers", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "topUsers", IsRequired = true, EmitDefaultValue = false)]
     public List<Dictionary<string, List<UserId>>> TopUsers { get; set; }
 
     /// <summary>

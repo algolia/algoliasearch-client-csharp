@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="conversionCount">Number of converted clicks. (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public TopSearchWithAnalytics(string search, int count, double clickThroughRate, int averageClickPosition, double conversionRate, int trackedSearchCount, int clickCount, int conversionCount, int nbHits)
+    public TopSearchWithAnalytics(string search, int? count, double clickThroughRate, int? averageClickPosition, double conversionRate, int? trackedSearchCount, int? clickCount, int? conversionCount, int? nbHits)
     {
       this.Search = search ?? throw new ArgumentNullException("search is a required property for TopSearchWithAnalytics and cannot be null");
       this.Count = count;
@@ -58,64 +58,64 @@ namespace Algolia.Search.Models.Analytics
     /// User query.
     /// </summary>
     /// <value>User query.</value>
-    [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = false)]
     public string Search { get; set; }
 
     /// <summary>
     /// Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;).
     /// </summary>
     /// <value>Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;).</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
     /// </summary>
     /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
-    [DataMember(Name = "clickThroughRate", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "clickThroughRate", IsRequired = true, EmitDefaultValue = false)]
     public double ClickThroughRate { get; set; }
 
     /// <summary>
     /// Average [position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) of clicked search result.
     /// </summary>
     /// <value>Average [position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) of clicked search result.</value>
-    [DataMember(Name = "averageClickPosition", IsRequired = true, EmitDefaultValue = true)]
-    public int AverageClickPosition { get; set; }
+    [DataMember(Name = "averageClickPosition", IsRequired = true, EmitDefaultValue = false)]
+    public int? AverageClickPosition { get; set; }
 
     /// <summary>
     /// [Conversion rate (CR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate). 
     /// </summary>
     /// <value>[Conversion rate (CR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate). </value>
-    [DataMember(Name = "conversionRate", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "conversionRate", IsRequired = true, EmitDefaultValue = false)]
     public double ConversionRate { get; set; }
 
     /// <summary>
     /// Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;.
     /// </summary>
     /// <value>Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;.</value>
-    [DataMember(Name = "trackedSearchCount", IsRequired = true, EmitDefaultValue = true)]
-    public int TrackedSearchCount { get; set; }
+    [DataMember(Name = "trackedSearchCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? TrackedSearchCount { get; set; }
 
     /// <summary>
     /// Number of click events.
     /// </summary>
     /// <value>Number of click events.</value>
-    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = true)]
-    public int ClickCount { get; set; }
+    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? ClickCount { get; set; }
 
     /// <summary>
     /// Number of converted clicks.
     /// </summary>
     /// <value>Number of converted clicks.</value>
-    [DataMember(Name = "conversionCount", IsRequired = true, EmitDefaultValue = true)]
-    public int ConversionCount { get; set; }
+    [DataMember(Name = "conversionCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? ConversionCount { get; set; }
 
     /// <summary>
     /// Number of hits the search query matched.
     /// </summary>
     /// <value>Number of hits the search query matched.</value>
-    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = true)]
-    public int NbHits { get; set; }
+    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
+    public int? NbHits { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

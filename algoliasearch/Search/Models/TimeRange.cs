@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Search
     /// </summary>
     /// <param name="from">Lower bound of the time range (Unix timestamp). (required).</param>
     /// <param name="until">Upper bound of the time range (Unix timestamp). (required).</param>
-    public TimeRange(int from, int until)
+    public TimeRange(int? from, int? until)
     {
       this.From = from;
       this.Until = until;
@@ -44,15 +44,15 @@ namespace Algolia.Search.Models.Search
     /// Lower bound of the time range (Unix timestamp).
     /// </summary>
     /// <value>Lower bound of the time range (Unix timestamp).</value>
-    [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = true)]
-    public int From { get; set; }
+    [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = false)]
+    public int? From { get; set; }
 
     /// <summary>
     /// Upper bound of the time range (Unix timestamp).
     /// </summary>
     /// <value>Upper bound of the time range (Unix timestamp).</value>
-    [DataMember(Name = "until", IsRequired = true, EmitDefaultValue = true)]
-    public int Until { get; set; }
+    [DataMember(Name = "until", IsRequired = true, EmitDefaultValue = false)]
+    public int? Until { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

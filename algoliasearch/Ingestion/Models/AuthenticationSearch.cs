@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets AuthenticationIDs
     /// </summary>
-    [DataMember(Name = "authenticationIDs", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "authenticationIDs", IsRequired = true, EmitDefaultValue = false)]
     public List<string> AuthenticationIDs { get; set; }
 
     /// <summary>

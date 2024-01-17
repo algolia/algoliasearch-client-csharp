@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public SynonymType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SynonymHit" /> class.
@@ -50,7 +50,7 @@ namespace Algolia.Search.Models.Search
     /// Unique identifier of a synonym object.
     /// </summary>
     /// <value>Unique identifier of a synonym object.</value>
-    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
     public string ObjectID { get; set; }
 
     /// <summary>

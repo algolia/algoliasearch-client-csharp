@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// IP address range of the source.
     /// </summary>
     /// <value>IP address range of the source.</value>
-    [DataMember(Name = "source", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "source", IsRequired = true, EmitDefaultValue = false)]
     public string VarSource { get; set; }
 
     /// <summary>

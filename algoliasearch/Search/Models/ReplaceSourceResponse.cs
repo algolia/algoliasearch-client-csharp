@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
     /// </summary>
     /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
     public string UpdatedAt { get; set; }
 
     /// <summary>

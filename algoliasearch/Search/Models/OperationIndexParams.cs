@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Operation
     /// </summary>
-    [DataMember(Name = "operation", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "operation", IsRequired = true, EmitDefaultValue = false)]
     public OperationType Operation { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="OperationIndexParams" /> class.
@@ -50,7 +50,7 @@ namespace Algolia.Search.Models.Search
     /// Algolia index name.
     /// </summary>
     /// <value>Algolia index name.</value>
-    [DataMember(Name = "destination", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "destination", IsRequired = true, EmitDefaultValue = false)]
     public string Destination { get; set; }
 
     /// <summary>

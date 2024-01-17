@@ -124,7 +124,7 @@ namespace Algolia.Search.Models.Search
     /// Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If &#x60;false&#x60;, maximum score is kept. If &#x60;true&#x60;, score is summed. 
     /// </summary>
     /// <value>Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If &#x60;false&#x60;, maximum score is kept. If &#x60;true&#x60;, score is summed. </value>
-    [DataMember(Name = "sumOrFiltersScores", EmitDefaultValue = true)]
+    [DataMember(Name = "sumOrFiltersScores", EmitDefaultValue = false)]
     public bool? SumOrFiltersScores { get; set; }
 
     /// <summary>
@@ -145,7 +145,7 @@ namespace Algolia.Search.Models.Search
     /// Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the &#x60;afterDistinct&#x60; [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of &#x60;attributesForFaceting&#x60; allows for more granular control. 
     /// </summary>
     /// <value>Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the &#x60;afterDistinct&#x60; [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of &#x60;attributesForFaceting&#x60; allows for more granular control. </value>
-    [DataMember(Name = "facetingAfterDistinct", EmitDefaultValue = true)]
+    [DataMember(Name = "facetingAfterDistinct", EmitDefaultValue = false)]
     public bool? FacetingAfterDistinct { get; set; }
 
     /// <summary>
@@ -180,7 +180,7 @@ namespace Algolia.Search.Models.Search
     /// Search for entries around a location. The location is automatically computed from the requester&#39;s IP address.
     /// </summary>
     /// <value>Search for entries around a location. The location is automatically computed from the requester&#39;s IP address.</value>
-    [DataMember(Name = "aroundLatLngViaIP", EmitDefaultValue = true)]
+    [DataMember(Name = "aroundLatLngViaIP", EmitDefaultValue = false)]
     public bool? AroundLatLngViaIP { get; set; }
 
     /// <summary>
@@ -248,7 +248,7 @@ namespace Algolia.Search.Models.Search
     /// Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).
     /// </summary>
     /// <value>Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).</value>
-    [DataMember(Name = "getRankingInfo", EmitDefaultValue = true)]
+    [DataMember(Name = "getRankingInfo", EmitDefaultValue = false)]
     public bool? GetRankingInfo { get; set; }
 
     /// <summary>
@@ -262,21 +262,21 @@ namespace Algolia.Search.Models.Search
     /// Whether to take into account an index&#39;s synonyms for a particular search.
     /// </summary>
     /// <value>Whether to take into account an index&#39;s synonyms for a particular search.</value>
-    [DataMember(Name = "synonyms", EmitDefaultValue = true)]
+    [DataMember(Name = "synonyms", EmitDefaultValue = false)]
     public bool? Synonyms { get; set; }
 
     /// <summary>
     /// Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).
     /// </summary>
     /// <value>Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).</value>
-    [DataMember(Name = "clickAnalytics", EmitDefaultValue = true)]
+    [DataMember(Name = "clickAnalytics", EmitDefaultValue = false)]
     public bool? ClickAnalytics { get; set; }
 
     /// <summary>
     /// Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).
     /// </summary>
     /// <value>Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).</value>
-    [DataMember(Name = "analytics", EmitDefaultValue = true)]
+    [DataMember(Name = "analytics", EmitDefaultValue = false)]
     public bool? Analytics { get; set; }
 
     /// <summary>
@@ -290,14 +290,14 @@ namespace Algolia.Search.Models.Search
     /// Whether to include or exclude a query from the processing-time percentile computation.
     /// </summary>
     /// <value>Whether to include or exclude a query from the processing-time percentile computation.</value>
-    [DataMember(Name = "percentileComputation", EmitDefaultValue = true)]
+    [DataMember(Name = "percentileComputation", EmitDefaultValue = false)]
     public bool? PercentileComputation { get; set; }
 
     /// <summary>
     /// Incidates whether this search will be considered in A/B testing.
     /// </summary>
     /// <value>Incidates whether this search will be considered in A/B testing.</value>
-    [DataMember(Name = "enableABTest", EmitDefaultValue = true)]
+    [DataMember(Name = "enableABTest", EmitDefaultValue = false)]
     public bool? EnableABTest { get; set; }
 
     /// <summary>
@@ -374,7 +374,7 @@ namespace Algolia.Search.Models.Search
     /// Restrict highlighting and snippeting to items that matched the query.
     /// </summary>
     /// <value>Restrict highlighting and snippeting to items that matched the query.</value>
-    [DataMember(Name = "restrictHighlightAndSnippetArrays", EmitDefaultValue = true)]
+    [DataMember(Name = "restrictHighlightAndSnippetArrays", EmitDefaultValue = false)]
     public bool? RestrictHighlightAndSnippetArrays { get; set; }
 
     /// <summary>
@@ -408,7 +408,7 @@ namespace Algolia.Search.Models.Search
     /// Whether to allow typos on numbers (\&quot;numeric tokens\&quot;) in the query string.
     /// </summary>
     /// <value>Whether to allow typos on numbers (\&quot;numeric tokens\&quot;) in the query string.</value>
-    [DataMember(Name = "allowTyposOnNumericTokens", EmitDefaultValue = true)]
+    [DataMember(Name = "allowTyposOnNumericTokens", EmitDefaultValue = false)]
     public bool? AllowTyposOnNumericTokens { get; set; }
 
     /// <summary>
@@ -448,21 +448,21 @@ namespace Algolia.Search.Models.Search
     /// [Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query. 
     /// </summary>
     /// <value>[Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query. </value>
-    [DataMember(Name = "decompoundQuery", EmitDefaultValue = true)]
+    [DataMember(Name = "decompoundQuery", EmitDefaultValue = false)]
     public bool? DecompoundQuery { get; set; }
 
     /// <summary>
     /// Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.
     /// </summary>
     /// <value>Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.</value>
-    [DataMember(Name = "enableRules", EmitDefaultValue = true)]
+    [DataMember(Name = "enableRules", EmitDefaultValue = false)]
     public bool? EnableRules { get; set; }
 
     /// <summary>
     /// Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.
     /// </summary>
     /// <value>Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.</value>
-    [DataMember(Name = "enablePersonalization", EmitDefaultValue = true)]
+    [DataMember(Name = "enablePersonalization", EmitDefaultValue = false)]
     public bool? EnablePersonalization { get; set; }
 
     /// <summary>
@@ -475,7 +475,7 @@ namespace Algolia.Search.Models.Search
     /// Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).
     /// </summary>
     /// <value>Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).</value>
-    [DataMember(Name = "advancedSyntax", EmitDefaultValue = true)]
+    [DataMember(Name = "advancedSyntax", EmitDefaultValue = false)]
     public bool? AdvancedSyntax { get; set; }
 
     /// <summary>
@@ -516,7 +516,7 @@ namespace Algolia.Search.Models.Search
     /// Whether to highlight and snippet the original word that matches the synonym or the synonym itself.
     /// </summary>
     /// <value>Whether to highlight and snippet the original word that matches the synonym or the synonym itself.</value>
-    [DataMember(Name = "replaceSynonymsInHighlight", EmitDefaultValue = true)]
+    [DataMember(Name = "replaceSynonymsInHighlight", EmitDefaultValue = false)]
     public bool? ReplaceSynonymsInHighlight { get; set; }
 
     /// <summary>
@@ -558,7 +558,7 @@ namespace Algolia.Search.Models.Search
     /// When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.
     /// </summary>
     /// <value>When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.</value>
-    [DataMember(Name = "attributeCriteriaComputedByMinProximity", EmitDefaultValue = true)]
+    [DataMember(Name = "attributeCriteriaComputedByMinProximity", EmitDefaultValue = false)]
     public bool? AttributeCriteriaComputedByMinProximity { get; set; }
 
     /// <summary>
@@ -571,20 +571,20 @@ namespace Algolia.Search.Models.Search
     /// Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
     /// </summary>
     /// <value>Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).</value>
-    [DataMember(Name = "enableReRanking", EmitDefaultValue = true)]
+    [DataMember(Name = "enableReRanking", EmitDefaultValue = false)]
     public bool? EnableReRanking { get; set; }
 
     /// <summary>
     /// Gets or Sets ReRankingApplyFilter
     /// </summary>
-    [DataMember(Name = "reRankingApplyFilter", EmitDefaultValue = true)]
+    [DataMember(Name = "reRankingApplyFilter", EmitDefaultValue = false)]
     public ReRankingApplyFilter ReRankingApplyFilter { get; set; }
 
     /// <summary>
     /// Algolia index name.
     /// </summary>
     /// <value>Algolia index name.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>

@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Abtesting
     /// <param name="index">A/B test index. (required).</param>
     /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
     /// <param name="customSearchParameters">customSearchParameters (required).</param>
-    public AbTestsVariantSearchParams(string index, int trafficPercentage, Object customSearchParameters)
+    public AbTestsVariantSearchParams(string index, int? trafficPercentage, Object customSearchParameters)
     {
       this.Index = index ?? throw new ArgumentNullException("index is a required property for AbTestsVariantSearchParams and cannot be null");
       this.TrafficPercentage = trafficPercentage;
@@ -46,15 +46,15 @@ namespace Algolia.Search.Models.Abtesting
     /// A/B test index.
     /// </summary>
     /// <value>A/B test index.</value>
-    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
     public string Index { get; set; }
 
     /// <summary>
     /// A/B test traffic percentage.
     /// </summary>
     /// <value>A/B test traffic percentage.</value>
-    [DataMember(Name = "trafficPercentage", IsRequired = true, EmitDefaultValue = true)]
-    public int TrafficPercentage { get; set; }
+    [DataMember(Name = "trafficPercentage", IsRequired = true, EmitDefaultValue = false)]
+    public int? TrafficPercentage { get; set; }
 
     /// <summary>
     /// A/B test description.
@@ -66,7 +66,7 @@ namespace Algolia.Search.Models.Abtesting
     /// <summary>
     /// Gets or Sets CustomSearchParameters
     /// </summary>
-    [DataMember(Name = "customSearchParameters", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "customSearchParameters", IsRequired = true, EmitDefaultValue = false)]
     public Object CustomSearchParameters { get; set; }
 
     /// <summary>

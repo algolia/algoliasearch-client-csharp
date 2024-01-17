@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Analytics
     /// </summary>
     /// <param name="position">Range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped.  (required).</param>
     /// <param name="clickCount">Number of click events. (required).</param>
-    public ClickPosition(List<int> position, int clickCount)
+    public ClickPosition(List<int> position, int? clickCount)
     {
       this.Position = position ?? throw new ArgumentNullException("position is a required property for ClickPosition and cannot be null");
       this.ClickCount = clickCount;
@@ -44,15 +44,15 @@ namespace Algolia.Search.Models.Analytics
     /// Range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped. 
     /// </summary>
     /// <value>Range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped. </value>
-    [DataMember(Name = "position", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "position", IsRequired = true, EmitDefaultValue = false)]
     public List<int> Position { get; set; }
 
     /// <summary>
     /// Number of click events.
     /// </summary>
     /// <value>Number of click events.</value>
-    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = true)]
-    public int ClickCount { get; set; }
+    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? ClickCount { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public AuthenticationType Type { get; set; }
 
     /// <summary>
@@ -62,27 +62,27 @@ namespace Algolia.Search.Models.Ingestion
     /// The authentication UUID.
     /// </summary>
     /// <value>The authentication UUID.</value>
-    [DataMember(Name = "authenticationID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "authenticationID", IsRequired = true, EmitDefaultValue = false)]
     public string AuthenticationID { get; set; }
 
     /// <summary>
     /// An human readable name describing the object.
     /// </summary>
     /// <value>An human readable name describing the object.</value>
-    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
     public string Name { get; set; }
 
     /// <summary>
     /// Gets or Sets Input
     /// </summary>
-    [DataMember(Name = "input", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "input", IsRequired = true, EmitDefaultValue = false)]
     public AuthInput Input { get; set; }
 
     /// <summary>
     /// Date of creation (RFC3339 format).
     /// </summary>
     /// <value>Date of creation (RFC3339 format).</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public string CreatedAt { get; set; }
 
     /// <summary>

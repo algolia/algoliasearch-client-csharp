@@ -62,7 +62,7 @@ namespace Algolia.Search.Models.Ingestion
     /// The configuration of the spec.
     /// </summary>
     /// <value>The configuration of the spec.</value>
-    [DataMember(Name = "configuration", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "configuration", IsRequired = true, EmitDefaultValue = false)]
     public Object VarConfiguration { get; set; }
 
     /// <summary>

@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Ingestion
     /// The run UUID.
     /// </summary>
     /// <value>The run UUID.</value>
-    [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = false)]
     public string RunID { get; set; }
 
     /// <summary>
     /// Date of creation (RFC3339 format).
     /// </summary>
     /// <value>Date of creation (RFC3339 format).</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public string CreatedAt { get; set; }
 
     /// <summary>

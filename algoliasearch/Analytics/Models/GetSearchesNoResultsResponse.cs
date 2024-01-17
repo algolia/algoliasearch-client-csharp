@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Analytics
     /// Searches with no results.
     /// </summary>
     /// <value>Searches with no results.</value>
-    [DataMember(Name = "searches", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "searches", IsRequired = true, EmitDefaultValue = false)]
     public List<SearchNoResultEvent> Searches { get; set; }
 
     /// <summary>

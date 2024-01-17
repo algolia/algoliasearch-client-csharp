@@ -60,7 +60,7 @@ namespace Algolia.Search.Models.Monitoring
     /// Included to support legacy applications. Do not rely on this attribute being present in the response. Use &#x60;is_replica&#x60; instead. 
     /// </summary>
     /// <value>Included to support legacy applications. Do not rely on this attribute being present in the response. Use &#x60;is_replica&#x60; instead. </value>
-    [DataMember(Name = "is_slave", EmitDefaultValue = true)]
+    [DataMember(Name = "is_slave", EmitDefaultValue = false)]
     [Obsolete]
     public bool? IsSlave { get; set; }
 
@@ -68,7 +68,7 @@ namespace Algolia.Search.Models.Monitoring
     /// Indicates whether this server is a replica of another server.
     /// </summary>
     /// <value>Indicates whether this server is a replica of another server.</value>
-    [DataMember(Name = "is_replica", EmitDefaultValue = true)]
+    [DataMember(Name = "is_replica", EmitDefaultValue = false)]
     public bool? IsReplica { get; set; }
 
     /// <summary>

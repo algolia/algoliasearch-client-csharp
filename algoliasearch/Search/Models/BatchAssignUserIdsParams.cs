@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Search
     /// Cluster name.
     /// </summary>
     /// <value>Cluster name.</value>
-    [DataMember(Name = "cluster", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "cluster", IsRequired = true, EmitDefaultValue = false)]
     public string Cluster { get; set; }
 
     /// <summary>
     /// User IDs to assign.
     /// </summary>
     /// <value>User IDs to assign.</value>
-    [DataMember(Name = "users", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "users", IsRequired = true, EmitDefaultValue = false)]
     public List<string> Users { get; set; }
 
     /// <summary>

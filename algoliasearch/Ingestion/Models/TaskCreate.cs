@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Action
     /// </summary>
-    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = false)]
     public ActionType Action { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="TaskCreate" /> class.
@@ -54,27 +54,27 @@ namespace Algolia.Search.Models.Ingestion
     /// The source UUID.
     /// </summary>
     /// <value>The source UUID.</value>
-    [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = false)]
     public string SourceID { get; set; }
 
     /// <summary>
     /// The destination UUID.
     /// </summary>
     /// <value>The destination UUID.</value>
-    [DataMember(Name = "destinationID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "destinationID", IsRequired = true, EmitDefaultValue = false)]
     public string DestinationID { get; set; }
 
     /// <summary>
     /// Gets or Sets Trigger
     /// </summary>
-    [DataMember(Name = "trigger", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "trigger", IsRequired = true, EmitDefaultValue = false)]
     public TaskCreateTrigger Trigger { get; set; }
 
     /// <summary>
     /// Whether the task is enabled or not.
     /// </summary>
     /// <value>Whether the task is enabled or not.</value>
-    [DataMember(Name = "enabled", EmitDefaultValue = true)]
+    [DataMember(Name = "enabled", EmitDefaultValue = false)]
     public bool? Enabled { get; set; }
 
     /// <summary>

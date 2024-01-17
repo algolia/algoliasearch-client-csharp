@@ -48,7 +48,7 @@ namespace Algolia.Search.Models.Search
     /// Whether the pattern matches on plurals, synonyms, and typos.
     /// </summary>
     /// <value>Whether the pattern matches on plurals, synonyms, and typos.</value>
-    [DataMember(Name = "alternatives", EmitDefaultValue = true)]
+    [DataMember(Name = "alternatives", EmitDefaultValue = false)]
     public bool? Alternatives { get; set; }
 
     /// <summary>

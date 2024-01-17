@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Personalization
     /// <param name="score">The score for the event. (required).</param>
     /// <param name="eventName">The name of the event. (required).</param>
     /// <param name="eventType">The type of the event. (required).</param>
-    public EventScoring(int score, string eventName, string eventType)
+    public EventScoring(int? score, string eventName, string eventType)
     {
       this.Score = score;
       this.EventName = eventName ?? throw new ArgumentNullException("eventName is a required property for EventScoring and cannot be null");
@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Personalization
     /// The score for the event.
     /// </summary>
     /// <value>The score for the event.</value>
-    [DataMember(Name = "score", IsRequired = true, EmitDefaultValue = true)]
-    public int Score { get; set; }
+    [DataMember(Name = "score", IsRequired = true, EmitDefaultValue = false)]
+    public int? Score { get; set; }
 
     /// <summary>
     /// The name of the event.
     /// </summary>
     /// <value>The name of the event.</value>
-    [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = false)]
     public string EventName { get; set; }
 
     /// <summary>
     /// The type of the event.
     /// </summary>
     /// <value>The type of the event.</value>
-    [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = false)]
     public string EventType { get; set; }
 
     /// <summary>

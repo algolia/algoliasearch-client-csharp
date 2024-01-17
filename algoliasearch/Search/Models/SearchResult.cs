@@ -179,7 +179,7 @@ namespace Algolia.Search.Models.Search
     /// <param name="serializer">JSON Serializer</param>
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-      writer.WriteRawValue((string)(typeof(SearchResult<>).GetMethod("ToJson").Invoke(value, null)));
+      writer.WriteRawValue((string)(typeof(SearchResult<object>).GetMethod("ToJson").Invoke(value, null)));
     }
 
     /// <summary>

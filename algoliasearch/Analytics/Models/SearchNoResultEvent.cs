@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="search">User query. (required).</param>
     /// <param name="count">Number of occurrences. (required).</param>
     /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-    public SearchNoResultEvent(string search, int count, int nbHits)
+    public SearchNoResultEvent(string search, int? count, int? nbHits)
     {
       this.Search = search ?? throw new ArgumentNullException("search is a required property for SearchNoResultEvent and cannot be null");
       this.Count = count;
@@ -46,22 +46,22 @@ namespace Algolia.Search.Models.Analytics
     /// User query.
     /// </summary>
     /// <value>User query.</value>
-    [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = false)]
     public string Search { get; set; }
 
     /// <summary>
     /// Number of occurrences.
     /// </summary>
     /// <value>Number of occurrences.</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Number of hits the search query matched.
     /// </summary>
     /// <value>Number of hits the search query matched.</value>
-    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = true)]
-    public int NbHits { get; set; }
+    [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
+    public int? NbHits { get; set; }
 
     /// <summary>
     /// Returns the string presentation of the object

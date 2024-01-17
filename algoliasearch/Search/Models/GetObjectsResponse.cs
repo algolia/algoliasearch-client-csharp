@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// Retrieved results.
     /// </summary>
     /// <value>Retrieved results.</value>
-    [DataMember(Name = "results", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "results", IsRequired = true, EmitDefaultValue = false)]
     public List<T> Results { get; set; }
 
     /// <summary>

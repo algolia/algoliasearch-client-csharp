@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public SearchTypeFacet Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchForFacetsOptions" /> class.
@@ -52,14 +52,14 @@ namespace Algolia.Search.Models.Search
     /// Facet name.
     /// </summary>
     /// <value>Facet name.</value>
-    [DataMember(Name = "facet", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "facet", IsRequired = true, EmitDefaultValue = false)]
     public string Facet { get; set; }
 
     /// <summary>
     /// Algolia index name.
     /// </summary>
     /// <value>Algolia index name.</value>
-    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
     public string IndexName { get; set; }
 
     /// <summary>

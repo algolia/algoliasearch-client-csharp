@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Ingestion
     /// The OAuth endpoint URL.
     /// </summary>
     /// <value>The OAuth endpoint URL.</value>
-    [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = false)]
     public string Url { get; set; }
 
     /// <summary>
     /// The clientID.
     /// </summary>
     /// <value>The clientID.</value>
-    [DataMember(Name = "client_id", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "client_id", IsRequired = true, EmitDefaultValue = false)]
     public string ClientId { get; set; }
 
     /// <summary>
     /// The secret.
     /// </summary>
     /// <value>The secret.</value>
-    [DataMember(Name = "client_secret", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "client_secret", IsRequired = true, EmitDefaultValue = false)]
     public string ClientSecret { get; set; }
 
     /// <summary>

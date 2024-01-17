@@ -48,7 +48,7 @@ namespace Algolia.Search.Models.Recommend
     /// Facet name for trending models.
     /// </summary>
     /// <value>Facet name for trending models.</value>
-    [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = false)]
     public string FacetName { get; set; }
 
     /// <summary>

@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Recommend
     /// <summary>
     /// Gets or Sets MatchLevel
     /// </summary>
-    [DataMember(Name = "matchLevel", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "matchLevel", IsRequired = true, EmitDefaultValue = false)]
     public MatchLevel MatchLevel { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SnippetResultOption" /> class.
@@ -50,7 +50,7 @@ namespace Algolia.Search.Models.Recommend
     /// Markup text with &#x60;facetQuery&#x60; matches highlighted.
     /// </summary>
     /// <value>Markup text with &#x60;facetQuery&#x60; matches highlighted.</value>
-    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
     public string Value { get; set; }
 
     /// <summary>

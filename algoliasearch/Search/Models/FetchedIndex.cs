@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Search
     /// <param name="lastBuildTimeS">Last build time. (required).</param>
     /// <param name="numberOfPendingTasks">Number of pending indexing operations. This value is deprecated and should not be used. (required) (default to 0).</param>
     /// <param name="pendingTask">A boolean which says whether the index has pending tasks. This value is deprecated and should not be used. (required) (default to false).</param>
-    public FetchedIndex(string name, string createdAt, string updatedAt, int entries, int dataSize, int fileSize, int lastBuildTimeS, int numberOfPendingTasks, bool pendingTask)
+    public FetchedIndex(string name, string createdAt, string updatedAt, int? entries, int? dataSize, int? fileSize, int? lastBuildTimeS, int? numberOfPendingTasks, bool? pendingTask)
     {
       this.Name = name ?? throw new ArgumentNullException("name is a required property for FetchedIndex and cannot be null");
       this.CreatedAt = createdAt ?? throw new ArgumentNullException("createdAt is a required property for FetchedIndex and cannot be null");
@@ -58,64 +58,64 @@ namespace Algolia.Search.Models.Search
     /// Index name.
     /// </summary>
     /// <value>Index name.</value>
-    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
     public string Name { get; set; }
 
     /// <summary>
     /// Index creation date. An empty string means that the index has no records.
     /// </summary>
     /// <value>Index creation date. An empty string means that the index has no records.</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public string CreatedAt { get; set; }
 
     /// <summary>
     /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
     /// </summary>
     /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
     public string UpdatedAt { get; set; }
 
     /// <summary>
     /// Number of records contained in the index.
     /// </summary>
     /// <value>Number of records contained in the index.</value>
-    [DataMember(Name = "entries", IsRequired = true, EmitDefaultValue = true)]
-    public int Entries { get; set; }
+    [DataMember(Name = "entries", IsRequired = true, EmitDefaultValue = false)]
+    public int? Entries { get; set; }
 
     /// <summary>
     /// Number of bytes of the index in minified format.
     /// </summary>
     /// <value>Number of bytes of the index in minified format.</value>
-    [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = true)]
-    public int DataSize { get; set; }
+    [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = false)]
+    public int? DataSize { get; set; }
 
     /// <summary>
     /// Number of bytes of the index binary file.
     /// </summary>
     /// <value>Number of bytes of the index binary file.</value>
-    [DataMember(Name = "fileSize", IsRequired = true, EmitDefaultValue = true)]
-    public int FileSize { get; set; }
+    [DataMember(Name = "fileSize", IsRequired = true, EmitDefaultValue = false)]
+    public int? FileSize { get; set; }
 
     /// <summary>
     /// Last build time.
     /// </summary>
     /// <value>Last build time.</value>
-    [DataMember(Name = "lastBuildTimeS", IsRequired = true, EmitDefaultValue = true)]
-    public int LastBuildTimeS { get; set; }
+    [DataMember(Name = "lastBuildTimeS", IsRequired = true, EmitDefaultValue = false)]
+    public int? LastBuildTimeS { get; set; }
 
     /// <summary>
     /// Number of pending indexing operations. This value is deprecated and should not be used.
     /// </summary>
     /// <value>Number of pending indexing operations. This value is deprecated and should not be used.</value>
-    [DataMember(Name = "numberOfPendingTasks", IsRequired = true, EmitDefaultValue = true)]
-    public int NumberOfPendingTasks { get; set; }
+    [DataMember(Name = "numberOfPendingTasks", IsRequired = true, EmitDefaultValue = false)]
+    public int? NumberOfPendingTasks { get; set; }
 
     /// <summary>
     /// A boolean which says whether the index has pending tasks. This value is deprecated and should not be used.
     /// </summary>
     /// <value>A boolean which says whether the index has pending tasks. This value is deprecated and should not be used.</value>
-    [DataMember(Name = "pendingTask", IsRequired = true, EmitDefaultValue = true)]
-    public bool PendingTask { get; set; }
+    [DataMember(Name = "pendingTask", IsRequired = true, EmitDefaultValue = false)]
+    public bool? PendingTask { get; set; }
 
     /// <summary>
     /// Only present if the index is a replica. Contains the name of the related primary index.

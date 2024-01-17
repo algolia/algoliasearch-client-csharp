@@ -35,21 +35,21 @@ namespace Algolia.Search.Models.Search
     /// Key-value pair of a language ISO code and a boolean value.
     /// </summary>
     /// <value>Key-value pair of a language ISO code and a boolean value.</value>
-    [DataMember(Name = "plurals", EmitDefaultValue = true)]
+    [DataMember(Name = "plurals", EmitDefaultValue = false)]
     public Dictionary<string, bool> Plurals { get; set; }
 
     /// <summary>
     /// Key-value pair of a language ISO code and a boolean value.
     /// </summary>
     /// <value>Key-value pair of a language ISO code and a boolean value.</value>
-    [DataMember(Name = "stopwords", EmitDefaultValue = true)]
+    [DataMember(Name = "stopwords", EmitDefaultValue = false)]
     public Dictionary<string, bool> Stopwords { get; set; }
 
     /// <summary>
     /// Key-value pair of a language ISO code and a boolean value.
     /// </summary>
     /// <value>Key-value pair of a language ISO code and a boolean value.</value>
-    [DataMember(Name = "compounds", EmitDefaultValue = true)]
+    [DataMember(Name = "compounds", EmitDefaultValue = false)]
     public Dictionary<string, bool> Compounds { get; set; }
 
     /// <summary>

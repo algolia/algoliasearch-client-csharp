@@ -36,7 +36,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
     /// <param name="dates">Click-through rate events. (required).</param>
-    public GetClickThroughRateResponse(double rate, int clickCount, int trackedSearchCount, List<ClickThroughRateEvent> dates)
+    public GetClickThroughRateResponse(double rate, int? clickCount, int? trackedSearchCount, List<ClickThroughRateEvent> dates)
     {
       this.Rate = rate;
       this.ClickCount = clickCount;
@@ -48,28 +48,28 @@ namespace Algolia.Search.Models.Analytics
     /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
     /// </summary>
     /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
-    [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = false)]
     public double Rate { get; set; }
 
     /// <summary>
     /// Number of click events.
     /// </summary>
     /// <value>Number of click events.</value>
-    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = true)]
-    public int ClickCount { get; set; }
+    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? ClickCount { get; set; }
 
     /// <summary>
     /// Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;.
     /// </summary>
     /// <value>Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;.</value>
-    [DataMember(Name = "trackedSearchCount", IsRequired = true, EmitDefaultValue = true)]
-    public int TrackedSearchCount { get; set; }
+    [DataMember(Name = "trackedSearchCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? TrackedSearchCount { get; set; }
 
     /// <summary>
     /// Click-through rate events.
     /// </summary>
     /// <value>Click-through rate events.</value>
-    [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = false)]
     public List<ClickThroughRateEvent> Dates { get; set; }
 
     /// <summary>

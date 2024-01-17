@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public OnDemandTriggerType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="OnDemandTrigger" /> class.

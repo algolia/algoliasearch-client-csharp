@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Streams
     /// </summary>
-    [DataMember(Name = "streams", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "streams", IsRequired = true, EmitDefaultValue = false)]
     public List<Object> Streams { get; set; }
 
     /// <summary>

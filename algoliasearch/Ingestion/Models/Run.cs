@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Status
     /// </summary>
-    [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = false)]
     public RunStatus Status { get; set; }
 
     /// <summary>
@@ -46,7 +46,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Type
     /// </summary>
-    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
     public RunType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="Run" /> class.
@@ -76,20 +76,20 @@ namespace Algolia.Search.Models.Ingestion
     /// The run UUID.
     /// </summary>
     /// <value>The run UUID.</value>
-    [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = false)]
     public string RunID { get; set; }
 
     /// <summary>
     /// Gets or Sets AppID
     /// </summary>
-    [DataMember(Name = "appID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "appID", IsRequired = true, EmitDefaultValue = false)]
     public string AppID { get; set; }
 
     /// <summary>
     /// The task UUID.
     /// </summary>
     /// <value>The task UUID.</value>
-    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
     public string TaskID { get; set; }
 
     /// <summary>
@@ -116,7 +116,7 @@ namespace Algolia.Search.Models.Ingestion
     /// Date of creation (RFC3339 format).
     /// </summary>
     /// <value>Date of creation (RFC3339 format).</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public string CreatedAt { get; set; }
 
     /// <summary>

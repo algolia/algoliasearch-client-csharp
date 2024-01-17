@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Personalization
     /// </summary>
     /// <param name="score">The score for the event. (required).</param>
     /// <param name="facetName">The name of the facet. (required).</param>
-    public FacetScoring(int score, string facetName)
+    public FacetScoring(int? score, string facetName)
     {
       this.Score = score;
       this.FacetName = facetName ?? throw new ArgumentNullException("facetName is a required property for FacetScoring and cannot be null");
@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Personalization
     /// The score for the event.
     /// </summary>
     /// <value>The score for the event.</value>
-    [DataMember(Name = "score", IsRequired = true, EmitDefaultValue = true)]
-    public int Score { get; set; }
+    [DataMember(Name = "score", IsRequired = true, EmitDefaultValue = false)]
+    public int? Score { get; set; }
 
     /// <summary>
     /// The name of the facet.
     /// </summary>
     /// <value>The name of the facet.</value>
-    [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = false)]
     public string FacetName { get; set; }
 
     /// <summary>

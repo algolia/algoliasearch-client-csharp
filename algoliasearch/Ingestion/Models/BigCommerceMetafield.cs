@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Ingestion
     /// The namespace of the metafield.
     /// </summary>
     /// <value>The namespace of the metafield.</value>
-    [DataMember(Name = "namespace", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "namespace", IsRequired = true, EmitDefaultValue = false)]
     public string VarNamespace { get; set; }
 
     /// <summary>
     /// The key identifier of the metafield.
     /// </summary>
     /// <value>The key identifier of the metafield.</value>
-    [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = false)]
     public string Key { get; set; }
 
     /// <summary>

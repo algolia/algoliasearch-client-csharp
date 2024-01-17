@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// API keys.
     /// </summary>
     /// <value>API keys.</value>
-    [DataMember(Name = "keys", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "keys", IsRequired = true, EmitDefaultValue = false)]
     public List<GetApiKeyResponse> Keys { get; set; }
 
     /// <summary>

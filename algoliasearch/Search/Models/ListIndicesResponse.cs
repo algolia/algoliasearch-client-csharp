@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Search
     /// All indices in your Algolia application.
     /// </summary>
     /// <value>All indices in your Algolia application.</value>
-    [DataMember(Name = "items", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "items", IsRequired = true, EmitDefaultValue = false)]
     public List<FetchedIndex> Items { get; set; }
 
     /// <summary>

@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="average">Average count of all click events. (required).</param>
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="dates">Average click positions. (required).</param>
-    public GetAverageClickPositionResponse(double average, int clickCount, List<AverageClickEvent> dates)
+    public GetAverageClickPositionResponse(double average, int? clickCount, List<AverageClickEvent> dates)
     {
       this.Average = average;
       this.ClickCount = clickCount;
@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Analytics
     /// Average count of all click events.
     /// </summary>
     /// <value>Average count of all click events.</value>
-    [DataMember(Name = "average", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "average", IsRequired = true, EmitDefaultValue = false)]
     public double Average { get; set; }
 
     /// <summary>
     /// Number of click events.
     /// </summary>
     /// <value>Number of click events.</value>
-    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = true)]
-    public int ClickCount { get; set; }
+    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? ClickCount { get; set; }
 
     /// <summary>
     /// Average click positions.
     /// </summary>
     /// <value>Average click positions.</value>
-    [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = false)]
     public List<AverageClickEvent> Dates { get; set; }
 
     /// <summary>

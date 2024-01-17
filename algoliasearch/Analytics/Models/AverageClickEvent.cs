@@ -35,7 +35,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="average">Average count of all click events. (required).</param>
     /// <param name="clickCount">Number of click events. (required).</param>
     /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-    public AverageClickEvent(double average, int clickCount, string date)
+    public AverageClickEvent(double average, int? clickCount, string date)
     {
       this.Average = average;
       this.ClickCount = clickCount;
@@ -46,21 +46,21 @@ namespace Algolia.Search.Models.Analytics
     /// Average count of all click events.
     /// </summary>
     /// <value>Average count of all click events.</value>
-    [DataMember(Name = "average", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "average", IsRequired = true, EmitDefaultValue = false)]
     public double Average { get; set; }
 
     /// <summary>
     /// Number of click events.
     /// </summary>
     /// <value>Number of click events.</value>
-    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = true)]
-    public int ClickCount { get; set; }
+    [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? ClickCount { get; set; }
 
     /// <summary>
     /// Date of the event in the format YYYY-MM-DD.
     /// </summary>
     /// <value>Date of the event in the format YYYY-MM-DD.</value>
-    [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
     public string Date { get; set; }
 
     /// <summary>

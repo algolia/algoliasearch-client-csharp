@@ -42,7 +42,7 @@ namespace Algolia.Search.Models.Recommend
     /// Request parameters depend on the model (recommendations or trending).
     /// </summary>
     /// <value>Request parameters depend on the model (recommendations or trending).</value>
-    [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = false)]
     public List<RecommendationsRequest> Requests { get; set; }
 
     /// <summary>

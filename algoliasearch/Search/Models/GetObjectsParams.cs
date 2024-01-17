@@ -41,7 +41,7 @@ namespace Algolia.Search.Models.Search
     /// <summary>
     /// Gets or Sets Requests
     /// </summary>
-    [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = false)]
     public List<GetObjectsRequest> Requests { get; set; }
 
     /// <summary>

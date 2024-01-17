@@ -34,7 +34,7 @@ namespace Algolia.Search.Models.Analytics
     /// </summary>
     /// <param name="count">Number of occurrences. (required).</param>
     /// <param name="values">Filters with no results. (required).</param>
-    public GetTopFiltersNoResultsValues(int count, List<GetTopFiltersNoResultsValue> values)
+    public GetTopFiltersNoResultsValues(int? count, List<GetTopFiltersNoResultsValue> values)
     {
       this.Count = count;
       this.Values = values ?? throw new ArgumentNullException("values is a required property for GetTopFiltersNoResultsValues and cannot be null");
@@ -44,14 +44,14 @@ namespace Algolia.Search.Models.Analytics
     /// Number of occurrences.
     /// </summary>
     /// <value>Number of occurrences.</value>
-    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-    public int Count { get; set; }
+    [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
+    public int? Count { get; set; }
 
     /// <summary>
     /// Filters with no results.
     /// </summary>
     /// <value>Filters with no results.</value>
-    [DataMember(Name = "values", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "values", IsRequired = true, EmitDefaultValue = false)]
     public List<GetTopFiltersNoResultsValue> Values { get; set; }
 
     /// <summary>

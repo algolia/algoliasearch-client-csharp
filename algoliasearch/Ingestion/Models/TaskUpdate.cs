@@ -54,7 +54,7 @@ namespace Algolia.Search.Models.Ingestion
     /// Whether the task is enabled or not.
     /// </summary>
     /// <value>Whether the task is enabled or not.</value>
-    [DataMember(Name = "enabled", EmitDefaultValue = true)]
+    [DataMember(Name = "enabled", EmitDefaultValue = false)]
     public bool? Enabled { get; set; }
 
     /// <summary>

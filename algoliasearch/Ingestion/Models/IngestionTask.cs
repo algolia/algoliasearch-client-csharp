@@ -28,7 +28,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <summary>
     /// Gets or Sets Action
     /// </summary>
-    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = false)]
     public ActionType Action { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="IngestionTask" /> class.
@@ -45,7 +45,7 @@ namespace Algolia.Search.Models.Ingestion
     /// <param name="enabled">Whether the task is enabled or not. (required) (default to true).</param>
     /// <param name="action">action (required).</param>
     /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-    public IngestionTask(string taskID, string sourceID, string destinationID, Trigger trigger, bool enabled, ActionType action, string createdAt)
+    public IngestionTask(string taskID, string sourceID, string destinationID, Trigger trigger, bool? enabled, ActionType action, string createdAt)
     {
       this.TaskID = taskID ?? throw new ArgumentNullException("taskID is a required property for IngestionTask and cannot be null");
       this.SourceID = sourceID ?? throw new ArgumentNullException("sourceID is a required property for IngestionTask and cannot be null");
@@ -60,27 +60,27 @@ namespace Algolia.Search.Models.Ingestion
     /// The task UUID.
     /// </summary>
     /// <value>The task UUID.</value>
-    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
     public string TaskID { get; set; }
 
     /// <summary>
     /// The source UUID.
     /// </summary>
     /// <value>The source UUID.</value>
-    [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = false)]
     public string SourceID { get; set; }
 
     /// <summary>
     /// The destination UUID.
     /// </summary>
     /// <value>The destination UUID.</value>
-    [DataMember(Name = "destinationID", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "destinationID", IsRequired = true, EmitDefaultValue = false)]
     public string DestinationID { get; set; }
 
     /// <summary>
     /// Gets or Sets Trigger
     /// </summary>
-    [DataMember(Name = "trigger", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "trigger", IsRequired = true, EmitDefaultValue = false)]
     public Trigger Trigger { get; set; }
 
     /// <summary>
@@ -93,8 +93,8 @@ namespace Algolia.Search.Models.Ingestion
     /// Whether the task is enabled or not.
     /// </summary>
     /// <value>Whether the task is enabled or not.</value>
-    [DataMember(Name = "enabled", IsRequired = true, EmitDefaultValue = true)]
-    public bool Enabled { get; set; }
+    [DataMember(Name = "enabled", IsRequired = true, EmitDefaultValue = false)]
+    public bool? Enabled { get; set; }
 
     /// <summary>
     /// A percentage representing the accepted failure threshold to determine if a &#x60;run&#x60; succeeded or not.
@@ -107,7 +107,7 @@ namespace Algolia.Search.Models.Ingestion
     /// Date of creation (RFC3339 format).
     /// </summary>
     /// <value>Date of creation (RFC3339 format).</value>
-    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
     public string CreatedAt { get; set; }
 
     /// <summary>

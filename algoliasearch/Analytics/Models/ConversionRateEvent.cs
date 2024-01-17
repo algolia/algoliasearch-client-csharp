@@ -36,7 +36,7 @@ namespace Algolia.Search.Models.Analytics
     /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
     /// <param name="conversionCount">Number of converted clicks. (required).</param>
     /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-    public ConversionRateEvent(double rate, int trackedSearchCount, int conversionCount, string date)
+    public ConversionRateEvent(double rate, int? trackedSearchCount, int? conversionCount, string date)
     {
       this.Rate = rate;
       this.TrackedSearchCount = trackedSearchCount;
@@ -48,28 +48,28 @@ namespace Algolia.Search.Models.Analytics
     /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
     /// </summary>
     /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
-    [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = false)]
     public double Rate { get; set; }
 
     /// <summary>
     /// Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;.
     /// </summary>
     /// <value>Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;.</value>
-    [DataMember(Name = "trackedSearchCount", IsRequired = true, EmitDefaultValue = true)]
-    public int TrackedSearchCount { get; set; }
+    [DataMember(Name = "trackedSearchCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? TrackedSearchCount { get; set; }
 
     /// <summary>
     /// Number of converted clicks.
     /// </summary>
     /// <value>Number of converted clicks.</value>
-    [DataMember(Name = "conversionCount", IsRequired = true, EmitDefaultValue = true)]
-    public int ConversionCount { get; set; }
+    [DataMember(Name = "conversionCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? ConversionCount { get; set; }
 
     /// <summary>
     /// Date of the event in the format YYYY-MM-DD.
     /// </summary>
     /// <value>Date of the event in the format YYYY-MM-DD.</value>
-    [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = true)]
+    [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
     public string Date { get; set; }
 
     /// <summary>
