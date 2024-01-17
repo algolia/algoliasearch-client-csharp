@@ -759,7 +759,7 @@ namespace Algolia.Search.Clients
     /// Search for a user ID.
     /// </summary>
     /// <remarks>
-    /// Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours).  
+    /// Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours). 
     /// </remarks>
     /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="searchUserIdsParams"></param>
@@ -2083,7 +2083,7 @@ namespace Algolia.Search.Clients
     }
 
     /// <summary>
-    /// Search for a user ID. Since it can take up to a few seconds to get the data from the different clusters, the response isn&#39;t real-time. To ensure rapid updates, the user IDs index isn&#39;t built at the same time as the mapping. Instead, it&#39;s built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours).  
+    /// Search for a user ID. Since it can take up to a few seconds to get the data from the different clusters, the response isn&#39;t real-time. To ensure rapid updates, the user IDs index isn&#39;t built at the same time as the mapping. Instead, it&#39;s built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours). 
     /// </summary>
     /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="searchUserIdsParams"></param>
