@@ -26,6 +26,7 @@ namespace Algolia.Search.Clients
       DefaultHosts = GetDefaultHosts(appId);
       Compression = CompressionType.NONE;
     }
+
     private static List<StatefulHost> GetDefaultHosts(string appId)
     {
       List<StatefulHost> hosts = new List<StatefulHost>

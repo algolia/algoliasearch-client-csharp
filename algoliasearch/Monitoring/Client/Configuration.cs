@@ -23,53 +23,21 @@ namespace Algolia.Search.Clients
     /// <param name="apiKey">Your API Key</param>
     public MonitoringConfig(string appId, string apiKey) : base(appId, apiKey, "Monitoring")
     {
-      DefaultHosts = GetDefaultHosts(appId);
+      DefaultHosts = GetDefaultHosts();
       Compression = CompressionType.NONE;
     }
-    private static List<StatefulHost> GetDefaultHosts(string appId)
+    private static List<StatefulHost> GetDefaultHosts()
     {
-      List<StatefulHost> hosts = new List<StatefulHost>
+      return new List<StatefulHost>
     {
       new StatefulHost
       {
-        Url = $"{appId}-dsn.algolia.net",
+        Url = "status.algolia.com",
         Up = true,
         LastUse = DateTime.UtcNow,
-        Accept = CallType.Read
-      },
-      new StatefulHost
-      {
-        Url = $"{appId}.algolia.net", Up = true, LastUse = DateTime.UtcNow, Accept = CallType.Write,
+        Accept =  CallType.Read | CallType.Write
       }
     };
-
-      var commonHosts = new List<StatefulHost>
-    {
-      new StatefulHost
-      {
-        Url = $"{appId}-1.algolianet.com",
-        Up = true,
-        LastUse = DateTime.UtcNow,
-        Accept = CallType.Read | CallType.Write,
-      },
-      new StatefulHost
-      {
-        Url = $"{appId}-2.algolianet.com",
-        Up = true,
-        LastUse = DateTime.UtcNow,
-        Accept = CallType.Read | CallType.Write,
-      },
-      new StatefulHost
-      {
-        Url = $"{appId}-3.algolianet.com",
-        Up = true,
-        LastUse = DateTime.UtcNow,
-        Accept = CallType.Read | CallType.Write,
-      }
-    }.Shuffle();
-
-      hosts.AddRange(commonHosts);
-      return hosts;
     }
   }
 }
