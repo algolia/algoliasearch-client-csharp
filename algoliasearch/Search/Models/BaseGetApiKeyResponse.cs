@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// BaseGetApiKeyResponse
   /// </summary>
   [DataContract(Name = "baseGetApiKeyResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class BaseGetApiKeyResponse
   {
     /// <summary>

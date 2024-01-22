@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// BaseIndexSettings
   /// </summary>
   [DataContract(Name = "baseIndexSettings")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class BaseIndexSettings
   {
     /// <summary>

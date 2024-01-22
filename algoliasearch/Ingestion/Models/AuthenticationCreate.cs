@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// The payload when creating an authentication.
   /// </summary>
   [DataContract(Name = "AuthenticationCreate")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AuthenticationCreate
   {
 

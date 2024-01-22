@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// LogQuery
   /// </summary>
   [DataContract(Name = "logQuery")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class LogQuery
   {
     /// <summary>

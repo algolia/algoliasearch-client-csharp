@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// Response from the API when the Authentication is successfully created.
   /// </summary>
   [DataContract(Name = "AuthenticationCreateResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AuthenticationCreateResponse
   {
     /// <summary>

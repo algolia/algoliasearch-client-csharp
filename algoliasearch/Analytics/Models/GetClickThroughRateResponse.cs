@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Analytics
   /// GetClickThroughRateResponse
   /// </summary>
   [DataContract(Name = "getClickThroughRateResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class GetClickThroughRateResponse
   {
     /// <summary>

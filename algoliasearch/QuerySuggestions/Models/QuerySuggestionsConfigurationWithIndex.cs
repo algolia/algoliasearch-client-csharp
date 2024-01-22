@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.QuerySuggestions
   /// Query Suggestions configuration.
   /// </summary>
   [DataContract(Name = "QuerySuggestionsConfigurationWithIndex")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class QuerySuggestionsConfigurationWithIndex
   {
     /// <summary>

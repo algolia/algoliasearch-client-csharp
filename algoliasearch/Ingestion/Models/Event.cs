@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// An event describe a step of the task execution flow..
   /// </summary>
   [DataContract(Name = "Event")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Event
   {
 

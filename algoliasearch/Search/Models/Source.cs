@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Source.
   /// </summary>
   [DataContract(Name = "varSource")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Source
   {
     /// <summary>

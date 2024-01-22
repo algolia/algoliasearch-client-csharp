@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Recommend
   /// Additional search parameters.
   /// </summary>
   [DataContract(Name = "varParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Params
   {
     /// <summary>

@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// The payload for a task update.
   /// </summary>
   [DataContract(Name = "TaskUpdate")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class TaskUpdate
   {
     /// <summary>

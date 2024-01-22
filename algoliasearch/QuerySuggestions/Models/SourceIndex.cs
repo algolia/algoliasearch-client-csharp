@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.QuerySuggestions
   /// Configuration of an Algolia index for Query Suggestions.
   /// </summary>
   [DataContract(Name = "SourceIndex")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class SourceIndex
   {
     /// <summary>

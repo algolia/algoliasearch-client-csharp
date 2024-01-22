@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// AuthAlgolia
   /// </summary>
   [DataContract(Name = "AuthAlgolia")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AuthAlgolia
   {
     /// <summary>

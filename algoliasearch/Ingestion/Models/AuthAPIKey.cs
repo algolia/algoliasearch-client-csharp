@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// Authentication input used for token credentials.
   /// </summary>
   [DataContract(Name = "AuthAPIKey")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AuthAPIKey
   {
     /// <summary>

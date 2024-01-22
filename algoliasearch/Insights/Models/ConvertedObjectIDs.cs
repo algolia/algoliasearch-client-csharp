@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Insights
   /// Use this event to track when users convert on items unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track conversion events related to Algolia requests, use the \&quot;Converted object IDs after search\&quot; event. 
   /// </summary>
   [DataContract(Name = "ConvertedObjectIDs")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ConvertedObjectIDs
   {
 

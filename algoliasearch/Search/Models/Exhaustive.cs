@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Whether certain properties of the search response are calculated exhaustive (exact) or approximated.
   /// </summary>
   [DataContract(Name = "exhaustive")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Exhaustive
   {
     /// <summary>

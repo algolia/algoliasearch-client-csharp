@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// Payload to partially update an Authentication.
   /// </summary>
   [DataContract(Name = "AuthenticationUpdate")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AuthenticationUpdate
   {
 

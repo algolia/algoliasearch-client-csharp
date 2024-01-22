@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Personalization
   /// SetPersonalizationStrategyResponse
   /// </summary>
   [DataContract(Name = "setPersonalizationStrategyResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class SetPersonalizationStrategyResponse
   {
     /// <summary>

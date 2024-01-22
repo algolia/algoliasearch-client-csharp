@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Recommend
   /// IndexSettingsAsSearchParams
   /// </summary>
   [DataContract(Name = "indexSettingsAsSearchParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class IndexSettingsAsSearchParams
   {
 

@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Abtesting
   /// Outliers removed from the A/B test as a result of configuration settings.
   /// </summary>
   [DataContract(Name = "filterEffects_outliers")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class FilterEffectsOutliers
   {
     /// <summary>

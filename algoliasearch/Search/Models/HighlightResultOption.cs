@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Show highlighted section and words matched on a query.
   /// </summary>
   [DataContract(Name = "highlightResultOption")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class HighlightResultOption
   {
 

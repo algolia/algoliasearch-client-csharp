@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Recommend
   /// Condition
   /// </summary>
   [DataContract(Name = "condition")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Condition
   {
 

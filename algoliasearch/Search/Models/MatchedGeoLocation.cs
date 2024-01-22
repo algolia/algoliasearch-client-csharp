@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// MatchedGeoLocation
   /// </summary>
   [DataContract(Name = "matchedGeoLocation")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class MatchedGeoLocation
   {
     /// <summary>

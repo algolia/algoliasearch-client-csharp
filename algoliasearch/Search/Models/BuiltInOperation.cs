@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// To update an attribute without pushing the entire record, you can use these built-in operations.
   /// </summary>
   [DataContract(Name = "builtInOperation")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class BuiltInOperation
   {
 

@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Analytics
   /// GetNoResultsRateResponse
   /// </summary>
   [DataContract(Name = "getNoResultsRateResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class GetNoResultsRateResponse
   {
     /// <summary>

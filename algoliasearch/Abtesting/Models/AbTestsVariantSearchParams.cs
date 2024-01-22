@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Abtesting
   /// AbTestsVariantSearchParams
   /// </summary>
   [DataContract(Name = "abTestsVariantSearchParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AbTestsVariantSearchParams
   {
     /// <summary>

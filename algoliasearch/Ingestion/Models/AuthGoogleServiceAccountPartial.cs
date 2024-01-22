@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// Authentication input to connect to a Google service (e.g. BigQuery).
   /// </summary>
   [DataContract(Name = "AuthGoogleServiceAccountPartial")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AuthGoogleServiceAccountPartial
   {
     /// <summary>

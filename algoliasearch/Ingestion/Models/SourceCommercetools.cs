@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// SourceCommercetools
   /// </summary>
   [DataContract(Name = "SourceCommercetools")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class SourceCommercetools
   {
     /// <summary>

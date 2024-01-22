@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Analytics
   /// ClickPosition
   /// </summary>
   [DataContract(Name = "clickPosition")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ClickPosition
   {
     /// <summary>

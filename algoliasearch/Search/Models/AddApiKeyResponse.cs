@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// AddApiKeyResponse
   /// </summary>
   [DataContract(Name = "addApiKeyResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AddApiKeyResponse
   {
     /// <summary>

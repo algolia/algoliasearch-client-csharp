@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// BigCommerceMetafield
   /// </summary>
   [DataContract(Name = "BigCommerceMetafield")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class BigCommerceMetafield
   {
     /// <summary>

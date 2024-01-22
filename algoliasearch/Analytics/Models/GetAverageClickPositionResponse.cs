@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Analytics
   /// GetAverageClickPositionResponse
   /// </summary>
   [DataContract(Name = "getAverageClickPositionResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class GetAverageClickPositionResponse
   {
     /// <summary>

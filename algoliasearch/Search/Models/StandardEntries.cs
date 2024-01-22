@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Key-value pairs of [supported language ISO codes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) and boolean values. 
   /// </summary>
   [DataContract(Name = "standardEntries")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class StandardEntries
   {
     /// <summary>

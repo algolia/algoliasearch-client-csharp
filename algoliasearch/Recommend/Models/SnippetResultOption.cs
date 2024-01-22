@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Recommend
   /// Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
   /// </summary>
   [DataContract(Name = "snippetResultOption")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class SnippetResultOption
   {
 

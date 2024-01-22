@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// TaskSearch
   /// </summary>
   [DataContract(Name = "TaskSearch")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class TaskSearch
   {
     /// <summary>

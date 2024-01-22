@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Insights
   /// ConvertedFilters
   /// </summary>
   [DataContract(Name = "ConvertedFilters")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ConvertedFilters
   {
 

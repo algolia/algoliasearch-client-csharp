@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Enable or turn off the built-in Algolia stop words for a specific language.
   /// </summary>
   [DataContract(Name = "dictionarySettingsParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class DictionarySettingsParams
   {
     /// <summary>

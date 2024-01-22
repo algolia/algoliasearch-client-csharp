@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// IngestionTask
   /// </summary>
   [DataContract(Name = "Task")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class IngestionTask
   {
 

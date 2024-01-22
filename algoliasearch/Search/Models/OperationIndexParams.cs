@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// OperationIndexParams
   /// </summary>
   [DataContract(Name = "operationIndexParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class OperationIndexParams
   {
 

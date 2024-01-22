@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// SourceBigQuery
   /// </summary>
   [DataContract(Name = "SourceBigQuery")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class SourceBigQuery
   {
 

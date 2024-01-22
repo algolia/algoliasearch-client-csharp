@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Recommend
   /// Automatic facet Filter.
   /// </summary>
   [DataContract(Name = "automaticFacetFilter")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AutomaticFacetFilter
   {
     /// <summary>

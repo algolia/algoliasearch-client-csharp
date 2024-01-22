@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// TimeRange
   /// </summary>
   [DataContract(Name = "timeRange")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class TimeRange
   {
     /// <summary>

@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// Authentication input for OAuth login.
   /// </summary>
   [DataContract(Name = "AuthOAuth")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AuthOAuth
   {
     /// <summary>

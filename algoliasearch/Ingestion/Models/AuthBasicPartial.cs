@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// Authentication input for Basic login with username and password.
   /// </summary>
   [DataContract(Name = "AuthBasicPartial")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AuthBasicPartial
   {
     /// <summary>

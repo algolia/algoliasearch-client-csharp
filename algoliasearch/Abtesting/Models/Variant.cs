@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Abtesting
   /// Variant
   /// </summary>
   [DataContract(Name = "variant")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Variant
   {
     /// <summary>

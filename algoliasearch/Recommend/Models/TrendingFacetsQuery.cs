@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Recommend
   /// TrendingFacetsQuery
   /// </summary>
   [DataContract(Name = "trendingFacetsQuery")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class TrendingFacetsQuery
   {
 

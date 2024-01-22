@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// The input for an &#x60;onDemand&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a given time range.
   /// </summary>
   [DataContract(Name = "OnDemandDateUtilsInput")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class OnDemandDateUtilsInput
   {
     /// <summary>

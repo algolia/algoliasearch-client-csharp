@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Settings for the semantic search part of NeuralSearch. Only used when &#x60;mode&#x60; is _neuralSearch_. 
   /// </summary>
   [DataContract(Name = "semanticSearch")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class SemanticSearch
   {
     /// <summary>

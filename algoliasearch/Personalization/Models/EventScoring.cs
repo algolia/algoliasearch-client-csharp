@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Personalization
   /// EventScoring
   /// </summary>
   [DataContract(Name = "eventScoring")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class EventScoring
   {
     /// <summary>

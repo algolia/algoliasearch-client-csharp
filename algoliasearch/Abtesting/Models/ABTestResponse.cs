@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Abtesting
   /// ABTestResponse
   /// </summary>
   [DataContract(Name = "ABTestResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ABTestResponse
   {
     /// <summary>

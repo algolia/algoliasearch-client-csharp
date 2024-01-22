@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Insights
   /// Use this method to capture active filters. For example, when browsing a category page, users see content filtered on that specific category. 
   /// </summary>
   [DataContract(Name = "ViewedFilters")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ViewedFilters
   {
 

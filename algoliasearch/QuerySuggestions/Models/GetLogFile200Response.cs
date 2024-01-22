@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.QuerySuggestions
   /// GetLogFile200Response
   /// </summary>
   [DataContract(Name = "getLogFile_200_response")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class GetLogFile200Response
   {
 

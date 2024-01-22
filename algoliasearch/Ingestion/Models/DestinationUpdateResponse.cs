@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// Response from the API when the Destination is successfully updated.
   /// </summary>
   [DataContract(Name = "DestinationUpdateResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class DestinationUpdateResponse
   {
     /// <summary>

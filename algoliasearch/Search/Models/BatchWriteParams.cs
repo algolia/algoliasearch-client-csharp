@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Batch parameters.
   /// </summary>
   [DataContract(Name = "batchWriteParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class BatchWriteParams
   {
     /// <summary>

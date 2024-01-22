@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Recommend
   /// Ordering of facets (widgets).
   /// </summary>
   [DataContract(Name = "facets")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Facets
   {
     /// <summary>

@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Analytics
   /// ConversionRateEvent
   /// </summary>
   [DataContract(Name = "conversionRateEvent")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ConversionRateEvent
   {
     /// <summary>

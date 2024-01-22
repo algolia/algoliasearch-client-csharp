@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Response, taskID, unique object identifier, and an update timestamp.
   /// </summary>
   [DataContract(Name = "updatedAtWithObjectIdResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class UpdatedAtWithObjectIdResponse
   {
     /// <summary>

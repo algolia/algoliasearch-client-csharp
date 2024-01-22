@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Abtesting
   /// Error.
   /// </summary>
   [DataContract(Name = "ErrorBase")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ErrorBase
   {
     /// <summary>

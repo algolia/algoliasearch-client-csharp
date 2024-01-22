@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Request parameters.
   /// </summary>
   [DataContract(Name = "getObjectsParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class GetObjectsParams
   {
     /// <summary>

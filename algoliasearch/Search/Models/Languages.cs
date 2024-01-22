@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// Dictionary language.
   /// </summary>
   [DataContract(Name = "languages")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Languages
   {
     /// <summary>

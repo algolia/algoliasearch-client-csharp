@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Insights
   /// Use this event to track when users click facet filters in your user interface.
   /// </summary>
   [DataContract(Name = "ClickedFilters")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ClickedFilters
   {
 

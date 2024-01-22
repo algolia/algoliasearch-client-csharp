@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Analytics
   /// SearchNoClickEvent
   /// </summary>
   [DataContract(Name = "searchNoClickEvent")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class SearchNoClickEvent
   {
     /// <summary>

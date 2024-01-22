@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Ingestion
   /// DeleteResponse
   /// </summary>
   [DataContract(Name = "DeleteResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class DeleteResponse
   {
     /// <summary>

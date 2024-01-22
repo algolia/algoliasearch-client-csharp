@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// ConsequenceQueryObject
   /// </summary>
   [DataContract(Name = "consequenceQueryObject")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ConsequenceQueryObject
   {
     /// <summary>

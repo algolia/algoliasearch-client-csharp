@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// ListIndicesResponse
   /// </summary>
   [DataContract(Name = "listIndicesResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ListIndicesResponse
   {
     /// <summary>

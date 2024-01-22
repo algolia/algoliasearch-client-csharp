@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// BatchDictionaryEntriesRequest
   /// </summary>
   [DataContract(Name = "batchDictionaryEntriesRequest")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class BatchDictionaryEntriesRequest
   {
 

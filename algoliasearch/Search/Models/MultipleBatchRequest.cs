@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// MultipleBatchRequest
   /// </summary>
   [DataContract(Name = "multipleBatchRequest")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class MultipleBatchRequest
   {
 

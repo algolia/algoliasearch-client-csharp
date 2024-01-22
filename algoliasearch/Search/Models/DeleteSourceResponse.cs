@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// DeleteSourceResponse
   /// </summary>
   [DataContract(Name = "deleteSourceResponse")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class DeleteSourceResponse
   {
     /// <summary>

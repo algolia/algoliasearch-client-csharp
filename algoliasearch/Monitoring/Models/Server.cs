@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Monitoring
   /// Server
   /// </summary>
   [DataContract(Name = "Server")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Server
   {
 

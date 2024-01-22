@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Recommend
   /// Redirect rule data.
   /// </summary>
   [DataContract(Name = "RedirectRuleIndexMetadata_data")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class RedirectRuleIndexMetadataData
   {
     /// <summary>

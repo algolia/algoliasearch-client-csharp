@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// BaseSearchParamsWithoutQuery
   /// </summary>
   [DataContract(Name = "baseSearchParamsWithoutQuery")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class BaseSearchParamsWithoutQuery
   {
     /// <summary>

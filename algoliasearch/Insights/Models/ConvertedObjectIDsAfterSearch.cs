@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Insights
   /// Use this event to track when users convert after a previous Algolia request. For example, a user clicks on an item in the search results to view the product detail page. Then, the user adds the item to their shopping cart.  If you&#39;re building your category pages with Algolia, you&#39;ll also use this event. 
   /// </summary>
   [DataContract(Name = "ConvertedObjectIDsAfterSearch")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ConvertedObjectIDsAfterSearch
   {
 

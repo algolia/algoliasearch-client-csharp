@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// SearchSynonymsParams
   /// </summary>
   [DataContract(Name = "searchSynonymsParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class SearchSynonymsParams
   {
     /// <summary>

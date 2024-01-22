@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Insights
   /// Use this event to track when users add items to their shopping cart after a previous Algolia request. If you&#39;re building your category pages with Algolia, you&#39;ll also use this event. 
   /// </summary>
   [DataContract(Name = "AddedToCartObjectIDsAfterSearch")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class AddedToCartObjectIDsAfterSearch
   {
 

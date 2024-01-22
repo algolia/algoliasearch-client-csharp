@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Search
   /// A single hit.
   /// </summary>
   [DataContract(Name = "hit")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class Hit
   {
     /// <summary>

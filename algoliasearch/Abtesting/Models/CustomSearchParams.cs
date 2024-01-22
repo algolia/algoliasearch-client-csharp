@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Abtesting
   /// Applies search parameters from [a restricted set of options](https://www.algolia.com/doc/api-reference/api-methods/add-ab-test/#method-param-customsearchparameters). Only use this parameter if the two variants use the same index.
   /// </summary>
   [DataContract(Name = "customSearchParams")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class CustomSearchParams
   {
     /// <summary>

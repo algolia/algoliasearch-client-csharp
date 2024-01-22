@@ -22,6 +22,7 @@ namespace Algolia.Search.Models.Insights
   /// Use this event to track when users viewed items in the search results.
   /// </summary>
   [DataContract(Name = "ViewedObjectIDs")]
+  [JsonObject(MemberSerialization.OptOut)]
   public partial class ViewedObjectIDs
   {
 
