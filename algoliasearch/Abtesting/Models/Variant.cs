@@ -50,7 +50,8 @@ namespace Algolia.Search.Models.Abtesting
     /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
     /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
     /// <param name="userCount">Number of users during the A/B test. (required).</param>
-    public Variant(int? addToCartCount, double addToCartRate, int? averageClickPosition, int? clickCount, double clickThroughRate, int? conversionCount, double conversionRate, Dictionary<string, CurrenciesValue> currencies, string description, string index, int? noResultCount, int? purchaseCount, double purchaseRate, int? searchCount, int? trackedSearchCount, int? trafficPercentage, int? userCount)
+    /// <param name="trackedUserCount">Number of users that performed a tracked search during the A/B test. (required).</param>
+    public Variant(int? addToCartCount, double addToCartRate, int? averageClickPosition, int? clickCount, double clickThroughRate, int? conversionCount, double conversionRate, Dictionary<string, CurrenciesValue> currencies, string description, string index, int? noResultCount, int? purchaseCount, double purchaseRate, int? searchCount, int? trackedSearchCount, int? trafficPercentage, int? userCount, int? trackedUserCount)
     {
       this.AddToCartCount = addToCartCount;
       this.AddToCartRate = addToCartRate;
@@ -69,6 +70,7 @@ namespace Algolia.Search.Models.Abtesting
       this.TrackedSearchCount = trackedSearchCount;
       this.TrafficPercentage = trafficPercentage;
       this.UserCount = userCount;
+      this.TrackedUserCount = trackedUserCount;
     }
 
     /// <summary>
@@ -197,6 +199,13 @@ namespace Algolia.Search.Models.Abtesting
     public int? UserCount { get; set; }
 
     /// <summary>
+    /// Number of users that performed a tracked search during the A/B test.
+    /// </summary>
+    /// <value>Number of users that performed a tracked search during the A/B test.</value>
+    [DataMember(Name = "trackedUserCount", IsRequired = true, EmitDefaultValue = false)]
+    public int? TrackedUserCount { get; set; }
+
+    /// <summary>
     /// Returns the string presentation of the object
     /// </summary>
     /// <returns>String presentation of the object</returns>
@@ -222,6 +231,7 @@ namespace Algolia.Search.Models.Abtesting
       sb.Append("  TrackedSearchCount: ").Append(TrackedSearchCount).Append("\n");
       sb.Append("  TrafficPercentage: ").Append(TrafficPercentage).Append("\n");
       sb.Append("  UserCount: ").Append(UserCount).Append("\n");
+      sb.Append("  TrackedUserCount: ").Append(TrackedUserCount).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
