@@ -747,14 +747,11 @@ namespace Algolia.Search.Clients
     /// </remarks>
     /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="type">Search for specific [types of synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#the-different-types-of-synonyms). (optional)</param>
-    /// <param name="page">Returns the requested page number (the first page is 0). Page size is set by `hitsPerPage`. When null, there's no pagination.  (optional, default to 0)</param>
-    /// <param name="hitsPerPage">Maximum number of hits per page. (optional, default to 100)</param>
     /// <param name="searchSynonymsParams">Body of the `searchSynonyms` operation. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of SearchSynonymsResponse</returns>
-    Task<SearchSynonymsResponse> SearchSynonymsAsync(string indexName, SynonymType? type = default, int? page = default, int? hitsPerPage = default, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+    Task<SearchSynonymsResponse> SearchSynonymsAsync(string indexName, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
     /// <summary>
     /// Search for a user ID.
     /// </summary>
@@ -2059,14 +2056,11 @@ namespace Algolia.Search.Clients
     /// </summary>
     /// <exception cref="Algolia.Search.Search.Client.ApiException">Thrown when fails to make API call</exception>
     /// <param name="indexName">Index on which to perform the request.</param>
-    /// <param name="type">Search for specific [types of synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#the-different-types-of-synonyms). (optional)</param>
-    /// <param name="page">Returns the requested page number (the first page is 0). Page size is set by &#x60;hitsPerPage&#x60;. When null, there&#39;s no pagination.  (optional, default to 0)</param>
-    /// <param name="hitsPerPage">Maximum number of hits per page. (optional, default to 100)</param>
     /// <param name="searchSynonymsParams">Body of the &#x60;searchSynonyms&#x60; operation. (optional)</param>
     /// <param name="options">Add extra http header or query parameters to Algolia.</param>
     /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
     /// <returns>Task of SearchSynonymsResponse</returns>
-    public async Task<SearchSynonymsResponse> SearchSynonymsAsync(string indexName, SynonymType? type = default, int? page = default, int? hitsPerPage = default, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+    public async Task<SearchSynonymsResponse> SearchSynonymsAsync(string indexName, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default)
     {
       if (indexName == null)
         throw new ApiException(400, "Parameter `indexName` is required when calling `SearchSynonyms`.");
@@ -2074,9 +2068,6 @@ namespace Algolia.Search.Clients
 
       requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
 
-      requestOptions.AddQueryParameter("type", type);
-      requestOptions.AddQueryParameter("page", page);
-      requestOptions.AddQueryParameter("hitsPerPage", hitsPerPage);
       requestOptions.Data = searchSynonymsParams;
       requestOptions.UseReadTransporter = true;
       return await _transport.ExecuteRequestAsync<SearchSynonymsResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/synonyms/search", requestOptions, cancellationToken).ConfigureAwait(false);

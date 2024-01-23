@@ -25,6 +25,12 @@ namespace Algolia.Search.Models.Search
   [JsonObject(MemberSerialization.OptOut)]
   public partial class SearchSynonymsParams
   {
+
+    /// <summary>
+    /// Gets or Sets Type
+    /// </summary>
+    [DataMember(Name = "type", EmitDefaultValue = false)]
+    public SynonymType Type { get; set; }
     /// <summary>
     /// Initializes a new instance of the <see cref="SearchSynonymsParams" /> class.
     /// </summary>
@@ -40,6 +46,20 @@ namespace Algolia.Search.Models.Search
     public string Query { get; set; }
 
     /// <summary>
+    /// Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).
+    /// </summary>
+    /// <value>Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;).</value>
+    [DataMember(Name = "page", EmitDefaultValue = false)]
+    public int? Page { get; set; }
+
+    /// <summary>
+    /// Number of hits per page.
+    /// </summary>
+    /// <value>Number of hits per page.</value>
+    [DataMember(Name = "hitsPerPage", EmitDefaultValue = false)]
+    public int? HitsPerPage { get; set; }
+
+    /// <summary>
     /// Returns the string presentation of the object
     /// </summary>
     /// <returns>String presentation of the object</returns>
@@ -48,6 +68,9 @@ namespace Algolia.Search.Models.Search
       StringBuilder sb = new StringBuilder();
       sb.Append("class SearchSynonymsParams {\n");
       sb.Append("  Query: ").Append(Query).Append("\n");
+      sb.Append("  Type: ").Append(Type).Append("\n");
+      sb.Append("  Page: ").Append(Page).Append("\n");
+      sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }
