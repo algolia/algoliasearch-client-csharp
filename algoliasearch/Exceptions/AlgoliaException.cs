@@ -8,7 +8,7 @@ namespace Algolia.Search.Exceptions
   public class AlgoliaException : Exception
   {
     /// <summary>
-    /// Algolia's Execption
+    /// Algolia's Exception
     /// </summary>
     public AlgoliaException()
     {

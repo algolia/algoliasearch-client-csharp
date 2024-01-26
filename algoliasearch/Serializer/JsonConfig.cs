@@ -10,13 +10,15 @@ namespace Algolia.Search.Serializer
   {
     public const string JsonContentType = "application/json";
 
-    public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new JsonSerializerSettings
+    public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new()
     {
       Formatting = Formatting.None,
       NullValueHandling = NullValueHandling.Ignore,
       ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
       ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-      DateParseHandling = DateParseHandling.DateTime
+      DateParseHandling = DateParseHandling.DateTime,
+      ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+      MissingMemberHandling = MissingMemberHandling.Ignore,
     };
   }
 }

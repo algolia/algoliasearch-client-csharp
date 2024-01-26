@@ -13,31 +13,6 @@ namespace Algolia.Search.Exceptions
     public int HttpErrorCode { get; set; }
 
     /// <summary>
-    /// Algolia's Execption
-    /// </summary>
-    public AlgoliaApiException()
-    {
-    }
-
-    /// <summary>
-    /// Create a new Algolia's api exception.
-    /// </summary>
-    /// <param name="message">The exception details.</param>
-    public AlgoliaApiException(string message) : base(message)
-    {
-    }
-
-    /// <summary>
-    /// Algolia API Exception
-    /// </summary>
-    /// <param name="message"></param>
-    /// <param name="inner"></param>
-    public AlgoliaApiException(string message, Exception inner)
-        : base(message, inner)
-    {
-    }
-
-    /// <summary>
     /// Ctor with error code and message
     /// </summary>
     /// <param name="message"></param>

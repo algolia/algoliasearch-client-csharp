@@ -1,5 +1,5 @@
 using System.IO;
-using Algolia.Search.Models;
+using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Serializer
 {

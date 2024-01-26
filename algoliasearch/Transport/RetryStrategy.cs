@@ -7,161 +7,160 @@ using Algolia.Search.Http;
 
 [assembly: InternalsVisibleTo("Algolia.Search.Test")]
 
-namespace Algolia.Search.Transport
+namespace Algolia.Search.Transport;
+
+/// <summary>
+/// Retry strategy logic in case of error/timeout
+/// </summary>
+internal class RetryStrategy
 {
   /// <summary>
-  /// Retry strategy logic in case of error/timeout
+  /// Hosts that will be used by the strategy
+  /// Could be default hosts or custom hosts
   /// </summary>
-  internal class RetryStrategy
+  private readonly List<StatefulHost> _hosts;
+
+  /// <summary>
+  /// The synchronization lock for each set RetryStrategy/Transport/Client
+  /// </summary>
+  /// <returns></returns>
+  private readonly object _lock = new();
+
+  /// <summary>
+  /// Default constructor
+  /// </summary>
+  /// <param name="config">Client's configuration</param>
+  public RetryStrategy(AlgoliaConfig config)
   {
-    /// <summary>
-    /// Hosts that will be used by the strategy
-    /// Could be default hosts or custom hosts
-    /// </summary>
-    private readonly List<StatefulHost> _hosts;
+    _hosts = config.CustomHosts ?? config.DefaultHosts;
+  }
 
-    /// <summary>
-    /// The synchronization lock for each set RetryStrategy/Transport/Client
-    /// </summary>
-    /// <returns></returns>
-    private readonly object _lock = new object();
-
-    /// <summary>
-    /// Default constructor
-    /// </summary>
-    /// <param name="config">Client's configuration</param>
-    public RetryStrategy(AlgoliaConfig config)
+  /// <summary>
+  /// Returns the tryable host regarding the retry strategy
+  /// </summary>
+  /// <param name="callType">The Call type <see cref="CallType"/></param>
+  public IEnumerable<StatefulHost> GetTryableHost(CallType callType)
+  {
+    lock (_lock)
     {
-      _hosts = config.CustomHosts ?? config.DefaultHosts;
-    }
+      ResetExpiredHosts();
 
-    /// <summary>
-    /// Returns the tryable host regarding the retry strategy
-    /// </summary>
-    /// <param name="callType">The Call type <see cref="CallType"/></param>
-    public IEnumerable<StatefulHost> GetTryableHost(CallType callType)
-    {
-      lock (_lock)
+      if (_hosts.Any(h => h.Up && h.Accept.HasFlag(callType)))
       {
-        ResetExpiredHosts();
-
-        if (_hosts.Any(h => h.Up && h.Accept.HasFlag(callType)))
-        {
-          return _hosts.Where(h => h.Up && h.Accept.HasFlag(callType));
-        }
-        else
-        {
-          foreach (var host in _hosts.Where(h => h.Accept.HasFlag(callType)))
-          {
-            Reset(host);
-          }
-
-          return _hosts;
-        }
+        return _hosts.Where(h => h.Up && h.Accept.HasFlag(callType));
       }
-    }
 
-    /// <summary>
-    /// Update host's state
-    /// </summary>
-    /// <param name="tryableHost">A statefull host</param>
-    /// <param name="response">Algolia's API response</param>
-    /// <returns></returns>
-    public RetryOutcomeType Decide(StatefulHost tryableHost, AlgoliaHttpResponse response)
-    {
-      lock (_lock)
+      foreach (var host in _hosts.Where(h => h.Accept.HasFlag(callType)))
       {
-        if (!response.IsTimedOut && IsSuccess(response))
-        {
-          tryableHost.Up = true;
-          tryableHost.LastUse = DateTime.UtcNow;
-          return RetryOutcomeType.Success;
-        }
-        else if (!response.IsTimedOut && IsRetryable(response))
-        {
-          tryableHost.Up = false;
-          tryableHost.LastUse = DateTime.UtcNow;
-          return RetryOutcomeType.Retry;
-        }
-        else if (response.IsTimedOut)
-        {
-          tryableHost.Up = true;
-          tryableHost.LastUse = DateTime.UtcNow;
-          tryableHost.RetryCount++;
-          return RetryOutcomeType.Retry;
-        }
-
-        return RetryOutcomeType.Failure;
+        Reset(host);
       }
-    }
 
-    /// <summary>
-    ///  Tells if the response is a success or not
-    /// </summary>
-    /// <param name="response">Algolia's API response</param>
-    /// <returns></returns>
-    private bool IsSuccess(AlgoliaHttpResponse response)
-    {
-      return (int)Math.Floor((decimal)response.HttpStatusCode / 100) == 2;
-    }
-
-    /// <summary>
-    ///  Tells if the response is retryable or not
-    /// </summary>
-    /// <param name="response">Algolia's API response</param>
-    /// <returns></returns>
-    private bool IsRetryable(AlgoliaHttpResponse response)
-    {
-      var isRetryableHttpCode = (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 2 &&
-                                (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 4;
-
-      return isRetryableHttpCode || response.IsNetworkError;
-    }
-
-    /// <summary>
-    /// Reset the given host
-    /// </summary>
-    /// <param name="host"></param>
-    private void Reset(StatefulHost host)
-    {
-      host.Up = true;
-      host.RetryCount = 0;
-      host.LastUse = DateTime.UtcNow;
-    }
-
-    /// <summary>
-    /// Reset down host after 5 minutes
-    /// </summary>
-    private void ResetExpiredHosts()
-    {
-      foreach (var host in _hosts)
-      {
-        if (!host.Up && DateTime.UtcNow.Subtract(host.LastUse).Minutes > 5)
-        {
-          Reset(host);
-        }
-      }
+      return _hosts;
     }
   }
 
   /// <summary>
-  /// Retry strategy outcome values
+  /// Update host's state
   /// </summary>
-  public enum RetryOutcomeType
+  /// <param name="tryableHost">A stateful host</param>
+  /// <param name="response">Algolia's API response</param>
+  /// <returns></returns>
+  public RetryOutcomeType Decide(StatefulHost tryableHost, AlgoliaHttpResponse response)
   {
-    /// <summary>
-    /// Success
-    /// </summary>
-    Success,
+    lock (_lock)
+    {
+      if (!response.IsTimedOut && IsSuccess(response))
+      {
+        tryableHost.Up = true;
+        tryableHost.LastUse = DateTime.UtcNow;
+        return RetryOutcomeType.Success;
+      }
 
-    /// <summary>
-    /// Retry the call
-    /// </summary>
-    Retry,
+      if (!response.IsTimedOut && IsRetryable(response))
+      {
+        tryableHost.Up = false;
+        tryableHost.LastUse = DateTime.UtcNow;
+        return RetryOutcomeType.Retry;
+      }
 
-    /// <summary>
-    /// Call failed error
-    /// </summary>
-    Failure
+      if (response.IsTimedOut)
+      {
+        tryableHost.Up = true;
+        tryableHost.LastUse = DateTime.UtcNow;
+        tryableHost.RetryCount++;
+        return RetryOutcomeType.Retry;
+      }
+
+      return RetryOutcomeType.Failure;
+    }
   }
+
+  /// <summary>
+  ///  Tells if the response is a success or not
+  /// </summary>
+  /// <param name="response">Algolia's API response</param>
+  /// <returns></returns>
+  private static bool IsSuccess(AlgoliaHttpResponse response)
+  {
+    return (int)Math.Floor((decimal)response.HttpStatusCode / 100) == 2;
+  }
+
+  /// <summary>
+  ///  Tells if the response is retryable or not
+  /// </summary>
+  /// <param name="response">Algolia's API response</param>
+  /// <returns></returns>
+  private static bool IsRetryable(AlgoliaHttpResponse response)
+  {
+    var isRetryableHttpCode = (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 2 &&
+                              (int)Math.Floor((decimal)response.HttpStatusCode / 100) != 4;
+
+    return isRetryableHttpCode || response.IsNetworkError;
+  }
+
+  /// <summary>
+  /// Reset the given host
+  /// </summary>
+  /// <param name="host"></param>
+  private static void Reset(StatefulHost host)
+  {
+    host.Up = true;
+    host.RetryCount = 0;
+    host.LastUse = DateTime.UtcNow;
+  }
+
+  /// <summary>
+  /// Reset down host after 5 minutes
+  /// </summary>
+  private void ResetExpiredHosts()
+  {
+    foreach (var host in _hosts)
+    {
+      if (!host.Up && DateTime.UtcNow.Subtract(host.LastUse).Minutes > 5)
+      {
+        Reset(host);
+      }
+    }
+  }
+}
+
+/// <summary>
+/// Retry strategy outcome values
+/// </summary>
+public enum RetryOutcomeType
+{
+  /// <summary>
+  /// Success
+  /// </summary>
+  Success,
+
+  /// <summary>
+  /// Retry the call
+  /// </summary>
+  Retry,
+
+  /// <summary>
+  /// Call failed error
+  /// </summary>
+  Failure
 }

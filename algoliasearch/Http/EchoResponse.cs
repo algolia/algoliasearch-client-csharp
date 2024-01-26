@@ -4,16 +4,49 @@ using System.Net.Http;
 
 namespace Algolia.Search.Http
 {
+  /// <summary>
+  /// Response returned by the echo API
+  /// </summary>
   public class EchoResponse
   {
+    /// <summary>
+    /// Path of the request
+    /// </summary>
+    public string Path;
 
-    public String Path;
-    public String Host;
+    /// <summary>
+    /// Host of the request
+    /// </summary>
+    public string Host;
+
+    /// <summary>
+    /// Method of the request
+    /// </summary>
     public HttpMethod Method;
-    public String Body;
+
+    /// <summary>
+    /// Body of the request
+    /// </summary>
+    public string Body;
+
+    /// <summary>
+    /// Query parameters of the request
+    /// </summary>
     public Dictionary<string, string> QueryParameters;
+
+    /// <summary>
+    /// Headers of the request
+    /// </summary>
     public Dictionary<string, string> Headers;
+
+    /// <summary>
+    /// Timeouts of the request
+    /// </summary>
     public TimeSpan ConnectTimeout;
+
+    /// <summary>
+    /// Timeouts of the request
+    /// </summary>
     public TimeSpan ResponseTimeout;
   }
 }

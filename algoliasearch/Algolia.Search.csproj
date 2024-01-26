@@ -1,22 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo><!-- setting GenerateAssemblyInfo to false causes this bug https://github.com/dotnet/project-system/issues/3934 -->
-    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <Description>Algolia Search API Client for .NET</Description>
     <AssemblyName>Algolia.Search</AssemblyName>
+    <AssemblyTitle>Algolia.Search</AssemblyTitle>
+    <Authors>Algolia</Authors>
+    <Owners>Algolia</Owners>
     <PackageId>Algolia.Search</PackageId>
-    <OutputType>Library</OutputType>
-    <Authors>OpenAPI</Authors>
-    <Company>OpenAPI</Company>
-    <AssemblyTitle>OpenAPI Library</AssemblyTitle>
-    <Description>A library generated from a OpenAPI doc</Description>
-    <Copyright>No Copyright</Copyright>
-    <RootNamespace>Algolia.Search</RootNamespace>
-    <Version>1.0.0</Version>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Algolia.Search.xml</DocumentationFile>
-    <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp.git</RepositoryUrl>
+    <Company>Algolia</Company>
+    <PackageTags>Algolia;Search;SearchEngine;Service;Instant;Typo-Tolerance;Realtime;Analytics</PackageTags>
+    <PackageReleaseNotes>https://github.com/algolia/algoliasearch-client-csharp/blob/master/CHANGELOG.md</PackageReleaseNotes>
+    <PackageIconUrl>https://s.gravatar.com/avatar/ef38ca989ef6a4a6373435c257373b84?s=80</PackageIconUrl>
+    <PackageDescription>
+      Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries, and pre-built integrations. Algolia API Client for the .NET framework lets you easily use the Algolia Search REST API from your .NET code.
+    </PackageDescription>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://www.algolia.com/doc/api-client/getting-started/install/csharp/</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/algolia/algoliasearch-client-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Minor update</PackageReleaseNotes>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Copyright>Copyright 2019 Algolia</Copyright>
+    <Version>7.0.0-alpha.5</Version>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <OutputType>Library</OutputType>
+    <LangVersion>11</LangVersion>
+    <Description>Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries, and pre-built integrations. Algolia API Client for the .NET framework lets you easily use the Algolia Search REST API from your .NET code.</Description>
+    <RootNamespace>Algolia.Search</RootNamespace>
+    <NoWarn>CS0612;CS1570</NoWarn>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo><!-- setting GenerateAssemblyInfo to false causes this bug https://github.com/dotnet/project-system/issues/3934 -->
   </PropertyGroup>
 
   <ItemGroup>

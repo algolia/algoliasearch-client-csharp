@@ -13,6 +13,9 @@ namespace Algolia.Search.Http
   /// </summary>
   public class EchoHttpRequester : IHttpRequester
   {
+    /// <summary>
+    /// Last response returned by the echo API
+    /// </summary>
     public EchoResponse LastResponse;
 
     private static Dictionary<string, string> SplitQuery(string query)
@@ -21,11 +24,19 @@ namespace Algolia.Search.Http
       return collection.AllKeys.ToDictionary(key => key, key => collection[key]);
     }
 
-    public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout,
+    /// <summary>
+    /// Send a fake request
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="requestTimeout"></param>
+    /// <param name="connectTimeout"></param>
+    /// <param name="ct"></param>
+    /// <returns></returns>
+    public Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout,
       TimeSpan connectTimeout,
       CancellationToken ct = default)
     {
-      EchoResponse echo = new EchoResponse
+      var echo = new EchoResponse
       {
         Path = request.Uri.AbsolutePath,
         Host = request.Uri.Host,
@@ -39,11 +50,11 @@ namespace Algolia.Search.Http
 
       LastResponse = echo;
 
-      return new AlgoliaHttpResponse
+      return Task.FromResult(new AlgoliaHttpResponse
       {
         Body = new MemoryStream(),
         HttpStatusCode = 200
-      };
+      });
     }
   }
 }

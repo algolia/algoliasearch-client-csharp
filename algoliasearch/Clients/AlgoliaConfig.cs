@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Algolia.Search.Models;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Serializer;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;

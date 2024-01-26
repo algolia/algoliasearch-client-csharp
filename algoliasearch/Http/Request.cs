@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Algolia.Search.Models;
+using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Http
 {
