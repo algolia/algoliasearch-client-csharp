@@ -1,3 +1,10 @@
+## [7.0.0-alpha.6](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.5...7.0.0-alpha.6)
+
+- [2400c351a](https://github.com/algolia/api-clients-automation/commit/2400c351a) feat(csharp): add helpers ([#2578](https://github.com/algolia/api-clients-automation/pull/2578)) by [@morganleroi](https://github.com/morganleroi/)
+- [aeb15bbe5](https://github.com/algolia/api-clients-automation/commit/aeb15bbe5) feat(csharp): move to dotnet8 and cleanings ([#2602](https://github.com/algolia/api-clients-automation/pull/2602)) by [@morganleroi](https://github.com/morganleroi/)
+- [872ab29bf](https://github.com/algolia/api-clients-automation/commit/872ab29bf) feat(specs): update query suggestions unauthorized response example ([#2606](https://github.com/algolia/api-clients-automation/pull/2606)) by [@alphonseb](https://github.com/alphonseb/)
+- [e569a3e23](https://github.com/algolia/api-clients-automation/commit/e569a3e23) feat(specs): add acls to API endpoints ([#2604](https://github.com/algolia/api-clients-automation/pull/2604)) by [@alphonseb](https://github.com/alphonseb/)
+
 ## [7.0.0-alpha.5](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.4...7.0.0-alpha.5)
 
 - [379fbc501](https://github.com/algolia/api-clients-automation/commit/379fbc501) fix(specs): correct `searchSynonyms` parameters ([#2595](https://github.com/algolia/api-clients-automation/pull/2595)) by [@morganleroi](https://github.com/morganleroi/)
