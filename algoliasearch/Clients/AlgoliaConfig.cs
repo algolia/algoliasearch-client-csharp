@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
+using Algolia.Search.Http;
 using Algolia.Search.Models;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Serializer;
@@ -14,28 +14,22 @@ namespace Algolia.Search.Clients
   /// </summary>
   public abstract class AlgoliaConfig
   {
-    private static readonly string ClientVersion =
-      typeof(AlgoliaConfig).GetTypeInfo().Assembly.GetName().Version.ToString();
-
-    // get the dotnet runtime version
-    private static readonly string DotnetVersion = Environment.Version.ToString();
-
     /// <summary>
     /// Create a new Algolia's configuration for the given credentials
     /// </summary>
     /// <param name="appId">Your application ID</param>
     /// <param name="apiKey">Your API Key</param>
-    /// <param name="client">The client name</param>
-    protected AlgoliaConfig(string appId, string apiKey, string client)
+    /// <param name="clientName">The client name</param>
+    protected AlgoliaConfig(string appId, string apiKey, string clientName)
     {
       AppId = appId;
       ApiKey = apiKey;
-
+      UserAgent = new AlgoliaUserAgent(clientName);
       DefaultHeaders = new Dictionary<string, string>
       {
         { Defaults.AlgoliaApplicationHeader.ToLowerInvariant(), AppId },
         { Defaults.AlgoliaApiKeyHeader.ToLowerInvariant(), ApiKey },
-        { Defaults.UserAgentHeader.ToLowerInvariant(), $"Algolia for Csharp ({ClientVersion}); {client} ({ClientVersion}); Dotnet ({DotnetVersion})" },
+        { Defaults.UserAgentHeader.ToLowerInvariant(), "" },
         { Defaults.Connection.ToLowerInvariant(), Defaults.KeepAlive },
         { Defaults.AcceptHeader.ToLowerInvariant(), JsonConfig.JsonContentType }
       };
@@ -88,5 +82,20 @@ namespace Algolia.Search.Clients
     /// Configurations hosts
     /// </summary>
     protected internal List<StatefulHost> DefaultHosts { get; set; }
+
+    /// <summary>
+    /// The user-agent header
+    /// </summary>
+    public AlgoliaUserAgent UserAgent { get; }
+
+    /// <summary>
+    /// Build the headers for the request
+    /// </summary>
+    /// <returns></returns>
+    internal Dictionary<string, string> BuildHeaders()
+    {
+      DefaultHeaders[Defaults.UserAgentHeader.ToLowerInvariant()] = UserAgent.ToString();
+      return DefaultHeaders;
+    }
   }
 }

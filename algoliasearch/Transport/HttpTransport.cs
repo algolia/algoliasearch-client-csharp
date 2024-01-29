@@ -167,8 +167,8 @@ internal class HttpTransport
   private IDictionary<string, string> GenerateHeaders(IDictionary<string, string> optionalHeaders = null)
   {
     return optionalHeaders != null && optionalHeaders.Any()
-      ? optionalHeaders.MergeWith(_algoliaConfig.DefaultHeaders)
-      : _algoliaConfig.DefaultHeaders;
+      ? optionalHeaders.MergeWith(_algoliaConfig.BuildHeaders())
+      : _algoliaConfig.BuildHeaders();
   }
 
   /// <summary>
