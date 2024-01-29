@@ -21,11 +21,8 @@ namespace Algolia.Search.Clients;
 public interface IRecommendClient
 {
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -37,11 +34,8 @@ public interface IRecommendClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -53,11 +47,8 @@ public interface IRecommendClient
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -70,11 +61,8 @@ public interface IRecommendClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -87,11 +75,8 @@ public interface IRecommendClient
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete a Recommend rule.
-  /// </summary>
-  /// <remarks>
   /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="objectID">Unique record (object) identifier.</param>
@@ -104,11 +89,8 @@ public interface IRecommendClient
   Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a Recommend rule.
-  /// </summary>
-  /// <remarks>
   /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="objectID">Unique record (object) identifier.</param>
@@ -121,11 +103,8 @@ public interface IRecommendClient
   Task<RuleResponse> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a Recommend task's status.
-  /// </summary>
-  /// <remarks>
   /// Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
@@ -138,11 +117,8 @@ public interface IRecommendClient
   Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get recommendations and trending items.
-  /// </summary>
-  /// <remarks>
   /// Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
-  /// </remarks>
+  /// </summary>
   /// <param name="getRecommendationsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -153,11 +129,8 @@ public interface IRecommendClient
   Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List Recommend rules.
-  /// </summary>
-  /// <remarks>
   /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="searchRecommendRulesParams"> (optional)</param>
@@ -227,7 +200,7 @@ public partial class RecommendClient : IRecommendClient
 
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -251,7 +224,7 @@ public partial class RecommendClient : IRecommendClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -275,7 +248,7 @@ public partial class RecommendClient : IRecommendClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -301,7 +274,7 @@ public partial class RecommendClient : IRecommendClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -327,8 +300,11 @@ public partial class RecommendClient : IRecommendClient
   }
 
   /// <summary>
-  /// Delete a Recommend rule. Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+  /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="objectID">Unique record (object) identifier.</param>
@@ -359,8 +335,11 @@ public partial class RecommendClient : IRecommendClient
   }
 
   /// <summary>
-  /// Get a Recommend rule. Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+  /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="objectID">Unique record (object) identifier.</param>
@@ -391,8 +370,11 @@ public partial class RecommendClient : IRecommendClient
   }
 
   /// <summary>
-  /// Get a Recommend task's status. Some operations, such as deleting a Recommend rule, will respond with a &#x60;taskID&#x60; value. Use this value here to check the status of that task.
+  /// Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
@@ -420,8 +402,11 @@ public partial class RecommendClient : IRecommendClient
   }
 
   /// <summary>
-  /// Get recommendations and trending items. Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
+  /// Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="getRecommendationsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -444,8 +429,11 @@ public partial class RecommendClient : IRecommendClient
   }
 
   /// <summary>
-  /// List Recommend rules. List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+  /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="searchRecommendRulesParams"> (optional)</param>

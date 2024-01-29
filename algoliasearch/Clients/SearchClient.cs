@@ -21,11 +21,8 @@ namespace Algolia.Search.Clients;
 public interface ISearchClient
 {
   /// <summary>
-  /// Add API key.
-  /// </summary>
-  /// <remarks>
   /// Add a new API key with specific permissions and restrictions. The request must be authenticated with the admin API key. The response returns an API key string. 
-  /// </remarks>
+  /// </summary>
   /// <param name="apiKey"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -36,11 +33,8 @@ public interface ISearchClient
   Task<AddApiKeyResponse> AddApiKeyAsync(ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Add or update a record (using objectID).
-  /// </summary>
-  /// <remarks>
   /// If you use an existing `objectID`, the existing record will be replaced with the new one.  To update only some attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead.  To add multiple records to your index in a single API request, use the [`batch` operation](#tag/Records/operation/batch). 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique record (object) identifier.</param>
   /// <param name="body">Algolia record.</param>
@@ -53,11 +47,8 @@ public interface ISearchClient
   Task<UpdatedAtWithObjectIdResponse> AddOrUpdateObjectAsync(string indexName, string objectID, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Add a source.
-  /// </summary>
-  /// <remarks>
   /// Add a source to the list of allowed sources.
-  /// </remarks>
+  /// </summary>
   /// <param name="varSource">Source to add.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -68,11 +59,8 @@ public interface ISearchClient
   Task<CreatedAtResponse> AppendSourceAsync(Source varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Assign or move a user ID.
-  /// </summary>
-  /// <remarks>
   /// Assign or move a user ID to a cluster. The time it takes to move a user is proportional to the amount of data linked to the user ID. 
-  /// </remarks>
+  /// </summary>
   /// <param name="xAlgoliaUserID">userID to assign.</param>
   /// <param name="assignUserIdParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -84,11 +72,8 @@ public interface ISearchClient
   Task<CreatedAtResponse> AssignUserIdAsync(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Batch write operations on one index.
-  /// </summary>
-  /// <remarks>
   /// To reduce the time spent on network round trips, you can perform several write actions in a single API call. Actions are applied in the order they are specified. The supported `action`s are equivalent to the individual operations of the same name. 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="batchWriteParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -100,11 +85,8 @@ public interface ISearchClient
   Task<BatchResponse> BatchAsync(string indexName, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Batch assign userIDs.
-  /// </summary>
-  /// <remarks>
   /// Assign multiple user IDs to a cluster. **You can't _move_ users with this operation.**. 
-  /// </remarks>
+  /// </summary>
   /// <param name="xAlgoliaUserID">userID to assign.</param>
   /// <param name="batchAssignUserIdsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -116,11 +98,8 @@ public interface ISearchClient
   Task<CreatedAtResponse> BatchAssignUserIdsAsync(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Batch dictionary entries.
-  /// </summary>
-  /// <remarks>
   /// Add or remove a batch of dictionary entries.
-  /// </remarks>
+  /// </summary>
   /// <param name="dictionaryName">Dictionary to search in.</param>
   /// <param name="batchDictionaryEntriesParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -132,11 +111,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> BatchDictionaryEntriesAsync(DictionaryType dictionaryName, BatchDictionaryEntriesParams batchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get all records from an index.
-  /// </summary>
-  /// <remarks>
   /// Retrieve up to 1,000 records per call. Supports full-text search and filters. For better performance, it doesn't support: - The `distinct` query parameter - Sorting by typos, proximity, words, or geographical distance. 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="browseParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -148,11 +124,8 @@ public interface ISearchClient
   Task<BrowseResponse<T>> BrowseAsync<T>(string indexName, BrowseParams browseParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete all records from an index.
-  /// </summary>
-  /// <remarks>
   /// Delete the records but leave settings and index-specific API keys untouched.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -163,11 +136,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> ClearObjectsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete all rules.
-  /// </summary>
-  /// <remarks>
   /// Delete all rules in the index.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -179,11 +149,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> ClearRulesAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete all synonyms.
-  /// </summary>
-  /// <remarks>
   /// Delete all synonyms in the index.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -195,11 +162,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> ClearSynonymsAsync(string indexName, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -211,11 +175,8 @@ public interface ISearchClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -227,11 +188,8 @@ public interface ISearchClient
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -244,11 +202,8 @@ public interface ISearchClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -261,11 +216,8 @@ public interface ISearchClient
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete API key.
-  /// </summary>
-  /// <remarks>
   /// Delete an existing API key. The request must be authenticated with the admin API key. 
-  /// </remarks>
+  /// </summary>
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -276,11 +228,8 @@ public interface ISearchClient
   Task<DeleteApiKeyResponse> DeleteApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete all records matching a query.
-  /// </summary>
-  /// <remarks>
   /// This operation doesn't support all the query options, only its filters (numeric, facet, or tag) and geo queries. It doesn't accept empty filters or queries. 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="deleteByParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -292,11 +241,8 @@ public interface ISearchClient
   Task<DeletedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete index.
-  /// </summary>
-  /// <remarks>
   /// Delete an existing index.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -307,11 +253,8 @@ public interface ISearchClient
   Task<DeletedAtResponse> DeleteIndexAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete a record.
-  /// </summary>
-  /// <remarks>
   /// To delete a set of records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy) instead.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique record (object) identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -323,11 +266,8 @@ public interface ISearchClient
   Task<DeletedAtResponse> DeleteObjectAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete a rule.
-  /// </summary>
-  /// <remarks>
   /// Delete a rule by its `objectID`. To find the `objectID` for rules, use the [`search` operation](#tag/Rules/operation/searchRules).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a rule object.</param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -340,11 +280,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> DeleteRuleAsync(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Remove a source.
-  /// </summary>
-  /// <remarks>
   /// Remove a source from the list of allowed sources.
-  /// </remarks>
+  /// </summary>
   /// <param name="varSource">IP address range of the source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -355,11 +292,8 @@ public interface ISearchClient
   Task<DeleteSourceResponse> DeleteSourceAsync(string varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete a synonym.
-  /// </summary>
-  /// <remarks>
   /// Delete a synonym by its `objectID`. To find the object IDs of your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a synonym object.</param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -372,11 +306,8 @@ public interface ISearchClient
   Task<DeletedAtResponse> DeleteSynonymAsync(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get API key permissions.
-  /// </summary>
-  /// <remarks>
   /// Get the permissions and restrictions of a specific API key. When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key. 
-  /// </remarks>
+  /// </summary>
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -387,11 +318,8 @@ public interface ISearchClient
   Task<GetApiKeyResponse> GetApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List available languages.
-  /// </summary>
-  /// <remarks>
   /// Lists Algolia's [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) and any customizations applied to each language's [stop word](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/), [plural](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/), and [segmentation (compound)](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) features.
-  /// </remarks>
+  /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -401,11 +329,8 @@ public interface ISearchClient
   Task<Dictionary<string, Languages>> GetDictionaryLanguagesAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get stop word settings.
-  /// </summary>
-  /// <remarks>
   /// Get the languages for which [stop words are turned off](#tag/Dictionaries/operation/setDictionarySettings).
-  /// </remarks>
+  /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -415,11 +340,8 @@ public interface ISearchClient
   Task<GetDictionarySettingsResponse> GetDictionarySettingsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Return the latest log entries.
-  /// </summary>
-  /// <remarks>
   /// The request must be authenticated by an API key with the [`logs` ACL](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). Logs are held for the last seven days. There's also a logging limit of 1,000 API calls per server. This request counts towards your [operations quota](https://support.algolia.com/hc/en-us/articles/4406981829777-How-does-Algolia-count-records-and-operations-) but doesn't appear in the logs itself. > **Note**: To fetch the logs for a Distributed Search Network (DSN) cluster, target the [DSN's endpoint](https://www.algolia.com/doc/guides/scaling/distributed-search-network-dsn/#accessing-dsn-servers). 
-  /// </remarks>
+  /// </summary>
   /// <param name="offset">First log entry to retrieve. Sorted by decreasing date with 0 being the most recent. (optional, default to 0)</param>
   /// <param name="length">Maximum number of entries to retrieve. (optional, default to 10)</param>
   /// <param name="indexName">Index for which log entries should be retrieved. When omitted, log entries are retrieved for all indices. (optional)</param>
@@ -433,11 +355,8 @@ public interface ISearchClient
   Task<GetLogsResponse> GetLogsAsync(int? offset = default, int? length = default, string indexName = default, LogType? type = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a record.
-  /// </summary>
-  /// <remarks>
   /// To get more than one record, use the [`objects` operation](#tag/Records/operation/getObjects).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique record (object) identifier.</param>
   /// <param name="attributesToRetrieve">Attributes to include with the records in the response. This is useful to reduce the size of the API response. By default, all retrievable attributes are returned. `objectID` is always retrieved, even when not specified. [`unretrievableAttributes`](https://www.algolia.com/doc/api-reference/api-parameters/unretrievableAttributes/) won't be retrieved unless the request is authenticated with the admin API key.  (optional)</param>
@@ -450,11 +369,8 @@ public interface ISearchClient
   Task<Dictionary<string, string>> GetObjectAsync(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get multiple records.
-  /// </summary>
-  /// <remarks>
   /// Retrieve one or more records, potentially from different indices, in a single API operation. Results will be received in the same order as the requests. 
-  /// </remarks>
+  /// </summary>
   /// <param name="getObjectsParams">Request object.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -465,11 +381,8 @@ public interface ISearchClient
   Task<GetObjectsResponse<T>> GetObjectsAsync<T>(GetObjectsParams getObjectsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a rule.
-  /// </summary>
-  /// <remarks>
   /// Get a rule by its `objectID`. To find the `objectID` for rules, use the [`search` operation](#tag/Rules/operation/searchRules).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a rule object.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -481,11 +394,8 @@ public interface ISearchClient
   Task<Rule> GetRuleAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get index settings.
-  /// </summary>
-  /// <remarks>
   /// Return an object containing an index's [configuration settings](https://www.algolia.com/doc/api-reference/settings-api-parameters/).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -496,11 +406,8 @@ public interface ISearchClient
   Task<IndexSettings> GetSettingsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get all allowed IP addresses.
-  /// </summary>
-  /// <remarks>
   /// Get all allowed sources (IP addresses).
-  /// </remarks>
+  /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -510,11 +417,8 @@ public interface ISearchClient
   Task<List<Source>> GetSourcesAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a synonym object.
-  /// </summary>
-  /// <remarks>
   /// Get a syonym by its `objectID`. To find the object IDs for your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a synonym object.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -526,11 +430,8 @@ public interface ISearchClient
   Task<SynonymHit> GetSynonymAsync(string indexName, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Check a task's status.
-  /// </summary>
-  /// <remarks>
   /// Some operations, such as copying an index, will respond with a `taskID` value. Use this value here to check the status of that task.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="taskID">Unique task identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -542,11 +443,8 @@ public interface ISearchClient
   Task<GetTaskResponse> GetTaskAsync(string indexName, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top userID.
-  /// </summary>
-  /// <remarks>
   /// Get the IDs of the 10 users with the highest number of records per cluster. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. 
-  /// </remarks>
+  /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -556,11 +454,8 @@ public interface ISearchClient
   Task<GetTopUserIdsResponse> GetTopUserIdsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get userID.
-  /// </summary>
-  /// <remarks>
   /// Returns the userID data stored in the mapping. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. 
-  /// </remarks>
+  /// </summary>
   /// <param name="userID">userID to assign.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -571,11 +466,8 @@ public interface ISearchClient
   Task<UserId> GetUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get migration and user mapping status.
-  /// </summary>
-  /// <remarks>
   /// To determine when the time-consuming process of creating a large batch of users or migrating users from one cluster to another is complete, this operation retrieves the status of the process. 
-  /// </remarks>
+  /// </summary>
   /// <param name="getClusters">Indicates whether to include the cluster's pending mapping state in the response. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -586,11 +478,8 @@ public interface ISearchClient
   Task<HasPendingMappingsResponse> HasPendingMappingsAsync(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List API keys.
-  /// </summary>
-  /// <remarks>
   /// List all API keys associated with your Algolia application, including their permissions and restrictions.
-  /// </remarks>
+  /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -600,11 +489,8 @@ public interface ISearchClient
   Task<ListApiKeysResponse> ListApiKeysAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List clusters.
-  /// </summary>
-  /// <remarks>
   /// List the available clusters in a multi-cluster setup.
-  /// </remarks>
+  /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -614,11 +500,8 @@ public interface ISearchClient
   Task<ListClustersResponse> ListClustersAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List indices.
-  /// </summary>
-  /// <remarks>
   /// List indices in an Algolia application.
-  /// </remarks>
+  /// </summary>
   /// <param name="page">Returns the requested page number. The page size is determined by the `hitsPerPage` parameter. You can see the number of available pages in the `nbPages` response attribute. When `page` is null, the API response is not paginated.  (optional)</param>
   /// <param name="hitsPerPage">Maximum number of hits per page. (optional, default to 100)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -630,11 +513,8 @@ public interface ISearchClient
   Task<ListIndicesResponse> ListIndicesAsync(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List userIDs.
-  /// </summary>
-  /// <remarks>
   /// List the userIDs assigned to a multi-cluster application. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. 
-  /// </remarks>
+  /// </summary>
   /// <param name="page">Returns the requested page number. The page size is determined by the `hitsPerPage` parameter. You can see the number of available pages in the `nbPages` response attribute. When `page` is null, the API response is not paginated.  (optional)</param>
   /// <param name="hitsPerPage">Maximum number of hits per page. (optional, default to 100)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -646,11 +526,8 @@ public interface ISearchClient
   Task<ListUserIdsResponse> ListUserIdsAsync(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Batch write operations on multiple indices.
-  /// </summary>
-  /// <remarks>
   /// To reduce the time spent on network round trips, you can perform several write actions in a single request. It's a multi-index version of the [`batch` operation](#tag/Records/operation/batch). Actions are applied in the order they are specified. The supported actions are equivalent to the individual operations of the same name. 
-  /// </remarks>
+  /// </summary>
   /// <param name="batchParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -661,11 +538,8 @@ public interface ISearchClient
   Task<MultipleBatchResponse> MultipleBatchAsync(BatchParams batchParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Copy, move, or rename an index.
-  /// </summary>
-  /// <remarks>
   /// This `operation`, _copy_ or _move_, will copy or move a source index's (`IndexName`) records, settings, synonyms, and rules to a `destination` index. If the destination index exists, it will be replaced, except for index-specific API keys and analytics data. If the destination index doesn't exist, it will be created.  The choice between moving or copying an index depends on your needs. Choose:  - **Move** to rename an index. - **Copy** to create a new index with the same records and configuration as an existing one.  > **Note**: When considering copying or moving, be aware of the [rate limitations](https://www.algolia.com/doc/guides/scaling/algolia-service-limits/#application-record-and-index-limits) on these processes and the [impact on your analytics data](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/concepts/indices-analytics/).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="operationIndexParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -677,11 +551,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> OperationIndexAsync(string indexName, OperationIndexParams operationIndexParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update record attributes.
-  /// </summary>
-  /// <remarks>
   /// Add new attributes or update current ones in an existing record. You can use any first-level attribute but not nested attributes. If you specify a [nested attribute](https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/how-to/creating-and-using-nested-attributes/), the engine treats it as a replacement for its first-level ancestor. 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique record (object) identifier.</param>
   /// <param name="attributesToUpdate">Object with attributes to update.</param>
@@ -695,11 +566,8 @@ public interface ISearchClient
   Task<UpdatedAtWithObjectIdResponse> PartialUpdateObjectAsync(string indexName, string objectID, Dictionary<string, AttributeToUpdate> attributesToUpdate, bool? createIfNotExists = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Remove userID.
-  /// </summary>
-  /// <remarks>
   /// Remove a userID and its associated data from the multi-clusters.
-  /// </remarks>
+  /// </summary>
   /// <param name="userID">userID to assign.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -710,11 +578,8 @@ public interface ISearchClient
   Task<RemoveUserIdResponse> RemoveUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Replace all sources.
-  /// </summary>
-  /// <remarks>
   /// Replace all allowed sources.
-  /// </remarks>
+  /// </summary>
   /// <param name="varSource">Allowed sources.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -725,11 +590,8 @@ public interface ISearchClient
   Task<ReplaceSourceResponse> ReplaceSourcesAsync(List<Source> varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Restore API key.
-  /// </summary>
-  /// <remarks>
   /// Restore a deleted API key, along with its associated permissions. The request must be authenticated with the admin API key. 
-  /// </remarks>
+  /// </summary>
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -740,11 +602,8 @@ public interface ISearchClient
   Task<AddApiKeyResponse> RestoreApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Add or update a record.
-  /// </summary>
-  /// <remarks>
   /// Add a record (object) to an index or replace it. If the record doesn't contain an `objectID`, Algolia automatically adds it. If you use an existing `objectID`, the existing record is replaced with the new one. To add multiple records to your index in a single API request, use the [`batch` operation](#tag/Records/operation/batch). 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="body">The Algolia record.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -756,11 +615,8 @@ public interface ISearchClient
   Task<SaveObjectResponse> SaveObjectAsync(string indexName, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create or update a rule.
-  /// </summary>
-  /// <remarks>
   /// To create or update more than one rule, use the [`batch` operation](#tag/Rules/operation/saveRules).
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a rule object.</param>
   /// <param name="rule"></param>
@@ -774,11 +630,8 @@ public interface ISearchClient
   Task<UpdatedRuleResponse> SaveRuleAsync(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Save a batch of rules.
-  /// </summary>
-  /// <remarks>
   /// Create or update multiple rules.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="rules"></param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -792,11 +645,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> SaveRulesAsync(string indexName, List<Rule> rules, bool? forwardToReplicas = default, bool? clearExistingRules = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Save a synonym.
-  /// </summary>
-  /// <remarks>
   /// Add a [synonym](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#the-different-types-of-synonyms) to an index or replace it. If the synonym `objectID` doesn't exist, Algolia adds a new one. If you use an existing synonym `objectID`, the existing synonym is replaced with the new one. To add multiple synonyms in a single API request, use the [`batch` operation](#tag/Synonyms/operation/saveSynonyms). 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a synonym object.</param>
   /// <param name="synonymHit"></param>
@@ -810,11 +660,8 @@ public interface ISearchClient
   Task<SaveSynonymResponse> SaveSynonymAsync(string indexName, string objectID, SynonymHit synonymHit, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Save a batch of synonyms.
-  /// </summary>
-  /// <remarks>
   /// Create or update multiple synonyms.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="synonymHit"></param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -828,11 +675,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> SaveSynonymsAsync(string indexName, List<SynonymHit> synonymHit, bool? forwardToReplicas = default, bool? replaceExistingSynonyms = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search multiple indices.
-  /// </summary>
-  /// <remarks>
   /// Send multiple search queries to one or more indices.
-  /// </remarks>
+  /// </summary>
   /// <param name="searchMethodParams">Query requests and strategies. Results will be received in the same order as the queries.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -843,11 +687,8 @@ public interface ISearchClient
   Task<SearchResponses<T>> SearchAsync<T>(SearchMethodParams searchMethodParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search dictionary entries.
-  /// </summary>
-  /// <remarks>
   /// Search for standard and [custom](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/) entries in the [stop words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/), [plurals](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/), or [segmentation (compounds)](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) dictionaries.
-  /// </remarks>
+  /// </summary>
   /// <param name="dictionaryName">Dictionary to search in.</param>
   /// <param name="searchDictionaryEntriesParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -859,11 +700,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> SearchDictionaryEntriesAsync(DictionaryType dictionaryName, SearchDictionaryEntriesParams searchDictionaryEntriesParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search for facet values.
-  /// </summary>
-  /// <remarks>
   /// [Search for a facet's values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values), optionally restricting the returned values to those contained in records matching other search criteria. > **Note**: Pagination isn't supported (`page` and `hitsPerPage` are ignored). By default, the engine returns a maximum of 10 values but you can adjust this with `maxFacetHits`. 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="facetName">Facet name.</param>
   /// <param name="searchForFacetValuesRequest"> (optional)</param>
@@ -876,11 +714,8 @@ public interface ISearchClient
   Task<SearchForFacetValuesResponse> SearchForFacetValuesAsync(string indexName, string facetName, SearchForFacetValuesRequest searchForFacetValuesRequest = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search for rules.
-  /// </summary>
-  /// <remarks>
   /// Search for rules in your index. You can control the search with parameters. To list all rules, send an empty request body.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="searchRulesParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -892,11 +727,8 @@ public interface ISearchClient
   Task<SearchRulesResponse> SearchRulesAsync(string indexName, SearchRulesParams searchRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search an index.
-  /// </summary>
-  /// <remarks>
   /// Return records that match the query.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="searchParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -908,11 +740,8 @@ public interface ISearchClient
   Task<SearchResponse<T>> SearchSingleIndexAsync<T>(string indexName, SearchParams searchParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search for synonyms.
-  /// </summary>
-  /// <remarks>
   /// Search for synonyms in your index. You can control and filter the search with parameters. To get all synonyms, send an empty request body.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="searchSynonymsParams">Body of the `searchSynonyms` operation. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -924,11 +753,8 @@ public interface ISearchClient
   Task<SearchSynonymsResponse> SearchSynonymsAsync(string indexName, SearchSynonymsParams searchSynonymsParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search for a user ID.
-  /// </summary>
-  /// <remarks>
   /// Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours). 
-  /// </remarks>
+  /// </summary>
   /// <param name="searchUserIdsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -939,11 +765,8 @@ public interface ISearchClient
   Task<SearchUserIdsResponse> SearchUserIdsAsync(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Set stop word settings.
-  /// </summary>
-  /// <remarks>
   /// Set stop word settings for a specific language.
-  /// </remarks>
+  /// </summary>
   /// <param name="dictionarySettingsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -954,11 +777,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> SetDictionarySettingsAsync(DictionarySettingsParams dictionarySettingsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update index settings.
-  /// </summary>
-  /// <remarks>
   /// Update the specified [index settings](https://www.algolia.com/doc/api-reference/settings-api-parameters/). Specifying null for a setting resets it to its default value.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="indexSettings"></param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -971,11 +791,8 @@ public interface ISearchClient
   Task<UpdatedAtResponse> SetSettingsAsync(string indexName, IndexSettings indexSettings, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update an API key.
-  /// </summary>
-  /// <remarks>
   /// Replace the permissions of an existing API key. Any unspecified parameter resets that permission to its default value. The request must be authenticated with the admin API key. 
-  /// </remarks>
+  /// </summary>
   /// <param name="key">API key.</param>
   /// <param name="apiKey"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1044,8 +861,11 @@ public partial class SearchClient : ISearchClient
 
 
   /// <summary>
-  /// Add API key. Add a new API key with specific permissions and restrictions. The request must be authenticated with the admin API key. The response returns an API key string. 
+  /// Add a new API key with specific permissions and restrictions. The request must be authenticated with the admin API key. The response returns an API key string. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="apiKey"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1067,8 +887,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Add or update a record (using objectID). If you use an existing &#x60;objectID&#x60;, the existing record will be replaced with the new one.  To update only some attributes of an existing record, use the [&#x60;partial&#x60; operation](#tag/Records/operation/partialUpdateObject) instead.  To add multiple records to your index in a single API request, use the [&#x60;batch&#x60; operation](#tag/Records/operation/batch). 
+  /// If you use an existing `objectID`, the existing record will be replaced with the new one.  To update only some attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead.  To add multiple records to your index in a single API request, use the [`batch` operation](#tag/Records/operation/batch). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique record (object) identifier.</param>
   /// <param name="body">Algolia record.</param>
@@ -1102,8 +925,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Add a source. Add a source to the list of allowed sources.
+  /// Add a source to the list of allowed sources.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="varSource">Source to add.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1125,8 +951,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Assign or move a user ID. Assign or move a user ID to a cluster. The time it takes to move a user is proportional to the amount of data linked to the user ID. 
+  /// Assign or move a user ID to a cluster. The time it takes to move a user is proportional to the amount of data linked to the user ID. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="xAlgoliaUserID">userID to assign.</param>
   /// <param name="assignUserIdParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1154,7 +983,7 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Batch write operations on one index. To reduce the time spent on network round trips, you can perform several write actions in a single API call. Actions are applied in the order they are specified. The supported &#x60;action&#x60;s are equivalent to the individual operations of the same name. 
+  /// To reduce the time spent on network round trips, you can perform several write actions in a single API call. Actions are applied in the order they are specified. The supported `action`s are equivalent to the individual operations of the same name. 
   /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="batchWriteParams"></param>
@@ -1183,8 +1012,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Batch assign userIDs. Assign multiple user IDs to a cluster. **You can&#39;t _move_ users with this operation.**. 
+  /// Assign multiple user IDs to a cluster. **You can't _move_ users with this operation.**. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="xAlgoliaUserID">userID to assign.</param>
   /// <param name="batchAssignUserIdsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1212,8 +1044,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Batch dictionary entries. Add or remove a batch of dictionary entries.
+  /// Add or remove a batch of dictionary entries.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="dictionaryName">Dictionary to search in.</param>
   /// <param name="batchDictionaryEntriesParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1238,8 +1073,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get all records from an index. Retrieve up to 1,000 records per call. Supports full-text search and filters. For better performance, it doesn&#39;t support: - The &#x60;distinct&#x60; query parameter - Sorting by typos, proximity, words, or geographical distance. 
+  /// Retrieve up to 1,000 records per call. Supports full-text search and filters. For better performance, it doesn't support: - The `distinct` query parameter - Sorting by typos, proximity, words, or geographical distance. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - browse
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="browseParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1263,8 +1101,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete all records from an index. Delete the records but leave settings and index-specific API keys untouched.
+  /// Delete the records but leave settings and index-specific API keys untouched.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - deleteIndex
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1286,8 +1127,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete all rules. Delete all rules in the index.
+  /// Delete all rules in the index.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1311,8 +1155,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete all synonyms. Delete all synonyms in the index.
+  /// Delete all synonyms in the index.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1336,7 +1183,7 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -1360,7 +1207,7 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -1384,7 +1231,7 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -1410,7 +1257,7 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -1436,8 +1283,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete API key. Delete an existing API key. The request must be authenticated with the admin API key. 
+  /// Delete an existing API key. The request must be authenticated with the admin API key. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1459,8 +1309,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete all records matching a query. This operation doesn&#39;t support all the query options, only its filters (numeric, facet, or tag) and geo queries. It doesn&#39;t accept empty filters or queries. 
+  /// This operation doesn't support all the query options, only its filters (numeric, facet, or tag) and geo queries. It doesn't accept empty filters or queries. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - deleteIndex
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="deleteByParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1488,8 +1341,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete index. Delete an existing index.
+  /// Delete an existing index.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - deleteIndex
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1511,8 +1367,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete a record. To delete a set of records matching a query, use the [&#x60;deleteByQuery&#x60; operation](#tag/Records/operation/deleteBy) instead.
+  /// To delete a set of records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy) instead.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - deleteObject
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique record (object) identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1540,8 +1399,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete a rule. Delete a rule by its &#x60;objectID&#x60;. To find the &#x60;objectID&#x60; for rules, use the [&#x60;search&#x60; operation](#tag/Rules/operation/searchRules).
+  /// Delete a rule by its `objectID`. To find the `objectID` for rules, use the [`search` operation](#tag/Rules/operation/searchRules).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a rule object.</param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -1571,8 +1433,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Remove a source. Remove a source from the list of allowed sources.
+  /// Remove a source from the list of allowed sources.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="varSource">IP address range of the source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1594,8 +1459,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Delete a synonym. Delete a synonym by its &#x60;objectID&#x60;. To find the object IDs of your synonyms, use the [&#x60;search&#x60; operation](#tag/Synonyms/operation/searchSynonyms).
+  /// Delete a synonym by its `objectID`. To find the object IDs of your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a synonym object.</param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -1625,7 +1493,7 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get API key permissions. Get the permissions and restrictions of a specific API key. When authenticating with the admin API key, you can request information for any of your application&#39;s keys. When authenticating with other API keys, you can only retrieve information for that key. 
+  /// Get the permissions and restrictions of a specific API key. When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key. 
   /// </summary>
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1648,8 +1516,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// List available languages. Lists Algolia&#39;s [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) and any customizations applied to each language&#39;s [stop word](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/), [plural](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/), and [segmentation (compound)](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) features.
+  /// Lists Algolia's [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) and any customizations applied to each language's [stop word](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/), [plural](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/), and [segmentation (compound)](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) features.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1665,8 +1536,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get stop word settings. Get the languages for which [stop words are turned off](#tag/Dictionaries/operation/setDictionarySettings).
+  /// Get the languages for which [stop words are turned off](#tag/Dictionaries/operation/setDictionarySettings).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1682,8 +1556,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Return the latest log entries. The request must be authenticated by an API key with the [&#x60;logs&#x60; ACL](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). Logs are held for the last seven days. There&#39;s also a logging limit of 1,000 API calls per server. This request counts towards your [operations quota](https://support.algolia.com/hc/en-us/articles/4406981829777-How-does-Algolia-count-records-and-operations-) but doesn&#39;t appear in the logs itself. &gt; **Note**: To fetch the logs for a Distributed Search Network (DSN) cluster, target the [DSN&#39;s endpoint](https://www.algolia.com/doc/guides/scaling/distributed-search-network-dsn/#accessing-dsn-servers). 
+  /// The request must be authenticated by an API key with the [`logs` ACL](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). Logs are held for the last seven days. There's also a logging limit of 1,000 API calls per server. This request counts towards your [operations quota](https://support.algolia.com/hc/en-us/articles/4406981829777-How-does-Algolia-count-records-and-operations-) but doesn't appear in the logs itself. > **Note**: To fetch the logs for a Distributed Search Network (DSN) cluster, target the [DSN's endpoint](https://www.algolia.com/doc/guides/scaling/distributed-search-network-dsn/#accessing-dsn-servers). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - logs
   /// <param name="offset">First log entry to retrieve. Sorted by decreasing date with 0 being the most recent. (optional, default to 0)</param>
   /// <param name="length">Maximum number of entries to retrieve. (optional, default to 10)</param>
   /// <param name="indexName">Index for which log entries should be retrieved. When omitted, log entries are retrieved for all indices. (optional)</param>
@@ -1707,8 +1584,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get a record. To get more than one record, use the [&#x60;objects&#x60; operation](#tag/Records/operation/getObjects).
+  /// To get more than one record, use the [`objects` operation](#tag/Records/operation/getObjects).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique record (object) identifier.</param>
   /// <param name="attributesToRetrieve">Attributes to include with the records in the response. This is useful to reduce the size of the API response. By default, all retrievable attributes are returned. &#x60;objectID&#x60; is always retrieved, even when not specified. [&#x60;unretrievableAttributes&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/unretrievableAttributes/) won&#39;t be retrieved unless the request is authenticated with the admin API key.  (optional)</param>
@@ -1738,8 +1618,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get multiple records. Retrieve one or more records, potentially from different indices, in a single API operation. Results will be received in the same order as the requests. 
+  /// Retrieve one or more records, potentially from different indices, in a single API operation. Results will be received in the same order as the requests. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="getObjectsParams">Request object.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1762,8 +1645,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get a rule. Get a rule by its &#x60;objectID&#x60;. To find the &#x60;objectID&#x60; for rules, use the [&#x60;search&#x60; operation](#tag/Rules/operation/searchRules).
+  /// Get a rule by its `objectID`. To find the `objectID` for rules, use the [`search` operation](#tag/Rules/operation/searchRules).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a rule object.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1791,8 +1677,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get index settings. Return an object containing an index&#39;s [configuration settings](https://www.algolia.com/doc/api-reference/settings-api-parameters/).
+  /// Return an object containing an index's [configuration settings](https://www.algolia.com/doc/api-reference/settings-api-parameters/).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1814,8 +1703,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get all allowed IP addresses. Get all allowed sources (IP addresses).
+  /// Get all allowed sources (IP addresses).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1831,8 +1723,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get a synonym object. Get a syonym by its &#x60;objectID&#x60;. To find the object IDs for your synonyms, use the [&#x60;search&#x60; operation](#tag/Synonyms/operation/searchSynonyms).
+  /// Get a syonym by its `objectID`. To find the object IDs for your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a synonym object.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1860,8 +1755,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Check a task's status. Some operations, such as copying an index, will respond with a &#x60;taskID&#x60; value. Use this value here to check the status of that task.
+  /// Some operations, such as copying an index, will respond with a `taskID` value. Use this value here to check the status of that task.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="taskID">Unique task identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1886,8 +1784,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get top userID. Get the IDs of the 10 users with the highest number of records per cluster. Since it can take up to a few seconds to get the data from the different clusters, the response isn&#39;t real-time. 
+  /// Get the IDs of the 10 users with the highest number of records per cluster. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1903,8 +1804,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get userID. Returns the userID data stored in the mapping. Since it can take up to a few seconds to get the data from the different clusters, the response isn&#39;t real-time. 
+  /// Returns the userID data stored in the mapping. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="userID">userID to assign.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1926,8 +1830,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Get migration and user mapping status. To determine when the time-consuming process of creating a large batch of users or migrating users from one cluster to another is complete, this operation retrieves the status of the process. 
+  /// To determine when the time-consuming process of creating a large batch of users or migrating users from one cluster to another is complete, this operation retrieves the status of the process. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="getClusters">Indicates whether to include the cluster&#39;s pending mapping state in the response. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1945,8 +1852,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// List API keys. List all API keys associated with your Algolia application, including their permissions and restrictions.
+  /// List all API keys associated with your Algolia application, including their permissions and restrictions.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1962,8 +1872,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// List clusters. List the available clusters in a multi-cluster setup.
+  /// List the available clusters in a multi-cluster setup.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1979,8 +1892,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// List indices. List indices in an Algolia application.
+  /// List indices in an Algolia application.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - listIndexes
   /// <param name="page">Returns the requested page number. The page size is determined by the &#x60;hitsPerPage&#x60; parameter. You can see the number of available pages in the &#x60;nbPages&#x60; response attribute. When &#x60;page&#x60; is null, the API response is not paginated.  (optional)</param>
   /// <param name="hitsPerPage">Maximum number of hits per page. (optional, default to 100)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2000,8 +1916,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// List userIDs. List the userIDs assigned to a multi-cluster application. Since it can take up to a few seconds to get the data from the different clusters, the response isn&#39;t real-time. 
+  /// List the userIDs assigned to a multi-cluster application. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="page">Returns the requested page number. The page size is determined by the &#x60;hitsPerPage&#x60; parameter. You can see the number of available pages in the &#x60;nbPages&#x60; response attribute. When &#x60;page&#x60; is null, the API response is not paginated.  (optional)</param>
   /// <param name="hitsPerPage">Maximum number of hits per page. (optional, default to 100)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2021,7 +1940,7 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Batch write operations on multiple indices. To reduce the time spent on network round trips, you can perform several write actions in a single request. It&#39;s a multi-index version of the [&#x60;batch&#x60; operation](#tag/Records/operation/batch). Actions are applied in the order they are specified. The supported actions are equivalent to the individual operations of the same name. 
+  /// To reduce the time spent on network round trips, you can perform several write actions in a single request. It's a multi-index version of the [`batch` operation](#tag/Records/operation/batch). Actions are applied in the order they are specified. The supported actions are equivalent to the individual operations of the same name. 
   /// </summary>
   /// <param name="batchParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2044,8 +1963,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Copy, move, or rename an index. This &#x60;operation&#x60;, _copy_ or _move_, will copy or move a source index&#39;s (&#x60;IndexName&#x60;) records, settings, synonyms, and rules to a &#x60;destination&#x60; index. If the destination index exists, it will be replaced, except for index-specific API keys and analytics data. If the destination index doesn&#39;t exist, it will be created.  The choice between moving or copying an index depends on your needs. Choose:  - **Move** to rename an index. - **Copy** to create a new index with the same records and configuration as an existing one.  &gt; **Note**: When considering copying or moving, be aware of the [rate limitations](https://www.algolia.com/doc/guides/scaling/algolia-service-limits/#application-record-and-index-limits) on these processes and the [impact on your analytics data](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/concepts/indices-analytics/).
+  /// This `operation`, _copy_ or _move_, will copy or move a source index's (`IndexName`) records, settings, synonyms, and rules to a `destination` index. If the destination index exists, it will be replaced, except for index-specific API keys and analytics data. If the destination index doesn't exist, it will be created.  The choice between moving or copying an index depends on your needs. Choose:  - **Move** to rename an index. - **Copy** to create a new index with the same records and configuration as an existing one.  > **Note**: When considering copying or moving, be aware of the [rate limitations](https://www.algolia.com/doc/guides/scaling/algolia-service-limits/#application-record-and-index-limits) on these processes and the [impact on your analytics data](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/concepts/indices-analytics/).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="operationIndexParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2073,8 +1995,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Update record attributes. Add new attributes or update current ones in an existing record. You can use any first-level attribute but not nested attributes. If you specify a [nested attribute](https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/how-to/creating-and-using-nested-attributes/), the engine treats it as a replacement for its first-level ancestor. 
+  /// Add new attributes or update current ones in an existing record. You can use any first-level attribute but not nested attributes. If you specify a [nested attribute](https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/how-to/creating-and-using-nested-attributes/), the engine treats it as a replacement for its first-level ancestor. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique record (object) identifier.</param>
   /// <param name="attributesToUpdate">Object with attributes to update.</param>
@@ -2110,8 +2035,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Remove userID. Remove a userID and its associated data from the multi-clusters.
+  /// Remove a userID and its associated data from the multi-clusters.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="userID">userID to assign.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2133,8 +2061,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Replace all sources. Replace all allowed sources.
+  /// Replace all allowed sources.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="varSource">Allowed sources.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2156,8 +2087,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Restore API key. Restore a deleted API key, along with its associated permissions. The request must be authenticated with the admin API key. 
+  /// Restore a deleted API key, along with its associated permissions. The request must be authenticated with the admin API key. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2179,8 +2113,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Add or update a record. Add a record (object) to an index or replace it. If the record doesn&#39;t contain an &#x60;objectID&#x60;, Algolia automatically adds it. If you use an existing &#x60;objectID&#x60;, the existing record is replaced with the new one. To add multiple records to your index in a single API request, use the [&#x60;batch&#x60; operation](#tag/Records/operation/batch). 
+  /// Add a record (object) to an index or replace it. If the record doesn't contain an `objectID`, Algolia automatically adds it. If you use an existing `objectID`, the existing record is replaced with the new one. To add multiple records to your index in a single API request, use the [`batch` operation](#tag/Records/operation/batch). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="body">The Algolia record.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2208,8 +2145,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Create or update a rule. To create or update more than one rule, use the [&#x60;batch&#x60; operation](#tag/Rules/operation/saveRules).
+  /// To create or update more than one rule, use the [`batch` operation](#tag/Rules/operation/saveRules).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a rule object.</param>
   /// <param name="rule"></param>
@@ -2245,8 +2185,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Save a batch of rules. Create or update multiple rules.
+  /// Create or update multiple rules.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="rules"></param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -2278,8 +2221,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Save a synonym. Add a [synonym](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#the-different-types-of-synonyms) to an index or replace it. If the synonym &#x60;objectID&#x60; doesn&#39;t exist, Algolia adds a new one. If you use an existing synonym &#x60;objectID&#x60;, the existing synonym is replaced with the new one. To add multiple synonyms in a single API request, use the [&#x60;batch&#x60; operation](#tag/Synonyms/operation/saveSynonyms). 
+  /// Add a [synonym](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#the-different-types-of-synonyms) to an index or replace it. If the synonym `objectID` doesn't exist, Algolia adds a new one. If you use an existing synonym `objectID`, the existing synonym is replaced with the new one. To add multiple synonyms in a single API request, use the [`batch` operation](#tag/Synonyms/operation/saveSynonyms). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="objectID">Unique identifier of a synonym object.</param>
   /// <param name="synonymHit"></param>
@@ -2315,8 +2261,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Save a batch of synonyms. Create or update multiple synonyms.
+  /// Create or update multiple synonyms.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="synonymHit"></param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -2348,8 +2297,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Search multiple indices. Send multiple search queries to one or more indices.
+  /// Send multiple search queries to one or more indices.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="searchMethodParams">Query requests and strategies. Results will be received in the same order as the queries.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2372,8 +2324,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Search dictionary entries. Search for standard and [custom](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/) entries in the [stop words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/), [plurals](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/), or [segmentation (compounds)](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) dictionaries.
+  /// Search for standard and [custom](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/) entries in the [stop words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/), [plurals](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/), or [segmentation (compounds)](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) dictionaries.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="dictionaryName">Dictionary to search in.</param>
   /// <param name="searchDictionaryEntriesParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2399,8 +2354,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Search for facet values. [Search for a facet&#39;s values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values), optionally restricting the returned values to those contained in records matching other search criteria. &gt; **Note**: Pagination isn&#39;t supported (&#x60;page&#x60; and &#x60;hitsPerPage&#x60; are ignored). By default, the engine returns a maximum of 10 values but you can adjust this with &#x60;maxFacetHits&#x60;. 
+  /// [Search for a facet's values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values), optionally restricting the returned values to those contained in records matching other search criteria. > **Note**: Pagination isn't supported (`page` and `hitsPerPage` are ignored). By default, the engine returns a maximum of 10 values but you can adjust this with `maxFacetHits`. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="facetName">Facet name.</param>
   /// <param name="searchForFacetValuesRequest"> (optional)</param>
@@ -2431,8 +2389,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Search for rules. Search for rules in your index. You can control the search with parameters. To list all rules, send an empty request body.
+  /// Search for rules in your index. You can control the search with parameters. To list all rules, send an empty request body.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="searchRulesParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2457,8 +2418,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Search an index. Return records that match the query.
+  /// Return records that match the query.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="searchParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2483,8 +2447,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Search for synonyms. Search for synonyms in your index. You can control and filter the search with parameters. To get all synonyms, send an empty request body.
+  /// Search for synonyms in your index. You can control and filter the search with parameters. To get all synonyms, send an empty request body.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="searchSynonymsParams">Body of the &#x60;searchSynonyms&#x60; operation. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2509,8 +2476,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Search for a user ID. Since it can take up to a few seconds to get the data from the different clusters, the response isn&#39;t real-time. To ensure rapid updates, the user IDs index isn&#39;t built at the same time as the mapping. Instead, it&#39;s built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours). 
+  /// Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="searchUserIdsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2533,8 +2503,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Set stop word settings. Set stop word settings for a specific language.
+  /// Set stop word settings for a specific language.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="dictionarySettingsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2556,8 +2529,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Update index settings. Update the specified [index settings](https://www.algolia.com/doc/api-reference/settings-api-parameters/). Specifying null for a setting resets it to its default value.
+  /// Update the specified [index settings](https://www.algolia.com/doc/api-reference/settings-api-parameters/). Specifying null for a setting resets it to its default value.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Index on which to perform the request.</param>
   /// <param name="indexSettings"></param>
   /// <param name="forwardToReplicas">Indicates whether changed index settings are forwarded to the replica indices. (optional)</param>
@@ -2587,8 +2563,11 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <summary>
-  /// Update an API key. Replace the permissions of an existing API key. Any unspecified parameter resets that permission to its default value. The request must be authenticated with the admin API key. 
+  /// Replace the permissions of an existing API key. Any unspecified parameter resets that permission to its default value. The request must be authenticated with the admin API key. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - admin
   /// <param name="key">API key.</param>
   /// <param name="apiKey"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>

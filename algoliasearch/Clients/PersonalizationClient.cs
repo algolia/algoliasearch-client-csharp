@@ -21,11 +21,8 @@ namespace Algolia.Search.Clients;
 public interface IPersonalizationClient
 {
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -37,11 +34,8 @@ public interface IPersonalizationClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -53,11 +47,8 @@ public interface IPersonalizationClient
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -70,11 +61,8 @@ public interface IPersonalizationClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -87,11 +75,8 @@ public interface IPersonalizationClient
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete a user profile.
-  /// </summary>
-  /// <remarks>
   /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
-  /// </remarks>
+  /// </summary>
   /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -102,11 +87,8 @@ public interface IPersonalizationClient
   Task<DeleteUserProfileResponse> DeleteUserProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the current strategy.
-  /// </summary>
-  /// <remarks>
   /// The strategy contains information on the events and facets that impact user profiles and personalized search results.
-  /// </remarks>
+  /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -116,11 +98,8 @@ public interface IPersonalizationClient
   Task<PersonalizationStrategyParams> GetPersonalizationStrategyAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a user profile.
-  /// </summary>
-  /// <remarks>
   /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
-  /// </remarks>
+  /// </summary>
   /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -131,11 +110,8 @@ public interface IPersonalizationClient
   Task<GetUserTokenResponse> GetUserTokenProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Set a new strategy.
-  /// </summary>
-  /// <remarks>
   /// A strategy defines the events and facets that impact user profiles and personalized search results.
-  /// </remarks>
+  /// </summary>
   /// <param name="personalizationStrategyParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -203,7 +179,7 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -227,7 +203,7 @@ public partial class PersonalizationClient : IPersonalizationClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -251,7 +227,7 @@ public partial class PersonalizationClient : IPersonalizationClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -277,7 +253,7 @@ public partial class PersonalizationClient : IPersonalizationClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -303,8 +279,11 @@ public partial class PersonalizationClient : IPersonalizationClient
   }
 
   /// <summary>
-  /// Delete a user profile. Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
+  /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - recommendation
   /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -326,8 +305,11 @@ public partial class PersonalizationClient : IPersonalizationClient
   }
 
   /// <summary>
-  /// Get the current strategy. The strategy contains information on the events and facets that impact user profiles and personalized search results.
+  /// The strategy contains information on the events and facets that impact user profiles and personalized search results.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - recommendation
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -343,8 +325,11 @@ public partial class PersonalizationClient : IPersonalizationClient
   }
 
   /// <summary>
-  /// Get a user profile. Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
+  /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - recommendation
   /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -366,8 +351,11 @@ public partial class PersonalizationClient : IPersonalizationClient
   }
 
   /// <summary>
-  /// Set a new strategy. A strategy defines the events and facets that impact user profiles and personalized search results.
+  /// A strategy defines the events and facets that impact user profiles and personalized search results.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - recommendation
   /// <param name="personalizationStrategyParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

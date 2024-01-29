@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using Algolia.Search.Clients;
 using Algolia.Search.Http;
 
-[assembly: InternalsVisibleTo("Algolia.Search.Test")]
+[assembly: InternalsVisibleTo("Algolia.Search.Tests")]
 
 namespace Algolia.Search.Transport;
 

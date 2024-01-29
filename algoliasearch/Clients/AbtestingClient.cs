@@ -21,11 +21,8 @@ namespace Algolia.Search.Clients;
 public interface IAbtestingClient
 {
   /// <summary>
-  /// Create an A/B test.
-  /// </summary>
-  /// <remarks>
   /// Creates an A/B test.
-  /// </remarks>
+  /// </summary>
   /// <param name="addABTestsRequest"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -36,11 +33,8 @@ public interface IAbtestingClient
   Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -52,11 +46,8 @@ public interface IAbtestingClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -68,11 +59,8 @@ public interface IAbtestingClient
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -85,11 +73,8 @@ public interface IAbtestingClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -102,11 +87,8 @@ public interface IAbtestingClient
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete an A/B test.
-  /// </summary>
-  /// <remarks>
   /// Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
-  /// </remarks>
+  /// </summary>
   /// <param name="id">Unique A/B test ID.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -117,11 +99,8 @@ public interface IAbtestingClient
   Task<ABTestResponse> DeleteABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get A/B test details.
-  /// </summary>
-  /// <remarks>
   /// Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
-  /// </remarks>
+  /// </summary>
   /// <param name="id">Unique A/B test ID.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -134,9 +113,6 @@ public interface IAbtestingClient
   /// <summary>
   /// List all A/B tests.
   /// </summary>
-  /// <remarks>
-  /// List all A/B tests.
-  /// </remarks>
   /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
   /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
   /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
@@ -150,11 +126,8 @@ public interface IAbtestingClient
   Task<ListABTestsResponse> ListABTestsAsync(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Stop an A/B test.
-  /// </summary>
-  /// <remarks>
   /// If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
-  /// </remarks>
+  /// </summary>
   /// <param name="id">Unique A/B test ID.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -222,8 +195,11 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// Create an A/B test. Creates an A/B test.
+  /// Creates an A/B test.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="addABTestsRequest"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -245,7 +221,7 @@ public partial class AbtestingClient : IAbtestingClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -269,7 +245,7 @@ public partial class AbtestingClient : IAbtestingClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -293,7 +269,7 @@ public partial class AbtestingClient : IAbtestingClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -319,7 +295,7 @@ public partial class AbtestingClient : IAbtestingClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -345,8 +321,11 @@ public partial class AbtestingClient : IAbtestingClient
   }
 
   /// <summary>
-  /// Delete an A/B test. Delete an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
+  /// Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="id">Unique A/B test ID.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -365,8 +344,11 @@ public partial class AbtestingClient : IAbtestingClient
   }
 
   /// <summary>
-  /// Get A/B test details. Get specific details for an A/B test. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
+  /// Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="id">Unique A/B test ID.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -385,8 +367,11 @@ public partial class AbtestingClient : IAbtestingClient
   }
 
   /// <summary>
-  /// List all A/B tests. List all A/B tests.
+  /// List all A/B tests.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
   /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
   /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
@@ -410,8 +395,11 @@ public partial class AbtestingClient : IAbtestingClient
   }
 
   /// <summary>
-  /// Stop an A/B test. If stopped, the test is over and can&#39;t be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the &#x60;id&#x60; for an A/B test, use the [&#x60;listABTests&#x60; operation](#tag/abtest/operation/listABTests). 
+  /// If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="id">Unique A/B test ID.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

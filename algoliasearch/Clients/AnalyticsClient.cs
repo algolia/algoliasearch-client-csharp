@@ -21,11 +21,8 @@ namespace Algolia.Search.Clients;
 public interface IAnalyticsClient
 {
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -37,11 +34,8 @@ public interface IAnalyticsClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -53,11 +47,8 @@ public interface IAnalyticsClient
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -70,11 +61,8 @@ public interface IAnalyticsClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -87,11 +75,8 @@ public interface IAnalyticsClient
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get average click position.
-  /// </summary>
-  /// <remarks>
   /// Return the average click position for the complete time range and for individual days. > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`. 
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -105,11 +90,8 @@ public interface IAnalyticsClient
   Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get click positions.
-  /// </summary>
-  /// <remarks>
   /// Show the number of clicks events and their associated position in the search results.  > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`. 
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -123,11 +105,8 @@ public interface IAnalyticsClient
   Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get click-through rate (CTR).
-  /// </summary>
-  /// <remarks>
   /// Returns a [click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -141,11 +120,8 @@ public interface IAnalyticsClient
   Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get conversion rate (CR).
-  /// </summary>
-  /// <remarks>
   /// Return a [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -159,11 +135,8 @@ public interface IAnalyticsClient
   Task<GetConversationRateResponse> GetConversationRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get no click rate.
-  /// </summary>
-  /// <remarks>
   /// Returns the rate at which searches don't lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -177,11 +150,8 @@ public interface IAnalyticsClient
   Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get no results rate.
-  /// </summary>
-  /// <remarks>
   /// Returns the rate at which searches didn't return any results.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -195,11 +165,8 @@ public interface IAnalyticsClient
   Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get number of searches.
-  /// </summary>
-  /// <remarks>
   /// Returns the number of searches within a time range.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -213,11 +180,8 @@ public interface IAnalyticsClient
   Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top searches with no clicks.
-  /// </summary>
-  /// <remarks>
   /// Return the most popular of the last 1,000 searches that didn't lead to any clicks.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -233,11 +197,8 @@ public interface IAnalyticsClient
   Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top searches with no results.
-  /// </summary>
-  /// <remarks>
   /// Returns the most popular of the latest 1,000 searches that didn't return any results.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -253,11 +214,8 @@ public interface IAnalyticsClient
   Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get Analytics API status.
-  /// </summary>
-  /// <remarks>
   /// Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, `updatedAt` will be `null`. > **Note**: The Analytics API is updated every 5&nbsp;minutes. 
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -268,11 +226,8 @@ public interface IAnalyticsClient
   Task<GetStatusResponse> GetStatusAsync(string index, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top countries.
-  /// </summary>
-  /// <remarks>
   /// Returns top countries. Limited to the 1,000 most frequent ones.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -288,11 +243,8 @@ public interface IAnalyticsClient
   Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top filterable attributes.
-  /// </summary>
-  /// <remarks>
   /// Return the most popular [filterable attributes](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) in the 1,000 most recently used filters.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -309,11 +261,8 @@ public interface IAnalyticsClient
   Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top filter values for an attribute.
-  /// </summary>
-  /// <remarks>
   /// Returns the most popular filter values for an attribute in the 1,000 most recently used filters.
-  /// </remarks>
+  /// </summary>
   /// <param name="attribute">Attribute name.</param>
   /// <param name="index">Index name to target.</param>
   /// <param name="search">User query. (optional)</param>
@@ -331,11 +280,8 @@ public interface IAnalyticsClient
   Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top filters for a no result search.
-  /// </summary>
-  /// <remarks>
   /// Returns top filters for filter-enabled searches that don't return results. Limited to the 1,000 most recently used filters.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -352,11 +298,8 @@ public interface IAnalyticsClient
   Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top hits.
-  /// </summary>
-  /// <remarks>
   /// Return the most popular clicked results in the last 1,000 searches.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
@@ -374,11 +317,8 @@ public interface IAnalyticsClient
   Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default, bool? clickAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get top searches.
-  /// </summary>
-  /// <remarks>
   /// Returns the most popular of the latest 1,000 searches. For each search, also returns the number of hits.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -397,11 +337,8 @@ public interface IAnalyticsClient
   Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get user count.
-  /// </summary>
-  /// <remarks>
   /// Return the count of unique users.
-  /// </remarks>
+  /// </summary>
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
@@ -472,7 +409,7 @@ public partial class AnalyticsClient : IAnalyticsClient
 
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -496,7 +433,7 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -520,7 +457,7 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -546,7 +483,7 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -572,8 +509,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get average click position. Return the average click position for the complete time range and for individual days. &gt; **Note**: If all &#x60;positions&#x60; have a &#x60;clickCount&#x60; of &#x60;0&#x60; or &#x60;null&#x60;, it means Algolia didn&#39;t receive any click events for tracked searches. A _tracked_ search is a search request where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. 
+  /// Return the average click position for the complete time range and for individual days. > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -601,8 +541,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get click positions. Show the number of clicks events and their associated position in the search results.  &gt; **Note**: If all &#x60;positions&#x60; have a &#x60;clickCount&#x60; of &#x60;0&#x60; or &#x60;null&#x60;, it means Algolia didn&#39;t receive any click events for tracked searches. A _tracked_ search is a search request where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. 
+  /// Show the number of clicks events and their associated position in the search results.  > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -630,8 +573,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get click-through rate (CTR). Returns a [click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+  /// Returns a [click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -659,8 +605,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get conversion rate (CR). Return a [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
+  /// Return a [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -688,8 +637,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get no click rate. Returns the rate at which searches don&#39;t lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks.
+  /// Returns the rate at which searches don't lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -717,8 +669,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get no results rate. Returns the rate at which searches didn&#39;t return any results.
+  /// Returns the rate at which searches didn't return any results.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -746,8 +701,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get number of searches. Returns the number of searches within a time range.
+  /// Returns the number of searches within a time range.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -775,8 +733,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get top searches with no clicks. Return the most popular of the last 1,000 searches that didn&#39;t lead to any clicks.
+  /// Return the most popular of the last 1,000 searches that didn't lead to any clicks.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -808,8 +769,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get top searches with no results. Returns the most popular of the latest 1,000 searches that didn&#39;t return any results.
+  /// Returns the most popular of the latest 1,000 searches that didn't return any results.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -841,8 +805,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get Analytics API status. Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, &#x60;updatedAt&#x60; will be &#x60;null&#x60;. &gt; **Note**: The Analytics API is updated every 5&amp;nbsp;minutes. 
+  /// Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, `updatedAt` will be `null`. > **Note**: The Analytics API is updated every 5&nbsp;minutes. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -864,8 +831,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get top countries. Returns top countries. Limited to the 1,000 most frequent ones.
+  /// Returns top countries. Limited to the 1,000 most frequent ones.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -897,8 +867,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get top filterable attributes. Return the most popular [filterable attributes](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) in the 1,000 most recently used filters.
+  /// Return the most popular [filterable attributes](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) in the 1,000 most recently used filters.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -932,8 +905,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get top filter values for an attribute. Returns the most popular filter values for an attribute in the 1,000 most recently used filters.
+  /// Returns the most popular filter values for an attribute in the 1,000 most recently used filters.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="attribute">Attribute name.</param>
   /// <param name="index">Index name to target.</param>
   /// <param name="search">User query. (optional)</param>
@@ -973,8 +949,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get top filters for a no result search. Returns top filters for filter-enabled searches that don&#39;t return results. Limited to the 1,000 most recently used filters.
+  /// Returns top filters for filter-enabled searches that don't return results. Limited to the 1,000 most recently used filters.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -1008,8 +987,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get top hits. Return the most popular clicked results in the last 1,000 searches.
+  /// Return the most popular clicked results in the last 1,000 searches.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
@@ -1045,8 +1027,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get top searches. Returns the most popular of the latest 1,000 searches. For each search, also returns the number of hits.
+  /// Returns the most popular of the latest 1,000 searches. For each search, also returns the number of hits.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
@@ -1084,8 +1069,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
   /// <summary>
-  /// Get user count. Return the count of unique users.
+  /// Return the count of unique users.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name to target.</param>
   /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>

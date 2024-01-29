@@ -21,11 +21,8 @@ namespace Algolia.Search.Clients;
 public interface IQuerySuggestionsClient
 {
   /// <summary>
-  /// Create a configuration.
-  /// </summary>
-  /// <remarks>
   /// Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
-  /// </remarks>
+  /// </summary>
   /// <param name="querySuggestionsConfigurationWithIndex"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -36,11 +33,8 @@ public interface IQuerySuggestionsClient
   Task<BaseResponse> CreateConfigAsync(QuerySuggestionsConfigurationWithIndex querySuggestionsConfigurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -52,11 +46,8 @@ public interface IQuerySuggestionsClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -68,11 +59,8 @@ public interface IQuerySuggestionsClient
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -85,11 +73,8 @@ public interface IQuerySuggestionsClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send requests to the Algolia REST API.
-  /// </summary>
-  /// <remarks>
   /// This method allow you to send requests to the Algolia REST API.
-  /// </remarks>
+  /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
   /// <param name="body">Parameters to send with the custom request. (optional)</param>
@@ -102,11 +87,8 @@ public interface IQuerySuggestionsClient
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete a configuration.
-  /// </summary>
-  /// <remarks>
   /// Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted. 
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -117,11 +99,8 @@ public interface IQuerySuggestionsClient
   Task<BaseResponse> DeleteConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List configurations.
-  /// </summary>
-  /// <remarks>
   /// List all Query Suggestions configurations of your Algolia application.
-  /// </remarks>
+  /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -131,11 +110,8 @@ public interface IQuerySuggestionsClient
   Task<List<QuerySuggestionsConfigurationResponse>> GetAllConfigsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a configuration.
-  /// </summary>
-  /// <remarks>
   /// Get a single Query Suggestions configuration.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -146,11 +122,8 @@ public interface IQuerySuggestionsClient
   Task<QuerySuggestionsConfigurationResponse> GetConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get configuration status.
-  /// </summary>
-  /// <remarks>
   /// Report the status of a Query Suggestions index.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -161,11 +134,8 @@ public interface IQuerySuggestionsClient
   Task<GetConfigStatus200Response> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get logs.
-  /// </summary>
-  /// <remarks>
   /// Get the logs for a single Query Suggestions index.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -176,11 +146,8 @@ public interface IQuerySuggestionsClient
   Task<GetLogFile200Response> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update a configuration.
-  /// </summary>
-  /// <remarks>
   /// Update a QuerySuggestions configuration.
-  /// </remarks>
+  /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="querySuggestionsConfiguration"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -249,8 +216,11 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Create a configuration. Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
+  /// Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="querySuggestionsConfigurationWithIndex"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -272,7 +242,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -296,7 +266,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -320,7 +290,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -346,7 +316,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Send requests to the Algolia REST API. This method allow you to send requests to the Algolia REST API.
+  /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -372,8 +342,11 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Delete a configuration. Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted. 
+  /// Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -395,8 +368,11 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// List configurations. List all Query Suggestions configurations of your Algolia application.
+  /// List all Query Suggestions configurations of your Algolia application.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -412,8 +388,11 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Get a configuration. Get a single Query Suggestions configuration.
+  /// Get a single Query Suggestions configuration.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -435,8 +414,11 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Get configuration status. Report the status of a Query Suggestions index.
+  /// Report the status of a Query Suggestions index.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -458,8 +440,11 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Get logs. Get the logs for a single Query Suggestions index.
+  /// Get the logs for a single Query Suggestions index.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -481,8 +466,11 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
   /// <summary>
-  /// Update a configuration. Update a QuerySuggestions configuration.
+  /// Update a QuerySuggestions configuration.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="querySuggestionsConfiguration"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
