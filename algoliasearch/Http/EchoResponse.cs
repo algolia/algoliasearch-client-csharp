@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 
 namespace Algolia.Search.Http
@@ -48,5 +49,10 @@ namespace Algolia.Search.Http
     /// Timeouts of the request
     /// </summary>
     public TimeSpan ResponseTimeout;
+
+    /// <summary>
+    /// The body stream
+    /// </summary>
+    public Stream BodyStream;
   }
 }

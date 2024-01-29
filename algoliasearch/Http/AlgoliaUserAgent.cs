@@ -31,6 +31,12 @@ public class AlgoliaUserAgent
     AddSegment("Dotnet", $"({DotnetVersion})");
   }
 
+  /// <summary>
+  /// Add a new segment to the user-agent header
+  /// </summary>
+  /// <param name="key"></param>
+  /// <param name="value"></param>
+  /// <exception cref="ArgumentException"></exception>
   public void AddSegment(string key, string value)
   {
     if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value))

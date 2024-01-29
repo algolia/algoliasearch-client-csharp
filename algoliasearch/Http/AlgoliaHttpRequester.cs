@@ -16,7 +16,7 @@ namespace Algolia.Search.Http
     /// <summary>
     /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
     /// </summary>
-    private readonly HttpClient _httpClient = new HttpClient(
+    private readonly HttpClient _httpClient = new(
         new TimeoutHandler
         {
           InnerHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip }
@@ -48,7 +48,7 @@ namespace Algolia.Search.Http
       {
         Method = request.Method,
         RequestUri = request.Uri,
-        Content = request.Body != null ? new StringContent(request.Body) : null
+        Content = request.Body != null ? new StreamContent(request.Body) : null
       };
 
       if (request.Body != null)

@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
+using Algolia.Search.Models.Common;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 
@@ -19,7 +23,7 @@ namespace Algolia.Search.Transport;
 internal class HttpTransport
 {
   private readonly IHttpRequester _httpClient;
-  private readonly CustomJsonSerializer _serializer;
+  private readonly DefaultJsonSerializer _serializer = new(JsonConfig.AlgoliaJsonSerializerSettings);
   private readonly RetryStrategy _retryStrategy;
   private readonly AlgoliaConfig _algoliaConfig;
   private string _errorMessage;
@@ -37,7 +41,6 @@ internal class HttpTransport
   {
     _algoliaConfig = config ?? throw new ArgumentNullException(nameof(config));
     _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-    _serializer = new CustomJsonSerializer(JsonConfig.AlgoliaJsonSerializerSettings);
     _retryStrategy = new RetryStrategy(config);
   }
 
@@ -115,9 +118,9 @@ internal class HttpTransport
       var requestTimeout =
         TimeSpan.FromTicks((requestOptions?.Timeout ?? GetTimeOut(callType)).Ticks * (host.RetryCount + 1));
 
-      if (string.IsNullOrWhiteSpace(request.Body) && (method == HttpMethod.Post || method == HttpMethod.Put))
+      if (request.Body == null && (method == HttpMethod.Post || method == HttpMethod.Put))
       {
-        request.Body = "{}";
+        request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{}"));
       }
 
       var response = await _httpClient
@@ -154,9 +157,9 @@ internal class HttpTransport
   /// <param name="compress">Whether the stream should be compressed or not</param>
   /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
   /// <returns></returns>
-  private string CreateRequestContent<T>(T data, bool compress)
+  private MemoryStream CreateRequestContent<T>(T data, bool compress)
   {
-    return data == null ? null : _serializer.Serialize(data);
+    return data == null ? null : Compression.CreateStream(_serializer.Serialize(data), compress);
   }
 
   /// <summary>
