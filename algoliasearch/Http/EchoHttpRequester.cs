@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.Extensions.Logging;
 
 namespace Algolia.Search.Http
 {
@@ -44,8 +45,7 @@ namespace Algolia.Search.Http
     /// <param name="ct"></param>
     /// <returns></returns>
     public Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout,
-      TimeSpan connectTimeout,
-      CancellationToken ct = default)
+      TimeSpan connectTimeout, CancellationToken ct = default)
     {
       string body = null;
       if (!_bodyAsStream && request.Body != null)

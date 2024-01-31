@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Clients;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Recommend;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -152,14 +152,16 @@ public interface IRecommendClient
 public partial class RecommendClient : IRecommendClient
 {
   private readonly HttpTransport _transport;
+  private readonly ILogger<RecommendClient> _logger;
 
   /// <summary>
   /// Create a new Recommend client for the given appID and apiKey.
   /// </summary>
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
+  /// <param name="loggerFactory">Logger factory</param>
 
-  public RecommendClient(string applicationId, string apiKey) : this(new RecommendConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+  public RecommendClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null) : this(new RecommendConfig(applicationId, apiKey), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -167,7 +169,8 @@ public partial class RecommendClient : IRecommendClient
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
-  public RecommendClient(RecommendConfig config) : this(config, new AlgoliaHttpRequester())
+  /// <param name="loggerFactory">Logger factory</param>
+  public RecommendClient(RecommendConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -176,7 +179,8 @@ public partial class RecommendClient : IRecommendClient
   /// </summary>
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-  public RecommendClient(RecommendConfig config, IHttpRequester httpRequester)
+  /// <param name="loggerFactory">Logger factory</param>
+  public RecommendClient(RecommendConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
   {
     if (httpRequester == null)
     {
@@ -195,7 +199,14 @@ public partial class RecommendClient : IRecommendClient
       throw new ArgumentException("`ApiKey` is missing.");
     }
 
-    _transport = new HttpTransport(config, httpRequester);
+    var factory = loggerFactory ?? NullLoggerFactory.Instance;
+    _transport = new HttpTransport(config, httpRequester, factory);
+    _logger = factory.CreateLogger<RecommendClient>();
+
+    if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
+    {
+      _logger.LogInformation("Algolia Recommend client is initialized.");
+    }
   }
 
 

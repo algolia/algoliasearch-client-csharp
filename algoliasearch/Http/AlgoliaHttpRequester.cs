@@ -4,6 +4,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Http
 {
@@ -17,10 +19,18 @@ namespace Algolia.Search.Http
     /// https://docs.microsoft.com/en-gb/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
     /// </summary>
     private readonly HttpClient _httpClient = new(
-        new TimeoutHandler
-        {
-          InnerHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip }
-        });
+      new TimeoutHandler
+      {
+        InnerHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip }
+      });
+
+    private readonly ILogger<AlgoliaHttpRequester> _logger;
+
+    public AlgoliaHttpRequester(ILoggerFactory loggerFactory)
+    {
+      var logger = loggerFactory ?? NullLoggerFactory.Instance;
+      _logger = logger.CreateLogger<AlgoliaHttpRequester>();
+    }
 
     /// <summary>
     /// Don't use it directly
@@ -31,8 +41,8 @@ namespace Algolia.Search.Http
     /// <param name="connectTimeout">Connect timeout</param>
     /// <param name="ct">Optional cancellation token</param>
     /// <returns></returns>
-    public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout, TimeSpan connectTimeout,
-      CancellationToken ct = default)
+    public async Task<AlgoliaHttpResponse> SendRequestAsync(Request request, TimeSpan requestTimeout,
+      TimeSpan connectTimeout, CancellationToken ct = default)
     {
       if (request.Method == null)
       {
@@ -63,14 +73,13 @@ namespace Algolia.Search.Http
       try
       {
         using (httpRequestMessage)
-        using (HttpResponseMessage response =
-            await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
+        using (var response = await _httpClient.SendAsync(httpRequestMessage, ct).ConfigureAwait(false))
         {
           using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
           {
             if (response.IsSuccessStatusCode)
             {
-              MemoryStream outputStream = new MemoryStream();
+              var outputStream = new MemoryStream();
               await stream.CopyToAsync(outputStream).ConfigureAwait(false);
               outputStream.Seek(0, SeekOrigin.Begin);
 
@@ -89,29 +98,35 @@ namespace Algolia.Search.Http
           }
         }
       }
-      catch (TimeoutException e)
+      catch (TimeoutException ex)
       {
-        return new AlgoliaHttpResponse { IsTimedOut = true, Error = e.ToString() };
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+          _logger.LogDebug(ex, "Timeout while sending request");
+        }
+
+        return new AlgoliaHttpResponse { IsTimedOut = true, Error = ex.ToString() };
       }
-      catch (HttpRequestException e)
+      catch (HttpRequestException ex)
       {
         // HttpRequestException is thrown when an underlying issue happened such as
         // network connectivity, DNS failure, server certificate validation.
-        return new AlgoliaHttpResponse { IsNetworkError = true, Error = e.Message };
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+          _logger.LogDebug(ex, "Error while sending request");
+        }
+
+        return new AlgoliaHttpResponse { IsNetworkError = true, Error = ex.Message };
       }
     }
 
     private async Task<string> StreamToStringAsync(Stream stream)
     {
-      string content;
-
       if (stream == null)
         return null;
 
-      using (var sr = new StreamReader(stream))
-      {
-        content = await sr.ReadToEndAsync().ConfigureAwait(false);
-      }
+      using var sr = new StreamReader(stream);
+      var content = await sr.ReadToEndAsync().ConfigureAwait(false);
 
       return content;
     }

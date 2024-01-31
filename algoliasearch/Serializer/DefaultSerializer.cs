@@ -4,17 +4,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Common;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Algolia.Search.Serializer;
 
-internal class DefaultJsonSerializer
+internal class DefaultJsonSerializer : ISerializer
 {
   private readonly JsonSerializerSettings _serializerSettings;
+  private readonly ILogger<DefaultJsonSerializer> _logger;
 
-  public DefaultJsonSerializer(JsonSerializerSettings serializerSettings)
+  public DefaultJsonSerializer(JsonSerializerSettings serializerSettings, ILoggerFactory logger)
   {
     _serializerSettings = serializerSettings;
+    _logger = logger.CreateLogger<DefaultJsonSerializer>();
   }
 
   /// <summary>
@@ -79,9 +82,14 @@ internal class DefaultJsonSerializer
       var text = await reader.ReadToEndAsync().ConfigureAwait(false);
       return JsonConvert.DeserializeObject(text, type, _serializerSettings);
     }
-    catch (Exception e)
+    catch (Exception ex)
     {
-      throw new AlgoliaException(e.Message);
+      if (_logger.IsEnabled(LogLevel.Debug))
+      {
+        _logger.Log(LogLevel.Debug, ex, "Error while deserializing response");
+      }
+
+      throw new AlgoliaException(ex.Message);
     }
   }
 }

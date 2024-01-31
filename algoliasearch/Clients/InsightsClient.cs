@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Clients;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Insights;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -108,14 +108,16 @@ public interface IInsightsClient
 public partial class InsightsClient : IInsightsClient
 {
   private readonly HttpTransport _transport;
+  private readonly ILogger<InsightsClient> _logger;
 
   /// <summary>
   /// Create a new Insights client for the given appID and apiKey.
   /// </summary>
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
+  /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public InsightsClient(string applicationId, string apiKey, string region = null) : this(new InsightsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
+  public InsightsClient(string applicationId, string apiKey, string region = null, ILoggerFactory loggerFactory = null) : this(new InsightsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -123,7 +125,8 @@ public partial class InsightsClient : IInsightsClient
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
-  public InsightsClient(InsightsConfig config) : this(config, new AlgoliaHttpRequester())
+  /// <param name="loggerFactory">Logger factory</param>
+  public InsightsClient(InsightsConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -132,7 +135,8 @@ public partial class InsightsClient : IInsightsClient
   /// </summary>
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-  public InsightsClient(InsightsConfig config, IHttpRequester httpRequester)
+  /// <param name="loggerFactory">Logger factory</param>
+  public InsightsClient(InsightsConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
   {
     if (httpRequester == null)
     {
@@ -151,7 +155,14 @@ public partial class InsightsClient : IInsightsClient
       throw new ArgumentException("`ApiKey` is missing.");
     }
 
-    _transport = new HttpTransport(config, httpRequester);
+    var factory = loggerFactory ?? NullLoggerFactory.Instance;
+    _transport = new HttpTransport(config, httpRequester, factory);
+    _logger = factory.CreateLogger<InsightsClient>();
+
+    if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
+    {
+      _logger.LogInformation("Algolia Insights client is initialized.");
+    }
   }
 
 

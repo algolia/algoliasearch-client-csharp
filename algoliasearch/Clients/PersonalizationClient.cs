@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Clients;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -131,14 +131,16 @@ public interface IPersonalizationClient
 public partial class PersonalizationClient : IPersonalizationClient
 {
   private readonly HttpTransport _transport;
+  private readonly ILogger<PersonalizationClient> _logger;
 
   /// <summary>
   /// Create a new Personalization client for the given appID and apiKey.
   /// </summary>
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
+  /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public PersonalizationClient(string applicationId, string apiKey, string region) : this(new PersonalizationConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
+  public PersonalizationClient(string applicationId, string apiKey, string region, ILoggerFactory loggerFactory = null) : this(new PersonalizationConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -146,7 +148,8 @@ public partial class PersonalizationClient : IPersonalizationClient
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
-  public PersonalizationClient(PersonalizationConfig config) : this(config, new AlgoliaHttpRequester())
+  /// <param name="loggerFactory">Logger factory</param>
+  public PersonalizationClient(PersonalizationConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -155,7 +158,8 @@ public partial class PersonalizationClient : IPersonalizationClient
   /// </summary>
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-  public PersonalizationClient(PersonalizationConfig config, IHttpRequester httpRequester)
+  /// <param name="loggerFactory">Logger factory</param>
+  public PersonalizationClient(PersonalizationConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
   {
     if (httpRequester == null)
     {
@@ -174,7 +178,14 @@ public partial class PersonalizationClient : IPersonalizationClient
       throw new ArgumentException("`ApiKey` is missing.");
     }
 
-    _transport = new HttpTransport(config, httpRequester);
+    var factory = loggerFactory ?? NullLoggerFactory.Instance;
+    _transport = new HttpTransport(config, httpRequester, factory);
+    _logger = factory.CreateLogger<PersonalizationClient>();
+
+    if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
+    {
+      _logger.LogInformation("Algolia Personalization client is initialized.");
+    }
   }
 
 

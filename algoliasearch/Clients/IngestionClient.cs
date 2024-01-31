@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Clients;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Ingestion;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -523,14 +523,16 @@ public interface IIngestionClient
 public partial class IngestionClient : IIngestionClient
 {
   private readonly HttpTransport _transport;
+  private readonly ILogger<IngestionClient> _logger;
 
   /// <summary>
   /// Create a new Ingestion client for the given appID and apiKey.
   /// </summary>
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
+  /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public IngestionClient(string applicationId, string apiKey, string region) : this(new IngestionConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
+  public IngestionClient(string applicationId, string apiKey, string region, ILoggerFactory loggerFactory = null) : this(new IngestionConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -538,7 +540,8 @@ public partial class IngestionClient : IIngestionClient
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
-  public IngestionClient(IngestionConfig config) : this(config, new AlgoliaHttpRequester())
+  /// <param name="loggerFactory">Logger factory</param>
+  public IngestionClient(IngestionConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -547,7 +550,8 @@ public partial class IngestionClient : IIngestionClient
   /// </summary>
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-  public IngestionClient(IngestionConfig config, IHttpRequester httpRequester)
+  /// <param name="loggerFactory">Logger factory</param>
+  public IngestionClient(IngestionConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
   {
     if (httpRequester == null)
     {
@@ -566,7 +570,14 @@ public partial class IngestionClient : IIngestionClient
       throw new ArgumentException("`ApiKey` is missing.");
     }
 
-    _transport = new HttpTransport(config, httpRequester);
+    var factory = loggerFactory ?? NullLoggerFactory.Instance;
+    _transport = new HttpTransport(config, httpRequester, factory);
+    _logger = factory.CreateLogger<IngestionClient>();
+
+    if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
+    {
+      _logger.LogInformation("Algolia Ingestion client is initialized.");
+    }
   }
 
 

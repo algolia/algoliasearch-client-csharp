@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Clients;
-using Algolia.Search.Models;
 using Algolia.Search.Models.QuerySuggestions;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -168,14 +168,16 @@ public interface IQuerySuggestionsClient
 public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 {
   private readonly HttpTransport _transport;
+  private readonly ILogger<QuerySuggestionsClient> _logger;
 
   /// <summary>
   /// Create a new QuerySuggestions client for the given appID and apiKey.
   /// </summary>
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
+  /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public QuerySuggestionsClient(string applicationId, string apiKey, string region) : this(new QuerySuggestionsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
+  public QuerySuggestionsClient(string applicationId, string apiKey, string region, ILoggerFactory loggerFactory = null) : this(new QuerySuggestionsConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -183,7 +185,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
-  public QuerySuggestionsClient(QuerySuggestionsConfig config) : this(config, new AlgoliaHttpRequester())
+  /// <param name="loggerFactory">Logger factory</param>
+  public QuerySuggestionsClient(QuerySuggestionsConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -192,7 +195,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   /// </summary>
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-  public QuerySuggestionsClient(QuerySuggestionsConfig config, IHttpRequester httpRequester)
+  /// <param name="loggerFactory">Logger factory</param>
+  public QuerySuggestionsClient(QuerySuggestionsConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
   {
     if (httpRequester == null)
     {
@@ -211,7 +215,14 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
       throw new ArgumentException("`ApiKey` is missing.");
     }
 
-    _transport = new HttpTransport(config, httpRequester);
+    var factory = loggerFactory ?? NullLoggerFactory.Instance;
+    _transport = new HttpTransport(config, httpRequester, factory);
+    _logger = factory.CreateLogger<QuerySuggestionsClient>();
+
+    if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
+    {
+      _logger.LogInformation("Algolia QuerySuggestions client is initialized.");
+    }
   }
 
 

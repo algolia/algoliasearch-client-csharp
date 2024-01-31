@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -10,9 +9,9 @@ using System.Threading.Tasks;
 using Algolia.Search.Clients;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Http;
-using Algolia.Search.Models.Common;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace Algolia.Search.Transport;
 
@@ -23,10 +22,11 @@ namespace Algolia.Search.Transport;
 internal class HttpTransport
 {
   private readonly IHttpRequester _httpClient;
-  private readonly DefaultJsonSerializer _serializer = new(JsonConfig.AlgoliaJsonSerializerSettings);
+  private readonly ISerializer _serializer;
   private readonly RetryStrategy _retryStrategy;
   private readonly AlgoliaConfig _algoliaConfig;
   private string _errorMessage;
+  private readonly ILogger<HttpTransport> _logger;
 
   private class VoidResult
   {
@@ -37,11 +37,14 @@ internal class HttpTransport
   /// </summary>
   /// <param name="config">Algolia Config</param>
   /// <param name="httpClient">An implementation of http requester <see cref="IHttpRequester"/> </param>
-  public HttpTransport(AlgoliaConfig config, IHttpRequester httpClient)
+  /// <param name="loggerFactory">Logger factory</param>
+  public HttpTransport(AlgoliaConfig config, IHttpRequester httpClient, ILoggerFactory loggerFactory)
   {
     _algoliaConfig = config ?? throw new ArgumentNullException(nameof(config));
     _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     _retryStrategy = new RetryStrategy(config);
+    _serializer = new DefaultJsonSerializer(JsonConfig.AlgoliaJsonSerializerSettings, loggerFactory);
+    _logger = loggerFactory.CreateLogger<HttpTransport>();
   }
 
   /// <summary>
@@ -112,7 +115,7 @@ internal class HttpTransport
 
     foreach (var host in _retryStrategy.GetTryableHost(callType))
     {
-      request.Body = CreateRequestContent(requestOptions?.Data, request.CanCompress);
+      request.Body = CreateRequestContent(requestOptions?.Data, request.CanCompress, _logger);
       request.Uri = BuildUri(host.Url, uri, requestOptions?.CustomPathParameters, requestOptions?.PathParameters,
         requestOptions?.QueryParameters);
       var requestTimeout =
@@ -121,6 +124,11 @@ internal class HttpTransport
       if (request.Body == null && (method == HttpMethod.Post || method == HttpMethod.Put))
       {
         request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{}"));
+      }
+
+      if (_logger.IsEnabled(LogLevel.Trace))
+      {
+        _logger.LogTrace("Sending request to {Method} {Uri}", request.Method, request.Uri);
       }
 
       var response = await _httpClient
@@ -137,14 +145,49 @@ internal class HttpTransport
             return new VoidResult() as TResult;
           }
 
-          return await _serializer.Deserialize<TResult>(response.Body);
+          if (_logger.IsEnabled(LogLevel.Trace))
+          {
+            var reader = new StreamReader(response.Body);
+            var json = await reader.ReadToEndAsync().ConfigureAwait(false);
+            _logger.LogTrace(
+              "Response HTTP {HttpCode}: {Json}", response.HttpStatusCode, json);
+            response.Body.Seek(0, SeekOrigin.Begin);
+          }
+
+          var deserialized = await _serializer.Deserialize<TResult>(response.Body);
+
+          if (_logger.IsEnabled(LogLevel.Trace))
+          {
+            _logger.LogTrace("Object created: {objectCreated}", deserialized);
+          }
+
+          return deserialized;
         case RetryOutcomeType.Retry:
+          if (_logger.IsEnabled(LogLevel.Debug))
+          {
+            _logger.LogDebug(
+              "Retrying ... Retryable error for response HTTP {HttpCode} : {Error}", response.HttpStatusCode,
+              response.Error);
+          }
+
           continue;
         case RetryOutcomeType.Failure:
+          if (_logger.IsEnabled(LogLevel.Debug))
+          {
+            _logger.LogDebug(
+              "Retry strategy with failure outcome. Response HTTP{HttpCode} : {Error}", response.HttpStatusCode,
+              response.Error);
+          }
+
           throw new AlgoliaApiException(response.Error, response.HttpStatusCode);
         default:
           throw new ArgumentOutOfRangeException();
       }
+    }
+
+    if (_logger.IsEnabled(LogLevel.Debug))
+    {
+      _logger.LogDebug("Retry strategy failed: {ErrorMessage}", _errorMessage);
     }
 
     throw new AlgoliaUnreachableHostException("RetryStrategy failed to connect to Algolia. Reason: " + _errorMessage);
@@ -155,11 +198,19 @@ internal class HttpTransport
   /// </summary>
   /// <param name="data">Data to send</param>
   /// <param name="compress">Whether the stream should be compressed or not</param>
+  /// <param name="logger">Logger</param>
   /// <typeparam name="T">Type of the data to send/retrieve</typeparam>
   /// <returns></returns>
-  private MemoryStream CreateRequestContent<T>(T data, bool compress)
+  private MemoryStream CreateRequestContent<T>(T data, bool compress, ILogger logger)
   {
-    return data == null ? null : Compression.CreateStream(_serializer.Serialize(data), compress);
+    var serializedData = _serializer.Serialize(data);
+
+    if (_logger.IsEnabled(LogLevel.Trace))
+    {
+      logger.LogTrace("Serialized request data: {Json}", serializedData);
+    }
+
+    return data == null ? null : Compression.CreateStream(serializedData, compress);
   }
 
   /// <summary>

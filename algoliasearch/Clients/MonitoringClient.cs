@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Clients;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Monitoring;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -190,14 +190,16 @@ public interface IMonitoringClient
 public partial class MonitoringClient : IMonitoringClient
 {
   private readonly HttpTransport _transport;
+  private readonly ILogger<MonitoringClient> _logger;
 
   /// <summary>
   /// Create a new Monitoring client for the given appID and apiKey.
   /// </summary>
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
+  /// <param name="loggerFactory">Logger factory</param>
 
-  public MonitoringClient(string applicationId, string apiKey) : this(new MonitoringConfig(applicationId, apiKey), new AlgoliaHttpRequester())
+  public MonitoringClient(string applicationId, string apiKey, ILoggerFactory loggerFactory = null) : this(new MonitoringConfig(applicationId, apiKey), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -205,7 +207,8 @@ public partial class MonitoringClient : IMonitoringClient
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
-  public MonitoringClient(MonitoringConfig config) : this(config, new AlgoliaHttpRequester())
+  /// <param name="loggerFactory">Logger factory</param>
+  public MonitoringClient(MonitoringConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -214,7 +217,8 @@ public partial class MonitoringClient : IMonitoringClient
   /// </summary>
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-  public MonitoringClient(MonitoringConfig config, IHttpRequester httpRequester)
+  /// <param name="loggerFactory">Logger factory</param>
+  public MonitoringClient(MonitoringConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
   {
     if (httpRequester == null)
     {
@@ -233,7 +237,14 @@ public partial class MonitoringClient : IMonitoringClient
       throw new ArgumentException("`ApiKey` is missing.");
     }
 
-    _transport = new HttpTransport(config, httpRequester);
+    var factory = loggerFactory ?? NullLoggerFactory.Instance;
+    _transport = new HttpTransport(config, httpRequester, factory);
+    _logger = factory.CreateLogger<MonitoringClient>();
+
+    if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
+    {
+      _logger.LogInformation("Algolia Monitoring client is initialized.");
+    }
   }
 
 

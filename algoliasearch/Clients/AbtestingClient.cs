@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Algolia.Search.Clients;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Abtesting;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -147,14 +147,16 @@ public interface IAbtestingClient
 public partial class AbtestingClient : IAbtestingClient
 {
   private readonly HttpTransport _transport;
+  private readonly ILogger<AbtestingClient> _logger;
 
   /// <summary>
   /// Create a new Abtesting client for the given appID and apiKey.
   /// </summary>
   /// <param name="applicationId">Your application</param>
   /// <param name="apiKey">Your API key</param>
+  /// <param name="loggerFactory">Logger factory</param>
   /// <param name="region">The targeted region</param>
-  public AbtestingClient(string applicationId, string apiKey, string region = null) : this(new AbtestingConfig(applicationId, apiKey, region), new AlgoliaHttpRequester())
+  public AbtestingClient(string applicationId, string apiKey, string region = null, ILoggerFactory loggerFactory = null) : this(new AbtestingConfig(applicationId, apiKey, region), new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -162,7 +164,8 @@ public partial class AbtestingClient : IAbtestingClient
   /// Initialize a client with custom config
   /// </summary>
   /// <param name="config">Algolia configuration</param>
-  public AbtestingClient(AbtestingConfig config) : this(config, new AlgoliaHttpRequester())
+  /// <param name="loggerFactory">Logger factory</param>
+  public AbtestingClient(AbtestingConfig config, ILoggerFactory loggerFactory = null) : this(config, new AlgoliaHttpRequester(loggerFactory), loggerFactory)
   {
   }
 
@@ -171,7 +174,8 @@ public partial class AbtestingClient : IAbtestingClient
   /// </summary>
   /// <param name="config">Algolia Config</param>
   /// <param name="httpRequester">Your Http requester implementation of <see cref="IHttpRequester"/></param>
-  public AbtestingClient(AbtestingConfig config, IHttpRequester httpRequester)
+  /// <param name="loggerFactory">Logger factory</param>
+  public AbtestingClient(AbtestingConfig config, IHttpRequester httpRequester, ILoggerFactory loggerFactory = null)
   {
     if (httpRequester == null)
     {
@@ -190,7 +194,14 @@ public partial class AbtestingClient : IAbtestingClient
       throw new ArgumentException("`ApiKey` is missing.");
     }
 
-    _transport = new HttpTransport(config, httpRequester);
+    var factory = loggerFactory ?? NullLoggerFactory.Instance;
+    _transport = new HttpTransport(config, httpRequester, factory);
+    _logger = factory.CreateLogger<AbtestingClient>();
+
+    if (_logger.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information))
+    {
+      _logger.LogInformation("Algolia Abtesting client is initialized.");
+    }
   }
 
 
