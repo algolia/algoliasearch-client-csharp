@@ -1,3 +1,11 @@
+## [7.0.0-alpha.7](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.6...7.0.0-alpha.7)
+
+- [e4ab48621](https://github.com/algolia/api-clients-automation/commit/e4ab48621) feat(csharp): add logs and logger factory ([#2640](https://github.com/algolia/api-clients-automation/pull/2640)) by [@morganleroi](https://github.com/morganleroi/)
+- [93e2aff59](https://github.com/algolia/api-clients-automation/commit/93e2aff59) feat(csharp): add compression ([#2627](https://github.com/algolia/api-clients-automation/pull/2627)) by [@morganleroi](https://github.com/morganleroi/)
+- [9404e3dc6](https://github.com/algolia/api-clients-automation/commit/9404e3dc6) feat(csharp): add custom user-agent segment ([#2631](https://github.com/algolia/api-clients-automation/pull/2631)) by [@morganleroi](https://github.com/morganleroi/)
+- [c4aa4c7e8](https://github.com/algolia/api-clients-automation/commit/c4aa4c7e8) test(csharp): add retry strategy ([#2629](https://github.com/algolia/api-clients-automation/pull/2629)) by [@morganleroi](https://github.com/morganleroi/)
+- [b3d61128a](https://github.com/algolia/api-clients-automation/commit/b3d61128a) docs(clients): add ACL section to code doc ([#2576](https://github.com/algolia/api-clients-automation/pull/2576)) by [@millotp](https://github.com/millotp/)
+
 ## [7.0.0-alpha.6](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.5...7.0.0-alpha.6)
 
 - [2400c351a](https://github.com/algolia/api-clients-automation/commit/2400c351a) feat(csharp): add helpers ([#2578](https://github.com/algolia/api-clients-automation/pull/2578)) by [@morganleroi](https://github.com/morganleroi/)
