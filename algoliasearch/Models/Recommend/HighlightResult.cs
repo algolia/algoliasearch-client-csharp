@@ -51,6 +51,18 @@ public partial class HighlightResult : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the HighlightResult class
+  /// with a List{HighlightResultOption}
+  /// </summary>
+  /// <param name="actualInstance">An instance of List&lt;HighlightResultOption&gt;.</param>
+  public HighlightResult(List<HighlightResultOption> actualInstance)
+  {
+    IsNullable = false;
+    SchemaType = "oneOf";
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -77,6 +89,16 @@ public partial class HighlightResult : AbstractSchema
     return (Dictionary<string, HighlightResultOption>)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `List{HighlightResultOption}`. If the actual instance is not `List{HighlightResultOption}`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of List&lt;HighlightResultOption&gt;</returns>
+  public List<HighlightResultOption> AsList()
+  {
+    return (List<HighlightResultOption>)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `HighlightResultOption` type.
@@ -94,6 +116,15 @@ public partial class HighlightResult : AbstractSchema
   public bool IsDictionary()
   {
     return ActualInstance.GetType() == typeof(Dictionary<string, HighlightResultOption>);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `List{HighlightResultOption}` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsList()
+  {
+    return ActualInstance.GetType() == typeof(List<HighlightResultOption>);
   }
 
   /// <summary>
@@ -148,6 +179,15 @@ public partial class HighlightResult : AbstractSchema
     {
       // deserialization failed, try the next one
       System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into Dictionary<string, HighlightResultOption>: {exception}");
+    }
+    try
+    {
+      return new HighlightResult(JsonConvert.DeserializeObject<List<HighlightResultOption>>(jsonString, AdditionalPropertiesSerializerSettings));
+    }
+    catch (Exception exception)
+    {
+      // deserialization failed, try the next one
+      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<HighlightResultOption>: {exception}");
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

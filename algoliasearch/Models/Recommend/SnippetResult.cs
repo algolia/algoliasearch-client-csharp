@@ -51,6 +51,18 @@ public partial class SnippetResult : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the SnippetResult class
+  /// with a List{SnippetResultOption}
+  /// </summary>
+  /// <param name="actualInstance">An instance of List&lt;SnippetResultOption&gt;.</param>
+  public SnippetResult(List<SnippetResultOption> actualInstance)
+  {
+    IsNullable = false;
+    SchemaType = "oneOf";
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -77,6 +89,16 @@ public partial class SnippetResult : AbstractSchema
     return (Dictionary<string, SnippetResultOption>)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `List{SnippetResultOption}`. If the actual instance is not `List{SnippetResultOption}`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of List&lt;SnippetResultOption&gt;</returns>
+  public List<SnippetResultOption> AsList()
+  {
+    return (List<SnippetResultOption>)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `SnippetResultOption` type.
@@ -94,6 +116,15 @@ public partial class SnippetResult : AbstractSchema
   public bool IsDictionary()
   {
     return ActualInstance.GetType() == typeof(Dictionary<string, SnippetResultOption>);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `List{SnippetResultOption}` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsList()
+  {
+    return ActualInstance.GetType() == typeof(List<SnippetResultOption>);
   }
 
   /// <summary>
@@ -148,6 +179,15 @@ public partial class SnippetResult : AbstractSchema
     {
       // deserialization failed, try the next one
       System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into Dictionary<string, SnippetResultOption>: {exception}");
+    }
+    try
+    {
+      return new SnippetResult(JsonConvert.DeserializeObject<List<SnippetResultOption>>(jsonString, AdditionalPropertiesSerializerSettings));
+    }
+    catch (Exception exception)
+    {
+      // deserialization failed, try the next one
+      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<SnippetResultOption>: {exception}");
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");
