@@ -1,0 +1,25 @@
+name: Release packages
+
+on:
+  push:
+    branches:
+      - next
+
+jobs:
+  release:
+    name: Publish
+    runs-on: ubuntu-22.04
+    if: "startsWith(github.event.head_commit.message, 'chore: release')"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Create Nugget package
+        run: dotnet pack --configuration Release --output nugget
+
+      - name: Publish NuGet package
+        run: dotnet nuget push "nugget/*.nupkg" --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
