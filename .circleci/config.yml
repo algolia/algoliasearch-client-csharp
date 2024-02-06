@@ -52,6 +52,10 @@ workflows:
   version: 2
   build:
     jobs:
+      - skip:
+          filters:
+            branches:
+              ignore: [ next ]
       - format:
           filters:
             tags:
