@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Algolia.Search.Models.Personalization;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -34,6 +35,19 @@ public interface IPersonalizationClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
@@ -45,6 +59,19 @@ public interface IPersonalizationClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
@@ -61,6 +88,20 @@ public interface IPersonalizationClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
@@ -75,6 +116,20 @@ public interface IPersonalizationClient
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
   /// </summary>
   /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
@@ -87,6 +142,18 @@ public interface IPersonalizationClient
   Task<DeleteUserProfileResponse> DeleteUserProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed.  (Synchronous version)
+  /// </summary>
+  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeleteUserProfileResponse</returns>
+  DeleteUserProfileResponse DeleteUserProfile(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// The strategy contains information on the events and facets that impact user profiles and personalized search results.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -96,6 +163,17 @@ public interface IPersonalizationClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of PersonalizationStrategyParams</returns>
   Task<PersonalizationStrategyParams> GetPersonalizationStrategyAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// The strategy contains information on the events and facets that impact user profiles and personalized search results. (Synchronous version)
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>PersonalizationStrategyParams</returns>
+  PersonalizationStrategyParams GetPersonalizationStrategy(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
@@ -110,6 +188,18 @@ public interface IPersonalizationClient
   Task<GetUserTokenResponse> GetUserTokenProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes.  (Synchronous version)
+  /// </summary>
+  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetUserTokenResponse</returns>
+  GetUserTokenResponse GetUserTokenProfile(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// A strategy defines the events and facets that impact user profiles and personalized search results.
   /// </summary>
   /// <param name="personalizationStrategyParams"></param>
@@ -120,6 +210,18 @@ public interface IPersonalizationClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SetPersonalizationStrategyResponse</returns>
   Task<SetPersonalizationStrategyResponse> SetPersonalizationStrategyAsync(PersonalizationStrategyParams personalizationStrategyParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// A strategy defines the events and facets that impact user profiles and personalized search results. (Synchronous version)
+  /// </summary>
+  /// <param name="personalizationStrategyParams"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SetPersonalizationStrategyResponse</returns>
+  SetPersonalizationStrategyResponse SetPersonalizationStrategy(PersonalizationStrategyParams personalizationStrategyParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
 }
 
@@ -213,6 +315,22 @@ public partial class PersonalizationClient : IPersonalizationClient
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
+
+
   /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
@@ -236,6 +354,22 @@ public partial class PersonalizationClient : IPersonalizationClient
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
+
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
+
 
   /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
@@ -263,6 +397,23 @@ public partial class PersonalizationClient : IPersonalizationClient
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
+
+
   /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
@@ -288,6 +439,23 @@ public partial class PersonalizationClient : IPersonalizationClient
     requestOptions.Data = body;
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
+
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
+
 
   /// <summary>
   /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
@@ -315,6 +483,24 @@ public partial class PersonalizationClient : IPersonalizationClient
     return await _transport.ExecuteRequestAsync<DeleteUserProfileResponse>(new HttpMethod("DELETE"), "/1/profiles/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - recommendation
+  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeleteUserProfileResponse</returns>
+  public DeleteUserProfileResponse DeleteUserProfile(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => DeleteUserProfileAsync(userToken, options, cancellationToken));
+
+
   /// <summary>
   /// The strategy contains information on the events and facets that impact user profiles and personalized search results.
   /// </summary>
@@ -334,6 +520,23 @@ public partial class PersonalizationClient : IPersonalizationClient
 
     return await _transport.ExecuteRequestAsync<PersonalizationStrategyParams>(new HttpMethod("GET"), "/1/strategies/personalization", requestOptions, cancellationToken).ConfigureAwait(false);
   }
+
+
+  /// <summary>
+  /// The strategy contains information on the events and facets that impact user profiles and personalized search results. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - recommendation
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>PersonalizationStrategyParams</returns>
+  public PersonalizationStrategyParams GetPersonalizationStrategy(RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => GetPersonalizationStrategyAsync(options, cancellationToken));
+
 
   /// <summary>
   /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
@@ -361,6 +564,24 @@ public partial class PersonalizationClient : IPersonalizationClient
     return await _transport.ExecuteRequestAsync<GetUserTokenResponse>(new HttpMethod("GET"), "/1/profiles/personalization/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - recommendation
+  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetUserTokenResponse</returns>
+  public GetUserTokenResponse GetUserTokenProfile(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => GetUserTokenProfileAsync(userToken, options, cancellationToken));
+
+
   /// <summary>
   /// A strategy defines the events and facets that impact user profiles and personalized search results.
   /// </summary>
@@ -386,5 +607,23 @@ public partial class PersonalizationClient : IPersonalizationClient
     requestOptions.Data = personalizationStrategyParams;
     return await _transport.ExecuteRequestAsync<SetPersonalizationStrategyResponse>(new HttpMethod("POST"), "/1/strategies/personalization", requestOptions, cancellationToken).ConfigureAwait(false);
   }
+
+
+  /// <summary>
+  /// A strategy defines the events and facets that impact user profiles and personalized search results. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - recommendation
+  /// <param name="personalizationStrategyParams"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SetPersonalizationStrategyResponse</returns>
+  public SetPersonalizationStrategyResponse SetPersonalizationStrategy(PersonalizationStrategyParams personalizationStrategyParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => SetPersonalizationStrategyAsync(personalizationStrategyParams, options, cancellationToken));
+
 }
 

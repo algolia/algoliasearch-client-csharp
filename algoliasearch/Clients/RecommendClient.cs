@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Algolia.Search.Models.Recommend;
 using Algolia.Search.Transport;
 using Algolia.Search.Http;
+using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -34,6 +35,19 @@ public interface IRecommendClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
@@ -45,6 +59,19 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
@@ -61,6 +88,20 @@ public interface IRecommendClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
@@ -73,6 +114,20 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of object</returns>
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
@@ -89,6 +144,20 @@ public interface IRecommendClient
   Task<DeletedAtResponse> DeleteRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
+  /// </summary>
+  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeletedAtResponse</returns>
+  DeletedAtResponse DeleteRecommendRule(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
   /// </summary>
   /// <param name="indexName">Index on which to perform the request.</param>
@@ -101,6 +170,20 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of RuleResponse</returns>
   Task<RuleResponse> GetRecommendRuleAsync(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
+  /// </summary>
+  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RuleResponse</returns>
+  RuleResponse GetRecommendRule(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
@@ -117,6 +200,20 @@ public interface IRecommendClient
   Task<GetRecommendTaskResponse> GetRecommendStatusAsync(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task. (Synchronous version)
+  /// </summary>
+  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetRecommendTaskResponse</returns>
+  GetRecommendTaskResponse GetRecommendStatus(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
   /// </summary>
   /// <param name="getRecommendationsParams"></param>
@@ -127,6 +224,18 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetRecommendationsResponse</returns>
   Task<GetRecommendationsResponse> GetRecommendationsAsync(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values).  (Synchronous version)
+  /// </summary>
+  /// <param name="getRecommendationsParams"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetRecommendationsResponse</returns>
+  GetRecommendationsResponse GetRecommendations(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
@@ -141,6 +250,20 @@ public interface IRecommendClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchRecommendRulesResponse</returns>
   Task<SearchRecommendRulesResponse> SearchRecommendRulesAsync(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
+  /// </summary>
+  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="searchRecommendRulesParams"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SearchRecommendRulesResponse</returns>
+  SearchRecommendRulesResponse SearchRecommendRules(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
 }
 
@@ -234,6 +357,22 @@ public partial class RecommendClient : IRecommendClient
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
+
+
   /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
@@ -257,6 +396,22 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
+
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
+
 
   /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
@@ -284,6 +439,23 @@ public partial class RecommendClient : IRecommendClient
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
+
+
   /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
@@ -309,6 +481,23 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.Data = body;
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
+
+
+  /// <summary>
+  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// </summary>
+  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
+  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
+  /// <param name="body">Parameters to send with the custom request. (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>object</returns>
+  public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
+
 
   /// <summary>
   /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
@@ -345,6 +534,26 @@ public partial class RecommendClient : IRecommendClient
     return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>DeletedAtResponse</returns>
+  public DeletedAtResponse DeleteRecommendRule(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => DeleteRecommendRuleAsync(indexName, model, objectID, options, cancellationToken));
+
+
   /// <summary>
   /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
   /// </summary>
@@ -380,6 +589,26 @@ public partial class RecommendClient : IRecommendClient
     return await _transport.ExecuteRequestAsync<RuleResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RuleResponse</returns>
+  public RuleResponse GetRecommendRule(string indexName, RecommendModels model, string objectID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => GetRecommendRuleAsync(indexName, model, objectID, options, cancellationToken));
+
+
   /// <summary>
   /// Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
   /// </summary>
@@ -412,6 +641,26 @@ public partial class RecommendClient : IRecommendClient
     return await _transport.ExecuteRequestAsync<GetRecommendTaskResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/{model}/task/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
+
+  /// <summary>
+  /// Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetRecommendTaskResponse</returns>
+  public GetRecommendTaskResponse GetRecommendStatus(string indexName, RecommendModels model, long taskID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => GetRecommendStatusAsync(indexName, model, taskID, options, cancellationToken));
+
+
   /// <summary>
   /// Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values). 
   /// </summary>
@@ -438,6 +687,24 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.UseReadTransporter = true;
     return await _transport.ExecuteRequestAsync<GetRecommendationsResponse>(new HttpMethod("POST"), "/1/indexes/*/recommendations", requestOptions, cancellationToken).ConfigureAwait(false);
   }
+
+
+  /// <summary>
+  /// Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values).  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - search
+  /// <param name="getRecommendationsParams"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetRecommendationsResponse</returns>
+  public GetRecommendationsResponse GetRecommendations(GetRecommendationsParams getRecommendationsParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => GetRecommendationsAsync(getRecommendationsParams, options, cancellationToken));
+
 
   /// <summary>
   /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
@@ -470,5 +737,25 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.UseReadTransporter = true;
     return await _transport.ExecuteRequestAsync<SearchRecommendRulesResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/{model}/recommend/rules/search", requestOptions, cancellationToken).ConfigureAwait(false);
   }
+
+
+  /// <summary>
+  /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
+  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="searchRecommendRulesParams"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>SearchRecommendRulesResponse</returns>
+  public SearchRecommendRulesResponse SearchRecommendRules(string indexName, RecommendModels model, SearchRecommendRulesParams searchRecommendRulesParams = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => SearchRecommendRulesAsync(indexName, model, searchRecommendRulesParams, options, cancellationToken));
+
 }
 
