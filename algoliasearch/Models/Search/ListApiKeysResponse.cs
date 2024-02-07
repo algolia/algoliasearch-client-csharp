@@ -44,7 +44,7 @@ public partial class ListApiKeysResponse
   /// API keys.
   /// </summary>
   /// <value>API keys.</value>
-  [DataMember(Name = "keys", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "keys")]
   public List<GetApiKeyResponse> Keys { get; set; }
 
   /// <summary>

@@ -36,53 +36,53 @@ public partial class DeleteByParams
   /// <summary>
   /// Gets or Sets FacetFilters
   /// </summary>
-  [DataMember(Name = "facetFilters", EmitDefaultValue = false)]
-  public FacetFilters FacetFilters { get; set; }
+  [DataMember(Name = "facetFilters")]
+  public FacetFilters? FacetFilters { get; set; }
 
   /// <summary>
   /// [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. 
   /// </summary>
   /// <value>[Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. </value>
-  [DataMember(Name = "filters", EmitDefaultValue = false)]
-  public string Filters { get; set; }
+  [DataMember(Name = "filters")]
+  public string? Filters { get; set; }
 
   /// <summary>
   /// Gets or Sets NumericFilters
   /// </summary>
-  [DataMember(Name = "numericFilters", EmitDefaultValue = false)]
-  public NumericFilters NumericFilters { get; set; }
+  [DataMember(Name = "numericFilters")]
+  public NumericFilters? NumericFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets TagFilters
   /// </summary>
-  [DataMember(Name = "tagFilters", EmitDefaultValue = false)]
-  public TagFilters TagFilters { get; set; }
+  [DataMember(Name = "tagFilters")]
+  public TagFilters? TagFilters { get; set; }
 
   /// <summary>
   /// Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
   /// </summary>
   /// <value>Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.</value>
-  [DataMember(Name = "aroundLatLng", EmitDefaultValue = false)]
-  public string AroundLatLng { get; set; }
+  [DataMember(Name = "aroundLatLng")]
+  public string? AroundLatLng { get; set; }
 
   /// <summary>
   /// Gets or Sets AroundRadius
   /// </summary>
-  [DataMember(Name = "aroundRadius", EmitDefaultValue = false)]
-  public AroundRadius AroundRadius { get; set; }
+  [DataMember(Name = "aroundRadius")]
+  public AroundRadius? AroundRadius { get; set; }
 
   /// <summary>
   /// Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
   /// </summary>
   /// <value>Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).</value>
-  [DataMember(Name = "insideBoundingBox", EmitDefaultValue = false)]
+  [DataMember(Name = "insideBoundingBox")]
   public List<List<double>> InsideBoundingBox { get; set; }
 
   /// <summary>
   /// Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
   /// </summary>
   /// <value>Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).</value>
-  [DataMember(Name = "insidePolygon", EmitDefaultValue = false)]
+  [DataMember(Name = "insidePolygon")]
   public List<List<double>> InsidePolygon { get; set; }
 
   /// <summary>

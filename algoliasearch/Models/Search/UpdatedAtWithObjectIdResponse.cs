@@ -37,22 +37,22 @@ public partial class UpdatedAtWithObjectIdResponse
   /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. 
   /// </summary>
   /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. </value>
-  [DataMember(Name = "taskID", EmitDefaultValue = false)]
-  public long TaskID { get; set; }
+  [DataMember(Name = "taskID")]
+  public long? TaskID { get; set; }
 
   /// <summary>
   /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
   /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-  [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
-  public string UpdatedAt { get; set; }
+  [DataMember(Name = "updatedAt")]
+  public string? UpdatedAt { get; set; }
 
   /// <summary>
   /// Unique object identifier.
   /// </summary>
   /// <value>Unique object identifier.</value>
-  [DataMember(Name = "objectID", EmitDefaultValue = false)]
-  public string ObjectID { get; set; }
+  [DataMember(Name = "objectID")]
+  public string? ObjectID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -36,8 +36,8 @@ public partial class GetInventory403Response
   /// <summary>
   /// Gets or Sets Reason
   /// </summary>
-  [DataMember(Name = "reason", EmitDefaultValue = false)]
-  public string Reason { get; set; }
+  [DataMember(Name = "reason")]
+  public string? Reason { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

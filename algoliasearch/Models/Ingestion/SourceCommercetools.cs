@@ -45,33 +45,33 @@ public partial class SourceCommercetools
   /// <summary>
   /// Gets or Sets StoreKeys
   /// </summary>
-  [DataMember(Name = "storeKeys", EmitDefaultValue = false)]
+  [DataMember(Name = "storeKeys")]
   public List<string> StoreKeys { get; set; }
 
   /// <summary>
   /// Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"]. 
   /// </summary>
   /// <value>Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"]. </value>
-  [DataMember(Name = "locales", EmitDefaultValue = false)]
+  [DataMember(Name = "locales")]
   public List<string> Locales { get; set; }
 
   /// <summary>
   /// Gets or Sets Url
   /// </summary>
-  [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "url")]
   public string Url { get; set; }
 
   /// <summary>
   /// Gets or Sets ProjectKey
   /// </summary>
-  [DataMember(Name = "projectKey", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "projectKey")]
   public string ProjectKey { get; set; }
 
   /// <summary>
   /// Determines the value that will be stored in the Algolia record if there's no inventory information on the product. 
   /// </summary>
   /// <value>Determines the value that will be stored in the Algolia record if there's no inventory information on the product. </value>
-  [DataMember(Name = "fallbackIsInStockValue", EmitDefaultValue = false)]
+  [DataMember(Name = "fallbackIsInStockValue")]
   public bool? FallbackIsInStockValue { get; set; }
 
   /// <summary>

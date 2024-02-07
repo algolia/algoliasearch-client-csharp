@@ -30,7 +30,7 @@ public partial class TaskCreate
   /// <summary>
   /// Gets or Sets Action
   /// </summary>
-  [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "action")]
   public ActionType Action { get; set; }
   /// <summary>
   /// Initializes a new instance of the TaskCreate class.
@@ -56,41 +56,41 @@ public partial class TaskCreate
   /// The source UUID.
   /// </summary>
   /// <value>The source UUID.</value>
-  [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "sourceID")]
   public string SourceID { get; set; }
 
   /// <summary>
   /// The destination UUID.
   /// </summary>
   /// <value>The destination UUID.</value>
-  [DataMember(Name = "destinationID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "destinationID")]
   public string DestinationID { get; set; }
 
   /// <summary>
   /// Gets or Sets Trigger
   /// </summary>
-  [DataMember(Name = "trigger", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "trigger")]
   public TaskCreateTrigger Trigger { get; set; }
 
   /// <summary>
   /// Whether the task is enabled or not.
   /// </summary>
   /// <value>Whether the task is enabled or not.</value>
-  [DataMember(Name = "enabled", EmitDefaultValue = false)]
+  [DataMember(Name = "enabled")]
   public bool? Enabled { get; set; }
 
   /// <summary>
   /// A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
   /// </summary>
   /// <value>A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.</value>
-  [DataMember(Name = "failureThreshold", EmitDefaultValue = false)]
+  [DataMember(Name = "failureThreshold")]
   public int? FailureThreshold { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
-  [DataMember(Name = "input", EmitDefaultValue = false)]
-  public TaskInput Input { get; set; }
+  [DataMember(Name = "input")]
+  public TaskInput? Input { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

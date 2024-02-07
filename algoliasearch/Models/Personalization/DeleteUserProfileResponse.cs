@@ -46,14 +46,14 @@ public partial class DeleteUserProfileResponse
   /// userToken representing the user for which to fetch the Personalization profile.
   /// </summary>
   /// <value>userToken representing the user for which to fetch the Personalization profile.</value>
-  [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "userToken")]
   public string UserToken { get; set; }
 
   /// <summary>
   /// A date until which the data can safely be considered as deleted for the given user. Any data received after the `deletedUntil` date will start building a new user profile.
   /// </summary>
   /// <value>A date until which the data can safely be considered as deleted for the given user. Any data received after the `deletedUntil` date will start building a new user profile.</value>
-  [DataMember(Name = "deletedUntil", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "deletedUntil")]
   public string DeletedUntil { get; set; }
 
   /// <summary>

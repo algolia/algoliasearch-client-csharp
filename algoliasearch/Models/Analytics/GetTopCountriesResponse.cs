@@ -44,7 +44,7 @@ public partial class GetTopCountriesResponse
   /// Countries
   /// </summary>
   /// <value>Countries</value>
-  [DataMember(Name = "countries", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "countries")]
   public List<TopCountry> Countries { get; set; }
 
   /// <summary>

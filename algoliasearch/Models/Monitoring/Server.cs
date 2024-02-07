@@ -30,20 +30,20 @@ public partial class Server
   /// <summary>
   /// Gets or Sets Region
   /// </summary>
-  [DataMember(Name = "region", EmitDefaultValue = false)]
-  public Region Region { get; set; }
+  [DataMember(Name = "region")]
+  public Region? Region { get; set; }
 
   /// <summary>
   /// Gets or Sets Status
   /// </summary>
-  [DataMember(Name = "status", EmitDefaultValue = false)]
-  public ServerStatus Status { get; set; }
+  [DataMember(Name = "status")]
+  public ServerStatus? Status { get; set; }
 
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", EmitDefaultValue = false)]
-  public Type Type { get; set; }
+  [DataMember(Name = "type")]
+  public Type? Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the Server class.
   /// </summary>
@@ -55,14 +55,14 @@ public partial class Server
   /// Server name.
   /// </summary>
   /// <value>Server name.</value>
-  [DataMember(Name = "name", EmitDefaultValue = false)]
-  public string Name { get; set; }
+  [DataMember(Name = "name")]
+  public string? Name { get; set; }
 
   /// <summary>
   /// Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead. 
   /// </summary>
   /// <value>Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead. </value>
-  [DataMember(Name = "is_slave", EmitDefaultValue = false)]
+  [DataMember(Name = "is_slave")]
   [Obsolete]
   public bool? IsSlave { get; set; }
 
@@ -70,15 +70,15 @@ public partial class Server
   /// Indicates whether this server is a replica of another server.
   /// </summary>
   /// <value>Indicates whether this server is a replica of another server.</value>
-  [DataMember(Name = "is_replica", EmitDefaultValue = false)]
+  [DataMember(Name = "is_replica")]
   public bool? IsReplica { get; set; }
 
   /// <summary>
   /// Name of the cluster to which this server belongs.
   /// </summary>
   /// <value>Name of the cluster to which this server belongs.</value>
-  [DataMember(Name = "cluster", EmitDefaultValue = false)]
-  public string Cluster { get; set; }
+  [DataMember(Name = "cluster")]
+  public string? Cluster { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

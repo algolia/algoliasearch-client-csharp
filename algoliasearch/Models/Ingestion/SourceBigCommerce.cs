@@ -37,31 +37,31 @@ public partial class SourceBigCommerce
   /// The store hash identifying the store the shopper is signing in to.
   /// </summary>
   /// <value>The store hash identifying the store the shopper is signing in to.</value>
-  [DataMember(Name = "storeHash", EmitDefaultValue = false)]
-  public string StoreHash { get; set; }
+  [DataMember(Name = "storeHash")]
+  public string? StoreHash { get; set; }
 
   /// <summary>
   /// Gets or Sets Channel
   /// </summary>
-  [DataMember(Name = "channel", EmitDefaultValue = false)]
-  public BigCommerceChannel Channel { get; set; }
+  [DataMember(Name = "channel")]
+  public BigCommerceChannel? Channel { get; set; }
 
   /// <summary>
   /// Gets or Sets CustomFields
   /// </summary>
-  [DataMember(Name = "customFields", EmitDefaultValue = false)]
+  [DataMember(Name = "customFields")]
   public List<string> CustomFields { get; set; }
 
   /// <summary>
   /// Gets or Sets ProductMetafields
   /// </summary>
-  [DataMember(Name = "productMetafields", EmitDefaultValue = false)]
+  [DataMember(Name = "productMetafields")]
   public List<BigCommerceMetafield> ProductMetafields { get; set; }
 
   /// <summary>
   /// Gets or Sets VariantMetafields
   /// </summary>
-  [DataMember(Name = "variantMetafields", EmitDefaultValue = false)]
+  [DataMember(Name = "variantMetafields")]
   public List<BigCommerceMetafield> VariantMetafields { get; set; }
 
   /// <summary>

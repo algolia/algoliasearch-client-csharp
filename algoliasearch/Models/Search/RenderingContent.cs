@@ -36,8 +36,8 @@ public partial class RenderingContent
   /// <summary>
   /// Gets or Sets FacetOrdering
   /// </summary>
-  [DataMember(Name = "facetOrdering", EmitDefaultValue = false)]
-  public FacetOrdering FacetOrdering { get; set; }
+  [DataMember(Name = "facetOrdering")]
+  public FacetOrdering? FacetOrdering { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

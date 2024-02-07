@@ -36,7 +36,7 @@ public partial class Redirect
   /// <summary>
   /// Gets or Sets Index
   /// </summary>
-  [DataMember(Name = "index", EmitDefaultValue = false)]
+  [DataMember(Name = "index")]
   public List<RedirectRuleIndexMetadata> Index { get; set; }
 
   /// <summary>

@@ -48,20 +48,20 @@ public partial class SourceUpdateResponse
   /// The source UUID.
   /// </summary>
   /// <value>The source UUID.</value>
-  [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "sourceID")]
   public string SourceID { get; set; }
 
   /// <summary>
   /// Gets or Sets Name
   /// </summary>
-  [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "name")]
   public string Name { get; set; }
 
   /// <summary>
   /// Date of last update (RFC3339 format).
   /// </summary>
   /// <value>Date of last update (RFC3339 format).</value>
-  [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "updatedAt")]
   public string UpdatedAt { get; set; }
 
   /// <summary>

@@ -38,7 +38,7 @@ public partial class SearchRecommendRulesResponse
   /// <param name="nbHits">Number of hits the search query matched. (required).</param>
   /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
   /// <param name="nbPages">Number of pages of results for the current query. (required).</param>
-  public SearchRecommendRulesResponse(List<RuleResponse> hits, int? nbHits, int? page, int? nbPages)
+  public SearchRecommendRulesResponse(List<RuleResponse> hits, int nbHits, int page, int nbPages)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
     NbHits = nbHits;
@@ -50,29 +50,29 @@ public partial class SearchRecommendRulesResponse
   /// Fetched rules.
   /// </summary>
   /// <value>Fetched rules.</value>
-  [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "hits")]
   public List<RuleResponse> Hits { get; set; }
 
   /// <summary>
   /// Number of hits the search query matched.
   /// </summary>
   /// <value>Number of hits the search query matched.</value>
-  [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbHits { get; set; }
+  [DataMember(Name = "nbHits")]
+  public int NbHits { get; set; }
 
   /// <summary>
   /// Page to retrieve (the first page is `0`, not `1`).
   /// </summary>
   /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
-  [DataMember(Name = "page", IsRequired = true, EmitDefaultValue = false)]
-  public int? Page { get; set; }
+  [DataMember(Name = "page")]
+  public int Page { get; set; }
 
   /// <summary>
   /// Number of pages of results for the current query.
   /// </summary>
   /// <value>Number of pages of results for the current query.</value>
-  [DataMember(Name = "nbPages", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbPages { get; set; }
+  [DataMember(Name = "nbPages")]
+  public int NbPages { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

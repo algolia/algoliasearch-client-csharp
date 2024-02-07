@@ -125,15 +125,9 @@ public partial class GetTopSearchesResponse : AbstractSchema
   /// <returns>An instance of GetTopSearchesResponse</returns>
   public static GetTopSearchesResponse FromJson(string jsonString)
   {
-    GetTopSearchesResponse newGetTopSearchesResponse = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newGetTopSearchesResponse;
-    }
     try
     {
-      return new GetTopSearchesResponse(JsonConvert.DeserializeObject<TopSearchesResponse>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new GetTopSearchesResponse(JsonConvert.DeserializeObject<TopSearchesResponse>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class GetTopSearchesResponse : AbstractSchema
     }
     try
     {
-      return new GetTopSearchesResponse(JsonConvert.DeserializeObject<TopSearchesResponseWithAnalytics>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new GetTopSearchesResponse(JsonConvert.DeserializeObject<TopSearchesResponseWithAnalytics>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class GetTopSearchesResponseJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(GetTopSearchesResponse).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class GetTopSearchesResponseJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

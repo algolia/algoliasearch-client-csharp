@@ -36,7 +36,7 @@ public partial class StatusResponse
   /// <summary>
   /// Gets or Sets Status
   /// </summary>
-  [DataMember(Name = "status", EmitDefaultValue = false)]
+  [DataMember(Name = "status")]
   public Dictionary<string, Status> Status { get; set; }
 
   /// <summary>

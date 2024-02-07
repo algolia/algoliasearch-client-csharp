@@ -44,7 +44,7 @@ public partial class GetTopFilterAttributesResponse
   /// Filterable attributes.
   /// </summary>
   /// <value>Filterable attributes.</value>
-  [DataMember(Name = "attributes", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "attributes")]
   public List<GetTopFilterAttribute> Attributes { get; set; }
 
   /// <summary>

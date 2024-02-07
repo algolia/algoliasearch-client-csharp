@@ -37,7 +37,7 @@ public partial class ListABTestsResponse
   /// <param name="abtests">A/B tests. (required).</param>
   /// <param name="count">Number of A/B tests implemented. (required).</param>
   /// <param name="total">Number of retrievable A/B tests. (required).</param>
-  public ListABTestsResponse(List<ABTest> abtests, int? count, int? total)
+  public ListABTestsResponse(List<ABTest> abtests, int count, int total)
   {
     Abtests = abtests ?? throw new ArgumentNullException(nameof(abtests));
     Count = count;
@@ -48,22 +48,22 @@ public partial class ListABTestsResponse
   /// A/B tests.
   /// </summary>
   /// <value>A/B tests.</value>
-  [DataMember(Name = "abtests", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "abtests")]
   public List<ABTest> Abtests { get; set; }
 
   /// <summary>
   /// Number of A/B tests implemented.
   /// </summary>
   /// <value>Number of A/B tests implemented.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Number of retrievable A/B tests.
   /// </summary>
   /// <value>Number of retrievable A/B tests.</value>
-  [DataMember(Name = "total", IsRequired = true, EmitDefaultValue = false)]
-  public int? Total { get; set; }
+  [DataMember(Name = "total")]
+  public int Total { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -30,7 +30,7 @@ public partial class IngestionTask
   /// <summary>
   /// Gets or Sets Action
   /// </summary>
-  [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "action")]
   public ActionType Action { get; set; }
   /// <summary>
   /// Initializes a new instance of the IngestionTask class.
@@ -47,7 +47,7 @@ public partial class IngestionTask
   /// <param name="enabled">Whether the task is enabled or not. (required) (default to true).</param>
   /// <param name="action">action (required).</param>
   /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-  public IngestionTask(string taskID, string sourceID, string destinationID, Trigger trigger, bool? enabled, ActionType action, string createdAt)
+  public IngestionTask(string taskID, string sourceID, string destinationID, Trigger trigger, bool enabled, ActionType action, string createdAt)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
@@ -62,62 +62,62 @@ public partial class IngestionTask
   /// The task UUID.
   /// </summary>
   /// <value>The task UUID.</value>
-  [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "taskID")]
   public string TaskID { get; set; }
 
   /// <summary>
   /// The source UUID.
   /// </summary>
   /// <value>The source UUID.</value>
-  [DataMember(Name = "sourceID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "sourceID")]
   public string SourceID { get; set; }
 
   /// <summary>
   /// The destination UUID.
   /// </summary>
   /// <value>The destination UUID.</value>
-  [DataMember(Name = "destinationID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "destinationID")]
   public string DestinationID { get; set; }
 
   /// <summary>
   /// Gets or Sets Trigger
   /// </summary>
-  [DataMember(Name = "trigger", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "trigger")]
   public Trigger Trigger { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
-  [DataMember(Name = "input", EmitDefaultValue = false)]
-  public TaskInput Input { get; set; }
+  [DataMember(Name = "input")]
+  public TaskInput? Input { get; set; }
 
   /// <summary>
   /// Whether the task is enabled or not.
   /// </summary>
   /// <value>Whether the task is enabled or not.</value>
-  [DataMember(Name = "enabled", IsRequired = true, EmitDefaultValue = false)]
-  public bool? Enabled { get; set; }
+  [DataMember(Name = "enabled")]
+  public bool Enabled { get; set; }
 
   /// <summary>
   /// A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
   /// </summary>
   /// <value>A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.</value>
-  [DataMember(Name = "failureThreshold", EmitDefaultValue = false)]
+  [DataMember(Name = "failureThreshold")]
   public int? FailureThreshold { get; set; }
 
   /// <summary>
   /// Date of creation (RFC3339 format).
   /// </summary>
   /// <value>Date of creation (RFC3339 format).</value>
-  [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
   /// Date of last update (RFC3339 format).
   /// </summary>
   /// <value>Date of last update (RFC3339 format).</value>
-  [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
-  public string UpdatedAt { get; set; }
+  [DataMember(Name = "updatedAt")]
+  public string? UpdatedAt { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

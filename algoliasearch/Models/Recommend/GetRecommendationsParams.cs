@@ -44,7 +44,7 @@ public partial class GetRecommendationsParams
   /// Request parameters depend on the model (recommendations or trending).
   /// </summary>
   /// <value>Request parameters depend on the model (recommendations or trending).</value>
-  [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "requests")]
   public List<RecommendationsRequest> Requests { get; set; }
 
   /// <summary>

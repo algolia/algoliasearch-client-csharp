@@ -156,15 +156,9 @@ public partial class HighlightResult : AbstractSchema
   /// <returns>An instance of HighlightResult</returns>
   public static HighlightResult FromJson(string jsonString)
   {
-    HighlightResult newHighlightResult = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newHighlightResult;
-    }
     try
     {
-      return new HighlightResult(JsonConvert.DeserializeObject<HighlightResultOption>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new HighlightResult(JsonConvert.DeserializeObject<HighlightResultOption>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -173,7 +167,7 @@ public partial class HighlightResult : AbstractSchema
     }
     try
     {
-      return new HighlightResult(JsonConvert.DeserializeObject<Dictionary<string, HighlightResultOption>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new HighlightResult(JsonConvert.DeserializeObject<Dictionary<string, HighlightResultOption>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -182,7 +176,7 @@ public partial class HighlightResult : AbstractSchema
     }
     try
     {
-      return new HighlightResult(JsonConvert.DeserializeObject<List<HighlightResultOption>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new HighlightResult(JsonConvert.DeserializeObject<List<HighlightResultOption>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -208,7 +202,7 @@ public class HighlightResultJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(HighlightResult).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -223,7 +217,7 @@ public class HighlightResultJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

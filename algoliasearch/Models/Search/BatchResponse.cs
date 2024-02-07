@@ -46,14 +46,14 @@ public partial class BatchResponse
   /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. 
   /// </summary>
   /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. </value>
-  [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "taskID")]
   public long TaskID { get; set; }
 
   /// <summary>
   /// Unique object (record) identifiers.
   /// </summary>
   /// <value>Unique object (record) identifiers.</value>
-  [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectIDs")]
   public List<string> ObjectIDs { get; set; }
 
   /// <summary>

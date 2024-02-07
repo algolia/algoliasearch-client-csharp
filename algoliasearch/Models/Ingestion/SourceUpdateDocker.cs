@@ -30,8 +30,8 @@ public partial class SourceUpdateDocker
   /// <summary>
   /// Gets or Sets Registry
   /// </summary>
-  [DataMember(Name = "registry", EmitDefaultValue = false)]
-  public DockerRegistry Registry { get; set; }
+  [DataMember(Name = "registry")]
+  public DockerRegistry? Registry { get; set; }
   /// <summary>
   /// Initializes a new instance of the SourceUpdateDocker class.
   /// </summary>
@@ -50,21 +50,21 @@ public partial class SourceUpdateDocker
   /// The name of the image to pull.
   /// </summary>
   /// <value>The name of the image to pull.</value>
-  [DataMember(Name = "image", EmitDefaultValue = false)]
-  public string Image { get; set; }
+  [DataMember(Name = "image")]
+  public string? Image { get; set; }
 
   /// <summary>
   /// The version of the image, defaults to `latest`.
   /// </summary>
   /// <value>The version of the image, defaults to `latest`.</value>
-  [DataMember(Name = "version", EmitDefaultValue = false)]
-  public string VarVersion { get; set; }
+  [DataMember(Name = "version")]
+  public string? VarVersion { get; set; }
 
   /// <summary>
   /// The configuration of the spec.
   /// </summary>
   /// <value>The configuration of the spec.</value>
-  [DataMember(Name = "configuration", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "configuration")]
   public object VarConfiguration { get; set; }
 
   /// <summary>

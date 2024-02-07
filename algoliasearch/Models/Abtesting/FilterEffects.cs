@@ -36,14 +36,14 @@ public partial class FilterEffects
   /// <summary>
   /// Gets or Sets Outliers
   /// </summary>
-  [DataMember(Name = "outliers", EmitDefaultValue = false)]
-  public FilterEffectsOutliers Outliers { get; set; }
+  [DataMember(Name = "outliers")]
+  public FilterEffectsOutliers? Outliers { get; set; }
 
   /// <summary>
   /// Gets or Sets EmptySearch
   /// </summary>
-  [DataMember(Name = "emptySearch", EmitDefaultValue = false)]
-  public FilterEffectsEmptySearch EmptySearch { get; set; }
+  [DataMember(Name = "emptySearch")]
+  public FilterEffectsEmptySearch? EmptySearch { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -37,14 +37,14 @@ public partial class Facet
   /// Facet name.
   /// </summary>
   /// <value>Facet name.</value>
-  [DataMember(Name = "attribute", EmitDefaultValue = false)]
-  public string Attribute { get; set; }
+  [DataMember(Name = "attribute")]
+  public string? Attribute { get; set; }
 
   /// <summary>
   /// Number of suggestions.
   /// </summary>
   /// <value>Number of suggestions.</value>
-  [DataMember(Name = "amount", EmitDefaultValue = false)]
+  [DataMember(Name = "amount")]
   public int? Amount { get; set; }
 
   /// <summary>

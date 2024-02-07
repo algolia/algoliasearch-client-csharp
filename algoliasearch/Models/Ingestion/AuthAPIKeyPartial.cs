@@ -36,8 +36,8 @@ public partial class AuthAPIKeyPartial
   /// <summary>
   /// Gets or Sets Key
   /// </summary>
-  [DataMember(Name = "key", EmitDefaultValue = false)]
-  public string Key { get; set; }
+  [DataMember(Name = "key")]
+  public string? Key { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

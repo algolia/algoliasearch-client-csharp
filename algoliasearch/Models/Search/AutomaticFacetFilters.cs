@@ -125,15 +125,9 @@ public partial class AutomaticFacetFilters : AbstractSchema
   /// <returns>An instance of AutomaticFacetFilters</returns>
   public static AutomaticFacetFilters FromJson(string jsonString)
   {
-    AutomaticFacetFilters newAutomaticFacetFilters = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newAutomaticFacetFilters;
-    }
     try
     {
-      return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class AutomaticFacetFilters : AbstractSchema
     }
     try
     {
-      return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class AutomaticFacetFiltersJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(AutomaticFacetFilters).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class AutomaticFacetFiltersJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

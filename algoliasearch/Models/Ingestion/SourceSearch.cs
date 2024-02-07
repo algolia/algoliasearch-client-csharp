@@ -43,7 +43,7 @@ public partial class SourceSearch
   /// <summary>
   /// Gets or Sets SourceIDs
   /// </summary>
-  [DataMember(Name = "sourceIDs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "sourceIDs")]
   public List<string> SourceIDs { get; set; }
 
   /// <summary>

@@ -218,15 +218,9 @@ public partial class SourceUpdateInput : AbstractSchema
   /// <returns>An instance of SourceUpdateInput</returns>
   public static SourceUpdateInput FromJson(string jsonString)
   {
-    SourceUpdateInput newSourceUpdateInput = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newSourceUpdateInput;
-    }
     try
     {
-      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateCommercetools>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateCommercetools>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -235,7 +229,7 @@ public partial class SourceUpdateInput : AbstractSchema
     }
     try
     {
-      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceJSON>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceJSON>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -244,7 +238,7 @@ public partial class SourceUpdateInput : AbstractSchema
     }
     try
     {
-      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceCSV>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceCSV>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -253,7 +247,7 @@ public partial class SourceUpdateInput : AbstractSchema
     }
     try
     {
-      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceBigQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceBigQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -262,7 +256,7 @@ public partial class SourceUpdateInput : AbstractSchema
     }
     try
     {
-      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateDocker>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceUpdateInput(JsonConvert.DeserializeObject<SourceUpdateDocker>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -288,7 +282,7 @@ public class SourceUpdateInputJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(SourceUpdateInput).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -303,7 +297,7 @@ public class SourceUpdateInputJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

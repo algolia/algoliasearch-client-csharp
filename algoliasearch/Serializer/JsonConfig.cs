@@ -10,15 +10,29 @@ namespace Algolia.Search.Serializer
   {
     public const string JsonContentType = "application/json";
 
-    public static JsonSerializerSettings AlgoliaJsonSerializerSettings => new()
+    private static readonly DefaultContractResolver Resolver = new() { NamingStrategy = new CamelCaseNamingStrategy() };
+
+    public static readonly JsonSerializerSettings AlgoliaJsonSerializerSettings = new()
     {
       Formatting = Formatting.None,
       NullValueHandling = NullValueHandling.Ignore,
-      ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
+      ContractResolver = Resolver,
       ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
       DateParseHandling = DateParseHandling.DateTime,
       ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
       MissingMemberHandling = MissingMemberHandling.Ignore,
+    };
+
+    // When DeserializeOneOfSettings is used, we set MissingMemberHandling to Error to throw an exception if a property is missing
+    public static readonly JsonSerializerSettings DeserializeOneOfSettings = new()
+    {
+      Formatting = Formatting.None,
+      NullValueHandling = NullValueHandling.Ignore,
+      ContractResolver = Resolver,
+      ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+      DateParseHandling = DateParseHandling.DateTime,
+      ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+      MissingMemberHandling = MissingMemberHandling.Error,
     };
   }
 }

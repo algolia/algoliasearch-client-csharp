@@ -38,7 +38,7 @@ public partial class NoResultsRateEvent
   /// <param name="noResultCount">Number of occurences. (required).</param>
   /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
   /// <param name="rate">[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).  (required).</param>
-  public NoResultsRateEvent(string date, int? noResultCount, int? count, double rate)
+  public NoResultsRateEvent(string date, int noResultCount, int count, double rate)
   {
     Date = date ?? throw new ArgumentNullException(nameof(date));
     NoResultCount = noResultCount;
@@ -50,28 +50,28 @@ public partial class NoResultsRateEvent
   /// Date of the event in the format YYYY-MM-DD.
   /// </summary>
   /// <value>Date of the event in the format YYYY-MM-DD.</value>
-  [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "date")]
   public string Date { get; set; }
 
   /// <summary>
   /// Number of occurences.
   /// </summary>
   /// <value>Number of occurences.</value>
-  [DataMember(Name = "noResultCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? NoResultCount { get; set; }
+  [DataMember(Name = "noResultCount")]
+  public int NoResultCount { get; set; }
 
   /// <summary>
   /// Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).
   /// </summary>
   /// <value>Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
   /// </summary>
   /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
-  [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "rate")]
   public double Rate { get; set; }
 
   /// <summary>

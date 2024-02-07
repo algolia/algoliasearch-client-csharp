@@ -30,8 +30,8 @@ public partial class DestinationIndexName
   /// <summary>
   /// Gets or Sets RecordType
   /// </summary>
-  [DataMember(Name = "recordType", EmitDefaultValue = false)]
-  public RecordType RecordType { get; set; }
+  [DataMember(Name = "recordType")]
+  public RecordType? RecordType { get; set; }
   /// <summary>
   /// Initializes a new instance of the DestinationIndexName class.
   /// </summary>
@@ -50,14 +50,14 @@ public partial class DestinationIndexName
   /// The index name to store data in.
   /// </summary>
   /// <value>The index name to store data in.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>
   /// Determines the attributes to exclude from an Algolia record. To remove nested element, you can separate the path to the element with dots (`.`):   - \"foo.bar\": will remove `bar` from `foo`. To remove elements from an array, you can use the following:   - \"foo.[0].bar\": will only remove `bar` from the first element of `foo`.   - \"foo.[*].bar\": will remove `bar` from every elements of `foo`. 
   /// </summary>
   /// <value>Determines the attributes to exclude from an Algolia record. To remove nested element, you can separate the path to the element with dots (`.`):   - \"foo.bar\": will remove `bar` from `foo`. To remove elements from an array, you can use the following:   - \"foo.[0].bar\": will only remove `bar` from the first element of `foo`.   - \"foo.[*].bar\": will remove `bar` from every elements of `foo`. </value>
-  [DataMember(Name = "attributesToExclude", EmitDefaultValue = false)]
+  [DataMember(Name = "attributesToExclude")]
   public List<string> AttributesToExclude { get; set; }
 
   /// <summary>

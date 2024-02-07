@@ -125,15 +125,9 @@ public partial class Distinct : AbstractSchema
   /// <returns>An instance of Distinct</returns>
   public static Distinct FromJson(string jsonString)
   {
-    Distinct newDistinct = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newDistinct;
-    }
     try
     {
-      return new Distinct(JsonConvert.DeserializeObject<bool>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new Distinct(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class Distinct : AbstractSchema
     }
     try
     {
-      return new Distinct(JsonConvert.DeserializeObject<int>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new Distinct(JsonConvert.DeserializeObject<int>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class DistinctJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(Distinct).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class DistinctJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

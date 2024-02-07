@@ -46,22 +46,22 @@ public partial class SaveObjectResponse
   /// Date of creation (ISO-8601 format).
   /// </summary>
   /// <value>Date of creation (ISO-8601 format).</value>
-  [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
   /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. 
   /// </summary>
   /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. </value>
-  [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "taskID")]
   public long TaskID { get; set; }
 
   /// <summary>
   /// Unique object identifier.
   /// </summary>
   /// <value>Unique object identifier.</value>
-  [DataMember(Name = "objectID", EmitDefaultValue = false)]
-  public string ObjectID { get; set; }
+  [DataMember(Name = "objectID")]
+  public string? ObjectID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

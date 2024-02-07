@@ -38,7 +38,7 @@ public partial class GetTopFilterForAttribute
   /// <param name="varOperator">Operator. (required).</param>
   /// <param name="value">Attribute value. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
-  public GetTopFilterForAttribute(string attribute, string varOperator, string value, int? count)
+  public GetTopFilterForAttribute(string attribute, string varOperator, string value, int count)
   {
     Attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
     VarOperator = varOperator ?? throw new ArgumentNullException(nameof(varOperator));
@@ -50,29 +50,29 @@ public partial class GetTopFilterForAttribute
   /// Attribute name.
   /// </summary>
   /// <value>Attribute name.</value>
-  [DataMember(Name = "attribute", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "attribute")]
   public string Attribute { get; set; }
 
   /// <summary>
   /// Operator.
   /// </summary>
   /// <value>Operator.</value>
-  [DataMember(Name = "operator", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "operator")]
   public string VarOperator { get; set; }
 
   /// <summary>
   /// Attribute value.
   /// </summary>
   /// <value>Attribute value.</value>
-  [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "value")]
   public string Value { get; set; }
 
   /// <summary>
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

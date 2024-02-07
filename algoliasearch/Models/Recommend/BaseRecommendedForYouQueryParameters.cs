@@ -44,7 +44,7 @@ public partial class BaseRecommendedForYouQueryParameters
   /// Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
   /// </summary>
   /// <value>Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.</value>
-  [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "userToken")]
   public string UserToken { get; set; }
 
   /// <summary>

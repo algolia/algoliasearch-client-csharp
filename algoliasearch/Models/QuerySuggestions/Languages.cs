@@ -125,15 +125,9 @@ public partial class Languages : AbstractSchema
   /// <returns>An instance of Languages</returns>
   public static Languages FromJson(string jsonString)
   {
-    Languages newLanguages = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newLanguages;
-    }
     try
     {
-      return new Languages(JsonConvert.DeserializeObject<List<string>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new Languages(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class Languages : AbstractSchema
     }
     try
     {
-      return new Languages(JsonConvert.DeserializeObject<bool>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new Languages(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class LanguagesJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(Languages).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class LanguagesJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

@@ -37,21 +37,21 @@ public partial class Personalization
   /// The score of the filters.
   /// </summary>
   /// <value>The score of the filters.</value>
-  [DataMember(Name = "filtersScore", EmitDefaultValue = false)]
+  [DataMember(Name = "filtersScore")]
   public int? FiltersScore { get; set; }
 
   /// <summary>
   /// The score of the ranking.
   /// </summary>
   /// <value>The score of the ranking.</value>
-  [DataMember(Name = "rankingScore", EmitDefaultValue = false)]
+  [DataMember(Name = "rankingScore")]
   public int? RankingScore { get; set; }
 
   /// <summary>
   /// The score of the event.
   /// </summary>
   /// <value>The score of the event.</value>
-  [DataMember(Name = "score", EmitDefaultValue = false)]
+  [DataMember(Name = "score")]
   public int? Score { get; set; }
 
   /// <summary>

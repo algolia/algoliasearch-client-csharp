@@ -44,7 +44,7 @@ public partial class BaseQuerySuggestionsConfigurationWithIndex
   /// Query Suggestions index name.
   /// </summary>
   /// <value>Query Suggestions index name.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>

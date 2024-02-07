@@ -30,7 +30,7 @@ public partial class OnDemandTriggerInput
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public OnDemandTriggerType Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the OnDemandTriggerInput class.

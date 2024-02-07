@@ -37,14 +37,14 @@ public partial class ConsequenceQueryObject
   /// Words to remove.
   /// </summary>
   /// <value>Words to remove.</value>
-  [DataMember(Name = "remove", EmitDefaultValue = false)]
+  [DataMember(Name = "remove")]
   public List<string> Remove { get; set; }
 
   /// <summary>
   /// Edits to apply.
   /// </summary>
   /// <value>Edits to apply.</value>
-  [DataMember(Name = "edits", EmitDefaultValue = false)]
+  [DataMember(Name = "edits")]
   public List<Edit> Edits { get; set; }
 
   /// <summary>

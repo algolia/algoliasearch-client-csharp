@@ -46,21 +46,21 @@ public partial class GetObjectsRequest
   /// Attributes to retrieve. If not specified, all retrievable attributes are returned.
   /// </summary>
   /// <value>Attributes to retrieve. If not specified, all retrievable attributes are returned.</value>
-  [DataMember(Name = "attributesToRetrieve", EmitDefaultValue = false)]
+  [DataMember(Name = "attributesToRetrieve")]
   public List<string> AttributesToRetrieve { get; set; }
 
   /// <summary>
   /// Record's objectID.
   /// </summary>
   /// <value>Record's objectID.</value>
-  [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
   /// Name of the index containing the required records.
   /// </summary>
   /// <value>Name of the index containing the required records.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>

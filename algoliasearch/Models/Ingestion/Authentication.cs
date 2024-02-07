@@ -30,14 +30,14 @@ public partial class Authentication
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public AuthenticationType Type { get; set; }
 
   /// <summary>
   /// Gets or Sets Platform
   /// </summary>
-  [DataMember(Name = "platform", EmitDefaultValue = false)]
-  public Platform Platform { get; set; }
+  [DataMember(Name = "platform")]
+  public Platform? Platform { get; set; }
   /// <summary>
   /// Initializes a new instance of the Authentication class.
   /// </summary>
@@ -64,35 +64,35 @@ public partial class Authentication
   /// The authentication UUID.
   /// </summary>
   /// <value>The authentication UUID.</value>
-  [DataMember(Name = "authenticationID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "authenticationID")]
   public string AuthenticationID { get; set; }
 
   /// <summary>
   /// An human readable name describing the object.
   /// </summary>
   /// <value>An human readable name describing the object.</value>
-  [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "name")]
   public string Name { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
-  [DataMember(Name = "input", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "input")]
   public AuthInput Input { get; set; }
 
   /// <summary>
   /// Date of creation (RFC3339 format).
   /// </summary>
   /// <value>Date of creation (RFC3339 format).</value>
-  [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
   /// Date of last update (RFC3339 format).
   /// </summary>
   /// <value>Date of last update (RFC3339 format).</value>
-  [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
-  public string UpdatedAt { get; set; }
+  [DataMember(Name = "updatedAt")]
+  public string? UpdatedAt { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

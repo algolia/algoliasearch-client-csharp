@@ -218,15 +218,9 @@ public partial class AuthInputPartial : AbstractSchema
   /// <returns>An instance of AuthInputPartial</returns>
   public static AuthInputPartial FromJson(string jsonString)
   {
-    AuthInputPartial newAuthInputPartial = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newAuthInputPartial;
-    }
     try
     {
-      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthGoogleServiceAccountPartial>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthGoogleServiceAccountPartial>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -235,7 +229,7 @@ public partial class AuthInputPartial : AbstractSchema
     }
     try
     {
-      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthBasicPartial>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthBasicPartial>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -244,7 +238,7 @@ public partial class AuthInputPartial : AbstractSchema
     }
     try
     {
-      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthAPIKeyPartial>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthAPIKeyPartial>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -253,7 +247,7 @@ public partial class AuthInputPartial : AbstractSchema
     }
     try
     {
-      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthOAuthPartial>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthOAuthPartial>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -262,7 +256,7 @@ public partial class AuthInputPartial : AbstractSchema
     }
     try
     {
-      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthAlgoliaPartial>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInputPartial(JsonConvert.DeserializeObject<AuthAlgoliaPartial>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -288,7 +282,7 @@ public class AuthInputPartialJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(AuthInputPartial).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -303,7 +297,7 @@ public class AuthInputPartialJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

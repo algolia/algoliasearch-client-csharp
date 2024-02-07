@@ -46,69 +46,69 @@ public partial class QuerySuggestionsConfigurationResponse
   /// Your Algolia application ID.
   /// </summary>
   /// <value>Your Algolia application ID.</value>
-  [DataMember(Name = "appId", EmitDefaultValue = false)]
-  public string AppId { get; set; }
+  [DataMember(Name = "appId")]
+  public string? AppId { get; set; }
 
   /// <summary>
   /// API key used to read from your source index.
   /// </summary>
   /// <value>API key used to read from your source index.</value>
-  [DataMember(Name = "sourceIndicesAPIKey", EmitDefaultValue = false)]
-  public string SourceIndicesAPIKey { get; set; }
+  [DataMember(Name = "sourceIndicesAPIKey")]
+  public string? SourceIndicesAPIKey { get; set; }
 
   /// <summary>
   /// API key used to write and configure your Query Suggestions index.
   /// </summary>
   /// <value>API key used to write and configure your Query Suggestions index.</value>
-  [DataMember(Name = "suggestionsIndicesAPIKey", EmitDefaultValue = false)]
-  public string SuggestionsIndicesAPIKey { get; set; }
+  [DataMember(Name = "suggestionsIndicesAPIKey")]
+  public string? SuggestionsIndicesAPIKey { get; set; }
 
   /// <summary>
   /// API key used to read from external Algolia indices.
   /// </summary>
   /// <value>API key used to read from external Algolia indices.</value>
-  [DataMember(Name = "externalIndicesAPIKey", EmitDefaultValue = false)]
-  public string ExternalIndicesAPIKey { get; set; }
+  [DataMember(Name = "externalIndicesAPIKey")]
+  public string? ExternalIndicesAPIKey { get; set; }
 
   /// <summary>
   /// Query Suggestions index name.
   /// </summary>
   /// <value>Query Suggestions index name.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>
   /// Algolia indices from which to get the popular searches for query suggestions.
   /// </summary>
   /// <value>Algolia indices from which to get the popular searches for query suggestions.</value>
-  [DataMember(Name = "sourceIndices", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "sourceIndices")]
   public List<SourceIndex> SourceIndices { get; set; }
 
   /// <summary>
   /// Gets or Sets Languages
   /// </summary>
-  [DataMember(Name = "languages", EmitDefaultValue = false)]
-  public Languages Languages { get; set; }
+  [DataMember(Name = "languages")]
+  public Languages? Languages { get; set; }
 
   /// <summary>
   /// Patterns to exclude from query suggestions.
   /// </summary>
   /// <value>Patterns to exclude from query suggestions.</value>
-  [DataMember(Name = "exclude", EmitDefaultValue = false)]
+  [DataMember(Name = "exclude")]
   public List<string> Exclude { get; set; }
 
   /// <summary>
   /// Turn on personalized query suggestions.
   /// </summary>
   /// <value>Turn on personalized query suggestions.</value>
-  [DataMember(Name = "enablePersonalization", EmitDefaultValue = false)]
+  [DataMember(Name = "enablePersonalization")]
   public bool? EnablePersonalization { get; set; }
 
   /// <summary>
   /// Allow suggestions with special characters.
   /// </summary>
   /// <value>Allow suggestions with special characters.</value>
-  [DataMember(Name = "allowSpecialCharacters", EmitDefaultValue = false)]
+  [DataMember(Name = "allowSpecialCharacters")]
   public bool? AllowSpecialCharacters { get; set; }
 
   /// <summary>

@@ -37,36 +37,36 @@ public partial class GetConfigStatus200Response
   /// Query Suggestions index name.
   /// </summary>
   /// <value>Query Suggestions index name.</value>
-  [DataMember(Name = "indexName", EmitDefaultValue = false)]
-  public string IndexName { get; set; }
+  [DataMember(Name = "indexName")]
+  public string? IndexName { get; set; }
 
   /// <summary>
   /// Indicates whether the creation or update of the Query Suggestions is in progress.
   /// </summary>
   /// <value>Indicates whether the creation or update of the Query Suggestions is in progress.</value>
-  [DataMember(Name = "isRunning", EmitDefaultValue = false)]
+  [DataMember(Name = "isRunning")]
   public bool? IsRunning { get; set; }
 
   /// <summary>
   /// Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.
   /// </summary>
   /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.</value>
-  [DataMember(Name = "lastBuiltAt", EmitDefaultValue = false)]
-  public string LastBuiltAt { get; set; }
+  [DataMember(Name = "lastBuiltAt")]
+  public string? LastBuiltAt { get; set; }
 
   /// <summary>
   /// Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.
   /// </summary>
   /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.</value>
-  [DataMember(Name = "lastSuccessfulBuiltAt", EmitDefaultValue = false)]
-  public string LastSuccessfulBuiltAt { get; set; }
+  [DataMember(Name = "lastSuccessfulBuiltAt")]
+  public string? LastSuccessfulBuiltAt { get; set; }
 
   /// <summary>
   /// Duration of the last successful build in seconds.
   /// </summary>
   /// <value>Duration of the last successful build in seconds.</value>
-  [DataMember(Name = "lastSuccessfulBuildDuration", EmitDefaultValue = false)]
-  public string LastSuccessfulBuildDuration { get; set; }
+  [DataMember(Name = "lastSuccessfulBuildDuration")]
+  public string? LastSuccessfulBuildDuration { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

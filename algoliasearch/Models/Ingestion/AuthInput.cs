@@ -218,15 +218,9 @@ public partial class AuthInput : AbstractSchema
   /// <returns>An instance of AuthInput</returns>
   public static AuthInput FromJson(string jsonString)
   {
-    AuthInput newAuthInput = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newAuthInput;
-    }
     try
     {
-      return new AuthInput(JsonConvert.DeserializeObject<AuthGoogleServiceAccount>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInput(JsonConvert.DeserializeObject<AuthGoogleServiceAccount>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -235,7 +229,7 @@ public partial class AuthInput : AbstractSchema
     }
     try
     {
-      return new AuthInput(JsonConvert.DeserializeObject<AuthBasic>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInput(JsonConvert.DeserializeObject<AuthBasic>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -244,7 +238,7 @@ public partial class AuthInput : AbstractSchema
     }
     try
     {
-      return new AuthInput(JsonConvert.DeserializeObject<AuthAPIKey>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInput(JsonConvert.DeserializeObject<AuthAPIKey>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -253,7 +247,7 @@ public partial class AuthInput : AbstractSchema
     }
     try
     {
-      return new AuthInput(JsonConvert.DeserializeObject<AuthOAuth>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInput(JsonConvert.DeserializeObject<AuthOAuth>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -262,7 +256,7 @@ public partial class AuthInput : AbstractSchema
     }
     try
     {
-      return new AuthInput(JsonConvert.DeserializeObject<AuthAlgolia>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AuthInput(JsonConvert.DeserializeObject<AuthAlgolia>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -288,7 +282,7 @@ public class AuthInputJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(AuthInput).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -303,7 +297,7 @@ public class AuthInputJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

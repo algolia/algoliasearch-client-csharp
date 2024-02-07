@@ -30,8 +30,8 @@ public partial class Edit
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", EmitDefaultValue = false)]
-  public EditType Type { get; set; }
+  [DataMember(Name = "type")]
+  public EditType? Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the Edit class.
   /// </summary>
@@ -43,15 +43,15 @@ public partial class Edit
   /// Text or patterns to remove from the query string.
   /// </summary>
   /// <value>Text or patterns to remove from the query string.</value>
-  [DataMember(Name = "delete", EmitDefaultValue = false)]
-  public string Delete { get; set; }
+  [DataMember(Name = "delete")]
+  public string? Delete { get; set; }
 
   /// <summary>
   /// Text that should be inserted in place of the removed text inside the query string.
   /// </summary>
   /// <value>Text that should be inserted in place of the removed text inside the query string.</value>
-  [DataMember(Name = "insert", EmitDefaultValue = false)]
-  public string Insert { get; set; }
+  [DataMember(Name = "insert")]
+  public string? Insert { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

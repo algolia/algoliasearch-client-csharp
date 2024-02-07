@@ -36,7 +36,7 @@ public partial class IncidentsResponse
   /// <summary>
   /// Gets or Sets Incidents
   /// </summary>
-  [DataMember(Name = "incidents", EmitDefaultValue = false)]
+  [DataMember(Name = "incidents")]
   public Dictionary<string, List<IncidentsInner>> Incidents { get; set; }
 
   /// <summary>

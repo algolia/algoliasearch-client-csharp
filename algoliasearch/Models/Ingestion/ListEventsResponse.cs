@@ -47,19 +47,19 @@ public partial class ListEventsResponse
   /// <summary>
   /// Gets or Sets Events
   /// </summary>
-  [DataMember(Name = "events", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "events")]
   public List<Event> Events { get; set; }
 
   /// <summary>
   /// Gets or Sets Pagination
   /// </summary>
-  [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "pagination")]
   public Pagination Pagination { get; set; }
 
   /// <summary>
   /// Gets or Sets Window
   /// </summary>
-  [DataMember(Name = "window", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "window")]
   public Window Window { get; set; }
 
   /// <summary>

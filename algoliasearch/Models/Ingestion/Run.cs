@@ -30,25 +30,25 @@ public partial class Run
   /// <summary>
   /// Gets or Sets Status
   /// </summary>
-  [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "status")]
   public RunStatus Status { get; set; }
 
   /// <summary>
   /// Gets or Sets Outcome
   /// </summary>
-  [DataMember(Name = "outcome", EmitDefaultValue = false)]
-  public RunOutcome Outcome { get; set; }
+  [DataMember(Name = "outcome")]
+  public RunOutcome? Outcome { get; set; }
 
   /// <summary>
   /// Gets or Sets ReasonCode
   /// </summary>
-  [DataMember(Name = "reasonCode", EmitDefaultValue = false)]
-  public RunReasonCode ReasonCode { get; set; }
+  [DataMember(Name = "reasonCode")]
+  public RunReasonCode? ReasonCode { get; set; }
 
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public RunType Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the Run class.
@@ -78,62 +78,62 @@ public partial class Run
   /// The run UUID.
   /// </summary>
   /// <value>The run UUID.</value>
-  [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "runID")]
   public string RunID { get; set; }
 
   /// <summary>
   /// Gets or Sets AppID
   /// </summary>
-  [DataMember(Name = "appID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "appID")]
   public string AppID { get; set; }
 
   /// <summary>
   /// The task UUID.
   /// </summary>
   /// <value>The task UUID.</value>
-  [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "taskID")]
   public string TaskID { get; set; }
 
   /// <summary>
   /// Gets or Sets Progress
   /// </summary>
-  [DataMember(Name = "progress", EmitDefaultValue = false)]
-  public RunProgress Progress { get; set; }
+  [DataMember(Name = "progress")]
+  public RunProgress? Progress { get; set; }
 
   /// <summary>
   /// A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
   /// </summary>
   /// <value>A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.</value>
-  [DataMember(Name = "failureThreshold", EmitDefaultValue = false)]
+  [DataMember(Name = "failureThreshold")]
   public int? FailureThreshold { get; set; }
 
   /// <summary>
   /// Explains the result of outcome.
   /// </summary>
   /// <value>Explains the result of outcome.</value>
-  [DataMember(Name = "reason", EmitDefaultValue = false)]
-  public string Reason { get; set; }
+  [DataMember(Name = "reason")]
+  public string? Reason { get; set; }
 
   /// <summary>
   /// Date of creation (RFC3339 format).
   /// </summary>
   /// <value>Date of creation (RFC3339 format).</value>
-  [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
   /// Date of start (RFC3339 format).
   /// </summary>
   /// <value>Date of start (RFC3339 format).</value>
-  [DataMember(Name = "startedAt", EmitDefaultValue = false)]
-  public string StartedAt { get; set; }
+  [DataMember(Name = "startedAt")]
+  public string? StartedAt { get; set; }
 
   /// <summary>
   /// Date of finish (RFC3339 format).
   /// </summary>
   /// <value>Date of finish (RFC3339 format).</value>
-  [DataMember(Name = "finishedAt", EmitDefaultValue = false)]
-  public string FinishedAt { get; set; }
+  [DataMember(Name = "finishedAt")]
+  public string? FinishedAt { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

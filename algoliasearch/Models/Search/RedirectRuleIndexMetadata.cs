@@ -39,7 +39,7 @@ public partial class RedirectRuleIndexMetadata
   /// <param name="reason">Reason for the redirect rule. (required).</param>
   /// <param name="succeed">Redirect rule status. (required).</param>
   /// <param name="data">data (required).</param>
-  public RedirectRuleIndexMetadata(string varSource, string dest, string reason, bool? succeed, RedirectRuleIndexMetadataData data)
+  public RedirectRuleIndexMetadata(string varSource, string dest, string reason, bool succeed, RedirectRuleIndexMetadataData data)
   {
     VarSource = varSource ?? throw new ArgumentNullException(nameof(varSource));
     Dest = dest ?? throw new ArgumentNullException(nameof(dest));
@@ -52,34 +52,34 @@ public partial class RedirectRuleIndexMetadata
   /// Source index for the redirect rule.
   /// </summary>
   /// <value>Source index for the redirect rule.</value>
-  [DataMember(Name = "source", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "source")]
   public string VarSource { get; set; }
 
   /// <summary>
   /// Destination index for the redirect rule.
   /// </summary>
   /// <value>Destination index for the redirect rule.</value>
-  [DataMember(Name = "dest", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "dest")]
   public string Dest { get; set; }
 
   /// <summary>
   /// Reason for the redirect rule.
   /// </summary>
   /// <value>Reason for the redirect rule.</value>
-  [DataMember(Name = "reason", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "reason")]
   public string Reason { get; set; }
 
   /// <summary>
   /// Redirect rule status.
   /// </summary>
   /// <value>Redirect rule status.</value>
-  [DataMember(Name = "succeed", IsRequired = true, EmitDefaultValue = false)]
-  public bool? Succeed { get; set; }
+  [DataMember(Name = "succeed")]
+  public bool Succeed { get; set; }
 
   /// <summary>
   /// Gets or Sets Data
   /// </summary>
-  [DataMember(Name = "data", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "data")]
   public RedirectRuleIndexMetadataData Data { get; set; }
 
   /// <summary>

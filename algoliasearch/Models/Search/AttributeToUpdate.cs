@@ -125,15 +125,9 @@ public partial class AttributeToUpdate : AbstractSchema
   /// <returns>An instance of AttributeToUpdate</returns>
   public static AttributeToUpdate FromJson(string jsonString)
   {
-    AttributeToUpdate newAttributeToUpdate = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newAttributeToUpdate;
-    }
     try
     {
-      return new AttributeToUpdate(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AttributeToUpdate(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class AttributeToUpdate : AbstractSchema
     }
     try
     {
-      return new AttributeToUpdate(JsonConvert.DeserializeObject<BuiltInOperation>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AttributeToUpdate(JsonConvert.DeserializeObject<BuiltInOperation>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class AttributeToUpdateJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(AttributeToUpdate).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class AttributeToUpdateJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

@@ -30,7 +30,7 @@ public partial class SearchForFacetsOptions
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public SearchTypeFacet Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the SearchForFacetsOptions class.
@@ -54,28 +54,28 @@ public partial class SearchForFacetsOptions
   /// Facet name.
   /// </summary>
   /// <value>Facet name.</value>
-  [DataMember(Name = "facet", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "facet")]
   public string Facet { get; set; }
 
   /// <summary>
   /// Algolia index name.
   /// </summary>
   /// <value>Algolia index name.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>
   /// Text to search inside the facet's values.
   /// </summary>
   /// <value>Text to search inside the facet's values.</value>
-  [DataMember(Name = "facetQuery", EmitDefaultValue = false)]
-  public string FacetQuery { get; set; }
+  [DataMember(Name = "facetQuery")]
+  public string? FacetQuery { get; set; }
 
   /// <summary>
   /// Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
   /// </summary>
   /// <value>Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
-  [DataMember(Name = "maxFacetHits", EmitDefaultValue = false)]
+  [DataMember(Name = "maxFacetHits")]
   public int? MaxFacetHits { get; set; }
 
   /// <summary>

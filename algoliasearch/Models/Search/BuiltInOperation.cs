@@ -30,7 +30,7 @@ public partial class BuiltInOperation
   /// <summary>
   /// Gets or Sets Operation
   /// </summary>
-  [DataMember(Name = "_operation", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "_operation")]
   public BuiltInOperationType Operation { get; set; }
   /// <summary>
   /// Initializes a new instance of the BuiltInOperation class.
@@ -52,7 +52,7 @@ public partial class BuiltInOperation
   /// Value that corresponds to the operation, for example an `Increment` or `Decrement` step, `Add` or `Remove` value.
   /// </summary>
   /// <value>Value that corresponds to the operation, for example an `Increment` or `Decrement` step, `Add` or `Remove` value.</value>
-  [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "value")]
   public string Value { get; set; }
 
   /// <summary>

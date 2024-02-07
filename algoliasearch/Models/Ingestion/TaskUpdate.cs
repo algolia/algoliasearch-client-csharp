@@ -37,33 +37,33 @@ public partial class TaskUpdate
   /// The destination UUID.
   /// </summary>
   /// <value>The destination UUID.</value>
-  [DataMember(Name = "destinationID", EmitDefaultValue = false)]
-  public string DestinationID { get; set; }
+  [DataMember(Name = "destinationID")]
+  public string? DestinationID { get; set; }
 
   /// <summary>
   /// Gets or Sets Trigger
   /// </summary>
-  [DataMember(Name = "trigger", EmitDefaultValue = false)]
-  public TriggerUpdateInput Trigger { get; set; }
+  [DataMember(Name = "trigger")]
+  public TriggerUpdateInput? Trigger { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
-  [DataMember(Name = "input", EmitDefaultValue = false)]
-  public TaskInput Input { get; set; }
+  [DataMember(Name = "input")]
+  public TaskInput? Input { get; set; }
 
   /// <summary>
   /// Whether the task is enabled or not.
   /// </summary>
   /// <value>Whether the task is enabled or not.</value>
-  [DataMember(Name = "enabled", EmitDefaultValue = false)]
+  [DataMember(Name = "enabled")]
   public bool? Enabled { get; set; }
 
   /// <summary>
   /// A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
   /// </summary>
   /// <value>A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.</value>
-  [DataMember(Name = "failureThreshold", EmitDefaultValue = false)]
+  [DataMember(Name = "failureThreshold")]
   public int? FailureThreshold { get; set; }
 
   /// <summary>

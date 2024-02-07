@@ -435,15 +435,9 @@ public partial class EventsItems : AbstractSchema
   /// <returns>An instance of EventsItems</returns>
   public static EventsItems FromJson(string jsonString)
   {
-    EventsItems newEventsItems = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newEventsItems;
-    }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDsAfterSearch>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -452,7 +446,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -461,7 +455,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -470,7 +464,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDsAfterSearch>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDsAfterSearch>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -479,7 +473,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -488,7 +482,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -497,7 +491,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -506,7 +500,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -515,7 +509,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ClickedFilters>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<ClickedFilters>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -524,7 +518,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ConvertedFilters>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<ConvertedFilters>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -533,7 +527,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ViewedObjectIDs>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<ViewedObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -542,7 +536,7 @@ public partial class EventsItems : AbstractSchema
     }
     try
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ViewedFilters>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new EventsItems(JsonConvert.DeserializeObject<ViewedFilters>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -568,7 +562,7 @@ public class EventsItemsJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(EventsItems).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -583,7 +577,7 @@ public class EventsItemsJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

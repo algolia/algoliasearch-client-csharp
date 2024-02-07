@@ -37,7 +37,7 @@ public partial class EventScoring
   /// <param name="score">The score for the event. (required).</param>
   /// <param name="eventName">The name of the event. (required).</param>
   /// <param name="eventType">The type of the event. (required).</param>
-  public EventScoring(int? score, string eventName, string eventType)
+  public EventScoring(int score, string eventName, string eventType)
   {
     Score = score;
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
@@ -48,21 +48,21 @@ public partial class EventScoring
   /// The score for the event.
   /// </summary>
   /// <value>The score for the event.</value>
-  [DataMember(Name = "score", IsRequired = true, EmitDefaultValue = false)]
-  public int? Score { get; set; }
+  [DataMember(Name = "score")]
+  public int Score { get; set; }
 
   /// <summary>
   /// The name of the event.
   /// </summary>
   /// <value>The name of the event.</value>
-  [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "eventName")]
   public string EventName { get; set; }
 
   /// <summary>
   /// The type of the event.
   /// </summary>
   /// <value>The type of the event.</value>
-  [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "eventType")]
   public string EventType { get; set; }
 
   /// <summary>

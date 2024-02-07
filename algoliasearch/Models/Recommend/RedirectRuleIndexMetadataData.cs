@@ -43,7 +43,7 @@ public partial class RedirectRuleIndexMetadataData
   /// <summary>
   /// Gets or Sets RuleObjectID
   /// </summary>
-  [DataMember(Name = "ruleObjectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "ruleObjectID")]
   public string RuleObjectID { get; set; }
 
   /// <summary>

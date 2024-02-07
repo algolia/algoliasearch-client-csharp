@@ -37,21 +37,21 @@ public partial class SearchForFacetValuesRequest
   /// Search parameters as a URL-encoded query string.
   /// </summary>
   /// <value>Search parameters as a URL-encoded query string.</value>
-  [DataMember(Name = "params", EmitDefaultValue = false)]
-  public string VarParams { get; set; }
+  [DataMember(Name = "params")]
+  public string? VarParams { get; set; }
 
   /// <summary>
   /// Text to search inside the facet's values.
   /// </summary>
   /// <value>Text to search inside the facet's values.</value>
-  [DataMember(Name = "facetQuery", EmitDefaultValue = false)]
-  public string FacetQuery { get; set; }
+  [DataMember(Name = "facetQuery")]
+  public string? FacetQuery { get; set; }
 
   /// <summary>
   /// Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
   /// </summary>
   /// <value>Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
-  [DataMember(Name = "maxFacetHits", EmitDefaultValue = false)]
+  [DataMember(Name = "maxFacetHits")]
   public int? MaxFacetHits { get; set; }
 
   /// <summary>

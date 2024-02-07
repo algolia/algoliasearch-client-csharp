@@ -37,14 +37,14 @@ public partial class TimeInner
   /// Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.
   /// </summary>
   /// <value>Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.</value>
-  [DataMember(Name = "t", EmitDefaultValue = false)]
-  public long T { get; set; }
+  [DataMember(Name = "t")]
+  public long? T { get; set; }
 
   /// <summary>
   /// Time in ms.
   /// </summary>
   /// <value>Time in ms.</value>
-  [DataMember(Name = "v", EmitDefaultValue = false)]
+  [DataMember(Name = "v")]
   public int? V { get; set; }
 
   /// <summary>

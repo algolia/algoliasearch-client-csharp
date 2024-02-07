@@ -125,15 +125,9 @@ public partial class AddABTestsVariant : AbstractSchema
   /// <returns>An instance of AddABTestsVariant</returns>
   public static AddABTestsVariant FromJson(string jsonString)
   {
-    AddABTestsVariant newAddABTestsVariant = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newAddABTestsVariant;
-    }
     try
     {
-      return new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariant>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariant>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class AddABTestsVariant : AbstractSchema
     }
     try
     {
-      return new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariantSearchParams>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AddABTestsVariant(JsonConvert.DeserializeObject<AbTestsVariantSearchParams>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class AddABTestsVariantJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(AddABTestsVariant).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class AddABTestsVariantJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

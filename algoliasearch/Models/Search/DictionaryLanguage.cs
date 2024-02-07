@@ -37,7 +37,7 @@ public partial class DictionaryLanguage
   /// If `0`, the dictionary hasn't been customized and only contains standard entries provided by Algolia. If `null`, that feature isn't available or isn't supported for that language. 
   /// </summary>
   /// <value>If `0`, the dictionary hasn't been customized and only contains standard entries provided by Algolia. If `null`, that feature isn't available or isn't supported for that language. </value>
-  [DataMember(Name = "nbCustomEntries", EmitDefaultValue = false)]
+  [DataMember(Name = "nbCustomEntries")]
   public int? NbCustomEntries { get; set; }
 
   /// <summary>

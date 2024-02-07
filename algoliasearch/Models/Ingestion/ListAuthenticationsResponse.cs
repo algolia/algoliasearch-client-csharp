@@ -45,13 +45,13 @@ public partial class ListAuthenticationsResponse
   /// <summary>
   /// Gets or Sets Authentications
   /// </summary>
-  [DataMember(Name = "authentications", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "authentications")]
   public List<Authentication> Authentications { get; set; }
 
   /// <summary>
   /// Gets or Sets Pagination
   /// </summary>
-  [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "pagination")]
   public Pagination Pagination { get; set; }
 
   /// <summary>

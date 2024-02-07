@@ -46,14 +46,14 @@ public partial class OnDemandDateUtilsInput
   /// The start date of the extraction (RFC3339 format).
   /// </summary>
   /// <value>The start date of the extraction (RFC3339 format).</value>
-  [DataMember(Name = "startDate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "startDate")]
   public string StartDate { get; set; }
 
   /// <summary>
   /// The end date of the extraction (RFC3339 format).
   /// </summary>
   /// <value>The end date of the extraction (RFC3339 format).</value>
-  [DataMember(Name = "endDate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "endDate")]
   public string EndDate { get; set; }
 
   /// <summary>

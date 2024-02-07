@@ -38,7 +38,7 @@ public partial class UserId
   /// <param name="clusterName">Cluster to which the user is assigned. (required).</param>
   /// <param name="nbRecords">Number of records belonging to the user. (required).</param>
   /// <param name="dataSize">Data size used by the user. (required).</param>
-  public UserId(string varUserID, string clusterName, int? nbRecords, int? dataSize)
+  public UserId(string varUserID, string clusterName, int nbRecords, int dataSize)
   {
     VarUserID = varUserID ?? throw new ArgumentNullException(nameof(varUserID));
     ClusterName = clusterName ?? throw new ArgumentNullException(nameof(clusterName));
@@ -50,29 +50,29 @@ public partial class UserId
   /// userID of the user.
   /// </summary>
   /// <value>userID of the user.</value>
-  [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "userID")]
   public string VarUserID { get; set; }
 
   /// <summary>
   /// Cluster to which the user is assigned.
   /// </summary>
   /// <value>Cluster to which the user is assigned.</value>
-  [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "clusterName")]
   public string ClusterName { get; set; }
 
   /// <summary>
   /// Number of records belonging to the user.
   /// </summary>
   /// <value>Number of records belonging to the user.</value>
-  [DataMember(Name = "nbRecords", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbRecords { get; set; }
+  [DataMember(Name = "nbRecords")]
+  public int NbRecords { get; set; }
 
   /// <summary>
   /// Data size used by the user.
   /// </summary>
   /// <value>Data size used by the user.</value>
-  [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = false)]
-  public int? DataSize { get; set; }
+  [DataMember(Name = "dataSize")]
+  public int DataSize { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

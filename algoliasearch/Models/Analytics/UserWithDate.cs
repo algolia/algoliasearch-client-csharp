@@ -36,7 +36,7 @@ public partial class UserWithDate
   /// </summary>
   /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
-  public UserWithDate(string date, int? count)
+  public UserWithDate(string date, int count)
   {
     Date = date ?? throw new ArgumentNullException(nameof(date));
     Count = count;
@@ -46,15 +46,15 @@ public partial class UserWithDate
   /// Date of the event in the format YYYY-MM-DD.
   /// </summary>
   /// <value>Date of the event in the format YYYY-MM-DD.</value>
-  [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "date")]
   public string Date { get; set; }
 
   /// <summary>
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

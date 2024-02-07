@@ -36,7 +36,7 @@ public partial class TopCountry
   /// </summary>
   /// <param name="country">Country. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
-  public TopCountry(string country, int? count)
+  public TopCountry(string country, int count)
   {
     Country = country ?? throw new ArgumentNullException(nameof(country));
     Count = count;
@@ -46,15 +46,15 @@ public partial class TopCountry
   /// Country.
   /// </summary>
   /// <value>Country.</value>
-  [DataMember(Name = "country", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "country")]
   public string Country { get; set; }
 
   /// <summary>
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

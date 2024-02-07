@@ -43,7 +43,7 @@ public partial class BatchWriteParams
   /// <summary>
   /// Gets or Sets Requests
   /// </summary>
-  [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "requests")]
   public List<BatchRequest> Requests { get; set; }
 
   /// <summary>

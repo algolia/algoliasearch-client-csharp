@@ -40,7 +40,7 @@ public partial class UserHit
   /// <param name="dataSize">Data size taken by all the users assigned to the cluster. (required).</param>
   /// <param name="objectID">userID of the requested user. Same as userID. (required).</param>
   /// <param name="highlightResult">highlightResult (required).</param>
-  public UserHit(string userID, string clusterName, int? nbRecords, int? dataSize, string objectID, UserHighlightResult highlightResult)
+  public UserHit(string userID, string clusterName, int nbRecords, int dataSize, string objectID, UserHighlightResult highlightResult)
   {
     UserID = userID ?? throw new ArgumentNullException(nameof(userID));
     ClusterName = clusterName ?? throw new ArgumentNullException(nameof(clusterName));
@@ -54,41 +54,41 @@ public partial class UserHit
   /// userID of the user.
   /// </summary>
   /// <value>userID of the user.</value>
-  [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "userID")]
   public string UserID { get; set; }
 
   /// <summary>
   /// Cluster name.
   /// </summary>
   /// <value>Cluster name.</value>
-  [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "clusterName")]
   public string ClusterName { get; set; }
 
   /// <summary>
   /// Number of records in the cluster.
   /// </summary>
   /// <value>Number of records in the cluster.</value>
-  [DataMember(Name = "nbRecords", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbRecords { get; set; }
+  [DataMember(Name = "nbRecords")]
+  public int NbRecords { get; set; }
 
   /// <summary>
   /// Data size taken by all the users assigned to the cluster.
   /// </summary>
   /// <value>Data size taken by all the users assigned to the cluster.</value>
-  [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = false)]
-  public int? DataSize { get; set; }
+  [DataMember(Name = "dataSize")]
+  public int DataSize { get; set; }
 
   /// <summary>
   /// userID of the requested user. Same as userID.
   /// </summary>
   /// <value>userID of the requested user. Same as userID.</value>
-  [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
   /// Gets or Sets HighlightResult
   /// </summary>
-  [DataMember(Name = "_highlightResult", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "_highlightResult")]
   public UserHighlightResult HighlightResult { get; set; }
 
   /// <summary>

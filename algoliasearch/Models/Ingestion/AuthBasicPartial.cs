@@ -36,14 +36,14 @@ public partial class AuthBasicPartial
   /// <summary>
   /// Gets or Sets Username
   /// </summary>
-  [DataMember(Name = "username", EmitDefaultValue = false)]
-  public string Username { get; set; }
+  [DataMember(Name = "username")]
+  public string? Username { get; set; }
 
   /// <summary>
   /// Gets or Sets Password
   /// </summary>
-  [DataMember(Name = "password", EmitDefaultValue = false)]
-  public string Password { get; set; }
+  [DataMember(Name = "password")]
+  public string? Password { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -44,21 +44,21 @@ public partial class AutomaticFacetFilter
   /// Attribute to filter on. This must match a facet placeholder in the Rule's pattern.
   /// </summary>
   /// <value>Attribute to filter on. This must match a facet placeholder in the Rule's pattern.</value>
-  [DataMember(Name = "facet", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "facet")]
   public string Facet { get; set; }
 
   /// <summary>
   /// Score for the filter. Typically used for optional or disjunctive filters.
   /// </summary>
   /// <value>Score for the filter. Typically used for optional or disjunctive filters.</value>
-  [DataMember(Name = "score", EmitDefaultValue = false)]
+  [DataMember(Name = "score")]
   public int? Score { get; set; }
 
   /// <summary>
   /// Whether the filter is disjunctive (true) or conjunctive (false).
   /// </summary>
   /// <value>Whether the filter is disjunctive (true) or conjunctive (false).</value>
-  [DataMember(Name = "disjunctive", EmitDefaultValue = false)]
+  [DataMember(Name = "disjunctive")]
   public bool? Disjunctive { get; set; }
 
   /// <summary>

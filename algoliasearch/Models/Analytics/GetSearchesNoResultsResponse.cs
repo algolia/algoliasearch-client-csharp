@@ -44,7 +44,7 @@ public partial class GetSearchesNoResultsResponse
   /// Searches with no results.
   /// </summary>
   /// <value>Searches with no results.</value>
-  [DataMember(Name = "searches", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "searches")]
   public List<SearchNoResultEvent> Searches { get; set; }
 
   /// <summary>

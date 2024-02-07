@@ -45,13 +45,13 @@ public partial class UserHighlightResult
   /// <summary>
   /// Gets or Sets UserID
   /// </summary>
-  [DataMember(Name = "userID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "userID")]
   public HighlightResult UserID { get; set; }
 
   /// <summary>
   /// Gets or Sets ClusterName
   /// </summary>
-  [DataMember(Name = "clusterName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "clusterName")]
   public HighlightResult ClusterName { get; set; }
 
   /// <summary>

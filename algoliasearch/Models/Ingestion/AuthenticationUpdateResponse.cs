@@ -48,21 +48,21 @@ public partial class AuthenticationUpdateResponse
   /// The authentication UUID.
   /// </summary>
   /// <value>The authentication UUID.</value>
-  [DataMember(Name = "authenticationID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "authenticationID")]
   public string AuthenticationID { get; set; }
 
   /// <summary>
   /// An human readable name describing the object.
   /// </summary>
   /// <value>An human readable name describing the object.</value>
-  [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "name")]
   public string Name { get; set; }
 
   /// <summary>
   /// Date of last update (RFC3339 format).
   /// </summary>
   /// <value>Date of last update (RFC3339 format).</value>
-  [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "updatedAt")]
   public string UpdatedAt { get; set; }
 
   /// <summary>

@@ -43,7 +43,7 @@ internal class HttpTransport
     _algoliaConfig = config ?? throw new ArgumentNullException(nameof(config));
     _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     _retryStrategy = new RetryStrategy(config);
-    _serializer = new DefaultJsonSerializer(JsonConfig.AlgoliaJsonSerializerSettings, loggerFactory);
+    _serializer = new DefaultJsonSerializer(loggerFactory);
     _logger = loggerFactory.CreateLogger<HttpTransport>();
   }
 
@@ -116,7 +116,7 @@ internal class HttpTransport
     foreach (var host in _retryStrategy.GetTryableHost(callType))
     {
       request.Body = CreateRequestContent(requestOptions?.Data, request.CanCompress, _logger);
-      request.Uri = BuildUri(host.Url, uri, requestOptions?.CustomPathParameters, requestOptions?.PathParameters,
+      request.Uri = BuildUri(host, uri, requestOptions?.CustomPathParameters, requestOptions?.PathParameters,
         requestOptions?.QueryParameters);
       var requestTimeout =
         TimeSpan.FromTicks((requestOptions?.Timeout ?? GetTimeOut(callType)).Ticks * (host.RetryCount + 1));
@@ -228,13 +228,14 @@ internal class HttpTransport
   /// <summary>
   /// Build uri depending on the method
   /// </summary>
-  /// <param name="url"></param>
+  /// <param name="host"></param>
   /// <param name="baseUri"></param>
   /// <param name="customPathParameters"></param>
   /// <param name="pathParameters"></param>
   /// <param name="optionalQueryParameters"></param>
   /// <returns></returns>
-  private static Uri BuildUri(string url, string baseUri, IDictionary<string, string> customPathParameters = null,
+  private static Uri BuildUri(StatefulHost host, string baseUri,
+    IDictionary<string, string> customPathParameters = null,
     IDictionary<string, string> pathParameters = null,
     IDictionary<string, string> optionalQueryParameters = null)
   {
@@ -255,13 +256,19 @@ internal class HttpTransport
       }
     }
 
-    if (optionalQueryParameters != null)
+    var builder = new UriBuilder { Scheme = host.Scheme.ToString(), Host = host.Url, Path = path };
+
+    if (optionalQueryParameters != null && optionalQueryParameters.Any())
     {
-      var queryParams = optionalQueryParameters.ToQueryString();
-      return new UriBuilder { Scheme = "https", Host = url, Path = path, Query = queryParams }.Uri;
+      builder.Query = optionalQueryParameters.ToQueryString();
     }
 
-    return new UriBuilder { Scheme = "https", Host = url, Path = path }.Uri;
+    if (host.Port.HasValue)
+    {
+      builder.Port = host.Port.Value;
+    }
+
+    return builder.Uri;
   }
 
   /// <summary>

@@ -37,14 +37,14 @@ public partial class FilterEffectsOutliers
   /// Number of users removed from the A/B test.
   /// </summary>
   /// <value>Number of users removed from the A/B test.</value>
-  [DataMember(Name = "usersCount", EmitDefaultValue = false)]
+  [DataMember(Name = "usersCount")]
   public int? UsersCount { get; set; }
 
   /// <summary>
   /// Number of tracked searches removed from the A/B test.
   /// </summary>
   /// <value>Number of tracked searches removed from the A/B test.</value>
-  [DataMember(Name = "trackedSearchesCount", EmitDefaultValue = false)]
+  [DataMember(Name = "trackedSearchesCount")]
   public int? TrackedSearchesCount { get; set; }
 
   /// <summary>

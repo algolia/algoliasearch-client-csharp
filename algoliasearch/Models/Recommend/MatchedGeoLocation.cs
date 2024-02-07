@@ -37,21 +37,21 @@ public partial class MatchedGeoLocation
   /// Latitude of the matched location.
   /// </summary>
   /// <value>Latitude of the matched location.</value>
-  [DataMember(Name = "lat", EmitDefaultValue = false)]
-  public double Lat { get; set; }
+  [DataMember(Name = "lat")]
+  public double? Lat { get; set; }
 
   /// <summary>
   /// Longitude of the matched location.
   /// </summary>
   /// <value>Longitude of the matched location.</value>
-  [DataMember(Name = "lng", EmitDefaultValue = false)]
-  public double Lng { get; set; }
+  [DataMember(Name = "lng")]
+  public double? Lng { get; set; }
 
   /// <summary>
   /// Distance between the matched location and the search location (in meters).
   /// </summary>
   /// <value>Distance between the matched location and the search location (in meters).</value>
-  [DataMember(Name = "distance", EmitDefaultValue = false)]
+  [DataMember(Name = "distance")]
   public int? Distance { get; set; }
 
   /// <summary>

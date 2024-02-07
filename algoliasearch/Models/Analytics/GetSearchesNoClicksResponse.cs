@@ -44,7 +44,7 @@ public partial class GetSearchesNoClicksResponse
   /// Searches with no clicks.
   /// </summary>
   /// <value>Searches with no clicks.</value>
-  [DataMember(Name = "searches", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "searches")]
   public List<SearchNoClickEvent> Searches { get; set; }
 
   /// <summary>

@@ -38,7 +38,7 @@ public partial class GetNoClickRateResponse
   /// <param name="count">Number of click events. (required).</param>
   /// <param name="noClickCount">Number of click events. (required).</param>
   /// <param name="dates">Overall count of searches without clicks plus a daily breakdown. (required).</param>
-  public GetNoClickRateResponse(double rate, int? count, int? noClickCount, List<NoClickRateEvent> dates)
+  public GetNoClickRateResponse(double rate, int count, int noClickCount, List<NoClickRateEvent> dates)
   {
     Rate = rate;
     Count = count;
@@ -50,28 +50,28 @@ public partial class GetNoClickRateResponse
   /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
   /// </summary>
   /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
-  [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "rate")]
   public double Rate { get; set; }
 
   /// <summary>
   /// Number of click events.
   /// </summary>
   /// <value>Number of click events.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Number of click events.
   /// </summary>
   /// <value>Number of click events.</value>
-  [DataMember(Name = "noClickCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? NoClickCount { get; set; }
+  [DataMember(Name = "noClickCount")]
+  public int NoClickCount { get; set; }
 
   /// <summary>
   /// Overall count of searches without clicks plus a daily breakdown.
   /// </summary>
   /// <value>Overall count of searches without clicks plus a daily breakdown.</value>
-  [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "dates")]
   public List<NoClickRateEvent> Dates { get; set; }
 
   /// <summary>

@@ -39,7 +39,7 @@ public partial class SearchSynonymsResponse
   /// </summary>
   /// <param name="hits">Synonym objects. (required).</param>
   /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-  public SearchSynonymsResponse(List<SynonymHit> hits, int? nbHits)
+  public SearchSynonymsResponse(List<SynonymHit> hits, int nbHits)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
     NbHits = nbHits;
@@ -50,15 +50,15 @@ public partial class SearchSynonymsResponse
   /// Synonym objects.
   /// </summary>
   /// <value>Synonym objects.</value>
-  [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "hits")]
   public List<SynonymHit> Hits { get; set; }
 
   /// <summary>
   /// Number of hits the search query matched.
   /// </summary>
   /// <value>Number of hits the search query matched.</value>
-  [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbHits { get; set; }
+  [DataMember(Name = "nbHits")]
+  public int NbHits { get; set; }
 
   /// <summary>
   /// Gets or Sets additional properties

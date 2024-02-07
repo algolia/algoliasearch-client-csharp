@@ -37,14 +37,14 @@ public partial class ProbesMetric
   /// Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.
   /// </summary>
   /// <value>Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.</value>
-  [DataMember(Name = "t", EmitDefaultValue = false)]
-  public long T { get; set; }
+  [DataMember(Name = "t")]
+  public long? T { get; set; }
 
   /// <summary>
   /// Value of the metric.
   /// </summary>
   /// <value>Value of the metric.</value>
-  [DataMember(Name = "v", EmitDefaultValue = false)]
+  [DataMember(Name = "v")]
   public int? V { get; set; }
 
   /// <summary>

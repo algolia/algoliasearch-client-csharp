@@ -42,7 +42,7 @@ public partial class RankingInfo
   /// <param name="promoted">Present and set to true if a Rule promoted the hit. (required).</param>
   /// <param name="userScore">Custom ranking for the object, expressed as a single integer value. (required).</param>
   /// <param name="words">Number of matched words, including prefixes and typos. (required).</param>
-  public RankingInfo(int? filters, int? firstMatchedWord, int? geoDistance, int? nbExactWords, int? nbTypos, bool? promoted, int? userScore, int? words)
+  public RankingInfo(int filters, int firstMatchedWord, int geoDistance, int nbExactWords, int nbTypos, bool promoted, int userScore, int words)
   {
     Filters = filters;
     FirstMatchedWord = firstMatchedWord;
@@ -58,89 +58,89 @@ public partial class RankingInfo
   /// This field is reserved for advanced usage.
   /// </summary>
   /// <value>This field is reserved for advanced usage.</value>
-  [DataMember(Name = "filters", IsRequired = true, EmitDefaultValue = false)]
-  public int? Filters { get; set; }
+  [DataMember(Name = "filters")]
+  public int Filters { get; set; }
 
   /// <summary>
   /// Position of the most important matched attribute in the attributes to index list.
   /// </summary>
   /// <value>Position of the most important matched attribute in the attributes to index list.</value>
-  [DataMember(Name = "firstMatchedWord", IsRequired = true, EmitDefaultValue = false)]
-  public int? FirstMatchedWord { get; set; }
+  [DataMember(Name = "firstMatchedWord")]
+  public int FirstMatchedWord { get; set; }
 
   /// <summary>
   /// Distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters).
   /// </summary>
   /// <value>Distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters).</value>
-  [DataMember(Name = "geoDistance", IsRequired = true, EmitDefaultValue = false)]
-  public int? GeoDistance { get; set; }
+  [DataMember(Name = "geoDistance")]
+  public int GeoDistance { get; set; }
 
   /// <summary>
   /// Precision used when computing the geo distance, in meters.
   /// </summary>
   /// <value>Precision used when computing the geo distance, in meters.</value>
-  [DataMember(Name = "geoPrecision", EmitDefaultValue = false)]
+  [DataMember(Name = "geoPrecision")]
   public int? GeoPrecision { get; set; }
 
   /// <summary>
   /// Gets or Sets MatchedGeoLocation
   /// </summary>
-  [DataMember(Name = "matchedGeoLocation", EmitDefaultValue = false)]
-  public MatchedGeoLocation MatchedGeoLocation { get; set; }
+  [DataMember(Name = "matchedGeoLocation")]
+  public MatchedGeoLocation? MatchedGeoLocation { get; set; }
 
   /// <summary>
   /// Gets or Sets Personalization
   /// </summary>
-  [DataMember(Name = "personalization", EmitDefaultValue = false)]
-  public Personalization Personalization { get; set; }
+  [DataMember(Name = "personalization")]
+  public Personalization? Personalization { get; set; }
 
   /// <summary>
   /// Number of exactly matched words.
   /// </summary>
   /// <value>Number of exactly matched words.</value>
-  [DataMember(Name = "nbExactWords", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbExactWords { get; set; }
+  [DataMember(Name = "nbExactWords")]
+  public int NbExactWords { get; set; }
 
   /// <summary>
   /// Number of typos encountered when matching the record.
   /// </summary>
   /// <value>Number of typos encountered when matching the record.</value>
-  [DataMember(Name = "nbTypos", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbTypos { get; set; }
+  [DataMember(Name = "nbTypos")]
+  public int NbTypos { get; set; }
 
   /// <summary>
   /// Present and set to true if a Rule promoted the hit.
   /// </summary>
   /// <value>Present and set to true if a Rule promoted the hit.</value>
-  [DataMember(Name = "promoted", IsRequired = true, EmitDefaultValue = false)]
-  public bool? Promoted { get; set; }
+  [DataMember(Name = "promoted")]
+  public bool Promoted { get; set; }
 
   /// <summary>
   /// When the query contains more than one word, the sum of the distances between matched words (in meters).
   /// </summary>
   /// <value>When the query contains more than one word, the sum of the distances between matched words (in meters).</value>
-  [DataMember(Name = "proximityDistance", EmitDefaultValue = false)]
+  [DataMember(Name = "proximityDistance")]
   public int? ProximityDistance { get; set; }
 
   /// <summary>
   /// Custom ranking for the object, expressed as a single integer value.
   /// </summary>
   /// <value>Custom ranking for the object, expressed as a single integer value.</value>
-  [DataMember(Name = "userScore", IsRequired = true, EmitDefaultValue = false)]
-  public int? UserScore { get; set; }
+  [DataMember(Name = "userScore")]
+  public int UserScore { get; set; }
 
   /// <summary>
   /// Number of matched words, including prefixes and typos.
   /// </summary>
   /// <value>Number of matched words, including prefixes and typos.</value>
-  [DataMember(Name = "words", IsRequired = true, EmitDefaultValue = false)]
-  public int? Words { get; set; }
+  [DataMember(Name = "words")]
+  public int Words { get; set; }
 
   /// <summary>
   /// Wether the record are promoted by the re-ranking strategy.
   /// </summary>
   /// <value>Wether the record are promoted by the re-ranking strategy.</value>
-  [DataMember(Name = "promotedByReRanking", EmitDefaultValue = false)]
+  [DataMember(Name = "promotedByReRanking")]
   public bool? PromotedByReRanking { get; set; }
 
   /// <summary>

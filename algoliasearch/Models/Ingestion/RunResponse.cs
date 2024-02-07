@@ -46,14 +46,14 @@ public partial class RunResponse
   /// The run UUID.
   /// </summary>
   /// <value>The run UUID.</value>
-  [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "runID")]
   public string RunID { get; set; }
 
   /// <summary>
   /// Date of creation (RFC3339 format).
   /// </summary>
   /// <value>Date of creation (RFC3339 format).</value>
-  [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>

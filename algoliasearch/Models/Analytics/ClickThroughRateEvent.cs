@@ -38,7 +38,7 @@ public partial class ClickThroughRateEvent
   /// <param name="clickCount">Number of click events. (required).</param>
   /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
   /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  public ClickThroughRateEvent(double rate, int? clickCount, int? trackedSearchCount, string date)
+  public ClickThroughRateEvent(double rate, int clickCount, int trackedSearchCount, string date)
   {
     Rate = rate;
     ClickCount = clickCount;
@@ -50,28 +50,28 @@ public partial class ClickThroughRateEvent
   /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
   /// </summary>
   /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
-  [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "rate")]
   public double Rate { get; set; }
 
   /// <summary>
   /// Number of click events.
   /// </summary>
   /// <value>Number of click events.</value>
-  [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? ClickCount { get; set; }
+  [DataMember(Name = "clickCount")]
+  public int ClickCount { get; set; }
 
   /// <summary>
   /// Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
-  [DataMember(Name = "trackedSearchCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? TrackedSearchCount { get; set; }
+  [DataMember(Name = "trackedSearchCount")]
+  public int TrackedSearchCount { get; set; }
 
   /// <summary>
   /// Date of the event in the format YYYY-MM-DD.
   /// </summary>
   /// <value>Date of the event in the format YYYY-MM-DD.</value>
-  [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "date")]
   public string Date { get; set; }
 
   /// <summary>

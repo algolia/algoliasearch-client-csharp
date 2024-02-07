@@ -30,8 +30,8 @@ public partial class SearchRulesParams
   /// <summary>
   /// Gets or Sets Anchoring
   /// </summary>
-  [DataMember(Name = "anchoring", EmitDefaultValue = false)]
-  public Anchoring Anchoring { get; set; }
+  [DataMember(Name = "anchoring")]
+  public Anchoring? Anchoring { get; set; }
   /// <summary>
   /// Initializes a new instance of the SearchRulesParams class.
   /// </summary>
@@ -43,42 +43,42 @@ public partial class SearchRulesParams
   /// Rule object query.
   /// </summary>
   /// <value>Rule object query.</value>
-  [DataMember(Name = "query", EmitDefaultValue = false)]
-  public string Query { get; set; }
+  [DataMember(Name = "query")]
+  public string? Query { get; set; }
 
   /// <summary>
   /// Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
   /// </summary>
   /// <value>Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).</value>
-  [DataMember(Name = "context", EmitDefaultValue = false)]
-  public string Context { get; set; }
+  [DataMember(Name = "context")]
+  public string? Context { get; set; }
 
   /// <summary>
   /// Requested page (the first page is page 0).
   /// </summary>
   /// <value>Requested page (the first page is page 0).</value>
-  [DataMember(Name = "page", EmitDefaultValue = false)]
+  [DataMember(Name = "page")]
   public int? Page { get; set; }
 
   /// <summary>
   /// Maximum number of hits per page.
   /// </summary>
   /// <value>Maximum number of hits per page.</value>
-  [DataMember(Name = "hitsPerPage", EmitDefaultValue = false)]
+  [DataMember(Name = "hitsPerPage")]
   public int? HitsPerPage { get; set; }
 
   /// <summary>
   /// Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.
   /// </summary>
   /// <value>Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.</value>
-  [DataMember(Name = "enabled", EmitDefaultValue = false)]
+  [DataMember(Name = "enabled")]
   public bool? Enabled { get; set; }
 
   /// <summary>
   /// Request options to send with the API call.
   /// </summary>
   /// <value>Request options to send with the API call.</value>
-  [DataMember(Name = "requestOptions", EmitDefaultValue = false)]
+  [DataMember(Name = "requestOptions")]
   public List<object> RequestOptions { get; set; }
 
   /// <summary>

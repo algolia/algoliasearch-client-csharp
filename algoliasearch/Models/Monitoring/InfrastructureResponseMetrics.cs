@@ -37,35 +37,35 @@ public partial class InfrastructureResponseMetrics
   /// CPU idleness in %.
   /// </summary>
   /// <value>CPU idleness in %.</value>
-  [DataMember(Name = "cpu_usage", EmitDefaultValue = false)]
+  [DataMember(Name = "cpu_usage")]
   public Dictionary<string, List<ProbesMetric>> CpuUsage { get; set; }
 
   /// <summary>
   /// RAM used for indexing in MB.
   /// </summary>
   /// <value>RAM used for indexing in MB.</value>
-  [DataMember(Name = "ram_indexing_usage", EmitDefaultValue = false)]
+  [DataMember(Name = "ram_indexing_usage")]
   public Dictionary<string, List<ProbesMetric>> RamIndexingUsage { get; set; }
 
   /// <summary>
   /// RAM used for search in MB.
   /// </summary>
   /// <value>RAM used for search in MB.</value>
-  [DataMember(Name = "ram_search_usage", EmitDefaultValue = false)]
+  [DataMember(Name = "ram_search_usage")]
   public Dictionary<string, List<ProbesMetric>> RamSearchUsage { get; set; }
 
   /// <summary>
   /// Solid-state disk (SSD) usage expressed as % of RAM.  0% means no SSD usage. A value of 50% indicates 32&nbsp;GB SSD usage for a machine with 64&nbsp;RAM. 
   /// </summary>
   /// <value>Solid-state disk (SSD) usage expressed as % of RAM.  0% means no SSD usage. A value of 50% indicates 32&nbsp;GB SSD usage for a machine with 64&nbsp;RAM. </value>
-  [DataMember(Name = "ssd_usage", EmitDefaultValue = false)]
+  [DataMember(Name = "ssd_usage")]
   public Dictionary<string, List<ProbesMetric>> SsdUsage { get; set; }
 
   /// <summary>
   /// Average build time of the indices in seconds.
   /// </summary>
   /// <value>Average build time of the indices in seconds.</value>
-  [DataMember(Name = "avg_build_time", EmitDefaultValue = false)]
+  [DataMember(Name = "avg_build_time")]
   public Dictionary<string, List<ProbesMetric>> AvgBuildTime { get; set; }
 
   /// <summary>

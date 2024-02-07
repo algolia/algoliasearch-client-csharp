@@ -30,14 +30,14 @@ public partial class AuthenticationUpdate
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", EmitDefaultValue = false)]
-  public AuthenticationType Type { get; set; }
+  [DataMember(Name = "type")]
+  public AuthenticationType? Type { get; set; }
 
   /// <summary>
   /// Gets or Sets Platform
   /// </summary>
-  [DataMember(Name = "platform", EmitDefaultValue = false)]
-  public Platform Platform { get; set; }
+  [DataMember(Name = "platform")]
+  public Platform? Platform { get; set; }
   /// <summary>
   /// Initializes a new instance of the AuthenticationUpdate class.
   /// </summary>
@@ -49,14 +49,14 @@ public partial class AuthenticationUpdate
   /// An human readable name describing the object.
   /// </summary>
   /// <value>An human readable name describing the object.</value>
-  [DataMember(Name = "name", EmitDefaultValue = false)]
-  public string Name { get; set; }
+  [DataMember(Name = "name")]
+  public string? Name { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
-  [DataMember(Name = "input", EmitDefaultValue = false)]
-  public AuthInputPartial Input { get; set; }
+  [DataMember(Name = "input")]
+  public AuthInputPartial? Input { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

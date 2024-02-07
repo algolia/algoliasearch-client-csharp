@@ -37,7 +37,7 @@ public partial class AbTestsVariantSearchParams
   /// <param name="index">A/B test index. (required).</param>
   /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
   /// <param name="customSearchParameters">customSearchParameters (required).</param>
-  public AbTestsVariantSearchParams(string index, int? trafficPercentage, object customSearchParameters)
+  public AbTestsVariantSearchParams(string index, int trafficPercentage, object customSearchParameters)
   {
     Index = index ?? throw new ArgumentNullException(nameof(index));
     TrafficPercentage = trafficPercentage;
@@ -48,27 +48,27 @@ public partial class AbTestsVariantSearchParams
   /// A/B test index.
   /// </summary>
   /// <value>A/B test index.</value>
-  [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "index")]
   public string Index { get; set; }
 
   /// <summary>
   /// A/B test traffic percentage.
   /// </summary>
   /// <value>A/B test traffic percentage.</value>
-  [DataMember(Name = "trafficPercentage", IsRequired = true, EmitDefaultValue = false)]
-  public int? TrafficPercentage { get; set; }
+  [DataMember(Name = "trafficPercentage")]
+  public int TrafficPercentage { get; set; }
 
   /// <summary>
   /// A/B test description.
   /// </summary>
   /// <value>A/B test description.</value>
-  [DataMember(Name = "description", EmitDefaultValue = false)]
-  public string Description { get; set; }
+  [DataMember(Name = "description")]
+  public string? Description { get; set; }
 
   /// <summary>
   /// Gets or Sets CustomSearchParameters
   /// </summary>
-  [DataMember(Name = "customSearchParameters", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "customSearchParameters")]
   public object CustomSearchParameters { get; set; }
 
   /// <summary>

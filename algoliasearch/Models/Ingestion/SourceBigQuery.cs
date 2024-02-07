@@ -30,8 +30,8 @@ public partial class SourceBigQuery
   /// <summary>
   /// Gets or Sets DataType
   /// </summary>
-  [DataMember(Name = "dataType", EmitDefaultValue = false)]
-  public BigQueryDataType DataType { get; set; }
+  [DataMember(Name = "dataType")]
+  public BigQueryDataType? DataType { get; set; }
   /// <summary>
   /// Initializes a new instance of the SourceBigQuery class.
   /// </summary>
@@ -52,43 +52,43 @@ public partial class SourceBigQuery
   /// Project ID of the BigQuery Source.
   /// </summary>
   /// <value>Project ID of the BigQuery Source.</value>
-  [DataMember(Name = "projectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "projectID")]
   public string ProjectID { get; set; }
 
   /// <summary>
   /// Dataset ID of the BigQuery Source.
   /// </summary>
   /// <value>Dataset ID of the BigQuery Source.</value>
-  [DataMember(Name = "datasetID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "datasetID")]
   public string DatasetID { get; set; }
 
   /// <summary>
   /// Table name (for default BQ).
   /// </summary>
   /// <value>Table name (for default BQ).</value>
-  [DataMember(Name = "table", EmitDefaultValue = false)]
-  public string Table { get; set; }
+  [DataMember(Name = "table")]
+  public string? Table { get; set; }
 
   /// <summary>
   /// Table prefix (for Google Analytics).
   /// </summary>
   /// <value>Table prefix (for Google Analytics).</value>
-  [DataMember(Name = "tablePrefix", EmitDefaultValue = false)]
-  public string TablePrefix { get; set; }
+  [DataMember(Name = "tablePrefix")]
+  public string? TablePrefix { get; set; }
 
   /// <summary>
   /// Custom SQL request to extract data from the BigQuery table.
   /// </summary>
   /// <value>Custom SQL request to extract data from the BigQuery table.</value>
-  [DataMember(Name = "customSQLRequest", EmitDefaultValue = false)]
-  public string CustomSQLRequest { get; set; }
+  [DataMember(Name = "customSQLRequest")]
+  public string? CustomSQLRequest { get; set; }
 
   /// <summary>
   /// The name of the column that contains the unique ID, used as `objectID` in Algolia.
   /// </summary>
   /// <value>The name of the column that contains the unique ID, used as `objectID` in Algolia.</value>
-  [DataMember(Name = "uniqueIDColumn", EmitDefaultValue = false)]
-  public string UniqueIDColumn { get; set; }
+  [DataMember(Name = "uniqueIDColumn")]
+  public string? UniqueIDColumn { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

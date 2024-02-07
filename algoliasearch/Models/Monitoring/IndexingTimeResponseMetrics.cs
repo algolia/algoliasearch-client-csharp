@@ -36,7 +36,7 @@ public partial class IndexingTimeResponseMetrics
   /// <summary>
   /// Gets or Sets Indexing
   /// </summary>
-  [DataMember(Name = "indexing", EmitDefaultValue = false)]
+  [DataMember(Name = "indexing")]
   public Dictionary<string, List<TimeInner>> Indexing { get; set; }
 
   /// <summary>

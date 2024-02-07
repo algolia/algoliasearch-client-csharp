@@ -37,22 +37,22 @@ public partial class AuthOAuthPartial
   /// The OAuth endpoint URL.
   /// </summary>
   /// <value>The OAuth endpoint URL.</value>
-  [DataMember(Name = "url", EmitDefaultValue = false)]
-  public string Url { get; set; }
+  [DataMember(Name = "url")]
+  public string? Url { get; set; }
 
   /// <summary>
   /// The clientID.
   /// </summary>
   /// <value>The clientID.</value>
-  [DataMember(Name = "client_id", EmitDefaultValue = false)]
-  public string ClientId { get; set; }
+  [DataMember(Name = "client_id")]
+  public string? ClientId { get; set; }
 
   /// <summary>
   /// The secret.
   /// </summary>
   /// <value>The secret.</value>
-  [DataMember(Name = "client_secret", EmitDefaultValue = false)]
-  public string ClientSecret { get; set; }
+  [DataMember(Name = "client_secret")]
+  public string? ClientSecret { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

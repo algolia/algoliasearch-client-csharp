@@ -30,7 +30,7 @@ public partial class OperationIndexParams
   /// <summary>
   /// Gets or Sets Operation
   /// </summary>
-  [DataMember(Name = "operation", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "operation")]
   public OperationType Operation { get; set; }
   /// <summary>
   /// Initializes a new instance of the OperationIndexParams class.
@@ -52,14 +52,14 @@ public partial class OperationIndexParams
   /// Algolia index name.
   /// </summary>
   /// <value>Algolia index name.</value>
-  [DataMember(Name = "destination", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "destination")]
   public string Destination { get; set; }
 
   /// <summary>
   /// **This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.
   /// </summary>
   /// <value>**This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.</value>
-  [DataMember(Name = "scope", EmitDefaultValue = false)]
+  [DataMember(Name = "scope")]
   public List<ScopeType> Scope { get; set; }
 
   /// <summary>

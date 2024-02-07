@@ -43,7 +43,7 @@ public partial class CustomSearchParams
   /// <summary>
   /// Gets or Sets CustomSearchParameters
   /// </summary>
-  [DataMember(Name = "customSearchParameters", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "customSearchParameters")]
   public object CustomSearchParameters { get; set; }
 
   /// <summary>

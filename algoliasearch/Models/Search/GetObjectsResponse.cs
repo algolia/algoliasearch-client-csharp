@@ -44,7 +44,7 @@ public partial class GetObjectsResponse<T>
   /// Retrieved results.
   /// </summary>
   /// <value>Retrieved results.</value>
-  [DataMember(Name = "results", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "results")]
   public List<T> Results { get; set; }
 
   /// <summary>

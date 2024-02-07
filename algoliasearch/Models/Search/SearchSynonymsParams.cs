@@ -30,8 +30,8 @@ public partial class SearchSynonymsParams
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", EmitDefaultValue = false)]
-  public SynonymType Type { get; set; }
+  [DataMember(Name = "type")]
+  public SynonymType? Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the SearchSynonymsParams class.
   /// </summary>
@@ -43,21 +43,21 @@ public partial class SearchSynonymsParams
   /// Text to search for in an index.
   /// </summary>
   /// <value>Text to search for in an index.</value>
-  [DataMember(Name = "query", EmitDefaultValue = false)]
-  public string Query { get; set; }
+  [DataMember(Name = "query")]
+  public string? Query { get; set; }
 
   /// <summary>
   /// Page to retrieve (the first page is `0`, not `1`).
   /// </summary>
   /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
-  [DataMember(Name = "page", EmitDefaultValue = false)]
+  [DataMember(Name = "page")]
   public int? Page { get; set; }
 
   /// <summary>
   /// Number of hits per page.
   /// </summary>
   /// <value>Number of hits per page.</value>
-  [DataMember(Name = "hitsPerPage", EmitDefaultValue = false)]
+  [DataMember(Name = "hitsPerPage")]
   public int? HitsPerPage { get; set; }
 
   /// <summary>

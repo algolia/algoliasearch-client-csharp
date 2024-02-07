@@ -44,7 +44,7 @@ public partial class ConsequenceHide
   /// Unique object identifier.
   /// </summary>
   /// <value>Unique object identifier.</value>
-  [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>

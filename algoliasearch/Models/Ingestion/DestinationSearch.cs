@@ -43,7 +43,7 @@ public partial class DestinationSearch
   /// <summary>
   /// Gets or Sets DestinationIDs
   /// </summary>
-  [DataMember(Name = "destinationIDs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "destinationIDs")]
   public List<string> DestinationIDs { get; set; }
 
   /// <summary>

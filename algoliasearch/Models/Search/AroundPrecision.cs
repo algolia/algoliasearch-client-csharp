@@ -125,15 +125,9 @@ public partial class AroundPrecision : AbstractSchema
   /// <returns>An instance of AroundPrecision</returns>
   public static AroundPrecision FromJson(string jsonString)
   {
-    AroundPrecision newAroundPrecision = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newAroundPrecision;
-    }
     try
     {
-      return new AroundPrecision(JsonConvert.DeserializeObject<int>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AroundPrecision(JsonConvert.DeserializeObject<int>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class AroundPrecision : AbstractSchema
     }
     try
     {
-      return new AroundPrecision(JsonConvert.DeserializeObject<List<AroundPrecisionFromValueInner>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new AroundPrecision(JsonConvert.DeserializeObject<List<AroundPrecisionFromValueInner>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class AroundPrecisionJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(AroundPrecision).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class AroundPrecisionJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

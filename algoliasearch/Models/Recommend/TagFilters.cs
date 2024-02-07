@@ -125,15 +125,9 @@ public partial class TagFilters : AbstractSchema
   /// <returns>An instance of TagFilters</returns>
   public static TagFilters FromJson(string jsonString)
   {
-    TagFilters newTagFilters = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newTagFilters;
-    }
     try
     {
-      return new TagFilters(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TagFilters(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class TagFilters : AbstractSchema
     }
     try
     {
-      return new TagFilters(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TagFilters(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class TagFiltersJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(TagFilters).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class TagFiltersJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

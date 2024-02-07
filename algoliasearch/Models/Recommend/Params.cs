@@ -36,26 +36,26 @@ public partial class Params
   /// <summary>
   /// Gets or Sets Query
   /// </summary>
-  [DataMember(Name = "query", EmitDefaultValue = false)]
-  public ConsequenceQuery Query { get; set; }
+  [DataMember(Name = "query")]
+  public ConsequenceQuery? Query { get; set; }
 
   /// <summary>
   /// Gets or Sets AutomaticFacetFilters
   /// </summary>
-  [DataMember(Name = "automaticFacetFilters", EmitDefaultValue = false)]
-  public AutomaticFacetFilters AutomaticFacetFilters { get; set; }
+  [DataMember(Name = "automaticFacetFilters")]
+  public AutomaticFacetFilters? AutomaticFacetFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets AutomaticOptionalFacetFilters
   /// </summary>
-  [DataMember(Name = "automaticOptionalFacetFilters", EmitDefaultValue = false)]
-  public AutomaticFacetFilters AutomaticOptionalFacetFilters { get; set; }
+  [DataMember(Name = "automaticOptionalFacetFilters")]
+  public AutomaticFacetFilters? AutomaticOptionalFacetFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets RenderingContent
   /// </summary>
-  [DataMember(Name = "renderingContent", EmitDefaultValue = false)]
-  public RenderingContent RenderingContent { get; set; }
+  [DataMember(Name = "renderingContent")]
+  public RenderingContent? RenderingContent { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

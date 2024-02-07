@@ -37,7 +37,7 @@ public partial class TopSearch
   /// <param name="search">User query. (required).</param>
   /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
   /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-  public TopSearch(string search, int? count, int? nbHits)
+  public TopSearch(string search, int count, int nbHits)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
     Count = count;
@@ -48,22 +48,22 @@ public partial class TopSearch
   /// User query.
   /// </summary>
   /// <value>User query.</value>
-  [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "search")]
   public string Search { get; set; }
 
   /// <summary>
   /// Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).
   /// </summary>
   /// <value>Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Number of hits the search query matched.
   /// </summary>
   /// <value>Number of hits the search query matched.</value>
-  [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbHits { get; set; }
+  [DataMember(Name = "nbHits")]
+  public int NbHits { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

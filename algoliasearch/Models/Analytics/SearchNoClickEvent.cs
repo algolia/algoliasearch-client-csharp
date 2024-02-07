@@ -37,7 +37,7 @@ public partial class SearchNoClickEvent
   /// <param name="search">User query. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
   /// <param name="withFilterCount">Number of occurrences. (required).</param>
-  public SearchNoClickEvent(string search, int? count, int? withFilterCount)
+  public SearchNoClickEvent(string search, int count, int withFilterCount)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
     Count = count;
@@ -48,22 +48,22 @@ public partial class SearchNoClickEvent
   /// User query.
   /// </summary>
   /// <value>User query.</value>
-  [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "search")]
   public string Search { get; set; }
 
   /// <summary>
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "withFilterCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? WithFilterCount { get; set; }
+  [DataMember(Name = "withFilterCount")]
+  public int WithFilterCount { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

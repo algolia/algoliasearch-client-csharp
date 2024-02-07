@@ -44,7 +44,7 @@ public partial class GetClickPositionsResponse
   /// Click positions.
   /// </summary>
   /// <value>Click positions.</value>
-  [DataMember(Name = "positions", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "positions")]
   public List<ClickPosition> Positions { get; set; }
 
   /// <summary>

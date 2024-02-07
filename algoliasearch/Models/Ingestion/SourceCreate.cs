@@ -30,7 +30,7 @@ public partial class SourceCreate
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public SourceType Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the SourceCreate class.
@@ -53,21 +53,21 @@ public partial class SourceCreate
   /// <summary>
   /// Gets or Sets Name
   /// </summary>
-  [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "name")]
   public string Name { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
-  [DataMember(Name = "input", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "input")]
   public SourceInput Input { get; set; }
 
   /// <summary>
   /// The authentication UUID.
   /// </summary>
   /// <value>The authentication UUID.</value>
-  [DataMember(Name = "authenticationID", EmitDefaultValue = false)]
-  public string AuthenticationID { get; set; }
+  [DataMember(Name = "authenticationID")]
+  public string? AuthenticationID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

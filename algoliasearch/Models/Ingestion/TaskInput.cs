@@ -125,15 +125,9 @@ public partial class TaskInput : AbstractSchema
   /// <returns>An instance of TaskInput</returns>
   public static TaskInput FromJson(string jsonString)
   {
-    TaskInput newTaskInput = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newTaskInput;
-    }
     try
     {
-      return new TaskInput(JsonConvert.DeserializeObject<OnDemandDateUtilsInput>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TaskInput(JsonConvert.DeserializeObject<OnDemandDateUtilsInput>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class TaskInput : AbstractSchema
     }
     try
     {
-      return new TaskInput(JsonConvert.DeserializeObject<ScheduleDateUtilsInput>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TaskInput(JsonConvert.DeserializeObject<ScheduleDateUtilsInput>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class TaskInputJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(TaskInput).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class TaskInputJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

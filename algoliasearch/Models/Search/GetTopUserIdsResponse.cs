@@ -44,7 +44,7 @@ public partial class GetTopUserIdsResponse
   /// Key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values.
   /// </summary>
   /// <value>Key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values.</value>
-  [DataMember(Name = "topUsers", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "topUsers")]
   public List<Dictionary<string, List<UserId>>> TopUsers { get; set; }
 
   /// <summary>

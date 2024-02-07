@@ -125,15 +125,9 @@ public partial class RemoveStopWords : AbstractSchema
   /// <returns>An instance of RemoveStopWords</returns>
   public static RemoveStopWords FromJson(string jsonString)
   {
-    RemoveStopWords newRemoveStopWords = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newRemoveStopWords;
-    }
     try
     {
-      return new RemoveStopWords(JsonConvert.DeserializeObject<List<string>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new RemoveStopWords(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class RemoveStopWords : AbstractSchema
     }
     try
     {
-      return new RemoveStopWords(JsonConvert.DeserializeObject<bool>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new RemoveStopWords(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class RemoveStopWordsJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(RemoveStopWords).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class RemoveStopWordsJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

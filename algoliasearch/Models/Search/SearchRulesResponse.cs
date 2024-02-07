@@ -38,7 +38,7 @@ public partial class SearchRulesResponse
   /// <param name="nbHits">Number of fetched rules. (required).</param>
   /// <param name="page">Current page. (required).</param>
   /// <param name="nbPages">Number of pages. (required).</param>
-  public SearchRulesResponse(List<Rule> hits, int? nbHits, int? page, int? nbPages)
+  public SearchRulesResponse(List<Rule> hits, int nbHits, int page, int nbPages)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
     NbHits = nbHits;
@@ -50,29 +50,29 @@ public partial class SearchRulesResponse
   /// Fetched rules.
   /// </summary>
   /// <value>Fetched rules.</value>
-  [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "hits")]
   public List<Rule> Hits { get; set; }
 
   /// <summary>
   /// Number of fetched rules.
   /// </summary>
   /// <value>Number of fetched rules.</value>
-  [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbHits { get; set; }
+  [DataMember(Name = "nbHits")]
+  public int NbHits { get; set; }
 
   /// <summary>
   /// Current page.
   /// </summary>
   /// <value>Current page.</value>
-  [DataMember(Name = "page", IsRequired = true, EmitDefaultValue = false)]
-  public int? Page { get; set; }
+  [DataMember(Name = "page")]
+  public int Page { get; set; }
 
   /// <summary>
   /// Number of pages.
   /// </summary>
   /// <value>Number of pages.</value>
-  [DataMember(Name = "nbPages", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbPages { get; set; }
+  [DataMember(Name = "nbPages")]
+  public int NbPages { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

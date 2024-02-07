@@ -43,41 +43,41 @@ public partial class RuleResponse
   /// <summary>
   /// Gets or Sets Metadata
   /// </summary>
-  [DataMember(Name = "_metadata", EmitDefaultValue = false)]
-  public RuleResponseMetadata Metadata { get; set; }
+  [DataMember(Name = "_metadata")]
+  public RuleResponseMetadata? Metadata { get; set; }
 
   /// <summary>
   /// Unique identifier for a rule object.
   /// </summary>
   /// <value>Unique identifier for a rule object.</value>
-  [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
   /// [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. 
   /// </summary>
   /// <value>[Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. </value>
-  [DataMember(Name = "conditions", EmitDefaultValue = false)]
+  [DataMember(Name = "conditions")]
   public List<Condition> Conditions { get; set; }
 
   /// <summary>
   /// Gets or Sets Consequence
   /// </summary>
-  [DataMember(Name = "consequence", EmitDefaultValue = false)]
-  public Consequence Consequence { get; set; }
+  [DataMember(Name = "consequence")]
+  public Consequence? Consequence { get; set; }
 
   /// <summary>
   /// Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
   /// </summary>
   /// <value>Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.</value>
-  [DataMember(Name = "description", EmitDefaultValue = false)]
-  public string Description { get; set; }
+  [DataMember(Name = "description")]
+  public string? Description { get; set; }
 
   /// <summary>
   /// Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
   /// </summary>
   /// <value>Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.</value>
-  [DataMember(Name = "enabled", EmitDefaultValue = false)]
+  [DataMember(Name = "enabled")]
   public bool? Enabled { get; set; }
 
   /// <summary>

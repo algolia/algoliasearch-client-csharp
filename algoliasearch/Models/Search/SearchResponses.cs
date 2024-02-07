@@ -43,7 +43,7 @@ public partial class SearchResponses<T>
   /// <summary>
   /// Gets or Sets Results
   /// </summary>
-  [DataMember(Name = "results", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "results")]
   public List<SearchResult<T>> Results { get; set; }
 
   /// <summary>

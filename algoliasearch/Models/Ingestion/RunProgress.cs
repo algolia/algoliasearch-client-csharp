@@ -36,13 +36,13 @@ public partial class RunProgress
   /// <summary>
   /// Gets or Sets ExpectedNbOfEvents
   /// </summary>
-  [DataMember(Name = "expectedNbOfEvents", EmitDefaultValue = false)]
+  [DataMember(Name = "expectedNbOfEvents")]
   public int? ExpectedNbOfEvents { get; set; }
 
   /// <summary>
   /// Gets or Sets ReceivedNbOfEvents
   /// </summary>
-  [DataMember(Name = "receivedNbOfEvents", EmitDefaultValue = false)]
+  [DataMember(Name = "receivedNbOfEvents")]
   public int? ReceivedNbOfEvents { get; set; }
 
   /// <summary>

@@ -44,55 +44,55 @@ public partial class SourceIndex
   /// Name of the Algolia index to use as source for query suggestions.
   /// </summary>
   /// <value>Name of the Algolia index to use as source for query suggestions.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>
   /// If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.  
   /// </summary>
   /// <value>If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.  </value>
-  [DataMember(Name = "replicas", EmitDefaultValue = false)]
+  [DataMember(Name = "replicas")]
   public bool? Replicas { get; set; }
 
   /// <summary>
   /// [Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches. 
   /// </summary>
   /// <value>[Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches. </value>
-  [DataMember(Name = "analyticsTags", EmitDefaultValue = false)]
+  [DataMember(Name = "analyticsTags")]
   public List<string> AnalyticsTags { get; set; }
 
   /// <summary>
   /// Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion. 
   /// </summary>
   /// <value>Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion. </value>
-  [DataMember(Name = "facets", EmitDefaultValue = false)]
+  [DataMember(Name = "facets")]
   public List<Facet> Facets { get; set; }
 
   /// <summary>
   /// Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` hits to be included in the Query Suggestions index. 
   /// </summary>
   /// <value>Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` hits to be included in the Query Suggestions index. </value>
-  [DataMember(Name = "minHits", EmitDefaultValue = false)]
+  [DataMember(Name = "minHits")]
   public int? MinHits { get; set; }
 
   /// <summary>
   /// Minimum letters required to be included as a suggestion.  A search query must be at least `minLetters` long to be included in the Query Suggestions index. 
   /// </summary>
   /// <value>Minimum letters required to be included as a suggestion.  A search query must be at least `minLetters` long to be included in the Query Suggestions index. </value>
-  [DataMember(Name = "minLetters", EmitDefaultValue = false)]
+  [DataMember(Name = "minLetters")]
   public int? MinLetters { get; set; }
 
   /// <summary>
   /// Gets or Sets Generate
   /// </summary>
-  [DataMember(Name = "generate", EmitDefaultValue = false)]
+  [DataMember(Name = "generate")]
   public List<List<string>> Generate { get; set; }
 
   /// <summary>
   /// Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - `query`: search query which will be added as a suggestion   - `count`: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data. 
   /// </summary>
   /// <value>Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - `query`: search query which will be added as a suggestion   - `count`: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data. </value>
-  [DataMember(Name = "external", EmitDefaultValue = false)]
+  [DataMember(Name = "external")]
   public List<string> External { get; set; }
 
   /// <summary>

@@ -43,7 +43,7 @@ public partial class GetObjectsParams
   /// <summary>
   /// Gets or Sets Requests
   /// </summary>
-  [DataMember(Name = "requests", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "requests")]
   public List<GetObjectsRequest> Requests { get; set; }
 
   /// <summary>

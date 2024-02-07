@@ -44,41 +44,41 @@ public partial class Rule
   /// Unique identifier for a rule object.
   /// </summary>
   /// <value>Unique identifier for a rule object.</value>
-  [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
   /// [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. 
   /// </summary>
   /// <value>[Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. </value>
-  [DataMember(Name = "conditions", EmitDefaultValue = false)]
+  [DataMember(Name = "conditions")]
   public List<Condition> Conditions { get; set; }
 
   /// <summary>
   /// Gets or Sets Consequence
   /// </summary>
-  [DataMember(Name = "consequence", EmitDefaultValue = false)]
-  public Consequence Consequence { get; set; }
+  [DataMember(Name = "consequence")]
+  public Consequence? Consequence { get; set; }
 
   /// <summary>
   /// Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
   /// </summary>
   /// <value>Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.</value>
-  [DataMember(Name = "description", EmitDefaultValue = false)]
-  public string Description { get; set; }
+  [DataMember(Name = "description")]
+  public string? Description { get; set; }
 
   /// <summary>
   /// Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
   /// </summary>
   /// <value>Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.</value>
-  [DataMember(Name = "enabled", EmitDefaultValue = false)]
+  [DataMember(Name = "enabled")]
   public bool? Enabled { get; set; }
 
   /// <summary>
   /// If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
   /// </summary>
   /// <value>If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.</value>
-  [DataMember(Name = "validity", EmitDefaultValue = false)]
+  [DataMember(Name = "validity")]
   public List<TimeRange> Validity { get; set; }
 
   /// <summary>

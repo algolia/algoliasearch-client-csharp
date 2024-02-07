@@ -35,7 +35,7 @@ public partial class HasPendingMappingsResponse
   /// Initializes a new instance of the HasPendingMappingsResponse class.
   /// </summary>
   /// <param name="pending">Indicates whether there are clusters undergoing migration, creation, or deletion. (required).</param>
-  public HasPendingMappingsResponse(bool? pending)
+  public HasPendingMappingsResponse(bool pending)
   {
     Pending = pending;
   }
@@ -44,14 +44,14 @@ public partial class HasPendingMappingsResponse
   /// Indicates whether there are clusters undergoing migration, creation, or deletion.
   /// </summary>
   /// <value>Indicates whether there are clusters undergoing migration, creation, or deletion.</value>
-  [DataMember(Name = "pending", IsRequired = true, EmitDefaultValue = false)]
-  public bool? Pending { get; set; }
+  [DataMember(Name = "pending")]
+  public bool Pending { get; set; }
 
   /// <summary>
   /// Cluster pending mapping state: migrating, creating, deleting. 
   /// </summary>
   /// <value>Cluster pending mapping state: migrating, creating, deleting. </value>
-  [DataMember(Name = "clusters", EmitDefaultValue = false)]
+  [DataMember(Name = "clusters")]
   public Dictionary<string, List<string>> Clusters { get; set; }
 
   /// <summary>

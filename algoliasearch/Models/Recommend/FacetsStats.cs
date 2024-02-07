@@ -37,29 +37,29 @@ public partial class FacetsStats
   /// Minimum value in the results.
   /// </summary>
   /// <value>Minimum value in the results.</value>
-  [DataMember(Name = "min", EmitDefaultValue = false)]
-  public double Min { get; set; }
+  [DataMember(Name = "min")]
+  public double? Min { get; set; }
 
   /// <summary>
   /// Maximum value in the results.
   /// </summary>
   /// <value>Maximum value in the results.</value>
-  [DataMember(Name = "max", EmitDefaultValue = false)]
-  public double Max { get; set; }
+  [DataMember(Name = "max")]
+  public double? Max { get; set; }
 
   /// <summary>
   /// Average facet value in the results.
   /// </summary>
   /// <value>Average facet value in the results.</value>
-  [DataMember(Name = "avg", EmitDefaultValue = false)]
-  public double Avg { get; set; }
+  [DataMember(Name = "avg")]
+  public double? Avg { get; set; }
 
   /// <summary>
   /// Sum of all values in the results.
   /// </summary>
   /// <value>Sum of all values in the results.</value>
-  [DataMember(Name = "sum", EmitDefaultValue = false)]
-  public double Sum { get; set; }
+  [DataMember(Name = "sum")]
+  public double? Sum { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -47,19 +47,19 @@ public partial class Languages
   /// <summary>
   /// Gets or Sets Plurals
   /// </summary>
-  [DataMember(Name = "plurals", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "plurals")]
   public DictionaryLanguage Plurals { get; set; }
 
   /// <summary>
   /// Gets or Sets Stopwords
   /// </summary>
-  [DataMember(Name = "stopwords", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "stopwords")]
   public DictionaryLanguage Stopwords { get; set; }
 
   /// <summary>
   /// Gets or Sets Compounds
   /// </summary>
-  [DataMember(Name = "compounds", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "compounds")]
   public DictionaryLanguage Compounds { get; set; }
 
   /// <summary>

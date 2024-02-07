@@ -125,15 +125,9 @@ public partial class ConsequenceQuery : AbstractSchema
   /// <returns>An instance of ConsequenceQuery</returns>
   public static ConsequenceQuery FromJson(string jsonString)
   {
-    ConsequenceQuery newConsequenceQuery = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newConsequenceQuery;
-    }
     try
     {
-      return new ConsequenceQuery(JsonConvert.DeserializeObject<ConsequenceQueryObject>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new ConsequenceQuery(JsonConvert.DeserializeObject<ConsequenceQueryObject>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class ConsequenceQuery : AbstractSchema
     }
     try
     {
-      return new ConsequenceQuery(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new ConsequenceQuery(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class ConsequenceQueryJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(ConsequenceQuery).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class ConsequenceQueryJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

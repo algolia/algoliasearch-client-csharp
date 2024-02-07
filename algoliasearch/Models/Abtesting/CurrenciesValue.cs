@@ -37,29 +37,29 @@ public partial class CurrenciesValue
   /// Currency code.
   /// </summary>
   /// <value>Currency code.</value>
-  [DataMember(Name = "currency", EmitDefaultValue = false)]
-  public string Currency { get; set; }
+  [DataMember(Name = "currency")]
+  public string? Currency { get; set; }
 
   /// <summary>
   /// Revenue for this currency.
   /// </summary>
   /// <value>Revenue for this currency.</value>
-  [DataMember(Name = "revenue", EmitDefaultValue = false)]
-  public double Revenue { get; set; }
+  [DataMember(Name = "revenue")]
+  public double? Revenue { get; set; }
 
   /// <summary>
   /// Mean for this currency.
   /// </summary>
   /// <value>Mean for this currency.</value>
-  [DataMember(Name = "mean", EmitDefaultValue = false)]
-  public double Mean { get; set; }
+  [DataMember(Name = "mean")]
+  public double? Mean { get; set; }
 
   /// <summary>
   /// Standard deviation for this currency.
   /// </summary>
   /// <value>Standard deviation for this currency.</value>
-  [DataMember(Name = "standardDeviation", EmitDefaultValue = false)]
-  public double StandardDeviation { get; set; }
+  [DataMember(Name = "standardDeviation")]
+  public double? StandardDeviation { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

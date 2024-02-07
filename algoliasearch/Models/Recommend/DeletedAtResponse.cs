@@ -46,14 +46,14 @@ public partial class DeletedAtResponse
   /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. 
   /// </summary>
   /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. </value>
-  [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "taskID")]
   public long TaskID { get; set; }
 
   /// <summary>
   /// Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
   /// <value>Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-  [DataMember(Name = "deletedAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "deletedAt")]
   public string DeletedAt { get; set; }
 
   /// <summary>

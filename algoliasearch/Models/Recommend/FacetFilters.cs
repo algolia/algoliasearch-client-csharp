@@ -125,15 +125,9 @@ public partial class FacetFilters : AbstractSchema
   /// <returns>An instance of FacetFilters</returns>
   public static FacetFilters FromJson(string jsonString)
   {
-    FacetFilters newFacetFilters = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newFacetFilters;
-    }
     try
     {
-      return new FacetFilters(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new FacetFilters(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class FacetFilters : AbstractSchema
     }
     try
     {
-      return new FacetFilters(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new FacetFilters(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class FacetFiltersJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(FacetFilters).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class FacetFiltersJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

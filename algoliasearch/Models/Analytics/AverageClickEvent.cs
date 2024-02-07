@@ -37,7 +37,7 @@ public partial class AverageClickEvent
   /// <param name="average">Average count of all click events. (required).</param>
   /// <param name="clickCount">Number of click events. (required).</param>
   /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  public AverageClickEvent(double average, int? clickCount, string date)
+  public AverageClickEvent(double average, int clickCount, string date)
   {
     Average = average;
     ClickCount = clickCount;
@@ -48,21 +48,21 @@ public partial class AverageClickEvent
   /// Average count of all click events.
   /// </summary>
   /// <value>Average count of all click events.</value>
-  [DataMember(Name = "average", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "average")]
   public double Average { get; set; }
 
   /// <summary>
   /// Number of click events.
   /// </summary>
   /// <value>Number of click events.</value>
-  [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? ClickCount { get; set; }
+  [DataMember(Name = "clickCount")]
+  public int ClickCount { get; set; }
 
   /// <summary>
   /// Date of the event in the format YYYY-MM-DD.
   /// </summary>
   /// <value>Date of the event in the format YYYY-MM-DD.</value>
-  [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "date")]
   public string Date { get; set; }
 
   /// <summary>

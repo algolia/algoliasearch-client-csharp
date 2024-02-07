@@ -30,7 +30,7 @@ public partial class GetRecommendTaskResponse
   /// <summary>
   /// Gets or Sets Status
   /// </summary>
-  [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "status")]
   public TaskStatus Status { get; set; }
   /// <summary>
   /// Initializes a new instance of the GetRecommendTaskResponse class.

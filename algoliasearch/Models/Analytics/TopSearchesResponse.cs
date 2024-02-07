@@ -44,7 +44,7 @@ public partial class TopSearchesResponse
   /// Top searches with their hits count.
   /// </summary>
   /// <value>Top searches with their hits count.</value>
-  [DataMember(Name = "searches", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "searches")]
   public List<TopSearch> Searches { get; set; }
 
   /// <summary>

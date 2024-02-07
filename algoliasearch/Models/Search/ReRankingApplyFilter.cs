@@ -134,15 +134,9 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// <returns>An instance of ReRankingApplyFilter</returns>
   public static ReRankingApplyFilter FromJson(string jsonString)
   {
-    ReRankingApplyFilter newReRankingApplyFilter = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newReRankingApplyFilter;
-    }
     try
     {
-      return new ReRankingApplyFilter(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new ReRankingApplyFilter(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -151,7 +145,7 @@ public partial class ReRankingApplyFilter : AbstractSchema
     }
     try
     {
-      return new ReRankingApplyFilter(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new ReRankingApplyFilter(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -177,7 +171,7 @@ public class ReRankingApplyFilterJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(ReRankingApplyFilter).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -192,7 +186,7 @@ public class ReRankingApplyFilterJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

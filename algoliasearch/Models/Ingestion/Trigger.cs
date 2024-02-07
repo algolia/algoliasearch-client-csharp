@@ -156,15 +156,9 @@ public partial class Trigger : AbstractSchema
   /// <returns>An instance of Trigger</returns>
   public static Trigger FromJson(string jsonString)
   {
-    Trigger newTrigger = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newTrigger;
-    }
     try
     {
-      return new Trigger(JsonConvert.DeserializeObject<OnDemandTrigger>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new Trigger(JsonConvert.DeserializeObject<OnDemandTrigger>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -173,7 +167,7 @@ public partial class Trigger : AbstractSchema
     }
     try
     {
-      return new Trigger(JsonConvert.DeserializeObject<ScheduleTrigger>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new Trigger(JsonConvert.DeserializeObject<ScheduleTrigger>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -182,7 +176,7 @@ public partial class Trigger : AbstractSchema
     }
     try
     {
-      return new Trigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new Trigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -208,7 +202,7 @@ public class TriggerJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(Trigger).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -223,7 +217,7 @@ public class TriggerJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

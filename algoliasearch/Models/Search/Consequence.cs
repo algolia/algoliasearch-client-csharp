@@ -36,35 +36,35 @@ public partial class Consequence
   /// <summary>
   /// Gets or Sets VarParams
   /// </summary>
-  [DataMember(Name = "params", EmitDefaultValue = false)]
-  public ConsequenceParams VarParams { get; set; }
+  [DataMember(Name = "params")]
+  public ConsequenceParams? VarParams { get; set; }
 
   /// <summary>
   /// Records to promote.
   /// </summary>
   /// <value>Records to promote.</value>
-  [DataMember(Name = "promote", EmitDefaultValue = false)]
+  [DataMember(Name = "promote")]
   public List<Promote> Promote { get; set; }
 
   /// <summary>
   /// Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.
   /// </summary>
   /// <value>Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.</value>
-  [DataMember(Name = "filterPromotes", EmitDefaultValue = false)]
+  [DataMember(Name = "filterPromotes")]
   public bool? FilterPromotes { get; set; }
 
   /// <summary>
   /// Records to hide. By default, you can hide up to 50 records per rule.
   /// </summary>
   /// <value>Records to hide. By default, you can hide up to 50 records per rule.</value>
-  [DataMember(Name = "hide", EmitDefaultValue = false)]
+  [DataMember(Name = "hide")]
   public List<ConsequenceHide> Hide { get; set; }
 
   /// <summary>
   /// Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.
   /// </summary>
   /// <value>Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.</value>
-  [DataMember(Name = "userData", EmitDefaultValue = false)]
+  [DataMember(Name = "userData")]
   public object UserData { get; set; }
 
   /// <summary>

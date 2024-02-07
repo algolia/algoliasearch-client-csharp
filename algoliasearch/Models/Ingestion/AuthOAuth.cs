@@ -48,21 +48,21 @@ public partial class AuthOAuth
   /// The OAuth endpoint URL.
   /// </summary>
   /// <value>The OAuth endpoint URL.</value>
-  [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "url")]
   public string Url { get; set; }
 
   /// <summary>
   /// The clientID.
   /// </summary>
   /// <value>The clientID.</value>
-  [DataMember(Name = "client_id", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "client_id")]
   public string ClientId { get; set; }
 
   /// <summary>
   /// The secret.
   /// </summary>
   /// <value>The secret.</value>
-  [DataMember(Name = "client_secret", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "client_secret")]
   public string ClientSecret { get; set; }
 
   /// <summary>

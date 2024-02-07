@@ -8,9 +8,19 @@ namespace Algolia.Search.Transport;
 public class StatefulHost
 {
   /// <summary>
-  /// Url endpoint without the scheme
+  /// Url endpoint without the scheme and the port
   /// </summary>
   public string Url { get; set; }
+
+  /// <summary>
+  /// Scheme of the URL
+  /// </summary>
+  public HttpScheme Scheme { get; set; } = HttpScheme.Https;
+
+  /// <summary>
+  /// Port of the URL (Optional)
+  /// </summary>
+  public int? Port { get; set; }
 
   /// <summary>
   /// Is the host up or not
@@ -28,25 +38,7 @@ public class StatefulHost
   public DateTime LastUse { get; set; } = DateTime.UtcNow;
 
   /// <summary>
-  /// Calltype accepted by the host
+  /// CallType accepted by the host
   /// </summary>
   public CallType Accept { get; set; }
-}
-
-/// <summary>
-/// https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/enumeration-types
-/// Binary enums beware when adding new values
-/// </summary>
-[Flags]
-public enum CallType
-{
-  /// <summary>
-  /// Read Call
-  /// </summary>
-  Read = 1,
-
-  /// <summary>
-  /// Write Call
-  /// </summary>
-  Write = 2
 }

@@ -30,7 +30,7 @@ public partial class SnippetResultOption
   /// <summary>
   /// Gets or Sets MatchLevel
   /// </summary>
-  [DataMember(Name = "matchLevel", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "matchLevel")]
   public MatchLevel MatchLevel { get; set; }
   /// <summary>
   /// Initializes a new instance of the SnippetResultOption class.
@@ -52,7 +52,7 @@ public partial class SnippetResultOption
   /// Markup text with `facetQuery` matches highlighted.
   /// </summary>
   /// <value>Markup text with `facetQuery` matches highlighted.</value>
-  [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "value")]
   public string Value { get; set; }
 
   /// <summary>

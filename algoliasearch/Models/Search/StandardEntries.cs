@@ -37,21 +37,21 @@ public partial class StandardEntries
   /// Key-value pair of a language ISO code and a boolean value.
   /// </summary>
   /// <value>Key-value pair of a language ISO code and a boolean value.</value>
-  [DataMember(Name = "plurals", EmitDefaultValue = false)]
+  [DataMember(Name = "plurals")]
   public Dictionary<string, bool> Plurals { get; set; }
 
   /// <summary>
   /// Key-value pair of a language ISO code and a boolean value.
   /// </summary>
   /// <value>Key-value pair of a language ISO code and a boolean value.</value>
-  [DataMember(Name = "stopwords", EmitDefaultValue = false)]
+  [DataMember(Name = "stopwords")]
   public Dictionary<string, bool> Stopwords { get; set; }
 
   /// <summary>
   /// Key-value pair of a language ISO code and a boolean value.
   /// </summary>
   /// <value>Key-value pair of a language ISO code and a boolean value.</value>
-  [DataMember(Name = "compounds", EmitDefaultValue = false)]
+  [DataMember(Name = "compounds")]
   public Dictionary<string, bool> Compounds { get; set; }
 
   /// <summary>

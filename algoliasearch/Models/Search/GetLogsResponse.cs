@@ -43,7 +43,7 @@ public partial class GetLogsResponse
   /// <summary>
   /// Gets or Sets Logs
   /// </summary>
-  [DataMember(Name = "logs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "logs")]
   public List<Log> Logs { get; set; }
 
   /// <summary>

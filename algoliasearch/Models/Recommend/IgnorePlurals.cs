@@ -125,15 +125,9 @@ public partial class IgnorePlurals : AbstractSchema
   /// <returns>An instance of IgnorePlurals</returns>
   public static IgnorePlurals FromJson(string jsonString)
   {
-    IgnorePlurals newIgnorePlurals = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newIgnorePlurals;
-    }
     try
     {
-      return new IgnorePlurals(JsonConvert.DeserializeObject<List<string>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new IgnorePlurals(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class IgnorePlurals : AbstractSchema
     }
     try
     {
-      return new IgnorePlurals(JsonConvert.DeserializeObject<bool>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new IgnorePlurals(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class IgnorePluralsJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(IgnorePlurals).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class IgnorePluralsJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

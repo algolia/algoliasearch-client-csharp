@@ -30,8 +30,8 @@ public partial class SearchForHitsOptions
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", EmitDefaultValue = false)]
-  public SearchTypeDefault Type { get; set; }
+  [DataMember(Name = "type")]
+  public SearchTypeDefault? Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the SearchForHitsOptions class.
   /// </summary>
@@ -50,7 +50,7 @@ public partial class SearchForHitsOptions
   /// Algolia index name.
   /// </summary>
   /// <value>Algolia index name.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>

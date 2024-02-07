@@ -64,105 +64,105 @@ public partial class Log
   /// Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
   /// <value>Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-  [DataMember(Name = "timestamp", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "timestamp")]
   public string Timestamp { get; set; }
 
   /// <summary>
   /// HTTP method of the performed request.
   /// </summary>
   /// <value>HTTP method of the performed request.</value>
-  [DataMember(Name = "method", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "method")]
   public string Method { get; set; }
 
   /// <summary>
   /// HTTP response code.
   /// </summary>
   /// <value>HTTP response code.</value>
-  [DataMember(Name = "answer_code", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "answer_code")]
   public string AnswerCode { get; set; }
 
   /// <summary>
   /// Request body. Truncated after 1,000 characters.
   /// </summary>
   /// <value>Request body. Truncated after 1,000 characters.</value>
-  [DataMember(Name = "query_body", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "query_body")]
   public string QueryBody { get; set; }
 
   /// <summary>
   /// Answer body. Truncated after 1,000 characters.
   /// </summary>
   /// <value>Answer body. Truncated after 1,000 characters.</value>
-  [DataMember(Name = "answer", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "answer")]
   public string Answer { get; set; }
 
   /// <summary>
   /// Request URL.
   /// </summary>
   /// <value>Request URL.</value>
-  [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "url")]
   public string Url { get; set; }
 
   /// <summary>
   /// IP address of the client that performed the request.
   /// </summary>
   /// <value>IP address of the client that performed the request.</value>
-  [DataMember(Name = "ip", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "ip")]
   public string Ip { get; set; }
 
   /// <summary>
   /// Request headers (API key is obfuscated).
   /// </summary>
   /// <value>Request headers (API key is obfuscated).</value>
-  [DataMember(Name = "query_headers", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "query_headers")]
   public string QueryHeaders { get; set; }
 
   /// <summary>
   /// SHA1 signature of the log entry.
   /// </summary>
   /// <value>SHA1 signature of the log entry.</value>
-  [DataMember(Name = "sha1", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "sha1")]
   public string Sha1 { get; set; }
 
   /// <summary>
   /// Number of API calls.
   /// </summary>
   /// <value>Number of API calls.</value>
-  [DataMember(Name = "nb_api_calls", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "nb_api_calls")]
   public string NbApiCalls { get; set; }
 
   /// <summary>
   /// Processing time for the query. Doesn't include network time.
   /// </summary>
   /// <value>Processing time for the query. Doesn't include network time.</value>
-  [DataMember(Name = "processing_time_ms", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "processing_time_ms")]
   public string ProcessingTimeMs { get; set; }
 
   /// <summary>
   /// Index targeted by the query.
   /// </summary>
   /// <value>Index targeted by the query.</value>
-  [DataMember(Name = "index", EmitDefaultValue = false)]
-  public string Index { get; set; }
+  [DataMember(Name = "index")]
+  public string? Index { get; set; }
 
   /// <summary>
   /// Query parameters sent with the request.
   /// </summary>
   /// <value>Query parameters sent with the request.</value>
-  [DataMember(Name = "query_params", EmitDefaultValue = false)]
-  public string QueryParams { get; set; }
+  [DataMember(Name = "query_params")]
+  public string? QueryParams { get; set; }
 
   /// <summary>
   /// Number of hits returned for the query.
   /// </summary>
   /// <value>Number of hits returned for the query.</value>
-  [DataMember(Name = "query_nb_hits", EmitDefaultValue = false)]
-  public string QueryNbHits { get; set; }
+  [DataMember(Name = "query_nb_hits")]
+  public string? QueryNbHits { get; set; }
 
   /// <summary>
   /// Performed queries for the given request.
   /// </summary>
   /// <value>Performed queries for the given request.</value>
-  [DataMember(Name = "inner_queries", EmitDefaultValue = false)]
+  [DataMember(Name = "inner_queries")]
   public List<LogQuery> InnerQueries { get; set; }
 
   /// <summary>

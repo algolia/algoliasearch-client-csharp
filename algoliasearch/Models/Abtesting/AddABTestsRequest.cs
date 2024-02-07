@@ -48,21 +48,21 @@ public partial class AddABTestsRequest
   /// A/B test name.
   /// </summary>
   /// <value>A/B test name.</value>
-  [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "name")]
   public string Name { get; set; }
 
   /// <summary>
   /// A/B test variants.
   /// </summary>
   /// <value>A/B test variants.</value>
-  [DataMember(Name = "variants", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "variants")]
   public List<AddABTestsVariant> Variants { get; set; }
 
   /// <summary>
   /// End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
   /// <value>End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-  [DataMember(Name = "endAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "endAt")]
   public string EndAt { get; set; }
 
   /// <summary>

@@ -156,15 +156,9 @@ public partial class TaskCreateTrigger : AbstractSchema
   /// <returns>An instance of TaskCreateTrigger</returns>
   public static TaskCreateTrigger FromJson(string jsonString)
   {
-    TaskCreateTrigger newTaskCreateTrigger = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newTaskCreateTrigger;
-    }
     try
     {
-      return new TaskCreateTrigger(JsonConvert.DeserializeObject<OnDemandTriggerInput>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TaskCreateTrigger(JsonConvert.DeserializeObject<OnDemandTriggerInput>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -173,7 +167,7 @@ public partial class TaskCreateTrigger : AbstractSchema
     }
     try
     {
-      return new TaskCreateTrigger(JsonConvert.DeserializeObject<ScheduleTriggerInput>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TaskCreateTrigger(JsonConvert.DeserializeObject<ScheduleTriggerInput>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -182,7 +176,7 @@ public partial class TaskCreateTrigger : AbstractSchema
     }
     try
     {
-      return new TaskCreateTrigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TaskCreateTrigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -208,7 +202,7 @@ public class TaskCreateTriggerJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(TaskCreateTrigger).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -223,7 +217,7 @@ public class TaskCreateTriggerJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

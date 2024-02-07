@@ -35,7 +35,7 @@ public partial class BigCommerceChannel
   /// Initializes a new instance of the BigCommerceChannel class.
   /// </summary>
   /// <param name="id">The ID of the bigcommerce channel. (required).</param>
-  public BigCommerceChannel(int? id)
+  public BigCommerceChannel(int id)
   {
     Id = id;
   }
@@ -44,14 +44,14 @@ public partial class BigCommerceChannel
   /// The ID of the bigcommerce channel.
   /// </summary>
   /// <value>The ID of the bigcommerce channel.</value>
-  [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = false)]
-  public int? Id { get; set; }
+  [DataMember(Name = "id")]
+  public int Id { get; set; }
 
   /// <summary>
   /// An array of currencies for the given channel `ID`, a currency is a trigram string that represents the currency code.
   /// </summary>
   /// <value>An array of currencies for the given channel `ID`, a currency is a trigram string that represents the currency code.</value>
-  [DataMember(Name = "currencies", EmitDefaultValue = false)]
+  [DataMember(Name = "currencies")]
   public List<string> Currencies { get; set; }
 
   /// <summary>

@@ -36,8 +36,8 @@ public partial class InfrastructureResponse
   /// <summary>
   /// Gets or Sets Metrics
   /// </summary>
-  [DataMember(Name = "metrics", EmitDefaultValue = false)]
-  public InfrastructureResponseMetrics Metrics { get; set; }
+  [DataMember(Name = "metrics")]
+  public InfrastructureResponseMetrics? Metrics { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

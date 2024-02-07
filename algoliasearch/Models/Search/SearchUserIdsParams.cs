@@ -44,28 +44,28 @@ public partial class SearchUserIdsParams
   /// Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.
   /// </summary>
   /// <value>Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.</value>
-  [DataMember(Name = "query", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "query")]
   public string Query { get; set; }
 
   /// <summary>
   /// Cluster name.
   /// </summary>
   /// <value>Cluster name.</value>
-  [DataMember(Name = "clusterName", EmitDefaultValue = false)]
-  public string ClusterName { get; set; }
+  [DataMember(Name = "clusterName")]
+  public string? ClusterName { get; set; }
 
   /// <summary>
   /// Page to retrieve (the first page is `0`, not `1`).
   /// </summary>
   /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
-  [DataMember(Name = "page", EmitDefaultValue = false)]
+  [DataMember(Name = "page")]
   public int? Page { get; set; }
 
   /// <summary>
   /// Number of hits per page.
   /// </summary>
   /// <value>Number of hits per page.</value>
-  [DataMember(Name = "hitsPerPage", EmitDefaultValue = false)]
+  [DataMember(Name = "hitsPerPage")]
   public int? HitsPerPage { get; set; }
 
   /// <summary>

@@ -37,218 +37,218 @@ public partial class BaseSearchParamsWithoutQuery
   /// Overrides the query parameter and performs a more generic search.
   /// </summary>
   /// <value>Overrides the query parameter and performs a more generic search.</value>
-  [DataMember(Name = "similarQuery", EmitDefaultValue = false)]
-  public string SimilarQuery { get; set; }
+  [DataMember(Name = "similarQuery")]
+  public string? SimilarQuery { get; set; }
 
   /// <summary>
   /// [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. 
   /// </summary>
   /// <value>[Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. </value>
-  [DataMember(Name = "filters", EmitDefaultValue = false)]
-  public string Filters { get; set; }
+  [DataMember(Name = "filters")]
+  public string? Filters { get; set; }
 
   /// <summary>
   /// Gets or Sets FacetFilters
   /// </summary>
-  [DataMember(Name = "facetFilters", EmitDefaultValue = false)]
-  public FacetFilters FacetFilters { get; set; }
+  [DataMember(Name = "facetFilters")]
+  public FacetFilters? FacetFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets OptionalFilters
   /// </summary>
-  [DataMember(Name = "optionalFilters", EmitDefaultValue = false)]
-  public OptionalFilters OptionalFilters { get; set; }
+  [DataMember(Name = "optionalFilters")]
+  public OptionalFilters? OptionalFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets NumericFilters
   /// </summary>
-  [DataMember(Name = "numericFilters", EmitDefaultValue = false)]
-  public NumericFilters NumericFilters { get; set; }
+  [DataMember(Name = "numericFilters")]
+  public NumericFilters? NumericFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets TagFilters
   /// </summary>
-  [DataMember(Name = "tagFilters", EmitDefaultValue = false)]
-  public TagFilters TagFilters { get; set; }
+  [DataMember(Name = "tagFilters")]
+  public TagFilters? TagFilters { get; set; }
 
   /// <summary>
   /// Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed. 
   /// </summary>
   /// <value>Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed. </value>
-  [DataMember(Name = "sumOrFiltersScores", EmitDefaultValue = false)]
+  [DataMember(Name = "sumOrFiltersScores")]
   public bool? SumOrFiltersScores { get; set; }
 
   /// <summary>
   /// Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
   /// </summary>
   /// <value>Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).</value>
-  [DataMember(Name = "restrictSearchableAttributes", EmitDefaultValue = false)]
+  [DataMember(Name = "restrictSearchableAttributes")]
   public List<string> RestrictSearchableAttributes { get; set; }
 
   /// <summary>
   /// Returns [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts), their facet values, and the number of matching facet values.
   /// </summary>
   /// <value>Returns [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts), their facet values, and the number of matching facet values.</value>
-  [DataMember(Name = "facets", EmitDefaultValue = false)]
+  [DataMember(Name = "facets")]
   public List<string> Facets { get; set; }
 
   /// <summary>
   /// Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the `afterDistinct` [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of `attributesForFaceting` allows for more granular control. 
   /// </summary>
   /// <value>Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the `afterDistinct` [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of `attributesForFaceting` allows for more granular control. </value>
-  [DataMember(Name = "facetingAfterDistinct", EmitDefaultValue = false)]
+  [DataMember(Name = "facetingAfterDistinct")]
   public bool? FacetingAfterDistinct { get; set; }
 
   /// <summary>
   /// Page to retrieve (the first page is `0`, not `1`).
   /// </summary>
   /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
-  [DataMember(Name = "page", EmitDefaultValue = false)]
+  [DataMember(Name = "page")]
   public int? Page { get; set; }
 
   /// <summary>
   /// Specifies the offset of the first hit to return. > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). 
   /// </summary>
   /// <value>Specifies the offset of the first hit to return. > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). </value>
-  [DataMember(Name = "offset", EmitDefaultValue = false)]
+  [DataMember(Name = "offset")]
   public int? Offset { get; set; }
 
   /// <summary>
   /// Sets the number of hits to retrieve (for use with `offset`). > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). 
   /// </summary>
   /// <value>Sets the number of hits to retrieve (for use with `offset`). > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). </value>
-  [DataMember(Name = "length", EmitDefaultValue = false)]
+  [DataMember(Name = "length")]
   public int? Length { get; set; }
 
   /// <summary>
   /// Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
   /// </summary>
   /// <value>Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.</value>
-  [DataMember(Name = "aroundLatLng", EmitDefaultValue = false)]
-  public string AroundLatLng { get; set; }
+  [DataMember(Name = "aroundLatLng")]
+  public string? AroundLatLng { get; set; }
 
   /// <summary>
   /// Search for entries around a location. The location is automatically computed from the requester's IP address.
   /// </summary>
   /// <value>Search for entries around a location. The location is automatically computed from the requester's IP address.</value>
-  [DataMember(Name = "aroundLatLngViaIP", EmitDefaultValue = false)]
+  [DataMember(Name = "aroundLatLngViaIP")]
   public bool? AroundLatLngViaIP { get; set; }
 
   /// <summary>
   /// Gets or Sets AroundRadius
   /// </summary>
-  [DataMember(Name = "aroundRadius", EmitDefaultValue = false)]
-  public AroundRadius AroundRadius { get; set; }
+  [DataMember(Name = "aroundRadius")]
+  public AroundRadius? AroundRadius { get; set; }
 
   /// <summary>
   /// Gets or Sets AroundPrecision
   /// </summary>
-  [DataMember(Name = "aroundPrecision", EmitDefaultValue = false)]
-  public AroundPrecision AroundPrecision { get; set; }
+  [DataMember(Name = "aroundPrecision")]
+  public AroundPrecision? AroundPrecision { get; set; }
 
   /// <summary>
   /// Minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set.
   /// </summary>
   /// <value>Minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set.</value>
-  [DataMember(Name = "minimumAroundRadius", EmitDefaultValue = false)]
+  [DataMember(Name = "minimumAroundRadius")]
   public int? MinimumAroundRadius { get; set; }
 
   /// <summary>
   /// Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
   /// </summary>
   /// <value>Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).</value>
-  [DataMember(Name = "insideBoundingBox", EmitDefaultValue = false)]
+  [DataMember(Name = "insideBoundingBox")]
   public List<List<double>> InsideBoundingBox { get; set; }
 
   /// <summary>
   /// Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
   /// </summary>
   /// <value>Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).</value>
-  [DataMember(Name = "insidePolygon", EmitDefaultValue = false)]
+  [DataMember(Name = "insidePolygon")]
   public List<List<double>> InsidePolygon { get; set; }
 
   /// <summary>
   /// Changes the default values of parameters that work best for a natural language query, such as `ignorePlurals`, `removeStopWords`, `removeWordsIfNoResults`, `analyticsTags`, and `ruleContexts`. These parameters work well together when the query consists of fuller natural language strings instead of keywords, for example when processing voice search queries.
   /// </summary>
   /// <value>Changes the default values of parameters that work best for a natural language query, such as `ignorePlurals`, `removeStopWords`, `removeWordsIfNoResults`, `analyticsTags`, and `ruleContexts`. These parameters work well together when the query consists of fuller natural language strings instead of keywords, for example when processing voice search queries.</value>
-  [DataMember(Name = "naturalLanguages", EmitDefaultValue = false)]
+  [DataMember(Name = "naturalLanguages")]
   public List<string> NaturalLanguages { get; set; }
 
   /// <summary>
   /// Assigns [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) to search queries.
   /// </summary>
   /// <value>Assigns [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) to search queries.</value>
-  [DataMember(Name = "ruleContexts", EmitDefaultValue = false)]
+  [DataMember(Name = "ruleContexts")]
   public List<string> RuleContexts { get; set; }
 
   /// <summary>
   /// Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).
   /// </summary>
   /// <value>Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).</value>
-  [DataMember(Name = "personalizationImpact", EmitDefaultValue = false)]
+  [DataMember(Name = "personalizationImpact")]
   public int? PersonalizationImpact { get; set; }
 
   /// <summary>
   /// Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
   /// </summary>
   /// <value>Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.</value>
-  [DataMember(Name = "userToken", EmitDefaultValue = false)]
-  public string UserToken { get; set; }
+  [DataMember(Name = "userToken")]
+  public string? UserToken { get; set; }
 
   /// <summary>
   /// Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).
   /// </summary>
   /// <value>Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).</value>
-  [DataMember(Name = "getRankingInfo", EmitDefaultValue = false)]
+  [DataMember(Name = "getRankingInfo")]
   public bool? GetRankingInfo { get; set; }
 
   /// <summary>
   /// Enriches the API's response with information about how the query was processed.
   /// </summary>
   /// <value>Enriches the API's response with information about how the query was processed.</value>
-  [DataMember(Name = "explain", EmitDefaultValue = false)]
+  [DataMember(Name = "explain")]
   public List<string> Explain { get; set; }
 
   /// <summary>
   /// Whether to take into account an index's synonyms for a particular search.
   /// </summary>
   /// <value>Whether to take into account an index's synonyms for a particular search.</value>
-  [DataMember(Name = "synonyms", EmitDefaultValue = false)]
+  [DataMember(Name = "synonyms")]
   public bool? Synonyms { get; set; }
 
   /// <summary>
   /// Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).
   /// </summary>
   /// <value>Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).</value>
-  [DataMember(Name = "clickAnalytics", EmitDefaultValue = false)]
+  [DataMember(Name = "clickAnalytics")]
   public bool? ClickAnalytics { get; set; }
 
   /// <summary>
   /// Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).
   /// </summary>
   /// <value>Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).</value>
-  [DataMember(Name = "analytics", EmitDefaultValue = false)]
+  [DataMember(Name = "analytics")]
   public bool? Analytics { get; set; }
 
   /// <summary>
   /// Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
   /// </summary>
   /// <value>Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).</value>
-  [DataMember(Name = "analyticsTags", EmitDefaultValue = false)]
+  [DataMember(Name = "analyticsTags")]
   public List<string> AnalyticsTags { get; set; }
 
   /// <summary>
   /// Whether to include or exclude a query from the processing-time percentile computation.
   /// </summary>
   /// <value>Whether to include or exclude a query from the processing-time percentile computation.</value>
-  [DataMember(Name = "percentileComputation", EmitDefaultValue = false)]
+  [DataMember(Name = "percentileComputation")]
   public bool? PercentileComputation { get; set; }
 
   /// <summary>
   /// Incidates whether this search will be considered in A/B testing.
   /// </summary>
   /// <value>Incidates whether this search will be considered in A/B testing.</value>
-  [DataMember(Name = "enableABTest", EmitDefaultValue = false)]
+  [DataMember(Name = "enableABTest")]
   public bool? EnableABTest { get; set; }
 
   /// <summary>

@@ -36,14 +36,14 @@ public partial class FacetOrdering
   /// <summary>
   /// Gets or Sets Facets
   /// </summary>
-  [DataMember(Name = "facets", EmitDefaultValue = false)]
-  public Facets Facets { get; set; }
+  [DataMember(Name = "facets")]
+  public Facets? Facets { get; set; }
 
   /// <summary>
   /// Ordering of facet values within an individual facet.
   /// </summary>
   /// <value>Ordering of facet values within an individual facet.</value>
-  [DataMember(Name = "values", EmitDefaultValue = false)]
+  [DataMember(Name = "values")]
   public Dictionary<string, Value> Values { get; set; }
 
   /// <summary>

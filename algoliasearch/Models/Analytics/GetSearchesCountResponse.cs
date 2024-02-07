@@ -36,7 +36,7 @@ public partial class GetSearchesCountResponse
   /// </summary>
   /// <param name="count">Number of occurrences. (required).</param>
   /// <param name="dates">Search events with their associated dates and hit counts. (required).</param>
-  public GetSearchesCountResponse(int? count, List<SearchEvent> dates)
+  public GetSearchesCountResponse(int count, List<SearchEvent> dates)
   {
     Count = count;
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
@@ -46,14 +46,14 @@ public partial class GetSearchesCountResponse
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Search events with their associated dates and hit counts.
   /// </summary>
   /// <value>Search events with their associated dates and hit counts.</value>
-  [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "dates")]
   public List<SearchEvent> Dates { get; set; }
 
   /// <summary>

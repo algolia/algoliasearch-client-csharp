@@ -187,15 +187,9 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <returns>An instance of RecommendationsRequest</returns>
   public static RecommendationsRequest FromJson(string jsonString)
   {
-    RecommendationsRequest newRecommendationsRequest = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newRecommendationsRequest;
-    }
     try
     {
-      return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingItemsQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingItemsQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -204,7 +198,7 @@ public partial class RecommendationsRequest : AbstractSchema
     }
     try
     {
-      return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingFacetsQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingFacetsQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -213,7 +207,7 @@ public partial class RecommendationsRequest : AbstractSchema
     }
     try
     {
-      return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendationsQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendationsQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -222,7 +216,7 @@ public partial class RecommendationsRequest : AbstractSchema
     }
     try
     {
-      return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -248,7 +242,7 @@ public class RecommendationsRequestJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(RecommendationsRequest).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -263,7 +257,7 @@ public class RecommendationsRequestJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

@@ -36,13 +36,13 @@ public partial class AroundPrecisionFromValueInner
   /// <summary>
   /// Gets or Sets From
   /// </summary>
-  [DataMember(Name = "from", EmitDefaultValue = false)]
+  [DataMember(Name = "from")]
   public int? From { get; set; }
 
   /// <summary>
   /// Gets or Sets Value
   /// </summary>
-  [DataMember(Name = "value", EmitDefaultValue = false)]
+  [DataMember(Name = "value")]
   public int? Value { get; set; }
 
   /// <summary>

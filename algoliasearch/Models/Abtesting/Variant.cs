@@ -52,7 +52,7 @@ public partial class Variant
   /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
   /// <param name="userCount">Number of users during the A/B test. (required).</param>
   /// <param name="trackedUserCount">Number of users that performed a tracked search during the A/B test. (required).</param>
-  public Variant(int? addToCartCount, double addToCartRate, int? averageClickPosition, int? clickCount, double clickThroughRate, int? conversionCount, double conversionRate, Dictionary<string, CurrenciesValue> currencies, string description, string index, int? noResultCount, int? purchaseCount, double purchaseRate, int? searchCount, int? trackedSearchCount, int? trafficPercentage, int? userCount, int? trackedUserCount)
+  public Variant(int addToCartCount, double addToCartRate, int averageClickPosition, int clickCount, double clickThroughRate, int conversionCount, double conversionRate, Dictionary<string, CurrenciesValue> currencies, string description, string index, int noResultCount, int purchaseCount, double purchaseRate, int searchCount, int trackedSearchCount, int trafficPercentage, int userCount, int trackedUserCount)
   {
     AddToCartCount = addToCartCount;
     AddToCartRate = addToCartRate;
@@ -78,133 +78,133 @@ public partial class Variant
   /// Number of add-to-cart events for this variant.
   /// </summary>
   /// <value>Number of add-to-cart events for this variant.</value>
-  [DataMember(Name = "addToCartCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? AddToCartCount { get; set; }
+  [DataMember(Name = "addToCartCount")]
+  public int AddToCartCount { get; set; }
 
   /// <summary>
   /// Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate).
   /// </summary>
   /// <value>Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate).</value>
-  [DataMember(Name = "addToCartRate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "addToCartRate")]
   public double AddToCartRate { get; set; }
 
   /// <summary>
   /// Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).
   /// </summary>
   /// <value>Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).</value>
-  [DataMember(Name = "averageClickPosition", IsRequired = true, EmitDefaultValue = false)]
-  public int? AverageClickPosition { get; set; }
+  [DataMember(Name = "averageClickPosition")]
+  public int AverageClickPosition { get; set; }
 
   /// <summary>
   /// Number of click events for this variant.
   /// </summary>
   /// <value>Number of click events for this variant.</value>
-  [DataMember(Name = "clickCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? ClickCount { get; set; }
+  [DataMember(Name = "clickCount")]
+  public int ClickCount { get; set; }
 
   /// <summary>
   /// Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
   /// </summary>
   /// <value>Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).</value>
-  [DataMember(Name = "clickThroughRate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "clickThroughRate")]
   public double ClickThroughRate { get; set; }
 
   /// <summary>
   /// Number of click events for this variant.
   /// </summary>
   /// <value>Number of click events for this variant.</value>
-  [DataMember(Name = "conversionCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? ConversionCount { get; set; }
+  [DataMember(Name = "conversionCount")]
+  public int ConversionCount { get; set; }
 
   /// <summary>
   /// Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
   /// </summary>
   /// <value>Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).</value>
-  [DataMember(Name = "conversionRate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "conversionRate")]
   public double ConversionRate { get; set; }
 
   /// <summary>
   /// A/B test currencies.
   /// </summary>
   /// <value>A/B test currencies.</value>
-  [DataMember(Name = "currencies", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "currencies")]
   public Dictionary<string, CurrenciesValue> Currencies { get; set; }
 
   /// <summary>
   /// A/B test description.
   /// </summary>
   /// <value>A/B test description.</value>
-  [DataMember(Name = "description", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "description")]
   public string Description { get; set; }
 
   /// <summary>
   /// Gets or Sets FilterEffects
   /// </summary>
-  [DataMember(Name = "filterEffects", EmitDefaultValue = false)]
-  public FilterEffects FilterEffects { get; set; }
+  [DataMember(Name = "filterEffects")]
+  public FilterEffects? FilterEffects { get; set; }
 
   /// <summary>
   /// A/B test index.
   /// </summary>
   /// <value>A/B test index.</value>
-  [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "index")]
   public string Index { get; set; }
 
   /// <summary>
   /// Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.
   /// </summary>
   /// <value>Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.</value>
-  [DataMember(Name = "noResultCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? NoResultCount { get; set; }
+  [DataMember(Name = "noResultCount")]
+  public int NoResultCount { get; set; }
 
   /// <summary>
   /// Number of purchase events for this variant.
   /// </summary>
   /// <value>Number of purchase events for this variant.</value>
-  [DataMember(Name = "purchaseCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? PurchaseCount { get; set; }
+  [DataMember(Name = "purchaseCount")]
+  public int PurchaseCount { get; set; }
 
   /// <summary>
   /// Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).
   /// </summary>
   /// <value>Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).</value>
-  [DataMember(Name = "purchaseRate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "purchaseRate")]
   public double PurchaseRate { get; set; }
 
   /// <summary>
   /// Number of searches carried out during the A/B test.
   /// </summary>
   /// <value>Number of searches carried out during the A/B test.</value>
-  [DataMember(Name = "searchCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? SearchCount { get; set; }
+  [DataMember(Name = "searchCount")]
+  public int SearchCount { get; set; }
 
   /// <summary>
   /// Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
-  [DataMember(Name = "trackedSearchCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? TrackedSearchCount { get; set; }
+  [DataMember(Name = "trackedSearchCount")]
+  public int TrackedSearchCount { get; set; }
 
   /// <summary>
   /// A/B test traffic percentage.
   /// </summary>
   /// <value>A/B test traffic percentage.</value>
-  [DataMember(Name = "trafficPercentage", IsRequired = true, EmitDefaultValue = false)]
-  public int? TrafficPercentage { get; set; }
+  [DataMember(Name = "trafficPercentage")]
+  public int TrafficPercentage { get; set; }
 
   /// <summary>
   /// Number of users during the A/B test.
   /// </summary>
   /// <value>Number of users during the A/B test.</value>
-  [DataMember(Name = "userCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? UserCount { get; set; }
+  [DataMember(Name = "userCount")]
+  public int UserCount { get; set; }
 
   /// <summary>
   /// Number of users that performed a tracked search during the A/B test.
   /// </summary>
   /// <value>Number of users that performed a tracked search during the A/B test.</value>
-  [DataMember(Name = "trackedUserCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? TrackedUserCount { get; set; }
+  [DataMember(Name = "trackedUserCount")]
+  public int TrackedUserCount { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

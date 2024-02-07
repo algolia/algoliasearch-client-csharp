@@ -37,7 +37,7 @@ public partial class SemanticSearch
   /// Indices from which to collect click and conversion events. If null, the current index and replica group will be used as the event source.
   /// </summary>
   /// <value>Indices from which to collect click and conversion events. If null, the current index and replica group will be used as the event source.</value>
-  [DataMember(Name = "eventSources", EmitDefaultValue = false)]
+  [DataMember(Name = "eventSources")]
   public List<string> EventSources { get; set; }
 
   /// <summary>

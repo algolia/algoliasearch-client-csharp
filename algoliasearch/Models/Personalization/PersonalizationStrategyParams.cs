@@ -37,7 +37,7 @@ public partial class PersonalizationStrategyParams
   /// <param name="eventScoring">Scores associated with the events. (required).</param>
   /// <param name="facetScoring">Scores associated with the facets. (required).</param>
   /// <param name="personalizationImpact">The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled). (required).</param>
-  public PersonalizationStrategyParams(List<EventScoring> eventScoring, List<FacetScoring> facetScoring, int? personalizationImpact)
+  public PersonalizationStrategyParams(List<EventScoring> eventScoring, List<FacetScoring> facetScoring, int personalizationImpact)
   {
     EventScoring = eventScoring ?? throw new ArgumentNullException(nameof(eventScoring));
     FacetScoring = facetScoring ?? throw new ArgumentNullException(nameof(facetScoring));
@@ -48,22 +48,22 @@ public partial class PersonalizationStrategyParams
   /// Scores associated with the events.
   /// </summary>
   /// <value>Scores associated with the events.</value>
-  [DataMember(Name = "eventScoring", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "eventScoring")]
   public List<EventScoring> EventScoring { get; set; }
 
   /// <summary>
   /// Scores associated with the facets.
   /// </summary>
   /// <value>Scores associated with the facets.</value>
-  [DataMember(Name = "facetScoring", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "facetScoring")]
   public List<FacetScoring> FacetScoring { get; set; }
 
   /// <summary>
   /// The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled).
   /// </summary>
   /// <value>The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled).</value>
-  [DataMember(Name = "personalizationImpact", IsRequired = true, EmitDefaultValue = false)]
-  public int? PersonalizationImpact { get; set; }
+  [DataMember(Name = "personalizationImpact")]
+  public int PersonalizationImpact { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

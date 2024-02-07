@@ -37,15 +37,15 @@ public partial class AuthAlgoliaPartial
   /// Algolia Application ID.
   /// </summary>
   /// <value>Algolia Application ID.</value>
-  [DataMember(Name = "appID", EmitDefaultValue = false)]
-  public string AppID { get; set; }
+  [DataMember(Name = "appID")]
+  public string? AppID { get; set; }
 
   /// <summary>
   /// Algolia API Key, with the correct rights to push to an index and change settings.
   /// </summary>
   /// <value>Algolia API Key, with the correct rights to push to an index and change settings.</value>
-  [DataMember(Name = "apiKey", EmitDefaultValue = false)]
-  public string ApiKey { get; set; }
+  [DataMember(Name = "apiKey")]
+  public string? ApiKey { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

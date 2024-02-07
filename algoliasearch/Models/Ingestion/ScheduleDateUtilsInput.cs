@@ -35,7 +35,7 @@ public partial class ScheduleDateUtilsInput
   /// Initializes a new instance of the ScheduleDateUtilsInput class.
   /// </summary>
   /// <param name="timeframe">The timeframe of the extraction, in number of days from today. (required).</param>
-  public ScheduleDateUtilsInput(int? timeframe)
+  public ScheduleDateUtilsInput(int timeframe)
   {
     Timeframe = timeframe;
   }
@@ -44,8 +44,8 @@ public partial class ScheduleDateUtilsInput
   /// The timeframe of the extraction, in number of days from today.
   /// </summary>
   /// <value>The timeframe of the extraction, in number of days from today.</value>
-  [DataMember(Name = "timeframe", IsRequired = true, EmitDefaultValue = false)]
-  public int? Timeframe { get; set; }
+  [DataMember(Name = "timeframe")]
+  public int Timeframe { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

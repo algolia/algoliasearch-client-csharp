@@ -37,14 +37,14 @@ public partial class SourceUpdateCommercetools
   /// Unique and immutable key of the referenced Store.
   /// </summary>
   /// <value>Unique and immutable key of the referenced Store.</value>
-  [DataMember(Name = "storeKeys", EmitDefaultValue = false)]
+  [DataMember(Name = "storeKeys")]
   public List<string> StoreKeys { get; set; }
 
   /// <summary>
   /// Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"]. 
   /// </summary>
   /// <value>Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"]. </value>
-  [DataMember(Name = "locales", EmitDefaultValue = false)]
+  [DataMember(Name = "locales")]
   public List<string> Locales { get; set; }
 
   /// <summary>

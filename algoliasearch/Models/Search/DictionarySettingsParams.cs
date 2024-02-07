@@ -43,7 +43,7 @@ public partial class DictionarySettingsParams
   /// <summary>
   /// Gets or Sets DisableStandardEntries
   /// </summary>
-  [DataMember(Name = "disableStandardEntries", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "disableStandardEntries")]
   public StandardEntries DisableStandardEntries { get; set; }
 
   /// <summary>

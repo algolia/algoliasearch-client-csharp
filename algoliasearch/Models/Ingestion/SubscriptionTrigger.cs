@@ -30,7 +30,7 @@ public partial class SubscriptionTrigger
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public SubscriptionTriggerType Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the SubscriptionTrigger class.

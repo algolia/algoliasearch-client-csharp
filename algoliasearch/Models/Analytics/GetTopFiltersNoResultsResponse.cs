@@ -44,7 +44,7 @@ public partial class GetTopFiltersNoResultsResponse
   /// Filters with no results.
   /// </summary>
   /// <value>Filters with no results.</value>
-  [DataMember(Name = "values", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "values")]
   public List<GetTopFiltersNoResultsValues> Values { get; set; }
 
   /// <summary>

@@ -43,7 +43,7 @@ public partial class AuthAPIKey
   /// <summary>
   /// Gets or Sets Key
   /// </summary>
-  [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "key")]
   public string Key { get; set; }
 
   /// <summary>

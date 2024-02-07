@@ -30,13 +30,13 @@ public partial class Event
   /// <summary>
   /// Gets or Sets Status
   /// </summary>
-  [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "status")]
   public EventStatus Status { get; set; }
 
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public EventType Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the Event class.
@@ -52,7 +52,7 @@ public partial class Event
   /// <param name="type">type (required).</param>
   /// <param name="batchSize">The extracted record batch size. (required).</param>
   /// <param name="publishedAt">Date of publish (RFC3339 format). (required).</param>
-  public Event(string eventID, string runID, EventStatus status, EventType type, int? batchSize, string publishedAt)
+  public Event(string eventID, string runID, EventStatus status, EventType type, int batchSize, string publishedAt)
   {
     EventID = eventID ?? throw new ArgumentNullException(nameof(eventID));
     RunID = runID ?? throw new ArgumentNullException(nameof(runID));
@@ -66,41 +66,41 @@ public partial class Event
   /// The event UUID.
   /// </summary>
   /// <value>The event UUID.</value>
-  [DataMember(Name = "eventID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "eventID")]
   public string EventID { get; set; }
 
   /// <summary>
   /// The run UUID.
   /// </summary>
   /// <value>The run UUID.</value>
-  [DataMember(Name = "runID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "runID")]
   public string RunID { get; set; }
 
   /// <summary>
   /// The parent event, the cause of this event.
   /// </summary>
   /// <value>The parent event, the cause of this event.</value>
-  [DataMember(Name = "parentID", EmitDefaultValue = false)]
-  public string ParentID { get; set; }
+  [DataMember(Name = "parentID")]
+  public string? ParentID { get; set; }
 
   /// <summary>
   /// The extracted record batch size.
   /// </summary>
   /// <value>The extracted record batch size.</value>
-  [DataMember(Name = "batchSize", IsRequired = true, EmitDefaultValue = false)]
-  public int? BatchSize { get; set; }
+  [DataMember(Name = "batchSize")]
+  public int BatchSize { get; set; }
 
   /// <summary>
   /// Gets or Sets Data
   /// </summary>
-  [DataMember(Name = "data", EmitDefaultValue = false)]
+  [DataMember(Name = "data")]
   public Dictionary<string, object> Data { get; set; }
 
   /// <summary>
   /// Date of publish (RFC3339 format).
   /// </summary>
   /// <value>Date of publish (RFC3339 format).</value>
-  [DataMember(Name = "publishedAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "publishedAt")]
   public string PublishedAt { get; set; }
 
   /// <summary>

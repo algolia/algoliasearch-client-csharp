@@ -44,7 +44,7 @@ public partial class TriggerUpdateInput
   /// A cron expression that represent at which regularity the task should run.
   /// </summary>
   /// <value>A cron expression that represent at which regularity the task should run.</value>
-  [DataMember(Name = "cron", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "cron")]
   public string Cron { get; set; }
 
   /// <summary>

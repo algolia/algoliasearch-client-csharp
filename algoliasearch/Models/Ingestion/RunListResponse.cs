@@ -47,19 +47,19 @@ public partial class RunListResponse
   /// <summary>
   /// Gets or Sets Runs
   /// </summary>
-  [DataMember(Name = "runs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "runs")]
   public List<Run> Runs { get; set; }
 
   /// <summary>
   /// Gets or Sets Pagination
   /// </summary>
-  [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "pagination")]
   public Pagination Pagination { get; set; }
 
   /// <summary>
   /// Gets or Sets Window
   /// </summary>
-  [DataMember(Name = "window", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "window")]
   public Window Window { get; set; }
 
   /// <summary>

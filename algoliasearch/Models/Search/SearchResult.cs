@@ -125,15 +125,9 @@ public partial class SearchResult<T> : AbstractSchema
   /// <returns>An instance of SearchResult</returns>
   public static SearchResult<T> FromJson(string jsonString)
   {
-    SearchResult<T> newSearchResult = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newSearchResult;
-    }
     try
     {
-      return new SearchResult<T>(JsonConvert.DeserializeObject<SearchForFacetValuesResponse>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SearchResult<T>(JsonConvert.DeserializeObject<SearchForFacetValuesResponse>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class SearchResult<T> : AbstractSchema
     }
     try
     {
-      return new SearchResult<T>(JsonConvert.DeserializeObject<SearchResponse<T>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SearchResult<T>(JsonConvert.DeserializeObject<SearchResponse<T>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class SearchResultJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(SearchResult<object>).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class SearchResultJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

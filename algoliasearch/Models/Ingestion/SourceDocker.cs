@@ -30,13 +30,13 @@ public partial class SourceDocker
   /// <summary>
   /// Gets or Sets ImageType
   /// </summary>
-  [DataMember(Name = "imageType", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "imageType")]
   public DockerImageType ImageType { get; set; }
 
   /// <summary>
   /// Gets or Sets Registry
   /// </summary>
-  [DataMember(Name = "registry", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "registry")]
   public DockerRegistry Registry { get; set; }
   /// <summary>
   /// Initializes a new instance of the SourceDocker class.
@@ -62,21 +62,21 @@ public partial class SourceDocker
   /// The name of the image to pull.
   /// </summary>
   /// <value>The name of the image to pull.</value>
-  [DataMember(Name = "image", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "image")]
   public string Image { get; set; }
 
   /// <summary>
   /// The version of the image, defaults to `latest`.
   /// </summary>
   /// <value>The version of the image, defaults to `latest`.</value>
-  [DataMember(Name = "version", EmitDefaultValue = false)]
-  public string VarVersion { get; set; }
+  [DataMember(Name = "version")]
+  public string? VarVersion { get; set; }
 
   /// <summary>
   /// The configuration of the spec.
   /// </summary>
   /// <value>The configuration of the spec.</value>
-  [DataMember(Name = "configuration", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "configuration")]
   public object VarConfiguration { get; set; }
 
   /// <summary>

@@ -37,22 +37,22 @@ public partial class LogQuery
   /// Index targeted by the query.
   /// </summary>
   /// <value>Index targeted by the query.</value>
-  [DataMember(Name = "index_name", EmitDefaultValue = false)]
-  public string IndexName { get; set; }
+  [DataMember(Name = "index_name")]
+  public string? IndexName { get; set; }
 
   /// <summary>
   /// User identifier.
   /// </summary>
   /// <value>User identifier.</value>
-  [DataMember(Name = "user_token", EmitDefaultValue = false)]
-  public string UserToken { get; set; }
+  [DataMember(Name = "user_token")]
+  public string? UserToken { get; set; }
 
   /// <summary>
   /// Unique query identifier.
   /// </summary>
   /// <value>Unique query identifier.</value>
-  [DataMember(Name = "query_id", EmitDefaultValue = false)]
-  public string QueryId { get; set; }
+  [DataMember(Name = "query_id")]
+  public string? QueryId { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

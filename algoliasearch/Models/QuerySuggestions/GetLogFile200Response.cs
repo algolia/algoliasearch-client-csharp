@@ -30,8 +30,8 @@ public partial class GetLogFile200Response
   /// <summary>
   /// Gets or Sets Level
   /// </summary>
-  [DataMember(Name = "level", EmitDefaultValue = false)]
-  public LogLevel Level { get; set; }
+  [DataMember(Name = "level")]
+  public LogLevel? Level { get; set; }
   /// <summary>
   /// Initializes a new instance of the GetLogFile200Response class.
   /// </summary>
@@ -43,21 +43,21 @@ public partial class GetLogFile200Response
   /// Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
   /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-  [DataMember(Name = "timestamp", EmitDefaultValue = false)]
-  public string Timestamp { get; set; }
+  [DataMember(Name = "timestamp")]
+  public string? Timestamp { get; set; }
 
   /// <summary>
   /// Details about this log entry.
   /// </summary>
   /// <value>Details about this log entry.</value>
-  [DataMember(Name = "message", EmitDefaultValue = false)]
-  public string Message { get; set; }
+  [DataMember(Name = "message")]
+  public string? Message { get; set; }
 
   /// <summary>
   /// Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0. 
   /// </summary>
   /// <value>Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0. </value>
-  [DataMember(Name = "contextLevel", EmitDefaultValue = false)]
+  [DataMember(Name = "contextLevel")]
   public int? ContextLevel { get; set; }
 
   /// <summary>

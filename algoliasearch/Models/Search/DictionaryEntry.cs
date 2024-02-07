@@ -30,8 +30,8 @@ public partial class DictionaryEntry
   /// <summary>
   /// Gets or Sets State
   /// </summary>
-  [DataMember(Name = "state", EmitDefaultValue = false)]
-  public DictionaryEntryState State { get; set; }
+  [DataMember(Name = "state")]
+  public DictionaryEntryState? State { get; set; }
   /// <summary>
   /// Initializes a new instance of the DictionaryEntry class.
   /// </summary>
@@ -56,35 +56,35 @@ public partial class DictionaryEntry
   /// Unique identifier for a dictionary object.
   /// </summary>
   /// <value>Unique identifier for a dictionary object.</value>
-  [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
   /// [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). 
   /// </summary>
   /// <value>[Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). </value>
-  [DataMember(Name = "language", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "language")]
   public string Language { get; set; }
 
   /// <summary>
   /// Dictionary entry word. Usage depends on the type of dictionary entry. **`stopwordEntry`** The stop word you want to add or update. If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. **`compoundEntry`** When `decomposition` is empty: adds `word` as a compound atom. For example, atom “kino” decomposes the query “kopfkino” into \"kopf\" and \"kino\". When `decomposition` isn't empty: creates a decomposition exception. For example, when decomposition is set to the [\"hund\", \"hutte\"] exception, \"hundehutte\" decomposes into “hund” and “hutte”, discarding the linking \"e\". 
   /// </summary>
   /// <value>Dictionary entry word. Usage depends on the type of dictionary entry. **`stopwordEntry`** The stop word you want to add or update. If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. **`compoundEntry`** When `decomposition` is empty: adds `word` as a compound atom. For example, atom “kino” decomposes the query “kopfkino” into \"kopf\" and \"kino\". When `decomposition` isn't empty: creates a decomposition exception. For example, when decomposition is set to the [\"hund\", \"hutte\"] exception, \"hundehutte\" decomposes into “hund” and “hutte”, discarding the linking \"e\". </value>
-  [DataMember(Name = "word", EmitDefaultValue = false)]
-  public string Word { get; set; }
+  [DataMember(Name = "word")]
+  public string? Word { get; set; }
 
   /// <summary>
   /// Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. 
   /// </summary>
   /// <value>Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. </value>
-  [DataMember(Name = "words", EmitDefaultValue = false)]
+  [DataMember(Name = "words")]
   public List<string> Words { get; set; }
 
   /// <summary>
   /// For compound entries, governs the behavior of the `word` parameter.
   /// </summary>
   /// <value>For compound entries, governs the behavior of the `word` parameter.</value>
-  [DataMember(Name = "decomposition", EmitDefaultValue = false)]
+  [DataMember(Name = "decomposition")]
   public List<string> Decomposition { get; set; }
 
   /// <summary>

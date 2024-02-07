@@ -38,7 +38,7 @@ public partial class NoClickRateEvent
   /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
   /// <param name="noClickCount">Number of click events. (required).</param>
   /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  public NoClickRateEvent(double rate, int? count, int? noClickCount, string date)
+  public NoClickRateEvent(double rate, int count, int noClickCount, string date)
   {
     Rate = rate;
     Count = count;
@@ -50,28 +50,28 @@ public partial class NoClickRateEvent
   /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
   /// </summary>
   /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
-  [DataMember(Name = "rate", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "rate")]
   public double Rate { get; set; }
 
   /// <summary>
   /// Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).
   /// </summary>
   /// <value>Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Number of click events.
   /// </summary>
   /// <value>Number of click events.</value>
-  [DataMember(Name = "noClickCount", IsRequired = true, EmitDefaultValue = false)]
-  public int? NoClickCount { get; set; }
+  [DataMember(Name = "noClickCount")]
+  public int NoClickCount { get; set; }
 
   /// <summary>
   /// Date of the event in the format YYYY-MM-DD.
   /// </summary>
   /// <value>Date of the event in the format YYYY-MM-DD.</value>
-  [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "date")]
   public string Date { get; set; }
 
   /// <summary>

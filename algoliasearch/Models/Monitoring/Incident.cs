@@ -30,8 +30,8 @@ public partial class Incident
   /// <summary>
   /// Gets or Sets Status
   /// </summary>
-  [DataMember(Name = "status", EmitDefaultValue = false)]
-  public Status Status { get; set; }
+  [DataMember(Name = "status")]
+  public Status? Status { get; set; }
   /// <summary>
   /// Initializes a new instance of the Incident class.
   /// </summary>
@@ -43,8 +43,8 @@ public partial class Incident
   /// Description of the incident.
   /// </summary>
   /// <value>Description of the incident.</value>
-  [DataMember(Name = "title", EmitDefaultValue = false)]
-  public string Title { get; set; }
+  [DataMember(Name = "title")]
+  public string? Title { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

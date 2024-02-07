@@ -36,7 +36,7 @@ public partial class GetTopFiltersNoResultsValues
   /// </summary>
   /// <param name="count">Number of occurrences. (required).</param>
   /// <param name="values">Filters with no results. (required).</param>
-  public GetTopFiltersNoResultsValues(int? count, List<GetTopFiltersNoResultsValue> values)
+  public GetTopFiltersNoResultsValues(int count, List<GetTopFiltersNoResultsValue> values)
   {
     Count = count;
     Values = values ?? throw new ArgumentNullException(nameof(values));
@@ -46,14 +46,14 @@ public partial class GetTopFiltersNoResultsValues
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Filters with no results.
   /// </summary>
   /// <value>Filters with no results.</value>
-  [DataMember(Name = "values", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "values")]
   public List<GetTopFiltersNoResultsValue> Values { get; set; }
 
   /// <summary>

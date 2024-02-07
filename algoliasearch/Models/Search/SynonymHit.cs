@@ -30,7 +30,7 @@ public partial class SynonymHit
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public SynonymType Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the SynonymHit class.
@@ -52,49 +52,49 @@ public partial class SynonymHit
   /// Unique identifier of a synonym object.
   /// </summary>
   /// <value>Unique identifier of a synonym object.</value>
-  [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
   /// Words or phrases considered equivalent.
   /// </summary>
   /// <value>Words or phrases considered equivalent.</value>
-  [DataMember(Name = "synonyms", EmitDefaultValue = false)]
+  [DataMember(Name = "synonyms")]
   public List<string> Synonyms { get; set; }
 
   /// <summary>
   /// Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
   /// </summary>
   /// <value>Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).</value>
-  [DataMember(Name = "input", EmitDefaultValue = false)]
-  public string Input { get; set; }
+  [DataMember(Name = "input")]
+  public string? Input { get; set; }
 
   /// <summary>
   /// Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
   /// </summary>
   /// <value>Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).</value>
-  [DataMember(Name = "word", EmitDefaultValue = false)]
-  public string Word { get; set; }
+  [DataMember(Name = "word")]
+  public string? Word { get; set; }
 
   /// <summary>
   /// Words to be matched in records.
   /// </summary>
   /// <value>Words to be matched in records.</value>
-  [DataMember(Name = "corrections", EmitDefaultValue = false)]
+  [DataMember(Name = "corrections")]
   public List<string> Corrections { get; set; }
 
   /// <summary>
   /// [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records. 
   /// </summary>
   /// <value>[Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records. </value>
-  [DataMember(Name = "placeholder", EmitDefaultValue = false)]
-  public string Placeholder { get; set; }
+  [DataMember(Name = "placeholder")]
+  public string? Placeholder { get; set; }
 
   /// <summary>
   /// Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
   /// </summary>
   /// <value>Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).</value>
-  [DataMember(Name = "replacements", EmitDefaultValue = false)]
+  [DataMember(Name = "replacements")]
   public List<string> Replacements { get; set; }
 
   /// <summary>

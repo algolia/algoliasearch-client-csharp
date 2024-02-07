@@ -125,15 +125,9 @@ public partial class TypoTolerance : AbstractSchema
   /// <returns>An instance of TypoTolerance</returns>
   public static TypoTolerance FromJson(string jsonString)
   {
-    TypoTolerance newTypoTolerance = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newTypoTolerance;
-    }
     try
     {
-      return new TypoTolerance(JsonConvert.DeserializeObject<bool>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TypoTolerance(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class TypoTolerance : AbstractSchema
     }
     try
     {
-      return new TypoTolerance(JsonConvert.DeserializeObject<TypoToleranceEnum>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new TypoTolerance(JsonConvert.DeserializeObject<TypoToleranceEnum>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class TypoToleranceJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(TypoTolerance).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class TypoToleranceJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

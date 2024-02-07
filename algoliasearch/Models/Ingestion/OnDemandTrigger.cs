@@ -30,7 +30,7 @@ public partial class OnDemandTrigger
   /// <summary>
   /// Gets or Sets Type
   /// </summary>
-  [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "type")]
   public OnDemandTriggerType Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the OnDemandTrigger class.
@@ -50,8 +50,8 @@ public partial class OnDemandTrigger
   /// The last time the scheduled task ran (RFC3339 format).
   /// </summary>
   /// <value>The last time the scheduled task ran (RFC3339 format).</value>
-  [DataMember(Name = "lastRun", EmitDefaultValue = false)]
-  public string LastRun { get; set; }
+  [DataMember(Name = "lastRun")]
+  public string? LastRun { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

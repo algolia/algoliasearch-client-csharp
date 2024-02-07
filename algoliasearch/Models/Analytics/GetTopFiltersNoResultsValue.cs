@@ -48,21 +48,21 @@ public partial class GetTopFiltersNoResultsValue
   /// Attribute name.
   /// </summary>
   /// <value>Attribute name.</value>
-  [DataMember(Name = "attribute", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "attribute")]
   public string Attribute { get; set; }
 
   /// <summary>
   /// Operator.
   /// </summary>
   /// <value>Operator.</value>
-  [DataMember(Name = "operator", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "operator")]
   public string VarOperator { get; set; }
 
   /// <summary>
   /// Attribute value.
   /// </summary>
   /// <value>Attribute value.</value>
-  [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "value")]
   public string Value { get; set; }
 
   /// <summary>

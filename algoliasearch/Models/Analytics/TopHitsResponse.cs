@@ -44,7 +44,7 @@ public partial class TopHitsResponse
   /// Top hits.
   /// </summary>
   /// <value>Top hits.</value>
-  [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "hits")]
   public List<TopHit> Hits { get; set; }
 
   /// <summary>

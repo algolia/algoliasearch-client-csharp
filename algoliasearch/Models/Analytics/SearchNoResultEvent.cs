@@ -37,7 +37,7 @@ public partial class SearchNoResultEvent
   /// <param name="search">User query. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
   /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-  public SearchNoResultEvent(string search, int? count, int? nbHits)
+  public SearchNoResultEvent(string search, int count, int nbHits)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
     Count = count;
@@ -48,22 +48,22 @@ public partial class SearchNoResultEvent
   /// User query.
   /// </summary>
   /// <value>User query.</value>
-  [DataMember(Name = "search", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "search")]
   public string Search { get; set; }
 
   /// <summary>
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// Number of hits the search query matched.
   /// </summary>
   /// <value>Number of hits the search query matched.</value>
-  [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbHits { get; set; }
+  [DataMember(Name = "nbHits")]
+  public int NbHits { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -46,14 +46,14 @@ public partial class TaskUpdateResponse
   /// The task UUID.
   /// </summary>
   /// <value>The task UUID.</value>
-  [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "taskID")]
   public string TaskID { get; set; }
 
   /// <summary>
   /// Date of last update (RFC3339 format).
   /// </summary>
   /// <value>Date of last update (RFC3339 format).</value>
-  [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "updatedAt")]
   public string UpdatedAt { get; set; }
 
   /// <summary>

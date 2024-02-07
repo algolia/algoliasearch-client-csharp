@@ -46,14 +46,14 @@ public partial class AddApiKeyResponse
   /// API key.
   /// </summary>
   /// <value>API key.</value>
-  [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "key")]
   public string Key { get; set; }
 
   /// <summary>
   /// Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
   /// <value>Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-  [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>

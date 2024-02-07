@@ -48,33 +48,33 @@ public partial class Hit
   /// Unique object identifier.
   /// </summary>
   /// <value>Unique object identifier.</value>
-  [DataMember(Name = "objectID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
   /// Show highlighted section and words matched on a query.
   /// </summary>
   /// <value>Show highlighted section and words matched on a query.</value>
-  [DataMember(Name = "_highlightResult", EmitDefaultValue = false)]
+  [DataMember(Name = "_highlightResult")]
   public Dictionary<string, HighlightResult> HighlightResult { get; set; }
 
   /// <summary>
   /// Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
   /// </summary>
   /// <value>Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.</value>
-  [DataMember(Name = "_snippetResult", EmitDefaultValue = false)]
+  [DataMember(Name = "_snippetResult")]
   public Dictionary<string, SnippetResult> SnippetResult { get; set; }
 
   /// <summary>
   /// Gets or Sets RankingInfo
   /// </summary>
-  [DataMember(Name = "_rankingInfo", EmitDefaultValue = false)]
-  public RankingInfo RankingInfo { get; set; }
+  [DataMember(Name = "_rankingInfo")]
+  public RankingInfo? RankingInfo { get; set; }
 
   /// <summary>
   /// Gets or Sets DistinctSeqID
   /// </summary>
-  [DataMember(Name = "_distinctSeqID", EmitDefaultValue = false)]
+  [DataMember(Name = "_distinctSeqID")]
   public int? DistinctSeqID { get; set; }
 
   /// <summary>

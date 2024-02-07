@@ -36,7 +36,7 @@ public partial class GetUsersCountResponse
   /// </summary>
   /// <param name="count">Number of occurrences. (required).</param>
   /// <param name="dates">User count. (required).</param>
-  public GetUsersCountResponse(int? count, List<UserWithDate> dates)
+  public GetUsersCountResponse(int count, List<UserWithDate> dates)
   {
     Count = count;
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
@@ -46,14 +46,14 @@ public partial class GetUsersCountResponse
   /// Number of occurrences.
   /// </summary>
   /// <value>Number of occurrences.</value>
-  [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = false)]
-  public int? Count { get; set; }
+  [DataMember(Name = "count")]
+  public int Count { get; set; }
 
   /// <summary>
   /// User count.
   /// </summary>
   /// <value>User count.</value>
-  [DataMember(Name = "dates", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "dates")]
   public List<UserWithDate> Dates { get; set; }
 
   /// <summary>

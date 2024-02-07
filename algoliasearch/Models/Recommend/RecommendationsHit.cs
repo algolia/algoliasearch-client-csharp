@@ -125,15 +125,9 @@ public partial class RecommendationsHit : AbstractSchema
   /// <returns>An instance of RecommendationsHit</returns>
   public static RecommendationsHit FromJson(string jsonString)
   {
-    RecommendationsHit newRecommendationsHit = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newRecommendationsHit;
-    }
     try
     {
-      return new RecommendationsHit(JsonConvert.DeserializeObject<RecommendHit>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new RecommendationsHit(JsonConvert.DeserializeObject<RecommendHit>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class RecommendationsHit : AbstractSchema
     }
     try
     {
-      return new RecommendationsHit(JsonConvert.DeserializeObject<TrendingFacetHit>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new RecommendationsHit(JsonConvert.DeserializeObject<TrendingFacetHit>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class RecommendationsHitJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(RecommendationsHit).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class RecommendationsHitJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

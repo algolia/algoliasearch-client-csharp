@@ -125,15 +125,9 @@ public partial class DestinationInput : AbstractSchema
   /// <returns>An instance of DestinationInput</returns>
   public static DestinationInput FromJson(string jsonString)
   {
-    DestinationInput newDestinationInput = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newDestinationInput;
-    }
     try
     {
-      return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexPrefix>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexPrefix>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class DestinationInput : AbstractSchema
     }
     try
     {
-      return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexName>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexName>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class DestinationInputJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(DestinationInput).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class DestinationInputJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

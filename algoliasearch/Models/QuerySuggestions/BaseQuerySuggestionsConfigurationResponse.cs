@@ -37,29 +37,29 @@ public partial class BaseQuerySuggestionsConfigurationResponse
   /// Your Algolia application ID.
   /// </summary>
   /// <value>Your Algolia application ID.</value>
-  [DataMember(Name = "appId", EmitDefaultValue = false)]
-  public string AppId { get; set; }
+  [DataMember(Name = "appId")]
+  public string? AppId { get; set; }
 
   /// <summary>
   /// API key used to read from your source index.
   /// </summary>
   /// <value>API key used to read from your source index.</value>
-  [DataMember(Name = "sourceIndicesAPIKey", EmitDefaultValue = false)]
-  public string SourceIndicesAPIKey { get; set; }
+  [DataMember(Name = "sourceIndicesAPIKey")]
+  public string? SourceIndicesAPIKey { get; set; }
 
   /// <summary>
   /// API key used to write and configure your Query Suggestions index.
   /// </summary>
   /// <value>API key used to write and configure your Query Suggestions index.</value>
-  [DataMember(Name = "suggestionsIndicesAPIKey", EmitDefaultValue = false)]
-  public string SuggestionsIndicesAPIKey { get; set; }
+  [DataMember(Name = "suggestionsIndicesAPIKey")]
+  public string? SuggestionsIndicesAPIKey { get; set; }
 
   /// <summary>
   /// API key used to read from external Algolia indices.
   /// </summary>
   /// <value>API key used to read from external Algolia indices.</value>
-  [DataMember(Name = "externalIndicesAPIKey", EmitDefaultValue = false)]
-  public string ExternalIndicesAPIKey { get; set; }
+  [DataMember(Name = "externalIndicesAPIKey")]
+  public string? ExternalIndicesAPIKey { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

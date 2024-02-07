@@ -125,15 +125,9 @@ public partial class MixedSearchFilters : AbstractSchema
   /// <returns>An instance of MixedSearchFilters</returns>
   public static MixedSearchFilters FromJson(string jsonString)
   {
-    MixedSearchFilters newMixedSearchFilters = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newMixedSearchFilters;
-    }
     try
     {
-      return new MixedSearchFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new MixedSearchFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class MixedSearchFilters : AbstractSchema
     }
     try
     {
-      return new MixedSearchFilters(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new MixedSearchFilters(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class MixedSearchFiltersJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(MixedSearchFilters).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class MixedSearchFiltersJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

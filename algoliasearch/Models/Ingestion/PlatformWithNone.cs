@@ -125,15 +125,9 @@ public partial class PlatformWithNone : AbstractSchema
   /// <returns>An instance of PlatformWithNone</returns>
   public static PlatformWithNone FromJson(string jsonString)
   {
-    PlatformWithNone newPlatformWithNone = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newPlatformWithNone;
-    }
     try
     {
-      return new PlatformWithNone(JsonConvert.DeserializeObject<Platform>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new PlatformWithNone(JsonConvert.DeserializeObject<Platform>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class PlatformWithNone : AbstractSchema
     }
     try
     {
-      return new PlatformWithNone(JsonConvert.DeserializeObject<PlatformNone>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new PlatformWithNone(JsonConvert.DeserializeObject<PlatformNone>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class PlatformWithNoneJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(PlatformWithNone).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class PlatformWithNoneJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

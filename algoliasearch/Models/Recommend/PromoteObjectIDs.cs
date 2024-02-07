@@ -36,7 +36,7 @@ public partial class PromoteObjectIDs
   /// </summary>
   /// <param name="objectIDs">Unique identifiers of the records to promote. (required).</param>
   /// <param name="position">The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions. (required).</param>
-  public PromoteObjectIDs(List<string> objectIDs, int? position)
+  public PromoteObjectIDs(List<string> objectIDs, int position)
   {
     ObjectIDs = objectIDs ?? throw new ArgumentNullException(nameof(objectIDs));
     Position = position;
@@ -46,15 +46,15 @@ public partial class PromoteObjectIDs
   /// Unique identifiers of the records to promote.
   /// </summary>
   /// <value>Unique identifiers of the records to promote.</value>
-  [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectIDs")]
   public List<string> ObjectIDs { get; set; }
 
   /// <summary>
   /// The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.
   /// </summary>
   /// <value>The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.</value>
-  [DataMember(Name = "position", IsRequired = true, EmitDefaultValue = false)]
-  public int? Position { get; set; }
+  [DataMember(Name = "position")]
+  public int Position { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -37,113 +37,113 @@ public partial class BaseIndexSettings
   /// Creates [replicas](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/), which are copies of a primary index with the same records but different settings.
   /// </summary>
   /// <value>Creates [replicas](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/), which are copies of a primary index with the same records but different settings.</value>
-  [DataMember(Name = "replicas", EmitDefaultValue = false)]
+  [DataMember(Name = "replicas")]
   public List<string> Replicas { get; set; }
 
   /// <summary>
   /// Maximum number of hits accessible through pagination.
   /// </summary>
   /// <value>Maximum number of hits accessible through pagination.</value>
-  [DataMember(Name = "paginationLimitedTo", EmitDefaultValue = false)]
+  [DataMember(Name = "paginationLimitedTo")]
   public int? PaginationLimitedTo { get; set; }
 
   /// <summary>
   /// Attributes that can't be retrieved at query time.
   /// </summary>
   /// <value>Attributes that can't be retrieved at query time.</value>
-  [DataMember(Name = "unretrievableAttributes", EmitDefaultValue = false)]
+  [DataMember(Name = "unretrievableAttributes")]
   public List<string> UnretrievableAttributes { get; set; }
 
   /// <summary>
   /// Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
   /// </summary>
   /// <value>Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).</value>
-  [DataMember(Name = "disableTypoToleranceOnWords", EmitDefaultValue = false)]
+  [DataMember(Name = "disableTypoToleranceOnWords")]
   public List<string> DisableTypoToleranceOnWords { get; set; }
 
   /// <summary>
   /// Attributes in your index to which [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead) applies. This will ensure that words indexed in Katakana or Kanji can also be searched in Hiragana.
   /// </summary>
   /// <value>Attributes in your index to which [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead) applies. This will ensure that words indexed in Katakana or Kanji can also be searched in Hiragana.</value>
-  [DataMember(Name = "attributesToTransliterate", EmitDefaultValue = false)]
+  [DataMember(Name = "attributesToTransliterate")]
   public List<string> AttributesToTransliterate { get; set; }
 
   /// <summary>
   /// Attributes on which to split [camel case](https://wikipedia.org/wiki/Camel_case) words.
   /// </summary>
   /// <value>Attributes on which to split [camel case](https://wikipedia.org/wiki/Camel_case) words.</value>
-  [DataMember(Name = "camelCaseAttributes", EmitDefaultValue = false)]
+  [DataMember(Name = "camelCaseAttributes")]
   public List<string> CamelCaseAttributes { get; set; }
 
   /// <summary>
   /// Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies.
   /// </summary>
   /// <value>Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies.</value>
-  [DataMember(Name = "decompoundedAttributes", EmitDefaultValue = false)]
-  public object DecompoundedAttributes { get; set; }
+  [DataMember(Name = "decompoundedAttributes")]
+  public object? DecompoundedAttributes { get; set; }
 
   /// <summary>
   /// Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
   /// </summary>
   /// <value>Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).</value>
-  [DataMember(Name = "indexLanguages", EmitDefaultValue = false)]
+  [DataMember(Name = "indexLanguages")]
   public List<string> IndexLanguages { get; set; }
 
   /// <summary>
   /// Attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search).
   /// </summary>
   /// <value>Attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search).</value>
-  [DataMember(Name = "disablePrefixOnAttributes", EmitDefaultValue = false)]
+  [DataMember(Name = "disablePrefixOnAttributes")]
   public List<string> DisablePrefixOnAttributes { get; set; }
 
   /// <summary>
   /// Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered. 
   /// </summary>
   /// <value>Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered. </value>
-  [DataMember(Name = "allowCompressionOfIntegerArray", EmitDefaultValue = false)]
+  [DataMember(Name = "allowCompressionOfIntegerArray")]
   public bool? AllowCompressionOfIntegerArray { get; set; }
 
   /// <summary>
   /// Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters).
   /// </summary>
   /// <value>Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters).</value>
-  [DataMember(Name = "numericAttributesForFiltering", EmitDefaultValue = false)]
+  [DataMember(Name = "numericAttributesForFiltering")]
   public List<string> NumericAttributesForFiltering { get; set; }
 
   /// <summary>
   /// Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥.
   /// </summary>
   /// <value>Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥.</value>
-  [DataMember(Name = "separatorsToIndex", EmitDefaultValue = false)]
-  public string SeparatorsToIndex { get; set; }
+  [DataMember(Name = "separatorsToIndex")]
+  public string? SeparatorsToIndex { get; set; }
 
   /// <summary>
   /// [Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position). 
   /// </summary>
   /// <value>[Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position). </value>
-  [DataMember(Name = "searchableAttributes", EmitDefaultValue = false)]
+  [DataMember(Name = "searchableAttributes")]
   public List<string> SearchableAttributes { get; set; }
 
   /// <summary>
   /// Lets you store custom data in your indices.
   /// </summary>
   /// <value>Lets you store custom data in your indices.</value>
-  [DataMember(Name = "userData", EmitDefaultValue = false)]
+  [DataMember(Name = "userData")]
   public object UserData { get; set; }
 
   /// <summary>
   /// A list of characters and their normalized replacements to override Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
   /// </summary>
   /// <value>A list of characters and their normalized replacements to override Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).</value>
-  [DataMember(Name = "customNormalization", EmitDefaultValue = false)]
+  [DataMember(Name = "customNormalization")]
   public Dictionary<string, Dictionary<string, string>> CustomNormalization { get; set; }
 
   /// <summary>
   /// Name of the deduplication attribute to be used with Algolia's [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).
   /// </summary>
   /// <value>Name of the deduplication attribute to be used with Algolia's [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).</value>
-  [DataMember(Name = "attributeForDistinct", EmitDefaultValue = false)]
-  public string AttributeForDistinct { get; set; }
+  [DataMember(Name = "attributeForDistinct")]
+  public string? AttributeForDistinct { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -249,15 +249,9 @@ public partial class SourceInput : AbstractSchema
   /// <returns>An instance of SourceInput</returns>
   public static SourceInput FromJson(string jsonString)
   {
-    SourceInput newSourceInput = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newSourceInput;
-    }
     try
     {
-      return new SourceInput(JsonConvert.DeserializeObject<SourceCommercetools>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceInput(JsonConvert.DeserializeObject<SourceCommercetools>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -266,7 +260,7 @@ public partial class SourceInput : AbstractSchema
     }
     try
     {
-      return new SourceInput(JsonConvert.DeserializeObject<SourceBigCommerce>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceInput(JsonConvert.DeserializeObject<SourceBigCommerce>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -275,7 +269,7 @@ public partial class SourceInput : AbstractSchema
     }
     try
     {
-      return new SourceInput(JsonConvert.DeserializeObject<SourceJSON>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceInput(JsonConvert.DeserializeObject<SourceJSON>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -284,7 +278,7 @@ public partial class SourceInput : AbstractSchema
     }
     try
     {
-      return new SourceInput(JsonConvert.DeserializeObject<SourceCSV>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceInput(JsonConvert.DeserializeObject<SourceCSV>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -293,7 +287,7 @@ public partial class SourceInput : AbstractSchema
     }
     try
     {
-      return new SourceInput(JsonConvert.DeserializeObject<SourceBigQuery>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceInput(JsonConvert.DeserializeObject<SourceBigQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -302,7 +296,7 @@ public partial class SourceInput : AbstractSchema
     }
     try
     {
-      return new SourceInput(JsonConvert.DeserializeObject<SourceDocker>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SourceInput(JsonConvert.DeserializeObject<SourceDocker>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -328,7 +322,7 @@ public class SourceInputJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(SourceInput).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -343,7 +337,7 @@ public class SourceInputJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

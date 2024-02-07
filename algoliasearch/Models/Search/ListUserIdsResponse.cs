@@ -44,7 +44,7 @@ public partial class ListUserIdsResponse
   /// User IDs.
   /// </summary>
   /// <value>User IDs.</value>
-  [DataMember(Name = "userIDs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "userIDs")]
   public List<UserId> UserIDs { get; set; }
 
   /// <summary>

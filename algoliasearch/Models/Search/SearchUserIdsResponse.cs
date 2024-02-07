@@ -39,7 +39,7 @@ public partial class SearchUserIdsResponse
   /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
   /// <param name="hitsPerPage">Maximum number of hits per page. (required) (default to 20).</param>
   /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-  public SearchUserIdsResponse(List<UserHit> hits, int? nbHits, int? page, int? hitsPerPage, string updatedAt)
+  public SearchUserIdsResponse(List<UserHit> hits, int nbHits, int page, int hitsPerPage, string updatedAt)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
     NbHits = nbHits;
@@ -52,35 +52,35 @@ public partial class SearchUserIdsResponse
   /// User objects that match the query.
   /// </summary>
   /// <value>User objects that match the query.</value>
-  [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "hits")]
   public List<UserHit> Hits { get; set; }
 
   /// <summary>
   /// Number of hits the search query matched.
   /// </summary>
   /// <value>Number of hits the search query matched.</value>
-  [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbHits { get; set; }
+  [DataMember(Name = "nbHits")]
+  public int NbHits { get; set; }
 
   /// <summary>
   /// Page to retrieve (the first page is `0`, not `1`).
   /// </summary>
   /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
-  [DataMember(Name = "page", IsRequired = true, EmitDefaultValue = false)]
-  public int? Page { get; set; }
+  [DataMember(Name = "page")]
+  public int Page { get; set; }
 
   /// <summary>
   /// Maximum number of hits per page.
   /// </summary>
   /// <value>Maximum number of hits per page.</value>
-  [DataMember(Name = "hitsPerPage", IsRequired = true, EmitDefaultValue = false)]
-  public int? HitsPerPage { get; set; }
+  [DataMember(Name = "hitsPerPage")]
+  public int HitsPerPage { get; set; }
 
   /// <summary>
   /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
   /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-  [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "updatedAt")]
   public string UpdatedAt { get; set; }
 
   /// <summary>

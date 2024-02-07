@@ -45,7 +45,7 @@ public partial class SearchResponse<T>
   /// <param name="hits">hits (required).</param>
   /// <param name="query">Text to search for in an index. (required) (default to &quot;&quot;).</param>
   /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
-  public SearchResponse(int? hitsPerPage, int? nbHits, int? nbPages, int? page, int? processingTimeMS, List<T> hits, string query, string varParams)
+  public SearchResponse(int hitsPerPage, int nbHits, int nbPages, int page, int processingTimeMS, List<T> hits, string query, string varParams)
   {
     HitsPerPage = hitsPerPage;
     NbHits = nbHits;
@@ -62,41 +62,41 @@ public partial class SearchResponse<T>
   /// A/B test ID. This is only included in the response for indices that are part of an A/B test.
   /// </summary>
   /// <value>A/B test ID. This is only included in the response for indices that are part of an A/B test.</value>
-  [DataMember(Name = "abTestID", EmitDefaultValue = false)]
+  [DataMember(Name = "abTestID")]
   public int? AbTestID { get; set; }
 
   /// <summary>
   /// Variant ID. This is only included in the response for indices that are part of an A/B test.
   /// </summary>
   /// <value>Variant ID. This is only included in the response for indices that are part of an A/B test.</value>
-  [DataMember(Name = "abTestVariantID", EmitDefaultValue = false)]
+  [DataMember(Name = "abTestVariantID")]
   public int? AbTestVariantID { get; set; }
 
   /// <summary>
   /// Computed geographical location.
   /// </summary>
   /// <value>Computed geographical location.</value>
-  [DataMember(Name = "aroundLatLng", EmitDefaultValue = false)]
-  public string AroundLatLng { get; set; }
+  [DataMember(Name = "aroundLatLng")]
+  public string? AroundLatLng { get; set; }
 
   /// <summary>
   /// Automatically-computed radius.
   /// </summary>
   /// <value>Automatically-computed radius.</value>
-  [DataMember(Name = "automaticRadius", EmitDefaultValue = false)]
-  public string AutomaticRadius { get; set; }
+  [DataMember(Name = "automaticRadius")]
+  public string? AutomaticRadius { get; set; }
 
   /// <summary>
   /// Gets or Sets Exhaustive
   /// </summary>
-  [DataMember(Name = "exhaustive", EmitDefaultValue = false)]
-  public Exhaustive Exhaustive { get; set; }
+  [DataMember(Name = "exhaustive")]
+  public Exhaustive? Exhaustive { get; set; }
 
   /// <summary>
   /// See the `facetsCount` field of the `exhaustive` object in the response.
   /// </summary>
   /// <value>See the `facetsCount` field of the `exhaustive` object in the response.</value>
-  [DataMember(Name = "exhaustiveFacetsCount", EmitDefaultValue = false)]
+  [DataMember(Name = "exhaustiveFacetsCount")]
   [Obsolete]
   public bool? ExhaustiveFacetsCount { get; set; }
 
@@ -104,7 +104,7 @@ public partial class SearchResponse<T>
   /// See the `nbHits` field of the `exhaustive` object in the response.
   /// </summary>
   /// <value>See the `nbHits` field of the `exhaustive` object in the response.</value>
-  [DataMember(Name = "exhaustiveNbHits", EmitDefaultValue = false)]
+  [DataMember(Name = "exhaustiveNbHits")]
   [Obsolete]
   public bool? ExhaustiveNbHits { get; set; }
 
@@ -112,7 +112,7 @@ public partial class SearchResponse<T>
   /// See the `typo` field of the `exhaustive` object in the response.
   /// </summary>
   /// <value>See the `typo` field of the `exhaustive` object in the response.</value>
-  [DataMember(Name = "exhaustiveTypo", EmitDefaultValue = false)]
+  [DataMember(Name = "exhaustiveTypo")]
   [Obsolete]
   public bool? ExhaustiveTypo { get; set; }
 
@@ -120,151 +120,151 @@ public partial class SearchResponse<T>
   /// Mapping of each facet name to the corresponding facet counts.
   /// </summary>
   /// <value>Mapping of each facet name to the corresponding facet counts.</value>
-  [DataMember(Name = "facets", EmitDefaultValue = false)]
+  [DataMember(Name = "facets")]
   public Dictionary<string, Dictionary<string, int>> Facets { get; set; }
 
   /// <summary>
   /// Statistics for numerical facets.
   /// </summary>
   /// <value>Statistics for numerical facets.</value>
-  [DataMember(Name = "facets_stats", EmitDefaultValue = false)]
+  [DataMember(Name = "facets_stats")]
   public Dictionary<string, FacetsStats> FacetsStats { get; set; }
 
   /// <summary>
   /// Number of hits per page.
   /// </summary>
   /// <value>Number of hits per page.</value>
-  [DataMember(Name = "hitsPerPage", IsRequired = true, EmitDefaultValue = false)]
-  public int? HitsPerPage { get; set; }
+  [DataMember(Name = "hitsPerPage")]
+  public int HitsPerPage { get; set; }
 
   /// <summary>
   /// Index name used for the query.
   /// </summary>
   /// <value>Index name used for the query.</value>
-  [DataMember(Name = "index", EmitDefaultValue = false)]
-  public string Index { get; set; }
+  [DataMember(Name = "index")]
+  public string? Index { get; set; }
 
   /// <summary>
   /// Index name used for the query. During A/B testing, the targeted index isn't always the index used by the query.
   /// </summary>
   /// <value>Index name used for the query. During A/B testing, the targeted index isn't always the index used by the query.</value>
-  [DataMember(Name = "indexUsed", EmitDefaultValue = false)]
-  public string IndexUsed { get; set; }
+  [DataMember(Name = "indexUsed")]
+  public string? IndexUsed { get; set; }
 
   /// <summary>
   /// Warnings about the query.
   /// </summary>
   /// <value>Warnings about the query.</value>
-  [DataMember(Name = "message", EmitDefaultValue = false)]
-  public string Message { get; set; }
+  [DataMember(Name = "message")]
+  public string? Message { get; set; }
 
   /// <summary>
   /// Number of hits the search query matched.
   /// </summary>
   /// <value>Number of hits the search query matched.</value>
-  [DataMember(Name = "nbHits", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbHits { get; set; }
+  [DataMember(Name = "nbHits")]
+  public int NbHits { get; set; }
 
   /// <summary>
   /// Number of pages of results for the current query.
   /// </summary>
   /// <value>Number of pages of results for the current query.</value>
-  [DataMember(Name = "nbPages", IsRequired = true, EmitDefaultValue = false)]
-  public int? NbPages { get; set; }
+  [DataMember(Name = "nbPages")]
+  public int NbPages { get; set; }
 
   /// <summary>
   /// Number of hits selected and sorted by the relevant sort algorithm.
   /// </summary>
   /// <value>Number of hits selected and sorted by the relevant sort algorithm.</value>
-  [DataMember(Name = "nbSortedHits", EmitDefaultValue = false)]
+  [DataMember(Name = "nbSortedHits")]
   public int? NbSortedHits { get; set; }
 
   /// <summary>
   /// Page to retrieve (the first page is `0`, not `1`).
   /// </summary>
   /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
-  [DataMember(Name = "page", IsRequired = true, EmitDefaultValue = false)]
-  public int? Page { get; set; }
+  [DataMember(Name = "page")]
+  public int Page { get; set; }
 
   /// <summary>
   /// Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.
   /// </summary>
   /// <value>Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.</value>
-  [DataMember(Name = "parsedQuery", EmitDefaultValue = false)]
-  public string ParsedQuery { get; set; }
+  [DataMember(Name = "parsedQuery")]
+  public string? ParsedQuery { get; set; }
 
   /// <summary>
   /// Time the server took to process the request, in milliseconds.
   /// </summary>
   /// <value>Time the server took to process the request, in milliseconds.</value>
-  [DataMember(Name = "processingTimeMS", IsRequired = true, EmitDefaultValue = false)]
-  public int? ProcessingTimeMS { get; set; }
+  [DataMember(Name = "processingTimeMS")]
+  public int ProcessingTimeMS { get; set; }
 
   /// <summary>
   /// Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.
   /// </summary>
   /// <value>Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.</value>
-  [DataMember(Name = "processingTimingsMS", EmitDefaultValue = false)]
-  public object ProcessingTimingsMS { get; set; }
+  [DataMember(Name = "processingTimingsMS")]
+  public object? ProcessingTimingsMS { get; set; }
 
   /// <summary>
   /// Markup text indicating which parts of the original query have been removed to retrieve a non-empty result set.
   /// </summary>
   /// <value>Markup text indicating which parts of the original query have been removed to retrieve a non-empty result set.</value>
-  [DataMember(Name = "queryAfterRemoval", EmitDefaultValue = false)]
-  public string QueryAfterRemoval { get; set; }
+  [DataMember(Name = "queryAfterRemoval")]
+  public string? QueryAfterRemoval { get; set; }
 
   /// <summary>
   /// Gets or Sets Redirect
   /// </summary>
-  [DataMember(Name = "redirect", EmitDefaultValue = false)]
-  public Redirect Redirect { get; set; }
+  [DataMember(Name = "redirect")]
+  public Redirect? Redirect { get; set; }
 
   /// <summary>
   /// Gets or Sets RenderingContent
   /// </summary>
-  [DataMember(Name = "renderingContent", EmitDefaultValue = false)]
-  public RenderingContent RenderingContent { get; set; }
+  [DataMember(Name = "renderingContent")]
+  public RenderingContent? RenderingContent { get; set; }
 
   /// <summary>
   /// Time the server took to process the request, in milliseconds.
   /// </summary>
   /// <value>Time the server took to process the request, in milliseconds.</value>
-  [DataMember(Name = "serverTimeMS", EmitDefaultValue = false)]
+  [DataMember(Name = "serverTimeMS")]
   public int? ServerTimeMS { get; set; }
 
   /// <summary>
   /// Host name of the server that processed the request.
   /// </summary>
   /// <value>Host name of the server that processed the request.</value>
-  [DataMember(Name = "serverUsed", EmitDefaultValue = false)]
-  public string ServerUsed { get; set; }
+  [DataMember(Name = "serverUsed")]
+  public string? ServerUsed { get; set; }
 
   /// <summary>
   /// Lets you store custom data in your indices.
   /// </summary>
   /// <value>Lets you store custom data in your indices.</value>
-  [DataMember(Name = "userData", EmitDefaultValue = false)]
-  public object UserData { get; set; }
+  [DataMember(Name = "userData")]
+  public object? UserData { get; set; }
 
   /// <summary>
   /// Gets or Sets Hits
   /// </summary>
-  [DataMember(Name = "hits", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "hits")]
   public List<T> Hits { get; set; }
 
   /// <summary>
   /// Text to search for in an index.
   /// </summary>
   /// <value>Text to search for in an index.</value>
-  [DataMember(Name = "query", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "query")]
   public string Query { get; set; }
 
   /// <summary>
   /// URL-encoded string of all search parameters.
   /// </summary>
   /// <value>URL-encoded string of all search parameters.</value>
-  [DataMember(Name = "params", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "params")]
   public string VarParams { get; set; }
 
   /// <summary>

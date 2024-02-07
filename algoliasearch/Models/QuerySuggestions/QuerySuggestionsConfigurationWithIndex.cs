@@ -46,41 +46,41 @@ public partial class QuerySuggestionsConfigurationWithIndex
   /// Query Suggestions index name.
   /// </summary>
   /// <value>Query Suggestions index name.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>
   /// Algolia indices from which to get the popular searches for query suggestions.
   /// </summary>
   /// <value>Algolia indices from which to get the popular searches for query suggestions.</value>
-  [DataMember(Name = "sourceIndices", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "sourceIndices")]
   public List<SourceIndex> SourceIndices { get; set; }
 
   /// <summary>
   /// Gets or Sets Languages
   /// </summary>
-  [DataMember(Name = "languages", EmitDefaultValue = false)]
-  public Languages Languages { get; set; }
+  [DataMember(Name = "languages")]
+  public Languages? Languages { get; set; }
 
   /// <summary>
   /// Patterns to exclude from query suggestions.
   /// </summary>
   /// <value>Patterns to exclude from query suggestions.</value>
-  [DataMember(Name = "exclude", EmitDefaultValue = false)]
+  [DataMember(Name = "exclude")]
   public List<string> Exclude { get; set; }
 
   /// <summary>
   /// Turn on personalized query suggestions.
   /// </summary>
   /// <value>Turn on personalized query suggestions.</value>
-  [DataMember(Name = "enablePersonalization", EmitDefaultValue = false)]
+  [DataMember(Name = "enablePersonalization")]
   public bool? EnablePersonalization { get; set; }
 
   /// <summary>
   /// Allow suggestions with special characters.
   /// </summary>
   /// <value>Allow suggestions with special characters.</value>
-  [DataMember(Name = "allowSpecialCharacters", EmitDefaultValue = false)]
+  [DataMember(Name = "allowSpecialCharacters")]
   public bool? AllowSpecialCharacters { get; set; }
 
   /// <summary>

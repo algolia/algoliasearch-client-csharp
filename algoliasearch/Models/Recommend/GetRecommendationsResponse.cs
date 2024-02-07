@@ -36,7 +36,7 @@ public partial class GetRecommendationsResponse
   /// <summary>
   /// Gets or Sets Results
   /// </summary>
-  [DataMember(Name = "results", EmitDefaultValue = false)]
+  [DataMember(Name = "results")]
   public List<RecommendationsResults> Results { get; set; }
 
   /// <summary>

@@ -37,7 +37,7 @@ public partial class ABTestResponse
   /// <param name="index">A/B test index. (required).</param>
   /// <param name="abTestID">Unique A/B test ID. (required).</param>
   /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
-  public ABTestResponse(string index, int? abTestID, long taskID)
+  public ABTestResponse(string index, int abTestID, long taskID)
   {
     Index = index ?? throw new ArgumentNullException(nameof(index));
     AbTestID = abTestID;
@@ -48,21 +48,21 @@ public partial class ABTestResponse
   /// A/B test index.
   /// </summary>
   /// <value>A/B test index.</value>
-  [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "index")]
   public string Index { get; set; }
 
   /// <summary>
   /// Unique A/B test ID.
   /// </summary>
   /// <value>Unique A/B test ID.</value>
-  [DataMember(Name = "abTestID", IsRequired = true, EmitDefaultValue = false)]
-  public int? AbTestID { get; set; }
+  [DataMember(Name = "abTestID")]
+  public int AbTestID { get; set; }
 
   /// <summary>
   /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. 
   /// </summary>
   /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. </value>
-  [DataMember(Name = "taskID", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "taskID")]
   public long TaskID { get; set; }
 
   /// <summary>

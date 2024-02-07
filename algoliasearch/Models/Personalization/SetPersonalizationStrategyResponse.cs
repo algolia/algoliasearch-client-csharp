@@ -44,7 +44,7 @@ public partial class SetPersonalizationStrategyResponse
   /// A message confirming the strategy update.
   /// </summary>
   /// <value>A message confirming the strategy update.</value>
-  [DataMember(Name = "message", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "message")]
   public string Message { get; set; }
 
   /// <summary>

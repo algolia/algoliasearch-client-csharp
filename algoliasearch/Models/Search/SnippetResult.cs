@@ -156,15 +156,9 @@ public partial class SnippetResult : AbstractSchema
   /// <returns>An instance of SnippetResult</returns>
   public static SnippetResult FromJson(string jsonString)
   {
-    SnippetResult newSnippetResult = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newSnippetResult;
-    }
     try
     {
-      return new SnippetResult(JsonConvert.DeserializeObject<SnippetResultOption>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SnippetResult(JsonConvert.DeserializeObject<SnippetResultOption>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -173,7 +167,7 @@ public partial class SnippetResult : AbstractSchema
     }
     try
     {
-      return new SnippetResult(JsonConvert.DeserializeObject<Dictionary<string, SnippetResultOption>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SnippetResult(JsonConvert.DeserializeObject<Dictionary<string, SnippetResultOption>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -182,7 +176,7 @@ public partial class SnippetResult : AbstractSchema
     }
     try
     {
-      return new SnippetResult(JsonConvert.DeserializeObject<List<SnippetResultOption>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new SnippetResult(JsonConvert.DeserializeObject<List<SnippetResultOption>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -208,7 +202,7 @@ public class SnippetResultJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(SnippetResult).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -223,7 +217,7 @@ public class SnippetResultJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

@@ -43,7 +43,7 @@ public partial class AuthenticationSearch
   /// <summary>
   /// Gets or Sets AuthenticationIDs
   /// </summary>
-  [DataMember(Name = "authenticationIDs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "authenticationIDs")]
   public List<string> AuthenticationIDs { get; set; }
 
   /// <summary>

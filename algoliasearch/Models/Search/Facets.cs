@@ -37,7 +37,7 @@ public partial class Facets
   /// Pinned order of facet lists.
   /// </summary>
   /// <value>Pinned order of facet lists.</value>
-  [DataMember(Name = "order", EmitDefaultValue = false)]
+  [DataMember(Name = "order")]
   public List<string> Order { get; set; }
 
   /// <summary>

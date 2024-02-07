@@ -36,7 +36,7 @@ public partial class InventoryResponse
   /// <summary>
   /// Gets or Sets Inventory
   /// </summary>
-  [DataMember(Name = "inventory", EmitDefaultValue = false)]
+  [DataMember(Name = "inventory")]
   public List<Server> Inventory { get; set; }
 
   /// <summary>

@@ -30,7 +30,7 @@ public partial class HighlightResultOption
   /// <summary>
   /// Gets or Sets MatchLevel
   /// </summary>
-  [DataMember(Name = "matchLevel", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "matchLevel")]
   public MatchLevel MatchLevel { get; set; }
   /// <summary>
   /// Initializes a new instance of the HighlightResultOption class.
@@ -54,21 +54,21 @@ public partial class HighlightResultOption
   /// Markup text with `facetQuery` matches highlighted.
   /// </summary>
   /// <value>Markup text with `facetQuery` matches highlighted.</value>
-  [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "value")]
   public string Value { get; set; }
 
   /// <summary>
   /// List of words from the query that matched the object.
   /// </summary>
   /// <value>List of words from the query that matched the object.</value>
-  [DataMember(Name = "matchedWords", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "matchedWords")]
   public List<string> MatchedWords { get; set; }
 
   /// <summary>
   /// Whether the entire attribute value is highlighted.
   /// </summary>
   /// <value>Whether the entire attribute value is highlighted.</value>
-  [DataMember(Name = "fullyHighlighted", EmitDefaultValue = false)]
+  [DataMember(Name = "fullyHighlighted")]
   public bool? FullyHighlighted { get; set; }
 
   /// <summary>

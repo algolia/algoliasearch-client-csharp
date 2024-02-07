@@ -36,7 +36,7 @@ public partial class FacetScoring
   /// </summary>
   /// <param name="score">The score for the event. (required).</param>
   /// <param name="facetName">The name of the facet. (required).</param>
-  public FacetScoring(int? score, string facetName)
+  public FacetScoring(int score, string facetName)
   {
     Score = score;
     FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
@@ -46,14 +46,14 @@ public partial class FacetScoring
   /// The score for the event.
   /// </summary>
   /// <value>The score for the event.</value>
-  [DataMember(Name = "score", IsRequired = true, EmitDefaultValue = false)]
-  public int? Score { get; set; }
+  [DataMember(Name = "score")]
+  public int Score { get; set; }
 
   /// <summary>
   /// The name of the facet.
   /// </summary>
   /// <value>The name of the facet.</value>
-  [DataMember(Name = "facetName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "facetName")]
   public string FacetName { get; set; }
 
   /// <summary>

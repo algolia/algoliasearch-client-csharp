@@ -30,7 +30,7 @@ public partial class ClickedObjectIDs
   /// <summary>
   /// Gets or Sets EventType
   /// </summary>
-  [DataMember(Name = "eventType", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "eventType")]
   public ClickEvent EventType { get; set; }
   /// <summary>
   /// Initializes a new instance of the ClickedObjectIDs class.
@@ -58,43 +58,43 @@ public partial class ClickedObjectIDs
   /// The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
   /// </summary>
   /// <value>The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
-  [DataMember(Name = "eventName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "eventName")]
   public string EventName { get; set; }
 
   /// <summary>
   /// The name of an Algolia index.
   /// </summary>
   /// <value>The name of an Algolia index.</value>
-  [DataMember(Name = "index", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "index")]
   public string Index { get; set; }
 
   /// <summary>
   /// The object IDs of the records that are part of the event.
   /// </summary>
   /// <value>The object IDs of the records that are part of the event.</value>
-  [DataMember(Name = "objectIDs", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "objectIDs")]
   public List<string> ObjectIDs { get; set; }
 
   /// <summary>
   /// An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens. 
   /// </summary>
   /// <value>An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens. </value>
-  [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "userToken")]
   public string UserToken { get; set; }
 
   /// <summary>
   /// An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens. 
   /// </summary>
   /// <value>An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens. </value>
-  [DataMember(Name = "authenticatedUserToken", EmitDefaultValue = false)]
-  public string AuthenticatedUserToken { get; set; }
+  [DataMember(Name = "authenticatedUserToken")]
+  public string? AuthenticatedUserToken { get; set; }
 
   /// <summary>
   /// The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
   /// </summary>
   /// <value>The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
-  [DataMember(Name = "timestamp", EmitDefaultValue = false)]
-  public long Timestamp { get; set; }
+  [DataMember(Name = "timestamp")]
+  public long? Timestamp { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -43,7 +43,7 @@ public partial class DockerSourceStreams
   /// <summary>
   /// Gets or Sets Streams
   /// </summary>
-  [DataMember(Name = "streams", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "streams")]
   public List<object> Streams { get; set; }
 
   /// <summary>

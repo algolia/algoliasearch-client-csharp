@@ -48,21 +48,21 @@ public partial class GetUserTokenResponse
   /// userToken representing the user for which to fetch the Personalization profile.
   /// </summary>
   /// <value>userToken representing the user for which to fetch the Personalization profile.</value>
-  [DataMember(Name = "userToken", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "userToken")]
   public string UserToken { get; set; }
 
   /// <summary>
   /// Date of last event update. (ISO-8601 format).
   /// </summary>
   /// <value>Date of last event update. (ISO-8601 format).</value>
-  [DataMember(Name = "lastEventAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "lastEventAt")]
   public string LastEventAt { get; set; }
 
   /// <summary>
   /// The userToken scores.
   /// </summary>
   /// <value>The userToken scores.</value>
-  [DataMember(Name = "scores", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "scores")]
   public object Scores { get; set; }
 
   /// <summary>

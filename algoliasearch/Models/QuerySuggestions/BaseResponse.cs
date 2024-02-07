@@ -37,15 +37,15 @@ public partial class BaseResponse
   /// HTTP status code.
   /// </summary>
   /// <value>HTTP status code.</value>
-  [DataMember(Name = "status", EmitDefaultValue = false)]
+  [DataMember(Name = "status")]
   public int? Status { get; set; }
 
   /// <summary>
   /// Details about the response, such as error messages.
   /// </summary>
   /// <value>Details about the response, such as error messages.</value>
-  [DataMember(Name = "message", EmitDefaultValue = false)]
-  public string Message { get; set; }
+  [DataMember(Name = "message")]
+  public string? Message { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

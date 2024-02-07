@@ -30,8 +30,8 @@ public partial class TrendingItemsQuery
   /// <summary>
   /// Gets or Sets Model
   /// </summary>
-  [DataMember(Name = "model", EmitDefaultValue = false)]
-  public TrendingItemsModel Model { get; set; }
+  [DataMember(Name = "model")]
+  public TrendingItemsModel? Model { get; set; }
   /// <summary>
   /// Initializes a new instance of the TrendingItemsQuery class.
   /// </summary>
@@ -50,48 +50,48 @@ public partial class TrendingItemsQuery
   /// Algolia index name.
   /// </summary>
   /// <value>Algolia index name.</value>
-  [DataMember(Name = "indexName", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "indexName")]
   public string IndexName { get; set; }
 
   /// <summary>
   /// Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. 
   /// </summary>
   /// <value>Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. </value>
-  [DataMember(Name = "threshold", EmitDefaultValue = false)]
+  [DataMember(Name = "threshold")]
   public int? Threshold { get; set; }
 
   /// <summary>
   /// Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
   /// </summary>
   /// <value>Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.</value>
-  [DataMember(Name = "maxRecommendations", EmitDefaultValue = false)]
+  [DataMember(Name = "maxRecommendations")]
   public int? MaxRecommendations { get; set; }
 
   /// <summary>
   /// Facet name for trending models.
   /// </summary>
   /// <value>Facet name for trending models.</value>
-  [DataMember(Name = "facetName", EmitDefaultValue = false)]
-  public string FacetName { get; set; }
+  [DataMember(Name = "facetName")]
+  public string? FacetName { get; set; }
 
   /// <summary>
   /// Facet value for trending models.
   /// </summary>
   /// <value>Facet value for trending models.</value>
-  [DataMember(Name = "facetValue", EmitDefaultValue = false)]
-  public string FacetValue { get; set; }
+  [DataMember(Name = "facetValue")]
+  public string? FacetValue { get; set; }
 
   /// <summary>
   /// Gets or Sets QueryParameters
   /// </summary>
-  [DataMember(Name = "queryParameters", EmitDefaultValue = false)]
-  public SearchParamsObject QueryParameters { get; set; }
+  [DataMember(Name = "queryParameters")]
+  public SearchParamsObject? QueryParameters { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
   /// </summary>
-  [DataMember(Name = "fallbackParameters", EmitDefaultValue = false)]
-  public SearchParamsObject FallbackParameters { get; set; }
+  [DataMember(Name = "fallbackParameters")]
+  public SearchParamsObject? FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

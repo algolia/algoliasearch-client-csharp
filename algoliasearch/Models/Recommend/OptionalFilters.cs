@@ -125,15 +125,9 @@ public partial class OptionalFilters : AbstractSchema
   /// <returns>An instance of OptionalFilters</returns>
   public static OptionalFilters FromJson(string jsonString)
   {
-    OptionalFilters newOptionalFilters = null;
-
-    if (string.IsNullOrEmpty(jsonString))
-    {
-      return newOptionalFilters;
-    }
     try
     {
-      return new OptionalFilters(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new OptionalFilters(JsonConvert.DeserializeObject<List<MixedSearchFilters>>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -142,7 +136,7 @@ public partial class OptionalFilters : AbstractSchema
     }
     try
     {
-      return new OptionalFilters(JsonConvert.DeserializeObject<string>(jsonString, AdditionalPropertiesSerializerSettings));
+      return new OptionalFilters(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
     }
     catch (Exception exception)
     {
@@ -168,7 +162,7 @@ public class OptionalFiltersJsonConverter : JsonConverter
   /// <param name="serializer">JSON Serializer</param>
   public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
   {
-    writer.WriteRawValue((string)(typeof(OptionalFilters).GetMethod("ToJson")?.Invoke(value, null)));
+    writer.WriteRawValue((string)value?.GetType().GetMethod("ToJson")?.Invoke(value, null));
   }
 
   /// <summary>
@@ -183,7 +177,7 @@ public class OptionalFiltersJsonConverter : JsonConverter
   {
     if (reader.TokenType != JsonToken.Null)
     {
-      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JObject.Load(reader).ToString(Formatting.None) });
+      return objectType.GetMethod("FromJson")?.Invoke(null, new object[] { JToken.Load(reader).ToString(Formatting.None) });
     }
     return null;
   }

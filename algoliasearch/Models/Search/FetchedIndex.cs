@@ -43,7 +43,7 @@ public partial class FetchedIndex
   /// <param name="lastBuildTimeS">Last build time. (required).</param>
   /// <param name="numberOfPendingTasks">Number of pending indexing operations. This value is deprecated and should not be used. (required) (default to 0).</param>
   /// <param name="pendingTask">A boolean which says whether the index has pending tasks. This value is deprecated and should not be used. (required) (default to false).</param>
-  public FetchedIndex(string name, string createdAt, string updatedAt, int? entries, int? dataSize, int? fileSize, int? lastBuildTimeS, int? numberOfPendingTasks, bool? pendingTask)
+  public FetchedIndex(string name, string createdAt, string updatedAt, int entries, int dataSize, int fileSize, int lastBuildTimeS, int numberOfPendingTasks, bool pendingTask)
   {
     Name = name ?? throw new ArgumentNullException(nameof(name));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
@@ -60,77 +60,77 @@ public partial class FetchedIndex
   /// Index name.
   /// </summary>
   /// <value>Index name.</value>
-  [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "name")]
   public string Name { get; set; }
 
   /// <summary>
   /// Index creation date. An empty string means that the index has no records.
   /// </summary>
   /// <value>Index creation date. An empty string means that the index has no records.</value>
-  [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
   /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
   /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
-  [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = false)]
+  [DataMember(Name = "updatedAt")]
   public string UpdatedAt { get; set; }
 
   /// <summary>
   /// Number of records contained in the index.
   /// </summary>
   /// <value>Number of records contained in the index.</value>
-  [DataMember(Name = "entries", IsRequired = true, EmitDefaultValue = false)]
-  public int? Entries { get; set; }
+  [DataMember(Name = "entries")]
+  public int Entries { get; set; }
 
   /// <summary>
   /// Number of bytes of the index in minified format.
   /// </summary>
   /// <value>Number of bytes of the index in minified format.</value>
-  [DataMember(Name = "dataSize", IsRequired = true, EmitDefaultValue = false)]
-  public int? DataSize { get; set; }
+  [DataMember(Name = "dataSize")]
+  public int DataSize { get; set; }
 
   /// <summary>
   /// Number of bytes of the index binary file.
   /// </summary>
   /// <value>Number of bytes of the index binary file.</value>
-  [DataMember(Name = "fileSize", IsRequired = true, EmitDefaultValue = false)]
-  public int? FileSize { get; set; }
+  [DataMember(Name = "fileSize")]
+  public int FileSize { get; set; }
 
   /// <summary>
   /// Last build time.
   /// </summary>
   /// <value>Last build time.</value>
-  [DataMember(Name = "lastBuildTimeS", IsRequired = true, EmitDefaultValue = false)]
-  public int? LastBuildTimeS { get; set; }
+  [DataMember(Name = "lastBuildTimeS")]
+  public int LastBuildTimeS { get; set; }
 
   /// <summary>
   /// Number of pending indexing operations. This value is deprecated and should not be used.
   /// </summary>
   /// <value>Number of pending indexing operations. This value is deprecated and should not be used.</value>
-  [DataMember(Name = "numberOfPendingTasks", IsRequired = true, EmitDefaultValue = false)]
-  public int? NumberOfPendingTasks { get; set; }
+  [DataMember(Name = "numberOfPendingTasks")]
+  public int NumberOfPendingTasks { get; set; }
 
   /// <summary>
   /// A boolean which says whether the index has pending tasks. This value is deprecated and should not be used.
   /// </summary>
   /// <value>A boolean which says whether the index has pending tasks. This value is deprecated and should not be used.</value>
-  [DataMember(Name = "pendingTask", IsRequired = true, EmitDefaultValue = false)]
-  public bool? PendingTask { get; set; }
+  [DataMember(Name = "pendingTask")]
+  public bool PendingTask { get; set; }
 
   /// <summary>
   /// Only present if the index is a replica. Contains the name of the related primary index.
   /// </summary>
   /// <value>Only present if the index is a replica. Contains the name of the related primary index.</value>
-  [DataMember(Name = "primary", EmitDefaultValue = false)]
-  public string Primary { get; set; }
+  [DataMember(Name = "primary")]
+  public string? Primary { get; set; }
 
   /// <summary>
   /// Only present if the index is a primary index with replicas. Contains the names of all linked replicas.
   /// </summary>
   /// <value>Only present if the index is a primary index with replicas. Contains the names of all linked replicas.</value>
-  [DataMember(Name = "replicas", EmitDefaultValue = false)]
+  [DataMember(Name = "replicas")]
   public List<string> Replicas { get; set; }
 
   /// <summary>
