@@ -44,7 +44,7 @@ public partial class Condition
   /// </summary>
   /// <value>Query pattern syntax.</value>
   [DataMember(Name = "pattern")]
-  public string? Pattern { get; set; }
+  public string Pattern { get; set; }
 
   /// <summary>
   /// Whether the pattern matches on plurals, synonyms, and typos.
@@ -58,7 +58,7 @@ public partial class Condition
   /// </summary>
   /// <value>Rule context format: [A-Za-z0-9_-]+).</value>
   [DataMember(Name = "context")]
-  public string? Context { get; set; }
+  public string Context { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

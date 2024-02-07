@@ -47,28 +47,28 @@ public partial class QuerySuggestionsConfigurationResponse
   /// </summary>
   /// <value>Your Algolia application ID.</value>
   [DataMember(Name = "appId")]
-  public string? AppId { get; set; }
+  public string AppId { get; set; }
 
   /// <summary>
   /// API key used to read from your source index.
   /// </summary>
   /// <value>API key used to read from your source index.</value>
   [DataMember(Name = "sourceIndicesAPIKey")]
-  public string? SourceIndicesAPIKey { get; set; }
+  public string SourceIndicesAPIKey { get; set; }
 
   /// <summary>
   /// API key used to write and configure your Query Suggestions index.
   /// </summary>
   /// <value>API key used to write and configure your Query Suggestions index.</value>
   [DataMember(Name = "suggestionsIndicesAPIKey")]
-  public string? SuggestionsIndicesAPIKey { get; set; }
+  public string SuggestionsIndicesAPIKey { get; set; }
 
   /// <summary>
   /// API key used to read from external Algolia indices.
   /// </summary>
   /// <value>API key used to read from external Algolia indices.</value>
   [DataMember(Name = "externalIndicesAPIKey")]
-  public string? ExternalIndicesAPIKey { get; set; }
+  public string ExternalIndicesAPIKey { get; set; }
 
   /// <summary>
   /// Query Suggestions index name.
@@ -88,7 +88,7 @@ public partial class QuerySuggestionsConfigurationResponse
   /// Gets or Sets Languages
   /// </summary>
   [DataMember(Name = "languages")]
-  public Languages? Languages { get; set; }
+  public Languages Languages { get; set; }
 
   /// <summary>
   /// Patterns to exclude from query suggestions.

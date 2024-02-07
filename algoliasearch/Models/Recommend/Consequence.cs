@@ -37,7 +37,7 @@ public partial class Consequence
   /// Gets or Sets VarParams
   /// </summary>
   [DataMember(Name = "params")]
-  public ConsequenceParams? VarParams { get; set; }
+  public ConsequenceParams VarParams { get; set; }
 
   /// <summary>
   /// Records to promote.

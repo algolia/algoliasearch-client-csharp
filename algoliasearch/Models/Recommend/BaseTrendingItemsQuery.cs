@@ -44,26 +44,26 @@ public partial class BaseTrendingItemsQuery
   /// </summary>
   /// <value>Facet name for trending models.</value>
   [DataMember(Name = "facetName")]
-  public string? FacetName { get; set; }
+  public string FacetName { get; set; }
 
   /// <summary>
   /// Facet value for trending models.
   /// </summary>
   /// <value>Facet value for trending models.</value>
   [DataMember(Name = "facetValue")]
-  public string? FacetValue { get; set; }
+  public string FacetValue { get; set; }
 
   /// <summary>
   /// Gets or Sets QueryParameters
   /// </summary>
   [DataMember(Name = "queryParameters")]
-  public SearchParamsObject? QueryParameters { get; set; }
+  public SearchParamsObject QueryParameters { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
   /// </summary>
   [DataMember(Name = "fallbackParameters")]
-  public SearchParamsObject? FallbackParameters { get; set; }
+  public SearchParamsObject FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

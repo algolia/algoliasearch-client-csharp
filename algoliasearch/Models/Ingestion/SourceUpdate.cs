@@ -37,20 +37,20 @@ public partial class SourceUpdate
   /// Gets or Sets Name
   /// </summary>
   [DataMember(Name = "name")]
-  public string? Name { get; set; }
+  public string Name { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
   [DataMember(Name = "input")]
-  public SourceUpdateInput? Input { get; set; }
+  public SourceUpdateInput Input { get; set; }
 
   /// <summary>
   /// The authentication UUID.
   /// </summary>
   /// <value>The authentication UUID.</value>
   [DataMember(Name = "authenticationID")]
-  public string? AuthenticationID { get; set; }
+  public string AuthenticationID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

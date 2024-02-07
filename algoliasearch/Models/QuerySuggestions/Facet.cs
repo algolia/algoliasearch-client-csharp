@@ -38,7 +38,7 @@ public partial class Facet
   /// </summary>
   /// <value>Facet name.</value>
   [DataMember(Name = "attribute")]
-  public string? Attribute { get; set; }
+  public string Attribute { get; set; }
 
   /// <summary>
   /// Number of suggestions.

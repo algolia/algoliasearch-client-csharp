@@ -38,38 +38,38 @@ public partial class BaseSearchParamsWithoutQuery
   /// </summary>
   /// <value>Overrides the query parameter and performs a more generic search.</value>
   [DataMember(Name = "similarQuery")]
-  public string? SimilarQuery { get; set; }
+  public string SimilarQuery { get; set; }
 
   /// <summary>
   /// [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. 
   /// </summary>
   /// <value>[Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. </value>
   [DataMember(Name = "filters")]
-  public string? Filters { get; set; }
+  public string Filters { get; set; }
 
   /// <summary>
   /// Gets or Sets FacetFilters
   /// </summary>
   [DataMember(Name = "facetFilters")]
-  public FacetFilters? FacetFilters { get; set; }
+  public FacetFilters FacetFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets OptionalFilters
   /// </summary>
   [DataMember(Name = "optionalFilters")]
-  public OptionalFilters? OptionalFilters { get; set; }
+  public OptionalFilters OptionalFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets NumericFilters
   /// </summary>
   [DataMember(Name = "numericFilters")]
-  public NumericFilters? NumericFilters { get; set; }
+  public NumericFilters NumericFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets TagFilters
   /// </summary>
   [DataMember(Name = "tagFilters")]
-  public TagFilters? TagFilters { get; set; }
+  public TagFilters TagFilters { get; set; }
 
   /// <summary>
   /// Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed. 
@@ -125,7 +125,7 @@ public partial class BaseSearchParamsWithoutQuery
   /// </summary>
   /// <value>Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.</value>
   [DataMember(Name = "aroundLatLng")]
-  public string? AroundLatLng { get; set; }
+  public string AroundLatLng { get; set; }
 
   /// <summary>
   /// Search for entries around a location. The location is automatically computed from the requester's IP address.
@@ -138,13 +138,13 @@ public partial class BaseSearchParamsWithoutQuery
   /// Gets or Sets AroundRadius
   /// </summary>
   [DataMember(Name = "aroundRadius")]
-  public AroundRadius? AroundRadius { get; set; }
+  public AroundRadius AroundRadius { get; set; }
 
   /// <summary>
   /// Gets or Sets AroundPrecision
   /// </summary>
   [DataMember(Name = "aroundPrecision")]
-  public AroundPrecision? AroundPrecision { get; set; }
+  public AroundPrecision AroundPrecision { get; set; }
 
   /// <summary>
   /// Minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set.
@@ -193,7 +193,7 @@ public partial class BaseSearchParamsWithoutQuery
   /// </summary>
   /// <value>Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.</value>
   [DataMember(Name = "userToken")]
-  public string? UserToken { get; set; }
+  public string UserToken { get; set; }
 
   /// <summary>
   /// Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).

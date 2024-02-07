@@ -38,7 +38,7 @@ public partial class ErrorBase
   /// Gets or Sets Message
   /// </summary>
   [DataMember(Name = "message")]
-  public string? Message { get; set; }
+  public string Message { get; set; }
 
   /// <summary>
   /// Gets or Sets additional properties

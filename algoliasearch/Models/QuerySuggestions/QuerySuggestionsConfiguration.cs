@@ -51,7 +51,7 @@ public partial class QuerySuggestionsConfiguration
   /// Gets or Sets Languages
   /// </summary>
   [DataMember(Name = "languages")]
-  public Languages? Languages { get; set; }
+  public Languages Languages { get; set; }
 
   /// <summary>
   /// Patterns to exclude from query suggestions.

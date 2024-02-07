@@ -86,13 +86,13 @@ public partial class RankingInfo
   /// Gets or Sets MatchedGeoLocation
   /// </summary>
   [DataMember(Name = "matchedGeoLocation")]
-  public MatchedGeoLocation? MatchedGeoLocation { get; set; }
+  public MatchedGeoLocation MatchedGeoLocation { get; set; }
 
   /// <summary>
   /// Gets or Sets Personalization
   /// </summary>
   [DataMember(Name = "personalization")]
-  public Personalization? Personalization { get; set; }
+  public Personalization Personalization { get; set; }
 
   /// <summary>
   /// Number of exactly matched words.

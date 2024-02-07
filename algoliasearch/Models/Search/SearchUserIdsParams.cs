@@ -52,7 +52,7 @@ public partial class SearchUserIdsParams
   /// </summary>
   /// <value>Cluster name.</value>
   [DataMember(Name = "clusterName")]
-  public string? ClusterName { get; set; }
+  public string ClusterName { get; set; }
 
   /// <summary>
   /// Page to retrieve (the first page is `0`, not `1`).

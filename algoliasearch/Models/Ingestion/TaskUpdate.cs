@@ -38,19 +38,19 @@ public partial class TaskUpdate
   /// </summary>
   /// <value>The destination UUID.</value>
   [DataMember(Name = "destinationID")]
-  public string? DestinationID { get; set; }
+  public string DestinationID { get; set; }
 
   /// <summary>
   /// Gets or Sets Trigger
   /// </summary>
   [DataMember(Name = "trigger")]
-  public TriggerUpdateInput? Trigger { get; set; }
+  public TriggerUpdateInput Trigger { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
   [DataMember(Name = "input")]
-  public TaskInput? Input { get; set; }
+  public TaskInput Input { get; set; }
 
   /// <summary>
   /// Whether the task is enabled or not.

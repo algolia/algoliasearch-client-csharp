@@ -80,7 +80,7 @@ public partial class BaseIndexSettings
   /// </summary>
   /// <value>Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies.</value>
   [DataMember(Name = "decompoundedAttributes")]
-  public object? DecompoundedAttributes { get; set; }
+  public object DecompoundedAttributes { get; set; }
 
   /// <summary>
   /// Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
@@ -115,7 +115,7 @@ public partial class BaseIndexSettings
   /// </summary>
   /// <value>Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥.</value>
   [DataMember(Name = "separatorsToIndex")]
-  public string? SeparatorsToIndex { get; set; }
+  public string SeparatorsToIndex { get; set; }
 
   /// <summary>
   /// [Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position). 
@@ -143,7 +143,7 @@ public partial class BaseIndexSettings
   /// </summary>
   /// <value>Name of the deduplication attribute to be used with Algolia's [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).</value>
   [DataMember(Name = "attributeForDistinct")]
-  public string? AttributeForDistinct { get; set; }
+  public string AttributeForDistinct { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

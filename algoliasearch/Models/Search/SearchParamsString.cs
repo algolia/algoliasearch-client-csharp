@@ -38,7 +38,7 @@ public partial class SearchParamsString
   /// </summary>
   /// <value>Search parameters as a URL-encoded query string.</value>
   [DataMember(Name = "params")]
-  public string? VarParams { get; set; }
+  public string VarParams { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

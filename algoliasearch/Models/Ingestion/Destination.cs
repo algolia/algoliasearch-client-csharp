@@ -86,13 +86,13 @@ public partial class Destination
   /// </summary>
   /// <value>Date of last update (RFC3339 format).</value>
   [DataMember(Name = "updatedAt")]
-  public string? UpdatedAt { get; set; }
+  public string UpdatedAt { get; set; }
 
   /// <summary>
   /// Gets or Sets AuthenticationID
   /// </summary>
   [DataMember(Name = "authenticationID")]
-  public string? AuthenticationID { get; set; }
+  public string AuthenticationID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

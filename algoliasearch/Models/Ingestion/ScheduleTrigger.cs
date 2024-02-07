@@ -62,7 +62,7 @@ public partial class ScheduleTrigger
   /// </summary>
   /// <value>The last time the scheduled task ran (RFC3339 format).</value>
   [DataMember(Name = "lastRun")]
-  public string? LastRun { get; set; }
+  public string LastRun { get; set; }
 
   /// <summary>
   /// The next scheduled run of the task (RFC3339 format).

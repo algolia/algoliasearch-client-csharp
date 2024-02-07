@@ -142,21 +142,21 @@ public partial class Log
   /// </summary>
   /// <value>Index targeted by the query.</value>
   [DataMember(Name = "index")]
-  public string? Index { get; set; }
+  public string Index { get; set; }
 
   /// <summary>
   /// Query parameters sent with the request.
   /// </summary>
   /// <value>Query parameters sent with the request.</value>
   [DataMember(Name = "query_params")]
-  public string? QueryParams { get; set; }
+  public string QueryParams { get; set; }
 
   /// <summary>
   /// Number of hits returned for the query.
   /// </summary>
   /// <value>Number of hits returned for the query.</value>
   [DataMember(Name = "query_nb_hits")]
-  public string? QueryNbHits { get; set; }
+  public string QueryNbHits { get; set; }
 
   /// <summary>
   /// Performed queries for the given request.

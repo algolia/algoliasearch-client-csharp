@@ -52,7 +52,7 @@ public partial class ApiKey
   /// </summary>
   /// <value>Description of an API key for you and your team members.</value>
   [DataMember(Name = "description")]
-  public string? Description { get; set; }
+  public string Description { get; set; }
 
   /// <summary>
   /// Restricts this API key to a list of indices or index patterns. If the list is empty, all indices are allowed. Specify either an exact index name or a pattern with a leading or trailing wildcard character (or both). For example: - `dev_*` matches all indices starting with \"dev_\" - `*_dev` matches all indices ending with \"_dev\" - `*_products_*` matches all indices containing \"_products_\". 
@@ -80,7 +80,7 @@ public partial class ApiKey
   /// </summary>
   /// <value>Force some [query parameters](https://www.algolia.com/doc/api-reference/api-parameters/) to be applied for each query made with this API key. It's a URL-encoded query string. </value>
   [DataMember(Name = "queryParameters")]
-  public string? QueryParameters { get; set; }
+  public string QueryParameters { get; set; }
 
   /// <summary>
   /// Restrict this API key to specific [referrers](https://www.algolia.com/doc/guides/security/api-keys/in-depth/api-key-restrictions/#http-referrers). If empty, all referrers are allowed. For example: - `https://algolia.com/_*` matches all referrers starting with \"https://algolia.com/\" - `*.algolia.com` matches all referrers ending with \".algolia.com\" - `*algolia.com*` allows everything in the domain \"algolia.com\". 

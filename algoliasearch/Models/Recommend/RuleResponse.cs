@@ -44,7 +44,7 @@ public partial class RuleResponse
   /// Gets or Sets Metadata
   /// </summary>
   [DataMember(Name = "_metadata")]
-  public RuleResponseMetadata? Metadata { get; set; }
+  public RuleResponseMetadata Metadata { get; set; }
 
   /// <summary>
   /// Unique identifier for a rule object.
@@ -64,14 +64,14 @@ public partial class RuleResponse
   /// Gets or Sets Consequence
   /// </summary>
   [DataMember(Name = "consequence")]
-  public Consequence? Consequence { get; set; }
+  public Consequence Consequence { get; set; }
 
   /// <summary>
   /// Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
   /// </summary>
   /// <value>Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.</value>
   [DataMember(Name = "description")]
-  public string? Description { get; set; }
+  public string Description { get; set; }
 
   /// <summary>
   /// Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.

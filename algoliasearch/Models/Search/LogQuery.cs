@@ -38,21 +38,21 @@ public partial class LogQuery
   /// </summary>
   /// <value>Index targeted by the query.</value>
   [DataMember(Name = "index_name")]
-  public string? IndexName { get; set; }
+  public string IndexName { get; set; }
 
   /// <summary>
   /// User identifier.
   /// </summary>
   /// <value>User identifier.</value>
   [DataMember(Name = "user_token")]
-  public string? UserToken { get; set; }
+  public string UserToken { get; set; }
 
   /// <summary>
   /// Unique query identifier.
   /// </summary>
   /// <value>Unique query identifier.</value>
   [DataMember(Name = "query_id")]
-  public string? QueryId { get; set; }
+  public string QueryId { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

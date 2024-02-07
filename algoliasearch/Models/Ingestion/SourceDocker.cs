@@ -70,7 +70,7 @@ public partial class SourceDocker
   /// </summary>
   /// <value>The version of the image, defaults to `latest`.</value>
   [DataMember(Name = "version")]
-  public string? VarVersion { get; set; }
+  public string VarVersion { get; set; }
 
   /// <summary>
   /// The configuration of the spec.

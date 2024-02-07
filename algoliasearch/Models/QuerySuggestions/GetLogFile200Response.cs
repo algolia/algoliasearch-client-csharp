@@ -44,14 +44,14 @@ public partial class GetLogFile200Response
   /// </summary>
   /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
   [DataMember(Name = "timestamp")]
-  public string? Timestamp { get; set; }
+  public string Timestamp { get; set; }
 
   /// <summary>
   /// Details about this log entry.
   /// </summary>
   /// <value>Details about this log entry.</value>
   [DataMember(Name = "message")]
-  public string? Message { get; set; }
+  public string Message { get; set; }
 
   /// <summary>
   /// Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0. 

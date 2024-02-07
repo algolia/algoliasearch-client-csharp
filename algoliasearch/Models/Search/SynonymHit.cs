@@ -67,14 +67,14 @@ public partial class SynonymHit
   /// </summary>
   /// <value>Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).</value>
   [DataMember(Name = "input")]
-  public string? Input { get; set; }
+  public string Input { get; set; }
 
   /// <summary>
   /// Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
   /// </summary>
   /// <value>Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).</value>
   [DataMember(Name = "word")]
-  public string? Word { get; set; }
+  public string Word { get; set; }
 
   /// <summary>
   /// Words to be matched in records.
@@ -88,7 +88,7 @@ public partial class SynonymHit
   /// </summary>
   /// <value>[Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records. </value>
   [DataMember(Name = "placeholder")]
-  public string? Placeholder { get; set; }
+  public string Placeholder { get; set; }
 
   /// <summary>
   /// Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).

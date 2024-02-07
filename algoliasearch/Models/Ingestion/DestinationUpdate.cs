@@ -44,19 +44,19 @@ public partial class DestinationUpdate
   /// </summary>
   /// <value>An human readable name describing the object.</value>
   [DataMember(Name = "name")]
-  public string? Name { get; set; }
+  public string Name { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
   /// </summary>
   [DataMember(Name = "input")]
-  public DestinationInput? Input { get; set; }
+  public DestinationInput Input { get; set; }
 
   /// <summary>
   /// Gets or Sets AuthenticationID
   /// </summary>
   [DataMember(Name = "authenticationID")]
-  public string? AuthenticationID { get; set; }
+  public string AuthenticationID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

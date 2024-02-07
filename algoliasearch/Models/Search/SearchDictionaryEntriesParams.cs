@@ -66,7 +66,7 @@ public partial class SearchDictionaryEntriesParams
   /// </summary>
   /// <value>[Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). </value>
   [DataMember(Name = "language")]
-  public string? Language { get; set; }
+  public string Language { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -37,7 +37,7 @@ public partial class AuthAPIKeyPartial
   /// Gets or Sets Key
   /// </summary>
   [DataMember(Name = "key")]
-  public string? Key { get; set; }
+  public string Key { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

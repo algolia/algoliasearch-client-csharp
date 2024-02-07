@@ -44,7 +44,7 @@ public partial class IncidentsInner
   /// Gets or Sets V
   /// </summary>
   [DataMember(Name = "v")]
-  public Incident? V { get; set; }
+  public Incident V { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

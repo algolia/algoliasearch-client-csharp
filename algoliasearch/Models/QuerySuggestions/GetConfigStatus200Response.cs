@@ -38,7 +38,7 @@ public partial class GetConfigStatus200Response
   /// </summary>
   /// <value>Query Suggestions index name.</value>
   [DataMember(Name = "indexName")]
-  public string? IndexName { get; set; }
+  public string IndexName { get; set; }
 
   /// <summary>
   /// Indicates whether the creation or update of the Query Suggestions is in progress.
@@ -52,21 +52,21 @@ public partial class GetConfigStatus200Response
   /// </summary>
   /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.</value>
   [DataMember(Name = "lastBuiltAt")]
-  public string? LastBuiltAt { get; set; }
+  public string LastBuiltAt { get; set; }
 
   /// <summary>
   /// Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.
   /// </summary>
   /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.</value>
   [DataMember(Name = "lastSuccessfulBuiltAt")]
-  public string? LastSuccessfulBuiltAt { get; set; }
+  public string LastSuccessfulBuiltAt { get; set; }
 
   /// <summary>
   /// Duration of the last successful build in seconds.
   /// </summary>
   /// <value>Duration of the last successful build in seconds.</value>
   [DataMember(Name = "lastSuccessfulBuildDuration")]
-  public string? LastSuccessfulBuildDuration { get; set; }
+  public string LastSuccessfulBuildDuration { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

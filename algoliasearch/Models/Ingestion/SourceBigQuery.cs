@@ -67,28 +67,28 @@ public partial class SourceBigQuery
   /// </summary>
   /// <value>Table name (for default BQ).</value>
   [DataMember(Name = "table")]
-  public string? Table { get; set; }
+  public string Table { get; set; }
 
   /// <summary>
   /// Table prefix (for Google Analytics).
   /// </summary>
   /// <value>Table prefix (for Google Analytics).</value>
   [DataMember(Name = "tablePrefix")]
-  public string? TablePrefix { get; set; }
+  public string TablePrefix { get; set; }
 
   /// <summary>
   /// Custom SQL request to extract data from the BigQuery table.
   /// </summary>
   /// <value>Custom SQL request to extract data from the BigQuery table.</value>
   [DataMember(Name = "customSQLRequest")]
-  public string? CustomSQLRequest { get; set; }
+  public string CustomSQLRequest { get; set; }
 
   /// <summary>
   /// The name of the column that contains the unique ID, used as `objectID` in Algolia.
   /// </summary>
   /// <value>The name of the column that contains the unique ID, used as `objectID` in Algolia.</value>
   [DataMember(Name = "uniqueIDColumn")]
-  public string? UniqueIDColumn { get; set; }
+  public string UniqueIDColumn { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

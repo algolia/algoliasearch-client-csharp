@@ -45,7 +45,7 @@ public partial class BaseResponse
   /// </summary>
   /// <value>Details about the response, such as error messages.</value>
   [DataMember(Name = "message")]
-  public string? Message { get; set; }
+  public string Message { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

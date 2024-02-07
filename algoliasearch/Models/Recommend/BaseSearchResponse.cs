@@ -71,20 +71,20 @@ public partial class BaseSearchResponse
   /// </summary>
   /// <value>Computed geographical location.</value>
   [DataMember(Name = "aroundLatLng")]
-  public string? AroundLatLng { get; set; }
+  public string AroundLatLng { get; set; }
 
   /// <summary>
   /// Automatically-computed radius.
   /// </summary>
   /// <value>Automatically-computed radius.</value>
   [DataMember(Name = "automaticRadius")]
-  public string? AutomaticRadius { get; set; }
+  public string AutomaticRadius { get; set; }
 
   /// <summary>
   /// Gets or Sets Exhaustive
   /// </summary>
   [DataMember(Name = "exhaustive")]
-  public Exhaustive? Exhaustive { get; set; }
+  public Exhaustive Exhaustive { get; set; }
 
   /// <summary>
   /// See the `facetsCount` field of the `exhaustive` object in the response.
@@ -136,21 +136,21 @@ public partial class BaseSearchResponse
   /// </summary>
   /// <value>Index name used for the query.</value>
   [DataMember(Name = "index")]
-  public string? Index { get; set; }
+  public string Index { get; set; }
 
   /// <summary>
   /// Index name used for the query. During A/B testing, the targeted index isn't always the index used by the query.
   /// </summary>
   /// <value>Index name used for the query. During A/B testing, the targeted index isn't always the index used by the query.</value>
   [DataMember(Name = "indexUsed")]
-  public string? IndexUsed { get; set; }
+  public string IndexUsed { get; set; }
 
   /// <summary>
   /// Warnings about the query.
   /// </summary>
   /// <value>Warnings about the query.</value>
   [DataMember(Name = "message")]
-  public string? Message { get; set; }
+  public string Message { get; set; }
 
   /// <summary>
   /// Number of hits the search query matched.
@@ -185,7 +185,7 @@ public partial class BaseSearchResponse
   /// </summary>
   /// <value>Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.</value>
   [DataMember(Name = "parsedQuery")]
-  public string? ParsedQuery { get; set; }
+  public string ParsedQuery { get; set; }
 
   /// <summary>
   /// Time the server took to process the request, in milliseconds.
@@ -199,26 +199,26 @@ public partial class BaseSearchResponse
   /// </summary>
   /// <value>Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.</value>
   [DataMember(Name = "processingTimingsMS")]
-  public object? ProcessingTimingsMS { get; set; }
+  public object ProcessingTimingsMS { get; set; }
 
   /// <summary>
   /// Markup text indicating which parts of the original query have been removed to retrieve a non-empty result set.
   /// </summary>
   /// <value>Markup text indicating which parts of the original query have been removed to retrieve a non-empty result set.</value>
   [DataMember(Name = "queryAfterRemoval")]
-  public string? QueryAfterRemoval { get; set; }
+  public string QueryAfterRemoval { get; set; }
 
   /// <summary>
   /// Gets or Sets Redirect
   /// </summary>
   [DataMember(Name = "redirect")]
-  public Redirect? Redirect { get; set; }
+  public Redirect Redirect { get; set; }
 
   /// <summary>
   /// Gets or Sets RenderingContent
   /// </summary>
   [DataMember(Name = "renderingContent")]
-  public RenderingContent? RenderingContent { get; set; }
+  public RenderingContent RenderingContent { get; set; }
 
   /// <summary>
   /// Time the server took to process the request, in milliseconds.
@@ -232,7 +232,7 @@ public partial class BaseSearchResponse
   /// </summary>
   /// <value>Host name of the server that processed the request.</value>
   [DataMember(Name = "serverUsed")]
-  public string? ServerUsed { get; set; }
+  public string ServerUsed { get; set; }
 
   /// <summary>
   /// Lets you store custom data in your indices.

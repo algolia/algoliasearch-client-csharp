@@ -38,13 +38,13 @@ public partial class ObjectDataAfterSearch
   /// </summary>
   /// <value>Unique identifier for a search query, used to track purchase events with multiple records that originate from different searches.</value>
   [DataMember(Name = "queryID")]
-  public string? QueryID { get; set; }
+  public string QueryID { get; set; }
 
   /// <summary>
   /// Gets or Sets Price
   /// </summary>
   [DataMember(Name = "price")]
-  public Price? Price { get; set; }
+  public Price Price { get; set; }
 
   /// <summary>
   /// The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item. 
@@ -57,7 +57,7 @@ public partial class ObjectDataAfterSearch
   /// Gets or Sets Discount
   /// </summary>
   [DataMember(Name = "discount")]
-  public Discount? Discount { get; set; }
+  public Discount Discount { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

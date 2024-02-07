@@ -45,7 +45,7 @@ public partial class BaseGetApiKeyResponse
   /// </summary>
   /// <value>API key.</value>
   [DataMember(Name = "value")]
-  public string? Value { get; set; }
+  public string Value { get; set; }
 
   /// <summary>
   /// Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).

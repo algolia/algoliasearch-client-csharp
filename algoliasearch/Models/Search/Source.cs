@@ -52,7 +52,7 @@ public partial class Source
   /// </summary>
   /// <value>Source description.</value>
   [DataMember(Name = "description")]
-  public string? Description { get; set; }
+  public string Description { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

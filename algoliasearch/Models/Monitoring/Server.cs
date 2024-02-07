@@ -56,7 +56,7 @@ public partial class Server
   /// </summary>
   /// <value>Server name.</value>
   [DataMember(Name = "name")]
-  public string? Name { get; set; }
+  public string Name { get; set; }
 
   /// <summary>
   /// Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead. 
@@ -78,7 +78,7 @@ public partial class Server
   /// </summary>
   /// <value>Name of the cluster to which this server belongs.</value>
   [DataMember(Name = "cluster")]
-  public string? Cluster { get; set; }
+  public string Cluster { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -37,7 +37,7 @@ public partial class LatencyResponse
   /// Gets or Sets Metrics
   /// </summary>
   [DataMember(Name = "metrics")]
-  public LatencyResponseMetrics? Metrics { get; set; }
+  public LatencyResponseMetrics Metrics { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

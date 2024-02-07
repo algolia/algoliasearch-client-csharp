@@ -141,7 +141,7 @@ public partial class Variant
   /// Gets or Sets FilterEffects
   /// </summary>
   [DataMember(Name = "filterEffects")]
-  public FilterEffects? FilterEffects { get; set; }
+  public FilterEffects FilterEffects { get; set; }
 
   /// <summary>
   /// A/B test index.

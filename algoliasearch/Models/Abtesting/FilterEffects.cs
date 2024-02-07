@@ -37,13 +37,13 @@ public partial class FilterEffects
   /// Gets or Sets Outliers
   /// </summary>
   [DataMember(Name = "outliers")]
-  public FilterEffectsOutliers? Outliers { get; set; }
+  public FilterEffectsOutliers Outliers { get; set; }
 
   /// <summary>
   /// Gets or Sets EmptySearch
   /// </summary>
   [DataMember(Name = "emptySearch")]
-  public FilterEffectsEmptySearch? EmptySearch { get; set; }
+  public FilterEffectsEmptySearch EmptySearch { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

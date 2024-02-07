@@ -37,39 +37,39 @@ public partial class DeleteByParams
   /// Gets or Sets FacetFilters
   /// </summary>
   [DataMember(Name = "facetFilters")]
-  public FacetFilters? FacetFilters { get; set; }
+  public FacetFilters FacetFilters { get; set; }
 
   /// <summary>
   /// [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. 
   /// </summary>
   /// <value>[Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. </value>
   [DataMember(Name = "filters")]
-  public string? Filters { get; set; }
+  public string Filters { get; set; }
 
   /// <summary>
   /// Gets or Sets NumericFilters
   /// </summary>
   [DataMember(Name = "numericFilters")]
-  public NumericFilters? NumericFilters { get; set; }
+  public NumericFilters NumericFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets TagFilters
   /// </summary>
   [DataMember(Name = "tagFilters")]
-  public TagFilters? TagFilters { get; set; }
+  public TagFilters TagFilters { get; set; }
 
   /// <summary>
   /// Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
   /// </summary>
   /// <value>Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.</value>
   [DataMember(Name = "aroundLatLng")]
-  public string? AroundLatLng { get; set; }
+  public string AroundLatLng { get; set; }
 
   /// <summary>
   /// Gets or Sets AroundRadius
   /// </summary>
   [DataMember(Name = "aroundRadius")]
-  public AroundRadius? AroundRadius { get; set; }
+  public AroundRadius AroundRadius { get; set; }
 
   /// <summary>
   /// Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).

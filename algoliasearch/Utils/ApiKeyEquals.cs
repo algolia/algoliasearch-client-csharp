@@ -30,6 +30,15 @@ namespace Algolia.Search.Models.Search
       return base.Equals(obj);
     }
 
+    /// <summary>
+    /// Get the hash code of the object
+    /// </summary>
+    /// <returns></returns>
+    public override int GetHashCode()
+    {
+      return base.GetHashCode();
+    }
+
     private bool CheckNullable<T>(T objProps, T otherProps)
     {
       // if other is null, we don't compare the property

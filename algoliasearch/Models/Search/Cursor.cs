@@ -38,7 +38,7 @@ public partial class Cursor
   /// </summary>
   /// <value>Cursor indicating the location to resume browsing from. Must match the value returned by the previous call. Pass this value to the subsequent browse call to get the next page of results. When the end of the index has been reached, `cursor` is absent from the response. </value>
   [DataMember(Name = "cursor")]
-  public string? VarCursor { get; set; }
+  public string VarCursor { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

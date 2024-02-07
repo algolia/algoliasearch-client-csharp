@@ -69,45 +69,45 @@ public partial class RecommendedForYouQueryParameters
   /// </summary>
   /// <value>Text to search for in an index.</value>
   [DataMember(Name = "query")]
-  public string? Query { get; set; }
+  public string Query { get; set; }
 
   /// <summary>
   /// Overrides the query parameter and performs a more generic search.
   /// </summary>
   /// <value>Overrides the query parameter and performs a more generic search.</value>
   [DataMember(Name = "similarQuery")]
-  public string? SimilarQuery { get; set; }
+  public string SimilarQuery { get; set; }
 
   /// <summary>
   /// [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. 
   /// </summary>
   /// <value>[Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. </value>
   [DataMember(Name = "filters")]
-  public string? Filters { get; set; }
+  public string Filters { get; set; }
 
   /// <summary>
   /// Gets or Sets FacetFilters
   /// </summary>
   [DataMember(Name = "facetFilters")]
-  public FacetFilters? FacetFilters { get; set; }
+  public FacetFilters FacetFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets OptionalFilters
   /// </summary>
   [DataMember(Name = "optionalFilters")]
-  public OptionalFilters? OptionalFilters { get; set; }
+  public OptionalFilters OptionalFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets NumericFilters
   /// </summary>
   [DataMember(Name = "numericFilters")]
-  public NumericFilters? NumericFilters { get; set; }
+  public NumericFilters NumericFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets TagFilters
   /// </summary>
   [DataMember(Name = "tagFilters")]
-  public TagFilters? TagFilters { get; set; }
+  public TagFilters TagFilters { get; set; }
 
   /// <summary>
   /// Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed. 
@@ -163,7 +163,7 @@ public partial class RecommendedForYouQueryParameters
   /// </summary>
   /// <value>Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.</value>
   [DataMember(Name = "aroundLatLng")]
-  public string? AroundLatLng { get; set; }
+  public string AroundLatLng { get; set; }
 
   /// <summary>
   /// Search for entries around a location. The location is automatically computed from the requester's IP address.
@@ -176,13 +176,13 @@ public partial class RecommendedForYouQueryParameters
   /// Gets or Sets AroundRadius
   /// </summary>
   [DataMember(Name = "aroundRadius")]
-  public AroundRadius? AroundRadius { get; set; }
+  public AroundRadius AroundRadius { get; set; }
 
   /// <summary>
   /// Gets or Sets AroundPrecision
   /// </summary>
   [DataMember(Name = "aroundPrecision")]
-  public AroundPrecision? AroundPrecision { get; set; }
+  public AroundPrecision AroundPrecision { get; set; }
 
   /// <summary>
   /// Minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set.
@@ -343,21 +343,21 @@ public partial class RecommendedForYouQueryParameters
   /// </summary>
   /// <value>HTML string to insert before the highlighted parts in all highlight and snippet results.</value>
   [DataMember(Name = "highlightPreTag")]
-  public string? HighlightPreTag { get; set; }
+  public string HighlightPreTag { get; set; }
 
   /// <summary>
   /// HTML string to insert after the highlighted parts in all highlight and snippet results.
   /// </summary>
   /// <value>HTML string to insert after the highlighted parts in all highlight and snippet results.</value>
   [DataMember(Name = "highlightPostTag")]
-  public string? HighlightPostTag { get; set; }
+  public string HighlightPostTag { get; set; }
 
   /// <summary>
   /// String used as an ellipsis indicator when a snippet is truncated.
   /// </summary>
   /// <value>String used as an ellipsis indicator when a snippet is truncated.</value>
   [DataMember(Name = "snippetEllipsisText")]
-  public string? SnippetEllipsisText { get; set; }
+  public string SnippetEllipsisText { get; set; }
 
   /// <summary>
   /// Restrict highlighting and snippeting to items that matched the query.
@@ -391,7 +391,7 @@ public partial class RecommendedForYouQueryParameters
   /// Gets or Sets TypoTolerance
   /// </summary>
   [DataMember(Name = "typoTolerance")]
-  public TypoTolerance? TypoTolerance { get; set; }
+  public TypoTolerance TypoTolerance { get; set; }
 
   /// <summary>
   /// Whether to allow typos on numbers (\"numeric tokens\") in the query string.
@@ -411,20 +411,20 @@ public partial class RecommendedForYouQueryParameters
   /// Gets or Sets IgnorePlurals
   /// </summary>
   [DataMember(Name = "ignorePlurals")]
-  public IgnorePlurals? IgnorePlurals { get; set; }
+  public IgnorePlurals IgnorePlurals { get; set; }
 
   /// <summary>
   /// Gets or Sets RemoveStopWords
   /// </summary>
   [DataMember(Name = "removeStopWords")]
-  public RemoveStopWords? RemoveStopWords { get; set; }
+  public RemoveStopWords RemoveStopWords { get; set; }
 
   /// <summary>
   /// Characters that the engine shouldn't automatically [normalize](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
   /// </summary>
   /// <value>Characters that the engine shouldn't automatically [normalize](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).</value>
   [DataMember(Name = "keepDiacriticsOnCharacters")]
-  public string? KeepDiacriticsOnCharacters { get; set; }
+  public string KeepDiacriticsOnCharacters { get; set; }
 
   /// <summary>
   /// Sets your user's search language. This adjusts language-specific settings and features such as `ignorePlurals`, `removeStopWords`, and [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) word detection.
@@ -458,7 +458,7 @@ public partial class RecommendedForYouQueryParameters
   /// Gets or Sets SemanticSearch
   /// </summary>
   [DataMember(Name = "semanticSearch")]
-  public SemanticSearch? SemanticSearch { get; set; }
+  public SemanticSearch SemanticSearch { get; set; }
 
   /// <summary>
   /// Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).
@@ -499,7 +499,7 @@ public partial class RecommendedForYouQueryParameters
   /// Gets or Sets Distinct
   /// </summary>
   [DataMember(Name = "distinct")]
-  public Distinct? Distinct { get; set; }
+  public Distinct Distinct { get; set; }
 
   /// <summary>
   /// Whether to highlight and snippet the original word that matches the synonym or the synonym itself.
@@ -541,7 +541,7 @@ public partial class RecommendedForYouQueryParameters
   /// </summary>
   /// <value>Controls how facet values are fetched.</value>
   [DataMember(Name = "sortFacetValuesBy")]
-  public string? SortFacetValuesBy { get; set; }
+  public string SortFacetValuesBy { get; set; }
 
   /// <summary>
   /// When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.
@@ -554,7 +554,7 @@ public partial class RecommendedForYouQueryParameters
   /// Gets or Sets RenderingContent
   /// </summary>
   [DataMember(Name = "renderingContent")]
-  public RenderingContent? RenderingContent { get; set; }
+  public RenderingContent RenderingContent { get; set; }
 
   /// <summary>
   /// Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).

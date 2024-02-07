@@ -45,14 +45,14 @@ public partial class UpdatedAtWithObjectIdResponse
   /// </summary>
   /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
   [DataMember(Name = "updatedAt")]
-  public string? UpdatedAt { get; set; }
+  public string UpdatedAt { get; set; }
 
   /// <summary>
   /// Unique object identifier.
   /// </summary>
   /// <value>Unique object identifier.</value>
   [DataMember(Name = "objectID")]
-  public string? ObjectID { get; set; }
+  public string ObjectID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -37,25 +37,25 @@ public partial class Params
   /// Gets or Sets Query
   /// </summary>
   [DataMember(Name = "query")]
-  public ConsequenceQuery? Query { get; set; }
+  public ConsequenceQuery Query { get; set; }
 
   /// <summary>
   /// Gets or Sets AutomaticFacetFilters
   /// </summary>
   [DataMember(Name = "automaticFacetFilters")]
-  public AutomaticFacetFilters? AutomaticFacetFilters { get; set; }
+  public AutomaticFacetFilters AutomaticFacetFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets AutomaticOptionalFacetFilters
   /// </summary>
   [DataMember(Name = "automaticOptionalFacetFilters")]
-  public AutomaticFacetFilters? AutomaticOptionalFacetFilters { get; set; }
+  public AutomaticFacetFilters AutomaticOptionalFacetFilters { get; set; }
 
   /// <summary>
   /// Gets or Sets RenderingContent
   /// </summary>
   [DataMember(Name = "renderingContent")]
-  public RenderingContent? RenderingContent { get; set; }
+  public RenderingContent RenderingContent { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -81,7 +81,7 @@ public partial class Event
   /// </summary>
   /// <value>The parent event, the cause of this event.</value>
   [DataMember(Name = "parentID")]
-  public string? ParentID { get; set; }
+  public string ParentID { get; set; }
 
   /// <summary>
   /// The extracted record batch size.

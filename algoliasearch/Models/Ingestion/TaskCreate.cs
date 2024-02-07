@@ -90,7 +90,7 @@ public partial class TaskCreate
   /// Gets or Sets Input
   /// </summary>
   [DataMember(Name = "input")]
-  public TaskInput? Input { get; set; }
+  public TaskInput Input { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

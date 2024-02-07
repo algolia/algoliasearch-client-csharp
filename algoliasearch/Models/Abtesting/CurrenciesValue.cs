@@ -38,7 +38,7 @@ public partial class CurrenciesValue
   /// </summary>
   /// <value>Currency code.</value>
   [DataMember(Name = "currency")]
-  public string? Currency { get; set; }
+  public string Currency { get; set; }
 
   /// <summary>
   /// Revenue for this currency.

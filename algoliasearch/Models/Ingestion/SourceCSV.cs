@@ -58,7 +58,7 @@ public partial class SourceCSV
   /// </summary>
   /// <value>The name of the column that contains the unique ID, used as `objectID` in Algolia.</value>
   [DataMember(Name = "uniqueIDColumn")]
-  public string? UniqueIDColumn { get; set; }
+  public string UniqueIDColumn { get; set; }
 
   /// <summary>
   /// Mapping of type for every column. For example {\"myColumn\": \"boolean\", \"myOtherColumn\": \"json\"}. 
@@ -72,7 +72,7 @@ public partial class SourceCSV
   /// </summary>
   /// <value>The character used to split the value on each line, default to a comma (\\r, \\n, 0xFFFD, and space are forbidden).</value>
   [DataMember(Name = "delimiter")]
-  public string? Delimiter { get; set; }
+  public string Delimiter { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
