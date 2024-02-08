@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Monitoring;
 /// Incident details.
 /// </summary>
 [DataContract(Name = "Incident")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Incident
 {
 

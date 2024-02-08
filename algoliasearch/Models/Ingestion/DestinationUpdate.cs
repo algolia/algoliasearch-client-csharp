@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// Payload to partially update a Destination.
 /// </summary>
 [DataContract(Name = "DestinationUpdate")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DestinationUpdate
 {
 

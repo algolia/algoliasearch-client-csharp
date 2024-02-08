@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Dictionary entry.
 /// </summary>
 [DataContract(Name = "dictionaryEntry")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DictionaryEntry
 {
 

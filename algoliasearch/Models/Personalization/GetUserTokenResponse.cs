@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Personalization;
 /// GetUserTokenResponse
 /// </summary>
 [DataContract(Name = "getUserTokenResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class GetUserTokenResponse
 {
   /// <summary>

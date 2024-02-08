@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Insights;
 /// The response of the Insights API.
 /// </summary>
 [DataContract(Name = "EventsResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class EventsResponse
 {
   /// <summary>

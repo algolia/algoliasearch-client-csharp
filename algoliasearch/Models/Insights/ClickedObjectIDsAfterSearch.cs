@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Insights;
 /// Click event after an Algolia request.  Use this event to track when users click items in the search results. If you're building your category pages with Algolia, you'll also use this event. 
 /// </summary>
 [DataContract(Name = "ClickedObjectIDsAfterSearch")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ClickedObjectIDsAfterSearch
 {
 

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Response, taskID, and deletion timestamp.
 /// </summary>
 [DataContract(Name = "deletedAtResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DeletedAtResponse
 {
   /// <summary>

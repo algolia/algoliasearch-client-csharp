@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// RecommendationsResults
 /// </summary>
 [DataContract(Name = "recommendationsResults")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class RecommendationsResults
 {
   /// <summary>

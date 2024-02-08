@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.QuerySuggestions;
 /// BaseQuerySuggestionsConfigurationWithIndex
 /// </summary>
 [DataContract(Name = "baseQuerySuggestionsConfigurationWithIndex")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class BaseQuerySuggestionsConfigurationWithIndex
 {
   /// <summary>

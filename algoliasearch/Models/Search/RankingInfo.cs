@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// RankingInfo
 /// </summary>
 [DataContract(Name = "rankingInfo")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class RankingInfo
 {
   /// <summary>

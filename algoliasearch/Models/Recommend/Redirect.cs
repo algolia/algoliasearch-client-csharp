@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/). 
 /// </summary>
 [DataContract(Name = "redirect")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Redirect
 {
   /// <summary>

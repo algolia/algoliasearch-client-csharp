@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// UserWithDate
 /// </summary>
 [DataContract(Name = "userWithDate")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class UserWithDate
 {
   /// <summary>

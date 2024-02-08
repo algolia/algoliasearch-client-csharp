@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// AuthAlgoliaPartial
 /// </summary>
 [DataContract(Name = "AuthAlgoliaPartial")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class AuthAlgoliaPartial
 {
   /// <summary>

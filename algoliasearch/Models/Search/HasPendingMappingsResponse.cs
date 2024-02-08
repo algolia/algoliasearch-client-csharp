@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// HasPendingMappingsResponse
 /// </summary>
 [DataContract(Name = "hasPendingMappingsResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class HasPendingMappingsResponse
 {
   /// <summary>

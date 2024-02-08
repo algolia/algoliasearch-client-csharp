@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// SearchEvent
 /// </summary>
 [DataContract(Name = "searchEvent")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SearchEvent
 {
   /// <summary>

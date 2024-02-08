@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Rules search parameters.
 /// </summary>
 [DataContract(Name = "searchRulesParams")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SearchRulesParams
 {
 

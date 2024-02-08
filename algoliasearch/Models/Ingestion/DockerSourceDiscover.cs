@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// DockerSourceDiscover
 /// </summary>
 [DataContract(Name = "dockerSourceDiscover")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DockerSourceDiscover
 {
   /// <summary>

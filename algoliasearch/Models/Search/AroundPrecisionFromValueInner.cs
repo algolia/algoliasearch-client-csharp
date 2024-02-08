@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// AroundPrecisionFromValueInner
 /// </summary>
 [DataContract(Name = "aroundPrecisionFromValue_inner")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class AroundPrecisionFromValueInner
 {
   /// <summary>

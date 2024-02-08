@@ -10,12 +10,9 @@
 
 using System;
 using System.Collections.Generic;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -34,7 +31,7 @@ public sealed class AbtestingConfig : AlgoliaConfig
   public AbtestingConfig(string appId, string apiKey, string region = null) : base(appId, apiKey, "Abtesting")
   {
     DefaultHosts = GetDefaultHosts(region);
-    Compression = CompressionType.NONE;
+    Compression = CompressionType.None;
   }
   private static List<StatefulHost> GetDefaultHosts(string region)
   {
@@ -46,9 +43,9 @@ public sealed class AbtestingConfig : AlgoliaConfig
 
     var selectedRegion = region == null ? "analytics.algolia.com" : "analytics.{region}.algolia.com".Replace("{region}", region);
 
-    List<StatefulHost> hosts = new List<StatefulHost>
+    var hosts = new List<StatefulHost>
   {
-    new StatefulHost
+    new()
     {
       Url = selectedRegion, Accept = CallType.Read | CallType.Write
     }

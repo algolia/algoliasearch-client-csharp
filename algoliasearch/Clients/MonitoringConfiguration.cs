@@ -10,12 +10,9 @@
 
 using System;
 using System.Collections.Generic;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -33,13 +30,13 @@ public sealed class MonitoringConfig : AlgoliaConfig
   public MonitoringConfig(string appId, string apiKey) : base(appId, apiKey, "Monitoring")
   {
     DefaultHosts = GetDefaultHosts();
-    Compression = CompressionType.NONE;
+    Compression = CompressionType.None;
   }
   private static List<StatefulHost> GetDefaultHosts()
   {
     return new List<StatefulHost>
   {
-    new StatefulHost
+    new()
     {
       Url = "status.algolia.com",
       Up = true,

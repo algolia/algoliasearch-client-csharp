@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// A destination describe how the data is indexed on the Algolia side.
 /// </summary>
 [DataContract(Name = "Destination")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Destination
 {
 

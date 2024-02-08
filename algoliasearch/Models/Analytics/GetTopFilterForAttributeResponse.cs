@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// GetTopFilterForAttributeResponse
 /// </summary>
 [DataContract(Name = "getTopFilterForAttributeResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class GetTopFilterForAttributeResponse
 {
   /// <summary>

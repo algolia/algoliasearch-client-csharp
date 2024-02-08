@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// ConsequenceQueryObject
 /// </summary>
 [DataContract(Name = "consequenceQueryObject")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ConsequenceQueryObject
 {
   /// <summary>

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// Response from the API when the Authentication is successfully updated.
 /// </summary>
 [DataContract(Name = "AuthenticationUpdateResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class AuthenticationUpdateResponse
 {
   /// <summary>

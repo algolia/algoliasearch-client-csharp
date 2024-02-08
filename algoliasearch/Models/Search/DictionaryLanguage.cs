@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Custom entries for a dictionary.
 /// </summary>
 [DataContract(Name = "dictionaryLanguage")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DictionaryLanguage
 {
   /// <summary>

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// GetSearchesCountResponse
 /// </summary>
 [DataContract(Name = "getSearchesCountResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class GetSearchesCountResponse
 {
   /// <summary>

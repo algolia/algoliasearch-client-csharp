@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.QuerySuggestions;
 /// QuerySuggestionsConfigurationResponse
 /// </summary>
 [DataContract(Name = "QuerySuggestionsConfigurationResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class QuerySuggestionsConfigurationResponse
 {
   /// <summary>

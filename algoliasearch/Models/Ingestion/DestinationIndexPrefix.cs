@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// DestinationIndexPrefix
 /// </summary>
 [DataContract(Name = "DestinationIndexPrefix")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DestinationIndexPrefix
 {
   /// <summary>

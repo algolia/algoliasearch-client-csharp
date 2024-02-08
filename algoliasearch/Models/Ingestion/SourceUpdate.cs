@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// SourceUpdate
 /// </summary>
 [DataContract(Name = "SourceUpdate")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SourceUpdate
 {
   /// <summary>

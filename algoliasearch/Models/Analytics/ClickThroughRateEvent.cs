@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// ClickThroughRateEvent
 /// </summary>
 [DataContract(Name = "clickThroughRateEvent")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ClickThroughRateEvent
 {
   /// <summary>

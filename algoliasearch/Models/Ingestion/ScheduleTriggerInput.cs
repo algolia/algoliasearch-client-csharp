@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The trigger input for a task of type 'schedule'.
 /// </summary>
 [DataContract(Name = "ScheduleTriggerInput")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ScheduleTriggerInput
 {
 

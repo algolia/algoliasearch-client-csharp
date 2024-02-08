@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Personalization;
 /// FacetScoring
 /// </summary>
 [DataContract(Name = "facetScoring")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class FacetScoring
 {
   /// <summary>

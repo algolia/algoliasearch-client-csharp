@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// BaseSearchParamsWithoutQuery
 /// </summary>
 [DataContract(Name = "baseSearchParamsWithoutQuery")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class BaseSearchParamsWithoutQuery
 {
   /// <summary>

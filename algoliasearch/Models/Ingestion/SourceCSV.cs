@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// SourceCSV
 /// </summary>
 [DataContract(Name = "SourceCSV")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SourceCSV
 {
 

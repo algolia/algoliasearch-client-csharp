@@ -1,18 +1,17 @@
-namespace Algolia.Search.Models.Common
+namespace Algolia.Search.Models.Common;
+
+/// <summary>
+/// Compression type for outgoing HTTP requests
+/// </summary>
+public enum CompressionType
 {
   /// <summary>
-  /// Compression type for outgoing HTTP requests
+  /// No compression
   /// </summary>
-  public enum CompressionType
-  {
-    /// <summary>
-    /// No compression
-    /// </summary>
-    NONE = 1,
+  None = 1,
 
-    /// <summary>
-    /// GZip Compression. Only supported by Search API.
-    /// </summary>
-    GZIP = 2
-  }
+  /// <summary>
+  /// GZip Compression. Only supported by Search API.
+  /// </summary>
+  Gzip = 2
 }

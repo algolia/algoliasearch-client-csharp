@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// SourceDocker
 /// </summary>
 [DataContract(Name = "SourceDocker")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SourceDocker
 {
 

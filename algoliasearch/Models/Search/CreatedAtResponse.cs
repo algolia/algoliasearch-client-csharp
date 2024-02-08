@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Response and creation timestamp.
 /// </summary>
 [DataContract(Name = "createdAtResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class CreatedAtResponse
 {
   /// <summary>

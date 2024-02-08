@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Personalization;
 /// DeleteUserProfileResponse
 /// </summary>
 [DataContract(Name = "deleteUserProfileResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DeleteUserProfileResponse
 {
   /// <summary>

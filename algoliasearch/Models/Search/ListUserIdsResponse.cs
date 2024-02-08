@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// User ID data.
 /// </summary>
 [DataContract(Name = "listUserIdsResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ListUserIdsResponse
 {
   /// <summary>

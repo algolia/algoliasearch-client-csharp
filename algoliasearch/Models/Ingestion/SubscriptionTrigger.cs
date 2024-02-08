@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The trigger input for a task of type 'subscription'.
 /// </summary>
 [DataContract(Name = "SubscriptionTrigger")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SubscriptionTrigger
 {
 

@@ -13,7 +13,7 @@ public class StatefulHost
   public string Url { get; set; }
 
   /// <summary>
-  /// Scheme of the URL
+  /// Scheme of the URL (Default: Https)
   /// </summary>
   public HttpScheme Scheme { get; set; } = HttpScheme.Https;
 

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// Unique identifier of the record to hide.
 /// </summary>
 [DataContract(Name = "consequenceHide")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ConsequenceHide
 {
   /// <summary>

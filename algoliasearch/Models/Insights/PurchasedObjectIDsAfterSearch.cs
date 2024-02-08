@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Insights;
 /// Use this event to track when users make a purchase after a previous Algolia request. If you're building your category pages with Algolia, you'll also use this event. 
 /// </summary>
 [DataContract(Name = "PurchasedObjectIDsAfterSearch")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class PurchasedObjectIDsAfterSearch
 {
 

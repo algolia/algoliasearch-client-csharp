@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// RunListResponse
 /// </summary>
 [DataContract(Name = "RunListResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class RunListResponse
 {
   /// <summary>

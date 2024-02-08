@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The payload for a task creation.
 /// </summary>
 [DataContract(Name = "TaskCreate")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class TaskCreate
 {
 

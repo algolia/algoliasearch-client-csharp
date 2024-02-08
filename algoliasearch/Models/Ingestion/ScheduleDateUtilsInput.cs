@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The input for a `schedule` task whose source is of type `bigquery` and for which extracted data spans a fixed number of days.
 /// </summary>
 [DataContract(Name = "ScheduleDateUtilsInput")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ScheduleDateUtilsInput
 {
   /// <summary>

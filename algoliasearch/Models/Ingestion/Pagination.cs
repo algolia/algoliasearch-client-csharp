@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// Pagination
 /// </summary>
 [DataContract(Name = "Pagination")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Pagination
 {
   /// <summary>

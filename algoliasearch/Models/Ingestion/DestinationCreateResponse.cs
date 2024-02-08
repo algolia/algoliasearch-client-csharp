@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// Response from the API when the Destination is successfully created.
 /// </summary>
 [DataContract(Name = "DestinationCreateResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DestinationCreateResponse
 {
   /// <summary>

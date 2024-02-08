@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Abtesting;
 /// A/B test filter effects resulting from configuration settings.
 /// </summary>
 [DataContract(Name = "filterEffects")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class FilterEffects
 {
   /// <summary>

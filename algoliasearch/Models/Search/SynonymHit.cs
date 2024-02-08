@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Synonym object.
 /// </summary>
 [DataContract(Name = "synonymHit")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SynonymHit
 {
 

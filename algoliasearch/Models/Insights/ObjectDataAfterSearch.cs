@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Insights;
 /// ObjectDataAfterSearch
 /// </summary>
 [DataContract(Name = "objectDataAfterSearch")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ObjectDataAfterSearch
 {
   /// <summary>

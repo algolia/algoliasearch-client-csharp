@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Abtesting;
 /// Empty searches removed from the A/B test as a result of configuration settings.
 /// </summary>
 [DataContract(Name = "filterEffects_emptySearch")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class FilterEffectsEmptySearch
 {
   /// <summary>

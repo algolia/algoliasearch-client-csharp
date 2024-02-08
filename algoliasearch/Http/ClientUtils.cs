@@ -5,71 +5,66 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Algolia.Search.Http
+namespace Algolia.Search.Http;
+
+/// <summary>
+/// Utility functions providing some benefit to API client consumers.
+/// </summary>
+public static class ClientUtils
 {
   /// <summary>
-  /// Utility functions providing some benefit to API client consumers.
+  /// If parameter is a list, join the list with ",".
+  /// Otherwise just return the string.
   /// </summary>
-  public static class ClientUtils
+  /// <param name="obj">The parameter (header, path, query, form).</param>
+  /// <returns>Formatted string.</returns>
+  public static string ParameterToString(object obj)
   {
-    /// <summary>
-    /// If parameter is a list, join the list with ",".
-    /// Otherwise just return the string.
-    /// </summary>
-    /// <param name="obj">The parameter (header, path, query, form).</param>
-    /// <returns>Formatted string.</returns>
-    public static string ParameterToString(object obj)
+    switch (obj)
     {
-      if (obj is bool boolean)
+      case bool boolean:
         return boolean ? "true" : "false";
-      if (obj is ICollection collection)
-      {
-        List<string> entries = new List<string>();
-        foreach (var entry in collection)
-          entries.Add(ParameterToString(entry));
-        return string.Join(",", entries);
-      }
-
-      if (obj is Enum && HasEnumMemberAttrValue(obj))
+      case ICollection collection:
+        {
+          var entries = new List<string>();
+          foreach (var entry in collection)
+            entries.Add(ParameterToString(entry));
+          return string.Join(",", entries);
+        }
+      case Enum when HasEnumMemberAttrValue(obj):
         return GetEnumMemberAttrValue(obj);
-
-      return Convert.ToString(obj, CultureInfo.InvariantCulture);
+      default:
+        return Convert.ToString(obj, CultureInfo.InvariantCulture);
     }
+  }
 
-    /// <summary>
-    /// Is the Enum decorated with EnumMember Attribute
-    /// </summary>
-    /// <param name="enumVal"></param>
-    /// <returns>true if found</returns>
-    private static bool HasEnumMemberAttrValue(object enumVal)
-    {
-      if (enumVal == null)
-        throw new ArgumentNullException(nameof(enumVal));
-      var enumType = enumVal.GetType();
-      var memInfo = enumType.GetMember(enumVal.ToString() ?? throw new InvalidOperationException());
-      var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
-      if (attr != null) return true;
-      return false;
-    }
+  /// <summary>
+  /// Is the Enum decorated with EnumMember Attribute
+  /// </summary>
+  /// <param name="enumVal"></param>
+  /// <returns>true if found</returns>
+  private static bool HasEnumMemberAttrValue(object enumVal)
+  {
+    if (enumVal == null)
+      throw new ArgumentNullException(nameof(enumVal));
+    var enumType = enumVal.GetType();
+    var memInfo = enumType.GetMember(enumVal.ToString() ?? throw new InvalidOperationException());
+    var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
+    return attr != null;
+  }
 
-    /// <summary>
-    /// Get the EnumMember value
-    /// </summary>
-    /// <param name="enumVal"></param>
-    /// <returns>EnumMember value as string otherwise null</returns>
-    private static string GetEnumMemberAttrValue(object enumVal)
-    {
-      if (enumVal == null)
-        throw new ArgumentNullException(nameof(enumVal));
-      var enumType = enumVal.GetType();
-      var memInfo = enumType.GetMember(enumVal.ToString() ?? throw new InvalidOperationException());
-      var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
-      if (attr != null)
-      {
-        return attr.Value;
-      }
-
-      return null;
-    }
+  /// <summary>
+  /// Get the EnumMember value
+  /// </summary>
+  /// <param name="enumVal"></param>
+  /// <returns>EnumMember value as string otherwise null</returns>
+  private static string GetEnumMemberAttrValue(object enumVal)
+  {
+    if (enumVal == null)
+      throw new ArgumentNullException(nameof(enumVal));
+    var enumType = enumVal.GetType();
+    var memInfo = enumType.GetMember(enumVal.ToString() ?? throw new InvalidOperationException());
+    var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
+    return attr?.Value;
   }
 }

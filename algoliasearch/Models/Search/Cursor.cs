@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Cursor
 /// </summary>
 [DataContract(Name = "cursor")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Cursor
 {
   /// <summary>

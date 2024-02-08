@@ -24,14 +24,13 @@ internal class DefaultJsonSerializer : ISerializer
   /// <returns>A JSON string.</returns>
   public string Serialize(object data)
   {
-    if (data is AbstractSchema schema)
+    if (data is not AbstractSchema schema)
     {
-      // the object to be serialized is an oneOf/anyOf schema
-      var serialize = schema.ToJson();
-      return serialize;
+      return JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
     }
 
-    return JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
+    // the object to be serialized is a oneOf/anyOf schema
+    return schema.ToJson();
   }
 
   public async Task<T> Deserialize<T>(Stream response)

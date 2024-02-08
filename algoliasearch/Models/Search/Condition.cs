@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Condition
 /// </summary>
 [DataContract(Name = "condition")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Condition
 {
 

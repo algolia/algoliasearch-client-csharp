@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// TopCountry
 /// </summary>
 [DataContract(Name = "topCountry")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class TopCountry
 {
   /// <summary>

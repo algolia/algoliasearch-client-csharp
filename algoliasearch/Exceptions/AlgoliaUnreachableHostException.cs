@@ -1,18 +1,17 @@
 using System;
 
-namespace Algolia.Search.Exceptions
+namespace Algolia.Search.Exceptions;
+
+/// <summary>
+/// Exception thrown when an host in unreachable
+/// </summary>
+public class AlgoliaUnreachableHostException : Exception
 {
   /// <summary>
-  /// Exception thrown when an host in unreachable
+  /// Create a new AlgoliaUnreachableHostException.
   /// </summary>
-  public class AlgoliaUnreachableHostException : Exception
+  /// <param name="message">The exception details.</param>
+  public AlgoliaUnreachableHostException(string message) : base(message)
   {
-    /// <summary>
-    /// Create a new AlgoliaUnreachableHostException.
-    /// </summary>
-    /// <param name="message">The exception details.</param>
-    public AlgoliaUnreachableHostException(string message) : base(message)
-    {
-    }
   }
 }

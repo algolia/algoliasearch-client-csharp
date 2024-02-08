@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Monitoring;
 /// TimeInner
 /// </summary>
 [DataContract(Name = "Time_inner")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class TimeInner
 {
   /// <summary>

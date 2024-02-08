@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// Value
 /// </summary>
 [DataContract(Name = "value")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Value
 {
 

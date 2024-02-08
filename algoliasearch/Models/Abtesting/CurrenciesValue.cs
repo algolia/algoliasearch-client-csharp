@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Abtesting;
 /// CurrenciesValue
 /// </summary>
 [DataContract(Name = "currencies_value")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class CurrenciesValue
 {
   /// <summary>

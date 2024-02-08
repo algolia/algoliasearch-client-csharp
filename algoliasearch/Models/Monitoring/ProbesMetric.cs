@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Monitoring;
 /// ProbesMetric
 /// </summary>
 [DataContract(Name = "ProbesMetric")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ProbesMetric
 {
   /// <summary>

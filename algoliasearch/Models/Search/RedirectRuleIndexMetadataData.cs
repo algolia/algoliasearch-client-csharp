@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Redirect rule data.
 /// </summary>
 [DataContract(Name = "RedirectRuleIndexMetadata_data")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class RedirectRuleIndexMetadataData
 {
   /// <summary>

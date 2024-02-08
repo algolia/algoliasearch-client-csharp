@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// Trending facet hit.
 /// </summary>
 [DataContract(Name = "trendingFacetHit")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class TrendingFacetHit
 {
   /// <summary>

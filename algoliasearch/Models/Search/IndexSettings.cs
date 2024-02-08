@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Algolia index settings.
 /// </summary>
 [DataContract(Name = "indexSettings")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class IndexSettings
 {
 

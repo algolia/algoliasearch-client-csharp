@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The response from the run task API, containing an Observability Run ID and the time it was created at.
 /// </summary>
 [DataContract(Name = "RunResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class RunResponse
 {
   /// <summary>

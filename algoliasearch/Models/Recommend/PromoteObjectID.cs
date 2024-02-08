@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// Record to promote.
 /// </summary>
 [DataContract(Name = "promoteObjectID")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class PromoteObjectID
 {
   /// <summary>

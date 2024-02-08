@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The trigger input for a task update.
 /// </summary>
 [DataContract(Name = "TriggerUpdateInput")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class TriggerUpdateInput
 {
   /// <summary>

@@ -5,7 +5,7 @@ namespace Algolia.Search.Utils;
 /// <summary>
 /// Holding all default values of the library
 /// </summary>
-internal class Defaults
+internal static class Defaults
 {
   /// <summary>
   /// Read timeout
@@ -25,7 +25,6 @@ internal class Defaults
   public const string AcceptHeader = "Accept";
   public const string AlgoliaApplicationHeader = "X-Algolia-Application-Id";
   public const string AlgoliaApiKeyHeader = "X-Algolia-API-Key";
-  public const string AlgoliaUserIdHeader = "X-Algolia-USER-ID";
   public const string UserAgentHeader = "User-Agent";
   public const string Connection = "Connection";
   public const string KeepAlive = "keep-alive";

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The response from the API after a task update.
 /// </summary>
 [DataContract(Name = "TaskUpdateResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class TaskUpdateResponse
 {
   /// <summary>

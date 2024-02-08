@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// DeleteApiKeyResponse
 /// </summary>
 [DataContract(Name = "deleteApiKeyResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DeleteApiKeyResponse
 {
   /// <summary>

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// FetchedIndex
 /// </summary>
 [DataContract(Name = "fetchedIndex")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class FetchedIndex
 {
   /// <summary>

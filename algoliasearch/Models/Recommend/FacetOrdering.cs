@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Recommend;
 /// Defines the ordering of facets (widgets).
 /// </summary>
 [DataContract(Name = "facetOrdering")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class FacetOrdering
 {
   /// <summary>

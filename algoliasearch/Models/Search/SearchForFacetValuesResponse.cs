@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// SearchForFacetValuesResponse
 /// </summary>
 [DataContract(Name = "searchForFacetValuesResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SearchForFacetValuesResponse
 {
   /// <summary>

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// RunProgress
 /// </summary>
 [DataContract(Name = "Run_progress")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class RunProgress
 {
   /// <summary>

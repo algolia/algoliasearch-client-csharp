@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Monitoring;
 /// StatusResponse
 /// </summary>
 [DataContract(Name = "StatusResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class StatusResponse
 {
   /// <summary>

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// GetClickPositionsResponse
 /// </summary>
 [DataContract(Name = "getClickPositionsResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class GetClickPositionsResponse
 {
   /// <summary>

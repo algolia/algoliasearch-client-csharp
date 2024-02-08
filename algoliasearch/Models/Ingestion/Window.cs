@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The window parameter represents the holds the dates used to query the Observability data from the database in a given window.
 /// </summary>
 [DataContract(Name = "Window")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Window
 {
   /// <summary>

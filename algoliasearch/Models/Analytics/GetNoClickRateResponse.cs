@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// GetNoClickRateResponse
 /// </summary>
 [DataContract(Name = "getNoClickRateResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class GetNoClickRateResponse
 {
   /// <summary>

@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// SourceJSON
 /// </summary>
 [DataContract(Name = "SourceJSON")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SourceJSON
 {
 

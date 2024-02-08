@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// SearchResponse
 /// </summary>
 [DataContract(Name = "searchResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SearchResponse<T>
 {
   /// <summary>

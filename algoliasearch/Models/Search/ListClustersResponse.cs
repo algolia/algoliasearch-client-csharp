@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Clusters.
 /// </summary>
 [DataContract(Name = "listClustersResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ListClustersResponse
 {
   /// <summary>

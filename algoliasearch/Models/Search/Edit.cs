@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Edit
 /// </summary>
 [DataContract(Name = "edit")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Edit
 {
 

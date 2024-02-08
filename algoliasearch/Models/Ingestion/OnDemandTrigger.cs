@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The trigger information of a task of type `onDemand`.
 /// </summary>
 [DataContract(Name = "OnDemandTrigger")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class OnDemandTrigger
 {
 

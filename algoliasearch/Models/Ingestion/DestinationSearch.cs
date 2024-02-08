@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// Payload to search for multiple destinations, based on the given `destinationIDs`.
 /// </summary>
 [DataContract(Name = "DestinationSearch")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DestinationSearch
 {
   /// <summary>

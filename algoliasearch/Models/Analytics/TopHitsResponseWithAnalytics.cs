@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// TopHitsResponseWithAnalytics
 /// </summary>
 [DataContract(Name = "topHitsResponseWithAnalytics")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class TopHitsResponseWithAnalytics
 {
   /// <summary>

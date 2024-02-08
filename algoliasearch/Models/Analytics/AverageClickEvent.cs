@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Analytics;
 /// AverageClickEvent
 /// </summary>
 [DataContract(Name = "averageClickEvent")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class AverageClickEvent
 {
   /// <summary>

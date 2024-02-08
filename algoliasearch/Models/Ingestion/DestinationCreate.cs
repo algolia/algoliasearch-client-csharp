@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// The payload when creating a destination.
 /// </summary>
 [DataContract(Name = "DestinationCreate")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DestinationCreate
 {
 

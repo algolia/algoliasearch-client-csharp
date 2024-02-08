@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Record retrieval operation.
 /// </summary>
 [DataContract(Name = "getObjectsRequest")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class GetObjectsRequest
 {
   /// <summary>

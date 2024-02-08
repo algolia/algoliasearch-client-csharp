@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// User IDs and clusters.
 /// </summary>
 [DataContract(Name = "getTopUserIdsResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class GetTopUserIdsResponse
 {
   /// <summary>

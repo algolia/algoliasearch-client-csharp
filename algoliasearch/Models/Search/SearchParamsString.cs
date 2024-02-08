@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// SearchParamsString
 /// </summary>
 [DataContract(Name = "searchParamsString")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SearchParamsString
 {
   /// <summary>

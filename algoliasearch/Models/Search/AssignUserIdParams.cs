@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// Assign userID parameters.
 /// </summary>
 [DataContract(Name = "assignUserIdParams")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class AssignUserIdParams
 {
   /// <summary>

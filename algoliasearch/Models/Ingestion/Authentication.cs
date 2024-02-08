@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// An authentication is used to login into a Source or a Destination.
 /// </summary>
 [DataContract(Name = "Authentication")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class Authentication
 {
 

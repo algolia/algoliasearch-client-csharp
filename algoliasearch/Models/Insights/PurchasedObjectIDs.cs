@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Insights;
 /// Use this event to track when users make a purchase unrelated to a previous Algolia request. For example, if you don't use Algolia to build your category pages, use this event.  To track purchase events related to Algolia requests, use the \"Purchased object IDs after search\" event. 
 /// </summary>
 [DataContract(Name = "PurchasedObjectIDs")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class PurchasedObjectIDs
 {
 

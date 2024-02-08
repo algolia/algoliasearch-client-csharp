@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// SourceBigCommerce
 /// </summary>
 [DataContract(Name = "SourceBigCommerce")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class SourceBigCommerce
 {
   /// <summary>

@@ -10,12 +10,9 @@
 
 using System;
 using System.Collections.Generic;
-using Algolia.Search.Models;
 using Algolia.Search.Models.Common;
 using Algolia.Search.Transport;
 using Algolia.Search.Utils;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Algolia.Search.Clients;
 
@@ -33,20 +30,20 @@ public sealed class RecommendConfig : AlgoliaConfig
   public RecommendConfig(string appId, string apiKey) : base(appId, apiKey, "Recommend")
   {
     DefaultHosts = GetDefaultHosts(appId);
-    Compression = CompressionType.NONE;
+    Compression = CompressionType.None;
   }
   private static List<StatefulHost> GetDefaultHosts(string appId)
   {
-    List<StatefulHost> hosts = new List<StatefulHost>
+    var hosts = new List<StatefulHost>
   {
-    new StatefulHost
+    new()
     {
       Url = $"{appId}-dsn.algolia.net",
       Up = true,
       LastUse = DateTime.UtcNow,
       Accept = CallType.Read
     },
-    new StatefulHost
+    new()
     {
       Url = $"{appId}.algolia.net", Up = true, LastUse = DateTime.UtcNow, Accept = CallType.Write,
     }
@@ -54,21 +51,21 @@ public sealed class RecommendConfig : AlgoliaConfig
 
     var commonHosts = new List<StatefulHost>
   {
-    new StatefulHost
+    new()
     {
       Url = $"{appId}-1.algolianet.com",
       Up = true,
       LastUse = DateTime.UtcNow,
       Accept = CallType.Read | CallType.Write,
     },
-    new StatefulHost
+    new()
     {
       Url = $"{appId}-2.algolianet.com",
       Up = true,
       LastUse = DateTime.UtcNow,
       Accept = CallType.Read | CallType.Write,
     },
-    new StatefulHost
+    new()
     {
       Url = $"{appId}-3.algolianet.com",
       Up = true,

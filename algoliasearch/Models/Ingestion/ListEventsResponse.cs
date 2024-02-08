@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// ListEventsResponse
 /// </summary>
 [DataContract(Name = "listEventsResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ListEventsResponse
 {
   /// <summary>

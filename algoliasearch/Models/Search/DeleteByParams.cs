@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Search;
 /// DeleteByParams
 /// </summary>
 [DataContract(Name = "deleteByParams")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class DeleteByParams
 {
   /// <summary>

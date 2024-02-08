@@ -23,7 +23,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// A list of tasks with pagination details.
 /// </summary>
 [DataContract(Name = "listTasksResponse")]
-[JsonObject(MemberSerialization.OptOut)]
 public partial class ListTasksResponse
 {
   /// <summary>
