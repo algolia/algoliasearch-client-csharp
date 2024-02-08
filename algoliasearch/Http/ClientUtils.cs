@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
+using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Http;
 
@@ -33,6 +34,10 @@ public static class ClientUtils
         }
       case Enum when HasEnumMemberAttrValue(obj):
         return GetEnumMemberAttrValue(obj);
+      case AbstractSchema schema when obj.GetType().IsClass:
+        {
+          return ParameterToString(schema.ActualInstance);
+        }
       default:
         return Convert.ToString(obj, CultureInfo.InvariantCulture);
     }

@@ -31,8 +31,14 @@ public class EchoHttpRequester : IHttpRequester
 
   private static Dictionary<string, string> SplitQuery(string query)
   {
-    var collection = HttpUtility.ParseQueryString(query);
-    return collection.AllKeys.ToDictionary(key => key, key => collection[key]);
+    if (string.IsNullOrEmpty(query))
+      return new Dictionary<string, string>();
+
+    if (query[0] == '?')
+      query = query.Substring(1);
+
+    return query.Split('&').Select(part => part.Split('='))
+      .ToDictionary(split => split[0], split => split[1]);
   }
 
   /// <summary>
