@@ -125,23 +125,30 @@ public partial class Price : AbstractSchema
   /// <returns>An instance of Price</returns>
   public static Price FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Float)
     {
-      return new Price(JsonConvert.DeserializeObject<double>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new Price(JsonConvert.DeserializeObject<double>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into double: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.String)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into double: {exception}");
-    }
-    try
-    {
-      return new Price(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into string: {exception}");
+      try
+      {
+        return new Price(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into string: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

@@ -125,23 +125,30 @@ public partial class RemoveStopWords : AbstractSchema
   /// <returns>An instance of RemoveStopWords</returns>
   public static RemoveStopWords FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Array)
     {
-      return new RemoveStopWords(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new RemoveStopWords(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<string>: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Boolean)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<string>: {exception}");
-    }
-    try
-    {
-      return new RemoveStopWords(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into bool: {exception}");
+      try
+      {
+        return new RemoveStopWords(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into bool: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

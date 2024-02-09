@@ -125,23 +125,30 @@ public partial class AttributeToUpdate : AbstractSchema
   /// <returns>An instance of AttributeToUpdate</returns>
   public static AttributeToUpdate FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.String)
     {
-      return new AttributeToUpdate(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new AttributeToUpdate(JsonConvert.DeserializeObject<string>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into string: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into string: {exception}");
-    }
-    try
-    {
-      return new AttributeToUpdate(JsonConvert.DeserializeObject<BuiltInOperation>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into BuiltInOperation: {exception}");
+      try
+      {
+        return new AttributeToUpdate(JsonConvert.DeserializeObject<BuiltInOperation>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into BuiltInOperation: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

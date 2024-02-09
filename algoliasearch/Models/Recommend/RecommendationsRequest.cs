@@ -187,41 +187,54 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <returns>An instance of RecommendationsRequest</returns>
   public static RecommendationsRequest FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingItemsQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingItemsQuery>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TrendingItemsQuery: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TrendingItemsQuery: {exception}");
+      try
+      {
+        return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingFacetsQuery>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TrendingFacetsQuery: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Object)
     {
-      return new RecommendationsRequest(JsonConvert.DeserializeObject<TrendingFacetsQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendationsQuery>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into RecommendationsQuery: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TrendingFacetsQuery: {exception}");
-    }
-    try
-    {
-      return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendationsQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into RecommendationsQuery: {exception}");
-    }
-    try
-    {
-      return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into RecommendedForYouQuery: {exception}");
+      try
+      {
+        return new RecommendationsRequest(JsonConvert.DeserializeObject<RecommendedForYouQuery>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into RecommendedForYouQuery: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

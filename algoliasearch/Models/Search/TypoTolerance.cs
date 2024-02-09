@@ -125,23 +125,30 @@ public partial class TypoTolerance : AbstractSchema
   /// <returns>An instance of TypoTolerance</returns>
   public static TypoTolerance FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Boolean)
     {
-      return new TypoTolerance(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new TypoTolerance(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into bool: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.String)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into bool: {exception}");
-    }
-    try
-    {
-      return new TypoTolerance(JsonConvert.DeserializeObject<TypoToleranceEnum>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TypoToleranceEnum: {exception}");
+      try
+      {
+        return new TypoTolerance(JsonConvert.DeserializeObject<TypoToleranceEnum>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TypoToleranceEnum: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

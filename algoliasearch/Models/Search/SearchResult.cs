@@ -125,23 +125,30 @@ public partial class SearchResult<T> : AbstractSchema
   /// <returns>An instance of SearchResult</returns>
   public static SearchResult<T> FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object && jToken["facetHits"] != null)
     {
-      return new SearchResult<T>(JsonConvert.DeserializeObject<SearchForFacetValuesResponse>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new SearchResult<T>(JsonConvert.DeserializeObject<SearchForFacetValuesResponse>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchForFacetValuesResponse: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchForFacetValuesResponse: {exception}");
-    }
-    try
-    {
-      return new SearchResult<T>(JsonConvert.DeserializeObject<SearchResponse<T>>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchResponse: {exception}");
+      try
+      {
+        return new SearchResult<T>(JsonConvert.DeserializeObject<SearchResponse<T>>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchResponse: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

@@ -156,32 +156,42 @@ public partial class SnippetResult : AbstractSchema
   /// <returns>An instance of SnippetResult</returns>
   public static SnippetResult FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new SnippetResult(JsonConvert.DeserializeObject<SnippetResultOption>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new SnippetResult(JsonConvert.DeserializeObject<SnippetResultOption>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SnippetResultOption: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SnippetResultOption: {exception}");
+      try
+      {
+        return new SnippetResult(JsonConvert.DeserializeObject<Dictionary<string, SnippetResultOption>>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into Dictionary<string, SnippetResultOption>: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Array)
     {
-      return new SnippetResult(JsonConvert.DeserializeObject<Dictionary<string, SnippetResultOption>>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into Dictionary<string, SnippetResultOption>: {exception}");
-    }
-    try
-    {
-      return new SnippetResult(JsonConvert.DeserializeObject<List<SnippetResultOption>>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<SnippetResultOption>: {exception}");
+      try
+      {
+        return new SnippetResult(JsonConvert.DeserializeObject<List<SnippetResultOption>>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<SnippetResultOption>: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

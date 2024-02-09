@@ -125,23 +125,30 @@ public partial class GetTopHitsResponse : AbstractSchema
   /// <returns>An instance of GetTopHitsResponse</returns>
   public static GetTopHitsResponse FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponse>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponse>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TopHitsResponse: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TopHitsResponse: {exception}");
-    }
-    try
-    {
-      return new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponseWithAnalytics>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TopHitsResponseWithAnalytics: {exception}");
+      try
+      {
+        return new GetTopHitsResponse(JsonConvert.DeserializeObject<TopHitsResponseWithAnalytics>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TopHitsResponseWithAnalytics: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

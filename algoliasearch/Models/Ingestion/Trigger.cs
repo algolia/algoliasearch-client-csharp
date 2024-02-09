@@ -156,32 +156,42 @@ public partial class Trigger : AbstractSchema
   /// <returns>An instance of Trigger</returns>
   public static Trigger FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new Trigger(JsonConvert.DeserializeObject<OnDemandTrigger>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new Trigger(JsonConvert.DeserializeObject<OnDemandTrigger>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into OnDemandTrigger: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into OnDemandTrigger: {exception}");
+      try
+      {
+        return new Trigger(JsonConvert.DeserializeObject<ScheduleTrigger>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ScheduleTrigger: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Object)
     {
-      return new Trigger(JsonConvert.DeserializeObject<ScheduleTrigger>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ScheduleTrigger: {exception}");
-    }
-    try
-    {
-      return new Trigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SubscriptionTrigger: {exception}");
+      try
+      {
+        return new Trigger(JsonConvert.DeserializeObject<SubscriptionTrigger>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SubscriptionTrigger: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

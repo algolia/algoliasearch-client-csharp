@@ -125,23 +125,30 @@ public partial class AutomaticFacetFilters : AbstractSchema
   /// <returns>An instance of AutomaticFacetFilters</returns>
   public static AutomaticFacetFilters FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Array)
     {
-      return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<AutomaticFacetFilter>>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<AutomaticFacetFilter>: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Array)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<AutomaticFacetFilter>: {exception}");
-    }
-    try
-    {
-      return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<string>: {exception}");
+      try
+      {
+        return new AutomaticFacetFilters(JsonConvert.DeserializeObject<List<string>>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<string>: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

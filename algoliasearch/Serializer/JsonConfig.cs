@@ -22,16 +22,4 @@ internal static class JsonConfig
     ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
     MissingMemberHandling = MissingMemberHandling.Ignore,
   };
-
-  // When DeserializeOneOfSettings is used, we set MissingMemberHandling to Error to throw an exception if a property is missing
-  public static readonly JsonSerializerSettings DeserializeOneOfSettings = new()
-  {
-    Formatting = Formatting.None,
-    NullValueHandling = NullValueHandling.Ignore,
-    ContractResolver = Resolver,
-    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-    DateParseHandling = DateParseHandling.DateTime,
-    ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-    MissingMemberHandling = MissingMemberHandling.Error,
-  };
 }

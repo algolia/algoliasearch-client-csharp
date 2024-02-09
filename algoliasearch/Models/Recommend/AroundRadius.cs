@@ -125,23 +125,30 @@ public partial class AroundRadius : AbstractSchema
   /// <returns>An instance of AroundRadius</returns>
   public static AroundRadius FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Integer)
     {
-      return new AroundRadius(JsonConvert.DeserializeObject<int>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new AroundRadius(JsonConvert.DeserializeObject<int>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into int: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.String)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into int: {exception}");
-    }
-    try
-    {
-      return new AroundRadius(JsonConvert.DeserializeObject<AroundRadiusAll>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into AroundRadiusAll: {exception}");
+      try
+      {
+        return new AroundRadius(JsonConvert.DeserializeObject<AroundRadiusAll>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into AroundRadiusAll: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

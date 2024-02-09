@@ -125,23 +125,30 @@ public partial class SearchParams : AbstractSchema
   /// <returns>An instance of SearchParams</returns>
   public static SearchParams FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object && jToken["params"] != null)
     {
-      return new SearchParams(JsonConvert.DeserializeObject<SearchParamsString>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new SearchParams(JsonConvert.DeserializeObject<SearchParamsString>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchParamsString: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchParamsString: {exception}");
-    }
-    try
-    {
-      return new SearchParams(JsonConvert.DeserializeObject<SearchParamsObject>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchParamsObject: {exception}");
+      try
+      {
+        return new SearchParams(JsonConvert.DeserializeObject<SearchParamsObject>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchParamsObject: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

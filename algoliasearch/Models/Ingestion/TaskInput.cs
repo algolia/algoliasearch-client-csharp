@@ -125,23 +125,30 @@ public partial class TaskInput : AbstractSchema
   /// <returns>An instance of TaskInput</returns>
   public static TaskInput FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new TaskInput(JsonConvert.DeserializeObject<OnDemandDateUtilsInput>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new TaskInput(JsonConvert.DeserializeObject<OnDemandDateUtilsInput>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into OnDemandDateUtilsInput: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into OnDemandDateUtilsInput: {exception}");
-    }
-    try
-    {
-      return new TaskInput(JsonConvert.DeserializeObject<ScheduleDateUtilsInput>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ScheduleDateUtilsInput: {exception}");
+      try
+      {
+        return new TaskInput(JsonConvert.DeserializeObject<ScheduleDateUtilsInput>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ScheduleDateUtilsInput: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

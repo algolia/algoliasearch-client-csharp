@@ -125,23 +125,30 @@ public partial class Distinct : AbstractSchema
   /// <returns>An instance of Distinct</returns>
   public static Distinct FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Boolean)
     {
-      return new Distinct(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new Distinct(JsonConvert.DeserializeObject<bool>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into bool: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Integer)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into bool: {exception}");
-    }
-    try
-    {
-      return new Distinct(JsonConvert.DeserializeObject<int>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into int: {exception}");
+      try
+      {
+        return new Distinct(JsonConvert.DeserializeObject<int>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into int: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

@@ -125,23 +125,30 @@ public partial class DestinationInput : AbstractSchema
   /// <returns>An instance of DestinationInput</returns>
   public static DestinationInput FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexPrefix>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexPrefix>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into DestinationIndexPrefix: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into DestinationIndexPrefix: {exception}");
-    }
-    try
-    {
-      return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexName>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into DestinationIndexName: {exception}");
+      try
+      {
+        return new DestinationInput(JsonConvert.DeserializeObject<DestinationIndexName>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into DestinationIndexName: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

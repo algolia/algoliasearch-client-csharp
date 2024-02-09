@@ -156,32 +156,42 @@ public partial class HighlightResult : AbstractSchema
   /// <returns>An instance of HighlightResult</returns>
   public static HighlightResult FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new HighlightResult(JsonConvert.DeserializeObject<HighlightResultOption>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new HighlightResult(JsonConvert.DeserializeObject<HighlightResultOption>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into HighlightResultOption: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into HighlightResultOption: {exception}");
+      try
+      {
+        return new HighlightResult(JsonConvert.DeserializeObject<Dictionary<string, HighlightResultOption>>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into Dictionary<string, HighlightResultOption>: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Array)
     {
-      return new HighlightResult(JsonConvert.DeserializeObject<Dictionary<string, HighlightResultOption>>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into Dictionary<string, HighlightResultOption>: {exception}");
-    }
-    try
-    {
-      return new HighlightResult(JsonConvert.DeserializeObject<List<HighlightResultOption>>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<HighlightResultOption>: {exception}");
+      try
+      {
+        return new HighlightResult(JsonConvert.DeserializeObject<List<HighlightResultOption>>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into List<HighlightResultOption>: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

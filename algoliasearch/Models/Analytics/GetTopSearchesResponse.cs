@@ -125,23 +125,30 @@ public partial class GetTopSearchesResponse : AbstractSchema
   /// <returns>An instance of GetTopSearchesResponse</returns>
   public static GetTopSearchesResponse FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new GetTopSearchesResponse(JsonConvert.DeserializeObject<TopSearchesResponse>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new GetTopSearchesResponse(JsonConvert.DeserializeObject<TopSearchesResponse>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TopSearchesResponse: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TopSearchesResponse: {exception}");
-    }
-    try
-    {
-      return new GetTopSearchesResponse(JsonConvert.DeserializeObject<TopSearchesResponseWithAnalytics>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TopSearchesResponseWithAnalytics: {exception}");
+      try
+      {
+        return new GetTopSearchesResponse(JsonConvert.DeserializeObject<TopSearchesResponseWithAnalytics>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TopSearchesResponseWithAnalytics: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

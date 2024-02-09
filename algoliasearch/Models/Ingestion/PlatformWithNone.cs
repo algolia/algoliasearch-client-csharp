@@ -125,23 +125,30 @@ public partial class PlatformWithNone : AbstractSchema
   /// <returns>An instance of PlatformWithNone</returns>
   public static PlatformWithNone FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.String)
     {
-      return new PlatformWithNone(JsonConvert.DeserializeObject<Platform>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new PlatformWithNone(JsonConvert.DeserializeObject<Platform>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into Platform: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.String)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into Platform: {exception}");
-    }
-    try
-    {
-      return new PlatformWithNone(JsonConvert.DeserializeObject<PlatformNone>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PlatformNone: {exception}");
+      try
+      {
+        return new PlatformWithNone(JsonConvert.DeserializeObject<PlatformNone>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PlatformNone: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

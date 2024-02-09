@@ -125,23 +125,30 @@ public partial class BrowseParams : AbstractSchema
   /// <returns>An instance of BrowseParams</returns>
   public static BrowseParams FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object && jToken["params"] != null)
     {
-      return new BrowseParams(JsonConvert.DeserializeObject<SearchParamsString>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new BrowseParams(JsonConvert.DeserializeObject<SearchParamsString>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchParamsString: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchParamsString: {exception}");
-    }
-    try
-    {
-      return new BrowseParams(JsonConvert.DeserializeObject<BrowseParamsObject>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into BrowseParamsObject: {exception}");
+      try
+      {
+        return new BrowseParams(JsonConvert.DeserializeObject<BrowseParamsObject>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into BrowseParamsObject: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

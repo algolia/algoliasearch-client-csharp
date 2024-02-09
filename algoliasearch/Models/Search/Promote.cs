@@ -125,23 +125,30 @@ public partial class Promote : AbstractSchema
   /// <returns>An instance of Promote</returns>
   public static Promote FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new Promote(JsonConvert.DeserializeObject<PromoteObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new Promote(JsonConvert.DeserializeObject<PromoteObjectIDs>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PromoteObjectIDs: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PromoteObjectIDs: {exception}");
-    }
-    try
-    {
-      return new Promote(JsonConvert.DeserializeObject<PromoteObjectID>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PromoteObjectID: {exception}");
+      try
+      {
+        return new Promote(JsonConvert.DeserializeObject<PromoteObjectID>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PromoteObjectID: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

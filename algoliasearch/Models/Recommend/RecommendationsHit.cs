@@ -125,23 +125,30 @@ public partial class RecommendationsHit : AbstractSchema
   /// <returns>An instance of RecommendationsHit</returns>
   public static RecommendationsHit FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object)
     {
-      return new RecommendationsHit(JsonConvert.DeserializeObject<RecommendHit>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new RecommendationsHit(JsonConvert.DeserializeObject<RecommendHit>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into RecommendHit: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into RecommendHit: {exception}");
-    }
-    try
-    {
-      return new RecommendationsHit(JsonConvert.DeserializeObject<TrendingFacetHit>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TrendingFacetHit: {exception}");
+      try
+      {
+        return new RecommendationsHit(JsonConvert.DeserializeObject<TrendingFacetHit>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into TrendingFacetHit: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

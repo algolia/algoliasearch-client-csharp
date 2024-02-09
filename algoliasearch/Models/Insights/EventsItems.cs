@@ -435,113 +435,150 @@ public partial class EventsItems : AbstractSchema
   /// <returns>An instance of EventsItems</returns>
   public static EventsItems FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object && jToken["positions"] != null && jToken["queryID"] != null && jToken["eventType"] != null)
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDsAfterSearch>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDsAfterSearch>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ClickedObjectIDsAfterSearch: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["eventSubtype"] != null && jToken["queryID"] != null && jToken["objectIDs"] != null)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ClickedObjectIDsAfterSearch: {exception}");
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into AddedToCartObjectIDsAfterSearch: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["eventSubtype"] != null && jToken["objectIDs"] != null && jToken["objectData"] != null)
     {
-      return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDsAfterSearch>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PurchasedObjectIDsAfterSearch: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object && jToken["queryID"] != null && jToken["eventType"] != null)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into AddedToCartObjectIDsAfterSearch: {exception}");
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDsAfterSearch>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ConvertedObjectIDsAfterSearch: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["objectIDs"] != null)
     {
-      return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDsAfterSearch>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDs>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ClickedObjectIDs: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["eventSubtype"] != null && jToken["objectIDs"] != null)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PurchasedObjectIDsAfterSearch: {exception}");
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PurchasedObjectIDs: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["eventSubtype"] != null && jToken["objectIDs"] != null)
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDsAfterSearch>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into AddedToCartObjectIDs: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["objectIDs"] != null)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ConvertedObjectIDsAfterSearch: {exception}");
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDs>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ConvertedObjectIDs: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["filters"] != null)
     {
-      return new EventsItems(JsonConvert.DeserializeObject<ClickedObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ClickedFilters>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ClickedFilters: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["filters"] != null)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ClickedObjectIDs: {exception}");
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ConvertedFilters>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ConvertedFilters: {exception}");
+      }
     }
-    try
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["objectIDs"] != null)
     {
-      return new EventsItems(JsonConvert.DeserializeObject<PurchasedObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ViewedObjectIDs>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ViewedObjectIDs: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object && jToken["eventType"] != null && jToken["filters"] != null)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into PurchasedObjectIDs: {exception}");
-    }
-    try
-    {
-      return new EventsItems(JsonConvert.DeserializeObject<AddedToCartObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into AddedToCartObjectIDs: {exception}");
-    }
-    try
-    {
-      return new EventsItems(JsonConvert.DeserializeObject<ConvertedObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ConvertedObjectIDs: {exception}");
-    }
-    try
-    {
-      return new EventsItems(JsonConvert.DeserializeObject<ClickedFilters>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ClickedFilters: {exception}");
-    }
-    try
-    {
-      return new EventsItems(JsonConvert.DeserializeObject<ConvertedFilters>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ConvertedFilters: {exception}");
-    }
-    try
-    {
-      return new EventsItems(JsonConvert.DeserializeObject<ViewedObjectIDs>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ViewedObjectIDs: {exception}");
-    }
-    try
-    {
-      return new EventsItems(JsonConvert.DeserializeObject<ViewedFilters>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ViewedFilters: {exception}");
+      try
+      {
+        return new EventsItems(JsonConvert.DeserializeObject<ViewedFilters>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into ViewedFilters: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");

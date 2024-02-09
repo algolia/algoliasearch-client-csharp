@@ -125,23 +125,30 @@ public partial class SearchQuery : AbstractSchema
   /// <returns>An instance of SearchQuery</returns>
   public static SearchQuery FromJson(string jsonString)
   {
-    try
+    var jToken = JToken.Parse(jsonString);
+    if (jToken.Type == JTokenType.Object && jToken["facet"] != null && jToken["type"] != null)
     {
-      return new SearchQuery(JsonConvert.DeserializeObject<SearchForFacets>(jsonString, JsonConfig.DeserializeOneOfSettings));
+      try
+      {
+        return new SearchQuery(JsonConvert.DeserializeObject<SearchForFacets>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchForFacets: {exception}");
+      }
     }
-    catch (Exception exception)
+    if (jToken.Type == JTokenType.Object)
     {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchForFacets: {exception}");
-    }
-    try
-    {
-      return new SearchQuery(JsonConvert.DeserializeObject<SearchForHits>(jsonString, JsonConfig.DeserializeOneOfSettings));
-    }
-    catch (Exception exception)
-    {
-      // deserialization failed, try the next one
-      System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchForHits: {exception}");
+      try
+      {
+        return new SearchQuery(JsonConvert.DeserializeObject<SearchForHits>(jsonString, JsonConfig.AlgoliaJsonSerializerSettings));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize `{jsonString}` into SearchForHits: {exception}");
+      }
     }
 
     throw new InvalidDataException($"The JSON string `{jsonString}` cannot be deserialized into any schema defined.");
