@@ -45,13 +45,13 @@ public partial class ABTest
   /// <param name="name">A/B test name. (required).</param>
   /// <param name="status">A/B test status. (required).</param>
   /// <param name="variants">A/B test variants. (required).</param>
-  public ABTest(int abTestID, double clickSignificance, double conversionSignificance, double addToCartSignificance, double purchaseSignificance, Dictionary<string, double> revenueSignificance, string updatedAt, string createdAt, string endAt, string name, string status, List<Variant> variants)
+  public ABTest(int abTestID, double? clickSignificance, double? conversionSignificance, double? addToCartSignificance, double? purchaseSignificance, Dictionary<string, double> revenueSignificance, string updatedAt, string createdAt, string endAt, string name, string status, List<Variant> variants)
   {
     AbTestID = abTestID;
-    ClickSignificance = clickSignificance;
-    ConversionSignificance = conversionSignificance;
-    AddToCartSignificance = addToCartSignificance;
-    PurchaseSignificance = purchaseSignificance;
+    ClickSignificance = clickSignificance ?? throw new ArgumentNullException(nameof(clickSignificance));
+    ConversionSignificance = conversionSignificance ?? throw new ArgumentNullException(nameof(conversionSignificance));
+    AddToCartSignificance = addToCartSignificance ?? throw new ArgumentNullException(nameof(addToCartSignificance));
+    PurchaseSignificance = purchaseSignificance ?? throw new ArgumentNullException(nameof(purchaseSignificance));
     RevenueSignificance = revenueSignificance ?? throw new ArgumentNullException(nameof(revenueSignificance));
     UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
@@ -73,28 +73,28 @@ public partial class ABTest
   /// </summary>
   /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on click data. A value of 0.95 or over is considered to be _significant_. </value>
   [DataMember(Name = "clickSignificance")]
-  public double ClickSignificance { get; set; }
+  public double? ClickSignificance { get; set; }
 
   /// <summary>
   /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on conversion. A value of 0.95 or over is considered to be _significant_. 
   /// </summary>
   /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on conversion. A value of 0.95 or over is considered to be _significant_. </value>
   [DataMember(Name = "conversionSignificance")]
-  public double ConversionSignificance { get; set; }
+  public double? ConversionSignificance { get; set; }
 
   /// <summary>
   /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on add-to-cart data. A value of 0.95 or over is considered to be _significant_. 
   /// </summary>
   /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on add-to-cart data. A value of 0.95 or over is considered to be _significant_. </value>
   [DataMember(Name = "addToCartSignificance")]
-  public double AddToCartSignificance { get; set; }
+  public double? AddToCartSignificance { get; set; }
 
   /// <summary>
   /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on purchase data. A value of 0.95 or over is considered to be _significant_. 
   /// </summary>
   /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on purchase data. A value of 0.95 or over is considered to be _significant_. </value>
   [DataMember(Name = "purchaseSignificance")]
-  public double PurchaseSignificance { get; set; }
+  public double? PurchaseSignificance { get; set; }
 
   /// <summary>
   /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on revenue data. A value of 0.95 or over is considered to be _significant_. 

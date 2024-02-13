@@ -37,11 +37,11 @@ public partial class ClickThroughRateEvent
   /// <param name="clickCount">Number of click events. (required).</param>
   /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
   /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  public ClickThroughRateEvent(double rate, int clickCount, int trackedSearchCount, string date)
+  public ClickThroughRateEvent(double rate, int clickCount, int? trackedSearchCount, string date)
   {
     Rate = rate;
     ClickCount = clickCount;
-    TrackedSearchCount = trackedSearchCount;
+    TrackedSearchCount = trackedSearchCount ?? throw new ArgumentNullException(nameof(trackedSearchCount));
     Date = date ?? throw new ArgumentNullException(nameof(date));
   }
 
@@ -64,7 +64,7 @@ public partial class ClickThroughRateEvent
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
   [DataMember(Name = "trackedSearchCount")]
-  public int TrackedSearchCount { get; set; }
+  public int? TrackedSearchCount { get; set; }
 
   /// <summary>
   /// Date of the event in the format YYYY-MM-DD.

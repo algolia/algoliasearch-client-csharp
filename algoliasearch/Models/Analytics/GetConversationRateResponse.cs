@@ -37,10 +37,10 @@ public partial class GetConversationRateResponse
   /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
   /// <param name="conversionCount">Number of converted clicks. (required).</param>
   /// <param name="dates">Conversion events. (required).</param>
-  public GetConversationRateResponse(double rate, int trackedSearchCount, int conversionCount, List<ConversionRateEvent> dates)
+  public GetConversationRateResponse(double rate, int? trackedSearchCount, int conversionCount, List<ConversionRateEvent> dates)
   {
     Rate = rate;
-    TrackedSearchCount = trackedSearchCount;
+    TrackedSearchCount = trackedSearchCount ?? throw new ArgumentNullException(nameof(trackedSearchCount));
     ConversionCount = conversionCount;
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
   }
@@ -57,7 +57,7 @@ public partial class GetConversationRateResponse
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
   [DataMember(Name = "trackedSearchCount")]
-  public int TrackedSearchCount { get; set; }
+  public int? TrackedSearchCount { get; set; }
 
   /// <summary>
   /// Number of converted clicks.

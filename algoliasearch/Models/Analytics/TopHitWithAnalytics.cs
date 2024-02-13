@@ -40,13 +40,13 @@ public partial class TopHitWithAnalytics
   /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
   /// <param name="clickCount">Number of click events. (required).</param>
   /// <param name="conversionCount">Number of converted clicks. (required).</param>
-  public TopHitWithAnalytics(string hit, int count, double clickThroughRate, double conversionRate, int trackedSearchCount, int clickCount, int conversionCount)
+  public TopHitWithAnalytics(string hit, int count, double clickThroughRate, double conversionRate, int? trackedSearchCount, int clickCount, int conversionCount)
   {
     Hit = hit ?? throw new ArgumentNullException(nameof(hit));
     Count = count;
     ClickThroughRate = clickThroughRate;
     ConversionRate = conversionRate;
-    TrackedSearchCount = trackedSearchCount;
+    TrackedSearchCount = trackedSearchCount ?? throw new ArgumentNullException(nameof(trackedSearchCount));
     ClickCount = clickCount;
     ConversionCount = conversionCount;
   }
@@ -84,7 +84,7 @@ public partial class TopHitWithAnalytics
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
   [DataMember(Name = "trackedSearchCount")]
-  public int TrackedSearchCount { get; set; }
+  public int? TrackedSearchCount { get; set; }
 
   /// <summary>
   /// Number of click events.

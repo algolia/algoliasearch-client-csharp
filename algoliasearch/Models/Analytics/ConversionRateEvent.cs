@@ -37,10 +37,10 @@ public partial class ConversionRateEvent
   /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
   /// <param name="conversionCount">Number of converted clicks. (required).</param>
   /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  public ConversionRateEvent(double rate, int trackedSearchCount, int conversionCount, string date)
+  public ConversionRateEvent(double rate, int? trackedSearchCount, int conversionCount, string date)
   {
     Rate = rate;
-    TrackedSearchCount = trackedSearchCount;
+    TrackedSearchCount = trackedSearchCount ?? throw new ArgumentNullException(nameof(trackedSearchCount));
     ConversionCount = conversionCount;
     Date = date ?? throw new ArgumentNullException(nameof(date));
   }
@@ -57,7 +57,7 @@ public partial class ConversionRateEvent
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
   [DataMember(Name = "trackedSearchCount")]
-  public int TrackedSearchCount { get; set; }
+  public int? TrackedSearchCount { get; set; }
 
   /// <summary>
   /// Number of converted clicks.

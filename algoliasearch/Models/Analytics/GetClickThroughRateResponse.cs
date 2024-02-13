@@ -37,11 +37,11 @@ public partial class GetClickThroughRateResponse
   /// <param name="clickCount">Number of click events. (required).</param>
   /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
   /// <param name="dates">Click-through rate events. (required).</param>
-  public GetClickThroughRateResponse(double rate, int clickCount, int trackedSearchCount, List<ClickThroughRateEvent> dates)
+  public GetClickThroughRateResponse(double rate, int clickCount, int? trackedSearchCount, List<ClickThroughRateEvent> dates)
   {
     Rate = rate;
     ClickCount = clickCount;
-    TrackedSearchCount = trackedSearchCount;
+    TrackedSearchCount = trackedSearchCount ?? throw new ArgumentNullException(nameof(trackedSearchCount));
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
   }
 
@@ -64,7 +64,7 @@ public partial class GetClickThroughRateResponse
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
   [DataMember(Name = "trackedSearchCount")]
-  public int TrackedSearchCount { get; set; }
+  public int? TrackedSearchCount { get; set; }
 
   /// <summary>
   /// Click-through rate events.

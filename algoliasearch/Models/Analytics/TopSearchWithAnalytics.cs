@@ -42,14 +42,14 @@ public partial class TopSearchWithAnalytics
   /// <param name="clickCount">Number of click events. (required).</param>
   /// <param name="conversionCount">Number of converted clicks. (required).</param>
   /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-  public TopSearchWithAnalytics(string search, int count, double clickThroughRate, int averageClickPosition, double conversionRate, int trackedSearchCount, int clickCount, int conversionCount, int nbHits)
+  public TopSearchWithAnalytics(string search, int count, double clickThroughRate, int averageClickPosition, double conversionRate, int? trackedSearchCount, int clickCount, int conversionCount, int nbHits)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
     Count = count;
     ClickThroughRate = clickThroughRate;
     AverageClickPosition = averageClickPosition;
     ConversionRate = conversionRate;
-    TrackedSearchCount = trackedSearchCount;
+    TrackedSearchCount = trackedSearchCount ?? throw new ArgumentNullException(nameof(trackedSearchCount));
     ClickCount = clickCount;
     ConversionCount = conversionCount;
     NbHits = nbHits;
@@ -95,7 +95,7 @@ public partial class TopSearchWithAnalytics
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
   [DataMember(Name = "trackedSearchCount")]
-  public int TrackedSearchCount { get; set; }
+  public int? TrackedSearchCount { get; set; }
 
   /// <summary>
   /// Number of click events.

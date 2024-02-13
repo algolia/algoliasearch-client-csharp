@@ -40,7 +40,6 @@ public partial class Variant
   /// <param name="clickThroughRate">Variant&#39;s [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). (required).</param>
   /// <param name="conversionCount">Number of click events for this variant. (required).</param>
   /// <param name="conversionRate">Variant&#39;s [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate). (required).</param>
-  /// <param name="currencies">A/B test currencies. (required).</param>
   /// <param name="description">A/B test description. (required).</param>
   /// <param name="index">A/B test index. (required).</param>
   /// <param name="noResultCount">Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant. (required).</param>
@@ -51,26 +50,25 @@ public partial class Variant
   /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
   /// <param name="userCount">Number of users during the A/B test. (required).</param>
   /// <param name="trackedUserCount">Number of users that performed a tracked search during the A/B test. (required).</param>
-  public Variant(int addToCartCount, double addToCartRate, int averageClickPosition, int clickCount, double clickThroughRate, int conversionCount, double conversionRate, Dictionary<string, CurrenciesValue> currencies, string description, string index, int noResultCount, int purchaseCount, double purchaseRate, int searchCount, int trackedSearchCount, int trafficPercentage, int userCount, int trackedUserCount)
+  public Variant(int addToCartCount, double? addToCartRate, int? averageClickPosition, int clickCount, double? clickThroughRate, int conversionCount, double? conversionRate, string description, string index, int? noResultCount, int purchaseCount, double? purchaseRate, int? searchCount, int? trackedSearchCount, int trafficPercentage, int? userCount, int? trackedUserCount)
   {
     AddToCartCount = addToCartCount;
-    AddToCartRate = addToCartRate;
-    AverageClickPosition = averageClickPosition;
+    AddToCartRate = addToCartRate ?? throw new ArgumentNullException(nameof(addToCartRate));
+    AverageClickPosition = averageClickPosition ?? throw new ArgumentNullException(nameof(averageClickPosition));
     ClickCount = clickCount;
-    ClickThroughRate = clickThroughRate;
+    ClickThroughRate = clickThroughRate ?? throw new ArgumentNullException(nameof(clickThroughRate));
     ConversionCount = conversionCount;
-    ConversionRate = conversionRate;
-    Currencies = currencies ?? throw new ArgumentNullException(nameof(currencies));
+    ConversionRate = conversionRate ?? throw new ArgumentNullException(nameof(conversionRate));
     Description = description ?? throw new ArgumentNullException(nameof(description));
     Index = index ?? throw new ArgumentNullException(nameof(index));
-    NoResultCount = noResultCount;
+    NoResultCount = noResultCount ?? throw new ArgumentNullException(nameof(noResultCount));
     PurchaseCount = purchaseCount;
-    PurchaseRate = purchaseRate;
-    SearchCount = searchCount;
-    TrackedSearchCount = trackedSearchCount;
+    PurchaseRate = purchaseRate ?? throw new ArgumentNullException(nameof(purchaseRate));
+    SearchCount = searchCount ?? throw new ArgumentNullException(nameof(searchCount));
+    TrackedSearchCount = trackedSearchCount ?? throw new ArgumentNullException(nameof(trackedSearchCount));
     TrafficPercentage = trafficPercentage;
-    UserCount = userCount;
-    TrackedUserCount = trackedUserCount;
+    UserCount = userCount ?? throw new ArgumentNullException(nameof(userCount));
+    TrackedUserCount = trackedUserCount ?? throw new ArgumentNullException(nameof(trackedUserCount));
   }
 
   /// <summary>
@@ -85,14 +83,14 @@ public partial class Variant
   /// </summary>
   /// <value>Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate).</value>
   [DataMember(Name = "addToCartRate")]
-  public double AddToCartRate { get; set; }
+  public double? AddToCartRate { get; set; }
 
   /// <summary>
   /// Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).
   /// </summary>
   /// <value>Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).</value>
   [DataMember(Name = "averageClickPosition")]
-  public int AverageClickPosition { get; set; }
+  public int? AverageClickPosition { get; set; }
 
   /// <summary>
   /// Number of click events for this variant.
@@ -106,7 +104,7 @@ public partial class Variant
   /// </summary>
   /// <value>Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).</value>
   [DataMember(Name = "clickThroughRate")]
-  public double ClickThroughRate { get; set; }
+  public double? ClickThroughRate { get; set; }
 
   /// <summary>
   /// Number of click events for this variant.
@@ -120,7 +118,7 @@ public partial class Variant
   /// </summary>
   /// <value>Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).</value>
   [DataMember(Name = "conversionRate")]
-  public double ConversionRate { get; set; }
+  public double? ConversionRate { get; set; }
 
   /// <summary>
   /// A/B test currencies.
@@ -135,6 +133,13 @@ public partial class Variant
   /// <value>A/B test description.</value>
   [DataMember(Name = "description")]
   public string Description { get; set; }
+
+  /// <summary>
+  /// The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.
+  /// </summary>
+  /// <value>The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.</value>
+  [DataMember(Name = "estimatedSampleSize")]
+  public int? EstimatedSampleSize { get; set; }
 
   /// <summary>
   /// Gets or Sets FilterEffects
@@ -154,7 +159,7 @@ public partial class Variant
   /// </summary>
   /// <value>Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.</value>
   [DataMember(Name = "noResultCount")]
-  public int NoResultCount { get; set; }
+  public int? NoResultCount { get; set; }
 
   /// <summary>
   /// Number of purchase events for this variant.
@@ -168,21 +173,21 @@ public partial class Variant
   /// </summary>
   /// <value>Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).</value>
   [DataMember(Name = "purchaseRate")]
-  public double PurchaseRate { get; set; }
+  public double? PurchaseRate { get; set; }
 
   /// <summary>
   /// Number of searches carried out during the A/B test.
   /// </summary>
   /// <value>Number of searches carried out during the A/B test.</value>
   [DataMember(Name = "searchCount")]
-  public int SearchCount { get; set; }
+  public int? SearchCount { get; set; }
 
   /// <summary>
   /// Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
   /// </summary>
   /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
   [DataMember(Name = "trackedSearchCount")]
-  public int TrackedSearchCount { get; set; }
+  public int? TrackedSearchCount { get; set; }
 
   /// <summary>
   /// A/B test traffic percentage.
@@ -196,14 +201,14 @@ public partial class Variant
   /// </summary>
   /// <value>Number of users during the A/B test.</value>
   [DataMember(Name = "userCount")]
-  public int UserCount { get; set; }
+  public int? UserCount { get; set; }
 
   /// <summary>
   /// Number of users that performed a tracked search during the A/B test.
   /// </summary>
   /// <value>Number of users that performed a tracked search during the A/B test.</value>
   [DataMember(Name = "trackedUserCount")]
-  public int TrackedUserCount { get; set; }
+  public int? TrackedUserCount { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -222,6 +227,7 @@ public partial class Variant
     sb.Append("  ConversionRate: ").Append(ConversionRate).Append("\n");
     sb.Append("  Currencies: ").Append(Currencies).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
+    sb.Append("  EstimatedSampleSize: ").Append(EstimatedSampleSize).Append("\n");
     sb.Append("  FilterEffects: ").Append(FilterEffects).Append("\n");
     sb.Append("  Index: ").Append(Index).Append("\n");
     sb.Append("  NoResultCount: ").Append(NoResultCount).Append("\n");
