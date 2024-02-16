@@ -33,13 +33,6 @@ public partial class BaseQuerySuggestionsConfigurationResponse
   }
 
   /// <summary>
-  /// Your Algolia application ID.
-  /// </summary>
-  /// <value>Your Algolia application ID.</value>
-  [DataMember(Name = "appId")]
-  public string AppId { get; set; }
-
-  /// <summary>
   /// API key used to read from your source index.
   /// </summary>
   /// <value>API key used to read from your source index.</value>
@@ -68,7 +61,6 @@ public partial class BaseQuerySuggestionsConfigurationResponse
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class BaseQuerySuggestionsConfigurationResponse {\n");
-    sb.Append("  AppId: ").Append(AppId).Append("\n");
     sb.Append("  SourceIndicesAPIKey: ").Append(SourceIndicesAPIKey).Append("\n");
     sb.Append("  SuggestionsIndicesAPIKey: ").Append(SuggestionsIndicesAPIKey).Append("\n");
     sb.Append("  ExternalIndicesAPIKey: ").Append(ExternalIndicesAPIKey).Append("\n");
