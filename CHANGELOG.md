@@ -1,3 +1,15 @@
+## [7.0.0-alpha.8](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.7...7.0.0-alpha.8)
+
+- [dfff005e3](https://github.com/algolia/api-clients-automation/commit/dfff005e3) feat(csharp): add requestion option builder helper ([#2709](https://github.com/algolia/api-clients-automation/pull/2709)) by [@morganleroi](https://github.com/morganleroi/)
+- [e31e15a01](https://github.com/algolia/api-clients-automation/commit/e31e15a01) feat(csharp): add SearchFor Hits and Search for Facets ([#2683](https://github.com/algolia/api-clients-automation/pull/2683)) by [@morganleroi](https://github.com/morganleroi/)
+- [b36a3a6fa](https://github.com/algolia/api-clients-automation/commit/b36a3a6fa) feat(csharp): add discriminator for deserialization ([#2678](https://github.com/algolia/api-clients-automation/pull/2678)) by [@morganleroi](https://github.com/morganleroi/)
+- [808e6a3ff](https://github.com/algolia/api-clients-automation/commit/808e6a3ff) refactor(csharp): some cleanings ([#2677](https://github.com/algolia/api-clients-automation/pull/2677)) by [@morganleroi](https://github.com/morganleroi/)
+- [daf427e48](https://github.com/algolia/api-clients-automation/commit/daf427e48) feat(csharp): remove all warns from assembly ([#2675](https://github.com/algolia/api-clients-automation/pull/2675)) by [@morganleroi](https://github.com/morganleroi/)
+- [31e43d2ee](https://github.com/algolia/api-clients-automation/commit/31e43d2ee) feat(csharp): correctly clean code gen ([#2676](https://github.com/algolia/api-clients-automation/pull/2676)) by [@morganleroi](https://github.com/morganleroi/)
+- [2145b687f](https://github.com/algolia/api-clients-automation/commit/2145b687f) feat(csharp): add sync method overload ([#2674](https://github.com/algolia/api-clients-automation/pull/2674)) by [@morganleroi](https://github.com/morganleroi/)
+- [832e86a5e](https://github.com/algolia/api-clients-automation/commit/832e86a5e) feat(csharp): add performances playground ([#2644](https://github.com/algolia/api-clients-automation/pull/2644)) by [@morganleroi](https://github.com/morganleroi/)
+- [83da9c316](https://github.com/algolia/api-clients-automation/commit/83da9c316) feat(csharp): add github action for release ([#2671](https://github.com/algolia/api-clients-automation/pull/2671)) by [@morganleroi](https://github.com/morganleroi/)
+
 ## [7.0.0-alpha.7](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.6...7.0.0-alpha.7)
 
 - [e4ab48621](https://github.com/algolia/api-clients-automation/commit/e4ab48621) feat(csharp): add logs and logger factory ([#2640](https://github.com/algolia/api-clients-automation/pull/2640)) by [@morganleroi](https://github.com/morganleroi/)
