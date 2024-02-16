@@ -1,5 +1,6 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Algolia.Search.Models.Search;
 
 namespace Algolia.Search.Serializer;
 
@@ -10,16 +11,16 @@ internal static class JsonConfig
 {
   public const string JsonContentType = "application/json";
 
-  private static readonly DefaultContractResolver Resolver = new() { NamingStrategy = new CamelCaseNamingStrategy() };
-
-  public static readonly JsonSerializerSettings AlgoliaJsonSerializerSettings = new()
+  public static readonly JsonSerializerOptions Options = new()
   {
-    Formatting = Formatting.None,
-    NullValueHandling = NullValueHandling.Ignore,
-    ContractResolver = Resolver,
-    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-    DateParseHandling = DateParseHandling.DateTime,
-    ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-    MissingMemberHandling = MissingMemberHandling.Ignore,
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    WriteIndented = false,
+    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+    UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip,
+    Converters =
+    {
+      new JsonStringEnumConverterFactory(),
+      new SearchResultConverterFactory()
+    }
   };
 }

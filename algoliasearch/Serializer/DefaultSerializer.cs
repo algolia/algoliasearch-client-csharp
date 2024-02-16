@@ -1,10 +1,12 @@
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Common;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+
 
 namespace Algolia.Search.Serializer;
 
@@ -26,7 +28,7 @@ internal class DefaultJsonSerializer : ISerializer
   {
     if (data is not AbstractSchema schema)
     {
-      return JsonConvert.SerializeObject(data, JsonConfig.AlgoliaJsonSerializerSettings);
+      return JsonSerializer.Serialize(data, JsonConfig.Options);
     }
 
     // the object to be serialized is a oneOf/anyOf schema
@@ -51,8 +53,12 @@ internal class DefaultJsonSerializer : ISerializer
     {
       using var reader = new StreamReader(response);
       var readToEndAsync = await reader.ReadToEndAsync().ConfigureAwait(false);
-      return JsonConvert.DeserializeObject(readToEndAsync, type,
-        JsonConfig.AlgoliaJsonSerializerSettings);
+      if (string.IsNullOrEmpty(readToEndAsync))
+      {
+        return null;
+      }
+
+      return JsonSerializer.Deserialize(readToEndAsync, type, JsonConfig.Options);
     }
     catch (Exception ex)
     {

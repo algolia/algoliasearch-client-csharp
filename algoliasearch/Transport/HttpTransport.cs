@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,7 @@ using Algolia.Search.Http;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Algolia.Search.Transport;
 
@@ -154,7 +156,7 @@ internal class HttpTransport
             response.Body.Seek(0, SeekOrigin.Begin);
           }
 
-          var deserialized = await _serializer.Deserialize<TResult>(response.Body);
+          var deserialized = await _serializer.Deserialize<TResult>(response.Body).ConfigureAwait(false);
 
           if (_logger.IsEnabled(LogLevel.Trace))
           {

@@ -28,7 +28,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <OutputType>Library</OutputType>
-    <LangVersion>11</LangVersion>
+    <LangVersion>12</LangVersion>
     <Description>Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries, and pre-built integrations. Algolia API Client for the .NET framework lets you easily use the Algolia Search REST API from your .NET code.</Description>
     <RootNamespace>Algolia.Search</RootNamespace>
     <NoWarn>CS0612;CS1570</NoWarn>
@@ -40,7 +40,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Text.Json" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>

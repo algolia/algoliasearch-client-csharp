@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using Algolia.Search.Models.Common;
 
 namespace Algolia.Search.Http;
@@ -54,7 +55,7 @@ public static class ClientUtils
       throw new ArgumentNullException(nameof(enumVal));
     var enumType = enumVal.GetType();
     var memInfo = enumType.GetMember(enumVal.ToString() ?? throw new InvalidOperationException());
-    var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
+    var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<JsonPropertyNameAttribute>().FirstOrDefault();
     return attr != null;
   }
 
@@ -69,7 +70,7 @@ public static class ClientUtils
       throw new ArgumentNullException(nameof(enumVal));
     var enumType = enumVal.GetType();
     var memInfo = enumType.GetMember(enumVal.ToString() ?? throw new InvalidOperationException());
-    var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
-    return attr?.Value;
+    var attr = memInfo.FirstOrDefault()?.GetCustomAttributes(false).OfType<JsonPropertyNameAttribute>().FirstOrDefault();
+    return attr?.Name;
   }
 }
