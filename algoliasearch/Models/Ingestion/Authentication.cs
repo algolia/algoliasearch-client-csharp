@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// An authentication is used to login into a Source or a Destination.
+/// An authentication is used to login into a Source or a Destination, with obfuscated input.
 /// </summary>
 public partial class Authentication
 {
@@ -41,7 +41,7 @@ public partial class Authentication
   /// <param name="name">An human readable name describing the object. (required).</param>
   /// <param name="input">input (required).</param>
   /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
-  public Authentication(string authenticationID, AuthenticationType? type, string name, AuthInput input, string createdAt)
+  public Authentication(string authenticationID, AuthenticationType? type, string name, AuthInputPartial input, string createdAt)
   {
     AuthenticationID = authenticationID ?? throw new ArgumentNullException(nameof(authenticationID));
     Type = type;
@@ -68,7 +68,7 @@ public partial class Authentication
   /// Gets or Sets Input
   /// </summary>
   [JsonPropertyName("input")]
-  public AuthInput Input { get; set; }
+  public AuthInputPartial Input { get; set; }
 
   /// <summary>
   /// Date of creation (RFC3339 format).

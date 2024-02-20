@@ -79,8 +79,9 @@ public partial class Destination
   public string UpdatedAt { get; set; }
 
   /// <summary>
-  /// Gets or Sets AuthenticationID
+  /// The authentication UUID.
   /// </summary>
+  /// <value>The authentication UUID.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 

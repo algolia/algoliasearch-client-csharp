@@ -19,8 +19,15 @@ public partial class SourceBigCommerce
   /// <summary>
   /// Initializes a new instance of the SourceBigCommerce class.
   /// </summary>
-  public SourceBigCommerce()
+  [JsonConstructor]
+  public SourceBigCommerce() { }
+  /// <summary>
+  /// Initializes a new instance of the SourceBigCommerce class.
+  /// </summary>
+  /// <param name="storeHash">The store hash identifying the store the shopper is signing in to. (required).</param>
+  public SourceBigCommerce(string storeHash)
   {
+    StoreHash = storeHash ?? throw new ArgumentNullException(nameof(storeHash));
   }
 
   /// <summary>

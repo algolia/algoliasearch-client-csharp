@@ -22,6 +22,16 @@ public partial class SourceUpdateInput : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the SourceUpdateInput class
+  /// with a SourceBigQuery
+  /// </summary>
+  /// <param name="actualInstance">An instance of SourceBigQuery.</param>
+  public SourceUpdateInput(SourceBigQuery actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the SourceUpdateInput class
   /// with a SourceUpdateCommercetools
   /// </summary>
   /// <param name="actualInstance">An instance of SourceUpdateCommercetools.</param>
@@ -52,16 +62,6 @@ public partial class SourceUpdateInput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the SourceUpdateInput class
-  /// with a SourceBigQuery
-  /// </summary>
-  /// <param name="actualInstance">An instance of SourceBigQuery.</param>
-  public SourceUpdateInput(SourceBigQuery actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the SourceUpdateInput class
   /// with a SourceUpdateDocker
   /// </summary>
   /// <param name="actualInstance">An instance of SourceUpdateDocker.</param>
@@ -75,6 +75,16 @@ public partial class SourceUpdateInput : AbstractSchema
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
+
+  /// <summary>
+  /// Get the actual instance of `SourceBigQuery`. If the actual instance is not `SourceBigQuery`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceBigQuery</returns>
+  public SourceBigQuery AsSourceBigQuery()
+  {
+    return (SourceBigQuery)ActualInstance;
+  }
 
   /// <summary>
   /// Get the actual instance of `SourceUpdateCommercetools`. If the actual instance is not `SourceUpdateCommercetools`,
@@ -107,16 +117,6 @@ public partial class SourceUpdateInput : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `SourceBigQuery`. If the actual instance is not `SourceBigQuery`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of SourceBigQuery</returns>
-  public SourceBigQuery AsSourceBigQuery()
-  {
-    return (SourceBigQuery)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `SourceUpdateDocker`. If the actual instance is not `SourceUpdateDocker`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -126,6 +126,15 @@ public partial class SourceUpdateInput : AbstractSchema
     return (SourceUpdateDocker)ActualInstance;
   }
 
+
+  /// <summary>
+  /// Check if the actual instance is of `SourceBigQuery` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceBigQuery()
+  {
+    return ActualInstance.GetType() == typeof(SourceBigQuery);
+  }
 
   /// <summary>
   /// Check if the actual instance is of `SourceUpdateCommercetools` type.
@@ -152,15 +161,6 @@ public partial class SourceUpdateInput : AbstractSchema
   public bool IsSourceCSV()
   {
     return ActualInstance.GetType() == typeof(SourceCSV);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `SourceBigQuery` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsSourceBigQuery()
-  {
-    return ActualInstance.GetType() == typeof(SourceBigQuery);
   }
 
   /// <summary>
@@ -256,6 +256,18 @@ public class SourceUpdateInputJsonConverter : JsonConverter<SourceUpdateInput>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectID", out _))
+    {
+      try
+      {
+        return new SourceUpdateInput(jsonDocument.Deserialize<SourceBigQuery>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceBigQuery: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
@@ -290,18 +302,6 @@ public class SourceUpdateInputJsonConverter : JsonConverter<SourceUpdateInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceCSV: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new SourceUpdateInput(jsonDocument.Deserialize<SourceBigQuery>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceBigQuery: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)
