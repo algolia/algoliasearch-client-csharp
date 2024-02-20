@@ -1,3 +1,13 @@
+## [7.0.0-alpha.9](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.8...7.0.0-alpha.9)
+
+- [6624759e1](https://github.com/algolia/api-clients-automation/commit/6624759e1) feat(specs): add CustomFields to CT Source Input ([#2742](https://github.com/algolia/api-clients-automation/pull/2742)) by [@damcou](https://github.com/damcou/)
+- [d86c75f59](https://github.com/algolia/api-clients-automation/commit/d86c75f59) refactor(csharp): move, tiny additions and cleanings ([#2740](https://github.com/algolia/api-clients-automation/pull/2740)) by [@morganleroi](https://github.com/morganleroi/)
+- [cd4f35f59](https://github.com/algolia/api-clients-automation/commit/cd4f35f59) feat(csharp): add last helpers ([#2694](https://github.com/algolia/api-clients-automation/pull/2694)) by [@morganleroi](https://github.com/morganleroi/)
+- [ef37e65b7](https://github.com/algolia/api-clients-automation/commit/ef37e65b7) fix(clients): add e2e tests for analytics API ([#2737](https://github.com/algolia/api-clients-automation/pull/2737)) by [@millotp](https://github.com/millotp/)
+- [ee1488752](https://github.com/algolia/api-clients-automation/commit/ee1488752) feat(csharp): remove Newtonsoft JSON.NET ([#2717](https://github.com/algolia/api-clients-automation/pull/2717)) by [@morganleroi](https://github.com/morganleroi/)
+- [0bafedc41](https://github.com/algolia/api-clients-automation/commit/0bafedc41) docs(csharp): add guides ([#2695](https://github.com/algolia/api-clients-automation/pull/2695)) by [@morganleroi](https://github.com/morganleroi/)
+- [c757282e1](https://github.com/algolia/api-clients-automation/commit/c757282e1) fix(csharp): add nextDelay parameter in Wait helpers ([#2710](https://github.com/algolia/api-clients-automation/pull/2710)) by [@morganleroi](https://github.com/morganleroi/)
+
 ## [7.0.0-alpha.8](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.7...7.0.0-alpha.8)
 
 - [dfff005e3](https://github.com/algolia/api-clients-automation/commit/dfff005e3) feat(csharp): add requestion option builder helper ([#2709](https://github.com/algolia/api-clients-automation/pull/2709)) by [@morganleroi](https://github.com/morganleroi/)
