@@ -190,9 +190,9 @@ internal class HttpTransport
       }
     }
 
-    if (_logger.IsEnabled(LogLevel.Debug))
+    if (_logger.IsEnabled(LogLevel.Error))
     {
-      _logger.LogDebug("Retry strategy failed: {ErrorMessage}", _errorMessage);
+      _logger.LogError("Retry strategy failed: {ErrorMessage}", _errorMessage);
     }
 
     throw new AlgoliaUnreachableHostException("RetryStrategy failed to connect to Algolia. Reason: " + _errorMessage);
