@@ -38,6 +38,12 @@ public partial class SourceUpdateCommercetools
   public List<string> Locales { get; set; }
 
   /// <summary>
+  /// Gets or Sets CustomFields
+  /// </summary>
+  [JsonPropertyName("customFields")]
+  public CommercetoolsCustomFields CustomFields { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -47,6 +53,7 @@ public partial class SourceUpdateCommercetools
     sb.Append("class SourceUpdateCommercetools {\n");
     sb.Append("  StoreKeys: ").Append(StoreKeys).Append("\n");
     sb.Append("  Locales: ").Append(Locales).Append("\n");
+    sb.Append("  CustomFields: ").Append(CustomFields).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -74,7 +81,8 @@ public partial class SourceUpdateCommercetools
 
     return
         (StoreKeys == input.StoreKeys || StoreKeys != null && input.StoreKeys != null && StoreKeys.SequenceEqual(input.StoreKeys)) &&
-        (Locales == input.Locales || Locales != null && input.Locales != null && Locales.SequenceEqual(input.Locales));
+        (Locales == input.Locales || Locales != null && input.Locales != null && Locales.SequenceEqual(input.Locales)) &&
+        (CustomFields == input.CustomFields || (CustomFields != null && CustomFields.Equals(input.CustomFields)));
   }
 
   /// <summary>
@@ -93,6 +101,10 @@ public partial class SourceUpdateCommercetools
       if (Locales != null)
       {
         hashCode = (hashCode * 59) + Locales.GetHashCode();
+      }
+      if (CustomFields != null)
+      {
+        hashCode = (hashCode * 59) + CustomFields.GetHashCode();
       }
       return hashCode;
     }

@@ -65,6 +65,12 @@ public partial class SourceCommercetools
   public bool? FallbackIsInStockValue { get; set; }
 
   /// <summary>
+  /// Gets or Sets CustomFields
+  /// </summary>
+  [JsonPropertyName("customFields")]
+  public CommercetoolsCustomFields CustomFields { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -77,6 +83,7 @@ public partial class SourceCommercetools
     sb.Append("  Url: ").Append(Url).Append("\n");
     sb.Append("  ProjectKey: ").Append(ProjectKey).Append("\n");
     sb.Append("  FallbackIsInStockValue: ").Append(FallbackIsInStockValue).Append("\n");
+    sb.Append("  CustomFields: ").Append(CustomFields).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -107,7 +114,8 @@ public partial class SourceCommercetools
         (Locales == input.Locales || Locales != null && input.Locales != null && Locales.SequenceEqual(input.Locales)) &&
         (Url == input.Url || (Url != null && Url.Equals(input.Url))) &&
         (ProjectKey == input.ProjectKey || (ProjectKey != null && ProjectKey.Equals(input.ProjectKey))) &&
-        (FallbackIsInStockValue == input.FallbackIsInStockValue || FallbackIsInStockValue.Equals(input.FallbackIsInStockValue));
+        (FallbackIsInStockValue == input.FallbackIsInStockValue || FallbackIsInStockValue.Equals(input.FallbackIsInStockValue)) &&
+        (CustomFields == input.CustomFields || (CustomFields != null && CustomFields.Equals(input.CustomFields)));
   }
 
   /// <summary>
@@ -136,6 +144,10 @@ public partial class SourceCommercetools
         hashCode = (hashCode * 59) + ProjectKey.GetHashCode();
       }
       hashCode = (hashCode * 59) + FallbackIsInStockValue.GetHashCode();
+      if (CustomFields != null)
+      {
+        hashCode = (hashCode * 59) + CustomFields.GetHashCode();
+      }
       return hashCode;
     }
   }
