@@ -27,8 +27,6 @@ public partial class AttributeToUpdate : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public AttributeToUpdate(string actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class AttributeToUpdate : AbstractSchema
   /// <param name="actualInstance">An instance of BuiltInOperation.</param>
   public AttributeToUpdate(BuiltInOperation actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

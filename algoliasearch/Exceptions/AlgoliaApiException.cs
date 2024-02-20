@@ -13,7 +13,7 @@ public class AlgoliaApiException : Exception
   public int HttpErrorCode { get; set; }
 
   /// <summary>
-  /// Ctor with error code and message
+  /// Create a new AlgoliaAPIException
   /// </summary>
   /// <param name="message"></param>
   /// <param name="httpErrorCode"></param>

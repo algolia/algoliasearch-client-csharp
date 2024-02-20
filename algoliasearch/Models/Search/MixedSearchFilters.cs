@@ -27,8 +27,6 @@ public partial class MixedSearchFilters : AbstractSchema
   /// <param name="actualInstance">An instance of List&lt;string&gt;.</param>
   public MixedSearchFilters(List<string> actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class MixedSearchFilters : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public MixedSearchFilters(string actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

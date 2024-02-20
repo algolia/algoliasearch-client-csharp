@@ -27,8 +27,6 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthGoogleServiceAccountPartial.</param>
   public AuthInputPartial(AuthGoogleServiceAccountPartial actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthBasicPartial.</param>
   public AuthInputPartial(AuthBasicPartial actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAPIKeyPartial.</param>
   public AuthInputPartial(AuthAPIKeyPartial actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -63,8 +57,6 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthOAuthPartial.</param>
   public AuthInputPartial(AuthOAuthPartial actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -75,8 +67,6 @@ public partial class AuthInputPartial : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAlgoliaPartial.</param>
   public AuthInputPartial(AuthAlgoliaPartial actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

@@ -1275,7 +1275,7 @@ public partial class IngestionClient : IIngestionClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -1315,7 +1315,7 @@ public partial class IngestionClient : IIngestionClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -1356,7 +1356,7 @@ public partial class IngestionClient : IIngestionClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -1399,7 +1399,7 @@ public partial class IngestionClient : IIngestionClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -1446,7 +1446,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
+    requestOptions.PathParameters.Add("authenticationID", QueryStringHelper.ParameterToString(authenticationID));
 
     return await _transport.ExecuteRequestAsync<DeleteResponse>(new HttpMethod("DELETE"), "/1/authentications/{authenticationID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1494,7 +1494,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
+    requestOptions.PathParameters.Add("destinationID", QueryStringHelper.ParameterToString(destinationID));
 
     return await _transport.ExecuteRequestAsync<DeleteResponse>(new HttpMethod("DELETE"), "/1/destinations/{destinationID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1542,7 +1542,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
     return await _transport.ExecuteRequestAsync<DeleteResponse>(new HttpMethod("DELETE"), "/1/sources/{sourceID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1585,7 +1585,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
     return await _transport.ExecuteRequestAsync<DeleteResponse>(new HttpMethod("DELETE"), "/1/tasks/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1628,7 +1628,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
     return await _transport.ExecuteRequestAsync<TaskUpdateResponse>(new HttpMethod("PUT"), "/1/tasks/{taskID}/disable", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1676,7 +1676,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
     return await _transport.ExecuteRequestAsync<TaskUpdateResponse>(new HttpMethod("PUT"), "/1/tasks/{taskID}/enable", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1724,7 +1724,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
+    requestOptions.PathParameters.Add("authenticationID", QueryStringHelper.ParameterToString(authenticationID));
 
     return await _transport.ExecuteRequestAsync<Authentication>(new HttpMethod("GET"), "/1/authentications/{authenticationID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1831,7 +1831,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
+    requestOptions.PathParameters.Add("destinationID", QueryStringHelper.ParameterToString(destinationID));
 
     return await _transport.ExecuteRequestAsync<Destination>(new HttpMethod("GET"), "/1/destinations/{destinationID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1938,7 +1938,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
     return await _transport.ExecuteRequestAsync<DockerSourceStreams>(new HttpMethod("GET"), "/1/sources/{sourceID}/discover", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1991,8 +1991,8 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
-    requestOptions.PathParameters.Add("eventID", ClientUtils.ParameterToString(eventID));
+    requestOptions.PathParameters.Add("runID", QueryStringHelper.ParameterToString(runID));
+    requestOptions.PathParameters.Add("eventID", QueryStringHelper.ParameterToString(eventID));
 
     return await _transport.ExecuteRequestAsync<Event>(new HttpMethod("GET"), "/1/runs/{runID}/events/{eventID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2049,7 +2049,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
+    requestOptions.PathParameters.Add("runID", QueryStringHelper.ParameterToString(runID));
 
     requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
     requestOptions.AddQueryParameter("page", page);
@@ -2113,7 +2113,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("runID", ClientUtils.ParameterToString(runID));
+    requestOptions.PathParameters.Add("runID", QueryStringHelper.ParameterToString(runID));
 
     return await _transport.ExecuteRequestAsync<Run>(new HttpMethod("GET"), "/1/runs/{runID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2226,7 +2226,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
     return await _transport.ExecuteRequestAsync<Source>(new HttpMethod("GET"), "/1/sources/{sourceID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2333,7 +2333,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
     return await _transport.ExecuteRequestAsync<IngestionTask>(new HttpMethod("GET"), "/1/tasks/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2449,7 +2449,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
     return await _transport.ExecuteRequestAsync<RunResponse>(new HttpMethod("POST"), "/1/tasks/{taskID}/run", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2689,7 +2689,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
     return await _transport.ExecuteRequestAsync<DockerSourceDiscover>(new HttpMethod("POST"), "/1/sources/{sourceID}/discover", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2742,7 +2742,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("authenticationID", ClientUtils.ParameterToString(authenticationID));
+    requestOptions.PathParameters.Add("authenticationID", QueryStringHelper.ParameterToString(authenticationID));
 
     requestOptions.Data = authenticationUpdate;
     return await _transport.ExecuteRequestAsync<AuthenticationUpdateResponse>(new HttpMethod("PATCH"), "/1/authentications/{authenticationID}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2797,7 +2797,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("destinationID", ClientUtils.ParameterToString(destinationID));
+    requestOptions.PathParameters.Add("destinationID", QueryStringHelper.ParameterToString(destinationID));
 
     requestOptions.Data = destinationUpdate;
     return await _transport.ExecuteRequestAsync<DestinationUpdateResponse>(new HttpMethod("PATCH"), "/1/destinations/{destinationID}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2852,7 +2852,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("sourceID", ClientUtils.ParameterToString(sourceID));
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
     requestOptions.Data = sourceUpdate;
     return await _transport.ExecuteRequestAsync<SourceUpdateResponse>(new HttpMethod("PATCH"), "/1/sources/{sourceID}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2902,7 +2902,7 @@ public partial class IngestionClient : IIngestionClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
     requestOptions.Data = taskUpdate;
     return await _transport.ExecuteRequestAsync<TaskUpdateResponse>(new HttpMethod("PATCH"), "/1/tasks/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);

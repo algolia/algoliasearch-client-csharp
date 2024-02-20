@@ -27,8 +27,6 @@ public partial class GetTopHitsResponse : AbstractSchema
   /// <param name="actualInstance">An instance of TopHitsResponse.</param>
   public GetTopHitsResponse(TopHitsResponse actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class GetTopHitsResponse : AbstractSchema
   /// <param name="actualInstance">An instance of TopHitsResponseWithAnalytics.</param>
   public GetTopHitsResponse(TopHitsResponseWithAnalytics actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

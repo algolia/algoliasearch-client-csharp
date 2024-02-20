@@ -27,8 +27,6 @@ public partial class DestinationInput : AbstractSchema
   /// <param name="actualInstance">An instance of DestinationIndexPrefix.</param>
   public DestinationInput(DestinationIndexPrefix actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class DestinationInput : AbstractSchema
   /// <param name="actualInstance">An instance of DestinationIndexName.</param>
   public DestinationInput(DestinationIndexName actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

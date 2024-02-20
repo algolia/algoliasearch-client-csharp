@@ -1730,8 +1730,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.Data = body;
     return await _transport.ExecuteRequestAsync<UpdatedAtWithObjectIdResponse>(new HttpMethod("PUT"), "/1/indexes/{indexName}/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -1828,7 +1828,7 @@ public partial class SearchClient : ISearchClient
     var requestOptions = new InternalRequestOptions(options);
 
 
-    requestOptions.HeaderParameters.Add("X-Algolia-User-ID".ToLowerInvariant(), ClientUtils.ParameterToString(xAlgoliaUserID)); // header parameter
+    requestOptions.HeaderParameters.Add("X-Algolia-User-ID".ToLowerInvariant(), QueryStringHelper.ParameterToString(xAlgoliaUserID)); // header parameter
     requestOptions.Data = assignUserIdParams;
     return await _transport.ExecuteRequestAsync<CreatedAtResponse>(new HttpMethod("POST"), "/1/clusters/mapping", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1875,7 +1875,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = batchWriteParams;
     return await _transport.ExecuteRequestAsync<BatchResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/batch", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -1924,7 +1924,7 @@ public partial class SearchClient : ISearchClient
     var requestOptions = new InternalRequestOptions(options);
 
 
-    requestOptions.HeaderParameters.Add("X-Algolia-User-ID".ToLowerInvariant(), ClientUtils.ParameterToString(xAlgoliaUserID)); // header parameter
+    requestOptions.HeaderParameters.Add("X-Algolia-User-ID".ToLowerInvariant(), QueryStringHelper.ParameterToString(xAlgoliaUserID)); // header parameter
     requestOptions.Data = batchAssignUserIdsParams;
     return await _transport.ExecuteRequestAsync<CreatedAtResponse>(new HttpMethod("POST"), "/1/clusters/mapping/batch", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -1971,7 +1971,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("dictionaryName", ClientUtils.ParameterToString(dictionaryName));
+    requestOptions.PathParameters.Add("dictionaryName", QueryStringHelper.ParameterToString(dictionaryName));
 
     requestOptions.Data = batchDictionaryEntriesParams;
     return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/dictionaries/{dictionaryName}/batch", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2018,7 +2018,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = browseParams;
     return await _transport.ExecuteRequestAsync<BrowseResponse<T>>(new HttpMethod("POST"), "/1/indexes/{indexName}/browse", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2064,7 +2064,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/clear", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2109,7 +2109,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/rules/clear", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2156,7 +2156,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/synonyms/clear", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2199,7 +2199,7 @@ public partial class SearchClient : ISearchClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2239,7 +2239,7 @@ public partial class SearchClient : ISearchClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2280,7 +2280,7 @@ public partial class SearchClient : ISearchClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -2323,7 +2323,7 @@ public partial class SearchClient : ISearchClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -2368,7 +2368,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("key", ClientUtils.ParameterToString(key));
+    requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
 
     return await _transport.ExecuteRequestAsync<DeleteApiKeyResponse>(new HttpMethod("DELETE"), "/1/keys/{key}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2417,7 +2417,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = deleteByParams;
     return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/deleteByQuery", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2463,7 +2463,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2512,8 +2512,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2564,8 +2564,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2612,7 +2612,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("source", ClientUtils.ParameterToString(varSource));
+    requestOptions.PathParameters.Add("source", QueryStringHelper.ParameterToString(varSource));
 
     return await _transport.ExecuteRequestAsync<DeleteSourceResponse>(new HttpMethod("DELETE"), "/1/security/sources/{source}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2662,8 +2662,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/synonyms/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2707,7 +2707,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("key", ClientUtils.ParameterToString(key));
+    requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
 
     return await _transport.ExecuteRequestAsync<GetApiKeyResponse>(new HttpMethod("GET"), "/1/keys/{key}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2877,8 +2877,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("attributesToRetrieve", attributesToRetrieve);
     return await _transport.ExecuteRequestAsync<Dictionary<string, string>>(new HttpMethod("GET"), "/1/indexes/{indexName}/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2975,8 +2975,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     return await _transport.ExecuteRequestAsync<Rule>(new HttpMethod("GET"), "/1/indexes/{indexName}/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -3021,7 +3021,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     return await _transport.ExecuteRequestAsync<IndexSettings>(new HttpMethod("GET"), "/1/indexes/{indexName}/settings", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -3107,8 +3107,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     return await _transport.ExecuteRequestAsync<SynonymHit>(new HttpMethod("GET"), "/1/indexes/{indexName}/synonyms/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -3155,8 +3155,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
     return await _transport.ExecuteRequestAsync<GetTaskResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/task/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -3238,7 +3238,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("userID", ClientUtils.ParameterToString(userID));
+    requestOptions.PathParameters.Add("userID", QueryStringHelper.ParameterToString(userID));
 
     return await _transport.ExecuteRequestAsync<UserId>(new HttpMethod("GET"), "/1/clusters/mapping/{userID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -3525,7 +3525,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = operationIndexParams;
     return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/operation", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -3582,8 +3582,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("createIfNotExists", createIfNotExists);
     requestOptions.Data = attributesToUpdate;
@@ -3632,7 +3632,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("userID", ClientUtils.ParameterToString(userID));
+    requestOptions.PathParameters.Add("userID", QueryStringHelper.ParameterToString(userID));
 
     return await _transport.ExecuteRequestAsync<RemoveUserIdResponse>(new HttpMethod("DELETE"), "/1/clusters/mapping/{userID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -3720,7 +3720,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("key", ClientUtils.ParameterToString(key));
+    requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
 
     return await _transport.ExecuteRequestAsync<AddApiKeyResponse>(new HttpMethod("POST"), "/1/keys/{key}/restore", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -3769,7 +3769,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = body;
     return await _transport.ExecuteRequestAsync<SaveObjectResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -3826,8 +3826,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.Data = rule;
@@ -3883,7 +3883,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.AddQueryParameter("clearExistingRules", clearExistingRules);
@@ -3944,8 +3944,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.Data = synonymHit;
@@ -4001,7 +4001,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.AddQueryParameter("replaceExistingSynonyms", replaceExistingSynonyms);
@@ -4098,7 +4098,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("dictionaryName", ClientUtils.ParameterToString(dictionaryName));
+    requestOptions.PathParameters.Add("dictionaryName", QueryStringHelper.ParameterToString(dictionaryName));
 
     requestOptions.Data = searchDictionaryEntriesParams;
     requestOptions.UseReadTransporter = true;
@@ -4151,8 +4151,8 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("facetName", ClientUtils.ParameterToString(facetName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("facetName", QueryStringHelper.ParameterToString(facetName));
 
     requestOptions.Data = searchForFacetValuesRequest;
     requestOptions.UseReadTransporter = true;
@@ -4201,7 +4201,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = searchRulesParams;
     requestOptions.UseReadTransporter = true;
@@ -4249,7 +4249,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = searchParams;
     requestOptions.UseReadTransporter = true;
@@ -4297,7 +4297,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = searchSynonymsParams;
     requestOptions.UseReadTransporter = true;
@@ -4439,7 +4439,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.Data = indexSettings;
@@ -4492,7 +4492,7 @@ public partial class SearchClient : ISearchClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("key", ClientUtils.ParameterToString(key));
+    requestOptions.PathParameters.Add("key", QueryStringHelper.ParameterToString(key));
 
     requestOptions.Data = apiKey;
     return await _transport.ExecuteRequestAsync<UpdateApiKeyResponse>(new HttpMethod("PUT"), "/1/keys/{key}", requestOptions, cancellationToken).ConfigureAwait(false);

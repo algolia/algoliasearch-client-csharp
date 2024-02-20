@@ -27,8 +27,6 @@ public partial class AroundRadius : AbstractSchema
   /// <param name="actualInstance">An instance of int.</param>
   public AroundRadius(int actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 
@@ -39,8 +37,6 @@ public partial class AroundRadius : AbstractSchema
   /// <param name="actualInstance">An instance of AroundRadiusAll.</param>
   public AroundRadius(AroundRadiusAll actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 

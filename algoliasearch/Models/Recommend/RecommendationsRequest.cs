@@ -27,8 +27,6 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of TrendingItemsQuery.</param>
   public RecommendationsRequest(TrendingItemsQuery actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of TrendingFacetsQuery.</param>
   public RecommendationsRequest(TrendingFacetsQuery actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of RecommendationsQuery.</param>
   public RecommendationsRequest(RecommendationsQuery actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -63,8 +57,6 @@ public partial class RecommendationsRequest : AbstractSchema
   /// <param name="actualInstance">An instance of RecommendedForYouQuery.</param>
   public RecommendationsRequest(RecommendedForYouQuery actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

@@ -27,8 +27,6 @@ public partial class BrowseParams : AbstractSchema
   /// <param name="actualInstance">An instance of SearchParamsString.</param>
   public BrowseParams(SearchParamsString actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class BrowseParams : AbstractSchema
   /// <param name="actualInstance">An instance of BrowseParamsObject.</param>
   public BrowseParams(BrowseParamsObject actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

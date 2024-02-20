@@ -26,8 +26,6 @@ public partial class SearchResult<T> : AbstractSchema
   /// <param name="actualInstance">An instance of SearchForFacetValuesResponse.</param>
   public SearchResult(SearchForFacetValuesResponse actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class SearchResult<T> : AbstractSchema
   /// <param name="actualInstance">An instance of SearchResponse.</param>
   public SearchResult(object actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

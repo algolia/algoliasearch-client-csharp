@@ -25,8 +25,6 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// </summary>
   public ReRankingApplyFilter()
   {
-    this.IsNullable = true;
-    this.SchemaType = "oneOf";
   }
 
   /// <summary>
@@ -36,8 +34,6 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// <param name="actualInstance">An instance of List&lt;MixedSearchFilters&gt;.</param>
   public ReRankingApplyFilter(List<MixedSearchFilters> actualInstance)
   {
-    IsNullable = true;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 
@@ -48,8 +44,6 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public ReRankingApplyFilter(string actualInstance)
   {
-    IsNullable = true;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 

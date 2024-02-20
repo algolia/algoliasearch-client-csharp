@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace Algolia.Search.Utils;
 
+/// <summary>
+/// Helper class to run async methods synchronously.
+/// </summary>
 internal static class AsyncHelper
 {
   private static readonly TaskFactory TaskFactory = new(CancellationToken.None,

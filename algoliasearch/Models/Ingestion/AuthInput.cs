@@ -27,8 +27,6 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthGoogleServiceAccount.</param>
   public AuthInput(AuthGoogleServiceAccount actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthBasic.</param>
   public AuthInput(AuthBasic actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAPIKey.</param>
   public AuthInput(AuthAPIKey actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -63,8 +57,6 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthOAuth.</param>
   public AuthInput(AuthOAuth actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -75,8 +67,6 @@ public partial class AuthInput : AbstractSchema
   /// <param name="actualInstance">An instance of AuthAlgolia.</param>
   public AuthInput(AuthAlgolia actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

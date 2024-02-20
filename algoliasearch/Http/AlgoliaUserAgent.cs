@@ -34,8 +34,8 @@ public class AlgoliaUserAgent
   /// <summary>
   /// Add a new segment to the user-agent header
   /// </summary>
-  /// <param name="key"></param>
-  /// <param name="value"></param>
+  /// <param name="key">The segment key</param>
+  /// <param name="value">The segment value. Will be wrapped in parenthesis</param>
   /// <exception cref="ArgumentException"></exception>
   public void AddSegment(string key, string value)
   {

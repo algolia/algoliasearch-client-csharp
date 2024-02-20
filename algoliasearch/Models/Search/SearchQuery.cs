@@ -27,8 +27,6 @@ public partial class SearchQuery : AbstractSchema
   /// <param name="actualInstance">An instance of SearchForFacets.</param>
   public SearchQuery(SearchForFacets actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class SearchQuery : AbstractSchema
   /// <param name="actualInstance">An instance of SearchForHits.</param>
   public SearchQuery(SearchForHits actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

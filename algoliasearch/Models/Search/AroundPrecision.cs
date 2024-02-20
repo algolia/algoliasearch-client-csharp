@@ -27,8 +27,6 @@ public partial class AroundPrecision : AbstractSchema
   /// <param name="actualInstance">An instance of int.</param>
   public AroundPrecision(int actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 
@@ -39,8 +37,6 @@ public partial class AroundPrecision : AbstractSchema
   /// <param name="actualInstance">An instance of List&lt;AroundPrecisionFromValueInner&gt;.</param>
   public AroundPrecision(List<AroundPrecisionFromValueInner> actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

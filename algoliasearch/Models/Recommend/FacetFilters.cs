@@ -27,8 +27,6 @@ public partial class FacetFilters : AbstractSchema
   /// <param name="actualInstance">An instance of List&lt;MixedSearchFilters&gt;.</param>
   public FacetFilters(List<MixedSearchFilters> actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class FacetFilters : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public FacetFilters(string actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

@@ -427,7 +427,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -467,7 +467,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -508,7 +508,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -551,7 +551,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -596,7 +596,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     return await _transport.ExecuteRequestAsync<BaseResponse>(new HttpMethod("DELETE"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -677,7 +677,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     return await _transport.ExecuteRequestAsync<QuerySuggestionsConfigurationResponse>(new HttpMethod("GET"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -721,7 +721,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     return await _transport.ExecuteRequestAsync<GetConfigStatus200Response>(new HttpMethod("GET"), "/1/configs/{indexName}/status", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -765,7 +765,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     return await _transport.ExecuteRequestAsync<GetLogFile200Response>(new HttpMethod("GET"), "/1/logs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -814,7 +814,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = querySuggestionsConfiguration;
     return await _transport.ExecuteRequestAsync<BaseResponse>(new HttpMethod("PUT"), "/1/configs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);

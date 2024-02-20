@@ -427,7 +427,7 @@ public partial class MonitoringClient : IMonitoringClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -467,7 +467,7 @@ public partial class MonitoringClient : IMonitoringClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -508,7 +508,7 @@ public partial class MonitoringClient : IMonitoringClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -551,7 +551,7 @@ public partial class MonitoringClient : IMonitoringClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -593,7 +593,7 @@ public partial class MonitoringClient : IMonitoringClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
+    requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
     return await _transport.ExecuteRequestAsync<IncidentsResponse>(new HttpMethod("GET"), "/1/incidents/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -631,7 +631,7 @@ public partial class MonitoringClient : IMonitoringClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
+    requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
     return await _transport.ExecuteRequestAsync<StatusResponse>(new HttpMethod("GET"), "/1/status/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -700,7 +700,7 @@ public partial class MonitoringClient : IMonitoringClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
+    requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
     return await _transport.ExecuteRequestAsync<IndexingTimeResponse>(new HttpMethod("GET"), "/1/indexing/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -769,7 +769,7 @@ public partial class MonitoringClient : IMonitoringClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
+    requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
     return await _transport.ExecuteRequestAsync<LatencyResponse>(new HttpMethod("GET"), "/1/latency/{clusters}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -806,8 +806,8 @@ public partial class MonitoringClient : IMonitoringClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("metric", ClientUtils.ParameterToString(metric));
-    requestOptions.PathParameters.Add("period", ClientUtils.ParameterToString(period));
+    requestOptions.PathParameters.Add("metric", QueryStringHelper.ParameterToString(metric));
+    requestOptions.PathParameters.Add("period", QueryStringHelper.ParameterToString(period));
 
     return await _transport.ExecuteRequestAsync<InfrastructureResponse>(new HttpMethod("GET"), "/1/infrastructure/{metric}/period/{period}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -846,7 +846,7 @@ public partial class MonitoringClient : IMonitoringClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("clusters", ClientUtils.ParameterToString(clusters));
+    requestOptions.PathParameters.Add("clusters", QueryStringHelper.ParameterToString(clusters));
 
     return await _transport.ExecuteRequestAsync<Dictionary<string, Dictionary<string, bool>>>(new HttpMethod("GET"), "/1/reachability/{clusters}/probes", requestOptions, cancellationToken).ConfigureAwait(false);
   }

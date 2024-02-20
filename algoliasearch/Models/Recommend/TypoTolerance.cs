@@ -27,8 +27,6 @@ public partial class TypoTolerance : AbstractSchema
   /// <param name="actualInstance">An instance of bool.</param>
   public TypoTolerance(bool actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 
@@ -39,8 +37,6 @@ public partial class TypoTolerance : AbstractSchema
   /// <param name="actualInstance">An instance of TypoToleranceEnum.</param>
   public TypoTolerance(TypoToleranceEnum actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 

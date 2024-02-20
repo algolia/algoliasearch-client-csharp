@@ -1,23 +1,16 @@
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Algolia.Search.Exceptions;
 using Algolia.Search.Models.Common;
 using Microsoft.Extensions.Logging;
 
-
 namespace Algolia.Search.Serializer;
 
-internal class DefaultJsonSerializer : ISerializer
+internal class DefaultJsonSerializer(ILoggerFactory logger) : ISerializer
 {
-  private readonly ILogger<DefaultJsonSerializer> _logger;
-
-  public DefaultJsonSerializer(ILoggerFactory logger)
-  {
-    _logger = logger.CreateLogger<DefaultJsonSerializer>();
-  }
+  private readonly ILogger<DefaultJsonSerializer> _logger = logger.CreateLogger<DefaultJsonSerializer>();
 
   /// <summary>
   /// Serialize the object into a JSON string.
@@ -26,13 +19,25 @@ internal class DefaultJsonSerializer : ISerializer
   /// <returns>A JSON string.</returns>
   public string Serialize(object data)
   {
-    if (data is not AbstractSchema schema)
+    try
     {
-      return JsonSerializer.Serialize(data, JsonConfig.Options);
-    }
+      if (data is not AbstractSchema schema)
+      {
+        return JsonSerializer.Serialize(data, JsonConfig.Options);
+      }
 
-    // the object to be serialized is a oneOf/anyOf schema
-    return schema.ToJson();
+      // the object to be serialized is a oneOf/anyOf schema
+      return schema.ToJson();
+    }
+    catch (Exception ex)
+    {
+      if (_logger.IsEnabled(LogLevel.Error))
+      {
+        _logger.LogError(ex, "Error while serializing object of type {Type}", data.GetType());
+      }
+
+      throw new AlgoliaException($"Error while serializing object of type {data.GetType()}", ex);
+    }
   }
 
   public async Task<T> Deserialize<T>(Stream response)
@@ -53,21 +58,19 @@ internal class DefaultJsonSerializer : ISerializer
     {
       using var reader = new StreamReader(response);
       var readToEndAsync = await reader.ReadToEndAsync().ConfigureAwait(false);
-      if (string.IsNullOrEmpty(readToEndAsync))
-      {
-        return null;
-      }
 
-      return JsonSerializer.Deserialize(readToEndAsync, type, JsonConfig.Options);
+      return string.IsNullOrEmpty(readToEndAsync)
+        ? null
+        : JsonSerializer.Deserialize(readToEndAsync, type, JsonConfig.Options);
     }
     catch (Exception ex)
     {
-      if (_logger.IsEnabled(LogLevel.Debug))
+      if (_logger.IsEnabled(LogLevel.Error))
       {
-        _logger.Log(LogLevel.Debug, ex, "Error while deserializing response");
+        _logger.LogError(ex, "Error while deserializing response of type {Type}", type);
       }
 
-      throw new AlgoliaException(ex.Message);
+      throw new AlgoliaException($"Error while deserializing response of type {type}", ex);
     }
   }
 }

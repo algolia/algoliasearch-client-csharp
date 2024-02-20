@@ -27,8 +27,6 @@ public partial class HighlightResult : AbstractSchema
   /// <param name="actualInstance">An instance of HighlightResultOption.</param>
   public HighlightResult(HighlightResultOption actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class HighlightResult : AbstractSchema
   /// <param name="actualInstance">An instance of Dictionary&lt;string, HighlightResultOption&gt;.</param>
   public HighlightResult(Dictionary<string, HighlightResultOption> actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class HighlightResult : AbstractSchema
   /// <param name="actualInstance">An instance of List&lt;HighlightResultOption&gt;.</param>
   public HighlightResult(List<HighlightResultOption> actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

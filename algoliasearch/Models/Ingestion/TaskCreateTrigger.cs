@@ -27,8 +27,6 @@ public partial class TaskCreateTrigger : AbstractSchema
   /// <param name="actualInstance">An instance of OnDemandTriggerInput.</param>
   public TaskCreateTrigger(OnDemandTriggerInput actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class TaskCreateTrigger : AbstractSchema
   /// <param name="actualInstance">An instance of ScheduleTriggerInput.</param>
   public TaskCreateTrigger(ScheduleTriggerInput actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class TaskCreateTrigger : AbstractSchema
   /// <param name="actualInstance">An instance of SubscriptionTrigger.</param>
   public TaskCreateTrigger(SubscriptionTrigger actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

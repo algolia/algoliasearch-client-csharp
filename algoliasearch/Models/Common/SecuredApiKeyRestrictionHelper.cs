@@ -31,7 +31,7 @@ public partial class SecuredApiKeyRestriction
   }
 
   /// <summary>
-  /// Transform a poco (only class of primitive objects) to a query string
+  /// Transform a poco to a query string
   /// </summary>
   /// <param name="value"></param>
   /// <param name="ignoreList"></param>
@@ -46,7 +46,7 @@ public partial class SecuredApiKeyRestriction
       .Select(p => new
       {
         propsName = p.GetCustomAttribute<JsonPropertyNameAttribute>().Name,
-        value = ClientUtils.ParameterToString(p.GetValue(value, null))
+        value = QueryStringHelper.ParameterToString(p.GetValue(value, null))
       }).ToDictionary(p => p.propsName, p => p.value);
 
     return properties.ToQueryString();

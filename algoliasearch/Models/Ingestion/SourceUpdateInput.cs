@@ -27,8 +27,6 @@ public partial class SourceUpdateInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceUpdateCommercetools.</param>
   public SourceUpdateInput(SourceUpdateCommercetools actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class SourceUpdateInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceJSON.</param>
   public SourceUpdateInput(SourceJSON actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class SourceUpdateInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceCSV.</param>
   public SourceUpdateInput(SourceCSV actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -63,8 +57,6 @@ public partial class SourceUpdateInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceBigQuery.</param>
   public SourceUpdateInput(SourceBigQuery actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -75,8 +67,6 @@ public partial class SourceUpdateInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceUpdateDocker.</param>
   public SourceUpdateInput(SourceUpdateDocker actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

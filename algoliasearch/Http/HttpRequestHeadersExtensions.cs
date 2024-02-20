@@ -12,14 +12,12 @@ internal static class HttpRequestHeadersExtensions
   /// <param name="headers"></param>
   /// <param name="dictionary"></param>
   /// <returns></returns>
-  internal static HttpRequestHeaders Fill(this HttpRequestHeaders headers, IDictionary<string, string> dictionary)
+  internal static void Fill(this HttpRequestHeaders headers, IDictionary<string, string> dictionary)
   {
     foreach (var header in dictionary)
     {
       headers.TryAddWithoutValidation(header.Key, header.Value);
     }
-
-    return headers;
   }
 
   /// <summary>
@@ -27,11 +25,11 @@ internal static class HttpRequestHeadersExtensions
   /// </summary>
   /// <param name="headers"></param>
   /// <param name="request"></param>
-  internal static HttpContentHeaders Fill(this HttpContentHeaders headers, Request request)
+  internal static void Fill(this HttpContentHeaders headers, Request request)
   {
     if (request.Body == null)
     {
-      return headers;
+      return;
     }
 
     headers.Add(Defaults.ContentType, Defaults.ApplicationJson);
@@ -40,7 +38,5 @@ internal static class HttpRequestHeadersExtensions
     {
       headers.ContentEncoding.Add(Defaults.GzipEncoding);
     }
-
-    return headers;
   }
 }

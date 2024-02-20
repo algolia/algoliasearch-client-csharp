@@ -27,8 +27,6 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceCommercetools.</param>
   public SourceInput(SourceCommercetools actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceBigCommerce.</param>
   public SourceInput(SourceBigCommerce actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceJSON.</param>
   public SourceInput(SourceJSON actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -63,8 +57,6 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceCSV.</param>
   public SourceInput(SourceCSV actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -75,8 +67,6 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceBigQuery.</param>
   public SourceInput(SourceBigQuery actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -87,8 +77,6 @@ public partial class SourceInput : AbstractSchema
   /// <param name="actualInstance">An instance of SourceDocker.</param>
   public SourceInput(SourceDocker actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

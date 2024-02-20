@@ -27,8 +27,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ClickedObjectIDsAfterSearch.</param>
   public EventsItems(ClickedObjectIDsAfterSearch actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of AddedToCartObjectIDsAfterSearch.</param>
   public EventsItems(AddedToCartObjectIDsAfterSearch actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of PurchasedObjectIDsAfterSearch.</param>
   public EventsItems(PurchasedObjectIDsAfterSearch actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -63,8 +57,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ConvertedObjectIDsAfterSearch.</param>
   public EventsItems(ConvertedObjectIDsAfterSearch actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -75,8 +67,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ClickedObjectIDs.</param>
   public EventsItems(ClickedObjectIDs actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -87,8 +77,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of PurchasedObjectIDs.</param>
   public EventsItems(PurchasedObjectIDs actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -99,8 +87,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of AddedToCartObjectIDs.</param>
   public EventsItems(AddedToCartObjectIDs actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -111,8 +97,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ConvertedObjectIDs.</param>
   public EventsItems(ConvertedObjectIDs actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -123,8 +107,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ClickedFilters.</param>
   public EventsItems(ClickedFilters actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -135,8 +117,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ConvertedFilters.</param>
   public EventsItems(ConvertedFilters actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -147,8 +127,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ViewedObjectIDs.</param>
   public EventsItems(ViewedObjectIDs actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -159,8 +137,6 @@ public partial class EventsItems : AbstractSchema
   /// <param name="actualInstance">An instance of ViewedFilters.</param>
   public EventsItems(ViewedFilters actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

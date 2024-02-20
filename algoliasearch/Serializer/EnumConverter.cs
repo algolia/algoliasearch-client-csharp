@@ -37,7 +37,6 @@ public class JsonStringEnumConverterFactory : JsonConverterFactory
 /// <summary>
 /// Custom JsonConverter to convert enum to string, using the JsonPropertyNameAttribute if present
 /// </summary>
-/// <typeparam name="TEnum"></typeparam>
 public class JsonStringEnumConverter<TEnum> : JsonConverter<TEnum> where TEnum : struct, Enum
 {
   private readonly Dictionary<TEnum, string> _enumToString = new();
@@ -73,7 +72,6 @@ public class JsonStringEnumConverter<TEnum> : JsonConverter<TEnum> where TEnum :
     }
   }
 
-
   /// <summary>
   /// Read the enum from the json
   /// </summary>
@@ -84,20 +82,24 @@ public class JsonStringEnumConverter<TEnum> : JsonConverter<TEnum> where TEnum :
   public override TEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     var type = reader.TokenType;
-    if (type == JsonTokenType.String)
+    switch (type)
     {
-      var stringValue = reader.GetString();
+      case JsonTokenType.String:
+        {
+          var stringValue = reader.GetString();
+          if (stringValue != null && _stringToEnum.TryGetValue(stringValue, out var enumValue))
+          {
+            return enumValue;
+          }
 
-      if (stringValue != null && _stringToEnum.TryGetValue(stringValue, out var enumValue))
-      {
-        return enumValue;
-      }
-    }
-    else if (type == JsonTokenType.Number)
-    {
-      var numValue = reader.GetInt32();
-      _numberToEnum.TryGetValue(numValue, out var enumValue);
-      return enumValue;
+          break;
+        }
+      case JsonTokenType.Number:
+        {
+          var numValue = reader.GetInt32();
+          _numberToEnum.TryGetValue(numValue, out var enumValue);
+          return enumValue;
+        }
     }
 
     return default;

@@ -27,8 +27,6 @@ public partial class TaskInput : AbstractSchema
   /// <param name="actualInstance">An instance of OnDemandDateUtilsInput.</param>
   public TaskInput(OnDemandDateUtilsInput actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class TaskInput : AbstractSchema
   /// <param name="actualInstance">An instance of ScheduleDateUtilsInput.</param>
   public TaskInput(ScheduleDateUtilsInput actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

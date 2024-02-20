@@ -351,7 +351,7 @@ public partial class RecommendClient : IRecommendClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -391,7 +391,7 @@ public partial class RecommendClient : IRecommendClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -432,7 +432,7 @@ public partial class RecommendClient : IRecommendClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -475,7 +475,7 @@ public partial class RecommendClient : IRecommendClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -527,9 +527,9 @@ public partial class RecommendClient : IRecommendClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("model", ClientUtils.ParameterToString(model));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("DELETE"), "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -582,9 +582,9 @@ public partial class RecommendClient : IRecommendClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("model", ClientUtils.ParameterToString(model));
-    requestOptions.PathParameters.Add("objectID", ClientUtils.ParameterToString(objectID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
+    requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     return await _transport.ExecuteRequestAsync<RuleResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/{model}/recommend/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -634,9 +634,9 @@ public partial class RecommendClient : IRecommendClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("model", ClientUtils.ParameterToString(model));
-    requestOptions.PathParameters.Add("taskID", ClientUtils.ParameterToString(taskID));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
 
     return await _transport.ExecuteRequestAsync<GetRecommendTaskResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/{model}/task/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -730,8 +730,8 @@ public partial class RecommendClient : IRecommendClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("indexName", ClientUtils.ParameterToString(indexName));
-    requestOptions.PathParameters.Add("model", ClientUtils.ParameterToString(model));
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
 
     requestOptions.Data = searchRecommendRulesParams;
     requestOptions.UseReadTransporter = true;

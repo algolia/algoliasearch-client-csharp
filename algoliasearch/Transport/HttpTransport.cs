@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +12,6 @@ using Algolia.Search.Http;
 using Algolia.Search.Serializer;
 using Algolia.Search.Utils;
 using Microsoft.Extensions.Logging;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Algolia.Search.Transport;
 
@@ -131,6 +129,11 @@ internal class HttpTransport
       if (_logger.IsEnabled(LogLevel.Trace))
       {
         _logger.LogTrace("Sending request to {Method} {Uri}", request.Method, request.Uri);
+        _logger.LogTrace("Request timeout: {RequestTimeout} (s)", requestTimeout.TotalSeconds);
+        foreach (var header in request.Headers)
+        {
+          _logger.LogTrace("Header: {HeaderName} : {HeaderValue}", header.Key, header.Value);
+        }
       }
 
       var response = await _httpClient
@@ -174,10 +177,10 @@ internal class HttpTransport
 
           continue;
         case RetryOutcomeType.Failure:
-          if (_logger.IsEnabled(LogLevel.Debug))
+          if (_logger.IsEnabled(LogLevel.Error))
           {
-            _logger.LogDebug(
-              "Retry strategy with failure outcome. Response HTTP{HttpCode} : {Error}", response.HttpStatusCode,
+            _logger.LogError(
+              "Retry strategy with failure outcome. Response HTTP {HttpCode} : {Error}", response.HttpStatusCode,
               response.Error);
           }
 

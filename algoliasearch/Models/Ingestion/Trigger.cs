@@ -27,8 +27,6 @@ public partial class Trigger : AbstractSchema
   /// <param name="actualInstance">An instance of OnDemandTrigger.</param>
   public Trigger(OnDemandTrigger actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class Trigger : AbstractSchema
   /// <param name="actualInstance">An instance of ScheduleTrigger.</param>
   public Trigger(ScheduleTrigger actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -51,8 +47,6 @@ public partial class Trigger : AbstractSchema
   /// <param name="actualInstance">An instance of SubscriptionTrigger.</param>
   public Trigger(SubscriptionTrigger actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

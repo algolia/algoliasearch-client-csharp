@@ -27,8 +27,6 @@ public partial class Price : AbstractSchema
   /// <param name="actualInstance">An instance of double.</param>
   public Price(double actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 
@@ -39,8 +37,6 @@ public partial class Price : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public Price(string actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

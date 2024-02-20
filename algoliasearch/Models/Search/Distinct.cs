@@ -27,8 +27,6 @@ public partial class Distinct : AbstractSchema
   /// <param name="actualInstance">An instance of bool.</param>
   public Distinct(bool actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 
@@ -39,8 +37,6 @@ public partial class Distinct : AbstractSchema
   /// <param name="actualInstance">An instance of int.</param>
   public Distinct(int actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 

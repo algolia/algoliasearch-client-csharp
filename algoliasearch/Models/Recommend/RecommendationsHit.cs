@@ -27,8 +27,6 @@ public partial class RecommendationsHit : AbstractSchema
   /// <param name="actualInstance">An instance of RecommendHit.</param>
   public RecommendationsHit(RecommendHit actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
@@ -39,8 +37,6 @@ public partial class RecommendationsHit : AbstractSchema
   /// <param name="actualInstance">An instance of TrendingFacetHit.</param>
   public RecommendationsHit(TrendingFacetHit actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 

@@ -27,8 +27,6 @@ public partial class PlatformWithNone : AbstractSchema
   /// <param name="actualInstance">An instance of Platform.</param>
   public PlatformWithNone(Platform actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 
@@ -39,8 +37,6 @@ public partial class PlatformWithNone : AbstractSchema
   /// <param name="actualInstance">An instance of PlatformNone.</param>
   public PlatformWithNone(PlatformNone actualInstance)
   {
-    IsNullable = false;
-    SchemaType = "oneOf";
     ActualInstance = actualInstance;
   }
 

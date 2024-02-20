@@ -309,7 +309,7 @@ public partial class PersonalizationClient : IPersonalizationClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomDelete`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -349,7 +349,7 @@ public partial class PersonalizationClient : IPersonalizationClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomGet`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -390,7 +390,7 @@ public partial class PersonalizationClient : IPersonalizationClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPost`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -433,7 +433,7 @@ public partial class PersonalizationClient : IPersonalizationClient
       throw new ArgumentException("Parameter `path` is required when calling `CustomPut`.");
 
     var requestOptions = new InternalRequestOptions(options);
-    requestOptions.CustomPathParameters.Add("path", ClientUtils.ParameterToString(path));
+    requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
@@ -478,7 +478,7 @@ public partial class PersonalizationClient : IPersonalizationClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("userToken", ClientUtils.ParameterToString(userToken));
+    requestOptions.PathParameters.Add("userToken", QueryStringHelper.ParameterToString(userToken));
 
     return await _transport.ExecuteRequestAsync<DeleteUserProfileResponse>(new HttpMethod("DELETE"), "/1/profiles/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -559,7 +559,7 @@ public partial class PersonalizationClient : IPersonalizationClient
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("userToken", ClientUtils.ParameterToString(userToken));
+    requestOptions.PathParameters.Add("userToken", QueryStringHelper.ParameterToString(userToken));
 
     return await _transport.ExecuteRequestAsync<GetUserTokenResponse>(new HttpMethod("GET"), "/1/profiles/personalization/{userToken}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
