@@ -1,5 +1,7 @@
-## [7.0.0-alpha.9](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.8...7.0.0-alpha.9)
+## 7.0.0-alpha.0
 
+- [4f6e2d0b3](https://github.com/algolia/api-clients-automation/commit/4f6e2d0b3) fix(specs): allow custom fields to be nullable ([#2746](https://github.com/algolia/api-clients-automation/pull/2746)) by [@shortcuts](https://github.com/shortcuts/)
+- [68551ff65](https://github.com/algolia/api-clients-automation/commit/68551ff65) refactor(csharp): Playground ([#2744](https://github.com/algolia/api-clients-automation/pull/2744)) by [@morganleroi](https://github.com/morganleroi/)
 - [6624759e1](https://github.com/algolia/api-clients-automation/commit/6624759e1) feat(specs): add CustomFields to CT Source Input ([#2742](https://github.com/algolia/api-clients-automation/pull/2742)) by [@damcou](https://github.com/damcou/)
 - [d86c75f59](https://github.com/algolia/api-clients-automation/commit/d86c75f59) refactor(csharp): move, tiny additions and cleanings ([#2740](https://github.com/algolia/api-clients-automation/pull/2740)) by [@morganleroi](https://github.com/morganleroi/)
 - [cd4f35f59](https://github.com/algolia/api-clients-automation/commit/cd4f35f59) feat(csharp): add last helpers ([#2694](https://github.com/algolia/api-clients-automation/pull/2694)) by [@morganleroi](https://github.com/morganleroi/)
@@ -7,9 +9,6 @@
 - [ee1488752](https://github.com/algolia/api-clients-automation/commit/ee1488752) feat(csharp): remove Newtonsoft JSON.NET ([#2717](https://github.com/algolia/api-clients-automation/pull/2717)) by [@morganleroi](https://github.com/morganleroi/)
 - [0bafedc41](https://github.com/algolia/api-clients-automation/commit/0bafedc41) docs(csharp): add guides ([#2695](https://github.com/algolia/api-clients-automation/pull/2695)) by [@morganleroi](https://github.com/morganleroi/)
 - [c757282e1](https://github.com/algolia/api-clients-automation/commit/c757282e1) fix(csharp): add nextDelay parameter in Wait helpers ([#2710](https://github.com/algolia/api-clients-automation/pull/2710)) by [@morganleroi](https://github.com/morganleroi/)
-
-## [7.0.0-alpha.8](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.7...7.0.0-alpha.8)
-
 - [dfff005e3](https://github.com/algolia/api-clients-automation/commit/dfff005e3) feat(csharp): add requestion option builder helper ([#2709](https://github.com/algolia/api-clients-automation/pull/2709)) by [@morganleroi](https://github.com/morganleroi/)
 - [e31e15a01](https://github.com/algolia/api-clients-automation/commit/e31e15a01) feat(csharp): add SearchFor Hits and Search for Facets ([#2683](https://github.com/algolia/api-clients-automation/pull/2683)) by [@morganleroi](https://github.com/morganleroi/)
 - [b36a3a6fa](https://github.com/algolia/api-clients-automation/commit/b36a3a6fa) feat(csharp): add discriminator for deserialization ([#2678](https://github.com/algolia/api-clients-automation/pull/2678)) by [@morganleroi](https://github.com/morganleroi/)
@@ -19,24 +18,15 @@
 - [2145b687f](https://github.com/algolia/api-clients-automation/commit/2145b687f) feat(csharp): add sync method overload ([#2674](https://github.com/algolia/api-clients-automation/pull/2674)) by [@morganleroi](https://github.com/morganleroi/)
 - [832e86a5e](https://github.com/algolia/api-clients-automation/commit/832e86a5e) feat(csharp): add performances playground ([#2644](https://github.com/algolia/api-clients-automation/pull/2644)) by [@morganleroi](https://github.com/morganleroi/)
 - [83da9c316](https://github.com/algolia/api-clients-automation/commit/83da9c316) feat(csharp): add github action for release ([#2671](https://github.com/algolia/api-clients-automation/pull/2671)) by [@morganleroi](https://github.com/morganleroi/)
-
-## [7.0.0-alpha.7](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.6...7.0.0-alpha.7)
-
 - [e4ab48621](https://github.com/algolia/api-clients-automation/commit/e4ab48621) feat(csharp): add logs and logger factory ([#2640](https://github.com/algolia/api-clients-automation/pull/2640)) by [@morganleroi](https://github.com/morganleroi/)
 - [93e2aff59](https://github.com/algolia/api-clients-automation/commit/93e2aff59) feat(csharp): add compression ([#2627](https://github.com/algolia/api-clients-automation/pull/2627)) by [@morganleroi](https://github.com/morganleroi/)
 - [9404e3dc6](https://github.com/algolia/api-clients-automation/commit/9404e3dc6) feat(csharp): add custom user-agent segment ([#2631](https://github.com/algolia/api-clients-automation/pull/2631)) by [@morganleroi](https://github.com/morganleroi/)
 - [c4aa4c7e8](https://github.com/algolia/api-clients-automation/commit/c4aa4c7e8) test(csharp): add retry strategy ([#2629](https://github.com/algolia/api-clients-automation/pull/2629)) by [@morganleroi](https://github.com/morganleroi/)
 - [b3d61128a](https://github.com/algolia/api-clients-automation/commit/b3d61128a) docs(clients): add ACL section to code doc ([#2576](https://github.com/algolia/api-clients-automation/pull/2576)) by [@millotp](https://github.com/millotp/)
-
-## [7.0.0-alpha.6](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.5...7.0.0-alpha.6)
-
 - [2400c351a](https://github.com/algolia/api-clients-automation/commit/2400c351a) feat(csharp): add helpers ([#2578](https://github.com/algolia/api-clients-automation/pull/2578)) by [@morganleroi](https://github.com/morganleroi/)
 - [aeb15bbe5](https://github.com/algolia/api-clients-automation/commit/aeb15bbe5) feat(csharp): move to dotnet8 and cleanings ([#2602](https://github.com/algolia/api-clients-automation/pull/2602)) by [@morganleroi](https://github.com/morganleroi/)
 - [872ab29bf](https://github.com/algolia/api-clients-automation/commit/872ab29bf) feat(specs): update query suggestions unauthorized response example ([#2606](https://github.com/algolia/api-clients-automation/pull/2606)) by [@alphonseb](https://github.com/alphonseb/)
 - [e569a3e23](https://github.com/algolia/api-clients-automation/commit/e569a3e23) feat(specs): add acls to API endpoints ([#2604](https://github.com/algolia/api-clients-automation/pull/2604)) by [@alphonseb](https://github.com/alphonseb/)
-
-## [7.0.0-alpha.5](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.4...7.0.0-alpha.5)
-
 - [379fbc501](https://github.com/algolia/api-clients-automation/commit/379fbc501) fix(specs): correct `searchSynonyms` parameters ([#2595](https://github.com/algolia/api-clients-automation/pull/2595)) by [@morganleroi](https://github.com/morganleroi/)
 - [982fd3ca4](https://github.com/algolia/api-clients-automation/commit/982fd3ca4) feat(specs): import `crawler` and `usage` specs from new world repo ([#2598](https://github.com/algolia/api-clients-automation/pull/2598)) by [@shortcuts](https://github.com/shortcuts/)
 - [9532a0136](https://github.com/algolia/api-clients-automation/commit/9532a0136) feat(specs): AB testing tracked user count ([#2596](https://github.com/algolia/api-clients-automation/pull/2596)) by [@cdhawke](https://github.com/cdhawke/)
@@ -47,26 +37,14 @@
 - [d5e2897e5](https://github.com/algolia/api-clients-automation/commit/d5e2897e5) test(csharp): add e2e test suite ([#2556](https://github.com/algolia/api-clients-automation/pull/2556)) by [@morganleroi](https://github.com/morganleroi/)
 - [8b0622380](https://github.com/algolia/api-clients-automation/commit/8b0622380) fix(specs): rename clearAllSynonyms to clearSynonyms ([#2553](https://github.com/algolia/api-clients-automation/pull/2553)) by [@kai687](https://github.com/kai687/)
 - [a6d6ecd2b](https://github.com/algolia/api-clients-automation/commit/a6d6ecd2b) test(csharp): add client CTS ([#2551](https://github.com/algolia/api-clients-automation/pull/2551)) by [@morganleroi](https://github.com/morganleroi/)
-
-## [7.0.0-alpha.4](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.3...7.0.0-alpha.4)
-
 - [7c5ba3288](https://github.com/algolia/api-clients-automation/commit/7c5ba3288) feat(specs): update Insights API spec ([#2376](https://github.com/algolia/api-clients-automation/pull/2376)) by [@kai687](https://github.com/kai687/)
 - [297baa987](https://github.com/algolia/api-clients-automation/commit/297baa987) chore(clients): provide snippets for all languages ([#2518](https://github.com/algolia/api-clients-automation/pull/2518)) by [@shortcuts](https://github.com/shortcuts/)
 - [1f6654a24](https://github.com/algolia/api-clients-automation/commit/1f6654a24) fix(csharp): enforce dotnet sdk version ([#2517](https://github.com/algolia/api-clients-automation/pull/2517)) by [@morganleroi](https://github.com/morganleroi/)
 - [857f3632e](https://github.com/algolia/api-clients-automation/commit/857f3632e) feat(clients): generate code snippets from cts ([#2511](https://github.com/algolia/api-clients-automation/pull/2511)) by [@shortcuts](https://github.com/shortcuts/)
 - [58f174cff](https://github.com/algolia/api-clients-automation/commit/58f174cff) feat(csharp): add CTS for Requests. ([#2420](https://github.com/algolia/api-clients-automation/pull/2420)) by [@morganleroi](https://github.com/morganleroi/)
-
-## [7.0.0-alpha.3](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.2...7.0.0-alpha.3)
-
 - [ae20258c6](https://github.com/algolia/api-clients-automation/commit/ae20258c6) feat(clients): deserialize in e2e and SFFV response ([#2500](https://github.com/algolia/api-clients-automation/pull/2500)) by [@shortcuts](https://github.com/shortcuts/)
 - [4dc28da98](https://github.com/algolia/api-clients-automation/commit/4dc28da98) chore(clients): add more e2e ([#2497](https://github.com/algolia/api-clients-automation/pull/2497)) by [@shortcuts](https://github.com/shortcuts/)
-
-## [7.0.0-alpha.2](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.1...7.0.0-alpha.2)
-
 - [ae6adfbf7](https://github.com/algolia/api-clients-automation/commit/ae6adfbf7) fix(specs): port recommend changes ([#2476](https://github.com/algolia/api-clients-automation/pull/2476)) by [@shortcuts](https://github.com/shortcuts/)
-
-## [7.0.0-alpha.1](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.0...7.0.0-alpha.1)
-
 - [30014c7c6](https://github.com/algolia/api-clients-automation/commit/30014c7c6) refactor(csharp): remove useless code ([#2377](https://github.com/algolia/api-clients-automation/pull/2377)) by [@morganleroi](https://github.com/morganleroi/)
 - [167bcd243](https://github.com/algolia/api-clients-automation/commit/167bcd243) feat(csharp): add http transporter, serializer and configuration ([#2368](https://github.com/algolia/api-clients-automation/pull/2368)) by [@morganleroi](https://github.com/morganleroi/)
 - [8d71c2b69](https://github.com/algolia/api-clients-automation/commit/8d71c2b69) fix(specs): provide non clashing names for custom methods ([#2369](https://github.com/algolia/api-clients-automation/pull/2369)) by [@shortcuts](https://github.com/shortcuts/)
