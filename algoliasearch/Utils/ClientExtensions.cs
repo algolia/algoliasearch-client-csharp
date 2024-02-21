@@ -236,12 +236,13 @@ public static class ClientExtensions
     RequestOptions requestOptions = null)
   {
     const int hitsPerPage = 1000;
+    var page = synonymsParams.Page ?? 0;
     synonymsParams.HitsPerPage = hitsPerPage;
     var all = await CreateIterable<Tuple<SearchSynonymsResponse, int>>(async (prevResp) =>
     {
-      synonymsParams.Page = prevResp?.Item2 ?? 0;
       var searchSynonymsResponse = await client.SearchSynonymsAsync(indexName, synonymsParams, requestOptions);
-      return new Tuple<SearchSynonymsResponse, int>(searchSynonymsResponse, (prevResp?.Item2 ?? 0) + 1);
+      page = page + 1;
+      return new Tuple<SearchSynonymsResponse, int>(searchSynonymsResponse, page);
     }, resp => resp?.Item1 is { NbHits: < hitsPerPage }).ConfigureAwait(false);
 
     return all.SelectMany(u => u.Item1.Hits);
