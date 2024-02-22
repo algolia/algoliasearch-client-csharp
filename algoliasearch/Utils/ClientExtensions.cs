@@ -473,7 +473,7 @@ public static class ClientExtensions
         new OperationIndexParams(OperationType.Move, indexName), options, cancellationToken)
       .ConfigureAwait(false);
 
-    await client.WaitForTaskAsync(indexName, moveResponse.TaskID, requestOptions: options, ct: cancellationToken).ConfigureAwait(false);
+    await client.WaitForTaskAsync(tmpIndexName, moveResponse.TaskID, requestOptions: options, ct: cancellationToken).ConfigureAwait(false);
 
     return [copyResponse.TaskID, batchResponse.TaskID, moveResponse.TaskID];
   }
