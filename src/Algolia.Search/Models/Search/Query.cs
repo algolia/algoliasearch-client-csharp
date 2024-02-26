@@ -376,6 +376,11 @@ namespace Algolia.Search.Models.Search
         public object IgnorePlurals { get; set; }
 
         /// <summary>
+        /// Sets the languages to be used by language-specific settings and functionalities such as ignorePlurals, removeStopWords, and CJK word-detection.
+        /// </summary>
+        public List<string> QueryLanguages { get; set; }
+
+        /// <summary>
         /// Removes stop (common) words from the query before executing it.
         /// </summary>
         public List<string> RemoveStopWords { get; set; }
@@ -415,16 +420,16 @@ namespace Algolia.Search.Models.Search
         public IDictionary<string, object> CustomParameters { get; set; }
 
         /// <summary>
-        /// Relevancy score to apply to search in virtual index. 
-        /// Bigger value means less, but more relevant results, 
+        /// Relevancy score to apply to search in virtual index.
+        /// Bigger value means less, but more relevant results,
         /// lesser value - more less relevant results
         /// </summary>
         public int? RelevancyStrictness { get; set; }
 
         /// <summary>
-        /// You need to turn on Dynamic Re-Ranking on your index 
-        /// for it to have an effect on your search results. 
-        /// You can do this through the Re-Ranking page on the dashboard. 
+        /// You need to turn on Dynamic Re-Ranking on your index
+        /// for it to have an effect on your search results.
+        /// You can do this through the Re-Ranking page on the dashboard.
         /// This parameter is only used to turn off Dynamic Re-Ranking (with false) at search time.
         /// </summary>
         public bool? EnableReRanking { get; set; }
