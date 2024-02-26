@@ -95,6 +95,14 @@ namespace Algolia.Search.Test.Serializer
 
         [Test]
         [Parallelizable]
+        public void TestQueryWithQueryLanguages()
+        {
+            Query query = new Query("") { QueryLanguages = new List<string> { "ca", "en" } };
+            Assert.AreEqual(query.ToQueryString(), "query=&queryLanguages=ca%2Cen");
+        }
+
+        [Test]
+        [Parallelizable]
         public void TestQueryWithMultipleObjects()
         {
             Query query = new Query("") { IgnorePlurals = "true" };
