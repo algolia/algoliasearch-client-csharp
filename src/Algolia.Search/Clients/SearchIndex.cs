@@ -516,7 +516,7 @@ namespace Algolia.Search.Clients
             {
                 var dic = new Dictionary<string, string>
                 {
-                    {nameof(attributesToRetrieve), WebUtility.UrlEncode(string.Join(",", attributesToRetrieve))}
+                    { nameof(attributesToRetrieve), string.Join(",", attributesToRetrieve.Select(x => x.Trim())) }
                 };
 
                 requestOptions = requestOptions.AddQueryParams(dic);
