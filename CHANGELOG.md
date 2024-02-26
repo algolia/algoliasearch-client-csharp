@@ -1,5 +1,12 @@
 # ChangeLog
 
+## [6.17.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.0...6.17.0) (2024-02-26)
+
+### Fix
+
+- remove encoding on attributes to retrieve in getObjects (#854) ([a9437f0](https://github.com/algolia/algoliasearch-client-csharp/commit/a9437f0))
+- add QueryLanguages to Query (#853) ([067f774](https://github.com/algolia/algoliasearch-client-csharp/commit/067f774))
+
 ## [6.16.0](https://github.com/algolia/algoliasearch-client-csharp/compare/6.15.0...6.16.0) (2023-11-17)
 
 ### Fix
