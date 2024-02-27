@@ -38,6 +38,19 @@ public partial class SourceUpdateCommercetools
   public List<string> Locales { get; set; }
 
   /// <summary>
+  /// Gets or Sets Url
+  /// </summary>
+  [JsonPropertyName("url")]
+  public string Url { get; set; }
+
+  /// <summary>
+  /// Determines the value that will be stored in the Algolia record if there's no inventory information on the product. 
+  /// </summary>
+  /// <value>Determines the value that will be stored in the Algolia record if there's no inventory information on the product. </value>
+  [JsonPropertyName("fallbackIsInStockValue")]
+  public bool? FallbackIsInStockValue { get; set; }
+
+  /// <summary>
   /// Gets or Sets CustomFields
   /// </summary>
   [JsonPropertyName("customFields")]
@@ -53,6 +66,8 @@ public partial class SourceUpdateCommercetools
     sb.Append("class SourceUpdateCommercetools {\n");
     sb.Append("  StoreKeys: ").Append(StoreKeys).Append("\n");
     sb.Append("  Locales: ").Append(Locales).Append("\n");
+    sb.Append("  Url: ").Append(Url).Append("\n");
+    sb.Append("  FallbackIsInStockValue: ").Append(FallbackIsInStockValue).Append("\n");
     sb.Append("  CustomFields: ").Append(CustomFields).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -82,6 +97,8 @@ public partial class SourceUpdateCommercetools
     return
         (StoreKeys == input.StoreKeys || StoreKeys != null && input.StoreKeys != null && StoreKeys.SequenceEqual(input.StoreKeys)) &&
         (Locales == input.Locales || Locales != null && input.Locales != null && Locales.SequenceEqual(input.Locales)) &&
+        (Url == input.Url || (Url != null && Url.Equals(input.Url))) &&
+        (FallbackIsInStockValue == input.FallbackIsInStockValue || FallbackIsInStockValue.Equals(input.FallbackIsInStockValue)) &&
         (CustomFields == input.CustomFields || (CustomFields != null && CustomFields.Equals(input.CustomFields)));
   }
 
@@ -102,6 +119,11 @@ public partial class SourceUpdateCommercetools
       {
         hashCode = (hashCode * 59) + Locales.GetHashCode();
       }
+      if (Url != null)
+      {
+        hashCode = (hashCode * 59) + Url.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + FallbackIsInStockValue.GetHashCode();
       if (CustomFields != null)
       {
         hashCode = (hashCode * 59) + CustomFields.GetHashCode();
