@@ -268,7 +268,7 @@ public static class ClientExtensions
   /// <param name="restriction">Restriction to add the key</param>
   /// <returns></returns>
   public static string GenerateSecuredApiKey(this SearchClient client, string parentApiKey,
-    SecuredApiKeyRestriction restriction)
+    SecuredAPIKeyRestrictions restriction)
   {
     var queryParams = restriction.ToQueryString();
     var hash = HmacShaHelper.GetHash(parentApiKey, queryParams);

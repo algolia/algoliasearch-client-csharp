@@ -4,12 +4,12 @@ using System.Text.Json.Serialization;
 using Algolia.Search.Http;
 using Algolia.Search.Utils;
 
-namespace Algolia.Search.Models.Common;
+namespace Algolia.Search.Models.Search;
 
 /// <summary>
 /// Secured Api Key restrictions
 /// </summary>
-public partial class SecuredApiKeyRestriction
+public partial class SecuredAPIKeyRestrictions
 {
 
   /// <summary>
@@ -19,12 +19,12 @@ public partial class SecuredApiKeyRestriction
   public string ToQueryString()
   {
     string restrictionQuery = null;
-    if (Query != null)
+    if (SearchParams != null)
     {
-      restrictionQuery = ToQueryString(Query);
+      restrictionQuery = ToQueryString(SearchParams);
     }
 
-    var restrictions = ToQueryString(this, nameof(Query));
+    var restrictions = ToQueryString(this, nameof(SearchParams));
     var array = new[] { restrictionQuery, restrictions };
 
     return string.Join("&", array.Where(s => !string.IsNullOrEmpty(s)));

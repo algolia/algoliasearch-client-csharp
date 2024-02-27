@@ -10,6 +10,7 @@ Models/Search/AdvancedSyntaxFeatures.cs
 Models/Search/AlternativesAsExact.cs
 Models/Search/Anchoring.cs
 Models/Search/ApiKey.cs
+Models/Search/ApiKeyOperation.cs
 Models/Search/AroundPrecision.cs
 Models/Search/AroundPrecisionFromValueInner.cs
 Models/Search/AroundRadius.cs
@@ -144,6 +145,7 @@ Models/Search/SearchTypeDefault.cs
 Models/Search/SearchTypeFacet.cs
 Models/Search/SearchUserIdsParams.cs
 Models/Search/SearchUserIdsResponse.cs
+Models/Search/SecuredAPIKeyRestrictions.cs
 Models/Search/SemanticSearch.cs
 Models/Search/SnippetResult.cs
 Models/Search/SnippetResultOption.cs
