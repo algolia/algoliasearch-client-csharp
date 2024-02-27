@@ -1,3 +1,9 @@
+## [7.0.0-alpha.1](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.0...7.0.0-alpha.1)
+
+- [d48e2f624](https://github.com/algolia/api-clients-automation/commit/d48e2f624) fix(specs): add missing attributes for CT Source update ([#2792](https://github.com/algolia/api-clients-automation/pull/2792)) by [@damcou](https://github.com/damcou/)
+- [f3e894002](https://github.com/algolia/api-clients-automation/commit/f3e894002) fix(clients): replace all objects ([#2762](https://github.com/algolia/api-clients-automation/pull/2762)) by [@shortcuts](https://github.com/shortcuts/)
+- [92cd1c793](https://github.com/algolia/api-clients-automation/commit/92cd1c793) fix(clients): browse synonyms page not in response ([#2757](https://github.com/algolia/api-clients-automation/pull/2757)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## 7.0.0-alpha.0
 
 - [4f6e2d0b3](https://github.com/algolia/api-clients-automation/commit/4f6e2d0b3) fix(specs): allow custom fields to be nullable ([#2746](https://github.com/algolia/api-clients-automation/pull/2746)) by [@shortcuts](https://github.com/shortcuts/)
