@@ -425,12 +425,15 @@ public static class ClientExtensions
   /// </summary>
   /// <param name="client"></param>
   /// <param name="indexName">The index in which to perform the request.</param>
-  /// <param name="data">The list of records to replace.</param>
+  /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  public static List<long> ReplaceAllObjects<T>(this SearchClient client, string indexName,
-    IEnumerable<T> data, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class
-    => AsyncHelper.RunSync(() => client.ReplaceAllObjectsAsync(indexName, data, options, cancellationToken));
+  public static ReplaceAllObjectsResponse ReplaceAllObjects<T>(this SearchClient client, string indexName,
+    IEnumerable<T> objects, int batchSize = 1000, RequestOptions options = null,
+    CancellationToken cancellationToken = default) where T : class
+    => AsyncHelper.RunSync(() =>
+      client.ReplaceAllObjectsAsync(indexName, objects, batchSize, options, cancellationToken));
 
   /// <summary>
   ///  Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
@@ -439,15 +442,17 @@ public static class ClientExtensions
   /// </summary>
   /// <param name="client"></param>
   /// <param name="indexName">The index in which to perform the request.</param>
-  /// <param name="data">The list of records to replace.</param>
+  /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  public static async Task<List<long>> ReplaceAllObjectsAsync<T>(this SearchClient client, string indexName,
-    IEnumerable<T> data, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class
+  public static async Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(this SearchClient client,
+    string indexName, IEnumerable<T> objects, int batchSize = 1000, RequestOptions options = null,
+    CancellationToken cancellationToken = default) where T : class
   {
-    if (data == null)
+    if (objects == null)
     {
-      throw new ArgumentNullException(nameof(data));
+      throw new ArgumentNullException(nameof(objects));
     }
 
     var rnd = new Random();
@@ -459,23 +464,81 @@ public static class ClientExtensions
         { Scope = [ScopeType.Rules, ScopeType.Settings, ScopeType.Synonyms] }, options, cancellationToken)
       .ConfigureAwait(false);
 
-    await client.WaitForTaskAsync(indexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken).ConfigureAwait(false);
+    await client.WaitForTaskAsync(indexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
+      .ConfigureAwait(false);
 
     // Add objects to the temporary index
-    var batchResponse = await client.BatchAsync(tmpIndexName,
-      new BatchWriteParams(data.Select(x => new BatchRequest(Action.AddObject, x)).ToList()),
+    var batchResponse = await client.ChunkedBatchAsync(tmpIndexName, objects, Action.AddObject, batchSize,
       options, cancellationToken).ConfigureAwait(false);
-
-    await client.WaitForTaskAsync(tmpIndexName, batchResponse.TaskID, requestOptions: options, ct: cancellationToken).ConfigureAwait(false);
 
     // Move the temporary index to the main one
     var moveResponse = await client.OperationIndexAsync(tmpIndexName,
         new OperationIndexParams(OperationType.Move, indexName), options, cancellationToken)
       .ConfigureAwait(false);
 
-    await client.WaitForTaskAsync(tmpIndexName, moveResponse.TaskID, requestOptions: options, ct: cancellationToken).ConfigureAwait(false);
+    await client.WaitForTaskAsync(tmpIndexName, moveResponse.TaskID, requestOptions: options, ct: cancellationToken)
+      .ConfigureAwait(false);
 
-    return [copyResponse.TaskID, batchResponse.TaskID, moveResponse.TaskID];
+    return new ReplaceAllObjectsResponse
+    {
+      CopyOperationResponse = copyResponse,
+      MoveOperationResponse = moveResponse,
+      BatchResponses = batchResponse
+    };
+  }
+
+  /// <summary>
+  /// Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests. (Synchronous version)
+  /// </summary>
+  /// <param name="client"></param>
+  /// <param name="indexName">The index in which to perform the request.</param>
+  /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
+  /// <param name="action">The `batch` `action` to perform on the given array of `objects`, defaults to `addObject`.</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <typeparam name="T"></typeparam>
+  public static List<BatchResponse> ChunkedBatch<T>(this SearchClient client, string indexName,
+    IEnumerable<T> objects, Action action = Action.AddObject, int batchSize = 1000, RequestOptions options = null,
+    CancellationToken cancellationToken = default) where T : class =>
+    AsyncHelper.RunSync(() =>
+      client.ChunkedBatchAsync(indexName, objects, action, batchSize, options, cancellationToken));
+
+  /// <summary>
+  /// Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests.
+  /// </summary>
+  /// <param name="client"></param>
+  /// <param name="indexName">The index in which to perform the request.</param>
+  /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
+  /// <param name="action">The `batch` `action` to perform on the given array of `objects`, defaults to `addObject`.</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <typeparam name="T"></typeparam>
+  public static async Task<List<BatchResponse>> ChunkedBatchAsync<T>(this SearchClient client, string indexName,
+    IEnumerable<T> objects, Action action = Action.AddObject, int batchSize = 1000, RequestOptions options = null,
+    CancellationToken cancellationToken = default) where T : class
+  {
+    var batchCount = (int)Math.Ceiling((double)objects.Count() / batchSize);
+    var responses = new List<BatchResponse>();
+
+    for (var i = 0; i < batchCount; i++)
+    {
+      var chunk = objects.Skip(i * batchSize).Take(batchSize);
+      var batchResponse = await client.BatchAsync(indexName,
+        new BatchWriteParams(chunk.Select(x => new BatchRequest(action, x)).ToList()),
+        options, cancellationToken).ConfigureAwait(false);
+
+      responses.Add(batchResponse);
+    }
+
+    foreach (var batch in responses)
+    {
+      await client.WaitForTaskAsync(indexName, batch.TaskID, requestOptions: options, ct: cancellationToken)
+        .ConfigureAwait(false);
+    }
+
+    return responses;
   }
 
   private static int NextDelay(int retryCount)
