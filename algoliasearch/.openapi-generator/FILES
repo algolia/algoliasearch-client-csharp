@@ -1,5 +1,6 @@
 ../Algolia.Search.sln
 ../global.json
+.openapi-generator-ignore
 Algolia.Search.csproj
 Clients/SearchClient.cs
 Clients/SearchConfiguration.cs

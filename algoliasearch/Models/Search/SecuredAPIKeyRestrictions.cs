@@ -41,7 +41,7 @@ public partial class SecuredAPIKeyRestrictions
   /// </summary>
   /// <value>Unix timestamp used to set the expiration date of the API key.</value>
   [JsonPropertyName("validUntil")]
-  public decimal? ValidUntil { get; set; }
+  public long? ValidUntil { get; set; }
 
   /// <summary>
   /// Index names that can be queried.
