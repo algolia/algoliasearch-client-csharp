@@ -234,6 +234,13 @@ public partial class BrowseResponse<T>
   public object UserData { get; set; }
 
   /// <summary>
+  /// Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
+  /// </summary>
+  /// <value>Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).</value>
+  [JsonPropertyName("queryID")]
+  public string QueryID { get; set; }
+
+  /// <summary>
   /// Gets or Sets Hits
   /// </summary>
   [JsonPropertyName("hits")]
@@ -295,6 +302,7 @@ public partial class BrowseResponse<T>
     sb.Append("  ServerTimeMS: ").Append(ServerTimeMS).Append("\n");
     sb.Append("  ServerUsed: ").Append(ServerUsed).Append("\n");
     sb.Append("  UserData: ").Append(UserData).Append("\n");
+    sb.Append("  QueryID: ").Append(QueryID).Append("\n");
     sb.Append("  Hits: ").Append(Hits).Append("\n");
     sb.Append("  Query: ").Append(Query).Append("\n");
     sb.Append("  VarParams: ").Append(VarParams).Append("\n");
@@ -352,6 +360,7 @@ public partial class BrowseResponse<T>
         (ServerTimeMS == input.ServerTimeMS || ServerTimeMS.Equals(input.ServerTimeMS)) &&
         (ServerUsed == input.ServerUsed || (ServerUsed != null && ServerUsed.Equals(input.ServerUsed))) &&
         (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData))) &&
+        (QueryID == input.QueryID || (QueryID != null && QueryID.Equals(input.QueryID))) &&
         (Hits == input.Hits || Hits != null && input.Hits != null && Hits.SequenceEqual(input.Hits)) &&
         (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
         (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams))) &&
@@ -438,6 +447,10 @@ public partial class BrowseResponse<T>
       if (UserData != null)
       {
         hashCode = (hashCode * 59) + UserData.GetHashCode();
+      }
+      if (QueryID != null)
+      {
+        hashCode = (hashCode * 59) + QueryID.GetHashCode();
       }
       if (Hits != null)
       {
