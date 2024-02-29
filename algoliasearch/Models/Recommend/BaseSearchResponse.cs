@@ -232,6 +232,13 @@ public partial class BaseSearchResponse
   public object UserData { get; set; }
 
   /// <summary>
+  /// Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
+  /// </summary>
+  /// <value>Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).</value>
+  [JsonPropertyName("queryID")]
+  public string QueryID { get; set; }
+
+  /// <summary>
   /// Gets or Sets additional properties
   /// </summary>
   [JsonExtensionData]
@@ -272,6 +279,7 @@ public partial class BaseSearchResponse
     sb.Append("  ServerTimeMS: ").Append(ServerTimeMS).Append("\n");
     sb.Append("  ServerUsed: ").Append(ServerUsed).Append("\n");
     sb.Append("  UserData: ").Append(UserData).Append("\n");
+    sb.Append("  QueryID: ").Append(QueryID).Append("\n");
     sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -325,7 +333,8 @@ public partial class BaseSearchResponse
         (RenderingContent == input.RenderingContent || (RenderingContent != null && RenderingContent.Equals(input.RenderingContent))) &&
         (ServerTimeMS == input.ServerTimeMS || ServerTimeMS.Equals(input.ServerTimeMS)) &&
         (ServerUsed == input.ServerUsed || (ServerUsed != null && ServerUsed.Equals(input.ServerUsed))) &&
-        (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData)))
+        (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData))) &&
+        (QueryID == input.QueryID || (QueryID != null && QueryID.Equals(input.QueryID)))
         && (AdditionalProperties.Count == input.AdditionalProperties.Count && !AdditionalProperties.Except(input.AdditionalProperties).Any());
   }
 
@@ -409,6 +418,10 @@ public partial class BaseSearchResponse
       if (UserData != null)
       {
         hashCode = (hashCode * 59) + UserData.GetHashCode();
+      }
+      if (QueryID != null)
+      {
+        hashCode = (hashCode * 59) + QueryID.GetHashCode();
       }
       if (AdditionalProperties != null)
       {
