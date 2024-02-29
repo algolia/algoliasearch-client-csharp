@@ -266,7 +266,7 @@ public partial class SearchClient
 
     if (matches.Count == 0)
     {
-      throw new AlgoliaException("The SecuredAPIKey doesn't have a validUntil parameter.");
+      throw new AlgoliaException("validUntil not found in given secured api key.");
     }
 
     // Select the validUntil parameter and its value
