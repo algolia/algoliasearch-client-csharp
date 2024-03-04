@@ -12,36 +12,38 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The input for a `schedule` task whose source is of type `bigquery` and for which extracted data spans a fixed number of days.
+/// Transformations to apply to source, serialized as a JSON string.
 /// </summary>
-public partial class ScheduleDateUtilsInput
+public partial class MappingInput
 {
   /// <summary>
-  /// Initializes a new instance of the ScheduleDateUtilsInput class.
+  /// Initializes a new instance of the MappingInput class.
   /// </summary>
   [JsonConstructor]
-  public ScheduleDateUtilsInput() { }
+  public MappingInput() { }
   /// <summary>
-  /// Initializes a new instance of the ScheduleDateUtilsInput class.
+  /// Initializes a new instance of the MappingInput class.
   /// </summary>
-  /// <param name="timeframe">The timeframe of the extraction, in number of days from today. (required).</param>
-  public ScheduleDateUtilsInput(int timeframe)
+  /// <param name="format">Name of the mapping format schema, &#x60;mappingkit/v1&#x60; is currently the only supported format. (required).</param>
+  /// <param name="actions">actions (required).</param>
+  public MappingInput(string format, List<MappingKitAction> actions)
   {
-    Timeframe = timeframe;
+    Format = format ?? throw new ArgumentNullException(nameof(format));
+    Actions = actions ?? throw new ArgumentNullException(nameof(actions));
   }
 
   /// <summary>
-  /// The timeframe of the extraction, in number of days from today.
+  /// Name of the mapping format schema, `mappingkit/v1` is currently the only supported format.
   /// </summary>
-  /// <value>The timeframe of the extraction, in number of days from today.</value>
-  [JsonPropertyName("timeframe")]
-  public int Timeframe { get; set; }
+  /// <value>Name of the mapping format schema, `mappingkit/v1` is currently the only supported format.</value>
+  [JsonPropertyName("format")]
+  public string Format { get; set; }
 
   /// <summary>
-  /// Gets or Sets Mapping
+  /// Gets or Sets Actions
   /// </summary>
-  [JsonPropertyName("mapping")]
-  public MappingInput Mapping { get; set; }
+  [JsonPropertyName("actions")]
+  public List<MappingKitAction> Actions { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -50,9 +52,9 @@ public partial class ScheduleDateUtilsInput
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ScheduleDateUtilsInput {\n");
-    sb.Append("  Timeframe: ").Append(Timeframe).Append("\n");
-    sb.Append("  Mapping: ").Append(Mapping).Append("\n");
+    sb.Append("class MappingInput {\n");
+    sb.Append("  Format: ").Append(Format).Append("\n");
+    sb.Append("  Actions: ").Append(Actions).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -73,14 +75,14 @@ public partial class ScheduleDateUtilsInput
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ScheduleDateUtilsInput input)
+    if (obj is not MappingInput input)
     {
       return false;
     }
 
     return
-        (Timeframe == input.Timeframe || Timeframe.Equals(input.Timeframe)) &&
-        (Mapping == input.Mapping || (Mapping != null && Mapping.Equals(input.Mapping)));
+        (Format == input.Format || (Format != null && Format.Equals(input.Format))) &&
+        (Actions == input.Actions || Actions != null && input.Actions != null && Actions.SequenceEqual(input.Actions));
   }
 
   /// <summary>
@@ -92,10 +94,13 @@ public partial class ScheduleDateUtilsInput
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Timeframe.GetHashCode();
-      if (Mapping != null)
+      if (Format != null)
       {
-        hashCode = (hashCode * 59) + Mapping.GetHashCode();
+        hashCode = (hashCode * 59) + Format.GetHashCode();
+      }
+      if (Actions != null)
+      {
+        hashCode = (hashCode * 59) + Actions.GetHashCode();
       }
       return hashCode;
     }

@@ -47,6 +47,12 @@ public partial class OnDemandDateUtilsInput
   public string EndDate { get; set; }
 
   /// <summary>
+  /// Gets or Sets Mapping
+  /// </summary>
+  [JsonPropertyName("mapping")]
+  public MappingInput Mapping { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -56,6 +62,7 @@ public partial class OnDemandDateUtilsInput
     sb.Append("class OnDemandDateUtilsInput {\n");
     sb.Append("  StartDate: ").Append(StartDate).Append("\n");
     sb.Append("  EndDate: ").Append(EndDate).Append("\n");
+    sb.Append("  Mapping: ").Append(Mapping).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -83,7 +90,8 @@ public partial class OnDemandDateUtilsInput
 
     return
         (StartDate == input.StartDate || (StartDate != null && StartDate.Equals(input.StartDate))) &&
-        (EndDate == input.EndDate || (EndDate != null && EndDate.Equals(input.EndDate)));
+        (EndDate == input.EndDate || (EndDate != null && EndDate.Equals(input.EndDate))) &&
+        (Mapping == input.Mapping || (Mapping != null && Mapping.Equals(input.Mapping)));
   }
 
   /// <summary>
@@ -102,6 +110,10 @@ public partial class OnDemandDateUtilsInput
       if (EndDate != null)
       {
         hashCode = (hashCode * 59) + EndDate.GetHashCode();
+      }
+      if (Mapping != null)
+      {
+        hashCode = (hashCode * 59) + Mapping.GetHashCode();
       }
       return hashCode;
     }
