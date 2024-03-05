@@ -1,3 +1,7 @@
+## [7.0.0-alpha.3](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.2...7.0.0-alpha.3)
+
+- [234427491](https://github.com/algolia/api-clients-automation/commit/234427491) feat(specs): Add MappingInput to Task Inputs ([#2787](https://github.com/algolia/api-clients-automation/pull/2787)) by [@jsok](https://github.com/jsok/)
+
 ## [7.0.0-alpha.2](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.1...7.0.0-alpha.2)
 
 - [6dc52baa2](https://github.com/algolia/api-clients-automation/commit/6dc52baa2) refactor(csharp): move client search extensions to instance method ([#2802](https://github.com/algolia/api-clients-automation/pull/2802)) by [@morganleroi](https://github.com/morganleroi/)
