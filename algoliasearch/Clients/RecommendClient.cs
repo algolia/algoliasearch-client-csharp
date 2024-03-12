@@ -132,9 +132,9 @@ public interface IRecommendClient
   /// <summary>
   /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
   /// </summary>
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="objectID">Unique record identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -146,9 +146,9 @@ public interface IRecommendClient
   /// <summary>
   /// Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
   /// </summary>
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="objectID">Unique record identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -160,9 +160,9 @@ public interface IRecommendClient
   /// <summary>
   /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
   /// </summary>
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="objectID">Unique record identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -174,9 +174,9 @@ public interface IRecommendClient
   /// <summary>
   /// Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
   /// </summary>
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="objectID">Unique record identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -188,7 +188,7 @@ public interface IRecommendClient
   /// <summary>
   /// Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
   /// </summary>
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -202,7 +202,7 @@ public interface IRecommendClient
   /// <summary>
   /// Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task. (Synchronous version)
   /// </summary>
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -240,7 +240,7 @@ public interface IRecommendClient
   /// <summary>
   /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
   /// </summary>
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="searchRecommendRulesParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -254,7 +254,7 @@ public interface IRecommendClient
   /// <summary>
   /// List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/). (Synchronous version)
   /// </summary>
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="searchRecommendRulesParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -505,9 +505,9 @@ public partial class RecommendClient : IRecommendClient
   ///
   /// Required API Key ACLs:
   ///   - editSettings
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="objectID">Unique record identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -541,9 +541,9 @@ public partial class RecommendClient : IRecommendClient
   ///
   /// Required API Key ACLs:
   ///   - editSettings
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="objectID">Unique record identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -560,9 +560,9 @@ public partial class RecommendClient : IRecommendClient
   ///
   /// Required API Key ACLs:
   ///   - settings
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="objectID">Unique record identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -596,9 +596,9 @@ public partial class RecommendClient : IRecommendClient
   ///
   /// Required API Key ACLs:
   ///   - settings
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
-  /// <param name="objectID">Unique record (object) identifier.</param>
+  /// <param name="objectID">Unique record identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -615,7 +615,7 @@ public partial class RecommendClient : IRecommendClient
   ///
   /// Required API Key ACLs:
   ///   - editSettings
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -648,7 +648,7 @@ public partial class RecommendClient : IRecommendClient
   ///
   /// Required API Key ACLs:
   ///   - editSettings
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="taskID">Unique identifier of a task. Numeric value (up to 64bits).</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -712,7 +712,7 @@ public partial class RecommendClient : IRecommendClient
   ///
   /// Required API Key ACLs:
   ///   - settings
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="searchRecommendRulesParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -745,7 +745,7 @@ public partial class RecommendClient : IRecommendClient
   ///
   /// Required API Key ACLs:
   ///   - settings
-  /// <param name="indexName">Index on which to perform the request.</param>
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="model">[Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
   /// <param name="searchRecommendRulesParams"> (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>

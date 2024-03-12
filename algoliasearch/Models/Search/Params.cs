@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Additional search parameters.
+/// Parameters to apply to this search.  You can use all search parameters, plus special `automaticFacetFilters`, `automaticOptionalFacetFilters`, and `query`. 
 /// </summary>
 public partial class Params
 {

@@ -27,8 +27,8 @@ public partial class SearchHits<T>
   /// <summary>
   /// Initializes a new instance of the SearchHits class.
   /// </summary>
-  /// <param name="hits">hits (required).</param>
-  /// <param name="query">Text to search for in an index. (required) (default to &quot;&quot;).</param>
+  /// <param name="hits">Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  (required).</param>
+  /// <param name="query">Search query. (required) (default to &quot;&quot;).</param>
   /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
   public SearchHits(List<T> hits, string query, string varParams)
   {
@@ -39,15 +39,16 @@ public partial class SearchHits<T>
   }
 
   /// <summary>
-  /// Gets or Sets Hits
+  /// Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting. 
   /// </summary>
+  /// <value>Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting. </value>
   [JsonPropertyName("hits")]
   public List<T> Hits { get; set; }
 
   /// <summary>
-  /// Text to search for in an index.
+  /// Search query.
   /// </summary>
-  /// <value>Text to search for in an index.</value>
+  /// <value>Search query.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 

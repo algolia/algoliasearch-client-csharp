@@ -132,9 +132,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the average click position for the complete time range and for individual days. > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`. 
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -147,9 +147,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the average click position for the complete time range and for individual days. > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`.  (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -162,9 +162,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Show the number of clicks events and their associated position in the search results.  > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`. 
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -177,9 +177,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Show the number of clicks events and their associated position in the search results.  > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`.  (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -192,9 +192,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns a [click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -207,9 +207,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns a [click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -222,9 +222,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return a [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -237,9 +237,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return a [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate). (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -252,9 +252,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the rate at which searches don't lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -267,9 +267,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the rate at which searches don't lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -282,9 +282,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the rate at which searches didn't return any results.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -297,9 +297,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the rate at which searches didn't return any results. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -312,9 +312,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the number of searches within a time range.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -327,9 +327,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the number of searches within a time range. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -342,11 +342,11 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the most popular of the last 1,000 searches that didn't lead to any clicks.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -359,11 +359,11 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the most popular of the last 1,000 searches that didn't lead to any clicks. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -376,11 +376,11 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the most popular of the latest 1,000 searches that didn't return any results.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -393,11 +393,11 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the most popular of the latest 1,000 searches that didn't return any results. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -410,7 +410,7 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, `updatedAt` will be `null`. > **Note**: The Analytics API is updated every 5&nbsp;minutes. 
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -422,7 +422,7 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, `updatedAt` will be `null`. > **Note**: The Analytics API is updated every 5&nbsp;minutes.  (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -434,11 +434,11 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns top countries. Limited to the 1,000 most frequent ones.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -451,11 +451,11 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns top countries. Limited to the 1,000 most frequent ones. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -468,12 +468,12 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the most popular [filterable attributes](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) in the 1,000 most recently used filters.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -486,12 +486,12 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the most popular [filterable attributes](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) in the 1,000 most recently used filters. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -505,12 +505,12 @@ public interface IAnalyticsClient
   /// Returns the most popular filter values for an attribute in the 1,000 most recently used filters.
   /// </summary>
   /// <param name="attribute">Attribute name.</param>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -524,12 +524,12 @@ public interface IAnalyticsClient
   /// Returns the most popular filter values for an attribute in the 1,000 most recently used filters. (Synchronous version)
   /// </summary>
   /// <param name="attribute">Attribute name.</param>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -542,12 +542,12 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns top filters for filter-enabled searches that don't return results. Limited to the 1,000 most recently used filters.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -560,12 +560,12 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns top filters for filter-enabled searches that don't return results. Limited to the 1,000 most recently used filters. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -578,13 +578,13 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the most popular clicked results in the last 1,000 searches.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -597,13 +597,13 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the most popular clicked results in the last 1,000 searches. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -616,14 +616,14 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the most popular of the latest 1,000 searches. For each search, also returns the number of hits.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="orderBy">Reorder the results. (optional)</param>
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -636,14 +636,14 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the most popular of the latest 1,000 searches. For each search, also returns the number of hits. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="orderBy">Reorder the results. (optional)</param>
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -656,9 +656,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the count of unique users.
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -671,9 +671,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Return the count of unique users. (Synchronous version)
   /// </summary>
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format `YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -923,9 +923,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -956,9 +956,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -976,9 +976,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1009,9 +1009,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1029,9 +1029,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1062,9 +1062,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1082,9 +1082,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1115,9 +1115,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1135,9 +1135,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1168,9 +1168,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1188,9 +1188,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1221,9 +1221,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1241,9 +1241,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1274,9 +1274,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1294,11 +1294,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1331,11 +1331,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1353,11 +1353,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1390,11 +1390,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1412,7 +1412,7 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1439,7 +1439,7 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1456,11 +1456,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1493,11 +1493,11 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1515,12 +1515,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1554,12 +1554,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1578,12 +1578,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="attribute">Attribute name.</param>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1623,12 +1623,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="attribute">Attribute name.</param>
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1646,12 +1646,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1685,12 +1685,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1708,13 +1708,13 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1749,13 +1749,13 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="search">User query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1773,14 +1773,14 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="orderBy">Reorder the results. (optional)</param>
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1816,14 +1816,14 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
+  /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="orderBy">Reorder the results. (optional)</param>
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1841,9 +1841,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1874,9 +1874,9 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="index">Index name to target.</param>
-  /// <param name="startDate">Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="index">Index name.</param>
+  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
   /// <param name="tags">Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

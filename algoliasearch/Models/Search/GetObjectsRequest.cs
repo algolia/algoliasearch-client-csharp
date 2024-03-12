@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Record retrieval operation.
+/// Request body for retrieving records.
 /// </summary>
 public partial class GetObjectsRequest
 {
@@ -24,8 +24,8 @@ public partial class GetObjectsRequest
   /// <summary>
   /// Initializes a new instance of the GetObjectsRequest class.
   /// </summary>
-  /// <param name="objectID">Record&#39;s objectID. (required).</param>
-  /// <param name="indexName">Name of the index containing the required records. (required).</param>
+  /// <param name="objectID">Object ID for the record to retrieve. (required).</param>
+  /// <param name="indexName">Index from which to retrieve the records. (required).</param>
   public GetObjectsRequest(string objectID, string indexName)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
@@ -33,23 +33,23 @@ public partial class GetObjectsRequest
   }
 
   /// <summary>
-  /// Attributes to retrieve. If not specified, all retrievable attributes are returned.
+  /// Attributes to retrieve. If not specified, all retrievable attributes are returned. 
   /// </summary>
-  /// <value>Attributes to retrieve. If not specified, all retrievable attributes are returned.</value>
+  /// <value>Attributes to retrieve. If not specified, all retrievable attributes are returned. </value>
   [JsonPropertyName("attributesToRetrieve")]
   public List<string> AttributesToRetrieve { get; set; }
 
   /// <summary>
-  /// Record's objectID.
+  /// Object ID for the record to retrieve.
   /// </summary>
-  /// <value>Record's objectID.</value>
+  /// <value>Object ID for the record to retrieve.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// Name of the index containing the required records.
+  /// Index from which to retrieve the records.
   /// </summary>
-  /// <value>Name of the index containing the required records.</value>
+  /// <value>Index from which to retrieve the records.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

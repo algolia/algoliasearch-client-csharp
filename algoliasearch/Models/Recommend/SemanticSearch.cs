@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Settings for the semantic search part of NeuralSearch. Only used when `mode` is _neuralSearch_. 
+/// Settings for the semantic search part of NeuralSearch. Only used when `mode` is `neuralSearch`. 
 /// </summary>
 public partial class SemanticSearch
 {
@@ -24,9 +24,9 @@ public partial class SemanticSearch
   }
 
   /// <summary>
-  /// Indices from which to collect click and conversion events. If null, the current index and replica group will be used as the event source.
+  /// Indices from which to collect click and conversion events.  If null, the current index and all its replicas are used. 
   /// </summary>
-  /// <value>Indices from which to collect click and conversion events. If null, the current index and replica group will be used as the event source.</value>
+  /// <value>Indices from which to collect click and conversion events.  If null, the current index and all its replicas are used. </value>
   [JsonPropertyName("eventSources")]
   public List<string> EventSources { get; set; }
 

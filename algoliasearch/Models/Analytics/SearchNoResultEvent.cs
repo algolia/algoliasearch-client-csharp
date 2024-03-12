@@ -26,7 +26,7 @@ public partial class SearchNoResultEvent
   /// </summary>
   /// <param name="search">User query. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
-  /// <param name="nbHits">Number of hits the search query matched. (required).</param>
+  /// <param name="nbHits">Number of results (hits). (required).</param>
   public SearchNoResultEvent(string search, int count, int nbHits)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
@@ -49,9 +49,9 @@ public partial class SearchNoResultEvent
   public int Count { get; set; }
 
   /// <summary>
-  /// Number of hits the search query matched.
+  /// Number of results (hits).
   /// </summary>
-  /// <value>Number of hits the search query matched.</value>
+  /// <value>Number of results (hits).</value>
   [JsonPropertyName("nbHits")]
   public int NbHits { get; set; }
 

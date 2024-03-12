@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Type of batch operation.
+/// Type of indexing operation.
 /// </summary>
-/// <value>Type of batch operation.</value>
+/// <value>Type of indexing operation.</value>
 public enum Action
 {
   /// <summary>

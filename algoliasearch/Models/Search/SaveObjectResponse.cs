@@ -24,8 +24,8 @@ public partial class SaveObjectResponse
   /// <summary>
   /// Initializes a new instance of the SaveObjectResponse class.
   /// </summary>
-  /// <param name="createdAt">Date of creation (ISO-8601 format). (required).</param>
-  /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
+  /// <param name="createdAt">Timestamp when the record was added, in ISO 8601 format. (required).</param>
+  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the [&#x60;task&#x60; operation](#tag/Indices/operation/getTask) and this &#x60;taskID&#x60;.  (required).</param>
   public SaveObjectResponse(string createdAt, long taskID)
   {
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
@@ -33,23 +33,23 @@ public partial class SaveObjectResponse
   }
 
   /// <summary>
-  /// Date of creation (ISO-8601 format).
+  /// Timestamp when the record was added, in ISO 8601 format.
   /// </summary>
-  /// <value>Date of creation (ISO-8601 format).</value>
+  /// <value>Timestamp when the record was added, in ISO 8601 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. 
+  /// Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`. 
   /// </summary>
-  /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. </value>
+  /// <value>Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`. </value>
   [JsonPropertyName("taskID")]
   public long TaskID { get; set; }
 
   /// <summary>
-  /// Unique object identifier.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Unique object identifier.</value>
+  /// <value>Unique record identifier.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 

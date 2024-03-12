@@ -24,8 +24,8 @@ public partial class PromoteObjectID
   /// <summary>
   /// Initializes a new instance of the PromoteObjectID class.
   /// </summary>
-  /// <param name="objectID">Unique identifier of the record to promote. (required).</param>
-  /// <param name="position">The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions. (required).</param>
+  /// <param name="objectID">Unique record identifier. (required).</param>
+  /// <param name="position">Position in the search results where you want to show the promoted records. (required).</param>
   public PromoteObjectID(string objectID, int position)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
@@ -33,16 +33,16 @@ public partial class PromoteObjectID
   }
 
   /// <summary>
-  /// Unique identifier of the record to promote.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Unique identifier of the record to promote.</value>
+  /// <value>Unique record identifier.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.
+  /// Position in the search results where you want to show the promoted records.
   /// </summary>
-  /// <value>The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.</value>
+  /// <value>Position in the search results where you want to show the promoted records.</value>
   [JsonPropertyName("position")]
   public int Position { get; set; }
 

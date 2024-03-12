@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Operation to apply to the attribute.
+/// How to change the attribute.
 /// </summary>
-/// <value>Operation to apply to the attribute.</value>
+/// <value>How to change the attribute.</value>
 public enum BuiltInOperationType
 {
   /// <summary>

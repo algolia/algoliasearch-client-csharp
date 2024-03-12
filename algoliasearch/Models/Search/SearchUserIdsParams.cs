@@ -45,9 +45,9 @@ public partial class SearchUserIdsParams
   public string ClusterName { get; set; }
 
   /// <summary>
-  /// Page to retrieve (the first page is `0`, not `1`).
+  /// Page of search results to retrieve.
   /// </summary>
-  /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
+  /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
   public int? Page { get; set; }
 

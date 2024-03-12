@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// To update an attribute without pushing the entire record, you can use these built-in operations.
+/// Update to perform on the attribute.
 /// </summary>
 public partial class BuiltInOperation
 {
@@ -31,7 +31,7 @@ public partial class BuiltInOperation
   /// Initializes a new instance of the BuiltInOperation class.
   /// </summary>
   /// <param name="operation">operation (required).</param>
-  /// <param name="value">Value that corresponds to the operation, for example an &#x60;Increment&#x60; or &#x60;Decrement&#x60; step, &#x60;Add&#x60; or &#x60;Remove&#x60; value. (required).</param>
+  /// <param name="value">Value that corresponds to the operation, for example an &#x60;Increment&#x60; or &#x60;Decrement&#x60; step, or an &#x60;Add&#x60; or &#x60;Remove&#x60; value. (required).</param>
   public BuiltInOperation(BuiltInOperationType? operation, string value)
   {
     Operation = operation;
@@ -39,9 +39,9 @@ public partial class BuiltInOperation
   }
 
   /// <summary>
-  /// Value that corresponds to the operation, for example an `Increment` or `Decrement` step, `Add` or `Remove` value.
+  /// Value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value.
   /// </summary>
-  /// <value>Value that corresponds to the operation, for example an `Increment` or `Decrement` step, `Add` or `Remove` value.</value>
+  /// <value>Value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value.</value>
   [JsonPropertyName("value")]
   public string Value { get; set; }
 

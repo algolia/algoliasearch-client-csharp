@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Operation to perform (_move_ or _copy_).
+/// Operation to perform on the index.
 /// </summary>
-/// <value>Operation to perform (_move_ or _copy_).</value>
+/// <value>Operation to perform on the index.</value>
 public enum OperationType
 {
   /// <summary>

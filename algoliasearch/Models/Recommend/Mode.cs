@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Search mode the index will use to query for results.
+/// Search mode the index will use to query for results.  This setting only applies to indices, for which Algolia enabled NeuralSearch for you. 
 /// </summary>
-/// <value>Search mode the index will use to query for results.</value>
+/// <value>Search mode the index will use to query for results.  This setting only applies to indices, for which Algolia enabled NeuralSearch for you. </value>
 public enum Mode
 {
   /// <summary>

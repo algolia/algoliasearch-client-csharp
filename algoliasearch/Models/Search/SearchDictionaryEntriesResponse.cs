@@ -12,36 +12,43 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// SearchSynonymsResponse
+/// SearchDictionaryEntriesResponse
 /// </summary>
-public partial class SearchSynonymsResponse
+public partial class SearchDictionaryEntriesResponse
 {
   /// <summary>
-  /// Initializes a new instance of the SearchSynonymsResponse class.
+  /// Initializes a new instance of the SearchDictionaryEntriesResponse class.
   /// </summary>
   [JsonConstructor]
-  public SearchSynonymsResponse()
-  {
-    AdditionalProperties = new Dictionary<string, object>();
-  }
+  public SearchDictionaryEntriesResponse() { }
   /// <summary>
-  /// Initializes a new instance of the SearchSynonymsResponse class.
+  /// Initializes a new instance of the SearchDictionaryEntriesResponse class.
   /// </summary>
-  /// <param name="hits">Matching synonyms. (required).</param>
+  /// <param name="hits">Dictionary entries matching the search criteria. (required).</param>
+  /// <param name="page">Requested page of the API response. (required).</param>
   /// <param name="nbHits">Number of results (hits). (required).</param>
-  public SearchSynonymsResponse(List<SynonymHit> hits, int nbHits)
+  /// <param name="nbPages">Number of pages of results. (required).</param>
+  public SearchDictionaryEntriesResponse(List<DictionaryEntry> hits, int page, int nbHits, int nbPages)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
+    Page = page;
     NbHits = nbHits;
-    AdditionalProperties = new Dictionary<string, object>();
+    NbPages = nbPages;
   }
 
   /// <summary>
-  /// Matching synonyms.
+  /// Dictionary entries matching the search criteria.
   /// </summary>
-  /// <value>Matching synonyms.</value>
+  /// <value>Dictionary entries matching the search criteria.</value>
   [JsonPropertyName("hits")]
-  public List<SynonymHit> Hits { get; set; }
+  public List<DictionaryEntry> Hits { get; set; }
+
+  /// <summary>
+  /// Requested page of the API response.
+  /// </summary>
+  /// <value>Requested page of the API response.</value>
+  [JsonPropertyName("page")]
+  public int Page { get; set; }
 
   /// <summary>
   /// Number of results (hits).
@@ -51,10 +58,11 @@ public partial class SearchSynonymsResponse
   public int NbHits { get; set; }
 
   /// <summary>
-  /// Gets or Sets additional properties
+  /// Number of pages of results.
   /// </summary>
-  [JsonExtensionData]
-  public IDictionary<string, object> AdditionalProperties { get; set; }
+  /// <value>Number of pages of results.</value>
+  [JsonPropertyName("nbPages")]
+  public int NbPages { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -63,10 +71,11 @@ public partial class SearchSynonymsResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SearchSynonymsResponse {\n");
+    sb.Append("class SearchDictionaryEntriesResponse {\n");
     sb.Append("  Hits: ").Append(Hits).Append("\n");
+    sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  NbHits: ").Append(NbHits).Append("\n");
-    sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
+    sb.Append("  NbPages: ").Append(NbPages).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -87,15 +96,16 @@ public partial class SearchSynonymsResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SearchSynonymsResponse input)
+    if (obj is not SearchDictionaryEntriesResponse input)
     {
       return false;
     }
 
     return
         (Hits == input.Hits || Hits != null && input.Hits != null && Hits.SequenceEqual(input.Hits)) &&
-        (NbHits == input.NbHits || NbHits.Equals(input.NbHits))
-        && (AdditionalProperties.Count == input.AdditionalProperties.Count && !AdditionalProperties.Except(input.AdditionalProperties).Any());
+        (Page == input.Page || Page.Equals(input.Page)) &&
+        (NbHits == input.NbHits || NbHits.Equals(input.NbHits)) &&
+        (NbPages == input.NbPages || NbPages.Equals(input.NbPages));
   }
 
   /// <summary>
@@ -111,11 +121,9 @@ public partial class SearchSynonymsResponse
       {
         hashCode = (hashCode * 59) + Hits.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Page.GetHashCode();
       hashCode = (hashCode * 59) + NbHits.GetHashCode();
-      if (AdditionalProperties != null)
-      {
-        hashCode = (hashCode * 59) + AdditionalProperties.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + NbPages.GetHashCode();
       return hashCode;
     }
   }

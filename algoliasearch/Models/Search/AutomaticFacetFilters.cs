@@ -15,7 +15,7 @@ using Algolia.Search.Models.Common;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
+/// Filter to be applied to the search.  You can use this to respond to search queries that match a facet value. For example, if users search for \"comedy\", which matches a facet value of the \"genre\" facet, you can filter the results to show the top-ranked comedy movies. 
 /// </summary>
 [JsonConverter(typeof(AutomaticFacetFiltersJsonConverter))]
 public partial class AutomaticFacetFilters : AbstractSchema

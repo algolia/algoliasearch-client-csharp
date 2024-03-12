@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+/// Snippets that show the context around a matching search query.
 /// </summary>
 public partial class SnippetResultOption
 {
@@ -30,7 +30,7 @@ public partial class SnippetResultOption
   /// <summary>
   /// Initializes a new instance of the SnippetResultOption class.
   /// </summary>
-  /// <param name="value">Markup text with &#x60;facetQuery&#x60; matches highlighted. (required).</param>
+  /// <param name="value">Highlighted attribute value, including HTML tags. (required).</param>
   /// <param name="matchLevel">matchLevel (required).</param>
   public SnippetResultOption(string value, MatchLevel? matchLevel)
   {
@@ -39,9 +39,9 @@ public partial class SnippetResultOption
   }
 
   /// <summary>
-  /// Markup text with `facetQuery` matches highlighted.
+  /// Highlighted attribute value, including HTML tags.
   /// </summary>
-  /// <value>Markup text with `facetQuery` matches highlighted.</value>
+  /// <value>Highlighted attribute value, including HTML tags.</value>
   [JsonPropertyName("value")]
   public string Value { get; set; }
 

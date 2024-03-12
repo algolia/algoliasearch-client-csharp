@@ -37,9 +37,9 @@ public partial class RecommendationsHits
   public List<RecommendationsHit> Hits { get; set; }
 
   /// <summary>
-  /// Text to search for in an index.
+  /// Search query.
   /// </summary>
-  /// <value>Text to search for in an index.</value>
+  /// <value>Search query.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 

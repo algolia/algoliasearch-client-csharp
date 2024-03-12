@@ -24,23 +24,23 @@ public partial class Rule
   /// <summary>
   /// Initializes a new instance of the Rule class.
   /// </summary>
-  /// <param name="objectID">Unique identifier for a rule object. (required).</param>
+  /// <param name="objectID">Unique identifier of a rule object. (required).</param>
   public Rule(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
-  /// Unique identifier for a rule object.
+  /// Unique identifier of a rule object.
   /// </summary>
-  /// <value>Unique identifier for a rule object.</value>
+  /// <value>Unique identifier of a rule object.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. 
+  /// Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions). 
   /// </summary>
-  /// <value>[Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. </value>
+  /// <value>Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions). </value>
   [JsonPropertyName("conditions")]
   public List<Condition> Conditions { get; set; }
 
@@ -51,23 +51,23 @@ public partial class Rule
   public Consequence Consequence { get; set; }
 
   /// <summary>
-  /// Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
+  /// Description of the rule's purpose to help you distinguish between different rules.
   /// </summary>
-  /// <value>Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.</value>
+  /// <value>Description of the rule's purpose to help you distinguish between different rules.</value>
   [JsonPropertyName("description")]
   public string Description { get; set; }
 
   /// <summary>
-  /// Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
+  /// Whether the rule is active.
   /// </summary>
-  /// <value>Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.</value>
+  /// <value>Whether the rule is active.</value>
   [JsonPropertyName("enabled")]
   public bool? Enabled { get; set; }
 
   /// <summary>
-  /// If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
+  /// Time periods when the rule is active.
   /// </summary>
-  /// <value>If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.</value>
+  /// <value>Time periods when the rule is active.</value>
   [JsonPropertyName("validity")]
   public List<TimeRange> Validity { get; set; }
 

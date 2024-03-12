@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Ordering of facets (widgets).
+/// Order of facet names.
 /// </summary>
 public partial class Facets
 {
@@ -24,9 +24,9 @@ public partial class Facets
   }
 
   /// <summary>
-  /// Pinned order of facet lists.
+  /// Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list. 
   /// </summary>
-  /// <value>Pinned order of facet lists.</value>
+  /// <value>Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list. </value>
   [JsonPropertyName("order")]
   public List<string> Order { get; set; }
 

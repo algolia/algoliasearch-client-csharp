@@ -33,8 +33,8 @@ public partial class DictionaryEntry
   /// <summary>
   /// Initializes a new instance of the DictionaryEntry class.
   /// </summary>
-  /// <param name="objectID">Unique identifier for a dictionary object. (required).</param>
-  /// <param name="language">[Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).  (required).</param>
+  /// <param name="objectID">Unique identifier for the dictionary entry. (required).</param>
+  /// <param name="language">ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). (required).</param>
   public DictionaryEntry(string objectID, string language)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
@@ -43,37 +43,37 @@ public partial class DictionaryEntry
   }
 
   /// <summary>
-  /// Unique identifier for a dictionary object.
+  /// Unique identifier for the dictionary entry.
   /// </summary>
-  /// <value>Unique identifier for a dictionary object.</value>
+  /// <value>Unique identifier for the dictionary entry.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). 
+  /// ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
   /// </summary>
-  /// <value>[Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). </value>
+  /// <value>ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).</value>
   [JsonPropertyName("language")]
   public string Language { get; set; }
 
   /// <summary>
-  /// Dictionary entry word. Usage depends on the type of dictionary entry. **`stopwordEntry`** The stop word you want to add or update. If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. **`compoundEntry`** When `decomposition` is empty: adds `word` as a compound atom. For example, atom “kino” decomposes the query “kopfkino” into \"kopf\" and \"kino\". When `decomposition` isn't empty: creates a decomposition exception. For example, when decomposition is set to the [\"hund\", \"hutte\"] exception, \"hundehutte\" decomposes into “hund” and “hutte”, discarding the linking \"e\". 
+  /// Matching dictionary word for `stopwords` and `compounds` dictionaries.
   /// </summary>
-  /// <value>Dictionary entry word. Usage depends on the type of dictionary entry. **`stopwordEntry`** The stop word you want to add or update. If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. **`compoundEntry`** When `decomposition` is empty: adds `word` as a compound atom. For example, atom “kino” decomposes the query “kopfkino” into \"kopf\" and \"kino\". When `decomposition` isn't empty: creates a decomposition exception. For example, when decomposition is set to the [\"hund\", \"hutte\"] exception, \"hundehutte\" decomposes into “hund” and “hutte”, discarding the linking \"e\". </value>
+  /// <value>Matching dictionary word for `stopwords` and `compounds` dictionaries.</value>
   [JsonPropertyName("word")]
   public string Word { get; set; }
 
   /// <summary>
-  /// Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. 
+  /// Matching words in the `plurals` dictionary including declensions.
   /// </summary>
-  /// <value>Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. </value>
+  /// <value>Matching words in the `plurals` dictionary including declensions.</value>
   [JsonPropertyName("words")]
   public List<string> Words { get; set; }
 
   /// <summary>
-  /// For compound entries, governs the behavior of the `word` parameter.
+  /// Invividual components of a compound word in the `compounds` dictionary.
   /// </summary>
-  /// <value>For compound entries, governs the behavior of the `word` parameter.</value>
+  /// <value>Invividual components of a compound word in the `compounds` dictionary.</value>
   [JsonPropertyName("decomposition")]
   public List<string> Decomposition { get; set; }
 

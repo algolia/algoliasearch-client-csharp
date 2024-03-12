@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Defines the ordering of facets (widgets).
+/// Order of facet names and facet values in your UI.
 /// </summary>
 public partial class FacetOrdering
 {
@@ -30,9 +30,9 @@ public partial class FacetOrdering
   public Facets Facets { get; set; }
 
   /// <summary>
-  /// Ordering of facet values within an individual facet.
+  /// Order of facet values. One object for each facet.
   /// </summary>
-  /// <value>Ordering of facet values within an individual facet.</value>
+  /// <value>Order of facet values. One object for each facet.</value>
   [JsonPropertyName("values")]
   public Dictionary<string, Value> Values { get; set; }
 

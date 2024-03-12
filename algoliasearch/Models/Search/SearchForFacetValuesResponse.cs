@@ -24,7 +24,7 @@ public partial class SearchForFacetValuesResponse
   /// <summary>
   /// Initializes a new instance of the SearchForFacetValuesResponse class.
   /// </summary>
-  /// <param name="facetHits">facetHits (required).</param>
+  /// <param name="facetHits">Matching facet values. (required).</param>
   /// <param name="exhaustiveFacetsCount">See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response. (required).</param>
   public SearchForFacetValuesResponse(List<FacetHits> facetHits, bool exhaustiveFacetsCount)
   {
@@ -33,8 +33,9 @@ public partial class SearchForFacetValuesResponse
   }
 
   /// <summary>
-  /// Gets or Sets FacetHits
+  /// Matching facet values.
   /// </summary>
+  /// <value>Matching facet values.</value>
   [JsonPropertyName("facetHits")]
   public List<FacetHits> FacetHits { get; set; }
 

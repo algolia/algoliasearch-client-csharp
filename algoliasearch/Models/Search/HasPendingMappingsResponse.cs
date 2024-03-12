@@ -24,16 +24,16 @@ public partial class HasPendingMappingsResponse
   /// <summary>
   /// Initializes a new instance of the HasPendingMappingsResponse class.
   /// </summary>
-  /// <param name="pending">Indicates whether there are clusters undergoing migration, creation, or deletion. (required).</param>
+  /// <param name="pending">Whether there are clusters undergoing migration, creation, or deletion. (required).</param>
   public HasPendingMappingsResponse(bool pending)
   {
     Pending = pending;
   }
 
   /// <summary>
-  /// Indicates whether there are clusters undergoing migration, creation, or deletion.
+  /// Whether there are clusters undergoing migration, creation, or deletion.
   /// </summary>
-  /// <value>Indicates whether there are clusters undergoing migration, creation, or deletion.</value>
+  /// <value>Whether there are clusters undergoing migration, creation, or deletion.</value>
   [JsonPropertyName("pending")]
   public bool Pending { get; set; }
 

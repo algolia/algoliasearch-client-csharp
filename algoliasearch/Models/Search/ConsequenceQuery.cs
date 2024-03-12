@@ -15,7 +15,7 @@ using Algolia.Search.Models.Common;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// When providing a string, it replaces the entire query string. When providing an object, it describes incremental edits to be made to the query string (but you can't do both).
+/// Replace or edit the search query.  If `consequenceQuery` is a string, the entire search query is replaced with that string. If `consequenceQuery` is an object, it describes incremental edits made to the query. 
 /// </summary>
 [JsonConverter(typeof(ConsequenceQueryJsonConverter))]
 public partial class ConsequenceQuery : AbstractSchema

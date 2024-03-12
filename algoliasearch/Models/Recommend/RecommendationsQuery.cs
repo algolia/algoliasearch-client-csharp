@@ -30,9 +30,9 @@ public partial class RecommendationsQuery
   /// <summary>
   /// Initializes a new instance of the RecommendationsQuery class.
   /// </summary>
-  /// <param name="indexName">Algolia index name. (required).</param>
+  /// <param name="indexName">Index name. (required).</param>
   /// <param name="model">model (required).</param>
-  /// <param name="objectID">Unique object identifier. (required).</param>
+  /// <param name="objectID">Unique record identifier. (required).</param>
   public RecommendationsQuery(string indexName, RecommendationModels? model, string objectID)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
@@ -41,9 +41,9 @@ public partial class RecommendationsQuery
   }
 
   /// <summary>
-  /// Algolia index name.
+  /// Index name.
   /// </summary>
-  /// <value>Algolia index name.</value>
+  /// <value>Index name.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 
@@ -62,9 +62,9 @@ public partial class RecommendationsQuery
   public int? MaxRecommendations { get; set; }
 
   /// <summary>
-  /// Unique object identifier.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Unique object identifier.</value>
+  /// <value>Unique record identifier.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 

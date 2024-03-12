@@ -28,9 +28,9 @@ public partial class BaseSearchResponse
   /// Initializes a new instance of the BaseSearchResponse class.
   /// </summary>
   /// <param name="hitsPerPage">Number of hits per page. (required) (default to 20).</param>
-  /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-  /// <param name="nbPages">Number of pages of results for the current query. (required).</param>
-  /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
+  /// <param name="nbHits">Number of results (hits). (required).</param>
+  /// <param name="nbPages">Number of pages of results. (required).</param>
+  /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
   /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
   public BaseSearchResponse(int hitsPerPage, int nbHits, int nbPages, int page, int processingTimeMS)
   {
@@ -64,9 +64,9 @@ public partial class BaseSearchResponse
   public string AroundLatLng { get; set; }
 
   /// <summary>
-  /// Automatically-computed radius.
+  /// Distance from a central coordinate provided by `aroundLatLng`.
   /// </summary>
-  /// <value>Automatically-computed radius.</value>
+  /// <value>Distance from a central coordinate provided by `aroundLatLng`.</value>
   [JsonPropertyName("automaticRadius")]
   public string AutomaticRadius { get; set; }
 
@@ -101,9 +101,9 @@ public partial class BaseSearchResponse
   public bool? ExhaustiveTypo { get; set; }
 
   /// <summary>
-  /// Mapping of each facet name to the corresponding facet counts.
+  /// Facet counts.
   /// </summary>
-  /// <value>Mapping of each facet name to the corresponding facet counts.</value>
+  /// <value>Facet counts.</value>
   [JsonPropertyName("facets")]
   public Dictionary<string, Dictionary<string, int>> Facets { get; set; }
 
@@ -143,16 +143,16 @@ public partial class BaseSearchResponse
   public string Message { get; set; }
 
   /// <summary>
-  /// Number of hits the search query matched.
+  /// Number of results (hits).
   /// </summary>
-  /// <value>Number of hits the search query matched.</value>
+  /// <value>Number of results (hits).</value>
   [JsonPropertyName("nbHits")]
   public int NbHits { get; set; }
 
   /// <summary>
-  /// Number of pages of results for the current query.
+  /// Number of pages of results.
   /// </summary>
-  /// <value>Number of pages of results for the current query.</value>
+  /// <value>Number of pages of results.</value>
   [JsonPropertyName("nbPages")]
   public int NbPages { get; set; }
 
@@ -164,9 +164,9 @@ public partial class BaseSearchResponse
   public int? NbSortedHits { get; set; }
 
   /// <summary>
-  /// Page to retrieve (the first page is `0`, not `1`).
+  /// Page of search results to retrieve.
   /// </summary>
-  /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
+  /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
   public int Page { get; set; }
 
@@ -225,9 +225,9 @@ public partial class BaseSearchResponse
   public string ServerUsed { get; set; }
 
   /// <summary>
-  /// Lets you store custom data in your indices.
+  /// An object with custom data.  You can store up to 32&nbsp;kB as custom data. 
   /// </summary>
-  /// <value>Lets you store custom data in your indices.</value>
+  /// <value>An object with custom data.  You can store up to 32&nbsp;kB as custom data. </value>
   [JsonPropertyName("userData")]
   public object UserData { get; set; }
 

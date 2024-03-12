@@ -12,8 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Defines aroundRadiusAll
+/// Return all records with a valid `_geoloc` attribute. Don't filter by distance.
 /// </summary>
+/// <value>Return all records with a valid `_geoloc` attribute. Don't filter by distance.</value>
 public enum AroundRadiusAll
 {
   /// <summary>

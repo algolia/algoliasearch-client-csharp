@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// `batchDictionaryEntries` parameters. 
+/// Request body for updating dictionary entries.
 /// </summary>
 public partial class BatchDictionaryEntriesParams
 {
@@ -24,23 +24,23 @@ public partial class BatchDictionaryEntriesParams
   /// <summary>
   /// Initializes a new instance of the BatchDictionaryEntriesParams class.
   /// </summary>
-  /// <param name="requests">Operations to batch. (required).</param>
+  /// <param name="requests">List of additions and deletions to your dictionaries. (required).</param>
   public BatchDictionaryEntriesParams(List<BatchDictionaryEntriesRequest> requests)
   {
     Requests = requests ?? throw new ArgumentNullException(nameof(requests));
   }
 
   /// <summary>
-  /// Incidates whether to replace all custom entries in the dictionary with the ones sent with this request.
+  /// Whether to replace all custom entries in the dictionary with the ones sent with this request.
   /// </summary>
-  /// <value>Incidates whether to replace all custom entries in the dictionary with the ones sent with this request.</value>
+  /// <value>Whether to replace all custom entries in the dictionary with the ones sent with this request.</value>
   [JsonPropertyName("clearExistingDictionaryEntries")]
   public bool? ClearExistingDictionaryEntries { get; set; }
 
   /// <summary>
-  /// Operations to batch.
+  /// List of additions and deletions to your dictionaries.
   /// </summary>
-  /// <value>Operations to batch.</value>
+  /// <value>List of additions and deletions to your dictionaries.</value>
   [JsonPropertyName("requests")]
   public List<BatchDictionaryEntriesRequest> Requests { get; set; }
 

@@ -27,7 +27,7 @@ public partial class RecommendHit
   /// <summary>
   /// Initializes a new instance of the RecommendHit class.
   /// </summary>
-  /// <param name="objectID">Unique object identifier. (required).</param>
+  /// <param name="objectID">Unique record identifier. (required).</param>
   /// <param name="score">Recommendation score. (required).</param>
   public RecommendHit(string objectID, double score)
   {
@@ -37,23 +37,23 @@ public partial class RecommendHit
   }
 
   /// <summary>
-  /// Unique object identifier.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Unique object identifier.</value>
+  /// <value>Unique record identifier.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// Show highlighted section and words matched on a query.
+  /// Surround words that match the query with HTML tags for highlighting.
   /// </summary>
-  /// <value>Show highlighted section and words matched on a query.</value>
+  /// <value>Surround words that match the query with HTML tags for highlighting.</value>
   [JsonPropertyName("_highlightResult")]
   public Dictionary<string, HighlightResult> HighlightResult { get; set; }
 
   /// <summary>
-  /// Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+  /// Snippets that show the context around a matching search query.
   /// </summary>
-  /// <value>Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.</value>
+  /// <value>Snippets that show the context around a matching search query.</value>
   [JsonPropertyName("_snippetResult")]
   public Dictionary<string, SnippetResult> SnippetResult { get; set; }
 

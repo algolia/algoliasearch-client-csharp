@@ -30,25 +30,32 @@ public partial class Condition
   }
 
   /// <summary>
-  /// Query pattern syntax.
+  /// Query pattern that triggers the rule.  You can use either a literal string, or a special pattern `{facet:ATTRIBUTE}`, where `ATTRIBUTE` is a facet name. The rule is triggered if the query matches the literal string or a value of the specified facet. For example, with `pattern: {facet:genre}`, the rule is triggered when users search for a genre, such as \"comedy\". 
   /// </summary>
-  /// <value>Query pattern syntax.</value>
+  /// <value>Query pattern that triggers the rule.  You can use either a literal string, or a special pattern `{facet:ATTRIBUTE}`, where `ATTRIBUTE` is a facet name. The rule is triggered if the query matches the literal string or a value of the specified facet. For example, with `pattern: {facet:genre}`, the rule is triggered when users search for a genre, such as \"comedy\". </value>
   [JsonPropertyName("pattern")]
   public string Pattern { get; set; }
 
   /// <summary>
-  /// Whether the pattern matches on plurals, synonyms, and typos.
+  /// Whether the pattern should match plurals, synonyms, and typos.
   /// </summary>
-  /// <value>Whether the pattern matches on plurals, synonyms, and typos.</value>
+  /// <value>Whether the pattern should match plurals, synonyms, and typos.</value>
   [JsonPropertyName("alternatives")]
   public bool? Alternatives { get; set; }
 
   /// <summary>
-  /// Rule context format: [A-Za-z0-9_-]+).
+  /// An additional restriction that only triggers the rule, when the search has the same value as `ruleContexts` parameter. For example, if `context: mobile`, the rule is only triggered when the search request has a matching `ruleContexts: mobile`. A rule context must only contain alphanumeric characters. 
   /// </summary>
-  /// <value>Rule context format: [A-Za-z0-9_-]+).</value>
+  /// <value>An additional restriction that only triggers the rule, when the search has the same value as `ruleContexts` parameter. For example, if `context: mobile`, the rule is only triggered when the search request has a matching `ruleContexts: mobile`. A rule context must only contain alphanumeric characters. </value>
   [JsonPropertyName("context")]
   public string Context { get; set; }
+
+  /// <summary>
+  /// Filters that trigger the rule.  You can add add filters using the syntax `facet:value` so that the rule is triggered, when the specific filter is selected. You can use `filters` on its own or combine it with the `pattern` parameter. 
+  /// </summary>
+  /// <value>Filters that trigger the rule.  You can add add filters using the syntax `facet:value` so that the rule is triggered, when the specific filter is selected. You can use `filters` on its own or combine it with the `pattern` parameter. </value>
+  [JsonPropertyName("filters")]
+  public string Filters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -62,6 +69,7 @@ public partial class Condition
     sb.Append("  Anchoring: ").Append(Anchoring).Append("\n");
     sb.Append("  Alternatives: ").Append(Alternatives).Append("\n");
     sb.Append("  Context: ").Append(Context).Append("\n");
+    sb.Append("  Filters: ").Append(Filters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -91,7 +99,8 @@ public partial class Condition
         (Pattern == input.Pattern || (Pattern != null && Pattern.Equals(input.Pattern))) &&
         (Anchoring == input.Anchoring || Anchoring.Equals(input.Anchoring)) &&
         (Alternatives == input.Alternatives || Alternatives.Equals(input.Alternatives)) &&
-        (Context == input.Context || (Context != null && Context.Equals(input.Context)));
+        (Context == input.Context || (Context != null && Context.Equals(input.Context))) &&
+        (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters)));
   }
 
   /// <summary>
@@ -112,6 +121,10 @@ public partial class Condition
       if (Context != null)
       {
         hashCode = (hashCode * 59) + Context.GetHashCode();
+      }
+      if (Filters != null)
+      {
+        hashCode = (hashCode * 59) + Filters.GetHashCode();
       }
       return hashCode;
     }

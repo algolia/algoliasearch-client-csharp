@@ -24,16 +24,16 @@ public partial class BaseRecommendRequest
   /// <summary>
   /// Initializes a new instance of the BaseRecommendRequest class.
   /// </summary>
-  /// <param name="indexName">Algolia index name. (required).</param>
+  /// <param name="indexName">Index name. (required).</param>
   public BaseRecommendRequest(string indexName)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
   }
 
   /// <summary>
-  /// Algolia index name.
+  /// Index name.
   /// </summary>
-  /// <value>Algolia index name.</value>
+  /// <value>Index name.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

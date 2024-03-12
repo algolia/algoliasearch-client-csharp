@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences) of a rule. 
+/// Effect of the rule.  For more information, see [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences). 
 /// </summary>
 public partial class Consequence
 {
@@ -30,30 +30,30 @@ public partial class Consequence
   public ConsequenceParams VarParams { get; set; }
 
   /// <summary>
-  /// Records to promote.
+  /// Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each. 
   /// </summary>
-  /// <value>Records to promote.</value>
+  /// <value>Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each. </value>
   [JsonPropertyName("promote")]
   public List<Promote> Promote { get; set; }
 
   /// <summary>
-  /// Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.
+  /// Whether promoted records must match an active filter for the consequence to be applied.  This ensures that user actions (filtering the search) are given a higher precendence. For example, if you promote a record with the `color: red` attribute, and the user filters the search for `color: blue`, the \"red\" record won't be shown. 
   /// </summary>
-  /// <value>Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.</value>
+  /// <value>Whether promoted records must match an active filter for the consequence to be applied.  This ensures that user actions (filtering the search) are given a higher precendence. For example, if you promote a record with the `color: red` attribute, and the user filters the search for `color: blue`, the \"red\" record won't be shown. </value>
   [JsonPropertyName("filterPromotes")]
   public bool? FilterPromotes { get; set; }
 
   /// <summary>
-  /// Records to hide. By default, you can hide up to 50 records per rule.
+  /// Records you want to hide from the search results.
   /// </summary>
-  /// <value>Records to hide. By default, you can hide up to 50 records per rule.</value>
+  /// <value>Records you want to hide from the search results.</value>
   [JsonPropertyName("hide")]
   public List<ConsequenceHide> Hide { get; set; }
 
   /// <summary>
-  /// Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.
+  /// A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON. 
   /// </summary>
-  /// <value>Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.</value>
+  /// <value>A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON. </value>
   [JsonPropertyName("userData")]
   public object UserData { get; set; }
 

@@ -15,7 +15,7 @@ using Algolia.Search.Models.Common;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// [Filter on numeric attributes](https://www.algolia.com/doc/api-reference/api-parameters/numericFilters/). 
+/// Filter by numeric facets.  **Prefer using the `filters` parameter, which supports all filter types and combinations with boolean operators.**  You can use numeric comparison operators: `<`, `<=`, `=`, `!=`, `>`, `>=`. Comparsions are precise up to 3 decimals. You can also provide ranges: `facet:<lower> TO <upper>`. The range includes the lower and upper boundaries. The same combination rules apply as for `facetFilters`. 
 /// </summary>
 [JsonConverter(typeof(NumericFiltersJsonConverter))]
 public partial class NumericFilters : AbstractSchema

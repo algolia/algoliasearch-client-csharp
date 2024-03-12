@@ -120,6 +120,7 @@ Models/Search/SaveObjectResponse.cs
 Models/Search/SaveSynonymResponse.cs
 Models/Search/ScopeType.cs
 Models/Search/SearchDictionaryEntriesParams.cs
+Models/Search/SearchDictionaryEntriesResponse.cs
 Models/Search/SearchForFacetValuesRequest.cs
 Models/Search/SearchForFacetValuesResponse.cs
 Models/Search/SearchForFacets.cs

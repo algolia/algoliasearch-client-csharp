@@ -30,7 +30,7 @@ public partial class RecommendedForYouQuery
   /// <summary>
   /// Initializes a new instance of the RecommendedForYouQuery class.
   /// </summary>
-  /// <param name="indexName">Algolia index name. (required).</param>
+  /// <param name="indexName">Index name. (required).</param>
   /// <param name="model">model (required).</param>
   public RecommendedForYouQuery(string indexName, RecommendedForYouModel? model)
   {
@@ -39,9 +39,9 @@ public partial class RecommendedForYouQuery
   }
 
   /// <summary>
-  /// Algolia index name.
+  /// Index name.
   /// </summary>
-  /// <value>Algolia index name.</value>
+  /// <value>Index name.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

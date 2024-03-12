@@ -37,9 +37,9 @@ public partial class Edit
   public string Delete { get; set; }
 
   /// <summary>
-  /// Text that should be inserted in place of the removed text inside the query string.
+  /// Text to be added in place of the deleted text inside the query string.
   /// </summary>
-  /// <value>Text that should be inserted in place of the removed text inside the query string.</value>
+  /// <value>Text to be added in place of the deleted text inside the query string.</value>
   [JsonPropertyName("insert")]
   public string Insert { get; set; }
 

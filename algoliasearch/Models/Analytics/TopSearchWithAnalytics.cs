@@ -32,7 +32,7 @@ public partial class TopSearchWithAnalytics
   /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
   /// <param name="clickCount">Number of click events. (required).</param>
   /// <param name="conversionCount">Number of converted clicks. (required).</param>
-  /// <param name="nbHits">Number of hits the search query matched. (required).</param>
+  /// <param name="nbHits">Number of results (hits). (required).</param>
   public TopSearchWithAnalytics(string search, int count, double clickThroughRate, int averageClickPosition, double conversionRate, int? trackedSearchCount, int clickCount, int conversionCount, int nbHits)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
@@ -103,9 +103,9 @@ public partial class TopSearchWithAnalytics
   public int ConversionCount { get; set; }
 
   /// <summary>
-  /// Number of hits the search query matched.
+  /// Number of results (hits).
   /// </summary>
-  /// <value>Number of hits the search query matched.</value>
+  /// <value>Number of results (hits).</value>
   [JsonPropertyName("nbHits")]
   public int NbHits { get; set; }
 

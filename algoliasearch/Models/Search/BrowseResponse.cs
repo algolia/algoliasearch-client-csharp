@@ -25,12 +25,12 @@ public partial class BrowseResponse<T>
   /// Initializes a new instance of the BrowseResponse class.
   /// </summary>
   /// <param name="hitsPerPage">Number of hits per page. (required) (default to 20).</param>
-  /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-  /// <param name="nbPages">Number of pages of results for the current query. (required).</param>
-  /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
+  /// <param name="nbHits">Number of results (hits). (required).</param>
+  /// <param name="nbPages">Number of pages of results. (required).</param>
+  /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
   /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
-  /// <param name="hits">hits (required).</param>
-  /// <param name="query">Text to search for in an index. (required) (default to &quot;&quot;).</param>
+  /// <param name="hits">Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  (required).</param>
+  /// <param name="query">Search query. (required) (default to &quot;&quot;).</param>
   /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
   public BrowseResponse(int hitsPerPage, int nbHits, int nbPages, int page, int processingTimeMS, List<T> hits, string query, string varParams)
   {
@@ -66,9 +66,9 @@ public partial class BrowseResponse<T>
   public string AroundLatLng { get; set; }
 
   /// <summary>
-  /// Automatically-computed radius.
+  /// Distance from a central coordinate provided by `aroundLatLng`.
   /// </summary>
-  /// <value>Automatically-computed radius.</value>
+  /// <value>Distance from a central coordinate provided by `aroundLatLng`.</value>
   [JsonPropertyName("automaticRadius")]
   public string AutomaticRadius { get; set; }
 
@@ -103,9 +103,9 @@ public partial class BrowseResponse<T>
   public bool? ExhaustiveTypo { get; set; }
 
   /// <summary>
-  /// Mapping of each facet name to the corresponding facet counts.
+  /// Facet counts.
   /// </summary>
-  /// <value>Mapping of each facet name to the corresponding facet counts.</value>
+  /// <value>Facet counts.</value>
   [JsonPropertyName("facets")]
   public Dictionary<string, Dictionary<string, int>> Facets { get; set; }
 
@@ -145,16 +145,16 @@ public partial class BrowseResponse<T>
   public string Message { get; set; }
 
   /// <summary>
-  /// Number of hits the search query matched.
+  /// Number of results (hits).
   /// </summary>
-  /// <value>Number of hits the search query matched.</value>
+  /// <value>Number of results (hits).</value>
   [JsonPropertyName("nbHits")]
   public int NbHits { get; set; }
 
   /// <summary>
-  /// Number of pages of results for the current query.
+  /// Number of pages of results.
   /// </summary>
-  /// <value>Number of pages of results for the current query.</value>
+  /// <value>Number of pages of results.</value>
   [JsonPropertyName("nbPages")]
   public int NbPages { get; set; }
 
@@ -166,9 +166,9 @@ public partial class BrowseResponse<T>
   public int? NbSortedHits { get; set; }
 
   /// <summary>
-  /// Page to retrieve (the first page is `0`, not `1`).
+  /// Page of search results to retrieve.
   /// </summary>
-  /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
+  /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
   public int Page { get; set; }
 
@@ -227,9 +227,9 @@ public partial class BrowseResponse<T>
   public string ServerUsed { get; set; }
 
   /// <summary>
-  /// Lets you store custom data in your indices.
+  /// An object with custom data.  You can store up to 32&nbsp;kB as custom data. 
   /// </summary>
-  /// <value>Lets you store custom data in your indices.</value>
+  /// <value>An object with custom data.  You can store up to 32&nbsp;kB as custom data. </value>
   [JsonPropertyName("userData")]
   public object UserData { get; set; }
 
@@ -241,15 +241,16 @@ public partial class BrowseResponse<T>
   public string QueryID { get; set; }
 
   /// <summary>
-  /// Gets or Sets Hits
+  /// Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting. 
   /// </summary>
+  /// <value>Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting. </value>
   [JsonPropertyName("hits")]
   public List<T> Hits { get; set; }
 
   /// <summary>
-  /// Text to search for in an index.
+  /// Search query.
   /// </summary>
-  /// <value>Text to search for in an index.</value>
+  /// <value>Search query.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 
@@ -261,9 +262,9 @@ public partial class BrowseResponse<T>
   public string VarParams { get; set; }
 
   /// <summary>
-  /// Cursor indicating the location to resume browsing from. Must match the value returned by the previous call. Pass this value to the subsequent browse call to get the next page of results. When the end of the index has been reached, `cursor` is absent from the response. 
+  /// Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute. 
   /// </summary>
-  /// <value>Cursor indicating the location to resume browsing from. Must match the value returned by the previous call. Pass this value to the subsequent browse call to get the next page of results. When the end of the index has been reached, `cursor` is absent from the response. </value>
+  /// <value>Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute. </value>
   [JsonPropertyName("cursor")]
   public string Cursor { get; set; }
 

@@ -31,7 +31,7 @@ public partial class OperationIndexParams
   /// Initializes a new instance of the OperationIndexParams class.
   /// </summary>
   /// <param name="operation">operation (required).</param>
-  /// <param name="destination">Algolia index name. (required).</param>
+  /// <param name="destination">Index name. (required).</param>
   public OperationIndexParams(OperationType? operation, string destination)
   {
     Operation = operation;
@@ -39,16 +39,16 @@ public partial class OperationIndexParams
   }
 
   /// <summary>
-  /// Algolia index name.
+  /// Index name.
   /// </summary>
-  /// <value>Algolia index name.</value>
+  /// <value>Index name.</value>
   [JsonPropertyName("destination")]
   public string Destination { get; set; }
 
   /// <summary>
-  /// **This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.
+  /// **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules. 
   /// </summary>
-  /// <value>**This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.</value>
+  /// <value>**Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules. </value>
   [JsonPropertyName("scope")]
   public List<ScopeType> Scope { get; set; }
 

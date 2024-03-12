@@ -24,8 +24,8 @@ public partial class TimeRange
   /// <summary>
   /// Initializes a new instance of the TimeRange class.
   /// </summary>
-  /// <param name="from">Lower bound of the time range (Unix timestamp). (required).</param>
-  /// <param name="until">Upper bound of the time range (Unix timestamp). (required).</param>
+  /// <param name="from">When the rule should start to be active, in Unix epoch time. (required).</param>
+  /// <param name="until">When the rule should stop to be active, in Unix epoch time. (required).</param>
   public TimeRange(int from, int until)
   {
     From = from;
@@ -33,16 +33,16 @@ public partial class TimeRange
   }
 
   /// <summary>
-  /// Lower bound of the time range (Unix timestamp).
+  /// When the rule should start to be active, in Unix epoch time.
   /// </summary>
-  /// <value>Lower bound of the time range (Unix timestamp).</value>
+  /// <value>When the rule should start to be active, in Unix epoch time.</value>
   [JsonPropertyName("from")]
   public int From { get; set; }
 
   /// <summary>
-  /// Upper bound of the time range (Unix timestamp).
+  /// When the rule should stop to be active, in Unix epoch time.
   /// </summary>
-  /// <value>Upper bound of the time range (Unix timestamp).</value>
+  /// <value>When the rule should stop to be active, in Unix epoch time.</value>
   [JsonPropertyName("until")]
   public int Until { get; set; }
 

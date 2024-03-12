@@ -24,16 +24,16 @@ public partial class GetObjectsResponse<T>
   /// <summary>
   /// Initializes a new instance of the GetObjectsResponse class.
   /// </summary>
-  /// <param name="results">Retrieved results. (required).</param>
+  /// <param name="results">Retrieved records. (required).</param>
   public GetObjectsResponse(List<T> results)
   {
     Results = results ?? throw new ArgumentNullException(nameof(results));
   }
 
   /// <summary>
-  /// Retrieved results.
+  /// Retrieved records.
   /// </summary>
-  /// <value>Retrieved results.</value>
+  /// <value>Retrieved records.</value>
   [JsonPropertyName("results")]
   public List<T> Results { get; set; }
 

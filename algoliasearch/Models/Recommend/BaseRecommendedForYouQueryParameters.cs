@@ -24,16 +24,16 @@ public partial class BaseRecommendedForYouQueryParameters
   /// <summary>
   /// Initializes a new instance of the BaseRecommendedForYouQueryParameters class.
   /// </summary>
-  /// <param name="userToken">Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search. (required).</param>
+  /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
   public BaseRecommendedForYouQueryParameters(string userToken)
   {
     UserToken = userToken ?? throw new ArgumentNullException(nameof(userToken));
   }
 
   /// <summary>
-  /// Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
+  /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). 
   /// </summary>
-  /// <value>Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.</value>
+  /// <value>Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
   [JsonPropertyName("userToken")]
   public string UserToken { get; set; }
 

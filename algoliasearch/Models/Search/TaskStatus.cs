@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// _published_ if the task has been processed, _notPublished_ otherwise.
+/// Task status, `published` if the task is completed, `notPublished` otherwise.
 /// </summary>
-/// <value>_published_ if the task has been processed, _notPublished_ otherwise.</value>
+/// <value>Task status, `published` if the task is completed, `notPublished` otherwise.</value>
 public enum TaskStatus
 {
   /// <summary>

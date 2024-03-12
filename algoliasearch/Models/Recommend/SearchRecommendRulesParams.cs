@@ -24,9 +24,9 @@ public partial class SearchRecommendRulesParams
   }
 
   /// <summary>
-  /// Full-text query.
+  /// Search query.
   /// </summary>
-  /// <value>Full-text query.</value>
+  /// <value>Search query.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 
@@ -38,9 +38,9 @@ public partial class SearchRecommendRulesParams
   public string Context { get; set; }
 
   /// <summary>
-  /// Requested page (the first page is page 0).
+  /// Requested page of the API response.
   /// </summary>
-  /// <value>Requested page (the first page is page 0).</value>
+  /// <value>Requested page of the API response.</value>
   [JsonPropertyName("page")]
   public int? Page { get; set; }
 

@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Automatic facet Filter.
+/// Filter or optional filter to be applied to the search.
 /// </summary>
 public partial class AutomaticFacetFilter
 {
@@ -24,30 +24,30 @@ public partial class AutomaticFacetFilter
   /// <summary>
   /// Initializes a new instance of the AutomaticFacetFilter class.
   /// </summary>
-  /// <param name="facet">Attribute to filter on. This must match a facet placeholder in the Rule&#39;s pattern. (required).</param>
+  /// <param name="facet">Facet name to be applied as filter. The name must match placeholders in the &#x60;pattern&#x60; parameter. For example, with &#x60;pattern: {facet:genre}&#x60;, &#x60;automaticFacetFilters&#x60; must be &#x60;genre&#x60;.  (required).</param>
   public AutomaticFacetFilter(string facet)
   {
     Facet = facet ?? throw new ArgumentNullException(nameof(facet));
   }
 
   /// <summary>
-  /// Attribute to filter on. This must match a facet placeholder in the Rule's pattern.
+  /// Facet name to be applied as filter. The name must match placeholders in the `pattern` parameter. For example, with `pattern: {facet:genre}`, `automaticFacetFilters` must be `genre`. 
   /// </summary>
-  /// <value>Attribute to filter on. This must match a facet placeholder in the Rule's pattern.</value>
+  /// <value>Facet name to be applied as filter. The name must match placeholders in the `pattern` parameter. For example, with `pattern: {facet:genre}`, `automaticFacetFilters` must be `genre`. </value>
   [JsonPropertyName("facet")]
   public string Facet { get; set; }
 
   /// <summary>
-  /// Score for the filter. Typically used for optional or disjunctive filters.
+  /// Filter scores to give different weights to individual filters.
   /// </summary>
-  /// <value>Score for the filter. Typically used for optional or disjunctive filters.</value>
+  /// <value>Filter scores to give different weights to individual filters.</value>
   [JsonPropertyName("score")]
   public int? Score { get; set; }
 
   /// <summary>
-  /// Whether the filter is disjunctive (true) or conjunctive (false).
+  /// Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurences are combined with the logical `OR` operation. If false, multiple occurences are combined with the logical `AND` operation. 
   /// </summary>
-  /// <value>Whether the filter is disjunctive (true) or conjunctive (false).</value>
+  /// <value>Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurences are combined with the logical `OR` operation. If false, multiple occurences are combined with the logical `AND` operation. </value>
   [JsonPropertyName("disjunctive")]
   public bool? Disjunctive { get; set; }
 

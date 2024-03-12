@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Unique identifier of the record to hide.
+/// Object ID of the record to hide.
 /// </summary>
 public partial class ConsequenceHide
 {
@@ -24,16 +24,16 @@ public partial class ConsequenceHide
   /// <summary>
   /// Initializes a new instance of the ConsequenceHide class.
   /// </summary>
-  /// <param name="objectID">Unique object identifier. (required).</param>
+  /// <param name="objectID">Unique record identifier. (required).</param>
   public ConsequenceHide(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
-  /// Unique object identifier.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Unique object identifier.</value>
+  /// <value>Unique record identifier.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 

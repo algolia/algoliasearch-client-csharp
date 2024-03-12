@@ -24,8 +24,8 @@ public partial class SearchRulesResponse
   /// <summary>
   /// Initializes a new instance of the SearchRulesResponse class.
   /// </summary>
-  /// <param name="hits">Fetched rules. (required).</param>
-  /// <param name="nbHits">Number of fetched rules. (required).</param>
+  /// <param name="hits">Rules that matched the search criteria. (required).</param>
+  /// <param name="nbHits">Number of rules that matched the search criteria. (required).</param>
   /// <param name="page">Current page. (required).</param>
   /// <param name="nbPages">Number of pages. (required).</param>
   public SearchRulesResponse(List<Rule> hits, int nbHits, int page, int nbPages)
@@ -37,16 +37,16 @@ public partial class SearchRulesResponse
   }
 
   /// <summary>
-  /// Fetched rules.
+  /// Rules that matched the search criteria.
   /// </summary>
-  /// <value>Fetched rules.</value>
+  /// <value>Rules that matched the search criteria.</value>
   [JsonPropertyName("hits")]
   public List<Rule> Hits { get; set; }
 
   /// <summary>
-  /// Number of fetched rules.
+  /// Number of rules that matched the search criteria.
   /// </summary>
-  /// <value>Number of fetched rules.</value>
+  /// <value>Number of rules that matched the search criteria.</value>
   [JsonPropertyName("nbHits")]
   public int NbHits { get; set; }
 

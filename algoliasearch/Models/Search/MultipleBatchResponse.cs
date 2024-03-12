@@ -24,8 +24,8 @@ public partial class MultipleBatchResponse
   /// <summary>
   /// Initializes a new instance of the MultipleBatchResponse class.
   /// </summary>
-  /// <param name="taskID">TaskIDs per index. (required).</param>
-  /// <param name="objectIDs">Unique object (record) identifiers. (required).</param>
+  /// <param name="taskID">Task IDs. One for each index. (required).</param>
+  /// <param name="objectIDs">Unique record identifiers. (required).</param>
   public MultipleBatchResponse(Dictionary<string, long> taskID, List<string> objectIDs)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
@@ -33,16 +33,16 @@ public partial class MultipleBatchResponse
   }
 
   /// <summary>
-  /// TaskIDs per index.
+  /// Task IDs. One for each index.
   /// </summary>
-  /// <value>TaskIDs per index.</value>
+  /// <value>Task IDs. One for each index.</value>
   [JsonPropertyName("taskID")]
   public Dictionary<string, long> TaskID { get; set; }
 
   /// <summary>
-  /// Unique object (record) identifiers.
+  /// Unique record identifiers.
   /// </summary>
-  /// <value>Unique object (record) identifiers.</value>
+  /// <value>Unique record identifiers.</value>
   [JsonPropertyName("objectIDs")]
   public List<string> ObjectIDs { get; set; }
 

@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// AroundPrecisionFromValueInner
+/// Range object with lower and upper values in meters to define custom ranges.
 /// </summary>
 public partial class AroundPrecisionFromValueInner
 {
@@ -24,14 +24,16 @@ public partial class AroundPrecisionFromValueInner
   }
 
   /// <summary>
-  /// Gets or Sets From
+  /// Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
   /// </summary>
+  /// <value>Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.</value>
   [JsonPropertyName("from")]
   public int? From { get; set; }
 
   /// <summary>
-  /// Gets or Sets Value
+  /// Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
   /// </summary>
+  /// <value>Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.</value>
   [JsonPropertyName("value")]
   public int? Value { get; set; }
 

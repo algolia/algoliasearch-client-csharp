@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Show highlighted section and words matched on a query.
+/// Surround words that match the query with HTML tags for highlighting.
 /// </summary>
 public partial class HighlightResultOption
 {
@@ -30,9 +30,9 @@ public partial class HighlightResultOption
   /// <summary>
   /// Initializes a new instance of the HighlightResultOption class.
   /// </summary>
-  /// <param name="value">Markup text with &#x60;facetQuery&#x60; matches highlighted. (required).</param>
+  /// <param name="value">Highlighted attribute value, including HTML tags. (required).</param>
   /// <param name="matchLevel">matchLevel (required).</param>
-  /// <param name="matchedWords">List of words from the query that matched the object. (required).</param>
+  /// <param name="matchedWords">List of matched words from the search query. (required).</param>
   public HighlightResultOption(string value, MatchLevel? matchLevel, List<string> matchedWords)
   {
     Value = value ?? throw new ArgumentNullException(nameof(value));
@@ -41,16 +41,16 @@ public partial class HighlightResultOption
   }
 
   /// <summary>
-  /// Markup text with `facetQuery` matches highlighted.
+  /// Highlighted attribute value, including HTML tags.
   /// </summary>
-  /// <value>Markup text with `facetQuery` matches highlighted.</value>
+  /// <value>Highlighted attribute value, including HTML tags.</value>
   [JsonPropertyName("value")]
   public string Value { get; set; }
 
   /// <summary>
-  /// List of words from the query that matched the object.
+  /// List of matched words from the search query.
   /// </summary>
-  /// <value>List of words from the query that matched the object.</value>
+  /// <value>List of matched words from the search query.</value>
   [JsonPropertyName("matchedWords")]
   public List<string> MatchedWords { get; set; }
 

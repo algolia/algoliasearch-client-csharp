@@ -30,7 +30,7 @@ public partial class TrendingFacetsQuery
   /// <summary>
   /// Initializes a new instance of the TrendingFacetsQuery class.
   /// </summary>
-  /// <param name="indexName">Algolia index name. (required).</param>
+  /// <param name="indexName">Index name. (required).</param>
   /// <param name="facetName">Facet name for trending models. (required).</param>
   public TrendingFacetsQuery(string indexName, string facetName)
   {
@@ -39,9 +39,9 @@ public partial class TrendingFacetsQuery
   }
 
   /// <summary>
-  /// Algolia index name.
+  /// Index name.
   /// </summary>
-  /// <value>Algolia index name.</value>
+  /// <value>Index name.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

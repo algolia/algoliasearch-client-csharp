@@ -48,30 +48,30 @@ public partial class RecommendedForYouQueryParameters
   /// <summary>
   /// Initializes a new instance of the RecommendedForYouQueryParameters class.
   /// </summary>
-  /// <param name="userToken">Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search. (required).</param>
+  /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
   public RecommendedForYouQueryParameters(string userToken)
   {
     UserToken = userToken ?? throw new ArgumentNullException(nameof(userToken));
   }
 
   /// <summary>
-  /// Text to search for in an index.
+  /// Search query.
   /// </summary>
-  /// <value>Text to search for in an index.</value>
+  /// <value>Search query.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 
   /// <summary>
-  /// Overrides the query parameter and performs a more generic search.
+  /// Keywords to be used instead of the search query to conduct a more broader search.  Using the `similarQuery` parameter changes other settings:  - `queryType` is set to `prefixNone`. - `removeStopWords` is set to true. - `words` is set as the first ranking criterion. - All remaining words are treated as `optionalWords`.  Since the `similarQuery` is supposed to do a broad search, they usually return many results. Combine it with `filters` to narrow down the list of results. 
   /// </summary>
-  /// <value>Overrides the query parameter and performs a more generic search.</value>
+  /// <value>Keywords to be used instead of the search query to conduct a more broader search.  Using the `similarQuery` parameter changes other settings:  - `queryType` is set to `prefixNone`. - `removeStopWords` is set to true. - `words` is set as the first ranking criterion. - All remaining words are treated as `optionalWords`.  Since the `similarQuery` is supposed to do a broad search, they usually return many results. Combine it with `filters` to narrow down the list of results. </value>
   [JsonPropertyName("similarQuery")]
   public string SimilarQuery { get; set; }
 
   /// <summary>
-  /// [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. 
+  /// Filter the search so that only records with matching values are included in the results.  These filters are supported:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/). 
   /// </summary>
-  /// <value>[Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters. </value>
+  /// <value>Filter the search so that only records with matching values are included in the results.  These filters are supported:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/). </value>
   [JsonPropertyName("filters")]
   public string Filters { get; set; }
 
@@ -100,65 +100,65 @@ public partial class RecommendedForYouQueryParameters
   public TagFilters TagFilters { get; set; }
 
   /// <summary>
-  /// Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed. 
+  /// Whether to sum all filter scores.  If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). 
   /// </summary>
-  /// <value>Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed. </value>
+  /// <value>Whether to sum all filter scores.  If true, all filter scores are summed. Otherwise, the maximum filter score is kept. For more information, see [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). </value>
   [JsonPropertyName("sumOrFiltersScores")]
   public bool? SumOrFiltersScores { get; set; }
 
   /// <summary>
-  /// Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
+  /// Restricts a search to a subset of your searchable attributes.
   /// </summary>
-  /// <value>Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).</value>
+  /// <value>Restricts a search to a subset of your searchable attributes.</value>
   [JsonPropertyName("restrictSearchableAttributes")]
   public List<string> RestrictSearchableAttributes { get; set; }
 
   /// <summary>
-  /// Returns [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts), their facet values, and the number of matching facet values.
+  /// Facets for which to retrieve facet values that match the search criteria and the number of matching facet values.  To retrieve all facets, use the wildcard character `*`. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts). 
   /// </summary>
-  /// <value>Returns [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts), their facet values, and the number of matching facet values.</value>
+  /// <value>Facets for which to retrieve facet values that match the search criteria and the number of matching facet values.  To retrieve all facets, use the wildcard character `*`. For more information, see [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts). </value>
   [JsonPropertyName("facets")]
   public List<string> Facets { get; set; }
 
   /// <summary>
-  /// Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the `afterDistinct` [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of `attributesForFaceting` allows for more granular control. 
+  /// Whether faceting should be applied after deduplication with `distinct`.  This leads to accurate facet counts when using faceting in combination with `distinct`. It's usually better to use `afterDistinct` modifiers in the `attributesForFaceting` setting, as `facetingAfterDistinct` only computes correct facet counts if all records have the same facet values for the `attributeForDistinct`. 
   /// </summary>
-  /// <value>Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the `afterDistinct` [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of `attributesForFaceting` allows for more granular control. </value>
+  /// <value>Whether faceting should be applied after deduplication with `distinct`.  This leads to accurate facet counts when using faceting in combination with `distinct`. It's usually better to use `afterDistinct` modifiers in the `attributesForFaceting` setting, as `facetingAfterDistinct` only computes correct facet counts if all records have the same facet values for the `attributeForDistinct`. </value>
   [JsonPropertyName("facetingAfterDistinct")]
   public bool? FacetingAfterDistinct { get; set; }
 
   /// <summary>
-  /// Page to retrieve (the first page is `0`, not `1`).
+  /// Page of search results to retrieve.
   /// </summary>
-  /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
+  /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
   public int? Page { get; set; }
 
   /// <summary>
-  /// Specifies the offset of the first hit to return. > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). 
+  /// Position of the first hit to retrieve.
   /// </summary>
-  /// <value>Specifies the offset of the first hit to return. > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). </value>
+  /// <value>Position of the first hit to retrieve.</value>
   [JsonPropertyName("offset")]
   public int? Offset { get; set; }
 
   /// <summary>
-  /// Sets the number of hits to retrieve (for use with `offset`). > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). 
+  /// Number of hits to retrieve (used in combination with `offset`).
   /// </summary>
-  /// <value>Sets the number of hits to retrieve (for use with `offset`). > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length). </value>
+  /// <value>Number of hits to retrieve (used in combination with `offset`).</value>
   [JsonPropertyName("length")]
   public int? Length { get; set; }
 
   /// <summary>
-  /// Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
+  /// Coordinates for the center of a circle, expressed as a comma-separated string of latitude and longitude.  Only records included within circle around this central location are included in the results. The radius of the circle is determined by the `aroundRadius` and `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon` or `insideBoundingBox`. 
   /// </summary>
-  /// <value>Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.</value>
+  /// <value>Coordinates for the center of a circle, expressed as a comma-separated string of latitude and longitude.  Only records included within circle around this central location are included in the results. The radius of the circle is determined by the `aroundRadius` and `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon` or `insideBoundingBox`. </value>
   [JsonPropertyName("aroundLatLng")]
   public string AroundLatLng { get; set; }
 
   /// <summary>
-  /// Search for entries around a location. The location is automatically computed from the requester's IP address.
+  /// Whether to obtain the coordinates from the request's IP address.
   /// </summary>
-  /// <value>Search for entries around a location. The location is automatically computed from the requester's IP address.</value>
+  /// <value>Whether to obtain the coordinates from the request's IP address.</value>
   [JsonPropertyName("aroundLatLngViaIP")]
   public bool? AroundLatLngViaIP { get; set; }
 
@@ -175,86 +175,79 @@ public partial class RecommendedForYouQueryParameters
   public AroundPrecision AroundPrecision { get; set; }
 
   /// <summary>
-  /// Minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set.
+  /// Minimum radius (in meters) for a search around a location when `aroundRadius` isn't set.
   /// </summary>
-  /// <value>Minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set.</value>
+  /// <value>Minimum radius (in meters) for a search around a location when `aroundRadius` isn't set.</value>
   [JsonPropertyName("minimumAroundRadius")]
   public int? MinimumAroundRadius { get; set; }
 
   /// <summary>
-  /// Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+  /// Coordinates for a rectangular area in which to search.  Each bounding box is defined by the two opposite points of its diagonal, and expressed as latitude and longitude pair: `[p1 lat, p1 long, p2 lat, p2 long]`. Provide multiple bounding boxes as nested arrays. For more information, see [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). 
   /// </summary>
-  /// <value>Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).</value>
+  /// <value>Coordinates for a rectangular area in which to search.  Each bounding box is defined by the two opposite points of its diagonal, and expressed as latitude and longitude pair: `[p1 lat, p1 long, p2 lat, p2 long]`. Provide multiple bounding boxes as nested arrays. For more information, see [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). </value>
   [JsonPropertyName("insideBoundingBox")]
   public List<List<double>> InsideBoundingBox { get; set; }
 
   /// <summary>
-  /// Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+  /// Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored, if you also specify `insideBoundingBox`. 
   /// </summary>
-  /// <value>Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).</value>
+  /// <value>Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored, if you also specify `insideBoundingBox`. </value>
   [JsonPropertyName("insidePolygon")]
   public List<List<double>> InsidePolygon { get; set; }
 
   /// <summary>
-  /// Changes the default values of parameters that work best for a natural language query, such as `ignorePlurals`, `removeStopWords`, `removeWordsIfNoResults`, `analyticsTags`, and `ruleContexts`. These parameters work well together when the query consists of fuller natural language strings instead of keywords, for example when processing voice search queries.
+  /// ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`. 
   /// </summary>
-  /// <value>Changes the default values of parameters that work best for a natural language query, such as `ignorePlurals`, `removeStopWords`, `removeWordsIfNoResults`, `analyticsTags`, and `ruleContexts`. These parameters work well together when the query consists of fuller natural language strings instead of keywords, for example when processing voice search queries.</value>
+  /// <value>ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`. </value>
   [JsonPropertyName("naturalLanguages")]
   public List<string> NaturalLanguages { get; set; }
 
   /// <summary>
-  /// Assigns [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) to search queries.
+  /// Assigns a rule context to the search query.  [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules. 
   /// </summary>
-  /// <value>Assigns [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) to search queries.</value>
+  /// <value>Assigns a rule context to the search query.  [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules. </value>
   [JsonPropertyName("ruleContexts")]
   public List<string> RuleContexts { get; set; }
 
   /// <summary>
-  /// Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).
+  /// Impact that Personalization should have on this search.  The higher this value is, the more Personalization determines the ranking compared to other factors. For more information, see [Understanding Personalization impact](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact). 
   /// </summary>
-  /// <value>Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).</value>
+  /// <value>Impact that Personalization should have on this search.  The higher this value is, the more Personalization determines the ranking compared to other factors. For more information, see [Understanding Personalization impact](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact). </value>
   [JsonPropertyName("personalizationImpact")]
   public int? PersonalizationImpact { get; set; }
 
   /// <summary>
-  /// Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
+  /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). 
   /// </summary>
-  /// <value>Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.</value>
+  /// <value>Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
   [JsonPropertyName("userToken")]
   public string UserToken { get; set; }
 
   /// <summary>
-  /// Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).
+  /// Whether the search response should include detailed ranking information.
   /// </summary>
-  /// <value>Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).</value>
+  /// <value>Whether the search response should include detailed ranking information.</value>
   [JsonPropertyName("getRankingInfo")]
   public bool? GetRankingInfo { get; set; }
 
   /// <summary>
-  /// Enriches the API's response with information about how the query was processed.
+  /// Whether to take into account an index's synonyms for this search.
   /// </summary>
-  /// <value>Enriches the API's response with information about how the query was processed.</value>
-  [JsonPropertyName("explain")]
-  public List<string> Explain { get; set; }
-
-  /// <summary>
-  /// Whether to take into account an index's synonyms for a particular search.
-  /// </summary>
-  /// <value>Whether to take into account an index's synonyms for a particular search.</value>
+  /// <value>Whether to take into account an index's synonyms for this search.</value>
   [JsonPropertyName("synonyms")]
   public bool? Synonyms { get; set; }
 
   /// <summary>
-  /// Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).
+  /// Whether to include a `queryID` attribute in the response.  The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started/). 
   /// </summary>
-  /// <value>Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).</value>
+  /// <value>Whether to include a `queryID` attribute in the response.  The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started/). </value>
   [JsonPropertyName("clickAnalytics")]
   public bool? ClickAnalytics { get; set; }
 
   /// <summary>
-  /// Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).
+  /// Whether this search will be included in Analytics.
   /// </summary>
-  /// <value>Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).</value>
+  /// <value>Whether this search will be included in Analytics.</value>
   [JsonPropertyName("analytics")]
   public bool? Analytics { get; set; }
 
@@ -266,79 +259,72 @@ public partial class RecommendedForYouQueryParameters
   public List<string> AnalyticsTags { get; set; }
 
   /// <summary>
-  /// Whether to include or exclude a query from the processing-time percentile computation.
+  /// Whether to include this search when calculating processing-time percentiles.
   /// </summary>
-  /// <value>Whether to include or exclude a query from the processing-time percentile computation.</value>
+  /// <value>Whether to include this search when calculating processing-time percentiles.</value>
   [JsonPropertyName("percentileComputation")]
   public bool? PercentileComputation { get; set; }
 
   /// <summary>
-  /// Incidates whether this search will be considered in A/B testing.
+  /// Whether to enable A/B testing for this search.
   /// </summary>
-  /// <value>Incidates whether this search will be considered in A/B testing.</value>
+  /// <value>Whether to enable A/B testing for this search.</value>
   [JsonPropertyName("enableABTest")]
   public bool? EnableABTest { get; set; }
 
   /// <summary>
-  /// Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/) and the [modifiers](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) that can be applied: `filterOnly`, `searchable`, and `afterDistinct`. 
+  /// Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. 
   /// </summary>
-  /// <value>Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/) and the [modifiers](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) that can be applied: `filterOnly`, `searchable`, and `afterDistinct`. </value>
-  [JsonPropertyName("attributesForFaceting")]
-  public List<string> AttributesForFaceting { get; set; }
-
-  /// <summary>
-  /// Attributes to include in the API response. To reduce the size of your response, you can retrieve only some of the attributes. By default, the response includes all attributes.
-  /// </summary>
-  /// <value>Attributes to include in the API response. To reduce the size of your response, you can retrieve only some of the attributes. By default, the response includes all attributes.</value>
+  /// <value>Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. </value>
   [JsonPropertyName("attributesToRetrieve")]
   public List<string> AttributesToRetrieve { get; set; }
 
   /// <summary>
-  /// Determines the order in which Algolia [returns your results](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/).
+  /// Determines the order in which Algolia returns your results.  By default, each entry corresponds to a [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/). The tie-breaking algorithm sequentially applies each criterion in the order they're specified. If you configure a replica index for [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute/), you put the sorting attribute at the top of the list.  **Modifiers**  <dl> <dt><code>asc(\"ATTRIBUTE\")</code></dt> <dd>Sort the index by the values of an attribute, in ascending order.</dd> <dt><code>desc(\"ATTRIBUTE\")</code></dt> <dd>Sort the index by the values of an attribute, in descending order.</dd> </dl>  Before you modify the default setting, you should test your changes in the dashboard, and by [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/). 
   /// </summary>
-  /// <value>Determines the order in which Algolia [returns your results](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/).</value>
+  /// <value>Determines the order in which Algolia returns your results.  By default, each entry corresponds to a [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/). The tie-breaking algorithm sequentially applies each criterion in the order they're specified. If you configure a replica index for [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute/), you put the sorting attribute at the top of the list.  **Modifiers**  <dl> <dt><code>asc(\"ATTRIBUTE\")</code></dt> <dd>Sort the index by the values of an attribute, in ascending order.</dd> <dt><code>desc(\"ATTRIBUTE\")</code></dt> <dd>Sort the index by the values of an attribute, in descending order.</dd> </dl>  Before you modify the default setting, you should test your changes in the dashboard, and by [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/). </value>
   [JsonPropertyName("ranking")]
   public List<string> Ranking { get; set; }
 
   /// <summary>
-  /// Specifies the [Custom ranking criterion](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Use the `asc` and `desc` modifiers to specify the ranking order: ascending or descending. 
+  /// Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/).  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  <dl> <dt><code>asc(\"ATTRIBUTE\")</code></dt> <dd>Sort the index by the values of an attribute, in ascending order.</dd> <dt><code>desc(\"ATTRIBUTE\")</code></dt> <dd>Sort the index by the values of an attribute, in descending order.</dd> </dl>  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. 
   /// </summary>
-  /// <value>Specifies the [Custom ranking criterion](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Use the `asc` and `desc` modifiers to specify the ranking order: ascending or descending. </value>
+  /// <value>Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/).  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  <dl> <dt><code>asc(\"ATTRIBUTE\")</code></dt> <dd>Sort the index by the values of an attribute, in ascending order.</dd> <dt><code>desc(\"ATTRIBUTE\")</code></dt> <dd>Sort the index by the values of an attribute, in descending order.</dd> </dl>  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. </value>
   [JsonPropertyName("customRanking")]
   public List<string> CustomRanking { get; set; }
 
   /// <summary>
-  /// Relevancy threshold below which less relevant results aren't included in the results.
+  /// Relevancy threshold below which less relevant results aren't included in the results.  You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. 
   /// </summary>
-  /// <value>Relevancy threshold below which less relevant results aren't included in the results.</value>
+  /// <value>Relevancy threshold below which less relevant results aren't included in the results.  You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. </value>
   [JsonPropertyName("relevancyStrictness")]
   public int? RelevancyStrictness { get; set; }
 
   /// <summary>
-  /// Attributes to highlight. Strings that match the search query in the attributes are highlighted by surrounding them with HTML tags (`highlightPreTag` and `highlightPostTag`).
+  /// Attributes to highlight.  By default, all searchable attributes are highlighted. Use `*` to highlight all attributes or use an empty array `[]` to turn off highlighting.  With highlighting, strings that match the search query are surrounded by HTML tags defined by `highlightPreTag` and `highlightPostTag`. You can use this to visually highlight matching parts of a search query in your UI.  For more information, see [Highlighting and snippeting](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/highlighting-snippeting/js/). 
   /// </summary>
-  /// <value>Attributes to highlight. Strings that match the search query in the attributes are highlighted by surrounding them with HTML tags (`highlightPreTag` and `highlightPostTag`).</value>
+  /// <value>Attributes to highlight.  By default, all searchable attributes are highlighted. Use `*` to highlight all attributes or use an empty array `[]` to turn off highlighting.  With highlighting, strings that match the search query are surrounded by HTML tags defined by `highlightPreTag` and `highlightPostTag`. You can use this to visually highlight matching parts of a search query in your UI.  For more information, see [Highlighting and snippeting](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/highlighting-snippeting/js/). </value>
   [JsonPropertyName("attributesToHighlight")]
   public List<string> AttributesToHighlight { get; set; }
 
   /// <summary>
-  /// Attributes to _snippet_. 'Snippeting' is shortening the attribute to a certain number of words. If not specified, the attribute is shortened to the 10 words around the matching string but you can specify the number. For example: `body:20`. 
+  /// Attributes for which to enable snippets.  Snippets provide additional context to matched words. If you enable snippets, they include 10 words, including the matched word. The matched word will also be wrapped by HTML tags for highlighting. You can adjust the number of words with the following notation: `ATTRIBUTE:NUMBER`, where `NUMBER` is the number of words to be extracted. 
   /// </summary>
-  /// <value>Attributes to _snippet_. 'Snippeting' is shortening the attribute to a certain number of words. If not specified, the attribute is shortened to the 10 words around the matching string but you can specify the number. For example: `body:20`. </value>
+  /// <value>Attributes for which to enable snippets.  Snippets provide additional context to matched words. If you enable snippets, they include 10 words, including the matched word. The matched word will also be wrapped by HTML tags for highlighting. You can adjust the number of words with the following notation: `ATTRIBUTE:NUMBER`, where `NUMBER` is the number of words to be extracted. </value>
   [JsonPropertyName("attributesToSnippet")]
   public List<string> AttributesToSnippet { get; set; }
 
   /// <summary>
-  /// HTML string to insert before the highlighted parts in all highlight and snippet results.
+  /// HTML tag to insert before the highlighted parts in all highlighted results and snippets.
   /// </summary>
-  /// <value>HTML string to insert before the highlighted parts in all highlight and snippet results.</value>
+  /// <value>HTML tag to insert before the highlighted parts in all highlighted results and snippets.</value>
   [JsonPropertyName("highlightPreTag")]
   public string HighlightPreTag { get; set; }
 
   /// <summary>
-  /// HTML string to insert after the highlighted parts in all highlight and snippet results.
+  /// HTML tag to insert after the highlighted parts in all highlighted results and snippets.
   /// </summary>
-  /// <value>HTML string to insert after the highlighted parts in all highlight and snippet results.</value>
+  /// <value>HTML tag to insert after the highlighted parts in all highlighted results and snippets.</value>
   [JsonPropertyName("highlightPostTag")]
   public string HighlightPostTag { get; set; }
 
@@ -350,9 +336,9 @@ public partial class RecommendedForYouQueryParameters
   public string SnippetEllipsisText { get; set; }
 
   /// <summary>
-  /// Restrict highlighting and snippeting to items that matched the query.
+  /// Whether to restrict highlighting and snippeting to items that at least partially matched the search query. By default, all items are highlighted and snippeted. 
   /// </summary>
-  /// <value>Restrict highlighting and snippeting to items that matched the query.</value>
+  /// <value>Whether to restrict highlighting and snippeting to items that at least partially matched the search query. By default, all items are highlighted and snippeted. </value>
   [JsonPropertyName("restrictHighlightAndSnippetArrays")]
   public bool? RestrictHighlightAndSnippetArrays { get; set; }
 
@@ -364,16 +350,16 @@ public partial class RecommendedForYouQueryParameters
   public int? HitsPerPage { get; set; }
 
   /// <summary>
-  /// Minimum number of characters a word in the query string must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+  /// Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
   /// </summary>
-  /// <value>Minimum number of characters a word in the query string must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
+  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
   [JsonPropertyName("minWordSizefor1Typo")]
   public int? MinWordSizefor1Typo { get; set; }
 
   /// <summary>
-  /// Minimum number of characters a word in the query string must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+  /// Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
   /// </summary>
-  /// <value>Minimum number of characters a word in the query string must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
+  /// <value>Minimum number of characters a word in the search query must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
   [JsonPropertyName("minWordSizefor2Typos")]
   public int? MinWordSizefor2Typos { get; set; }
 
@@ -384,16 +370,16 @@ public partial class RecommendedForYouQueryParameters
   public TypoTolerance TypoTolerance { get; set; }
 
   /// <summary>
-  /// Whether to allow typos on numbers (\"numeric tokens\") in the query string.
+  /// Whether to allow typos on numbers in the search query.  Turn off this setting to reduce the number of irrelevant matches when searching in large sets of similar numbers. 
   /// </summary>
-  /// <value>Whether to allow typos on numbers (\"numeric tokens\") in the query string.</value>
+  /// <value>Whether to allow typos on numbers in the search query.  Turn off this setting to reduce the number of irrelevant matches when searching in large sets of similar numbers. </value>
   [JsonPropertyName("allowTyposOnNumericTokens")]
   public bool? AllowTyposOnNumericTokens { get; set; }
 
   /// <summary>
-  /// Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
+  /// Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).  Returning only exact matches can help when:  - [Searching in hyphenated attributes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/how-to/how-to-search-in-hyphenated-attributes/). - Reducing the number of matches when you have too many.   This can happen with attributes that are long blocks of text, such as product descriptions.  Consider alternatives such as `disableTypoToleranceOnWords` or adding synonyms if your attributes have intentional unusual spellings that might look like typos. 
   /// </summary>
-  /// <value>Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).</value>
+  /// <value>Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).  Returning only exact matches can help when:  - [Searching in hyphenated attributes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/how-to/how-to-search-in-hyphenated-attributes/). - Reducing the number of matches when you have too many.   This can happen with attributes that are long blocks of text, such as product descriptions.  Consider alternatives such as `disableTypoToleranceOnWords` or adding synonyms if your attributes have intentional unusual spellings that might look like typos. </value>
   [JsonPropertyName("disableTypoToleranceOnAttributes")]
   public List<string> DisableTypoToleranceOnAttributes { get; set; }
 
@@ -410,37 +396,37 @@ public partial class RecommendedForYouQueryParameters
   public RemoveStopWords RemoveStopWords { get; set; }
 
   /// <summary>
-  /// Characters that the engine shouldn't automatically [normalize](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
+  /// Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. 
   /// </summary>
-  /// <value>Characters that the engine shouldn't automatically [normalize](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).</value>
+  /// <value>Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. </value>
   [JsonPropertyName("keepDiacriticsOnCharacters")]
   public string KeepDiacriticsOnCharacters { get; set; }
 
   /// <summary>
-  /// Sets your user's search language. This adjusts language-specific settings and features such as `ignorePlurals`, `removeStopWords`, and [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) word detection.
+  /// [ISO code](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for language-specific settings such as plurals, stop words, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.   **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/). 
   /// </summary>
-  /// <value>Sets your user's search language. This adjusts language-specific settings and features such as `ignorePlurals`, `removeStopWords`, and [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) word detection.</value>
+  /// <value>[ISO code](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for language-specific settings such as plurals, stop words, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.   **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/). </value>
   [JsonPropertyName("queryLanguages")]
   public List<string> QueryLanguages { get; set; }
 
   /// <summary>
-  /// [Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query. 
+  /// Whether to split compound words into their building blocks.  For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. 
   /// </summary>
-  /// <value>[Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query. </value>
+  /// <value>Whether to split compound words into their building blocks.  For more information, see [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words). Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and Norwegian. </value>
   [JsonPropertyName("decompoundQuery")]
   public bool? DecompoundQuery { get; set; }
 
   /// <summary>
-  /// Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.
+  /// Whether to enable rules.
   /// </summary>
-  /// <value>Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.</value>
+  /// <value>Whether to enable rules.</value>
   [JsonPropertyName("enableRules")]
   public bool? EnableRules { get; set; }
 
   /// <summary>
-  /// Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.
+  /// Whether to enable Personalization.
   /// </summary>
-  /// <value>Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.</value>
+  /// <value>Whether to enable Personalization.</value>
   [JsonPropertyName("enablePersonalization")]
   public bool? EnablePersonalization { get; set; }
 
@@ -451,37 +437,37 @@ public partial class RecommendedForYouQueryParameters
   public SemanticSearch SemanticSearch { get; set; }
 
   /// <summary>
-  /// Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).
+  /// Whether to support phrase matching and excluding words from search queries.  Use the `advancedSyntaxFeatures` parameter to control which feature is supported. 
   /// </summary>
-  /// <value>Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).</value>
+  /// <value>Whether to support phrase matching and excluding words from search queries.  Use the `advancedSyntaxFeatures` parameter to control which feature is supported. </value>
   [JsonPropertyName("advancedSyntax")]
   public bool? AdvancedSyntax { get; set; }
 
   /// <summary>
-  /// Words which should be considered [optional](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words) when found in a query.
+  /// Words that should be considered optional when found in the query.  By default, records must match all words in the search query to be included in the search results. Adding optional words can help to increase the number of search results by running an additional search query that doesn't include the optional words. For example, if the search query is \"action video\" and \"video\" is an optional word, the search engine runs two queries. One for \"action video\" and one for \"action\". Records that match all words are ranked higher.  For a search query with 4 or more words **and** all its words are optional, the number of matched words required for a record to be included in the search results increases for every 1,000 records:  - If `optionalWords` has less than 10 words, the required number of matched words increases by 1:   results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 2 matched words. - If `optionalWords` has 10 or more words, the number of required matched words increases by the number of optional words dividied by 5 (rounded down).   For example, with 18 optional words: results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 4 matched words.  For more information, see [Optional words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words). 
   /// </summary>
-  /// <value>Words which should be considered [optional](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words) when found in a query.</value>
+  /// <value>Words that should be considered optional when found in the query.  By default, records must match all words in the search query to be included in the search results. Adding optional words can help to increase the number of search results by running an additional search query that doesn't include the optional words. For example, if the search query is \"action video\" and \"video\" is an optional word, the search engine runs two queries. One for \"action video\" and one for \"action\". Records that match all words are ranked higher.  For a search query with 4 or more words **and** all its words are optional, the number of matched words required for a record to be included in the search results increases for every 1,000 records:  - If `optionalWords` has less than 10 words, the required number of matched words increases by 1:   results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 2 matched words. - If `optionalWords` has 10 or more words, the number of required matched words increases by the number of optional words dividied by 5 (rounded down).   For example, with 18 optional words: results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 4 matched words.  For more information, see [Optional words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words). </value>
   [JsonPropertyName("optionalWords")]
   public List<string> OptionalWords { get; set; }
 
   /// <summary>
-  /// Attributes for which you want to [turn off the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
+  /// Searchable attributes for which you want to [turn off the Exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).  This can be useful for attributes with long values, where the likelyhood of an exact match is high, such as product descriptions. Turning off the Exact ranking criterion for these attributes favors exact matching on other attributes. This reduces the impact of individual attributes with a lot of content on ranking. 
   /// </summary>
-  /// <value>Attributes for which you want to [turn off the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).</value>
+  /// <value>Searchable attributes for which you want to [turn off the Exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).  This can be useful for attributes with long values, where the likelyhood of an exact match is high, such as product descriptions. Turning off the Exact ranking criterion for these attributes favors exact matching on other attributes. This reduces the impact of individual attributes with a lot of content on ranking. </value>
   [JsonPropertyName("disableExactOnAttributes")]
   public List<string> DisableExactOnAttributes { get; set; }
 
   /// <summary>
-  /// Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
+  /// Alternatives of query words that should be considered as exact matches by the Exact ranking criterion.  <dl> <dt><code>ignorePlurals</code></dt> <dd>  Plurals and similar declensions added by the `ignorePlurals` setting are considered exact matches.  </dd> <dt><code>singleWordSynonym</code></dt> <dd> Single-word synonyms, such as \"NY/NYC\" are considered exact matches. </dd> <dt><code>multiWordsSynonym</code></dt> <dd> Multi-word synonyms, such as \"NY/New York\" are considered exact matches. </dd> </dl>. 
   /// </summary>
-  /// <value>Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).</value>
+  /// <value>Alternatives of query words that should be considered as exact matches by the Exact ranking criterion.  <dl> <dt><code>ignorePlurals</code></dt> <dd>  Plurals and similar declensions added by the `ignorePlurals` setting are considered exact matches.  </dd> <dt><code>singleWordSynonym</code></dt> <dd> Single-word synonyms, such as \"NY/NYC\" are considered exact matches. </dd> <dt><code>multiWordsSynonym</code></dt> <dd> Multi-word synonyms, such as \"NY/New York\" are considered exact matches. </dd> </dl>. </value>
   [JsonPropertyName("alternativesAsExact")]
   public List<AlternativesAsExact> AlternativesAsExact { get; set; }
 
   /// <summary>
-  /// Allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled.
+  /// Advanced search syntax features you want to support.  <dl> <dt><code>exactPhrase</code></dt> <dd>  Phrases in quotes must match exactly. For example, `sparkly blue \"iPhone case\"` only returns records with the exact string \"iPhone case\".  </dd> <dt><code>excludeWords</code></dt> <dd>  Query words prefixed with a `-` must not occur in a record. For example, `search -engine` matches records that contain \"search\" but not \"engine\".  </dd> </dl>  This setting only has an effect if `advancedSyntax` is true. 
   /// </summary>
-  /// <value>Allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled.</value>
+  /// <value>Advanced search syntax features you want to support.  <dl> <dt><code>exactPhrase</code></dt> <dd>  Phrases in quotes must match exactly. For example, `sparkly blue \"iPhone case\"` only returns records with the exact string \"iPhone case\".  </dd> <dt><code>excludeWords</code></dt> <dd>  Query words prefixed with a `-` must not occur in a record. For example, `search -engine` matches records that contain \"search\" but not \"engine\".  </dd> </dl>  This setting only has an effect if `advancedSyntax` is true. </value>
   [JsonPropertyName("advancedSyntaxFeatures")]
   public List<AdvancedSyntaxFeatures> AdvancedSyntaxFeatures { get; set; }
 
@@ -492,30 +478,30 @@ public partial class RecommendedForYouQueryParameters
   public Distinct Distinct { get; set; }
 
   /// <summary>
-  /// Whether to highlight and snippet the original word that matches the synonym or the synonym itself.
+  /// Whether to replace a highlighted word with the matched synonym.  By default, the original words are highlighted even if a synonym matches. For example, with `home` as a synonym for `house` and a search for `home`, records matching either \"home\" or \"house\" are included in the search results, and either \"home\" or \"house\" are highlighted.  With `replaceSynonymsInHighlight` set to `true`, a search for `home` still matches the same records, but all occurences of \"house\" are replaced by \"home\" in the highlighted response. 
   /// </summary>
-  /// <value>Whether to highlight and snippet the original word that matches the synonym or the synonym itself.</value>
+  /// <value>Whether to replace a highlighted word with the matched synonym.  By default, the original words are highlighted even if a synonym matches. For example, with `home` as a synonym for `house` and a search for `home`, records matching either \"home\" or \"house\" are included in the search results, and either \"home\" or \"house\" are highlighted.  With `replaceSynonymsInHighlight` set to `true`, a search for `home` still matches the same records, but all occurences of \"house\" are replaced by \"home\" in the highlighted response. </value>
   [JsonPropertyName("replaceSynonymsInHighlight")]
   public bool? ReplaceSynonymsInHighlight { get; set; }
 
   /// <summary>
-  /// Precision of the [proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity).
+  /// Minimum proximity score for two matching words.  This adjusts the [Proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity) by equally scoring matches that are farther apart.  For example, if `minProximity` is 2, neighboring matches and matches with one word between them would have the same score. 
   /// </summary>
-  /// <value>Precision of the [proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity).</value>
+  /// <value>Minimum proximity score for two matching words.  This adjusts the [Proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity) by equally scoring matches that are farther apart.  For example, if `minProximity` is 2, neighboring matches and matches with one word between them would have the same score. </value>
   [JsonPropertyName("minProximity")]
   public int? MinProximity { get; set; }
 
   /// <summary>
-  /// Attributes to include in the API response for search and browse queries.
+  /// Properties to include in the API response of `search` and `browse` requests.  By default, all response properties are included. To reduce the response size, you can select, which attributes should be included.  You can't exclude these properties: `message`, `warning`, `cursor`, `serverUsed`, `indexUsed`, `abTestVariantID`, `parsedQuery`, or any property triggered by the `getRankingInfo` parameter.  Don't exclude properties that you might need in your search UI. 
   /// </summary>
-  /// <value>Attributes to include in the API response for search and browse queries.</value>
+  /// <value>Properties to include in the API response of `search` and `browse` requests.  By default, all response properties are included. To reduce the response size, you can select, which attributes should be included.  You can't exclude these properties: `message`, `warning`, `cursor`, `serverUsed`, `indexUsed`, `abTestVariantID`, `parsedQuery`, or any property triggered by the `getRankingInfo` parameter.  Don't exclude properties that you might need in your search UI. </value>
   [JsonPropertyName("responseFields")]
   public List<string> ResponseFields { get; set; }
 
   /// <summary>
-  /// Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+  /// Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
   /// </summary>
-  /// <value>Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
+  /// <value>Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
   [JsonPropertyName("maxFacetHits")]
   public int? MaxFacetHits { get; set; }
 
@@ -527,16 +513,16 @@ public partial class RecommendedForYouQueryParameters
   public int? MaxValuesPerFacet { get; set; }
 
   /// <summary>
-  /// Controls how facet values are fetched.
+  /// Order in which to retrieve facet values.  <dl> <dt><code>count</code></dt> <dd> Facet values are retrieved by decreasing count. The count is the number of matching records containing this facet value. </dd> <dt><code>alpha</code></dt> <dd>Retrieve facet values alphabetically.</dd> </dl>  This setting doesn't influence how facet values are displayed in your UI (see `renderingContent`). For more information, see [facet value display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/js/). 
   /// </summary>
-  /// <value>Controls how facet values are fetched.</value>
+  /// <value>Order in which to retrieve facet values.  <dl> <dt><code>count</code></dt> <dd> Facet values are retrieved by decreasing count. The count is the number of matching records containing this facet value. </dd> <dt><code>alpha</code></dt> <dd>Retrieve facet values alphabetically.</dd> </dl>  This setting doesn't influence how facet values are displayed in your UI (see `renderingContent`). For more information, see [facet value display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/js/). </value>
   [JsonPropertyName("sortFacetValuesBy")]
   public string SortFacetValuesBy { get; set; }
 
   /// <summary>
-  /// When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.
+  /// Whether the best matching attribute should be determined by minimum proximity.  This setting only affects ranking if the Attribute ranking criterion comes before Proximity in the `ranking` setting. If true, the best matching attribute is selected based on the minimum proximity of multiple matches. Otherwise, the best matching attribute is determined by the order in the `searchableAttributes` setting. 
   /// </summary>
-  /// <value>When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.</value>
+  /// <value>Whether the best matching attribute should be determined by minimum proximity.  This setting only affects ranking if the Attribute ranking criterion comes before Proximity in the `ranking` setting. If true, the best matching attribute is selected based on the minimum proximity of multiple matches. Otherwise, the best matching attribute is determined by the order in the `searchableAttributes` setting. </value>
   [JsonPropertyName("attributeCriteriaComputedByMinProximity")]
   public bool? AttributeCriteriaComputedByMinProximity { get; set; }
 
@@ -547,9 +533,9 @@ public partial class RecommendedForYouQueryParameters
   public RenderingContent RenderingContent { get; set; }
 
   /// <summary>
-  /// Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
+  /// Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).  This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard. 
   /// </summary>
-  /// <value>Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).</value>
+  /// <value>Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).  This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard. </value>
   [JsonPropertyName("enableReRanking")]
   public bool? EnableReRanking { get; set; }
 
@@ -593,14 +579,12 @@ public partial class RecommendedForYouQueryParameters
     sb.Append("  PersonalizationImpact: ").Append(PersonalizationImpact).Append("\n");
     sb.Append("  UserToken: ").Append(UserToken).Append("\n");
     sb.Append("  GetRankingInfo: ").Append(GetRankingInfo).Append("\n");
-    sb.Append("  Explain: ").Append(Explain).Append("\n");
     sb.Append("  Synonyms: ").Append(Synonyms).Append("\n");
     sb.Append("  ClickAnalytics: ").Append(ClickAnalytics).Append("\n");
     sb.Append("  Analytics: ").Append(Analytics).Append("\n");
     sb.Append("  AnalyticsTags: ").Append(AnalyticsTags).Append("\n");
     sb.Append("  PercentileComputation: ").Append(PercentileComputation).Append("\n");
     sb.Append("  EnableABTest: ").Append(EnableABTest).Append("\n");
-    sb.Append("  AttributesForFaceting: ").Append(AttributesForFaceting).Append("\n");
     sb.Append("  AttributesToRetrieve: ").Append(AttributesToRetrieve).Append("\n");
     sb.Append("  Ranking: ").Append(Ranking).Append("\n");
     sb.Append("  CustomRanking: ").Append(CustomRanking).Append("\n");
@@ -697,14 +681,12 @@ public partial class RecommendedForYouQueryParameters
         (PersonalizationImpact == input.PersonalizationImpact || PersonalizationImpact.Equals(input.PersonalizationImpact)) &&
         (UserToken == input.UserToken || (UserToken != null && UserToken.Equals(input.UserToken))) &&
         (GetRankingInfo == input.GetRankingInfo || GetRankingInfo.Equals(input.GetRankingInfo)) &&
-        (Explain == input.Explain || Explain != null && input.Explain != null && Explain.SequenceEqual(input.Explain)) &&
         (Synonyms == input.Synonyms || Synonyms.Equals(input.Synonyms)) &&
         (ClickAnalytics == input.ClickAnalytics || ClickAnalytics.Equals(input.ClickAnalytics)) &&
         (Analytics == input.Analytics || Analytics.Equals(input.Analytics)) &&
         (AnalyticsTags == input.AnalyticsTags || AnalyticsTags != null && input.AnalyticsTags != null && AnalyticsTags.SequenceEqual(input.AnalyticsTags)) &&
         (PercentileComputation == input.PercentileComputation || PercentileComputation.Equals(input.PercentileComputation)) &&
         (EnableABTest == input.EnableABTest || EnableABTest.Equals(input.EnableABTest)) &&
-        (AttributesForFaceting == input.AttributesForFaceting || AttributesForFaceting != null && input.AttributesForFaceting != null && AttributesForFaceting.SequenceEqual(input.AttributesForFaceting)) &&
         (AttributesToRetrieve == input.AttributesToRetrieve || AttributesToRetrieve != null && input.AttributesToRetrieve != null && AttributesToRetrieve.SequenceEqual(input.AttributesToRetrieve)) &&
         (Ranking == input.Ranking || Ranking != null && input.Ranking != null && Ranking.SequenceEqual(input.Ranking)) &&
         (CustomRanking == input.CustomRanking || CustomRanking != null && input.CustomRanking != null && CustomRanking.SequenceEqual(input.CustomRanking)) &&
@@ -837,10 +819,6 @@ public partial class RecommendedForYouQueryParameters
         hashCode = (hashCode * 59) + UserToken.GetHashCode();
       }
       hashCode = (hashCode * 59) + GetRankingInfo.GetHashCode();
-      if (Explain != null)
-      {
-        hashCode = (hashCode * 59) + Explain.GetHashCode();
-      }
       hashCode = (hashCode * 59) + Synonyms.GetHashCode();
       hashCode = (hashCode * 59) + ClickAnalytics.GetHashCode();
       hashCode = (hashCode * 59) + Analytics.GetHashCode();
@@ -850,10 +828,6 @@ public partial class RecommendedForYouQueryParameters
       }
       hashCode = (hashCode * 59) + PercentileComputation.GetHashCode();
       hashCode = (hashCode * 59) + EnableABTest.GetHashCode();
-      if (AttributesForFaceting != null)
-      {
-        hashCode = (hashCode * 59) + AttributesForFaceting.GetHashCode();
-      }
       if (AttributesToRetrieve != null)
       {
         hashCode = (hashCode * 59) + AttributesToRetrieve.GetHashCode();

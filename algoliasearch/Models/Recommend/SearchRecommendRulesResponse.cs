@@ -25,9 +25,9 @@ public partial class SearchRecommendRulesResponse
   /// Initializes a new instance of the SearchRecommendRulesResponse class.
   /// </summary>
   /// <param name="hits">Fetched rules. (required).</param>
-  /// <param name="nbHits">Number of hits the search query matched. (required).</param>
-  /// <param name="page">Page to retrieve (the first page is &#x60;0&#x60;, not &#x60;1&#x60;). (required) (default to 0).</param>
-  /// <param name="nbPages">Number of pages of results for the current query. (required).</param>
+  /// <param name="nbHits">Number of results (hits). (required).</param>
+  /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
+  /// <param name="nbPages">Number of pages of results. (required).</param>
   public SearchRecommendRulesResponse(List<RuleResponse> hits, int nbHits, int page, int nbPages)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
@@ -44,23 +44,23 @@ public partial class SearchRecommendRulesResponse
   public List<RuleResponse> Hits { get; set; }
 
   /// <summary>
-  /// Number of hits the search query matched.
+  /// Number of results (hits).
   /// </summary>
-  /// <value>Number of hits the search query matched.</value>
+  /// <value>Number of results (hits).</value>
   [JsonPropertyName("nbHits")]
   public int NbHits { get; set; }
 
   /// <summary>
-  /// Page to retrieve (the first page is `0`, not `1`).
+  /// Page of search results to retrieve.
   /// </summary>
-  /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
+  /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
   public int Page { get; set; }
 
   /// <summary>
-  /// Number of pages of results for the current query.
+  /// Number of pages of results.
   /// </summary>
-  /// <value>Number of pages of results for the current query.</value>
+  /// <value>Number of pages of results.</value>
   [JsonPropertyName("nbPages")]
   public int NbPages { get; set; }
 

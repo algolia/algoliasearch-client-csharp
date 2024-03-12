@@ -30,16 +30,16 @@ public partial class SearchSynonymsParams
   }
 
   /// <summary>
-  /// Text to search for in an index.
+  /// Search query.
   /// </summary>
-  /// <value>Text to search for in an index.</value>
+  /// <value>Search query.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 
   /// <summary>
-  /// Page to retrieve (the first page is `0`, not `1`).
+  /// Page of search results to retrieve.
   /// </summary>
-  /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
+  /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
   public int? Page { get; set; }
 

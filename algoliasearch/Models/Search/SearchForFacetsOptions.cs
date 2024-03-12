@@ -31,7 +31,7 @@ public partial class SearchForFacetsOptions
   /// Initializes a new instance of the SearchForFacetsOptions class.
   /// </summary>
   /// <param name="facet">Facet name. (required).</param>
-  /// <param name="indexName">Algolia index name. (required).</param>
+  /// <param name="indexName">Index name. (required).</param>
   /// <param name="type">type (required).</param>
   public SearchForFacetsOptions(string facet, string indexName, SearchTypeFacet? type)
   {
@@ -48,9 +48,9 @@ public partial class SearchForFacetsOptions
   public string Facet { get; set; }
 
   /// <summary>
-  /// Algolia index name.
+  /// Index name.
   /// </summary>
-  /// <value>Algolia index name.</value>
+  /// <value>Index name.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 
@@ -62,9 +62,9 @@ public partial class SearchForFacetsOptions
   public string FacetQuery { get; set; }
 
   /// <summary>
-  /// Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+  /// Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
   /// </summary>
-  /// <value>Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
+  /// <value>Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
   [JsonPropertyName("maxFacetHits")]
   public int? MaxFacetHits { get; set; }
 

@@ -24,16 +24,16 @@ public partial class ConsequenceQueryObject
   }
 
   /// <summary>
-  /// Words to remove.
+  /// Words to remove from the search query.
   /// </summary>
-  /// <value>Words to remove.</value>
+  /// <value>Words to remove from the search query.</value>
   [JsonPropertyName("remove")]
   public List<string> Remove { get; set; }
 
   /// <summary>
-  /// Edits to apply.
+  /// Changes to make to the search query.
   /// </summary>
-  /// <value>Edits to apply.</value>
+  /// <value>Changes to make to the search query.</value>
   [JsonPropertyName("edits")]
   public List<Edit> Edits { get; set; }
 

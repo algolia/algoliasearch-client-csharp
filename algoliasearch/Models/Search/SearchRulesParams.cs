@@ -30,23 +30,23 @@ public partial class SearchRulesParams
   }
 
   /// <summary>
-  /// Rule object query.
+  /// Search query for rules.
   /// </summary>
-  /// <value>Rule object query.</value>
+  /// <value>Search query for rules.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 
   /// <summary>
-  /// Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+  /// Only return rules that match the context (exact match).
   /// </summary>
-  /// <value>Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).</value>
+  /// <value>Only return rules that match the context (exact match).</value>
   [JsonPropertyName("context")]
   public string Context { get; set; }
 
   /// <summary>
-  /// Requested page (the first page is page 0).
+  /// Requested page of the API response.
   /// </summary>
-  /// <value>Requested page (the first page is page 0).</value>
+  /// <value>Requested page of the API response.</value>
   [JsonPropertyName("page")]
   public int? Page { get; set; }
 
@@ -58,18 +58,11 @@ public partial class SearchRulesParams
   public int? HitsPerPage { get; set; }
 
   /// <summary>
-  /// Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.
+  /// If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned. 
   /// </summary>
-  /// <value>Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.</value>
+  /// <value>If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned. </value>
   [JsonPropertyName("enabled")]
   public bool? Enabled { get; set; }
-
-  /// <summary>
-  /// Request options to send with the API call.
-  /// </summary>
-  /// <value>Request options to send with the API call.</value>
-  [JsonPropertyName("requestOptions")]
-  public List<object> RequestOptions { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -85,7 +78,6 @@ public partial class SearchRulesParams
     sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
-    sb.Append("  RequestOptions: ").Append(RequestOptions).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -117,8 +109,7 @@ public partial class SearchRulesParams
         (Context == input.Context || (Context != null && Context.Equals(input.Context))) &&
         (Page == input.Page || Page.Equals(input.Page)) &&
         (HitsPerPage == input.HitsPerPage || HitsPerPage.Equals(input.HitsPerPage)) &&
-        (Enabled == input.Enabled || (Enabled != null && Enabled.Equals(input.Enabled))) &&
-        (RequestOptions == input.RequestOptions || RequestOptions != null && input.RequestOptions != null && RequestOptions.SequenceEqual(input.RequestOptions));
+        (Enabled == input.Enabled || (Enabled != null && Enabled.Equals(input.Enabled)));
   }
 
   /// <summary>
@@ -144,10 +135,6 @@ public partial class SearchRulesParams
       if (Enabled != null)
       {
         hashCode = (hashCode * 59) + Enabled.GetHashCode();
-      }
-      if (RequestOptions != null)
-      {
-        hashCode = (hashCode * 59) + RequestOptions.GetHashCode();
       }
       return hashCode;
     }

@@ -25,7 +25,7 @@ public partial class AddApiKeyResponse
   /// Initializes a new instance of the AddApiKeyResponse class.
   /// </summary>
   /// <param name="key">API key. (required).</param>
-  /// <param name="createdAt">Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="createdAt">Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
   public AddApiKeyResponse(string key, string createdAt)
   {
     Key = key ?? throw new ArgumentNullException(nameof(key));
@@ -40,9 +40,9 @@ public partial class AddApiKeyResponse
   public string Key { get; set; }
 
   /// <summary>
-  /// Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
   /// </summary>
-  /// <value>Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

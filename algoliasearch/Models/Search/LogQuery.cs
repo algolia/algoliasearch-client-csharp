@@ -31,9 +31,9 @@ public partial class LogQuery
   public string IndexName { get; set; }
 
   /// <summary>
-  /// User identifier.
+  /// A user identifier.
   /// </summary>
-  /// <value>User identifier.</value>
+  /// <value>A user identifier.</value>
   [JsonPropertyName("user_token")]
   public string UserToken { get; set; }
 

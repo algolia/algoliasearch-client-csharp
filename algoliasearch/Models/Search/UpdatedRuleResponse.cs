@@ -24,9 +24,9 @@ public partial class UpdatedRuleResponse
   /// <summary>
   /// Initializes a new instance of the UpdatedRuleResponse class.
   /// </summary>
-  /// <param name="objectID">Unique object identifier. (required).</param>
+  /// <param name="objectID">Unique identifier of a rule object. (required).</param>
   /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-  /// <param name="taskID">Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the &#x60;task&#x60; operation and this &#x60;taskID&#x60;.  (required).</param>
+  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the [&#x60;task&#x60; operation](#tag/Indices/operation/getTask) and this &#x60;taskID&#x60;.  (required).</param>
   public UpdatedRuleResponse(string objectID, string updatedAt, long taskID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
@@ -35,9 +35,9 @@ public partial class UpdatedRuleResponse
   }
 
   /// <summary>
-  /// Unique object identifier.
+  /// Unique identifier of a rule object.
   /// </summary>
-  /// <value>Unique object identifier.</value>
+  /// <value>Unique identifier of a rule object.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
@@ -49,9 +49,9 @@ public partial class UpdatedRuleResponse
   public string UpdatedAt { get; set; }
 
   /// <summary>
-  /// Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. 
+  /// Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`. 
   /// </summary>
-  /// <value>Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`. </value>
+  /// <value>Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`. </value>
   [JsonPropertyName("taskID")]
   public long TaskID { get; set; }
 

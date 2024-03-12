@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Indicates whether a dictionary entry is active (`enabled`) or inactive (`disabled`).
+/// Whether a dictionary entry is active.
 /// </summary>
-/// <value>Indicates whether a dictionary entry is active (`enabled`) or inactive (`disabled`).</value>
+/// <value>Whether a dictionary entry is active.</value>
 public enum DictionaryEntryState
 {
   /// <summary>

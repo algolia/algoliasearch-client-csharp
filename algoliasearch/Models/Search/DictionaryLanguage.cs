@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Custom entries for a dictionary.
+/// Dictionary type. If `null`, this dictionary type isn't supported for the language.
 /// </summary>
 public partial class DictionaryLanguage
 {
@@ -24,9 +24,9 @@ public partial class DictionaryLanguage
   }
 
   /// <summary>
-  /// If `0`, the dictionary hasn't been customized and only contains standard entries provided by Algolia. If `null`, that feature isn't available or isn't supported for that language. 
+  /// Number of custom dictionary entries.
   /// </summary>
-  /// <value>If `0`, the dictionary hasn't been customized and only contains standard entries provided by Algolia. If `null`, that feature isn't available or isn't supported for that language. </value>
+  /// <value>Number of custom dictionary entries.</value>
   [JsonPropertyName("nbCustomEntries")]
   public int? NbCustomEntries { get; set; }
 

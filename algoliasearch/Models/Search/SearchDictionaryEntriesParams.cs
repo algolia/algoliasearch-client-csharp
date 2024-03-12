@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// `searchDictionaryEntries` parameters. 
+/// Search parameter.
 /// </summary>
 public partial class SearchDictionaryEntriesParams
 {
@@ -24,23 +24,23 @@ public partial class SearchDictionaryEntriesParams
   /// <summary>
   /// Initializes a new instance of the SearchDictionaryEntriesParams class.
   /// </summary>
-  /// <param name="query">Text to search for in an index. (required) (default to &quot;&quot;).</param>
+  /// <param name="query">Search query. (required) (default to &quot;&quot;).</param>
   public SearchDictionaryEntriesParams(string query)
   {
     Query = query ?? throw new ArgumentNullException(nameof(query));
   }
 
   /// <summary>
-  /// Text to search for in an index.
+  /// Search query.
   /// </summary>
-  /// <value>Text to search for in an index.</value>
+  /// <value>Search query.</value>
   [JsonPropertyName("query")]
   public string Query { get; set; }
 
   /// <summary>
-  /// Page to retrieve (the first page is `0`, not `1`).
+  /// Page of search results to retrieve.
   /// </summary>
-  /// <value>Page to retrieve (the first page is `0`, not `1`).</value>
+  /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
   public int? Page { get; set; }
 
@@ -52,9 +52,9 @@ public partial class SearchDictionaryEntriesParams
   public int? HitsPerPage { get; set; }
 
   /// <summary>
-  /// [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). 
+  /// ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
   /// </summary>
-  /// <value>[Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). </value>
+  /// <value>ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).</value>
   [JsonPropertyName("language")]
   public string Language { get; set; }
 

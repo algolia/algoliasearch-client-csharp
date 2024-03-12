@@ -204,8 +204,8 @@ public interface IAbtestingClient
   /// <summary>
   /// List all A/B tests.
   /// </summary>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
   /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -219,8 +219,8 @@ public interface IAbtestingClient
   /// <summary>
   /// List all A/B tests. (Synchronous version)
   /// </summary>
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
   /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -621,8 +621,8 @@ public partial class AbtestingClient : IAbtestingClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
   /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -650,8 +650,8 @@ public partial class AbtestingClient : IAbtestingClient
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="offset">Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)</param>
-  /// <param name="limit">Number of records to return (page size). (optional, default to 10)</param>
+  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
+  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
   /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>

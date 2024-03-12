@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Indicates how well the attribute matched the search query.
+/// Whether the whole query string matches or only a part.
 /// </summary>
-/// <value>Indicates how well the attribute matched the search query.</value>
+/// <value>Whether the whole query string matches or only a part.</value>
 public enum MatchLevel
 {
   /// <summary>

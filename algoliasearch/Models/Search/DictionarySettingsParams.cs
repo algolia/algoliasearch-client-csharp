@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Enable or turn off the built-in Algolia stop words for a specific language.
+/// Turn on or off the built-in Algolia stop words for a specific language. 
 /// </summary>
 public partial class DictionarySettingsParams
 {

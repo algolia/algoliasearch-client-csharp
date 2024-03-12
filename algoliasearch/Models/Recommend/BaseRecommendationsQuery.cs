@@ -31,7 +31,7 @@ public partial class BaseRecommendationsQuery
   /// Initializes a new instance of the BaseRecommendationsQuery class.
   /// </summary>
   /// <param name="model">model (required).</param>
-  /// <param name="objectID">Unique object identifier. (required).</param>
+  /// <param name="objectID">Unique record identifier. (required).</param>
   public BaseRecommendationsQuery(RecommendationModels? model, string objectID)
   {
     Model = model;
@@ -39,9 +39,9 @@ public partial class BaseRecommendationsQuery
   }
 
   /// <summary>
-  /// Unique object identifier.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Unique object identifier.</value>
+  /// <value>Unique record identifier.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 

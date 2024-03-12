@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// A single hit.
+/// Search result.  A hit is a record from your index, augmented with special attributes for highlighting, snippeting, and ranking. 
 /// </summary>
 public partial class Hit
 {
@@ -27,7 +27,7 @@ public partial class Hit
   /// <summary>
   /// Initializes a new instance of the Hit class.
   /// </summary>
-  /// <param name="objectID">Unique object identifier. (required).</param>
+  /// <param name="objectID">Unique record identifier. (required).</param>
   public Hit(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
@@ -35,23 +35,23 @@ public partial class Hit
   }
 
   /// <summary>
-  /// Unique object identifier.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Unique object identifier.</value>
+  /// <value>Unique record identifier.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// Show highlighted section and words matched on a query.
+  /// Surround words that match the query with HTML tags for highlighting.
   /// </summary>
-  /// <value>Show highlighted section and words matched on a query.</value>
+  /// <value>Surround words that match the query with HTML tags for highlighting.</value>
   [JsonPropertyName("_highlightResult")]
   public Dictionary<string, HighlightResult> HighlightResult { get; set; }
 
   /// <summary>
-  /// Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+  /// Snippets that show the context around a matching search query.
   /// </summary>
-  /// <value>Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.</value>
+  /// <value>Snippets that show the context around a matching search query.</value>
   [JsonPropertyName("_snippetResult")]
   public Dictionary<string, SnippetResult> SnippetResult { get; set; }
 

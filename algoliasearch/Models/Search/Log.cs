@@ -24,17 +24,17 @@ public partial class Log
   /// <summary>
   /// Initializes a new instance of the Log class.
   /// </summary>
-  /// <param name="timestamp">Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-  /// <param name="method">HTTP method of the performed request. (required).</param>
-  /// <param name="answerCode">HTTP response code. (required).</param>
-  /// <param name="queryBody">Request body. Truncated after 1,000 characters. (required).</param>
-  /// <param name="answer">Answer body. Truncated after 1,000 characters. (required).</param>
-  /// <param name="url">Request URL. (required).</param>
+  /// <param name="timestamp">Timestamp of the API request in ISO 8601 format. (required).</param>
+  /// <param name="method">HTTP method of the request. (required).</param>
+  /// <param name="answerCode">HTTP status code of the response. (required).</param>
+  /// <param name="queryBody">Request body. (required).</param>
+  /// <param name="answer">Response body. (required).</param>
+  /// <param name="url">URL of the API endpoint. (required).</param>
   /// <param name="ip">IP address of the client that performed the request. (required).</param>
-  /// <param name="queryHeaders">Request headers (API key is obfuscated). (required).</param>
+  /// <param name="queryHeaders">Request headers (API keys are obfuscated). (required).</param>
   /// <param name="sha1">SHA1 signature of the log entry. (required).</param>
-  /// <param name="nbApiCalls">Number of API calls. (required).</param>
-  /// <param name="processingTimeMs">Processing time for the query. Doesn&#39;t include network time. (required).</param>
+  /// <param name="nbApiCalls">Number of API requests. (required).</param>
+  /// <param name="processingTimeMs">Processing time for the query in milliseconds. This doesn&#39;t include latency due to the network.  (required).</param>
   public Log(string timestamp, string method, string answerCode, string queryBody, string answer, string url, string ip, string queryHeaders, string sha1, string nbApiCalls, string processingTimeMs)
   {
     Timestamp = timestamp ?? throw new ArgumentNullException(nameof(timestamp));
@@ -51,44 +51,44 @@ public partial class Log
   }
 
   /// <summary>
-  /// Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Timestamp of the API request in ISO 8601 format.
   /// </summary>
-  /// <value>Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Timestamp of the API request in ISO 8601 format.</value>
   [JsonPropertyName("timestamp")]
   public string Timestamp { get; set; }
 
   /// <summary>
-  /// HTTP method of the performed request.
+  /// HTTP method of the request.
   /// </summary>
-  /// <value>HTTP method of the performed request.</value>
+  /// <value>HTTP method of the request.</value>
   [JsonPropertyName("method")]
   public string Method { get; set; }
 
   /// <summary>
-  /// HTTP response code.
+  /// HTTP status code of the response.
   /// </summary>
-  /// <value>HTTP response code.</value>
+  /// <value>HTTP status code of the response.</value>
   [JsonPropertyName("answer_code")]
   public string AnswerCode { get; set; }
 
   /// <summary>
-  /// Request body. Truncated after 1,000 characters.
+  /// Request body.
   /// </summary>
-  /// <value>Request body. Truncated after 1,000 characters.</value>
+  /// <value>Request body.</value>
   [JsonPropertyName("query_body")]
   public string QueryBody { get; set; }
 
   /// <summary>
-  /// Answer body. Truncated after 1,000 characters.
+  /// Response body.
   /// </summary>
-  /// <value>Answer body. Truncated after 1,000 characters.</value>
+  /// <value>Response body.</value>
   [JsonPropertyName("answer")]
   public string Answer { get; set; }
 
   /// <summary>
-  /// Request URL.
+  /// URL of the API endpoint.
   /// </summary>
-  /// <value>Request URL.</value>
+  /// <value>URL of the API endpoint.</value>
   [JsonPropertyName("url")]
   public string Url { get; set; }
 
@@ -100,9 +100,9 @@ public partial class Log
   public string Ip { get; set; }
 
   /// <summary>
-  /// Request headers (API key is obfuscated).
+  /// Request headers (API keys are obfuscated).
   /// </summary>
-  /// <value>Request headers (API key is obfuscated).</value>
+  /// <value>Request headers (API keys are obfuscated).</value>
   [JsonPropertyName("query_headers")]
   public string QueryHeaders { get; set; }
 
@@ -114,16 +114,16 @@ public partial class Log
   public string Sha1 { get; set; }
 
   /// <summary>
-  /// Number of API calls.
+  /// Number of API requests.
   /// </summary>
-  /// <value>Number of API calls.</value>
+  /// <value>Number of API requests.</value>
   [JsonPropertyName("nb_api_calls")]
   public string NbApiCalls { get; set; }
 
   /// <summary>
-  /// Processing time for the query. Doesn't include network time.
+  /// Processing time for the query in milliseconds. This doesn't include latency due to the network. 
   /// </summary>
-  /// <value>Processing time for the query. Doesn't include network time.</value>
+  /// <value>Processing time for the query in milliseconds. This doesn't include latency due to the network. </value>
   [JsonPropertyName("processing_time_ms")]
   public string ProcessingTimeMs { get; set; }
 
@@ -142,16 +142,16 @@ public partial class Log
   public string QueryParams { get; set; }
 
   /// <summary>
-  /// Number of hits returned for the query.
+  /// Number of search results (hits) returned for the query.
   /// </summary>
-  /// <value>Number of hits returned for the query.</value>
+  /// <value>Number of search results (hits) returned for the query.</value>
   [JsonPropertyName("query_nb_hits")]
   public string QueryNbHits { get; set; }
 
   /// <summary>
-  /// Performed queries for the given request.
+  /// Queries performed for the given request.
   /// </summary>
-  /// <value>Performed queries for the given request.</value>
+  /// <value>Queries performed for the given request.</value>
   [JsonPropertyName("inner_queries")]
   public List<LogQuery> InnerQueries { get; set; }
 
