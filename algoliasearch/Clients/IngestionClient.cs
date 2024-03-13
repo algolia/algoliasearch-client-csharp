@@ -726,8 +726,8 @@ public interface IIngestionClient
   /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
   /// <param name="action">The action of the tasks to retrieve. (optional)</param>
   /// <param name="enabled">Whether the task is enabled or not. (optional)</param>
-  /// <param name="sourceID">The sourceIDs of the tasks to retrive. (optional)</param>
-  /// <param name="destinationID">The destinationIDs of the tasks to retrive. (optional)</param>
+  /// <param name="sourceID">The sourceIDs of the tasks to retrieve. (optional)</param>
+  /// <param name="destinationID">The destinationIDs of the tasks to retrieve. (optional)</param>
   /// <param name="triggerType">The trigger type of the task. (optional)</param>
   /// <param name="sort">The key by which the list should be sorted. (optional)</param>
   /// <param name="order">The order of the returned list. (optional)</param>
@@ -746,8 +746,8 @@ public interface IIngestionClient
   /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
   /// <param name="action">The action of the tasks to retrieve. (optional)</param>
   /// <param name="enabled">Whether the task is enabled or not. (optional)</param>
-  /// <param name="sourceID">The sourceIDs of the tasks to retrive. (optional)</param>
-  /// <param name="destinationID">The destinationIDs of the tasks to retrive. (optional)</param>
+  /// <param name="sourceID">The sourceIDs of the tasks to retrieve. (optional)</param>
+  /// <param name="destinationID">The destinationIDs of the tasks to retrieve. (optional)</param>
   /// <param name="triggerType">The trigger type of the task. (optional)</param>
   /// <param name="sort">The key by which the list should be sorted. (optional)</param>
   /// <param name="order">The order of the returned list. (optional)</param>
@@ -2370,8 +2370,8 @@ public partial class IngestionClient : IIngestionClient
   /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
   /// <param name="action">The action of the tasks to retrieve. (optional)</param>
   /// <param name="enabled">Whether the task is enabled or not. (optional)</param>
-  /// <param name="sourceID">The sourceIDs of the tasks to retrive. (optional)</param>
-  /// <param name="destinationID">The destinationIDs of the tasks to retrive. (optional)</param>
+  /// <param name="sourceID">The sourceIDs of the tasks to retrieve. (optional)</param>
+  /// <param name="destinationID">The destinationIDs of the tasks to retrieve. (optional)</param>
   /// <param name="triggerType">The trigger type of the task. (optional)</param>
   /// <param name="sort">The key by which the list should be sorted. (optional)</param>
   /// <param name="order">The order of the returned list. (optional)</param>
@@ -2411,8 +2411,8 @@ public partial class IngestionClient : IIngestionClient
   /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
   /// <param name="action">The action of the tasks to retrieve. (optional)</param>
   /// <param name="enabled">Whether the task is enabled or not. (optional)</param>
-  /// <param name="sourceID">The sourceIDs of the tasks to retrive. (optional)</param>
-  /// <param name="destinationID">The destinationIDs of the tasks to retrive. (optional)</param>
+  /// <param name="sourceID">The sourceIDs of the tasks to retrieve. (optional)</param>
+  /// <param name="destinationID">The destinationIDs of the tasks to retrieve. (optional)</param>
   /// <param name="triggerType">The trigger type of the task. (optional)</param>
   /// <param name="sort">The key by which the list should be sorted. (optional)</param>
   /// <param name="order">The order of the returned list. (optional)</param>

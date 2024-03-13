@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The type of the task reflect how it can be used:   - onDemand: a task that runs manually   - schedule: a task that runs regularly, following a given cron expression   - subscription: a task that runs after a subscription event is received from an integration (e.g. Webhook). 
+/// The type of the task reflect how it can be used:   - onDemand: a task that runs manually   - schedule: a task that runs regularly, following a given cron expression   - subscription: a task that runs after a subscription event is received from an integration (e.g. Webhook).   - streaming: a task that runs continuously. 
 /// </summary>
-/// <value>The type of the task reflect how it can be used:   - onDemand: a task that runs manually   - schedule: a task that runs regularly, following a given cron expression   - subscription: a task that runs after a subscription event is received from an integration (e.g. Webhook). </value>
+/// <value>The type of the task reflect how it can be used:   - onDemand: a task that runs manually   - schedule: a task that runs regularly, following a given cron expression   - subscription: a task that runs after a subscription event is received from an integration (e.g. Webhook).   - streaming: a task that runs continuously. </value>
 public enum TriggerType
 {
   /// <summary>
@@ -33,6 +33,12 @@ public enum TriggerType
   /// Enum Subscription for value: subscription
   /// </summary>
   [JsonPropertyName("subscription")]
-  Subscription = 3
+  Subscription = 3,
+
+  /// <summary>
+  /// Enum Streaming for value: streaming
+  /// </summary>
+  [JsonPropertyName("streaming")]
+  Streaming = 4
 }
 

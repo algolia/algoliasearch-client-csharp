@@ -40,6 +40,16 @@ public partial class TaskInput : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the TaskInput class
+  /// with a StreamingUtilsInput
+  /// </summary>
+  /// <param name="actualInstance">An instance of StreamingUtilsInput.</param>
+  public TaskInput(StreamingUtilsInput actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -66,6 +76,16 @@ public partial class TaskInput : AbstractSchema
     return (ScheduleDateUtilsInput)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `StreamingUtilsInput`. If the actual instance is not `StreamingUtilsInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of StreamingUtilsInput</returns>
+  public StreamingUtilsInput AsStreamingUtilsInput()
+  {
+    return (StreamingUtilsInput)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `OnDemandDateUtilsInput` type.
@@ -83,6 +103,15 @@ public partial class TaskInput : AbstractSchema
   public bool IsScheduleDateUtilsInput()
   {
     return ActualInstance.GetType() == typeof(ScheduleDateUtilsInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `StreamingUtilsInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsStreamingUtilsInput()
+  {
+    return ActualInstance.GetType() == typeof(StreamingUtilsInput);
   }
 
   /// <summary>
@@ -191,6 +220,18 @@ public class TaskInputJsonConverter : JsonConverter<TaskInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ScheduleDateUtilsInput: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new TaskInput(jsonDocument.Deserialize<StreamingUtilsInput>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into StreamingUtilsInput: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

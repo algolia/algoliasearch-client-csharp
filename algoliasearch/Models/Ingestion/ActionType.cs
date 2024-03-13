@@ -33,6 +33,12 @@ public enum ActionType
   /// Enum Partial for value: partial
   /// </summary>
   [JsonPropertyName("partial")]
-  Partial = 3
+  Partial = 3,
+
+  /// <summary>
+  /// Enum Append for value: append
+  /// </summary>
+  [JsonPropertyName("append")]
+  Append = 4
 }
 

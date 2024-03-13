@@ -50,6 +50,16 @@ public partial class TaskCreateTrigger : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the TaskCreateTrigger class
+  /// with a StreamingTrigger
+  /// </summary>
+  /// <param name="actualInstance">An instance of StreamingTrigger.</param>
+  public TaskCreateTrigger(StreamingTrigger actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -86,6 +96,16 @@ public partial class TaskCreateTrigger : AbstractSchema
     return (SubscriptionTrigger)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `StreamingTrigger`. If the actual instance is not `StreamingTrigger`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of StreamingTrigger</returns>
+  public StreamingTrigger AsStreamingTrigger()
+  {
+    return (StreamingTrigger)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `OnDemandTriggerInput` type.
@@ -112,6 +132,15 @@ public partial class TaskCreateTrigger : AbstractSchema
   public bool IsSubscriptionTrigger()
   {
     return ActualInstance.GetType() == typeof(SubscriptionTrigger);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `StreamingTrigger` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsStreamingTrigger()
+  {
+    return ActualInstance.GetType() == typeof(StreamingTrigger);
   }
 
   /// <summary>
@@ -232,6 +261,18 @@ public class TaskCreateTriggerJsonConverter : JsonConverter<TaskCreateTrigger>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SubscriptionTrigger: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new TaskCreateTrigger(jsonDocument.Deserialize<StreamingTrigger>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into StreamingTrigger: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

@@ -32,6 +32,16 @@ public partial class SourceUpdateInput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the SourceUpdateInput class
+  /// with a SourceGA4BigQueryExport
+  /// </summary>
+  /// <param name="actualInstance">An instance of SourceGA4BigQueryExport.</param>
+  public SourceUpdateInput(SourceGA4BigQueryExport actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the SourceUpdateInput class
   /// with a SourceUpdateCommercetools
   /// </summary>
   /// <param name="actualInstance">An instance of SourceUpdateCommercetools.</param>
@@ -87,6 +97,16 @@ public partial class SourceUpdateInput : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `SourceGA4BigQueryExport`. If the actual instance is not `SourceGA4BigQueryExport`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceGA4BigQueryExport</returns>
+  public SourceGA4BigQueryExport AsSourceGA4BigQueryExport()
+  {
+    return (SourceGA4BigQueryExport)ActualInstance;
+  }
+
+  /// <summary>
   /// Get the actual instance of `SourceUpdateCommercetools`. If the actual instance is not `SourceUpdateCommercetools`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -134,6 +154,15 @@ public partial class SourceUpdateInput : AbstractSchema
   public bool IsSourceBigQuery()
   {
     return ActualInstance.GetType() == typeof(SourceBigQuery);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `SourceGA4BigQueryExport` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceGA4BigQueryExport()
+  {
+    return ActualInstance.GetType() == typeof(SourceGA4BigQueryExport);
   }
 
   /// <summary>
@@ -266,6 +295,18 @@ public class SourceUpdateInputJsonConverter : JsonConverter<SourceUpdateInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceBigQuery: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectID", out _) && root.TryGetProperty("datasetID", out _) && root.TryGetProperty("tablePrefix", out _))
+    {
+      try
+      {
+        return new SourceUpdateInput(jsonDocument.Deserialize<SourceGA4BigQueryExport>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceGA4BigQueryExport: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)

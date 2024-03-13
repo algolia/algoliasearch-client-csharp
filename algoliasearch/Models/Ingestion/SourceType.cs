@@ -50,6 +50,12 @@ public enum SourceType
   /// Enum Docker for value: docker
   /// </summary>
   [JsonPropertyName("docker")]
-  Docker = 6
+  Docker = 6,
+
+  /// <summary>
+  /// Enum Ga4BigqueryExport for value: ga4BigqueryExport
+  /// </summary>
+  [JsonPropertyName("ga4BigqueryExport")]
+  Ga4BigqueryExport = 7
 }
 
