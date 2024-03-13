@@ -30,13 +30,13 @@ public partial class ClickedObjectIDsAfterSearch
   /// <summary>
   /// Initializes a new instance of the ClickedObjectIDsAfterSearch class.
   /// </summary>
-  /// <param name="eventName">The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
+  /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
   /// <param name="eventType">eventType (required).</param>
-  /// <param name="index">The name of an Algolia index. (required).</param>
-  /// <param name="objectIDs">The object IDs of the records that are part of the event. (required).</param>
-  /// <param name="positions">The position of the clicked item the search results.  The first search result has a position of 1 (not 0). You must provide 1 &#x60;position&#x60; for each &#x60;objectID&#x60;.  (required).</param>
+  /// <param name="index">Index name to which the event&#39;s items belong. (required).</param>
+  /// <param name="objectIDs">Object IDs of the records that are part of the event. (required).</param>
+  /// <param name="positions">Position of the clicked item the search results.  You must provide 1 &#x60;position&#x60; for each &#x60;objectID&#x60;.  (required).</param>
   /// <param name="queryID">Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add &#x60;clickAnalytics: true&#x60; as a search request parameter, the query ID is included in the API response.  (required).</param>
-  /// <param name="userToken">An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens.  (required).</param>
+  /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don&#39;t use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
   public ClickedObjectIDsAfterSearch(string eventName, ClickEvent? eventType, string index, List<string> objectIDs, List<int> positions, string queryID, string userToken)
   {
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
@@ -49,30 +49,30 @@ public partial class ClickedObjectIDsAfterSearch
   }
 
   /// <summary>
-  /// The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
+  /// Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
   /// </summary>
-  /// <value>The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
+  /// <value>Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
   [JsonPropertyName("eventName")]
   public string EventName { get; set; }
 
   /// <summary>
-  /// The name of an Algolia index.
+  /// Index name to which the event's items belong.
   /// </summary>
-  /// <value>The name of an Algolia index.</value>
+  /// <value>Index name to which the event's items belong.</value>
   [JsonPropertyName("index")]
   public string Index { get; set; }
 
   /// <summary>
-  /// The object IDs of the records that are part of the event.
+  /// Object IDs of the records that are part of the event.
   /// </summary>
-  /// <value>The object IDs of the records that are part of the event.</value>
+  /// <value>Object IDs of the records that are part of the event.</value>
   [JsonPropertyName("objectIDs")]
   public List<string> ObjectIDs { get; set; }
 
   /// <summary>
-  /// The position of the clicked item the search results.  The first search result has a position of 1 (not 0). You must provide 1 `position` for each `objectID`. 
+  /// Position of the clicked item the search results.  You must provide 1 `position` for each `objectID`. 
   /// </summary>
-  /// <value>The position of the clicked item the search results.  The first search result has a position of 1 (not 0). You must provide 1 `position` for each `objectID`. </value>
+  /// <value>Position of the clicked item the search results.  You must provide 1 `position` for each `objectID`. </value>
   [JsonPropertyName("positions")]
   public List<int> Positions { get; set; }
 
@@ -84,23 +84,23 @@ public partial class ClickedObjectIDsAfterSearch
   public string QueryID { get; set; }
 
   /// <summary>
-  /// An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens. 
+  /// Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). 
   /// </summary>
-  /// <value>An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens. </value>
+  /// <value>Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
   [JsonPropertyName("userToken")]
   public string UserToken { get; set; }
 
   /// <summary>
-  /// An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens. 
+  /// Identifier for authenticated users.  When the user signs in, you can get an identifier from your system and send it as `authenticatedUserToken`. This lets you keep using the `userToken` from before the user signed in, while providing a reliable way to identify users across sessions. Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). 
   /// </summary>
-  /// <value>An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens. </value>
+  /// <value>Identifier for authenticated users.  When the user signs in, you can get an identifier from your system and send it as `authenticatedUserToken`. This lets you keep using the `userToken` from before the user signed in, while providing a reliable way to identify users across sessions. Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
   [JsonPropertyName("authenticatedUserToken")]
   public string AuthenticatedUserToken { get; set; }
 
   /// <summary>
-  /// The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
+  /// Timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
   /// </summary>
-  /// <value>The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
+  /// <value>Timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
   [JsonPropertyName("timestamp")]
   public long? Timestamp { get; set; }
 

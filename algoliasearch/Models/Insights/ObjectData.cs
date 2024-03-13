@@ -30,9 +30,9 @@ public partial class ObjectData
   public Price Price { get; set; }
 
   /// <summary>
-  /// The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item. 
+  /// Quantity of a product that has been purchased or added to the cart. The total purchase value is the sum of `quantity` multiplied with the `price` for each purchased item. 
   /// </summary>
-  /// <value>The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item. </value>
+  /// <value>Quantity of a product that has been purchased or added to the cart. The total purchase value is the sum of `quantity` multiplied with the `price` for each purchased item. </value>
   [JsonPropertyName("quantity")]
   public int? Quantity { get; set; }
 

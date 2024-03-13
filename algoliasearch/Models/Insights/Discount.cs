@@ -15,7 +15,7 @@ using Algolia.Search.Models.Common;
 namespace Algolia.Search.Models.Insights;
 
 /// <summary>
-/// The absolute value of the discount for this product, in units of `currency`. 
+/// Absolute value of the discount for this product, in units of `currency`.
 /// </summary>
 [JsonConverter(typeof(DiscountJsonConverter))]
 public partial class Discount : AbstractSchema

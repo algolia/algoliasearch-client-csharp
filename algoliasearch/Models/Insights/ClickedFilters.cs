@@ -30,11 +30,11 @@ public partial class ClickedFilters
   /// <summary>
   /// Initializes a new instance of the ClickedFilters class.
   /// </summary>
-  /// <param name="eventName">The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
+  /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
   /// <param name="eventType">eventType (required).</param>
-  /// <param name="index">The name of an Algolia index. (required).</param>
-  /// <param name="filters">Facet filters.  Each facet filter string must be URL-encoded, such as, &#x60;discount:10%25&#x60;.  (required).</param>
-  /// <param name="userToken">An anonymous or pseudonymous user identifier.  &gt; **Note**: Never include personally identifiable information in user tokens.  (required).</param>
+  /// <param name="index">Index name to which the event&#39;s items belong. (required).</param>
+  /// <param name="filters">Applied facet filters.  Facet filters are &#x60;facet:value&#x60; pairs. Facet values must be URL-encoded, such as, &#x60;discount:10%25&#x60;.  (required).</param>
+  /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don&#39;t use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
   public ClickedFilters(string eventName, ClickEvent? eventType, string index, List<string> filters, string userToken)
   {
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
@@ -45,44 +45,44 @@ public partial class ClickedFilters
   }
 
   /// <summary>
-  /// The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
+  /// Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. 
   /// </summary>
-  /// <value>The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
+  /// <value>Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework. </value>
   [JsonPropertyName("eventName")]
   public string EventName { get; set; }
 
   /// <summary>
-  /// The name of an Algolia index.
+  /// Index name to which the event's items belong.
   /// </summary>
-  /// <value>The name of an Algolia index.</value>
+  /// <value>Index name to which the event's items belong.</value>
   [JsonPropertyName("index")]
   public string Index { get; set; }
 
   /// <summary>
-  /// Facet filters.  Each facet filter string must be URL-encoded, such as, `discount:10%25`. 
+  /// Applied facet filters.  Facet filters are `facet:value` pairs. Facet values must be URL-encoded, such as, `discount:10%25`. 
   /// </summary>
-  /// <value>Facet filters.  Each facet filter string must be URL-encoded, such as, `discount:10%25`. </value>
+  /// <value>Applied facet filters.  Facet filters are `facet:value` pairs. Facet values must be URL-encoded, such as, `discount:10%25`. </value>
   [JsonPropertyName("filters")]
   public List<string> Filters { get; set; }
 
   /// <summary>
-  /// An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens. 
+  /// Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). 
   /// </summary>
-  /// <value>An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens. </value>
+  /// <value>Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
   [JsonPropertyName("userToken")]
   public string UserToken { get; set; }
 
   /// <summary>
-  /// An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens. 
+  /// Identifier for authenticated users.  When the user signs in, you can get an identifier from your system and send it as `authenticatedUserToken`. This lets you keep using the `userToken` from before the user signed in, while providing a reliable way to identify users across sessions. Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). 
   /// </summary>
-  /// <value>An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens. </value>
+  /// <value>Identifier for authenticated users.  When the user signs in, you can get an identifier from your system and send it as `authenticatedUserToken`. This lets you keep using the `userToken` from before the user signed in, while providing a reliable way to identify users across sessions. Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
   [JsonPropertyName("authenticatedUserToken")]
   public string AuthenticatedUserToken { get; set; }
 
   /// <summary>
-  /// The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
+  /// Timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. 
   /// </summary>
-  /// <value>The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
+  /// <value>Timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp. </value>
   [JsonPropertyName("timestamp")]
   public long? Timestamp { get; set; }
 

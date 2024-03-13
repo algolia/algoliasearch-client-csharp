@@ -15,7 +15,7 @@ using Algolia.Search.Models.Common;
 namespace Algolia.Search.Models.Insights;
 
 /// <summary>
-/// The total price of a product, including any discounts, in units of `currency`. 
+/// Total price of a product, including any discounts, in units of `currency`.
 /// </summary>
 [JsonConverter(typeof(PriceJsonConverter))]
 public partial class Price : AbstractSchema

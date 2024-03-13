@@ -130,9 +130,9 @@ public interface IInsightsClient
   object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile). 
+  /// Deletes all events related to the specified user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile). 
   /// </summary>
-  /// <param name="userToken">The user token for which to delete all associated events.</param>
+  /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -142,9 +142,9 @@ public interface IInsightsClient
   Task DeleteUserTokenAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile).  (Synchronous version)
+  /// Deletes all events related to the specified user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile).  (Synchronous version)
   /// </summary>
-  /// <param name="userToken">The user token for which to delete all associated events.</param>
+  /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -154,7 +154,7 @@ public interface IInsightsClient
   void DeleteUserToken(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB. 
+  /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB. 
   /// </summary>
   /// <param name="insightsEvents"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -166,7 +166,7 @@ public interface IInsightsClient
   Task<EventsResponse> PushEventsAsync(InsightsEvents insightsEvents, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.  (Synchronous version)
+  /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.  (Synchronous version)
   /// </summary>
   /// <param name="insightsEvents"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -412,9 +412,9 @@ public partial class InsightsClient : IInsightsClient
 
 
   /// <summary>
-  /// Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile). 
+  /// Deletes all events related to the specified user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile). 
   /// </summary>
-  /// <param name="userToken">The user token for which to delete all associated events.</param>
+  /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -436,9 +436,9 @@ public partial class InsightsClient : IInsightsClient
 
 
   /// <summary>
-  /// Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile).  (Synchronous version)
+  /// Deletes all events related to the specified user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile).  (Synchronous version)
   /// </summary>
-  /// <param name="userToken">The user token for which to delete all associated events.</param>
+  /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -450,7 +450,7 @@ public partial class InsightsClient : IInsightsClient
 
 
   /// <summary>
-  /// Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB. 
+  /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB. 
   /// </summary>
   /// <param name="insightsEvents"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -474,7 +474,7 @@ public partial class InsightsClient : IInsightsClient
 
 
   /// <summary>
-  /// Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.  (Synchronous version)
+  /// Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.  (Synchronous version)
   /// </summary>
   /// <param name="insightsEvents"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>

@@ -24,16 +24,16 @@ public partial class InsightsEvents
   /// <summary>
   /// Initializes a new instance of the InsightsEvents class.
   /// </summary>
-  /// <param name="events">List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error.  (required).</param>
+  /// <param name="events">Click and conversion events.  **All** events must be valid, otherwise the API returns an error.  (required).</param>
   public InsightsEvents(List<EventsItems> events)
   {
     Events = events ?? throw new ArgumentNullException(nameof(events));
   }
 
   /// <summary>
-  /// List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. 
+  /// Click and conversion events.  **All** events must be valid, otherwise the API returns an error. 
   /// </summary>
-  /// <value>List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. </value>
+  /// <value>Click and conversion events.  **All** events must be valid, otherwise the API returns an error. </value>
   [JsonPropertyName("events")]
   public List<EventsItems> Events { get; set; }
 
