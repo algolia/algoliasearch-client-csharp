@@ -16,6 +16,12 @@ namespace Algolia.Search.Models.Search;
 /// </summary>
 public partial class SearchDictionaryEntriesParams
 {
+
+  /// <summary>
+  /// Gets or Sets Language
+  /// </summary>
+  [JsonPropertyName("language")]
+  public SupportedLanguage? Language { get; set; }
   /// <summary>
   /// Initializes a new instance of the SearchDictionaryEntriesParams class.
   /// </summary>
@@ -50,13 +56,6 @@ public partial class SearchDictionaryEntriesParams
   /// <value>Number of hits per page.</value>
   [JsonPropertyName("hitsPerPage")]
   public int? HitsPerPage { get; set; }
-
-  /// <summary>
-  /// ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
-  /// </summary>
-  /// <value>ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).</value>
-  [JsonPropertyName("language")]
-  public string Language { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -99,7 +98,7 @@ public partial class SearchDictionaryEntriesParams
         (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
         (Page == input.Page || Page.Equals(input.Page)) &&
         (HitsPerPage == input.HitsPerPage || HitsPerPage.Equals(input.HitsPerPage)) &&
-        (Language == input.Language || (Language != null && Language.Equals(input.Language)));
+        (Language == input.Language || Language.Equals(input.Language));
   }
 
   /// <summary>
@@ -117,10 +116,7 @@ public partial class SearchDictionaryEntriesParams
       }
       hashCode = (hashCode * 59) + Page.GetHashCode();
       hashCode = (hashCode * 59) + HitsPerPage.GetHashCode();
-      if (Language != null)
-      {
-        hashCode = (hashCode * 59) + Language.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + Language.GetHashCode();
       return hashCode;
     }
   }

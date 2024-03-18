@@ -153,6 +153,7 @@ Models/Search/SnippetResultOption.cs
 Models/Search/SortRemainingBy.cs
 Models/Search/Source.cs
 Models/Search/StandardEntries.cs
+Models/Search/SupportedLanguage.cs
 Models/Search/SynonymHit.cs
 Models/Search/SynonymType.cs
 Models/Search/TagFilters.cs

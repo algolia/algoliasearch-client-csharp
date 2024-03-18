@@ -18,6 +18,12 @@ public partial class DictionaryEntry
 {
 
   /// <summary>
+  /// Gets or Sets Language
+  /// </summary>
+  [JsonPropertyName("language")]
+  public SupportedLanguage? Language { get; set; }
+
+  /// <summary>
   /// Gets or Sets State
   /// </summary>
   [JsonPropertyName("state")]
@@ -34,11 +40,11 @@ public partial class DictionaryEntry
   /// Initializes a new instance of the DictionaryEntry class.
   /// </summary>
   /// <param name="objectID">Unique identifier for the dictionary entry. (required).</param>
-  /// <param name="language">ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). (required).</param>
-  public DictionaryEntry(string objectID, string language)
+  /// <param name="language">language (required).</param>
+  public DictionaryEntry(string objectID, SupportedLanguage? language)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
-    Language = language ?? throw new ArgumentNullException(nameof(language));
+    Language = language;
     AdditionalProperties = new Dictionary<string, object>();
   }
 
@@ -48,13 +54,6 @@ public partial class DictionaryEntry
   /// <value>Unique identifier for the dictionary entry.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
-
-  /// <summary>
-  /// ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
-  /// </summary>
-  /// <value>ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).</value>
-  [JsonPropertyName("language")]
-  public string Language { get; set; }
 
   /// <summary>
   /// Matching dictionary word for `stopwords` and `compounds` dictionaries.
@@ -125,7 +124,7 @@ public partial class DictionaryEntry
 
     return
         (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID))) &&
-        (Language == input.Language || (Language != null && Language.Equals(input.Language))) &&
+        (Language == input.Language || Language.Equals(input.Language)) &&
         (Word == input.Word || (Word != null && Word.Equals(input.Word))) &&
         (Words == input.Words || Words != null && input.Words != null && Words.SequenceEqual(input.Words)) &&
         (Decomposition == input.Decomposition || Decomposition != null && input.Decomposition != null && Decomposition.SequenceEqual(input.Decomposition)) &&
@@ -146,10 +145,7 @@ public partial class DictionaryEntry
       {
         hashCode = (hashCode * 59) + ObjectID.GetHashCode();
       }
-      if (Language != null)
-      {
-        hashCode = (hashCode * 59) + Language.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + Language.GetHashCode();
       if (Word != null)
       {
         hashCode = (hashCode * 59) + Word.GetHashCode();

@@ -22,10 +22,10 @@ public partial class IgnorePlurals : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the IgnorePlurals class
-  /// with a List{String}
+  /// with a List{SupportedLanguage}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;string&gt;.</param>
-  public IgnorePlurals(List<string> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;SupportedLanguage&gt;.</param>
+  public IgnorePlurals(List<SupportedLanguage> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -47,13 +47,13 @@ public partial class IgnorePlurals : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `List{string}`. If the actual instance is not `List{string}`,
+  /// Get the actual instance of `List{SupportedLanguage}`. If the actual instance is not `List{SupportedLanguage}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of List&lt;string&gt;</returns>
-  public List<string> AsListString()
+  /// <returns>An instance of List&lt;SupportedLanguage&gt;</returns>
+  public List<SupportedLanguage> AsList()
   {
-    return (List<string>)ActualInstance;
+    return (List<SupportedLanguage>)ActualInstance;
   }
 
   /// <summary>
@@ -68,12 +68,12 @@ public partial class IgnorePlurals : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `List{string}` type.
+  /// Check if the actual instance is of `List{SupportedLanguage}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsListString()
+  public bool IsList()
   {
-    return ActualInstance.GetType() == typeof(List<string>);
+    return ActualInstance.GetType() == typeof(List<SupportedLanguage>);
   }
 
   /// <summary>
@@ -173,12 +173,12 @@ public class IgnorePluralsJsonConverter : JsonConverter<IgnorePlurals>
     {
       try
       {
-        return new IgnorePlurals(jsonDocument.Deserialize<List<string>>(JsonConfig.Options));
+        return new IgnorePlurals(jsonDocument.Deserialize<List<SupportedLanguage>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<string>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<SupportedLanguage>: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.True || root.ValueKind == JsonValueKind.False)
