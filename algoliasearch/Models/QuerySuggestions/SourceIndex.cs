@@ -38,9 +38,9 @@ public partial class SourceIndex
   public string IndexName { get; set; }
 
   /// <summary>
-  /// If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.  
+  /// If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used. 
   /// </summary>
-  /// <value>If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.  </value>
+  /// <value>If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used. </value>
   [JsonPropertyName("replicas")]
   public bool? Replicas { get; set; }
 
