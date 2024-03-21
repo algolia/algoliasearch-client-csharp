@@ -24,16 +24,16 @@ public partial class TopSearchesResponseWithAnalytics
   /// <summary>
   /// Initializes a new instance of the TopSearchesResponseWithAnalytics class.
   /// </summary>
-  /// <param name="searches">Top searches with their hits count and analytics. (required).</param>
+  /// <param name="searches">Most popular searches and their associated click and conversion metrics. (required).</param>
   public TopSearchesResponseWithAnalytics(List<TopSearchWithAnalytics> searches)
   {
     Searches = searches ?? throw new ArgumentNullException(nameof(searches));
   }
 
   /// <summary>
-  /// Top searches with their hits count and analytics.
+  /// Most popular searches and their associated click and conversion metrics.
   /// </summary>
-  /// <value>Top searches with their hits count and analytics.</value>
+  /// <value>Most popular searches and their associated click and conversion metrics.</value>
   [JsonPropertyName("searches")]
   public List<TopSearchWithAnalytics> Searches { get; set; }
 

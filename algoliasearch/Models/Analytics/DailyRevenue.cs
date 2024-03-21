@@ -12,46 +12,37 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// AverageClickEvent
+/// DailyRevenue
 /// </summary>
-public partial class AverageClickEvent
+public partial class DailyRevenue
 {
   /// <summary>
-  /// Initializes a new instance of the AverageClickEvent class.
+  /// Initializes a new instance of the DailyRevenue class.
   /// </summary>
   [JsonConstructor]
-  public AverageClickEvent() { }
+  public DailyRevenue() { }
   /// <summary>
-  /// Initializes a new instance of the AverageClickEvent class.
+  /// Initializes a new instance of the DailyRevenue class.
   /// </summary>
-  /// <param name="average">Average count of all click events. (required).</param>
-  /// <param name="clickCount">Number of click events. (required).</param>
-  /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  public AverageClickEvent(double average, int clickCount, string date)
+  /// <param name="currencies">Revenue associated with this search, broken-down by currencies. (required).</param>
+  /// <param name="date">Date in the format YYYY-MM-DD. (required).</param>
+  public DailyRevenue(Dictionary<string, CurrenciesValue> currencies, string date)
   {
-    Average = average;
-    ClickCount = clickCount;
+    Currencies = currencies ?? throw new ArgumentNullException(nameof(currencies));
     Date = date ?? throw new ArgumentNullException(nameof(date));
   }
 
   /// <summary>
-  /// Average count of all click events.
+  /// Revenue associated with this search, broken-down by currencies.
   /// </summary>
-  /// <value>Average count of all click events.</value>
-  [JsonPropertyName("average")]
-  public double Average { get; set; }
+  /// <value>Revenue associated with this search, broken-down by currencies.</value>
+  [JsonPropertyName("currencies")]
+  public Dictionary<string, CurrenciesValue> Currencies { get; set; }
 
   /// <summary>
-  /// Number of click events.
+  /// Date in the format YYYY-MM-DD.
   /// </summary>
-  /// <value>Number of click events.</value>
-  [JsonPropertyName("clickCount")]
-  public int ClickCount { get; set; }
-
-  /// <summary>
-  /// Date of the event in the format YYYY-MM-DD.
-  /// </summary>
-  /// <value>Date of the event in the format YYYY-MM-DD.</value>
+  /// <value>Date in the format YYYY-MM-DD.</value>
   [JsonPropertyName("date")]
   public string Date { get; set; }
 
@@ -62,9 +53,8 @@ public partial class AverageClickEvent
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class AverageClickEvent {\n");
-    sb.Append("  Average: ").Append(Average).Append("\n");
-    sb.Append("  ClickCount: ").Append(ClickCount).Append("\n");
+    sb.Append("class DailyRevenue {\n");
+    sb.Append("  Currencies: ").Append(Currencies).Append("\n");
     sb.Append("  Date: ").Append(Date).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -86,14 +76,13 @@ public partial class AverageClickEvent
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not AverageClickEvent input)
+    if (obj is not DailyRevenue input)
     {
       return false;
     }
 
     return
-        (Average == input.Average || Average.Equals(input.Average)) &&
-        (ClickCount == input.ClickCount || ClickCount.Equals(input.ClickCount)) &&
+        (Currencies == input.Currencies || Currencies != null && input.Currencies != null && Currencies.SequenceEqual(input.Currencies)) &&
         (Date == input.Date || (Date != null && Date.Equals(input.Date)));
   }
 
@@ -106,8 +95,10 @@ public partial class AverageClickEvent
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Average.GetHashCode();
-      hashCode = (hashCode * 59) + ClickCount.GetHashCode();
+      if (Currencies != null)
+      {
+        hashCode = (hashCode * 59) + Currencies.GetHashCode();
+      }
       if (Date != null)
       {
         hashCode = (hashCode * 59) + Date.GetHashCode();

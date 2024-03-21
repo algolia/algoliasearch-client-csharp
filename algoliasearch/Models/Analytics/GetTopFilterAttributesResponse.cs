@@ -24,16 +24,16 @@ public partial class GetTopFilterAttributesResponse
   /// <summary>
   /// Initializes a new instance of the GetTopFilterAttributesResponse class.
   /// </summary>
-  /// <param name="attributes">Filterable attributes. (required).</param>
+  /// <param name="attributes">Most frequent filters. (required).</param>
   public GetTopFilterAttributesResponse(List<GetTopFilterAttribute> attributes)
   {
     Attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
   }
 
   /// <summary>
-  /// Filterable attributes.
+  /// Most frequent filters.
   /// </summary>
-  /// <value>Filterable attributes.</value>
+  /// <value>Most frequent filters.</value>
   [JsonPropertyName("attributes")]
   public List<GetTopFilterAttribute> Attributes { get; set; }
 

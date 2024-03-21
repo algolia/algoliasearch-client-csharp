@@ -12,39 +12,30 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// ClickPosition
+/// Click position.
 /// </summary>
-public partial class ClickPosition
+public partial class ClickPositionsInner
 {
   /// <summary>
-  /// Initializes a new instance of the ClickPosition class.
+  /// Initializes a new instance of the ClickPositionsInner class.
   /// </summary>
-  [JsonConstructor]
-  public ClickPosition() { }
-  /// <summary>
-  /// Initializes a new instance of the ClickPosition class.
-  /// </summary>
-  /// <param name="position">Range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped.  (required).</param>
-  /// <param name="clickCount">Number of click events. (required).</param>
-  public ClickPosition(List<int> position, int clickCount)
+  public ClickPositionsInner()
   {
-    Position = position ?? throw new ArgumentNullException(nameof(position));
-    ClickCount = clickCount;
   }
 
   /// <summary>
-  /// Range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped. 
+  /// Range of positions in the search results, using the pattern `[start,end]`.  For positions 11 and up, click events are summed over the specified range. `-1` indicates the end of the list of search results. 
   /// </summary>
-  /// <value>Range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped. </value>
+  /// <value>Range of positions in the search results, using the pattern `[start,end]`.  For positions 11 and up, click events are summed over the specified range. `-1` indicates the end of the list of search results. </value>
   [JsonPropertyName("position")]
   public List<int> Position { get; set; }
 
   /// <summary>
-  /// Number of click events.
+  /// Number of times this search has been clicked at that position.
   /// </summary>
-  /// <value>Number of click events.</value>
+  /// <value>Number of times this search has been clicked at that position.</value>
   [JsonPropertyName("clickCount")]
-  public int ClickCount { get; set; }
+  public int? ClickCount { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -53,7 +44,7 @@ public partial class ClickPosition
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ClickPosition {\n");
+    sb.Append("class ClickPositionsInner {\n");
     sb.Append("  Position: ").Append(Position).Append("\n");
     sb.Append("  ClickCount: ").Append(ClickCount).Append("\n");
     sb.Append("}\n");
@@ -76,7 +67,7 @@ public partial class ClickPosition
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ClickPosition input)
+    if (obj is not ClickPositionsInner input)
     {
       return false;
     }

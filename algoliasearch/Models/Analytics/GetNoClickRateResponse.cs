@@ -24,11 +24,11 @@ public partial class GetNoClickRateResponse
   /// <summary>
   /// Initializes a new instance of the GetNoClickRateResponse class.
   /// </summary>
-  /// <param name="rate">[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).  (required).</param>
-  /// <param name="count">Number of click events. (required).</param>
-  /// <param name="noClickCount">Number of click events. (required).</param>
-  /// <param name="dates">Overall count of searches without clicks plus a daily breakdown. (required).</param>
-  public GetNoClickRateResponse(double rate, int count, int noClickCount, List<NoClickRateEvent> dates)
+  /// <param name="rate">No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches. (required).</param>
+  /// <param name="count">Number of tracked searches. Tracked searches are search requests where the &#x60;clickAnalytics&#x60; parameter is true. (required) (default to 0).</param>
+  /// <param name="noClickCount">Number of times this search was returned as a result without any click. (required).</param>
+  /// <param name="dates">Daily no click rates. (required).</param>
+  public GetNoClickRateResponse(double rate, int count, int noClickCount, List<DailyNoClickRates> dates)
   {
     Rate = rate;
     Count = count;
@@ -37,32 +37,32 @@ public partial class GetNoClickRateResponse
   }
 
   /// <summary>
-  /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
+  /// No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches.
   /// </summary>
-  /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
+  /// <value>No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches.</value>
   [JsonPropertyName("rate")]
   public double Rate { get; set; }
 
   /// <summary>
-  /// Number of click events.
+  /// Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
   /// </summary>
-  /// <value>Number of click events.</value>
+  /// <value>Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.</value>
   [JsonPropertyName("count")]
   public int Count { get; set; }
 
   /// <summary>
-  /// Number of click events.
+  /// Number of times this search was returned as a result without any click.
   /// </summary>
-  /// <value>Number of click events.</value>
+  /// <value>Number of times this search was returned as a result without any click.</value>
   [JsonPropertyName("noClickCount")]
   public int NoClickCount { get; set; }
 
   /// <summary>
-  /// Overall count of searches without clicks plus a daily breakdown.
+  /// Daily no click rates.
   /// </summary>
-  /// <value>Overall count of searches without clicks plus a daily breakdown.</value>
+  /// <value>Daily no click rates.</value>
   [JsonPropertyName("dates")]
-  public List<NoClickRateEvent> Dates { get; set; }
+  public List<DailyNoClickRates> Dates { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

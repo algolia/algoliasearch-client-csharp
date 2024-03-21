@@ -12,39 +12,30 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// SearchEvent
+/// TopSearchesResponseWithRevenueAnalytics
 /// </summary>
-public partial class SearchEvent
+public partial class TopSearchesResponseWithRevenueAnalytics
 {
   /// <summary>
-  /// Initializes a new instance of the SearchEvent class.
+  /// Initializes a new instance of the TopSearchesResponseWithRevenueAnalytics class.
   /// </summary>
   [JsonConstructor]
-  public SearchEvent() { }
+  public TopSearchesResponseWithRevenueAnalytics() { }
   /// <summary>
-  /// Initializes a new instance of the SearchEvent class.
+  /// Initializes a new instance of the TopSearchesResponseWithRevenueAnalytics class.
   /// </summary>
-  /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  /// <param name="count">Number of occurrences. (required).</param>
-  public SearchEvent(string date, int count)
+  /// <param name="searches">Most popular searches, including their click and revenue metrics. (required).</param>
+  public TopSearchesResponseWithRevenueAnalytics(List<TopSearchWithRevenueAnalytics> searches)
   {
-    Date = date ?? throw new ArgumentNullException(nameof(date));
-    Count = count;
+    Searches = searches ?? throw new ArgumentNullException(nameof(searches));
   }
 
   /// <summary>
-  /// Date of the event in the format YYYY-MM-DD.
+  /// Most popular searches, including their click and revenue metrics.
   /// </summary>
-  /// <value>Date of the event in the format YYYY-MM-DD.</value>
-  [JsonPropertyName("date")]
-  public string Date { get; set; }
-
-  /// <summary>
-  /// Number of occurrences.
-  /// </summary>
-  /// <value>Number of occurrences.</value>
-  [JsonPropertyName("count")]
-  public int Count { get; set; }
+  /// <value>Most popular searches, including their click and revenue metrics.</value>
+  [JsonPropertyName("searches")]
+  public List<TopSearchWithRevenueAnalytics> Searches { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -53,9 +44,8 @@ public partial class SearchEvent
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SearchEvent {\n");
-    sb.Append("  Date: ").Append(Date).Append("\n");
-    sb.Append("  Count: ").Append(Count).Append("\n");
+    sb.Append("class TopSearchesResponseWithRevenueAnalytics {\n");
+    sb.Append("  Searches: ").Append(Searches).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -76,14 +66,13 @@ public partial class SearchEvent
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SearchEvent input)
+    if (obj is not TopSearchesResponseWithRevenueAnalytics input)
     {
       return false;
     }
 
     return
-        (Date == input.Date || (Date != null && Date.Equals(input.Date))) &&
-        (Count == input.Count || Count.Equals(input.Count));
+        (Searches == input.Searches || Searches != null && input.Searches != null && Searches.SequenceEqual(input.Searches));
   }
 
   /// <summary>
@@ -95,11 +84,10 @@ public partial class SearchEvent
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Date != null)
+      if (Searches != null)
       {
-        hashCode = (hashCode * 59) + Date.GetHashCode();
+        hashCode = (hashCode * 59) + Searches.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Count.GetHashCode();
       return hashCode;
     }
   }

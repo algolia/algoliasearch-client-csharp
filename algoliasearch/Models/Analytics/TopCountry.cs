@@ -24,7 +24,7 @@ public partial class TopCountry
   /// <summary>
   /// Initializes a new instance of the TopCountry class.
   /// </summary>
-  /// <param name="country">Country. (required).</param>
+  /// <param name="country">Country code. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
   public TopCountry(string country, int count)
   {
@@ -33,9 +33,9 @@ public partial class TopCountry
   }
 
   /// <summary>
-  /// Country.
+  /// Country code.
   /// </summary>
-  /// <value>Country.</value>
+  /// <value>Country code.</value>
   [JsonPropertyName("country")]
   public string Country { get; set; }
 

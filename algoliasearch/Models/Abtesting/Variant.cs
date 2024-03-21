@@ -37,11 +37,10 @@ public partial class Variant
   /// <param name="purchaseCount">Number of purchase events for this variant. (required).</param>
   /// <param name="purchaseRate">Variant&#39;s [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate). (required).</param>
   /// <param name="searchCount">Number of searches carried out during the A/B test. (required).</param>
-  /// <param name="trackedSearchCount">Number of tracked searches. This is the number of search requests where the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;. (required).</param>
   /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
   /// <param name="userCount">Number of users during the A/B test. (required).</param>
   /// <param name="trackedUserCount">Number of users that performed a tracked search during the A/B test. (required).</param>
-  public Variant(int addToCartCount, double? addToCartRate, int? averageClickPosition, int clickCount, double? clickThroughRate, int conversionCount, double? conversionRate, string description, string index, int? noResultCount, int purchaseCount, double? purchaseRate, int? searchCount, int? trackedSearchCount, int trafficPercentage, int? userCount, int? trackedUserCount)
+  public Variant(int addToCartCount, double? addToCartRate, int? averageClickPosition, int clickCount, double? clickThroughRate, int conversionCount, double? conversionRate, string description, string index, int? noResultCount, int purchaseCount, double? purchaseRate, int? searchCount, int trafficPercentage, int? userCount, int? trackedUserCount)
   {
     AddToCartCount = addToCartCount;
     AddToCartRate = addToCartRate ?? throw new ArgumentNullException(nameof(addToCartRate));
@@ -56,7 +55,6 @@ public partial class Variant
     PurchaseCount = purchaseCount;
     PurchaseRate = purchaseRate ?? throw new ArgumentNullException(nameof(purchaseRate));
     SearchCount = searchCount ?? throw new ArgumentNullException(nameof(searchCount));
-    TrackedSearchCount = trackedSearchCount ?? throw new ArgumentNullException(nameof(trackedSearchCount));
     TrafficPercentage = trafficPercentage;
     UserCount = userCount ?? throw new ArgumentNullException(nameof(userCount));
     TrackedUserCount = trackedUserCount ?? throw new ArgumentNullException(nameof(trackedUserCount));
@@ -116,7 +114,7 @@ public partial class Variant
   /// </summary>
   /// <value>A/B test currencies.</value>
   [JsonPropertyName("currencies")]
-  public Dictionary<string, CurrenciesValue> Currencies { get; set; }
+  public Dictionary<string, Currency> Currencies { get; set; }
 
   /// <summary>
   /// A/B test description.
@@ -174,9 +172,9 @@ public partial class Variant
   public int? SearchCount { get; set; }
 
   /// <summary>
-  /// Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
+  /// Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
   /// </summary>
-  /// <value>Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.</value>
+  /// <value>Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.</value>
   [JsonPropertyName("trackedSearchCount")]
   public int? TrackedSearchCount { get; set; }
 
@@ -271,7 +269,7 @@ public partial class Variant
         (PurchaseCount == input.PurchaseCount || PurchaseCount.Equals(input.PurchaseCount)) &&
         (PurchaseRate == input.PurchaseRate || (PurchaseRate != null && PurchaseRate.Equals(input.PurchaseRate))) &&
         (SearchCount == input.SearchCount || (SearchCount != null && SearchCount.Equals(input.SearchCount))) &&
-        (TrackedSearchCount == input.TrackedSearchCount || (TrackedSearchCount != null && TrackedSearchCount.Equals(input.TrackedSearchCount))) &&
+        (TrackedSearchCount == input.TrackedSearchCount || TrackedSearchCount.Equals(input.TrackedSearchCount)) &&
         (TrafficPercentage == input.TrafficPercentage || TrafficPercentage.Equals(input.TrafficPercentage)) &&
         (UserCount == input.UserCount || (UserCount != null && UserCount.Equals(input.UserCount))) &&
         (TrackedUserCount == input.TrackedUserCount || (TrackedUserCount != null && TrackedUserCount.Equals(input.TrackedUserCount)));
@@ -335,10 +333,7 @@ public partial class Variant
       {
         hashCode = (hashCode * 59) + SearchCount.GetHashCode();
       }
-      if (TrackedSearchCount != null)
-      {
-        hashCode = (hashCode * 59) + TrackedSearchCount.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + TrackedSearchCount.GetHashCode();
       hashCode = (hashCode * 59) + TrafficPercentage.GetHashCode();
       if (UserCount != null)
       {

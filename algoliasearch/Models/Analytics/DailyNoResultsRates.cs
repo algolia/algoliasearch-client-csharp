@@ -12,23 +12,23 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// NoResultsRateEvent
+/// DailyNoResultsRates
 /// </summary>
-public partial class NoResultsRateEvent
+public partial class DailyNoResultsRates
 {
   /// <summary>
-  /// Initializes a new instance of the NoResultsRateEvent class.
+  /// Initializes a new instance of the DailyNoResultsRates class.
   /// </summary>
   [JsonConstructor]
-  public NoResultsRateEvent() { }
+  public DailyNoResultsRates() { }
   /// <summary>
-  /// Initializes a new instance of the NoResultsRateEvent class.
+  /// Initializes a new instance of the DailyNoResultsRates class.
   /// </summary>
-  /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  /// <param name="noResultCount">Number of occurences. (required).</param>
-  /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
-  /// <param name="rate">[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).  (required).</param>
-  public NoResultsRateEvent(string date, int noResultCount, int count, double rate)
+  /// <param name="date">Date in the format YYYY-MM-DD. (required).</param>
+  /// <param name="noResultCount">Number of searches without any results. (required).</param>
+  /// <param name="count">Number of searches. (required).</param>
+  /// <param name="rate">No results rate, calculated as number of searches with zero results divided by the total number of searches. (required).</param>
+  public DailyNoResultsRates(string date, int noResultCount, int count, double rate)
   {
     Date = date ?? throw new ArgumentNullException(nameof(date));
     NoResultCount = noResultCount;
@@ -37,30 +37,30 @@ public partial class NoResultsRateEvent
   }
 
   /// <summary>
-  /// Date of the event in the format YYYY-MM-DD.
+  /// Date in the format YYYY-MM-DD.
   /// </summary>
-  /// <value>Date of the event in the format YYYY-MM-DD.</value>
+  /// <value>Date in the format YYYY-MM-DD.</value>
   [JsonPropertyName("date")]
   public string Date { get; set; }
 
   /// <summary>
-  /// Number of occurences.
+  /// Number of searches without any results.
   /// </summary>
-  /// <value>Number of occurences.</value>
+  /// <value>Number of searches without any results.</value>
   [JsonPropertyName("noResultCount")]
   public int NoResultCount { get; set; }
 
   /// <summary>
-  /// Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).
+  /// Number of searches.
   /// </summary>
-  /// <value>Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).</value>
+  /// <value>Number of searches.</value>
   [JsonPropertyName("count")]
   public int Count { get; set; }
 
   /// <summary>
-  /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
+  /// No results rate, calculated as number of searches with zero results divided by the total number of searches.
   /// </summary>
-  /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
+  /// <value>No results rate, calculated as number of searches with zero results divided by the total number of searches.</value>
   [JsonPropertyName("rate")]
   public double Rate { get; set; }
 
@@ -71,7 +71,7 @@ public partial class NoResultsRateEvent
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class NoResultsRateEvent {\n");
+    sb.Append("class DailyNoResultsRates {\n");
     sb.Append("  Date: ").Append(Date).Append("\n");
     sb.Append("  NoResultCount: ").Append(NoResultCount).Append("\n");
     sb.Append("  Count: ").Append(Count).Append("\n");
@@ -96,7 +96,7 @@ public partial class NoResultsRateEvent
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not NoResultsRateEvent input)
+    if (obj is not DailyNoResultsRates input)
     {
       return false;
     }

@@ -40,6 +40,16 @@ public partial class GetTopHitsResponse : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the GetTopHitsResponse class
+  /// with a TopHitsResponseWithRevenueAnalytics
+  /// </summary>
+  /// <param name="actualInstance">An instance of TopHitsResponseWithRevenueAnalytics.</param>
+  public GetTopHitsResponse(TopHitsResponseWithRevenueAnalytics actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -66,6 +76,16 @@ public partial class GetTopHitsResponse : AbstractSchema
     return (TopHitsResponseWithAnalytics)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `TopHitsResponseWithRevenueAnalytics`. If the actual instance is not `TopHitsResponseWithRevenueAnalytics`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of TopHitsResponseWithRevenueAnalytics</returns>
+  public TopHitsResponseWithRevenueAnalytics AsTopHitsResponseWithRevenueAnalytics()
+  {
+    return (TopHitsResponseWithRevenueAnalytics)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `TopHitsResponse` type.
@@ -83,6 +103,15 @@ public partial class GetTopHitsResponse : AbstractSchema
   public bool IsTopHitsResponseWithAnalytics()
   {
     return ActualInstance.GetType() == typeof(TopHitsResponseWithAnalytics);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `TopHitsResponseWithRevenueAnalytics` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsTopHitsResponseWithRevenueAnalytics()
+  {
+    return ActualInstance.GetType() == typeof(TopHitsResponseWithRevenueAnalytics);
   }
 
   /// <summary>
@@ -191,6 +220,18 @@ public class GetTopHitsResponseJsonConverter : JsonConverter<GetTopHitsResponse>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into TopHitsResponseWithAnalytics: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new GetTopHitsResponse(jsonDocument.Deserialize<TopHitsResponseWithRevenueAnalytics>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into TopHitsResponseWithRevenueAnalytics: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

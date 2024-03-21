@@ -12,26 +12,26 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// GetAverageClickPositionResponse
+/// DailyAverageClicks
 /// </summary>
-public partial class GetAverageClickPositionResponse
+public partial class DailyAverageClicks
 {
   /// <summary>
-  /// Initializes a new instance of the GetAverageClickPositionResponse class.
+  /// Initializes a new instance of the DailyAverageClicks class.
   /// </summary>
   [JsonConstructor]
-  public GetAverageClickPositionResponse() { }
+  public DailyAverageClicks() { }
   /// <summary>
-  /// Initializes a new instance of the GetAverageClickPositionResponse class.
+  /// Initializes a new instance of the DailyAverageClicks class.
   /// </summary>
   /// <param name="average">Average position of a clicked search result in the list of search results. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
   /// <param name="clickCount">Number of clicks associated with this search. (required) (default to 0).</param>
-  /// <param name="dates">Daily average click positions. (required).</param>
-  public GetAverageClickPositionResponse(double? average, int clickCount, List<DailyAverageClicks> dates)
+  /// <param name="date">Date in the format YYYY-MM-DD. (required).</param>
+  public DailyAverageClicks(double? average, int clickCount, string date)
   {
     Average = average ?? throw new ArgumentNullException(nameof(average));
     ClickCount = clickCount;
-    Dates = dates ?? throw new ArgumentNullException(nameof(dates));
+    Date = date ?? throw new ArgumentNullException(nameof(date));
   }
 
   /// <summary>
@@ -49,11 +49,11 @@ public partial class GetAverageClickPositionResponse
   public int ClickCount { get; set; }
 
   /// <summary>
-  /// Daily average click positions.
+  /// Date in the format YYYY-MM-DD.
   /// </summary>
-  /// <value>Daily average click positions.</value>
-  [JsonPropertyName("dates")]
-  public List<DailyAverageClicks> Dates { get; set; }
+  /// <value>Date in the format YYYY-MM-DD.</value>
+  [JsonPropertyName("date")]
+  public string Date { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -62,10 +62,10 @@ public partial class GetAverageClickPositionResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetAverageClickPositionResponse {\n");
+    sb.Append("class DailyAverageClicks {\n");
     sb.Append("  Average: ").Append(Average).Append("\n");
     sb.Append("  ClickCount: ").Append(ClickCount).Append("\n");
-    sb.Append("  Dates: ").Append(Dates).Append("\n");
+    sb.Append("  Date: ").Append(Date).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -86,7 +86,7 @@ public partial class GetAverageClickPositionResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetAverageClickPositionResponse input)
+    if (obj is not DailyAverageClicks input)
     {
       return false;
     }
@@ -94,7 +94,7 @@ public partial class GetAverageClickPositionResponse
     return
         (Average == input.Average || (Average != null && Average.Equals(input.Average))) &&
         (ClickCount == input.ClickCount || ClickCount.Equals(input.ClickCount)) &&
-        (Dates == input.Dates || Dates != null && input.Dates != null && Dates.SequenceEqual(input.Dates));
+        (Date == input.Date || (Date != null && Date.Equals(input.Date)));
   }
 
   /// <summary>
@@ -111,9 +111,9 @@ public partial class GetAverageClickPositionResponse
         hashCode = (hashCode * 59) + Average.GetHashCode();
       }
       hashCode = (hashCode * 59) + ClickCount.GetHashCode();
-      if (Dates != null)
+      if (Date != null)
       {
-        hashCode = (hashCode * 59) + Dates.GetHashCode();
+        hashCode = (hashCode * 59) + Date.GetHashCode();
       }
       return hashCode;
     }

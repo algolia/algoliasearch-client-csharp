@@ -40,6 +40,16 @@ public partial class GetTopSearchesResponse : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the GetTopSearchesResponse class
+  /// with a TopSearchesResponseWithRevenueAnalytics
+  /// </summary>
+  /// <param name="actualInstance">An instance of TopSearchesResponseWithRevenueAnalytics.</param>
+  public GetTopSearchesResponse(TopSearchesResponseWithRevenueAnalytics actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -66,6 +76,16 @@ public partial class GetTopSearchesResponse : AbstractSchema
     return (TopSearchesResponseWithAnalytics)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `TopSearchesResponseWithRevenueAnalytics`. If the actual instance is not `TopSearchesResponseWithRevenueAnalytics`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of TopSearchesResponseWithRevenueAnalytics</returns>
+  public TopSearchesResponseWithRevenueAnalytics AsTopSearchesResponseWithRevenueAnalytics()
+  {
+    return (TopSearchesResponseWithRevenueAnalytics)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `TopSearchesResponse` type.
@@ -83,6 +103,15 @@ public partial class GetTopSearchesResponse : AbstractSchema
   public bool IsTopSearchesResponseWithAnalytics()
   {
     return ActualInstance.GetType() == typeof(TopSearchesResponseWithAnalytics);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `TopSearchesResponseWithRevenueAnalytics` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsTopSearchesResponseWithRevenueAnalytics()
+  {
+    return ActualInstance.GetType() == typeof(TopSearchesResponseWithRevenueAnalytics);
   }
 
   /// <summary>
@@ -191,6 +220,18 @@ public class GetTopSearchesResponseJsonConverter : JsonConverter<GetTopSearchesR
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into TopSearchesResponseWithAnalytics: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new GetTopSearchesResponse(jsonDocument.Deserialize<TopSearchesResponseWithRevenueAnalytics>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into TopSearchesResponseWithRevenueAnalytics: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

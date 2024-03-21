@@ -24,16 +24,16 @@ public partial class GetTopCountriesResponse
   /// <summary>
   /// Initializes a new instance of the GetTopCountriesResponse class.
   /// </summary>
-  /// <param name="countries">Countries (required).</param>
+  /// <param name="countries">Countries and number of searches. (required).</param>
   public GetTopCountriesResponse(List<TopCountry> countries)
   {
     Countries = countries ?? throw new ArgumentNullException(nameof(countries));
   }
 
   /// <summary>
-  /// Countries
+  /// Countries and number of searches.
   /// </summary>
-  /// <value>Countries</value>
+  /// <value>Countries and number of searches.</value>
   [JsonPropertyName("countries")]
   public List<TopCountry> Countries { get; set; }
 

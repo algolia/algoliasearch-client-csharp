@@ -24,11 +24,11 @@ public partial class GetNoResultsRateResponse
   /// <summary>
   /// Initializes a new instance of the GetNoResultsRateResponse class.
   /// </summary>
-  /// <param name="rate">[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).  (required).</param>
-  /// <param name="count">Number of occurrences. (required).</param>
-  /// <param name="noResultCount">Number of occurrences. (required).</param>
-  /// <param name="dates">Overall count of searches without results plus a daily breakdown. (required).</param>
-  public GetNoResultsRateResponse(double rate, int count, int noResultCount, List<NoResultsRateEvent> dates)
+  /// <param name="rate">No results rate, calculated as number of searches with zero results divided by the total number of searches. (required).</param>
+  /// <param name="count">Number of searches. (required).</param>
+  /// <param name="noResultCount">Number of searches without any results. (required).</param>
+  /// <param name="dates">Daily no results rates. (required).</param>
+  public GetNoResultsRateResponse(double rate, int count, int noResultCount, List<DailyNoResultsRates> dates)
   {
     Rate = rate;
     Count = count;
@@ -37,32 +37,32 @@ public partial class GetNoResultsRateResponse
   }
 
   /// <summary>
-  /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
+  /// No results rate, calculated as number of searches with zero results divided by the total number of searches.
   /// </summary>
-  /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
+  /// <value>No results rate, calculated as number of searches with zero results divided by the total number of searches.</value>
   [JsonPropertyName("rate")]
   public double Rate { get; set; }
 
   /// <summary>
-  /// Number of occurrences.
+  /// Number of searches.
   /// </summary>
-  /// <value>Number of occurrences.</value>
+  /// <value>Number of searches.</value>
   [JsonPropertyName("count")]
   public int Count { get; set; }
 
   /// <summary>
-  /// Number of occurrences.
+  /// Number of searches without any results.
   /// </summary>
-  /// <value>Number of occurrences.</value>
+  /// <value>Number of searches without any results.</value>
   [JsonPropertyName("noResultCount")]
   public int NoResultCount { get; set; }
 
   /// <summary>
-  /// Overall count of searches without results plus a daily breakdown.
+  /// Daily no results rates.
   /// </summary>
-  /// <value>Overall count of searches without results plus a daily breakdown.</value>
+  /// <value>Daily no results rates.</value>
   [JsonPropertyName("dates")]
-  public List<NoResultsRateEvent> Dates { get; set; }
+  public List<DailyNoResultsRates> Dates { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

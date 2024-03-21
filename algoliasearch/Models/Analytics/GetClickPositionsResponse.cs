@@ -24,18 +24,18 @@ public partial class GetClickPositionsResponse
   /// <summary>
   /// Initializes a new instance of the GetClickPositionsResponse class.
   /// </summary>
-  /// <param name="positions">Click positions. (required).</param>
-  public GetClickPositionsResponse(List<ClickPosition> positions)
+  /// <param name="positions">List of positions in the search results and clicks associated with this search. (required).</param>
+  public GetClickPositionsResponse(List<ClickPositionsInner> positions)
   {
     Positions = positions ?? throw new ArgumentNullException(nameof(positions));
   }
 
   /// <summary>
-  /// Click positions.
+  /// List of positions in the search results and clicks associated with this search.
   /// </summary>
-  /// <value>Click positions.</value>
+  /// <value>List of positions in the search results and clicks associated with this search.</value>
   [JsonPropertyName("positions")]
-  public List<ClickPosition> Positions { get; set; }
+  public List<ClickPositionsInner> Positions { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

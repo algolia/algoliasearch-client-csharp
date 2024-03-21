@@ -12,39 +12,39 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// GetUsersCountResponse
+/// GetRevenue
 /// </summary>
-public partial class GetUsersCountResponse
+public partial class GetRevenue
 {
   /// <summary>
-  /// Initializes a new instance of the GetUsersCountResponse class.
+  /// Initializes a new instance of the GetRevenue class.
   /// </summary>
   [JsonConstructor]
-  public GetUsersCountResponse() { }
+  public GetRevenue() { }
   /// <summary>
-  /// Initializes a new instance of the GetUsersCountResponse class.
+  /// Initializes a new instance of the GetRevenue class.
   /// </summary>
-  /// <param name="count">Number of unique users. (required).</param>
-  /// <param name="dates">Daily number of unique users. (required).</param>
-  public GetUsersCountResponse(int count, List<DailyUsers> dates)
+  /// <param name="currencies">Revenue associated with this search, broken-down by currencies. (required).</param>
+  /// <param name="dates">Daily revenue. (required).</param>
+  public GetRevenue(Dictionary<string, CurrenciesValue> currencies, List<DailyRevenue> dates)
   {
-    Count = count;
+    Currencies = currencies ?? throw new ArgumentNullException(nameof(currencies));
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
   }
 
   /// <summary>
-  /// Number of unique users.
+  /// Revenue associated with this search, broken-down by currencies.
   /// </summary>
-  /// <value>Number of unique users.</value>
-  [JsonPropertyName("count")]
-  public int Count { get; set; }
+  /// <value>Revenue associated with this search, broken-down by currencies.</value>
+  [JsonPropertyName("currencies")]
+  public Dictionary<string, CurrenciesValue> Currencies { get; set; }
 
   /// <summary>
-  /// Daily number of unique users.
+  /// Daily revenue.
   /// </summary>
-  /// <value>Daily number of unique users.</value>
+  /// <value>Daily revenue.</value>
   [JsonPropertyName("dates")]
-  public List<DailyUsers> Dates { get; set; }
+  public List<DailyRevenue> Dates { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -53,8 +53,8 @@ public partial class GetUsersCountResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetUsersCountResponse {\n");
-    sb.Append("  Count: ").Append(Count).Append("\n");
+    sb.Append("class GetRevenue {\n");
+    sb.Append("  Currencies: ").Append(Currencies).Append("\n");
     sb.Append("  Dates: ").Append(Dates).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -76,13 +76,13 @@ public partial class GetUsersCountResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetUsersCountResponse input)
+    if (obj is not GetRevenue input)
     {
       return false;
     }
 
     return
-        (Count == input.Count || Count.Equals(input.Count)) &&
+        (Currencies == input.Currencies || Currencies != null && input.Currencies != null && Currencies.SequenceEqual(input.Currencies)) &&
         (Dates == input.Dates || Dates != null && input.Dates != null && Dates.SequenceEqual(input.Dates));
   }
 
@@ -95,7 +95,10 @@ public partial class GetUsersCountResponse
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Count.GetHashCode();
+      if (Currencies != null)
+      {
+        hashCode = (hashCode * 59) + Currencies.GetHashCode();
+      }
       if (Dates != null)
       {
         hashCode = (hashCode * 59) + Dates.GetHashCode();

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// Method for ordering results. `clickThroughRate`, `conversionRate` and `averageClickPosition` are only available if the `clickAnalytics` parameter is `true`. 
+/// Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available. 
 /// </summary>
-/// <value>Method for ordering results. `clickThroughRate`, `conversionRate` and `averageClickPosition` are only available if the `clickAnalytics` parameter is `true`. </value>
+/// <value>Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available. </value>
 public enum OrderBy
 {
   /// <summary>

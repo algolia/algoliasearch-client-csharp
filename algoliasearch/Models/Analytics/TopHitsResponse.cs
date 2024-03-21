@@ -24,16 +24,16 @@ public partial class TopHitsResponse
   /// <summary>
   /// Initializes a new instance of the TopHitsResponse class.
   /// </summary>
-  /// <param name="hits">Top hits. (required).</param>
+  /// <param name="hits">Most frequent search results. (required).</param>
   public TopHitsResponse(List<TopHit> hits)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
   }
 
   /// <summary>
-  /// Top hits.
+  /// Most frequent search results.
   /// </summary>
-  /// <value>Top hits.</value>
+  /// <value>Most frequent search results.</value>
   [JsonPropertyName("hits")]
   public List<TopHit> Hits { get; set; }
 

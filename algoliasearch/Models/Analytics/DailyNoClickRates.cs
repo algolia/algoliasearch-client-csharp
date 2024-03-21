@@ -12,23 +12,23 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// NoClickRateEvent
+/// DailyNoClickRates
 /// </summary>
-public partial class NoClickRateEvent
+public partial class DailyNoClickRates
 {
   /// <summary>
-  /// Initializes a new instance of the NoClickRateEvent class.
+  /// Initializes a new instance of the DailyNoClickRates class.
   /// </summary>
   [JsonConstructor]
-  public NoClickRateEvent() { }
+  public DailyNoClickRates() { }
   /// <summary>
-  /// Initializes a new instance of the NoClickRateEvent class.
+  /// Initializes a new instance of the DailyNoClickRates class.
   /// </summary>
-  /// <param name="rate">[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).  (required).</param>
-  /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
-  /// <param name="noClickCount">Number of click events. (required).</param>
-  /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
-  public NoClickRateEvent(double rate, int count, int noClickCount, string date)
+  /// <param name="rate">No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches. (required).</param>
+  /// <param name="count">Number of tracked searches. Tracked searches are search requests where the &#x60;clickAnalytics&#x60; parameter is true. (required) (default to 0).</param>
+  /// <param name="noClickCount">Number of times this search was returned as a result without any click. (required).</param>
+  /// <param name="date">Date in the format YYYY-MM-DD. (required).</param>
+  public DailyNoClickRates(double rate, int count, int noClickCount, string date)
   {
     Rate = rate;
     Count = count;
@@ -37,30 +37,30 @@ public partial class NoClickRateEvent
   }
 
   /// <summary>
-  /// [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). 
+  /// No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches.
   /// </summary>
-  /// <value>[Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). </value>
+  /// <value>No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches.</value>
   [JsonPropertyName("rate")]
   public double Rate { get; set; }
 
   /// <summary>
-  /// Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).
+  /// Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
   /// </summary>
-  /// <value>Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).</value>
+  /// <value>Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.</value>
   [JsonPropertyName("count")]
   public int Count { get; set; }
 
   /// <summary>
-  /// Number of click events.
+  /// Number of times this search was returned as a result without any click.
   /// </summary>
-  /// <value>Number of click events.</value>
+  /// <value>Number of times this search was returned as a result without any click.</value>
   [JsonPropertyName("noClickCount")]
   public int NoClickCount { get; set; }
 
   /// <summary>
-  /// Date of the event in the format YYYY-MM-DD.
+  /// Date in the format YYYY-MM-DD.
   /// </summary>
-  /// <value>Date of the event in the format YYYY-MM-DD.</value>
+  /// <value>Date in the format YYYY-MM-DD.</value>
   [JsonPropertyName("date")]
   public string Date { get; set; }
 
@@ -71,7 +71,7 @@ public partial class NoClickRateEvent
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class NoClickRateEvent {\n");
+    sb.Append("class DailyNoClickRates {\n");
     sb.Append("  Rate: ").Append(Rate).Append("\n");
     sb.Append("  Count: ").Append(Count).Append("\n");
     sb.Append("  NoClickCount: ").Append(NoClickCount).Append("\n");
@@ -96,7 +96,7 @@ public partial class NoClickRateEvent
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not NoClickRateEvent input)
+    if (obj is not DailyNoClickRates input)
     {
       return false;
     }

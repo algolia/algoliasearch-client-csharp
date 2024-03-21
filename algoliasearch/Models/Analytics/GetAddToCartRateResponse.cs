@@ -12,43 +12,36 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// GetClickThroughRateResponse
+/// GetAddToCartRateResponse
 /// </summary>
-public partial class GetClickThroughRateResponse
+public partial class GetAddToCartRateResponse
 {
   /// <summary>
-  /// Initializes a new instance of the GetClickThroughRateResponse class.
+  /// Initializes a new instance of the GetAddToCartRateResponse class.
   /// </summary>
   [JsonConstructor]
-  public GetClickThroughRateResponse() { }
+  public GetAddToCartRateResponse() { }
   /// <summary>
-  /// Initializes a new instance of the GetClickThroughRateResponse class.
+  /// Initializes a new instance of the GetAddToCartRateResponse class.
   /// </summary>
-  /// <param name="rate">Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
-  /// <param name="clickCount">Number of clicks associated with this search. (required) (default to 0).</param>
+  /// <param name="rate">Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
   /// <param name="trackedSearchCount">Number of tracked searches. Tracked searches are search requests where the &#x60;clickAnalytics&#x60; parameter is true. (required) (default to 0).</param>
-  /// <param name="dates">Daily click-through rates. (required).</param>
-  public GetClickThroughRateResponse(double? rate, int clickCount, int trackedSearchCount, List<DailyClickThroughRates> dates)
+  /// <param name="addToCartCount">Number of add-to-cart events from this search. (required) (default to 0).</param>
+  /// <param name="dates">Daily add-to-cart rates. (required).</param>
+  public GetAddToCartRateResponse(double? rate, int trackedSearchCount, int addToCartCount, List<DailyAddToCartRates> dates)
   {
     Rate = rate ?? throw new ArgumentNullException(nameof(rate));
-    ClickCount = clickCount;
     TrackedSearchCount = trackedSearchCount;
+    AddToCartCount = addToCartCount;
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
   }
 
   /// <summary>
-  /// Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("rate")]
   public double? Rate { get; set; }
-
-  /// <summary>
-  /// Number of clicks associated with this search.
-  /// </summary>
-  /// <value>Number of clicks associated with this search.</value>
-  [JsonPropertyName("clickCount")]
-  public int ClickCount { get; set; }
 
   /// <summary>
   /// Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
@@ -58,11 +51,18 @@ public partial class GetClickThroughRateResponse
   public int TrackedSearchCount { get; set; }
 
   /// <summary>
-  /// Daily click-through rates.
+  /// Number of add-to-cart events from this search.
   /// </summary>
-  /// <value>Daily click-through rates.</value>
+  /// <value>Number of add-to-cart events from this search.</value>
+  [JsonPropertyName("addToCartCount")]
+  public int AddToCartCount { get; set; }
+
+  /// <summary>
+  /// Daily add-to-cart rates.
+  /// </summary>
+  /// <value>Daily add-to-cart rates.</value>
   [JsonPropertyName("dates")]
-  public List<DailyClickThroughRates> Dates { get; set; }
+  public List<DailyAddToCartRates> Dates { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -71,10 +71,10 @@ public partial class GetClickThroughRateResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetClickThroughRateResponse {\n");
+    sb.Append("class GetAddToCartRateResponse {\n");
     sb.Append("  Rate: ").Append(Rate).Append("\n");
-    sb.Append("  ClickCount: ").Append(ClickCount).Append("\n");
     sb.Append("  TrackedSearchCount: ").Append(TrackedSearchCount).Append("\n");
+    sb.Append("  AddToCartCount: ").Append(AddToCartCount).Append("\n");
     sb.Append("  Dates: ").Append(Dates).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -96,15 +96,15 @@ public partial class GetClickThroughRateResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetClickThroughRateResponse input)
+    if (obj is not GetAddToCartRateResponse input)
     {
       return false;
     }
 
     return
         (Rate == input.Rate || (Rate != null && Rate.Equals(input.Rate))) &&
-        (ClickCount == input.ClickCount || ClickCount.Equals(input.ClickCount)) &&
         (TrackedSearchCount == input.TrackedSearchCount || TrackedSearchCount.Equals(input.TrackedSearchCount)) &&
+        (AddToCartCount == input.AddToCartCount || AddToCartCount.Equals(input.AddToCartCount)) &&
         (Dates == input.Dates || Dates != null && input.Dates != null && Dates.SequenceEqual(input.Dates));
   }
 
@@ -121,8 +121,8 @@ public partial class GetClickThroughRateResponse
       {
         hashCode = (hashCode * 59) + Rate.GetHashCode();
       }
-      hashCode = (hashCode * 59) + ClickCount.GetHashCode();
       hashCode = (hashCode * 59) + TrackedSearchCount.GetHashCode();
+      hashCode = (hashCode * 59) + AddToCartCount.GetHashCode();
       if (Dates != null)
       {
         hashCode = (hashCode * 59) + Dates.GetHashCode();

@@ -12,34 +12,32 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// SearchNoResultEvent
+/// DailySearches
 /// </summary>
-public partial class SearchNoResultEvent
+public partial class DailySearches
 {
   /// <summary>
-  /// Initializes a new instance of the SearchNoResultEvent class.
+  /// Initializes a new instance of the DailySearches class.
   /// </summary>
   [JsonConstructor]
-  public SearchNoResultEvent() { }
+  public DailySearches() { }
   /// <summary>
-  /// Initializes a new instance of the SearchNoResultEvent class.
+  /// Initializes a new instance of the DailySearches class.
   /// </summary>
-  /// <param name="search">User query. (required).</param>
+  /// <param name="date">Date in the format YYYY-MM-DD. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
-  /// <param name="nbHits">Number of results (hits). (required).</param>
-  public SearchNoResultEvent(string search, int count, int nbHits)
+  public DailySearches(string date, int count)
   {
-    Search = search ?? throw new ArgumentNullException(nameof(search));
+    Date = date ?? throw new ArgumentNullException(nameof(date));
     Count = count;
-    NbHits = nbHits;
   }
 
   /// <summary>
-  /// User query.
+  /// Date in the format YYYY-MM-DD.
   /// </summary>
-  /// <value>User query.</value>
-  [JsonPropertyName("search")]
-  public string Search { get; set; }
+  /// <value>Date in the format YYYY-MM-DD.</value>
+  [JsonPropertyName("date")]
+  public string Date { get; set; }
 
   /// <summary>
   /// Number of occurrences.
@@ -49,23 +47,15 @@ public partial class SearchNoResultEvent
   public int Count { get; set; }
 
   /// <summary>
-  /// Number of results (hits).
-  /// </summary>
-  /// <value>Number of results (hits).</value>
-  [JsonPropertyName("nbHits")]
-  public int NbHits { get; set; }
-
-  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SearchNoResultEvent {\n");
-    sb.Append("  Search: ").Append(Search).Append("\n");
+    sb.Append("class DailySearches {\n");
+    sb.Append("  Date: ").Append(Date).Append("\n");
     sb.Append("  Count: ").Append(Count).Append("\n");
-    sb.Append("  NbHits: ").Append(NbHits).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -86,15 +76,14 @@ public partial class SearchNoResultEvent
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SearchNoResultEvent input)
+    if (obj is not DailySearches input)
     {
       return false;
     }
 
     return
-        (Search == input.Search || (Search != null && Search.Equals(input.Search))) &&
-        (Count == input.Count || Count.Equals(input.Count)) &&
-        (NbHits == input.NbHits || NbHits.Equals(input.NbHits));
+        (Date == input.Date || (Date != null && Date.Equals(input.Date))) &&
+        (Count == input.Count || Count.Equals(input.Count));
   }
 
   /// <summary>
@@ -106,12 +95,11 @@ public partial class SearchNoResultEvent
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Search != null)
+      if (Date != null)
       {
-        hashCode = (hashCode * 59) + Search.GetHashCode();
+        hashCode = (hashCode * 59) + Date.GetHashCode();
       }
       hashCode = (hashCode * 59) + Count.GetHashCode();
-      hashCode = (hashCode * 59) + NbHits.GetHashCode();
       return hashCode;
     }
   }

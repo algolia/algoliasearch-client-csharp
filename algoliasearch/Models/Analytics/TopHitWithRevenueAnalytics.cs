@@ -12,17 +12,17 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// TopHitWithAnalytics
+/// TopHitWithRevenueAnalytics
 /// </summary>
-public partial class TopHitWithAnalytics
+public partial class TopHitWithRevenueAnalytics
 {
   /// <summary>
-  /// Initializes a new instance of the TopHitWithAnalytics class.
+  /// Initializes a new instance of the TopHitWithRevenueAnalytics class.
   /// </summary>
   [JsonConstructor]
-  public TopHitWithAnalytics() { }
+  public TopHitWithRevenueAnalytics() { }
   /// <summary>
-  /// Initializes a new instance of the TopHitWithAnalytics class.
+  /// Initializes a new instance of the TopHitWithRevenueAnalytics class.
   /// </summary>
   /// <param name="hit">Object ID of a record that&#39;s returned as a search result. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
@@ -31,7 +31,12 @@ public partial class TopHitWithAnalytics
   /// <param name="trackedHitCount">Number of tracked searches. Tracked searches are search requests where the &#x60;clickAnalytics&#x60; parameter is true. (required) (default to 0).</param>
   /// <param name="clickCount">Number of clicks associated with this search. (required) (default to 0).</param>
   /// <param name="conversionCount">Number of conversions from this search. (required) (default to 0).</param>
-  public TopHitWithAnalytics(string hit, int count, double? clickThroughRate, double? conversionRate, int trackedHitCount, int clickCount, int conversionCount)
+  /// <param name="addToCartRate">Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
+  /// <param name="addToCartCount">Number of add-to-cart events from this search. (required) (default to 0).</param>
+  /// <param name="purchaseRate">Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
+  /// <param name="purchaseCount">Number of purchase events from this search. (required) (default to 0).</param>
+  /// <param name="currencies">Revenue associated with this search, broken-down by currencies. (required).</param>
+  public TopHitWithRevenueAnalytics(string hit, int count, double? clickThroughRate, double? conversionRate, int trackedHitCount, int clickCount, int conversionCount, double? addToCartRate, int addToCartCount, double? purchaseRate, int purchaseCount, Dictionary<string, CurrenciesValue> currencies)
   {
     Hit = hit ?? throw new ArgumentNullException(nameof(hit));
     Count = count;
@@ -40,6 +45,11 @@ public partial class TopHitWithAnalytics
     TrackedHitCount = trackedHitCount;
     ClickCount = clickCount;
     ConversionCount = conversionCount;
+    AddToCartRate = addToCartRate ?? throw new ArgumentNullException(nameof(addToCartRate));
+    AddToCartCount = addToCartCount;
+    PurchaseRate = purchaseRate ?? throw new ArgumentNullException(nameof(purchaseRate));
+    PurchaseCount = purchaseCount;
+    Currencies = currencies ?? throw new ArgumentNullException(nameof(currencies));
   }
 
   /// <summary>
@@ -92,13 +102,48 @@ public partial class TopHitWithAnalytics
   public int ConversionCount { get; set; }
 
   /// <summary>
+  /// Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// </summary>
+  /// <value>Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  [JsonPropertyName("addToCartRate")]
+  public double? AddToCartRate { get; set; }
+
+  /// <summary>
+  /// Number of add-to-cart events from this search.
+  /// </summary>
+  /// <value>Number of add-to-cart events from this search.</value>
+  [JsonPropertyName("addToCartCount")]
+  public int AddToCartCount { get; set; }
+
+  /// <summary>
+  /// Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// </summary>
+  /// <value>Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  [JsonPropertyName("purchaseRate")]
+  public double? PurchaseRate { get; set; }
+
+  /// <summary>
+  /// Number of purchase events from this search.
+  /// </summary>
+  /// <value>Number of purchase events from this search.</value>
+  [JsonPropertyName("purchaseCount")]
+  public int PurchaseCount { get; set; }
+
+  /// <summary>
+  /// Revenue associated with this search, broken-down by currencies.
+  /// </summary>
+  /// <value>Revenue associated with this search, broken-down by currencies.</value>
+  [JsonPropertyName("currencies")]
+  public Dictionary<string, CurrenciesValue> Currencies { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class TopHitWithAnalytics {\n");
+    sb.Append("class TopHitWithRevenueAnalytics {\n");
     sb.Append("  Hit: ").Append(Hit).Append("\n");
     sb.Append("  Count: ").Append(Count).Append("\n");
     sb.Append("  ClickThroughRate: ").Append(ClickThroughRate).Append("\n");
@@ -106,6 +151,11 @@ public partial class TopHitWithAnalytics
     sb.Append("  TrackedHitCount: ").Append(TrackedHitCount).Append("\n");
     sb.Append("  ClickCount: ").Append(ClickCount).Append("\n");
     sb.Append("  ConversionCount: ").Append(ConversionCount).Append("\n");
+    sb.Append("  AddToCartRate: ").Append(AddToCartRate).Append("\n");
+    sb.Append("  AddToCartCount: ").Append(AddToCartCount).Append("\n");
+    sb.Append("  PurchaseRate: ").Append(PurchaseRate).Append("\n");
+    sb.Append("  PurchaseCount: ").Append(PurchaseCount).Append("\n");
+    sb.Append("  Currencies: ").Append(Currencies).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -126,7 +176,7 @@ public partial class TopHitWithAnalytics
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not TopHitWithAnalytics input)
+    if (obj is not TopHitWithRevenueAnalytics input)
     {
       return false;
     }
@@ -138,7 +188,12 @@ public partial class TopHitWithAnalytics
         (ConversionRate == input.ConversionRate || (ConversionRate != null && ConversionRate.Equals(input.ConversionRate))) &&
         (TrackedHitCount == input.TrackedHitCount || TrackedHitCount.Equals(input.TrackedHitCount)) &&
         (ClickCount == input.ClickCount || ClickCount.Equals(input.ClickCount)) &&
-        (ConversionCount == input.ConversionCount || ConversionCount.Equals(input.ConversionCount));
+        (ConversionCount == input.ConversionCount || ConversionCount.Equals(input.ConversionCount)) &&
+        (AddToCartRate == input.AddToCartRate || (AddToCartRate != null && AddToCartRate.Equals(input.AddToCartRate))) &&
+        (AddToCartCount == input.AddToCartCount || AddToCartCount.Equals(input.AddToCartCount)) &&
+        (PurchaseRate == input.PurchaseRate || (PurchaseRate != null && PurchaseRate.Equals(input.PurchaseRate))) &&
+        (PurchaseCount == input.PurchaseCount || PurchaseCount.Equals(input.PurchaseCount)) &&
+        (Currencies == input.Currencies || Currencies != null && input.Currencies != null && Currencies.SequenceEqual(input.Currencies));
   }
 
   /// <summary>
@@ -166,6 +221,20 @@ public partial class TopHitWithAnalytics
       hashCode = (hashCode * 59) + TrackedHitCount.GetHashCode();
       hashCode = (hashCode * 59) + ClickCount.GetHashCode();
       hashCode = (hashCode * 59) + ConversionCount.GetHashCode();
+      if (AddToCartRate != null)
+      {
+        hashCode = (hashCode * 59) + AddToCartRate.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + AddToCartCount.GetHashCode();
+      if (PurchaseRate != null)
+      {
+        hashCode = (hashCode * 59) + PurchaseRate.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + PurchaseCount.GetHashCode();
+      if (Currencies != null)
+      {
+        hashCode = (hashCode * 59) + Currencies.GetHashCode();
+      }
       return hashCode;
     }
   }

@@ -12,30 +12,30 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// GetSearchesNoResultsResponse
+/// Currency code.
 /// </summary>
-public partial class GetSearchesNoResultsResponse
+public partial class CurrenciesValue
 {
   /// <summary>
-  /// Initializes a new instance of the GetSearchesNoResultsResponse class.
+  /// Initializes a new instance of the CurrenciesValue class.
   /// </summary>
-  [JsonConstructor]
-  public GetSearchesNoResultsResponse() { }
-  /// <summary>
-  /// Initializes a new instance of the GetSearchesNoResultsResponse class.
-  /// </summary>
-  /// <param name="searches">Searches without results. (required).</param>
-  public GetSearchesNoResultsResponse(List<DailySearchesNoResults> searches)
+  public CurrenciesValue()
   {
-    Searches = searches ?? throw new ArgumentNullException(nameof(searches));
   }
 
   /// <summary>
-  /// Searches without results.
+  /// Currency code.
   /// </summary>
-  /// <value>Searches without results.</value>
-  [JsonPropertyName("searches")]
-  public List<DailySearchesNoResults> Searches { get; set; }
+  /// <value>Currency code.</value>
+  [JsonPropertyName("currency")]
+  public string Currency { get; set; }
+
+  /// <summary>
+  /// Revenue associated with this search in this currency.
+  /// </summary>
+  /// <value>Revenue associated with this search in this currency.</value>
+  [JsonPropertyName("revenue")]
+  public float? Revenue { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,8 +44,9 @@ public partial class GetSearchesNoResultsResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetSearchesNoResultsResponse {\n");
-    sb.Append("  Searches: ").Append(Searches).Append("\n");
+    sb.Append("class CurrenciesValue {\n");
+    sb.Append("  Currency: ").Append(Currency).Append("\n");
+    sb.Append("  Revenue: ").Append(Revenue).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,13 +67,14 @@ public partial class GetSearchesNoResultsResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetSearchesNoResultsResponse input)
+    if (obj is not CurrenciesValue input)
     {
       return false;
     }
 
     return
-        (Searches == input.Searches || Searches != null && input.Searches != null && Searches.SequenceEqual(input.Searches));
+        (Currency == input.Currency || (Currency != null && Currency.Equals(input.Currency))) &&
+        (Revenue == input.Revenue || Revenue.Equals(input.Revenue));
   }
 
   /// <summary>
@@ -84,10 +86,11 @@ public partial class GetSearchesNoResultsResponse
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Searches != null)
+      if (Currency != null)
       {
-        hashCode = (hashCode * 59) + Searches.GetHashCode();
+        hashCode = (hashCode * 59) + Currency.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Revenue.GetHashCode();
       return hashCode;
     }
   }

@@ -24,8 +24,8 @@ public partial class TopSearch
   /// <summary>
   /// Initializes a new instance of the TopSearch class.
   /// </summary>
-  /// <param name="search">User query. (required).</param>
-  /// <param name="count">Number of tracked _and_ untracked searches (where the &#x60;clickAnalytics&#x60; parameter isn&#39;t &#x60;true&#x60;). (required).</param>
+  /// <param name="search">Search query. (required).</param>
+  /// <param name="count">Number of searches. (required).</param>
   /// <param name="nbHits">Number of results (hits). (required).</param>
   public TopSearch(string search, int count, int nbHits)
   {
@@ -35,16 +35,16 @@ public partial class TopSearch
   }
 
   /// <summary>
-  /// User query.
+  /// Search query.
   /// </summary>
-  /// <value>User query.</value>
+  /// <value>Search query.</value>
   [JsonPropertyName("search")]
   public string Search { get; set; }
 
   /// <summary>
-  /// Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).
+  /// Number of searches.
   /// </summary>
-  /// <value>Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).</value>
+  /// <value>Number of searches.</value>
   [JsonPropertyName("count")]
   public int Count { get; set; }
 

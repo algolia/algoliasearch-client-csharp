@@ -25,8 +25,8 @@ public partial class GetSearchesCountResponse
   /// Initializes a new instance of the GetSearchesCountResponse class.
   /// </summary>
   /// <param name="count">Number of occurrences. (required).</param>
-  /// <param name="dates">Search events with their associated dates and hit counts. (required).</param>
-  public GetSearchesCountResponse(int count, List<SearchEvent> dates)
+  /// <param name="dates">Daily number of searches. (required).</param>
+  public GetSearchesCountResponse(int count, List<DailySearches> dates)
   {
     Count = count;
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
@@ -40,11 +40,11 @@ public partial class GetSearchesCountResponse
   public int Count { get; set; }
 
   /// <summary>
-  /// Search events with their associated dates and hit counts.
+  /// Daily number of searches.
   /// </summary>
-  /// <value>Search events with their associated dates and hit counts.</value>
+  /// <value>Daily number of searches.</value>
   [JsonPropertyName("dates")]
-  public List<SearchEvent> Dates { get; set; }
+  public List<DailySearches> Dates { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

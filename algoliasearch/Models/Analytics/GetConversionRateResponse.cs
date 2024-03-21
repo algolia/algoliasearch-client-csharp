@@ -12,43 +12,36 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// GetClickThroughRateResponse
+/// GetConversionRateResponse
 /// </summary>
-public partial class GetClickThroughRateResponse
+public partial class GetConversionRateResponse
 {
   /// <summary>
-  /// Initializes a new instance of the GetClickThroughRateResponse class.
+  /// Initializes a new instance of the GetConversionRateResponse class.
   /// </summary>
   [JsonConstructor]
-  public GetClickThroughRateResponse() { }
+  public GetConversionRateResponse() { }
   /// <summary>
-  /// Initializes a new instance of the GetClickThroughRateResponse class.
+  /// Initializes a new instance of the GetConversionRateResponse class.
   /// </summary>
-  /// <param name="rate">Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
-  /// <param name="clickCount">Number of clicks associated with this search. (required) (default to 0).</param>
+  /// <param name="rate">Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
   /// <param name="trackedSearchCount">Number of tracked searches. Tracked searches are search requests where the &#x60;clickAnalytics&#x60; parameter is true. (required) (default to 0).</param>
-  /// <param name="dates">Daily click-through rates. (required).</param>
-  public GetClickThroughRateResponse(double? rate, int clickCount, int trackedSearchCount, List<DailyClickThroughRates> dates)
+  /// <param name="conversionCount">Number of conversions from this search. (required) (default to 0).</param>
+  /// <param name="dates">Daily conversion rates. (required).</param>
+  public GetConversionRateResponse(double? rate, int trackedSearchCount, int conversionCount, List<DailyConversionRates> dates)
   {
     Rate = rate ?? throw new ArgumentNullException(nameof(rate));
-    ClickCount = clickCount;
     TrackedSearchCount = trackedSearchCount;
+    ConversionCount = conversionCount;
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
   }
 
   /// <summary>
-  /// Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("rate")]
   public double? Rate { get; set; }
-
-  /// <summary>
-  /// Number of clicks associated with this search.
-  /// </summary>
-  /// <value>Number of clicks associated with this search.</value>
-  [JsonPropertyName("clickCount")]
-  public int ClickCount { get; set; }
 
   /// <summary>
   /// Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
@@ -58,11 +51,18 @@ public partial class GetClickThroughRateResponse
   public int TrackedSearchCount { get; set; }
 
   /// <summary>
-  /// Daily click-through rates.
+  /// Number of conversions from this search.
   /// </summary>
-  /// <value>Daily click-through rates.</value>
+  /// <value>Number of conversions from this search.</value>
+  [JsonPropertyName("conversionCount")]
+  public int ConversionCount { get; set; }
+
+  /// <summary>
+  /// Daily conversion rates.
+  /// </summary>
+  /// <value>Daily conversion rates.</value>
   [JsonPropertyName("dates")]
-  public List<DailyClickThroughRates> Dates { get; set; }
+  public List<DailyConversionRates> Dates { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -71,10 +71,10 @@ public partial class GetClickThroughRateResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetClickThroughRateResponse {\n");
+    sb.Append("class GetConversionRateResponse {\n");
     sb.Append("  Rate: ").Append(Rate).Append("\n");
-    sb.Append("  ClickCount: ").Append(ClickCount).Append("\n");
     sb.Append("  TrackedSearchCount: ").Append(TrackedSearchCount).Append("\n");
+    sb.Append("  ConversionCount: ").Append(ConversionCount).Append("\n");
     sb.Append("  Dates: ").Append(Dates).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -96,15 +96,15 @@ public partial class GetClickThroughRateResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetClickThroughRateResponse input)
+    if (obj is not GetConversionRateResponse input)
     {
       return false;
     }
 
     return
         (Rate == input.Rate || (Rate != null && Rate.Equals(input.Rate))) &&
-        (ClickCount == input.ClickCount || ClickCount.Equals(input.ClickCount)) &&
         (TrackedSearchCount == input.TrackedSearchCount || TrackedSearchCount.Equals(input.TrackedSearchCount)) &&
+        (ConversionCount == input.ConversionCount || ConversionCount.Equals(input.ConversionCount)) &&
         (Dates == input.Dates || Dates != null && input.Dates != null && Dates.SequenceEqual(input.Dates));
   }
 
@@ -121,8 +121,8 @@ public partial class GetClickThroughRateResponse
       {
         hashCode = (hashCode * 59) + Rate.GetHashCode();
       }
-      hashCode = (hashCode * 59) + ClickCount.GetHashCode();
       hashCode = (hashCode * 59) + TrackedSearchCount.GetHashCode();
+      hashCode = (hashCode * 59) + ConversionCount.GetHashCode();
       if (Dates != null)
       {
         hashCode = (hashCode * 59) + Dates.GetHashCode();

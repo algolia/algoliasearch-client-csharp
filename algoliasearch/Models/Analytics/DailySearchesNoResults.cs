@@ -12,32 +12,34 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// UserWithDate
+/// DailySearchesNoResults
 /// </summary>
-public partial class UserWithDate
+public partial class DailySearchesNoResults
 {
   /// <summary>
-  /// Initializes a new instance of the UserWithDate class.
+  /// Initializes a new instance of the DailySearchesNoResults class.
   /// </summary>
   [JsonConstructor]
-  public UserWithDate() { }
+  public DailySearchesNoResults() { }
   /// <summary>
-  /// Initializes a new instance of the UserWithDate class.
+  /// Initializes a new instance of the DailySearchesNoResults class.
   /// </summary>
-  /// <param name="date">Date of the event in the format YYYY-MM-DD. (required).</param>
+  /// <param name="search">Search query. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
-  public UserWithDate(string date, int count)
+  /// <param name="withFilterCount">Number of searches for this term with applied filters. (required) (default to 0).</param>
+  public DailySearchesNoResults(string search, int count, int withFilterCount)
   {
-    Date = date ?? throw new ArgumentNullException(nameof(date));
+    Search = search ?? throw new ArgumentNullException(nameof(search));
     Count = count;
+    WithFilterCount = withFilterCount;
   }
 
   /// <summary>
-  /// Date of the event in the format YYYY-MM-DD.
+  /// Search query.
   /// </summary>
-  /// <value>Date of the event in the format YYYY-MM-DD.</value>
-  [JsonPropertyName("date")]
-  public string Date { get; set; }
+  /// <value>Search query.</value>
+  [JsonPropertyName("search")]
+  public string Search { get; set; }
 
   /// <summary>
   /// Number of occurrences.
@@ -47,15 +49,23 @@ public partial class UserWithDate
   public int Count { get; set; }
 
   /// <summary>
+  /// Number of searches for this term with applied filters.
+  /// </summary>
+  /// <value>Number of searches for this term with applied filters.</value>
+  [JsonPropertyName("withFilterCount")]
+  public int WithFilterCount { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class UserWithDate {\n");
-    sb.Append("  Date: ").Append(Date).Append("\n");
+    sb.Append("class DailySearchesNoResults {\n");
+    sb.Append("  Search: ").Append(Search).Append("\n");
     sb.Append("  Count: ").Append(Count).Append("\n");
+    sb.Append("  WithFilterCount: ").Append(WithFilterCount).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -76,14 +86,15 @@ public partial class UserWithDate
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not UserWithDate input)
+    if (obj is not DailySearchesNoResults input)
     {
       return false;
     }
 
     return
-        (Date == input.Date || (Date != null && Date.Equals(input.Date))) &&
-        (Count == input.Count || Count.Equals(input.Count));
+        (Search == input.Search || (Search != null && Search.Equals(input.Search))) &&
+        (Count == input.Count || Count.Equals(input.Count)) &&
+        (WithFilterCount == input.WithFilterCount || WithFilterCount.Equals(input.WithFilterCount));
   }
 
   /// <summary>
@@ -95,11 +106,12 @@ public partial class UserWithDate
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Date != null)
+      if (Search != null)
       {
-        hashCode = (hashCode * 59) + Date.GetHashCode();
+        hashCode = (hashCode * 59) + Search.GetHashCode();
       }
       hashCode = (hashCode * 59) + Count.GetHashCode();
+      hashCode = (hashCode * 59) + WithFilterCount.GetHashCode();
       return hashCode;
     }
   }

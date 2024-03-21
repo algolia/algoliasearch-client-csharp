@@ -16,6 +16,12 @@ namespace Algolia.Search.Models.Analytics;
 /// </summary>
 public partial class GetTopFilterForAttribute
 {
+
+  /// <summary>
+  /// Gets or Sets VarOperator
+  /// </summary>
+  [JsonPropertyName("operator")]
+  public Operator? VarOperator { get; set; }
   /// <summary>
   /// Initializes a new instance of the GetTopFilterForAttribute class.
   /// </summary>
@@ -25,13 +31,13 @@ public partial class GetTopFilterForAttribute
   /// Initializes a new instance of the GetTopFilterForAttribute class.
   /// </summary>
   /// <param name="attribute">Attribute name. (required).</param>
-  /// <param name="varOperator">Operator. (required).</param>
+  /// <param name="varOperator">varOperator (required).</param>
   /// <param name="value">Attribute value. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
-  public GetTopFilterForAttribute(string attribute, string varOperator, string value, int count)
+  public GetTopFilterForAttribute(string attribute, Operator? varOperator, string value, int count)
   {
     Attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
-    VarOperator = varOperator ?? throw new ArgumentNullException(nameof(varOperator));
+    VarOperator = varOperator;
     Value = value ?? throw new ArgumentNullException(nameof(value));
     Count = count;
   }
@@ -42,13 +48,6 @@ public partial class GetTopFilterForAttribute
   /// <value>Attribute name.</value>
   [JsonPropertyName("attribute")]
   public string Attribute { get; set; }
-
-  /// <summary>
-  /// Operator.
-  /// </summary>
-  /// <value>Operator.</value>
-  [JsonPropertyName("operator")]
-  public string VarOperator { get; set; }
 
   /// <summary>
   /// Attribute value.
@@ -103,7 +102,7 @@ public partial class GetTopFilterForAttribute
 
     return
         (Attribute == input.Attribute || (Attribute != null && Attribute.Equals(input.Attribute))) &&
-        (VarOperator == input.VarOperator || (VarOperator != null && VarOperator.Equals(input.VarOperator))) &&
+        (VarOperator == input.VarOperator || VarOperator.Equals(input.VarOperator)) &&
         (Value == input.Value || (Value != null && Value.Equals(input.Value))) &&
         (Count == input.Count || Count.Equals(input.Count));
   }
@@ -121,10 +120,7 @@ public partial class GetTopFilterForAttribute
       {
         hashCode = (hashCode * 59) + Attribute.GetHashCode();
       }
-      if (VarOperator != null)
-      {
-        hashCode = (hashCode * 59) + VarOperator.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + VarOperator.GetHashCode();
       if (Value != null)
       {
         hashCode = (hashCode * 59) + Value.GetHashCode();

@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Abtesting;
 
 /// <summary>
-/// CurrenciesValue
+/// Currency
 /// </summary>
-public partial class CurrenciesValue
+public partial class Currency
 {
   /// <summary>
-  /// Initializes a new instance of the CurrenciesValue class.
+  /// Initializes a new instance of the Currency class.
   /// </summary>
-  public CurrenciesValue()
+  public Currency()
   {
   }
 
@@ -28,7 +28,7 @@ public partial class CurrenciesValue
   /// </summary>
   /// <value>Currency code.</value>
   [JsonPropertyName("currency")]
-  public string Currency { get; set; }
+  public string VarCurrency { get; set; }
 
   /// <summary>
   /// Revenue for this currency.
@@ -58,8 +58,8 @@ public partial class CurrenciesValue
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class CurrenciesValue {\n");
-    sb.Append("  Currency: ").Append(Currency).Append("\n");
+    sb.Append("class Currency {\n");
+    sb.Append("  VarCurrency: ").Append(VarCurrency).Append("\n");
     sb.Append("  Revenue: ").Append(Revenue).Append("\n");
     sb.Append("  Mean: ").Append(Mean).Append("\n");
     sb.Append("  StandardDeviation: ").Append(StandardDeviation).Append("\n");
@@ -83,13 +83,13 @@ public partial class CurrenciesValue
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not CurrenciesValue input)
+    if (obj is not Currency input)
     {
       return false;
     }
 
     return
-        (Currency == input.Currency || (Currency != null && Currency.Equals(input.Currency))) &&
+        (VarCurrency == input.VarCurrency || (VarCurrency != null && VarCurrency.Equals(input.VarCurrency))) &&
         (Revenue == input.Revenue || Revenue.Equals(input.Revenue)) &&
         (Mean == input.Mean || Mean.Equals(input.Mean)) &&
         (StandardDeviation == input.StandardDeviation || StandardDeviation.Equals(input.StandardDeviation));
@@ -104,9 +104,9 @@ public partial class CurrenciesValue
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Currency != null)
+      if (VarCurrency != null)
       {
-        hashCode = (hashCode * 59) + Currency.GetHashCode();
+        hashCode = (hashCode * 59) + VarCurrency.GetHashCode();
       }
       hashCode = (hashCode * 59) + Revenue.GetHashCode();
       hashCode = (hashCode * 59) + Mean.GetHashCode();

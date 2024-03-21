@@ -12,30 +12,30 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// GetSearchesNoResultsResponse
+/// TopHitsResponseWithRevenueAnalytics
 /// </summary>
-public partial class GetSearchesNoResultsResponse
+public partial class TopHitsResponseWithRevenueAnalytics
 {
   /// <summary>
-  /// Initializes a new instance of the GetSearchesNoResultsResponse class.
+  /// Initializes a new instance of the TopHitsResponseWithRevenueAnalytics class.
   /// </summary>
   [JsonConstructor]
-  public GetSearchesNoResultsResponse() { }
+  public TopHitsResponseWithRevenueAnalytics() { }
   /// <summary>
-  /// Initializes a new instance of the GetSearchesNoResultsResponse class.
+  /// Initializes a new instance of the TopHitsResponseWithRevenueAnalytics class.
   /// </summary>
-  /// <param name="searches">Searches without results. (required).</param>
-  public GetSearchesNoResultsResponse(List<DailySearchesNoResults> searches)
+  /// <param name="hits">Most frequent search results with click, conversion, and revenue metrics. (required).</param>
+  public TopHitsResponseWithRevenueAnalytics(List<TopHitWithRevenueAnalytics> hits)
   {
-    Searches = searches ?? throw new ArgumentNullException(nameof(searches));
+    Hits = hits ?? throw new ArgumentNullException(nameof(hits));
   }
 
   /// <summary>
-  /// Searches without results.
+  /// Most frequent search results with click, conversion, and revenue metrics.
   /// </summary>
-  /// <value>Searches without results.</value>
-  [JsonPropertyName("searches")]
-  public List<DailySearchesNoResults> Searches { get; set; }
+  /// <value>Most frequent search results with click, conversion, and revenue metrics.</value>
+  [JsonPropertyName("hits")]
+  public List<TopHitWithRevenueAnalytics> Hits { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,8 +44,8 @@ public partial class GetSearchesNoResultsResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetSearchesNoResultsResponse {\n");
-    sb.Append("  Searches: ").Append(Searches).Append("\n");
+    sb.Append("class TopHitsResponseWithRevenueAnalytics {\n");
+    sb.Append("  Hits: ").Append(Hits).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,13 +66,13 @@ public partial class GetSearchesNoResultsResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetSearchesNoResultsResponse input)
+    if (obj is not TopHitsResponseWithRevenueAnalytics input)
     {
       return false;
     }
 
     return
-        (Searches == input.Searches || Searches != null && input.Searches != null && Searches.SequenceEqual(input.Searches));
+        (Hits == input.Hits || Hits != null && input.Hits != null && Hits.SequenceEqual(input.Hits));
   }
 
   /// <summary>
@@ -84,9 +84,9 @@ public partial class GetSearchesNoResultsResponse
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Searches != null)
+      if (Hits != null)
       {
-        hashCode = (hashCode * 59) + Searches.GetHashCode();
+        hashCode = (hashCode * 59) + Hits.GetHashCode();
       }
       return hashCode;
     }
