@@ -354,7 +354,7 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("DELETE"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -394,7 +394,7 @@ public partial class RecommendClient : IRecommendClient
     requestOptions.CustomPathParameters.Add("path", QueryStringHelper.ParameterToString(path));
 
     requestOptions.AddCustomQueryParameters(parameters);
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -436,7 +436,7 @@ public partial class RecommendClient : IRecommendClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("POST"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -479,7 +479,7 @@ public partial class RecommendClient : IRecommendClient
 
     requestOptions.AddCustomQueryParameters(parameters);
     requestOptions.Data = body;
-    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/1{path}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("PUT"), "/{path}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
