@@ -1,3 +1,7 @@
+## [7.0.0-alpha.6](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.5...7.0.0-alpha.6)
+
+- [10c9339c8](https://github.com/algolia/api-clients-automation/commit/10c9339c8) fix(specs): more flexible custom methods ([#2889](https://github.com/algolia/api-clients-automation/pull/2889)) by [@damcou](https://github.com/damcou/)
+
 ## [7.0.0-alpha.5](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.4...7.0.0-alpha.5)
 
 - [7dc719cbe](https://github.com/algolia/api-clients-automation/commit/7dc719cbe) fix(specs): make languages an enum ([#2865](https://github.com/algolia/api-clients-automation/pull/2865)) by [@kai687](https://github.com/kai687/)
