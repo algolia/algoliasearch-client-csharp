@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// The region where the cluster is located.
+/// Region where the cluster is located.
 /// </summary>
-/// <value>The region where the cluster is located.</value>
+/// <value>Region where the cluster is located.</value>
 public enum Region
 {
   /// <summary>

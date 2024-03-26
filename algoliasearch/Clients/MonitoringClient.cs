@@ -130,7 +130,7 @@ public interface IMonitoringClient
   object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List known incidents for selected clusters.
+  /// Retrieves known incidents for the selected clusters.
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -142,7 +142,7 @@ public interface IMonitoringClient
   Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List known incidents for selected clusters. (Synchronous version)
+  /// Retrieves known incidents for the selected clusters. (Synchronous version)
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -154,7 +154,7 @@ public interface IMonitoringClient
   IncidentsResponse GetClusterIncidents(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Report whether a cluster is operational.
+  /// Retrieves the status of selected clusters.
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -166,7 +166,7 @@ public interface IMonitoringClient
   Task<StatusResponse> GetClusterStatusAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Report whether a cluster is operational. (Synchronous version)
+  /// Retrieves the status of selected clusters. (Synchronous version)
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -178,7 +178,7 @@ public interface IMonitoringClient
   StatusResponse GetClusterStatus(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List known incidents for all clusters.
+  /// Retrieves known incidents for all clusters.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -189,7 +189,7 @@ public interface IMonitoringClient
   Task<IncidentsResponse> GetIncidentsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List known incidents for all clusters. (Synchronous version)
+  /// Retrieves known incidents for all clusters. (Synchronous version)
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -200,7 +200,7 @@ public interface IMonitoringClient
   IncidentsResponse GetIncidents(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List the average times for indexing operations for selected clusters.
+  /// Retrieves average times for indexing operations for selected clusters.
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -212,7 +212,7 @@ public interface IMonitoringClient
   Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List the average times for indexing operations for selected clusters. (Synchronous version)
+  /// Retrieves average times for indexing operations for selected clusters. (Synchronous version)
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -224,29 +224,7 @@ public interface IMonitoringClient
   IndexingTimeResponse GetIndexingTime(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of InventoryResponse</returns>
-  Task<InventoryResponse> GetInventoryAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.  (Synchronous version)
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>InventoryResponse</returns>
-  InventoryResponse GetInventory(RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// List the average latency for search requests for selected clusters.
+  /// Retrieves the average latency for search requests for selected clusters.
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -258,7 +236,7 @@ public interface IMonitoringClient
   Task<LatencyResponse> GetLatencyAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List the average latency for search requests for selected clusters. (Synchronous version)
+  /// Retrieves the average latency for search requests for selected clusters. (Synchronous version)
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -270,9 +248,9 @@ public interface IMonitoringClient
   LatencyResponse GetLatency(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Report the aggregate value of a metric for a selected period of time.
+  /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key). 
   /// </summary>
-  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use `*` as the parameter. </param>
+  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use `*`. </param>
   /// <param name="period">Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day. </param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -283,9 +261,9 @@ public interface IMonitoringClient
   Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Report the aggregate value of a metric for a selected period of time. (Synchronous version)
+  /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).  (Synchronous version)
   /// </summary>
-  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use `*` as the parameter. </param>
+  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use `*`. </param>
   /// <param name="period">Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day. </param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -320,7 +298,29 @@ public interface IMonitoringClient
   Dictionary<string, Dictionary<string, bool>> GetReachability(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
+  /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of InventoryResponse</returns>
+  Task<InventoryResponse> GetServersAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.  (Synchronous version)
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>InventoryResponse</returns>
+  InventoryResponse GetServers(RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Retrieves the status of all Algolia clusters and instances.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -331,7 +331,7 @@ public interface IMonitoringClient
   Task<StatusResponse> GetStatusAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters.  (Synchronous version)
+  /// Retrieves the status of all Algolia clusters and instances. (Synchronous version)
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -576,7 +576,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// List known incidents for selected clusters.
+  /// Retrieves known incidents for the selected clusters.
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -600,7 +600,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// List known incidents for selected clusters. (Synchronous version)
+  /// Retrieves known incidents for the selected clusters. (Synchronous version)
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -614,7 +614,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// Report whether a cluster is operational.
+  /// Retrieves the status of selected clusters.
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -638,7 +638,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// Report whether a cluster is operational. (Synchronous version)
+  /// Retrieves the status of selected clusters. (Synchronous version)
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -652,7 +652,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// List known incidents for all clusters.
+  /// Retrieves known incidents for all clusters.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -670,7 +670,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// List known incidents for all clusters. (Synchronous version)
+  /// Retrieves known incidents for all clusters. (Synchronous version)
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -683,7 +683,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// List the average times for indexing operations for selected clusters.
+  /// Retrieves average times for indexing operations for selected clusters.
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -707,7 +707,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// List the average times for indexing operations for selected clusters. (Synchronous version)
+  /// Retrieves average times for indexing operations for selected clusters. (Synchronous version)
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -721,38 +721,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of InventoryResponse</returns>
-  public async Task<InventoryResponse> GetInventoryAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
-  {
-    var requestOptions = new InternalRequestOptions(options);
-
-
-    return await _transport.ExecuteRequestAsync<InventoryResponse>(new HttpMethod("GET"), "/1/inventory/servers", requestOptions, cancellationToken).ConfigureAwait(false);
-  }
-
-
-  /// <summary>
-  /// List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.  (Synchronous version)
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>InventoryResponse</returns>
-  public InventoryResponse GetInventory(RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetInventoryAsync(options, cancellationToken));
-
-
-  /// <summary>
-  /// List the average latency for search requests for selected clusters.
+  /// Retrieves the average latency for search requests for selected clusters.
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -776,7 +745,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// List the average latency for search requests for selected clusters. (Synchronous version)
+  /// Retrieves the average latency for search requests for selected clusters. (Synchronous version)
   /// </summary>
   /// <param name="clusters">Subset of clusters, separated by comma.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -790,9 +759,9 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// Report the aggregate value of a metric for a selected period of time.
+  /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key). 
   /// </summary>
-  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
+  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use &#x60;*&#x60;. </param>
   /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -814,9 +783,9 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// Report the aggregate value of a metric for a selected period of time. (Synchronous version)
+  /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).  (Synchronous version)
   /// </summary>
-  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. </param>
+  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use &#x60;*&#x60;. </param>
   /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -867,7 +836,38 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters. 
+  /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of InventoryResponse</returns>
+  public async Task<InventoryResponse> GetServersAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+
+    return await _transport.ExecuteRequestAsync<InventoryResponse>(new HttpMethod("GET"), "/1/inventory/servers", requestOptions, cancellationToken).ConfigureAwait(false);
+  }
+
+
+  /// <summary>
+  /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.  (Synchronous version)
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>InventoryResponse</returns>
+  public InventoryResponse GetServers(RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => GetServersAsync(options, cancellationToken));
+
+
+  /// <summary>
+  /// Retrieves the status of all Algolia clusters and instances.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -885,7 +885,7 @@ public partial class MonitoringClient : IMonitoringClient
 
 
   /// <summary>
-  /// Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters.  (Synchronous version)
+  /// Retrieves the status of all Algolia clusters and instances. (Synchronous version)
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

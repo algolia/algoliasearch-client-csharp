@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// GetInventory403Response
+/// GetServers403Response
 /// </summary>
-public partial class GetInventory403Response
+public partial class GetServers403Response
 {
   /// <summary>
-  /// Initializes a new instance of the GetInventory403Response class.
+  /// Initializes a new instance of the GetServers403Response class.
   /// </summary>
-  public GetInventory403Response()
+  public GetServers403Response()
   {
   }
 
@@ -36,7 +36,7 @@ public partial class GetInventory403Response
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetInventory403Response {\n");
+    sb.Append("class GetServers403Response {\n");
     sb.Append("  Reason: ").Append(Reason).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -58,7 +58,7 @@ public partial class GetInventory403Response
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetInventory403Response input)
+    if (obj is not GetServers403Response input)
     {
       return false;
     }

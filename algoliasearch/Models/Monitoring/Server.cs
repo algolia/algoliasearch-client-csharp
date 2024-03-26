@@ -49,17 +49,17 @@ public partial class Server
   public string Name { get; set; }
 
   /// <summary>
-  /// Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead. 
+  /// Included to support legacy applications. Use `is_replica` instead. 
   /// </summary>
-  /// <value>Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead. </value>
+  /// <value>Included to support legacy applications. Use `is_replica` instead. </value>
   [JsonPropertyName("is_slave")]
   [Obsolete]
   public bool? IsSlave { get; set; }
 
   /// <summary>
-  /// Indicates whether this server is a replica of another server.
+  /// Whether this server is a replica of another server.
   /// </summary>
-  /// <value>Indicates whether this server is a replica of another server.</value>
+  /// <value>Whether this server is a replica of another server.</value>
   [JsonPropertyName("is_replica")]
   public bool? IsReplica { get; set; }
 
