@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The input for a `streaming` task whose source is of type `ga4BigqueryExport` and for which extracted data is continuously streamed.
+/// Input for a `streaming` task whose source is of type `ga4BigqueryExport` and for which extracted data is continuously streamed.
 /// </summary>
 public partial class StreamingUtilsInput
 {

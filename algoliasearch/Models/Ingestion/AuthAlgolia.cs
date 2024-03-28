@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// AuthAlgolia
+/// Credentials for authenticating with Algolia.
 /// </summary>
 public partial class AuthAlgolia
 {
@@ -24,8 +24,8 @@ public partial class AuthAlgolia
   /// <summary>
   /// Initializes a new instance of the AuthAlgolia class.
   /// </summary>
-  /// <param name="appID">Algolia Application ID. (required).</param>
-  /// <param name="apiKey">Algolia API Key, with the correct rights to push to an index and change settings. (required).</param>
+  /// <param name="appID">Algolia application ID. (required).</param>
+  /// <param name="apiKey">Algolia API key with the ACL: &#x60;addObject&#x60;, &#x60;deleteObject&#x60;, &#x60;settings&#x60;, &#x60;editSettings&#x60;, &#x60;listIndexes&#x60;, &#x60;deleteIndex&#x60;. This field is &#x60;null&#x60; in the API response.  (required).</param>
   public AuthAlgolia(string appID, string apiKey)
   {
     AppID = appID ?? throw new ArgumentNullException(nameof(appID));
@@ -33,16 +33,16 @@ public partial class AuthAlgolia
   }
 
   /// <summary>
-  /// Algolia Application ID.
+  /// Algolia application ID.
   /// </summary>
-  /// <value>Algolia Application ID.</value>
+  /// <value>Algolia application ID.</value>
   [JsonPropertyName("appID")]
   public string AppID { get; set; }
 
   /// <summary>
-  /// Algolia API Key, with the correct rights to push to an index and change settings.
+  /// Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response. 
   /// </summary>
-  /// <value>Algolia API Key, with the correct rights to push to an index and change settings.</value>
+  /// <value>Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response. </value>
   [JsonPropertyName("apiKey")]
   public string ApiKey { get; set; }
 

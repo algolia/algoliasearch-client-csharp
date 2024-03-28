@@ -24,9 +24,9 @@ public partial class SourceGA4BigQueryExport
   /// <summary>
   /// Initializes a new instance of the SourceGA4BigQueryExport class.
   /// </summary>
-  /// <param name="projectID">GCP project ID that the BigQuery Export writes to. (required).</param>
-  /// <param name="datasetID">BigQuery dataset ID that the BigQuery Export writes to. (required).</param>
-  /// <param name="tablePrefix">Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily). (required).</param>
+  /// <param name="projectID">GCP project ID that the BigQuery export writes to. (required).</param>
+  /// <param name="datasetID">BigQuery dataset ID that the BigQuery export writes to. (required).</param>
+  /// <param name="tablePrefix">Prefix of the tables that the BigQuery Export writes to. (required).</param>
   public SourceGA4BigQueryExport(string projectID, string datasetID, string tablePrefix)
   {
     ProjectID = projectID ?? throw new ArgumentNullException(nameof(projectID));
@@ -35,23 +35,23 @@ public partial class SourceGA4BigQueryExport
   }
 
   /// <summary>
-  /// GCP project ID that the BigQuery Export writes to.
+  /// GCP project ID that the BigQuery export writes to.
   /// </summary>
-  /// <value>GCP project ID that the BigQuery Export writes to.</value>
+  /// <value>GCP project ID that the BigQuery export writes to.</value>
   [JsonPropertyName("projectID")]
   public string ProjectID { get; set; }
 
   /// <summary>
-  /// BigQuery dataset ID that the BigQuery Export writes to.
+  /// BigQuery dataset ID that the BigQuery export writes to.
   /// </summary>
-  /// <value>BigQuery dataset ID that the BigQuery Export writes to.</value>
+  /// <value>BigQuery dataset ID that the BigQuery export writes to.</value>
   [JsonPropertyName("datasetID")]
   public string DatasetID { get; set; }
 
   /// <summary>
-  /// Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily).
+  /// Prefix of the tables that the BigQuery Export writes to.
   /// </summary>
-  /// <value>Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily).</value>
+  /// <value>Prefix of the tables that the BigQuery Export writes to.</value>
   [JsonPropertyName("tablePrefix")]
   public string TablePrefix { get; set; }
 

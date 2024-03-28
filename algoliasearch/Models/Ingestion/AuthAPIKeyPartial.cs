@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Authentication input used for token credentials.
+/// Credentials for authenticating with an API key.
 /// </summary>
 public partial class AuthAPIKeyPartial
 {
@@ -24,8 +24,9 @@ public partial class AuthAPIKeyPartial
   }
 
   /// <summary>
-  /// Gets or Sets Key
+  /// API key. This field is `null` in the API response.
   /// </summary>
+  /// <value>API key. This field is `null` in the API response.</value>
   [JsonPropertyName("key")]
   public string Key { get; set; }
 

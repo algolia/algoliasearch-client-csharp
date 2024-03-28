@@ -15,7 +15,7 @@ using Algolia.Search.Models.Common;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Trigger
+/// Trigger that runs the task.
 /// </summary>
 [JsonConverter(typeof(TriggerJsonConverter))]
 public partial class Trigger : AbstractSchema

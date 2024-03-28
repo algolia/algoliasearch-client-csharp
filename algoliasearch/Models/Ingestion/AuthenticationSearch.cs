@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Payload to search for multiple authentications, based on the given `authenticationIDs`.
+/// Request body for searching for authentication resources.
 /// </summary>
 public partial class AuthenticationSearch
 {

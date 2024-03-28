@@ -12,8 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Defines RunStatus
+/// Task run status.
 /// </summary>
+/// <value>Task run status.</value>
 public enum RunStatus
 {
   /// <summary>

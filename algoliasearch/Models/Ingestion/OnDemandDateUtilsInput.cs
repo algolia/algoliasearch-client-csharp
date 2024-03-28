@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The input for an `onDemand` task whose source is of type `bigquery` and for which extracted data spans a given time range.
+/// Input for a manually-triggered task whose source is of type `bigquery` and for which extracted data spans a given time range.
 /// </summary>
 public partial class OnDemandDateUtilsInput
 {
@@ -24,8 +24,8 @@ public partial class OnDemandDateUtilsInput
   /// <summary>
   /// Initializes a new instance of the OnDemandDateUtilsInput class.
   /// </summary>
-  /// <param name="startDate">The start date of the extraction (RFC3339 format). (required).</param>
-  /// <param name="endDate">The end date of the extraction (RFC3339 format). (required).</param>
+  /// <param name="startDate">Earliest date in RFC3339 format of the extracted data from Big Query. (required).</param>
+  /// <param name="endDate">Latest date in RFC3339 format of the extracted data from Big Query. (required).</param>
   public OnDemandDateUtilsInput(string startDate, string endDate)
   {
     StartDate = startDate ?? throw new ArgumentNullException(nameof(startDate));
@@ -33,16 +33,16 @@ public partial class OnDemandDateUtilsInput
   }
 
   /// <summary>
-  /// The start date of the extraction (RFC3339 format).
+  /// Earliest date in RFC3339 format of the extracted data from Big Query.
   /// </summary>
-  /// <value>The start date of the extraction (RFC3339 format).</value>
+  /// <value>Earliest date in RFC3339 format of the extracted data from Big Query.</value>
   [JsonPropertyName("startDate")]
   public string StartDate { get; set; }
 
   /// <summary>
-  /// The end date of the extraction (RFC3339 format).
+  /// Latest date in RFC3339 format of the extracted data from Big Query.
   /// </summary>
-  /// <value>The end date of the extraction (RFC3339 format).</value>
+  /// <value>Latest date in RFC3339 format of the extracted data from Big Query.</value>
   [JsonPropertyName("endDate")]
   public string EndDate { get; set; }
 

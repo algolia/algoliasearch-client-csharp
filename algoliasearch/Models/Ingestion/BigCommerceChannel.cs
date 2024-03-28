@@ -24,23 +24,23 @@ public partial class BigCommerceChannel
   /// <summary>
   /// Initializes a new instance of the BigCommerceChannel class.
   /// </summary>
-  /// <param name="id">The ID of the bigcommerce channel. (required).</param>
+  /// <param name="id">ID of the BigCommerce channel. (required).</param>
   public BigCommerceChannel(int id)
   {
     Id = id;
   }
 
   /// <summary>
-  /// The ID of the bigcommerce channel.
+  /// ID of the BigCommerce channel.
   /// </summary>
-  /// <value>The ID of the bigcommerce channel.</value>
+  /// <value>ID of the BigCommerce channel.</value>
   [JsonPropertyName("id")]
   public int Id { get; set; }
 
   /// <summary>
-  /// An array of currencies for the given channel `ID`, a currency is a trigram string that represents the currency code.
+  /// Currencies for the given channel.
   /// </summary>
-  /// <value>An array of currencies for the given channel `ID`, a currency is a trigram string that represents the currency code.</value>
+  /// <value>Currencies for the given channel.</value>
   [JsonPropertyName("currencies")]
   public List<string> Currencies { get; set; }
 

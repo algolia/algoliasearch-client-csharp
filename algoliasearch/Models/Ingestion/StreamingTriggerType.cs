@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// A task that runs continuously.
+/// Task runs continuously.
 /// </summary>
-/// <value>A task that runs continuously.</value>
+/// <value>Task runs continuously.</value>
 public enum StreamingTriggerType
 {
   /// <summary>

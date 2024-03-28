@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Authentication input for Basic login with username and password.
+/// Credentials for authenticating with user name and password.
 /// </summary>
 public partial class AuthBasic
 {
@@ -24,8 +24,8 @@ public partial class AuthBasic
   /// <summary>
   /// Initializes a new instance of the AuthBasic class.
   /// </summary>
-  /// <param name="username">username (required).</param>
-  /// <param name="password">password (required).</param>
+  /// <param name="username">Username. (required).</param>
+  /// <param name="password">Password. This field is &#x60;null&#x60; in the API response. (required).</param>
   public AuthBasic(string username, string password)
   {
     Username = username ?? throw new ArgumentNullException(nameof(username));
@@ -33,14 +33,16 @@ public partial class AuthBasic
   }
 
   /// <summary>
-  /// Gets or Sets Username
+  /// Username.
   /// </summary>
+  /// <value>Username.</value>
   [JsonPropertyName("username")]
   public string Username { get; set; }
 
   /// <summary>
-  /// Gets or Sets Password
+  /// Password. This field is `null` in the API response.
   /// </summary>
+  /// <value>Password. This field is `null` in the API response.</value>
   [JsonPropertyName("password")]
   public string Password { get; set; }
 

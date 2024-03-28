@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Authentication input to connect to a Google service (e.g. BigQuery).
+/// Credentials for authenticating with a Google service account, such as BigQuery.
 /// </summary>
 public partial class AuthGoogleServiceAccount
 {
@@ -24,8 +24,8 @@ public partial class AuthGoogleServiceAccount
   /// <summary>
   /// Initializes a new instance of the AuthGoogleServiceAccount class.
   /// </summary>
-  /// <param name="clientEmail">Email address of the Service Account. (required).</param>
-  /// <param name="privateKey">Private key of the Service Account. (required).</param>
+  /// <param name="clientEmail">Email address of the Google service account. (required).</param>
+  /// <param name="privateKey">Private key of the Google service account. This field is &#x60;null&#x60; in the API response. (required).</param>
   public AuthGoogleServiceAccount(string clientEmail, string privateKey)
   {
     ClientEmail = clientEmail ?? throw new ArgumentNullException(nameof(clientEmail));
@@ -33,16 +33,16 @@ public partial class AuthGoogleServiceAccount
   }
 
   /// <summary>
-  /// Email address of the Service Account.
+  /// Email address of the Google service account.
   /// </summary>
-  /// <value>Email address of the Service Account.</value>
+  /// <value>Email address of the Google service account.</value>
   [JsonPropertyName("clientEmail")]
   public string ClientEmail { get; set; }
 
   /// <summary>
-  /// Private key of the Service Account.
+  /// Private key of the Google service account. This field is `null` in the API response.
   /// </summary>
-  /// <value>Private key of the Service Account.</value>
+  /// <value>Private key of the Google service account. This field is `null` in the API response.</value>
   [JsonPropertyName("privateKey")]
   public string PrivateKey { get; set; }
 

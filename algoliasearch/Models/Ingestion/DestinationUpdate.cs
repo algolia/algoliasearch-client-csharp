@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Payload to partially update a Destination.
+/// API request body for updating a destination.
 /// </summary>
 public partial class DestinationUpdate
 {
@@ -30,9 +30,9 @@ public partial class DestinationUpdate
   }
 
   /// <summary>
-  /// An human readable name describing the object.
+  /// Descriptive name for the resource.
   /// </summary>
-  /// <value>An human readable name describing the object.</value>
+  /// <value>Descriptive name for the resource.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
@@ -43,9 +43,9 @@ public partial class DestinationUpdate
   public DestinationInput Input { get; set; }
 
   /// <summary>
-  /// The authentication UUID.
+  /// Universally unique identifier (UUID) of an authentication resource.
   /// </summary>
-  /// <value>The authentication UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an authentication resource.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 

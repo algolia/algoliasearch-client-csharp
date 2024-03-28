@@ -15,7 +15,7 @@ using Algolia.Search.Models.Common;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// TaskInput
+/// Configuration of the task, depending on its type.
 /// </summary>
 [JsonConverter(typeof(TaskInputJsonConverter))]
 public partial class TaskInput : AbstractSchema

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Used to sort the Destination list endpoint.
+/// Property by which to sort the destinations.
 /// </summary>
-/// <value>Used to sort the Destination list endpoint.</value>
+/// <value>Property by which to sort the destinations.</value>
 public enum DestinationSortKeys
 {
   /// <summary>

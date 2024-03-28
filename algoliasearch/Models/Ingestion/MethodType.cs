@@ -12,8 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Defines MethodType
+/// HTTP method to be used for retrieving your data.
 /// </summary>
+/// <value>HTTP method to be used for retrieving your data.</value>
 public enum MethodType
 {
   /// <summary>

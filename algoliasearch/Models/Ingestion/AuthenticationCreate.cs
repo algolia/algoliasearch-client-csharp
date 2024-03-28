@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The payload when creating an authentication.
+/// Request body for creating a new authentication resource.
 /// </summary>
 public partial class AuthenticationCreate
 {
@@ -37,7 +37,7 @@ public partial class AuthenticationCreate
   /// Initializes a new instance of the AuthenticationCreate class.
   /// </summary>
   /// <param name="type">type (required).</param>
-  /// <param name="name">An human readable name describing the object. (required).</param>
+  /// <param name="name">Descriptive name for the resource. (required).</param>
   /// <param name="input">input (required).</param>
   public AuthenticationCreate(AuthenticationType? type, string name, AuthInput input)
   {
@@ -47,9 +47,9 @@ public partial class AuthenticationCreate
   }
 
   /// <summary>
-  /// An human readable name describing the object.
+  /// Descriptive name for the resource.
   /// </summary>
-  /// <value>An human readable name describing the object.</value>
+  /// <value>Descriptive name for the resource.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 

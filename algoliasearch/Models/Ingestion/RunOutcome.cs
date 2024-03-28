@@ -12,8 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Defines RunOutcome
+/// Task run outcome.
 /// </summary>
+/// <value>Task run outcome.</value>
 public enum RunOutcome
 {
   /// <summary>

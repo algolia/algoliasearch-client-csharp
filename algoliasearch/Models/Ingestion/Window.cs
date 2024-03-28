@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The window parameter represents the holds the dates used to query the Observability data from the database in a given window.
+/// Time window by which to filter the observability data.
 /// </summary>
 public partial class Window
 {
@@ -24,8 +24,8 @@ public partial class Window
   /// <summary>
   /// Initializes a new instance of the Window class.
   /// </summary>
-  /// <param name="startDate">A date in format RFC3339 representing the oldest possible data in query window. (required).</param>
-  /// <param name="endDate">A date in format RFC3339 representing the newest possible data in query window. (required).</param>
+  /// <param name="startDate">Date in RFC3339 format representing the oldest data in the time window. (required).</param>
+  /// <param name="endDate">Date in RFC3339 format representing the newest data in the time window. (required).</param>
   public Window(string startDate, string endDate)
   {
     StartDate = startDate ?? throw new ArgumentNullException(nameof(startDate));
@@ -33,16 +33,16 @@ public partial class Window
   }
 
   /// <summary>
-  /// A date in format RFC3339 representing the oldest possible data in query window.
+  /// Date in RFC3339 format representing the oldest data in the time window.
   /// </summary>
-  /// <value>A date in format RFC3339 representing the oldest possible data in query window.</value>
+  /// <value>Date in RFC3339 format representing the oldest data in the time window.</value>
   [JsonPropertyName("startDate")]
   public string StartDate { get; set; }
 
   /// <summary>
-  /// A date in format RFC3339 representing the newest possible data in query window.
+  /// Date in RFC3339 format representing the newest data in the time window.
   /// </summary>
-  /// <value>A date in format RFC3339 representing the newest possible data in query window.</value>
+  /// <value>Date in RFC3339 format representing the newest data in the time window.</value>
   [JsonPropertyName("endDate")]
   public string EndDate { get; set; }
 

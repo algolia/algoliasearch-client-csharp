@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The trigger input for a task of type 'subscription'.
+/// Trigger input for subscription tasks.
 /// </summary>
 public partial class SubscriptionTrigger
 {

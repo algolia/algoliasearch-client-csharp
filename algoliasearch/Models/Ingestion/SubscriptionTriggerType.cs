@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// A task which is triggered by an external subscription (e.g. Webhook).
+/// Task runs after receiving subscribed event.
 /// </summary>
-/// <value>A task which is triggered by an external subscription (e.g. Webhook).</value>
+/// <value>Task runs after receiving subscribed event.</value>
 public enum SubscriptionTriggerType
 {
   /// <summary>

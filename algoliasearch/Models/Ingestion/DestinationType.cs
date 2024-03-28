@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Type of the Destination, defines in which Algolia product the data will be stored.
+/// Destination type.  <dl> <dt><code>search</code></dt> <dd>Data is stored in an Algolia index.</dd> <dt><code>insights</code></dt> <dd>Data is recorded as user events in the Insights API.</dd> </dl>. 
 /// </summary>
-/// <value>Type of the Destination, defines in which Algolia product the data will be stored.</value>
+/// <value>Destination type.  <dl> <dt><code>search</code></dt> <dd>Data is stored in an Algolia index.</dd> <dt><code>insights</code></dt> <dd>Data is recorded as user events in the Insights API.</dd> </dl>. </value>
 public enum DestinationType
 {
   /// <summary>
@@ -27,12 +27,6 @@ public enum DestinationType
   /// Enum Insights for value: insights
   /// </summary>
   [JsonPropertyName("insights")]
-  Insights = 2,
-
-  /// <summary>
-  /// Enum Flow for value: flow
-  /// </summary>
-  [JsonPropertyName("flow")]
-  Flow = 3
+  Insights = 2
 }
 

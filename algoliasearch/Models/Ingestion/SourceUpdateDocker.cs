@@ -30,30 +30,30 @@ public partial class SourceUpdateDocker
   /// <summary>
   /// Initializes a new instance of the SourceUpdateDocker class.
   /// </summary>
-  /// <param name="varConfiguration">The configuration of the spec. (required).</param>
+  /// <param name="varConfiguration">Configuration of the spec. (required).</param>
   public SourceUpdateDocker(object varConfiguration)
   {
     VarConfiguration = varConfiguration ?? throw new ArgumentNullException(nameof(varConfiguration));
   }
 
   /// <summary>
-  /// The name of the image to pull.
+  /// Docker image name.
   /// </summary>
-  /// <value>The name of the image to pull.</value>
+  /// <value>Docker image name.</value>
   [JsonPropertyName("image")]
   public string Image { get; set; }
 
   /// <summary>
-  /// The version of the image, defaults to `latest`.
+  /// Docker image version.
   /// </summary>
-  /// <value>The version of the image, defaults to `latest`.</value>
+  /// <value>Docker image version.</value>
   [JsonPropertyName("version")]
   public string VarVersion { get; set; }
 
   /// <summary>
-  /// The configuration of the spec.
+  /// Configuration of the spec.
   /// </summary>
-  /// <value>The configuration of the spec.</value>
+  /// <value>Configuration of the spec.</value>
   [JsonPropertyName("configuration")]
   public object VarConfiguration { get; set; }
 

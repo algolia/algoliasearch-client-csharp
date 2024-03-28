@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Used to sort the Authentication list endpoint.
+/// Property by which to sort the list of authentication resources.
 /// </summary>
-/// <value>Used to sort the Authentication list endpoint.</value>
+/// <value>Property by which to sort the list of authentication resources.</value>
 public enum AuthenticationSortKeys
 {
   /// <summary>

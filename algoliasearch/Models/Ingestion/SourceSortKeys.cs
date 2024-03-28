@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Used to sort the Source list endpoint.
+/// Property by which to sort the list of sources.
 /// </summary>
-/// <value>Used to sort the Source list endpoint.</value>
+/// <value>Property by which to sort the list of sources.</value>
 public enum SourceSortKeys
 {
   /// <summary>

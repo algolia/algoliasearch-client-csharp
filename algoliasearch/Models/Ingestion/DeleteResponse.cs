@@ -24,16 +24,16 @@ public partial class DeleteResponse
   /// <summary>
   /// Initializes a new instance of the DeleteResponse class.
   /// </summary>
-  /// <param name="deletedAt">Date of deletion (RFC3339 format). (required).</param>
+  /// <param name="deletedAt">Date of deletion in RFC3339 format. (required).</param>
   public DeleteResponse(string deletedAt)
   {
     DeletedAt = deletedAt ?? throw new ArgumentNullException(nameof(deletedAt));
   }
 
   /// <summary>
-  /// Date of deletion (RFC3339 format).
+  /// Date of deletion in RFC3339 format.
   /// </summary>
-  /// <value>Date of deletion (RFC3339 format).</value>
+  /// <value>Date of deletion in RFC3339 format.</value>
   [JsonPropertyName("deletedAt")]
   public string DeletedAt { get; set; }
 

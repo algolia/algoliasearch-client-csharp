@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// AuthAlgoliaPartial
+/// Credentials for authenticating with Algolia.
 /// </summary>
 public partial class AuthAlgoliaPartial
 {
@@ -24,16 +24,16 @@ public partial class AuthAlgoliaPartial
   }
 
   /// <summary>
-  /// Algolia Application ID.
+  /// Algolia application ID.
   /// </summary>
-  /// <value>Algolia Application ID.</value>
+  /// <value>Algolia application ID.</value>
   [JsonPropertyName("appID")]
   public string AppID { get; set; }
 
   /// <summary>
-  /// Algolia API Key, with the correct rights to push to an index and change settings.
+  /// Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response. 
   /// </summary>
-  /// <value>Algolia API Key, with the correct rights to push to an index and change settings.</value>
+  /// <value>Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response. </value>
   [JsonPropertyName("apiKey")]
   public string ApiKey { get; set; }
 

@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// A list of tasks with pagination details.
+/// Configured tasks and pagination information.
 /// </summary>
 public partial class ListTasksResponse
 {

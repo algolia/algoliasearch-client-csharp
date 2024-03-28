@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The payload for a task creation.
+/// API request body for creating a task.
 /// </summary>
 public partial class TaskCreate
 {
@@ -30,8 +30,8 @@ public partial class TaskCreate
   /// <summary>
   /// Initializes a new instance of the TaskCreate class.
   /// </summary>
-  /// <param name="sourceID">The source UUID. (required).</param>
-  /// <param name="destinationID">The destination UUID. (required).</param>
+  /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
+  /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
   /// <param name="trigger">trigger (required).</param>
   /// <param name="action">action (required).</param>
   public TaskCreate(string sourceID, string destinationID, TaskCreateTrigger trigger, ActionType? action)
@@ -43,16 +43,16 @@ public partial class TaskCreate
   }
 
   /// <summary>
-  /// The source UUID.
+  /// Universally uniqud identifier (UUID) of a source.
   /// </summary>
-  /// <value>The source UUID.</value>
+  /// <value>Universally uniqud identifier (UUID) of a source.</value>
   [JsonPropertyName("sourceID")]
   public string SourceID { get; set; }
 
   /// <summary>
-  /// The destination UUID.
+  /// Universally unique identifier (UUID) of a destination resource.
   /// </summary>
-  /// <value>The destination UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a destination resource.</value>
   [JsonPropertyName("destinationID")]
   public string DestinationID { get; set; }
 
@@ -63,16 +63,16 @@ public partial class TaskCreate
   public TaskCreateTrigger Trigger { get; set; }
 
   /// <summary>
-  /// Whether the task is enabled or not.
+  /// Whether the task is enabled.
   /// </summary>
-  /// <value>Whether the task is enabled or not.</value>
+  /// <value>Whether the task is enabled.</value>
   [JsonPropertyName("enabled")]
   public bool? Enabled { get; set; }
 
   /// <summary>
-  /// A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
+  /// Maximum accepted percentage of failures for a task run to finish successfully.
   /// </summary>
-  /// <value>A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.</value>
+  /// <value>Maximum accepted percentage of failures for a task run to finish successfully.</value>
   [JsonPropertyName("failureThreshold")]
   public int? FailureThreshold { get; set; }
 

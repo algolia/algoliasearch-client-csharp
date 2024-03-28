@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// A destination describe how the data is indexed on the Algolia side.
+/// Destinations are Algolia resources like indices or event streams.
 /// </summary>
 public partial class Destination
 {
@@ -30,11 +30,11 @@ public partial class Destination
   /// <summary>
   /// Initializes a new instance of the Destination class.
   /// </summary>
-  /// <param name="destinationID">The destination UUID. (required).</param>
+  /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
   /// <param name="type">type (required).</param>
-  /// <param name="name">An human readable name describing the object. (required).</param>
+  /// <param name="name">Descriptive name for the resource. (required).</param>
   /// <param name="input">input (required).</param>
-  /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
+  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
   public Destination(string destinationID, DestinationType? type, string name, DestinationInput input, string createdAt)
   {
     DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
@@ -45,16 +45,16 @@ public partial class Destination
   }
 
   /// <summary>
-  /// The destination UUID.
+  /// Universally unique identifier (UUID) of a destination resource.
   /// </summary>
-  /// <value>The destination UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a destination resource.</value>
   [JsonPropertyName("destinationID")]
   public string DestinationID { get; set; }
 
   /// <summary>
-  /// An human readable name describing the object.
+  /// Descriptive name for the resource.
   /// </summary>
-  /// <value>An human readable name describing the object.</value>
+  /// <value>Descriptive name for the resource.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
@@ -65,23 +65,23 @@ public partial class Destination
   public DestinationInput Input { get; set; }
 
   /// <summary>
-  /// Date of creation (RFC3339 format).
+  /// Date of creation in RFC3339 format.
   /// </summary>
-  /// <value>Date of creation (RFC3339 format).</value>
+  /// <value>Date of creation in RFC3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update (RFC3339 format).
+  /// Date of last update in RFC3339 format.
   /// </summary>
-  /// <value>Date of last update (RFC3339 format).</value>
+  /// <value>Date of last update in RFC3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 
   /// <summary>
-  /// The authentication UUID.
+  /// Universally unique identifier (UUID) of an authentication resource.
   /// </summary>
-  /// <value>The authentication UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an authentication resource.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 

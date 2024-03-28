@@ -39,9 +39,9 @@ public partial class SourceCommercetools
   public List<string> StoreKeys { get; set; }
 
   /// <summary>
-  /// Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"]. 
+  /// Locales for your commercetools stores.
   /// </summary>
-  /// <value>Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"]. </value>
+  /// <value>Locales for your commercetools stores.</value>
   [JsonPropertyName("locales")]
   public List<string> Locales { get; set; }
 
@@ -58,9 +58,9 @@ public partial class SourceCommercetools
   public string ProjectKey { get; set; }
 
   /// <summary>
-  /// Determines the value that will be stored in the Algolia record if there's no inventory information on the product. 
+  /// Whether a fallback value is stored in the Algolia record if there's no inventory information about the product. 
   /// </summary>
-  /// <value>Determines the value that will be stored in the Algolia record if there's no inventory information on the product. </value>
+  /// <value>Whether a fallback value is stored in the Algolia record if there's no inventory information about the product. </value>
   [JsonPropertyName("fallbackIsInStockValue")]
   public bool? FallbackIsInStockValue { get; set; }
 

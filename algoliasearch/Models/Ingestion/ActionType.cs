@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The action to perform on the Algolia index.
+/// Action to perform on the Algolia index.
 /// </summary>
-/// <value>The action to perform on the Algolia index.</value>
+/// <value>Action to perform on the Algolia index.</value>
 public enum ActionType
 {
   /// <summary>

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The registry where the image is stored.
+/// Container registry name from where to pull the image.
 /// </summary>
-/// <value>The registry where the image is stored.</value>
+/// <value>Container registry name from where to pull the image.</value>
 public enum DockerRegistry
 {
   /// <summary>

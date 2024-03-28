@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Response from the API when the Destination is successfully updated.
+/// API response for updating a destination.
 /// </summary>
 public partial class DestinationUpdateResponse
 {
@@ -24,9 +24,9 @@ public partial class DestinationUpdateResponse
   /// <summary>
   /// Initializes a new instance of the DestinationUpdateResponse class.
   /// </summary>
-  /// <param name="destinationID">The destination UUID. (required).</param>
-  /// <param name="name">An human readable name describing the object. (required).</param>
-  /// <param name="updatedAt">Date of last update (RFC3339 format). (required).</param>
+  /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
+  /// <param name="name">Descriptive name for the resource. (required).</param>
+  /// <param name="updatedAt">Date of last update in RFC3339 format. (required).</param>
   public DestinationUpdateResponse(string destinationID, string name, string updatedAt)
   {
     DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
@@ -35,23 +35,23 @@ public partial class DestinationUpdateResponse
   }
 
   /// <summary>
-  /// The destination UUID.
+  /// Universally unique identifier (UUID) of a destination resource.
   /// </summary>
-  /// <value>The destination UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a destination resource.</value>
   [JsonPropertyName("destinationID")]
   public string DestinationID { get; set; }
 
   /// <summary>
-  /// An human readable name describing the object.
+  /// Descriptive name for the resource.
   /// </summary>
-  /// <value>An human readable name describing the object.</value>
+  /// <value>Descriptive name for the resource.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
   /// <summary>
-  /// Date of last update (RFC3339 format).
+  /// Date of last update in RFC3339 format.
   /// </summary>
-  /// <value>Date of last update (RFC3339 format).</value>
+  /// <value>Date of last update in RFC3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

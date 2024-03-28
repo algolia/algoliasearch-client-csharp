@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// A task which is triggered by a schedule (cron expression).
+/// Task runs on a schedule.
 /// </summary>
-/// <value>A task which is triggered by a schedule (cron expression).</value>
+/// <value>Task runs on a schedule.</value>
 public enum ScheduleTriggerType
 {
   /// <summary>

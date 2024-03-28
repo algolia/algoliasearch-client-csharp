@@ -12,15 +12,15 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Task is run manually, with the `/run` endpoint.
+/// Mapping format schema.
 /// </summary>
-/// <value>Task is run manually, with the `/run` endpoint.</value>
-public enum OnDemandTriggerType
+/// <value>Mapping format schema.</value>
+public enum MappingFormatSchema
 {
   /// <summary>
-  /// Enum OnDemand for value: onDemand
+  /// Enum MappingkitV1 for value: mappingkit/v1
   /// </summary>
-  [JsonPropertyName("onDemand")]
-  OnDemand = 1
+  [JsonPropertyName("mappingkit/v1")]
+  MappingkitV1 = 1
 }
 

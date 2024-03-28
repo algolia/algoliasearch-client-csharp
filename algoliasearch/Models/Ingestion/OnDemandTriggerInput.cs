@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The trigger information of a task of type `onDemand`.
+/// Trigger information for manually-triggered tasks.
 /// </summary>
 public partial class OnDemandTriggerInput
 {

@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Payload to search for multiple destinations, based on the given `destinationIDs`.
+/// API request body for searching destinations.
 /// </summary>
 public partial class DestinationSearch
 {

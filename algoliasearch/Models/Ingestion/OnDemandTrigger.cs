@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The trigger information of a task of type `onDemand`.
+/// Trigger information for manually-triggered tasks.
 /// </summary>
 public partial class OnDemandTrigger
 {
@@ -37,9 +37,9 @@ public partial class OnDemandTrigger
   }
 
   /// <summary>
-  /// The last time the scheduled task ran (RFC3339 format).
+  /// The last time the scheduled task ran in RFC3339 format.
   /// </summary>
-  /// <value>The last time the scheduled task ran (RFC3339 format).</value>
+  /// <value>The last time the scheduled task ran in RFC3339 format.</value>
   [JsonPropertyName("lastRun")]
   public string LastRun { get; set; }
 

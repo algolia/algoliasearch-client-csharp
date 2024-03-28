@@ -22,7 +22,7 @@ namespace Algolia.Search.Clients;
 public interface IIngestionClient
 {
   /// <summary>
-  /// Create a authentication.
+  /// Creates a new authentication resource.
   /// </summary>
   /// <param name="authenticationCreate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -34,7 +34,7 @@ public interface IIngestionClient
   Task<AuthenticationCreateResponse> CreateAuthenticationAsync(AuthenticationCreate authenticationCreate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create a authentication. (Synchronous version)
+  /// Creates a new authentication resource. (Synchronous version)
   /// </summary>
   /// <param name="authenticationCreate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -46,7 +46,7 @@ public interface IIngestionClient
   AuthenticationCreateResponse CreateAuthentication(AuthenticationCreate authenticationCreate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create a destination.
+  /// Creates a new destination.
   /// </summary>
   /// <param name="destinationCreate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -58,7 +58,7 @@ public interface IIngestionClient
   Task<DestinationCreateResponse> CreateDestinationAsync(DestinationCreate destinationCreate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create a destination. (Synchronous version)
+  /// Creates a new destination. (Synchronous version)
   /// </summary>
   /// <param name="destinationCreate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -70,7 +70,7 @@ public interface IIngestionClient
   DestinationCreateResponse CreateDestination(DestinationCreate destinationCreate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create a source.
+  /// Creates a new source.
   /// </summary>
   /// <param name="sourceCreate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -82,7 +82,7 @@ public interface IIngestionClient
   Task<SourceCreateResponse> CreateSourceAsync(SourceCreate sourceCreate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create a source. (Synchronous version)
+  /// Creates a new source. (Synchronous version)
   /// </summary>
   /// <param name="sourceCreate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -94,9 +94,9 @@ public interface IIngestionClient
   SourceCreateResponse CreateSource(SourceCreate sourceCreate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create a task.
+  /// Creates a new task.
   /// </summary>
-  /// <param name="taskCreate"></param>
+  /// <param name="taskCreate">Request body for creating a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -106,9 +106,9 @@ public interface IIngestionClient
   Task<TaskCreateResponse> CreateTaskAsync(TaskCreate taskCreate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create a task. (Synchronous version)
+  /// Creates a new task. (Synchronous version)
   /// </summary>
-  /// <param name="taskCreate"></param>
+  /// <param name="taskCreate">Request body for creating a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -226,9 +226,9 @@ public interface IIngestionClient
   object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Soft delete the authentication of the given authenticationID.
+  /// Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination.
   /// </summary>
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -238,9 +238,9 @@ public interface IIngestionClient
   Task<DeleteResponse> DeleteAuthenticationAsync(string authenticationID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Soft delete the authentication of the given authenticationID. (Synchronous version)
+  /// Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination. (Synchronous version)
   /// </summary>
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -250,9 +250,9 @@ public interface IIngestionClient
   DeleteResponse DeleteAuthentication(string authenticationID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Soft delete the destination of the given destinationID.
+  /// Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
   /// </summary>
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -262,9 +262,9 @@ public interface IIngestionClient
   Task<DeleteResponse> DeleteDestinationAsync(string destinationID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Soft delete the destination of the given destinationID. (Synchronous version)
+  /// Deletes a destination by its ID. You can't delete destinations that are referenced in tasks. (Synchronous version)
   /// </summary>
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -274,9 +274,9 @@ public interface IIngestionClient
   DeleteResponse DeleteDestination(string destinationID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Soft delete the source of the given sourceID.
+  /// Deletes a source by its ID. You can't delete sources that are referenced in tasks.
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -286,9 +286,9 @@ public interface IIngestionClient
   Task<DeleteResponse> DeleteSourceAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Soft delete the source of the given sourceID. (Synchronous version)
+  /// Deletes a source by its ID. You can't delete sources that are referenced in tasks. (Synchronous version)
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -298,9 +298,9 @@ public interface IIngestionClient
   DeleteResponse DeleteSource(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Soft delete the task of the given taskID.
+  /// Deletes a task by its ID.
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -310,9 +310,9 @@ public interface IIngestionClient
   Task<DeleteResponse> DeleteTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Soft delete the task of the given taskID. (Synchronous version)
+  /// Deletes a task by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -322,9 +322,9 @@ public interface IIngestionClient
   DeleteResponse DeleteTask(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Disable the task of the given taskID.
+  /// Disables a task.
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -334,9 +334,9 @@ public interface IIngestionClient
   Task<TaskUpdateResponse> DisableTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Disable the task of the given taskID. (Synchronous version)
+  /// Disables a task. (Synchronous version)
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -346,9 +346,9 @@ public interface IIngestionClient
   TaskUpdateResponse DisableTask(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Enable the task of the given taskID.
+  /// Enables a task.
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -358,9 +358,9 @@ public interface IIngestionClient
   Task<TaskUpdateResponse> EnableTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Enable the task of the given taskID. (Synchronous version)
+  /// Enables a task. (Synchronous version)
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -370,9 +370,9 @@ public interface IIngestionClient
   TaskUpdateResponse EnableTask(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the authentication of the given authenticationID.
+  /// Retrieves an authentication resource by its ID.
   /// </summary>
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -382,9 +382,9 @@ public interface IIngestionClient
   Task<Authentication> GetAuthenticationAsync(string authenticationID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the authentication of the given authenticationID. (Synchronous version)
+  /// Retrieves an authentication resource by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -394,14 +394,14 @@ public interface IIngestionClient
   Authentication GetAuthentication(string authenticationID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of authentications for the given query parameters, with pagination details.
+  /// Retrieves a list of all authentication resources.
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the authentications to retrieve. (optional)</param>
-  /// <param name="platform">The platform of the authentications to retrieve. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Type of authentication resource to retrieve. (optional)</param>
+  /// <param name="platform">Ecommerce platform for which to retrieve authentication resources. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of authentication resources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -411,14 +411,14 @@ public interface IIngestionClient
   Task<ListAuthenticationsResponse> GetAuthenticationsAsync(int? itemsPerPage = default, int? page = default, List<AuthenticationType> type = default, List<PlatformWithNone> platform = default, AuthenticationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of authentications for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieves a list of all authentication resources. (Synchronous version)
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the authentications to retrieve. (optional)</param>
-  /// <param name="platform">The platform of the authentications to retrieve. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Type of authentication resource to retrieve. (optional)</param>
+  /// <param name="platform">Ecommerce platform for which to retrieve authentication resources. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of authentication resources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -428,9 +428,9 @@ public interface IIngestionClient
   ListAuthenticationsResponse GetAuthentications(int? itemsPerPage = default, int? page = default, List<AuthenticationType> type = default, List<PlatformWithNone> platform = default, AuthenticationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the destination of the given destinationID.
+  /// Retrieves a destination by its ID.
   /// </summary>
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -440,9 +440,9 @@ public interface IIngestionClient
   Task<Destination> GetDestinationAsync(string destinationID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the destination of the given destinationID. (Synchronous version)
+  /// Retrieves a destination by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -452,14 +452,14 @@ public interface IIngestionClient
   Destination GetDestination(string destinationID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of destinations for the given query parameters, with pagination details.
+  /// Retrieves a list of destinations.
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the destinations to retrive. (optional)</param>
-  /// <param name="authenticationID">The authenticationIDs of the destinations to retrive. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Destination type. (optional)</param>
+  /// <param name="authenticationID">Authentication ID used by destinations. (optional)</param>
+  /// <param name="sort">Property by which to sort the destinations. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -469,14 +469,14 @@ public interface IIngestionClient
   Task<ListDestinationsResponse> GetDestinationsAsync(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of destinations for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieves a list of destinations. (Synchronous version)
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the destinations to retrive. (optional)</param>
-  /// <param name="authenticationID">The authenticationIDs of the destinations to retrive. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Destination type. (optional)</param>
+  /// <param name="authenticationID">Authentication ID used by destinations. (optional)</param>
+  /// <param name="sort">Property by which to sort the destinations. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -486,9 +486,9 @@ public interface IIngestionClient
   ListDestinationsResponse GetDestinations(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Retrieve a stream listing for a given Singer specification compatible docker type source ID.
+  /// Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`. 
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -498,9 +498,9 @@ public interface IIngestionClient
   Task<DockerSourceStreams> GetDockerSourceStreamsAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Retrieve a stream listing for a given Singer specification compatible docker type source ID. (Synchronous version)
+  /// Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`.  (Synchronous version)
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -510,10 +510,10 @@ public interface IIngestionClient
   DockerSourceStreams GetDockerSourceStreams(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a single event for a specific runID.
+  /// Retrieves a single task run event by its ID.
   /// </summary>
-  /// <param name="runID">The run UUID.</param>
-  /// <param name="eventID">The event UUID.</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="eventID">Unique identifier of an event.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -523,10 +523,10 @@ public interface IIngestionClient
   Task<Event> GetEventAsync(string runID, string eventID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a single event for a specific runID. (Synchronous version)
+  /// Retrieves a single task run event by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="runID">The run UUID.</param>
-  /// <param name="eventID">The event UUID.</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="eventID">Unique identifier of an event.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -536,17 +536,17 @@ public interface IIngestionClient
   Event GetEvent(string runID, string eventID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of events associated to the given runID, for the given query parameters.
+  /// Retrieves a list of events for a task run, identified by it's ID.
   /// </summary>
-  /// <param name="runID">The run UUID.</param>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="status">Filter the status of the events. (optional)</param>
-  /// <param name="type">Filter the type of the events. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
-  /// <param name="startDate">The start date (in RFC3339 format) of the events fetching window. Defaults to 'now'-3 hours if omitted. (optional)</param>
-  /// <param name="endDate">The end date (in RFC3339 format) of the events fetching window. Defaults to 'now' days if omitted. (optional)</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Event status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -556,17 +556,17 @@ public interface IIngestionClient
   Task<ListEventsResponse> GetEventsAsync(string runID, int? itemsPerPage = default, int? page = default, List<EventStatus> status = default, List<EventType> type = default, EventSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of events associated to the given runID, for the given query parameters. (Synchronous version)
+  /// Retrieves a list of events for a task run, identified by it's ID. (Synchronous version)
   /// </summary>
-  /// <param name="runID">The run UUID.</param>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="status">Filter the status of the events. (optional)</param>
-  /// <param name="type">Filter the type of the events. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
-  /// <param name="startDate">The start date (in RFC3339 format) of the events fetching window. Defaults to 'now'-3 hours if omitted. (optional)</param>
-  /// <param name="endDate">The end date (in RFC3339 format) of the events fetching window. Defaults to 'now' days if omitted. (optional)</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Event status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -576,9 +576,9 @@ public interface IIngestionClient
   ListEventsResponse GetEvents(string runID, int? itemsPerPage = default, int? page = default, List<EventStatus> status = default, List<EventType> type = default, EventSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a single run for the given ID.
+  /// Retrieve a single task run by its ID.
   /// </summary>
-  /// <param name="runID">The run UUID.</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -588,9 +588,9 @@ public interface IIngestionClient
   Task<Run> GetRunAsync(string runID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a single run for the given ID. (Synchronous version)
+  /// Retrieve a single task run by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="runID">The run UUID.</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -600,16 +600,16 @@ public interface IIngestionClient
   Run GetRun(string runID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of runs for the given query parameters, with pagination details.
+  /// Retrieve a list of task runs.
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="status">Filter the status of the runs. (optional)</param>
-  /// <param name="taskID">Filter by taskID. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
-  /// <param name="startDate">The start date (in RFC3339 format) of the runs fetching window. Defaults to 'now'-7 days if omitted. (optional)</param>
-  /// <param name="endDate">The end date (in RFC3339 format) of the runs fetching window. Defaults to 'now' days if omitted. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -619,16 +619,16 @@ public interface IIngestionClient
   Task<RunListResponse> GetRunsAsync(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of runs for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieve a list of task runs. (Synchronous version)
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="status">Filter the status of the runs. (optional)</param>
-  /// <param name="taskID">Filter by taskID. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
-  /// <param name="startDate">The start date (in RFC3339 format) of the runs fetching window. Defaults to 'now'-7 days if omitted. (optional)</param>
-  /// <param name="endDate">The end date (in RFC3339 format) of the runs fetching window. Defaults to 'now' days if omitted. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -638,9 +638,9 @@ public interface IIngestionClient
   RunListResponse GetRuns(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the source of the given sourceID.
+  /// Retrieve a source by its ID.
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -650,9 +650,9 @@ public interface IIngestionClient
   Task<Source> GetSourceAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the source of the given sourceID. (Synchronous version)
+  /// Retrieve a source by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -662,14 +662,14 @@ public interface IIngestionClient
   Source GetSource(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of sources for the given query parameters, with pagination details.
+  /// Retrieves a list of sources.
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the sources to retrieve. (optional)</param>
-  /// <param name="authenticationID">The authenticationIDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.  (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Source type. Some sources require authentication. (optional)</param>
+  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication resource.  (optional)</param>
+  /// <param name="sort">Property by which to sort the list of sources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -679,14 +679,14 @@ public interface IIngestionClient
   Task<ListSourcesResponse> GetSourcesAsync(int? itemsPerPage = default, int? page = default, List<SourceType> type = default, List<string> authenticationID = default, SourceSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of sources for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieves a list of sources. (Synchronous version)
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the sources to retrieve. (optional)</param>
-  /// <param name="authenticationID">The authenticationIDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.  (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Source type. Some sources require authentication. (optional)</param>
+  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication resource.  (optional)</param>
+  /// <param name="sort">Property by which to sort the list of sources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -696,9 +696,9 @@ public interface IIngestionClient
   ListSourcesResponse GetSources(int? itemsPerPage = default, int? page = default, List<SourceType> type = default, List<string> authenticationID = default, SourceSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the task of the given taskID.
+  /// Retrieves a task by its ID.
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -708,9 +708,9 @@ public interface IIngestionClient
   Task<IngestionTask> GetTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the task of the given taskID. (Synchronous version)
+  /// Retrieves a task by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -720,17 +720,17 @@ public interface IIngestionClient
   IngestionTask GetTask(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of tasks for the given query parameters, with pagination details.
+  /// Retrieves a list of tasks.
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="action">The action of the tasks to retrieve. (optional)</param>
-  /// <param name="enabled">Whether the task is enabled or not. (optional)</param>
-  /// <param name="sourceID">The sourceIDs of the tasks to retrieve. (optional)</param>
-  /// <param name="destinationID">The destinationIDs of the tasks to retrieve. (optional)</param>
-  /// <param name="triggerType">The trigger type of the task. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="action">Actions for filtering the list of tasks. (optional)</param>
+  /// <param name="enabled">Whether to filter the list of tasks by the `enabled` status. (optional)</param>
+  /// <param name="sourceID">Source IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -740,17 +740,17 @@ public interface IIngestionClient
   Task<ListTasksResponse> GetTasksAsync(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a list of tasks for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieves a list of tasks. (Synchronous version)
   /// </summary>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="action">The action of the tasks to retrieve. (optional)</param>
-  /// <param name="enabled">Whether the task is enabled or not. (optional)</param>
-  /// <param name="sourceID">The sourceIDs of the tasks to retrieve. (optional)</param>
-  /// <param name="destinationID">The destinationIDs of the tasks to retrieve. (optional)</param>
-  /// <param name="triggerType">The trigger type of the task. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="action">Actions for filtering the list of tasks. (optional)</param>
+  /// <param name="enabled">Whether to filter the list of tasks by the `enabled` status. (optional)</param>
+  /// <param name="sourceID">Source IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -760,9 +760,9 @@ public interface IIngestionClient
   ListTasksResponse GetTasks(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Run the task of the given taskID.
+  /// Runs a task. You can check the status of task runs with the observability endpoints.
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -772,9 +772,9 @@ public interface IIngestionClient
   Task<RunResponse> RunTaskAsync(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Run the task of the given taskID. (Synchronous version)
+  /// Runs a task. You can check the status of task runs with the observability endpoints. (Synchronous version)
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -784,7 +784,7 @@ public interface IIngestionClient
   RunResponse RunTask(string taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search among authentications with a defined set of parameters.
+  /// Searches for authentication resources.
   /// </summary>
   /// <param name="authenticationSearch"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -796,7 +796,7 @@ public interface IIngestionClient
   Task<List<Authentication>> SearchAuthenticationsAsync(AuthenticationSearch authenticationSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search among authentications with a defined set of parameters. (Synchronous version)
+  /// Searches for authentication resources. (Synchronous version)
   /// </summary>
   /// <param name="authenticationSearch"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -808,7 +808,7 @@ public interface IIngestionClient
   List<Authentication> SearchAuthentications(AuthenticationSearch authenticationSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search among destinations with a defined set of parameters.
+  /// Searches for destinations.
   /// </summary>
   /// <param name="destinationSearch"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -820,7 +820,7 @@ public interface IIngestionClient
   Task<List<Destination>> SearchDestinationsAsync(DestinationSearch destinationSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search among destinations with a defined set of parameters. (Synchronous version)
+  /// Searches for destinations. (Synchronous version)
   /// </summary>
   /// <param name="destinationSearch"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -832,7 +832,7 @@ public interface IIngestionClient
   List<Destination> SearchDestinations(DestinationSearch destinationSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search among sources with a defined set of parameters.
+  /// Searches for sources.
   /// </summary>
   /// <param name="sourceSearch"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -844,7 +844,7 @@ public interface IIngestionClient
   Task<List<Source>> SearchSourcesAsync(SourceSearch sourceSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search among sources with a defined set of parameters. (Synchronous version)
+  /// Searches for sources. (Synchronous version)
   /// </summary>
   /// <param name="sourceSearch"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -856,7 +856,7 @@ public interface IIngestionClient
   List<Source> SearchSources(SourceSearch sourceSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search among tasks with a defined set of parameters.
+  /// Searches for tasks.
   /// </summary>
   /// <param name="taskSearch"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -868,7 +868,7 @@ public interface IIngestionClient
   Task<List<IngestionTask>> SearchTasksAsync(TaskSearch taskSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Search among tasks with a defined set of parameters. (Synchronous version)
+  /// Searches for tasks. (Synchronous version)
   /// </summary>
   /// <param name="taskSearch"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -880,9 +880,9 @@ public interface IIngestionClient
   List<IngestionTask> SearchTasks(TaskSearch taskSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Trigger a stream listing request for a Singer specification compatible docker type source.
+  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`. 
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -892,9 +892,9 @@ public interface IIngestionClient
   Task<DockerSourceDiscover> TriggerDockerSourceDiscoverAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Trigger a stream listing request for a Singer specification compatible docker type source. (Synchronous version)
+  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`.  (Synchronous version)
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -904,9 +904,9 @@ public interface IIngestionClient
   DockerSourceDiscover TriggerDockerSourceDiscover(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update the authentication of the given authenticationID.
+  /// Updates an authentication resource.
   /// </summary>
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="authenticationUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -917,9 +917,9 @@ public interface IIngestionClient
   Task<AuthenticationUpdateResponse> UpdateAuthenticationAsync(string authenticationID, AuthenticationUpdate authenticationUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update the authentication of the given authenticationID. (Synchronous version)
+  /// Updates an authentication resource. (Synchronous version)
   /// </summary>
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="authenticationUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -930,9 +930,9 @@ public interface IIngestionClient
   AuthenticationUpdateResponse UpdateAuthentication(string authenticationID, AuthenticationUpdate authenticationUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update the destination of the given destinationID.
+  /// Updates the destination by its ID.
   /// </summary>
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="destinationUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -943,9 +943,9 @@ public interface IIngestionClient
   Task<DestinationUpdateResponse> UpdateDestinationAsync(string destinationID, DestinationUpdate destinationUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update the destination of the given destinationID. (Synchronous version)
+  /// Updates the destination by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="destinationUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -956,9 +956,9 @@ public interface IIngestionClient
   DestinationUpdateResponse UpdateDestination(string destinationID, DestinationUpdate destinationUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update the source of the given sourceID.
+  /// Updates a source by its ID.
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="sourceUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -969,9 +969,9 @@ public interface IIngestionClient
   Task<SourceUpdateResponse> UpdateSourceAsync(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update the source of the given sourceID. (Synchronous version)
+  /// Updates a source by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="sourceUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -982,9 +982,9 @@ public interface IIngestionClient
   SourceUpdateResponse UpdateSource(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update the task of the given taskID.
+  /// Updates a task by its ID.
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -995,9 +995,9 @@ public interface IIngestionClient
   Task<TaskUpdateResponse> UpdateTaskAsync(string taskID, TaskUpdate taskUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update the task of the given taskID. (Synchronous version)
+  /// Updates a task by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1076,7 +1076,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Create a authentication.
+  /// Creates a new authentication resource.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1105,7 +1105,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Create a authentication. (Synchronous version)
+  /// Creates a new authentication resource. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1124,7 +1124,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Create a destination.
+  /// Creates a new destination.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1153,7 +1153,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Create a destination. (Synchronous version)
+  /// Creates a new destination. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1172,7 +1172,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Create a source.
+  /// Creates a new source.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1201,7 +1201,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Create a source. (Synchronous version)
+  /// Creates a new source. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1220,9 +1220,9 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Create a task.
+  /// Creates a new task.
   /// </summary>
-  /// <param name="taskCreate"></param>
+  /// <param name="taskCreate">Request body for creating a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1244,9 +1244,9 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Create a task. (Synchronous version)
+  /// Creates a new task. (Synchronous version)
   /// </summary>
-  /// <param name="taskCreate"></param>
+  /// <param name="taskCreate">Request body for creating a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1424,14 +1424,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Soft delete the authentication of the given authenticationID.
+  /// Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1453,14 +1453,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Soft delete the authentication of the given authenticationID. (Synchronous version)
+  /// Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1472,14 +1472,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Soft delete the destination of the given destinationID.
+  /// Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1501,14 +1501,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Soft delete the destination of the given destinationID. (Synchronous version)
+  /// Deletes a destination by its ID. You can't delete destinations that are referenced in tasks. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1520,14 +1520,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Soft delete the source of the given sourceID.
+  /// Deletes a source by its ID. You can't delete sources that are referenced in tasks.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1549,14 +1549,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Soft delete the source of the given sourceID. (Synchronous version)
+  /// Deletes a source by its ID. You can't delete sources that are referenced in tasks. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1568,9 +1568,9 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Soft delete the task of the given taskID.
+  /// Deletes a task by its ID.
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1592,9 +1592,9 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Soft delete the task of the given taskID. (Synchronous version)
+  /// Deletes a task by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1606,14 +1606,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Disable the task of the given taskID.
+  /// Disables a task.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1635,14 +1635,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Disable the task of the given taskID. (Synchronous version)
+  /// Disables a task. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1654,14 +1654,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Enable the task of the given taskID.
+  /// Enables a task.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1683,14 +1683,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Enable the task of the given taskID. (Synchronous version)
+  /// Enables a task. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1702,14 +1702,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get the authentication of the given authenticationID.
+  /// Retrieves an authentication resource by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1731,14 +1731,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get the authentication of the given authenticationID. (Synchronous version)
+  /// Retrieves an authentication resource by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1750,19 +1750,19 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of authentications for the given query parameters, with pagination details.
+  /// Retrieves a list of all authentication resources.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the authentications to retrieve. (optional)</param>
-  /// <param name="platform">The platform of the authentications to retrieve. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Type of authentication resource to retrieve. (optional)</param>
+  /// <param name="platform">Ecommerce platform for which to retrieve authentication resources. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of authentication resources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1785,19 +1785,19 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of authentications for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieves a list of all authentication resources. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the authentications to retrieve. (optional)</param>
-  /// <param name="platform">The platform of the authentications to retrieve. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Type of authentication resource to retrieve. (optional)</param>
+  /// <param name="platform">Ecommerce platform for which to retrieve authentication resources. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of authentication resources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1809,14 +1809,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get the destination of the given destinationID.
+  /// Retrieves a destination by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1838,14 +1838,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get the destination of the given destinationID. (Synchronous version)
+  /// Retrieves a destination by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1857,19 +1857,19 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of destinations for the given query parameters, with pagination details.
+  /// Retrieves a list of destinations.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the destinations to retrive. (optional)</param>
-  /// <param name="authenticationID">The authenticationIDs of the destinations to retrive. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Destination type. (optional)</param>
+  /// <param name="authenticationID">Authentication ID used by destinations. (optional)</param>
+  /// <param name="sort">Property by which to sort the destinations. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1892,19 +1892,19 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of destinations for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieves a list of destinations. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the destinations to retrive. (optional)</param>
-  /// <param name="authenticationID">The authenticationIDs of the destinations to retrive. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Destination type. (optional)</param>
+  /// <param name="authenticationID">Authentication ID used by destinations. (optional)</param>
+  /// <param name="sort">Property by which to sort the destinations. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1916,14 +1916,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Retrieve a stream listing for a given Singer specification compatible docker type source ID.
+  /// Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`. 
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1945,14 +1945,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Retrieve a stream listing for a given Singer specification compatible docker type source ID. (Synchronous version)
+  /// Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1964,15 +1964,15 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a single event for a specific runID.
+  /// Retrieves a single task run event by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="runID">The run UUID.</param>
-  /// <param name="eventID">The event UUID.</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="eventID">Unique identifier of an event.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1999,15 +1999,15 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a single event for a specific runID. (Synchronous version)
+  /// Retrieves a single task run event by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="runID">The run UUID.</param>
-  /// <param name="eventID">The event UUID.</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="eventID">Unique identifier of an event.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2019,22 +2019,22 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of events associated to the given runID, for the given query parameters.
+  /// Retrieves a list of events for a task run, identified by it's ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="runID">The run UUID.</param>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="status">Filter the status of the events. (optional)</param>
-  /// <param name="type">Filter the type of the events. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
-  /// <param name="startDate">The start date (in RFC3339 format) of the events fetching window. Defaults to &#39;now&#39;-3 hours if omitted. (optional)</param>
-  /// <param name="endDate">The end date (in RFC3339 format) of the events fetching window. Defaults to &#39;now&#39; days if omitted. (optional)</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Event status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2064,22 +2064,22 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of events associated to the given runID, for the given query parameters. (Synchronous version)
+  /// Retrieves a list of events for a task run, identified by it's ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="runID">The run UUID.</param>
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="status">Filter the status of the events. (optional)</param>
-  /// <param name="type">Filter the type of the events. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
-  /// <param name="startDate">The start date (in RFC3339 format) of the events fetching window. Defaults to &#39;now&#39;-3 hours if omitted. (optional)</param>
-  /// <param name="endDate">The end date (in RFC3339 format) of the events fetching window. Defaults to &#39;now&#39; days if omitted. (optional)</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Event status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2091,14 +2091,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a single run for the given ID.
+  /// Retrieve a single task run by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="runID">The run UUID.</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2120,14 +2120,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a single run for the given ID. (Synchronous version)
+  /// Retrieve a single task run by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="runID">The run UUID.</param>
+  /// <param name="runID">Unique identifier of a task run.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2139,21 +2139,21 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of runs for the given query parameters, with pagination details.
+  /// Retrieve a list of task runs.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="status">Filter the status of the runs. (optional)</param>
-  /// <param name="taskID">Filter by taskID. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
-  /// <param name="startDate">The start date (in RFC3339 format) of the runs fetching window. Defaults to &#39;now&#39;-7 days if omitted. (optional)</param>
-  /// <param name="endDate">The end date (in RFC3339 format) of the runs fetching window. Defaults to &#39;now&#39; days if omitted. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2178,21 +2178,21 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of runs for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieve a list of task runs. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="status">Filter the status of the runs. (optional)</param>
-  /// <param name="taskID">Filter by taskID. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
-  /// <param name="startDate">The start date (in RFC3339 format) of the runs fetching window. Defaults to &#39;now&#39;-7 days if omitted. (optional)</param>
-  /// <param name="endDate">The end date (in RFC3339 format) of the runs fetching window. Defaults to &#39;now&#39; days if omitted. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
+  /// <param name="startDate">Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2204,14 +2204,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get the source of the given sourceID.
+  /// Retrieve a source by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2233,14 +2233,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get the source of the given sourceID. (Synchronous version)
+  /// Retrieve a source by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2252,19 +2252,19 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of sources for the given query parameters, with pagination details.
+  /// Retrieves a list of sources.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the sources to retrieve. (optional)</param>
-  /// <param name="authenticationID">The authenticationIDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication.  (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Source type. Some sources require authentication. (optional)</param>
+  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication resource.  (optional)</param>
+  /// <param name="sort">Property by which to sort the list of sources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2287,19 +2287,19 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of sources for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieves a list of sources. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="type">The type of the sources to retrieve. (optional)</param>
-  /// <param name="authenticationID">The authenticationIDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication.  (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="type">Source type. Some sources require authentication. (optional)</param>
+  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication resource.  (optional)</param>
+  /// <param name="sort">Property by which to sort the list of sources. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2311,14 +2311,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get the task of the given taskID.
+  /// Retrieves a task by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2340,14 +2340,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get the task of the given taskID. (Synchronous version)
+  /// Retrieves a task by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2359,22 +2359,22 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of tasks for the given query parameters, with pagination details.
+  /// Retrieves a list of tasks.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="action">The action of the tasks to retrieve. (optional)</param>
-  /// <param name="enabled">Whether the task is enabled or not. (optional)</param>
-  /// <param name="sourceID">The sourceIDs of the tasks to retrieve. (optional)</param>
-  /// <param name="destinationID">The destinationIDs of the tasks to retrieve. (optional)</param>
-  /// <param name="triggerType">The trigger type of the task. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="action">Actions for filtering the list of tasks. (optional)</param>
+  /// <param name="enabled">Whether to filter the list of tasks by the &#x60;enabled&#x60; status. (optional)</param>
+  /// <param name="sourceID">Source IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2400,22 +2400,22 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Get a list of tasks for the given query parameters, with pagination details. (Synchronous version)
+  /// Retrieves a list of tasks. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="itemsPerPage">The number of items per page to return. (optional)</param>
-  /// <param name="page">The page number to fetch, starting at 1. (optional)</param>
-  /// <param name="action">The action of the tasks to retrieve. (optional)</param>
-  /// <param name="enabled">Whether the task is enabled or not. (optional)</param>
-  /// <param name="sourceID">The sourceIDs of the tasks to retrieve. (optional)</param>
-  /// <param name="destinationID">The destinationIDs of the tasks to retrieve. (optional)</param>
-  /// <param name="triggerType">The trigger type of the task. (optional)</param>
-  /// <param name="sort">The key by which the list should be sorted. (optional)</param>
-  /// <param name="order">The order of the returned list. (optional)</param>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
+  /// <param name="action">Actions for filtering the list of tasks. (optional)</param>
+  /// <param name="enabled">Whether to filter the list of tasks by the &#x60;enabled&#x60; status. (optional)</param>
+  /// <param name="sourceID">Source IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
+  /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
+  /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2427,14 +2427,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Run the task of the given taskID.
+  /// Runs a task. You can check the status of task runs with the observability endpoints.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2456,14 +2456,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Run the task of the given taskID. (Synchronous version)
+  /// Runs a task. You can check the status of task runs with the observability endpoints. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2475,7 +2475,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Search among authentications with a defined set of parameters.
+  /// Searches for authentication resources.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2504,7 +2504,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Search among authentications with a defined set of parameters. (Synchronous version)
+  /// Searches for authentication resources. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2523,7 +2523,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Search among destinations with a defined set of parameters.
+  /// Searches for destinations.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2552,7 +2552,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Search among destinations with a defined set of parameters. (Synchronous version)
+  /// Searches for destinations. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2571,7 +2571,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Search among sources with a defined set of parameters.
+  /// Searches for sources.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2600,7 +2600,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Search among sources with a defined set of parameters. (Synchronous version)
+  /// Searches for sources. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2619,7 +2619,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Search among tasks with a defined set of parameters.
+  /// Searches for tasks.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2648,7 +2648,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Search among tasks with a defined set of parameters. (Synchronous version)
+  /// Searches for tasks. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2667,14 +2667,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Trigger a stream listing request for a Singer specification compatible docker type source.
+  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`. 
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2696,14 +2696,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Trigger a stream listing request for a Singer specification compatible docker type source. (Synchronous version)
+  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2715,14 +2715,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Update the authentication of the given authenticationID.
+  /// Updates an authentication resource.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="authenticationUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2750,14 +2750,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Update the authentication of the given authenticationID. (Synchronous version)
+  /// Updates an authentication resource. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="authenticationID">The authentication UUID.</param>
+  /// <param name="authenticationID">Unique identifier of an authentication resource.</param>
   /// <param name="authenticationUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2770,14 +2770,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Update the destination of the given destinationID.
+  /// Updates the destination by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="destinationUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2805,14 +2805,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Update the destination of the given destinationID. (Synchronous version)
+  /// Updates the destination by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="destinationID">The destination UUID.</param>
+  /// <param name="destinationID">Unique identifier of a destination.</param>
   /// <param name="destinationUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2825,14 +2825,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Update the source of the given sourceID.
+  /// Updates a source by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="sourceUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2860,14 +2860,14 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Update the source of the given sourceID. (Synchronous version)
+  /// Updates a source by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
-  /// <param name="sourceID">The source UUID.</param>
+  /// <param name="sourceID">Unique identifier of a source.</param>
   /// <param name="sourceUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2880,9 +2880,9 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Update the task of the given taskID.
+  /// Updates a task by its ID.
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2910,9 +2910,9 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Update the task of the given taskID. (Synchronous version)
+  /// Updates a task by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="taskID">The task UUID.</param>
+  /// <param name="taskID">Unique identifier of a task.</param>
   /// <param name="taskUpdate"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The payload for a task update.
+/// API request body for updating a task.
 /// </summary>
 public partial class TaskUpdate
 {
@@ -24,9 +24,9 @@ public partial class TaskUpdate
   }
 
   /// <summary>
-  /// The destination UUID.
+  /// Universally unique identifier (UUID) of a destination resource.
   /// </summary>
-  /// <value>The destination UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a destination resource.</value>
   [JsonPropertyName("destinationID")]
   public string DestinationID { get; set; }
 
@@ -43,16 +43,16 @@ public partial class TaskUpdate
   public TaskInput Input { get; set; }
 
   /// <summary>
-  /// Whether the task is enabled or not.
+  /// Whether the task is enabled.
   /// </summary>
-  /// <value>Whether the task is enabled or not.</value>
+  /// <value>Whether the task is enabled.</value>
   [JsonPropertyName("enabled")]
   public bool? Enabled { get; set; }
 
   /// <summary>
-  /// A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
+  /// Maximum accepted percentage of failures for a task run to finish successfully.
   /// </summary>
-  /// <value>A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.</value>
+  /// <value>Maximum accepted percentage of failures for a task run to finish successfully.</value>
   [JsonPropertyName("failureThreshold")]
   public int? FailureThreshold { get; set; }
 

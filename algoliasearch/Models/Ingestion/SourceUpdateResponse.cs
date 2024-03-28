@@ -24,9 +24,9 @@ public partial class SourceUpdateResponse
   /// <summary>
   /// Initializes a new instance of the SourceUpdateResponse class.
   /// </summary>
-  /// <param name="sourceID">The source UUID. (required).</param>
-  /// <param name="name">name (required).</param>
-  /// <param name="updatedAt">Date of last update (RFC3339 format). (required).</param>
+  /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
+  /// <param name="name">Descriptive name of the source. (required).</param>
+  /// <param name="updatedAt">Date of last update in RFC3339 format. (required).</param>
   public SourceUpdateResponse(string sourceID, string name, string updatedAt)
   {
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
@@ -35,22 +35,23 @@ public partial class SourceUpdateResponse
   }
 
   /// <summary>
-  /// The source UUID.
+  /// Universally uniqud identifier (UUID) of a source.
   /// </summary>
-  /// <value>The source UUID.</value>
+  /// <value>Universally uniqud identifier (UUID) of a source.</value>
   [JsonPropertyName("sourceID")]
   public string SourceID { get; set; }
 
   /// <summary>
-  /// Gets or Sets Name
+  /// Descriptive name of the source.
   /// </summary>
+  /// <value>Descriptive name of the source.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
   /// <summary>
-  /// Date of last update (RFC3339 format).
+  /// Date of last update in RFC3339 format.
   /// </summary>
-  /// <value>Date of last update (RFC3339 format).</value>
+  /// <value>Date of last update in RFC3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

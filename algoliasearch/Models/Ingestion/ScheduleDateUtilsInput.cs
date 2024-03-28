@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The input for a `schedule` task whose source is of type `bigquery` and for which extracted data spans a fixed number of days.
+/// Input for scheduled tasks whose source is of type `bigquery` and for which extracted data spans a fixed number of days.
 /// </summary>
 public partial class ScheduleDateUtilsInput
 {
@@ -24,16 +24,16 @@ public partial class ScheduleDateUtilsInput
   /// <summary>
   /// Initializes a new instance of the ScheduleDateUtilsInput class.
   /// </summary>
-  /// <param name="timeframe">The timeframe of the extraction, in number of days from today. (required).</param>
+  /// <param name="timeframe">Number of days in the past until the current day for which to extract Big Query data. (required).</param>
   public ScheduleDateUtilsInput(int timeframe)
   {
     Timeframe = timeframe;
   }
 
   /// <summary>
-  /// The timeframe of the extraction, in number of days from today.
+  /// Number of days in the past until the current day for which to extract Big Query data.
   /// </summary>
-  /// <value>The timeframe of the extraction, in number of days from today.</value>
+  /// <value>Number of days in the past until the current day for which to extract Big Query data.</value>
   [JsonPropertyName("timeframe")]
   public int Timeframe { get; set; }
 

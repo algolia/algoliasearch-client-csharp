@@ -30,8 +30,8 @@ public partial class SourceBigQuery
   /// <summary>
   /// Initializes a new instance of the SourceBigQuery class.
   /// </summary>
-  /// <param name="projectID">Project ID of the BigQuery Source. (required).</param>
-  /// <param name="datasetID">Dataset ID of the BigQuery Source. (required).</param>
+  /// <param name="projectID">Project ID of the BigQuery source. (required).</param>
+  /// <param name="datasetID">Dataset ID of the BigQuery source. (required).</param>
   public SourceBigQuery(string projectID, string datasetID)
   {
     ProjectID = projectID ?? throw new ArgumentNullException(nameof(projectID));
@@ -39,30 +39,30 @@ public partial class SourceBigQuery
   }
 
   /// <summary>
-  /// Project ID of the BigQuery Source.
+  /// Project ID of the BigQuery source.
   /// </summary>
-  /// <value>Project ID of the BigQuery Source.</value>
+  /// <value>Project ID of the BigQuery source.</value>
   [JsonPropertyName("projectID")]
   public string ProjectID { get; set; }
 
   /// <summary>
-  /// Dataset ID of the BigQuery Source.
+  /// Dataset ID of the BigQuery source.
   /// </summary>
-  /// <value>Dataset ID of the BigQuery Source.</value>
+  /// <value>Dataset ID of the BigQuery source.</value>
   [JsonPropertyName("datasetID")]
   public string DatasetID { get; set; }
 
   /// <summary>
-  /// Table name (for default BQ).
+  /// Table name for the BigQuery export.
   /// </summary>
-  /// <value>Table name (for default BQ).</value>
+  /// <value>Table name for the BigQuery export.</value>
   [JsonPropertyName("table")]
   public string Table { get; set; }
 
   /// <summary>
-  /// Table prefix (for Google Analytics).
+  /// Table prefix for a Google Analytics 4 data export to BigQuery.
   /// </summary>
-  /// <value>Table prefix (for Google Analytics).</value>
+  /// <value>Table prefix for a Google Analytics 4 data export to BigQuery.</value>
   [JsonPropertyName("tablePrefix")]
   public string TablePrefix { get; set; }
 
@@ -74,9 +74,9 @@ public partial class SourceBigQuery
   public string CustomSQLRequest { get; set; }
 
   /// <summary>
-  /// The name of the column that contains the unique ID, used as `objectID` in Algolia.
+  /// Name of a column that contains a unique ID which will be used as `objectID` in Algolia.
   /// </summary>
-  /// <value>The name of the column that contains the unique ID, used as `objectID` in Algolia.</value>
+  /// <value>Name of a column that contains a unique ID which will be used as `objectID` in Algolia.</value>
   [JsonPropertyName("uniqueIDColumn")]
   public string UniqueIDColumn { get; set; }
 

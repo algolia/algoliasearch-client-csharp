@@ -30,11 +30,11 @@ public partial class Source
   /// <summary>
   /// Initializes a new instance of the Source class.
   /// </summary>
-  /// <param name="sourceID">The source UUID. (required).</param>
+  /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
   /// <param name="type">type (required).</param>
   /// <param name="name">name (required).</param>
   /// <param name="input">input (required).</param>
-  /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
+  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
   public Source(string sourceID, SourceType? type, string name, SourceInput input, string createdAt)
   {
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
@@ -45,9 +45,9 @@ public partial class Source
   }
 
   /// <summary>
-  /// The source UUID.
+  /// Universally uniqud identifier (UUID) of a source.
   /// </summary>
-  /// <value>The source UUID.</value>
+  /// <value>Universally uniqud identifier (UUID) of a source.</value>
   [JsonPropertyName("sourceID")]
   public string SourceID { get; set; }
 
@@ -64,23 +64,23 @@ public partial class Source
   public SourceInput Input { get; set; }
 
   /// <summary>
-  /// The authentication UUID.
+  /// Universally unique identifier (UUID) of an authentication resource.
   /// </summary>
-  /// <value>The authentication UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an authentication resource.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 
   /// <summary>
-  /// Date of creation (RFC3339 format).
+  /// Date of creation in RFC3339 format.
   /// </summary>
-  /// <value>Date of creation (RFC3339 format).</value>
+  /// <value>Date of creation in RFC3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update (RFC3339 format).
+  /// Date of last update in RFC3339 format.
   /// </summary>
-  /// <value>Date of last update (RFC3339 format).</value>
+  /// <value>Date of last update in RFC3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Used to sort the Task list endpoint.
+/// Property by which to sort the list of tasks.
 /// </summary>
-/// <value>Used to sort the Task list endpoint.</value>
+/// <value>Property by which to sort the list of tasks.</value>
 public enum TaskSortKeys
 {
   /// <summary>

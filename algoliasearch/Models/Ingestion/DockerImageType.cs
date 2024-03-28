@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The type of the image.
+/// Image type.
 /// </summary>
-/// <value>The type of the image.</value>
+/// <value>Image type.</value>
 public enum DockerImageType
 {
   /// <summary>

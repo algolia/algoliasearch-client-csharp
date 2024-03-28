@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The trigger input for a task of type 'schedule'.
+/// Trigger input for scheduled tasks.
 /// </summary>
 public partial class ScheduleTriggerInput
 {
@@ -31,7 +31,7 @@ public partial class ScheduleTriggerInput
   /// Initializes a new instance of the ScheduleTriggerInput class.
   /// </summary>
   /// <param name="type">type (required).</param>
-  /// <param name="cron">A cron expression that represent at which regularity the task should run. (required).</param>
+  /// <param name="cron">Cron expression for the task&#39;s schedule. (required).</param>
   public ScheduleTriggerInput(ScheduleTriggerType? type, string cron)
   {
     Type = type;
@@ -39,9 +39,9 @@ public partial class ScheduleTriggerInput
   }
 
   /// <summary>
-  /// A cron expression that represent at which regularity the task should run.
+  /// Cron expression for the task's schedule.
   /// </summary>
-  /// <value>A cron expression that represent at which regularity the task should run.</value>
+  /// <value>Cron expression for the task's schedule.</value>
   [JsonPropertyName("cron")]
   public string Cron { get; set; }
 

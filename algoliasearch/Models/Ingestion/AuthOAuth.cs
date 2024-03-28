@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Authentication input for OAuth login.
+/// Credentials for authenticating with OAuth 2.0.
 /// </summary>
 public partial class AuthOAuth
 {
@@ -24,9 +24,9 @@ public partial class AuthOAuth
   /// <summary>
   /// Initializes a new instance of the AuthOAuth class.
   /// </summary>
-  /// <param name="url">The OAuth endpoint URL. (required).</param>
-  /// <param name="clientId">The clientID. (required).</param>
-  /// <param name="clientSecret">The secret. (required).</param>
+  /// <param name="url">URL for the OAuth endpoint. (required).</param>
+  /// <param name="clientId">Client ID. (required).</param>
+  /// <param name="clientSecret">Client secret. This field is &#x60;null&#x60; in the API response. (required).</param>
   public AuthOAuth(string url, string clientId, string clientSecret)
   {
     Url = url ?? throw new ArgumentNullException(nameof(url));
@@ -35,25 +35,32 @@ public partial class AuthOAuth
   }
 
   /// <summary>
-  /// The OAuth endpoint URL.
+  /// URL for the OAuth endpoint.
   /// </summary>
-  /// <value>The OAuth endpoint URL.</value>
+  /// <value>URL for the OAuth endpoint.</value>
   [JsonPropertyName("url")]
   public string Url { get; set; }
 
   /// <summary>
-  /// The clientID.
+  /// Client ID.
   /// </summary>
-  /// <value>The clientID.</value>
+  /// <value>Client ID.</value>
   [JsonPropertyName("client_id")]
   public string ClientId { get; set; }
 
   /// <summary>
-  /// The secret.
+  /// Client secret. This field is `null` in the API response.
   /// </summary>
-  /// <value>The secret.</value>
+  /// <value>Client secret. This field is `null` in the API response.</value>
   [JsonPropertyName("client_secret")]
   public string ClientSecret { get; set; }
+
+  /// <summary>
+  /// OAuth scope.
+  /// </summary>
+  /// <value>OAuth scope.</value>
+  [JsonPropertyName("scope")]
+  public string Scope { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -66,6 +73,7 @@ public partial class AuthOAuth
     sb.Append("  Url: ").Append(Url).Append("\n");
     sb.Append("  ClientId: ").Append(ClientId).Append("\n");
     sb.Append("  ClientSecret: ").Append(ClientSecret).Append("\n");
+    sb.Append("  Scope: ").Append(Scope).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -94,7 +102,8 @@ public partial class AuthOAuth
     return
         (Url == input.Url || (Url != null && Url.Equals(input.Url))) &&
         (ClientId == input.ClientId || (ClientId != null && ClientId.Equals(input.ClientId))) &&
-        (ClientSecret == input.ClientSecret || (ClientSecret != null && ClientSecret.Equals(input.ClientSecret)));
+        (ClientSecret == input.ClientSecret || (ClientSecret != null && ClientSecret.Equals(input.ClientSecret))) &&
+        (Scope == input.Scope || (Scope != null && Scope.Equals(input.Scope)));
   }
 
   /// <summary>
@@ -117,6 +126,10 @@ public partial class AuthOAuth
       if (ClientSecret != null)
       {
         hashCode = (hashCode * 59) + ClientSecret.GetHashCode();
+      }
+      if (Scope != null)
+      {
+        hashCode = (hashCode * 59) + Scope.GetHashCode();
       }
       return hashCode;
     }

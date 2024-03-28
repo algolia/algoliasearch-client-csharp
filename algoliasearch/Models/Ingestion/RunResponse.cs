@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The response from the run task API, containing an Observability Run ID and the time it was created at.
+/// API response for running a task.
 /// </summary>
 public partial class RunResponse
 {
@@ -24,8 +24,8 @@ public partial class RunResponse
   /// <summary>
   /// Initializes a new instance of the RunResponse class.
   /// </summary>
-  /// <param name="runID">The run UUID. (required).</param>
-  /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
+  /// <param name="runID">Universally unique identifier (UUID) of a task run. (required).</param>
+  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
   public RunResponse(string runID, string createdAt)
   {
     RunID = runID ?? throw new ArgumentNullException(nameof(runID));
@@ -33,16 +33,16 @@ public partial class RunResponse
   }
 
   /// <summary>
-  /// The run UUID.
+  /// Universally unique identifier (UUID) of a task run.
   /// </summary>
-  /// <value>The run UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a task run.</value>
   [JsonPropertyName("runID")]
   public string RunID { get; set; }
 
   /// <summary>
-  /// Date of creation (RFC3339 format).
+  /// Date of creation in RFC3339 format.
   /// </summary>
-  /// <value>Date of creation (RFC3339 format).</value>
+  /// <value>Date of creation in RFC3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

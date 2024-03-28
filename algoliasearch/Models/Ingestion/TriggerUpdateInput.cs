@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The trigger input for a task update.
+/// Trigger for a task update.
 /// </summary>
 public partial class TriggerUpdateInput
 {
@@ -24,16 +24,16 @@ public partial class TriggerUpdateInput
   /// <summary>
   /// Initializes a new instance of the TriggerUpdateInput class.
   /// </summary>
-  /// <param name="cron">A cron expression that represent at which regularity the task should run. (required).</param>
+  /// <param name="cron">Cron expression for the task&#39;s schedule. (required).</param>
   public TriggerUpdateInput(string cron)
   {
     Cron = cron ?? throw new ArgumentNullException(nameof(cron));
   }
 
   /// <summary>
-  /// A cron expression that represent at which regularity the task should run.
+  /// Cron expression for the task's schedule.
   /// </summary>
-  /// <value>A cron expression that represent at which regularity the task should run.</value>
+  /// <value>Cron expression for the task's schedule.</value>
   [JsonPropertyName("cron")]
   public string Cron { get; set; }
 

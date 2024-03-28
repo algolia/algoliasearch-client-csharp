@@ -23,16 +23,16 @@ public enum SourceType
   Bigcommerce = 1,
 
   /// <summary>
+  /// Enum Bigquery for value: bigquery
+  /// </summary>
+  [JsonPropertyName("bigquery")]
+  Bigquery = 2,
+
+  /// <summary>
   /// Enum Commercetools for value: commercetools
   /// </summary>
   [JsonPropertyName("commercetools")]
-  Commercetools = 2,
-
-  /// <summary>
-  /// Enum Json for value: json
-  /// </summary>
-  [JsonPropertyName("json")]
-  Json = 3,
+  Commercetools = 3,
 
   /// <summary>
   /// Enum Csv for value: csv
@@ -41,21 +41,33 @@ public enum SourceType
   Csv = 4,
 
   /// <summary>
-  /// Enum Bigquery for value: bigquery
-  /// </summary>
-  [JsonPropertyName("bigquery")]
-  Bigquery = 5,
-
-  /// <summary>
   /// Enum Docker for value: docker
   /// </summary>
   [JsonPropertyName("docker")]
-  Docker = 6,
+  Docker = 5,
 
   /// <summary>
   /// Enum Ga4BigqueryExport for value: ga4BigqueryExport
   /// </summary>
   [JsonPropertyName("ga4BigqueryExport")]
-  Ga4BigqueryExport = 7
+  Ga4BigqueryExport = 6,
+
+  /// <summary>
+  /// Enum Json for value: json
+  /// </summary>
+  [JsonPropertyName("json")]
+  Json = 7,
+
+  /// <summary>
+  /// Enum Shopify for value: shopify
+  /// </summary>
+  [JsonPropertyName("shopify")]
+  Shopify = 8,
+
+  /// <summary>
+  /// Enum Sfcc for value: sfcc
+  /// </summary>
+  [JsonPropertyName("sfcc")]
+  Sfcc = 9
 }
 

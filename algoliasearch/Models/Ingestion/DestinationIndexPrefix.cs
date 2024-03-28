@@ -24,16 +24,16 @@ public partial class DestinationIndexPrefix
   /// <summary>
   /// Initializes a new instance of the DestinationIndexPrefix class.
   /// </summary>
-  /// <param name="indexPrefix">The prefix of the final index name. (required).</param>
+  /// <param name="indexPrefix">String added to the beginning of all indices created by this destination. (required).</param>
   public DestinationIndexPrefix(string indexPrefix)
   {
     IndexPrefix = indexPrefix ?? throw new ArgumentNullException(nameof(indexPrefix));
   }
 
   /// <summary>
-  /// The prefix of the final index name.
+  /// String added to the beginning of all indices created by this destination.
   /// </summary>
-  /// <value>The prefix of the final index name.</value>
+  /// <value>String added to the beginning of all indices created by this destination.</value>
   [JsonPropertyName("indexPrefix")]
   public string IndexPrefix { get; set; }
 

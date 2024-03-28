@@ -48,12 +48,12 @@ public partial class Run
   /// <summary>
   /// Initializes a new instance of the Run class.
   /// </summary>
-  /// <param name="runID">The run UUID. (required).</param>
+  /// <param name="runID">Universally unique identifier (UUID) of a task run. (required).</param>
   /// <param name="appID">appID (required).</param>
-  /// <param name="taskID">The task UUID. (required).</param>
+  /// <param name="taskID">Universally unique identifier (UUID) of a task. (required).</param>
   /// <param name="status">status (required).</param>
   /// <param name="type">type (required).</param>
-  /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
+  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
   public Run(string runID, string appID, string taskID, RunStatus? status, RunType? type, string createdAt)
   {
     RunID = runID ?? throw new ArgumentNullException(nameof(runID));
@@ -65,9 +65,9 @@ public partial class Run
   }
 
   /// <summary>
-  /// The run UUID.
+  /// Universally unique identifier (UUID) of a task run.
   /// </summary>
-  /// <value>The run UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a task run.</value>
   [JsonPropertyName("runID")]
   public string RunID { get; set; }
 
@@ -78,9 +78,9 @@ public partial class Run
   public string AppID { get; set; }
 
   /// <summary>
-  /// The task UUID.
+  /// Universally unique identifier (UUID) of a task.
   /// </summary>
-  /// <value>The task UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a task.</value>
   [JsonPropertyName("taskID")]
   public string TaskID { get; set; }
 
@@ -91,37 +91,37 @@ public partial class Run
   public RunProgress Progress { get; set; }
 
   /// <summary>
-  /// A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
+  /// Maximum accepted percentage of failures for a task run to finish successfully.
   /// </summary>
-  /// <value>A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.</value>
+  /// <value>Maximum accepted percentage of failures for a task run to finish successfully.</value>
   [JsonPropertyName("failureThreshold")]
   public int? FailureThreshold { get; set; }
 
   /// <summary>
-  /// Explains the result of outcome.
+  /// More information about the task run's outcome.
   /// </summary>
-  /// <value>Explains the result of outcome.</value>
+  /// <value>More information about the task run's outcome.</value>
   [JsonPropertyName("reason")]
   public string Reason { get; set; }
 
   /// <summary>
-  /// Date of creation (RFC3339 format).
+  /// Date of creation in RFC3339 format.
   /// </summary>
-  /// <value>Date of creation (RFC3339 format).</value>
+  /// <value>Date of creation in RFC3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of start (RFC3339 format).
+  /// Date of start in RFC3339 format.
   /// </summary>
-  /// <value>Date of start (RFC3339 format).</value>
+  /// <value>Date of start in RFC3339 format.</value>
   [JsonPropertyName("startedAt")]
   public string StartedAt { get; set; }
 
   /// <summary>
-  /// Date of finish (RFC3339 format).
+  /// Date of finish in RFC3339 format.
   /// </summary>
-  /// <value>Date of finish (RFC3339 format).</value>
+  /// <value>Date of finish in RFC3339 format.</value>
   [JsonPropertyName("finishedAt")]
   public string FinishedAt { get; set; }
 

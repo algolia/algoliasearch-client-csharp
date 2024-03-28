@@ -36,12 +36,12 @@ public partial class Event
   /// <summary>
   /// Initializes a new instance of the Event class.
   /// </summary>
-  /// <param name="eventID">The event UUID. (required).</param>
-  /// <param name="runID">The run UUID. (required).</param>
+  /// <param name="eventID">Universally unique identifier (UUID) of an event. (required).</param>
+  /// <param name="runID">Universally unique identifier (UUID) of a task run. (required).</param>
   /// <param name="status">status (required).</param>
   /// <param name="type">type (required).</param>
   /// <param name="batchSize">The extracted record batch size. (required).</param>
-  /// <param name="publishedAt">Date of publish (RFC3339 format). (required).</param>
+  /// <param name="publishedAt">Date of publish RFC3339 format. (required).</param>
   public Event(string eventID, string runID, EventStatus? status, EventType? type, int batchSize, string publishedAt)
   {
     EventID = eventID ?? throw new ArgumentNullException(nameof(eventID));
@@ -53,16 +53,16 @@ public partial class Event
   }
 
   /// <summary>
-  /// The event UUID.
+  /// Universally unique identifier (UUID) of an event.
   /// </summary>
-  /// <value>The event UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an event.</value>
   [JsonPropertyName("eventID")]
   public string EventID { get; set; }
 
   /// <summary>
-  /// The run UUID.
+  /// Universally unique identifier (UUID) of a task run.
   /// </summary>
-  /// <value>The run UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a task run.</value>
   [JsonPropertyName("runID")]
   public string RunID { get; set; }
 
@@ -87,9 +87,9 @@ public partial class Event
   public Dictionary<string, object> Data { get; set; }
 
   /// <summary>
-  /// Date of publish (RFC3339 format).
+  /// Date of publish RFC3339 format.
   /// </summary>
-  /// <value>Date of publish (RFC3339 format).</value>
+  /// <value>Date of publish RFC3339 format.</value>
   [JsonPropertyName("publishedAt")]
   public string PublishedAt { get; set; }
 

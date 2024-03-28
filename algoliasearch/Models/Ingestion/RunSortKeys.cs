@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Used to sort the Run list endpoint.
+/// Property by which to sort the list of task runs.
 /// </summary>
-/// <value>Used to sort the Run list endpoint.</value>
+/// <value>Property by which to sort the list of task runs.</value>
 public enum RunSortKeys
 {
   /// <summary>

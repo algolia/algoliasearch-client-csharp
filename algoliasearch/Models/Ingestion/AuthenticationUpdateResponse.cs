@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Response from the API when the Authentication is successfully updated.
+/// API response for a successful update of an authentication resource.
 /// </summary>
 public partial class AuthenticationUpdateResponse
 {
@@ -24,9 +24,9 @@ public partial class AuthenticationUpdateResponse
   /// <summary>
   /// Initializes a new instance of the AuthenticationUpdateResponse class.
   /// </summary>
-  /// <param name="authenticationID">The authentication UUID. (required).</param>
-  /// <param name="name">An human readable name describing the object. (required).</param>
-  /// <param name="updatedAt">Date of last update (RFC3339 format). (required).</param>
+  /// <param name="authenticationID">Universally unique identifier (UUID) of an authentication resource. (required).</param>
+  /// <param name="name">Descriptive name for the resource. (required).</param>
+  /// <param name="updatedAt">Date of last update in RFC3339 format. (required).</param>
   public AuthenticationUpdateResponse(string authenticationID, string name, string updatedAt)
   {
     AuthenticationID = authenticationID ?? throw new ArgumentNullException(nameof(authenticationID));
@@ -35,23 +35,23 @@ public partial class AuthenticationUpdateResponse
   }
 
   /// <summary>
-  /// The authentication UUID.
+  /// Universally unique identifier (UUID) of an authentication resource.
   /// </summary>
-  /// <value>The authentication UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an authentication resource.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 
   /// <summary>
-  /// An human readable name describing the object.
+  /// Descriptive name for the resource.
   /// </summary>
-  /// <value>An human readable name describing the object.</value>
+  /// <value>Descriptive name for the resource.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
   /// <summary>
-  /// Date of last update (RFC3339 format).
+  /// Date of last update in RFC3339 format.
   /// </summary>
-  /// <value>Date of last update (RFC3339 format).</value>
+  /// <value>Date of last update in RFC3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

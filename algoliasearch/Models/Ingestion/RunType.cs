@@ -12,8 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Defines RunType
+/// Task run type.
 /// </summary>
+/// <value>Task run type.</value>
 public enum RunType
 {
   /// <summary>

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Type of the Authentication, defines what kind of object is stored in the input.
+/// Type of authentication. This determines the type of credentials required in the `input` object.
 /// </summary>
-/// <value>Type of the Authentication, defines what kind of object is stored in the input.</value>
+/// <value>Type of authentication. This determines the type of credentials required in the `input` object.</value>
 public enum AuthenticationType
 {
   /// <summary>

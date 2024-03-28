@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Used to sort the Event list endpoint.
+/// Property by which to sort the list of task run events.
 /// </summary>
-/// <value>Used to sort the Event list endpoint.</value>
+/// <value>Property by which to sort the list of task run events.</value>
 public enum EventSortKeys
 {
   /// <summary>

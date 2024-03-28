@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// An identifier that pairs with the outcome reason.
+/// A code for the task run's outcome. A readable description of the code is included in the `reason` response property.
 /// </summary>
-/// <value>An identifier that pairs with the outcome reason.</value>
+/// <value>A code for the task run's outcome. A readable description of the code is included in the `reason` response property.</value>
 public enum RunReasonCode
 {
   /// <summary>

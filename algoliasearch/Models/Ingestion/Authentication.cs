@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// An authentication is used to login into a Source or a Destination, with obfuscated input.
+/// Resource representing the information required to authenticate with a source or a destination.
 /// </summary>
 public partial class Authentication
 {
@@ -36,11 +36,11 @@ public partial class Authentication
   /// <summary>
   /// Initializes a new instance of the Authentication class.
   /// </summary>
-  /// <param name="authenticationID">The authentication UUID. (required).</param>
+  /// <param name="authenticationID">Universally unique identifier (UUID) of an authentication resource. (required).</param>
   /// <param name="type">type (required).</param>
-  /// <param name="name">An human readable name describing the object. (required).</param>
+  /// <param name="name">Descriptive name for the resource. (required).</param>
   /// <param name="input">input (required).</param>
-  /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
+  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
   public Authentication(string authenticationID, AuthenticationType? type, string name, AuthInputPartial input, string createdAt)
   {
     AuthenticationID = authenticationID ?? throw new ArgumentNullException(nameof(authenticationID));
@@ -51,16 +51,16 @@ public partial class Authentication
   }
 
   /// <summary>
-  /// The authentication UUID.
+  /// Universally unique identifier (UUID) of an authentication resource.
   /// </summary>
-  /// <value>The authentication UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an authentication resource.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 
   /// <summary>
-  /// An human readable name describing the object.
+  /// Descriptive name for the resource.
   /// </summary>
-  /// <value>An human readable name describing the object.</value>
+  /// <value>Descriptive name for the resource.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
@@ -71,16 +71,16 @@ public partial class Authentication
   public AuthInputPartial Input { get; set; }
 
   /// <summary>
-  /// Date of creation (RFC3339 format).
+  /// Date of creation in RFC3339 format.
   /// </summary>
-  /// <value>Date of creation (RFC3339 format).</value>
+  /// <value>Date of creation in RFC3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update (RFC3339 format).
+  /// Date of last update in RFC3339 format.
   /// </summary>
-  /// <value>Date of last update (RFC3339 format).</value>
+  /// <value>Date of last update in RFC3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

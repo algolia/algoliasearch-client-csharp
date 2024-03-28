@@ -24,9 +24,9 @@ public partial class SourceCreateResponse
   /// <summary>
   /// Initializes a new instance of the SourceCreateResponse class.
   /// </summary>
-  /// <param name="sourceID">The source UUID. (required).</param>
-  /// <param name="name">name (required).</param>
-  /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
+  /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
+  /// <param name="name">Descriptive name of the source. (required).</param>
+  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
   public SourceCreateResponse(string sourceID, string name, string createdAt)
   {
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
@@ -35,22 +35,23 @@ public partial class SourceCreateResponse
   }
 
   /// <summary>
-  /// The source UUID.
+  /// Universally uniqud identifier (UUID) of a source.
   /// </summary>
-  /// <value>The source UUID.</value>
+  /// <value>Universally uniqud identifier (UUID) of a source.</value>
   [JsonPropertyName("sourceID")]
   public string SourceID { get; set; }
 
   /// <summary>
-  /// Gets or Sets Name
+  /// Descriptive name of the source.
   /// </summary>
+  /// <value>Descriptive name of the source.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
   /// <summary>
-  /// Date of creation (RFC3339 format).
+  /// Date of creation in RFC3339 format.
   /// </summary>
-  /// <value>Date of creation (RFC3339 format).</value>
+  /// <value>Date of creation in RFC3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

@@ -12,10 +12,16 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Transformations to apply to source, serialized as a JSON string.
+/// Transformations to apply to the source, serialized as a JSON string.
 /// </summary>
 public partial class MappingInput
 {
+
+  /// <summary>
+  /// Gets or Sets Format
+  /// </summary>
+  [JsonPropertyName("format")]
+  public MappingFormatSchema? Format { get; set; }
   /// <summary>
   /// Initializes a new instance of the MappingInput class.
   /// </summary>
@@ -24,20 +30,13 @@ public partial class MappingInput
   /// <summary>
   /// Initializes a new instance of the MappingInput class.
   /// </summary>
-  /// <param name="format">Name of the mapping format schema, &#x60;mappingkit/v1&#x60; is currently the only supported format. (required).</param>
+  /// <param name="format">format (required).</param>
   /// <param name="actions">actions (required).</param>
-  public MappingInput(string format, List<MappingKitAction> actions)
+  public MappingInput(MappingFormatSchema? format, List<MappingKitAction> actions)
   {
-    Format = format ?? throw new ArgumentNullException(nameof(format));
+    Format = format;
     Actions = actions ?? throw new ArgumentNullException(nameof(actions));
   }
-
-  /// <summary>
-  /// Name of the mapping format schema, `mappingkit/v1` is currently the only supported format.
-  /// </summary>
-  /// <value>Name of the mapping format schema, `mappingkit/v1` is currently the only supported format.</value>
-  [JsonPropertyName("format")]
-  public string Format { get; set; }
 
   /// <summary>
   /// Gets or Sets Actions
@@ -81,7 +80,7 @@ public partial class MappingInput
     }
 
     return
-        (Format == input.Format || (Format != null && Format.Equals(input.Format))) &&
+        (Format == input.Format || Format.Equals(input.Format)) &&
         (Actions == input.Actions || Actions != null && input.Actions != null && Actions.SequenceEqual(input.Actions));
   }
 
@@ -94,10 +93,7 @@ public partial class MappingInput
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Format != null)
-      {
-        hashCode = (hashCode * 59) + Format.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + Format.GetHashCode();
       if (Actions != null)
       {
         hashCode = (hashCode * 59) + Actions.GetHashCode();

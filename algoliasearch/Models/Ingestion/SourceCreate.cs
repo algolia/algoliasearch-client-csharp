@@ -31,7 +31,7 @@ public partial class SourceCreate
   /// Initializes a new instance of the SourceCreate class.
   /// </summary>
   /// <param name="type">type (required).</param>
-  /// <param name="name">name (required).</param>
+  /// <param name="name">Descriptive name of the source. (required).</param>
   /// <param name="input">input (required).</param>
   public SourceCreate(SourceType? type, string name, SourceInput input)
   {
@@ -41,8 +41,9 @@ public partial class SourceCreate
   }
 
   /// <summary>
-  /// Gets or Sets Name
+  /// Descriptive name of the source.
   /// </summary>
+  /// <value>Descriptive name of the source.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
@@ -53,9 +54,9 @@ public partial class SourceCreate
   public SourceInput Input { get; set; }
 
   /// <summary>
-  /// The authentication UUID.
+  /// Universally unique identifier (UUID) of an authentication resource.
   /// </summary>
-  /// <value>The authentication UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an authentication resource.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 

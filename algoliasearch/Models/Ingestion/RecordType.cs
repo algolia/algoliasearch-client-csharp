@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Determines the indexing strategy to use for a given e-commerce source.
+/// Record type for ecommerce sources.
 /// </summary>
-/// <value>Determines the indexing strategy to use for a given e-commerce source.</value>
+/// <value>Record type for ecommerce sources.</value>
 public enum RecordType
 {
   /// <summary>

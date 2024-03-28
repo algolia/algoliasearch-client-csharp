@@ -30,13 +30,13 @@ public partial class IngestionTask
   /// <summary>
   /// Initializes a new instance of the IngestionTask class.
   /// </summary>
-  /// <param name="taskID">The task UUID. (required).</param>
-  /// <param name="sourceID">The source UUID. (required).</param>
-  /// <param name="destinationID">The destination UUID. (required).</param>
+  /// <param name="taskID">Universally unique identifier (UUID) of a task. (required).</param>
+  /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
+  /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
   /// <param name="trigger">trigger (required).</param>
-  /// <param name="enabled">Whether the task is enabled or not. (required) (default to true).</param>
+  /// <param name="enabled">Whether the task is enabled. (required) (default to true).</param>
   /// <param name="action">action (required).</param>
-  /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
+  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
   public IngestionTask(string taskID, string sourceID, string destinationID, Trigger trigger, bool enabled, ActionType? action, string createdAt)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
@@ -49,23 +49,23 @@ public partial class IngestionTask
   }
 
   /// <summary>
-  /// The task UUID.
+  /// Universally unique identifier (UUID) of a task.
   /// </summary>
-  /// <value>The task UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a task.</value>
   [JsonPropertyName("taskID")]
   public string TaskID { get; set; }
 
   /// <summary>
-  /// The source UUID.
+  /// Universally uniqud identifier (UUID) of a source.
   /// </summary>
-  /// <value>The source UUID.</value>
+  /// <value>Universally uniqud identifier (UUID) of a source.</value>
   [JsonPropertyName("sourceID")]
   public string SourceID { get; set; }
 
   /// <summary>
-  /// The destination UUID.
+  /// Universally unique identifier (UUID) of a destination resource.
   /// </summary>
-  /// <value>The destination UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a destination resource.</value>
   [JsonPropertyName("destinationID")]
   public string DestinationID { get; set; }
 
@@ -82,30 +82,30 @@ public partial class IngestionTask
   public TaskInput Input { get; set; }
 
   /// <summary>
-  /// Whether the task is enabled or not.
+  /// Whether the task is enabled.
   /// </summary>
-  /// <value>Whether the task is enabled or not.</value>
+  /// <value>Whether the task is enabled.</value>
   [JsonPropertyName("enabled")]
   public bool Enabled { get; set; }
 
   /// <summary>
-  /// A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
+  /// Maximum accepted percentage of failures for a task run to finish successfully.
   /// </summary>
-  /// <value>A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.</value>
+  /// <value>Maximum accepted percentage of failures for a task run to finish successfully.</value>
   [JsonPropertyName("failureThreshold")]
   public int? FailureThreshold { get; set; }
 
   /// <summary>
-  /// Date of creation (RFC3339 format).
+  /// Date of creation in RFC3339 format.
   /// </summary>
-  /// <value>Date of creation (RFC3339 format).</value>
+  /// <value>Date of creation in RFC3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update (RFC3339 format).
+  /// Date of last update in RFC3339 format.
   /// </summary>
-  /// <value>Date of last update (RFC3339 format).</value>
+  /// <value>Date of last update in RFC3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

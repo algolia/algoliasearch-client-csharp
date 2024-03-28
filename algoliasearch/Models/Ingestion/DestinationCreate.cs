@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The payload when creating a destination.
+/// API request body for creating a new destination.
 /// </summary>
 public partial class DestinationCreate
 {
@@ -31,7 +31,7 @@ public partial class DestinationCreate
   /// Initializes a new instance of the DestinationCreate class.
   /// </summary>
   /// <param name="type">type (required).</param>
-  /// <param name="name">An human readable name describing the object. (required).</param>
+  /// <param name="name">Descriptive name for the resource. (required).</param>
   /// <param name="input">input (required).</param>
   public DestinationCreate(DestinationType? type, string name, DestinationInput input)
   {
@@ -41,9 +41,9 @@ public partial class DestinationCreate
   }
 
   /// <summary>
-  /// An human readable name describing the object.
+  /// Descriptive name for the resource.
   /// </summary>
-  /// <value>An human readable name describing the object.</value>
+  /// <value>Descriptive name for the resource.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
@@ -54,9 +54,9 @@ public partial class DestinationCreate
   public DestinationInput Input { get; set; }
 
   /// <summary>
-  /// The authentication UUID.
+  /// Universally unique identifier (UUID) of an authentication resource.
   /// </summary>
-  /// <value>The authentication UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an authentication resource.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 

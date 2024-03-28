@@ -30,23 +30,23 @@ public partial class SourceJSON
   /// <summary>
   /// Initializes a new instance of the SourceJSON class.
   /// </summary>
-  /// <param name="url">The URL of the file. (required).</param>
+  /// <param name="url">URL of the file. (required).</param>
   public SourceJSON(string url)
   {
     Url = url ?? throw new ArgumentNullException(nameof(url));
   }
 
   /// <summary>
-  /// The URL of the file.
+  /// URL of the file.
   /// </summary>
-  /// <value>The URL of the file.</value>
+  /// <value>URL of the file.</value>
   [JsonPropertyName("url")]
   public string Url { get; set; }
 
   /// <summary>
-  /// The name of the column that contains the unique ID, used as `objectID` in Algolia.
+  /// Name of a column that contains a unique ID which will be used as `objectID` in Algolia.
   /// </summary>
-  /// <value>The name of the column that contains the unique ID, used as `objectID` in Algolia.</value>
+  /// <value>Name of a column that contains a unique ID which will be used as `objectID` in Algolia.</value>
   [JsonPropertyName("uniqueIDColumn")]
   public string UniqueIDColumn { get; set; }
 

@@ -24,8 +24,9 @@ public partial class SourceUpdate
   }
 
   /// <summary>
-  /// Gets or Sets Name
+  /// Descriptive name of the source.
   /// </summary>
+  /// <value>Descriptive name of the source.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 
@@ -36,9 +37,9 @@ public partial class SourceUpdate
   public SourceUpdateInput Input { get; set; }
 
   /// <summary>
-  /// The authentication UUID.
+  /// Universally unique identifier (UUID) of an authentication resource.
   /// </summary>
-  /// <value>The authentication UUID.</value>
+  /// <value>Universally unique identifier (UUID) of an authentication resource.</value>
   [JsonPropertyName("authenticationID")]
   public string AuthenticationID { get; set; }
 

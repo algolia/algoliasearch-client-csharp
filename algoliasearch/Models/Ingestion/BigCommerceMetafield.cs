@@ -24,8 +24,8 @@ public partial class BigCommerceMetafield
   /// <summary>
   /// Initializes a new instance of the BigCommerceMetafield class.
   /// </summary>
-  /// <param name="varNamespace">The namespace of the metafield. (required).</param>
-  /// <param name="key">The key identifier of the metafield. (required).</param>
+  /// <param name="varNamespace">Namespace of the metafield. (required).</param>
+  /// <param name="key">Key identifier of the metafield. (required).</param>
   public BigCommerceMetafield(string varNamespace, string key)
   {
     VarNamespace = varNamespace ?? throw new ArgumentNullException(nameof(varNamespace));
@@ -33,16 +33,16 @@ public partial class BigCommerceMetafield
   }
 
   /// <summary>
-  /// The namespace of the metafield.
+  /// Namespace of the metafield.
   /// </summary>
-  /// <value>The namespace of the metafield.</value>
+  /// <value>Namespace of the metafield.</value>
   [JsonPropertyName("namespace")]
   public string VarNamespace { get; set; }
 
   /// <summary>
-  /// The key identifier of the metafield.
+  /// Key identifier of the metafield.
   /// </summary>
-  /// <value>The key identifier of the metafield.</value>
+  /// <value>Key identifier of the metafield.</value>
   [JsonPropertyName("key")]
   public string Key { get; set; }
 

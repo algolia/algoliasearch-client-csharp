@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Payload to partially update an Authentication.
+/// Request body for updating an authentication resource.
 /// </summary>
 public partial class AuthenticationUpdate
 {
@@ -36,9 +36,9 @@ public partial class AuthenticationUpdate
   }
 
   /// <summary>
-  /// An human readable name describing the object.
+  /// Descriptive name for the resource.
   /// </summary>
-  /// <value>An human readable name describing the object.</value>
+  /// <value>Descriptive name for the resource.</value>
   [JsonPropertyName("name")]
   public string Name { get; set; }
 

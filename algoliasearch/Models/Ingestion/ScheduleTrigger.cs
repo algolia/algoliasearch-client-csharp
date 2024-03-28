@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The trigger information for a task of type 'schedule'.
+/// Trigger information for scheduled tasks.
 /// </summary>
 public partial class ScheduleTrigger
 {
@@ -31,8 +31,8 @@ public partial class ScheduleTrigger
   /// Initializes a new instance of the ScheduleTrigger class.
   /// </summary>
   /// <param name="type">type (required).</param>
-  /// <param name="cron">A cron expression that represent at which regularity the task should run. (required).</param>
-  /// <param name="nextRun">The next scheduled run of the task (RFC3339 format). (required).</param>
+  /// <param name="cron">Cron expression for the task&#39;s schedule. (required).</param>
+  /// <param name="nextRun">The next scheduled run of the task in RFC3339 format. (required).</param>
   public ScheduleTrigger(ScheduleTriggerType? type, string cron, string nextRun)
   {
     Type = type;
@@ -41,23 +41,23 @@ public partial class ScheduleTrigger
   }
 
   /// <summary>
-  /// A cron expression that represent at which regularity the task should run.
+  /// Cron expression for the task's schedule.
   /// </summary>
-  /// <value>A cron expression that represent at which regularity the task should run.</value>
+  /// <value>Cron expression for the task's schedule.</value>
   [JsonPropertyName("cron")]
   public string Cron { get; set; }
 
   /// <summary>
-  /// The last time the scheduled task ran (RFC3339 format).
+  /// The last time the scheduled task ran in RFC3339 format.
   /// </summary>
-  /// <value>The last time the scheduled task ran (RFC3339 format).</value>
+  /// <value>The last time the scheduled task ran in RFC3339 format.</value>
   [JsonPropertyName("lastRun")]
   public string LastRun { get; set; }
 
   /// <summary>
-  /// The next scheduled run of the task (RFC3339 format).
+  /// The next scheduled run of the task in RFC3339 format.
   /// </summary>
-  /// <value>The next scheduled run of the task (RFC3339 format).</value>
+  /// <value>The next scheduled run of the task in RFC3339 format.</value>
   [JsonPropertyName("nextRun")]
   public string NextRun { get; set; }
 

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Used to filter Authentication without platform property.
+/// Authentication resource not tied to any ecommerce platform, used for filtering.
 /// </summary>
-/// <value>Used to filter Authentication without platform property.</value>
+/// <value>Authentication resource not tied to any ecommerce platform, used for filtering.</value>
 public enum PlatformNone
 {
   /// <summary>

@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Pagination
+/// Paginated API response.
 /// </summary>
 public partial class Pagination
 {
@@ -24,10 +24,10 @@ public partial class Pagination
   /// <summary>
   /// Initializes a new instance of the Pagination class.
   /// </summary>
-  /// <param name="nbPages">nbPages (required).</param>
-  /// <param name="page">page (required).</param>
-  /// <param name="nbItems">nbItems (required).</param>
-  /// <param name="itemsPerPage">itemsPerPage (required).</param>
+  /// <param name="nbPages">Number of pages in the API response. (required).</param>
+  /// <param name="page">Page of the API response to retrieve. (required).</param>
+  /// <param name="nbItems">Number of items in the API response. (required).</param>
+  /// <param name="itemsPerPage">Number of items per page. (required) (default to 10).</param>
   public Pagination(int nbPages, int page, int nbItems, int itemsPerPage)
   {
     NbPages = nbPages;
@@ -37,26 +37,30 @@ public partial class Pagination
   }
 
   /// <summary>
-  /// Gets or Sets NbPages
+  /// Number of pages in the API response.
   /// </summary>
+  /// <value>Number of pages in the API response.</value>
   [JsonPropertyName("nbPages")]
   public int NbPages { get; set; }
 
   /// <summary>
-  /// Gets or Sets Page
+  /// Page of the API response to retrieve.
   /// </summary>
+  /// <value>Page of the API response to retrieve.</value>
   [JsonPropertyName("page")]
   public int Page { get; set; }
 
   /// <summary>
-  /// Gets or Sets NbItems
+  /// Number of items in the API response.
   /// </summary>
+  /// <value>Number of items in the API response.</value>
   [JsonPropertyName("nbItems")]
   public int NbItems { get; set; }
 
   /// <summary>
-  /// Gets or Sets ItemsPerPage
+  /// Number of items per page.
   /// </summary>
+  /// <value>Number of items per page.</value>
   [JsonPropertyName("itemsPerPage")]
   public int ItemsPerPage { get; set; }
 

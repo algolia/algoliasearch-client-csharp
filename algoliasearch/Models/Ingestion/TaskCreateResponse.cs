@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// The response from the API after a task creation.
+/// API response for creating a task.
 /// </summary>
 public partial class TaskCreateResponse
 {
@@ -24,8 +24,8 @@ public partial class TaskCreateResponse
   /// <summary>
   /// Initializes a new instance of the TaskCreateResponse class.
   /// </summary>
-  /// <param name="taskID">The task UUID. (required).</param>
-  /// <param name="createdAt">Date of creation (RFC3339 format). (required).</param>
+  /// <param name="taskID">Universally unique identifier (UUID) of a task. (required).</param>
+  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
   public TaskCreateResponse(string taskID, string createdAt)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
@@ -33,16 +33,16 @@ public partial class TaskCreateResponse
   }
 
   /// <summary>
-  /// The task UUID.
+  /// Universally unique identifier (UUID) of a task.
   /// </summary>
-  /// <value>The task UUID.</value>
+  /// <value>Universally unique identifier (UUID) of a task.</value>
   [JsonPropertyName("taskID")]
   public string TaskID { get; set; }
 
   /// <summary>
-  /// Date of creation (RFC3339 format).
+  /// Date of creation in RFC3339 format.
   /// </summary>
-  /// <value>Date of creation (RFC3339 format).</value>
+  /// <value>Date of creation in RFC3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Authentication input to connect to a Google service (e.g. BigQuery).
+/// Credentials for authenticating with a Google service account, such as BigQuery.
 /// </summary>
 public partial class AuthGoogleServiceAccountPartial
 {
@@ -24,16 +24,16 @@ public partial class AuthGoogleServiceAccountPartial
   }
 
   /// <summary>
-  /// Email address of the Service Account.
+  /// Email address of the Google service account.
   /// </summary>
-  /// <value>Email address of the Service Account.</value>
+  /// <value>Email address of the Google service account.</value>
   [JsonPropertyName("clientEmail")]
   public string ClientEmail { get; set; }
 
   /// <summary>
-  /// Private key of the Service Account.
+  /// Private key of the Google service account. This field is `null` in the API response.
   /// </summary>
-  /// <value>Private key of the Service Account.</value>
+  /// <value>Private key of the Google service account. This field is `null` in the API response.</value>
   [JsonPropertyName("privateKey")]
   public string PrivateKey { get; set; }
 

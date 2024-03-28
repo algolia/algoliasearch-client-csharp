@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Describe which platform the Authentication is used for.
+/// Name of an ecommerce platform with which to authenticate. This determines which authentication type you can select. 
 /// </summary>
-/// <value>Describe which platform the Authentication is used for.</value>
+/// <value>Name of an ecommerce platform with which to authenticate. This determines which authentication type you can select. </value>
 public enum Platform
 {
   /// <summary>
@@ -27,6 +27,12 @@ public enum Platform
   /// Enum Commercetools for value: commercetools
   /// </summary>
   [JsonPropertyName("commercetools")]
-  Commercetools = 2
+  Commercetools = 2,
+
+  /// <summary>
+  /// Enum Shopify for value: shopify
+  /// </summary>
+  [JsonPropertyName("shopify")]
+  Shopify = 3
 }
 

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Used to order a sorted request.
+/// Ascending or descending sort order.
 /// </summary>
-/// <value>Used to order a sorted request.</value>
+/// <value>Ascending or descending sort order.</value>
 public enum OrderKeys
 {
   /// <summary>
