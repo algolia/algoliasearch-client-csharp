@@ -44,23 +44,22 @@ public partial class QuerySuggestionsConfiguration
   public Languages Languages { get; set; }
 
   /// <summary>
-  /// Patterns to exclude from query suggestions.
+  /// Gets or Sets Exclude
   /// </summary>
-  /// <value>Patterns to exclude from query suggestions.</value>
   [JsonPropertyName("exclude")]
   public List<string> Exclude { get; set; }
 
   /// <summary>
-  /// Turn on personalized query suggestions.
+  /// Whether to turn on personalized query suggestions.
   /// </summary>
-  /// <value>Turn on personalized query suggestions.</value>
+  /// <value>Whether to turn on personalized query suggestions.</value>
   [JsonPropertyName("enablePersonalization")]
   public bool? EnablePersonalization { get; set; }
 
   /// <summary>
-  /// Allow suggestions with special characters.
+  /// Whether to include suggestions with special characters.
   /// </summary>
-  /// <value>Allow suggestions with special characters.</value>
+  /// <value>Whether to include suggestions with special characters.</value>
   [JsonPropertyName("allowSpecialCharacters")]
   public bool? AllowSpecialCharacters { get; set; }
 

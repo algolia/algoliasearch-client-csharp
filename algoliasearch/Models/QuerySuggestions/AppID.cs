@@ -12,30 +12,23 @@ using System.Text.Json;
 namespace Algolia.Search.Models.QuerySuggestions;
 
 /// <summary>
-/// BaseQuerySuggestionsConfigurationWithIndex
+/// AppID
 /// </summary>
-public partial class BaseQuerySuggestionsConfigurationWithIndex
+public partial class AppID
 {
   /// <summary>
-  /// Initializes a new instance of the BaseQuerySuggestionsConfigurationWithIndex class.
+  /// Initializes a new instance of the AppID class.
   /// </summary>
-  [JsonConstructor]
-  public BaseQuerySuggestionsConfigurationWithIndex() { }
-  /// <summary>
-  /// Initializes a new instance of the BaseQuerySuggestionsConfigurationWithIndex class.
-  /// </summary>
-  /// <param name="indexName">Query Suggestions index name. (required).</param>
-  public BaseQuerySuggestionsConfigurationWithIndex(string indexName)
+  public AppID()
   {
-    IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
   }
 
   /// <summary>
-  /// Query Suggestions index name.
+  /// Algolia application ID to which this Query Suggestions configuration belongs.
   /// </summary>
-  /// <value>Query Suggestions index name.</value>
-  [JsonPropertyName("indexName")]
-  public string IndexName { get; set; }
+  /// <value>Algolia application ID to which this Query Suggestions configuration belongs.</value>
+  [JsonPropertyName("appID")]
+  public string VarAppID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,8 +37,8 @@ public partial class BaseQuerySuggestionsConfigurationWithIndex
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class BaseQuerySuggestionsConfigurationWithIndex {\n");
-    sb.Append("  IndexName: ").Append(IndexName).Append("\n");
+    sb.Append("class AppID {\n");
+    sb.Append("  VarAppID: ").Append(VarAppID).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,13 +59,13 @@ public partial class BaseQuerySuggestionsConfigurationWithIndex
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not BaseQuerySuggestionsConfigurationWithIndex input)
+    if (obj is not AppID input)
     {
       return false;
     }
 
     return
-        (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName)));
+        (VarAppID == input.VarAppID || (VarAppID != null && VarAppID.Equals(input.VarAppID)));
   }
 
   /// <summary>
@@ -84,9 +77,9 @@ public partial class BaseQuerySuggestionsConfigurationWithIndex
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (IndexName != null)
+      if (VarAppID != null)
       {
-        hashCode = (hashCode * 59) + IndexName.GetHashCode();
+        hashCode = (hashCode * 59) + VarAppID.GetHashCode();
       }
       return hashCode;
     }

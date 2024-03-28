@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.QuerySuggestions;
 
 /// <summary>
-/// QuerySuggestionsConfigurationResponse
+/// API response for retrieving Query Suggestions configurations.
 /// </summary>
 public partial class QuerySuggestionsConfigurationResponse
 {
@@ -24,39 +24,35 @@ public partial class QuerySuggestionsConfigurationResponse
   /// <summary>
   /// Initializes a new instance of the QuerySuggestionsConfigurationResponse class.
   /// </summary>
-  /// <param name="indexName">Query Suggestions index name. (required).</param>
+  /// <param name="appID">Algolia application ID to which this Query Suggestions configuration belongs. (required).</param>
+  /// <param name="indexName">Name of the Query Suggestions index. (required).</param>
   /// <param name="sourceIndices">Algolia indices from which to get the popular searches for query suggestions. (required).</param>
-  public QuerySuggestionsConfigurationResponse(string indexName, List<SourceIndex> sourceIndices)
+  /// <param name="languages">languages (required).</param>
+  /// <param name="exclude">exclude (required).</param>
+  /// <param name="enablePersonalization">Whether to turn on personalized query suggestions. (required) (default to false).</param>
+  /// <param name="allowSpecialCharacters">Whether to include suggestions with special characters. (required) (default to false).</param>
+  public QuerySuggestionsConfigurationResponse(string appID, string indexName, List<SourceIndex> sourceIndices, Languages languages, List<string> exclude, bool enablePersonalization, bool allowSpecialCharacters)
   {
+    AppID = appID ?? throw new ArgumentNullException(nameof(appID));
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
     SourceIndices = sourceIndices ?? throw new ArgumentNullException(nameof(sourceIndices));
+    Languages = languages ?? throw new ArgumentNullException(nameof(languages));
+    Exclude = exclude ?? throw new ArgumentNullException(nameof(exclude));
+    EnablePersonalization = enablePersonalization;
+    AllowSpecialCharacters = allowSpecialCharacters;
   }
 
   /// <summary>
-  /// API key used to read from your source index.
+  /// Algolia application ID to which this Query Suggestions configuration belongs.
   /// </summary>
-  /// <value>API key used to read from your source index.</value>
-  [JsonPropertyName("sourceIndicesAPIKey")]
-  public string SourceIndicesAPIKey { get; set; }
+  /// <value>Algolia application ID to which this Query Suggestions configuration belongs.</value>
+  [JsonPropertyName("appID")]
+  public string AppID { get; set; }
 
   /// <summary>
-  /// API key used to write and configure your Query Suggestions index.
+  /// Name of the Query Suggestions index.
   /// </summary>
-  /// <value>API key used to write and configure your Query Suggestions index.</value>
-  [JsonPropertyName("suggestionsIndicesAPIKey")]
-  public string SuggestionsIndicesAPIKey { get; set; }
-
-  /// <summary>
-  /// API key used to read from external Algolia indices.
-  /// </summary>
-  /// <value>API key used to read from external Algolia indices.</value>
-  [JsonPropertyName("externalIndicesAPIKey")]
-  public string ExternalIndicesAPIKey { get; set; }
-
-  /// <summary>
-  /// Query Suggestions index name.
-  /// </summary>
-  /// <value>Query Suggestions index name.</value>
+  /// <value>Name of the Query Suggestions index.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 
@@ -74,25 +70,24 @@ public partial class QuerySuggestionsConfigurationResponse
   public Languages Languages { get; set; }
 
   /// <summary>
-  /// Patterns to exclude from query suggestions.
+  /// Gets or Sets Exclude
   /// </summary>
-  /// <value>Patterns to exclude from query suggestions.</value>
   [JsonPropertyName("exclude")]
   public List<string> Exclude { get; set; }
 
   /// <summary>
-  /// Turn on personalized query suggestions.
+  /// Whether to turn on personalized query suggestions.
   /// </summary>
-  /// <value>Turn on personalized query suggestions.</value>
+  /// <value>Whether to turn on personalized query suggestions.</value>
   [JsonPropertyName("enablePersonalization")]
-  public bool? EnablePersonalization { get; set; }
+  public bool EnablePersonalization { get; set; }
 
   /// <summary>
-  /// Allow suggestions with special characters.
+  /// Whether to include suggestions with special characters.
   /// </summary>
-  /// <value>Allow suggestions with special characters.</value>
+  /// <value>Whether to include suggestions with special characters.</value>
   [JsonPropertyName("allowSpecialCharacters")]
-  public bool? AllowSpecialCharacters { get; set; }
+  public bool AllowSpecialCharacters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -102,9 +97,7 @@ public partial class QuerySuggestionsConfigurationResponse
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class QuerySuggestionsConfigurationResponse {\n");
-    sb.Append("  SourceIndicesAPIKey: ").Append(SourceIndicesAPIKey).Append("\n");
-    sb.Append("  SuggestionsIndicesAPIKey: ").Append(SuggestionsIndicesAPIKey).Append("\n");
-    sb.Append("  ExternalIndicesAPIKey: ").Append(ExternalIndicesAPIKey).Append("\n");
+    sb.Append("  AppID: ").Append(AppID).Append("\n");
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  SourceIndices: ").Append(SourceIndices).Append("\n");
     sb.Append("  Languages: ").Append(Languages).Append("\n");
@@ -137,9 +130,7 @@ public partial class QuerySuggestionsConfigurationResponse
     }
 
     return
-        (SourceIndicesAPIKey == input.SourceIndicesAPIKey || (SourceIndicesAPIKey != null && SourceIndicesAPIKey.Equals(input.SourceIndicesAPIKey))) &&
-        (SuggestionsIndicesAPIKey == input.SuggestionsIndicesAPIKey || (SuggestionsIndicesAPIKey != null && SuggestionsIndicesAPIKey.Equals(input.SuggestionsIndicesAPIKey))) &&
-        (ExternalIndicesAPIKey == input.ExternalIndicesAPIKey || (ExternalIndicesAPIKey != null && ExternalIndicesAPIKey.Equals(input.ExternalIndicesAPIKey))) &&
+        (AppID == input.AppID || (AppID != null && AppID.Equals(input.AppID))) &&
         (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName))) &&
         (SourceIndices == input.SourceIndices || SourceIndices != null && input.SourceIndices != null && SourceIndices.SequenceEqual(input.SourceIndices)) &&
         (Languages == input.Languages || (Languages != null && Languages.Equals(input.Languages))) &&
@@ -157,17 +148,9 @@ public partial class QuerySuggestionsConfigurationResponse
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (SourceIndicesAPIKey != null)
+      if (AppID != null)
       {
-        hashCode = (hashCode * 59) + SourceIndicesAPIKey.GetHashCode();
-      }
-      if (SuggestionsIndicesAPIKey != null)
-      {
-        hashCode = (hashCode * 59) + SuggestionsIndicesAPIKey.GetHashCode();
-      }
-      if (ExternalIndicesAPIKey != null)
-      {
-        hashCode = (hashCode * 59) + ExternalIndicesAPIKey.GetHashCode();
+        hashCode = (hashCode * 59) + AppID.GetHashCode();
       }
       if (IndexName != null)
       {

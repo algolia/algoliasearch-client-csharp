@@ -22,7 +22,7 @@ namespace Algolia.Search.Clients;
 public interface IQuerySuggestionsClient
 {
   /// <summary>
-  /// Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
+  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
   /// </summary>
   /// <param name="querySuggestionsConfigurationWithIndex"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -34,7 +34,7 @@ public interface IQuerySuggestionsClient
   Task<BaseResponse> CreateConfigAsync(QuerySuggestionsConfigurationWithIndex querySuggestionsConfigurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.  (Synchronous version)
+  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.  (Synchronous version)
   /// </summary>
   /// <param name="querySuggestionsConfigurationWithIndex"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -154,7 +154,7 @@ public interface IQuerySuggestionsClient
   object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted. 
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation. 
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -166,7 +166,7 @@ public interface IQuerySuggestionsClient
   Task<BaseResponse> DeleteConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted.  (Synchronous version)
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation.  (Synchronous version)
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -178,7 +178,7 @@ public interface IQuerySuggestionsClient
   BaseResponse DeleteConfig(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List all Query Suggestions configurations of your Algolia application.
+  /// Retrieves all Query Suggestions configurations of your Algolia application.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -189,7 +189,7 @@ public interface IQuerySuggestionsClient
   Task<List<QuerySuggestionsConfigurationResponse>> GetAllConfigsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List all Query Suggestions configurations of your Algolia application. (Synchronous version)
+  /// Retrieves all Query Suggestions configurations of your Algolia application. (Synchronous version)
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -200,7 +200,7 @@ public interface IQuerySuggestionsClient
   List<QuerySuggestionsConfigurationResponse> GetAllConfigs(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a single Query Suggestions configuration.
+  /// Retrieves a single Query Suggestions configuration by its index name.
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -212,7 +212,7 @@ public interface IQuerySuggestionsClient
   Task<QuerySuggestionsConfigurationResponse> GetConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get a single Query Suggestions configuration. (Synchronous version)
+  /// Retrieves a single Query Suggestions configuration by its index name. (Synchronous version)
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -224,7 +224,7 @@ public interface IQuerySuggestionsClient
   QuerySuggestionsConfigurationResponse GetConfig(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Report the status of a Query Suggestions index.
+  /// Reports the status of a Query Suggestions index.
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -236,7 +236,7 @@ public interface IQuerySuggestionsClient
   Task<GetConfigStatus200Response> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Report the status of a Query Suggestions index. (Synchronous version)
+  /// Reports the status of a Query Suggestions index. (Synchronous version)
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -248,7 +248,7 @@ public interface IQuerySuggestionsClient
   GetConfigStatus200Response GetConfigStatus(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the logs for a single Query Suggestions index.
+  /// Retrieves the logs for a single Query Suggestions index.
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -260,7 +260,7 @@ public interface IQuerySuggestionsClient
   Task<GetLogFile200Response> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the logs for a single Query Suggestions index. (Synchronous version)
+  /// Retrieves the logs for a single Query Suggestions index. (Synchronous version)
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -272,7 +272,7 @@ public interface IQuerySuggestionsClient
   GetLogFile200Response GetLogFile(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update a QuerySuggestions configuration.
+  /// Updates a QuerySuggestions configuration.
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="querySuggestionsConfiguration"></param>
@@ -285,7 +285,7 @@ public interface IQuerySuggestionsClient
   Task<BaseResponse> UpdateConfigAsync(string indexName, QuerySuggestionsConfiguration querySuggestionsConfiguration, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Update a QuerySuggestions configuration. (Synchronous version)
+  /// Updates a QuerySuggestions configuration. (Synchronous version)
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="querySuggestionsConfiguration"></param>
@@ -366,7 +366,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
+  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -393,7 +393,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.  (Synchronous version)
+  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -576,7 +576,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted. 
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation. 
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -603,7 +603,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted.  (Synchronous version)
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -620,7 +620,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// List all Query Suggestions configurations of your Algolia application.
+  /// Retrieves all Query Suggestions configurations of your Algolia application.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -641,7 +641,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// List all Query Suggestions configurations of your Algolia application. (Synchronous version)
+  /// Retrieves all Query Suggestions configurations of your Algolia application. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -657,7 +657,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Get a single Query Suggestions configuration.
+  /// Retrieves a single Query Suggestions configuration by its index name.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -684,7 +684,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Get a single Query Suggestions configuration. (Synchronous version)
+  /// Retrieves a single Query Suggestions configuration by its index name. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -701,7 +701,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Report the status of a Query Suggestions index.
+  /// Reports the status of a Query Suggestions index.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -728,7 +728,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Report the status of a Query Suggestions index. (Synchronous version)
+  /// Reports the status of a Query Suggestions index. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -745,7 +745,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Get the logs for a single Query Suggestions index.
+  /// Retrieves the logs for a single Query Suggestions index.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -772,7 +772,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Get the logs for a single Query Suggestions index. (Synchronous version)
+  /// Retrieves the logs for a single Query Suggestions index. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -789,7 +789,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Update a QuerySuggestions configuration.
+  /// Updates a QuerySuggestions configuration.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -822,7 +822,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Update a QuerySuggestions configuration. (Synchronous version)
+  /// Updates a QuerySuggestions configuration. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

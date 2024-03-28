@@ -15,7 +15,7 @@ using Algolia.Search.Models.Common;
 namespace Algolia.Search.Models.QuerySuggestions;
 
 /// <summary>
-/// Set the language for deduplicating singular and plural suggestions. If specified, only the more popular form is included. 
+/// Languages for deduplicating singular and plural suggestions. If specified, only the more popular form is included. 
 /// </summary>
 [JsonConverter(typeof(LanguagesJsonConverter))]
 public partial class Languages : AbstractSchema

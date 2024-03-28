@@ -38,30 +38,28 @@ public partial class SourceIndex
   public string IndexName { get; set; }
 
   /// <summary>
-  /// If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used. 
+  /// If true, Query Suggestions uses all replica indices to find popular searches. If false, only the primary index is used. 
   /// </summary>
-  /// <value>If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used. </value>
+  /// <value>If true, Query Suggestions uses all replica indices to find popular searches. If false, only the primary index is used. </value>
   [JsonPropertyName("replicas")]
   public bool? Replicas { get; set; }
 
   /// <summary>
-  /// [Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches. 
+  /// Gets or Sets AnalyticsTags
   /// </summary>
-  /// <value>[Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches. </value>
   [JsonPropertyName("analyticsTags")]
   public List<string> AnalyticsTags { get; set; }
 
   /// <summary>
-  /// Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion. 
+  /// Gets or Sets Facets
   /// </summary>
-  /// <value>Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion. </value>
   [JsonPropertyName("facets")]
   public List<Facet> Facets { get; set; }
 
   /// <summary>
-  /// Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` hits to be included in the Query Suggestions index. 
+  /// Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` search results to be included in the Query Suggestions index. 
   /// </summary>
-  /// <value>Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` hits to be included in the Query Suggestions index. </value>
+  /// <value>Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` search results to be included in the Query Suggestions index. </value>
   [JsonPropertyName("minHits")]
   public int? MinHits { get; set; }
 
@@ -79,9 +77,8 @@ public partial class SourceIndex
   public List<List<string>> Generate { get; set; }
 
   /// <summary>
-  /// Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - `query`: search query which will be added as a suggestion   - `count`: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data. 
+  /// Gets or Sets External
   /// </summary>
-  /// <value>Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - `query`: search query which will be added as a suggestion   - `count`: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data. </value>
   [JsonPropertyName("external")]
   public List<string> External { get; set; }
 

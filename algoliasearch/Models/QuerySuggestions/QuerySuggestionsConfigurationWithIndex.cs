@@ -24,20 +24,13 @@ public partial class QuerySuggestionsConfigurationWithIndex
   /// <summary>
   /// Initializes a new instance of the QuerySuggestionsConfigurationWithIndex class.
   /// </summary>
-  /// <param name="indexName">Query Suggestions index name. (required).</param>
   /// <param name="sourceIndices">Algolia indices from which to get the popular searches for query suggestions. (required).</param>
-  public QuerySuggestionsConfigurationWithIndex(string indexName, List<SourceIndex> sourceIndices)
+  /// <param name="indexName">Name of the Query Suggestions index. (required).</param>
+  public QuerySuggestionsConfigurationWithIndex(List<SourceIndex> sourceIndices, string indexName)
   {
-    IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
     SourceIndices = sourceIndices ?? throw new ArgumentNullException(nameof(sourceIndices));
+    IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
   }
-
-  /// <summary>
-  /// Query Suggestions index name.
-  /// </summary>
-  /// <value>Query Suggestions index name.</value>
-  [JsonPropertyName("indexName")]
-  public string IndexName { get; set; }
 
   /// <summary>
   /// Algolia indices from which to get the popular searches for query suggestions.
@@ -53,25 +46,31 @@ public partial class QuerySuggestionsConfigurationWithIndex
   public Languages Languages { get; set; }
 
   /// <summary>
-  /// Patterns to exclude from query suggestions.
+  /// Gets or Sets Exclude
   /// </summary>
-  /// <value>Patterns to exclude from query suggestions.</value>
   [JsonPropertyName("exclude")]
   public List<string> Exclude { get; set; }
 
   /// <summary>
-  /// Turn on personalized query suggestions.
+  /// Whether to turn on personalized query suggestions.
   /// </summary>
-  /// <value>Turn on personalized query suggestions.</value>
+  /// <value>Whether to turn on personalized query suggestions.</value>
   [JsonPropertyName("enablePersonalization")]
   public bool? EnablePersonalization { get; set; }
 
   /// <summary>
-  /// Allow suggestions with special characters.
+  /// Whether to include suggestions with special characters.
   /// </summary>
-  /// <value>Allow suggestions with special characters.</value>
+  /// <value>Whether to include suggestions with special characters.</value>
   [JsonPropertyName("allowSpecialCharacters")]
   public bool? AllowSpecialCharacters { get; set; }
+
+  /// <summary>
+  /// Name of the Query Suggestions index.
+  /// </summary>
+  /// <value>Name of the Query Suggestions index.</value>
+  [JsonPropertyName("indexName")]
+  public string IndexName { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -81,12 +80,12 @@ public partial class QuerySuggestionsConfigurationWithIndex
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class QuerySuggestionsConfigurationWithIndex {\n");
-    sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  SourceIndices: ").Append(SourceIndices).Append("\n");
     sb.Append("  Languages: ").Append(Languages).Append("\n");
     sb.Append("  Exclude: ").Append(Exclude).Append("\n");
     sb.Append("  EnablePersonalization: ").Append(EnablePersonalization).Append("\n");
     sb.Append("  AllowSpecialCharacters: ").Append(AllowSpecialCharacters).Append("\n");
+    sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -113,12 +112,12 @@ public partial class QuerySuggestionsConfigurationWithIndex
     }
 
     return
-        (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName))) &&
         (SourceIndices == input.SourceIndices || SourceIndices != null && input.SourceIndices != null && SourceIndices.SequenceEqual(input.SourceIndices)) &&
         (Languages == input.Languages || (Languages != null && Languages.Equals(input.Languages))) &&
         (Exclude == input.Exclude || Exclude != null && input.Exclude != null && Exclude.SequenceEqual(input.Exclude)) &&
         (EnablePersonalization == input.EnablePersonalization || EnablePersonalization.Equals(input.EnablePersonalization)) &&
-        (AllowSpecialCharacters == input.AllowSpecialCharacters || AllowSpecialCharacters.Equals(input.AllowSpecialCharacters));
+        (AllowSpecialCharacters == input.AllowSpecialCharacters || AllowSpecialCharacters.Equals(input.AllowSpecialCharacters)) &&
+        (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName)));
   }
 
   /// <summary>
@@ -130,10 +129,6 @@ public partial class QuerySuggestionsConfigurationWithIndex
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (IndexName != null)
-      {
-        hashCode = (hashCode * 59) + IndexName.GetHashCode();
-      }
       if (SourceIndices != null)
       {
         hashCode = (hashCode * 59) + SourceIndices.GetHashCode();
@@ -148,6 +143,10 @@ public partial class QuerySuggestionsConfigurationWithIndex
       }
       hashCode = (hashCode * 59) + EnablePersonalization.GetHashCode();
       hashCode = (hashCode * 59) + AllowSpecialCharacters.GetHashCode();
+      if (IndexName != null)
+      {
+        hashCode = (hashCode * 59) + IndexName.GetHashCode();
+      }
       return hashCode;
     }
   }

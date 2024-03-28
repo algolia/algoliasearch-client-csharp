@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.QuerySuggestions;
 
 /// <summary>
-/// The type of log entry.   - `SKIP`. A query is skipped because it doesn't match the conditions for successful inclusion. For example, when a query doesn't generate enough search results. - `INFO`. An informative log entry. - `ERROR`. The Query Suggestions process encountered an error. 
+/// Type of log entry.  - `SKIP`. A query is skipped because it doesn't match the conditions for successful inclusion. For example, when a query doesn't generate enough search results. - `INFO`. An informative log entry. - `ERROR`. The Query Suggestions process encountered an error. 
 /// </summary>
-/// <value>The type of log entry.   - `SKIP`. A query is skipped because it doesn't match the conditions for successful inclusion. For example, when a query doesn't generate enough search results. - `INFO`. An informative log entry. - `ERROR`. The Query Suggestions process encountered an error. </value>
+/// <value>Type of log entry.  - `SKIP`. A query is skipped because it doesn't match the conditions for successful inclusion. For example, when a query doesn't generate enough search results. - `INFO`. An informative log entry. - `ERROR`. The Query Suggestions process encountered an error. </value>
 public enum LogLevel
 {
   /// <summary>

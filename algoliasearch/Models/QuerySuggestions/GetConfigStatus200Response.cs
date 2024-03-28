@@ -24,16 +24,16 @@ public partial class GetConfigStatus200Response
   }
 
   /// <summary>
-  /// Query Suggestions index name.
+  /// Name of the Query Suggestions index.
   /// </summary>
-  /// <value>Query Suggestions index name.</value>
+  /// <value>Name of the Query Suggestions index.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 
   /// <summary>
-  /// Indicates whether the creation or update of the Query Suggestions is in progress.
+  /// Whether the creation or update of the Query Suggestions index is in progress.
   /// </summary>
-  /// <value>Indicates whether the creation or update of the Query Suggestions is in progress.</value>
+  /// <value>Whether the creation or update of the Query Suggestions index is in progress.</value>
   [JsonPropertyName("isRunning")]
   public bool? IsRunning { get; set; }
 
