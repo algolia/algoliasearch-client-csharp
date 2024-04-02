@@ -42,7 +42,8 @@ public partial class PurchasedObjectIDsAfterSearch
   /// <param name="index">Index name to which the event&#39;s items belong. (required).</param>
   /// <param name="objectIDs">Object IDs of the records that are part of the event. (required).</param>
   /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don&#39;t use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
-  public PurchasedObjectIDsAfterSearch(string eventName, ConversionEvent? eventType, PurchaseEvent? eventSubtype, string index, List<string> objectIDs, string userToken)
+  /// <param name="objectData">Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as &#x60;objectIDs&#x60;.  (required).</param>
+  public PurchasedObjectIDsAfterSearch(string eventName, ConversionEvent? eventType, PurchaseEvent? eventSubtype, string index, List<string> objectIDs, string userToken, List<ObjectDataAfterSearch> objectData)
   {
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
     EventType = eventType;
@@ -50,6 +51,7 @@ public partial class PurchasedObjectIDsAfterSearch
     Index = index ?? throw new ArgumentNullException(nameof(index));
     ObjectIDs = objectIDs ?? throw new ArgumentNullException(nameof(objectIDs));
     UserToken = userToken ?? throw new ArgumentNullException(nameof(userToken));
+    ObjectData = objectData ?? throw new ArgumentNullException(nameof(objectData));
   }
 
   /// <summary>
