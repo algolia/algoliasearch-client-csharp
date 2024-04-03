@@ -1,3 +1,8 @@
+## [7.0.0-alpha.7](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.6...7.0.0-alpha.7)
+
+- [10e08c9e7](https://github.com/algolia/api-clients-automation/commit/10e08c9e7) fix(specs): query suggestions api ([#2924](https://github.com/algolia/api-clients-automation/pull/2924)) by [@kai687](https://github.com/kai687/)
+- [b153b397e](https://github.com/algolia/api-clients-automation/commit/b153b397e) fix(specs): ingestion api reference ([#2918](https://github.com/algolia/api-clients-automation/pull/2918)) by [@kai687](https://github.com/kai687/)
+
 ## [7.0.0-alpha.6](https://github.com/algolia/algoliasearch-client-csharp/compare/7.0.0-alpha.5...7.0.0-alpha.6)
 
 - [10c9339c8](https://github.com/algolia/api-clients-automation/commit/10c9339c8) fix(specs): more flexible custom methods ([#2889](https://github.com/algolia/api-clients-automation/pull/2889)) by [@damcou](https://github.com/damcou/)
