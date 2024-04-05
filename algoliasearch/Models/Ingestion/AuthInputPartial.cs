@@ -70,6 +70,16 @@ public partial class AuthInputPartial : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the AuthInputPartial class
+  /// with a AuthAlgoliaInsightsPartial
+  /// </summary>
+  /// <param name="actualInstance">An instance of AuthAlgoliaInsightsPartial.</param>
+  public AuthInputPartial(AuthAlgoliaInsightsPartial actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -126,6 +136,16 @@ public partial class AuthInputPartial : AbstractSchema
     return (AuthAlgoliaPartial)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `AuthAlgoliaInsightsPartial`. If the actual instance is not `AuthAlgoliaInsightsPartial`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of AuthAlgoliaInsightsPartial</returns>
+  public AuthAlgoliaInsightsPartial AsAuthAlgoliaInsightsPartial()
+  {
+    return (AuthAlgoliaInsightsPartial)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `AuthGoogleServiceAccountPartial` type.
@@ -170,6 +190,15 @@ public partial class AuthInputPartial : AbstractSchema
   public bool IsAuthAlgoliaPartial()
   {
     return ActualInstance.GetType() == typeof(AuthAlgoliaPartial);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `AuthAlgoliaInsightsPartial` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsAuthAlgoliaInsightsPartial()
+  {
+    return ActualInstance.GetType() == typeof(AuthAlgoliaInsightsPartial);
   }
 
   /// <summary>
@@ -314,6 +343,18 @@ public class AuthInputPartialJsonConverter : JsonConverter<AuthInputPartial>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthAlgoliaPartial: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new AuthInputPartial(jsonDocument.Deserialize<AuthAlgoliaInsightsPartial>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthAlgoliaInsightsPartial: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

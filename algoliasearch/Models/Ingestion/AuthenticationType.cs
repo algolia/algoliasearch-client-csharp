@@ -45,6 +45,12 @@ public enum AuthenticationType
   /// Enum Algolia for value: algolia
   /// </summary>
   [JsonPropertyName("algolia")]
-  Algolia = 5
+  Algolia = 5,
+
+  /// <summary>
+  /// Enum AlgoliaInsights for value: algoliaInsights
+  /// </summary>
+  [JsonPropertyName("algoliaInsights")]
+  AlgoliaInsights = 6
 }
 

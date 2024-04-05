@@ -70,6 +70,16 @@ public partial class AuthInput : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the AuthInput class
+  /// with a AuthAlgoliaInsights
+  /// </summary>
+  /// <param name="actualInstance">An instance of AuthAlgoliaInsights.</param>
+  public AuthInput(AuthAlgoliaInsights actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -126,6 +136,16 @@ public partial class AuthInput : AbstractSchema
     return (AuthAlgolia)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `AuthAlgoliaInsights`. If the actual instance is not `AuthAlgoliaInsights`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of AuthAlgoliaInsights</returns>
+  public AuthAlgoliaInsights AsAuthAlgoliaInsights()
+  {
+    return (AuthAlgoliaInsights)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `AuthGoogleServiceAccount` type.
@@ -170,6 +190,15 @@ public partial class AuthInput : AbstractSchema
   public bool IsAuthAlgolia()
   {
     return ActualInstance.GetType() == typeof(AuthAlgolia);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `AuthAlgoliaInsights` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsAuthAlgoliaInsights()
+  {
+    return ActualInstance.GetType() == typeof(AuthAlgoliaInsights);
   }
 
   /// <summary>
@@ -314,6 +343,18 @@ public class AuthInputJsonConverter : JsonConverter<AuthInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthAlgolia: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new AuthInput(jsonDocument.Deserialize<AuthAlgoliaInsights>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthAlgoliaInsights: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");
