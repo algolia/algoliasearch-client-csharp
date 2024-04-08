@@ -24,7 +24,7 @@ public partial class GetApiKeyResponse
   /// <summary>
   /// Initializes a new instance of the GetApiKeyResponse class.
   /// </summary>
-  /// <param name="createdAt">Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). (required).</param>
+  /// <param name="createdAt">Timestamp when the object was created, in milliseconds since the Unix epoch. (required).</param>
   /// <param name="acl">Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint&#39;s reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  (required).</param>
   public GetApiKeyResponse(long createdAt, List<Acl> acl)
   {
@@ -40,9 +40,9 @@ public partial class GetApiKeyResponse
   public string Value { get; set; }
 
   /// <summary>
-  /// Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).
+  /// Timestamp when the object was created, in milliseconds since the Unix epoch.
   /// </summary>
-  /// <value>Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).</value>
+  /// <value>Timestamp when the object was created, in milliseconds since the Unix epoch.</value>
   [JsonPropertyName("createdAt")]
   public long CreatedAt { get; set; }
 

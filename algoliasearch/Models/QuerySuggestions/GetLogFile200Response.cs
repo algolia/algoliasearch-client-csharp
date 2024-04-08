@@ -30,9 +30,9 @@ public partial class GetLogFile200Response
   }
 
   /// <summary>
-  /// Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time of the log entry, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time of the log entry, in RFC 3339 format.</value>
   [JsonPropertyName("timestamp")]
   public string Timestamp { get; set; }
 

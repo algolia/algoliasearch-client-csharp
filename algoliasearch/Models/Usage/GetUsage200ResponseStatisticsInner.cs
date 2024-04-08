@@ -24,9 +24,9 @@ public partial class GetUsage200ResponseStatisticsInner
   }
 
   /// <summary>
-  /// Timestamp in milliseconds in Unix epoch time.
+  /// Timestamp, measured in milliseconds since the Unix epoch.
   /// </summary>
-  /// <value>Timestamp in milliseconds in Unix epoch time.</value>
+  /// <value>Timestamp, measured in milliseconds since the Unix epoch.</value>
   [JsonPropertyName("t")]
   public int? T { get; set; }
 

@@ -24,16 +24,16 @@ public partial class DeleteApiKeyResponse
   /// <summary>
   /// Initializes a new instance of the DeleteApiKeyResponse class.
   /// </summary>
-  /// <param name="deletedAt">Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="deletedAt">Date and time when the object was deleted, in RFC 3339 format. (required).</param>
   public DeleteApiKeyResponse(string deletedAt)
   {
     DeletedAt = deletedAt ?? throw new ArgumentNullException(nameof(deletedAt));
   }
 
   /// <summary>
-  /// Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the object was deleted, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the object was deleted, in RFC 3339 format.</value>
   [JsonPropertyName("deletedAt")]
   public string DeletedAt { get; set; }
 

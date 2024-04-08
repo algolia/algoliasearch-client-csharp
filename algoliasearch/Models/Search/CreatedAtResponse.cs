@@ -24,16 +24,16 @@ public partial class CreatedAtResponse
   /// <summary>
   /// Initializes a new instance of the CreatedAtResponse class.
   /// </summary>
-  /// <param name="createdAt">Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="createdAt">Date and time when the object was created, in RFC 3339 format. (required).</param>
   public CreatedAtResponse(string createdAt)
   {
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
   }
 
   /// <summary>
-  /// Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the object was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the object was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

@@ -26,7 +26,7 @@ public partial class FetchedIndex
   /// </summary>
   /// <param name="name">Index name. (required).</param>
   /// <param name="createdAt">Index creation date. An empty string means that the index has no records. (required).</param>
-  /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="updatedAt">Date and time when the object was updated, in RFC 3339 format. (required).</param>
   /// <param name="entries">Number of records contained in the index. (required).</param>
   /// <param name="dataSize">Number of bytes of the index in minified format. (required).</param>
   /// <param name="fileSize">Number of bytes of the index binary file. (required).</param>
@@ -61,9 +61,9 @@ public partial class FetchedIndex
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the object was updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

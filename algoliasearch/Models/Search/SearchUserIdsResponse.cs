@@ -28,7 +28,7 @@ public partial class SearchUserIdsResponse
   /// <param name="nbHits">Number of results (hits). (required).</param>
   /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
   /// <param name="hitsPerPage">Maximum number of hits per page. (required) (default to 20).</param>
-  /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="updatedAt">Date and time when the object was updated, in RFC 3339 format. (required).</param>
   public SearchUserIdsResponse(List<UserHit> hits, int nbHits, int page, int hitsPerPage, string updatedAt)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
@@ -67,9 +67,9 @@ public partial class SearchUserIdsResponse
   public int HitsPerPage { get; set; }
 
   /// <summary>
-  /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the object was updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

@@ -25,7 +25,7 @@ public partial class DeletedAtResponse
   /// Initializes a new instance of the DeletedAtResponse class.
   /// </summary>
   /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the [&#x60;task&#x60; operation](#tag/Indices/operation/getTask) and this &#x60;taskID&#x60;.  (required).</param>
-  /// <param name="deletedAt">Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="deletedAt">Date and time when the object was deleted, in RFC 3339 format. (required).</param>
   public DeletedAtResponse(long taskID, string deletedAt)
   {
     TaskID = taskID;
@@ -40,9 +40,9 @@ public partial class DeletedAtResponse
   public long TaskID { get; set; }
 
   /// <summary>
-  /// Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the object was deleted, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the object was deleted, in RFC 3339 format.</value>
   [JsonPropertyName("deletedAt")]
   public string DeletedAt { get; set; }
 

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Destination type.  <dl> <dt><code>search</code></dt> <dd>Data is stored in an Algolia index.</dd> <dt><code>insights</code></dt> <dd>Data is recorded as user events in the Insights API.</dd> </dl>. 
+/// Destination type.  - `search`.   Data is stored in an Algolia index.  - `insights`.   Data is recorded as user events in the Insights API. 
 /// </summary>
-/// <value>Destination type.  <dl> <dt><code>search</code></dt> <dd>Data is stored in an Algolia index.</dd> <dt><code>insights</code></dt> <dd>Data is recorded as user events in the Insights API.</dd> </dl>. </value>
+/// <value>Destination type.  - `search`.   Data is stored in an Algolia index.  - `insights`.   Data is recorded as user events in the Insights API. </value>
 public enum DestinationType
 {
   /// <summary>

@@ -24,7 +24,7 @@ public partial class BaseGetApiKeyResponse
   /// <summary>
   /// Initializes a new instance of the BaseGetApiKeyResponse class.
   /// </summary>
-  /// <param name="createdAt">Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). (required).</param>
+  /// <param name="createdAt">Timestamp when the object was created, in milliseconds since the Unix epoch. (required).</param>
   public BaseGetApiKeyResponse(long createdAt)
   {
     CreatedAt = createdAt;
@@ -38,9 +38,9 @@ public partial class BaseGetApiKeyResponse
   public string Value { get; set; }
 
   /// <summary>
-  /// Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).
+  /// Timestamp when the object was created, in milliseconds since the Unix epoch.
   /// </summary>
-  /// <value>Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).</value>
+  /// <value>Timestamp when the object was created, in milliseconds since the Unix epoch.</value>
   [JsonPropertyName("createdAt")]
   public long CreatedAt { get; set; }
 

@@ -25,7 +25,7 @@ public partial class SaveSynonymResponse
   /// Initializes a new instance of the SaveSynonymResponse class.
   /// </summary>
   /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the [&#x60;task&#x60; operation](#tag/Indices/operation/getTask) and this &#x60;taskID&#x60;.  (required).</param>
-  /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="updatedAt">Date and time when the object was updated, in RFC 3339 format. (required).</param>
   /// <param name="id">Unique identifier of a synonym object. (required).</param>
   public SaveSynonymResponse(long taskID, string updatedAt, string id)
   {
@@ -42,9 +42,9 @@ public partial class SaveSynonymResponse
   public long TaskID { get; set; }
 
   /// <summary>
-  /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the object was updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

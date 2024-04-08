@@ -133,8 +133,8 @@ public interface IAnalyticsClient
   /// Retrieves the add-to-cart rate for all of your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -148,8 +148,8 @@ public interface IAnalyticsClient
   /// Retrieves the add-to-cart rate for all of your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -163,8 +163,8 @@ public interface IAnalyticsClient
   /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search results' positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -178,8 +178,8 @@ public interface IAnalyticsClient
   /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search results' positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -193,8 +193,8 @@ public interface IAnalyticsClient
   /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -208,8 +208,8 @@ public interface IAnalyticsClient
   /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -223,8 +223,8 @@ public interface IAnalyticsClient
   /// Retrieves the click-through rate for all of your searches with at least one click event, including a daily breakdown  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -238,8 +238,8 @@ public interface IAnalyticsClient
   /// Retrieves the click-through rate for all of your searches with at least one click event, including a daily breakdown  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -253,8 +253,8 @@ public interface IAnalyticsClient
   /// Retrieves the conversion rate for all of your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -268,8 +268,8 @@ public interface IAnalyticsClient
   /// Retrieves the conversion rate for all of your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -283,8 +283,8 @@ public interface IAnalyticsClient
   /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -298,8 +298,8 @@ public interface IAnalyticsClient
   /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -313,8 +313,8 @@ public interface IAnalyticsClient
   /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -328,8 +328,8 @@ public interface IAnalyticsClient
   /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -343,8 +343,8 @@ public interface IAnalyticsClient
   /// Retrieves the purchase rate for all of your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -358,8 +358,8 @@ public interface IAnalyticsClient
   /// Retrieves the purchase rate for all of your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -373,8 +373,8 @@ public interface IAnalyticsClient
   /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, sent purchase events. By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -388,8 +388,8 @@ public interface IAnalyticsClient
   /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, sent purchase events. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -403,8 +403,8 @@ public interface IAnalyticsClient
   /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -418,8 +418,8 @@ public interface IAnalyticsClient
   /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -433,8 +433,8 @@ public interface IAnalyticsClient
   /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches.
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -450,8 +450,8 @@ public interface IAnalyticsClient
   /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches. (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -467,8 +467,8 @@ public interface IAnalyticsClient
   /// Retrieves the most popular searches that didn't return any results.
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -484,8 +484,8 @@ public interface IAnalyticsClient
   /// Retrieves the most popular searches that didn't return any results. (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -525,8 +525,8 @@ public interface IAnalyticsClient
   /// Retrieves the countries with the most searches to your index.
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -542,8 +542,8 @@ public interface IAnalyticsClient
   /// Retrieves the countries with the most searches to your index. (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -560,8 +560,8 @@ public interface IAnalyticsClient
   /// </summary>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -578,8 +578,8 @@ public interface IAnalyticsClient
   /// </summary>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -597,8 +597,8 @@ public interface IAnalyticsClient
   /// <param name="attribute">Attribute name.</param>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -616,8 +616,8 @@ public interface IAnalyticsClient
   /// <param name="attribute">Attribute name.</param>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -634,8 +634,8 @@ public interface IAnalyticsClient
   /// </summary>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -652,8 +652,8 @@ public interface IAnalyticsClient
   /// </summary>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -672,8 +672,8 @@ public interface IAnalyticsClient
   /// <param name="search">Search query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -692,8 +692,8 @@ public interface IAnalyticsClient
   /// <param name="search">Search query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -711,8 +711,8 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="orderBy">Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available.  (optional)</param>
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
@@ -732,8 +732,8 @@ public interface IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="orderBy">Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available.  (optional)</param>
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
@@ -751,8 +751,8 @@ public interface IAnalyticsClient
   /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since this endpoint returns the number of unique users, the sum of the daily values might be different from the total number.  By default, Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -766,8 +766,8 @@ public interface IAnalyticsClient
   /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since this endpoint returns the number of unique users, the sum of the daily values might be different from the total number.  By default, Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (`YYYY-MM-DD`) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1018,8 +1018,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1051,8 +1051,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1071,8 +1071,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1104,8 +1104,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1124,8 +1124,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1157,8 +1157,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1177,8 +1177,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1210,8 +1210,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1230,8 +1230,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1263,8 +1263,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1283,8 +1283,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1316,8 +1316,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1336,8 +1336,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1369,8 +1369,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1389,8 +1389,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1422,8 +1422,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1442,8 +1442,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1475,8 +1475,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1495,8 +1495,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1528,8 +1528,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1548,8 +1548,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1585,8 +1585,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1607,8 +1607,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1644,8 +1644,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1710,8 +1710,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1747,8 +1747,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1770,8 +1770,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1809,8 +1809,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1833,8 +1833,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// <param name="attribute">Attribute name.</param>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1878,8 +1878,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// <param name="attribute">Attribute name.</param>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1901,8 +1901,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1940,8 +1940,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -1965,8 +1965,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// <param name="search">Search query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -2008,8 +2008,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// <param name="search">Search query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
@@ -2032,8 +2032,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="orderBy">Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available.  (optional)</param>
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
@@ -2077,8 +2077,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="orderBy">Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available.  (optional)</param>
   /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
@@ -2101,8 +2101,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2134,8 +2134,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
-  /// <param name="endDate">End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)</param>
+  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
+  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
   /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

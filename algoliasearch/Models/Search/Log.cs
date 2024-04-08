@@ -24,7 +24,7 @@ public partial class Log
   /// <summary>
   /// Initializes a new instance of the Log class.
   /// </summary>
-  /// <param name="timestamp">Timestamp of the API request in ISO 8601 format. (required).</param>
+  /// <param name="timestamp">Date and time of the API request, in RFC 3339 format. (required).</param>
   /// <param name="method">HTTP method of the request. (required).</param>
   /// <param name="answerCode">HTTP status code of the response. (required).</param>
   /// <param name="queryBody">Request body. (required).</param>
@@ -51,9 +51,9 @@ public partial class Log
   }
 
   /// <summary>
-  /// Timestamp of the API request in ISO 8601 format.
+  /// Date and time of the API request, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of the API request in ISO 8601 format.</value>
+  /// <value>Date and time of the API request, in RFC 3339 format.</value>
   [JsonPropertyName("timestamp")]
   public string Timestamp { get; set; }
 

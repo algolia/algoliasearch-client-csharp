@@ -24,7 +24,7 @@ public partial class UserHit
   /// <summary>
   /// Initializes a new instance of the UserHit class.
   /// </summary>
-  /// <param name="userID">User ID. (required).</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request. (required).</param>
   /// <param name="clusterName">Cluster name. (required).</param>
   /// <param name="nbRecords">Number of records in the cluster. (required).</param>
   /// <param name="dataSize">Data size taken by all the users assigned to the cluster. (required).</param>
@@ -41,9 +41,9 @@ public partial class UserHit
   }
 
   /// <summary>
-  /// User ID.
+  /// Unique identifier of the user who makes the search request.
   /// </summary>
-  /// <value>User ID.</value>
+  /// <value>Unique identifier of the user who makes the search request.</value>
   [JsonPropertyName("userID")]
   public string UserID { get; set; }
 

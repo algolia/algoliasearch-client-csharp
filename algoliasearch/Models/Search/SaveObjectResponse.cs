@@ -24,7 +24,7 @@ public partial class SaveObjectResponse
   /// <summary>
   /// Initializes a new instance of the SaveObjectResponse class.
   /// </summary>
-  /// <param name="createdAt">Timestamp when the record was added, in ISO 8601 format. (required).</param>
+  /// <param name="createdAt">Date and time when the object was created, in RFC 3339 format. (required).</param>
   /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the [&#x60;task&#x60; operation](#tag/Indices/operation/getTask) and this &#x60;taskID&#x60;.  (required).</param>
   public SaveObjectResponse(string createdAt, long taskID)
   {
@@ -33,9 +33,9 @@ public partial class SaveObjectResponse
   }
 
   /// <summary>
-  /// Timestamp when the record was added, in ISO 8601 format.
+  /// Date and time when the object was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp when the record was added, in ISO 8601 format.</value>
+  /// <value>Date and time when the object was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 

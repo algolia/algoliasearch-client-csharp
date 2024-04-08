@@ -100,7 +100,7 @@ public interface ISearchClient
   /// <summary>
   /// Assigns or moves a user ID to a cluster.  The time it takes to move a user is proportional to the amount of data linked to the user ID. 
   /// </summary>
-  /// <param name="xAlgoliaUserID">User ID to assign.</param>
+  /// <param name="xAlgoliaUserID">Unique identifier of the user who makes the search request.</param>
   /// <param name="assignUserIdParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -113,7 +113,7 @@ public interface ISearchClient
   /// <summary>
   /// Assigns or moves a user ID to a cluster.  The time it takes to move a user is proportional to the amount of data linked to the user ID.  (Synchronous version)
   /// </summary>
-  /// <param name="xAlgoliaUserID">User ID to assign.</param>
+  /// <param name="xAlgoliaUserID">Unique identifier of the user who makes the search request.</param>
   /// <param name="assignUserIdParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -152,7 +152,7 @@ public interface ISearchClient
   /// <summary>
   /// Assigns multiple user IDs to a cluster.  **You can't move users with this operation**. 
   /// </summary>
-  /// <param name="xAlgoliaUserID">User ID to assign.</param>
+  /// <param name="xAlgoliaUserID">Unique identifier of the user who makes the search request.</param>
   /// <param name="batchAssignUserIdsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -165,7 +165,7 @@ public interface ISearchClient
   /// <summary>
   /// Assigns multiple user IDs to a cluster.  **You can't move users with this operation**.  (Synchronous version)
   /// </summary>
-  /// <param name="xAlgoliaUserID">User ID to assign.</param>
+  /// <param name="xAlgoliaUserID">Unique identifier of the user who makes the search request.</param>
   /// <param name="batchAssignUserIdsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -890,7 +890,7 @@ public interface ISearchClient
   /// <summary>
   /// Returns the user ID data stored in the mapping.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time. 
   /// </summary>
-  /// <param name="userID">User ID to assign.</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -902,7 +902,7 @@ public interface ISearchClient
   /// <summary>
   /// Returns the user ID data stored in the mapping.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.  (Synchronous version)
   /// </summary>
-  /// <param name="userID">User ID to assign.</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1114,7 +1114,7 @@ public interface ISearchClient
   /// <summary>
   /// Deletes a user ID and its associated data from the clusters.
   /// </summary>
-  /// <param name="userID">User ID to assign.</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1126,7 +1126,7 @@ public interface ISearchClient
   /// <summary>
   /// Deletes a user ID and its associated data from the clusters. (Synchronous version)
   /// </summary>
-  /// <param name="userID">User ID to assign.</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -1807,7 +1807,7 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="xAlgoliaUserID">User ID to assign.</param>
+  /// <param name="xAlgoliaUserID">Unique identifier of the user who makes the search request.</param>
   /// <param name="assignUserIdParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1840,7 +1840,7 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="xAlgoliaUserID">User ID to assign.</param>
+  /// <param name="xAlgoliaUserID">Unique identifier of the user who makes the search request.</param>
   /// <param name="assignUserIdParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1903,7 +1903,7 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="xAlgoliaUserID">User ID to assign.</param>
+  /// <param name="xAlgoliaUserID">Unique identifier of the user who makes the search request.</param>
   /// <param name="batchAssignUserIdsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1936,7 +1936,7 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="xAlgoliaUserID">User ID to assign.</param>
+  /// <param name="xAlgoliaUserID">Unique identifier of the user who makes the search request.</param>
   /// <param name="batchAssignUserIdsParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -3223,7 +3223,7 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="userID">User ID to assign.</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -3250,7 +3250,7 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="userID">User ID to assign.</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -3617,7 +3617,7 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="userID">User ID to assign.</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -3644,7 +3644,7 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="userID">User ID to assign.</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>

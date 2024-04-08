@@ -24,16 +24,16 @@ public partial class GetStatusResponse
   /// <summary>
   /// Initializes a new instance of the GetStatusResponse class.
   /// </summary>
-  /// <param name="updatedAt">Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. If null, no update was performed yet.  (required).</param>
+  /// <param name="updatedAt">Date and time when the object was updated, in RFC 3339 format.  (required).</param>
   public GetStatusResponse(string updatedAt)
   {
     UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
   }
 
   /// <summary>
-  /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. If null, no update was performed yet. 
+  /// Date and time when the object was updated, in RFC 3339 format. 
   /// </summary>
-  /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. If null, no update was performed yet. </value>
+  /// <value>Date and time when the object was updated, in RFC 3339 format. </value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

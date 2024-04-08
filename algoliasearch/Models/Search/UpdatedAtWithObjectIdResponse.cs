@@ -31,9 +31,9 @@ public partial class UpdatedAtWithObjectIdResponse
   public long? TaskID { get; set; }
 
   /// <summary>
-  /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the object was updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

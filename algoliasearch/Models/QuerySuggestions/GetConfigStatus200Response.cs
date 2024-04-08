@@ -38,16 +38,16 @@ public partial class GetConfigStatus200Response
   public bool? IsRunning { get; set; }
 
   /// <summary>
-  /// Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.
+  /// Date and time when the Query Suggestions index was last built, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.</value>
+  /// <value>Date and time when the Query Suggestions index was last built, in RFC 3339 format.</value>
   [JsonPropertyName("lastBuiltAt")]
   public string LastBuiltAt { get; set; }
 
   /// <summary>
-  /// Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.
+  /// Date and time when the Query Suggestions index was last updated successfully.
   /// </summary>
-  /// <value>Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.</value>
+  /// <value>Date and time when the Query Suggestions index was last updated successfully.</value>
   [JsonPropertyName("lastSuccessfulBuiltAt")]
   public string LastSuccessfulBuiltAt { get; set; }
 

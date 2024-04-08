@@ -24,7 +24,7 @@ public partial class UserId
   /// <summary>
   /// Initializes a new instance of the UserId class.
   /// </summary>
-  /// <param name="varUserID">User ID. (required).</param>
+  /// <param name="varUserID">Unique identifier of the user who makes the search request. (required).</param>
   /// <param name="clusterName">Cluster to which the user is assigned. (required).</param>
   /// <param name="nbRecords">Number of records belonging to the user. (required).</param>
   /// <param name="dataSize">Data size used by the user. (required).</param>
@@ -37,9 +37,9 @@ public partial class UserId
   }
 
   /// <summary>
-  /// User ID.
+  /// Unique identifier of the user who makes the search request.
   /// </summary>
-  /// <value>User ID.</value>
+  /// <value>Unique identifier of the user who makes the search request.</value>
   [JsonPropertyName("userID")]
   public string VarUserID { get; set; }
 

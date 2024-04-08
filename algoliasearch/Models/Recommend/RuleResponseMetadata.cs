@@ -24,9 +24,9 @@ public partial class RuleResponseMetadata
   }
 
   /// <summary>
-  /// Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the object was updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
   [JsonPropertyName("lastUpdate")]
   public string LastUpdate { get; set; }
 

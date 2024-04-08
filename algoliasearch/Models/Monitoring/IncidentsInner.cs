@@ -24,9 +24,9 @@ public partial class IncidentsInner
   }
 
   /// <summary>
-  /// Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.
+  /// Timestamp, measured in milliseconds since the Unix epoch.
   /// </summary>
-  /// <value>Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.</value>
+  /// <value>Timestamp, measured in milliseconds since the Unix epoch.</value>
   [JsonPropertyName("t")]
   public long? T { get; set; }
 
