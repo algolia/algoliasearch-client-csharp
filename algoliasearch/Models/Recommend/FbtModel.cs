@@ -12,21 +12,15 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Type of edit.
+/// Frequently bought together model.  This model recommends items that have been purchased within 1 day with the item with the ID `objectID`. 
 /// </summary>
-/// <value>Type of edit.</value>
-public enum EditType
+/// <value>Frequently bought together model.  This model recommends items that have been purchased within 1 day with the item with the ID `objectID`. </value>
+public enum FbtModel
 {
   /// <summary>
-  /// Enum Remove for value: remove
+  /// Enum BoughtTogether for value: bought-together
   /// </summary>
-  [JsonPropertyName("remove")]
-  Remove = 1,
-
-  /// <summary>
-  /// Enum Replace for value: replace
-  /// </summary>
-  [JsonPropertyName("replace")]
-  Replace = 2
+  [JsonPropertyName("bought-together")]
+  BoughtTogether = 1
 }
 

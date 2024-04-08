@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Recommend parameters.
+/// Recommend request body.
 /// </summary>
 public partial class GetRecommendationsParams
 {
@@ -24,16 +24,16 @@ public partial class GetRecommendationsParams
   /// <summary>
   /// Initializes a new instance of the GetRecommendationsParams class.
   /// </summary>
-  /// <param name="requests">Request parameters depend on the model (recommendations or trending). (required).</param>
+  /// <param name="requests">Recommendation request with parameters depending on the requested model. (required).</param>
   public GetRecommendationsParams(List<RecommendationsRequest> requests)
   {
     Requests = requests ?? throw new ArgumentNullException(nameof(requests));
   }
 
   /// <summary>
-  /// Request parameters depend on the model (recommendations or trending).
+  /// Recommendation request with parameters depending on the requested model.
   /// </summary>
-  /// <value>Request parameters depend on the model (recommendations or trending).</value>
+  /// <value>Recommendation request with parameters depending on the requested model.</value>
   [JsonPropertyName("requests")]
   public List<RecommendationsRequest> Requests { get; set; }
 

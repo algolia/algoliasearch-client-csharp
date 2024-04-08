@@ -12,15 +12,15 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Trending facet values model.  This model recommends trending facet values for the specified facet attribute. 
+/// Looking similar model.  This model recommends items that look similar to the item with the ID `objectID` based on image attributes in your index. 
 /// </summary>
-/// <value>Trending facet values model.  This model recommends trending facet values for the specified facet attribute. </value>
-public enum TrendingFacetsModel
+/// <value>Looking similar model.  This model recommends items that look similar to the item with the ID `objectID` based on image attributes in your index. </value>
+public enum LookingSimilarModel
 {
   /// <summary>
-  /// Enum TrendingFacets for value: trending-facets
+  /// Enum LookingSimilar for value: looking-similar
   /// </summary>
-  [JsonPropertyName("trending-facets")]
-  TrendingFacets = 1
+  [JsonPropertyName("looking-similar")]
+  LookingSimilar = 1
 }
 

@@ -12,23 +12,23 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// RuleResponseMetadata
+/// Object ID of the recommendation you want to exclude.
 /// </summary>
-public partial class RuleResponseMetadata
+public partial class HideConsequenceObject
 {
   /// <summary>
-  /// Initializes a new instance of the RuleResponseMetadata class.
+  /// Initializes a new instance of the HideConsequenceObject class.
   /// </summary>
-  public RuleResponseMetadata()
+  public HideConsequenceObject()
   {
   }
 
   /// <summary>
-  /// Date and time when the object was updated, in RFC 3339 format.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
-  [JsonPropertyName("lastUpdate")]
-  public string LastUpdate { get; set; }
+  /// <value>Unique record identifier.</value>
+  [JsonPropertyName("objectID")]
+  public string ObjectID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -37,8 +37,8 @@ public partial class RuleResponseMetadata
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RuleResponseMetadata {\n");
-    sb.Append("  LastUpdate: ").Append(LastUpdate).Append("\n");
+    sb.Append("class HideConsequenceObject {\n");
+    sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -59,13 +59,13 @@ public partial class RuleResponseMetadata
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RuleResponseMetadata input)
+    if (obj is not HideConsequenceObject input)
     {
       return false;
     }
 
     return
-        (LastUpdate == input.LastUpdate || (LastUpdate != null && LastUpdate.Equals(input.LastUpdate)));
+        (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID)));
   }
 
   /// <summary>
@@ -77,9 +77,9 @@ public partial class RuleResponseMetadata
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (LastUpdate != null)
+      if (ObjectID != null)
       {
-        hashCode = (hashCode * 59) + LastUpdate.GetHashCode();
+        hashCode = (hashCode * 59) + ObjectID.GetHashCode();
       }
       return hashCode;
     }

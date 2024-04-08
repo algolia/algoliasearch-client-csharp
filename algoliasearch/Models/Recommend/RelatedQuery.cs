@@ -12,30 +12,32 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// RecommendationsQuery
+/// RelatedQuery
 /// </summary>
-public partial class RecommendationsQuery
+public partial class RelatedQuery
 {
 
   /// <summary>
   /// Gets or Sets Model
   /// </summary>
   [JsonPropertyName("model")]
-  public RecommendationModels? Model { get; set; }
+  public RelatedModel? Model { get; set; }
   /// <summary>
-  /// Initializes a new instance of the RecommendationsQuery class.
+  /// Initializes a new instance of the RelatedQuery class.
   /// </summary>
   [JsonConstructor]
-  public RecommendationsQuery() { }
+  public RelatedQuery() { }
   /// <summary>
-  /// Initializes a new instance of the RecommendationsQuery class.
+  /// Initializes a new instance of the RelatedQuery class.
   /// </summary>
   /// <param name="indexName">Index name. (required).</param>
+  /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
   /// <param name="model">model (required).</param>
   /// <param name="objectID">Unique record identifier. (required).</param>
-  public RecommendationsQuery(string indexName, RecommendationModels? model, string objectID)
+  public RelatedQuery(string indexName, double threshold, RelatedModel? model, string objectID)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
+    Threshold = threshold;
     Model = model;
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
@@ -48,18 +50,24 @@ public partial class RecommendationsQuery
   public string IndexName { get; set; }
 
   /// <summary>
-  /// Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. 
+  /// Minimum score a recommendation must have to be included in the response.
   /// </summary>
-  /// <value>Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. </value>
+  /// <value>Minimum score a recommendation must have to be included in the response.</value>
   [JsonPropertyName("threshold")]
-  public int? Threshold { get; set; }
+  public double Threshold { get; set; }
 
   /// <summary>
-  /// Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
+  /// Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value. 
   /// </summary>
-  /// <value>Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.</value>
+  /// <value>Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value. </value>
   [JsonPropertyName("maxRecommendations")]
   public int? MaxRecommendations { get; set; }
+
+  /// <summary>
+  /// Gets or Sets QueryParameters
+  /// </summary>
+  [JsonPropertyName("queryParameters")]
+  public SearchParams QueryParameters { get; set; }
 
   /// <summary>
   /// Unique record identifier.
@@ -69,16 +77,10 @@ public partial class RecommendationsQuery
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// Gets or Sets QueryParameters
-  /// </summary>
-  [JsonPropertyName("queryParameters")]
-  public SearchParamsObject QueryParameters { get; set; }
-
-  /// <summary>
   /// Gets or Sets FallbackParameters
   /// </summary>
   [JsonPropertyName("fallbackParameters")]
-  public SearchParamsObject FallbackParameters { get; set; }
+  public FallbackParams FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -87,13 +89,13 @@ public partial class RecommendationsQuery
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RecommendationsQuery {\n");
+    sb.Append("class RelatedQuery {\n");
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  Threshold: ").Append(Threshold).Append("\n");
     sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
+    sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
     sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
-    sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
     sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -115,7 +117,7 @@ public partial class RecommendationsQuery
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RecommendationsQuery input)
+    if (obj is not RelatedQuery input)
     {
       return false;
     }
@@ -124,9 +126,9 @@ public partial class RecommendationsQuery
         (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName))) &&
         (Threshold == input.Threshold || Threshold.Equals(input.Threshold)) &&
         (MaxRecommendations == input.MaxRecommendations || MaxRecommendations.Equals(input.MaxRecommendations)) &&
+        (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
         (Model == input.Model || Model.Equals(input.Model)) &&
         (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID))) &&
-        (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
         (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
@@ -145,14 +147,14 @@ public partial class RecommendationsQuery
       }
       hashCode = (hashCode * 59) + Threshold.GetHashCode();
       hashCode = (hashCode * 59) + MaxRecommendations.GetHashCode();
+      if (QueryParameters != null)
+      {
+        hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
+      }
       hashCode = (hashCode * 59) + Model.GetHashCode();
       if (ObjectID != null)
       {
         hashCode = (hashCode * 59) + ObjectID.GetHashCode();
-      }
-      if (QueryParameters != null)
-      {
-        hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
       }
       if (FallbackParameters != null)
       {

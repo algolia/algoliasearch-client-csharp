@@ -12,50 +12,44 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// BaseRecommendationsQuery
+/// TrendingFacets
 /// </summary>
-public partial class BaseRecommendationsQuery
+public partial class TrendingFacets
 {
 
   /// <summary>
   /// Gets or Sets Model
   /// </summary>
   [JsonPropertyName("model")]
-  public RecommendationModels? Model { get; set; }
+  public TrendingFacetsModel? Model { get; set; }
   /// <summary>
-  /// Initializes a new instance of the BaseRecommendationsQuery class.
+  /// Initializes a new instance of the TrendingFacets class.
   /// </summary>
   [JsonConstructor]
-  public BaseRecommendationsQuery() { }
+  public TrendingFacets() { }
   /// <summary>
-  /// Initializes a new instance of the BaseRecommendationsQuery class.
+  /// Initializes a new instance of the TrendingFacets class.
   /// </summary>
+  /// <param name="facetName">Facet attribute for which to retrieve trending facet values. (required).</param>
   /// <param name="model">model (required).</param>
-  /// <param name="objectID">Unique record identifier. (required).</param>
-  public BaseRecommendationsQuery(RecommendationModels? model, string objectID)
+  public TrendingFacets(object facetName, TrendingFacetsModel? model)
   {
+    FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
     Model = model;
-    ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
-  /// Unique record identifier.
+  /// Facet attribute for which to retrieve trending facet values.
   /// </summary>
-  /// <value>Unique record identifier.</value>
-  [JsonPropertyName("objectID")]
-  public string ObjectID { get; set; }
-
-  /// <summary>
-  /// Gets or Sets QueryParameters
-  /// </summary>
-  [JsonPropertyName("queryParameters")]
-  public SearchParamsObject QueryParameters { get; set; }
+  /// <value>Facet attribute for which to retrieve trending facet values.</value>
+  [JsonPropertyName("facetName")]
+  public object FacetName { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
   /// </summary>
   [JsonPropertyName("fallbackParameters")]
-  public SearchParamsObject FallbackParameters { get; set; }
+  public FallbackParams FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -64,10 +58,9 @@ public partial class BaseRecommendationsQuery
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class BaseRecommendationsQuery {\n");
+    sb.Append("class TrendingFacets {\n");
+    sb.Append("  FacetName: ").Append(FacetName).Append("\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
-    sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
-    sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
     sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -89,15 +82,14 @@ public partial class BaseRecommendationsQuery
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not BaseRecommendationsQuery input)
+    if (obj is not TrendingFacets input)
     {
       return false;
     }
 
     return
+        (FacetName == input.FacetName || (FacetName != null && FacetName.Equals(input.FacetName))) &&
         (Model == input.Model || Model.Equals(input.Model)) &&
-        (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID))) &&
-        (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
         (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
@@ -110,15 +102,11 @@ public partial class BaseRecommendationsQuery
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
+      if (FacetName != null)
+      {
+        hashCode = (hashCode * 59) + FacetName.GetHashCode();
+      }
       hashCode = (hashCode * 59) + Model.GetHashCode();
-      if (ObjectID != null)
-      {
-        hashCode = (hashCode * 59) + ObjectID.GetHashCode();
-      }
-      if (QueryParameters != null)
-      {
-        hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
-      }
       if (FallbackParameters != null)
       {
         hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();

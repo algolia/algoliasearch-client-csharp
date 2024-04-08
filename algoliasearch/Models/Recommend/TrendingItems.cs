@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// BaseTrendingItemsQuery
+/// TrendingItems
 /// </summary>
-public partial class BaseTrendingItemsQuery
+public partial class TrendingItems
 {
 
   /// <summary>
@@ -23,31 +23,36 @@ public partial class BaseTrendingItemsQuery
   [JsonPropertyName("model")]
   public TrendingItemsModel? Model { get; set; }
   /// <summary>
-  /// Initializes a new instance of the BaseTrendingItemsQuery class.
+  /// Initializes a new instance of the TrendingItems class.
   /// </summary>
-  public BaseTrendingItemsQuery()
+  [JsonConstructor]
+  public TrendingItems() { }
+  /// <summary>
+  /// Initializes a new instance of the TrendingItems class.
+  /// </summary>
+  /// <param name="facetName">Facet attribute. To be used in combination with &#x60;facetValue&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
+  /// <param name="facetValue">Facet value. To be used in combination with &#x60;facetName&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
+  /// <param name="model">model (required).</param>
+  public TrendingItems(string facetName, string facetValue, TrendingItemsModel? model)
   {
+    FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
+    FacetValue = facetValue ?? throw new ArgumentNullException(nameof(facetValue));
+    Model = model;
   }
 
   /// <summary>
-  /// Facet name for trending models.
+  /// Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned. 
   /// </summary>
-  /// <value>Facet name for trending models.</value>
+  /// <value>Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned. </value>
   [JsonPropertyName("facetName")]
   public string FacetName { get; set; }
 
   /// <summary>
-  /// Facet value for trending models.
+  /// Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned. 
   /// </summary>
-  /// <value>Facet value for trending models.</value>
+  /// <value>Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned. </value>
   [JsonPropertyName("facetValue")]
   public string FacetValue { get; set; }
-
-  /// <summary>
-  /// Gets or Sets QueryParameters
-  /// </summary>
-  [JsonPropertyName("queryParameters")]
-  public SearchParamsObject QueryParameters { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
@@ -62,11 +67,10 @@ public partial class BaseTrendingItemsQuery
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class BaseTrendingItemsQuery {\n");
+    sb.Append("class TrendingItems {\n");
     sb.Append("  FacetName: ").Append(FacetName).Append("\n");
     sb.Append("  FacetValue: ").Append(FacetValue).Append("\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
-    sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
     sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -88,7 +92,7 @@ public partial class BaseTrendingItemsQuery
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not BaseTrendingItemsQuery input)
+    if (obj is not TrendingItems input)
     {
       return false;
     }
@@ -97,7 +101,6 @@ public partial class BaseTrendingItemsQuery
         (FacetName == input.FacetName || (FacetName != null && FacetName.Equals(input.FacetName))) &&
         (FacetValue == input.FacetValue || (FacetValue != null && FacetValue.Equals(input.FacetValue))) &&
         (Model == input.Model || Model.Equals(input.Model)) &&
-        (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
         (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
@@ -119,10 +122,6 @@ public partial class BaseTrendingItemsQuery
         hashCode = (hashCode * 59) + FacetValue.GetHashCode();
       }
       hashCode = (hashCode * 59) + Model.GetHashCode();
-      if (QueryParameters != null)
-      {
-        hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
-      }
       if (FallbackParameters != null)
       {
         hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();

@@ -12,30 +12,23 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// ConsequenceQueryObject
+/// Rule metadata.
 /// </summary>
-public partial class ConsequenceQueryObject
+public partial class RecommendRuleMetadata
 {
   /// <summary>
-  /// Initializes a new instance of the ConsequenceQueryObject class.
+  /// Initializes a new instance of the RecommendRuleMetadata class.
   /// </summary>
-  public ConsequenceQueryObject()
+  public RecommendRuleMetadata()
   {
   }
 
   /// <summary>
-  /// Words to remove from the search query.
+  /// Date and time when the object was updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Words to remove from the search query.</value>
-  [JsonPropertyName("remove")]
-  public List<string> Remove { get; set; }
-
-  /// <summary>
-  /// Changes to make to the search query.
-  /// </summary>
-  /// <value>Changes to make to the search query.</value>
-  [JsonPropertyName("edits")]
-  public List<Edit> Edits { get; set; }
+  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
+  [JsonPropertyName("lastUpdate")]
+  public string LastUpdate { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,9 +37,8 @@ public partial class ConsequenceQueryObject
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ConsequenceQueryObject {\n");
-    sb.Append("  Remove: ").Append(Remove).Append("\n");
-    sb.Append("  Edits: ").Append(Edits).Append("\n");
+    sb.Append("class RecommendRuleMetadata {\n");
+    sb.Append("  LastUpdate: ").Append(LastUpdate).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -67,14 +59,13 @@ public partial class ConsequenceQueryObject
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ConsequenceQueryObject input)
+    if (obj is not RecommendRuleMetadata input)
     {
       return false;
     }
 
     return
-        (Remove == input.Remove || Remove != null && input.Remove != null && Remove.SequenceEqual(input.Remove)) &&
-        (Edits == input.Edits || Edits != null && input.Edits != null && Edits.SequenceEqual(input.Edits));
+        (LastUpdate == input.LastUpdate || (LastUpdate != null && LastUpdate.Equals(input.LastUpdate)));
   }
 
   /// <summary>
@@ -86,13 +77,9 @@ public partial class ConsequenceQueryObject
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Remove != null)
+      if (LastUpdate != null)
       {
-        hashCode = (hashCode * 59) + Remove.GetHashCode();
-      }
-      if (Edits != null)
-      {
-        hashCode = (hashCode * 59) + Edits.GetHashCode();
+        hashCode = (hashCode * 59) + LastUpdate.GetHashCode();
       }
       return hashCode;
     }

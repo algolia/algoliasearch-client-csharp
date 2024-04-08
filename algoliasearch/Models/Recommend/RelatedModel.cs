@@ -12,21 +12,15 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Recommendation model.
+/// Related products or similar content model.  This model recommends items that are similar to the item with the ID `objectID`. Similarity is determined from the user interactions and attributes. 
 /// </summary>
-/// <value>Recommendation model.</value>
-public enum RecommendationModels
+/// <value>Related products or similar content model.  This model recommends items that are similar to the item with the ID `objectID`. Similarity is determined from the user interactions and attributes. </value>
+public enum RelatedModel
 {
   /// <summary>
   /// Enum RelatedProducts for value: related-products
   /// </summary>
   [JsonPropertyName("related-products")]
-  RelatedProducts = 1,
-
-  /// <summary>
-  /// Enum BoughtTogether for value: bought-together
-  /// </summary>
-  [JsonPropertyName("bought-together")]
-  BoughtTogether = 2
+  RelatedProducts = 1
 }
 

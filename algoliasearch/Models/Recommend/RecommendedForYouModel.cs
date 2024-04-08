@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Recommended for you model.
+/// \"Recommened for you\" model. 
 /// </summary>
-/// <value>Recommended for you model.</value>
+/// <value>\"Recommened for you\" model. </value>
 public enum RecommendedForYouModel
 {
   /// <summary>

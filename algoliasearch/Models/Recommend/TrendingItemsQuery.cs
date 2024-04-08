@@ -31,9 +31,17 @@ public partial class TrendingItemsQuery
   /// Initializes a new instance of the TrendingItemsQuery class.
   /// </summary>
   /// <param name="indexName">Index name. (required).</param>
-  public TrendingItemsQuery(string indexName)
+  /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
+  /// <param name="facetName">Facet attribute. To be used in combination with &#x60;facetValue&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
+  /// <param name="facetValue">Facet value. To be used in combination with &#x60;facetName&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
+  /// <param name="model">model (required).</param>
+  public TrendingItemsQuery(string indexName, double threshold, string facetName, string facetValue, TrendingItemsModel? model)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
+    Threshold = threshold;
+    FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
+    FacetValue = facetValue ?? throw new ArgumentNullException(nameof(facetValue));
+    Model = model;
   }
 
   /// <summary>
@@ -44,38 +52,38 @@ public partial class TrendingItemsQuery
   public string IndexName { get; set; }
 
   /// <summary>
-  /// Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. 
+  /// Minimum score a recommendation must have to be included in the response.
   /// </summary>
-  /// <value>Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. </value>
+  /// <value>Minimum score a recommendation must have to be included in the response.</value>
   [JsonPropertyName("threshold")]
-  public int? Threshold { get; set; }
+  public double Threshold { get; set; }
 
   /// <summary>
-  /// Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
+  /// Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value. 
   /// </summary>
-  /// <value>Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.</value>
+  /// <value>Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value. </value>
   [JsonPropertyName("maxRecommendations")]
   public int? MaxRecommendations { get; set; }
-
-  /// <summary>
-  /// Facet name for trending models.
-  /// </summary>
-  /// <value>Facet name for trending models.</value>
-  [JsonPropertyName("facetName")]
-  public string FacetName { get; set; }
-
-  /// <summary>
-  /// Facet value for trending models.
-  /// </summary>
-  /// <value>Facet value for trending models.</value>
-  [JsonPropertyName("facetValue")]
-  public string FacetValue { get; set; }
 
   /// <summary>
   /// Gets or Sets QueryParameters
   /// </summary>
   [JsonPropertyName("queryParameters")]
-  public SearchParamsObject QueryParameters { get; set; }
+  public SearchParams QueryParameters { get; set; }
+
+  /// <summary>
+  /// Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned. 
+  /// </summary>
+  /// <value>Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned. </value>
+  [JsonPropertyName("facetName")]
+  public string FacetName { get; set; }
+
+  /// <summary>
+  /// Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned. 
+  /// </summary>
+  /// <value>Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned. </value>
+  [JsonPropertyName("facetValue")]
+  public string FacetValue { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
@@ -94,10 +102,10 @@ public partial class TrendingItemsQuery
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  Threshold: ").Append(Threshold).Append("\n");
     sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
+    sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
     sb.Append("  FacetName: ").Append(FacetName).Append("\n");
     sb.Append("  FacetValue: ").Append(FacetValue).Append("\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
-    sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
     sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -128,10 +136,10 @@ public partial class TrendingItemsQuery
         (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName))) &&
         (Threshold == input.Threshold || Threshold.Equals(input.Threshold)) &&
         (MaxRecommendations == input.MaxRecommendations || MaxRecommendations.Equals(input.MaxRecommendations)) &&
+        (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
         (FacetName == input.FacetName || (FacetName != null && FacetName.Equals(input.FacetName))) &&
         (FacetValue == input.FacetValue || (FacetValue != null && FacetValue.Equals(input.FacetValue))) &&
         (Model == input.Model || Model.Equals(input.Model)) &&
-        (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
         (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
@@ -150,6 +158,10 @@ public partial class TrendingItemsQuery
       }
       hashCode = (hashCode * 59) + Threshold.GetHashCode();
       hashCode = (hashCode * 59) + MaxRecommendations.GetHashCode();
+      if (QueryParameters != null)
+      {
+        hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
+      }
       if (FacetName != null)
       {
         hashCode = (hashCode * 59) + FacetName.GetHashCode();
@@ -159,10 +171,6 @@ public partial class TrendingItemsQuery
         hashCode = (hashCode * 59) + FacetValue.GetHashCode();
       }
       hashCode = (hashCode * 59) + Model.GetHashCode();
-      if (QueryParameters != null)
-      {
-        hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
-      }
       if (FallbackParameters != null)
       {
         hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();

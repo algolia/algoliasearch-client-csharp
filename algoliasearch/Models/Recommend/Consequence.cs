@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Effect of the rule.  For more information, see [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences). 
+/// Effect of the rule.
 /// </summary>
 public partial class Consequence
 {
@@ -24,38 +24,24 @@ public partial class Consequence
   }
 
   /// <summary>
+  /// Exclude items from recommendations.
+  /// </summary>
+  /// <value>Exclude items from recommendations.</value>
+  [JsonPropertyName("hide")]
+  public List<HideConsequenceObject> Hide { get; set; }
+
+  /// <summary>
+  /// Place items at specific positions in the list of recommendations.
+  /// </summary>
+  /// <value>Place items at specific positions in the list of recommendations.</value>
+  [JsonPropertyName("promote")]
+  public List<PromoteConsequenceObject> Promote { get; set; }
+
+  /// <summary>
   /// Gets or Sets VarParams
   /// </summary>
   [JsonPropertyName("params")]
-  public ConsequenceParams VarParams { get; set; }
-
-  /// <summary>
-  /// Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each. 
-  /// </summary>
-  /// <value>Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each. </value>
-  [JsonPropertyName("promote")]
-  public List<Promote> Promote { get; set; }
-
-  /// <summary>
-  /// Whether promoted records must match an active filter for the consequence to be applied.  This ensures that user actions (filtering the search) are given a higher precendence. For example, if you promote a record with the `color: red` attribute, and the user filters the search for `color: blue`, the \"red\" record won't be shown. 
-  /// </summary>
-  /// <value>Whether promoted records must match an active filter for the consequence to be applied.  This ensures that user actions (filtering the search) are given a higher precendence. For example, if you promote a record with the `color: red` attribute, and the user filters the search for `color: blue`, the \"red\" record won't be shown. </value>
-  [JsonPropertyName("filterPromotes")]
-  public bool? FilterPromotes { get; set; }
-
-  /// <summary>
-  /// Records you want to hide from the search results.
-  /// </summary>
-  /// <value>Records you want to hide from the search results.</value>
-  [JsonPropertyName("hide")]
-  public List<ConsequenceHide> Hide { get; set; }
-
-  /// <summary>
-  /// A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON. 
-  /// </summary>
-  /// <value>A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON. </value>
-  [JsonPropertyName("userData")]
-  public object UserData { get; set; }
+  public ParamsConsequence VarParams { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -65,11 +51,9 @@ public partial class Consequence
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class Consequence {\n");
-    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
-    sb.Append("  Promote: ").Append(Promote).Append("\n");
-    sb.Append("  FilterPromotes: ").Append(FilterPromotes).Append("\n");
     sb.Append("  Hide: ").Append(Hide).Append("\n");
-    sb.Append("  UserData: ").Append(UserData).Append("\n");
+    sb.Append("  Promote: ").Append(Promote).Append("\n");
+    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -96,11 +80,9 @@ public partial class Consequence
     }
 
     return
-        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams))) &&
-        (Promote == input.Promote || Promote != null && input.Promote != null && Promote.SequenceEqual(input.Promote)) &&
-        (FilterPromotes == input.FilterPromotes || FilterPromotes.Equals(input.FilterPromotes)) &&
         (Hide == input.Hide || Hide != null && input.Hide != null && Hide.SequenceEqual(input.Hide)) &&
-        (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData)));
+        (Promote == input.Promote || Promote != null && input.Promote != null && Promote.SequenceEqual(input.Promote)) &&
+        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams)));
   }
 
   /// <summary>
@@ -112,22 +94,17 @@ public partial class Consequence
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarParams != null)
+      if (Hide != null)
       {
-        hashCode = (hashCode * 59) + VarParams.GetHashCode();
+        hashCode = (hashCode * 59) + Hide.GetHashCode();
       }
       if (Promote != null)
       {
         hashCode = (hashCode * 59) + Promote.GetHashCode();
       }
-      hashCode = (hashCode * 59) + FilterPromotes.GetHashCode();
-      if (Hide != null)
+      if (VarParams != null)
       {
-        hashCode = (hashCode * 59) + Hide.GetHashCode();
-      }
-      if (UserData != null)
-      {
-        hashCode = (hashCode * 59) + UserData.GetHashCode();
+        hashCode = (hashCode * 59) + VarParams.GetHashCode();
       }
       return hashCode;
     }

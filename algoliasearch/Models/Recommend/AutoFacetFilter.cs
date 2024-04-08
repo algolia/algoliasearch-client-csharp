@@ -12,36 +12,30 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Edit
+/// Facet attribute. Only recommendations with the same value (or only recommendations with a different value) as the original viewed item are included.
 /// </summary>
-public partial class Edit
+public partial class AutoFacetFilter
 {
-
   /// <summary>
-  /// Gets or Sets Type
+  /// Initializes a new instance of the AutoFacetFilter class.
   /// </summary>
-  [JsonPropertyName("type")]
-  public EditType? Type { get; set; }
-  /// <summary>
-  /// Initializes a new instance of the Edit class.
-  /// </summary>
-  public Edit()
+  public AutoFacetFilter()
   {
   }
 
   /// <summary>
-  /// Text or patterns to remove from the query string.
+  /// Facet attribute.
   /// </summary>
-  /// <value>Text or patterns to remove from the query string.</value>
-  [JsonPropertyName("delete")]
-  public string Delete { get; set; }
+  /// <value>Facet attribute.</value>
+  [JsonPropertyName("facet")]
+  public string Facet { get; set; }
 
   /// <summary>
-  /// Text to be added in place of the deleted text inside the query string.
+  /// Whether the filter is negative. If true, recommendations must not have the same value for the `facet` attribute. If false, recommendations must have the same value for the `facet` attribute. 
   /// </summary>
-  /// <value>Text to be added in place of the deleted text inside the query string.</value>
-  [JsonPropertyName("insert")]
-  public string Insert { get; set; }
+  /// <value>Whether the filter is negative. If true, recommendations must not have the same value for the `facet` attribute. If false, recommendations must have the same value for the `facet` attribute. </value>
+  [JsonPropertyName("negative")]
+  public bool? Negative { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -50,10 +44,9 @@ public partial class Edit
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class Edit {\n");
-    sb.Append("  Type: ").Append(Type).Append("\n");
-    sb.Append("  Delete: ").Append(Delete).Append("\n");
-    sb.Append("  Insert: ").Append(Insert).Append("\n");
+    sb.Append("class AutoFacetFilter {\n");
+    sb.Append("  Facet: ").Append(Facet).Append("\n");
+    sb.Append("  Negative: ").Append(Negative).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -74,15 +67,14 @@ public partial class Edit
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not Edit input)
+    if (obj is not AutoFacetFilter input)
     {
       return false;
     }
 
     return
-        (Type == input.Type || Type.Equals(input.Type)) &&
-        (Delete == input.Delete || (Delete != null && Delete.Equals(input.Delete))) &&
-        (Insert == input.Insert || (Insert != null && Insert.Equals(input.Insert)));
+        (Facet == input.Facet || (Facet != null && Facet.Equals(input.Facet))) &&
+        (Negative == input.Negative || Negative.Equals(input.Negative));
   }
 
   /// <summary>
@@ -94,15 +86,11 @@ public partial class Edit
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Type.GetHashCode();
-      if (Delete != null)
+      if (Facet != null)
       {
-        hashCode = (hashCode * 59) + Delete.GetHashCode();
+        hashCode = (hashCode * 59) + Facet.GetHashCode();
       }
-      if (Insert != null)
-      {
-        hashCode = (hashCode * 59) + Insert.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + Negative.GetHashCode();
       return hashCode;
     }
   }

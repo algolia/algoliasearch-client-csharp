@@ -12,21 +12,29 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Object ID of the record to hide.
+/// FrequentlyBoughtTogether
 /// </summary>
-public partial class ConsequenceHide
+public partial class FrequentlyBoughtTogether
 {
+
   /// <summary>
-  /// Initializes a new instance of the ConsequenceHide class.
+  /// Gets or Sets Model
+  /// </summary>
+  [JsonPropertyName("model")]
+  public FbtModel? Model { get; set; }
+  /// <summary>
+  /// Initializes a new instance of the FrequentlyBoughtTogether class.
   /// </summary>
   [JsonConstructor]
-  public ConsequenceHide() { }
+  public FrequentlyBoughtTogether() { }
   /// <summary>
-  /// Initializes a new instance of the ConsequenceHide class.
+  /// Initializes a new instance of the FrequentlyBoughtTogether class.
   /// </summary>
+  /// <param name="model">model (required).</param>
   /// <param name="objectID">Unique record identifier. (required).</param>
-  public ConsequenceHide(string objectID)
+  public FrequentlyBoughtTogether(FbtModel? model, string objectID)
   {
+    Model = model;
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
@@ -44,7 +52,8 @@ public partial class ConsequenceHide
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ConsequenceHide {\n");
+    sb.Append("class FrequentlyBoughtTogether {\n");
+    sb.Append("  Model: ").Append(Model).Append("\n");
     sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -66,12 +75,13 @@ public partial class ConsequenceHide
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ConsequenceHide input)
+    if (obj is not FrequentlyBoughtTogether input)
     {
       return false;
     }
 
     return
+        (Model == input.Model || Model.Equals(input.Model)) &&
         (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID)));
   }
 
@@ -84,6 +94,7 @@ public partial class ConsequenceHide
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
+      hashCode = (hashCode * 59) + Model.GetHashCode();
       if (ObjectID != null)
       {
         hashCode = (hashCode * 59) + ObjectID.GetHashCode();

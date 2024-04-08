@@ -12,36 +12,44 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// BaseTrendingFacetsQuery
+/// LookingSimilar
 /// </summary>
-public partial class BaseTrendingFacetsQuery
+public partial class LookingSimilar
 {
 
   /// <summary>
   /// Gets or Sets Model
   /// </summary>
   [JsonPropertyName("model")]
-  public TrendingFacetsModel? Model { get; set; }
+  public LookingSimilarModel? Model { get; set; }
   /// <summary>
-  /// Initializes a new instance of the BaseTrendingFacetsQuery class.
+  /// Initializes a new instance of the LookingSimilar class.
   /// </summary>
   [JsonConstructor]
-  public BaseTrendingFacetsQuery() { }
+  public LookingSimilar() { }
   /// <summary>
-  /// Initializes a new instance of the BaseTrendingFacetsQuery class.
+  /// Initializes a new instance of the LookingSimilar class.
   /// </summary>
-  /// <param name="facetName">Facet name for trending models. (required).</param>
-  public BaseTrendingFacetsQuery(string facetName)
+  /// <param name="model">model (required).</param>
+  /// <param name="objectID">Unique record identifier. (required).</param>
+  public LookingSimilar(LookingSimilarModel? model, string objectID)
   {
-    FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
+    Model = model;
+    ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
-  /// Facet name for trending models.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Facet name for trending models.</value>
-  [JsonPropertyName("facetName")]
-  public string FacetName { get; set; }
+  /// <value>Unique record identifier.</value>
+  [JsonPropertyName("objectID")]
+  public string ObjectID { get; set; }
+
+  /// <summary>
+  /// Gets or Sets FallbackParameters
+  /// </summary>
+  [JsonPropertyName("fallbackParameters")]
+  public FallbackParams FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -50,9 +58,10 @@ public partial class BaseTrendingFacetsQuery
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class BaseTrendingFacetsQuery {\n");
-    sb.Append("  FacetName: ").Append(FacetName).Append("\n");
+    sb.Append("class LookingSimilar {\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
+    sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
+    sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -73,14 +82,15 @@ public partial class BaseTrendingFacetsQuery
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not BaseTrendingFacetsQuery input)
+    if (obj is not LookingSimilar input)
     {
       return false;
     }
 
     return
-        (FacetName == input.FacetName || (FacetName != null && FacetName.Equals(input.FacetName))) &&
-        (Model == input.Model || Model.Equals(input.Model));
+        (Model == input.Model || Model.Equals(input.Model)) &&
+        (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID))) &&
+        (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
   /// <summary>
@@ -92,11 +102,15 @@ public partial class BaseTrendingFacetsQuery
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (FacetName != null)
-      {
-        hashCode = (hashCode * 59) + FacetName.GetHashCode();
-      }
       hashCode = (hashCode * 59) + Model.GetHashCode();
+      if (ObjectID != null)
+      {
+        hashCode = (hashCode * 59) + ObjectID.GetHashCode();
+      }
+      if (FallbackParameters != null)
+      {
+        hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();
+      }
       return hashCode;
     }
   }

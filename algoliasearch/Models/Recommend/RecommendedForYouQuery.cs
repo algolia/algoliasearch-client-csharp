@@ -31,10 +31,12 @@ public partial class RecommendedForYouQuery
   /// Initializes a new instance of the RecommendedForYouQuery class.
   /// </summary>
   /// <param name="indexName">Index name. (required).</param>
+  /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
   /// <param name="model">model (required).</param>
-  public RecommendedForYouQuery(string indexName, RecommendedForYouModel? model)
+  public RecommendedForYouQuery(string indexName, double threshold, RecommendedForYouModel? model)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
+    Threshold = threshold;
     Model = model;
   }
 
@@ -46,16 +48,16 @@ public partial class RecommendedForYouQuery
   public string IndexName { get; set; }
 
   /// <summary>
-  /// Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. 
+  /// Minimum score a recommendation must have to be included in the response.
   /// </summary>
-  /// <value>Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are. </value>
+  /// <value>Minimum score a recommendation must have to be included in the response.</value>
   [JsonPropertyName("threshold")]
-  public int? Threshold { get; set; }
+  public double Threshold { get; set; }
 
   /// <summary>
-  /// Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
+  /// Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value. 
   /// </summary>
-  /// <value>Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.</value>
+  /// <value>Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value. </value>
   [JsonPropertyName("maxRecommendations")]
   public int? MaxRecommendations { get; set; }
 
@@ -63,13 +65,13 @@ public partial class RecommendedForYouQuery
   /// Gets or Sets QueryParameters
   /// </summary>
   [JsonPropertyName("queryParameters")]
-  public RecommendedForYouQueryParameters QueryParameters { get; set; }
+  public SearchParams QueryParameters { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
   /// </summary>
   [JsonPropertyName("fallbackParameters")]
-  public RecommendedForYouQueryParameters FallbackParameters { get; set; }
+  public FallbackParams FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -82,8 +84,8 @@ public partial class RecommendedForYouQuery
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  Threshold: ").Append(Threshold).Append("\n");
     sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
-    sb.Append("  Model: ").Append(Model).Append("\n");
     sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
+    sb.Append("  Model: ").Append(Model).Append("\n");
     sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -114,8 +116,8 @@ public partial class RecommendedForYouQuery
         (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName))) &&
         (Threshold == input.Threshold || Threshold.Equals(input.Threshold)) &&
         (MaxRecommendations == input.MaxRecommendations || MaxRecommendations.Equals(input.MaxRecommendations)) &&
-        (Model == input.Model || Model.Equals(input.Model)) &&
         (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
+        (Model == input.Model || Model.Equals(input.Model)) &&
         (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
@@ -134,11 +136,11 @@ public partial class RecommendedForYouQuery
       }
       hashCode = (hashCode * 59) + Threshold.GetHashCode();
       hashCode = (hashCode * 59) + MaxRecommendations.GetHashCode();
-      hashCode = (hashCode * 59) + Model.GetHashCode();
       if (QueryParameters != null)
       {
         hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Model.GetHashCode();
       if (FallbackParameters != null)
       {
         hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();

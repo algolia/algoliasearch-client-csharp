@@ -12,16 +12,23 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Condition that triggers the rule. If not specified, the rule is triggered for all recommendations. 
+/// Filter or boost recommendations matching a facet filter.
 /// </summary>
-public partial class Condition
+public partial class ParamsConsequence
 {
   /// <summary>
-  /// Initializes a new instance of the Condition class.
+  /// Initializes a new instance of the ParamsConsequence class.
   /// </summary>
-  public Condition()
+  public ParamsConsequence()
   {
   }
+
+  /// <summary>
+  /// Filter recommendations that match or don't match the same `facet:facet_value` combination as the viewed item.
+  /// </summary>
+  /// <value>Filter recommendations that match or don't match the same `facet:facet_value` combination as the viewed item.</value>
+  [JsonPropertyName("automaticFacetFilters")]
+  public List<AutoFacetFilter> AutomaticFacetFilters { get; set; }
 
   /// <summary>
   /// Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/). 
@@ -31,11 +38,11 @@ public partial class Condition
   public string Filters { get; set; }
 
   /// <summary>
-  /// An additional restriction that only triggers the rule, when the search has the same value as `ruleContexts` parameter. For example, if `context: mobile`, the rule is only triggered when the search request has a matching `ruleContexts: mobile`. A rule context must only contain alphanumeric characters. 
+  /// Filters to promote or demote records in the search results.  Optional filters work like facet filters, but they don't exclude records from the search results. Records that match the optional filter rank before records that don't match. Matches with higher weights (`<score=N>`) rank before matches with lower weights. If you're using a negative filter `facet:-value`, matching records rank after records that don't match. 
   /// </summary>
-  /// <value>An additional restriction that only triggers the rule, when the search has the same value as `ruleContexts` parameter. For example, if `context: mobile`, the rule is only triggered when the search request has a matching `ruleContexts: mobile`. A rule context must only contain alphanumeric characters. </value>
-  [JsonPropertyName("context")]
-  public string Context { get; set; }
+  /// <value>Filters to promote or demote records in the search results.  Optional filters work like facet filters, but they don't exclude records from the search results. Records that match the optional filter rank before records that don't match. Matches with higher weights (`<score=N>`) rank before matches with lower weights. If you're using a negative filter `facet:-value`, matching records rank after records that don't match. </value>
+  [JsonPropertyName("optionalFilters")]
+  public List<string> OptionalFilters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,9 +51,10 @@ public partial class Condition
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class Condition {\n");
+    sb.Append("class ParamsConsequence {\n");
+    sb.Append("  AutomaticFacetFilters: ").Append(AutomaticFacetFilters).Append("\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
-    sb.Append("  Context: ").Append(Context).Append("\n");
+    sb.Append("  OptionalFilters: ").Append(OptionalFilters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -67,14 +75,15 @@ public partial class Condition
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not Condition input)
+    if (obj is not ParamsConsequence input)
     {
       return false;
     }
 
     return
+        (AutomaticFacetFilters == input.AutomaticFacetFilters || AutomaticFacetFilters != null && input.AutomaticFacetFilters != null && AutomaticFacetFilters.SequenceEqual(input.AutomaticFacetFilters)) &&
         (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters))) &&
-        (Context == input.Context || (Context != null && Context.Equals(input.Context)));
+        (OptionalFilters == input.OptionalFilters || OptionalFilters != null && input.OptionalFilters != null && OptionalFilters.SequenceEqual(input.OptionalFilters));
   }
 
   /// <summary>
@@ -86,13 +95,17 @@ public partial class Condition
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
+      if (AutomaticFacetFilters != null)
+      {
+        hashCode = (hashCode * 59) + AutomaticFacetFilters.GetHashCode();
+      }
       if (Filters != null)
       {
         hashCode = (hashCode * 59) + Filters.GetHashCode();
       }
-      if (Context != null)
+      if (OptionalFilters != null)
       {
-        hashCode = (hashCode * 59) + Context.GetHashCode();
+        hashCode = (hashCode * 59) + OptionalFilters.GetHashCode();
       }
       return hashCode;
     }

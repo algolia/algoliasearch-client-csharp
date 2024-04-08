@@ -243,20 +243,6 @@ public partial class RecommendationsResults
   public List<RecommendationsHit> Hits { get; set; }
 
   /// <summary>
-  /// Search query.
-  /// </summary>
-  /// <value>Search query.</value>
-  [JsonPropertyName("query")]
-  public string Query { get; set; }
-
-  /// <summary>
-  /// URL-encoded string of all search parameters.
-  /// </summary>
-  /// <value>URL-encoded string of all search parameters.</value>
-  [JsonPropertyName("params")]
-  public string VarParams { get; set; }
-
-  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -293,8 +279,6 @@ public partial class RecommendationsResults
     sb.Append("  UserData: ").Append(UserData).Append("\n");
     sb.Append("  QueryID: ").Append(QueryID).Append("\n");
     sb.Append("  Hits: ").Append(Hits).Append("\n");
-    sb.Append("  Query: ").Append(Query).Append("\n");
-    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -349,9 +333,7 @@ public partial class RecommendationsResults
         (ServerUsed == input.ServerUsed || (ServerUsed != null && ServerUsed.Equals(input.ServerUsed))) &&
         (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData))) &&
         (QueryID == input.QueryID || (QueryID != null && QueryID.Equals(input.QueryID))) &&
-        (Hits == input.Hits || Hits != null && input.Hits != null && Hits.SequenceEqual(input.Hits)) &&
-        (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
-        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams)));
+        (Hits == input.Hits || Hits != null && input.Hits != null && Hits.SequenceEqual(input.Hits));
   }
 
   /// <summary>
@@ -442,14 +424,6 @@ public partial class RecommendationsResults
       if (Hits != null)
       {
         hashCode = (hashCode * 59) + Hits.GetHashCode();
-      }
-      if (Query != null)
-      {
-        hashCode = (hashCode * 59) + Query.GetHashCode();
-      }
-      if (VarParams != null)
-      {
-        hashCode = (hashCode * 59) + VarParams.GetHashCode();
       }
       return hashCode;
     }

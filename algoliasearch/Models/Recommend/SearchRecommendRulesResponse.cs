@@ -24,11 +24,11 @@ public partial class SearchRecommendRulesResponse
   /// <summary>
   /// Initializes a new instance of the SearchRecommendRulesResponse class.
   /// </summary>
-  /// <param name="hits">Fetched rules. (required).</param>
+  /// <param name="hits">Recommend rules that match the search criteria. (required).</param>
   /// <param name="nbHits">Number of results (hits). (required).</param>
   /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
   /// <param name="nbPages">Number of pages of results. (required).</param>
-  public SearchRecommendRulesResponse(List<RuleResponse> hits, int nbHits, int page, int nbPages)
+  public SearchRecommendRulesResponse(List<RecommendRule> hits, int nbHits, int page, int nbPages)
   {
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
     NbHits = nbHits;
@@ -37,11 +37,11 @@ public partial class SearchRecommendRulesResponse
   }
 
   /// <summary>
-  /// Fetched rules.
+  /// Recommend rules that match the search criteria.
   /// </summary>
-  /// <value>Fetched rules.</value>
+  /// <value>Recommend rules that match the search criteria.</value>
   [JsonPropertyName("hits")]
-  public List<RuleResponse> Hits { get; set; }
+  public List<RecommendRule> Hits { get; set; }
 
   /// <summary>
   /// Number of results (hits).

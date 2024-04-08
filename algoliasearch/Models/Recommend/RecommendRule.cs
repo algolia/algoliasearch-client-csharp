@@ -12,43 +12,35 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Rule object.
+/// Recommend rule.
 /// </summary>
-public partial class RuleResponse
+public partial class RecommendRule
 {
   /// <summary>
-  /// Initializes a new instance of the RuleResponse class.
+  /// Initializes a new instance of the RecommendRule class.
   /// </summary>
-  [JsonConstructor]
-  public RuleResponse() { }
-  /// <summary>
-  /// Initializes a new instance of the RuleResponse class.
-  /// </summary>
-  /// <param name="objectID">Unique identifier for a rule object. (required).</param>
-  public RuleResponse(string objectID)
+  public RecommendRule()
   {
-    ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
   /// Gets or Sets Metadata
   /// </summary>
   [JsonPropertyName("_metadata")]
-  public RuleResponseMetadata Metadata { get; set; }
+  public RecommendRuleMetadata Metadata { get; set; }
 
   /// <summary>
-  /// Unique identifier for a rule object.
+  /// Unique identifier of a rule object.
   /// </summary>
-  /// <value>Unique identifier for a rule object.</value>
+  /// <value>Unique identifier of a rule object.</value>
   [JsonPropertyName("objectID")]
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. 
+  /// Gets or Sets Condition
   /// </summary>
-  /// <value>[Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule. </value>
-  [JsonPropertyName("conditions")]
-  public List<Condition> Conditions { get; set; }
+  [JsonPropertyName("condition")]
+  public Condition Condition { get; set; }
 
   /// <summary>
   /// Gets or Sets Consequence
@@ -77,10 +69,10 @@ public partial class RuleResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RuleResponse {\n");
+    sb.Append("class RecommendRule {\n");
     sb.Append("  Metadata: ").Append(Metadata).Append("\n");
     sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
-    sb.Append("  Conditions: ").Append(Conditions).Append("\n");
+    sb.Append("  Condition: ").Append(Condition).Append("\n");
     sb.Append("  Consequence: ").Append(Consequence).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
@@ -104,7 +96,7 @@ public partial class RuleResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RuleResponse input)
+    if (obj is not RecommendRule input)
     {
       return false;
     }
@@ -112,7 +104,7 @@ public partial class RuleResponse
     return
         (Metadata == input.Metadata || (Metadata != null && Metadata.Equals(input.Metadata))) &&
         (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID))) &&
-        (Conditions == input.Conditions || Conditions != null && input.Conditions != null && Conditions.SequenceEqual(input.Conditions)) &&
+        (Condition == input.Condition || (Condition != null && Condition.Equals(input.Condition))) &&
         (Consequence == input.Consequence || (Consequence != null && Consequence.Equals(input.Consequence))) &&
         (Description == input.Description || (Description != null && Description.Equals(input.Description))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled));
@@ -135,9 +127,9 @@ public partial class RuleResponse
       {
         hashCode = (hashCode * 59) + ObjectID.GetHashCode();
       }
-      if (Conditions != null)
+      if (Condition != null)
       {
-        hashCode = (hashCode * 59) + Conditions.GetHashCode();
+        hashCode = (hashCode * 59) + Condition.GetHashCode();
       }
       if (Consequence != null)
       {

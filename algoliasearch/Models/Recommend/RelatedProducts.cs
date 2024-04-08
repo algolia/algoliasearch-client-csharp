@@ -12,41 +12,44 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// BaseRecommendedForYouQuery
+/// RelatedProducts
 /// </summary>
-public partial class BaseRecommendedForYouQuery
+public partial class RelatedProducts
 {
 
   /// <summary>
   /// Gets or Sets Model
   /// </summary>
   [JsonPropertyName("model")]
-  public RecommendedForYouModel? Model { get; set; }
+  public RelatedModel? Model { get; set; }
   /// <summary>
-  /// Initializes a new instance of the BaseRecommendedForYouQuery class.
+  /// Initializes a new instance of the RelatedProducts class.
   /// </summary>
   [JsonConstructor]
-  public BaseRecommendedForYouQuery() { }
+  public RelatedProducts() { }
   /// <summary>
-  /// Initializes a new instance of the BaseRecommendedForYouQuery class.
+  /// Initializes a new instance of the RelatedProducts class.
   /// </summary>
   /// <param name="model">model (required).</param>
-  public BaseRecommendedForYouQuery(RecommendedForYouModel? model)
+  /// <param name="objectID">Unique record identifier. (required).</param>
+  public RelatedProducts(RelatedModel? model, string objectID)
   {
     Model = model;
+    ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
-  /// Gets or Sets QueryParameters
+  /// Unique record identifier.
   /// </summary>
-  [JsonPropertyName("queryParameters")]
-  public RecommendedForYouQueryParameters QueryParameters { get; set; }
+  /// <value>Unique record identifier.</value>
+  [JsonPropertyName("objectID")]
+  public string ObjectID { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
   /// </summary>
   [JsonPropertyName("fallbackParameters")]
-  public RecommendedForYouQueryParameters FallbackParameters { get; set; }
+  public FallbackParams FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -55,9 +58,9 @@ public partial class BaseRecommendedForYouQuery
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class BaseRecommendedForYouQuery {\n");
+    sb.Append("class RelatedProducts {\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
-    sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
+    sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
     sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -79,14 +82,14 @@ public partial class BaseRecommendedForYouQuery
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not BaseRecommendedForYouQuery input)
+    if (obj is not RelatedProducts input)
     {
       return false;
     }
 
     return
         (Model == input.Model || Model.Equals(input.Model)) &&
-        (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
+        (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID))) &&
         (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
@@ -100,9 +103,9 @@ public partial class BaseRecommendedForYouQuery
     {
       int hashCode = 41;
       hashCode = (hashCode * 59) + Model.GetHashCode();
-      if (QueryParameters != null)
+      if (ObjectID != null)
       {
-        hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
+        hashCode = (hashCode * 59) + ObjectID.GetHashCode();
       }
       if (FallbackParameters != null)
       {

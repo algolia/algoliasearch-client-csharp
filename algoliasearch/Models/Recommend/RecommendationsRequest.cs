@@ -22,6 +22,26 @@ public partial class RecommendationsRequest : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the RecommendationsRequest class
+  /// with a BoughtTogetherQuery
+  /// </summary>
+  /// <param name="actualInstance">An instance of BoughtTogetherQuery.</param>
+  public RecommendationsRequest(BoughtTogetherQuery actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the RecommendationsRequest class
+  /// with a RelatedQuery
+  /// </summary>
+  /// <param name="actualInstance">An instance of RelatedQuery.</param>
+  public RecommendationsRequest(RelatedQuery actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the RecommendationsRequest class
   /// with a TrendingItemsQuery
   /// </summary>
   /// <param name="actualInstance">An instance of TrendingItemsQuery.</param>
@@ -42,10 +62,10 @@ public partial class RecommendationsRequest : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the RecommendationsRequest class
-  /// with a RecommendationsQuery
+  /// with a LookingSimilarQuery
   /// </summary>
-  /// <param name="actualInstance">An instance of RecommendationsQuery.</param>
-  public RecommendationsRequest(RecommendationsQuery actualInstance)
+  /// <param name="actualInstance">An instance of LookingSimilarQuery.</param>
+  public RecommendationsRequest(LookingSimilarQuery actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -65,6 +85,26 @@ public partial class RecommendationsRequest : AbstractSchema
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
+
+  /// <summary>
+  /// Get the actual instance of `BoughtTogetherQuery`. If the actual instance is not `BoughtTogetherQuery`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of BoughtTogetherQuery</returns>
+  public BoughtTogetherQuery AsBoughtTogetherQuery()
+  {
+    return (BoughtTogetherQuery)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `RelatedQuery`. If the actual instance is not `RelatedQuery`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of RelatedQuery</returns>
+  public RelatedQuery AsRelatedQuery()
+  {
+    return (RelatedQuery)ActualInstance;
+  }
 
   /// <summary>
   /// Get the actual instance of `TrendingItemsQuery`. If the actual instance is not `TrendingItemsQuery`,
@@ -87,13 +127,13 @@ public partial class RecommendationsRequest : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `RecommendationsQuery`. If the actual instance is not `RecommendationsQuery`,
+  /// Get the actual instance of `LookingSimilarQuery`. If the actual instance is not `LookingSimilarQuery`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of RecommendationsQuery</returns>
-  public RecommendationsQuery AsRecommendationsQuery()
+  /// <returns>An instance of LookingSimilarQuery</returns>
+  public LookingSimilarQuery AsLookingSimilarQuery()
   {
-    return (RecommendationsQuery)ActualInstance;
+    return (LookingSimilarQuery)ActualInstance;
   }
 
   /// <summary>
@@ -106,6 +146,24 @@ public partial class RecommendationsRequest : AbstractSchema
     return (RecommendedForYouQuery)ActualInstance;
   }
 
+
+  /// <summary>
+  /// Check if the actual instance is of `BoughtTogetherQuery` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsBoughtTogetherQuery()
+  {
+    return ActualInstance.GetType() == typeof(BoughtTogetherQuery);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `RelatedQuery` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsRelatedQuery()
+  {
+    return ActualInstance.GetType() == typeof(RelatedQuery);
+  }
 
   /// <summary>
   /// Check if the actual instance is of `TrendingItemsQuery` type.
@@ -126,12 +184,12 @@ public partial class RecommendationsRequest : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `RecommendationsQuery` type.
+  /// Check if the actual instance is of `LookingSimilarQuery` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsRecommendationsQuery()
+  public bool IsLookingSimilarQuery()
   {
-    return ActualInstance.GetType() == typeof(RecommendationsQuery);
+    return ActualInstance.GetType() == typeof(LookingSimilarQuery);
   }
 
   /// <summary>
@@ -231,6 +289,30 @@ public class RecommendationsRequestJsonConverter : JsonConverter<Recommendations
     {
       try
       {
+        return new RecommendationsRequest(jsonDocument.Deserialize<BoughtTogetherQuery>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into BoughtTogetherQuery: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new RecommendationsRequest(jsonDocument.Deserialize<RelatedQuery>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into RelatedQuery: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
         return new RecommendationsRequest(jsonDocument.Deserialize<TrendingItemsQuery>(JsonConfig.Options));
       }
       catch (Exception exception)
@@ -255,12 +337,12 @@ public class RecommendationsRequestJsonConverter : JsonConverter<Recommendations
     {
       try
       {
-        return new RecommendationsRequest(jsonDocument.Deserialize<RecommendationsQuery>(JsonConfig.Options));
+        return new RecommendationsRequest(jsonDocument.Deserialize<LookingSimilarQuery>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into RecommendationsQuery: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into LookingSimilarQuery: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)

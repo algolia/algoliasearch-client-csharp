@@ -12,24 +12,15 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Record to promote.
+/// Object ID and position of the recommendation you want to pin.
 /// </summary>
-public partial class PromoteObjectID
+public partial class PromoteConsequenceObject
 {
   /// <summary>
-  /// Initializes a new instance of the PromoteObjectID class.
+  /// Initializes a new instance of the PromoteConsequenceObject class.
   /// </summary>
-  [JsonConstructor]
-  public PromoteObjectID() { }
-  /// <summary>
-  /// Initializes a new instance of the PromoteObjectID class.
-  /// </summary>
-  /// <param name="objectID">Unique record identifier. (required).</param>
-  /// <param name="position">Position in the search results where you want to show the promoted records. (required).</param>
-  public PromoteObjectID(string objectID, int position)
+  public PromoteConsequenceObject()
   {
-    ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
-    Position = position;
   }
 
   /// <summary>
@@ -40,11 +31,11 @@ public partial class PromoteObjectID
   public string ObjectID { get; set; }
 
   /// <summary>
-  /// Position in the search results where you want to show the promoted records.
+  /// Index in the list of recommendations where to place this item.
   /// </summary>
-  /// <value>Position in the search results where you want to show the promoted records.</value>
+  /// <value>Index in the list of recommendations where to place this item.</value>
   [JsonPropertyName("position")]
-  public int Position { get; set; }
+  public int? Position { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -53,7 +44,7 @@ public partial class PromoteObjectID
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class PromoteObjectID {\n");
+    sb.Append("class PromoteConsequenceObject {\n");
     sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
     sb.Append("  Position: ").Append(Position).Append("\n");
     sb.Append("}\n");
@@ -76,7 +67,7 @@ public partial class PromoteObjectID
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not PromoteObjectID input)
+    if (obj is not PromoteConsequenceObject input)
     {
       return false;
     }

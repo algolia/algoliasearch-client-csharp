@@ -12,29 +12,35 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// RecommendationsHits
+/// RecommendedForYou
 /// </summary>
-public partial class RecommendationsHits
+public partial class RecommendedForYou
 {
+
   /// <summary>
-  /// Initializes a new instance of the RecommendationsHits class.
+  /// Gets or Sets Model
+  /// </summary>
+  [JsonPropertyName("model")]
+  public RecommendedForYouModel? Model { get; set; }
+  /// <summary>
+  /// Initializes a new instance of the RecommendedForYou class.
   /// </summary>
   [JsonConstructor]
-  public RecommendationsHits() { }
+  public RecommendedForYou() { }
   /// <summary>
-  /// Initializes a new instance of the RecommendationsHits class.
+  /// Initializes a new instance of the RecommendedForYou class.
   /// </summary>
-  /// <param name="hits">hits (required).</param>
-  public RecommendationsHits(List<RecommendationsHit> hits)
+  /// <param name="model">model (required).</param>
+  public RecommendedForYou(RecommendedForYouModel? model)
   {
-    Hits = hits ?? throw new ArgumentNullException(nameof(hits));
+    Model = model;
   }
 
   /// <summary>
-  /// Gets or Sets Hits
+  /// Gets or Sets FallbackParameters
   /// </summary>
-  [JsonPropertyName("hits")]
-  public List<RecommendationsHit> Hits { get; set; }
+  [JsonPropertyName("fallbackParameters")]
+  public FallbackParams FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,8 +49,9 @@ public partial class RecommendationsHits
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RecommendationsHits {\n");
-    sb.Append("  Hits: ").Append(Hits).Append("\n");
+    sb.Append("class RecommendedForYou {\n");
+    sb.Append("  Model: ").Append(Model).Append("\n");
+    sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -65,13 +72,14 @@ public partial class RecommendationsHits
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RecommendationsHits input)
+    if (obj is not RecommendedForYou input)
     {
       return false;
     }
 
     return
-        (Hits == input.Hits || Hits != null && input.Hits != null && Hits.SequenceEqual(input.Hits));
+        (Model == input.Model || Model.Equals(input.Model)) &&
+        (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
   /// <summary>
@@ -83,9 +91,10 @@ public partial class RecommendationsHits
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Hits != null)
+      hashCode = (hashCode * 59) + Model.GetHashCode();
+      if (FallbackParameters != null)
       {
-        hashCode = (hashCode * 59) + Hits.GetHashCode();
+        hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();
       }
       return hashCode;
     }

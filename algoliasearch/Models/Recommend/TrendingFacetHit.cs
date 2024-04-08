@@ -25,8 +25,8 @@ public partial class TrendingFacetHit
   /// Initializes a new instance of the TrendingFacetHit class.
   /// </summary>
   /// <param name="score">Recommendation score. (required).</param>
-  /// <param name="facetName">Facet name for trending models. (required).</param>
-  /// <param name="facetValue">Facet value for trending models. (required).</param>
+  /// <param name="facetName">Facet attribute. To be used in combination with &#x60;facetValue&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
+  /// <param name="facetValue">Facet value. To be used in combination with &#x60;facetName&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
   public TrendingFacetHit(double score, string facetName, string facetValue)
   {
     Score = score;
@@ -42,16 +42,16 @@ public partial class TrendingFacetHit
   public double Score { get; set; }
 
   /// <summary>
-  /// Facet name for trending models.
+  /// Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned. 
   /// </summary>
-  /// <value>Facet name for trending models.</value>
+  /// <value>Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned. </value>
   [JsonPropertyName("facetName")]
   public string FacetName { get; set; }
 
   /// <summary>
-  /// Facet value for trending models.
+  /// Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned. 
   /// </summary>
-  /// <value>Facet value for trending models.</value>
+  /// <value>Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned. </value>
   [JsonPropertyName("facetValue")]
   public string FacetValue { get; set; }
 

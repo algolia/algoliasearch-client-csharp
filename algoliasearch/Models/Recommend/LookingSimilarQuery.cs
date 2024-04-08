@@ -12,34 +12,34 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// TrendingFacetsQuery
+/// LookingSimilarQuery
 /// </summary>
-public partial class TrendingFacetsQuery
+public partial class LookingSimilarQuery
 {
 
   /// <summary>
   /// Gets or Sets Model
   /// </summary>
   [JsonPropertyName("model")]
-  public TrendingFacetsModel? Model { get; set; }
+  public LookingSimilarModel? Model { get; set; }
   /// <summary>
-  /// Initializes a new instance of the TrendingFacetsQuery class.
+  /// Initializes a new instance of the LookingSimilarQuery class.
   /// </summary>
   [JsonConstructor]
-  public TrendingFacetsQuery() { }
+  public LookingSimilarQuery() { }
   /// <summary>
-  /// Initializes a new instance of the TrendingFacetsQuery class.
+  /// Initializes a new instance of the LookingSimilarQuery class.
   /// </summary>
   /// <param name="indexName">Index name. (required).</param>
   /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
-  /// <param name="facetName">Facet attribute for which to retrieve trending facet values. (required).</param>
   /// <param name="model">model (required).</param>
-  public TrendingFacetsQuery(string indexName, double threshold, object facetName, TrendingFacetsModel? model)
+  /// <param name="objectID">Unique record identifier. (required).</param>
+  public LookingSimilarQuery(string indexName, double threshold, LookingSimilarModel? model, string objectID)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
     Threshold = threshold;
-    FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
     Model = model;
+    ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
   }
 
   /// <summary>
@@ -70,11 +70,11 @@ public partial class TrendingFacetsQuery
   public SearchParams QueryParameters { get; set; }
 
   /// <summary>
-  /// Facet attribute for which to retrieve trending facet values.
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Facet attribute for which to retrieve trending facet values.</value>
-  [JsonPropertyName("facetName")]
-  public object FacetName { get; set; }
+  /// <value>Unique record identifier.</value>
+  [JsonPropertyName("objectID")]
+  public string ObjectID { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
@@ -89,13 +89,13 @@ public partial class TrendingFacetsQuery
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class TrendingFacetsQuery {\n");
+    sb.Append("class LookingSimilarQuery {\n");
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  Threshold: ").Append(Threshold).Append("\n");
     sb.Append("  MaxRecommendations: ").Append(MaxRecommendations).Append("\n");
     sb.Append("  QueryParameters: ").Append(QueryParameters).Append("\n");
-    sb.Append("  FacetName: ").Append(FacetName).Append("\n");
     sb.Append("  Model: ").Append(Model).Append("\n");
+    sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
     sb.Append("  FallbackParameters: ").Append(FallbackParameters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -117,7 +117,7 @@ public partial class TrendingFacetsQuery
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not TrendingFacetsQuery input)
+    if (obj is not LookingSimilarQuery input)
     {
       return false;
     }
@@ -127,8 +127,8 @@ public partial class TrendingFacetsQuery
         (Threshold == input.Threshold || Threshold.Equals(input.Threshold)) &&
         (MaxRecommendations == input.MaxRecommendations || MaxRecommendations.Equals(input.MaxRecommendations)) &&
         (QueryParameters == input.QueryParameters || (QueryParameters != null && QueryParameters.Equals(input.QueryParameters))) &&
-        (FacetName == input.FacetName || (FacetName != null && FacetName.Equals(input.FacetName))) &&
         (Model == input.Model || Model.Equals(input.Model)) &&
+        (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID))) &&
         (FallbackParameters == input.FallbackParameters || (FallbackParameters != null && FallbackParameters.Equals(input.FallbackParameters)));
   }
 
@@ -151,11 +151,11 @@ public partial class TrendingFacetsQuery
       {
         hashCode = (hashCode * 59) + QueryParameters.GetHashCode();
       }
-      if (FacetName != null)
-      {
-        hashCode = (hashCode * 59) + FacetName.GetHashCode();
-      }
       hashCode = (hashCode * 59) + Model.GetHashCode();
+      if (ObjectID != null)
+      {
+        hashCode = (hashCode * 59) + ObjectID.GetHashCode();
+      }
       if (FallbackParameters != null)
       {
         hashCode = (hashCode * 59) + FallbackParameters.GetHashCode();

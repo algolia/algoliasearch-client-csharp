@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Recommend rules search parameters.
+/// Recommend rules parameters.
 /// </summary>
 public partial class SearchRecommendRulesParams
 {
@@ -31,9 +31,9 @@ public partial class SearchRecommendRulesParams
   public string Query { get; set; }
 
   /// <summary>
-  /// Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+  /// Only search for rules with matching context.
   /// </summary>
-  /// <value>Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).</value>
+  /// <value>Only search for rules with matching context.</value>
   [JsonPropertyName("context")]
   public string Context { get; set; }
 
@@ -52,11 +52,32 @@ public partial class SearchRecommendRulesParams
   public int? HitsPerPage { get; set; }
 
   /// <summary>
-  /// Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
+  /// Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property. 
   /// </summary>
-  /// <value>Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.</value>
+  /// <value>Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property. </value>
   [JsonPropertyName("enabled")]
   public bool? Enabled { get; set; }
+
+  /// <summary>
+  /// Filter expression. This only searches for rules matching the filter expression.
+  /// </summary>
+  /// <value>Filter expression. This only searches for rules matching the filter expression.</value>
+  [JsonPropertyName("filters")]
+  public string Filters { get; set; }
+
+  /// <summary>
+  /// Include facets and facet values in the response. Use `['*']` to include all facets.
+  /// </summary>
+  /// <value>Include facets and facet values in the response. Use `['*']` to include all facets.</value>
+  [JsonPropertyName("facets")]
+  public List<string> Facets { get; set; }
+
+  /// <summary>
+  /// Maximum number of values to return for each facet.
+  /// </summary>
+  /// <value>Maximum number of values to return for each facet.</value>
+  [JsonPropertyName("maxValuesPerFacet")]
+  public int? MaxValuesPerFacet { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -71,6 +92,9 @@ public partial class SearchRecommendRulesParams
     sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
+    sb.Append("  Filters: ").Append(Filters).Append("\n");
+    sb.Append("  Facets: ").Append(Facets).Append("\n");
+    sb.Append("  MaxValuesPerFacet: ").Append(MaxValuesPerFacet).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -101,7 +125,10 @@ public partial class SearchRecommendRulesParams
         (Context == input.Context || (Context != null && Context.Equals(input.Context))) &&
         (Page == input.Page || Page.Equals(input.Page)) &&
         (HitsPerPage == input.HitsPerPage || HitsPerPage.Equals(input.HitsPerPage)) &&
-        (Enabled == input.Enabled || (Enabled != null && Enabled.Equals(input.Enabled)));
+        (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
+        (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters))) &&
+        (Facets == input.Facets || Facets != null && input.Facets != null && Facets.SequenceEqual(input.Facets)) &&
+        (MaxValuesPerFacet == input.MaxValuesPerFacet || MaxValuesPerFacet.Equals(input.MaxValuesPerFacet));
   }
 
   /// <summary>
@@ -123,10 +150,16 @@ public partial class SearchRecommendRulesParams
       }
       hashCode = (hashCode * 59) + Page.GetHashCode();
       hashCode = (hashCode * 59) + HitsPerPage.GetHashCode();
-      if (Enabled != null)
+      hashCode = (hashCode * 59) + Enabled.GetHashCode();
+      if (Filters != null)
       {
-        hashCode = (hashCode * 59) + Enabled.GetHashCode();
+        hashCode = (hashCode * 59) + Filters.GetHashCode();
       }
+      if (Facets != null)
+      {
+        hashCode = (hashCode * 59) + Facets.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + MaxValuesPerFacet.GetHashCode();
       return hashCode;
     }
   }

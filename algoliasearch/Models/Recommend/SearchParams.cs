@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// ConsequenceParams
+/// SearchParams
 /// </summary>
-public partial class ConsequenceParams
+public partial class SearchParams
 {
 
   /// <summary>
@@ -41,11 +41,18 @@ public partial class ConsequenceParams
   [JsonPropertyName("exactOnSingleWordQuery")]
   public ExactOnSingleWordQuery? ExactOnSingleWordQuery { get; set; }
   /// <summary>
-  /// Initializes a new instance of the ConsequenceParams class.
+  /// Initializes a new instance of the SearchParams class.
   /// </summary>
-  public ConsequenceParams()
+  public SearchParams()
   {
   }
+
+  /// <summary>
+  /// Search query.
+  /// </summary>
+  /// <value>Search query.</value>
+  [JsonPropertyName("query")]
+  public string Query { get; set; }
 
   /// <summary>
   /// Keywords to be used instead of the search query to conduct a more broader search.  Using the `similarQuery` parameter changes other settings:  - `queryType` is set to `prefixNone`. - `removeStopWords` is set to true. - `words` is set as the first ranking criterion. - All remaining words are treated as `optionalWords`.  Since the `similarQuery` is supposed to do a broad search, they usually return many results. Combine it with `filters` to narrow down the list of results. 
@@ -55,9 +62,9 @@ public partial class ConsequenceParams
   public string SimilarQuery { get; set; }
 
   /// <summary>
-  /// Filter the search so that only records with matching values are included in the results.  These filters are supported:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/). 
+  /// Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/). 
   /// </summary>
-  /// <value>Filter the search so that only records with matching values are included in the results.  These filters are supported:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/). </value>
+  /// <value>Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/). </value>
   [JsonPropertyName("filters")]
   public string Filters { get; set; }
 
@@ -532,31 +539,14 @@ public partial class ConsequenceParams
   public ReRankingApplyFilter ReRankingApplyFilter { get; set; }
 
   /// <summary>
-  /// Gets or Sets Query
-  /// </summary>
-  [JsonPropertyName("query")]
-  public ConsequenceQuery Query { get; set; }
-
-  /// <summary>
-  /// Gets or Sets AutomaticFacetFilters
-  /// </summary>
-  [JsonPropertyName("automaticFacetFilters")]
-  public AutomaticFacetFilters AutomaticFacetFilters { get; set; }
-
-  /// <summary>
-  /// Gets or Sets AutomaticOptionalFacetFilters
-  /// </summary>
-  [JsonPropertyName("automaticOptionalFacetFilters")]
-  public AutomaticFacetFilters AutomaticOptionalFacetFilters { get; set; }
-
-  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ConsequenceParams {\n");
+    sb.Append("class SearchParams {\n");
+    sb.Append("  Query: ").Append(Query).Append("\n");
     sb.Append("  SimilarQuery: ").Append(SimilarQuery).Append("\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
     sb.Append("  FacetFilters: ").Append(FacetFilters).Append("\n");
@@ -632,9 +622,6 @@ public partial class ConsequenceParams
     sb.Append("  RenderingContent: ").Append(RenderingContent).Append("\n");
     sb.Append("  EnableReRanking: ").Append(EnableReRanking).Append("\n");
     sb.Append("  ReRankingApplyFilter: ").Append(ReRankingApplyFilter).Append("\n");
-    sb.Append("  Query: ").Append(Query).Append("\n");
-    sb.Append("  AutomaticFacetFilters: ").Append(AutomaticFacetFilters).Append("\n");
-    sb.Append("  AutomaticOptionalFacetFilters: ").Append(AutomaticOptionalFacetFilters).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -655,12 +642,13 @@ public partial class ConsequenceParams
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ConsequenceParams input)
+    if (obj is not SearchParams input)
     {
       return false;
     }
 
     return
+        (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
         (SimilarQuery == input.SimilarQuery || (SimilarQuery != null && SimilarQuery.Equals(input.SimilarQuery))) &&
         (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters))) &&
         (FacetFilters == input.FacetFilters || (FacetFilters != null && FacetFilters.Equals(input.FacetFilters))) &&
@@ -735,10 +723,7 @@ public partial class ConsequenceParams
         (AttributeCriteriaComputedByMinProximity == input.AttributeCriteriaComputedByMinProximity || AttributeCriteriaComputedByMinProximity.Equals(input.AttributeCriteriaComputedByMinProximity)) &&
         (RenderingContent == input.RenderingContent || (RenderingContent != null && RenderingContent.Equals(input.RenderingContent))) &&
         (EnableReRanking == input.EnableReRanking || EnableReRanking.Equals(input.EnableReRanking)) &&
-        (ReRankingApplyFilter == input.ReRankingApplyFilter || (ReRankingApplyFilter != null && ReRankingApplyFilter.Equals(input.ReRankingApplyFilter))) &&
-        (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
-        (AutomaticFacetFilters == input.AutomaticFacetFilters || (AutomaticFacetFilters != null && AutomaticFacetFilters.Equals(input.AutomaticFacetFilters))) &&
-        (AutomaticOptionalFacetFilters == input.AutomaticOptionalFacetFilters || (AutomaticOptionalFacetFilters != null && AutomaticOptionalFacetFilters.Equals(input.AutomaticOptionalFacetFilters)));
+        (ReRankingApplyFilter == input.ReRankingApplyFilter || (ReRankingApplyFilter != null && ReRankingApplyFilter.Equals(input.ReRankingApplyFilter)));
   }
 
   /// <summary>
@@ -750,6 +735,10 @@ public partial class ConsequenceParams
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
+      if (Query != null)
+      {
+        hashCode = (hashCode * 59) + Query.GetHashCode();
+      }
       if (SimilarQuery != null)
       {
         hashCode = (hashCode * 59) + SimilarQuery.GetHashCode();
@@ -947,18 +936,6 @@ public partial class ConsequenceParams
       if (ReRankingApplyFilter != null)
       {
         hashCode = (hashCode * 59) + ReRankingApplyFilter.GetHashCode();
-      }
-      if (Query != null)
-      {
-        hashCode = (hashCode * 59) + Query.GetHashCode();
-      }
-      if (AutomaticFacetFilters != null)
-      {
-        hashCode = (hashCode * 59) + AutomaticFacetFilters.GetHashCode();
-      }
-      if (AutomaticOptionalFacetFilters != null)
-      {
-        hashCode = (hashCode * 59) + AutomaticOptionalFacetFilters.GetHashCode();
       }
       return hashCode;
     }

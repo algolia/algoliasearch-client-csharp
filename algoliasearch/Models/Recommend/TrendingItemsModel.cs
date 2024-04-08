@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Trending items model.
+/// Trending items model.  Trending items are determined from the number of conversion events collected on them. 
 /// </summary>
-/// <value>Trending items model.</value>
+/// <value>Trending items model.  Trending items are determined from the number of conversion events collected on them. </value>
 public enum TrendingItemsModel
 {
   /// <summary>
