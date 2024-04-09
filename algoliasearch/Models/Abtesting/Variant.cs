@@ -25,21 +25,21 @@ public partial class Variant
   /// Initializes a new instance of the Variant class.
   /// </summary>
   /// <param name="addToCartCount">Number of add-to-cart events for this variant. (required).</param>
-  /// <param name="addToCartRate">Variant&#39;s [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate). (required).</param>
-  /// <param name="averageClickPosition">Variant&#39;s [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position). (required).</param>
+  /// <param name="addToCartRate">[Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant.  (required).</param>
+  /// <param name="averageClickPosition">[Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.  (required).</param>
   /// <param name="clickCount">Number of click events for this variant. (required).</param>
-  /// <param name="clickThroughRate">Variant&#39;s [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). (required).</param>
+  /// <param name="clickThroughRate">[Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.  (required).</param>
   /// <param name="conversionCount">Number of click events for this variant. (required).</param>
-  /// <param name="conversionRate">Variant&#39;s [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate). (required).</param>
-  /// <param name="description">A/B test description. (required).</param>
+  /// <param name="conversionRate">[Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.  (required).</param>
+  /// <param name="description">Description for this variant. (required).</param>
   /// <param name="index">A/B test index. (required).</param>
-  /// <param name="noResultCount">Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant. (required).</param>
+  /// <param name="noResultCount">Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant. (required).</param>
   /// <param name="purchaseCount">Number of purchase events for this variant. (required).</param>
-  /// <param name="purchaseRate">Variant&#39;s [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate). (required).</param>
-  /// <param name="searchCount">Number of searches carried out during the A/B test. (required).</param>
-  /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
-  /// <param name="userCount">Number of users during the A/B test. (required).</param>
-  /// <param name="trackedUserCount">Number of users that performed a tracked search during the A/B test. (required).</param>
+  /// <param name="purchaseRate">[Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.  (required).</param>
+  /// <param name="searchCount">Number of searches for this variant. (required).</param>
+  /// <param name="trafficPercentage">Percentage of search requests each variant receives. (required).</param>
+  /// <param name="userCount">Number of users that made searches to this variant. (required).</param>
+  /// <param name="trackedUserCount">Number of users that made tracked searches to this variant. (required).</param>
   public Variant(int addToCartCount, double? addToCartRate, int? averageClickPosition, int clickCount, double? clickThroughRate, int conversionCount, double? conversionRate, string description, string index, int? noResultCount, int purchaseCount, double? purchaseRate, int? searchCount, int trafficPercentage, int? userCount, int? trackedUserCount)
   {
     AddToCartCount = addToCartCount;
@@ -68,16 +68,16 @@ public partial class Variant
   public int AddToCartCount { get; set; }
 
   /// <summary>
-  /// Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate).
+  /// [Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant. 
   /// </summary>
-  /// <value>Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate).</value>
+  /// <value>[Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant. </value>
   [JsonPropertyName("addToCartRate")]
   public double? AddToCartRate { get; set; }
 
   /// <summary>
-  /// Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).
+  /// [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant. 
   /// </summary>
-  /// <value>Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).</value>
+  /// <value>[Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant. </value>
   [JsonPropertyName("averageClickPosition")]
   public int? AverageClickPosition { get; set; }
 
@@ -89,9 +89,9 @@ public partial class Variant
   public int ClickCount { get; set; }
 
   /// <summary>
-  /// Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+  /// [Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant. 
   /// </summary>
-  /// <value>Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).</value>
+  /// <value>[Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant. </value>
   [JsonPropertyName("clickThroughRate")]
   public double? ClickThroughRate { get; set; }
 
@@ -103,9 +103,9 @@ public partial class Variant
   public int ConversionCount { get; set; }
 
   /// <summary>
-  /// Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
+  /// [Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant. 
   /// </summary>
-  /// <value>Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).</value>
+  /// <value>[Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant. </value>
   [JsonPropertyName("conversionRate")]
   public double? ConversionRate { get; set; }
 
@@ -117,16 +117,16 @@ public partial class Variant
   public Dictionary<string, Currency> Currencies { get; set; }
 
   /// <summary>
-  /// A/B test description.
+  /// Description for this variant.
   /// </summary>
-  /// <value>A/B test description.</value>
+  /// <value>Description for this variant.</value>
   [JsonPropertyName("description")]
   public string Description { get; set; }
 
   /// <summary>
-  /// The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.
+  /// Estimated number of searches required to achieve the desired statistical significance.  The A/B test configuration must include a `mininmumDetectableEffect` setting for this number to be included in the response. 
   /// </summary>
-  /// <value>The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.</value>
+  /// <value>Estimated number of searches required to achieve the desired statistical significance.  The A/B test configuration must include a `mininmumDetectableEffect` setting for this number to be included in the response. </value>
   [JsonPropertyName("estimatedSampleSize")]
   public int? EstimatedSampleSize { get; set; }
 
@@ -144,9 +144,9 @@ public partial class Variant
   public string Index { get; set; }
 
   /// <summary>
-  /// Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.
+  /// Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant.
   /// </summary>
-  /// <value>Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.</value>
+  /// <value>Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant.</value>
   [JsonPropertyName("noResultCount")]
   public int? NoResultCount { get; set; }
 
@@ -158,16 +158,16 @@ public partial class Variant
   public int PurchaseCount { get; set; }
 
   /// <summary>
-  /// Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).
+  /// [Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant. 
   /// </summary>
-  /// <value>Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).</value>
+  /// <value>[Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant. </value>
   [JsonPropertyName("purchaseRate")]
   public double? PurchaseRate { get; set; }
 
   /// <summary>
-  /// Number of searches carried out during the A/B test.
+  /// Number of searches for this variant.
   /// </summary>
-  /// <value>Number of searches carried out during the A/B test.</value>
+  /// <value>Number of searches for this variant.</value>
   [JsonPropertyName("searchCount")]
   public int? SearchCount { get; set; }
 
@@ -179,23 +179,23 @@ public partial class Variant
   public int? TrackedSearchCount { get; set; }
 
   /// <summary>
-  /// A/B test traffic percentage.
+  /// Percentage of search requests each variant receives.
   /// </summary>
-  /// <value>A/B test traffic percentage.</value>
+  /// <value>Percentage of search requests each variant receives.</value>
   [JsonPropertyName("trafficPercentage")]
   public int TrafficPercentage { get; set; }
 
   /// <summary>
-  /// Number of users during the A/B test.
+  /// Number of users that made searches to this variant.
   /// </summary>
-  /// <value>Number of users during the A/B test.</value>
+  /// <value>Number of users that made searches to this variant.</value>
   [JsonPropertyName("userCount")]
   public int? UserCount { get; set; }
 
   /// <summary>
-  /// Number of users that performed a tracked search during the A/B test.
+  /// Number of users that made tracked searches to this variant.
   /// </summary>
-  /// <value>Number of users that performed a tracked search during the A/B test.</value>
+  /// <value>Number of users that made tracked searches to this variant.</value>
   [JsonPropertyName("trackedUserCount")]
   public int? TrackedUserCount { get; set; }
 

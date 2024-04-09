@@ -12,29 +12,29 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Abtesting;
 
 /// <summary>
-/// Search parameters to add to the test variant. Only use this parameter if the two variants use the same index. 
+/// Configuration for the smallest difference between test variants you want to detect.
 /// </summary>
-public partial class CustomSearchParams
+public partial class MinimumDetectableEffect
 {
+
   /// <summary>
-  /// Initializes a new instance of the CustomSearchParams class.
+  /// Gets or Sets Effect
   /// </summary>
-  [JsonConstructor]
-  public CustomSearchParams() { }
+  [JsonPropertyName("effect")]
+  public Effect? Effect { get; set; }
   /// <summary>
-  /// Initializes a new instance of the CustomSearchParams class.
+  /// Initializes a new instance of the MinimumDetectableEffect class.
   /// </summary>
-  /// <param name="customSearchParameters">customSearchParameters (required).</param>
-  public CustomSearchParams(object customSearchParameters)
+  public MinimumDetectableEffect()
   {
-    CustomSearchParameters = customSearchParameters ?? throw new ArgumentNullException(nameof(customSearchParameters));
   }
 
   /// <summary>
-  /// Gets or Sets CustomSearchParameters
+  /// Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1. 
   /// </summary>
-  [JsonPropertyName("customSearchParameters")]
-  public object CustomSearchParameters { get; set; }
+  /// <value>Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1. </value>
+  [JsonPropertyName("size")]
+  public double? Size { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,8 +43,9 @@ public partial class CustomSearchParams
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class CustomSearchParams {\n");
-    sb.Append("  CustomSearchParameters: ").Append(CustomSearchParameters).Append("\n");
+    sb.Append("class MinimumDetectableEffect {\n");
+    sb.Append("  Size: ").Append(Size).Append("\n");
+    sb.Append("  Effect: ").Append(Effect).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -65,13 +66,14 @@ public partial class CustomSearchParams
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not CustomSearchParams input)
+    if (obj is not MinimumDetectableEffect input)
     {
       return false;
     }
 
     return
-        (CustomSearchParameters == input.CustomSearchParameters || (CustomSearchParameters != null && CustomSearchParameters.Equals(input.CustomSearchParameters)));
+        (Size == input.Size || Size.Equals(input.Size)) &&
+        (Effect == input.Effect || Effect.Equals(input.Effect));
   }
 
   /// <summary>
@@ -83,10 +85,8 @@ public partial class CustomSearchParams
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (CustomSearchParameters != null)
-      {
-        hashCode = (hashCode * 59) + CustomSearchParameters.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + Size.GetHashCode();
+      hashCode = (hashCode * 59) + Effect.GetHashCode();
       return hashCode;
     }
   }

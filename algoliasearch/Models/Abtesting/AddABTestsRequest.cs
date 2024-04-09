@@ -26,7 +26,7 @@ public partial class AddABTestsRequest
   /// </summary>
   /// <param name="name">A/B test name. (required).</param>
   /// <param name="variants">A/B test variants. (required).</param>
-  /// <param name="endAt">End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="endAt">End date and time of the A/B test, in RFC 3339 format. (required).</param>
   public AddABTestsRequest(string name, List<AddABTestsVariant> variants, string endAt)
   {
     Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -49,9 +49,9 @@ public partial class AddABTestsRequest
   public List<AddABTestsVariant> Variants { get; set; }
 
   /// <summary>
-  /// End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// End date and time of the A/B test, in RFC 3339 format.
   /// </summary>
-  /// <value>End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>End date and time of the A/B test, in RFC 3339 format.</value>
   [JsonPropertyName("endAt")]
   public string EndAt { get; set; }
 

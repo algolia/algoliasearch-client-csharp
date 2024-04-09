@@ -25,7 +25,7 @@ public partial class ABTestResponse
   /// Initializes a new instance of the ABTestResponse class.
   /// </summary>
   /// <param name="index">A/B test index. (required).</param>
-  /// <param name="abTestID">Unique A/B test ID. (required).</param>
+  /// <param name="abTestID">Unique A/B test identifier. (required).</param>
   /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the [&#x60;task&#x60; operation](#tag/Indices/operation/getTask) and this &#x60;taskID&#x60;.  (required).</param>
   public ABTestResponse(string index, int abTestID, long taskID)
   {
@@ -42,9 +42,9 @@ public partial class ABTestResponse
   public string Index { get; set; }
 
   /// <summary>
-  /// Unique A/B test ID.
+  /// Unique A/B test identifier.
   /// </summary>
-  /// <value>Unique A/B test ID.</value>
+  /// <value>Unique A/B test identifier.</value>
   [JsonPropertyName("abTestID")]
   public int AbTestID { get; set; }
 

@@ -22,7 +22,7 @@ namespace Algolia.Search.Clients;
 public interface IAbtestingClient
 {
   /// <summary>
-  /// Creates an A/B test.
+  /// Creates a new A/B test.
   /// </summary>
   /// <param name="addABTestsRequest"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -34,7 +34,7 @@ public interface IAbtestingClient
   Task<ABTestResponse> AddABTestsAsync(AddABTestsRequest addABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Creates an A/B test. (Synchronous version)
+  /// Creates a new A/B test. (Synchronous version)
   /// </summary>
   /// <param name="addABTestsRequest"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -154,9 +154,9 @@ public interface IAbtestingClient
   object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
+  /// Deletes an A/B test by its ID.
   /// </summary>
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -166,9 +166,9 @@ public interface IAbtestingClient
   Task<ABTestResponse> DeleteABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).  (Synchronous version)
+  /// Deletes an A/B test by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -178,9 +178,9 @@ public interface IAbtestingClient
   ABTestResponse DeleteABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
+  /// Retrieves the details for an A/B test by its ID.
   /// </summary>
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -190,9 +190,9 @@ public interface IAbtestingClient
   Task<ABTest> GetABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).  (Synchronous version)
+  /// Retrieves the details for an A/B test by its ID. (Synchronous version)
   /// </summary>
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -202,12 +202,12 @@ public interface IAbtestingClient
   ABTest GetABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List all A/B tests.
+  /// Lists all A/B tests you configured for this application.
   /// </summary>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
-  /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
+  /// <param name="indexPrefix">Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)</param>
+  /// <param name="indexSuffix">Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -217,12 +217,12 @@ public interface IAbtestingClient
   Task<ListABTestsResponse> ListABTestsAsync(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// List all A/B tests. (Synchronous version)
+  /// Lists all A/B tests you configured for this application. (Synchronous version)
   /// </summary>
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
-  /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
+  /// <param name="indexPrefix">Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)</param>
+  /// <param name="indexSuffix">Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -232,9 +232,9 @@ public interface IAbtestingClient
   ListABTestsResponse ListABTests(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
+  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests. 
   /// </summary>
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -244,9 +244,9 @@ public interface IAbtestingClient
   Task<ABTestResponse> StopABTestAsync(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).  (Synchronous version)
+  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests.  (Synchronous version)
   /// </summary>
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -324,7 +324,7 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// Creates an A/B test.
+  /// Creates a new A/B test.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -351,7 +351,7 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// Creates an A/B test. (Synchronous version)
+  /// Creates a new A/B test. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -534,12 +534,12 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
+  /// Deletes an A/B test by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - editSettings
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -558,12 +558,12 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).  (Synchronous version)
+  /// Deletes an A/B test by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - editSettings
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -575,12 +575,12 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
+  /// Retrieves the details for an A/B test by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -599,12 +599,12 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).  (Synchronous version)
+  /// Retrieves the details for an A/B test by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - analytics
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -616,15 +616,15 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// List all A/B tests.
+  /// Lists all A/B tests you configured for this application.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
-  /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
+  /// <param name="indexPrefix">Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)</param>
+  /// <param name="indexSuffix">Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -645,15 +645,15 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// List all A/B tests. (Synchronous version)
+  /// Lists all A/B tests you configured for this application. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - analytics
   /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
   /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="indexPrefix">Only return A/B tests for indices starting with this prefix. (optional)</param>
-  /// <param name="indexSuffix">Only return A/B tests for indices ending with this suffix. (optional)</param>
+  /// <param name="indexPrefix">Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)</param>
+  /// <param name="indexSuffix">Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -665,12 +665,12 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests). 
+  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests. 
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - editSettings
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -689,12 +689,12 @@ public partial class AbtestingClient : IAbtestingClient
 
 
   /// <summary>
-  /// If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).  (Synchronous version)
+  /// Stops an A/B test by its ID.  You can't restart stopped A/B tests.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - editSettings
-  /// <param name="id">Unique A/B test ID.</param>
+  /// <param name="id">Unique A/B test identifier.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>

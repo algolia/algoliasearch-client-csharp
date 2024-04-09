@@ -16,6 +16,12 @@ namespace Algolia.Search.Models.Abtesting;
 /// </summary>
 public partial class ABTest
 {
+
+  /// <summary>
+  /// Gets or Sets Status
+  /// </summary>
+  [JsonPropertyName("status")]
+  public Status? Status { get; set; }
   /// <summary>
   /// Initializes a new instance of the ABTest class.
   /// </summary>
@@ -24,19 +30,19 @@ public partial class ABTest
   /// <summary>
   /// Initializes a new instance of the ABTest class.
   /// </summary>
-  /// <param name="abTestID">Unique A/B test ID. (required).</param>
-  /// <param name="clickSignificance">[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on click data. A value of 0.95 or over is considered to be _significant_.  (required).</param>
-  /// <param name="conversionSignificance">[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on conversion. A value of 0.95 or over is considered to be _significant_.  (required).</param>
-  /// <param name="addToCartSignificance">[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on add-to-cart data. A value of 0.95 or over is considered to be _significant_.  (required).</param>
-  /// <param name="purchaseSignificance">[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on purchase data. A value of 0.95 or over is considered to be _significant_.  (required).</param>
-  /// <param name="revenueSignificance">[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on revenue data. A value of 0.95 or over is considered to be _significant_.  (required).</param>
-  /// <param name="updatedAt">Update date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-  /// <param name="createdAt">Creation date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
-  /// <param name="endAt">End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required).</param>
+  /// <param name="abTestID">Unique A/B test identifier. (required).</param>
+  /// <param name="clickSignificance">clickSignificance (required).</param>
+  /// <param name="conversionSignificance">conversionSignificance (required).</param>
+  /// <param name="addToCartSignificance">addToCartSignificance (required).</param>
+  /// <param name="purchaseSignificance">purchaseSignificance (required).</param>
+  /// <param name="revenueSignificance">revenueSignificance (required).</param>
+  /// <param name="updatedAt">Date and time when the A/B test was last updated, in RFC 3339 format. (required).</param>
+  /// <param name="createdAt">Date and time when the A/B test was created, in RFC 3339 format. (required).</param>
+  /// <param name="endAt">End date and time of the A/B test, in RFC 3339 format. (required).</param>
   /// <param name="name">A/B test name. (required).</param>
-  /// <param name="status">A/B test status. (required).</param>
-  /// <param name="variants">A/B test variants. (required).</param>
-  public ABTest(int abTestID, double? clickSignificance, double? conversionSignificance, double? addToCartSignificance, double? purchaseSignificance, Dictionary<string, double> revenueSignificance, string updatedAt, string createdAt, string endAt, string name, string status, List<Variant> variants)
+  /// <param name="status">status (required).</param>
+  /// <param name="variants">A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control.  (required).</param>
+  public ABTest(int abTestID, double? clickSignificance, double? conversionSignificance, double? addToCartSignificance, double? purchaseSignificance, Dictionary<string, double> revenueSignificance, string updatedAt, string createdAt, string endAt, string name, Status? status, List<Variant> variants)
   {
     AbTestID = abTestID;
     ClickSignificance = clickSignificance ?? throw new ArgumentNullException(nameof(clickSignificance));
@@ -48,70 +54,65 @@ public partial class ABTest
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
     EndAt = endAt ?? throw new ArgumentNullException(nameof(endAt));
     Name = name ?? throw new ArgumentNullException(nameof(name));
-    Status = status ?? throw new ArgumentNullException(nameof(status));
+    Status = status;
     Variants = variants ?? throw new ArgumentNullException(nameof(variants));
   }
 
   /// <summary>
-  /// Unique A/B test ID.
+  /// Unique A/B test identifier.
   /// </summary>
-  /// <value>Unique A/B test ID.</value>
+  /// <value>Unique A/B test identifier.</value>
   [JsonPropertyName("abTestID")]
   public int AbTestID { get; set; }
 
   /// <summary>
-  /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on click data. A value of 0.95 or over is considered to be _significant_. 
+  /// Gets or Sets ClickSignificance
   /// </summary>
-  /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on click data. A value of 0.95 or over is considered to be _significant_. </value>
   [JsonPropertyName("clickSignificance")]
   public double? ClickSignificance { get; set; }
 
   /// <summary>
-  /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on conversion. A value of 0.95 or over is considered to be _significant_. 
+  /// Gets or Sets ConversionSignificance
   /// </summary>
-  /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on conversion. A value of 0.95 or over is considered to be _significant_. </value>
   [JsonPropertyName("conversionSignificance")]
   public double? ConversionSignificance { get; set; }
 
   /// <summary>
-  /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on add-to-cart data. A value of 0.95 or over is considered to be _significant_. 
+  /// Gets or Sets AddToCartSignificance
   /// </summary>
-  /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on add-to-cart data. A value of 0.95 or over is considered to be _significant_. </value>
   [JsonPropertyName("addToCartSignificance")]
   public double? AddToCartSignificance { get; set; }
 
   /// <summary>
-  /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on purchase data. A value of 0.95 or over is considered to be _significant_. 
+  /// Gets or Sets PurchaseSignificance
   /// </summary>
-  /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on purchase data. A value of 0.95 or over is considered to be _significant_. </value>
   [JsonPropertyName("purchaseSignificance")]
   public double? PurchaseSignificance { get; set; }
 
   /// <summary>
-  /// [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on revenue data. A value of 0.95 or over is considered to be _significant_. 
+  /// Gets or Sets RevenueSignificance
   /// </summary>
-  /// <value>[A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on revenue data. A value of 0.95 or over is considered to be _significant_. </value>
   [JsonPropertyName("revenueSignificance")]
   public Dictionary<string, double> RevenueSignificance { get; set; }
 
   /// <summary>
-  /// Update date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the A/B test was last updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Update date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the A/B test was last updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 
   /// <summary>
-  /// Creation date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// Date and time when the A/B test was created, in RFC 3339 format.
   /// </summary>
-  /// <value>Creation date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>Date and time when the A/B test was created, in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+  /// End date and time of the A/B test, in RFC 3339 format.
   /// </summary>
-  /// <value>End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.</value>
+  /// <value>End date and time of the A/B test, in RFC 3339 format.</value>
   [JsonPropertyName("endAt")]
   public string EndAt { get; set; }
 
@@ -123,18 +124,17 @@ public partial class ABTest
   public string Name { get; set; }
 
   /// <summary>
-  /// A/B test status.
+  /// A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control. 
   /// </summary>
-  /// <value>A/B test status.</value>
-  [JsonPropertyName("status")]
-  public string Status { get; set; }
-
-  /// <summary>
-  /// A/B test variants.
-  /// </summary>
-  /// <value>A/B test variants.</value>
+  /// <value>A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control. </value>
   [JsonPropertyName("variants")]
   public List<Variant> Variants { get; set; }
+
+  /// <summary>
+  /// Gets or Sets VarConfiguration
+  /// </summary>
+  [JsonPropertyName("configuration")]
+  public ABTestConfiguration VarConfiguration { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -156,6 +156,7 @@ public partial class ABTest
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Status: ").Append(Status).Append("\n");
     sb.Append("  Variants: ").Append(Variants).Append("\n");
+    sb.Append("  VarConfiguration: ").Append(VarConfiguration).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -192,8 +193,9 @@ public partial class ABTest
         (CreatedAt == input.CreatedAt || (CreatedAt != null && CreatedAt.Equals(input.CreatedAt))) &&
         (EndAt == input.EndAt || (EndAt != null && EndAt.Equals(input.EndAt))) &&
         (Name == input.Name || (Name != null && Name.Equals(input.Name))) &&
-        (Status == input.Status || (Status != null && Status.Equals(input.Status))) &&
-        (Variants == input.Variants || Variants != null && input.Variants != null && Variants.SequenceEqual(input.Variants));
+        (Status == input.Status || Status.Equals(input.Status)) &&
+        (Variants == input.Variants || Variants != null && input.Variants != null && Variants.SequenceEqual(input.Variants)) &&
+        (VarConfiguration == input.VarConfiguration || (VarConfiguration != null && VarConfiguration.Equals(input.VarConfiguration)));
   }
 
   /// <summary>
@@ -242,13 +244,14 @@ public partial class ABTest
       {
         hashCode = (hashCode * 59) + Name.GetHashCode();
       }
-      if (Status != null)
-      {
-        hashCode = (hashCode * 59) + Status.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + Status.GetHashCode();
       if (Variants != null)
       {
         hashCode = (hashCode * 59) + Variants.GetHashCode();
+      }
+      if (VarConfiguration != null)
+      {
+        hashCode = (hashCode * 59) + VarConfiguration.GetHashCode();
       }
       return hashCode;
     }

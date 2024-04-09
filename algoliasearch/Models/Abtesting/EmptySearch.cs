@@ -12,29 +12,23 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Abtesting;
 
 /// <summary>
-/// Search parameters to add to the test variant. Only use this parameter if the two variants use the same index. 
+/// Configuration for handling empty searches.
 /// </summary>
-public partial class CustomSearchParams
+public partial class EmptySearch
 {
   /// <summary>
-  /// Initializes a new instance of the CustomSearchParams class.
+  /// Initializes a new instance of the EmptySearch class.
   /// </summary>
-  [JsonConstructor]
-  public CustomSearchParams() { }
-  /// <summary>
-  /// Initializes a new instance of the CustomSearchParams class.
-  /// </summary>
-  /// <param name="customSearchParameters">customSearchParameters (required).</param>
-  public CustomSearchParams(object customSearchParameters)
+  public EmptySearch()
   {
-    CustomSearchParameters = customSearchParameters ?? throw new ArgumentNullException(nameof(customSearchParameters));
   }
 
   /// <summary>
-  /// Gets or Sets CustomSearchParameters
+  /// Whether to exclude empty searches when calculating A/B test results.
   /// </summary>
-  [JsonPropertyName("customSearchParameters")]
-  public object CustomSearchParameters { get; set; }
+  /// <value>Whether to exclude empty searches when calculating A/B test results.</value>
+  [JsonPropertyName("exclude")]
+  public bool? Exclude { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,8 +37,8 @@ public partial class CustomSearchParams
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class CustomSearchParams {\n");
-    sb.Append("  CustomSearchParameters: ").Append(CustomSearchParameters).Append("\n");
+    sb.Append("class EmptySearch {\n");
+    sb.Append("  Exclude: ").Append(Exclude).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -65,13 +59,13 @@ public partial class CustomSearchParams
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not CustomSearchParams input)
+    if (obj is not EmptySearch input)
     {
       return false;
     }
 
     return
-        (CustomSearchParameters == input.CustomSearchParameters || (CustomSearchParameters != null && CustomSearchParameters.Equals(input.CustomSearchParameters)));
+        (Exclude == input.Exclude || Exclude.Equals(input.Exclude));
   }
 
   /// <summary>
@@ -83,10 +77,7 @@ public partial class CustomSearchParams
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (CustomSearchParameters != null)
-      {
-        hashCode = (hashCode * 59) + CustomSearchParameters.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + Exclude.GetHashCode();
       return hashCode;
     }
   }

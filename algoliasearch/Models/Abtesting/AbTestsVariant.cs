@@ -25,7 +25,7 @@ public partial class AbTestsVariant
   /// Initializes a new instance of the AbTestsVariant class.
   /// </summary>
   /// <param name="index">A/B test index. (required).</param>
-  /// <param name="trafficPercentage">A/B test traffic percentage. (required).</param>
+  /// <param name="trafficPercentage">Percentage of search requests each variant receives. (required).</param>
   public AbTestsVariant(string index, int trafficPercentage)
   {
     Index = index ?? throw new ArgumentNullException(nameof(index));
@@ -40,16 +40,16 @@ public partial class AbTestsVariant
   public string Index { get; set; }
 
   /// <summary>
-  /// A/B test traffic percentage.
+  /// Percentage of search requests each variant receives.
   /// </summary>
-  /// <value>A/B test traffic percentage.</value>
+  /// <value>Percentage of search requests each variant receives.</value>
   [JsonPropertyName("trafficPercentage")]
   public int TrafficPercentage { get; set; }
 
   /// <summary>
-  /// A/B test description.
+  /// Description for this variant.
   /// </summary>
-  /// <value>A/B test description.</value>
+  /// <value>Description for this variant.</value>
   [JsonPropertyName("description")]
   public string Description { get; set; }
 
