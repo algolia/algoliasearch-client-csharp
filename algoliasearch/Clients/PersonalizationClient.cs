@@ -130,9 +130,9 @@ public interface IPersonalizationClient
   object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
+  /// Deletes a user profile.  The response includes a date and time when the user profile can safely be considered deleted. 
   /// </summary>
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="userToken">Unique identifier representing a user for which to fetch the personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -142,9 +142,9 @@ public interface IPersonalizationClient
   Task<DeleteUserProfileResponse> DeleteUserProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed.  (Synchronous version)
+  /// Deletes a user profile.  The response includes a date and time when the user profile can safely be considered deleted.  (Synchronous version)
   /// </summary>
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="userToken">Unique identifier representing a user for which to fetch the personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -154,7 +154,7 @@ public interface IPersonalizationClient
   DeleteUserProfileResponse DeleteUserProfile(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// The strategy contains information on the events and facets that impact user profiles and personalized search results.
+  /// Retrieves the current personalization strategy.
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -165,7 +165,7 @@ public interface IPersonalizationClient
   Task<PersonalizationStrategyParams> GetPersonalizationStrategyAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// The strategy contains information on the events and facets that impact user profiles and personalized search results. (Synchronous version)
+  /// Retrieves the current personalization strategy. (Synchronous version)
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -176,9 +176,9 @@ public interface IPersonalizationClient
   PersonalizationStrategyParams GetPersonalizationStrategy(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
+  /// Retrieves a user profile and their affinities for different facets.
   /// </summary>
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="userToken">Unique identifier representing a user for which to fetch the personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -188,9 +188,9 @@ public interface IPersonalizationClient
   Task<GetUserTokenResponse> GetUserTokenProfileAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes.  (Synchronous version)
+  /// Retrieves a user profile and their affinities for different facets. (Synchronous version)
   /// </summary>
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="userToken">Unique identifier representing a user for which to fetch the personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -200,7 +200,7 @@ public interface IPersonalizationClient
   GetUserTokenResponse GetUserTokenProfile(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// A strategy defines the events and facets that impact user profiles and personalized search results.
+  /// Creates a new personalization strategy.
   /// </summary>
   /// <param name="personalizationStrategyParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -212,7 +212,7 @@ public interface IPersonalizationClient
   Task<SetPersonalizationStrategyResponse> SetPersonalizationStrategyAsync(PersonalizationStrategyParams personalizationStrategyParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// A strategy defines the events and facets that impact user profiles and personalized search results. (Synchronous version)
+  /// Creates a new personalization strategy. (Synchronous version)
   /// </summary>
   /// <param name="personalizationStrategyParams"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -458,12 +458,12 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed. 
+  /// Deletes a user profile.  The response includes a date and time when the user profile can safely be considered deleted. 
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - recommendation
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="userToken">Unique identifier representing a user for which to fetch the personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -485,12 +485,12 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed.  (Synchronous version)
+  /// Deletes a user profile.  The response includes a date and time when the user profile can safely be considered deleted.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - recommendation
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="userToken">Unique identifier representing a user for which to fetch the personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -502,7 +502,7 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// The strategy contains information on the events and facets that impact user profiles and personalized search results.
+  /// Retrieves the current personalization strategy.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -523,7 +523,7 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// The strategy contains information on the events and facets that impact user profiles and personalized search results. (Synchronous version)
+  /// Retrieves the current personalization strategy. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -539,12 +539,12 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes. 
+  /// Retrieves a user profile and their affinities for different facets.
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - recommendation
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="userToken">Unique identifier representing a user for which to fetch the personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -566,12 +566,12 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes.  (Synchronous version)
+  /// Retrieves a user profile and their affinities for different facets. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
   ///   - recommendation
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile.</param>
+  /// <param name="userToken">Unique identifier representing a user for which to fetch the personalization profile.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -583,7 +583,7 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// A strategy defines the events and facets that impact user profiles and personalized search results.
+  /// Creates a new personalization strategy.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -610,7 +610,7 @@ public partial class PersonalizationClient : IPersonalizationClient
 
 
   /// <summary>
-  /// A strategy defines the events and facets that impact user profiles and personalized search results. (Synchronous version)
+  /// Creates a new personalization strategy. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

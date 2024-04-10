@@ -24,9 +24,9 @@ public partial class GetUserTokenResponse
   /// <summary>
   /// Initializes a new instance of the GetUserTokenResponse class.
   /// </summary>
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile. (required).</param>
-  /// <param name="lastEventAt">Date of last event update. (ISO-8601 format). (required).</param>
-  /// <param name="scores">The userToken scores. (required).</param>
+  /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
+  /// <param name="lastEventAt">Date and time of the last event from this user, in RFC 3339 format. (required).</param>
+  /// <param name="scores">Scores for different facet values.  Scores represent the user affinity for a user profile towards specific facet values, given the personalization strategy and past events.  (required).</param>
   public GetUserTokenResponse(string userToken, string lastEventAt, object scores)
   {
     UserToken = userToken ?? throw new ArgumentNullException(nameof(userToken));
@@ -35,23 +35,23 @@ public partial class GetUserTokenResponse
   }
 
   /// <summary>
-  /// userToken representing the user for which to fetch the Personalization profile.
+  /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). 
   /// </summary>
-  /// <value>userToken representing the user for which to fetch the Personalization profile.</value>
+  /// <value>Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
   [JsonPropertyName("userToken")]
   public string UserToken { get; set; }
 
   /// <summary>
-  /// Date of last event update. (ISO-8601 format).
+  /// Date and time of the last event from this user, in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last event update. (ISO-8601 format).</value>
+  /// <value>Date and time of the last event from this user, in RFC 3339 format.</value>
   [JsonPropertyName("lastEventAt")]
   public string LastEventAt { get; set; }
 
   /// <summary>
-  /// The userToken scores.
+  /// Scores for different facet values.  Scores represent the user affinity for a user profile towards specific facet values, given the personalization strategy and past events. 
   /// </summary>
-  /// <value>The userToken scores.</value>
+  /// <value>Scores for different facet values.  Scores represent the user affinity for a user profile towards specific facet values, given the personalization strategy and past events. </value>
   [JsonPropertyName("scores")]
   public object Scores { get; set; }
 

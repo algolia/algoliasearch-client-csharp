@@ -16,6 +16,12 @@ namespace Algolia.Search.Models.Personalization;
 /// </summary>
 public partial class EventScoring
 {
+
+  /// <summary>
+  /// Gets or Sets EventType
+  /// </summary>
+  [JsonPropertyName("eventType")]
+  public EventType? EventType { get; set; }
   /// <summary>
   /// Initializes a new instance of the EventScoring class.
   /// </summary>
@@ -24,36 +30,29 @@ public partial class EventScoring
   /// <summary>
   /// Initializes a new instance of the EventScoring class.
   /// </summary>
-  /// <param name="score">The score for the event. (required).</param>
-  /// <param name="eventName">The name of the event. (required).</param>
-  /// <param name="eventType">The type of the event. (required).</param>
-  public EventScoring(int score, string eventName, string eventType)
+  /// <param name="score">Event score. (required).</param>
+  /// <param name="eventName">Event name. (required).</param>
+  /// <param name="eventType">eventType (required).</param>
+  public EventScoring(int score, string eventName, EventType? eventType)
   {
     Score = score;
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
-    EventType = eventType ?? throw new ArgumentNullException(nameof(eventType));
+    EventType = eventType;
   }
 
   /// <summary>
-  /// The score for the event.
+  /// Event score.
   /// </summary>
-  /// <value>The score for the event.</value>
+  /// <value>Event score.</value>
   [JsonPropertyName("score")]
   public int Score { get; set; }
 
   /// <summary>
-  /// The name of the event.
+  /// Event name.
   /// </summary>
-  /// <value>The name of the event.</value>
+  /// <value>Event name.</value>
   [JsonPropertyName("eventName")]
   public string EventName { get; set; }
-
-  /// <summary>
-  /// The type of the event.
-  /// </summary>
-  /// <value>The type of the event.</value>
-  [JsonPropertyName("eventType")]
-  public string EventType { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -94,7 +93,7 @@ public partial class EventScoring
     return
         (Score == input.Score || Score.Equals(input.Score)) &&
         (EventName == input.EventName || (EventName != null && EventName.Equals(input.EventName))) &&
-        (EventType == input.EventType || (EventType != null && EventType.Equals(input.EventType)));
+        (EventType == input.EventType || EventType.Equals(input.EventType));
   }
 
   /// <summary>
@@ -111,10 +110,7 @@ public partial class EventScoring
       {
         hashCode = (hashCode * 59) + EventName.GetHashCode();
       }
-      if (EventType != null)
-      {
-        hashCode = (hashCode * 59) + EventType.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + EventType.GetHashCode();
       return hashCode;
     }
   }

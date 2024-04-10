@@ -24,9 +24,9 @@ public partial class PersonalizationStrategyParams
   /// <summary>
   /// Initializes a new instance of the PersonalizationStrategyParams class.
   /// </summary>
-  /// <param name="eventScoring">Scores associated with the events. (required).</param>
-  /// <param name="facetScoring">Scores associated with the facets. (required).</param>
-  /// <param name="personalizationImpact">The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled). (required).</param>
+  /// <param name="eventScoring">Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.  (required).</param>
+  /// <param name="facetScoring">Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.  (required).</param>
+  /// <param name="personalizationImpact">Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results.  (required).</param>
   public PersonalizationStrategyParams(List<EventScoring> eventScoring, List<FacetScoring> facetScoring, int personalizationImpact)
   {
     EventScoring = eventScoring ?? throw new ArgumentNullException(nameof(eventScoring));
@@ -35,23 +35,23 @@ public partial class PersonalizationStrategyParams
   }
 
   /// <summary>
-  /// Scores associated with the events.
+  /// Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. 
   /// </summary>
-  /// <value>Scores associated with the events.</value>
+  /// <value>Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. </value>
   [JsonPropertyName("eventScoring")]
   public List<EventScoring> EventScoring { get; set; }
 
   /// <summary>
-  /// Scores associated with the facets.
+  /// Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. 
   /// </summary>
-  /// <value>Scores associated with the facets.</value>
+  /// <value>Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. </value>
   [JsonPropertyName("facetScoring")]
   public List<FacetScoring> FacetScoring { get; set; }
 
   /// <summary>
-  /// The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled).
+  /// Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. 
   /// </summary>
-  /// <value>The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled).</value>
+  /// <value>Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. </value>
   [JsonPropertyName("personalizationImpact")]
   public int PersonalizationImpact { get; set; }
 

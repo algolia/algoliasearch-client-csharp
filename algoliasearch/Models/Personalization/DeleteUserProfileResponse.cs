@@ -24,8 +24,8 @@ public partial class DeleteUserProfileResponse
   /// <summary>
   /// Initializes a new instance of the DeleteUserProfileResponse class.
   /// </summary>
-  /// <param name="userToken">userToken representing the user for which to fetch the Personalization profile. (required).</param>
-  /// <param name="deletedUntil">A date until which the data can safely be considered as deleted for the given user. Any data received after the &#x60;deletedUntil&#x60; date will start building a new user profile. (required).</param>
+  /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
+  /// <param name="deletedUntil">Date and time when the user profile can be safely considered to be deleted. Any events received after the &#x60;deletedUntil&#x60; date start a new user profile.  (required).</param>
   public DeleteUserProfileResponse(string userToken, string deletedUntil)
   {
     UserToken = userToken ?? throw new ArgumentNullException(nameof(userToken));
@@ -33,16 +33,16 @@ public partial class DeleteUserProfileResponse
   }
 
   /// <summary>
-  /// userToken representing the user for which to fetch the Personalization profile.
+  /// Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). 
   /// </summary>
-  /// <value>userToken representing the user for which to fetch the Personalization profile.</value>
+  /// <value>Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). </value>
   [JsonPropertyName("userToken")]
   public string UserToken { get; set; }
 
   /// <summary>
-  /// A date until which the data can safely be considered as deleted for the given user. Any data received after the `deletedUntil` date will start building a new user profile.
+  /// Date and time when the user profile can be safely considered to be deleted. Any events received after the `deletedUntil` date start a new user profile. 
   /// </summary>
-  /// <value>A date until which the data can safely be considered as deleted for the given user. Any data received after the `deletedUntil` date will start building a new user profile.</value>
+  /// <value>Date and time when the user profile can be safely considered to be deleted. Any events received after the `deletedUntil` date start a new user profile. </value>
   [JsonPropertyName("deletedUntil")]
   public string DeletedUntil { get; set; }
 

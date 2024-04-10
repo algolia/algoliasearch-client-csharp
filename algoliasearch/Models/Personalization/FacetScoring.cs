@@ -24,8 +24,8 @@ public partial class FacetScoring
   /// <summary>
   /// Initializes a new instance of the FacetScoring class.
   /// </summary>
-  /// <param name="score">The score for the event. (required).</param>
-  /// <param name="facetName">The name of the facet. (required).</param>
+  /// <param name="score">Event score. (required).</param>
+  /// <param name="facetName">Facet attribute name. (required).</param>
   public FacetScoring(int score, string facetName)
   {
     Score = score;
@@ -33,16 +33,16 @@ public partial class FacetScoring
   }
 
   /// <summary>
-  /// The score for the event.
+  /// Event score.
   /// </summary>
-  /// <value>The score for the event.</value>
+  /// <value>Event score.</value>
   [JsonPropertyName("score")]
   public int Score { get; set; }
 
   /// <summary>
-  /// The name of the facet.
+  /// Facet attribute name.
   /// </summary>
-  /// <value>The name of the facet.</value>
+  /// <value>Facet attribute name.</value>
   [JsonPropertyName("facetName")]
   public string FacetName { get; set; }
 
