@@ -80,6 +80,16 @@ public partial class SourceUpdateInput : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the SourceUpdateInput class
+  /// with a SourceUpdateShopify
+  /// </summary>
+  /// <param name="actualInstance">An instance of SourceUpdateShopify.</param>
+  public SourceUpdateInput(SourceUpdateShopify actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -146,6 +156,16 @@ public partial class SourceUpdateInput : AbstractSchema
     return (SourceUpdateDocker)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `SourceUpdateShopify`. If the actual instance is not `SourceUpdateShopify`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceUpdateShopify</returns>
+  public SourceUpdateShopify AsSourceUpdateShopify()
+  {
+    return (SourceUpdateShopify)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `SourceBigQuery` type.
@@ -199,6 +219,15 @@ public partial class SourceUpdateInput : AbstractSchema
   public bool IsSourceUpdateDocker()
   {
     return ActualInstance.GetType() == typeof(SourceUpdateDocker);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `SourceUpdateShopify` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceUpdateShopify()
+  {
+    return ActualInstance.GetType() == typeof(SourceUpdateShopify);
   }
 
   /// <summary>
@@ -355,6 +384,18 @@ public class SourceUpdateInputJsonConverter : JsonConverter<SourceUpdateInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceUpdateDocker: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new SourceUpdateInput(jsonDocument.Deserialize<SourceUpdateShopify>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceUpdateShopify: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");
