@@ -24,7 +24,7 @@ public partial class BaseRecommendRequest
   /// <summary>
   /// Initializes a new instance of the BaseRecommendRequest class.
   /// </summary>
-  /// <param name="indexName">Index name. (required).</param>
+  /// <param name="indexName">Index name (case-sensitive). (required).</param>
   /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
   public BaseRecommendRequest(string indexName, double threshold)
   {
@@ -33,9 +33,9 @@ public partial class BaseRecommendRequest
   }
 
   /// <summary>
-  /// Index name.
+  /// Index name (case-sensitive).
   /// </summary>
-  /// <value>Index name.</value>
+  /// <value>Index name (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

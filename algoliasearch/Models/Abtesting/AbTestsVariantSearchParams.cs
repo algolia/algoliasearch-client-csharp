@@ -24,7 +24,7 @@ public partial class AbTestsVariantSearchParams
   /// <summary>
   /// Initializes a new instance of the AbTestsVariantSearchParams class.
   /// </summary>
-  /// <param name="index">A/B test index. (required).</param>
+  /// <param name="index">Index name of the A/B test variant (case-sensitive). (required).</param>
   /// <param name="trafficPercentage">Percentage of search requests each variant receives. (required).</param>
   /// <param name="customSearchParameters">customSearchParameters (required).</param>
   public AbTestsVariantSearchParams(string index, int trafficPercentage, object customSearchParameters)
@@ -35,9 +35,9 @@ public partial class AbTestsVariantSearchParams
   }
 
   /// <summary>
-  /// A/B test index.
+  /// Index name of the A/B test variant (case-sensitive).
   /// </summary>
-  /// <value>A/B test index.</value>
+  /// <value>Index name of the A/B test variant (case-sensitive).</value>
   [JsonPropertyName("index")]
   public string Index { get; set; }
 

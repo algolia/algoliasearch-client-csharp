@@ -24,9 +24,9 @@ public partial class GetConfigStatus200Response
   }
 
   /// <summary>
-  /// Name of the Query Suggestions index.
+  /// Name of the Query Suggestions index (case-sensitive).
   /// </summary>
-  /// <value>Name of the Query Suggestions index.</value>
+  /// <value>Name of the Query Suggestions index (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

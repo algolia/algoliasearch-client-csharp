@@ -31,7 +31,7 @@ public partial class SearchForFacetsOptions
   /// Initializes a new instance of the SearchForFacetsOptions class.
   /// </summary>
   /// <param name="facet">Facet name. (required).</param>
-  /// <param name="indexName">Index name. (required).</param>
+  /// <param name="indexName">Index name (case-sensitive). (required).</param>
   /// <param name="type">type (required).</param>
   public SearchForFacetsOptions(string facet, string indexName, SearchTypeFacet? type)
   {
@@ -48,9 +48,9 @@ public partial class SearchForFacetsOptions
   public string Facet { get; set; }
 
   /// <summary>
-  /// Index name.
+  /// Index name (case-sensitive).
   /// </summary>
-  /// <value>Index name.</value>
+  /// <value>Index name (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

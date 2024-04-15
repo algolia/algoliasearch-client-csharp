@@ -32,7 +32,7 @@ public partial class MultipleBatchRequest
   /// </summary>
   /// <param name="action">action (required).</param>
   /// <param name="body">Operation arguments (varies with specified &#x60;action&#x60;). (required).</param>
-  /// <param name="indexName">Index to target for this operation. (required).</param>
+  /// <param name="indexName">Index name (case-sensitive). (required).</param>
   public MultipleBatchRequest(Action? action, object body, string indexName)
   {
     Action = action;
@@ -48,9 +48,9 @@ public partial class MultipleBatchRequest
   public object Body { get; set; }
 
   /// <summary>
-  /// Index to target for this operation.
+  /// Index name (case-sensitive).
   /// </summary>
-  /// <value>Index to target for this operation.</value>
+  /// <value>Index name (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

@@ -30,16 +30,16 @@ public partial class DestinationIndexName
   /// <summary>
   /// Initializes a new instance of the DestinationIndexName class.
   /// </summary>
-  /// <param name="indexName">Algolia index name. (required).</param>
+  /// <param name="indexName">Algolia index name (case-sensitive). (required).</param>
   public DestinationIndexName(string indexName)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
   }
 
   /// <summary>
-  /// Algolia index name.
+  /// Algolia index name (case-sensitive).
   /// </summary>
-  /// <value>Algolia index name.</value>
+  /// <value>Algolia index name (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

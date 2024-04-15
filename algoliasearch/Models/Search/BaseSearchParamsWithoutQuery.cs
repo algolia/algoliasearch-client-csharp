@@ -69,9 +69,9 @@ public partial class BaseSearchParamsWithoutQuery
   public bool? SumOrFiltersScores { get; set; }
 
   /// <summary>
-  /// Restricts a search to a subset of your searchable attributes.
+  /// Restricts a search to a subset of your searchable attributes. Attribute names are case-sensitive. 
   /// </summary>
-  /// <value>Restricts a search to a subset of your searchable attributes.</value>
+  /// <value>Restricts a search to a subset of your searchable attributes. Attribute names are case-sensitive. </value>
   [JsonPropertyName("restrictSearchableAttributes")]
   public List<string> RestrictSearchableAttributes { get; set; }
 
@@ -151,9 +151,9 @@ public partial class BaseSearchParamsWithoutQuery
   public List<List<double>> InsideBoundingBox { get; set; }
 
   /// <summary>
-  /// Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored, if you also specify `insideBoundingBox`. 
+  /// Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored if you also specify `insideBoundingBox`. 
   /// </summary>
-  /// <value>Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored, if you also specify `insideBoundingBox`. </value>
+  /// <value>Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored if you also specify `insideBoundingBox`. </value>
   [JsonPropertyName("insidePolygon")]
   public List<List<double>> InsidePolygon { get; set; }
 
@@ -162,7 +162,7 @@ public partial class BaseSearchParamsWithoutQuery
   /// </summary>
   /// <value>ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`. </value>
   [JsonPropertyName("naturalLanguages")]
-  public List<string> NaturalLanguages { get; set; }
+  public List<SupportedLanguage> NaturalLanguages { get; set; }
 
   /// <summary>
   /// Assigns a rule context to the search query.  [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules. 

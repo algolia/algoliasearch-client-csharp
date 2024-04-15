@@ -30,7 +30,7 @@ public partial class RecommendedForYouQuery
   /// <summary>
   /// Initializes a new instance of the RecommendedForYouQuery class.
   /// </summary>
-  /// <param name="indexName">Index name. (required).</param>
+  /// <param name="indexName">Index name (case-sensitive). (required).</param>
   /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
   /// <param name="model">model (required).</param>
   public RecommendedForYouQuery(string indexName, double threshold, RecommendedForYouModel? model)
@@ -41,9 +41,9 @@ public partial class RecommendedForYouQuery
   }
 
   /// <summary>
-  /// Index name.
+  /// Index name (case-sensitive).
   /// </summary>
-  /// <value>Index name.</value>
+  /// <value>Index name (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

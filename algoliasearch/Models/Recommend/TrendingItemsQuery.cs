@@ -30,7 +30,7 @@ public partial class TrendingItemsQuery
   /// <summary>
   /// Initializes a new instance of the TrendingItemsQuery class.
   /// </summary>
-  /// <param name="indexName">Index name. (required).</param>
+  /// <param name="indexName">Index name (case-sensitive). (required).</param>
   /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
   /// <param name="facetName">Facet attribute. To be used in combination with &#x60;facetValue&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
   /// <param name="facetValue">Facet value. To be used in combination with &#x60;facetName&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
@@ -45,9 +45,9 @@ public partial class TrendingItemsQuery
   }
 
   /// <summary>
-  /// Index name.
+  /// Index name (case-sensitive).
   /// </summary>
-  /// <value>Index name.</value>
+  /// <value>Index name (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

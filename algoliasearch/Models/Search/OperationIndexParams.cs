@@ -31,7 +31,7 @@ public partial class OperationIndexParams
   /// Initializes a new instance of the OperationIndexParams class.
   /// </summary>
   /// <param name="operation">operation (required).</param>
-  /// <param name="destination">Index name. (required).</param>
+  /// <param name="destination">Index name (case-sensitive). (required).</param>
   public OperationIndexParams(OperationType? operation, string destination)
   {
     Operation = operation;
@@ -39,9 +39,9 @@ public partial class OperationIndexParams
   }
 
   /// <summary>
-  /// Index name.
+  /// Index name (case-sensitive).
   /// </summary>
-  /// <value>Index name.</value>
+  /// <value>Index name (case-sensitive).</value>
   [JsonPropertyName("destination")]
   public string Destination { get; set; }
 

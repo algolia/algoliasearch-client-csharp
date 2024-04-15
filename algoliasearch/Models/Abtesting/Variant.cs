@@ -32,7 +32,7 @@ public partial class Variant
   /// <param name="conversionCount">Number of click events for this variant. (required).</param>
   /// <param name="conversionRate">[Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.  (required).</param>
   /// <param name="description">Description for this variant. (required).</param>
-  /// <param name="index">A/B test index. (required).</param>
+  /// <param name="index">Index name of the A/B test variant (case-sensitive). (required).</param>
   /// <param name="noResultCount">Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant. (required).</param>
   /// <param name="purchaseCount">Number of purchase events for this variant. (required).</param>
   /// <param name="purchaseRate">[Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.  (required).</param>
@@ -137,9 +137,9 @@ public partial class Variant
   public FilterEffects FilterEffects { get; set; }
 
   /// <summary>
-  /// A/B test index.
+  /// Index name of the A/B test variant (case-sensitive).
   /// </summary>
-  /// <value>A/B test index.</value>
+  /// <value>Index name of the A/B test variant (case-sensitive).</value>
   [JsonPropertyName("index")]
   public string Index { get; set; }
 

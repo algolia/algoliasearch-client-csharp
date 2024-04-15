@@ -25,7 +25,7 @@ public partial class QuerySuggestionsConfigurationResponse
   /// Initializes a new instance of the QuerySuggestionsConfigurationResponse class.
   /// </summary>
   /// <param name="appID">Algolia application ID to which this Query Suggestions configuration belongs. (required).</param>
-  /// <param name="indexName">Name of the Query Suggestions index. (required).</param>
+  /// <param name="indexName">Name of the Query Suggestions index (case-sensitive). (required).</param>
   /// <param name="sourceIndices">Algolia indices from which to get the popular searches for query suggestions. (required).</param>
   /// <param name="languages">languages (required).</param>
   /// <param name="exclude">exclude (required).</param>
@@ -50,9 +50,9 @@ public partial class QuerySuggestionsConfigurationResponse
   public string AppID { get; set; }
 
   /// <summary>
-  /// Name of the Query Suggestions index.
+  /// Name of the Query Suggestions index (case-sensitive).
   /// </summary>
-  /// <value>Name of the Query Suggestions index.</value>
+  /// <value>Name of the Query Suggestions index (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

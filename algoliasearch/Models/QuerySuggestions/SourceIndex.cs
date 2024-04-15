@@ -24,16 +24,16 @@ public partial class SourceIndex
   /// <summary>
   /// Initializes a new instance of the SourceIndex class.
   /// </summary>
-  /// <param name="indexName">Name of the Algolia index to use as source for query suggestions. (required).</param>
+  /// <param name="indexName">Name of the Algolia index (case-sensitive) to use as source for query suggestions. (required).</param>
   public SourceIndex(string indexName)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
   }
 
   /// <summary>
-  /// Name of the Algolia index to use as source for query suggestions.
+  /// Name of the Algolia index (case-sensitive) to use as source for query suggestions.
   /// </summary>
-  /// <value>Name of the Algolia index to use as source for query suggestions.</value>
+  /// <value>Name of the Algolia index (case-sensitive) to use as source for query suggestions.</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 

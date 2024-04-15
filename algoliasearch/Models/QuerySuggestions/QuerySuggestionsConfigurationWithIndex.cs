@@ -25,7 +25,7 @@ public partial class QuerySuggestionsConfigurationWithIndex
   /// Initializes a new instance of the QuerySuggestionsConfigurationWithIndex class.
   /// </summary>
   /// <param name="sourceIndices">Algolia indices from which to get the popular searches for query suggestions. (required).</param>
-  /// <param name="indexName">Name of the Query Suggestions index. (required).</param>
+  /// <param name="indexName">Name of the Query Suggestions index (case-sensitive). (required).</param>
   public QuerySuggestionsConfigurationWithIndex(List<SourceIndex> sourceIndices, string indexName)
   {
     SourceIndices = sourceIndices ?? throw new ArgumentNullException(nameof(sourceIndices));
@@ -66,9 +66,9 @@ public partial class QuerySuggestionsConfigurationWithIndex
   public bool? AllowSpecialCharacters { get; set; }
 
   /// <summary>
-  /// Name of the Query Suggestions index.
+  /// Name of the Query Suggestions index (case-sensitive).
   /// </summary>
-  /// <value>Name of the Query Suggestions index.</value>
+  /// <value>Name of the Query Suggestions index (case-sensitive).</value>
   [JsonPropertyName("indexName")]
   public string IndexName { get; set; }
 
