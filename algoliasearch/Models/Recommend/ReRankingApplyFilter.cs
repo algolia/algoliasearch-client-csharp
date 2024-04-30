@@ -21,20 +21,13 @@ namespace Algolia.Search.Models.Recommend;
 public partial class ReRankingApplyFilter : AbstractSchema
 {
   /// <summary>
-  /// Initializes a new instance of the ReRankingApplyFilter class.
-  /// </summary>
-  public ReRankingApplyFilter()
-  {
-  }
-
-  /// <summary>
   /// Initializes a new instance of the ReRankingApplyFilter class
-  /// with a List{MixedSearchFilters}
+  /// with a List{ReRankingApplyFilter}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;MixedSearchFilters&gt;.</param>
-  public ReRankingApplyFilter(List<MixedSearchFilters> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;ReRankingApplyFilter&gt;.</param>
+  public ReRankingApplyFilter(List<ReRankingApplyFilter> actualInstance)
   {
-    ActualInstance = actualInstance;
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
@@ -44,7 +37,7 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// <param name="actualInstance">An instance of string.</param>
   public ReRankingApplyFilter(string actualInstance)
   {
-    ActualInstance = actualInstance;
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
 
@@ -54,13 +47,13 @@ public partial class ReRankingApplyFilter : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `List{MixedSearchFilters}`. If the actual instance is not `List{MixedSearchFilters}`,
+  /// Get the actual instance of `List{ReRankingApplyFilter}`. If the actual instance is not `List{ReRankingApplyFilter}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of List&lt;MixedSearchFilters&gt;</returns>
-  public List<MixedSearchFilters> AsList()
+  /// <returns>An instance of List&lt;ReRankingApplyFilter&gt;</returns>
+  public List<ReRankingApplyFilter> AsList()
   {
-    return (List<MixedSearchFilters>)ActualInstance;
+    return (List<ReRankingApplyFilter>)ActualInstance;
   }
 
   /// <summary>
@@ -75,12 +68,12 @@ public partial class ReRankingApplyFilter : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `List{MixedSearchFilters}` type.
+  /// Check if the actual instance is of `List{ReRankingApplyFilter}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsList()
   {
-    return ActualInstance.GetType() == typeof(List<MixedSearchFilters>);
+    return ActualInstance.GetType() == typeof(List<ReRankingApplyFilter>);
   }
 
   /// <summary>
@@ -180,12 +173,12 @@ public class ReRankingApplyFilterJsonConverter : JsonConverter<ReRankingApplyFil
     {
       try
       {
-        return new ReRankingApplyFilter(jsonDocument.Deserialize<List<MixedSearchFilters>>(JsonConfig.Options));
+        return new ReRankingApplyFilter(jsonDocument.Deserialize<List<ReRankingApplyFilter>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<MixedSearchFilters>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<ReRankingApplyFilter>: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.String)

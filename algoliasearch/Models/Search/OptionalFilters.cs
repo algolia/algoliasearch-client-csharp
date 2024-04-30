@@ -22,10 +22,10 @@ public partial class OptionalFilters : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the OptionalFilters class
-  /// with a List{MixedSearchFilters}
+  /// with a List{OptionalFilters}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;MixedSearchFilters&gt;.</param>
-  public OptionalFilters(List<MixedSearchFilters> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;OptionalFilters&gt;.</param>
+  public OptionalFilters(List<OptionalFilters> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -47,13 +47,13 @@ public partial class OptionalFilters : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `List{MixedSearchFilters}`. If the actual instance is not `List{MixedSearchFilters}`,
+  /// Get the actual instance of `List{OptionalFilters}`. If the actual instance is not `List{OptionalFilters}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of List&lt;MixedSearchFilters&gt;</returns>
-  public List<MixedSearchFilters> AsList()
+  /// <returns>An instance of List&lt;OptionalFilters&gt;</returns>
+  public List<OptionalFilters> AsList()
   {
-    return (List<MixedSearchFilters>)ActualInstance;
+    return (List<OptionalFilters>)ActualInstance;
   }
 
   /// <summary>
@@ -68,12 +68,12 @@ public partial class OptionalFilters : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `List{MixedSearchFilters}` type.
+  /// Check if the actual instance is of `List{OptionalFilters}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsList()
   {
-    return ActualInstance.GetType() == typeof(List<MixedSearchFilters>);
+    return ActualInstance.GetType() == typeof(List<OptionalFilters>);
   }
 
   /// <summary>
@@ -173,12 +173,12 @@ public class OptionalFiltersJsonConverter : JsonConverter<OptionalFilters>
     {
       try
       {
-        return new OptionalFilters(jsonDocument.Deserialize<List<MixedSearchFilters>>(JsonConfig.Options));
+        return new OptionalFilters(jsonDocument.Deserialize<List<OptionalFilters>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<MixedSearchFilters>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<OptionalFilters>: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.String)

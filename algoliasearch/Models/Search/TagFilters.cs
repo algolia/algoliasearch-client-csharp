@@ -22,10 +22,10 @@ public partial class TagFilters : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the TagFilters class
-  /// with a List{MixedSearchFilters}
+  /// with a List{TagFilters}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;MixedSearchFilters&gt;.</param>
-  public TagFilters(List<MixedSearchFilters> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;TagFilters&gt;.</param>
+  public TagFilters(List<TagFilters> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -47,13 +47,13 @@ public partial class TagFilters : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `List{MixedSearchFilters}`. If the actual instance is not `List{MixedSearchFilters}`,
+  /// Get the actual instance of `List{TagFilters}`. If the actual instance is not `List{TagFilters}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of List&lt;MixedSearchFilters&gt;</returns>
-  public List<MixedSearchFilters> AsList()
+  /// <returns>An instance of List&lt;TagFilters&gt;</returns>
+  public List<TagFilters> AsList()
   {
-    return (List<MixedSearchFilters>)ActualInstance;
+    return (List<TagFilters>)ActualInstance;
   }
 
   /// <summary>
@@ -68,12 +68,12 @@ public partial class TagFilters : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `List{MixedSearchFilters}` type.
+  /// Check if the actual instance is of `List{TagFilters}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsList()
   {
-    return ActualInstance.GetType() == typeof(List<MixedSearchFilters>);
+    return ActualInstance.GetType() == typeof(List<TagFilters>);
   }
 
   /// <summary>
@@ -173,12 +173,12 @@ public class TagFiltersJsonConverter : JsonConverter<TagFilters>
     {
       try
       {
-        return new TagFilters(jsonDocument.Deserialize<List<MixedSearchFilters>>(JsonConfig.Options));
+        return new TagFilters(jsonDocument.Deserialize<List<TagFilters>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<MixedSearchFilters>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<TagFilters>: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.String)

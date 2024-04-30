@@ -22,10 +22,10 @@ public partial class FacetFilters : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the FacetFilters class
-  /// with a List{MixedSearchFilters}
+  /// with a List{FacetFilters}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;MixedSearchFilters&gt;.</param>
-  public FacetFilters(List<MixedSearchFilters> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;FacetFilters&gt;.</param>
+  public FacetFilters(List<FacetFilters> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -47,13 +47,13 @@ public partial class FacetFilters : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `List{MixedSearchFilters}`. If the actual instance is not `List{MixedSearchFilters}`,
+  /// Get the actual instance of `List{FacetFilters}`. If the actual instance is not `List{FacetFilters}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of List&lt;MixedSearchFilters&gt;</returns>
-  public List<MixedSearchFilters> AsList()
+  /// <returns>An instance of List&lt;FacetFilters&gt;</returns>
+  public List<FacetFilters> AsList()
   {
-    return (List<MixedSearchFilters>)ActualInstance;
+    return (List<FacetFilters>)ActualInstance;
   }
 
   /// <summary>
@@ -68,12 +68,12 @@ public partial class FacetFilters : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `List{MixedSearchFilters}` type.
+  /// Check if the actual instance is of `List{FacetFilters}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsList()
   {
-    return ActualInstance.GetType() == typeof(List<MixedSearchFilters>);
+    return ActualInstance.GetType() == typeof(List<FacetFilters>);
   }
 
   /// <summary>
@@ -173,12 +173,12 @@ public class FacetFiltersJsonConverter : JsonConverter<FacetFilters>
     {
       try
       {
-        return new FacetFilters(jsonDocument.Deserialize<List<MixedSearchFilters>>(JsonConfig.Options));
+        return new FacetFilters(jsonDocument.Deserialize<List<FacetFilters>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<MixedSearchFilters>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<FacetFilters>: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.String)

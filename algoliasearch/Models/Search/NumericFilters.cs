@@ -22,10 +22,10 @@ public partial class NumericFilters : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the NumericFilters class
-  /// with a List{MixedSearchFilters}
+  /// with a List{NumericFilters}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;MixedSearchFilters&gt;.</param>
-  public NumericFilters(List<MixedSearchFilters> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;NumericFilters&gt;.</param>
+  public NumericFilters(List<NumericFilters> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -47,13 +47,13 @@ public partial class NumericFilters : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `List{MixedSearchFilters}`. If the actual instance is not `List{MixedSearchFilters}`,
+  /// Get the actual instance of `List{NumericFilters}`. If the actual instance is not `List{NumericFilters}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of List&lt;MixedSearchFilters&gt;</returns>
-  public List<MixedSearchFilters> AsList()
+  /// <returns>An instance of List&lt;NumericFilters&gt;</returns>
+  public List<NumericFilters> AsList()
   {
-    return (List<MixedSearchFilters>)ActualInstance;
+    return (List<NumericFilters>)ActualInstance;
   }
 
   /// <summary>
@@ -68,12 +68,12 @@ public partial class NumericFilters : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `List{MixedSearchFilters}` type.
+  /// Check if the actual instance is of `List{NumericFilters}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsList()
   {
-    return ActualInstance.GetType() == typeof(List<MixedSearchFilters>);
+    return ActualInstance.GetType() == typeof(List<NumericFilters>);
   }
 
   /// <summary>
@@ -173,12 +173,12 @@ public class NumericFiltersJsonConverter : JsonConverter<NumericFilters>
     {
       try
       {
-        return new NumericFilters(jsonDocument.Deserialize<List<MixedSearchFilters>>(JsonConfig.Options));
+        return new NumericFilters(jsonDocument.Deserialize<List<NumericFilters>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<MixedSearchFilters>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<NumericFilters>: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.String)
