@@ -25,7 +25,7 @@ public partial class SearchForFacetValuesResponse
   /// Initializes a new instance of the SearchForFacetValuesResponse class.
   /// </summary>
   /// <param name="facetHits">Matching facet values. (required).</param>
-  /// <param name="exhaustiveFacetsCount">See the &#x60;facetsCount&#x60; field of the &#x60;exhaustive&#x60; object in the response. (required).</param>
+  /// <param name="exhaustiveFacetsCount">Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).  (required).</param>
   public SearchForFacetValuesResponse(List<FacetHits> facetHits, bool exhaustiveFacetsCount)
   {
     FacetHits = facetHits ?? throw new ArgumentNullException(nameof(facetHits));
@@ -40,11 +40,10 @@ public partial class SearchForFacetValuesResponse
   public List<FacetHits> FacetHits { get; set; }
 
   /// <summary>
-  /// See the `facetsCount` field of the `exhaustive` object in the response.
+  /// Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). 
   /// </summary>
-  /// <value>See the `facetsCount` field of the `exhaustive` object in the response.</value>
+  /// <value>Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). </value>
   [JsonPropertyName("exhaustiveFacetsCount")]
-  [Obsolete]
   public bool ExhaustiveFacetsCount { get; set; }
 
   /// <summary>
