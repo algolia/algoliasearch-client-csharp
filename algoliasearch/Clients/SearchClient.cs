@@ -616,6 +616,30 @@ public interface ISearchClient
   GetApiKeyResponse GetApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Checks the status of a given application task. 
+  /// </summary>
+  /// <param name="taskID">Unique task identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of GetTaskResponse</returns>
+  Task<GetTaskResponse> GetAppTaskAsync(long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Checks the status of a given application task.  (Synchronous version)
+  /// </summary>
+  /// <param name="taskID">Unique task identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetTaskResponse</returns>
+  GetTaskResponse GetAppTask(long taskID, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Lists supported languages with their supported dictionary types and number of custom entries. 
   /// </summary>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -2725,6 +2749,47 @@ public partial class SearchClient : ISearchClient
   /// <returns>GetApiKeyResponse</returns>
   public GetApiKeyResponse GetApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetApiKeyAsync(key, options, cancellationToken));
+
+
+  /// <summary>
+  /// Checks the status of a given application task. 
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="taskID">Unique task identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of GetTaskResponse</returns>
+  public async Task<GetTaskResponse> GetAppTaskAsync(long taskID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  {
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    return await _transport.ExecuteRequestAsync<GetTaskResponse>(new HttpMethod("GET"), "/1/task/{taskID}", requestOptions, cancellationToken).ConfigureAwait(false);
+  }
+
+
+  /// <summary>
+  /// Checks the status of a given application task.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="taskID">Unique task identifier.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>GetTaskResponse</returns>
+  public GetTaskResponse GetAppTask(long taskID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => GetAppTaskAsync(taskID, options, cancellationToken));
 
 
   /// <summary>
