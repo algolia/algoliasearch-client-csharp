@@ -47,6 +47,33 @@ public partial class SearchClient
     AsyncHelper.RunSync(() => WaitForTaskAsync(indexName, taskId, maxRetries, timeout, requestOptions, ct));
 
   /// <summary>
+  /// Wait for an application-level task to complete with `taskID`.
+  /// </summary>
+  /// <param name="taskId">The `taskID` returned in the method response.</param>
+  /// <param name="maxRetries">The maximum number of retry. 50 by default. (optional)</param>
+  /// <param name="timeout">The function to decide how long to wait between retries. Math.Min(retryCount * 200, 5000) by default. (optional)</param>
+  /// <param name="requestOptions">The requestOptions to send along with the query, they will be merged with the transporter requestOptions. (optional)</param>
+  /// <param name="ct">Cancellation token (optional)</param>
+  public async Task<GetTaskResponse> WaitForAppTaskAsync(long taskId, int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default)
+  {
+    return await RetryUntil(async () => await GetAppTaskAsync(taskId, requestOptions, ct),
+      resp => resp.Status == Models.Search.TaskStatus.Published, maxRetries, timeout, ct).ConfigureAwait(false);
+  }
+
+  /// <summary>
+  /// Wait for an application-level task to complete with `taskID`. (Synchronous version)
+  /// </summary>
+  /// <param name="taskId">The `taskID` returned in the method response.</param>
+  /// <param name="maxRetries">The maximum number of retry. 50 by default. (optional)</param>
+  /// <param name="timeout">The function to decide how long to wait between retries. Math.Min(retryCount * 200, 5000) by default. (optional)</param>
+  /// <param name="requestOptions">The requestOptions to send along with the query, they will be merged with the transporter requestOptions. (optional)</param>
+  /// <param name="ct">Cancellation token (optional)</param>
+  public GetTaskResponse WaitForAppTask(long taskId, int maxRetries = DefaultMaxRetries,
+    Func<int, int> timeout = null, RequestOptions requestOptions = null, CancellationToken ct = default) =>
+    AsyncHelper.RunSync(() => WaitForAppTaskAsync(taskId, maxRetries, timeout, requestOptions, ct));
+
+  /// <summary>
   /// Helper method that waits for an API key task to be processed.
   /// </summary>
   /// <param name="operation">The `operation` that was done on a `key`.</param>
