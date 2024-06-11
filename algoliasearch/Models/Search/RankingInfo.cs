@@ -24,24 +24,18 @@ public partial class RankingInfo
   /// <summary>
   /// Initializes a new instance of the RankingInfo class.
   /// </summary>
-  /// <param name="filters">Whether a filter matched the query. (required).</param>
   /// <param name="firstMatchedWord">Position of the first matched word in the best matching attribute of the record. (required).</param>
   /// <param name="geoDistance">Distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters). (required).</param>
   /// <param name="nbExactWords">Number of exactly matched words. (required).</param>
   /// <param name="nbTypos">Number of typos encountered when matching the record. (required).</param>
-  /// <param name="promoted">Whether the record was promoted by a rule. (required).</param>
   /// <param name="userScore">Overall ranking of the record, expressed as a single integer. This attribute is internal. (required).</param>
-  /// <param name="words">Number of matched words. (required).</param>
-  public RankingInfo(int filters, int firstMatchedWord, int geoDistance, int nbExactWords, int nbTypos, bool promoted, int userScore, int words)
+  public RankingInfo(int firstMatchedWord, int geoDistance, int nbExactWords, int nbTypos, int userScore)
   {
-    Filters = filters;
     FirstMatchedWord = firstMatchedWord;
     GeoDistance = geoDistance;
     NbExactWords = nbExactWords;
     NbTypos = nbTypos;
-    Promoted = promoted;
     UserScore = userScore;
-    Words = words;
   }
 
   /// <summary>
@@ -49,7 +43,7 @@ public partial class RankingInfo
   /// </summary>
   /// <value>Whether a filter matched the query.</value>
   [JsonPropertyName("filters")]
-  public int Filters { get; set; }
+  public int? Filters { get; set; }
 
   /// <summary>
   /// Position of the first matched word in the best matching attribute of the record.
@@ -103,7 +97,7 @@ public partial class RankingInfo
   /// </summary>
   /// <value>Whether the record was promoted by a rule.</value>
   [JsonPropertyName("promoted")]
-  public bool Promoted { get; set; }
+  public bool? Promoted { get; set; }
 
   /// <summary>
   /// Number of words between multiple matches in the query plus 1. For single word queries, `proximityDistance` is 0.
@@ -124,7 +118,7 @@ public partial class RankingInfo
   /// </summary>
   /// <value>Number of matched words.</value>
   [JsonPropertyName("words")]
-  public int Words { get; set; }
+  public int? Words { get; set; }
 
   /// <summary>
   /// Whether the record is re-ranked.
