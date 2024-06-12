@@ -410,6 +410,7 @@ public partial class SearchClient
   ///  Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
   /// Replace all objects in an index without any downtime. Internally, this method copies the existing index settings, synonyms and query rules and indexes all passed objects.
   /// Finally, the temporary one replaces the existing index. (Synchronous version)
+  /// See https://api-clients-automation.netlify.app/docs/contributing/add-new-api-client#5-helpers for implementation details.
   /// </summary>
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
@@ -424,6 +425,7 @@ public partial class SearchClient
   ///  Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
   /// Replace all objects in an index without any downtime. Internally, this method copies the existing index settings, synonyms and query rules and indexes all passed objects.
   /// Finally, the temporary one replaces the existing index.
+  /// See https://api-clients-automation.netlify.app/docs/contributing/add-new-api-client#5-helpers for implementation details.
   /// </summary>
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
@@ -441,20 +443,24 @@ public partial class SearchClient
     var rnd = new Random();
     var tmpIndexName = $"{indexName}_tmp_{rnd.Next(100)}";
 
-    // Copy settings, synonyms and query rules into the temporary index
     var copyResponse = await OperationIndexAsync(indexName,
         new OperationIndexParams(OperationType.Copy, tmpIndexName)
         { Scope = [ScopeType.Rules, ScopeType.Settings, ScopeType.Synonyms] }, options, cancellationToken)
       .ConfigureAwait(false);
 
-    await WaitForTaskAsync(indexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
-      .ConfigureAwait(false);
-
-    // Add objects to the temporary index
     var batchResponse = await ChunkedBatchAsync(tmpIndexName, objects, Action.AddObject, batchSize,
       options, cancellationToken).ConfigureAwait(false);
 
-    // Move the temporary index to the main one
+    await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
+      .ConfigureAwait(false);
+
+    copyResponse = await OperationIndexAsync(indexName,
+        new OperationIndexParams(OperationType.Copy, tmpIndexName)
+        { Scope = [ScopeType.Rules, ScopeType.Settings, ScopeType.Synonyms] }, options, cancellationToken)
+      .ConfigureAwait(false);
+    await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
+      .ConfigureAwait(false);
+
     var moveResponse = await OperationIndexAsync(tmpIndexName,
         new OperationIndexParams(OperationType.Move, indexName), options, cancellationToken)
       .ConfigureAwait(false);
