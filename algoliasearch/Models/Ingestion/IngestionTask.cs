@@ -36,7 +36,7 @@ public partial class IngestionTask
   /// <param name="trigger">trigger (required).</param>
   /// <param name="enabled">Whether the task is enabled. (required) (default to true).</param>
   /// <param name="action">action (required).</param>
-  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
+  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
   public IngestionTask(string taskID, string sourceID, string destinationID, Trigger trigger, bool enabled, ActionType? action, string createdAt)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
@@ -96,16 +96,16 @@ public partial class IngestionTask
   public int? FailureThreshold { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC3339 format.
+  /// Date of creation in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC3339 format.</value>
+  /// <value>Date of creation in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC3339 format.
+  /// Date of last update in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC3339 format.</value>
+  /// <value>Date of last update in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

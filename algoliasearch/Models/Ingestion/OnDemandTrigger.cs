@@ -37,9 +37,9 @@ public partial class OnDemandTrigger
   }
 
   /// <summary>
-  /// The last time the scheduled task ran in RFC3339 format.
+  /// The last time the scheduled task ran in RFC 3339 format.
   /// </summary>
-  /// <value>The last time the scheduled task ran in RFC3339 format.</value>
+  /// <value>The last time the scheduled task ran in RFC 3339 format.</value>
   [JsonPropertyName("lastRun")]
   public string LastRun { get; set; }
 

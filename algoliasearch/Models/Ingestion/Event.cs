@@ -41,7 +41,7 @@ public partial class Event
   /// <param name="status">status (required).</param>
   /// <param name="type">type (required).</param>
   /// <param name="batchSize">The extracted record batch size. (required).</param>
-  /// <param name="publishedAt">Date of publish RFC3339 format. (required).</param>
+  /// <param name="publishedAt">Date of publish RFC 3339 format. (required).</param>
   public Event(string eventID, string runID, EventStatus? status, EventType? type, int batchSize, string publishedAt)
   {
     EventID = eventID ?? throw new ArgumentNullException(nameof(eventID));
@@ -87,9 +87,9 @@ public partial class Event
   public Dictionary<string, object> Data { get; set; }
 
   /// <summary>
-  /// Date of publish RFC3339 format.
+  /// Date of publish RFC 3339 format.
   /// </summary>
-  /// <value>Date of publish RFC3339 format.</value>
+  /// <value>Date of publish RFC 3339 format.</value>
   [JsonPropertyName("publishedAt")]
   public string PublishedAt { get; set; }
 

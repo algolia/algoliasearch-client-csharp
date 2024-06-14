@@ -545,8 +545,8 @@ public interface IIngestionClient
   /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
-  /// <param name="endDate">Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
+  /// <param name="startDate">Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -565,8 +565,8 @@ public interface IIngestionClient
   /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
-  /// <param name="endDate">Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
+  /// <param name="startDate">Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -608,8 +608,8 @@ public interface IIngestionClient
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
-  /// <param name="endDate">Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -627,8 +627,8 @@ public interface IIngestionClient
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
-  /// <param name="endDate">Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2033,8 +2033,8 @@ public partial class IngestionClient : IIngestionClient
   /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
-  /// <param name="endDate">Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
+  /// <param name="startDate">Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2078,8 +2078,8 @@ public partial class IngestionClient : IIngestionClient
   /// <param name="type">Event type for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task run events. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
-  /// <param name="endDate">Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
+  /// <param name="startDate">Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)</param>
+  /// <param name="endDate">Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2152,8 +2152,8 @@ public partial class IngestionClient : IIngestionClient
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
-  /// <param name="endDate">Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -2191,8 +2191,8 @@ public partial class IngestionClient : IIngestionClient
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
-  /// <param name="startDate">Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
-  /// <param name="endDate">Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
+  /// <param name="startDate">Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)</param>
+  /// <param name="endDate">Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>

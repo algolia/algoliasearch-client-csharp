@@ -32,7 +32,7 @@ public partial class ScheduleTrigger
   /// </summary>
   /// <param name="type">type (required).</param>
   /// <param name="cron">Cron expression for the task&#39;s schedule. (required).</param>
-  /// <param name="nextRun">The next scheduled run of the task in RFC3339 format. (required).</param>
+  /// <param name="nextRun">The next scheduled run of the task in RFC 3339 format. (required).</param>
   public ScheduleTrigger(ScheduleTriggerType? type, string cron, string nextRun)
   {
     Type = type;
@@ -48,16 +48,16 @@ public partial class ScheduleTrigger
   public string Cron { get; set; }
 
   /// <summary>
-  /// The last time the scheduled task ran in RFC3339 format.
+  /// The last time the scheduled task ran in RFC 3339 format.
   /// </summary>
-  /// <value>The last time the scheduled task ran in RFC3339 format.</value>
+  /// <value>The last time the scheduled task ran in RFC 3339 format.</value>
   [JsonPropertyName("lastRun")]
   public string LastRun { get; set; }
 
   /// <summary>
-  /// The next scheduled run of the task in RFC3339 format.
+  /// The next scheduled run of the task in RFC 3339 format.
   /// </summary>
-  /// <value>The next scheduled run of the task in RFC3339 format.</value>
+  /// <value>The next scheduled run of the task in RFC 3339 format.</value>
   [JsonPropertyName("nextRun")]
   public string NextRun { get; set; }
 

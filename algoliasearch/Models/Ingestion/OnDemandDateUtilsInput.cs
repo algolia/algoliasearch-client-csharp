@@ -24,8 +24,8 @@ public partial class OnDemandDateUtilsInput
   /// <summary>
   /// Initializes a new instance of the OnDemandDateUtilsInput class.
   /// </summary>
-  /// <param name="startDate">Earliest date in RFC3339 format of the extracted data from Big Query. (required).</param>
-  /// <param name="endDate">Latest date in RFC3339 format of the extracted data from Big Query. (required).</param>
+  /// <param name="startDate">Earliest date in RFC 3339 format of the extracted data from Big Query. (required).</param>
+  /// <param name="endDate">Latest date in RFC 3339 format of the extracted data from Big Query. (required).</param>
   public OnDemandDateUtilsInput(string startDate, string endDate)
   {
     StartDate = startDate ?? throw new ArgumentNullException(nameof(startDate));
@@ -33,16 +33,16 @@ public partial class OnDemandDateUtilsInput
   }
 
   /// <summary>
-  /// Earliest date in RFC3339 format of the extracted data from Big Query.
+  /// Earliest date in RFC 3339 format of the extracted data from Big Query.
   /// </summary>
-  /// <value>Earliest date in RFC3339 format of the extracted data from Big Query.</value>
+  /// <value>Earliest date in RFC 3339 format of the extracted data from Big Query.</value>
   [JsonPropertyName("startDate")]
   public string StartDate { get; set; }
 
   /// <summary>
-  /// Latest date in RFC3339 format of the extracted data from Big Query.
+  /// Latest date in RFC 3339 format of the extracted data from Big Query.
   /// </summary>
-  /// <value>Latest date in RFC3339 format of the extracted data from Big Query.</value>
+  /// <value>Latest date in RFC 3339 format of the extracted data from Big Query.</value>
   [JsonPropertyName("endDate")]
   public string EndDate { get; set; }
 

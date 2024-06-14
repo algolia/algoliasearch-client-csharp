@@ -26,7 +26,7 @@ public partial class AuthenticationUpdateResponse
   /// </summary>
   /// <param name="authenticationID">Universally unique identifier (UUID) of an authentication resource. (required).</param>
   /// <param name="name">Descriptive name for the resource. (required).</param>
-  /// <param name="updatedAt">Date of last update in RFC3339 format. (required).</param>
+  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
   public AuthenticationUpdateResponse(string authenticationID, string name, string updatedAt)
   {
     AuthenticationID = authenticationID ?? throw new ArgumentNullException(nameof(authenticationID));
@@ -49,9 +49,9 @@ public partial class AuthenticationUpdateResponse
   public string Name { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC3339 format.
+  /// Date of last update in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC3339 format.</value>
+  /// <value>Date of last update in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

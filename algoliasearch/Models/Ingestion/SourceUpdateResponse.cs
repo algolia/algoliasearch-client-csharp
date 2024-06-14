@@ -26,7 +26,7 @@ public partial class SourceUpdateResponse
   /// </summary>
   /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
   /// <param name="name">Descriptive name of the source. (required).</param>
-  /// <param name="updatedAt">Date of last update in RFC3339 format. (required).</param>
+  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
   public SourceUpdateResponse(string sourceID, string name, string updatedAt)
   {
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
@@ -49,9 +49,9 @@ public partial class SourceUpdateResponse
   public string Name { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC3339 format.
+  /// Date of last update in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC3339 format.</value>
+  /// <value>Date of last update in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 

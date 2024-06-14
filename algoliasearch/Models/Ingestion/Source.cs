@@ -34,7 +34,7 @@ public partial class Source
   /// <param name="type">type (required).</param>
   /// <param name="name">name (required).</param>
   /// <param name="input">input (required).</param>
-  /// <param name="createdAt">Date of creation in RFC3339 format. (required).</param>
+  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
   public Source(string sourceID, SourceType? type, string name, SourceInput input, string createdAt)
   {
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
@@ -71,16 +71,16 @@ public partial class Source
   public string AuthenticationID { get; set; }
 
   /// <summary>
-  /// Date of creation in RFC3339 format.
+  /// Date of creation in RFC 3339 format.
   /// </summary>
-  /// <value>Date of creation in RFC3339 format.</value>
+  /// <value>Date of creation in RFC 3339 format.</value>
   [JsonPropertyName("createdAt")]
   public string CreatedAt { get; set; }
 
   /// <summary>
-  /// Date of last update in RFC3339 format.
+  /// Date of last update in RFC 3339 format.
   /// </summary>
-  /// <value>Date of last update in RFC3339 format.</value>
+  /// <value>Date of last update in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 
