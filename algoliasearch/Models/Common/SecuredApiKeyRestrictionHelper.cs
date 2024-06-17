@@ -3,13 +3,14 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using Algolia.Search.Http;
 using Algolia.Search.Utils;
+using System.Collections.Generic;
 
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
 /// Secured Api Key restrictions
 /// </summary>
-public partial class SecuredAPIKeyRestrictions
+public partial class SecuredApiKeyRestrictions
 {
 
   /// <summary>
@@ -18,28 +19,26 @@ public partial class SecuredAPIKeyRestrictions
   /// <returns></returns>
   public string ToQueryString()
   {
-    string restrictionQuery = null;
+    var restrictions = ToQueryMap(this, nameof(SearchParams));
     if (SearchParams != null)
     {
-      restrictionQuery = ToQueryString(SearchParams);
+      // merge SearchParams into restrictions
+      restrictions = restrictions.Concat(ToQueryMap(SearchParams)).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     }
 
-    var restrictions = ToQueryString(this, nameof(SearchParams));
-    var array = new[] { restrictionQuery, restrictions };
-
-    return string.Join("&", array.Where(s => !string.IsNullOrEmpty(s)));
+    return QueryStringHelper.ToQueryString(restrictions.OrderBy(x => x.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
   }
 
   /// <summary>
-  /// Transform a poco to a query string
+  /// Transform a poco to a map of query parameters
   /// </summary>
   /// <param name="value"></param>
   /// <param name="ignoreList"></param>
   /// <typeparam name="T"></typeparam>
   /// <returns></returns>
-  private static string ToQueryString<T>(T value, params string[] ignoreList)
+  private static Dictionary<string, string> ToQueryMap<T>(T value, params string[] ignoreList)
   {
-    var properties = typeof(T).GetTypeInfo()
+    return typeof(T).GetTypeInfo()
       .DeclaredProperties.Where(p =>
         p.GetValue(value, null) != null && !ignoreList.Contains(p.Name) &&
         p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
@@ -48,8 +47,6 @@ public partial class SecuredAPIKeyRestrictions
         propsName = p.GetCustomAttribute<JsonPropertyNameAttribute>().Name,
         value = QueryStringHelper.ParameterToString(p.GetValue(value, null))
       }).ToDictionary(p => p.propsName, p => p.value);
-
-    return properties.ToQueryString();
   }
 
 }

@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// SecuredAPIKeyRestrictions
+/// SecuredApiKeyRestrictions
 /// </summary>
-public partial class SecuredAPIKeyRestrictions
+public partial class SecuredApiKeyRestrictions
 {
   /// <summary>
-  /// Initializes a new instance of the SecuredAPIKeyRestrictions class.
+  /// Initializes a new instance of the SecuredApiKeyRestrictions class.
   /// </summary>
-  public SecuredAPIKeyRestrictions()
+  public SecuredApiKeyRestrictions()
   {
   }
 
@@ -71,7 +71,7 @@ public partial class SecuredAPIKeyRestrictions
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SecuredAPIKeyRestrictions {\n");
+    sb.Append("class SecuredApiKeyRestrictions {\n");
     sb.Append("  SearchParams: ").Append(SearchParams).Append("\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
     sb.Append("  ValidUntil: ").Append(ValidUntil).Append("\n");
@@ -98,7 +98,7 @@ public partial class SecuredAPIKeyRestrictions
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SecuredAPIKeyRestrictions input)
+    if (obj is not SecuredApiKeyRestrictions input)
     {
       return false;
     }
