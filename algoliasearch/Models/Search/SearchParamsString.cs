@@ -28,7 +28,7 @@ public partial class SearchParamsString
   /// </summary>
   /// <value>Search parameters as a URL-encoded query string.</value>
   [JsonPropertyName("params")]
-  public string VarParams { get; set; }
+  public string Params { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -38,7 +38,7 @@ public partial class SearchParamsString
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class SearchParamsString {\n");
-    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -65,7 +65,7 @@ public partial class SearchParamsString
     }
 
     return
-        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams)));
+        (Params == input.Params || (Params != null && Params.Equals(input.Params)));
   }
 
   /// <summary>
@@ -77,9 +77,9 @@ public partial class SearchParamsString
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarParams != null)
+      if (Params != null)
       {
-        hashCode = (hashCode * 59) + VarParams.GetHashCode();
+        hashCode = (hashCode * 59) + Params.GetHashCode();
       }
       return hashCode;
     }

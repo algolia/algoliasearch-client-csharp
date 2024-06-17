@@ -24,21 +24,21 @@ public partial class ShopifyMetafield
   /// <summary>
   /// Initializes a new instance of the ShopifyMetafield class.
   /// </summary>
-  /// <param name="varNamespace">varNamespace (required).</param>
+  /// <param name="varNamespace">namespace (required).</param>
   /// <param name="key">key (required).</param>
   /// <param name="value">value (required).</param>
   public ShopifyMetafield(string varNamespace, string key, string value)
   {
-    VarNamespace = varNamespace ?? throw new ArgumentNullException(nameof(varNamespace));
+    Namespace = varNamespace ?? throw new ArgumentNullException(nameof(varNamespace));
     Key = key ?? throw new ArgumentNullException(nameof(key));
     Value = value ?? throw new ArgumentNullException(nameof(value));
   }
 
   /// <summary>
-  /// Gets or Sets VarNamespace
+  /// Gets or Sets Namespace
   /// </summary>
   [JsonPropertyName("namespace")]
-  public string VarNamespace { get; set; }
+  public string Namespace { get; set; }
 
   /// <summary>
   /// Gets or Sets Key
@@ -60,7 +60,7 @@ public partial class ShopifyMetafield
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class ShopifyMetafield {\n");
-    sb.Append("  VarNamespace: ").Append(VarNamespace).Append("\n");
+    sb.Append("  Namespace: ").Append(Namespace).Append("\n");
     sb.Append("  Key: ").Append(Key).Append("\n");
     sb.Append("  Value: ").Append(Value).Append("\n");
     sb.Append("}\n");
@@ -89,7 +89,7 @@ public partial class ShopifyMetafield
     }
 
     return
-        (VarNamespace == input.VarNamespace || (VarNamespace != null && VarNamespace.Equals(input.VarNamespace))) &&
+        (Namespace == input.Namespace || (Namespace != null && Namespace.Equals(input.Namespace))) &&
         (Key == input.Key || (Key != null && Key.Equals(input.Key))) &&
         (Value == input.Value || (Value != null && Value.Equals(input.Value)));
   }
@@ -103,9 +103,9 @@ public partial class ShopifyMetafield
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarNamespace != null)
+      if (Namespace != null)
       {
-        hashCode = (hashCode * 59) + VarNamespace.GetHashCode();
+        hashCode = (hashCode * 59) + Namespace.GetHashCode();
       }
       if (Key != null)
       {

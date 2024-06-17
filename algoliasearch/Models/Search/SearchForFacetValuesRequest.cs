@@ -28,7 +28,7 @@ public partial class SearchForFacetValuesRequest
   /// </summary>
   /// <value>Search parameters as a URL-encoded query string.</value>
   [JsonPropertyName("params")]
-  public string VarParams { get; set; }
+  public string Params { get; set; }
 
   /// <summary>
   /// Text to search inside the facet's values.
@@ -52,7 +52,7 @@ public partial class SearchForFacetValuesRequest
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class SearchForFacetValuesRequest {\n");
-    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  FacetQuery: ").Append(FacetQuery).Append("\n");
     sb.Append("  MaxFacetHits: ").Append(MaxFacetHits).Append("\n");
     sb.Append("}\n");
@@ -81,7 +81,7 @@ public partial class SearchForFacetValuesRequest
     }
 
     return
-        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams))) &&
+        (Params == input.Params || (Params != null && Params.Equals(input.Params))) &&
         (FacetQuery == input.FacetQuery || (FacetQuery != null && FacetQuery.Equals(input.FacetQuery))) &&
         (MaxFacetHits == input.MaxFacetHits || MaxFacetHits.Equals(input.MaxFacetHits));
   }
@@ -95,9 +95,9 @@ public partial class SearchForFacetValuesRequest
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarParams != null)
+      if (Params != null)
       {
-        hashCode = (hashCode * 59) + VarParams.GetHashCode();
+        hashCode = (hashCode * 59) + Params.GetHashCode();
       }
       if (FacetQuery != null)
       {

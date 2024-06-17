@@ -76,26 +76,26 @@ public interface ISearchClient
   /// <summary>
   /// Adds a source to the list of allowed sources.
   /// </summary>
-  /// <param name="varSource">Source to add.</param>
+  /// <param name="source">Source to add.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of CreatedAtResponse</returns>
-  Task<CreatedAtResponse> AppendSourceAsync(Source varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<CreatedAtResponse> AppendSourceAsync(Source source, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Adds a source to the list of allowed sources. (Synchronous version)
   /// </summary>
-  /// <param name="varSource">Source to add.</param>
+  /// <param name="source">Source to add.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>CreatedAtResponse</returns>
-  CreatedAtResponse AppendSource(Source varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
+  CreatedAtResponse AppendSource(Source source, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Assigns or moves a user ID to a cluster.  The time it takes to move a user is proportional to the amount of data linked to the user ID. 
@@ -542,26 +542,26 @@ public interface ISearchClient
   /// <summary>
   /// Deletes a source from the list of allowed sources.
   /// </summary>
-  /// <param name="varSource">IP address range of the source.</param>
+  /// <param name="source">IP address range of the source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of DeleteSourceResponse</returns>
-  Task<DeleteSourceResponse> DeleteSourceAsync(string varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<DeleteSourceResponse> DeleteSourceAsync(string source, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Deletes a source from the list of allowed sources. (Synchronous version)
   /// </summary>
-  /// <param name="varSource">IP address range of the source.</param>
+  /// <param name="source">IP address range of the source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeleteSourceResponse</returns>
-  DeleteSourceResponse DeleteSource(string varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
+  DeleteSourceResponse DeleteSource(string source, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Deletes a synonym by its ID. To find the object IDs of your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms). 
@@ -1162,26 +1162,26 @@ public interface ISearchClient
   /// <summary>
   /// Replaces the list of allowed sources.
   /// </summary>
-  /// <param name="varSource">Allowed sources.</param>
+  /// <param name="source">Allowed sources.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ReplaceSourceResponse</returns>
-  Task<ReplaceSourceResponse> ReplaceSourcesAsync(List<Source> varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ReplaceSourceResponse> ReplaceSourcesAsync(List<Source> source, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Replaces the list of allowed sources. (Synchronous version)
   /// </summary>
-  /// <param name="varSource">Allowed sources.</param>
+  /// <param name="source">Allowed sources.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ReplaceSourceResponse</returns>
-  ReplaceSourceResponse ReplaceSources(List<Source> varSource, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ReplaceSourceResponse ReplaceSources(List<Source> source, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Restores a deleted API key.  Restoring resets the `validity` attribute to `0`.  Algolia stores up to 1,000 API keys per application. If you create more, the oldest API keys are deleted and can't be restored. 
@@ -1787,23 +1787,23 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="varSource">Source to add.</param>
+  /// <param name="source">Source to add.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of CreatedAtResponse</returns>
-  public async Task<CreatedAtResponse> AppendSourceAsync(Source varSource, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<CreatedAtResponse> AppendSourceAsync(Source source, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
-    if (varSource == null)
-      throw new ArgumentException("Parameter `varSource` is required when calling `AppendSource`.");
+    if (source == null)
+      throw new ArgumentException("Parameter `source` is required when calling `AppendSource`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
 
-    requestOptions.Data = varSource;
+    requestOptions.Data = source;
     return await _transport.ExecuteRequestAsync<CreatedAtResponse>(new HttpMethod("POST"), "/1/security/sources/append", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
@@ -1814,15 +1814,15 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="varSource">Source to add.</param>
+  /// <param name="source">Source to add.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>CreatedAtResponse</returns>
-  public CreatedAtResponse AppendSource(Source varSource, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => AppendSourceAsync(varSource, options, cancellationToken));
+  public CreatedAtResponse AppendSource(Source source, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => AppendSourceAsync(source, options, cancellationToken));
 
 
   /// <summary>
@@ -2621,22 +2621,22 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="varSource">IP address range of the source.</param>
+  /// <param name="source">IP address range of the source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of DeleteSourceResponse</returns>
-  public async Task<DeleteSourceResponse> DeleteSourceAsync(string varSource, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<DeleteSourceResponse> DeleteSourceAsync(string source, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
-    if (varSource == null)
-      throw new ArgumentException("Parameter `varSource` is required when calling `DeleteSource`.");
+    if (source == null)
+      throw new ArgumentException("Parameter `source` is required when calling `DeleteSource`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
-    requestOptions.PathParameters.Add("source", QueryStringHelper.ParameterToString(varSource));
+    requestOptions.PathParameters.Add("source", QueryStringHelper.ParameterToString(source));
 
     return await _transport.ExecuteRequestAsync<DeleteSourceResponse>(new HttpMethod("DELETE"), "/1/security/sources/{source}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
@@ -2648,15 +2648,15 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="varSource">IP address range of the source.</param>
+  /// <param name="source">IP address range of the source.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>DeleteSourceResponse</returns>
-  public DeleteSourceResponse DeleteSource(string varSource, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteSourceAsync(varSource, options, cancellationToken));
+  public DeleteSourceResponse DeleteSource(string source, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => DeleteSourceAsync(source, options, cancellationToken));
 
 
   /// <summary>
@@ -3726,23 +3726,23 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="varSource">Allowed sources.</param>
+  /// <param name="source">Allowed sources.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ReplaceSourceResponse</returns>
-  public async Task<ReplaceSourceResponse> ReplaceSourcesAsync(List<Source> varSource, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ReplaceSourceResponse> ReplaceSourcesAsync(List<Source> source, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
-    if (varSource == null)
-      throw new ArgumentException("Parameter `varSource` is required when calling `ReplaceSources`.");
+    if (source == null)
+      throw new ArgumentException("Parameter `source` is required when calling `ReplaceSources`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
 
-    requestOptions.Data = varSource;
+    requestOptions.Data = source;
     return await _transport.ExecuteRequestAsync<ReplaceSourceResponse>(new HttpMethod("PUT"), "/1/security/sources", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
@@ -3753,15 +3753,15 @@ public partial class SearchClient : ISearchClient
   ///
   /// Required API Key ACLs:
   ///   - admin
-  /// <param name="varSource">Allowed sources.</param>
+  /// <param name="source">Allowed sources.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ReplaceSourceResponse</returns>
-  public ReplaceSourceResponse ReplaceSources(List<Source> varSource, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ReplaceSourcesAsync(varSource, options, cancellationToken));
+  public ReplaceSourceResponse ReplaceSources(List<Source> source, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => ReplaceSourcesAsync(source, options, cancellationToken));
 
 
   /// <summary>

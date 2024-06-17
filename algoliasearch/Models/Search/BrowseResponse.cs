@@ -41,7 +41,7 @@ public partial class BrowseResponse<T>
     ProcessingTimeMS = processingTimeMS;
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
     Query = query ?? throw new ArgumentNullException(nameof(query));
-    VarParams = varParams ?? throw new ArgumentNullException(nameof(varParams));
+    Params = varParams ?? throw new ArgumentNullException(nameof(varParams));
   }
 
   /// <summary>
@@ -227,9 +227,9 @@ public partial class BrowseResponse<T>
   public string ServerUsed { get; set; }
 
   /// <summary>
-  /// An object with custom data.  You can store up to 32&nbsp;kB as custom data. 
+  /// An object with custom data.  You can store up to 32kB as custom data. 
   /// </summary>
-  /// <value>An object with custom data.  You can store up to 32&nbsp;kB as custom data. </value>
+  /// <value>An object with custom data.  You can store up to 32kB as custom data. </value>
   [JsonPropertyName("userData")]
   public object UserData { get; set; }
 
@@ -259,7 +259,7 @@ public partial class BrowseResponse<T>
   /// </summary>
   /// <value>URL-encoded string of all search parameters.</value>
   [JsonPropertyName("params")]
-  public string VarParams { get; set; }
+  public string Params { get; set; }
 
   /// <summary>
   /// Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute. 
@@ -306,7 +306,7 @@ public partial class BrowseResponse<T>
     sb.Append("  QueryID: ").Append(QueryID).Append("\n");
     sb.Append("  Hits: ").Append(Hits).Append("\n");
     sb.Append("  Query: ").Append(Query).Append("\n");
-    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  Cursor: ").Append(Cursor).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -364,7 +364,7 @@ public partial class BrowseResponse<T>
         (QueryID == input.QueryID || (QueryID != null && QueryID.Equals(input.QueryID))) &&
         (Hits == input.Hits || Hits != null && input.Hits != null && Hits.SequenceEqual(input.Hits)) &&
         (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
-        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams))) &&
+        (Params == input.Params || (Params != null && Params.Equals(input.Params))) &&
         (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor)));
   }
 
@@ -461,9 +461,9 @@ public partial class BrowseResponse<T>
       {
         hashCode = (hashCode * 59) + Query.GetHashCode();
       }
-      if (VarParams != null)
+      if (Params != null)
       {
-        hashCode = (hashCode * 59) + VarParams.GetHashCode();
+        hashCode = (hashCode * 59) + Params.GetHashCode();
       }
       if (Cursor != null)
       {

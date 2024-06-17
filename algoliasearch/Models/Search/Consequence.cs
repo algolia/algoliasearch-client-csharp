@@ -24,10 +24,10 @@ public partial class Consequence
   }
 
   /// <summary>
-  /// Gets or Sets VarParams
+  /// Gets or Sets Params
   /// </summary>
   [JsonPropertyName("params")]
-  public ConsequenceParams VarParams { get; set; }
+  public ConsequenceParams Params { get; set; }
 
   /// <summary>
   /// Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each. 
@@ -65,7 +65,7 @@ public partial class Consequence
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class Consequence {\n");
-    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  Promote: ").Append(Promote).Append("\n");
     sb.Append("  FilterPromotes: ").Append(FilterPromotes).Append("\n");
     sb.Append("  Hide: ").Append(Hide).Append("\n");
@@ -96,7 +96,7 @@ public partial class Consequence
     }
 
     return
-        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams))) &&
+        (Params == input.Params || (Params != null && Params.Equals(input.Params))) &&
         (Promote == input.Promote || Promote != null && input.Promote != null && Promote.SequenceEqual(input.Promote)) &&
         (FilterPromotes == input.FilterPromotes || FilterPromotes.Equals(input.FilterPromotes)) &&
         (Hide == input.Hide || Hide != null && input.Hide != null && Hide.SequenceEqual(input.Hide)) &&
@@ -112,9 +112,9 @@ public partial class Consequence
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarParams != null)
+      if (Params != null)
       {
-        hashCode = (hashCode * 59) + VarParams.GetHashCode();
+        hashCode = (hashCode * 59) + Params.GetHashCode();
       }
       if (Promote != null)
       {

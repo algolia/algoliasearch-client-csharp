@@ -24,14 +24,14 @@ public partial class RedirectRuleIndexMetadata
   /// <summary>
   /// Initializes a new instance of the RedirectRuleIndexMetadata class.
   /// </summary>
-  /// <param name="varSource">Source index for the redirect rule. (required).</param>
+  /// <param name="source">Source index for the redirect rule. (required).</param>
   /// <param name="dest">Destination index for the redirect rule. (required).</param>
   /// <param name="reason">Reason for the redirect rule. (required).</param>
   /// <param name="succeed">Redirect rule status. (required).</param>
   /// <param name="data">data (required).</param>
-  public RedirectRuleIndexMetadata(string varSource, string dest, string reason, bool succeed, RedirectRuleIndexMetadataData data)
+  public RedirectRuleIndexMetadata(string source, string dest, string reason, bool succeed, RedirectRuleIndexMetadataData data)
   {
-    VarSource = varSource ?? throw new ArgumentNullException(nameof(varSource));
+    Source = source ?? throw new ArgumentNullException(nameof(source));
     Dest = dest ?? throw new ArgumentNullException(nameof(dest));
     Reason = reason ?? throw new ArgumentNullException(nameof(reason));
     Succeed = succeed;
@@ -43,7 +43,7 @@ public partial class RedirectRuleIndexMetadata
   /// </summary>
   /// <value>Source index for the redirect rule.</value>
   [JsonPropertyName("source")]
-  public string VarSource { get; set; }
+  public string Source { get; set; }
 
   /// <summary>
   /// Destination index for the redirect rule.
@@ -80,7 +80,7 @@ public partial class RedirectRuleIndexMetadata
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class RedirectRuleIndexMetadata {\n");
-    sb.Append("  VarSource: ").Append(VarSource).Append("\n");
+    sb.Append("  Source: ").Append(Source).Append("\n");
     sb.Append("  Dest: ").Append(Dest).Append("\n");
     sb.Append("  Reason: ").Append(Reason).Append("\n");
     sb.Append("  Succeed: ").Append(Succeed).Append("\n");
@@ -111,7 +111,7 @@ public partial class RedirectRuleIndexMetadata
     }
 
     return
-        (VarSource == input.VarSource || (VarSource != null && VarSource.Equals(input.VarSource))) &&
+        (Source == input.Source || (Source != null && Source.Equals(input.Source))) &&
         (Dest == input.Dest || (Dest != null && Dest.Equals(input.Dest))) &&
         (Reason == input.Reason || (Reason != null && Reason.Equals(input.Reason))) &&
         (Succeed == input.Succeed || Succeed.Equals(input.Succeed)) &&
@@ -127,9 +127,9 @@ public partial class RedirectRuleIndexMetadata
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarSource != null)
+      if (Source != null)
       {
-        hashCode = (hashCode * 59) + VarSource.GetHashCode();
+        hashCode = (hashCode * 59) + Source.GetHashCode();
       }
       if (Dest != null)
       {

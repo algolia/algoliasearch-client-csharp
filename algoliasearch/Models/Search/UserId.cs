@@ -24,13 +24,13 @@ public partial class UserId
   /// <summary>
   /// Initializes a new instance of the UserId class.
   /// </summary>
-  /// <param name="varUserID">Unique identifier of the user who makes the search request. (required).</param>
+  /// <param name="userID">Unique identifier of the user who makes the search request. (required).</param>
   /// <param name="clusterName">Cluster to which the user is assigned. (required).</param>
   /// <param name="nbRecords">Number of records belonging to the user. (required).</param>
   /// <param name="dataSize">Data size used by the user. (required).</param>
-  public UserId(string varUserID, string clusterName, int nbRecords, int dataSize)
+  public UserId(string userID, string clusterName, int nbRecords, int dataSize)
   {
-    VarUserID = varUserID ?? throw new ArgumentNullException(nameof(varUserID));
+    UserID = userID ?? throw new ArgumentNullException(nameof(userID));
     ClusterName = clusterName ?? throw new ArgumentNullException(nameof(clusterName));
     NbRecords = nbRecords;
     DataSize = dataSize;
@@ -41,7 +41,7 @@ public partial class UserId
   /// </summary>
   /// <value>Unique identifier of the user who makes the search request.</value>
   [JsonPropertyName("userID")]
-  public string VarUserID { get; set; }
+  public string UserID { get; set; }
 
   /// <summary>
   /// Cluster to which the user is assigned.
@@ -72,7 +72,7 @@ public partial class UserId
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class UserId {\n");
-    sb.Append("  VarUserID: ").Append(VarUserID).Append("\n");
+    sb.Append("  UserID: ").Append(UserID).Append("\n");
     sb.Append("  ClusterName: ").Append(ClusterName).Append("\n");
     sb.Append("  NbRecords: ").Append(NbRecords).Append("\n");
     sb.Append("  DataSize: ").Append(DataSize).Append("\n");
@@ -102,7 +102,7 @@ public partial class UserId
     }
 
     return
-        (VarUserID == input.VarUserID || (VarUserID != null && VarUserID.Equals(input.VarUserID))) &&
+        (UserID == input.UserID || (UserID != null && UserID.Equals(input.UserID))) &&
         (ClusterName == input.ClusterName || (ClusterName != null && ClusterName.Equals(input.ClusterName))) &&
         (NbRecords == input.NbRecords || NbRecords.Equals(input.NbRecords)) &&
         (DataSize == input.DataSize || DataSize.Equals(input.DataSize));
@@ -117,9 +117,9 @@ public partial class UserId
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarUserID != null)
+      if (UserID != null)
       {
-        hashCode = (hashCode * 59) + VarUserID.GetHashCode();
+        hashCode = (hashCode * 59) + UserID.GetHashCode();
       }
       if (ClusterName != null)
       {

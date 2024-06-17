@@ -69,7 +69,7 @@ public partial class SearchForFacets
   /// </summary>
   /// <value>Search parameters as a URL-encoded query string.</value>
   [JsonPropertyName("params")]
-  public string VarParams { get; set; }
+  public string Params { get; set; }
 
   /// <summary>
   /// Search query.
@@ -591,7 +591,7 @@ public partial class SearchForFacets
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class SearchForFacets {\n");
-    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("  Query: ").Append(Query).Append("\n");
     sb.Append("  SimilarQuery: ").Append(SimilarQuery).Append("\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
@@ -698,7 +698,7 @@ public partial class SearchForFacets
     }
 
     return
-        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams))) &&
+        (Params == input.Params || (Params != null && Params.Equals(input.Params))) &&
         (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
         (SimilarQuery == input.SimilarQuery || (SimilarQuery != null && SimilarQuery.Equals(input.SimilarQuery))) &&
         (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters))) &&
@@ -790,9 +790,9 @@ public partial class SearchForFacets
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarParams != null)
+      if (Params != null)
       {
-        hashCode = (hashCode * 59) + VarParams.GetHashCode();
+        hashCode = (hashCode * 59) + Params.GetHashCode();
       }
       if (Query != null)
       {

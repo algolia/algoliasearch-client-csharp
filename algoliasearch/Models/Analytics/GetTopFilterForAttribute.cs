@@ -18,10 +18,10 @@ public partial class GetTopFilterForAttribute
 {
 
   /// <summary>
-  /// Gets or Sets VarOperator
+  /// Gets or Sets Operator
   /// </summary>
   [JsonPropertyName("operator")]
-  public Operator? VarOperator { get; set; }
+  public Operator? Operator { get; set; }
   /// <summary>
   /// Initializes a new instance of the GetTopFilterForAttribute class.
   /// </summary>
@@ -31,13 +31,13 @@ public partial class GetTopFilterForAttribute
   /// Initializes a new instance of the GetTopFilterForAttribute class.
   /// </summary>
   /// <param name="attribute">Attribute name. (required).</param>
-  /// <param name="varOperator">varOperator (required).</param>
+  /// <param name="varOperator">operator (required).</param>
   /// <param name="value">Attribute value. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
   public GetTopFilterForAttribute(string attribute, Operator? varOperator, string value, int count)
   {
     Attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
-    VarOperator = varOperator;
+    Operator = varOperator;
     Value = value ?? throw new ArgumentNullException(nameof(value));
     Count = count;
   }
@@ -72,7 +72,7 @@ public partial class GetTopFilterForAttribute
     StringBuilder sb = new StringBuilder();
     sb.Append("class GetTopFilterForAttribute {\n");
     sb.Append("  Attribute: ").Append(Attribute).Append("\n");
-    sb.Append("  VarOperator: ").Append(VarOperator).Append("\n");
+    sb.Append("  Operator: ").Append(Operator).Append("\n");
     sb.Append("  Value: ").Append(Value).Append("\n");
     sb.Append("  Count: ").Append(Count).Append("\n");
     sb.Append("}\n");
@@ -102,7 +102,7 @@ public partial class GetTopFilterForAttribute
 
     return
         (Attribute == input.Attribute || (Attribute != null && Attribute.Equals(input.Attribute))) &&
-        (VarOperator == input.VarOperator || VarOperator.Equals(input.VarOperator)) &&
+        (Operator == input.Operator || Operator.Equals(input.Operator)) &&
         (Value == input.Value || (Value != null && Value.Equals(input.Value))) &&
         (Count == input.Count || Count.Equals(input.Count));
   }
@@ -120,7 +120,7 @@ public partial class GetTopFilterForAttribute
       {
         hashCode = (hashCode * 59) + Attribute.GetHashCode();
       }
-      hashCode = (hashCode * 59) + VarOperator.GetHashCode();
+      hashCode = (hashCode * 59) + Operator.GetHashCode();
       if (Value != null)
       {
         hashCode = (hashCode * 59) + Value.GetHashCode();

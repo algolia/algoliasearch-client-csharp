@@ -146,9 +146,9 @@ public partial class IndexSettings
   public List<string> SearchableAttributes { get; set; }
 
   /// <summary>
-  /// An object with custom data.  You can store up to 32&nbsp;kB as custom data. 
+  /// An object with custom data.  You can store up to 32kB as custom data. 
   /// </summary>
-  /// <value>An object with custom data.  You can store up to 32&nbsp;kB as custom data. </value>
+  /// <value>An object with custom data.  You can store up to 32kB as custom data. </value>
   [JsonPropertyName("userData")]
   public object UserData { get; set; }
 

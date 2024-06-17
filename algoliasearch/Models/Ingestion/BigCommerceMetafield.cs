@@ -28,7 +28,7 @@ public partial class BigCommerceMetafield
   /// <param name="key">Key identifier of the metafield. (required).</param>
   public BigCommerceMetafield(string varNamespace, string key)
   {
-    VarNamespace = varNamespace ?? throw new ArgumentNullException(nameof(varNamespace));
+    Namespace = varNamespace ?? throw new ArgumentNullException(nameof(varNamespace));
     Key = key ?? throw new ArgumentNullException(nameof(key));
   }
 
@@ -37,7 +37,7 @@ public partial class BigCommerceMetafield
   /// </summary>
   /// <value>Namespace of the metafield.</value>
   [JsonPropertyName("namespace")]
-  public string VarNamespace { get; set; }
+  public string Namespace { get; set; }
 
   /// <summary>
   /// Key identifier of the metafield.
@@ -54,7 +54,7 @@ public partial class BigCommerceMetafield
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class BigCommerceMetafield {\n");
-    sb.Append("  VarNamespace: ").Append(VarNamespace).Append("\n");
+    sb.Append("  Namespace: ").Append(Namespace).Append("\n");
     sb.Append("  Key: ").Append(Key).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -82,7 +82,7 @@ public partial class BigCommerceMetafield
     }
 
     return
-        (VarNamespace == input.VarNamespace || (VarNamespace != null && VarNamespace.Equals(input.VarNamespace))) &&
+        (Namespace == input.Namespace || (Namespace != null && Namespace.Equals(input.Namespace))) &&
         (Key == input.Key || (Key != null && Key.Equals(input.Key)));
   }
 
@@ -95,9 +95,9 @@ public partial class BigCommerceMetafield
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (VarNamespace != null)
+      if (Namespace != null)
       {
-        hashCode = (hashCode * 59) + VarNamespace.GetHashCode();
+        hashCode = (hashCode * 59) + Namespace.GetHashCode();
       }
       if (Key != null)
       {

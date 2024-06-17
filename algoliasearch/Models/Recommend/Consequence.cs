@@ -38,10 +38,10 @@ public partial class Consequence
   public List<PromoteConsequenceObject> Promote { get; set; }
 
   /// <summary>
-  /// Gets or Sets VarParams
+  /// Gets or Sets Params
   /// </summary>
   [JsonPropertyName("params")]
-  public ParamsConsequence VarParams { get; set; }
+  public ParamsConsequence Params { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -53,7 +53,7 @@ public partial class Consequence
     sb.Append("class Consequence {\n");
     sb.Append("  Hide: ").Append(Hide).Append("\n");
     sb.Append("  Promote: ").Append(Promote).Append("\n");
-    sb.Append("  VarParams: ").Append(VarParams).Append("\n");
+    sb.Append("  Params: ").Append(Params).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -82,7 +82,7 @@ public partial class Consequence
     return
         (Hide == input.Hide || Hide != null && input.Hide != null && Hide.SequenceEqual(input.Hide)) &&
         (Promote == input.Promote || Promote != null && input.Promote != null && Promote.SequenceEqual(input.Promote)) &&
-        (VarParams == input.VarParams || (VarParams != null && VarParams.Equals(input.VarParams)));
+        (Params == input.Params || (Params != null && Params.Equals(input.Params)));
   }
 
   /// <summary>
@@ -102,9 +102,9 @@ public partial class Consequence
       {
         hashCode = (hashCode * 59) + Promote.GetHashCode();
       }
-      if (VarParams != null)
+      if (Params != null)
       {
-        hashCode = (hashCode * 59) + VarParams.GetHashCode();
+        hashCode = (hashCode * 59) + Params.GetHashCode();
       }
       return hashCode;
     }
