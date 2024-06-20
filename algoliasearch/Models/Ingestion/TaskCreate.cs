@@ -83,6 +83,13 @@ public partial class TaskCreate
   public TaskInput Input { get; set; }
 
   /// <summary>
+  /// Date of the last cursor in RFC 3339 format.
+  /// </summary>
+  /// <value>Date of the last cursor in RFC 3339 format.</value>
+  [JsonPropertyName("cursor")]
+  public string Cursor { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -97,6 +104,7 @@ public partial class TaskCreate
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
+    sb.Append("  Cursor: ").Append(Cursor).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -129,7 +137,8 @@ public partial class TaskCreate
         (Action == input.Action || Action.Equals(input.Action)) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
-        (Input == input.Input || (Input != null && Input.Equals(input.Input)));
+        (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
+        (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor)));
   }
 
   /// <summary>
@@ -159,6 +168,10 @@ public partial class TaskCreate
       if (Input != null)
       {
         hashCode = (hashCode * 59) + Input.GetHashCode();
+      }
+      if (Cursor != null)
+      {
+        hashCode = (hashCode * 59) + Cursor.GetHashCode();
       }
       return hashCode;
     }
