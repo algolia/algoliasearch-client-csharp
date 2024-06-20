@@ -12,20 +12,20 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceValidateResponse
+/// SourceWatchResponse
 /// </summary>
-public partial class SourceValidateResponse
+public partial class SourceWatchResponse
 {
   /// <summary>
-  /// Initializes a new instance of the SourceValidateResponse class.
+  /// Initializes a new instance of the SourceWatchResponse class.
   /// </summary>
   [JsonConstructor]
-  public SourceValidateResponse() { }
+  public SourceWatchResponse() { }
   /// <summary>
-  /// Initializes a new instance of the SourceValidateResponse class.
+  /// Initializes a new instance of the SourceWatchResponse class.
   /// </summary>
   /// <param name="message">a message describing the outcome of a validate run. (required).</param>
-  public SourceValidateResponse(string message)
+  public SourceWatchResponse(string message)
   {
     Message = message ?? throw new ArgumentNullException(nameof(message));
   }
@@ -65,7 +65,7 @@ public partial class SourceValidateResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SourceValidateResponse {\n");
+    sb.Append("class SourceWatchResponse {\n");
     sb.Append("  RunID: ").Append(RunID).Append("\n");
     sb.Append("  Data: ").Append(Data).Append("\n");
     sb.Append("  Events: ").Append(Events).Append("\n");
@@ -90,7 +90,7 @@ public partial class SourceValidateResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SourceValidateResponse input)
+    if (obj is not SourceWatchResponse input)
     {
       return false;
     }

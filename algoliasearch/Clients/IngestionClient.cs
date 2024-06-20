@@ -486,30 +486,6 @@ public interface IIngestionClient
   ListDestinationsResponse GetDestinations(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`. 
-  /// </summary>
-  /// <param name="sourceID">Unique identifier of a source.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of DockerSourceStreams</returns>
-  Task<DockerSourceStreams> GetDockerSourceStreamsAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
-  /// Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`.  (Synchronous version)
-  /// </summary>
-  /// <param name="sourceID">Unique identifier of a source.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>DockerSourceStreams</returns>
-  DockerSourceStreams GetDockerSourceStreams(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
-
-  /// <summary>
   /// Retrieves a single task run event by its ID.
   /// </summary>
   /// <param name="runID">Unique identifier of a task run.</param>
@@ -888,8 +864,8 @@ public interface IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of DockerSourceDiscover</returns>
-  Task<DockerSourceDiscover> TriggerDockerSourceDiscoverAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of SourceWatchResponse</returns>
+  Task<SourceWatchResponse> TriggerDockerSourceDiscoverAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`.  (Synchronous version)
@@ -900,8 +876,8 @@ public interface IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>DockerSourceDiscover</returns>
-  DockerSourceDiscover TriggerDockerSourceDiscover(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>SourceWatchResponse</returns>
+  SourceWatchResponse TriggerDockerSourceDiscover(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Updates an authentication resource.
@@ -1016,8 +992,8 @@ public interface IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of SourceValidateResponse</returns>
-  Task<SourceValidateResponse> ValidateSourceAsync(SourceCreate sourceCreate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of SourceWatchResponse</returns>
+  Task<SourceWatchResponse> ValidateSourceAsync(SourceCreate sourceCreate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Validates a source payload to ensure it can be created and that the data source can be reached by Algolia.  (Synchronous version)
@@ -1028,8 +1004,8 @@ public interface IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>SourceValidateResponse</returns>
-  SourceValidateResponse ValidateSource(SourceCreate sourceCreate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>SourceWatchResponse</returns>
+  SourceWatchResponse ValidateSource(SourceCreate sourceCreate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia. 
@@ -1041,8 +1017,8 @@ public interface IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of SourceValidateResponse</returns>
-  Task<SourceValidateResponse> ValidateSourceBeforeUpdateAsync(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of SourceWatchResponse</returns>
+  Task<SourceWatchResponse> ValidateSourceBeforeUpdateAsync(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.  (Synchronous version)
@@ -1054,8 +1030,8 @@ public interface IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>SourceValidateResponse</returns>
-  SourceValidateResponse ValidateSourceBeforeUpdate(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>SourceWatchResponse</returns>
+  SourceWatchResponse ValidateSourceBeforeUpdate(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default);
 
 }
 
@@ -1966,54 +1942,6 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - addObject
-  ///   - deleteIndex
-  ///   - editSettings
-  /// <param name="sourceID">Unique identifier of a source.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of DockerSourceStreams</returns>
-  public async Task<DockerSourceStreams> GetDockerSourceStreamsAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
-  {
-
-    if (sourceID == null)
-      throw new ArgumentException("Parameter `sourceID` is required when calling `GetDockerSourceStreams`.");
-
-    var requestOptions = new InternalRequestOptions(options);
-
-    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
-
-    return await _transport.ExecuteRequestAsync<DockerSourceStreams>(new HttpMethod("GET"), "/1/sources/{sourceID}/discover", requestOptions, cancellationToken).ConfigureAwait(false);
-  }
-
-
-  /// <summary>
-  /// Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - addObject
-  ///   - deleteIndex
-  ///   - editSettings
-  /// <param name="sourceID">Unique identifier of a source.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>DockerSourceStreams</returns>
-  public DockerSourceStreams GetDockerSourceStreams(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => GetDockerSourceStreamsAsync(sourceID, options, cancellationToken));
-
-
-  /// <summary>
   /// Retrieves a single task run event by its ID.
   /// </summary>
   ///
@@ -2730,8 +2658,8 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of DockerSourceDiscover</returns>
-  public async Task<DockerSourceDiscover> TriggerDockerSourceDiscoverAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of SourceWatchResponse</returns>
+  public async Task<SourceWatchResponse> TriggerDockerSourceDiscoverAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (sourceID == null)
@@ -2741,7 +2669,7 @@ public partial class IngestionClient : IIngestionClient
 
     requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
-    return await _transport.ExecuteRequestAsync<DockerSourceDiscover>(new HttpMethod("POST"), "/1/sources/{sourceID}/discover", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<SourceWatchResponse>(new HttpMethod("POST"), "/1/sources/{sourceID}/discover", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -2759,8 +2687,8 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>DockerSourceDiscover</returns>
-  public DockerSourceDiscover TriggerDockerSourceDiscover(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>SourceWatchResponse</returns>
+  public SourceWatchResponse TriggerDockerSourceDiscover(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => TriggerDockerSourceDiscoverAsync(sourceID, options, cancellationToken));
 
 
@@ -2988,14 +2916,14 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of SourceValidateResponse</returns>
-  public async Task<SourceValidateResponse> ValidateSourceAsync(SourceCreate sourceCreate = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of SourceWatchResponse</returns>
+  public async Task<SourceWatchResponse> ValidateSourceAsync(SourceCreate sourceCreate = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
 
 
     requestOptions.Data = sourceCreate;
-    return await _transport.ExecuteRequestAsync<SourceValidateResponse>(new HttpMethod("POST"), "/1/sources/validate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<SourceWatchResponse>(new HttpMethod("POST"), "/1/sources/validate", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -3013,8 +2941,8 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>SourceValidateResponse</returns>
-  public SourceValidateResponse ValidateSource(SourceCreate sourceCreate = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>SourceWatchResponse</returns>
+  public SourceWatchResponse ValidateSource(SourceCreate sourceCreate = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => ValidateSourceAsync(sourceCreate, options, cancellationToken));
 
 
@@ -3033,8 +2961,8 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of SourceValidateResponse</returns>
-  public async Task<SourceValidateResponse> ValidateSourceBeforeUpdateAsync(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of SourceWatchResponse</returns>
+  public async Task<SourceWatchResponse> ValidateSourceBeforeUpdateAsync(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (sourceID == null)
@@ -3049,7 +2977,7 @@ public partial class IngestionClient : IIngestionClient
     requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
     requestOptions.Data = sourceUpdate;
-    return await _transport.ExecuteRequestAsync<SourceValidateResponse>(new HttpMethod("POST"), "/1/sources/{sourceID}/validate", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<SourceWatchResponse>(new HttpMethod("POST"), "/1/sources/{sourceID}/validate", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -3068,8 +2996,8 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>SourceValidateResponse</returns>
-  public SourceValidateResponse ValidateSourceBeforeUpdate(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>SourceWatchResponse</returns>
+  public SourceWatchResponse ValidateSourceBeforeUpdate(string sourceID, SourceUpdate sourceUpdate, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => ValidateSourceBeforeUpdateAsync(sourceID, sourceUpdate, options, cancellationToken));
 
 }
