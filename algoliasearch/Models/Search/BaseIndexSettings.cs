@@ -38,6 +38,13 @@ public partial class BaseIndexSettings
   public List<string> Replicas { get; set; }
 
   /// <summary>
+  /// Only present if the index is a [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas).
+  /// </summary>
+  /// <value>Only present if the index is a [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas).</value>
+  [JsonPropertyName("virtual")]
+  public bool? Virtual { get; set; }
+
+  /// <summary>
   /// Maximum number of search results that can be obtained through pagination.  Higher pagination limits might slow down your search. For pagination limits above 1,000, the sorting of results beyond the 1,000th hit can't be guaranteed. 
   /// </summary>
   /// <value>Maximum number of search results that can be obtained through pagination.  Higher pagination limits might slow down your search. For pagination limits above 1,000, the sorting of results beyond the 1,000th hit can't be guaranteed. </value>
@@ -152,6 +159,7 @@ public partial class BaseIndexSettings
     sb.Append("class BaseIndexSettings {\n");
     sb.Append("  AttributesForFaceting: ").Append(AttributesForFaceting).Append("\n");
     sb.Append("  Replicas: ").Append(Replicas).Append("\n");
+    sb.Append("  Virtual: ").Append(Virtual).Append("\n");
     sb.Append("  PaginationLimitedTo: ").Append(PaginationLimitedTo).Append("\n");
     sb.Append("  UnretrievableAttributes: ").Append(UnretrievableAttributes).Append("\n");
     sb.Append("  DisableTypoToleranceOnWords: ").Append(DisableTypoToleranceOnWords).Append("\n");
@@ -195,6 +203,7 @@ public partial class BaseIndexSettings
     return
         (AttributesForFaceting == input.AttributesForFaceting || AttributesForFaceting != null && input.AttributesForFaceting != null && AttributesForFaceting.SequenceEqual(input.AttributesForFaceting)) &&
         (Replicas == input.Replicas || Replicas != null && input.Replicas != null && Replicas.SequenceEqual(input.Replicas)) &&
+        (Virtual == input.Virtual || Virtual.Equals(input.Virtual)) &&
         (PaginationLimitedTo == input.PaginationLimitedTo || PaginationLimitedTo.Equals(input.PaginationLimitedTo)) &&
         (UnretrievableAttributes == input.UnretrievableAttributes || UnretrievableAttributes != null && input.UnretrievableAttributes != null && UnretrievableAttributes.SequenceEqual(input.UnretrievableAttributes)) &&
         (DisableTypoToleranceOnWords == input.DisableTypoToleranceOnWords || DisableTypoToleranceOnWords != null && input.DisableTypoToleranceOnWords != null && DisableTypoToleranceOnWords.SequenceEqual(input.DisableTypoToleranceOnWords)) &&
@@ -229,6 +238,7 @@ public partial class BaseIndexSettings
       {
         hashCode = (hashCode * 59) + Replicas.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Virtual.GetHashCode();
       hashCode = (hashCode * 59) + PaginationLimitedTo.GetHashCode();
       if (UnretrievableAttributes != null)
       {

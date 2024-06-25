@@ -37,6 +37,13 @@ public partial class Value
   public List<string> Order { get; set; }
 
   /// <summary>
+  /// Hide facet values.
+  /// </summary>
+  /// <value>Hide facet values.</value>
+  [JsonPropertyName("hide")]
+  public List<string> Hide { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -46,6 +53,7 @@ public partial class Value
     sb.Append("class Value {\n");
     sb.Append("  Order: ").Append(Order).Append("\n");
     sb.Append("  SortRemainingBy: ").Append(SortRemainingBy).Append("\n");
+    sb.Append("  Hide: ").Append(Hide).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -73,7 +81,8 @@ public partial class Value
 
     return
         (Order == input.Order || Order != null && input.Order != null && Order.SequenceEqual(input.Order)) &&
-        (SortRemainingBy == input.SortRemainingBy || SortRemainingBy.Equals(input.SortRemainingBy));
+        (SortRemainingBy == input.SortRemainingBy || SortRemainingBy.Equals(input.SortRemainingBy)) &&
+        (Hide == input.Hide || Hide != null && input.Hide != null && Hide.SequenceEqual(input.Hide));
   }
 
   /// <summary>
@@ -90,6 +99,10 @@ public partial class Value
         hashCode = (hashCode * 59) + Order.GetHashCode();
       }
       hashCode = (hashCode * 59) + SortRemainingBy.GetHashCode();
+      if (Hide != null)
+      {
+        hashCode = (hashCode * 59) + Hide.GetHashCode();
+      }
       return hashCode;
     }
   }
