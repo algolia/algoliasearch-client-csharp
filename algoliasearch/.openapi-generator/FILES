@@ -3,6 +3,7 @@
 Algolia.Search.csproj
 Clients/UsageClient.cs
 Clients/UsageConfiguration.cs
+LICENSE
 Models/Usage/ErrorBase.cs
 Models/Usage/GetUsage200Response.cs
 Models/Usage/GetUsage200ResponseStatisticsInner.cs
