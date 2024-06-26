@@ -124,6 +124,13 @@ public partial class FetchedIndex
   public List<string> Replicas { get; set; }
 
   /// <summary>
+  /// Only present if the index is a [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas).
+  /// </summary>
+  /// <value>Only present if the index is a [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas).</value>
+  [JsonPropertyName("virtual")]
+  public bool? Virtual { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -142,6 +149,7 @@ public partial class FetchedIndex
     sb.Append("  PendingTask: ").Append(PendingTask).Append("\n");
     sb.Append("  Primary: ").Append(Primary).Append("\n");
     sb.Append("  Replicas: ").Append(Replicas).Append("\n");
+    sb.Append("  Virtual: ").Append(Virtual).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -178,7 +186,8 @@ public partial class FetchedIndex
         (NumberOfPendingTasks == input.NumberOfPendingTasks || NumberOfPendingTasks.Equals(input.NumberOfPendingTasks)) &&
         (PendingTask == input.PendingTask || PendingTask.Equals(input.PendingTask)) &&
         (Primary == input.Primary || (Primary != null && Primary.Equals(input.Primary))) &&
-        (Replicas == input.Replicas || Replicas != null && input.Replicas != null && Replicas.SequenceEqual(input.Replicas));
+        (Replicas == input.Replicas || Replicas != null && input.Replicas != null && Replicas.SequenceEqual(input.Replicas)) &&
+        (Virtual == input.Virtual || Virtual.Equals(input.Virtual));
   }
 
   /// <summary>
@@ -216,6 +225,7 @@ public partial class FetchedIndex
       {
         hashCode = (hashCode * 59) + Replicas.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Virtual.GetHashCode();
       return hashCode;
     }
   }
