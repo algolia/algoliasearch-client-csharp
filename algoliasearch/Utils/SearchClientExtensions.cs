@@ -532,6 +532,50 @@ public partial class SearchClient
     return Math.Min(retryCount * 200, 5000);
   }
 
+  /// <summary>
+  /// Helper: Saves the given array of objects in the given index. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
+  /// </summary>
+  /// <param name="indexName">The index in which to perform the request.</param>
+  /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <typeparam name="T"></typeparam>
+  public async Task<List<BatchResponse>> SaveObjectsAsync<T>(string indexName, IEnumerable<T> objects,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default) where T : class
+  {
+    return await ChunkedBatchAsync(indexName, objects, Action.AddObject, 1000, options, cancellationToken).ConfigureAwait(false);
+  }
+
+  /// <summary>
+  /// Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
+  /// </summary>
+  /// <param name="indexName">The index in which to perform the request.</param>
+  /// <param name="objectIDs">The list of `objectIDs` to remove from the given Algolia `indexName`.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  public async Task<List<BatchResponse>> DeleteObjects(string indexName, IEnumerable<String> objectIDs,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default)
+  {
+    return await ChunkedBatchAsync(indexName, objectIDs.Select(id => new { objectID = id }), Action.DeleteObject, 1000, options, cancellationToken).ConfigureAwait(false);
+  }
+
+  /// <summary>
+  /// Helper: Replaces object content of all the given objects according to their respective `objectID` field. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
+  /// </summary>
+  /// <param name="indexName">The index in which to perform the request.</param>
+  /// <param name="objects">The list of `objects` to update in the given Algolia `indexName`.</param>
+  /// <param name="createIfNotExists">To be provided if non-existing objects are passed, otherwise, the call will fail.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  public async Task<List<BatchResponse>> PartialUpdateObjects<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists,
+    RequestOptions options = null,
+    CancellationToken cancellationToken = default) where T : class
+  {
+    return await ChunkedBatchAsync(indexName, objects, createIfNotExists ? Action.PartialUpdateObject : Action.PartialUpdateObjectNoCreate, 1000, options, cancellationToken).ConfigureAwait(false);
+  }
+
   private static async Task<List<TU>> CreateIterable<TU>(Func<TU, Task<TU>> executeQuery,
     Func<TU, bool> stopCondition)
   {
