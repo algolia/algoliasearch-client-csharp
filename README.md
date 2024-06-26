@@ -32,42 +32,78 @@
 * Retry strategy & Helpers.
 
 **Migration note for v7.x**
-> In February 2024, we released v7 of our .NET client. If you are using version 6.x of the client, read the [migration guide to version 7.x](https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/csharp/).
 
-This version has been completely rewritten and is part of the [Api Automation initiative](https://github.com/algolia/api-clients-automation), meaning that models and routes are generated from the Algolia APIs specifications.
-
-This version introduces breaking changes. A document has been created to help you migrate from v6 to v7. You can find it [here](https://api-clients-automation.netlify.app/docs/clients/migration-guides/).
+> In July 2024, we released v7 of our .NET client. If you are using version 6.x of the client, read the [migration guide to version 7.x](https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/csharp/).
 
 **Migration note from v5.x to v6.x**
->
+
 > In January 2019, we released v6 of our .NET client. If you are using version 5.x of the client, read the [migration guide to version 6.x](https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/csharp/).
 Version 5.x will **no longer** be under active development.
 
 ## 💡 Getting Started
 
-Install the library with the `.NET CLI`:
+To get started, first install the Algolia.Search client.
 
-```sh*
-dotnet add package Algolia.Search
+You can get the last version of the client from [NuGet](https://www.nuget.org/packages/Algolia.Search/).
+
+If you are using the .NET CLI, you can install the package using the following command:
+
+```bash
+dotnet add package Algolia.Search --version <The version you want to install>
 ```
 
-or with the `Nuget Package Manager Console`:
+Or directly in your .csproj file:
 
-```sh*
-Install-Package Algolia.Search
+```csharp
+<PackageReference Include="Algolia.Search" Version=${versions.csharp} />
 ```
 
-### Documentation, Guides & API Reference
+You can now import the Algolia API client in your project and play with it.
 
-You will find all you need to get started in our API Client Automation [documentation](https://api-clients-automation.netlify.app/docs/clients/csharp/).
+```csharp
+using Algolia.Search.Clients;
+using Algolia.Search.Http;
 
-For full documentation, visit the **[Algolia .NET API Client documentation](https://www.algolia.com/doc/api-client/getting-started/install/csharp/)**.
+var client = new SearchClient(new SearchConfig("YOUR_APP_ID", "YOUR_API_KEY"));
 
-#### ASP.NET
-If you're using ASP.NET, checkout the [following tutorial](https://www.algolia.com/doc/api-client/getting-started/tutorials/asp.net/csharp/).
+// Add a new record to your Algolia index
+var response = await client.SaveObjectAsync(
+  "<YOUR_INDEX_NAME>",
+  new Dictionary<string, string> { { "objectID", "id" }, { "test", "val" } }
+);
+
+// Poll the task status to know when it has been indexed
+await client.WaitForTaskAsync("<YOUR_INDEX_NAME>", response.TaskID);
+
+// Fetch search results, with typo tolerance
+var response = await client.SearchAsync<Object>(
+  new SearchMethodParams
+  {
+    Requests = new List<SearchQuery>
+    {
+      new SearchQuery(
+        new SearchForHits
+        {
+          IndexName = "<YOUR_INDEX_NAME>",
+          Query = "<YOUR_QUERY>",
+          HitsPerPage = 50,
+        }
+      )
+    },
+  }
+);
+```
+
+For full documentation, visit the **[Algolia CSharp API Client](https://www.algolia.com/doc/api-client/getting-started/install/csharp/)**.
 
 ## ❓ Troubleshooting
-Encountering an issue? Before reaching out to support, we recommend heading to our [FAQ](https://www.algolia.com/doc/api-client/troubleshooting/faq/csharp/) where you will find answers for the most common issues and gotchas with the client.
+
+Encountering an issue? Before reaching out to support, we recommend heading to our [FAQ](https://www.algolia.com/doc/api-client/troubleshooting/faq/csharp/) where you will find answers for the most common issues and gotchas with the client. You can also open [a GitHub issue](https://github.com/algolia/api-clients-automation/issues/new?assignees=&labels=&projects=&template=Bug_report.md)
+
+## Contributing
+
+This repository hosts the code of the generated Algolia API client for CSharp, if you'd like to contribute, head over to the [main repository](https://github.com/algolia/api-clients-automation). You can also find contributing guides on [our documentation website](https://api-clients-automation.netlify.app/docs/contributing/introduction).
 
 ## 📄 License
-Algolia .NET API Client is an open-sourced software licensed under the [MIT license](LICENSE.md).
+
+The Algolia .NET API Client is an open-sourced software licensed under the [MIT license](LICENSE).
