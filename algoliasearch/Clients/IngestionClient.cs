@@ -1002,7 +1002,7 @@ public interface IIngestionClient
   SourceWatchResponse TriggerDockerSourceDiscover(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Searches for transformations.
+  /// Try a transformation.
   /// </summary>
   /// <param name="transformationTry"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1014,7 +1014,7 @@ public interface IIngestionClient
   Task<TransformationTryResponse> TryTransformationsAsync(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Searches for transformations. (Synchronous version)
+  /// Try a transformation. (Synchronous version)
   /// </summary>
   /// <param name="transformationTry"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -3084,7 +3084,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Searches for transformations.
+  /// Try a transformation.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -3113,7 +3113,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <summary>
-  /// Searches for transformations. (Synchronous version)
+  /// Try a transformation. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
