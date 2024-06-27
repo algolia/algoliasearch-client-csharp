@@ -131,10 +131,10 @@ public partial class ABTest
   public List<Variant> Variants { get; set; }
 
   /// <summary>
-  /// Gets or Sets VarConfiguration
+  /// Gets or Sets Configuration
   /// </summary>
   [JsonPropertyName("configuration")]
-  public ABTestConfiguration VarConfiguration { get; set; }
+  public ABTestConfiguration Configuration { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -156,7 +156,7 @@ public partial class ABTest
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Status: ").Append(Status).Append("\n");
     sb.Append("  Variants: ").Append(Variants).Append("\n");
-    sb.Append("  VarConfiguration: ").Append(VarConfiguration).Append("\n");
+    sb.Append("  Configuration: ").Append(Configuration).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -195,7 +195,7 @@ public partial class ABTest
         (Name == input.Name || (Name != null && Name.Equals(input.Name))) &&
         (Status == input.Status || Status.Equals(input.Status)) &&
         (Variants == input.Variants || Variants != null && input.Variants != null && Variants.SequenceEqual(input.Variants)) &&
-        (VarConfiguration == input.VarConfiguration || (VarConfiguration != null && VarConfiguration.Equals(input.VarConfiguration)));
+        (Configuration == input.Configuration || (Configuration != null && Configuration.Equals(input.Configuration)));
   }
 
   /// <summary>
@@ -249,9 +249,9 @@ public partial class ABTest
       {
         hashCode = (hashCode * 59) + Variants.GetHashCode();
       }
-      if (VarConfiguration != null)
+      if (Configuration != null)
       {
-        hashCode = (hashCode * 59) + VarConfiguration.GetHashCode();
+        hashCode = (hashCode * 59) + Configuration.GetHashCode();
       }
       return hashCode;
     }

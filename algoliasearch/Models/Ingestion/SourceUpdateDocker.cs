@@ -30,10 +30,10 @@ public partial class SourceUpdateDocker
   /// <summary>
   /// Initializes a new instance of the SourceUpdateDocker class.
   /// </summary>
-  /// <param name="varConfiguration">Configuration of the spec. (required).</param>
-  public SourceUpdateDocker(object varConfiguration)
+  /// <param name="configuration">Configuration of the spec. (required).</param>
+  public SourceUpdateDocker(object configuration)
   {
-    VarConfiguration = varConfiguration ?? throw new ArgumentNullException(nameof(varConfiguration));
+    Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
   }
 
   /// <summary>
@@ -55,7 +55,7 @@ public partial class SourceUpdateDocker
   /// </summary>
   /// <value>Configuration of the spec.</value>
   [JsonPropertyName("configuration")]
-  public object VarConfiguration { get; set; }
+  public object Configuration { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -68,7 +68,7 @@ public partial class SourceUpdateDocker
     sb.Append("  Registry: ").Append(Registry).Append("\n");
     sb.Append("  Image: ").Append(Image).Append("\n");
     sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
-    sb.Append("  VarConfiguration: ").Append(VarConfiguration).Append("\n");
+    sb.Append("  Configuration: ").Append(Configuration).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -98,7 +98,7 @@ public partial class SourceUpdateDocker
         (Registry == input.Registry || Registry.Equals(input.Registry)) &&
         (Image == input.Image || (Image != null && Image.Equals(input.Image))) &&
         (VarVersion == input.VarVersion || (VarVersion != null && VarVersion.Equals(input.VarVersion))) &&
-        (VarConfiguration == input.VarConfiguration || (VarConfiguration != null && VarConfiguration.Equals(input.VarConfiguration)));
+        (Configuration == input.Configuration || (Configuration != null && Configuration.Equals(input.Configuration)));
   }
 
   /// <summary>
@@ -119,9 +119,9 @@ public partial class SourceUpdateDocker
       {
         hashCode = (hashCode * 59) + VarVersion.GetHashCode();
       }
-      if (VarConfiguration != null)
+      if (Configuration != null)
       {
-        hashCode = (hashCode * 59) + VarConfiguration.GetHashCode();
+        hashCode = (hashCode * 59) + Configuration.GetHashCode();
       }
       return hashCode;
     }

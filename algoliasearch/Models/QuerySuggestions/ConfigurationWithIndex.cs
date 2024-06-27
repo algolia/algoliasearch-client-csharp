@@ -14,20 +14,22 @@ namespace Algolia.Search.Models.QuerySuggestions;
 /// <summary>
 /// Query Suggestions configuration.
 /// </summary>
-public partial class QuerySuggestionsConfiguration
+public partial class ConfigurationWithIndex
 {
   /// <summary>
-  /// Initializes a new instance of the QuerySuggestionsConfiguration class.
+  /// Initializes a new instance of the ConfigurationWithIndex class.
   /// </summary>
   [JsonConstructor]
-  public QuerySuggestionsConfiguration() { }
+  public ConfigurationWithIndex() { }
   /// <summary>
-  /// Initializes a new instance of the QuerySuggestionsConfiguration class.
+  /// Initializes a new instance of the ConfigurationWithIndex class.
   /// </summary>
   /// <param name="sourceIndices">Algolia indices from which to get the popular searches for query suggestions. (required).</param>
-  public QuerySuggestionsConfiguration(List<SourceIndex> sourceIndices)
+  /// <param name="indexName">Name of the Query Suggestions index (case-sensitive). (required).</param>
+  public ConfigurationWithIndex(List<SourceIndex> sourceIndices, string indexName)
   {
     SourceIndices = sourceIndices ?? throw new ArgumentNullException(nameof(sourceIndices));
+    IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
   }
 
   /// <summary>
@@ -64,18 +66,26 @@ public partial class QuerySuggestionsConfiguration
   public bool? AllowSpecialCharacters { get; set; }
 
   /// <summary>
+  /// Name of the Query Suggestions index (case-sensitive).
+  /// </summary>
+  /// <value>Name of the Query Suggestions index (case-sensitive).</value>
+  [JsonPropertyName("indexName")]
+  public string IndexName { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class QuerySuggestionsConfiguration {\n");
+    sb.Append("class ConfigurationWithIndex {\n");
     sb.Append("  SourceIndices: ").Append(SourceIndices).Append("\n");
     sb.Append("  Languages: ").Append(Languages).Append("\n");
     sb.Append("  Exclude: ").Append(Exclude).Append("\n");
     sb.Append("  EnablePersonalization: ").Append(EnablePersonalization).Append("\n");
     sb.Append("  AllowSpecialCharacters: ").Append(AllowSpecialCharacters).Append("\n");
+    sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -96,7 +106,7 @@ public partial class QuerySuggestionsConfiguration
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not QuerySuggestionsConfiguration input)
+    if (obj is not ConfigurationWithIndex input)
     {
       return false;
     }
@@ -106,7 +116,8 @@ public partial class QuerySuggestionsConfiguration
         (Languages == input.Languages || (Languages != null && Languages.Equals(input.Languages))) &&
         (Exclude == input.Exclude || Exclude != null && input.Exclude != null && Exclude.SequenceEqual(input.Exclude)) &&
         (EnablePersonalization == input.EnablePersonalization || EnablePersonalization.Equals(input.EnablePersonalization)) &&
-        (AllowSpecialCharacters == input.AllowSpecialCharacters || AllowSpecialCharacters.Equals(input.AllowSpecialCharacters));
+        (AllowSpecialCharacters == input.AllowSpecialCharacters || AllowSpecialCharacters.Equals(input.AllowSpecialCharacters)) &&
+        (IndexName == input.IndexName || (IndexName != null && IndexName.Equals(input.IndexName)));
   }
 
   /// <summary>
@@ -132,6 +143,10 @@ public partial class QuerySuggestionsConfiguration
       }
       hashCode = (hashCode * 59) + EnablePersonalization.GetHashCode();
       hashCode = (hashCode * 59) + AllowSpecialCharacters.GetHashCode();
+      if (IndexName != null)
+      {
+        hashCode = (hashCode * 59) + IndexName.GetHashCode();
+      }
       return hashCode;
     }
   }

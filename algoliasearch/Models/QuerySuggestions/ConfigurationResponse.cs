@@ -14,15 +14,15 @@ namespace Algolia.Search.Models.QuerySuggestions;
 /// <summary>
 /// API response for retrieving Query Suggestions configurations.
 /// </summary>
-public partial class QuerySuggestionsConfigurationResponse
+public partial class ConfigurationResponse
 {
   /// <summary>
-  /// Initializes a new instance of the QuerySuggestionsConfigurationResponse class.
+  /// Initializes a new instance of the ConfigurationResponse class.
   /// </summary>
   [JsonConstructor]
-  public QuerySuggestionsConfigurationResponse() { }
+  public ConfigurationResponse() { }
   /// <summary>
-  /// Initializes a new instance of the QuerySuggestionsConfigurationResponse class.
+  /// Initializes a new instance of the ConfigurationResponse class.
   /// </summary>
   /// <param name="appID">Algolia application ID to which this Query Suggestions configuration belongs. (required).</param>
   /// <param name="indexName">Name of the Query Suggestions index (case-sensitive). (required).</param>
@@ -31,7 +31,7 @@ public partial class QuerySuggestionsConfigurationResponse
   /// <param name="exclude">exclude (required).</param>
   /// <param name="enablePersonalization">Whether to turn on personalized query suggestions. (required) (default to false).</param>
   /// <param name="allowSpecialCharacters">Whether to include suggestions with special characters. (required) (default to false).</param>
-  public QuerySuggestionsConfigurationResponse(string appID, string indexName, List<SourceIndex> sourceIndices, Languages languages, List<string> exclude, bool enablePersonalization, bool allowSpecialCharacters)
+  public ConfigurationResponse(string appID, string indexName, List<SourceIndex> sourceIndices, Languages languages, List<string> exclude, bool enablePersonalization, bool allowSpecialCharacters)
   {
     AppID = appID ?? throw new ArgumentNullException(nameof(appID));
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
@@ -96,7 +96,7 @@ public partial class QuerySuggestionsConfigurationResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class QuerySuggestionsConfigurationResponse {\n");
+    sb.Append("class ConfigurationResponse {\n");
     sb.Append("  AppID: ").Append(AppID).Append("\n");
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  SourceIndices: ").Append(SourceIndices).Append("\n");
@@ -124,7 +124,7 @@ public partial class QuerySuggestionsConfigurationResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not QuerySuggestionsConfigurationResponse input)
+    if (obj is not ConfigurationResponse input)
     {
       return false;
     }
