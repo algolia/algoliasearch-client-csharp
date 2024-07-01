@@ -9,25 +9,25 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Recommend;
+namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/), this this parameter is for internal use only. 
+/// The redirect rule container.
 /// </summary>
-public partial class Redirect
+public partial class RedirectURL
 {
   /// <summary>
-  /// Initializes a new instance of the Redirect class.
+  /// Initializes a new instance of the RedirectURL class.
   /// </summary>
-  public Redirect()
+  public RedirectURL()
   {
   }
 
   /// <summary>
-  /// Gets or Sets Index
+  /// Gets or Sets Url
   /// </summary>
-  [JsonPropertyName("index")]
-  public List<RedirectRuleIndexMetadata> Index { get; set; }
+  [JsonPropertyName("url")]
+  public string Url { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -36,8 +36,8 @@ public partial class Redirect
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class Redirect {\n");
-    sb.Append("  Index: ").Append(Index).Append("\n");
+    sb.Append("class RedirectURL {\n");
+    sb.Append("  Url: ").Append(Url).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -58,13 +58,13 @@ public partial class Redirect
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not Redirect input)
+    if (obj is not RedirectURL input)
     {
       return false;
     }
 
     return
-        (Index == input.Index || Index != null && input.Index != null && Index.SequenceEqual(input.Index));
+        (Url == input.Url || (Url != null && Url.Equals(input.Url)));
   }
 
   /// <summary>
@@ -76,9 +76,9 @@ public partial class Redirect
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Index != null)
+      if (Url != null)
       {
-        hashCode = (hashCode * 59) + Index.GetHashCode();
+        hashCode = (hashCode * 59) + Url.GetHashCode();
       }
       return hashCode;
     }

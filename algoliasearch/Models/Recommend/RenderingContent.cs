@@ -30,6 +30,12 @@ public partial class RenderingContent
   public FacetOrdering FacetOrdering { get; set; }
 
   /// <summary>
+  /// Gets or Sets Redirect
+  /// </summary>
+  [JsonPropertyName("redirect")]
+  public RedirectURL Redirect { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -38,6 +44,7 @@ public partial class RenderingContent
     StringBuilder sb = new StringBuilder();
     sb.Append("class RenderingContent {\n");
     sb.Append("  FacetOrdering: ").Append(FacetOrdering).Append("\n");
+    sb.Append("  Redirect: ").Append(Redirect).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -64,7 +71,8 @@ public partial class RenderingContent
     }
 
     return
-        (FacetOrdering == input.FacetOrdering || (FacetOrdering != null && FacetOrdering.Equals(input.FacetOrdering)));
+        (FacetOrdering == input.FacetOrdering || (FacetOrdering != null && FacetOrdering.Equals(input.FacetOrdering))) &&
+        (Redirect == input.Redirect || (Redirect != null && Redirect.Equals(input.Redirect)));
   }
 
   /// <summary>
@@ -79,6 +87,10 @@ public partial class RenderingContent
       if (FacetOrdering != null)
       {
         hashCode = (hashCode * 59) + FacetOrdering.GetHashCode();
+      }
+      if (Redirect != null)
+      {
+        hashCode = (hashCode * 59) + Redirect.GetHashCode();
       }
       return hashCode;
     }
