@@ -14,18 +14,18 @@ namespace Algolia.Search.Models.Ingestion;
 /// <summary>
 /// Input for a `streaming` task whose source is of type `ga4BigqueryExport` and for which extracted data is continuously streamed.
 /// </summary>
-public partial class StreamingUtilsInput
+public partial class StreamingInput
 {
   /// <summary>
-  /// Initializes a new instance of the StreamingUtilsInput class.
+  /// Initializes a new instance of the StreamingInput class.
   /// </summary>
   [JsonConstructor]
-  public StreamingUtilsInput() { }
+  public StreamingInput() { }
   /// <summary>
-  /// Initializes a new instance of the StreamingUtilsInput class.
+  /// Initializes a new instance of the StreamingInput class.
   /// </summary>
   /// <param name="mapping">mapping (required).</param>
-  public StreamingUtilsInput(MappingInput mapping)
+  public StreamingInput(MappingInput mapping)
   {
     Mapping = mapping ?? throw new ArgumentNullException(nameof(mapping));
   }
@@ -43,7 +43,7 @@ public partial class StreamingUtilsInput
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class StreamingUtilsInput {\n");
+    sb.Append("class StreamingInput {\n");
     sb.Append("  Mapping: ").Append(Mapping).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -65,7 +65,7 @@ public partial class StreamingUtilsInput
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not StreamingUtilsInput input)
+    if (obj is not StreamingInput input)
     {
       return false;
     }

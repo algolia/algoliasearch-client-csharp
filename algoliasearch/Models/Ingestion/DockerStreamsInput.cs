@@ -12,36 +12,29 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Input for scheduled tasks whose source is of type `bigquery` and for which extracted data spans a fixed number of days.
+/// DockerStreamsInput
 /// </summary>
-public partial class ScheduleDateUtilsInput
+public partial class DockerStreamsInput
 {
   /// <summary>
-  /// Initializes a new instance of the ScheduleDateUtilsInput class.
+  /// Initializes a new instance of the DockerStreamsInput class.
   /// </summary>
   [JsonConstructor]
-  public ScheduleDateUtilsInput() { }
+  public DockerStreamsInput() { }
   /// <summary>
-  /// Initializes a new instance of the ScheduleDateUtilsInput class.
+  /// Initializes a new instance of the DockerStreamsInput class.
   /// </summary>
-  /// <param name="timeframe">Number of days in the past until the current day for which to extract Big Query data. (required).</param>
-  public ScheduleDateUtilsInput(int timeframe)
+  /// <param name="streams">streams (required).</param>
+  public DockerStreamsInput(object streams)
   {
-    Timeframe = timeframe;
+    Streams = streams ?? throw new ArgumentNullException(nameof(streams));
   }
 
   /// <summary>
-  /// Number of days in the past until the current day for which to extract Big Query data.
+  /// Gets or Sets Streams
   /// </summary>
-  /// <value>Number of days in the past until the current day for which to extract Big Query data.</value>
-  [JsonPropertyName("timeframe")]
-  public int Timeframe { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Mapping
-  /// </summary>
-  [JsonPropertyName("mapping")]
-  public MappingInput Mapping { get; set; }
+  [JsonPropertyName("streams")]
+  public object Streams { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -50,9 +43,8 @@ public partial class ScheduleDateUtilsInput
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ScheduleDateUtilsInput {\n");
-    sb.Append("  Timeframe: ").Append(Timeframe).Append("\n");
-    sb.Append("  Mapping: ").Append(Mapping).Append("\n");
+    sb.Append("class DockerStreamsInput {\n");
+    sb.Append("  Streams: ").Append(Streams).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -73,14 +65,13 @@ public partial class ScheduleDateUtilsInput
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ScheduleDateUtilsInput input)
+    if (obj is not DockerStreamsInput input)
     {
       return false;
     }
 
     return
-        (Timeframe == input.Timeframe || Timeframe.Equals(input.Timeframe)) &&
-        (Mapping == input.Mapping || (Mapping != null && Mapping.Equals(input.Mapping)));
+        (Streams == input.Streams || (Streams != null && Streams.Equals(input.Streams)));
   }
 
   /// <summary>
@@ -92,10 +83,9 @@ public partial class ScheduleDateUtilsInput
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Timeframe.GetHashCode();
-      if (Mapping != null)
+      if (Streams != null)
       {
-        hashCode = (hashCode * 59) + Mapping.GetHashCode();
+        hashCode = (hashCode * 59) + Streams.GetHashCode();
       }
       return hashCode;
     }

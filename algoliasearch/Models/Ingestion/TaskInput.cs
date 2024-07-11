@@ -22,30 +22,20 @@ public partial class TaskInput : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the TaskInput class
-  /// with a OnDemandDateUtilsInput
+  /// with a StreamingInput
   /// </summary>
-  /// <param name="actualInstance">An instance of OnDemandDateUtilsInput.</param>
-  public TaskInput(OnDemandDateUtilsInput actualInstance)
+  /// <param name="actualInstance">An instance of StreamingInput.</param>
+  public TaskInput(StreamingInput actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
   /// Initializes a new instance of the TaskInput class
-  /// with a ScheduleDateUtilsInput
+  /// with a DockerStreamsInput
   /// </summary>
-  /// <param name="actualInstance">An instance of ScheduleDateUtilsInput.</param>
-  public TaskInput(ScheduleDateUtilsInput actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the TaskInput class
-  /// with a StreamingUtilsInput
-  /// </summary>
-  /// <param name="actualInstance">An instance of StreamingUtilsInput.</param>
-  public TaskInput(StreamingUtilsInput actualInstance)
+  /// <param name="actualInstance">An instance of DockerStreamsInput.</param>
+  public TaskInput(DockerStreamsInput actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -67,33 +57,23 @@ public partial class TaskInput : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `OnDemandDateUtilsInput`. If the actual instance is not `OnDemandDateUtilsInput`,
+  /// Get the actual instance of `StreamingInput`. If the actual instance is not `StreamingInput`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of OnDemandDateUtilsInput</returns>
-  public OnDemandDateUtilsInput AsOnDemandDateUtilsInput()
+  /// <returns>An instance of StreamingInput</returns>
+  public StreamingInput AsStreamingInput()
   {
-    return (OnDemandDateUtilsInput)ActualInstance;
+    return (StreamingInput)ActualInstance;
   }
 
   /// <summary>
-  /// Get the actual instance of `ScheduleDateUtilsInput`. If the actual instance is not `ScheduleDateUtilsInput`,
+  /// Get the actual instance of `DockerStreamsInput`. If the actual instance is not `DockerStreamsInput`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of ScheduleDateUtilsInput</returns>
-  public ScheduleDateUtilsInput AsScheduleDateUtilsInput()
+  /// <returns>An instance of DockerStreamsInput</returns>
+  public DockerStreamsInput AsDockerStreamsInput()
   {
-    return (ScheduleDateUtilsInput)ActualInstance;
-  }
-
-  /// <summary>
-  /// Get the actual instance of `StreamingUtilsInput`. If the actual instance is not `StreamingUtilsInput`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of StreamingUtilsInput</returns>
-  public StreamingUtilsInput AsStreamingUtilsInput()
-  {
-    return (StreamingUtilsInput)ActualInstance;
+    return (DockerStreamsInput)ActualInstance;
   }
 
   /// <summary>
@@ -108,30 +88,21 @@ public partial class TaskInput : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `OnDemandDateUtilsInput` type.
+  /// Check if the actual instance is of `StreamingInput` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsOnDemandDateUtilsInput()
+  public bool IsStreamingInput()
   {
-    return ActualInstance.GetType() == typeof(OnDemandDateUtilsInput);
+    return ActualInstance.GetType() == typeof(StreamingInput);
   }
 
   /// <summary>
-  /// Check if the actual instance is of `ScheduleDateUtilsInput` type.
+  /// Check if the actual instance is of `DockerStreamsInput` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsScheduleDateUtilsInput()
+  public bool IsDockerStreamsInput()
   {
-    return ActualInstance.GetType() == typeof(ScheduleDateUtilsInput);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `StreamingUtilsInput` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsStreamingUtilsInput()
-  {
-    return ActualInstance.GetType() == typeof(StreamingUtilsInput);
+    return ActualInstance.GetType() == typeof(DockerStreamsInput);
   }
 
   /// <summary>
@@ -231,36 +202,24 @@ public class TaskInputJsonConverter : JsonConverter<TaskInput>
     {
       try
       {
-        return new TaskInput(jsonDocument.Deserialize<OnDemandDateUtilsInput>(JsonConfig.Options));
+        return new TaskInput(jsonDocument.Deserialize<StreamingInput>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into OnDemandDateUtilsInput: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into StreamingInput: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
       {
-        return new TaskInput(jsonDocument.Deserialize<ScheduleDateUtilsInput>(JsonConfig.Options));
+        return new TaskInput(jsonDocument.Deserialize<DockerStreamsInput>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ScheduleDateUtilsInput: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new TaskInput(jsonDocument.Deserialize<StreamingUtilsInput>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into StreamingUtilsInput: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into DockerStreamsInput: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)
