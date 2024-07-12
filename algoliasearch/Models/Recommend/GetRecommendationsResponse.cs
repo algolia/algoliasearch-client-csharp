@@ -19,8 +19,15 @@ public partial class GetRecommendationsResponse
   /// <summary>
   /// Initializes a new instance of the GetRecommendationsResponse class.
   /// </summary>
-  public GetRecommendationsResponse()
+  [JsonConstructor]
+  public GetRecommendationsResponse() { }
+  /// <summary>
+  /// Initializes a new instance of the GetRecommendationsResponse class.
+  /// </summary>
+  /// <param name="results">results (required).</param>
+  public GetRecommendationsResponse(List<RecommendationsResults> results)
   {
+    Results = results ?? throw new ArgumentNullException(nameof(results));
   }
 
   /// <summary>
