@@ -24,19 +24,19 @@ public partial class RecommendationsResults
   /// <summary>
   /// Initializes a new instance of the RecommendationsResults class.
   /// </summary>
-  /// <param name="hitsPerPage">Number of hits per page. (required) (default to 20).</param>
+  /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
+  /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
   /// <param name="nbHits">Number of results (hits). (required).</param>
   /// <param name="nbPages">Number of pages of results. (required).</param>
-  /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
-  /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
+  /// <param name="hitsPerPage">Number of hits per page. (required) (default to 20).</param>
   /// <param name="hits">hits (required).</param>
-  public RecommendationsResults(int hitsPerPage, int nbHits, int nbPages, int page, int processingTimeMS, List<RecommendationsHit> hits)
+  public RecommendationsResults(int processingTimeMS, int page, int nbHits, int nbPages, int hitsPerPage, List<RecommendationsHit> hits)
   {
-    HitsPerPage = hitsPerPage;
+    ProcessingTimeMS = processingTimeMS;
+    Page = page;
     NbHits = nbHits;
     NbPages = nbPages;
-    Page = page;
-    ProcessingTimeMS = processingTimeMS;
+    HitsPerPage = hitsPerPage;
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
   }
 
@@ -113,13 +113,6 @@ public partial class RecommendationsResults
   public Dictionary<string, FacetsStats> FacetsStats { get; set; }
 
   /// <summary>
-  /// Number of hits per page.
-  /// </summary>
-  /// <value>Number of hits per page.</value>
-  [JsonPropertyName("hitsPerPage")]
-  public int HitsPerPage { get; set; }
-
-  /// <summary>
   /// Index name used for the query.
   /// </summary>
   /// <value>Index name used for the query.</value>
@@ -141,32 +134,11 @@ public partial class RecommendationsResults
   public string Message { get; set; }
 
   /// <summary>
-  /// Number of results (hits).
-  /// </summary>
-  /// <value>Number of results (hits).</value>
-  [JsonPropertyName("nbHits")]
-  public int NbHits { get; set; }
-
-  /// <summary>
-  /// Number of pages of results.
-  /// </summary>
-  /// <value>Number of pages of results.</value>
-  [JsonPropertyName("nbPages")]
-  public int NbPages { get; set; }
-
-  /// <summary>
   /// Number of hits selected and sorted by the relevant sort algorithm.
   /// </summary>
   /// <value>Number of hits selected and sorted by the relevant sort algorithm.</value>
   [JsonPropertyName("nbSortedHits")]
   public int? NbSortedHits { get; set; }
-
-  /// <summary>
-  /// Page of search results to retrieve.
-  /// </summary>
-  /// <value>Page of search results to retrieve.</value>
-  [JsonPropertyName("page")]
-  public int Page { get; set; }
 
   /// <summary>
   /// Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.
@@ -237,6 +209,34 @@ public partial class RecommendationsResults
   public string QueryID { get; set; }
 
   /// <summary>
+  /// Page of search results to retrieve.
+  /// </summary>
+  /// <value>Page of search results to retrieve.</value>
+  [JsonPropertyName("page")]
+  public int Page { get; set; }
+
+  /// <summary>
+  /// Number of results (hits).
+  /// </summary>
+  /// <value>Number of results (hits).</value>
+  [JsonPropertyName("nbHits")]
+  public int NbHits { get; set; }
+
+  /// <summary>
+  /// Number of pages of results.
+  /// </summary>
+  /// <value>Number of pages of results.</value>
+  [JsonPropertyName("nbPages")]
+  public int NbPages { get; set; }
+
+  /// <summary>
+  /// Number of hits per page.
+  /// </summary>
+  /// <value>Number of hits per page.</value>
+  [JsonPropertyName("hitsPerPage")]
+  public int HitsPerPage { get; set; }
+
+  /// <summary>
   /// Gets or Sets Hits
   /// </summary>
   [JsonPropertyName("hits")]
@@ -260,14 +260,10 @@ public partial class RecommendationsResults
     sb.Append("  ExhaustiveTypo: ").Append(ExhaustiveTypo).Append("\n");
     sb.Append("  Facets: ").Append(Facets).Append("\n");
     sb.Append("  FacetsStats: ").Append(FacetsStats).Append("\n");
-    sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
     sb.Append("  Index: ").Append(Index).Append("\n");
     sb.Append("  IndexUsed: ").Append(IndexUsed).Append("\n");
     sb.Append("  Message: ").Append(Message).Append("\n");
-    sb.Append("  NbHits: ").Append(NbHits).Append("\n");
-    sb.Append("  NbPages: ").Append(NbPages).Append("\n");
     sb.Append("  NbSortedHits: ").Append(NbSortedHits).Append("\n");
-    sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  ParsedQuery: ").Append(ParsedQuery).Append("\n");
     sb.Append("  ProcessingTimeMS: ").Append(ProcessingTimeMS).Append("\n");
     sb.Append("  ProcessingTimingsMS: ").Append(ProcessingTimingsMS).Append("\n");
@@ -278,6 +274,10 @@ public partial class RecommendationsResults
     sb.Append("  ServerUsed: ").Append(ServerUsed).Append("\n");
     sb.Append("  UserData: ").Append(UserData).Append("\n");
     sb.Append("  QueryID: ").Append(QueryID).Append("\n");
+    sb.Append("  Page: ").Append(Page).Append("\n");
+    sb.Append("  NbHits: ").Append(NbHits).Append("\n");
+    sb.Append("  NbPages: ").Append(NbPages).Append("\n");
+    sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
     sb.Append("  Hits: ").Append(Hits).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -315,14 +315,10 @@ public partial class RecommendationsResults
         (ExhaustiveTypo == input.ExhaustiveTypo || ExhaustiveTypo.Equals(input.ExhaustiveTypo)) &&
         (Facets == input.Facets || Facets != null && input.Facets != null && Facets.SequenceEqual(input.Facets)) &&
         (FacetsStats == input.FacetsStats || FacetsStats != null && input.FacetsStats != null && FacetsStats.SequenceEqual(input.FacetsStats)) &&
-        (HitsPerPage == input.HitsPerPage || HitsPerPage.Equals(input.HitsPerPage)) &&
         (Index == input.Index || (Index != null && Index.Equals(input.Index))) &&
         (IndexUsed == input.IndexUsed || (IndexUsed != null && IndexUsed.Equals(input.IndexUsed))) &&
         (Message == input.Message || (Message != null && Message.Equals(input.Message))) &&
-        (NbHits == input.NbHits || NbHits.Equals(input.NbHits)) &&
-        (NbPages == input.NbPages || NbPages.Equals(input.NbPages)) &&
         (NbSortedHits == input.NbSortedHits || NbSortedHits.Equals(input.NbSortedHits)) &&
-        (Page == input.Page || Page.Equals(input.Page)) &&
         (ParsedQuery == input.ParsedQuery || (ParsedQuery != null && ParsedQuery.Equals(input.ParsedQuery))) &&
         (ProcessingTimeMS == input.ProcessingTimeMS || ProcessingTimeMS.Equals(input.ProcessingTimeMS)) &&
         (ProcessingTimingsMS == input.ProcessingTimingsMS || (ProcessingTimingsMS != null && ProcessingTimingsMS.Equals(input.ProcessingTimingsMS))) &&
@@ -333,6 +329,10 @@ public partial class RecommendationsResults
         (ServerUsed == input.ServerUsed || (ServerUsed != null && ServerUsed.Equals(input.ServerUsed))) &&
         (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData))) &&
         (QueryID == input.QueryID || (QueryID != null && QueryID.Equals(input.QueryID))) &&
+        (Page == input.Page || Page.Equals(input.Page)) &&
+        (NbHits == input.NbHits || NbHits.Equals(input.NbHits)) &&
+        (NbPages == input.NbPages || NbPages.Equals(input.NbPages)) &&
+        (HitsPerPage == input.HitsPerPage || HitsPerPage.Equals(input.HitsPerPage)) &&
         (Hits == input.Hits || Hits != null && input.Hits != null && Hits.SequenceEqual(input.Hits));
   }
 
@@ -370,7 +370,6 @@ public partial class RecommendationsResults
       {
         hashCode = (hashCode * 59) + FacetsStats.GetHashCode();
       }
-      hashCode = (hashCode * 59) + HitsPerPage.GetHashCode();
       if (Index != null)
       {
         hashCode = (hashCode * 59) + Index.GetHashCode();
@@ -383,10 +382,7 @@ public partial class RecommendationsResults
       {
         hashCode = (hashCode * 59) + Message.GetHashCode();
       }
-      hashCode = (hashCode * 59) + NbHits.GetHashCode();
-      hashCode = (hashCode * 59) + NbPages.GetHashCode();
       hashCode = (hashCode * 59) + NbSortedHits.GetHashCode();
-      hashCode = (hashCode * 59) + Page.GetHashCode();
       if (ParsedQuery != null)
       {
         hashCode = (hashCode * 59) + ParsedQuery.GetHashCode();
@@ -421,6 +417,10 @@ public partial class RecommendationsResults
       {
         hashCode = (hashCode * 59) + QueryID.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Page.GetHashCode();
+      hashCode = (hashCode * 59) + NbHits.GetHashCode();
+      hashCode = (hashCode * 59) + NbPages.GetHashCode();
+      hashCode = (hashCode * 59) + HitsPerPage.GetHashCode();
       if (Hits != null)
       {
         hashCode = (hashCode * 59) + Hits.GetHashCode();
