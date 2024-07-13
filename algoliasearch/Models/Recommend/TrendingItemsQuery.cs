@@ -32,15 +32,11 @@ public partial class TrendingItemsQuery
   /// </summary>
   /// <param name="indexName">Index name (case-sensitive). (required).</param>
   /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
-  /// <param name="facetName">Facet attribute. To be used in combination with &#x60;facetValue&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
-  /// <param name="facetValue">Facet value. To be used in combination with &#x60;facetName&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
   /// <param name="model">model (required).</param>
-  public TrendingItemsQuery(string indexName, double threshold, string facetName, string facetValue, TrendingItemsModel? model)
+  public TrendingItemsQuery(string indexName, double threshold, TrendingItemsModel? model)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
     Threshold = threshold;
-    FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
-    FacetValue = facetValue ?? throw new ArgumentNullException(nameof(facetValue));
     Model = model;
   }
 

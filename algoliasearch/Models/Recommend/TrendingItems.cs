@@ -30,13 +30,9 @@ public partial class TrendingItems
   /// <summary>
   /// Initializes a new instance of the TrendingItems class.
   /// </summary>
-  /// <param name="facetName">Facet attribute. To be used in combination with &#x60;facetValue&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
-  /// <param name="facetValue">Facet value. To be used in combination with &#x60;facetName&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
   /// <param name="model">model (required).</param>
-  public TrendingItems(string facetName, string facetValue, TrendingItemsModel? model)
+  public TrendingItems(TrendingItemsModel? model)
   {
-    FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
-    FacetValue = facetValue ?? throw new ArgumentNullException(nameof(facetValue));
     Model = model;
   }
 
