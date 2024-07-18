@@ -76,14 +76,15 @@ public partial class SearchClient
   /// <summary>
   /// Helper method that waits for an API key task to be processed.
   /// </summary>
-  /// <param name="operation">The `operation` that was done on a `key`.</param>
   /// <param name="key">The key that has been added, deleted or updated.</param>
+  /// <param name="operation">The `operation` that was done on a `key`.</param>
   /// <param name="apiKey">Necessary to know if an `update` operation has been processed, compare fields of the response with it. (optional - mandatory if operation is UPDATE)</param>
   /// <param name="maxRetries">The maximum number of retry. 50 by default. (optional)</param>
   /// <param name="timeout">The function to decide how long to wait between retries. Math.Min(retryCount * 200, 5000) by default. (optional)</param>
   /// <param name="requestOptions">The requestOptions to send along with the query, they will be merged with the transporter requestOptions. (optional)</param>
   /// <param name="ct">Cancellation token (optional)</param>
-  public async Task<GetApiKeyResponse> WaitForApiKeyAsync(ApiKeyOperation operation, string key,
+  public async Task<GetApiKeyResponse> WaitForApiKeyAsync(string key,
+    ApiKeyOperation operation,
     ApiKey apiKey = default, int maxRetries = DefaultMaxRetries, Func<int, int> timeout = null,
     RequestOptions requestOptions = null, CancellationToken ct = default)
   {
@@ -112,36 +113,35 @@ public partial class SearchClient
         }, maxRetries, timeout, ct).ConfigureAwait(false);
     }
 
-    var addedKey = new GetApiKeyResponse();
-
-    // check the status of the getApiKey method
-    await RetryUntil(async () =>
+    return await RetryUntil(async () =>
       {
         try
         {
-          addedKey = await GetApiKeyAsync(key, requestOptions, ct).ConfigureAwait(false);
-          // magic number to signify we found the key
-          return -2;
+          return await GetApiKeyAsync(key, requestOptions, ct).ConfigureAwait(false);
         }
         catch (AlgoliaApiException e)
         {
-          return e.HttpErrorCode;
+          if (e.HttpErrorCode is 404)
+          {
+            return null;
+          }
+
+          throw;
         }
-      }, (status) =>
+      }, (response) =>
       {
         return operation switch
         {
           ApiKeyOperation.Add =>
             // stop either when the key is created or when we don't receive 404
-            status is -2 or not 404 and not 0,
+            response is not null,
           ApiKeyOperation.Delete =>
             // stop when the key is not found
-            status == 404,
+            response is null,
           _ => false
         };
       },
       maxRetries, timeout, ct);
-    return addedKey;
   }
 
   /// <summary>
@@ -154,10 +154,10 @@ public partial class SearchClient
   /// <param name="timeout">The function to decide how long to wait between retries. Math.Min(retryCount * 200, 5000) by default. (optional)</param>
   /// <param name="requestOptions">The requestOptions to send along with the query, they will be merged with the transporter requestOptions. (optional)</param>
   /// <param name="ct">Cancellation token (optional)</param>
-  public GetApiKeyResponse WaitForApiKey(ApiKeyOperation operation, string key, ApiKey apiKey = default,
+  public GetApiKeyResponse WaitForApiKey(string key, ApiKeyOperation operation, ApiKey apiKey = default,
     int maxRetries = DefaultMaxRetries, Func<int, int> timeout = null, RequestOptions requestOptions = null,
     CancellationToken ct = default) =>
-    AsyncHelper.RunSync(() => WaitForApiKeyAsync(operation, key, apiKey, maxRetries, timeout, requestOptions, ct));
+    AsyncHelper.RunSync(() => WaitForApiKeyAsync(key, operation, apiKey, maxRetries, timeout, requestOptions, ct));
 
 
   /// <summary>
