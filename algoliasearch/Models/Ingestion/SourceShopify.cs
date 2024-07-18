@@ -31,53 +31,11 @@ public partial class SourceShopify
   }
 
   /// <summary>
-  /// Whether to index collection IDs.   If your store has `has_collection_search_page` set to true, collection IDs will be indexed even if `collectionIDIndexing` is false.  
+  /// Feature flags for the Shopify source.
   /// </summary>
-  /// <value>Whether to index collection IDs.   If your store has `has_collection_search_page` set to true, collection IDs will be indexed even if `collectionIDIndexing` is false.  </value>
-  [JsonPropertyName("collectionIDIndexing")]
-  public bool? CollectionIDIndexing { get; set; }
-
-  /// <summary>
-  /// Whether to increase the number of indexed collections per product. If true, Algolia indexes 200 collections per product. If false, 100 collections per product are indexed. 
-  /// </summary>
-  /// <value>Whether to increase the number of indexed collections per product. If true, Algolia indexes 200 collections per product. If false, 100 collections per product are indexed. </value>
-  [JsonPropertyName("increaseProductCollectionLimit")]
-  public bool? IncreaseProductCollectionLimit { get; set; }
-
-  /// <summary>
-  /// Whether to set the default price ratio to 1 if no sale price is present.  The price ratio is determined by the ratio: `sale_price` / `regular_price`. If no sale price is present, the price ratio would be 0. If `defaultPriceRatioAsOne` is true, the price ratio is indexed as 1 instead. 
-  /// </summary>
-  /// <value>Whether to set the default price ratio to 1 if no sale price is present.  The price ratio is determined by the ratio: `sale_price` / `regular_price`. If no sale price is present, the price ratio would be 0. If `defaultPriceRatioAsOne` is true, the price ratio is indexed as 1 instead. </value>
-  [JsonPropertyName("defaultPriceRatioAsOne")]
-  public bool? DefaultPriceRatioAsOne { get; set; }
-
-  /// <summary>
-  /// Whether to exclude out-of-stock variants when determining the `max_variant_price` and `min_variant_price` attributes. 
-  /// </summary>
-  /// <value>Whether to exclude out-of-stock variants when determining the `max_variant_price` and `min_variant_price` attributes. </value>
-  [JsonPropertyName("excludeOOSVariantsForPriceAtTRS")]
-  public bool? ExcludeOOSVariantsForPriceAtTRS { get; set; }
-
-  /// <summary>
-  /// Whether to include an inventory with every variant for every product record. 
-  /// </summary>
-  /// <value>Whether to include an inventory with every variant for every product record. </value>
-  [JsonPropertyName("includeVariantsInventory")]
-  public bool? IncludeVariantsInventory { get; set; }
-
-  /// <summary>
-  /// Whether to include collection IDs and handles in the product records. 
-  /// </summary>
-  /// <value>Whether to include collection IDs and handles in the product records. </value>
-  [JsonPropertyName("hasCollectionSearchPage")]
-  public bool? HasCollectionSearchPage { get; set; }
-
-  /// <summary>
-  /// Whether to convert tags on products to named tags.  To learn more, see [Named tags](https://www.algolia.com/doc/integration/shopify/sending-and-managing-data/named-tags). 
-  /// </summary>
-  /// <value>Whether to convert tags on products to named tags.  To learn more, see [Named tags](https://www.algolia.com/doc/integration/shopify/sending-and-managing-data/named-tags). </value>
-  [JsonPropertyName("productNamedTags")]
-  public bool? ProductNamedTags { get; set; }
+  /// <value>Feature flags for the Shopify source.</value>
+  [JsonPropertyName("featureFlags")]
+  public Dictionary<string, object> FeatureFlags { get; set; }
 
   /// <summary>
   /// URL of the Shopify store.
@@ -94,13 +52,7 @@ public partial class SourceShopify
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class SourceShopify {\n");
-    sb.Append("  CollectionIDIndexing: ").Append(CollectionIDIndexing).Append("\n");
-    sb.Append("  IncreaseProductCollectionLimit: ").Append(IncreaseProductCollectionLimit).Append("\n");
-    sb.Append("  DefaultPriceRatioAsOne: ").Append(DefaultPriceRatioAsOne).Append("\n");
-    sb.Append("  ExcludeOOSVariantsForPriceAtTRS: ").Append(ExcludeOOSVariantsForPriceAtTRS).Append("\n");
-    sb.Append("  IncludeVariantsInventory: ").Append(IncludeVariantsInventory).Append("\n");
-    sb.Append("  HasCollectionSearchPage: ").Append(HasCollectionSearchPage).Append("\n");
-    sb.Append("  ProductNamedTags: ").Append(ProductNamedTags).Append("\n");
+    sb.Append("  FeatureFlags: ").Append(FeatureFlags).Append("\n");
     sb.Append("  ShopURL: ").Append(ShopURL).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -128,13 +80,7 @@ public partial class SourceShopify
     }
 
     return
-        (CollectionIDIndexing == input.CollectionIDIndexing || CollectionIDIndexing.Equals(input.CollectionIDIndexing)) &&
-        (IncreaseProductCollectionLimit == input.IncreaseProductCollectionLimit || IncreaseProductCollectionLimit.Equals(input.IncreaseProductCollectionLimit)) &&
-        (DefaultPriceRatioAsOne == input.DefaultPriceRatioAsOne || DefaultPriceRatioAsOne.Equals(input.DefaultPriceRatioAsOne)) &&
-        (ExcludeOOSVariantsForPriceAtTRS == input.ExcludeOOSVariantsForPriceAtTRS || ExcludeOOSVariantsForPriceAtTRS.Equals(input.ExcludeOOSVariantsForPriceAtTRS)) &&
-        (IncludeVariantsInventory == input.IncludeVariantsInventory || IncludeVariantsInventory.Equals(input.IncludeVariantsInventory)) &&
-        (HasCollectionSearchPage == input.HasCollectionSearchPage || HasCollectionSearchPage.Equals(input.HasCollectionSearchPage)) &&
-        (ProductNamedTags == input.ProductNamedTags || ProductNamedTags.Equals(input.ProductNamedTags)) &&
+        (FeatureFlags == input.FeatureFlags || FeatureFlags != null && input.FeatureFlags != null && FeatureFlags.SequenceEqual(input.FeatureFlags)) &&
         (ShopURL == input.ShopURL || (ShopURL != null && ShopURL.Equals(input.ShopURL)));
   }
 
@@ -147,13 +93,10 @@ public partial class SourceShopify
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + CollectionIDIndexing.GetHashCode();
-      hashCode = (hashCode * 59) + IncreaseProductCollectionLimit.GetHashCode();
-      hashCode = (hashCode * 59) + DefaultPriceRatioAsOne.GetHashCode();
-      hashCode = (hashCode * 59) + ExcludeOOSVariantsForPriceAtTRS.GetHashCode();
-      hashCode = (hashCode * 59) + IncludeVariantsInventory.GetHashCode();
-      hashCode = (hashCode * 59) + HasCollectionSearchPage.GetHashCode();
-      hashCode = (hashCode * 59) + ProductNamedTags.GetHashCode();
+      if (FeatureFlags != null)
+      {
+        hashCode = (hashCode * 59) + FeatureFlags.GetHashCode();
+      }
       if (ShopURL != null)
       {
         hashCode = (hashCode * 59) + ShopURL.GetHashCode();
