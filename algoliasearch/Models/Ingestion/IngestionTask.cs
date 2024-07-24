@@ -33,16 +33,14 @@ public partial class IngestionTask
   /// <param name="taskID">Universally unique identifier (UUID) of a task. (required).</param>
   /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
   /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
-  /// <param name="trigger">trigger (required).</param>
   /// <param name="enabled">Whether the task is enabled. (required) (default to true).</param>
   /// <param name="action">action (required).</param>
   /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  public IngestionTask(string taskID, string sourceID, string destinationID, Trigger trigger, bool enabled, ActionType? action, string createdAt)
+  public IngestionTask(string taskID, string sourceID, string destinationID, bool enabled, ActionType? action, string createdAt)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
     DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
-    Trigger = trigger ?? throw new ArgumentNullException(nameof(trigger));
     Enabled = enabled;
     Action = action;
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
@@ -70,10 +68,25 @@ public partial class IngestionTask
   public string DestinationID { get; set; }
 
   /// <summary>
-  /// Gets or Sets Trigger
+  /// Cron expression for the task's schedule.
   /// </summary>
-  [JsonPropertyName("trigger")]
-  public Trigger Trigger { get; set; }
+  /// <value>Cron expression for the task's schedule.</value>
+  [JsonPropertyName("cron")]
+  public string Cron { get; set; }
+
+  /// <summary>
+  /// The last time the scheduled task ran in RFC 3339 format.
+  /// </summary>
+  /// <value>The last time the scheduled task ran in RFC 3339 format.</value>
+  [JsonPropertyName("lastRun")]
+  public string LastRun { get; set; }
+
+  /// <summary>
+  /// The next scheduled run of the task in RFC 3339 format.
+  /// </summary>
+  /// <value>The next scheduled run of the task in RFC 3339 format.</value>
+  [JsonPropertyName("nextRun")]
+  public string NextRun { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
@@ -127,7 +140,9 @@ public partial class IngestionTask
     sb.Append("  TaskID: ").Append(TaskID).Append("\n");
     sb.Append("  SourceID: ").Append(SourceID).Append("\n");
     sb.Append("  DestinationID: ").Append(DestinationID).Append("\n");
-    sb.Append("  Trigger: ").Append(Trigger).Append("\n");
+    sb.Append("  Cron: ").Append(Cron).Append("\n");
+    sb.Append("  LastRun: ").Append(LastRun).Append("\n");
+    sb.Append("  NextRun: ").Append(NextRun).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
@@ -164,7 +179,9 @@ public partial class IngestionTask
         (TaskID == input.TaskID || (TaskID != null && TaskID.Equals(input.TaskID))) &&
         (SourceID == input.SourceID || (SourceID != null && SourceID.Equals(input.SourceID))) &&
         (DestinationID == input.DestinationID || (DestinationID != null && DestinationID.Equals(input.DestinationID))) &&
-        (Trigger == input.Trigger || (Trigger != null && Trigger.Equals(input.Trigger))) &&
+        (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron))) &&
+        (LastRun == input.LastRun || (LastRun != null && LastRun.Equals(input.LastRun))) &&
+        (NextRun == input.NextRun || (NextRun != null && NextRun.Equals(input.NextRun))) &&
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
@@ -195,9 +212,17 @@ public partial class IngestionTask
       {
         hashCode = (hashCode * 59) + DestinationID.GetHashCode();
       }
-      if (Trigger != null)
+      if (Cron != null)
       {
-        hashCode = (hashCode * 59) + Trigger.GetHashCode();
+        hashCode = (hashCode * 59) + Cron.GetHashCode();
+      }
+      if (LastRun != null)
+      {
+        hashCode = (hashCode * 59) + LastRun.GetHashCode();
+      }
+      if (NextRun != null)
+      {
+        hashCode = (hashCode * 59) + NextRun.GetHashCode();
       }
       if (Input != null)
       {

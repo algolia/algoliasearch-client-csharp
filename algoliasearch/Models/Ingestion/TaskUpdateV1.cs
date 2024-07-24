@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// API request body for updating a task.
+/// API request body for updating a task using the V1 shape, please use methods and types that don't contain the V1 suffix.
 /// </summary>
-public partial class TaskUpdate
+public partial class TaskUpdateV1
 {
   /// <summary>
-  /// Initializes a new instance of the TaskUpdate class.
+  /// Initializes a new instance of the TaskUpdateV1 class.
   /// </summary>
-  public TaskUpdate()
+  public TaskUpdateV1()
   {
   }
 
@@ -31,11 +31,10 @@ public partial class TaskUpdate
   public string DestinationID { get; set; }
 
   /// <summary>
-  /// Cron expression for the task's schedule.
+  /// Gets or Sets Trigger
   /// </summary>
-  /// <value>Cron expression for the task's schedule.</value>
-  [JsonPropertyName("cron")]
-  public string Cron { get; set; }
+  [JsonPropertyName("trigger")]
+  public TriggerUpdateInput Trigger { get; set; }
 
   /// <summary>
   /// Gets or Sets Input
@@ -64,9 +63,9 @@ public partial class TaskUpdate
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class TaskUpdate {\n");
+    sb.Append("class TaskUpdateV1 {\n");
     sb.Append("  DestinationID: ").Append(DestinationID).Append("\n");
-    sb.Append("  Cron: ").Append(Cron).Append("\n");
+    sb.Append("  Trigger: ").Append(Trigger).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
@@ -90,14 +89,14 @@ public partial class TaskUpdate
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not TaskUpdate input)
+    if (obj is not TaskUpdateV1 input)
     {
       return false;
     }
 
     return
         (DestinationID == input.DestinationID || (DestinationID != null && DestinationID.Equals(input.DestinationID))) &&
-        (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron))) &&
+        (Trigger == input.Trigger || (Trigger != null && Trigger.Equals(input.Trigger))) &&
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold));
@@ -116,9 +115,9 @@ public partial class TaskUpdate
       {
         hashCode = (hashCode * 59) + DestinationID.GetHashCode();
       }
-      if (Cron != null)
+      if (Trigger != null)
       {
-        hashCode = (hashCode * 59) + Cron.GetHashCode();
+        hashCode = (hashCode * 59) + Trigger.GetHashCode();
       }
       if (Input != null)
       {

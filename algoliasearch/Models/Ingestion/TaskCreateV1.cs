@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// API request body for creating a task.
+/// API request body for creating a task using the V1 shape, please use methods and types that don't contain the V1 suffix.
 /// </summary>
-public partial class TaskCreate
+public partial class TaskCreateV1
 {
 
   /// <summary>
@@ -23,20 +23,22 @@ public partial class TaskCreate
   [JsonPropertyName("action")]
   public ActionType? Action { get; set; }
   /// <summary>
-  /// Initializes a new instance of the TaskCreate class.
+  /// Initializes a new instance of the TaskCreateV1 class.
   /// </summary>
   [JsonConstructor]
-  public TaskCreate() { }
+  public TaskCreateV1() { }
   /// <summary>
-  /// Initializes a new instance of the TaskCreate class.
+  /// Initializes a new instance of the TaskCreateV1 class.
   /// </summary>
   /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
   /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
+  /// <param name="trigger">trigger (required).</param>
   /// <param name="action">action (required).</param>
-  public TaskCreate(string sourceID, string destinationID, ActionType? action)
+  public TaskCreateV1(string sourceID, string destinationID, TaskCreateTrigger trigger, ActionType? action)
   {
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
     DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
+    Trigger = trigger ?? throw new ArgumentNullException(nameof(trigger));
     Action = action;
   }
 
@@ -55,11 +57,10 @@ public partial class TaskCreate
   public string DestinationID { get; set; }
 
   /// <summary>
-  /// Cron expression for the task's schedule.
+  /// Gets or Sets Trigger
   /// </summary>
-  /// <value>Cron expression for the task's schedule.</value>
-  [JsonPropertyName("cron")]
-  public string Cron { get; set; }
+  [JsonPropertyName("trigger")]
+  public TaskCreateTrigger Trigger { get; set; }
 
   /// <summary>
   /// Whether the task is enabled.
@@ -95,11 +96,11 @@ public partial class TaskCreate
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class TaskCreate {\n");
+    sb.Append("class TaskCreateV1 {\n");
     sb.Append("  SourceID: ").Append(SourceID).Append("\n");
     sb.Append("  DestinationID: ").Append(DestinationID).Append("\n");
+    sb.Append("  Trigger: ").Append(Trigger).Append("\n");
     sb.Append("  Action: ").Append(Action).Append("\n");
-    sb.Append("  Cron: ").Append(Cron).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
@@ -124,7 +125,7 @@ public partial class TaskCreate
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not TaskCreate input)
+    if (obj is not TaskCreateV1 input)
     {
       return false;
     }
@@ -132,8 +133,8 @@ public partial class TaskCreate
     return
         (SourceID == input.SourceID || (SourceID != null && SourceID.Equals(input.SourceID))) &&
         (DestinationID == input.DestinationID || (DestinationID != null && DestinationID.Equals(input.DestinationID))) &&
+        (Trigger == input.Trigger || (Trigger != null && Trigger.Equals(input.Trigger))) &&
         (Action == input.Action || Action.Equals(input.Action)) &&
-        (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
@@ -157,11 +158,11 @@ public partial class TaskCreate
       {
         hashCode = (hashCode * 59) + DestinationID.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Action.GetHashCode();
-      if (Cron != null)
+      if (Trigger != null)
       {
-        hashCode = (hashCode * 59) + Cron.GetHashCode();
+        hashCode = (hashCode * 59) + Trigger.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Action.GetHashCode();
       hashCode = (hashCode * 59) + Enabled.GetHashCode();
       hashCode = (hashCode * 59) + FailureThreshold.GetHashCode();
       if (Input != null)

@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// API request body for creating a task.
+/// The V1 task object, please use methods and types that don't contain the V1 suffix.
 /// </summary>
-public partial class TaskCreate
+public partial class TaskV1
 {
 
   /// <summary>
@@ -23,22 +23,37 @@ public partial class TaskCreate
   [JsonPropertyName("action")]
   public ActionType? Action { get; set; }
   /// <summary>
-  /// Initializes a new instance of the TaskCreate class.
+  /// Initializes a new instance of the TaskV1 class.
   /// </summary>
   [JsonConstructor]
-  public TaskCreate() { }
+  public TaskV1() { }
   /// <summary>
-  /// Initializes a new instance of the TaskCreate class.
+  /// Initializes a new instance of the TaskV1 class.
   /// </summary>
+  /// <param name="taskID">Universally unique identifier (UUID) of a task. (required).</param>
   /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
   /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
+  /// <param name="trigger">trigger (required).</param>
+  /// <param name="enabled">Whether the task is enabled. (required) (default to true).</param>
   /// <param name="action">action (required).</param>
-  public TaskCreate(string sourceID, string destinationID, ActionType? action)
+  /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
+  public TaskV1(string taskID, string sourceID, string destinationID, Trigger trigger, bool enabled, ActionType? action, string createdAt)
   {
+    TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
     DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
+    Trigger = trigger ?? throw new ArgumentNullException(nameof(trigger));
+    Enabled = enabled;
     Action = action;
+    CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
   }
+
+  /// <summary>
+  /// Universally unique identifier (UUID) of a task.
+  /// </summary>
+  /// <value>Universally unique identifier (UUID) of a task.</value>
+  [JsonPropertyName("taskID")]
+  public string TaskID { get; set; }
 
   /// <summary>
   /// Universally uniqud identifier (UUID) of a source.
@@ -55,18 +70,23 @@ public partial class TaskCreate
   public string DestinationID { get; set; }
 
   /// <summary>
-  /// Cron expression for the task's schedule.
+  /// Gets or Sets Trigger
   /// </summary>
-  /// <value>Cron expression for the task's schedule.</value>
-  [JsonPropertyName("cron")]
-  public string Cron { get; set; }
+  [JsonPropertyName("trigger")]
+  public Trigger Trigger { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Input
+  /// </summary>
+  [JsonPropertyName("input")]
+  public TaskInput Input { get; set; }
 
   /// <summary>
   /// Whether the task is enabled.
   /// </summary>
   /// <value>Whether the task is enabled.</value>
   [JsonPropertyName("enabled")]
-  public bool? Enabled { get; set; }
+  public bool Enabled { get; set; }
 
   /// <summary>
   /// Maximum accepted percentage of failures for a task run to finish successfully.
@@ -76,17 +96,25 @@ public partial class TaskCreate
   public int? FailureThreshold { get; set; }
 
   /// <summary>
-  /// Gets or Sets Input
-  /// </summary>
-  [JsonPropertyName("input")]
-  public TaskInput Input { get; set; }
-
-  /// <summary>
   /// Date of the last cursor in RFC 3339 format.
   /// </summary>
   /// <value>Date of the last cursor in RFC 3339 format.</value>
   [JsonPropertyName("cursor")]
   public string Cursor { get; set; }
+
+  /// <summary>
+  /// Date of creation in RFC 3339 format.
+  /// </summary>
+  /// <value>Date of creation in RFC 3339 format.</value>
+  [JsonPropertyName("createdAt")]
+  public string CreatedAt { get; set; }
+
+  /// <summary>
+  /// Date of last update in RFC 3339 format.
+  /// </summary>
+  /// <value>Date of last update in RFC 3339 format.</value>
+  [JsonPropertyName("updatedAt")]
+  public string UpdatedAt { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -95,15 +123,18 @@ public partial class TaskCreate
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class TaskCreate {\n");
+    sb.Append("class TaskV1 {\n");
+    sb.Append("  TaskID: ").Append(TaskID).Append("\n");
     sb.Append("  SourceID: ").Append(SourceID).Append("\n");
     sb.Append("  DestinationID: ").Append(DestinationID).Append("\n");
-    sb.Append("  Action: ").Append(Action).Append("\n");
-    sb.Append("  Cron: ").Append(Cron).Append("\n");
+    sb.Append("  Trigger: ").Append(Trigger).Append("\n");
+    sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
-    sb.Append("  Input: ").Append(Input).Append("\n");
+    sb.Append("  Action: ").Append(Action).Append("\n");
     sb.Append("  Cursor: ").Append(Cursor).Append("\n");
+    sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+    sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -124,20 +155,23 @@ public partial class TaskCreate
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not TaskCreate input)
+    if (obj is not TaskV1 input)
     {
       return false;
     }
 
     return
+        (TaskID == input.TaskID || (TaskID != null && TaskID.Equals(input.TaskID))) &&
         (SourceID == input.SourceID || (SourceID != null && SourceID.Equals(input.SourceID))) &&
         (DestinationID == input.DestinationID || (DestinationID != null && DestinationID.Equals(input.DestinationID))) &&
-        (Action == input.Action || Action.Equals(input.Action)) &&
-        (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron))) &&
+        (Trigger == input.Trigger || (Trigger != null && Trigger.Equals(input.Trigger))) &&
+        (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
-        (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
-        (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor)));
+        (Action == input.Action || Action.Equals(input.Action)) &&
+        (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor))) &&
+        (CreatedAt == input.CreatedAt || (CreatedAt != null && CreatedAt.Equals(input.CreatedAt))) &&
+        (UpdatedAt == input.UpdatedAt || (UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)));
   }
 
   /// <summary>
@@ -149,6 +183,10 @@ public partial class TaskCreate
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
+      if (TaskID != null)
+      {
+        hashCode = (hashCode * 59) + TaskID.GetHashCode();
+      }
       if (SourceID != null)
       {
         hashCode = (hashCode * 59) + SourceID.GetHashCode();
@@ -157,20 +195,28 @@ public partial class TaskCreate
       {
         hashCode = (hashCode * 59) + DestinationID.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Action.GetHashCode();
-      if (Cron != null)
+      if (Trigger != null)
       {
-        hashCode = (hashCode * 59) + Cron.GetHashCode();
+        hashCode = (hashCode * 59) + Trigger.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Enabled.GetHashCode();
-      hashCode = (hashCode * 59) + FailureThreshold.GetHashCode();
       if (Input != null)
       {
         hashCode = (hashCode * 59) + Input.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Enabled.GetHashCode();
+      hashCode = (hashCode * 59) + FailureThreshold.GetHashCode();
+      hashCode = (hashCode * 59) + Action.GetHashCode();
       if (Cursor != null)
       {
         hashCode = (hashCode * 59) + Cursor.GetHashCode();
+      }
+      if (CreatedAt != null)
+      {
+        hashCode = (hashCode * 59) + CreatedAt.GetHashCode();
+      }
+      if (UpdatedAt != null)
+      {
+        hashCode = (hashCode * 59) + UpdatedAt.GetHashCode();
       }
       return hashCode;
     }
