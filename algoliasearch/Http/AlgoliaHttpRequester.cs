@@ -105,7 +105,7 @@ internal class AlgoliaHttpRequester : IHttpRequester
         _logger.LogWarning(ex, "Timeout while sending request");
       }
 
-      return new AlgoliaHttpResponse { IsTimedOut = true, Error = ex.ToString() };
+      return new AlgoliaHttpResponse { IsTimedOut = true, Error = ex.Message };
     }
     catch (HttpRequestException ex)
     {
