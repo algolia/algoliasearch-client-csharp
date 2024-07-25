@@ -996,6 +996,32 @@ public interface IIngestionClient
   ListTransformationsResponse ListTransformations(SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints.
+  /// </summary>
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="batchWriteParams">Request body of a Search API `batch` request that will be pushed in the Connectors pipeline.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RunResponse</returns>
+  Task<RunResponse> PushTaskAsync(string taskID, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints. (Synchronous version)
+  /// </summary>
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="batchWriteParams">Request body of a Search API `batch` request that will be pushed in the Connectors pipeline.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RunResponse</returns>
+  RunResponse PushTask(string taskID, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Runs a task. You can check the status of task runs with the observability endpoints.
   /// </summary>
   /// <param name="taskID">Unique identifier of a task.</param>
@@ -3271,6 +3297,61 @@ public partial class IngestionClient : IIngestionClient
   /// <returns>ListTransformationsResponse</returns>
   public ListTransformationsResponse ListTransformations(SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => ListTransformationsAsync(sort, order, options, cancellationToken));
+
+
+  /// <summary>
+  /// Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="batchWriteParams">Request body of a Search API &#x60;batch&#x60; request that will be pushed in the Connectors pipeline.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RunResponse</returns>
+  public async Task<RunResponse> PushTaskAsync(string taskID, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  {
+
+    if (taskID == null)
+      throw new ArgumentException("Parameter `taskID` is required when calling `PushTask`.");
+
+
+    if (batchWriteParams == null)
+      throw new ArgumentException("Parameter `batchWriteParams` is required when calling `PushTask`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("taskID", QueryStringHelper.ParameterToString(taskID));
+
+    requestOptions.Data = batchWriteParams;
+    return await _transport.ExecuteRequestAsync<RunResponse>(new HttpMethod("POST"), "/2/tasks/{taskID}/push", requestOptions, cancellationToken).ConfigureAwait(false);
+  }
+
+
+  /// <summary>
+  /// Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="taskID">Unique identifier of a task.</param>
+  /// <param name="batchWriteParams">Request body of a Search API &#x60;batch&#x60; request that will be pushed in the Connectors pipeline.</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RunResponse</returns>
+  public RunResponse PushTask(string taskID, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => PushTaskAsync(taskID, batchWriteParams, options, cancellationToken));
 
 
   /// <summary>
