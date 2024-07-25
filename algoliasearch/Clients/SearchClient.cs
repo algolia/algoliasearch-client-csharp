@@ -800,8 +800,8 @@ public interface ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of IndexSettings</returns>
-  Task<IndexSettings> GetSettingsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of SettingsResponse</returns>
+  Task<SettingsResponse> GetSettingsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves an object with non-null index settings. (Synchronous version)
@@ -812,8 +812,8 @@ public interface ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>IndexSettings</returns>
-  IndexSettings GetSettings(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>SettingsResponse</returns>
+  SettingsResponse GetSettings(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves all allowed IP addresses with access to your application.
@@ -3077,8 +3077,8 @@ public partial class SearchClient : ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of IndexSettings</returns>
-  public async Task<IndexSettings> GetSettingsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of SettingsResponse</returns>
+  public async Task<SettingsResponse> GetSettingsAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (indexName == null)
@@ -3088,7 +3088,7 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<IndexSettings>(new HttpMethod("GET"), "/1/indexes/{indexName}/settings", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<SettingsResponse>(new HttpMethod("GET"), "/1/indexes/{indexName}/settings", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -3104,8 +3104,8 @@ public partial class SearchClient : ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>IndexSettings</returns>
-  public IndexSettings GetSettings(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>SettingsResponse</returns>
+  public SettingsResponse GetSettings(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetSettingsAsync(indexName, options, cancellationToken));
 
 
