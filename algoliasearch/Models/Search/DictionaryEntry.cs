@@ -40,11 +40,9 @@ public partial class DictionaryEntry
   /// Initializes a new instance of the DictionaryEntry class.
   /// </summary>
   /// <param name="objectID">Unique identifier for the dictionary entry. (required).</param>
-  /// <param name="language">language (required).</param>
-  public DictionaryEntry(string objectID, SupportedLanguage? language)
+  public DictionaryEntry(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
-    Language = language;
     AdditionalProperties = new Dictionary<string, object>();
   }
 
