@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// DockerStreamsInput
+/// The selected streams of a singer or airbyte connector.
 /// </summary>
 public partial class DockerStreamsInput
 {

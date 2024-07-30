@@ -9,26 +9,33 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Search;
+namespace Algolia.Search.Models.Analytics;
 
 /// <summary>
-/// Search parameters as query string.
+/// Click position.
 /// </summary>
-public partial class SearchParamsString
+public partial class ClickPosition
 {
   /// <summary>
-  /// Initializes a new instance of the SearchParamsString class.
+  /// Initializes a new instance of the ClickPosition class.
   /// </summary>
-  public SearchParamsString()
+  public ClickPosition()
   {
   }
 
   /// <summary>
-  /// Search parameters as a URL-encoded query string.
+  /// Range of positions in the search results, using the pattern `[start,end]`.  For positions 11 and up, click events are summed over the specified range. `-1` indicates the end of the list of search results. 
   /// </summary>
-  /// <value>Search parameters as a URL-encoded query string.</value>
-  [JsonPropertyName("params")]
-  public string Params { get; set; }
+  /// <value>Range of positions in the search results, using the pattern `[start,end]`.  For positions 11 and up, click events are summed over the specified range. `-1` indicates the end of the list of search results. </value>
+  [JsonPropertyName("position")]
+  public List<int> Position { get; set; }
+
+  /// <summary>
+  /// Number of times this search has been clicked at that position.
+  /// </summary>
+  /// <value>Number of times this search has been clicked at that position.</value>
+  [JsonPropertyName("clickCount")]
+  public int? ClickCount { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -37,8 +44,9 @@ public partial class SearchParamsString
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SearchParamsString {\n");
-    sb.Append("  Params: ").Append(Params).Append("\n");
+    sb.Append("class ClickPosition {\n");
+    sb.Append("  Position: ").Append(Position).Append("\n");
+    sb.Append("  ClickCount: ").Append(ClickCount).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -59,13 +67,14 @@ public partial class SearchParamsString
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SearchParamsString input)
+    if (obj is not ClickPosition input)
     {
       return false;
     }
 
     return
-        (Params == input.Params || (Params != null && Params.Equals(input.Params)));
+        (Position == input.Position || Position != null && input.Position != null && Position.SequenceEqual(input.Position)) &&
+        (ClickCount == input.ClickCount || ClickCount.Equals(input.ClickCount));
   }
 
   /// <summary>
@@ -77,10 +86,11 @@ public partial class SearchParamsString
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Params != null)
+      if (Position != null)
       {
-        hashCode = (hashCode * 59) + Params.GetHashCode();
+        hashCode = (hashCode * 59) + Position.GetHashCode();
       }
+      hashCode = (hashCode * 59) + ClickCount.GetHashCode();
       return hashCode;
     }
   }

@@ -9,33 +9,25 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Ingestion;
+namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// The error if the transformation failed.
+/// BadRequest
 /// </summary>
-public partial class TransformationTryResponseError
+public partial class BadRequest
 {
   /// <summary>
-  /// Initializes a new instance of the TransformationTryResponseError class.
+  /// Initializes a new instance of the BadRequest class.
   /// </summary>
-  public TransformationTryResponseError()
+  public BadRequest()
   {
   }
 
   /// <summary>
-  /// The error status code.
+  /// Gets or Sets Reason
   /// </summary>
-  /// <value>The error status code.</value>
-  [JsonPropertyName("code")]
-  public int? Code { get; set; }
-
-  /// <summary>
-  /// A descriptive message explaining the failure.
-  /// </summary>
-  /// <value>A descriptive message explaining the failure.</value>
-  [JsonPropertyName("message")]
-  public string Message { get; set; }
+  [JsonPropertyName("reason")]
+  public string Reason { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,9 +36,8 @@ public partial class TransformationTryResponseError
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class TransformationTryResponseError {\n");
-    sb.Append("  Code: ").Append(Code).Append("\n");
-    sb.Append("  Message: ").Append(Message).Append("\n");
+    sb.Append("class BadRequest {\n");
+    sb.Append("  Reason: ").Append(Reason).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -67,14 +58,13 @@ public partial class TransformationTryResponseError
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not TransformationTryResponseError input)
+    if (obj is not BadRequest input)
     {
       return false;
     }
 
     return
-        (Code == input.Code || Code.Equals(input.Code)) &&
-        (Message == input.Message || (Message != null && Message.Equals(input.Message)));
+        (Reason == input.Reason || (Reason != null && Reason.Equals(input.Reason)));
   }
 
   /// <summary>
@@ -86,10 +76,9 @@ public partial class TransformationTryResponseError
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Code.GetHashCode();
-      if (Message != null)
+      if (Reason != null)
       {
-        hashCode = (hashCode * 59) + Message.GetHashCode();
+        hashCode = (hashCode * 59) + Reason.GetHashCode();
       }
       return hashCode;
     }

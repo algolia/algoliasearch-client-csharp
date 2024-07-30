@@ -9,26 +9,32 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Recommend;
+namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Rule metadata.
+/// Redirect rule data.
 /// </summary>
-public partial class RecommendRuleMetadata
+public partial class RedirectRuleIndexData
 {
   /// <summary>
-  /// Initializes a new instance of the RecommendRuleMetadata class.
+  /// Initializes a new instance of the RedirectRuleIndexData class.
   /// </summary>
-  public RecommendRuleMetadata()
+  [JsonConstructor]
+  public RedirectRuleIndexData() { }
+  /// <summary>
+  /// Initializes a new instance of the RedirectRuleIndexData class.
+  /// </summary>
+  /// <param name="ruleObjectID">ruleObjectID (required).</param>
+  public RedirectRuleIndexData(string ruleObjectID)
   {
+    RuleObjectID = ruleObjectID ?? throw new ArgumentNullException(nameof(ruleObjectID));
   }
 
   /// <summary>
-  /// Date and time when the object was updated, in RFC 3339 format.
+  /// Gets or Sets RuleObjectID
   /// </summary>
-  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
-  [JsonPropertyName("lastUpdate")]
-  public string LastUpdate { get; set; }
+  [JsonPropertyName("ruleObjectID")]
+  public string RuleObjectID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -37,8 +43,8 @@ public partial class RecommendRuleMetadata
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RecommendRuleMetadata {\n");
-    sb.Append("  LastUpdate: ").Append(LastUpdate).Append("\n");
+    sb.Append("class RedirectRuleIndexData {\n");
+    sb.Append("  RuleObjectID: ").Append(RuleObjectID).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -59,13 +65,13 @@ public partial class RecommendRuleMetadata
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RecommendRuleMetadata input)
+    if (obj is not RedirectRuleIndexData input)
     {
       return false;
     }
 
     return
-        (LastUpdate == input.LastUpdate || (LastUpdate != null && LastUpdate.Equals(input.LastUpdate)));
+        (RuleObjectID == input.RuleObjectID || (RuleObjectID != null && RuleObjectID.Equals(input.RuleObjectID)));
   }
 
   /// <summary>
@@ -77,9 +83,9 @@ public partial class RecommendRuleMetadata
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (LastUpdate != null)
+      if (RuleObjectID != null)
       {
-        hashCode = (hashCode * 59) + LastUpdate.GetHashCode();
+        hashCode = (hashCode * 59) + RuleObjectID.GetHashCode();
       }
       return hashCode;
     }

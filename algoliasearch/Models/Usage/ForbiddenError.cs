@@ -9,33 +9,37 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Analytics;
+namespace Algolia.Search.Models.Usage;
 
 /// <summary>
-/// Click position.
+/// ForbiddenError
 /// </summary>
-public partial class ClickPositionsInner
+public partial class ForbiddenError
 {
   /// <summary>
-  /// Initializes a new instance of the ClickPositionsInner class.
+  /// Initializes a new instance of the ForbiddenError class.
   /// </summary>
-  public ClickPositionsInner()
+  public ForbiddenError()
   {
   }
 
   /// <summary>
-  /// Range of positions in the search results, using the pattern `[start,end]`.  For positions 11 and up, click events are summed over the specified range. `-1` indicates the end of the list of search results. 
+  /// Gets or Sets Code
   /// </summary>
-  /// <value>Range of positions in the search results, using the pattern `[start,end]`.  For positions 11 and up, click events are summed over the specified range. `-1` indicates the end of the list of search results. </value>
-  [JsonPropertyName("position")]
-  public List<int> Position { get; set; }
+  [JsonPropertyName("code")]
+  public string Code { get; set; }
 
   /// <summary>
-  /// Number of times this search has been clicked at that position.
+  /// Gets or Sets Message
   /// </summary>
-  /// <value>Number of times this search has been clicked at that position.</value>
-  [JsonPropertyName("clickCount")]
-  public int? ClickCount { get; set; }
+  [JsonPropertyName("message")]
+  public string Message { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Errors
+  /// </summary>
+  [JsonPropertyName("errors")]
+  public List<ErrorItem> Errors { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,9 +48,10 @@ public partial class ClickPositionsInner
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class ClickPositionsInner {\n");
-    sb.Append("  Position: ").Append(Position).Append("\n");
-    sb.Append("  ClickCount: ").Append(ClickCount).Append("\n");
+    sb.Append("class ForbiddenError {\n");
+    sb.Append("  Code: ").Append(Code).Append("\n");
+    sb.Append("  Message: ").Append(Message).Append("\n");
+    sb.Append("  Errors: ").Append(Errors).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -67,14 +72,15 @@ public partial class ClickPositionsInner
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not ClickPositionsInner input)
+    if (obj is not ForbiddenError input)
     {
       return false;
     }
 
     return
-        (Position == input.Position || Position != null && input.Position != null && Position.SequenceEqual(input.Position)) &&
-        (ClickCount == input.ClickCount || ClickCount.Equals(input.ClickCount));
+        (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
+        (Message == input.Message || (Message != null && Message.Equals(input.Message))) &&
+        (Errors == input.Errors || Errors != null && input.Errors != null && Errors.SequenceEqual(input.Errors));
   }
 
   /// <summary>
@@ -86,11 +92,18 @@ public partial class ClickPositionsInner
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Position != null)
+      if (Code != null)
       {
-        hashCode = (hashCode * 59) + Position.GetHashCode();
+        hashCode = (hashCode * 59) + Code.GetHashCode();
       }
-      hashCode = (hashCode * 59) + ClickCount.GetHashCode();
+      if (Message != null)
+      {
+        hashCode = (hashCode * 59) + Message.GetHashCode();
+      }
+      if (Errors != null)
+      {
+        hashCode = (hashCode * 59) + Errors.GetHashCode();
+      }
       return hashCode;
     }
   }

@@ -9,50 +9,46 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Usage;
+namespace Algolia.Search.Models.QuerySuggestions;
 
 /// <summary>
-/// GetUsage400ResponseErrorErrorsInner
+/// LogFile
 /// </summary>
-public partial class GetUsage400ResponseErrorErrorsInner
+public partial class LogFile
 {
+
   /// <summary>
-  /// Initializes a new instance of the GetUsage400ResponseErrorErrorsInner class.
+  /// Gets or Sets Level
   /// </summary>
-  [JsonConstructor]
-  public GetUsage400ResponseErrorErrorsInner() { }
+  [JsonPropertyName("level")]
+  public LogLevel? Level { get; set; }
   /// <summary>
-  /// Initializes a new instance of the GetUsage400ResponseErrorErrorsInner class.
+  /// Initializes a new instance of the LogFile class.
   /// </summary>
-  /// <param name="message">message (required).</param>
-  public GetUsage400ResponseErrorErrorsInner(string message)
+  public LogFile()
   {
-    Message = message ?? throw new ArgumentNullException(nameof(message));
   }
 
   /// <summary>
-  /// Gets or Sets Code
+  /// Date and time of the log entry, in RFC 3339 format.
   /// </summary>
-  [JsonPropertyName("code")]
-  public string Code { get; set; }
+  /// <value>Date and time of the log entry, in RFC 3339 format.</value>
+  [JsonPropertyName("timestamp")]
+  public string Timestamp { get; set; }
 
   /// <summary>
-  /// Gets or Sets Message
+  /// Details about this log entry.
   /// </summary>
+  /// <value>Details about this log entry.</value>
   [JsonPropertyName("message")]
   public string Message { get; set; }
 
   /// <summary>
-  /// Gets or Sets Line
+  /// Level indicating the position of a suggestion in a hierarchy of records.  For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0. 
   /// </summary>
-  [JsonPropertyName("line")]
-  public int? Line { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Position
-  /// </summary>
-  [JsonPropertyName("position")]
-  public int? Position { get; set; }
+  /// <value>Level indicating the position of a suggestion in a hierarchy of records.  For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0. </value>
+  [JsonPropertyName("contextLevel")]
+  public int? ContextLevel { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -61,11 +57,11 @@ public partial class GetUsage400ResponseErrorErrorsInner
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetUsage400ResponseErrorErrorsInner {\n");
-    sb.Append("  Code: ").Append(Code).Append("\n");
+    sb.Append("class LogFile {\n");
+    sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+    sb.Append("  Level: ").Append(Level).Append("\n");
     sb.Append("  Message: ").Append(Message).Append("\n");
-    sb.Append("  Line: ").Append(Line).Append("\n");
-    sb.Append("  Position: ").Append(Position).Append("\n");
+    sb.Append("  ContextLevel: ").Append(ContextLevel).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -86,16 +82,16 @@ public partial class GetUsage400ResponseErrorErrorsInner
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetUsage400ResponseErrorErrorsInner input)
+    if (obj is not LogFile input)
     {
       return false;
     }
 
     return
-        (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
+        (Timestamp == input.Timestamp || (Timestamp != null && Timestamp.Equals(input.Timestamp))) &&
+        (Level == input.Level || Level.Equals(input.Level)) &&
         (Message == input.Message || (Message != null && Message.Equals(input.Message))) &&
-        (Line == input.Line || Line.Equals(input.Line)) &&
-        (Position == input.Position || Position.Equals(input.Position));
+        (ContextLevel == input.ContextLevel || ContextLevel.Equals(input.ContextLevel));
   }
 
   /// <summary>
@@ -107,16 +103,16 @@ public partial class GetUsage400ResponseErrorErrorsInner
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Code != null)
+      if (Timestamp != null)
       {
-        hashCode = (hashCode * 59) + Code.GetHashCode();
+        hashCode = (hashCode * 59) + Timestamp.GetHashCode();
       }
+      hashCode = (hashCode * 59) + Level.GetHashCode();
       if (Message != null)
       {
         hashCode = (hashCode * 59) + Message.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Line.GetHashCode();
-      hashCode = (hashCode * 59) + Position.GetHashCode();
+      hashCode = (hashCode * 59) + ContextLevel.GetHashCode();
       return hashCode;
     }
   }

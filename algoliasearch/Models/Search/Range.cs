@@ -12,23 +12,30 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Search parameters as query string.
+/// Range object with lower and upper values in meters to define custom ranges.
 /// </summary>
-public partial class SearchParamsString
+public partial class Range
 {
   /// <summary>
-  /// Initializes a new instance of the SearchParamsString class.
+  /// Initializes a new instance of the Range class.
   /// </summary>
-  public SearchParamsString()
+  public Range()
   {
   }
 
   /// <summary>
-  /// Search parameters as a URL-encoded query string.
+  /// Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
   /// </summary>
-  /// <value>Search parameters as a URL-encoded query string.</value>
-  [JsonPropertyName("params")]
-  public string Params { get; set; }
+  /// <value>Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.</value>
+  [JsonPropertyName("from")]
+  public int? From { get; set; }
+
+  /// <summary>
+  /// Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
+  /// </summary>
+  /// <value>Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.</value>
+  [JsonPropertyName("value")]
+  public int? Value { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -37,8 +44,9 @@ public partial class SearchParamsString
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SearchParamsString {\n");
-    sb.Append("  Params: ").Append(Params).Append("\n");
+    sb.Append("class Range {\n");
+    sb.Append("  From: ").Append(From).Append("\n");
+    sb.Append("  Value: ").Append(Value).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -59,13 +67,14 @@ public partial class SearchParamsString
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SearchParamsString input)
+    if (obj is not Range input)
     {
       return false;
     }
 
     return
-        (Params == input.Params || (Params != null && Params.Equals(input.Params)));
+        (From == input.From || From.Equals(input.From)) &&
+        (Value == input.Value || Value.Equals(input.Value));
   }
 
   /// <summary>
@@ -77,10 +86,8 @@ public partial class SearchParamsString
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Params != null)
-      {
-        hashCode = (hashCode * 59) + Params.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + From.GetHashCode();
+      hashCode = (hashCode * 59) + Value.GetHashCode();
       return hashCode;
     }
   }

@@ -9,17 +9,17 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Search;
+namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
 /// Range object with lower and upper values in meters to define custom ranges.
 /// </summary>
-public partial class AroundPrecisionFromValueInner
+public partial class Range
 {
   /// <summary>
-  /// Initializes a new instance of the AroundPrecisionFromValueInner class.
+  /// Initializes a new instance of the Range class.
   /// </summary>
-  public AroundPrecisionFromValueInner()
+  public Range()
   {
   }
 
@@ -44,7 +44,7 @@ public partial class AroundPrecisionFromValueInner
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class AroundPrecisionFromValueInner {\n");
+    sb.Append("class Range {\n");
     sb.Append("  From: ").Append(From).Append("\n");
     sb.Append("  Value: ").Append(Value).Append("\n");
     sb.Append("}\n");
@@ -67,7 +67,7 @@ public partial class AroundPrecisionFromValueInner
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not AroundPrecisionFromValueInner input)
+    if (obj is not Range input)
     {
       return false;
     }

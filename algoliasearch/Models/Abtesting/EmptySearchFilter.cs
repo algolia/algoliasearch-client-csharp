@@ -9,32 +9,33 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Recommend;
+namespace Algolia.Search.Models.Abtesting;
 
 /// <summary>
-/// Redirect rule data.
+/// Empty searches removed from the A/B test as a result of configuration settings.
 /// </summary>
-public partial class RedirectRuleIndexMetadataData
+public partial class EmptySearchFilter
 {
   /// <summary>
-  /// Initializes a new instance of the RedirectRuleIndexMetadataData class.
+  /// Initializes a new instance of the EmptySearchFilter class.
   /// </summary>
-  [JsonConstructor]
-  public RedirectRuleIndexMetadataData() { }
-  /// <summary>
-  /// Initializes a new instance of the RedirectRuleIndexMetadataData class.
-  /// </summary>
-  /// <param name="ruleObjectID">ruleObjectID (required).</param>
-  public RedirectRuleIndexMetadataData(string ruleObjectID)
+  public EmptySearchFilter()
   {
-    RuleObjectID = ruleObjectID ?? throw new ArgumentNullException(nameof(ruleObjectID));
   }
 
   /// <summary>
-  /// Gets or Sets RuleObjectID
+  /// Number of users removed from the A/B test.
   /// </summary>
-  [JsonPropertyName("ruleObjectID")]
-  public string RuleObjectID { get; set; }
+  /// <value>Number of users removed from the A/B test.</value>
+  [JsonPropertyName("usersCount")]
+  public int? UsersCount { get; set; }
+
+  /// <summary>
+  /// Number of tracked searches removed from the A/B test.
+  /// </summary>
+  /// <value>Number of tracked searches removed from the A/B test.</value>
+  [JsonPropertyName("trackedSearchesCount")]
+  public int? TrackedSearchesCount { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,8 +44,9 @@ public partial class RedirectRuleIndexMetadataData
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RedirectRuleIndexMetadataData {\n");
-    sb.Append("  RuleObjectID: ").Append(RuleObjectID).Append("\n");
+    sb.Append("class EmptySearchFilter {\n");
+    sb.Append("  UsersCount: ").Append(UsersCount).Append("\n");
+    sb.Append("  TrackedSearchesCount: ").Append(TrackedSearchesCount).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -65,13 +67,14 @@ public partial class RedirectRuleIndexMetadataData
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RedirectRuleIndexMetadataData input)
+    if (obj is not EmptySearchFilter input)
     {
       return false;
     }
 
     return
-        (RuleObjectID == input.RuleObjectID || (RuleObjectID != null && RuleObjectID.Equals(input.RuleObjectID)));
+        (UsersCount == input.UsersCount || UsersCount.Equals(input.UsersCount)) &&
+        (TrackedSearchesCount == input.TrackedSearchesCount || TrackedSearchesCount.Equals(input.TrackedSearchesCount));
   }
 
   /// <summary>
@@ -83,10 +86,8 @@ public partial class RedirectRuleIndexMetadataData
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (RuleObjectID != null)
-      {
-        hashCode = (hashCode * 59) + RuleObjectID.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + UsersCount.GetHashCode();
+      hashCode = (hashCode * 59) + TrackedSearchesCount.GetHashCode();
       return hashCode;
     }
   }

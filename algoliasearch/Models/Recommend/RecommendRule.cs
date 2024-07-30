@@ -27,7 +27,7 @@ public partial class RecommendRule
   /// Gets or Sets Metadata
   /// </summary>
   [JsonPropertyName("_metadata")]
-  public RecommendRuleMetadata Metadata { get; set; }
+  public RuleMetadata Metadata { get; set; }
 
   /// <summary>
   /// Unique identifier of a rule object.

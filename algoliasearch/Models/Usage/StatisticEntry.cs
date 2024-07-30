@@ -9,33 +9,32 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Abtesting;
+namespace Algolia.Search.Models.Usage;
 
 /// <summary>
-/// Outliers removed from the A/B test as a result of configuration settings.
+/// StatisticEntry
 /// </summary>
-public partial class FilterEffectsOutliers
+public partial class StatisticEntry
 {
   /// <summary>
-  /// Initializes a new instance of the FilterEffectsOutliers class.
+  /// Initializes a new instance of the StatisticEntry class.
   /// </summary>
-  public FilterEffectsOutliers()
+  public StatisticEntry()
   {
   }
 
   /// <summary>
-  /// Number of users removed from the A/B test.
+  /// Timestamp, measured in milliseconds since the Unix epoch.
   /// </summary>
-  /// <value>Number of users removed from the A/B test.</value>
-  [JsonPropertyName("usersCount")]
-  public int? UsersCount { get; set; }
+  /// <value>Timestamp, measured in milliseconds since the Unix epoch.</value>
+  [JsonPropertyName("t")]
+  public int? T { get; set; }
 
   /// <summary>
-  /// Number of tracked searches removed from the A/B test.
+  /// Gets or Sets V
   /// </summary>
-  /// <value>Number of tracked searches removed from the A/B test.</value>
-  [JsonPropertyName("trackedSearchesCount")]
-  public int? TrackedSearchesCount { get; set; }
+  [JsonPropertyName("v")]
+  public StatisticValue V { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,9 +43,9 @@ public partial class FilterEffectsOutliers
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class FilterEffectsOutliers {\n");
-    sb.Append("  UsersCount: ").Append(UsersCount).Append("\n");
-    sb.Append("  TrackedSearchesCount: ").Append(TrackedSearchesCount).Append("\n");
+    sb.Append("class StatisticEntry {\n");
+    sb.Append("  T: ").Append(T).Append("\n");
+    sb.Append("  V: ").Append(V).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -67,14 +66,14 @@ public partial class FilterEffectsOutliers
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not FilterEffectsOutliers input)
+    if (obj is not StatisticEntry input)
     {
       return false;
     }
 
     return
-        (UsersCount == input.UsersCount || UsersCount.Equals(input.UsersCount)) &&
-        (TrackedSearchesCount == input.TrackedSearchesCount || TrackedSearchesCount.Equals(input.TrackedSearchesCount));
+        (T == input.T || T.Equals(input.T)) &&
+        (V == input.V || (V != null && V.Equals(input.V)));
   }
 
   /// <summary>
@@ -86,8 +85,11 @@ public partial class FilterEffectsOutliers
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + UsersCount.GetHashCode();
-      hashCode = (hashCode * 59) + TrackedSearchesCount.GetHashCode();
+      hashCode = (hashCode * 59) + T.GetHashCode();
+      if (V != null)
+      {
+        hashCode = (hashCode * 59) + V.GetHashCode();
+      }
       return hashCode;
     }
   }

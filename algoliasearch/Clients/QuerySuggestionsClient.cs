@@ -232,8 +232,8 @@ public interface IQuerySuggestionsClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetConfigStatus200Response</returns>
-  Task<GetConfigStatus200Response> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of ConfigStatus</returns>
+  Task<ConfigStatus> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Reports the status of a Query Suggestions index. (Synchronous version)
@@ -244,8 +244,8 @@ public interface IQuerySuggestionsClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetConfigStatus200Response</returns>
-  GetConfigStatus200Response GetConfigStatus(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>ConfigStatus</returns>
+  ConfigStatus GetConfigStatus(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves the logs for a single Query Suggestions index.
@@ -256,8 +256,8 @@ public interface IQuerySuggestionsClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetLogFile200Response</returns>
-  Task<GetLogFile200Response> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of LogFile</returns>
+  Task<LogFile> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves the logs for a single Query Suggestions index. (Synchronous version)
@@ -268,8 +268,8 @@ public interface IQuerySuggestionsClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetLogFile200Response</returns>
-  GetLogFile200Response GetLogFile(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>LogFile</returns>
+  LogFile GetLogFile(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Updates a QuerySuggestions configuration.
@@ -712,8 +712,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetConfigStatus200Response</returns>
-  public async Task<GetConfigStatus200Response> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of ConfigStatus</returns>
+  public async Task<ConfigStatus> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (indexName == null)
@@ -723,7 +723,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<GetConfigStatus200Response>(new HttpMethod("GET"), "/1/configs/{indexName}/status", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<ConfigStatus>(new HttpMethod("GET"), "/1/configs/{indexName}/status", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -739,8 +739,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetConfigStatus200Response</returns>
-  public GetConfigStatus200Response GetConfigStatus(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>ConfigStatus</returns>
+  public ConfigStatus GetConfigStatus(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetConfigStatusAsync(indexName, options, cancellationToken));
 
 
@@ -756,8 +756,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetLogFile200Response</returns>
-  public async Task<GetLogFile200Response> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of LogFile</returns>
+  public async Task<LogFile> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (indexName == null)
@@ -767,7 +767,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
-    return await _transport.ExecuteRequestAsync<GetLogFile200Response>(new HttpMethod("GET"), "/1/logs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<LogFile>(new HttpMethod("GET"), "/1/logs/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -783,8 +783,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetLogFile200Response</returns>
-  public GetLogFile200Response GetLogFile(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>LogFile</returns>
+  public LogFile GetLogFile(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetLogFileAsync(indexName, options, cancellationToken));
 
 

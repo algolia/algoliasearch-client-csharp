@@ -27,7 +27,7 @@ public partial class IndexingTimeResponse
   /// Gets or Sets Metrics
   /// </summary>
   [JsonPropertyName("metrics")]
-  public IndexingTimeResponseMetrics Metrics { get; set; }
+  public IndexingMetric Metrics { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

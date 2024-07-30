@@ -27,7 +27,7 @@ public partial class InfrastructureResponse
   /// Gets or Sets Metrics
   /// </summary>
   [JsonPropertyName("metrics")]
-  public InfrastructureResponseMetrics Metrics { get; set; }
+  public Metrics Metrics { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

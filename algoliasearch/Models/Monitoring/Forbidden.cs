@@ -9,33 +9,25 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Abtesting;
+namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// Empty searches removed from the A/B test as a result of configuration settings.
+/// Forbidden
 /// </summary>
-public partial class FilterEffectsEmptySearch
+public partial class Forbidden
 {
   /// <summary>
-  /// Initializes a new instance of the FilterEffectsEmptySearch class.
+  /// Initializes a new instance of the Forbidden class.
   /// </summary>
-  public FilterEffectsEmptySearch()
+  public Forbidden()
   {
   }
 
   /// <summary>
-  /// Number of users removed from the A/B test.
+  /// Gets or Sets Reason
   /// </summary>
-  /// <value>Number of users removed from the A/B test.</value>
-  [JsonPropertyName("usersCount")]
-  public int? UsersCount { get; set; }
-
-  /// <summary>
-  /// Number of tracked searches removed from the A/B test.
-  /// </summary>
-  /// <value>Number of tracked searches removed from the A/B test.</value>
-  [JsonPropertyName("trackedSearchesCount")]
-  public int? TrackedSearchesCount { get; set; }
+  [JsonPropertyName("reason")]
+  public string Reason { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,9 +36,8 @@ public partial class FilterEffectsEmptySearch
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class FilterEffectsEmptySearch {\n");
-    sb.Append("  UsersCount: ").Append(UsersCount).Append("\n");
-    sb.Append("  TrackedSearchesCount: ").Append(TrackedSearchesCount).Append("\n");
+    sb.Append("class Forbidden {\n");
+    sb.Append("  Reason: ").Append(Reason).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -67,14 +58,13 @@ public partial class FilterEffectsEmptySearch
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not FilterEffectsEmptySearch input)
+    if (obj is not Forbidden input)
     {
       return false;
     }
 
     return
-        (UsersCount == input.UsersCount || UsersCount.Equals(input.UsersCount)) &&
-        (TrackedSearchesCount == input.TrackedSearchesCount || TrackedSearchesCount.Equals(input.TrackedSearchesCount));
+        (Reason == input.Reason || (Reason != null && Reason.Equals(input.Reason)));
   }
 
   /// <summary>
@@ -86,8 +76,10 @@ public partial class FilterEffectsEmptySearch
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + UsersCount.GetHashCode();
-      hashCode = (hashCode * 59) + TrackedSearchesCount.GetHashCode();
+      if (Reason != null)
+      {
+        hashCode = (hashCode * 59) + Reason.GetHashCode();
+      }
       return hashCode;
     }
   }

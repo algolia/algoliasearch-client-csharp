@@ -34,7 +34,7 @@ public partial class TopSearchWithAnalytics
   /// <param name="clickCount">Number of clicks associated with this search. (required) (default to 0).</param>
   /// <param name="conversionCount">Number of conversions from this search. (required) (default to 0).</param>
   /// <param name="nbHits">Number of results (hits). (required).</param>
-  public TopSearchWithAnalytics(string search, int count, double? clickThroughRate, double? averageClickPosition, List<ClickPositionsInner> clickPositions, double? conversionRate, int trackedSearchCount, int clickCount, int conversionCount, int nbHits)
+  public TopSearchWithAnalytics(string search, int count, double? clickThroughRate, double? averageClickPosition, List<ClickPosition> clickPositions, double? conversionRate, int trackedSearchCount, int clickCount, int conversionCount, int nbHits)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
     Count = count;
@@ -81,7 +81,7 @@ public partial class TopSearchWithAnalytics
   /// </summary>
   /// <value>List of positions in the search results and clicks associated with this search.</value>
   [JsonPropertyName("clickPositions")]
-  public List<ClickPositionsInner> ClickPositions { get; set; }
+  public List<ClickPosition> ClickPositions { get; set; }
 
   /// <summary>
   /// Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 

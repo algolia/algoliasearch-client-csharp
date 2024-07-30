@@ -9,25 +9,37 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Monitoring;
+namespace Algolia.Search.Models.Usage;
 
 /// <summary>
-/// LatencyResponseMetrics
+/// InvalidRequestError
 /// </summary>
-public partial class LatencyResponseMetrics
+public partial class InvalidRequestError
 {
   /// <summary>
-  /// Initializes a new instance of the LatencyResponseMetrics class.
+  /// Initializes a new instance of the InvalidRequestError class.
   /// </summary>
-  public LatencyResponseMetrics()
+  public InvalidRequestError()
   {
   }
 
   /// <summary>
-  /// Gets or Sets Latency
+  /// Gets or Sets Code
   /// </summary>
-  [JsonPropertyName("latency")]
-  public Dictionary<string, List<TimeInner>> Latency { get; set; }
+  [JsonPropertyName("code")]
+  public string Code { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Message
+  /// </summary>
+  [JsonPropertyName("message")]
+  public string Message { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Errors
+  /// </summary>
+  [JsonPropertyName("errors")]
+  public List<ErrorItem> Errors { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -36,8 +48,10 @@ public partial class LatencyResponseMetrics
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class LatencyResponseMetrics {\n");
-    sb.Append("  Latency: ").Append(Latency).Append("\n");
+    sb.Append("class InvalidRequestError {\n");
+    sb.Append("  Code: ").Append(Code).Append("\n");
+    sb.Append("  Message: ").Append(Message).Append("\n");
+    sb.Append("  Errors: ").Append(Errors).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -58,13 +72,15 @@ public partial class LatencyResponseMetrics
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not LatencyResponseMetrics input)
+    if (obj is not InvalidRequestError input)
     {
       return false;
     }
 
     return
-        (Latency == input.Latency || Latency != null && input.Latency != null && Latency.SequenceEqual(input.Latency));
+        (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
+        (Message == input.Message || (Message != null && Message.Equals(input.Message))) &&
+        (Errors == input.Errors || Errors != null && input.Errors != null && Errors.SequenceEqual(input.Errors));
   }
 
   /// <summary>
@@ -76,9 +92,17 @@ public partial class LatencyResponseMetrics
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Latency != null)
+      if (Code != null)
       {
-        hashCode = (hashCode * 59) + Latency.GetHashCode();
+        hashCode = (hashCode * 59) + Code.GetHashCode();
+      }
+      if (Message != null)
+      {
+        hashCode = (hashCode * 59) + Message.GetHashCode();
+      }
+      if (Errors != null)
+      {
+        hashCode = (hashCode * 59) + Errors.GetHashCode();
       }
       return hashCode;
     }

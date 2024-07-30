@@ -32,10 +32,10 @@ public partial class AroundPrecision : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the AroundPrecision class
-  /// with a List{AroundPrecisionFromValueInner}
+  /// with a List{Range}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;AroundPrecisionFromValueInner&gt;.</param>
-  public AroundPrecision(List<AroundPrecisionFromValueInner> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;Range&gt;.</param>
+  public AroundPrecision(List<Range> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -57,13 +57,13 @@ public partial class AroundPrecision : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `List{AroundPrecisionFromValueInner}`. If the actual instance is not `List{AroundPrecisionFromValueInner}`,
+  /// Get the actual instance of `List{Range}`. If the actual instance is not `List{Range}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of List&lt;AroundPrecisionFromValueInner&gt;</returns>
-  public List<AroundPrecisionFromValueInner> AsList()
+  /// <returns>An instance of List&lt;Range&gt;</returns>
+  public List<Range> AsList()
   {
-    return (List<AroundPrecisionFromValueInner>)ActualInstance;
+    return (List<Range>)ActualInstance;
   }
 
 
@@ -77,12 +77,12 @@ public partial class AroundPrecision : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `List{AroundPrecisionFromValueInner}` type.
+  /// Check if the actual instance is of `List{Range}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsList()
   {
-    return ActualInstance.GetType() == typeof(List<AroundPrecisionFromValueInner>);
+    return ActualInstance.GetType() == typeof(List<Range>);
   }
 
   /// <summary>
@@ -185,12 +185,12 @@ public class AroundPrecisionJsonConverter : JsonConverter<AroundPrecision>
     {
       try
       {
-        return new AroundPrecision(jsonDocument.Deserialize<List<AroundPrecisionFromValueInner>>(JsonConfig.Options));
+        return new AroundPrecision(jsonDocument.Deserialize<List<Range>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<AroundPrecisionFromValueInner>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<Range>: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

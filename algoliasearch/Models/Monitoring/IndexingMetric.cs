@@ -9,32 +9,25 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Search;
+namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// Redirect rule data.
+/// IndexingMetric
 /// </summary>
-public partial class RedirectRuleIndexMetadataData
+public partial class IndexingMetric
 {
   /// <summary>
-  /// Initializes a new instance of the RedirectRuleIndexMetadataData class.
+  /// Initializes a new instance of the IndexingMetric class.
   /// </summary>
-  [JsonConstructor]
-  public RedirectRuleIndexMetadataData() { }
-  /// <summary>
-  /// Initializes a new instance of the RedirectRuleIndexMetadataData class.
-  /// </summary>
-  /// <param name="ruleObjectID">ruleObjectID (required).</param>
-  public RedirectRuleIndexMetadataData(string ruleObjectID)
+  public IndexingMetric()
   {
-    RuleObjectID = ruleObjectID ?? throw new ArgumentNullException(nameof(ruleObjectID));
   }
 
   /// <summary>
-  /// Gets or Sets RuleObjectID
+  /// Gets or Sets Indexing
   /// </summary>
-  [JsonPropertyName("ruleObjectID")]
-  public string RuleObjectID { get; set; }
+  [JsonPropertyName("indexing")]
+  public Dictionary<string, List<TimeEntry>> Indexing { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,8 +36,8 @@ public partial class RedirectRuleIndexMetadataData
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RedirectRuleIndexMetadataData {\n");
-    sb.Append("  RuleObjectID: ").Append(RuleObjectID).Append("\n");
+    sb.Append("class IndexingMetric {\n");
+    sb.Append("  Indexing: ").Append(Indexing).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -65,13 +58,13 @@ public partial class RedirectRuleIndexMetadataData
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RedirectRuleIndexMetadataData input)
+    if (obj is not IndexingMetric input)
     {
       return false;
     }
 
     return
-        (RuleObjectID == input.RuleObjectID || (RuleObjectID != null && RuleObjectID.Equals(input.RuleObjectID)));
+        (Indexing == input.Indexing || Indexing != null && input.Indexing != null && Indexing.SequenceEqual(input.Indexing));
   }
 
   /// <summary>
@@ -83,9 +76,9 @@ public partial class RedirectRuleIndexMetadataData
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (RuleObjectID != null)
+      if (Indexing != null)
       {
-        hashCode = (hashCode * 59) + RuleObjectID.GetHashCode();
+        hashCode = (hashCode * 59) + Indexing.GetHashCode();
       }
       return hashCode;
     }

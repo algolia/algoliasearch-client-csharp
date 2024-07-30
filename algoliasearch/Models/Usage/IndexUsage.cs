@@ -9,33 +9,25 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Monitoring;
+namespace Algolia.Search.Models.Usage;
 
 /// <summary>
-/// TimeInner
+/// IndexUsage
 /// </summary>
-public partial class TimeInner
+public partial class IndexUsage
 {
   /// <summary>
-  /// Initializes a new instance of the TimeInner class.
+  /// Initializes a new instance of the IndexUsage class.
   /// </summary>
-  public TimeInner()
+  public IndexUsage()
   {
   }
 
   /// <summary>
-  /// Timestamp, measured in milliseconds since the Unix epoch.
+  /// Gets or Sets Statistics
   /// </summary>
-  /// <value>Timestamp, measured in milliseconds since the Unix epoch.</value>
-  [JsonPropertyName("t")]
-  public long? T { get; set; }
-
-  /// <summary>
-  /// Time in ms.
-  /// </summary>
-  /// <value>Time in ms.</value>
-  [JsonPropertyName("v")]
-  public int? V { get; set; }
+  [JsonPropertyName("statistics")]
+  public List<StatisticEntry> Statistics { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,9 +36,8 @@ public partial class TimeInner
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class TimeInner {\n");
-    sb.Append("  T: ").Append(T).Append("\n");
-    sb.Append("  V: ").Append(V).Append("\n");
+    sb.Append("class IndexUsage {\n");
+    sb.Append("  Statistics: ").Append(Statistics).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -67,14 +58,13 @@ public partial class TimeInner
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not TimeInner input)
+    if (obj is not IndexUsage input)
     {
       return false;
     }
 
     return
-        (T == input.T || T.Equals(input.T)) &&
-        (V == input.V || V.Equals(input.V));
+        (Statistics == input.Statistics || Statistics != null && input.Statistics != null && Statistics.SequenceEqual(input.Statistics));
   }
 
   /// <summary>
@@ -86,8 +76,10 @@ public partial class TimeInner
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + T.GetHashCode();
-      hashCode = (hashCode * 59) + V.GetHashCode();
+      if (Statistics != null)
+      {
+        hashCode = (hashCode * 59) + Statistics.GetHashCode();
+      }
       return hashCode;
     }
   }

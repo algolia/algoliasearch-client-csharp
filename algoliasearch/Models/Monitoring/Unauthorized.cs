@@ -9,33 +9,25 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Recommend;
+namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// Range object with lower and upper values in meters to define custom ranges.
+/// Unauthorized
 /// </summary>
-public partial class AroundPrecisionFromValueInner
+public partial class Unauthorized
 {
   /// <summary>
-  /// Initializes a new instance of the AroundPrecisionFromValueInner class.
+  /// Initializes a new instance of the Unauthorized class.
   /// </summary>
-  public AroundPrecisionFromValueInner()
+  public Unauthorized()
   {
   }
 
   /// <summary>
-  /// Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
+  /// Gets or Sets Reason
   /// </summary>
-  /// <value>Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.</value>
-  [JsonPropertyName("from")]
-  public int? From { get; set; }
-
-  /// <summary>
-  /// Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
-  /// </summary>
-  /// <value>Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.</value>
-  [JsonPropertyName("value")]
-  public int? Value { get; set; }
+  [JsonPropertyName("reason")]
+  public string Reason { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,9 +36,8 @@ public partial class AroundPrecisionFromValueInner
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class AroundPrecisionFromValueInner {\n");
-    sb.Append("  From: ").Append(From).Append("\n");
-    sb.Append("  Value: ").Append(Value).Append("\n");
+    sb.Append("class Unauthorized {\n");
+    sb.Append("  Reason: ").Append(Reason).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -67,14 +58,13 @@ public partial class AroundPrecisionFromValueInner
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not AroundPrecisionFromValueInner input)
+    if (obj is not Unauthorized input)
     {
       return false;
     }
 
     return
-        (From == input.From || From.Equals(input.From)) &&
-        (Value == input.Value || Value.Equals(input.Value));
+        (Reason == input.Reason || (Reason != null && Reason.Equals(input.Reason)));
   }
 
   /// <summary>
@@ -86,8 +76,10 @@ public partial class AroundPrecisionFromValueInner
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + From.GetHashCode();
-      hashCode = (hashCode * 59) + Value.GetHashCode();
+      if (Reason != null)
+      {
+        hashCode = (hashCode * 59) + Reason.GetHashCode();
+      }
       return hashCode;
     }
   }

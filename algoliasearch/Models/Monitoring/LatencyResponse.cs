@@ -27,7 +27,7 @@ public partial class LatencyResponse
   /// Gets or Sets Metrics
   /// </summary>
   [JsonPropertyName("metrics")]
-  public LatencyResponseMetrics Metrics { get; set; }
+  public LatencyMetric Metrics { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

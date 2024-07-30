@@ -29,7 +29,7 @@ public partial class RedirectRuleIndexMetadata
   /// <param name="reason">Reason for the redirect rule. (required).</param>
   /// <param name="succeed">Redirect rule status. (required).</param>
   /// <param name="data">data (required).</param>
-  public RedirectRuleIndexMetadata(string source, string dest, string reason, bool succeed, RedirectRuleIndexMetadataData data)
+  public RedirectRuleIndexMetadata(string source, string dest, string reason, bool succeed, RedirectRuleIndexData data)
   {
     Source = source ?? throw new ArgumentNullException(nameof(source));
     Dest = dest ?? throw new ArgumentNullException(nameof(dest));
@@ -70,7 +70,7 @@ public partial class RedirectRuleIndexMetadata
   /// Gets or Sets Data
   /// </summary>
   [JsonPropertyName("data")]
-  public RedirectRuleIndexMetadataData Data { get; set; }
+  public RedirectRuleIndexData Data { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

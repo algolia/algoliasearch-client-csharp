@@ -9,32 +9,33 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Monitoring;
+namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// IncidentsInner
+/// The error if the transformation failed.
 /// </summary>
-public partial class IncidentsInner
+public partial class TransformationError
 {
   /// <summary>
-  /// Initializes a new instance of the IncidentsInner class.
+  /// Initializes a new instance of the TransformationError class.
   /// </summary>
-  public IncidentsInner()
+  public TransformationError()
   {
   }
 
   /// <summary>
-  /// Timestamp, measured in milliseconds since the Unix epoch.
+  /// The error status code.
   /// </summary>
-  /// <value>Timestamp, measured in milliseconds since the Unix epoch.</value>
-  [JsonPropertyName("t")]
-  public long? T { get; set; }
+  /// <value>The error status code.</value>
+  [JsonPropertyName("code")]
+  public int? Code { get; set; }
 
   /// <summary>
-  /// Gets or Sets V
+  /// A descriptive message explaining the failure.
   /// </summary>
-  [JsonPropertyName("v")]
-  public Incident V { get; set; }
+  /// <value>A descriptive message explaining the failure.</value>
+  [JsonPropertyName("message")]
+  public string Message { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,9 +44,9 @@ public partial class IncidentsInner
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class IncidentsInner {\n");
-    sb.Append("  T: ").Append(T).Append("\n");
-    sb.Append("  V: ").Append(V).Append("\n");
+    sb.Append("class TransformationError {\n");
+    sb.Append("  Code: ").Append(Code).Append("\n");
+    sb.Append("  Message: ").Append(Message).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,14 +67,14 @@ public partial class IncidentsInner
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not IncidentsInner input)
+    if (obj is not TransformationError input)
     {
       return false;
     }
 
     return
-        (T == input.T || T.Equals(input.T)) &&
-        (V == input.V || (V != null && V.Equals(input.V)));
+        (Code == input.Code || Code.Equals(input.Code)) &&
+        (Message == input.Message || (Message != null && Message.Equals(input.Message)));
   }
 
   /// <summary>
@@ -85,10 +86,10 @@ public partial class IncidentsInner
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + T.GetHashCode();
-      if (V != null)
+      hashCode = (hashCode * 59) + Code.GetHashCode();
+      if (Message != null)
       {
-        hashCode = (hashCode * 59) + V.GetHashCode();
+        hashCode = (hashCode * 59) + Message.GetHashCode();
       }
       return hashCode;
     }

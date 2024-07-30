@@ -27,7 +27,7 @@ public partial class IncidentsResponse
   /// Gets or Sets Incidents
   /// </summary>
   [JsonPropertyName("incidents")]
-  public Dictionary<string, List<IncidentsInner>> Incidents { get; set; }
+  public Dictionary<string, List<IncidentEntry>> Incidents { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

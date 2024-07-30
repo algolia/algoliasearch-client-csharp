@@ -9,26 +9,32 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Search;
+namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Search parameters as query string.
+/// Redirect rule data.
 /// </summary>
-public partial class SearchParamsString
+public partial class RedirectRuleIndexData
 {
   /// <summary>
-  /// Initializes a new instance of the SearchParamsString class.
+  /// Initializes a new instance of the RedirectRuleIndexData class.
   /// </summary>
-  public SearchParamsString()
+  [JsonConstructor]
+  public RedirectRuleIndexData() { }
+  /// <summary>
+  /// Initializes a new instance of the RedirectRuleIndexData class.
+  /// </summary>
+  /// <param name="ruleObjectID">ruleObjectID (required).</param>
+  public RedirectRuleIndexData(string ruleObjectID)
   {
+    RuleObjectID = ruleObjectID ?? throw new ArgumentNullException(nameof(ruleObjectID));
   }
 
   /// <summary>
-  /// Search parameters as a URL-encoded query string.
+  /// Gets or Sets RuleObjectID
   /// </summary>
-  /// <value>Search parameters as a URL-encoded query string.</value>
-  [JsonPropertyName("params")]
-  public string Params { get; set; }
+  [JsonPropertyName("ruleObjectID")]
+  public string RuleObjectID { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -37,8 +43,8 @@ public partial class SearchParamsString
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SearchParamsString {\n");
-    sb.Append("  Params: ").Append(Params).Append("\n");
+    sb.Append("class RedirectRuleIndexData {\n");
+    sb.Append("  RuleObjectID: ").Append(RuleObjectID).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -59,13 +65,13 @@ public partial class SearchParamsString
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SearchParamsString input)
+    if (obj is not RedirectRuleIndexData input)
     {
       return false;
     }
 
     return
-        (Params == input.Params || (Params != null && Params.Equals(input.Params)));
+        (RuleObjectID == input.RuleObjectID || (RuleObjectID != null && RuleObjectID.Equals(input.RuleObjectID)));
   }
 
   /// <summary>
@@ -77,9 +83,9 @@ public partial class SearchParamsString
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Params != null)
+      if (RuleObjectID != null)
       {
-        hashCode = (hashCode * 59) + Params.GetHashCode();
+        hashCode = (hashCode * 59) + RuleObjectID.GetHashCode();
       }
       return hashCode;
     }

@@ -9,25 +9,33 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Monitoring;
+namespace Algolia.Search.Models.Abtesting;
 
 /// <summary>
-/// GetServers403Response
+/// Outliers removed from the A/B test as a result of configuration settings.
 /// </summary>
-public partial class GetServers403Response
+public partial class OutliersFilter
 {
   /// <summary>
-  /// Initializes a new instance of the GetServers403Response class.
+  /// Initializes a new instance of the OutliersFilter class.
   /// </summary>
-  public GetServers403Response()
+  public OutliersFilter()
   {
   }
 
   /// <summary>
-  /// Gets or Sets Reason
+  /// Number of users removed from the A/B test.
   /// </summary>
-  [JsonPropertyName("reason")]
-  public string Reason { get; set; }
+  /// <value>Number of users removed from the A/B test.</value>
+  [JsonPropertyName("usersCount")]
+  public int? UsersCount { get; set; }
+
+  /// <summary>
+  /// Number of tracked searches removed from the A/B test.
+  /// </summary>
+  /// <value>Number of tracked searches removed from the A/B test.</value>
+  [JsonPropertyName("trackedSearchesCount")]
+  public int? TrackedSearchesCount { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -36,8 +44,9 @@ public partial class GetServers403Response
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetServers403Response {\n");
-    sb.Append("  Reason: ").Append(Reason).Append("\n");
+    sb.Append("class OutliersFilter {\n");
+    sb.Append("  UsersCount: ").Append(UsersCount).Append("\n");
+    sb.Append("  TrackedSearchesCount: ").Append(TrackedSearchesCount).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -58,13 +67,14 @@ public partial class GetServers403Response
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetServers403Response input)
+    if (obj is not OutliersFilter input)
     {
       return false;
     }
 
     return
-        (Reason == input.Reason || (Reason != null && Reason.Equals(input.Reason)));
+        (UsersCount == input.UsersCount || UsersCount.Equals(input.UsersCount)) &&
+        (TrackedSearchesCount == input.TrackedSearchesCount || TrackedSearchesCount.Equals(input.TrackedSearchesCount));
   }
 
   /// <summary>
@@ -76,10 +86,8 @@ public partial class GetServers403Response
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Reason != null)
-      {
-        hashCode = (hashCode * 59) + Reason.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + UsersCount.GetHashCode();
+      hashCode = (hashCode * 59) + TrackedSearchesCount.GetHashCode();
       return hashCode;
     }
   }

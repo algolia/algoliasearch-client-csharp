@@ -9,32 +9,33 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Usage;
+namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// GetUsage400Response
+/// TimeEntry
 /// </summary>
-public partial class GetUsage400Response
+public partial class TimeEntry
 {
   /// <summary>
-  /// Initializes a new instance of the GetUsage400Response class.
+  /// Initializes a new instance of the TimeEntry class.
   /// </summary>
-  [JsonConstructor]
-  public GetUsage400Response() { }
-  /// <summary>
-  /// Initializes a new instance of the GetUsage400Response class.
-  /// </summary>
-  /// <param name="error">error (required).</param>
-  public GetUsage400Response(GetUsage400ResponseError error)
+  public TimeEntry()
   {
-    Error = error ?? throw new ArgumentNullException(nameof(error));
   }
 
   /// <summary>
-  /// Gets or Sets Error
+  /// Timestamp, measured in milliseconds since the Unix epoch.
   /// </summary>
-  [JsonPropertyName("error")]
-  public GetUsage400ResponseError Error { get; set; }
+  /// <value>Timestamp, measured in milliseconds since the Unix epoch.</value>
+  [JsonPropertyName("t")]
+  public long? T { get; set; }
+
+  /// <summary>
+  /// Time in ms.
+  /// </summary>
+  /// <value>Time in ms.</value>
+  [JsonPropertyName("v")]
+  public int? V { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,8 +44,9 @@ public partial class GetUsage400Response
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetUsage400Response {\n");
-    sb.Append("  Error: ").Append(Error).Append("\n");
+    sb.Append("class TimeEntry {\n");
+    sb.Append("  T: ").Append(T).Append("\n");
+    sb.Append("  V: ").Append(V).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -65,13 +67,14 @@ public partial class GetUsage400Response
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetUsage400Response input)
+    if (obj is not TimeEntry input)
     {
       return false;
     }
 
     return
-        (Error == input.Error || (Error != null && Error.Equals(input.Error)));
+        (T == input.T || T.Equals(input.T)) &&
+        (V == input.V || V.Equals(input.V));
   }
 
   /// <summary>
@@ -83,10 +86,8 @@ public partial class GetUsage400Response
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Error != null)
-      {
-        hashCode = (hashCode * 59) + Error.GetHashCode();
-      }
+      hashCode = (hashCode * 59) + T.GetHashCode();
+      hashCode = (hashCode * 59) + V.GetHashCode();
       return hashCode;
     }
   }

@@ -41,7 +41,7 @@ public partial class TransformationTryResponse
   /// Gets or Sets Error
   /// </summary>
   [JsonPropertyName("error")]
-  public TransformationTryResponseError Error { get; set; }
+  public TransformationError Error { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

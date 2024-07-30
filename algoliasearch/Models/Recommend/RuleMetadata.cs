@@ -9,32 +9,26 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Usage;
+namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// GetUsage200ResponseStatisticsInner
+/// Rule metadata.
 /// </summary>
-public partial class GetUsage200ResponseStatisticsInner
+public partial class RuleMetadata
 {
   /// <summary>
-  /// Initializes a new instance of the GetUsage200ResponseStatisticsInner class.
+  /// Initializes a new instance of the RuleMetadata class.
   /// </summary>
-  public GetUsage200ResponseStatisticsInner()
+  public RuleMetadata()
   {
   }
 
   /// <summary>
-  /// Timestamp, measured in milliseconds since the Unix epoch.
+  /// Date and time when the object was updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Timestamp, measured in milliseconds since the Unix epoch.</value>
-  [JsonPropertyName("t")]
-  public int? T { get; set; }
-
-  /// <summary>
-  /// Gets or Sets V
-  /// </summary>
-  [JsonPropertyName("v")]
-  public StatisticValue V { get; set; }
+  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
+  [JsonPropertyName("lastUpdate")]
+  public string LastUpdate { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,9 +37,8 @@ public partial class GetUsage200ResponseStatisticsInner
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetUsage200ResponseStatisticsInner {\n");
-    sb.Append("  T: ").Append(T).Append("\n");
-    sb.Append("  V: ").Append(V).Append("\n");
+    sb.Append("class RuleMetadata {\n");
+    sb.Append("  LastUpdate: ").Append(LastUpdate).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -66,14 +59,13 @@ public partial class GetUsage200ResponseStatisticsInner
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetUsage200ResponseStatisticsInner input)
+    if (obj is not RuleMetadata input)
     {
       return false;
     }
 
     return
-        (T == input.T || T.Equals(input.T)) &&
-        (V == input.V || (V != null && V.Equals(input.V)));
+        (LastUpdate == input.LastUpdate || (LastUpdate != null && LastUpdate.Equals(input.LastUpdate)));
   }
 
   /// <summary>
@@ -85,10 +77,9 @@ public partial class GetUsage200ResponseStatisticsInner
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + T.GetHashCode();
-      if (V != null)
+      if (LastUpdate != null)
       {
-        hashCode = (hashCode * 59) + V.GetHashCode();
+        hashCode = (hashCode * 59) + LastUpdate.GetHashCode();
       }
       return hashCode;
     }

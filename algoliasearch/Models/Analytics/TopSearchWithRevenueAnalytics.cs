@@ -39,7 +39,7 @@ public partial class TopSearchWithRevenueAnalytics
   /// <param name="addToCartCount">Number of add-to-cart events from this search. (required) (default to 0).</param>
   /// <param name="purchaseRate">Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
   /// <param name="purchaseCount">Number of purchase events from this search. (required) (default to 0).</param>
-  public TopSearchWithRevenueAnalytics(string search, int count, double? clickThroughRate, double? averageClickPosition, List<ClickPositionsInner> clickPositions, double? conversionRate, int trackedSearchCount, int clickCount, int conversionCount, int nbHits, Dictionary<string, CurrenciesValue> currencies, double? addToCartRate, int addToCartCount, double? purchaseRate, int purchaseCount)
+  public TopSearchWithRevenueAnalytics(string search, int count, double? clickThroughRate, double? averageClickPosition, List<ClickPosition> clickPositions, double? conversionRate, int trackedSearchCount, int clickCount, int conversionCount, int nbHits, Dictionary<string, CurrenciesValue> currencies, double? addToCartRate, int addToCartCount, double? purchaseRate, int purchaseCount)
   {
     Search = search ?? throw new ArgumentNullException(nameof(search));
     Count = count;
@@ -91,7 +91,7 @@ public partial class TopSearchWithRevenueAnalytics
   /// </summary>
   /// <value>List of positions in the search results and clicks associated with this search.</value>
   [JsonPropertyName("clickPositions")]
-  public List<ClickPositionsInner> ClickPositions { get; set; }
+  public List<ClickPosition> ClickPositions { get; set; }
 
   /// <summary>
   /// Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 

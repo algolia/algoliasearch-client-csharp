@@ -9,37 +9,25 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Usage;
+namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// GetUsage400ResponseError
+/// LatencyMetric
 /// </summary>
-public partial class GetUsage400ResponseError
+public partial class LatencyMetric
 {
   /// <summary>
-  /// Initializes a new instance of the GetUsage400ResponseError class.
+  /// Initializes a new instance of the LatencyMetric class.
   /// </summary>
-  public GetUsage400ResponseError()
+  public LatencyMetric()
   {
   }
 
   /// <summary>
-  /// Gets or Sets Code
+  /// Gets or Sets Latency
   /// </summary>
-  [JsonPropertyName("code")]
-  public string Code { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Message
-  /// </summary>
-  [JsonPropertyName("message")]
-  public string Message { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Errors
-  /// </summary>
-  [JsonPropertyName("errors")]
-  public List<GetUsage400ResponseErrorErrorsInner> Errors { get; set; }
+  [JsonPropertyName("latency")]
+  public Dictionary<string, List<TimeEntry>> Latency { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -48,10 +36,8 @@ public partial class GetUsage400ResponseError
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetUsage400ResponseError {\n");
-    sb.Append("  Code: ").Append(Code).Append("\n");
-    sb.Append("  Message: ").Append(Message).Append("\n");
-    sb.Append("  Errors: ").Append(Errors).Append("\n");
+    sb.Append("class LatencyMetric {\n");
+    sb.Append("  Latency: ").Append(Latency).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -72,15 +58,13 @@ public partial class GetUsage400ResponseError
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetUsage400ResponseError input)
+    if (obj is not LatencyMetric input)
     {
       return false;
     }
 
     return
-        (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
-        (Message == input.Message || (Message != null && Message.Equals(input.Message))) &&
-        (Errors == input.Errors || Errors != null && input.Errors != null && Errors.SequenceEqual(input.Errors));
+        (Latency == input.Latency || Latency != null && input.Latency != null && Latency.SequenceEqual(input.Latency));
   }
 
   /// <summary>
@@ -92,17 +76,9 @@ public partial class GetUsage400ResponseError
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Code != null)
+      if (Latency != null)
       {
-        hashCode = (hashCode * 59) + Code.GetHashCode();
-      }
-      if (Message != null)
-      {
-        hashCode = (hashCode * 59) + Message.GetHashCode();
-      }
-      if (Errors != null)
-      {
-        hashCode = (hashCode * 59) + Errors.GetHashCode();
+        hashCode = (hashCode * 59) + Latency.GetHashCode();
       }
       return hashCode;
     }

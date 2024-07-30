@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Monitoring;
 
 /// <summary>
-/// InfrastructureResponseMetrics
+/// Metrics
 /// </summary>
-public partial class InfrastructureResponseMetrics
+public partial class Metrics
 {
   /// <summary>
-  /// Initializes a new instance of the InfrastructureResponseMetrics class.
+  /// Initializes a new instance of the Metrics class.
   /// </summary>
-  public InfrastructureResponseMetrics()
+  public Metrics()
   {
   }
 
@@ -65,7 +65,7 @@ public partial class InfrastructureResponseMetrics
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class InfrastructureResponseMetrics {\n");
+    sb.Append("class Metrics {\n");
     sb.Append("  CpuUsage: ").Append(CpuUsage).Append("\n");
     sb.Append("  RamIndexingUsage: ").Append(RamIndexingUsage).Append("\n");
     sb.Append("  RamSearchUsage: ").Append(RamSearchUsage).Append("\n");
@@ -91,7 +91,7 @@ public partial class InfrastructureResponseMetrics
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not InfrastructureResponseMetrics input)
+    if (obj is not Metrics input)
     {
       return false;
     }

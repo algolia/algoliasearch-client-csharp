@@ -27,13 +27,13 @@ public partial class FilterEffects
   /// Gets or Sets Outliers
   /// </summary>
   [JsonPropertyName("outliers")]
-  public FilterEffectsOutliers Outliers { get; set; }
+  public OutliersFilter Outliers { get; set; }
 
   /// <summary>
   /// Gets or Sets EmptySearch
   /// </summary>
   [JsonPropertyName("emptySearch")]
-  public FilterEffectsEmptySearch EmptySearch { get; set; }
+  public EmptySearchFilter EmptySearch { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

@@ -12,22 +12,29 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Usage;
 
 /// <summary>
-/// GetUsage200Response
+/// InvalidRequest
 /// </summary>
-public partial class GetUsage200Response
+public partial class InvalidRequest
 {
   /// <summary>
-  /// Initializes a new instance of the GetUsage200Response class.
+  /// Initializes a new instance of the InvalidRequest class.
   /// </summary>
-  public GetUsage200Response()
+  [JsonConstructor]
+  public InvalidRequest() { }
+  /// <summary>
+  /// Initializes a new instance of the InvalidRequest class.
+  /// </summary>
+  /// <param name="error">error (required).</param>
+  public InvalidRequest(InvalidRequestError error)
   {
+    Error = error ?? throw new ArgumentNullException(nameof(error));
   }
 
   /// <summary>
-  /// Gets or Sets Statistics
+  /// Gets or Sets Error
   /// </summary>
-  [JsonPropertyName("statistics")]
-  public List<GetUsage200ResponseStatisticsInner> Statistics { get; set; }
+  [JsonPropertyName("error")]
+  public InvalidRequestError Error { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -36,8 +43,8 @@ public partial class GetUsage200Response
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetUsage200Response {\n");
-    sb.Append("  Statistics: ").Append(Statistics).Append("\n");
+    sb.Append("class InvalidRequest {\n");
+    sb.Append("  Error: ").Append(Error).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -58,13 +65,13 @@ public partial class GetUsage200Response
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetUsage200Response input)
+    if (obj is not InvalidRequest input)
     {
       return false;
     }
 
     return
-        (Statistics == input.Statistics || Statistics != null && input.Statistics != null && Statistics.SequenceEqual(input.Statistics));
+        (Error == input.Error || (Error != null && Error.Equals(input.Error)));
   }
 
   /// <summary>
@@ -76,9 +83,9 @@ public partial class GetUsage200Response
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Statistics != null)
+      if (Error != null)
       {
-        hashCode = (hashCode * 59) + Statistics.GetHashCode();
+        hashCode = (hashCode * 59) + Error.GetHashCode();
       }
       return hashCode;
     }

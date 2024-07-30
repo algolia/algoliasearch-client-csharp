@@ -142,8 +142,8 @@ public interface IUsageClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetUsage200Response</returns>
-  Task<GetUsage200Response> GetIndexUsageAsync(Statistic statistic, string indexName, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of IndexUsage</returns>
+  Task<IndexUsage> GetIndexUsageAsync(Statistic statistic, string indexName, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves the selected usage statistics for one index.  (Synchronous version)
@@ -158,8 +158,8 @@ public interface IUsageClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetUsage200Response</returns>
-  GetUsage200Response GetIndexUsage(Statistic statistic, string indexName, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>IndexUsage</returns>
+  IndexUsage GetIndexUsage(Statistic statistic, string indexName, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves usage statistics evaluated over a specified period. 
@@ -173,8 +173,8 @@ public interface IUsageClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetUsage200Response</returns>
-  Task<GetUsage200Response> GetUsageAsync(Statistic statistic, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of IndexUsage</returns>
+  Task<IndexUsage> GetUsageAsync(Statistic statistic, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves usage statistics evaluated over a specified period.  (Synchronous version)
@@ -188,8 +188,8 @@ public interface IUsageClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetUsage200Response</returns>
-  GetUsage200Response GetUsage(Statistic statistic, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>IndexUsage</returns>
+  IndexUsage GetUsage(Statistic statistic, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
 }
 
@@ -438,8 +438,8 @@ public partial class UsageClient : IUsageClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetUsage200Response</returns>
-  public async Task<GetUsage200Response> GetIndexUsageAsync(Statistic statistic, string indexName, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of IndexUsage</returns>
+  public async Task<IndexUsage> GetIndexUsageAsync(Statistic statistic, string indexName, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
 
@@ -462,7 +462,7 @@ public partial class UsageClient : IUsageClient
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("granularity", granularity);
-    return await _transport.ExecuteRequestAsync<GetUsage200Response>(new HttpMethod("GET"), "/1/usage/{statistic}/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<IndexUsage>(new HttpMethod("GET"), "/1/usage/{statistic}/{indexName}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -479,8 +479,8 @@ public partial class UsageClient : IUsageClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetUsage200Response</returns>
-  public GetUsage200Response GetIndexUsage(Statistic statistic, string indexName, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>IndexUsage</returns>
+  public IndexUsage GetIndexUsage(Statistic statistic, string indexName, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetIndexUsageAsync(statistic, indexName, startDate, endDate, granularity, options, cancellationToken));
 
 
@@ -496,8 +496,8 @@ public partial class UsageClient : IUsageClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetUsage200Response</returns>
-  public async Task<GetUsage200Response> GetUsageAsync(Statistic statistic, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of IndexUsage</returns>
+  public async Task<IndexUsage> GetUsageAsync(Statistic statistic, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
 
@@ -515,7 +515,7 @@ public partial class UsageClient : IUsageClient
     requestOptions.AddQueryParameter("startDate", startDate);
     requestOptions.AddQueryParameter("endDate", endDate);
     requestOptions.AddQueryParameter("granularity", granularity);
-    return await _transport.ExecuteRequestAsync<GetUsage200Response>(new HttpMethod("GET"), "/1/usage/{statistic}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<IndexUsage>(new HttpMethod("GET"), "/1/usage/{statistic}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -531,8 +531,8 @@ public partial class UsageClient : IUsageClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetUsage200Response</returns>
-  public GetUsage200Response GetUsage(Statistic statistic, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>IndexUsage</returns>
+  public IndexUsage GetUsage(Statistic statistic, string startDate, string endDate, Granularity? granularity = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetUsageAsync(statistic, startDate, endDate, granularity, options, cancellationToken));
 
 }

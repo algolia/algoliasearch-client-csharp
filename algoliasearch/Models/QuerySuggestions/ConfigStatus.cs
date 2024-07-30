@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace Algolia.Search.Models.QuerySuggestions;
 
 /// <summary>
-/// GetConfigStatus200Response
+/// ConfigStatus
 /// </summary>
-public partial class GetConfigStatus200Response
+public partial class ConfigStatus
 {
   /// <summary>
-  /// Initializes a new instance of the GetConfigStatus200Response class.
+  /// Initializes a new instance of the ConfigStatus class.
   /// </summary>
-  public GetConfigStatus200Response()
+  public ConfigStatus()
   {
   }
 
@@ -65,7 +65,7 @@ public partial class GetConfigStatus200Response
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetConfigStatus200Response {\n");
+    sb.Append("class ConfigStatus {\n");
     sb.Append("  IndexName: ").Append(IndexName).Append("\n");
     sb.Append("  IsRunning: ").Append(IsRunning).Append("\n");
     sb.Append("  LastBuiltAt: ").Append(LastBuiltAt).Append("\n");
@@ -91,7 +91,7 @@ public partial class GetConfigStatus200Response
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetConfigStatus200Response input)
+    if (obj is not ConfigStatus input)
     {
       return false;
     }

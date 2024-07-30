@@ -9,46 +9,50 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.QuerySuggestions;
+namespace Algolia.Search.Models.Usage;
 
 /// <summary>
-/// GetLogFile200Response
+/// ErrorItem
 /// </summary>
-public partial class GetLogFile200Response
+public partial class ErrorItem
 {
-
   /// <summary>
-  /// Gets or Sets Level
+  /// Initializes a new instance of the ErrorItem class.
   /// </summary>
-  [JsonPropertyName("level")]
-  public LogLevel? Level { get; set; }
+  [JsonConstructor]
+  public ErrorItem() { }
   /// <summary>
-  /// Initializes a new instance of the GetLogFile200Response class.
+  /// Initializes a new instance of the ErrorItem class.
   /// </summary>
-  public GetLogFile200Response()
+  /// <param name="message">message (required).</param>
+  public ErrorItem(string message)
   {
+    Message = message ?? throw new ArgumentNullException(nameof(message));
   }
 
   /// <summary>
-  /// Date and time of the log entry, in RFC 3339 format.
+  /// Gets or Sets Code
   /// </summary>
-  /// <value>Date and time of the log entry, in RFC 3339 format.</value>
-  [JsonPropertyName("timestamp")]
-  public string Timestamp { get; set; }
+  [JsonPropertyName("code")]
+  public string Code { get; set; }
 
   /// <summary>
-  /// Details about this log entry.
+  /// Gets or Sets Message
   /// </summary>
-  /// <value>Details about this log entry.</value>
   [JsonPropertyName("message")]
   public string Message { get; set; }
 
   /// <summary>
-  /// Level indicating the position of a suggestion in a hierarchy of records.  For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0. 
+  /// Gets or Sets Line
   /// </summary>
-  /// <value>Level indicating the position of a suggestion in a hierarchy of records.  For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0. </value>
-  [JsonPropertyName("contextLevel")]
-  public int? ContextLevel { get; set; }
+  [JsonPropertyName("line")]
+  public int? Line { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Position
+  /// </summary>
+  [JsonPropertyName("position")]
+  public int? Position { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -57,11 +61,11 @@ public partial class GetLogFile200Response
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class GetLogFile200Response {\n");
-    sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
-    sb.Append("  Level: ").Append(Level).Append("\n");
+    sb.Append("class ErrorItem {\n");
+    sb.Append("  Code: ").Append(Code).Append("\n");
     sb.Append("  Message: ").Append(Message).Append("\n");
-    sb.Append("  ContextLevel: ").Append(ContextLevel).Append("\n");
+    sb.Append("  Line: ").Append(Line).Append("\n");
+    sb.Append("  Position: ").Append(Position).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -82,16 +86,16 @@ public partial class GetLogFile200Response
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not GetLogFile200Response input)
+    if (obj is not ErrorItem input)
     {
       return false;
     }
 
     return
-        (Timestamp == input.Timestamp || (Timestamp != null && Timestamp.Equals(input.Timestamp))) &&
-        (Level == input.Level || Level.Equals(input.Level)) &&
+        (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
         (Message == input.Message || (Message != null && Message.Equals(input.Message))) &&
-        (ContextLevel == input.ContextLevel || ContextLevel.Equals(input.ContextLevel));
+        (Line == input.Line || Line.Equals(input.Line)) &&
+        (Position == input.Position || Position.Equals(input.Position));
   }
 
   /// <summary>
@@ -103,16 +107,16 @@ public partial class GetLogFile200Response
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Timestamp != null)
+      if (Code != null)
       {
-        hashCode = (hashCode * 59) + Timestamp.GetHashCode();
+        hashCode = (hashCode * 59) + Code.GetHashCode();
       }
-      hashCode = (hashCode * 59) + Level.GetHashCode();
       if (Message != null)
       {
         hashCode = (hashCode * 59) + Message.GetHashCode();
       }
-      hashCode = (hashCode * 59) + ContextLevel.GetHashCode();
+      hashCode = (hashCode * 59) + Line.GetHashCode();
+      hashCode = (hashCode * 59) + Position.GetHashCode();
       return hashCode;
     }
   }

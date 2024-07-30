@@ -9,25 +9,32 @@ using System.Collections.Generic;
 using Algolia.Search.Serializer;
 using System.Text.Json;
 
-namespace Algolia.Search.Models.Monitoring;
+namespace Algolia.Search.Models.Usage;
 
 /// <summary>
-/// IndexingTimeResponseMetrics
+/// Forbidden
 /// </summary>
-public partial class IndexingTimeResponseMetrics
+public partial class Forbidden
 {
   /// <summary>
-  /// Initializes a new instance of the IndexingTimeResponseMetrics class.
+  /// Initializes a new instance of the Forbidden class.
   /// </summary>
-  public IndexingTimeResponseMetrics()
+  [JsonConstructor]
+  public Forbidden() { }
+  /// <summary>
+  /// Initializes a new instance of the Forbidden class.
+  /// </summary>
+  /// <param name="error">error (required).</param>
+  public Forbidden(ForbiddenError error)
   {
+    Error = error ?? throw new ArgumentNullException(nameof(error));
   }
 
   /// <summary>
-  /// Gets or Sets Indexing
+  /// Gets or Sets Error
   /// </summary>
-  [JsonPropertyName("indexing")]
-  public Dictionary<string, List<TimeInner>> Indexing { get; set; }
+  [JsonPropertyName("error")]
+  public ForbiddenError Error { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -36,8 +43,8 @@ public partial class IndexingTimeResponseMetrics
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class IndexingTimeResponseMetrics {\n");
-    sb.Append("  Indexing: ").Append(Indexing).Append("\n");
+    sb.Append("class Forbidden {\n");
+    sb.Append("  Error: ").Append(Error).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -58,13 +65,13 @@ public partial class IndexingTimeResponseMetrics
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not IndexingTimeResponseMetrics input)
+    if (obj is not Forbidden input)
     {
       return false;
     }
 
     return
-        (Indexing == input.Indexing || Indexing != null && input.Indexing != null && Indexing.SequenceEqual(input.Indexing));
+        (Error == input.Error || (Error != null && Error.Equals(input.Error)));
   }
 
   /// <summary>
@@ -76,9 +83,9 @@ public partial class IndexingTimeResponseMetrics
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Indexing != null)
+      if (Error != null)
       {
-        hashCode = (hashCode * 59) + Indexing.GetHashCode();
+        hashCode = (hashCode * 59) + Error.GetHashCode();
       }
       return hashCode;
     }
