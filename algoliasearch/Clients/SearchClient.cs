@@ -724,8 +724,8 @@ public interface ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of Dictionary{string, string}</returns>
-  Task<Dictionary<string, string>> GetObjectAsync(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of object</returns>
+  Task<object> GetObjectAsync(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves one record by its object ID.  To retrieve more than one record, use the [`objects` operation](#tag/Records/operation/getObjects).  (Synchronous version)
@@ -738,8 +738,8 @@ public interface ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Dictionary{string, string}</returns>
-  Dictionary<string, string> GetObject(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>object</returns>
+  object GetObject(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves one or more records, potentially from different indices.  Records are returned in the same order as the requests. 
@@ -2929,8 +2929,8 @@ public partial class SearchClient : ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of Dictionary{string, string}</returns>
-  public async Task<Dictionary<string, string>> GetObjectAsync(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  /// <returns>Task of object</returns>
+  public async Task<object> GetObjectAsync(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (indexName == null)
@@ -2946,7 +2946,7 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("objectID", QueryStringHelper.ParameterToString(objectID));
 
     requestOptions.AddQueryParameter("attributesToRetrieve", attributesToRetrieve);
-    return await _transport.ExecuteRequestAsync<Dictionary<string, string>>(new HttpMethod("GET"), "/1/indexes/{indexName}/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<object>(new HttpMethod("GET"), "/1/indexes/{indexName}/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
@@ -2964,8 +2964,8 @@ public partial class SearchClient : ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Dictionary{string, string}</returns>
-  public Dictionary<string, string> GetObject(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  /// <returns>object</returns>
+  public object GetObject(string indexName, string objectID, List<string> attributesToRetrieve = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetObjectAsync(indexName, objectID, attributesToRetrieve, options, cancellationToken));
 
 
