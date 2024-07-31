@@ -31,19 +31,18 @@ public partial class BuiltInOperation
   /// Initializes a new instance of the BuiltInOperation class.
   /// </summary>
   /// <param name="operation">operation (required).</param>
-  /// <param name="value">Value that corresponds to the operation, for example an &#x60;Increment&#x60; or &#x60;Decrement&#x60; step, or an &#x60;Add&#x60; or &#x60;Remove&#x60; value. (required).</param>
-  public BuiltInOperation(BuiltInOperationType? operation, string value)
+  /// <param name="value">value (required).</param>
+  public BuiltInOperation(BuiltInOperationType? operation, BuiltInOperationValue value)
   {
     Operation = operation;
     Value = value ?? throw new ArgumentNullException(nameof(value));
   }
 
   /// <summary>
-  /// Value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value.
+  /// Gets or Sets Value
   /// </summary>
-  /// <value>Value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value.</value>
   [JsonPropertyName("value")]
-  public string Value { get; set; }
+  public BuiltInOperationValue Value { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
