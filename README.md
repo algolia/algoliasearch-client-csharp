@@ -31,10 +31,6 @@
 * Injectable HTTP client.
 * Retry strategy & Helpers.
 
-**Migration note for v7.x**
-
-> In July 2024, we released v7 of our .NET client. If you are using version 6.x of the client, read the [migration guide to version 7.x](https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/csharp/).
-
 **Migration note from v5.x to v6.x**
 
 > In January 2019, we released v6 of our .NET client. If you are using version 5.x of the client, read the [migration guide to version 6.x](https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/csharp/).
