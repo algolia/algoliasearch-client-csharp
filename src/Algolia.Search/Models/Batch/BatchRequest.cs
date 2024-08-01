@@ -59,7 +59,15 @@ namespace Algolia.Search.Models.Batch
                 throw new ArgumentNullException(nameof(data));
             }
 
-            Operations = new List<BatchOperation<T>>();
+            if (data is IReadOnlyCollection<T> dataCollection)
+            {
+                // If it is a collection, we can avoid resizing the Operations list from 4->8->16->32->64->128->256->512->1024 for the default max batch size
+                Operations = new List<BatchOperation<T>>(dataCollection.Count);
+            }
+            else
+            {
+                Operations = new List<BatchOperation<T>>();
+            }
 
             foreach (var item in data)
             {

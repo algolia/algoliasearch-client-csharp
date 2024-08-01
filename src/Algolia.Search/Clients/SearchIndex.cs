@@ -274,6 +274,54 @@ namespace Algolia.Search.Clients
             RequestOptions requestOptions = null, CancellationToken ct = default) where T : class
         {
             BatchIndexingResponse ret = new BatchIndexingResponse { Responses = new List<BatchResponse>() };
+
+            // Highly likely to be some form of list or array that we can get the size from
+            // Then we can avoid resizing the records list from 4->8->16->32->64->128->256->512->1024 for the default max batch size
+            if (data is IReadOnlyCollection<T> dataCollection)
+            {
+                if (dataCollection.Count <= Config.BatchSize)
+                {
+                    // if the size is less than max batch size, just use it directly instead of allocating and copying to a new list
+                    var request = new BatchRequest<T>(actionType, dataCollection);
+                    BatchResponse batch = await BatchAsync(request, requestOptions, ct).ConfigureAwait(false);
+                    ret.Responses.Add(batch);
+                    return ret;
+                }
+
+                // otherwise we can precisely calculate the sizes of batches and use an array that iterates faster
+                var maxBatch = new T[Config.BatchSize];
+                var batchIndex = 0;
+                int remaining = dataCollection.Count;
+                foreach (T item in dataCollection)
+                {
+                    maxBatch[batchIndex] = item;
+                    batchIndex++;
+                    if (batchIndex < maxBatch.Length)
+                    {
+                        continue;
+                    }
+                    // batch size reached, send batch
+                    var request = new BatchRequest<T>(actionType, maxBatch);
+                    BatchResponse batch = await BatchAsync(request, requestOptions, ct).ConfigureAwait(false);
+                    ret.Responses.Add(batch);
+                    remaining -= batchIndex;
+                    if (remaining == 0)
+                    {
+                        // avoid doing calculations & allocations for the last batch
+                        break;
+                    }
+                    int nextArraySize = Math.Min(remaining, Config.BatchSize);
+                    if (nextArraySize != maxBatch.Length)
+                    {
+                        // Only allocate a new array if required, otherwise reuse the old one
+                        // System.Memory<T> could have been used to just expose a subset of the existing array, but it is not in netstandard 1.3-2.0
+                        maxBatch = new T[nextArraySize];
+                    }
+                    batchIndex = 0;
+                }
+                return ret;
+            }
+
             List<T> records = new List<T>();
 
             foreach (var item in data)
