@@ -1022,6 +1022,32 @@ public interface IIngestionClient
   RunResponse PushTask(string taskID, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task.
+  /// </summary>
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="runSourcePayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RunSourceResponse</returns>
+  Task<RunSourceResponse> RunSourceAsync(string sourceID, RunSourcePayload runSourcePayload = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task. (Synchronous version)
+  /// </summary>
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="runSourcePayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RunSourceResponse</returns>
+  RunSourceResponse RunSource(string sourceID, RunSourcePayload runSourcePayload = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Runs a task. You can check the status of task runs with the observability endpoints.
   /// </summary>
   /// <param name="taskID">Unique identifier of a task.</param>
@@ -3352,6 +3378,57 @@ public partial class IngestionClient : IIngestionClient
   /// <returns>RunResponse</returns>
   public RunResponse PushTask(string taskID, BatchWriteParams batchWriteParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => PushTaskAsync(taskID, batchWriteParams, options, cancellationToken));
+
+
+  /// <summary>
+  /// Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="runSourcePayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RunSourceResponse</returns>
+  public async Task<RunSourceResponse> RunSourceAsync(string sourceID, RunSourcePayload runSourcePayload = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  {
+
+    if (sourceID == null)
+      throw new ArgumentException("Parameter `sourceID` is required when calling `RunSource`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
+
+    requestOptions.Data = runSourcePayload;
+    return await _transport.ExecuteRequestAsync<RunSourceResponse>(new HttpMethod("POST"), "/1/sources/{sourceID}/run", requestOptions, cancellationToken).ConfigureAwait(false);
+  }
+
+
+  /// <summary>
+  /// Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="sourceID">Unique identifier of a source.</param>
+  /// <param name="runSourcePayload"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RunSourceResponse</returns>
+  public RunSourceResponse RunSource(string sourceID, RunSourcePayload runSourcePayload = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => RunSourceAsync(sourceID, runSourcePayload, options, cancellationToken));
 
 
   /// <summary>
