@@ -31,12 +31,10 @@ public partial class MultipleBatchRequest
   /// Initializes a new instance of the MultipleBatchRequest class.
   /// </summary>
   /// <param name="action">action (required).</param>
-  /// <param name="body">Operation arguments (varies with specified &#x60;action&#x60;). (required).</param>
   /// <param name="indexName">Index name (case-sensitive). (required).</param>
-  public MultipleBatchRequest(Action? action, object body, string indexName)
+  public MultipleBatchRequest(Action? action, string indexName)
   {
     Action = action;
-    Body = body ?? throw new ArgumentNullException(nameof(body));
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
   }
 
