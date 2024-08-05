@@ -972,6 +972,8 @@ public interface IIngestionClient
   /// <summary>
   /// Retrieves a list of transformations.
   /// </summary>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="sort">Property by which to sort the list. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -980,11 +982,13 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListTransformationsResponse</returns>
-  Task<ListTransformationsResponse> ListTransformationsAsync(SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListTransformationsResponse> ListTransformationsAsync(int? itemsPerPage = default, int? page = default, SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves a list of transformations. (Synchronous version)
   /// </summary>
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="sort">Property by which to sort the list. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -993,7 +997,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListTransformationsResponse</returns>
-  ListTransformationsResponse ListTransformations(SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListTransformationsResponse ListTransformations(int? itemsPerPage = default, int? page = default, SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints.
@@ -3286,6 +3290,8 @@ public partial class IngestionClient : IIngestionClient
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="sort">Property by which to sort the list. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -3294,11 +3300,13 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListTransformationsResponse</returns>
-  public async Task<ListTransformationsResponse> ListTransformationsAsync(SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListTransformationsResponse> ListTransformationsAsync(int? itemsPerPage = default, int? page = default, SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
 
 
+    requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
+    requestOptions.AddQueryParameter("page", page);
     requestOptions.AddQueryParameter("sort", sort);
     requestOptions.AddQueryParameter("order", order);
     return await _transport.ExecuteRequestAsync<ListTransformationsResponse>(new HttpMethod("GET"), "/1/transformations", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -3313,6 +3321,8 @@ public partial class IngestionClient : IIngestionClient
   ///   - addObject
   ///   - deleteIndex
   ///   - editSettings
+  /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
+  /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="sort">Property by which to sort the list. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -3321,8 +3331,8 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListTransformationsResponse</returns>
-  public ListTransformationsResponse ListTransformations(SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListTransformationsAsync(sort, order, options, cancellationToken));
+  public ListTransformationsResponse ListTransformations(int? itemsPerPage = default, int? page = default, SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => ListTransformationsAsync(itemsPerPage, page, sort, order, options, cancellationToken));
 
 
   /// <summary>

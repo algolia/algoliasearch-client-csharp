@@ -86,6 +86,12 @@ public partial class Destination
   public string AuthenticationID { get; set; }
 
   /// <summary>
+  /// Gets or Sets TransformationIDs
+  /// </summary>
+  [JsonPropertyName("transformationIDs")]
+  public List<string> TransformationIDs { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -100,6 +106,7 @@ public partial class Destination
     sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
     sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
     sb.Append("  AuthenticationID: ").Append(AuthenticationID).Append("\n");
+    sb.Append("  TransformationIDs: ").Append(TransformationIDs).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -132,7 +139,8 @@ public partial class Destination
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
         (CreatedAt == input.CreatedAt || (CreatedAt != null && CreatedAt.Equals(input.CreatedAt))) &&
         (UpdatedAt == input.UpdatedAt || (UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt))) &&
-        (AuthenticationID == input.AuthenticationID || (AuthenticationID != null && AuthenticationID.Equals(input.AuthenticationID)));
+        (AuthenticationID == input.AuthenticationID || (AuthenticationID != null && AuthenticationID.Equals(input.AuthenticationID))) &&
+        (TransformationIDs == input.TransformationIDs || TransformationIDs != null && input.TransformationIDs != null && TransformationIDs.SequenceEqual(input.TransformationIDs));
   }
 
   /// <summary>
@@ -168,6 +176,10 @@ public partial class Destination
       if (AuthenticationID != null)
       {
         hashCode = (hashCode * 59) + AuthenticationID.GetHashCode();
+      }
+      if (TransformationIDs != null)
+      {
+        hashCode = (hashCode * 59) + TransformationIDs.GetHashCode();
       }
       return hashCode;
     }
