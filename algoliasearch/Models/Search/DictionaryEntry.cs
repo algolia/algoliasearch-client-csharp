@@ -28,6 +28,12 @@ public partial class DictionaryEntry
   /// </summary>
   [JsonPropertyName("state")]
   public DictionaryEntryState? State { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Type
+  /// </summary>
+  [JsonPropertyName("type")]
+  public DictionaryEntryType? Type { get; set; }
   /// <summary>
   /// Initializes a new instance of the DictionaryEntry class.
   /// </summary>
@@ -94,6 +100,7 @@ public partial class DictionaryEntry
     sb.Append("  Words: ").Append(Words).Append("\n");
     sb.Append("  Decomposition: ").Append(Decomposition).Append("\n");
     sb.Append("  State: ").Append(State).Append("\n");
+    sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -126,7 +133,8 @@ public partial class DictionaryEntry
         (Word == input.Word || (Word != null && Word.Equals(input.Word))) &&
         (Words == input.Words || Words != null && input.Words != null && Words.SequenceEqual(input.Words)) &&
         (Decomposition == input.Decomposition || Decomposition != null && input.Decomposition != null && Decomposition.SequenceEqual(input.Decomposition)) &&
-        (State == input.State || State.Equals(input.State))
+        (State == input.State || State.Equals(input.State)) &&
+        (Type == input.Type || Type.Equals(input.Type))
         && (AdditionalProperties.Count == input.AdditionalProperties.Count && !AdditionalProperties.Except(input.AdditionalProperties).Any());
   }
 
@@ -157,6 +165,7 @@ public partial class DictionaryEntry
         hashCode = (hashCode * 59) + Decomposition.GetHashCode();
       }
       hashCode = (hashCode * 59) + State.GetHashCode();
+      hashCode = (hashCode * 59) + Type.GetHashCode();
       if (AdditionalProperties != null)
       {
         hashCode = (hashCode * 59) + AdditionalProperties.GetHashCode();
