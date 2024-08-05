@@ -22,16 +22,6 @@ public partial class DestinationInput : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the DestinationInput class
-  /// with a DestinationIndexPrefix
-  /// </summary>
-  /// <param name="actualInstance">An instance of DestinationIndexPrefix.</param>
-  public DestinationInput(DestinationIndexPrefix actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the DestinationInput class
   /// with a DestinationIndexName
   /// </summary>
   /// <param name="actualInstance">An instance of DestinationIndexName.</param>
@@ -47,16 +37,6 @@ public partial class DestinationInput : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `DestinationIndexPrefix`. If the actual instance is not `DestinationIndexPrefix`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of DestinationIndexPrefix</returns>
-  public DestinationIndexPrefix AsDestinationIndexPrefix()
-  {
-    return (DestinationIndexPrefix)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `DestinationIndexName`. If the actual instance is not `DestinationIndexName`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -66,15 +46,6 @@ public partial class DestinationInput : AbstractSchema
     return (DestinationIndexName)ActualInstance;
   }
 
-
-  /// <summary>
-  /// Check if the actual instance is of `DestinationIndexPrefix` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsDestinationIndexPrefix()
-  {
-    return ActualInstance.GetType() == typeof(DestinationIndexPrefix);
-  }
 
   /// <summary>
   /// Check if the actual instance is of `DestinationIndexName` type.
@@ -169,18 +140,6 @@ public class DestinationInputJsonConverter : JsonConverter<DestinationInput>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new DestinationInput(jsonDocument.Deserialize<DestinationIndexPrefix>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into DestinationIndexPrefix: {exception}");
-      }
-    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
