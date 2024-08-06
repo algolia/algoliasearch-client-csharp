@@ -970,6 +970,28 @@ public interface IIngestionClient
   ListTasksResponseV1 ListTasksV1(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Retrieves a list of existing LLM transformation helpers.
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TransformationModels</returns>
+  Task<TransformationModels> ListTransformationModelsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Retrieves a list of existing LLM transformation helpers. (Synchronous version)
+  /// </summary>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TransformationModels</returns>
+  TransformationModels ListTransformationModels(RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Retrieves a list of transformations.
   /// </summary>
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
@@ -3280,6 +3302,47 @@ public partial class IngestionClient : IIngestionClient
   /// <returns>ListTasksResponseV1</returns>
   public ListTasksResponseV1 ListTasksV1(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => ListTasksV1Async(itemsPerPage, page, action, enabled, sourceID, destinationID, triggerType, sort, order, options, cancellationToken));
+
+
+  /// <summary>
+  /// Retrieves a list of existing LLM transformation helpers.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of TransformationModels</returns>
+  public async Task<TransformationModels> ListTransformationModelsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
+  {
+    var requestOptions = new InternalRequestOptions(options);
+
+
+    return await _transport.ExecuteRequestAsync<TransformationModels>(new HttpMethod("GET"), "/1/transformations/copilot", requestOptions, cancellationToken).ConfigureAwait(false);
+  }
+
+
+  /// <summary>
+  /// Retrieves a list of existing LLM transformation helpers. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - addObject
+  ///   - deleteIndex
+  ///   - editSettings
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>TransformationModels</returns>
+  public TransformationModels ListTransformationModels(RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => ListTransformationModelsAsync(options, cancellationToken));
 
 
   /// <summary>
