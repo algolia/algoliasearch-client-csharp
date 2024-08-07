@@ -19,22 +19,15 @@ public partial class TransformationSearch
   /// <summary>
   /// Initializes a new instance of the TransformationSearch class.
   /// </summary>
-  [JsonConstructor]
-  public TransformationSearch() { }
-  /// <summary>
-  /// Initializes a new instance of the TransformationSearch class.
-  /// </summary>
-  /// <param name="transformationsIDs">transformationsIDs (required).</param>
-  public TransformationSearch(List<string> transformationsIDs)
+  public TransformationSearch()
   {
-    TransformationsIDs = transformationsIDs ?? throw new ArgumentNullException(nameof(transformationsIDs));
   }
 
   /// <summary>
-  /// Gets or Sets TransformationsIDs
+  /// Gets or Sets TransformationIDs
   /// </summary>
-  [JsonPropertyName("transformationsIDs")]
-  public List<string> TransformationsIDs { get; set; }
+  [JsonPropertyName("transformationIDs")]
+  public List<string> TransformationIDs { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -44,7 +37,7 @@ public partial class TransformationSearch
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class TransformationSearch {\n");
-    sb.Append("  TransformationsIDs: ").Append(TransformationsIDs).Append("\n");
+    sb.Append("  TransformationIDs: ").Append(TransformationIDs).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -71,7 +64,7 @@ public partial class TransformationSearch
     }
 
     return
-        (TransformationsIDs == input.TransformationsIDs || TransformationsIDs != null && input.TransformationsIDs != null && TransformationsIDs.SequenceEqual(input.TransformationsIDs));
+        (TransformationIDs == input.TransformationIDs || TransformationIDs != null && input.TransformationIDs != null && TransformationIDs.SequenceEqual(input.TransformationIDs));
   }
 
   /// <summary>
@@ -83,9 +76,9 @@ public partial class TransformationSearch
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (TransformationsIDs != null)
+      if (TransformationIDs != null)
       {
-        hashCode = (hashCode * 59) + TransformationsIDs.GetHashCode();
+        hashCode = (hashCode * 59) + TransformationIDs.GetHashCode();
       }
       return hashCode;
     }
