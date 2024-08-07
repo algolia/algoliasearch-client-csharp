@@ -1299,7 +1299,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of TransformationTryResponse</returns>
-  Task<TransformationTryResponse> TryTransformationsAsync(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<TransformationTryResponse> TryTransformationAsync(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Try a transformation. (Synchronous version)
@@ -1311,7 +1311,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TransformationTryResponse</returns>
-  TransformationTryResponse TryTransformations(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default);
+  TransformationTryResponse TryTransformation(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Updates an authentication resource.
@@ -3951,11 +3951,11 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of TransformationTryResponse</returns>
-  public async Task<TransformationTryResponse> TryTransformationsAsync(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<TransformationTryResponse> TryTransformationAsync(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (transformationTry == null)
-      throw new ArgumentException("Parameter `transformationTry` is required when calling `TryTransformations`.");
+      throw new ArgumentException("Parameter `transformationTry` is required when calling `TryTransformation`.");
 
     var requestOptions = new InternalRequestOptions(options);
 
@@ -3980,8 +3980,8 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>TransformationTryResponse</returns>
-  public TransformationTryResponse TryTransformations(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => TryTransformationsAsync(transformationTry, options, cancellationToken));
+  public TransformationTryResponse TryTransformation(TransformationTry transformationTry, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => TryTransformationAsync(transformationTry, options, cancellationToken));
 
 
   /// <summary>

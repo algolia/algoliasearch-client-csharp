@@ -25,7 +25,7 @@ public partial class DockerStreamsInput
   /// Initializes a new instance of the DockerStreamsInput class.
   /// </summary>
   /// <param name="streams">streams (required).</param>
-  public DockerStreamsInput(object streams)
+  public DockerStreamsInput(List<DockerStreams> streams)
   {
     Streams = streams ?? throw new ArgumentNullException(nameof(streams));
   }
@@ -34,7 +34,7 @@ public partial class DockerStreamsInput
   /// Gets or Sets Streams
   /// </summary>
   [JsonPropertyName("streams")]
-  public object Streams { get; set; }
+  public List<DockerStreams> Streams { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -71,7 +71,7 @@ public partial class DockerStreamsInput
     }
 
     return
-        (Streams == input.Streams || (Streams != null && Streams.Equals(input.Streams)));
+        (Streams == input.Streams || Streams != null && input.Streams != null && Streams.SequenceEqual(input.Streams));
   }
 
   /// <summary>
