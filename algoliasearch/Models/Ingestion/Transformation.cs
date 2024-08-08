@@ -44,6 +44,13 @@ public partial class Transformation
   public string TransformationID { get; set; }
 
   /// <summary>
+  /// The authentications associated for the current transformation.
+  /// </summary>
+  /// <value>The authentications associated for the current transformation.</value>
+  [JsonPropertyName("authenticationIDs")]
+  public List<string> AuthenticationIDs { get; set; }
+
+  /// <summary>
   /// The source code of the transformation.
   /// </summary>
   /// <value>The source code of the transformation.</value>
@@ -87,6 +94,7 @@ public partial class Transformation
     StringBuilder sb = new StringBuilder();
     sb.Append("class Transformation {\n");
     sb.Append("  TransformationID: ").Append(TransformationID).Append("\n");
+    sb.Append("  AuthenticationIDs: ").Append(AuthenticationIDs).Append("\n");
     sb.Append("  Code: ").Append(Code).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
@@ -119,6 +127,7 @@ public partial class Transformation
 
     return
         (TransformationID == input.TransformationID || (TransformationID != null && TransformationID.Equals(input.TransformationID))) &&
+        (AuthenticationIDs == input.AuthenticationIDs || AuthenticationIDs != null && input.AuthenticationIDs != null && AuthenticationIDs.SequenceEqual(input.AuthenticationIDs)) &&
         (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
         (Name == input.Name || (Name != null && Name.Equals(input.Name))) &&
         (Description == input.Description || (Description != null && Description.Equals(input.Description))) &&
@@ -138,6 +147,10 @@ public partial class Transformation
       if (TransformationID != null)
       {
         hashCode = (hashCode * 59) + TransformationID.GetHashCode();
+      }
+      if (AuthenticationIDs != null)
+      {
+        hashCode = (hashCode * 59) + AuthenticationIDs.GetHashCode();
       }
       if (Code != null)
       {

@@ -47,6 +47,12 @@ public partial class TransformationTry
   public object SampleRecord { get; set; }
 
   /// <summary>
+  /// Gets or Sets Authentications
+  /// </summary>
+  [JsonPropertyName("authentications")]
+  public List<AuthenticationCreate> Authentications { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -56,6 +62,7 @@ public partial class TransformationTry
     sb.Append("class TransformationTry {\n");
     sb.Append("  Code: ").Append(Code).Append("\n");
     sb.Append("  SampleRecord: ").Append(SampleRecord).Append("\n");
+    sb.Append("  Authentications: ").Append(Authentications).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -83,7 +90,8 @@ public partial class TransformationTry
 
     return
         (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
-        (SampleRecord == input.SampleRecord || (SampleRecord != null && SampleRecord.Equals(input.SampleRecord)));
+        (SampleRecord == input.SampleRecord || (SampleRecord != null && SampleRecord.Equals(input.SampleRecord))) &&
+        (Authentications == input.Authentications || Authentications != null && input.Authentications != null && Authentications.SequenceEqual(input.Authentications));
   }
 
   /// <summary>
@@ -102,6 +110,10 @@ public partial class TransformationTry
       if (SampleRecord != null)
       {
         hashCode = (hashCode * 59) + SampleRecord.GetHashCode();
+      }
+      if (Authentications != null)
+      {
+        hashCode = (hashCode * 59) + Authentications.GetHashCode();
       }
       return hashCode;
     }

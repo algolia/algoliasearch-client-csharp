@@ -54,6 +54,13 @@ public partial class TransformationCreate
   public string Description { get; set; }
 
   /// <summary>
+  /// The authentications associated for the current transformation.
+  /// </summary>
+  /// <value>The authentications associated for the current transformation.</value>
+  [JsonPropertyName("authenticationIDs")]
+  public List<string> AuthenticationIDs { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -64,6 +71,7 @@ public partial class TransformationCreate
     sb.Append("  Code: ").Append(Code).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
+    sb.Append("  AuthenticationIDs: ").Append(AuthenticationIDs).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -92,7 +100,8 @@ public partial class TransformationCreate
     return
         (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
         (Name == input.Name || (Name != null && Name.Equals(input.Name))) &&
-        (Description == input.Description || (Description != null && Description.Equals(input.Description)));
+        (Description == input.Description || (Description != null && Description.Equals(input.Description))) &&
+        (AuthenticationIDs == input.AuthenticationIDs || AuthenticationIDs != null && input.AuthenticationIDs != null && AuthenticationIDs.SequenceEqual(input.AuthenticationIDs));
   }
 
   /// <summary>
@@ -115,6 +124,10 @@ public partial class TransformationCreate
       if (Description != null)
       {
         hashCode = (hashCode * 59) + Description.GetHashCode();
+      }
+      if (AuthenticationIDs != null)
+      {
+        hashCode = (hashCode * 59) + AuthenticationIDs.GetHashCode();
       }
       return hashCode;
     }
