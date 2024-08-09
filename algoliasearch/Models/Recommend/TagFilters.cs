@@ -51,7 +51,7 @@ public partial class TagFilters : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of List&lt;TagFilters&gt;</returns>
-  public List<TagFilters> AsList()
+  public List<TagFilters> AsListTagFilters()
   {
     return (List<TagFilters>)ActualInstance;
   }
@@ -71,7 +71,7 @@ public partial class TagFilters : AbstractSchema
   /// Check if the actual instance is of `List{TagFilters}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsList()
+  public bool IsListTagFilters()
   {
     return ActualInstance.GetType() == typeof(List<TagFilters>);
   }

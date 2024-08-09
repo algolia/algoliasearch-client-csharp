@@ -61,7 +61,7 @@ public partial class StatisticValue : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of Dictionary&lt;string, int&gt;</returns>
-  public Dictionary<string, int> AsDictionary()
+  public Dictionary<string, int> AsDictionaryInt()
   {
     return (Dictionary<string, int>)ActualInstance;
   }
@@ -80,7 +80,7 @@ public partial class StatisticValue : AbstractSchema
   /// Check if the actual instance is of `Dictionary{string, int}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsDictionary()
+  public bool IsDictionaryInt()
   {
     return ActualInstance.GetType() == typeof(Dictionary<string, int>);
   }

@@ -61,7 +61,7 @@ public partial class AroundPrecision : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of List&lt;Range&gt;</returns>
-  public List<Range> AsList()
+  public List<Range> AsListRange()
   {
     return (List<Range>)ActualInstance;
   }
@@ -80,7 +80,7 @@ public partial class AroundPrecision : AbstractSchema
   /// Check if the actual instance is of `List{Range}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsList()
+  public bool IsListRange()
   {
     return ActualInstance.GetType() == typeof(List<Range>);
   }

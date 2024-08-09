@@ -51,7 +51,7 @@ public partial class NumericFilters : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of List&lt;NumericFilters&gt;</returns>
-  public List<NumericFilters> AsList()
+  public List<NumericFilters> AsListNumericFilters()
   {
     return (List<NumericFilters>)ActualInstance;
   }
@@ -71,7 +71,7 @@ public partial class NumericFilters : AbstractSchema
   /// Check if the actual instance is of `List{NumericFilters}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsList()
+  public bool IsListNumericFilters()
   {
     return ActualInstance.GetType() == typeof(List<NumericFilters>);
   }

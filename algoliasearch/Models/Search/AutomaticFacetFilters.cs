@@ -51,7 +51,7 @@ public partial class AutomaticFacetFilters : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of List&lt;AutomaticFacetFilter&gt;</returns>
-  public List<AutomaticFacetFilter> AsList()
+  public List<AutomaticFacetFilter> AsListAutomaticFacetFilter()
   {
     return (List<AutomaticFacetFilter>)ActualInstance;
   }
@@ -71,7 +71,7 @@ public partial class AutomaticFacetFilters : AbstractSchema
   /// Check if the actual instance is of `List{AutomaticFacetFilter}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsList()
+  public bool IsListAutomaticFacetFilter()
   {
     return ActualInstance.GetType() == typeof(List<AutomaticFacetFilter>);
   }

@@ -51,7 +51,7 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of List&lt;ReRankingApplyFilter&gt;</returns>
-  public List<ReRankingApplyFilter> AsList()
+  public List<ReRankingApplyFilter> AsListReRankingApplyFilter()
   {
     return (List<ReRankingApplyFilter>)ActualInstance;
   }
@@ -71,7 +71,7 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// Check if the actual instance is of `List{ReRankingApplyFilter}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsList()
+  public bool IsListReRankingApplyFilter()
   {
     return ActualInstance.GetType() == typeof(List<ReRankingApplyFilter>);
   }

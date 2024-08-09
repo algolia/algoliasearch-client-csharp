@@ -51,7 +51,7 @@ public partial class IgnorePlurals : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of List&lt;SupportedLanguage&gt;</returns>
-  public List<SupportedLanguage> AsList()
+  public List<SupportedLanguage> AsListSupportedLanguage()
   {
     return (List<SupportedLanguage>)ActualInstance;
   }
@@ -71,7 +71,7 @@ public partial class IgnorePlurals : AbstractSchema
   /// Check if the actual instance is of `List{SupportedLanguage}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsList()
+  public bool IsListSupportedLanguage()
   {
     return ActualInstance.GetType() == typeof(List<SupportedLanguage>);
   }

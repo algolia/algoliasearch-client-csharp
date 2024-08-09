@@ -51,7 +51,7 @@ public partial class FacetFilters : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of List&lt;FacetFilters&gt;</returns>
-  public List<FacetFilters> AsList()
+  public List<FacetFilters> AsListFacetFilters()
   {
     return (List<FacetFilters>)ActualInstance;
   }
@@ -71,7 +71,7 @@ public partial class FacetFilters : AbstractSchema
   /// Check if the actual instance is of `List{FacetFilters}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsList()
+  public bool IsListFacetFilters()
   {
     return ActualInstance.GetType() == typeof(List<FacetFilters>);
   }

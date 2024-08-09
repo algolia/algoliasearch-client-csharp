@@ -51,7 +51,7 @@ public partial class OptionalFilters : AbstractSchema
   /// the InvalidClassException will be thrown
   /// </summary>
   /// <returns>An instance of List&lt;OptionalFilters&gt;</returns>
-  public List<OptionalFilters> AsList()
+  public List<OptionalFilters> AsListOptionalFilters()
   {
     return (List<OptionalFilters>)ActualInstance;
   }
@@ -71,7 +71,7 @@ public partial class OptionalFilters : AbstractSchema
   /// Check if the actual instance is of `List{OptionalFilters}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsList()
+  public bool IsListOptionalFilters()
   {
     return ActualInstance.GetType() == typeof(List<OptionalFilters>);
   }
