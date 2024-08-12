@@ -19,8 +19,15 @@ public partial class TransformationSearch
   /// <summary>
   /// Initializes a new instance of the TransformationSearch class.
   /// </summary>
-  public TransformationSearch()
+  [JsonConstructor]
+  public TransformationSearch() { }
+  /// <summary>
+  /// Initializes a new instance of the TransformationSearch class.
+  /// </summary>
+  /// <param name="transformationIDs">transformationIDs (required).</param>
+  public TransformationSearch(List<string> transformationIDs)
   {
+    TransformationIDs = transformationIDs ?? throw new ArgumentNullException(nameof(transformationIDs));
   }
 
   /// <summary>
