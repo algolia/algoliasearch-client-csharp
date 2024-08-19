@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://api-clients-automation.netlify.app/docs/clients/csharp/" target="_blank">Documentation</a>  •
+  <a href="https://www.algolia.com/doc/libraries/csharp/v7/" target="_blank">Documentation</a>  •
   <a href="https://discourse.algolia.com" target="_blank">Community Forum</a>  •
   <a href="http://stackoverflow.com/questions/tagged/algolia" target="_blank">Stack Overflow</a>  •
   <a href="https://github.com/algolia/algoliasearch-client-csharp/issues" target="_blank">Report a bug</a>  •
@@ -98,7 +98,7 @@ Encountering an issue? Before reaching out to support, we recommend heading to o
 
 ## Contributing
 
-This repository hosts the code of the generated Algolia API client for CSharp, if you'd like to contribute, head over to the [main repository](https://github.com/algolia/api-clients-automation). You can also find contributing guides on [our documentation website](https://api-clients-automation.netlify.app/docs/contributing/introduction).
+This repository hosts the code of the generated Algolia API client for CSharp, if you'd like to contribute, head over to the [main repository](https://github.com/algolia/api-clients-automation). You can also find contributing guides on [our documentation website](https://api-clients-automation.netlify.app/docs/introduction).
 
 ## 📄 License
 
