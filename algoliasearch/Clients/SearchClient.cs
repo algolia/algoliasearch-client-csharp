@@ -436,7 +436,7 @@ public interface ISearchClient
   DeleteApiKeyResponse DeleteApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](tag/Records/operation/batch). 
+  /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch). 
   /// </summary>
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="deleteByParams"></param>
@@ -449,7 +449,7 @@ public interface ISearchClient
   Task<DeletedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](tag/Records/operation/batch).  (Synchronous version)
+  /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
   /// </summary>
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="deleteByParams"></param>
@@ -2416,7 +2416,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <summary>
-  /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](tag/Records/operation/batch). 
+  /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch). 
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -2449,7 +2449,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <summary>
-  /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](tag/Records/operation/batch).  (Synchronous version)
+  /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
