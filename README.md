@@ -90,7 +90,7 @@ var response = await client.SearchAsync<Object>(
 );
 ```
 
-For full documentation, visit the **[Algolia CSharp API Client](https://www.algolia.com/doc/api-client/getting-started/install/csharp/)**.
+For full documentation, visit the **[Algolia CSharp API Client](https://www.algolia.com/doc/libraries/csharp/)**.
 
 ## ❓ Troubleshooting
 
