@@ -232,6 +232,30 @@ public interface IAbtestingClient
   ListABTestsResponse ListABTests(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Schedule an A/B test to be started at a later time. 
+  /// </summary>
+  /// <param name="scheduleABTestsRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ScheduleABTestResponse</returns>
+  Task<ScheduleABTestResponse> ScheduleABTestAsync(ScheduleABTestsRequest scheduleABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Schedule an A/B test to be started at a later time.  (Synchronous version)
+  /// </summary>
+  /// <param name="scheduleABTestsRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ScheduleABTestResponse</returns>
+  ScheduleABTestResponse ScheduleABTest(ScheduleABTestsRequest scheduleABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Stops an A/B test by its ID.  You can't restart stopped A/B tests. 
   /// </summary>
   /// <param name="id">Unique A/B test identifier.</param>
@@ -662,6 +686,50 @@ public partial class AbtestingClient : IAbtestingClient
   /// <returns>ListABTestsResponse</returns>
   public ListABTestsResponse ListABTests(int? offset = default, int? limit = default, string indexPrefix = default, string indexSuffix = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => ListABTestsAsync(offset, limit, indexPrefix, indexSuffix, options, cancellationToken));
+
+
+  /// <summary>
+  /// Schedule an A/B test to be started at a later time. 
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="scheduleABTestsRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of ScheduleABTestResponse</returns>
+  public async Task<ScheduleABTestResponse> ScheduleABTestAsync(ScheduleABTestsRequest scheduleABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default)
+  {
+
+    if (scheduleABTestsRequest == null)
+      throw new ArgumentException("Parameter `scheduleABTestsRequest` is required when calling `ScheduleABTest`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+
+    requestOptions.Data = scheduleABTestsRequest;
+    return await _transport.ExecuteRequestAsync<ScheduleABTestResponse>(new HttpMethod("POST"), "/2/abtests/schedule", requestOptions, cancellationToken).ConfigureAwait(false);
+  }
+
+
+  /// <summary>
+  /// Schedule an A/B test to be started at a later time.  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="scheduleABTestsRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>ScheduleABTestResponse</returns>
+  public ScheduleABTestResponse ScheduleABTest(ScheduleABTestsRequest scheduleABTestsRequest, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => ScheduleABTestAsync(scheduleABTestsRequest, options, cancellationToken));
 
 
   /// <summary>
