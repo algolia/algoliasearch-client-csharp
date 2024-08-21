@@ -22,20 +22,20 @@ public partial class SnippetResult : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the SnippetResult class
-  /// with a Dictionary{string, SnippetResult}
+  /// with a SnippetResultOption
   /// </summary>
-  /// <param name="actualInstance">An instance of Dictionary&lt;string, SnippetResult&gt;.</param>
-  public SnippetResult(Dictionary<string, SnippetResult> actualInstance)
+  /// <param name="actualInstance">An instance of SnippetResultOption.</param>
+  public SnippetResult(SnippetResultOption actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
   /// Initializes a new instance of the SnippetResult class
-  /// with a SnippetResultOption
+  /// with a Dictionary{string, SnippetResult}
   /// </summary>
-  /// <param name="actualInstance">An instance of SnippetResultOption.</param>
-  public SnippetResult(SnippetResultOption actualInstance)
+  /// <param name="actualInstance">An instance of Dictionary&lt;string, SnippetResult&gt;.</param>
+  public SnippetResult(Dictionary<string, SnippetResult> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -67,16 +67,6 @@ public partial class SnippetResult : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `Dictionary{string, SnippetResult}`. If the actual instance is not `Dictionary{string, SnippetResult}`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of Dictionary&lt;string, SnippetResult&gt;</returns>
-  public Dictionary<string, SnippetResult> AsDictionarySnippetResult()
-  {
-    return (Dictionary<string, SnippetResult>)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `SnippetResultOption`. If the actual instance is not `SnippetResultOption`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -84,6 +74,16 @@ public partial class SnippetResult : AbstractSchema
   public SnippetResultOption AsSnippetResultOption()
   {
     return (SnippetResultOption)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `Dictionary{string, SnippetResult}`. If the actual instance is not `Dictionary{string, SnippetResult}`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of Dictionary&lt;string, SnippetResult&gt;</returns>
+  public Dictionary<string, SnippetResult> AsDictionarySnippetResult()
+  {
+    return (Dictionary<string, SnippetResult>)ActualInstance;
   }
 
   /// <summary>
@@ -108,21 +108,21 @@ public partial class SnippetResult : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `Dictionary{string, SnippetResult}` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsDictionarySnippetResult()
-  {
-    return ActualInstance.GetType() == typeof(Dictionary<string, SnippetResult>);
-  }
-
-  /// <summary>
   /// Check if the actual instance is of `SnippetResultOption` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsSnippetResultOption()
   {
     return ActualInstance.GetType() == typeof(SnippetResultOption);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `Dictionary{string, SnippetResult}` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsDictionarySnippetResult()
+  {
+    return ActualInstance.GetType() == typeof(Dictionary<string, SnippetResult>);
   }
 
   /// <summary>
@@ -227,6 +227,18 @@ public class SnippetResultJsonConverter : JsonConverter<SnippetResult>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("matchLevel", out _))
+    {
+      try
+      {
+        return new SnippetResult(jsonDocument.Deserialize<SnippetResultOption>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SnippetResultOption: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
@@ -237,18 +249,6 @@ public class SnippetResultJsonConverter : JsonConverter<SnippetResult>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into Dictionary<string, SnippetResult>: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new SnippetResult(jsonDocument.Deserialize<SnippetResultOption>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SnippetResultOption: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)

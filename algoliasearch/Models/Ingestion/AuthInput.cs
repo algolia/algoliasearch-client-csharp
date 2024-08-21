@@ -22,6 +22,16 @@ public partial class AuthInput : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the AuthInput class
+  /// with a AuthOAuth
+  /// </summary>
+  /// <param name="actualInstance">An instance of AuthOAuth.</param>
+  public AuthInput(AuthOAuth actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the AuthInput class
   /// with a AuthGoogleServiceAccount
   /// </summary>
   /// <param name="actualInstance">An instance of AuthGoogleServiceAccount.</param>
@@ -52,16 +62,6 @@ public partial class AuthInput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the AuthInput class
-  /// with a AuthOAuth
-  /// </summary>
-  /// <param name="actualInstance">An instance of AuthOAuth.</param>
-  public AuthInput(AuthOAuth actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the AuthInput class
   /// with a AuthAlgolia
   /// </summary>
   /// <param name="actualInstance">An instance of AuthAlgolia.</param>
@@ -85,6 +85,16 @@ public partial class AuthInput : AbstractSchema
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
+
+  /// <summary>
+  /// Get the actual instance of `AuthOAuth`. If the actual instance is not `AuthOAuth`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of AuthOAuth</returns>
+  public AuthOAuth AsAuthOAuth()
+  {
+    return (AuthOAuth)ActualInstance;
+  }
 
   /// <summary>
   /// Get the actual instance of `AuthGoogleServiceAccount`. If the actual instance is not `AuthGoogleServiceAccount`,
@@ -117,16 +127,6 @@ public partial class AuthInput : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `AuthOAuth`. If the actual instance is not `AuthOAuth`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of AuthOAuth</returns>
-  public AuthOAuth AsAuthOAuth()
-  {
-    return (AuthOAuth)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `AuthAlgolia`. If the actual instance is not `AuthAlgolia`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -146,6 +146,15 @@ public partial class AuthInput : AbstractSchema
     return (AuthAlgoliaInsights)ActualInstance;
   }
 
+
+  /// <summary>
+  /// Check if the actual instance is of `AuthOAuth` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsAuthOAuth()
+  {
+    return ActualInstance.GetType() == typeof(AuthOAuth);
+  }
 
   /// <summary>
   /// Check if the actual instance is of `AuthGoogleServiceAccount` type.
@@ -172,15 +181,6 @@ public partial class AuthInput : AbstractSchema
   public bool IsAuthAPIKey()
   {
     return ActualInstance.GetType() == typeof(AuthAPIKey);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `AuthOAuth` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsAuthOAuth()
-  {
-    return ActualInstance.GetType() == typeof(AuthOAuth);
   }
 
   /// <summary>
@@ -285,7 +285,19 @@ public class AuthInputJsonConverter : JsonConverter<AuthInput>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("url", out _) && root.TryGetProperty("client_id", out _) && root.TryGetProperty("client_secret", out _))
+    {
+      try
+      {
+        return new AuthInput(jsonDocument.Deserialize<AuthOAuth>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthOAuth: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("clientEmail", out _) && root.TryGetProperty("privateKey", out _))
     {
       try
       {
@@ -297,7 +309,7 @@ public class AuthInputJsonConverter : JsonConverter<AuthInput>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthGoogleServiceAccount: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("username", out _) && root.TryGetProperty("password", out _))
     {
       try
       {
@@ -309,7 +321,7 @@ public class AuthInputJsonConverter : JsonConverter<AuthInput>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthBasic: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("key", out _))
     {
       try
       {
@@ -319,18 +331,6 @@ public class AuthInputJsonConverter : JsonConverter<AuthInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthAPIKey: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new AuthInput(jsonDocument.Deserialize<AuthOAuth>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthOAuth: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)

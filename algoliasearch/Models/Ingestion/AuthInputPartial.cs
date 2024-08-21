@@ -285,7 +285,7 @@ public class AuthInputPartialJsonConverter : JsonConverter<AuthInputPartial>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("clientEmail", out _))
     {
       try
       {
@@ -297,7 +297,7 @@ public class AuthInputPartialJsonConverter : JsonConverter<AuthInputPartial>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthGoogleServiceAccountPartial: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("username", out _))
     {
       try
       {
@@ -309,7 +309,7 @@ public class AuthInputPartialJsonConverter : JsonConverter<AuthInputPartial>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthBasicPartial: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("key", out _))
     {
       try
       {
@@ -321,7 +321,7 @@ public class AuthInputPartialJsonConverter : JsonConverter<AuthInputPartial>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthAPIKeyPartial: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("url", out _))
     {
       try
       {

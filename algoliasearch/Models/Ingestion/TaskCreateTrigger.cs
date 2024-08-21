@@ -22,20 +22,20 @@ public partial class TaskCreateTrigger : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the TaskCreateTrigger class
-  /// with a OnDemandTriggerInput
+  /// with a ScheduleTriggerInput
   /// </summary>
-  /// <param name="actualInstance">An instance of OnDemandTriggerInput.</param>
-  public TaskCreateTrigger(OnDemandTriggerInput actualInstance)
+  /// <param name="actualInstance">An instance of ScheduleTriggerInput.</param>
+  public TaskCreateTrigger(ScheduleTriggerInput actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
   /// Initializes a new instance of the TaskCreateTrigger class
-  /// with a ScheduleTriggerInput
+  /// with a OnDemandTriggerInput
   /// </summary>
-  /// <param name="actualInstance">An instance of ScheduleTriggerInput.</param>
-  public TaskCreateTrigger(ScheduleTriggerInput actualInstance)
+  /// <param name="actualInstance">An instance of OnDemandTriggerInput.</param>
+  public TaskCreateTrigger(OnDemandTriggerInput actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -67,16 +67,6 @@ public partial class TaskCreateTrigger : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `OnDemandTriggerInput`. If the actual instance is not `OnDemandTriggerInput`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of OnDemandTriggerInput</returns>
-  public OnDemandTriggerInput AsOnDemandTriggerInput()
-  {
-    return (OnDemandTriggerInput)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `ScheduleTriggerInput`. If the actual instance is not `ScheduleTriggerInput`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -84,6 +74,16 @@ public partial class TaskCreateTrigger : AbstractSchema
   public ScheduleTriggerInput AsScheduleTriggerInput()
   {
     return (ScheduleTriggerInput)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `OnDemandTriggerInput`. If the actual instance is not `OnDemandTriggerInput`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of OnDemandTriggerInput</returns>
+  public OnDemandTriggerInput AsOnDemandTriggerInput()
+  {
+    return (OnDemandTriggerInput)ActualInstance;
   }
 
   /// <summary>
@@ -108,21 +108,21 @@ public partial class TaskCreateTrigger : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `OnDemandTriggerInput` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsOnDemandTriggerInput()
-  {
-    return ActualInstance.GetType() == typeof(OnDemandTriggerInput);
-  }
-
-  /// <summary>
   /// Check if the actual instance is of `ScheduleTriggerInput` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsScheduleTriggerInput()
   {
     return ActualInstance.GetType() == typeof(ScheduleTriggerInput);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `OnDemandTriggerInput` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsOnDemandTriggerInput()
+  {
+    return ActualInstance.GetType() == typeof(OnDemandTriggerInput);
   }
 
   /// <summary>
@@ -227,6 +227,18 @@ public class TaskCreateTriggerJsonConverter : JsonConverter<TaskCreateTrigger>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("cron", out _))
+    {
+      try
+      {
+        return new TaskCreateTrigger(jsonDocument.Deserialize<ScheduleTriggerInput>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ScheduleTriggerInput: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
@@ -237,18 +249,6 @@ public class TaskCreateTriggerJsonConverter : JsonConverter<TaskCreateTrigger>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into OnDemandTriggerInput: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new TaskCreateTrigger(jsonDocument.Deserialize<ScheduleTriggerInput>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ScheduleTriggerInput: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)

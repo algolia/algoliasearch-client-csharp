@@ -22,20 +22,20 @@ public partial class HighlightResult : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the HighlightResult class
-  /// with a Dictionary{string, HighlightResult}
+  /// with a HighlightResultOption
   /// </summary>
-  /// <param name="actualInstance">An instance of Dictionary&lt;string, HighlightResult&gt;.</param>
-  public HighlightResult(Dictionary<string, HighlightResult> actualInstance)
+  /// <param name="actualInstance">An instance of HighlightResultOption.</param>
+  public HighlightResult(HighlightResultOption actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
   /// Initializes a new instance of the HighlightResult class
-  /// with a HighlightResultOption
+  /// with a Dictionary{string, HighlightResult}
   /// </summary>
-  /// <param name="actualInstance">An instance of HighlightResultOption.</param>
-  public HighlightResult(HighlightResultOption actualInstance)
+  /// <param name="actualInstance">An instance of Dictionary&lt;string, HighlightResult&gt;.</param>
+  public HighlightResult(Dictionary<string, HighlightResult> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -67,16 +67,6 @@ public partial class HighlightResult : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `Dictionary{string, HighlightResult}`. If the actual instance is not `Dictionary{string, HighlightResult}`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of Dictionary&lt;string, HighlightResult&gt;</returns>
-  public Dictionary<string, HighlightResult> AsDictionaryHighlightResult()
-  {
-    return (Dictionary<string, HighlightResult>)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `HighlightResultOption`. If the actual instance is not `HighlightResultOption`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -84,6 +74,16 @@ public partial class HighlightResult : AbstractSchema
   public HighlightResultOption AsHighlightResultOption()
   {
     return (HighlightResultOption)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `Dictionary{string, HighlightResult}`. If the actual instance is not `Dictionary{string, HighlightResult}`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of Dictionary&lt;string, HighlightResult&gt;</returns>
+  public Dictionary<string, HighlightResult> AsDictionaryHighlightResult()
+  {
+    return (Dictionary<string, HighlightResult>)ActualInstance;
   }
 
   /// <summary>
@@ -108,21 +108,21 @@ public partial class HighlightResult : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `Dictionary{string, HighlightResult}` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsDictionaryHighlightResult()
-  {
-    return ActualInstance.GetType() == typeof(Dictionary<string, HighlightResult>);
-  }
-
-  /// <summary>
   /// Check if the actual instance is of `HighlightResultOption` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsHighlightResultOption()
   {
     return ActualInstance.GetType() == typeof(HighlightResultOption);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `Dictionary{string, HighlightResult}` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsDictionaryHighlightResult()
+  {
+    return ActualInstance.GetType() == typeof(Dictionary<string, HighlightResult>);
   }
 
   /// <summary>
@@ -227,6 +227,18 @@ public class HighlightResultJsonConverter : JsonConverter<HighlightResult>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("matchLevel", out _) && root.TryGetProperty("matchedWords", out _))
+    {
+      try
+      {
+        return new HighlightResult(jsonDocument.Deserialize<HighlightResultOption>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into HighlightResultOption: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
@@ -237,18 +249,6 @@ public class HighlightResultJsonConverter : JsonConverter<HighlightResult>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into Dictionary<string, HighlightResult>: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new HighlightResult(jsonDocument.Deserialize<HighlightResultOption>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into HighlightResultOption: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)

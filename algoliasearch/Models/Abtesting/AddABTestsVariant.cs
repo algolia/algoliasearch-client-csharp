@@ -22,20 +22,20 @@ public partial class AddABTestsVariant : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the AddABTestsVariant class
-  /// with a AbTestsVariant
+  /// with a AbTestsVariantSearchParams
   /// </summary>
-  /// <param name="actualInstance">An instance of AbTestsVariant.</param>
-  public AddABTestsVariant(AbTestsVariant actualInstance)
+  /// <param name="actualInstance">An instance of AbTestsVariantSearchParams.</param>
+  public AddABTestsVariant(AbTestsVariantSearchParams actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
   /// Initializes a new instance of the AddABTestsVariant class
-  /// with a AbTestsVariantSearchParams
+  /// with a AbTestsVariant
   /// </summary>
-  /// <param name="actualInstance">An instance of AbTestsVariantSearchParams.</param>
-  public AddABTestsVariant(AbTestsVariantSearchParams actualInstance)
+  /// <param name="actualInstance">An instance of AbTestsVariant.</param>
+  public AddABTestsVariant(AbTestsVariant actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -47,16 +47,6 @@ public partial class AddABTestsVariant : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `AbTestsVariant`. If the actual instance is not `AbTestsVariant`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of AbTestsVariant</returns>
-  public AbTestsVariant AsAbTestsVariant()
-  {
-    return (AbTestsVariant)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `AbTestsVariantSearchParams`. If the actual instance is not `AbTestsVariantSearchParams`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -66,15 +56,16 @@ public partial class AddABTestsVariant : AbstractSchema
     return (AbTestsVariantSearchParams)ActualInstance;
   }
 
-
   /// <summary>
-  /// Check if the actual instance is of `AbTestsVariant` type.
+  /// Get the actual instance of `AbTestsVariant`. If the actual instance is not `AbTestsVariant`,
+  /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsAbTestsVariant()
+  /// <returns>An instance of AbTestsVariant</returns>
+  public AbTestsVariant AsAbTestsVariant()
   {
-    return ActualInstance.GetType() == typeof(AbTestsVariant);
+    return (AbTestsVariant)ActualInstance;
   }
+
 
   /// <summary>
   /// Check if the actual instance is of `AbTestsVariantSearchParams` type.
@@ -83,6 +74,15 @@ public partial class AddABTestsVariant : AbstractSchema
   public bool IsAbTestsVariantSearchParams()
   {
     return ActualInstance.GetType() == typeof(AbTestsVariantSearchParams);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `AbTestsVariant` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsAbTestsVariant()
+  {
+    return ActualInstance.GetType() == typeof(AbTestsVariant);
   }
 
   /// <summary>
@@ -169,6 +169,18 @@ public class AddABTestsVariantJsonConverter : JsonConverter<AddABTestsVariant>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("customSearchParameters", out _))
+    {
+      try
+      {
+        return new AddABTestsVariant(jsonDocument.Deserialize<AbTestsVariantSearchParams>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AbTestsVariantSearchParams: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
@@ -179,18 +191,6 @@ public class AddABTestsVariantJsonConverter : JsonConverter<AddABTestsVariant>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AbTestsVariant: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new AddABTestsVariant(jsonDocument.Deserialize<AbTestsVariantSearchParams>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AbTestsVariantSearchParams: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

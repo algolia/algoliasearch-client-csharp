@@ -31,25 +31,15 @@ public partial class ABTest
   /// Initializes a new instance of the ABTest class.
   /// </summary>
   /// <param name="abTestID">Unique A/B test identifier. (required).</param>
-  /// <param name="clickSignificance">clickSignificance (required).</param>
-  /// <param name="conversionSignificance">conversionSignificance (required).</param>
-  /// <param name="addToCartSignificance">addToCartSignificance (required).</param>
-  /// <param name="purchaseSignificance">purchaseSignificance (required).</param>
-  /// <param name="revenueSignificance">revenueSignificance (required).</param>
   /// <param name="updatedAt">Date and time when the A/B test was last updated, in RFC 3339 format. (required).</param>
   /// <param name="createdAt">Date and time when the A/B test was created, in RFC 3339 format. (required).</param>
   /// <param name="endAt">End date and time of the A/B test, in RFC 3339 format. (required).</param>
   /// <param name="name">A/B test name. (required).</param>
   /// <param name="status">status (required).</param>
   /// <param name="variants">A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control.  (required).</param>
-  public ABTest(int abTestID, double? clickSignificance, double? conversionSignificance, double? addToCartSignificance, double? purchaseSignificance, Dictionary<string, double> revenueSignificance, string updatedAt, string createdAt, string endAt, string name, Status? status, List<Variant> variants)
+  public ABTest(int abTestID, string updatedAt, string createdAt, string endAt, string name, Status? status, List<Variant> variants)
   {
     AbTestID = abTestID;
-    ClickSignificance = clickSignificance ?? throw new ArgumentNullException(nameof(clickSignificance));
-    ConversionSignificance = conversionSignificance ?? throw new ArgumentNullException(nameof(conversionSignificance));
-    AddToCartSignificance = addToCartSignificance ?? throw new ArgumentNullException(nameof(addToCartSignificance));
-    PurchaseSignificance = purchaseSignificance ?? throw new ArgumentNullException(nameof(purchaseSignificance));
-    RevenueSignificance = revenueSignificance ?? throw new ArgumentNullException(nameof(revenueSignificance));
     UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
     EndAt = endAt ?? throw new ArgumentNullException(nameof(endAt));

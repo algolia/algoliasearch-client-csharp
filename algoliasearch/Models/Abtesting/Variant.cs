@@ -25,35 +25,25 @@ public partial class Variant
   /// Initializes a new instance of the Variant class.
   /// </summary>
   /// <param name="addToCartCount">Number of add-to-cart events for this variant. (required).</param>
-  /// <param name="addToCartRate">[Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant.  (required).</param>
-  /// <param name="averageClickPosition">[Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.  (required).</param>
   /// <param name="clickCount">Number of click events for this variant. (required).</param>
-  /// <param name="clickThroughRate">[Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.  (required).</param>
   /// <param name="conversionCount">Number of click events for this variant. (required).</param>
-  /// <param name="conversionRate">[Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.  (required).</param>
   /// <param name="description">Description for this variant. (required).</param>
   /// <param name="index">Index name of the A/B test variant (case-sensitive). (required).</param>
   /// <param name="noResultCount">Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant. (required).</param>
   /// <param name="purchaseCount">Number of purchase events for this variant. (required).</param>
-  /// <param name="purchaseRate">[Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.  (required).</param>
   /// <param name="searchCount">Number of searches for this variant. (required).</param>
   /// <param name="trafficPercentage">Percentage of search requests each variant receives. (required).</param>
   /// <param name="userCount">Number of users that made searches to this variant. (required).</param>
   /// <param name="trackedUserCount">Number of users that made tracked searches to this variant. (required).</param>
-  public Variant(int addToCartCount, double? addToCartRate, int? averageClickPosition, int clickCount, double? clickThroughRate, int conversionCount, double? conversionRate, string description, string index, int? noResultCount, int purchaseCount, double? purchaseRate, int? searchCount, int trafficPercentage, int? userCount, int? trackedUserCount)
+  public Variant(int addToCartCount, int clickCount, int conversionCount, string description, string index, int? noResultCount, int purchaseCount, int? searchCount, int trafficPercentage, int? userCount, int? trackedUserCount)
   {
     AddToCartCount = addToCartCount;
-    AddToCartRate = addToCartRate ?? throw new ArgumentNullException(nameof(addToCartRate));
-    AverageClickPosition = averageClickPosition ?? throw new ArgumentNullException(nameof(averageClickPosition));
     ClickCount = clickCount;
-    ClickThroughRate = clickThroughRate ?? throw new ArgumentNullException(nameof(clickThroughRate));
     ConversionCount = conversionCount;
-    ConversionRate = conversionRate ?? throw new ArgumentNullException(nameof(conversionRate));
     Description = description ?? throw new ArgumentNullException(nameof(description));
     Index = index ?? throw new ArgumentNullException(nameof(index));
     NoResultCount = noResultCount ?? throw new ArgumentNullException(nameof(noResultCount));
     PurchaseCount = purchaseCount;
-    PurchaseRate = purchaseRate ?? throw new ArgumentNullException(nameof(purchaseRate));
     SearchCount = searchCount ?? throw new ArgumentNullException(nameof(searchCount));
     TrafficPercentage = trafficPercentage;
     UserCount = userCount ?? throw new ArgumentNullException(nameof(userCount));

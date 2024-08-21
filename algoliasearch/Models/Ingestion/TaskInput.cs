@@ -198,7 +198,7 @@ public class TaskInputJsonConverter : JsonConverter<TaskInput>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("mapping", out _))
     {
       try
       {
@@ -210,7 +210,7 @@ public class TaskInputJsonConverter : JsonConverter<TaskInput>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into StreamingInput: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("streams", out _))
     {
       try
       {

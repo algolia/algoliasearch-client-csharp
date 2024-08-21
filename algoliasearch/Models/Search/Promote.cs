@@ -169,7 +169,7 @@ public class PromoteJsonConverter : JsonConverter<Promote>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("objectIDs", out _))
     {
       try
       {
@@ -181,7 +181,7 @@ public class PromoteJsonConverter : JsonConverter<Promote>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into PromoteObjectIDs: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("objectID", out _))
     {
       try
       {

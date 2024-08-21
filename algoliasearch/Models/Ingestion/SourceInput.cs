@@ -22,6 +22,26 @@ public partial class SourceInput : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the SourceInput class
+  /// with a SourceDocker
+  /// </summary>
+  /// <param name="actualInstance">An instance of SourceDocker.</param>
+  public SourceInput(SourceDocker actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the SourceInput class
+  /// with a SourceGA4BigQueryExport
+  /// </summary>
+  /// <param name="actualInstance">An instance of SourceGA4BigQueryExport.</param>
+  public SourceInput(SourceGA4BigQueryExport actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the SourceInput class
   /// with a SourceCommercetools
   /// </summary>
   /// <param name="actualInstance">An instance of SourceCommercetools.</param>
@@ -52,10 +72,10 @@ public partial class SourceInput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the SourceInput class
-  /// with a SourceGA4BigQueryExport
+  /// with a SourceShopify
   /// </summary>
-  /// <param name="actualInstance">An instance of SourceGA4BigQueryExport.</param>
-  public SourceInput(SourceGA4BigQueryExport actualInstance)
+  /// <param name="actualInstance">An instance of SourceShopify.</param>
+  public SourceInput(SourceShopify actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -80,31 +100,31 @@ public partial class SourceInput : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
-  /// <summary>
-  /// Initializes a new instance of the SourceInput class
-  /// with a SourceDocker
-  /// </summary>
-  /// <param name="actualInstance">An instance of SourceDocker.</param>
-  public SourceInput(SourceDocker actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the SourceInput class
-  /// with a SourceShopify
-  /// </summary>
-  /// <param name="actualInstance">An instance of SourceShopify.</param>
-  public SourceInput(SourceShopify actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
 
   /// <summary>
   /// Gets or Sets ActualInstance
   /// </summary>
   public sealed override object ActualInstance { get; set; }
+
+  /// <summary>
+  /// Get the actual instance of `SourceDocker`. If the actual instance is not `SourceDocker`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceDocker</returns>
+  public SourceDocker AsSourceDocker()
+  {
+    return (SourceDocker)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `SourceGA4BigQueryExport`. If the actual instance is not `SourceGA4BigQueryExport`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceGA4BigQueryExport</returns>
+  public SourceGA4BigQueryExport AsSourceGA4BigQueryExport()
+  {
+    return (SourceGA4BigQueryExport)ActualInstance;
+  }
 
   /// <summary>
   /// Get the actual instance of `SourceCommercetools`. If the actual instance is not `SourceCommercetools`,
@@ -137,13 +157,13 @@ public partial class SourceInput : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `SourceGA4BigQueryExport`. If the actual instance is not `SourceGA4BigQueryExport`,
+  /// Get the actual instance of `SourceShopify`. If the actual instance is not `SourceShopify`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of SourceGA4BigQueryExport</returns>
-  public SourceGA4BigQueryExport AsSourceGA4BigQueryExport()
+  /// <returns>An instance of SourceShopify</returns>
+  public SourceShopify AsSourceShopify()
   {
-    return (SourceGA4BigQueryExport)ActualInstance;
+    return (SourceShopify)ActualInstance;
   }
 
   /// <summary>
@@ -166,26 +186,24 @@ public partial class SourceInput : AbstractSchema
     return (SourceCSV)ActualInstance;
   }
 
+
   /// <summary>
-  /// Get the actual instance of `SourceDocker`. If the actual instance is not `SourceDocker`,
-  /// the InvalidClassException will be thrown
+  /// Check if the actual instance is of `SourceDocker` type.
   /// </summary>
-  /// <returns>An instance of SourceDocker</returns>
-  public SourceDocker AsSourceDocker()
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceDocker()
   {
-    return (SourceDocker)ActualInstance;
+    return ActualInstance.GetType() == typeof(SourceDocker);
   }
 
   /// <summary>
-  /// Get the actual instance of `SourceShopify`. If the actual instance is not `SourceShopify`,
-  /// the InvalidClassException will be thrown
+  /// Check if the actual instance is of `SourceGA4BigQueryExport` type.
   /// </summary>
-  /// <returns>An instance of SourceShopify</returns>
-  public SourceShopify AsSourceShopify()
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceGA4BigQueryExport()
   {
-    return (SourceShopify)ActualInstance;
+    return ActualInstance.GetType() == typeof(SourceGA4BigQueryExport);
   }
-
 
   /// <summary>
   /// Check if the actual instance is of `SourceCommercetools` type.
@@ -215,12 +233,12 @@ public partial class SourceInput : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `SourceGA4BigQueryExport` type.
+  /// Check if the actual instance is of `SourceShopify` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsSourceGA4BigQueryExport()
+  public bool IsSourceShopify()
   {
-    return ActualInstance.GetType() == typeof(SourceGA4BigQueryExport);
+    return ActualInstance.GetType() == typeof(SourceShopify);
   }
 
   /// <summary>
@@ -239,24 +257,6 @@ public partial class SourceInput : AbstractSchema
   public bool IsSourceCSV()
   {
     return ActualInstance.GetType() == typeof(SourceCSV);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `SourceDocker` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsSourceDocker()
-  {
-    return ActualInstance.GetType() == typeof(SourceDocker);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `SourceShopify` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsSourceShopify()
-  {
-    return ActualInstance.GetType() == typeof(SourceShopify);
   }
 
   /// <summary>
@@ -343,6 +343,30 @@ public class SourceInputJsonConverter : JsonConverter<SourceInput>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("registry", out _) && root.TryGetProperty("image", out _) && root.TryGetProperty("imageType", out _) && root.TryGetProperty("configuration", out _))
+    {
+      try
+      {
+        return new SourceInput(jsonDocument.Deserialize<SourceDocker>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceDocker: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectID", out _) && root.TryGetProperty("datasetID", out _) && root.TryGetProperty("tablePrefix", out _))
+    {
+      try
+      {
+        return new SourceInput(jsonDocument.Deserialize<SourceGA4BigQueryExport>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceGA4BigQueryExport: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectKey", out _))
     {
       try
@@ -379,16 +403,16 @@ public class SourceInputJsonConverter : JsonConverter<SourceInput>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceBigQuery: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectID", out _) && root.TryGetProperty("datasetID", out _) && root.TryGetProperty("tablePrefix", out _))
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("shopURL", out _))
     {
       try
       {
-        return new SourceInput(jsonDocument.Deserialize<SourceGA4BigQueryExport>(JsonConfig.Options));
+        return new SourceInput(jsonDocument.Deserialize<SourceShopify>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceGA4BigQueryExport: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceShopify: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)
@@ -413,30 +437,6 @@ public class SourceInputJsonConverter : JsonConverter<SourceInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceCSV: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new SourceInput(jsonDocument.Deserialize<SourceDocker>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceDocker: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new SourceInput(jsonDocument.Deserialize<SourceShopify>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceShopify: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

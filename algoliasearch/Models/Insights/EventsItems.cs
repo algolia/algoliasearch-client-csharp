@@ -22,16 +22,6 @@ public partial class EventsItems : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the EventsItems class
-  /// with a ClickedObjectIDsAfterSearch
-  /// </summary>
-  /// <param name="actualInstance">An instance of ClickedObjectIDsAfterSearch.</param>
-  public EventsItems(ClickedObjectIDsAfterSearch actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the EventsItems class
   /// with a AddedToCartObjectIDsAfterSearch
   /// </summary>
   /// <param name="actualInstance">An instance of AddedToCartObjectIDsAfterSearch.</param>
@@ -52,20 +42,10 @@ public partial class EventsItems : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the EventsItems class
-  /// with a ConvertedObjectIDsAfterSearch
+  /// with a ClickedObjectIDsAfterSearch
   /// </summary>
-  /// <param name="actualInstance">An instance of ConvertedObjectIDsAfterSearch.</param>
-  public EventsItems(ConvertedObjectIDsAfterSearch actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the EventsItems class
-  /// with a ClickedObjectIDs
-  /// </summary>
-  /// <param name="actualInstance">An instance of ClickedObjectIDs.</param>
-  public EventsItems(ClickedObjectIDs actualInstance)
+  /// <param name="actualInstance">An instance of ClickedObjectIDsAfterSearch.</param>
+  public EventsItems(ClickedObjectIDsAfterSearch actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -86,6 +66,26 @@ public partial class EventsItems : AbstractSchema
   /// </summary>
   /// <param name="actualInstance">An instance of AddedToCartObjectIDs.</param>
   public EventsItems(AddedToCartObjectIDs actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the EventsItems class
+  /// with a ConvertedObjectIDsAfterSearch
+  /// </summary>
+  /// <param name="actualInstance">An instance of ConvertedObjectIDsAfterSearch.</param>
+  public EventsItems(ConvertedObjectIDsAfterSearch actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the EventsItems class
+  /// with a ClickedObjectIDs
+  /// </summary>
+  /// <param name="actualInstance">An instance of ClickedObjectIDs.</param>
+  public EventsItems(ClickedObjectIDs actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -147,16 +147,6 @@ public partial class EventsItems : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `ClickedObjectIDsAfterSearch`. If the actual instance is not `ClickedObjectIDsAfterSearch`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of ClickedObjectIDsAfterSearch</returns>
-  public ClickedObjectIDsAfterSearch AsClickedObjectIDsAfterSearch()
-  {
-    return (ClickedObjectIDsAfterSearch)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `AddedToCartObjectIDsAfterSearch`. If the actual instance is not `AddedToCartObjectIDsAfterSearch`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -177,23 +167,13 @@ public partial class EventsItems : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `ConvertedObjectIDsAfterSearch`. If the actual instance is not `ConvertedObjectIDsAfterSearch`,
+  /// Get the actual instance of `ClickedObjectIDsAfterSearch`. If the actual instance is not `ClickedObjectIDsAfterSearch`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of ConvertedObjectIDsAfterSearch</returns>
-  public ConvertedObjectIDsAfterSearch AsConvertedObjectIDsAfterSearch()
+  /// <returns>An instance of ClickedObjectIDsAfterSearch</returns>
+  public ClickedObjectIDsAfterSearch AsClickedObjectIDsAfterSearch()
   {
-    return (ConvertedObjectIDsAfterSearch)ActualInstance;
-  }
-
-  /// <summary>
-  /// Get the actual instance of `ClickedObjectIDs`. If the actual instance is not `ClickedObjectIDs`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of ClickedObjectIDs</returns>
-  public ClickedObjectIDs AsClickedObjectIDs()
-  {
-    return (ClickedObjectIDs)ActualInstance;
+    return (ClickedObjectIDsAfterSearch)ActualInstance;
   }
 
   /// <summary>
@@ -214,6 +194,26 @@ public partial class EventsItems : AbstractSchema
   public AddedToCartObjectIDs AsAddedToCartObjectIDs()
   {
     return (AddedToCartObjectIDs)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `ConvertedObjectIDsAfterSearch`. If the actual instance is not `ConvertedObjectIDsAfterSearch`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of ConvertedObjectIDsAfterSearch</returns>
+  public ConvertedObjectIDsAfterSearch AsConvertedObjectIDsAfterSearch()
+  {
+    return (ConvertedObjectIDsAfterSearch)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `ClickedObjectIDs`. If the actual instance is not `ClickedObjectIDs`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of ClickedObjectIDs</returns>
+  public ClickedObjectIDs AsClickedObjectIDs()
+  {
+    return (ClickedObjectIDs)ActualInstance;
   }
 
   /// <summary>
@@ -268,15 +268,6 @@ public partial class EventsItems : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `ClickedObjectIDsAfterSearch` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsClickedObjectIDsAfterSearch()
-  {
-    return ActualInstance.GetType() == typeof(ClickedObjectIDsAfterSearch);
-  }
-
-  /// <summary>
   /// Check if the actual instance is of `AddedToCartObjectIDsAfterSearch` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -295,21 +286,12 @@ public partial class EventsItems : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `ConvertedObjectIDsAfterSearch` type.
+  /// Check if the actual instance is of `ClickedObjectIDsAfterSearch` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsConvertedObjectIDsAfterSearch()
+  public bool IsClickedObjectIDsAfterSearch()
   {
-    return ActualInstance.GetType() == typeof(ConvertedObjectIDsAfterSearch);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `ClickedObjectIDs` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsClickedObjectIDs()
-  {
-    return ActualInstance.GetType() == typeof(ClickedObjectIDs);
+    return ActualInstance.GetType() == typeof(ClickedObjectIDsAfterSearch);
   }
 
   /// <summary>
@@ -328,6 +310,24 @@ public partial class EventsItems : AbstractSchema
   public bool IsAddedToCartObjectIDs()
   {
     return ActualInstance.GetType() == typeof(AddedToCartObjectIDs);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `ConvertedObjectIDsAfterSearch` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsConvertedObjectIDsAfterSearch()
+  {
+    return ActualInstance.GetType() == typeof(ConvertedObjectIDsAfterSearch);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `ClickedObjectIDs` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsClickedObjectIDs()
+  {
+    return ActualInstance.GetType() == typeof(ClickedObjectIDs);
   }
 
   /// <summary>
@@ -459,18 +459,6 @@ public class EventsItemsJsonConverter : JsonConverter<EventsItems>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("positions", out _) && root.TryGetProperty("queryID", out _) && root.TryGetProperty("eventType", out _))
-    {
-      try
-      {
-        return new EventsItems(jsonDocument.Deserialize<ClickedObjectIDsAfterSearch>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ClickedObjectIDsAfterSearch: {exception}");
-      }
-    }
     if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("eventType", out _) && root.TryGetProperty("eventSubtype", out _) && root.TryGetProperty("queryID", out _) && root.TryGetProperty("objectIDs", out _))
     {
       try
@@ -495,28 +483,16 @@ public class EventsItemsJsonConverter : JsonConverter<EventsItems>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into PurchasedObjectIDsAfterSearch: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("queryID", out _) && root.TryGetProperty("eventType", out _))
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("positions", out _) && root.TryGetProperty("queryID", out _) && root.TryGetProperty("eventType", out _))
     {
       try
       {
-        return new EventsItems(jsonDocument.Deserialize<ConvertedObjectIDsAfterSearch>(JsonConfig.Options));
+        return new EventsItems(jsonDocument.Deserialize<ClickedObjectIDsAfterSearch>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ConvertedObjectIDsAfterSearch: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("eventType", out _) && root.TryGetProperty("objectIDs", out _))
-    {
-      try
-      {
-        return new EventsItems(jsonDocument.Deserialize<ClickedObjectIDs>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ClickedObjectIDs: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ClickedObjectIDsAfterSearch: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("eventType", out _) && root.TryGetProperty("eventSubtype", out _) && root.TryGetProperty("objectIDs", out _))
@@ -541,6 +517,30 @@ public class EventsItemsJsonConverter : JsonConverter<EventsItems>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AddedToCartObjectIDs: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("queryID", out _) && root.TryGetProperty("eventType", out _))
+    {
+      try
+      {
+        return new EventsItems(jsonDocument.Deserialize<ConvertedObjectIDsAfterSearch>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ConvertedObjectIDsAfterSearch: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("eventType", out _) && root.TryGetProperty("objectIDs", out _))
+    {
+      try
+      {
+        return new EventsItems(jsonDocument.Deserialize<ClickedObjectIDs>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into ClickedObjectIDs: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("eventType", out _) && root.TryGetProperty("objectIDs", out _))

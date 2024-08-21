@@ -22,6 +22,16 @@ public partial class SourceUpdateInput : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the SourceUpdateInput class
+  /// with a SourceGA4BigQueryExport
+  /// </summary>
+  /// <param name="actualInstance">An instance of SourceGA4BigQueryExport.</param>
+  public SourceUpdateInput(SourceGA4BigQueryExport actualInstance)
+  {
+    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the SourceUpdateInput class
   /// with a SourceBigQuery
   /// </summary>
   /// <param name="actualInstance">An instance of SourceBigQuery.</param>
@@ -32,10 +42,10 @@ public partial class SourceUpdateInput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the SourceUpdateInput class
-  /// with a SourceGA4BigQueryExport
+  /// with a SourceUpdateDocker
   /// </summary>
-  /// <param name="actualInstance">An instance of SourceGA4BigQueryExport.</param>
-  public SourceUpdateInput(SourceGA4BigQueryExport actualInstance)
+  /// <param name="actualInstance">An instance of SourceUpdateDocker.</param>
+  public SourceUpdateInput(SourceUpdateDocker actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -72,16 +82,6 @@ public partial class SourceUpdateInput : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the SourceUpdateInput class
-  /// with a SourceUpdateDocker
-  /// </summary>
-  /// <param name="actualInstance">An instance of SourceUpdateDocker.</param>
-  public SourceUpdateInput(SourceUpdateDocker actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the SourceUpdateInput class
   /// with a SourceUpdateShopify
   /// </summary>
   /// <param name="actualInstance">An instance of SourceUpdateShopify.</param>
@@ -97,6 +97,16 @@ public partial class SourceUpdateInput : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
+  /// Get the actual instance of `SourceGA4BigQueryExport`. If the actual instance is not `SourceGA4BigQueryExport`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceGA4BigQueryExport</returns>
+  public SourceGA4BigQueryExport AsSourceGA4BigQueryExport()
+  {
+    return (SourceGA4BigQueryExport)ActualInstance;
+  }
+
+  /// <summary>
   /// Get the actual instance of `SourceBigQuery`. If the actual instance is not `SourceBigQuery`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -107,13 +117,13 @@ public partial class SourceUpdateInput : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `SourceGA4BigQueryExport`. If the actual instance is not `SourceGA4BigQueryExport`,
+  /// Get the actual instance of `SourceUpdateDocker`. If the actual instance is not `SourceUpdateDocker`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of SourceGA4BigQueryExport</returns>
-  public SourceGA4BigQueryExport AsSourceGA4BigQueryExport()
+  /// <returns>An instance of SourceUpdateDocker</returns>
+  public SourceUpdateDocker AsSourceUpdateDocker()
   {
-    return (SourceGA4BigQueryExport)ActualInstance;
+    return (SourceUpdateDocker)ActualInstance;
   }
 
   /// <summary>
@@ -147,16 +157,6 @@ public partial class SourceUpdateInput : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `SourceUpdateDocker`. If the actual instance is not `SourceUpdateDocker`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of SourceUpdateDocker</returns>
-  public SourceUpdateDocker AsSourceUpdateDocker()
-  {
-    return (SourceUpdateDocker)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `SourceUpdateShopify`. If the actual instance is not `SourceUpdateShopify`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -168,6 +168,15 @@ public partial class SourceUpdateInput : AbstractSchema
 
 
   /// <summary>
+  /// Check if the actual instance is of `SourceGA4BigQueryExport` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceGA4BigQueryExport()
+  {
+    return ActualInstance.GetType() == typeof(SourceGA4BigQueryExport);
+  }
+
+  /// <summary>
   /// Check if the actual instance is of `SourceBigQuery` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
@@ -177,12 +186,12 @@ public partial class SourceUpdateInput : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `SourceGA4BigQueryExport` type.
+  /// Check if the actual instance is of `SourceUpdateDocker` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsSourceGA4BigQueryExport()
+  public bool IsSourceUpdateDocker()
   {
-    return ActualInstance.GetType() == typeof(SourceGA4BigQueryExport);
+    return ActualInstance.GetType() == typeof(SourceUpdateDocker);
   }
 
   /// <summary>
@@ -210,15 +219,6 @@ public partial class SourceUpdateInput : AbstractSchema
   public bool IsSourceCSV()
   {
     return ActualInstance.GetType() == typeof(SourceCSV);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `SourceUpdateDocker` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsSourceUpdateDocker()
-  {
-    return ActualInstance.GetType() == typeof(SourceUpdateDocker);
   }
 
   /// <summary>
@@ -314,6 +314,18 @@ public class SourceUpdateInputJsonConverter : JsonConverter<SourceUpdateInput>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectID", out _) && root.TryGetProperty("datasetID", out _) && root.TryGetProperty("tablePrefix", out _))
+    {
+      try
+      {
+        return new SourceUpdateInput(jsonDocument.Deserialize<SourceGA4BigQueryExport>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceGA4BigQueryExport: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectID", out _))
     {
       try
@@ -326,16 +338,16 @@ public class SourceUpdateInputJsonConverter : JsonConverter<SourceUpdateInput>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceBigQuery: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectID", out _) && root.TryGetProperty("datasetID", out _) && root.TryGetProperty("tablePrefix", out _))
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("configuration", out _))
     {
       try
       {
-        return new SourceUpdateInput(jsonDocument.Deserialize<SourceGA4BigQueryExport>(JsonConfig.Options));
+        return new SourceUpdateInput(jsonDocument.Deserialize<SourceUpdateDocker>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceGA4BigQueryExport: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceUpdateDocker: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)
@@ -372,18 +384,6 @@ public class SourceUpdateInputJsonConverter : JsonConverter<SourceUpdateInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceCSV: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new SourceUpdateInput(jsonDocument.Deserialize<SourceUpdateDocker>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceUpdateDocker: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object)
