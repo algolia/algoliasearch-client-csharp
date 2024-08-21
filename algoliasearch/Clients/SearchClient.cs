@@ -1208,7 +1208,7 @@ public interface ISearchClient
   AddApiKeyResponse RestoreApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partial). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch). 
+  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch). 
   /// </summary>
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="body">The record, a schemaless object with attributes that are useful in the context of search and discovery.</param>
@@ -1221,7 +1221,7 @@ public interface ISearchClient
   Task<SaveObjectResponse> SaveObjectAsync(string indexName, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partial). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
+  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
   /// </summary>
   /// <param name="indexName">Name of the index on which to perform the operation.</param>
   /// <param name="body">The record, a schemaless object with attributes that are useful in the context of search and discovery.</param>
@@ -3809,7 +3809,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <summary>
-  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partial). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch). 
+  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch). 
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -3842,7 +3842,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <summary>
-  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partial). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
+  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
