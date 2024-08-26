@@ -106,7 +106,7 @@ public partial class BrowseResponse<T>
   /// </summary>
   /// <value>Statistics for numerical facets.</value>
   [JsonPropertyName("facets_stats")]
-  public Dictionary<string, FacetsStats> FacetsStats { get; set; }
+  public Dictionary<string, FacetStats> FacetsStats { get; set; }
 
   /// <summary>
   /// Index name used for the query.

@@ -14,12 +14,12 @@ namespace Algolia.Search.Models.Analytics;
 /// <summary>
 /// Currency code.
 /// </summary>
-public partial class CurrenciesValue
+public partial class CurrencyCode
 {
   /// <summary>
-  /// Initializes a new instance of the CurrenciesValue class.
+  /// Initializes a new instance of the CurrencyCode class.
   /// </summary>
-  public CurrenciesValue()
+  public CurrencyCode()
   {
   }
 
@@ -44,7 +44,7 @@ public partial class CurrenciesValue
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class CurrenciesValue {\n");
+    sb.Append("class CurrencyCode {\n");
     sb.Append("  Currency: ").Append(Currency).Append("\n");
     sb.Append("  Revenue: ").Append(Revenue).Append("\n");
     sb.Append("}\n");
@@ -67,7 +67,7 @@ public partial class CurrenciesValue
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not CurrenciesValue input)
+    if (obj is not CurrencyCode input)
     {
       return false;
     }

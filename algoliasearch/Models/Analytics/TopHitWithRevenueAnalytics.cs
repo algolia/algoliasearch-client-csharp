@@ -36,7 +36,7 @@ public partial class TopHitWithRevenueAnalytics
   /// <param name="purchaseRate">Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
   /// <param name="purchaseCount">Number of purchase events from this search. (required) (default to 0).</param>
   /// <param name="currencies">Revenue associated with this search, broken-down by currencies. (required).</param>
-  public TopHitWithRevenueAnalytics(string hit, int count, double? clickThroughRate, double? conversionRate, int trackedHitCount, int clickCount, int conversionCount, double? addToCartRate, int addToCartCount, double? purchaseRate, int purchaseCount, Dictionary<string, CurrenciesValue> currencies)
+  public TopHitWithRevenueAnalytics(string hit, int count, double? clickThroughRate, double? conversionRate, int trackedHitCount, int clickCount, int conversionCount, double? addToCartRate, int addToCartCount, double? purchaseRate, int purchaseCount, Dictionary<string, CurrencyCode> currencies)
   {
     Hit = hit ?? throw new ArgumentNullException(nameof(hit));
     Count = count;
@@ -134,7 +134,7 @@ public partial class TopHitWithRevenueAnalytics
   /// </summary>
   /// <value>Revenue associated with this search, broken-down by currencies.</value>
   [JsonPropertyName("currencies")]
-  public Dictionary<string, CurrenciesValue> Currencies { get; set; }
+  public Dictionary<string, CurrencyCode> Currencies { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

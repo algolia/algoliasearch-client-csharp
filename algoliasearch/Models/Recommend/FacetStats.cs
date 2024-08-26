@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// FacetsStats
+/// FacetStats
 /// </summary>
-public partial class FacetsStats
+public partial class FacetStats
 {
   /// <summary>
-  /// Initializes a new instance of the FacetsStats class.
+  /// Initializes a new instance of the FacetStats class.
   /// </summary>
-  public FacetsStats()
+  public FacetStats()
   {
   }
 
@@ -58,7 +58,7 @@ public partial class FacetsStats
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class FacetsStats {\n");
+    sb.Append("class FacetStats {\n");
     sb.Append("  Min: ").Append(Min).Append("\n");
     sb.Append("  Max: ").Append(Max).Append("\n");
     sb.Append("  Avg: ").Append(Avg).Append("\n");
@@ -83,7 +83,7 @@ public partial class FacetsStats
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not FacetsStats input)
+    if (obj is not FacetStats input)
     {
       return false;
     }

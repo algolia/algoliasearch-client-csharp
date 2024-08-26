@@ -26,7 +26,7 @@ public partial class GetRevenue
   /// </summary>
   /// <param name="currencies">Revenue associated with this search, broken-down by currencies. (required).</param>
   /// <param name="dates">Daily revenue. (required).</param>
-  public GetRevenue(Dictionary<string, CurrenciesValue> currencies, List<DailyRevenue> dates)
+  public GetRevenue(Dictionary<string, CurrencyCode> currencies, List<DailyRevenue> dates)
   {
     Currencies = currencies ?? throw new ArgumentNullException(nameof(currencies));
     Dates = dates ?? throw new ArgumentNullException(nameof(dates));
@@ -37,7 +37,7 @@ public partial class GetRevenue
   /// </summary>
   /// <value>Revenue associated with this search, broken-down by currencies.</value>
   [JsonPropertyName("currencies")]
-  public Dictionary<string, CurrenciesValue> Currencies { get; set; }
+  public Dictionary<string, CurrencyCode> Currencies { get; set; }
 
   /// <summary>
   /// Daily revenue.
