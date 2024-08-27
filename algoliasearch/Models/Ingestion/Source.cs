@@ -33,14 +33,12 @@ public partial class Source
   /// <param name="sourceID">Universally uniqud identifier (UUID) of a source. (required).</param>
   /// <param name="type">type (required).</param>
   /// <param name="name">name (required).</param>
-  /// <param name="input">input (required).</param>
   /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  public Source(string sourceID, SourceType? type, string name, SourceInput input, string createdAt)
+  public Source(string sourceID, SourceType? type, string name, string createdAt)
   {
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
     Type = type;
     Name = name ?? throw new ArgumentNullException(nameof(name));
-    Input = input ?? throw new ArgumentNullException(nameof(input));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
   }
 

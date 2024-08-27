@@ -68,6 +68,12 @@ public enum SourceType
   /// Enum Sfcc for value: sfcc
   /// </summary>
   [JsonPropertyName("sfcc")]
-  Sfcc = 9
+  Sfcc = 9,
+
+  /// <summary>
+  /// Enum Push for value: push
+  /// </summary>
+  [JsonPropertyName("push")]
+  Push = 10
 }
 

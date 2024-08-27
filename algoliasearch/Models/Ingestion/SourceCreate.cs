@@ -32,12 +32,10 @@ public partial class SourceCreate
   /// </summary>
   /// <param name="type">type (required).</param>
   /// <param name="name">Descriptive name of the source. (required).</param>
-  /// <param name="input">input (required).</param>
-  public SourceCreate(SourceType? type, string name, SourceInput input)
+  public SourceCreate(SourceType? type, string name)
   {
     Type = type;
     Name = name ?? throw new ArgumentNullException(nameof(name));
-    Input = input ?? throw new ArgumentNullException(nameof(input));
   }
 
   /// <summary>
