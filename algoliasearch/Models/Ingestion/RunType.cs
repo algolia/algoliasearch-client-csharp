@@ -33,6 +33,18 @@ public enum RunType
   /// Enum Discover for value: discover
   /// </summary>
   [JsonPropertyName("discover")]
-  Discover = 3
+  Discover = 3,
+
+  /// <summary>
+  /// Enum Validate for value: validate
+  /// </summary>
+  [JsonPropertyName("validate")]
+  Validate = 4,
+
+  /// <summary>
+  /// Enum Push for value: push
+  /// </summary>
+  [JsonPropertyName("push")]
+  Push = 5
 }
 

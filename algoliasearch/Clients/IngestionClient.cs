@@ -847,6 +847,7 @@ public interface IIngestionClient
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Run type for filtering the list of task runs. (optional)</param>
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
@@ -858,7 +859,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of RunListResponse</returns>
-  Task<RunListResponse> ListRunsAsync(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<RunListResponse> ListRunsAsync(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, List<RunType> type = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieve a list of task runs. (Synchronous version)
@@ -866,6 +867,7 @@ public interface IIngestionClient
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Run type for filtering the list of task runs. (optional)</param>
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
@@ -877,7 +879,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>RunListResponse</returns>
-  RunListResponse ListRuns(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  RunListResponse ListRuns(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, List<RunType> type = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves a list of sources.
@@ -3153,6 +3155,7 @@ public partial class IngestionClient : IIngestionClient
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Run type for filtering the list of task runs. (optional)</param>
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
@@ -3164,7 +3167,7 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of RunListResponse</returns>
-  public async Task<RunListResponse> ListRunsAsync(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<RunListResponse> ListRunsAsync(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, List<RunType> type = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
 
@@ -3172,6 +3175,7 @@ public partial class IngestionClient : IIngestionClient
     requestOptions.AddQueryParameter("itemsPerPage", itemsPerPage);
     requestOptions.AddQueryParameter("page", page);
     requestOptions.AddQueryParameter("status", status);
+    requestOptions.AddQueryParameter("type", type);
     requestOptions.AddQueryParameter("taskID", taskID);
     requestOptions.AddQueryParameter("sort", sort);
     requestOptions.AddQueryParameter("order", order);
@@ -3192,6 +3196,7 @@ public partial class IngestionClient : IIngestionClient
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="status">Run status for filtering the list of task runs. (optional)</param>
+  /// <param name="type">Run type for filtering the list of task runs. (optional)</param>
   /// <param name="taskID">Task ID for filtering the list of task runs. (optional)</param>
   /// <param name="sort">Property by which to sort the list of task runs. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
@@ -3203,8 +3208,8 @@ public partial class IngestionClient : IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>RunListResponse</returns>
-  public RunListResponse ListRuns(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListRunsAsync(itemsPerPage, page, status, taskID, sort, order, startDate, endDate, options, cancellationToken));
+  public RunListResponse ListRuns(int? itemsPerPage = default, int? page = default, List<RunStatus> status = default, List<RunType> type = default, string taskID = default, RunSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => ListRunsAsync(itemsPerPage, page, status, type, taskID, sort, order, startDate, endDate, options, cancellationToken));
 
 
   /// <summary>
