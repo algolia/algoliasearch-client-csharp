@@ -12,38 +12,40 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// BatchRequest
+/// PushTaskRecords
 /// </summary>
-public partial class BatchRequest
+public partial class PushTaskRecords
 {
-
   /// <summary>
-  /// Gets or Sets Action
-  /// </summary>
-  [JsonPropertyName("action")]
-  public Action? Action { get; set; }
-  /// <summary>
-  /// Initializes a new instance of the BatchRequest class.
+  /// Initializes a new instance of the PushTaskRecords class.
   /// </summary>
   [JsonConstructor]
-  public BatchRequest() { }
-  /// <summary>
-  /// Initializes a new instance of the BatchRequest class.
-  /// </summary>
-  /// <param name="action">action (required).</param>
-  /// <param name="body">Operation arguments (varies with specified &#x60;action&#x60;). (required).</param>
-  public BatchRequest(Action? action, object body)
+  public PushTaskRecords()
   {
-    Action = action;
-    Body = body ?? throw new ArgumentNullException(nameof(body));
+    AdditionalProperties = new Dictionary<string, object>();
+  }
+  /// <summary>
+  /// Initializes a new instance of the PushTaskRecords class.
+  /// </summary>
+  /// <param name="objectID">Unique record identifier. (required).</param>
+  public PushTaskRecords(string objectID)
+  {
+    ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
+    AdditionalProperties = new Dictionary<string, object>();
   }
 
   /// <summary>
-  /// Operation arguments (varies with specified `action`).
+  /// Unique record identifier.
   /// </summary>
-  /// <value>Operation arguments (varies with specified `action`).</value>
-  [JsonPropertyName("body")]
-  public object Body { get; set; }
+  /// <value>Unique record identifier.</value>
+  [JsonPropertyName("objectID")]
+  public string ObjectID { get; set; }
+
+  /// <summary>
+  /// Gets or Sets additional properties
+  /// </summary>
+  [JsonExtensionData]
+  public IDictionary<string, object> AdditionalProperties { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -52,9 +54,9 @@ public partial class BatchRequest
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class BatchRequest {\n");
-    sb.Append("  Action: ").Append(Action).Append("\n");
-    sb.Append("  Body: ").Append(Body).Append("\n");
+    sb.Append("class PushTaskRecords {\n");
+    sb.Append("  ObjectID: ").Append(ObjectID).Append("\n");
+    sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -75,14 +77,14 @@ public partial class BatchRequest
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not BatchRequest input)
+    if (obj is not PushTaskRecords input)
     {
       return false;
     }
 
     return
-        (Action == input.Action || Action.Equals(input.Action)) &&
-        (Body == input.Body || (Body != null && Body.Equals(input.Body)));
+        (ObjectID == input.ObjectID || (ObjectID != null && ObjectID.Equals(input.ObjectID)))
+        && (AdditionalProperties.Count == input.AdditionalProperties.Count && !AdditionalProperties.Except(input.AdditionalProperties).Any());
   }
 
   /// <summary>
@@ -94,10 +96,13 @@ public partial class BatchRequest
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Action.GetHashCode();
-      if (Body != null)
+      if (ObjectID != null)
       {
-        hashCode = (hashCode * 59) + Body.GetHashCode();
+        hashCode = (hashCode * 59) + ObjectID.GetHashCode();
+      }
+      if (AdditionalProperties != null)
+      {
+        hashCode = (hashCode * 59) + AdditionalProperties.GetHashCode();
       }
       return hashCode;
     }

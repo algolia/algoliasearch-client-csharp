@@ -12,29 +12,37 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Batch parameters.
+/// PushTaskPayload
 /// </summary>
-public partial class BatchWriteParams
+public partial class PushTaskPayload
 {
+
   /// <summary>
-  /// Initializes a new instance of the BatchWriteParams class.
+  /// Gets or Sets Action
+  /// </summary>
+  [JsonPropertyName("action")]
+  public Action? Action { get; set; }
+  /// <summary>
+  /// Initializes a new instance of the PushTaskPayload class.
   /// </summary>
   [JsonConstructor]
-  public BatchWriteParams() { }
+  public PushTaskPayload() { }
   /// <summary>
-  /// Initializes a new instance of the BatchWriteParams class.
+  /// Initializes a new instance of the PushTaskPayload class.
   /// </summary>
-  /// <param name="requests">requests (required).</param>
-  public BatchWriteParams(List<BatchRequest> requests)
+  /// <param name="action">action (required).</param>
+  /// <param name="records">records (required).</param>
+  public PushTaskPayload(Action? action, List<PushTaskRecords> records)
   {
-    Requests = requests ?? throw new ArgumentNullException(nameof(requests));
+    Action = action;
+    Records = records ?? throw new ArgumentNullException(nameof(records));
   }
 
   /// <summary>
-  /// Gets or Sets Requests
+  /// Gets or Sets Records
   /// </summary>
-  [JsonPropertyName("requests")]
-  public List<BatchRequest> Requests { get; set; }
+  [JsonPropertyName("records")]
+  public List<PushTaskRecords> Records { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -43,8 +51,9 @@ public partial class BatchWriteParams
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class BatchWriteParams {\n");
-    sb.Append("  Requests: ").Append(Requests).Append("\n");
+    sb.Append("class PushTaskPayload {\n");
+    sb.Append("  Action: ").Append(Action).Append("\n");
+    sb.Append("  Records: ").Append(Records).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -65,13 +74,14 @@ public partial class BatchWriteParams
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not BatchWriteParams input)
+    if (obj is not PushTaskPayload input)
     {
       return false;
     }
 
     return
-        (Requests == input.Requests || Requests != null && input.Requests != null && Requests.SequenceEqual(input.Requests));
+        (Action == input.Action || Action.Equals(input.Action)) &&
+        (Records == input.Records || Records != null && input.Records != null && Records.SequenceEqual(input.Records));
   }
 
   /// <summary>
@@ -83,9 +93,10 @@ public partial class BatchWriteParams
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Requests != null)
+      hashCode = (hashCode * 59) + Action.GetHashCode();
+      if (Records != null)
       {
-        hashCode = (hashCode * 59) + Requests.GetHashCode();
+        hashCode = (hashCode * 59) + Records.GetHashCode();
       }
       return hashCode;
     }
