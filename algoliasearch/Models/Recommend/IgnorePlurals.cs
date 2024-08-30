@@ -32,6 +32,16 @@ public partial class IgnorePlurals : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the IgnorePlurals class
+  /// with a BooleanString
+  /// </summary>
+  /// <param name="actualInstance">An instance of BooleanString.</param>
+  public IgnorePlurals(BooleanString actualInstance)
+  {
+    ActualInstance = actualInstance;
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the IgnorePlurals class
   /// with a bool
   /// </summary>
   /// <param name="actualInstance">An instance of bool.</param>
@@ -57,6 +67,16 @@ public partial class IgnorePlurals : AbstractSchema
   }
 
   /// <summary>
+  /// Get the actual instance of `BooleanString`. If the actual instance is not `BooleanString`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of BooleanString</returns>
+  public BooleanString AsBooleanString()
+  {
+    return (BooleanString)ActualInstance;
+  }
+
+  /// <summary>
   /// Get the actual instance of `bool`. If the actual instance is not `bool`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -74,6 +94,15 @@ public partial class IgnorePlurals : AbstractSchema
   public bool IsListSupportedLanguage()
   {
     return ActualInstance.GetType() == typeof(List<SupportedLanguage>);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `BooleanString` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsBooleanString()
+  {
+    return ActualInstance.GetType() == typeof(BooleanString);
   }
 
   /// <summary>
@@ -179,6 +208,18 @@ public class IgnorePluralsJsonConverter : JsonConverter<IgnorePlurals>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<SupportedLanguage>: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.String)
+    {
+      try
+      {
+        return new IgnorePlurals(jsonDocument.Deserialize<BooleanString>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into BooleanString: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.True || root.ValueKind == JsonValueKind.False)
