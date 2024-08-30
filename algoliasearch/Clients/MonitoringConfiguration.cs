@@ -42,8 +42,7 @@ public sealed class MonitoringConfig : AlgoliaConfig
       Up = true,
       LastUse = DateTime.UtcNow,
       Accept =  CallType.Read | CallType.Write
-    }
+    },
   };
   }
 }
-

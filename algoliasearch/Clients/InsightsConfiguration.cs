@@ -53,4 +53,3 @@ public sealed class InsightsConfig : AlgoliaConfig
     return hosts;
   }
 }
-

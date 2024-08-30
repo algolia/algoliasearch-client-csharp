@@ -78,4 +78,3 @@ public sealed class SearchConfig : AlgoliaConfig
     return hosts;
   }
 }
-

@@ -29,53 +29,27 @@ public sealed class UsageConfig : AlgoliaConfig
   /// <param name="apiKey">Your API Key</param>
   public UsageConfig(string appId, string apiKey) : base(appId, apiKey, "Usage")
   {
-    DefaultHosts = GetDefaultHosts(appId);
+    DefaultHosts = GetDefaultHosts();
     Compression = CompressionType.None;
   }
-  private static List<StatefulHost> GetDefaultHosts(string appId)
+  private static List<StatefulHost> GetDefaultHosts()
   {
-    var hosts = new List<StatefulHost>
+    return new List<StatefulHost>
   {
     new()
     {
-      Url = $"{appId}-dsn.algolia.net",
+      Url = "usage.algolia.com",
       Up = true,
       LastUse = DateTime.UtcNow,
-      Accept = CallType.Read
+      Accept =  CallType.Read | CallType.Write
     },
     new()
     {
-      Url = $"{appId}.algolia.net", Up = true, LastUse = DateTime.UtcNow, Accept = CallType.Write,
-    }
+      Url = "usage-dev.algolia.com",
+      Up = true,
+      LastUse = DateTime.UtcNow,
+      Accept =  CallType.Read | CallType.Write
+    },
   };
-
-    var commonHosts = new List<StatefulHost>
-  {
-    new()
-    {
-      Url = $"{appId}-1.algolianet.com",
-      Up = true,
-      LastUse = DateTime.UtcNow,
-      Accept = CallType.Read | CallType.Write,
-    },
-    new()
-    {
-      Url = $"{appId}-2.algolianet.com",
-      Up = true,
-      LastUse = DateTime.UtcNow,
-      Accept = CallType.Read | CallType.Write,
-    },
-    new()
-    {
-      Url = $"{appId}-3.algolianet.com",
-      Up = true,
-      LastUse = DateTime.UtcNow,
-      Accept = CallType.Read | CallType.Write,
-    }
-  }.Shuffle();
-
-    hosts.AddRange(commonHosts);
-    return hosts;
   }
 }
-

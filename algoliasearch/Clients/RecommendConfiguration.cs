@@ -78,4 +78,3 @@ public sealed class RecommendConfig : AlgoliaConfig
     return hosts;
   }
 }
-

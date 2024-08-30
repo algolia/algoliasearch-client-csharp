@@ -53,4 +53,3 @@ public sealed class AnalyticsConfig : AlgoliaConfig
     return hosts;
   }
 }
-

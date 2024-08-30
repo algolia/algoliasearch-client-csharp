@@ -53,4 +53,3 @@ public sealed class PersonalizationConfig : AlgoliaConfig
     return hosts;
   }
 }
-

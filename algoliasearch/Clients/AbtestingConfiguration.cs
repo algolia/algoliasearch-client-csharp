@@ -53,4 +53,3 @@ public sealed class AbtestingConfig : AlgoliaConfig
     return hosts;
   }
 }
-
