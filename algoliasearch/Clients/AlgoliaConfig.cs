@@ -19,11 +19,12 @@ namespace Algolia.Search.Clients
     /// <param name="appId">Your application ID</param>
     /// <param name="apiKey">Your API Key</param>
     /// <param name="clientName">The client name</param>
-    protected AlgoliaConfig(string appId, string apiKey, string clientName)
+    /// <param name="clientVersion">The client version</param>
+    protected AlgoliaConfig(string appId, string apiKey, string clientName, string clientVersion)
     {
       AppId = appId;
       ApiKey = apiKey;
-      UserAgent = new AlgoliaUserAgent(clientName);
+      UserAgent = new AlgoliaUserAgent(clientName, clientVersion);
       DefaultHeaders = new Dictionary<string, string>
       {
         { Defaults.AlgoliaApplicationHeader.ToLowerInvariant(), AppId },

@@ -13,10 +13,6 @@ public class AlgoliaUserAgent
 {
   private readonly IDictionary<string, string> _segments = new Dictionary<string, string>();
 
-  // Get the client assembly version
-  private static readonly string ClientVersion =
-    typeof(AlgoliaConfig).GetTypeInfo().Assembly.GetName().Version.ToString();
-
   // Get the dotnet runtime version
   private static readonly string DotnetVersion = Environment.Version.ToString();
 
@@ -24,10 +20,10 @@ public class AlgoliaUserAgent
   /// Create a new user-agent header
   /// </summary>
   /// <param name="clientName"></param>
-  public AlgoliaUserAgent(string clientName)
+  public AlgoliaUserAgent(string clientName, string clientVersion)
   {
-    AddSegment("Algolia for Csharp", $"({typeof(AlgoliaConfig).GetTypeInfo().Assembly.GetName().Version})");
-    AddSegment(clientName, $"({ClientVersion})");
+    AddSegment("Algolia for Csharp", $"({clientVersion})");
+    AddSegment(clientName, $"({clientVersion})");
     AddSegment("Dotnet", $"({DotnetVersion})");
   }
 
