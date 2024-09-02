@@ -154,7 +154,7 @@ public interface IQuerySuggestionsClient
   object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation. 
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation. 
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -166,7 +166,7 @@ public interface IQuerySuggestionsClient
   Task<BaseResponse> DeleteConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation.  (Synchronous version)
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.  (Synchronous version)
   /// </summary>
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -576,7 +576,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation. 
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation. 
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -603,7 +603,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
 
 
   /// <summary>
-  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation.  (Synchronous version)
+  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

@@ -43,13 +43,6 @@ public sealed class UsageConfig : AlgoliaConfig
       LastUse = DateTime.UtcNow,
       Accept =  CallType.Read | CallType.Write
     },
-    new()
-    {
-      Url = "usage-dev.algolia.com",
-      Up = true,
-      LastUse = DateTime.UtcNow,
-      Accept =  CallType.Read | CallType.Write
-    },
   };
   }
 }

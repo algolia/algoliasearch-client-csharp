@@ -130,7 +130,7 @@ public interface IInsightsClient
   object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile). 
+  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API. 
   /// </summary>
   /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -142,7 +142,7 @@ public interface IInsightsClient
   Task DeleteUserTokenAsync(string userToken, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile).  (Synchronous version)
+  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.  (Synchronous version)
   /// </summary>
   /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -412,7 +412,7 @@ public partial class InsightsClient : IInsightsClient
 
 
   /// <summary>
-  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile). 
+  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API. 
   /// </summary>
   /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -436,7 +436,7 @@ public partial class InsightsClient : IInsightsClient
 
 
   /// <summary>
-  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile).  (Synchronous version)
+  /// Deletes all events related to the specified user token from events metrics and analytics. The deletion is asynchronous, and processed within 48 hours. To delete a personalization user profile, see `Delete a user profile` in the Personalization API.  (Synchronous version)
   /// </summary>
   /// <param name="userToken">User token for which to delete all associated events.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
