@@ -593,4 +593,24 @@ public partial class SearchClient
 
     return responses;
   }
+
+  public bool Exists(string indexName, CancellationToken cancellationToken = default) => AsyncHelper.RunSync(() => IndexExistsAsync(indexName, cancellationToken));
+
+  public async Task<bool> IndexExistsAsync(string indexName, CancellationToken cancellationToken = default)
+  {
+    try
+    {
+      await GetSettingsAsync(indexName, null, cancellationToken);
+    }
+    catch (AlgoliaApiException ex) when (ex.HttpErrorCode == 404)
+    {
+      return await Task.FromResult(false);
+    }
+    catch (Exception ex)
+    {
+      throw ex;
+    }
+
+    return await Task.FromResult(true);
+  }
 }
