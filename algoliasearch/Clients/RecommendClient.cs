@@ -304,7 +304,7 @@ public interface IRecommendClient
 /// </summary>
 public partial class RecommendClient : IRecommendClient
 {
-  private readonly HttpTransport _transport;
+  internal HttpTransport _transport;
   private readonly ILogger<RecommendClient> _logger;
 
   /// <summary>
@@ -361,6 +361,17 @@ public partial class RecommendClient : IRecommendClient
       _logger.LogInformation("Algolia Recommend client is initialized.");
     }
   }
+
+  /// <summary>
+  /// Helper to switch the API key sent with each request
+  /// </summary>
+  /// <param name="apiKey">Your new API Key</param>
+  /// <returns></returns>
+  public void SetClientApiKey(string apiKey)
+  {
+    _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
 
 
   /// <inheritdoc />

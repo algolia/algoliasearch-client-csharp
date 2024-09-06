@@ -1950,7 +1950,7 @@ public partial interface ISearchClient
 /// </summary>
 public partial class SearchClient : ISearchClient
 {
-  private readonly HttpTransport _transport;
+  internal HttpTransport _transport;
   private readonly ILogger<SearchClient> _logger;
 
   /// <summary>
@@ -2007,6 +2007,17 @@ public partial class SearchClient : ISearchClient
       _logger.LogInformation("Algolia Search client is initialized.");
     }
   }
+
+  /// <summary>
+  /// Helper to switch the API key sent with each request
+  /// </summary>
+  /// <param name="apiKey">Your new API Key</param>
+  /// <returns></returns>
+  public void SetClientApiKey(string apiKey)
+  {
+    _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
 
 
   /// <inheritdoc />

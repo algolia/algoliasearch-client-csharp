@@ -324,7 +324,7 @@ public interface IAbtestingClient
 /// </summary>
 public partial class AbtestingClient : IAbtestingClient
 {
-  private readonly HttpTransport _transport;
+  internal HttpTransport _transport;
   private readonly ILogger<AbtestingClient> _logger;
 
   /// <summary>
@@ -381,6 +381,17 @@ public partial class AbtestingClient : IAbtestingClient
       _logger.LogInformation("Algolia Abtesting client is initialized.");
     }
   }
+
+  /// <summary>
+  /// Helper to switch the API key sent with each request
+  /// </summary>
+  /// <param name="apiKey">Your new API Key</param>
+  /// <returns></returns>
+  public void SetClientApiKey(string apiKey)
+  {
+    _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
 
 
   /// <inheritdoc />

@@ -24,7 +24,7 @@ internal class HttpTransport
   private readonly IHttpRequester _httpClient;
   private readonly ISerializer _serializer;
   private readonly RetryStrategy _retryStrategy;
-  private readonly AlgoliaConfig _algoliaConfig;
+  internal AlgoliaConfig _algoliaConfig;
   private string _errorMessage;
   private readonly ILogger<HttpTransport> _logger;
 

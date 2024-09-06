@@ -256,7 +256,7 @@ public interface IPersonalizationClient
 /// </summary>
 public partial class PersonalizationClient : IPersonalizationClient
 {
-  private readonly HttpTransport _transport;
+  internal HttpTransport _transport;
   private readonly ILogger<PersonalizationClient> _logger;
 
   /// <summary>
@@ -313,6 +313,17 @@ public partial class PersonalizationClient : IPersonalizationClient
       _logger.LogInformation("Algolia Personalization client is initialized.");
     }
   }
+
+  /// <summary>
+  /// Helper to switch the API key sent with each request
+  /// </summary>
+  /// <param name="apiKey">Your new API Key</param>
+  /// <returns></returns>
+  public void SetClientApiKey(string apiKey)
+  {
+    _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
 
 
   /// <inheritdoc />

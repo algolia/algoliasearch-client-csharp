@@ -350,7 +350,7 @@ public interface IMonitoringClient
 /// </summary>
 public partial class MonitoringClient : IMonitoringClient
 {
-  private readonly HttpTransport _transport;
+  internal HttpTransport _transport;
   private readonly ILogger<MonitoringClient> _logger;
 
   /// <summary>
@@ -407,6 +407,17 @@ public partial class MonitoringClient : IMonitoringClient
       _logger.LogInformation("Algolia Monitoring client is initialized.");
     }
   }
+
+  /// <summary>
+  /// Helper to switch the API key sent with each request
+  /// </summary>
+  /// <param name="apiKey">Your new API Key</param>
+  /// <returns></returns>
+  public void SetClientApiKey(string apiKey)
+  {
+    _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
 
 
   /// <inheritdoc />

@@ -906,7 +906,7 @@ public interface IAnalyticsClient
 /// </summary>
 public partial class AnalyticsClient : IAnalyticsClient
 {
-  private readonly HttpTransport _transport;
+  internal HttpTransport _transport;
   private readonly ILogger<AnalyticsClient> _logger;
 
   /// <summary>
@@ -963,6 +963,17 @@ public partial class AnalyticsClient : IAnalyticsClient
       _logger.LogInformation("Algolia Analytics client is initialized.");
     }
   }
+
+  /// <summary>
+  /// Helper to switch the API key sent with each request
+  /// </summary>
+  /// <param name="apiKey">Your new API Key</param>
+  /// <returns></returns>
+  public void SetClientApiKey(string apiKey)
+  {
+    _transport._algoliaConfig.SetClientApiKey(apiKey);
+  }
+
 
 
   /// <inheritdoc />
