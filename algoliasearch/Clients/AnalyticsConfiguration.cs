@@ -28,7 +28,7 @@ public sealed class AnalyticsConfig : AlgoliaConfig
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
   /// <param name="region">Targeted region (optional)</param>
-  public AnalyticsConfig(string appId, string apiKey, string region = null) : base(appId, apiKey, "Analytics", "7.2.4")
+  public AnalyticsConfig(string appId, string apiKey, string region = null) : base(appId, apiKey, "Analytics", "7.3.0")
   {
     DefaultHosts = GetDefaultHosts(region);
     Compression = CompressionType.None;

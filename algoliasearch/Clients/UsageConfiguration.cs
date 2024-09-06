@@ -27,7 +27,7 @@ public sealed class UsageConfig : AlgoliaConfig
   /// </summary>
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
-  public UsageConfig(string appId, string apiKey) : base(appId, apiKey, "Usage", "7.2.4")
+  public UsageConfig(string appId, string apiKey) : base(appId, apiKey, "Usage", "7.3.0")
   {
     DefaultHosts = GetDefaultHosts();
     Compression = CompressionType.None;
