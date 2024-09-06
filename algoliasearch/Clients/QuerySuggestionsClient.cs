@@ -24,6 +24,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="configurationWithIndex"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -36,6 +39,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="configurationWithIndex"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -156,6 +162,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -168,6 +177,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -180,6 +192,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Retrieves all Query Suggestions configurations of your Algolia application.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -191,6 +206,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Retrieves all Query Suggestions configurations of your Algolia application. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -202,6 +220,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Retrieves a single Query Suggestions configuration by its index name.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -214,6 +235,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Retrieves a single Query Suggestions configuration by its index name. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -226,6 +250,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Reports the status of a Query Suggestions index.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -238,6 +265,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Reports the status of a Query Suggestions index. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -250,6 +280,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Retrieves the logs for a single Query Suggestions index.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -262,6 +295,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Retrieves the logs for a single Query Suggestions index. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - settings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -274,6 +310,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Updates a QuerySuggestions configuration.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="configuration"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -287,6 +326,9 @@ public interface IQuerySuggestionsClient
   /// <summary>
   /// Updates a QuerySuggestions configuration. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
   /// <param name="indexName">Query Suggestions index name.</param>
   /// <param name="configuration"></param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -365,19 +407,7 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - editSettings
-  /// <param name="configurationWithIndex"></param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of BaseResponse</returns>
+  /// <inheritdoc />
   public async Task<BaseResponse> CreateConfigAsync(ConfigurationWithIndex configurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -392,34 +422,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - editSettings
-  /// <param name="configurationWithIndex"></param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>BaseResponse</returns>
+  /// <inheritdoc />
   public BaseResponse CreateConfig(ConfigurationWithIndex configurationWithIndex, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CreateConfigAsync(configurationWithIndex, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -434,32 +442,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -474,33 +462,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -516,34 +483,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -559,35 +504,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
 
-  /// <summary>
-  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - editSettings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of BaseResponse</returns>
+  /// <inheritdoc />
   public async Task<BaseResponse> DeleteConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -602,35 +524,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the `Delete an index` operation.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - editSettings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>BaseResponse</returns>
+  /// <inheritdoc />
   public BaseResponse DeleteConfig(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => DeleteConfigAsync(indexName, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves all Query Suggestions configurations of your Algolia application.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - settings
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of List{ConfigurationResponse}</returns>
+  /// <inheritdoc />
   public async Task<List<ConfigurationResponse>> GetAllConfigsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
@@ -640,35 +539,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// Retrieves all Query Suggestions configurations of your Algolia application. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - settings
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>List{ConfigurationResponse}</returns>
+  /// <inheritdoc />
   public List<ConfigurationResponse> GetAllConfigs(RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetAllConfigsAsync(options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves a single Query Suggestions configuration by its index name.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - settings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of ConfigurationResponse</returns>
+  /// <inheritdoc />
   public async Task<ConfigurationResponse> GetConfigAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -683,36 +559,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// Retrieves a single Query Suggestions configuration by its index name. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - settings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>ConfigurationResponse</returns>
+  /// <inheritdoc />
   public ConfigurationResponse GetConfig(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetConfigAsync(indexName, options, cancellationToken));
 
 
-  /// <summary>
-  /// Reports the status of a Query Suggestions index.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - settings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of ConfigStatus</returns>
+  /// <inheritdoc />
   public async Task<ConfigStatus> GetConfigStatusAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -727,36 +579,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// Reports the status of a Query Suggestions index. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - settings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>ConfigStatus</returns>
+  /// <inheritdoc />
   public ConfigStatus GetConfigStatus(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetConfigStatusAsync(indexName, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the logs for a single Query Suggestions index.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - settings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of LogFile</returns>
+  /// <inheritdoc />
   public async Task<LogFile> GetLogFileAsync(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -771,37 +599,12 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the logs for a single Query Suggestions index. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - settings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>LogFile</returns>
+  /// <inheritdoc />
   public LogFile GetLogFile(string indexName, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetLogFileAsync(indexName, options, cancellationToken));
 
 
-  /// <summary>
-  /// Updates a QuerySuggestions configuration.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - editSettings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="configuration"></param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of BaseResponse</returns>
+  /// <inheritdoc />
   public async Task<BaseResponse> UpdateConfigAsync(string indexName, Configuration configuration, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -821,22 +624,8 @@ public partial class QuerySuggestionsClient : IQuerySuggestionsClient
   }
 
 
-  /// <summary>
-  /// Updates a QuerySuggestions configuration. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - editSettings
-  /// <param name="indexName">Query Suggestions index name.</param>
-  /// <param name="configuration"></param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>BaseResponse</returns>
+  /// <inheritdoc />
   public BaseResponse UpdateConfig(string indexName, Configuration configuration, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => UpdateConfigAsync(indexName, configuration, options, cancellationToken));
 
 }
-

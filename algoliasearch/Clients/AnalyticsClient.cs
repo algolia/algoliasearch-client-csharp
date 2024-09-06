@@ -132,6 +132,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the add-to-cart rate for all of your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -147,6 +150,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the add-to-cart rate for all of your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -162,6 +168,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search results' positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -177,6 +186,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search results' positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -192,6 +204,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -207,6 +222,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -222,6 +240,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the click-through rate for all of your searches with at least one click event, including a daily breakdown  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -237,6 +258,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the click-through rate for all of your searches with at least one click event, including a daily breakdown  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -252,6 +276,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the conversion rate for all of your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -267,6 +294,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the conversion rate for all of your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -282,6 +312,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -297,6 +330,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -312,6 +348,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -327,6 +366,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -342,6 +384,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the purchase rate for all of your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -357,6 +402,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the purchase rate for all of your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -372,6 +420,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, sent purchase events. By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -387,6 +438,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, sent purchase events. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -402,6 +456,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -417,6 +474,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -432,6 +492,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -449,6 +512,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -466,6 +532,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most popular searches that didn't return any results.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -483,6 +552,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most popular searches that didn't return any results. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -500,6 +572,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the time when the Analytics data for the specified index was last updated.  The Analytics data is updated every 5 minutes. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -512,6 +587,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the time when the Analytics data for the specified index was last updated.  The Analytics data is updated every 5 minutes.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -524,6 +602,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the countries with the most searches to your index.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -541,6 +622,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the countries with the most searches to your index. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -558,6 +642,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most frequently used filter attributes.  These are attributes of your records that you included in the `attributesForFaceting` setting. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -576,6 +663,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most frequently used filter attributes.  These are attributes of your records that you included in the `attributesForFaceting` setting.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -594,6 +684,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most frequent filter (facet) values for a filter attribute.  These are attributes of your records that you included in the `attributesForFaceting` setting. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="attribute">Attribute name.</param>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
@@ -613,6 +706,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most frequent filter (facet) values for a filter attribute.  These are attributes of your records that you included in the `attributesForFaceting` setting.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="attribute">Attribute name.</param>
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
@@ -632,6 +728,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -650,6 +749,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -668,6 +770,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the object IDs of the most frequent search results.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
@@ -688,6 +793,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the object IDs of the most frequent search results. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="search">Search query. (optional)</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
@@ -708,6 +816,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the most popular search terms.
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
@@ -729,6 +840,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Returns the most popular search terms. (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
   /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
@@ -750,6 +864,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since this endpoint returns the number of unique users, the sum of the daily values might be different from the total number.  By default, Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. By default, the analyzed period includes the last eight days including the current day. 
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -765,6 +882,9 @@ public interface IAnalyticsClient
   /// <summary>
   /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since this endpoint returns the number of unique users, the sum of the daily values might be different from the total number.  By default, Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
   /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
   /// <param name="index">Index name.</param>
   /// <param name="startDate">Start date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
   /// <param name="endDate">End date of the period to analyze, in `YYYY-MM-DD` format. (optional)</param>
@@ -845,17 +965,7 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -870,32 +980,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -910,33 +1000,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -952,34 +1021,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -995,38 +1042,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the add-to-cart rate for all of your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetAddToCartRateResponse</returns>
+  /// <inheritdoc />
   public async Task<GetAddToCartRateResponse> GetAddToCartRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1044,42 +1065,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the add-to-cart rate for all of your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetAddToCartRateResponse</returns>
+  /// <inheritdoc />
   public GetAddToCartRateResponse GetAddToCartRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetAddToCartRateAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search results' positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetAverageClickPositionResponse</returns>
+  /// <inheritdoc />
   public async Task<GetAverageClickPositionResponse> GetAverageClickPositionAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1097,42 +1088,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search results' positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetAverageClickPositionResponse</returns>
+  /// <inheritdoc />
   public GetAverageClickPositionResponse GetAverageClickPosition(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetAverageClickPositionAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetClickPositionsResponse</returns>
+  /// <inheritdoc />
   public async Task<GetClickPositionsResponse> GetClickPositionsAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1150,42 +1111,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetClickPositionsResponse</returns>
+  /// <inheritdoc />
   public GetClickPositionsResponse GetClickPositions(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetClickPositionsAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the click-through rate for all of your searches with at least one click event, including a daily breakdown  By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetClickThroughRateResponse</returns>
+  /// <inheritdoc />
   public async Task<GetClickThroughRateResponse> GetClickThroughRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1203,42 +1134,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the click-through rate for all of your searches with at least one click event, including a daily breakdown  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetClickThroughRateResponse</returns>
+  /// <inheritdoc />
   public GetClickThroughRateResponse GetClickThroughRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetClickThroughRateAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the conversion rate for all of your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetConversionRateResponse</returns>
+  /// <inheritdoc />
   public async Task<GetConversionRateResponse> GetConversionRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1256,42 +1157,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the conversion rate for all of your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetConversionRateResponse</returns>
+  /// <inheritdoc />
   public GetConversionRateResponse GetConversionRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetConversionRateAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetNoClickRateResponse</returns>
+  /// <inheritdoc />
   public async Task<GetNoClickRateResponse> GetNoClickRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1309,42 +1180,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetNoClickRateResponse</returns>
+  /// <inheritdoc />
   public GetNoClickRateResponse GetNoClickRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetNoClickRateAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetNoResultsRateResponse</returns>
+  /// <inheritdoc />
   public async Task<GetNoResultsRateResponse> GetNoResultsRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1362,42 +1203,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetNoResultsRateResponse</returns>
+  /// <inheritdoc />
   public GetNoResultsRateResponse GetNoResultsRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetNoResultsRateAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the purchase rate for all of your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetPurchaseRateResponse</returns>
+  /// <inheritdoc />
   public async Task<GetPurchaseRateResponse> GetPurchaseRateAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1415,42 +1226,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the purchase rate for all of your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetPurchaseRateResponse</returns>
+  /// <inheritdoc />
   public GetPurchaseRateResponse GetPurchaseRate(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetPurchaseRateAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, sent purchase events. By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetRevenue</returns>
+  /// <inheritdoc />
   public async Task<GetRevenue> GetRevenueAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1468,42 +1249,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, sent purchase events. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetRevenue</returns>
+  /// <inheritdoc />
   public GetRevenue GetRevenue(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetRevenueAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetSearchesCountResponse</returns>
+  /// <inheritdoc />
   public async Task<GetSearchesCountResponse> GetSearchesCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1521,44 +1272,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetSearchesCountResponse</returns>
+  /// <inheritdoc />
   public GetSearchesCountResponse GetSearchesCount(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetSearchesCountAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetSearchesNoClicksResponse</returns>
+  /// <inheritdoc />
   public async Task<GetSearchesNoClicksResponse> GetSearchesNoClicksAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1578,46 +1297,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetSearchesNoClicksResponse</returns>
+  /// <inheritdoc />
   public GetSearchesNoClicksResponse GetSearchesNoClicks(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetSearchesNoClicksAsync(index, startDate, endDate, limit, offset, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the most popular searches that didn't return any results.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetSearchesNoResultsResponse</returns>
+  /// <inheritdoc />
   public async Task<GetSearchesNoResultsResponse> GetSearchesNoResultsAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1637,41 +1322,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the most popular searches that didn't return any results. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetSearchesNoResultsResponse</returns>
+  /// <inheritdoc />
   public GetSearchesNoResultsResponse GetSearchesNoResults(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetSearchesNoResultsAsync(index, startDate, endDate, limit, offset, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the time when the Analytics data for the specified index was last updated.  The Analytics data is updated every 5 minutes. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetStatusResponse</returns>
+  /// <inheritdoc />
   public async Task<GetStatusResponse> GetStatusAsync(string index, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1686,41 +1342,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the time when the Analytics data for the specified index was last updated.  The Analytics data is updated every 5 minutes.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetStatusResponse</returns>
+  /// <inheritdoc />
   public GetStatusResponse GetStatus(string index, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetStatusAsync(index, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the countries with the most searches to your index.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetTopCountriesResponse</returns>
+  /// <inheritdoc />
   public async Task<GetTopCountriesResponse> GetTopCountriesAsync(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1740,47 +1367,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the countries with the most searches to your index. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetTopCountriesResponse</returns>
+  /// <inheritdoc />
   public GetTopCountriesResponse GetTopCountries(string index, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetTopCountriesAsync(index, startDate, endDate, limit, offset, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the most frequently used filter attributes.  These are attributes of your records that you included in the `attributesForFaceting` setting. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetTopFilterAttributesResponse</returns>
+  /// <inheritdoc />
   public async Task<GetTopFilterAttributesResponse> GetTopFilterAttributesAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1801,49 +1393,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the most frequently used filter attributes.  These are attributes of your records that you included in the `attributesForFaceting` setting.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetTopFilterAttributesResponse</returns>
+  /// <inheritdoc />
   public GetTopFilterAttributesResponse GetTopFilterAttributes(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetTopFilterAttributesAsync(index, search, startDate, endDate, limit, offset, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the most frequent filter (facet) values for a filter attribute.  These are attributes of your records that you included in the `attributesForFaceting` setting. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="attribute">Attribute name.</param>
-  /// <param name="index">Index name.</param>
-  /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetTopFilterForAttributeResponse</returns>
+  /// <inheritdoc />
   public async Task<GetTopFilterForAttributeResponse> GetTopFilterForAttributeAsync(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1869,49 +1424,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the most frequent filter (facet) values for a filter attribute.  These are attributes of your records that you included in the `attributesForFaceting` setting.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="attribute">Attribute name.</param>
-  /// <param name="index">Index name.</param>
-  /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetTopFilterForAttributeResponse</returns>
+  /// <inheritdoc />
   public GetTopFilterForAttributeResponse GetTopFilterForAttribute(string attribute, string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetTopFilterForAttributeAsync(attribute, index, search, startDate, endDate, limit, offset, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetTopFiltersNoResultsResponse</returns>
+  /// <inheritdoc />
   public async Task<GetTopFiltersNoResultsResponse> GetTopFiltersNoResultsAsync(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1932,50 +1450,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="search">Search query. (optional)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetTopFiltersNoResultsResponse</returns>
+  /// <inheritdoc />
   public GetTopFiltersNoResultsResponse GetTopFiltersNoResults(string index, string search = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetTopFiltersNoResultsAsync(index, search, startDate, endDate, limit, offset, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the object IDs of the most frequent search results.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="search">Search query. (optional)</param>
-  /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
-  /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetTopHitsResponse</returns>
+  /// <inheritdoc />
   public async Task<GetTopHitsResponse> GetTopHitsAsync(string index, string search = default, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -1998,53 +1478,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the object IDs of the most frequent search results. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="search">Search query. (optional)</param>
-  /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
-  /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetTopHitsResponse</returns>
+  /// <inheritdoc />
   public GetTopHitsResponse GetTopHits(string index, string search = default, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetTopHitsAsync(index, search, clickAnalytics, revenueAnalytics, startDate, endDate, limit, offset, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Returns the most popular search terms.
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
-  /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="orderBy">Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available.  (optional)</param>
-  /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetTopSearchesResponse</returns>
+  /// <inheritdoc />
   public async Task<GetTopSearchesResponse> GetTopSearchesAsync(string index, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -2068,48 +1507,12 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Returns the most popular search terms. (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="clickAnalytics">Whether to include metrics related to click and conversion events in the response. (optional, default to false)</param>
-  /// <param name="revenueAnalytics">Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (optional, default to false)</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="orderBy">Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available.  (optional)</param>
-  /// <param name="direction">Sorting direction of the results: ascending or descending.  (optional)</param>
-  /// <param name="limit">Number of items to return. (optional, default to 10)</param>
-  /// <param name="offset">Position of the first item to return. (optional, default to 0)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetTopSearchesResponse</returns>
+  /// <inheritdoc />
   public GetTopSearchesResponse GetTopSearches(string index, bool? clickAnalytics = default, bool? revenueAnalytics = default, string startDate = default, string endDate = default, OrderBy? orderBy = default, Direction? direction = default, int? limit = default, int? offset = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetTopSearchesAsync(index, clickAnalytics, revenueAnalytics, startDate, endDate, orderBy, direction, limit, offset, tags, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since this endpoint returns the number of unique users, the sum of the daily values might be different from the total number.  By default, Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. By default, the analyzed period includes the last eight days including the current day. 
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of GetUsersCountResponse</returns>
+  /// <inheritdoc />
   public async Task<GetUsersCountResponse> GetUsersCountAsync(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -2127,24 +1530,8 @@ public partial class AnalyticsClient : IAnalyticsClient
   }
 
 
-  /// <summary>
-  /// Retrieves the number of unique users within a time range, including a daily breakdown.  Since this endpoint returns the number of unique users, the sum of the daily values might be different from the total number.  By default, Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. By default, the analyzed period includes the last eight days including the current day.  (Synchronous version)
-  /// </summary>
-  ///
-  /// Required API Key ACLs:
-  ///   - analytics
-  /// <param name="index">Index name.</param>
-  /// <param name="startDate">Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="endDate">End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)</param>
-  /// <param name="tags">Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).  (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>GetUsersCountResponse</returns>
+  /// <inheritdoc />
   public GetUsersCountResponse GetUsersCount(string index, string startDate = default, string endDate = default, string tags = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetUsersCountAsync(index, startDate, endDate, tags, options, cancellationToken));
 
 }
-

@@ -409,17 +409,7 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -434,32 +424,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomDeleteAsync(path, parameters, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -474,33 +444,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomGetAsync(path, parameters, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -516,34 +465,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomPostAsync(path, parameters, body, options, cancellationToken));
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of object</returns>
+  /// <inheritdoc />
   public async Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -559,32 +486,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
-  /// </summary>
-  /// <param name="path">Path of the endpoint, anything after \&quot;/1\&quot; must be specified.</param>
-  /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
-  /// <param name="body">Parameters to send with the custom request. (optional)</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>object</returns>
+  /// <inheritdoc />
   public object CustomPut(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => CustomPutAsync(path, parameters, body, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves known incidents for the selected clusters.
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of IncidentsResponse</returns>
+  /// <inheritdoc />
   public async Task<IncidentsResponse> GetClusterIncidentsAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -599,30 +506,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Retrieves known incidents for the selected clusters. (Synchronous version)
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>IncidentsResponse</returns>
+  /// <inheritdoc />
   public IncidentsResponse GetClusterIncidents(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetClusterIncidentsAsync(clusters, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the status of selected clusters.
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of StatusResponse</returns>
+  /// <inheritdoc />
   public async Task<StatusResponse> GetClusterStatusAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -637,29 +526,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Retrieves the status of selected clusters. (Synchronous version)
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>StatusResponse</returns>
+  /// <inheritdoc />
   public StatusResponse GetClusterStatus(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetClusterStatusAsync(clusters, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves known incidents for all clusters.
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of IncidentsResponse</returns>
+  /// <inheritdoc />
   public async Task<IncidentsResponse> GetIncidentsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
@@ -669,29 +541,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Retrieves known incidents for all clusters. (Synchronous version)
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>IncidentsResponse</returns>
+  /// <inheritdoc />
   public IncidentsResponse GetIncidents(RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetIncidentsAsync(options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves average times for indexing operations for selected clusters.
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of IndexingTimeResponse</returns>
+  /// <inheritdoc />
   public async Task<IndexingTimeResponse> GetIndexingTimeAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -706,30 +561,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Retrieves average times for indexing operations for selected clusters. (Synchronous version)
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>IndexingTimeResponse</returns>
+  /// <inheritdoc />
   public IndexingTimeResponse GetIndexingTime(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetIndexingTimeAsync(clusters, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the average latency for search requests for selected clusters.
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of LatencyResponse</returns>
+  /// <inheritdoc />
   public async Task<LatencyResponse> GetLatencyAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -744,31 +581,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Retrieves the average latency for search requests for selected clusters. (Synchronous version)
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>LatencyResponse</returns>
+  /// <inheritdoc />
   public LatencyResponse GetLatency(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetLatencyAsync(clusters, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key). 
-  /// </summary>
-  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use &#x60;*&#x60;. </param>
-  /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of InfrastructureResponse</returns>
+  /// <inheritdoc />
   public async Task<InfrastructureResponse> GetMetricsAsync(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -782,31 +600,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).  (Synchronous version)
-  /// </summary>
-  /// <param name="metric">Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use &#x60;*&#x60;. </param>
-  /// <param name="period">Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. </param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>InfrastructureResponse</returns>
+  /// <inheritdoc />
   public InfrastructureResponse GetMetrics(Metric metric, Period period, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetMetricsAsync(metric, period, options, cancellationToken));
 
 
-  /// <summary>
-  /// Test whether clusters are reachable or not.
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of Dictionary{string, Dictionary{string, bool}}</returns>
+  /// <inheritdoc />
   public async Task<Dictionary<string, Dictionary<string, bool>>> GetReachabilityAsync(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -821,29 +620,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Test whether clusters are reachable or not. (Synchronous version)
-  /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Dictionary{string, Dictionary{string, bool}}</returns>
+  /// <inheritdoc />
   public Dictionary<string, Dictionary<string, bool>> GetReachability(string clusters, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetReachabilityAsync(clusters, options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters. 
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of InventoryResponse</returns>
+  /// <inheritdoc />
   public async Task<InventoryResponse> GetServersAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
@@ -853,28 +635,12 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.  (Synchronous version)
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>InventoryResponse</returns>
+  /// <inheritdoc />
   public InventoryResponse GetServers(RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetServersAsync(options, cancellationToken));
 
 
-  /// <summary>
-  /// Retrieves the status of all Algolia clusters and instances.
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of StatusResponse</returns>
+  /// <inheritdoc />
   public async Task<StatusResponse> GetStatusAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
@@ -884,17 +650,8 @@ public partial class MonitoringClient : IMonitoringClient
   }
 
 
-  /// <summary>
-  /// Retrieves the status of all Algolia clusters and instances. (Synchronous version)
-  /// </summary>
-  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
-  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
-  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>StatusResponse</returns>
+  /// <inheritdoc />
   public StatusResponse GetStatus(RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetStatusAsync(options, cancellationToken));
 
 }
-

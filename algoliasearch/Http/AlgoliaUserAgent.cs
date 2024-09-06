@@ -19,7 +19,8 @@ public class AlgoliaUserAgent
   /// <summary>
   /// Create a new user-agent header
   /// </summary>
-  /// <param name="clientName"></param>
+  /// <param name="clientName">The client name</param>
+  /// <param name="clientVersion">The client version</param>
   public AlgoliaUserAgent(string clientName, string clientVersion)
   {
     AddSegment("Algolia for Csharp", $"({clientVersion})");
