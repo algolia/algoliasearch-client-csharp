@@ -209,6 +209,13 @@ public partial class RecommendationsResults
   public string QueryID { get; set; }
 
   /// <summary>
+  /// Whether automatic events collection is enabled for the application.
+  /// </summary>
+  /// <value>Whether automatic events collection is enabled for the application.</value>
+  [JsonPropertyName("_automaticInsights")]
+  public bool? AutomaticInsights { get; set; }
+
+  /// <summary>
   /// Page of search results to retrieve.
   /// </summary>
   /// <value>Page of search results to retrieve.</value>
@@ -274,6 +281,7 @@ public partial class RecommendationsResults
     sb.Append("  ServerUsed: ").Append(ServerUsed).Append("\n");
     sb.Append("  UserData: ").Append(UserData).Append("\n");
     sb.Append("  QueryID: ").Append(QueryID).Append("\n");
+    sb.Append("  AutomaticInsights: ").Append(AutomaticInsights).Append("\n");
     sb.Append("  Page: ").Append(Page).Append("\n");
     sb.Append("  NbHits: ").Append(NbHits).Append("\n");
     sb.Append("  NbPages: ").Append(NbPages).Append("\n");
@@ -329,6 +337,7 @@ public partial class RecommendationsResults
         (ServerUsed == input.ServerUsed || (ServerUsed != null && ServerUsed.Equals(input.ServerUsed))) &&
         (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData))) &&
         (QueryID == input.QueryID || (QueryID != null && QueryID.Equals(input.QueryID))) &&
+        (AutomaticInsights == input.AutomaticInsights || AutomaticInsights.Equals(input.AutomaticInsights)) &&
         (Page == input.Page || Page.Equals(input.Page)) &&
         (NbHits == input.NbHits || NbHits.Equals(input.NbHits)) &&
         (NbPages == input.NbPages || NbPages.Equals(input.NbPages)) &&
@@ -417,6 +426,7 @@ public partial class RecommendationsResults
       {
         hashCode = (hashCode * 59) + QueryID.GetHashCode();
       }
+      hashCode = (hashCode * 59) + AutomaticInsights.GetHashCode();
       hashCode = (hashCode * 59) + Page.GetHashCode();
       hashCode = (hashCode * 59) + NbHits.GetHashCode();
       hashCode = (hashCode * 59) + NbPages.GetHashCode();
