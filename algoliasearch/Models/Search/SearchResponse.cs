@@ -28,20 +28,12 @@ public partial class SearchResponse<T>
   /// Initializes a new instance of the SearchResponse class.
   /// </summary>
   /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
-  /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
-  /// <param name="nbHits">Number of results (hits). (required).</param>
-  /// <param name="nbPages">Number of pages of results. (required).</param>
-  /// <param name="hitsPerPage">Number of hits per page. (required) (default to 20).</param>
   /// <param name="hits">Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  (required).</param>
   /// <param name="query">Search query. (required) (default to &quot;&quot;).</param>
   /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
-  public SearchResponse(int processingTimeMS, int page, int nbHits, int nbPages, int hitsPerPage, List<T> hits, string query, string varParams)
+  public SearchResponse(int processingTimeMS, List<T> hits, string query, string varParams)
   {
     ProcessingTimeMS = processingTimeMS;
-    Page = page;
-    NbHits = nbHits;
-    NbPages = nbPages;
-    HitsPerPage = hitsPerPage;
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
     Query = query ?? throw new ArgumentNullException(nameof(query));
     Params = varParams ?? throw new ArgumentNullException(nameof(varParams));
@@ -228,28 +220,28 @@ public partial class SearchResponse<T>
   /// </summary>
   /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
-  public int Page { get; set; }
+  public int? Page { get; set; }
 
   /// <summary>
   /// Number of results (hits).
   /// </summary>
   /// <value>Number of results (hits).</value>
   [JsonPropertyName("nbHits")]
-  public int NbHits { get; set; }
+  public int? NbHits { get; set; }
 
   /// <summary>
   /// Number of pages of results.
   /// </summary>
   /// <value>Number of pages of results.</value>
   [JsonPropertyName("nbPages")]
-  public int NbPages { get; set; }
+  public int? NbPages { get; set; }
 
   /// <summary>
   /// Number of hits per page.
   /// </summary>
   /// <value>Number of hits per page.</value>
   [JsonPropertyName("hitsPerPage")]
-  public int HitsPerPage { get; set; }
+  public int? HitsPerPage { get; set; }
 
   /// <summary>
   /// Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting. 

@@ -42,20 +42,10 @@ public partial class HighlightResult : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the HighlightResult class
-  /// with a Dictionary{string, HighlightResultOption}
+  /// with a List{HighlightResult}
   /// </summary>
-  /// <param name="actualInstance">An instance of Dictionary&lt;string, HighlightResultOption&gt;.</param>
-  public HighlightResult(Dictionary<string, HighlightResultOption> actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the HighlightResult class
-  /// with a List{HighlightResultOption}
-  /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;HighlightResultOption&gt;.</param>
-  public HighlightResult(List<HighlightResultOption> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;HighlightResult&gt;.</param>
+  public HighlightResult(List<HighlightResult> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -87,23 +77,13 @@ public partial class HighlightResult : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `Dictionary{string, HighlightResultOption}`. If the actual instance is not `Dictionary{string, HighlightResultOption}`,
+  /// Get the actual instance of `List{HighlightResult}`. If the actual instance is not `List{HighlightResult}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of Dictionary&lt;string, HighlightResultOption&gt;</returns>
-  public Dictionary<string, HighlightResultOption> AsDictionaryHighlightResultOption()
+  /// <returns>An instance of List&lt;HighlightResult&gt;</returns>
+  public List<HighlightResult> AsListHighlightResult()
   {
-    return (Dictionary<string, HighlightResultOption>)ActualInstance;
-  }
-
-  /// <summary>
-  /// Get the actual instance of `List{HighlightResultOption}`. If the actual instance is not `List{HighlightResultOption}`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of List&lt;HighlightResultOption&gt;</returns>
-  public List<HighlightResultOption> AsListHighlightResultOption()
-  {
-    return (List<HighlightResultOption>)ActualInstance;
+    return (List<HighlightResult>)ActualInstance;
   }
 
 
@@ -126,21 +106,12 @@ public partial class HighlightResult : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `Dictionary{string, HighlightResultOption}` type.
+  /// Check if the actual instance is of `List{HighlightResult}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsDictionaryHighlightResultOption()
+  public bool IsListHighlightResult()
   {
-    return ActualInstance.GetType() == typeof(Dictionary<string, HighlightResultOption>);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `List{HighlightResultOption}` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsListHighlightResultOption()
-  {
-    return ActualInstance.GetType() == typeof(List<HighlightResultOption>);
+    return ActualInstance.GetType() == typeof(List<HighlightResult>);
   }
 
   /// <summary>
@@ -251,28 +222,16 @@ public class HighlightResultJsonConverter : JsonConverter<HighlightResult>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into Dictionary<string, HighlightResult>: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new HighlightResult(jsonDocument.Deserialize<Dictionary<string, HighlightResultOption>>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into Dictionary<string, HighlightResultOption>: {exception}");
-      }
-    }
     if (root.ValueKind == JsonValueKind.Array)
     {
       try
       {
-        return new HighlightResult(jsonDocument.Deserialize<List<HighlightResultOption>>(JsonConfig.Options));
+        return new HighlightResult(jsonDocument.Deserialize<List<HighlightResult>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<HighlightResultOption>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<HighlightResult>: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");

@@ -25,18 +25,10 @@ public partial class RecommendationsResults
   /// Initializes a new instance of the RecommendationsResults class.
   /// </summary>
   /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
-  /// <param name="page">Page of search results to retrieve. (required) (default to 0).</param>
-  /// <param name="nbHits">Number of results (hits). (required).</param>
-  /// <param name="nbPages">Number of pages of results. (required).</param>
-  /// <param name="hitsPerPage">Number of hits per page. (required) (default to 20).</param>
   /// <param name="hits">hits (required).</param>
-  public RecommendationsResults(int processingTimeMS, int page, int nbHits, int nbPages, int hitsPerPage, List<RecommendationsHit> hits)
+  public RecommendationsResults(int processingTimeMS, List<RecommendationsHit> hits)
   {
     ProcessingTimeMS = processingTimeMS;
-    Page = page;
-    NbHits = nbHits;
-    NbPages = nbPages;
-    HitsPerPage = hitsPerPage;
     Hits = hits ?? throw new ArgumentNullException(nameof(hits));
   }
 
@@ -220,28 +212,28 @@ public partial class RecommendationsResults
   /// </summary>
   /// <value>Page of search results to retrieve.</value>
   [JsonPropertyName("page")]
-  public int Page { get; set; }
+  public int? Page { get; set; }
 
   /// <summary>
   /// Number of results (hits).
   /// </summary>
   /// <value>Number of results (hits).</value>
   [JsonPropertyName("nbHits")]
-  public int NbHits { get; set; }
+  public int? NbHits { get; set; }
 
   /// <summary>
   /// Number of pages of results.
   /// </summary>
   /// <value>Number of pages of results.</value>
   [JsonPropertyName("nbPages")]
-  public int NbPages { get; set; }
+  public int? NbPages { get; set; }
 
   /// <summary>
   /// Number of hits per page.
   /// </summary>
   /// <value>Number of hits per page.</value>
   [JsonPropertyName("hitsPerPage")]
-  public int HitsPerPage { get; set; }
+  public int? HitsPerPage { get; set; }
 
   /// <summary>
   /// Gets or Sets Hits

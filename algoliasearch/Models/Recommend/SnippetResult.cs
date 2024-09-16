@@ -42,20 +42,10 @@ public partial class SnippetResult : AbstractSchema
 
   /// <summary>
   /// Initializes a new instance of the SnippetResult class
-  /// with a Dictionary{string, SnippetResultOption}
+  /// with a List{SnippetResult}
   /// </summary>
-  /// <param name="actualInstance">An instance of Dictionary&lt;string, SnippetResultOption&gt;.</param>
-  public SnippetResult(Dictionary<string, SnippetResultOption> actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
-  /// <summary>
-  /// Initializes a new instance of the SnippetResult class
-  /// with a List{SnippetResultOption}
-  /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;SnippetResultOption&gt;.</param>
-  public SnippetResult(List<SnippetResultOption> actualInstance)
+  /// <param name="actualInstance">An instance of List&lt;SnippetResult&gt;.</param>
+  public SnippetResult(List<SnippetResult> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -87,23 +77,13 @@ public partial class SnippetResult : AbstractSchema
   }
 
   /// <summary>
-  /// Get the actual instance of `Dictionary{string, SnippetResultOption}`. If the actual instance is not `Dictionary{string, SnippetResultOption}`,
+  /// Get the actual instance of `List{SnippetResult}`. If the actual instance is not `List{SnippetResult}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of Dictionary&lt;string, SnippetResultOption&gt;</returns>
-  public Dictionary<string, SnippetResultOption> AsDictionarySnippetResultOption()
+  /// <returns>An instance of List&lt;SnippetResult&gt;</returns>
+  public List<SnippetResult> AsListSnippetResult()
   {
-    return (Dictionary<string, SnippetResultOption>)ActualInstance;
-  }
-
-  /// <summary>
-  /// Get the actual instance of `List{SnippetResultOption}`. If the actual instance is not `List{SnippetResultOption}`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of List&lt;SnippetResultOption&gt;</returns>
-  public List<SnippetResultOption> AsListSnippetResultOption()
-  {
-    return (List<SnippetResultOption>)ActualInstance;
+    return (List<SnippetResult>)ActualInstance;
   }
 
 
@@ -126,21 +106,12 @@ public partial class SnippetResult : AbstractSchema
   }
 
   /// <summary>
-  /// Check if the actual instance is of `Dictionary{string, SnippetResultOption}` type.
+  /// Check if the actual instance is of `List{SnippetResult}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsDictionarySnippetResultOption()
+  public bool IsListSnippetResult()
   {
-    return ActualInstance.GetType() == typeof(Dictionary<string, SnippetResultOption>);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `List{SnippetResultOption}` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsListSnippetResultOption()
-  {
-    return ActualInstance.GetType() == typeof(List<SnippetResultOption>);
+    return ActualInstance.GetType() == typeof(List<SnippetResult>);
   }
 
   /// <summary>
@@ -251,28 +222,16 @@ public class SnippetResultJsonConverter : JsonConverter<SnippetResult>
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into Dictionary<string, SnippetResult>: {exception}");
       }
     }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new SnippetResult(jsonDocument.Deserialize<Dictionary<string, SnippetResultOption>>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into Dictionary<string, SnippetResultOption>: {exception}");
-      }
-    }
     if (root.ValueKind == JsonValueKind.Array)
     {
       try
       {
-        return new SnippetResult(jsonDocument.Deserialize<List<SnippetResultOption>>(JsonConfig.Options));
+        return new SnippetResult(jsonDocument.Deserialize<List<SnippetResult>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<SnippetResultOption>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<SnippetResult>: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");
