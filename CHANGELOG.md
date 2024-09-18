@@ -1,3 +1,7 @@
+## [7.4.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.3.2...7.4.0)
+
+- [e74af8d71](https://github.com/algolia/api-clients-automation/commit/e74af8d71) fix(csharp): remove global enum converter ([#3765](https://github.com/algolia/api-clients-automation/pull/3765)) by [@morganleroi](https://github.com/morganleroi/)
+
 ## [7.3.2](https://github.com/algolia/algoliasearch-client-csharp/compare/7.3.1...7.3.2)
 
 - [638058eae](https://github.com/algolia/api-clients-automation/commit/638058eae) fix(specs): update search api specs [skip-bc] ([#3760](https://github.com/algolia/api-clients-automation/pull/3760)) by [@Fluf22](https://github.com/Fluf22/)
