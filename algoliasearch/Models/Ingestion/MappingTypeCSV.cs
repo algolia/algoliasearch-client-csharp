@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// <summary>
 /// Defines MappingTypeCSV
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<MappingTypeCSV>))]
 public enum MappingTypeCSV
 {
   /// <summary>

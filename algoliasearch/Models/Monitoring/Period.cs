@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Monitoring;
 /// <summary>
 /// Defines Period
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Period>))]
 public enum Period
 {
   /// <summary>

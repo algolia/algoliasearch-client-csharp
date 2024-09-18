@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Actions to perform.
 /// </summary>
 /// <value>Actions to perform.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DictionaryAction>))]
 public enum DictionaryAction
 {
   /// <summary>

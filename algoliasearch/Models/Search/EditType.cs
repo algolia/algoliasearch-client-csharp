@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Type of edit.
 /// </summary>
 /// <value>Type of edit.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<EditType>))]
 public enum EditType
 {
   /// <summary>

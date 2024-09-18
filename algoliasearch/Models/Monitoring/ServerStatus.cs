@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Monitoring;
 /// <summary>
 /// Defines ServerStatus
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<ServerStatus>))]
 public enum ServerStatus
 {
   /// <summary>

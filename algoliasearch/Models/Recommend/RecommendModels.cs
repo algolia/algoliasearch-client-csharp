@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Recommend;
 /// <summary>
 /// Defines recommendModels
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<RecommendModels>))]
 public enum RecommendModels
 {
   /// <summary>

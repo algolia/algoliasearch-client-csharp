@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Task is run manually, with the `/run` endpoint.
 /// </summary>
 /// <value>Task is run manually, with the `/run` endpoint.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<OnDemandTriggerType>))]
 public enum OnDemandTriggerType
 {
   /// <summary>

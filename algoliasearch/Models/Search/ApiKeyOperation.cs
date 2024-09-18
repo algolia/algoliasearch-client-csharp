@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Search;
 /// <summary>
 /// Defines apiKeyOperation
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<ApiKeyOperation>))]
 public enum ApiKeyOperation
 {
   /// <summary>

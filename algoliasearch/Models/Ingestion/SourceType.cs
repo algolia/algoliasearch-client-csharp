@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// <summary>
 /// Defines SourceType
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SourceType>))]
 public enum SourceType
 {
   /// <summary>

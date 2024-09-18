@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// The strategy to use to fetch the data.
 /// </summary>
 /// <value>The strategy to use to fetch the data.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DockerStreamsSyncMode>))]
 public enum DockerStreamsSyncMode
 {
   /// <summary>

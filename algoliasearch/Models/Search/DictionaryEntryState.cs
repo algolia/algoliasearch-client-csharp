@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Whether a dictionary entry is active.
 /// </summary>
 /// <value>Whether a dictionary entry is active.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DictionaryEntryState>))]
 public enum DictionaryEntryState
 {
   /// <summary>

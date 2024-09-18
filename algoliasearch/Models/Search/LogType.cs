@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Search;
 /// <summary>
 /// Defines logType
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<LogType>))]
 public enum LogType
 {
   /// <summary>

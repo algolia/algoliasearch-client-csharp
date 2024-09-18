@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Record type for ecommerce sources.
 /// </summary>
 /// <value>Record type for ecommerce sources.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<RecordType>))]
 public enum RecordType
 {
   /// <summary>

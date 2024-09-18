@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Analytics;
 /// Character that characterizes how the filter is applied.  For example, for a facet filter `facet:value`, `:` is the operator. For a numeric filter `count>50`, `>` is the operator. 
 /// </summary>
 /// <value>Character that characterizes how the filter is applied.  For example, for a facet filter `facet:value`, `:` is the operator. For a numeric filter `count>50`, `>` is the operator. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Operator>))]
 public enum Operator
 {
   /// <summary>

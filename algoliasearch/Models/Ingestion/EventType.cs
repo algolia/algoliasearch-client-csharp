@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// <summary>
 /// Defines EventType
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<EventType>))]
 public enum EventType
 {
   /// <summary>

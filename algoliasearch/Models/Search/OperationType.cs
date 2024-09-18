@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Operation to perform on the index.
 /// </summary>
 /// <value>Operation to perform on the index.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<OperationType>))]
 public enum OperationType
 {
   /// <summary>

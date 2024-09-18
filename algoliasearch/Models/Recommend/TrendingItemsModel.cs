@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Trending items model.  Trending items are determined from the number of conversion events collected on them. 
 /// </summary>
 /// <value>Trending items model.  Trending items are determined from the number of conversion events collected on them. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<TrendingItemsModel>))]
 public enum TrendingItemsModel
 {
   /// <summary>

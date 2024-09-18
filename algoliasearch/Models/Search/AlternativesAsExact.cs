@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Search;
 /// <summary>
 /// Defines alternativesAsExact
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<AlternativesAsExact>))]
 public enum AlternativesAsExact
 {
   /// <summary>

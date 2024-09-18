@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Task run status.
 /// </summary>
 /// <value>Task run status.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<RunStatus>))]
 public enum RunStatus
 {
   /// <summary>

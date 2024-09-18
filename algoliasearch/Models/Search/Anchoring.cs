@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Which part of the search query the pattern should match:  - `startsWith`. The pattern must match the begginning of the query. - `endsWith`. The pattern must match the end of the query. - `is`. The pattern must match the query exactly. - `contains`. The pattern must match anywhere in the query.  Empty queries are only allowed as pattern with `anchoring: is`. 
 /// </summary>
 /// <value>Which part of the search query the pattern should match:  - `startsWith`. The pattern must match the begginning of the query. - `endsWith`. The pattern must match the end of the query. - `is`. The pattern must match the query exactly. - `contains`. The pattern must match anywhere in the query.  Empty queries are only allowed as pattern with `anchoring: is`. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Anchoring>))]
 public enum Anchoring
 {
   /// <summary>

@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// ISO code for a supported language.
 /// </summary>
 /// <value>ISO code for a supported language.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SupportedLanguage>))]
 public enum SupportedLanguage
 {
   /// <summary>

@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Monitoring;
 /// Region where the cluster is located.
 /// </summary>
 /// <value>Region where the cluster is located.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Region>))]
 public enum Region
 {
   /// <summary>

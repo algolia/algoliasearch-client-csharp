@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Type of indexing operation.
 /// </summary>
 /// <value>Type of indexing operation.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Action>))]
 public enum Action
 {
   /// <summary>

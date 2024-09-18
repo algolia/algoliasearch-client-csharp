@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Personalization;
 /// Event type.
 /// </summary>
 /// <value>Event type.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<EventType>))]
 public enum EventType
 {
   /// <summary>

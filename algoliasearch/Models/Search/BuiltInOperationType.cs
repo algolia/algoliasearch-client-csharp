@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// How to change the attribute.
 /// </summary>
 /// <value>How to change the attribute.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<BuiltInOperationType>))]
 public enum BuiltInOperationType
 {
   /// <summary>

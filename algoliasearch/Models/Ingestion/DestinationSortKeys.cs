@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Property by which to sort the destinations.
 /// </summary>
 /// <value>Property by which to sort the destinations.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DestinationSortKeys>))]
 public enum DestinationSortKeys
 {
   /// <summary>

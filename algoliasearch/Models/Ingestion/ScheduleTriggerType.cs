@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Task runs on a schedule.
 /// </summary>
 /// <value>Task runs on a schedule.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<ScheduleTriggerType>))]
 public enum ScheduleTriggerType
 {
   /// <summary>

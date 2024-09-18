@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Search;
 /// <summary>
 /// Defines scopeType
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<ScopeType>))]
 public enum ScopeType
 {
   /// <summary>

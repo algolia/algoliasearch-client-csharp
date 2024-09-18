@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Ascending or descending sort order.
 /// </summary>
 /// <value>Ascending or descending sort order.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<OrderKeys>))]
 public enum OrderKeys
 {
   /// <summary>

@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Task runs continuously.
 /// </summary>
 /// <value>Task runs continuously.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<StreamingTriggerType>))]
 public enum StreamingTriggerType
 {
   /// <summary>

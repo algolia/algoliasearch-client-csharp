@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Property by which to sort the list of task run events.
 /// </summary>
 /// <value>Property by which to sort the list of task run events.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<EventSortKeys>))]
 public enum EventSortKeys
 {
   /// <summary>

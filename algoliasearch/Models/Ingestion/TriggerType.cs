@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Task trigger, describing when a task should run.  - `onDemand`.   Manually trigger the task with the `/run` endpoint.  - `schedule`.   Regularly trigger the task on a `cron` schedule.  - `subscription`.   Trigger the task after an event is received, such as, a webhook.  - `streaming`.   Run the task continuously. 
 /// </summary>
 /// <value>Task trigger, describing when a task should run.  - `onDemand`.   Manually trigger the task with the `/run` endpoint.  - `schedule`.   Regularly trigger the task on a `cron` schedule.  - `subscription`.   Trigger the task after an event is received, such as, a webhook.  - `streaming`.   Run the task continuously. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<TriggerType>))]
 public enum TriggerType
 {
   /// <summary>

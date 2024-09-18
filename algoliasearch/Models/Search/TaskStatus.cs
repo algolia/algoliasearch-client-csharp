@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Task status, `published` if the task is completed, `notPublished` otherwise.
 /// </summary>
 /// <value>Task status, `published` if the task is completed, `notPublished` otherwise.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<TaskStatus>))]
 public enum TaskStatus
 {
   /// <summary>

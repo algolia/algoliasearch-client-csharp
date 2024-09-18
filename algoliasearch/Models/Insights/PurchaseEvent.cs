@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Insights;
 /// <summary>
 /// Defines PurchaseEvent
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<PurchaseEvent>))]
 public enum PurchaseEvent
 {
   /// <summary>

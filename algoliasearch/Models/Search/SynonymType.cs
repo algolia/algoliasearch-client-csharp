@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Synonym type.
 /// </summary>
 /// <value>Synonym type.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SynonymType>))]
 public enum SynonymType
 {
   /// <summary>

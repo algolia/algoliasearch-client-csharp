@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Property by which to sort the list of tasks.
 /// </summary>
 /// <value>Property by which to sort the list of tasks.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<TaskSortKeys>))]
 public enum TaskSortKeys
 {
   /// <summary>

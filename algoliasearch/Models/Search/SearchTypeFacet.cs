@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// - `default`: perform a search query - `facet` [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). 
 /// </summary>
 /// <value>- `default`: perform a search query - `facet` [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SearchTypeFacet>))]
 public enum SearchTypeFacet
 {
   /// <summary>

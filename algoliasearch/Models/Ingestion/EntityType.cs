@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Type of entity to update.
 /// </summary>
 /// <value>Type of entity to update.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<EntityType>))]
 public enum EntityType
 {
   /// <summary>

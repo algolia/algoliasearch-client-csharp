@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Monitoring;
 /// <summary>
 /// Defines Metric
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Metric>))]
 public enum Metric
 {
   /// <summary>

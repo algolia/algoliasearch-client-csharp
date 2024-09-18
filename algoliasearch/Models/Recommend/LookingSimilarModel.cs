@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Looking similar model.  This model recommends items that look similar to the item with the ID `objectID` based on image attributes in your index. 
 /// </summary>
 /// <value>Looking similar model.  This model recommends items that look similar to the item with the ID `objectID` based on image attributes in your index. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<LookingSimilarModel>))]
 public enum LookingSimilarModel
 {
   /// <summary>

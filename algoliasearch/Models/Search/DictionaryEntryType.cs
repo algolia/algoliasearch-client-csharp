@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Whether a dictionary entry is provided by Algolia (standard), or has been added by you (custom).
 /// </summary>
 /// <value>Whether a dictionary entry is provided by Algolia (standard), or has been added by you (custom).</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DictionaryEntryType>))]
 public enum DictionaryEntryType
 {
   /// <summary>

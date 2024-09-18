@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Search mode the index will use to query for results.  This setting only applies to indices, for which Algolia enabled NeuralSearch for you. 
 /// </summary>
 /// <value>Search mode the index will use to query for results.  This setting only applies to indices, for which Algolia enabled NeuralSearch for you. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Mode>))]
 public enum Mode
 {
   /// <summary>

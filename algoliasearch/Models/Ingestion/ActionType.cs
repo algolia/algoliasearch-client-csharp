@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Action to perform on the Algolia index.
 /// </summary>
 /// <value>Action to perform on the Algolia index.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<ActionType>))]
 public enum ActionType
 {
   /// <summary>

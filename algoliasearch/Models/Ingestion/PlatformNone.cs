@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Authentication resource not tied to any ecommerce platform, used for filtering.
 /// </summary>
 /// <value>Authentication resource not tied to any ecommerce platform, used for filtering.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<PlatformNone>))]
 public enum PlatformNone
 {
   /// <summary>

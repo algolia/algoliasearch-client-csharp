@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Insights;
 /// <summary>
 /// Defines ClickEvent
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<ClickEvent>))]
 public enum ClickEvent
 {
   /// <summary>

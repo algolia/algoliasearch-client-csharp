@@ -19,7 +19,6 @@ internal static class JsonConfig
     UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip,
     Converters =
     {
-      new JsonStringEnumConverterFactory(),
       new SearchResultConverterFactory()
     }
   };

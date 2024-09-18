@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Analytics;
 /// Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available. 
 /// </summary>
 /// <value>Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<OrderBy>))]
 public enum OrderBy
 {
   /// <summary>

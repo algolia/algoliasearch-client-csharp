@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// HTTP method to be used for retrieving your data.
 /// </summary>
 /// <value>HTTP method to be used for retrieving your data.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<MethodType>))]
 public enum MethodType
 {
   /// <summary>

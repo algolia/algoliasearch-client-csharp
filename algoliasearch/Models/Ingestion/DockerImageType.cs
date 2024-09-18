@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Image type.
 /// </summary>
 /// <value>Image type.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DockerImageType>))]
 public enum DockerImageType
 {
   /// <summary>

@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Frequently bought together model.  This model recommends items that have been purchased within 1 day with the item with the ID `objectID`. 
 /// </summary>
 /// <value>Frequently bought together model.  This model recommends items that have been purchased within 1 day with the item with the ID `objectID`. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<FbtModel>))]
 public enum FbtModel
 {
   /// <summary>

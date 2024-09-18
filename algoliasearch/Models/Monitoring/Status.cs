@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Monitoring;
 /// Status of the cluster.
 /// </summary>
 /// <value>Status of the cluster.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Status>))]
 public enum Status
 {
   /// <summary>

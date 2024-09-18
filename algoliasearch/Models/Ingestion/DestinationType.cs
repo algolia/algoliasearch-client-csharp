@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Destination type.  - `search`.   Data is stored in an Algolia index.  - `insights`.   Data is recorded as user events in the Insights API. 
 /// </summary>
 /// <value>Destination type.  - `search`.   Data is stored in an Algolia index.  - `insights`.   Data is recorded as user events in the Insights API. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DestinationType>))]
 public enum DestinationType
 {
   /// <summary>

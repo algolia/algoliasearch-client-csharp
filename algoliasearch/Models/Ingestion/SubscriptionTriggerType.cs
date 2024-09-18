@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Task runs after receiving subscribed event.
 /// </summary>
 /// <value>Task runs after receiving subscribed event.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SubscriptionTriggerType>))]
 public enum SubscriptionTriggerType
 {
   /// <summary>

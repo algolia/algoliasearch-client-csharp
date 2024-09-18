@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Access control list permissions.
 /// </summary>
 /// <value>Access control list permissions.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Acl>))]
 public enum Acl
 {
   /// <summary>

@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Type of authentication. This determines the type of credentials required in the `input` object.
 /// </summary>
 /// <value>Type of authentication. This determines the type of credentials required in the `input` object.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<AuthenticationType>))]
 public enum AuthenticationType
 {
   /// <summary>

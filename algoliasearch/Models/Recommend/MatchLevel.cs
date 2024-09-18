@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Whether the whole query string matches or only a part.
 /// </summary>
 /// <value>Whether the whole query string matches or only a part.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<MatchLevel>))]
 public enum MatchLevel
 {
   /// <summary>

@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Monitoring;
 /// <summary>
 /// Defines Type
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Type>))]
 public enum Type
 {
   /// <summary>

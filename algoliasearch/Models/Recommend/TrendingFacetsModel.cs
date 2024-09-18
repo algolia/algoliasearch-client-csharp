@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Trending facet values model.  This model recommends trending facet values for the specified facet attribute. 
 /// </summary>
 /// <value>Trending facet values model.  This model recommends trending facet values for the specified facet attribute. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<TrendingFacetsModel>))]
 public enum TrendingFacetsModel
 {
   /// <summary>

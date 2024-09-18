@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Return all records with a valid `_geoloc` attribute. Don't filter by distance.
 /// </summary>
 /// <value>Return all records with a valid `_geoloc` attribute. Don't filter by distance.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<AroundRadiusAll>))]
 public enum AroundRadiusAll
 {
   /// <summary>

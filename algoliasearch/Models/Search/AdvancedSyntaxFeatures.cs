@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Search;
 /// <summary>
 /// Defines advancedSyntaxFeatures
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<AdvancedSyntaxFeatures>))]
 public enum AdvancedSyntaxFeatures
 {
   /// <summary>

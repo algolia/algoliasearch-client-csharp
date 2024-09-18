@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Insights;
 /// <summary>
 /// Defines ViewEvent
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<ViewEvent>))]
 public enum ViewEvent
 {
   /// <summary>

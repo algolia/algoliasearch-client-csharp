@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Mapping format schema.
 /// </summary>
 /// <value>Mapping format schema.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<MappingFormatSchema>))]
 public enum MappingFormatSchema
 {
   /// <summary>

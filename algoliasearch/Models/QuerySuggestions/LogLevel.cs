@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.QuerySuggestions;
 /// Type of log entry.  - `SKIP`. A query is skipped because it doesn't match the conditions for successful inclusion. For example, when a query doesn't generate enough search results. - `INFO`. An informative log entry. - `ERROR`. The Query Suggestions process encountered an error. 
 /// </summary>
 /// <value>Type of log entry.  - `SKIP`. A query is skipped because it doesn't match the conditions for successful inclusion. For example, when a query doesn't generate enough search results. - `INFO`. An informative log entry. - `ERROR`. The Query Suggestions process encountered an error. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<LogLevel>))]
 public enum LogLevel
 {
   /// <summary>

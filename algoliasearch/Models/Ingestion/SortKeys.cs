@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Property by which to sort the list.
 /// </summary>
 /// <value>Property by which to sort the list.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SortKeys>))]
 public enum SortKeys
 {
   /// <summary>

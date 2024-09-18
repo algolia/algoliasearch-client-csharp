@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Search;
 /// Strategy for multiple search queries:  - `none`. Run all queries. - `stopIfEnoughMatches`. Run the queries one by one, stopping as soon as a query matches at least the `hitsPerPage` number of results. 
 /// </summary>
 /// <value>Strategy for multiple search queries:  - `none`. Run all queries. - `stopIfEnoughMatches`. Run the queries one by one, stopping as soon as a query matches at least the `hitsPerPage` number of results. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SearchStrategy>))]
 public enum SearchStrategy
 {
   /// <summary>

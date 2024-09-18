@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Name of an ecommerce platform with which to authenticate. This determines which authentication type you can select. 
 /// </summary>
 /// <value>Name of an ecommerce platform with which to authenticate. This determines which authentication type you can select. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Platform>))]
 public enum Platform
 {
   /// <summary>

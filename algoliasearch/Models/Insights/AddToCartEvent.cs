@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Insights;
 /// <summary>
 /// Defines AddToCartEvent
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<AddToCartEvent>))]
 public enum AddToCartEvent
 {
   /// <summary>

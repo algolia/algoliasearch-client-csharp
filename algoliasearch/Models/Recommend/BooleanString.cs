@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Recommend;
 /// <summary>
 /// Defines booleanString
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<BooleanString>))]
 public enum BooleanString
 {
   /// <summary>

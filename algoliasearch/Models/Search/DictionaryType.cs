@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Search;
 /// <summary>
 /// Defines dictionaryType
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DictionaryType>))]
 public enum DictionaryType
 {
   /// <summary>

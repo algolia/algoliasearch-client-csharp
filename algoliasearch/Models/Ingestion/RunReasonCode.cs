@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// A code for the task run's outcome. A readable description of the code is included in the `reason` response property.
 /// </summary>
 /// <value>A code for the task run's outcome. A readable description of the code is included in the `reason` response property.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<RunReasonCode>))]
 public enum RunReasonCode
 {
   /// <summary>

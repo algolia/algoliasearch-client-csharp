@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Order of facet values that aren't explicitly positioned with the `order` setting.  - `count`.   Order remaining facet values by decreasing count.   The count is the number of matching records containing this facet value.  - `alpha`.   Sort facet values alphabetically.  - `hidden`.   Don't show facet values that aren't explicitly positioned. 
 /// </summary>
 /// <value>Order of facet values that aren't explicitly positioned with the `order` setting.  - `count`.   Order remaining facet values by decreasing count.   The count is the number of matching records containing this facet value.  - `alpha`.   Sort facet values alphabetically.  - `hidden`.   Don't show facet values that aren't explicitly positioned. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SortRemainingBy>))]
 public enum SortRemainingBy
 {
   /// <summary>

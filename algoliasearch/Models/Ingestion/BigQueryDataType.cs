@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// <summary>
 /// Defines BigQueryDataType
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<BigQueryDataType>))]
 public enum BigQueryDataType
 {
   /// <summary>

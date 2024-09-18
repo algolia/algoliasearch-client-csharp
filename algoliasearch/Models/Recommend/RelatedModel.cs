@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Recommend;
 /// Related products or similar content model.  This model recommends items that are similar to the item with the ID `objectID`. Similarity is determined from the user interactions and attributes. 
 /// </summary>
 /// <value>Related products or similar content model.  This model recommends items that are similar to the item with the ID `objectID`. Similarity is determined from the user interactions and attributes. </value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<RelatedModel>))]
 public enum RelatedModel
 {
   /// <summary>

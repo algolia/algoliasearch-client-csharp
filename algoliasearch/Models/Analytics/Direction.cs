@@ -14,6 +14,7 @@ namespace Algolia.Search.Models.Analytics;
 /// <summary>
 /// Defines direction
 /// </summary>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Direction>))]
 public enum Direction
 {
   /// <summary>

@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Container registry name from where to pull the image.
 /// </summary>
 /// <value>Container registry name from where to pull the image.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<DockerRegistry>))]
 public enum DockerRegistry
 {
   /// <summary>

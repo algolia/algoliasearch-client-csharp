@@ -15,6 +15,7 @@ namespace Algolia.Search.Models.Ingestion;
 /// Property by which to sort the list of authentication resources.
 /// </summary>
 /// <value>Property by which to sort the list of authentication resources.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<AuthenticationSortKeys>))]
 public enum AuthenticationSortKeys
 {
   /// <summary>
