@@ -65,7 +65,7 @@ public partial class TrendingItemsQuery
   /// Gets or Sets QueryParameters
   /// </summary>
   [JsonPropertyName("queryParameters")]
-  public SearchParams QueryParameters { get; set; }
+  public RecommendSearchParams QueryParameters { get; set; }
 
   /// <summary>
   /// Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned. 
@@ -85,7 +85,7 @@ public partial class TrendingItemsQuery
   /// Gets or Sets FallbackParameters
   /// </summary>
   [JsonPropertyName("fallbackParameters")]
-  public SearchParamsObject FallbackParameters { get; set; }
+  public FallbackParams FallbackParameters { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object

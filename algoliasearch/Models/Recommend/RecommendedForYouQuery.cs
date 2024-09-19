@@ -65,7 +65,7 @@ public partial class RecommendedForYouQuery
   /// Gets or Sets QueryParameters
   /// </summary>
   [JsonPropertyName("queryParameters")]
-  public SearchParams QueryParameters { get; set; }
+  public RecommendSearchParams QueryParameters { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters

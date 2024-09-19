@@ -67,7 +67,7 @@ public partial class TrendingFacetsQuery
   /// Gets or Sets QueryParameters
   /// </summary>
   [JsonPropertyName("queryParameters")]
-  public SearchParams QueryParameters { get; set; }
+  public RecommendSearchParams QueryParameters { get; set; }
 
   /// <summary>
   /// Facet attribute for which to retrieve trending facet values.

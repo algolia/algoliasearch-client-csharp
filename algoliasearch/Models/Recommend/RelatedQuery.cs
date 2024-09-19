@@ -67,7 +67,7 @@ public partial class RelatedQuery
   /// Gets or Sets QueryParameters
   /// </summary>
   [JsonPropertyName("queryParameters")]
-  public SearchParams QueryParameters { get; set; }
+  public RecommendSearchParams QueryParameters { get; set; }
 
   /// <summary>
   /// Unique record identifier.

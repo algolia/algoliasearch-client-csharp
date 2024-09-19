@@ -30,12 +30,6 @@ public partial class FallbackParams
   public RemoveWordsIfNoResults? RemoveWordsIfNoResults { get; set; }
 
   /// <summary>
-  /// Gets or Sets Mode
-  /// </summary>
-  [JsonPropertyName("mode")]
-  public Mode? Mode { get; set; }
-
-  /// <summary>
   /// Gets or Sets ExactOnSingleWordQuery
   /// </summary>
   [JsonPropertyName("exactOnSingleWordQuery")]
@@ -46,13 +40,6 @@ public partial class FallbackParams
   public FallbackParams()
   {
   }
-
-  /// <summary>
-  /// Search query.
-  /// </summary>
-  /// <value>Search query.</value>
-  [JsonPropertyName("query")]
-  public string Query { get; set; }
 
   /// <summary>
   /// Keywords to be used instead of the search query to conduct a more broader search.  Using the `similarQuery` parameter changes other settings:  - `queryType` is set to `prefixNone`. - `removeStopWords` is set to true. - `words` is set as the first ranking criterion. - All remaining words are treated as `optionalWords`.  Since the `similarQuery` is supposed to do a broad search, they usually return many results. Combine it with `filters` to narrow down the list of results. 
@@ -119,27 +106,6 @@ public partial class FallbackParams
   /// <value>Whether faceting should be applied after deduplication with `distinct`.  This leads to accurate facet counts when using faceting in combination with `distinct`. It's usually better to use `afterDistinct` modifiers in the `attributesForFaceting` setting, as `facetingAfterDistinct` only computes correct facet counts if all records have the same facet values for the `attributeForDistinct`. </value>
   [JsonPropertyName("facetingAfterDistinct")]
   public bool? FacetingAfterDistinct { get; set; }
-
-  /// <summary>
-  /// Page of search results to retrieve.
-  /// </summary>
-  /// <value>Page of search results to retrieve.</value>
-  [JsonPropertyName("page")]
-  public int? Page { get; set; }
-
-  /// <summary>
-  /// Position of the first hit to retrieve.
-  /// </summary>
-  /// <value>Position of the first hit to retrieve.</value>
-  [JsonPropertyName("offset")]
-  public int? Offset { get; set; }
-
-  /// <summary>
-  /// Number of hits to retrieve (used in combination with `offset`).
-  /// </summary>
-  /// <value>Number of hits to retrieve (used in combination with `offset`).</value>
-  [JsonPropertyName("length")]
-  public int? Length { get; set; }
 
   /// <summary>
   /// Coordinates for the center of a circle, expressed as a comma-separated string of latitude and longitude.  Only records included within circle around this central location are included in the results. The radius of the circle is determined by the `aroundRadius` and `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon` or `insideBoundingBox`. 
@@ -266,6 +232,132 @@ public partial class FallbackParams
   public bool? EnableABTest { get; set; }
 
   /// <summary>
+  /// Search query.
+  /// </summary>
+  /// <value>Search query.</value>
+  [JsonPropertyName("query")]
+  public string Query { get; set; }
+
+  /// <summary>
+  /// Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/).  Facets are attributes that let you categorize search results. They can be used for filtering search results. By default, no attribute is used for faceting. Attribute names are case-sensitive.  **Modifiers**  - `filterOnly(\"ATTRIBUTE\")`.   Allows using this attribute as a filter, but doesn't evalue the facet values.  - `searchable(\"ATTRIBUTE\")`.   Allows searching for facet values.  - `afterDistinct(\"ATTRIBUTE\")`.   Evaluates the facet count _after_ deduplication with `distinct`.   This ensures accurate facet counts.   You can apply this modifier to searchable facets: `afterDistinct(searchable(ATTRIBUTE))`. 
+  /// </summary>
+  /// <value>Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/).  Facets are attributes that let you categorize search results. They can be used for filtering search results. By default, no attribute is used for faceting. Attribute names are case-sensitive.  **Modifiers**  - `filterOnly(\"ATTRIBUTE\")`.   Allows using this attribute as a filter, but doesn't evalue the facet values.  - `searchable(\"ATTRIBUTE\")`.   Allows searching for facet values.  - `afterDistinct(\"ATTRIBUTE\")`.   Evaluates the facet count _after_ deduplication with `distinct`.   This ensures accurate facet counts.   You can apply this modifier to searchable facets: `afterDistinct(searchable(ATTRIBUTE))`. </value>
+  [JsonPropertyName("attributesForFaceting")]
+  public List<string> AttributesForFaceting { get; set; }
+
+  /// <summary>
+  /// Creates [replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/).  Replicas are copies of a primary index with the same records but different settings, synonyms, or rules. If you want to offer a different ranking or sorting of your search results, you'll use replica indices. All index operations on a primary index are automatically forwarded to its replicas. To add a replica index, you must provide the complete set of replicas to this parameter. If you omit a replica from this list, the replica turns into a regular, standalone index that will no longer by synced with the primary index.  **Modifier**  - `virtual(\"REPLICA\")`.   Create a virtual replica,   Virtual replicas don't increase the number of records and are optimized for [Relevant sorting](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/relevant-sort/). 
+  /// </summary>
+  /// <value>Creates [replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/).  Replicas are copies of a primary index with the same records but different settings, synonyms, or rules. If you want to offer a different ranking or sorting of your search results, you'll use replica indices. All index operations on a primary index are automatically forwarded to its replicas. To add a replica index, you must provide the complete set of replicas to this parameter. If you omit a replica from this list, the replica turns into a regular, standalone index that will no longer by synced with the primary index.  **Modifier**  - `virtual(\"REPLICA\")`.   Create a virtual replica,   Virtual replicas don't increase the number of records and are optimized for [Relevant sorting](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/relevant-sort/). </value>
+  [JsonPropertyName("replicas")]
+  public List<string> Replicas { get; set; }
+
+  /// <summary>
+  /// Maximum number of search results that can be obtained through pagination.  Higher pagination limits might slow down your search. For pagination limits above 1,000, the sorting of results beyond the 1,000th hit can't be guaranteed. 
+  /// </summary>
+  /// <value>Maximum number of search results that can be obtained through pagination.  Higher pagination limits might slow down your search. For pagination limits above 1,000, the sorting of results beyond the 1,000th hit can't be guaranteed. </value>
+  [JsonPropertyName("paginationLimitedTo")]
+  public int? PaginationLimitedTo { get; set; }
+
+  /// <summary>
+  /// Attributes that can't be retrieved at query time.  This can be useful if you want to use an attribute for ranking or to [restrict access](https://www.algolia.com/doc/guides/security/api-keys/how-to/user-restricted-access-to-data/), but don't want to include it in the search results. Attribute names are case-sensitive. 
+  /// </summary>
+  /// <value>Attributes that can't be retrieved at query time.  This can be useful if you want to use an attribute for ranking or to [restrict access](https://www.algolia.com/doc/guides/security/api-keys/how-to/user-restricted-access-to-data/), but don't want to include it in the search results. Attribute names are case-sensitive. </value>
+  [JsonPropertyName("unretrievableAttributes")]
+  public List<string> UnretrievableAttributes { get; set; }
+
+  /// <summary>
+  /// Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/). This also turns off [word splitting and concatenation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/splitting-and-concatenation/) for the specified words. 
+  /// </summary>
+  /// <value>Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/). This also turns off [word splitting and concatenation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/splitting-and-concatenation/) for the specified words. </value>
+  [JsonPropertyName("disableTypoToleranceOnWords")]
+  public List<string> DisableTypoToleranceOnWords { get; set; }
+
+  /// <summary>
+  /// Attributes, for which you want to support [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead).  Transliteration supports searching in any of the Japanese writing systems. To support transliteration, you must set the indexing language to Japanese. Attribute names are case-sensitive. 
+  /// </summary>
+  /// <value>Attributes, for which you want to support [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead).  Transliteration supports searching in any of the Japanese writing systems. To support transliteration, you must set the indexing language to Japanese. Attribute names are case-sensitive. </value>
+  [JsonPropertyName("attributesToTransliterate")]
+  public List<string> AttributesToTransliterate { get; set; }
+
+  /// <summary>
+  /// Attributes for which to split [camel case](https://wikipedia.org/wiki/Camel_case) words. Attribute names are case-sensitive. 
+  /// </summary>
+  /// <value>Attributes for which to split [camel case](https://wikipedia.org/wiki/Camel_case) words. Attribute names are case-sensitive. </value>
+  [JsonPropertyName("camelCaseAttributes")]
+  public List<string> CamelCaseAttributes { get; set; }
+
+  /// <summary>
+  /// Searchable attributes to which Algolia should apply [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding). Attribute names are case-sensitive.  Compound words are formed by combining two or more individual words, and are particularly prevalent in Germanic languages—for example, \"firefighter\". With decompounding, the individual components are indexed separately.  You can specify different lists for different languages. Decompounding is supported for these languages: Dutch (`nl`), German (`de`), Finnish (`fi`), Danish (`da`), Swedish (`sv`), and Norwegian (`no`). Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308). 
+  /// </summary>
+  /// <value>Searchable attributes to which Algolia should apply [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding). Attribute names are case-sensitive.  Compound words are formed by combining two or more individual words, and are particularly prevalent in Germanic languages—for example, \"firefighter\". With decompounding, the individual components are indexed separately.  You can specify different lists for different languages. Decompounding is supported for these languages: Dutch (`nl`), German (`de`), Finnish (`fi`), Danish (`da`), Swedish (`sv`), and Norwegian (`no`). Decompounding doesn't work for words with [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark). For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈` (U+0308). </value>
+  [JsonPropertyName("decompoundedAttributes")]
+  public object DecompoundedAttributes { get; set; }
+
+  /// <summary>
+  /// Languages for language-specific processing steps, such as word detection and dictionary settings.  **You should always specify an indexing language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/). 
+  /// </summary>
+  /// <value>Languages for language-specific processing steps, such as word detection and dictionary settings.  **You should always specify an indexing language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/). </value>
+  [JsonPropertyName("indexLanguages")]
+  public List<SupportedLanguage> IndexLanguages { get; set; }
+
+  /// <summary>
+  /// Searchable attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search). Attribute names are case-sensitive. 
+  /// </summary>
+  /// <value>Searchable attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search). Attribute names are case-sensitive. </value>
+  [JsonPropertyName("disablePrefixOnAttributes")]
+  public List<string> DisablePrefixOnAttributes { get; set; }
+
+  /// <summary>
+  /// Whether arrays with exclusively non-negative integers should be compressed for better performance. If true, the compressed arrays may be reordered. 
+  /// </summary>
+  /// <value>Whether arrays with exclusively non-negative integers should be compressed for better performance. If true, the compressed arrays may be reordered. </value>
+  [JsonPropertyName("allowCompressionOfIntegerArray")]
+  public bool? AllowCompressionOfIntegerArray { get; set; }
+
+  /// <summary>
+  /// Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters). Attribute names are case-sensitive.  By default, all numeric attributes are available as numerical filters. For faster indexing, reduce the number of numeric attributes.  If you want to turn off filtering for all numeric attributes, specifiy an attribute that doesn't exist in your index, such as `NO_NUMERIC_FILTERING`.  **Modifier**  - `equalOnly(\"ATTRIBUTE\")`.   Support only filtering based on equality comparisons `=` and `!=`. 
+  /// </summary>
+  /// <value>Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters). Attribute names are case-sensitive.  By default, all numeric attributes are available as numerical filters. For faster indexing, reduce the number of numeric attributes.  If you want to turn off filtering for all numeric attributes, specifiy an attribute that doesn't exist in your index, such as `NO_NUMERIC_FILTERING`.  **Modifier**  - `equalOnly(\"ATTRIBUTE\")`.   Support only filtering based on equality comparisons `=` and `!=`. </value>
+  [JsonPropertyName("numericAttributesForFiltering")]
+  public List<string> NumericAttributesForFiltering { get; set; }
+
+  /// <summary>
+  /// Controls which separators are indexed.  Separators are all non-letter characters except spaces and currency characters, such as $€£¥. By default, separator characters aren't indexed. With `separatorsToIndex`, Algolia treats separator characters as separate words. For example, a search for `C#` would report two matches. 
+  /// </summary>
+  /// <value>Controls which separators are indexed.  Separators are all non-letter characters except spaces and currency characters, such as $€£¥. By default, separator characters aren't indexed. With `separatorsToIndex`, Algolia treats separator characters as separate words. For example, a search for `C#` would report two matches. </value>
+  [JsonPropertyName("separatorsToIndex")]
+  public string SeparatorsToIndex { get; set; }
+
+  /// <summary>
+  /// Attributes used for searching. Attribute names are case-sensitive.  By default, all attributes are searchable and the [Attribute](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute) ranking criterion is turned off. With a non-empty list, Algolia only returns results with matches in the selected attributes. In addition, the Attribute ranking criterion is turned on: matches in attributes that are higher in the list of `searchableAttributes` rank first. To make matches in two attributes rank equally, include them in a comma-separated string, such as `\"title,alternate_title\"`. Attributes with the same priority are always unordered.  For more information, see [Searchable attributes](https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/how-to/setting-searchable-attributes/).  **Modifier**  - `unordered(\"ATTRIBUTE\")`.   Ignore the position of a match within the attribute.  Without modifier, matches at the beginning of an attribute rank higer than matches at the end. 
+  /// </summary>
+  /// <value>Attributes used for searching. Attribute names are case-sensitive.  By default, all attributes are searchable and the [Attribute](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute) ranking criterion is turned off. With a non-empty list, Algolia only returns results with matches in the selected attributes. In addition, the Attribute ranking criterion is turned on: matches in attributes that are higher in the list of `searchableAttributes` rank first. To make matches in two attributes rank equally, include them in a comma-separated string, such as `\"title,alternate_title\"`. Attributes with the same priority are always unordered.  For more information, see [Searchable attributes](https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/how-to/setting-searchable-attributes/).  **Modifier**  - `unordered(\"ATTRIBUTE\")`.   Ignore the position of a match within the attribute.  Without modifier, matches at the beginning of an attribute rank higer than matches at the end. </value>
+  [JsonPropertyName("searchableAttributes")]
+  public List<string> SearchableAttributes { get; set; }
+
+  /// <summary>
+  /// An object with custom data.  You can store up to 32kB as custom data. 
+  /// </summary>
+  /// <value>An object with custom data.  You can store up to 32kB as custom data. </value>
+  [JsonPropertyName("userData")]
+  public object UserData { get; set; }
+
+  /// <summary>
+  /// Characters and their normalized replacements. This overrides Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/). 
+  /// </summary>
+  /// <value>Characters and their normalized replacements. This overrides Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/). </value>
+  [JsonPropertyName("customNormalization")]
+  public Dictionary<string, Dictionary<string, string>> CustomNormalization { get; set; }
+
+  /// <summary>
+  /// Attribute that should be used to establish groups of results. Attribute names are case-sensitive.  All records with the same value for this attribute are considered a group. You can combine `attributeForDistinct` with the `distinct` search parameter to control how many items per group are included in the search results.  If you want to use the same attribute also for faceting, use the `afterDistinct` modifier of the `attributesForFaceting` setting. This applies faceting _after_ deduplication, which will result in accurate facet counts. 
+  /// </summary>
+  /// <value>Attribute that should be used to establish groups of results. Attribute names are case-sensitive.  All records with the same value for this attribute are considered a group. You can combine `attributeForDistinct` with the `distinct` search parameter to control how many items per group are included in the search results.  If you want to use the same attribute also for faceting, use the `afterDistinct` modifier of the `attributesForFaceting` setting. This applies faceting _after_ deduplication, which will result in accurate facet counts. </value>
+  [JsonPropertyName("attributeForDistinct")]
+  public string AttributeForDistinct { get; set; }
+
+  /// <summary>
   /// Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes. Attribute names are case-sensitive.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. 
   /// </summary>
   /// <value>Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes. Attribute names are case-sensitive.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. </value>
@@ -278,13 +370,6 @@ public partial class FallbackParams
   /// <value>Determines the order in which Algolia returns your results.  By default, each entry corresponds to a [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/). The tie-breaking algorithm sequentially applies each criterion in the order they're specified. If you configure a replica index for [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute/), you put the sorting attribute at the top of the list.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order. - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  Before you modify the default setting, you should test your changes in the dashboard, and by [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/). </value>
   [JsonPropertyName("ranking")]
   public List<string> Ranking { get; set; }
-
-  /// <summary>
-  /// Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. 
-  /// </summary>
-  /// <value>Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. </value>
-  [JsonPropertyName("customRanking")]
-  public List<string> CustomRanking { get; set; }
 
   /// <summary>
   /// Relevancy threshold below which less relevant results aren't included in the results.  You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. 
@@ -336,13 +421,6 @@ public partial class FallbackParams
   public bool? RestrictHighlightAndSnippetArrays { get; set; }
 
   /// <summary>
-  /// Number of hits per page.
-  /// </summary>
-  /// <value>Number of hits per page.</value>
-  [JsonPropertyName("hitsPerPage")]
-  public int? HitsPerPage { get; set; }
-
-  /// <summary>
   /// Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
   /// </summary>
   /// <value>Minimum number of characters a word in the search query must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).</value>
@@ -389,13 +467,6 @@ public partial class FallbackParams
   public RemoveStopWords RemoveStopWords { get; set; }
 
   /// <summary>
-  /// Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. 
-  /// </summary>
-  /// <value>Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. </value>
-  [JsonPropertyName("keepDiacriticsOnCharacters")]
-  public string KeepDiacriticsOnCharacters { get; set; }
-
-  /// <summary>
   /// Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/). 
   /// </summary>
   /// <value>Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/). </value>
@@ -422,12 +493,6 @@ public partial class FallbackParams
   /// <value>Whether to enable Personalization.</value>
   [JsonPropertyName("enablePersonalization")]
   public bool? EnablePersonalization { get; set; }
-
-  /// <summary>
-  /// Gets or Sets SemanticSearch
-  /// </summary>
-  [JsonPropertyName("semanticSearch")]
-  public SemanticSearch SemanticSearch { get; set; }
 
   /// <summary>
   /// Whether to support phrase matching and excluding words from search queries.  Use the `advancedSyntaxFeatures` parameter to control which feature is supported. 
@@ -546,7 +611,6 @@ public partial class FallbackParams
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class FallbackParams {\n");
-    sb.Append("  Query: ").Append(Query).Append("\n");
     sb.Append("  SimilarQuery: ").Append(SimilarQuery).Append("\n");
     sb.Append("  Filters: ").Append(Filters).Append("\n");
     sb.Append("  FacetFilters: ").Append(FacetFilters).Append("\n");
@@ -557,9 +621,6 @@ public partial class FallbackParams
     sb.Append("  RestrictSearchableAttributes: ").Append(RestrictSearchableAttributes).Append("\n");
     sb.Append("  Facets: ").Append(Facets).Append("\n");
     sb.Append("  FacetingAfterDistinct: ").Append(FacetingAfterDistinct).Append("\n");
-    sb.Append("  Page: ").Append(Page).Append("\n");
-    sb.Append("  Offset: ").Append(Offset).Append("\n");
-    sb.Append("  Length: ").Append(Length).Append("\n");
     sb.Append("  AroundLatLng: ").Append(AroundLatLng).Append("\n");
     sb.Append("  AroundLatLngViaIP: ").Append(AroundLatLngViaIP).Append("\n");
     sb.Append("  AroundRadius: ").Append(AroundRadius).Append("\n");
@@ -578,9 +639,26 @@ public partial class FallbackParams
     sb.Append("  AnalyticsTags: ").Append(AnalyticsTags).Append("\n");
     sb.Append("  PercentileComputation: ").Append(PercentileComputation).Append("\n");
     sb.Append("  EnableABTest: ").Append(EnableABTest).Append("\n");
+    sb.Append("  Query: ").Append(Query).Append("\n");
+    sb.Append("  AttributesForFaceting: ").Append(AttributesForFaceting).Append("\n");
+    sb.Append("  Replicas: ").Append(Replicas).Append("\n");
+    sb.Append("  PaginationLimitedTo: ").Append(PaginationLimitedTo).Append("\n");
+    sb.Append("  UnretrievableAttributes: ").Append(UnretrievableAttributes).Append("\n");
+    sb.Append("  DisableTypoToleranceOnWords: ").Append(DisableTypoToleranceOnWords).Append("\n");
+    sb.Append("  AttributesToTransliterate: ").Append(AttributesToTransliterate).Append("\n");
+    sb.Append("  CamelCaseAttributes: ").Append(CamelCaseAttributes).Append("\n");
+    sb.Append("  DecompoundedAttributes: ").Append(DecompoundedAttributes).Append("\n");
+    sb.Append("  IndexLanguages: ").Append(IndexLanguages).Append("\n");
+    sb.Append("  DisablePrefixOnAttributes: ").Append(DisablePrefixOnAttributes).Append("\n");
+    sb.Append("  AllowCompressionOfIntegerArray: ").Append(AllowCompressionOfIntegerArray).Append("\n");
+    sb.Append("  NumericAttributesForFiltering: ").Append(NumericAttributesForFiltering).Append("\n");
+    sb.Append("  SeparatorsToIndex: ").Append(SeparatorsToIndex).Append("\n");
+    sb.Append("  SearchableAttributes: ").Append(SearchableAttributes).Append("\n");
+    sb.Append("  UserData: ").Append(UserData).Append("\n");
+    sb.Append("  CustomNormalization: ").Append(CustomNormalization).Append("\n");
+    sb.Append("  AttributeForDistinct: ").Append(AttributeForDistinct).Append("\n");
     sb.Append("  AttributesToRetrieve: ").Append(AttributesToRetrieve).Append("\n");
     sb.Append("  Ranking: ").Append(Ranking).Append("\n");
-    sb.Append("  CustomRanking: ").Append(CustomRanking).Append("\n");
     sb.Append("  RelevancyStrictness: ").Append(RelevancyStrictness).Append("\n");
     sb.Append("  AttributesToHighlight: ").Append(AttributesToHighlight).Append("\n");
     sb.Append("  AttributesToSnippet: ").Append(AttributesToSnippet).Append("\n");
@@ -588,7 +666,6 @@ public partial class FallbackParams
     sb.Append("  HighlightPostTag: ").Append(HighlightPostTag).Append("\n");
     sb.Append("  SnippetEllipsisText: ").Append(SnippetEllipsisText).Append("\n");
     sb.Append("  RestrictHighlightAndSnippetArrays: ").Append(RestrictHighlightAndSnippetArrays).Append("\n");
-    sb.Append("  HitsPerPage: ").Append(HitsPerPage).Append("\n");
     sb.Append("  MinWordSizefor1Typo: ").Append(MinWordSizefor1Typo).Append("\n");
     sb.Append("  MinWordSizefor2Typos: ").Append(MinWordSizefor2Typos).Append("\n");
     sb.Append("  TypoTolerance: ").Append(TypoTolerance).Append("\n");
@@ -596,15 +673,12 @@ public partial class FallbackParams
     sb.Append("  DisableTypoToleranceOnAttributes: ").Append(DisableTypoToleranceOnAttributes).Append("\n");
     sb.Append("  IgnorePlurals: ").Append(IgnorePlurals).Append("\n");
     sb.Append("  RemoveStopWords: ").Append(RemoveStopWords).Append("\n");
-    sb.Append("  KeepDiacriticsOnCharacters: ").Append(KeepDiacriticsOnCharacters).Append("\n");
     sb.Append("  QueryLanguages: ").Append(QueryLanguages).Append("\n");
     sb.Append("  DecompoundQuery: ").Append(DecompoundQuery).Append("\n");
     sb.Append("  EnableRules: ").Append(EnableRules).Append("\n");
     sb.Append("  EnablePersonalization: ").Append(EnablePersonalization).Append("\n");
     sb.Append("  QueryType: ").Append(QueryType).Append("\n");
     sb.Append("  RemoveWordsIfNoResults: ").Append(RemoveWordsIfNoResults).Append("\n");
-    sb.Append("  Mode: ").Append(Mode).Append("\n");
-    sb.Append("  SemanticSearch: ").Append(SemanticSearch).Append("\n");
     sb.Append("  AdvancedSyntax: ").Append(AdvancedSyntax).Append("\n");
     sb.Append("  OptionalWords: ").Append(OptionalWords).Append("\n");
     sb.Append("  DisableExactOnAttributes: ").Append(DisableExactOnAttributes).Append("\n");
@@ -648,7 +722,6 @@ public partial class FallbackParams
     }
 
     return
-        (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
         (SimilarQuery == input.SimilarQuery || (SimilarQuery != null && SimilarQuery.Equals(input.SimilarQuery))) &&
         (Filters == input.Filters || (Filters != null && Filters.Equals(input.Filters))) &&
         (FacetFilters == input.FacetFilters || (FacetFilters != null && FacetFilters.Equals(input.FacetFilters))) &&
@@ -659,9 +732,6 @@ public partial class FallbackParams
         (RestrictSearchableAttributes == input.RestrictSearchableAttributes || RestrictSearchableAttributes != null && input.RestrictSearchableAttributes != null && RestrictSearchableAttributes.SequenceEqual(input.RestrictSearchableAttributes)) &&
         (Facets == input.Facets || Facets != null && input.Facets != null && Facets.SequenceEqual(input.Facets)) &&
         (FacetingAfterDistinct == input.FacetingAfterDistinct || FacetingAfterDistinct.Equals(input.FacetingAfterDistinct)) &&
-        (Page == input.Page || Page.Equals(input.Page)) &&
-        (Offset == input.Offset || Offset.Equals(input.Offset)) &&
-        (Length == input.Length || Length.Equals(input.Length)) &&
         (AroundLatLng == input.AroundLatLng || (AroundLatLng != null && AroundLatLng.Equals(input.AroundLatLng))) &&
         (AroundLatLngViaIP == input.AroundLatLngViaIP || AroundLatLngViaIP.Equals(input.AroundLatLngViaIP)) &&
         (AroundRadius == input.AroundRadius || (AroundRadius != null && AroundRadius.Equals(input.AroundRadius))) &&
@@ -680,9 +750,26 @@ public partial class FallbackParams
         (AnalyticsTags == input.AnalyticsTags || AnalyticsTags != null && input.AnalyticsTags != null && AnalyticsTags.SequenceEqual(input.AnalyticsTags)) &&
         (PercentileComputation == input.PercentileComputation || PercentileComputation.Equals(input.PercentileComputation)) &&
         (EnableABTest == input.EnableABTest || EnableABTest.Equals(input.EnableABTest)) &&
+        (Query == input.Query || (Query != null && Query.Equals(input.Query))) &&
+        (AttributesForFaceting == input.AttributesForFaceting || AttributesForFaceting != null && input.AttributesForFaceting != null && AttributesForFaceting.SequenceEqual(input.AttributesForFaceting)) &&
+        (Replicas == input.Replicas || Replicas != null && input.Replicas != null && Replicas.SequenceEqual(input.Replicas)) &&
+        (PaginationLimitedTo == input.PaginationLimitedTo || PaginationLimitedTo.Equals(input.PaginationLimitedTo)) &&
+        (UnretrievableAttributes == input.UnretrievableAttributes || UnretrievableAttributes != null && input.UnretrievableAttributes != null && UnretrievableAttributes.SequenceEqual(input.UnretrievableAttributes)) &&
+        (DisableTypoToleranceOnWords == input.DisableTypoToleranceOnWords || DisableTypoToleranceOnWords != null && input.DisableTypoToleranceOnWords != null && DisableTypoToleranceOnWords.SequenceEqual(input.DisableTypoToleranceOnWords)) &&
+        (AttributesToTransliterate == input.AttributesToTransliterate || AttributesToTransliterate != null && input.AttributesToTransliterate != null && AttributesToTransliterate.SequenceEqual(input.AttributesToTransliterate)) &&
+        (CamelCaseAttributes == input.CamelCaseAttributes || CamelCaseAttributes != null && input.CamelCaseAttributes != null && CamelCaseAttributes.SequenceEqual(input.CamelCaseAttributes)) &&
+        (DecompoundedAttributes == input.DecompoundedAttributes || (DecompoundedAttributes != null && DecompoundedAttributes.Equals(input.DecompoundedAttributes))) &&
+        (IndexLanguages == input.IndexLanguages || IndexLanguages != null && input.IndexLanguages != null && IndexLanguages.SequenceEqual(input.IndexLanguages)) &&
+        (DisablePrefixOnAttributes == input.DisablePrefixOnAttributes || DisablePrefixOnAttributes != null && input.DisablePrefixOnAttributes != null && DisablePrefixOnAttributes.SequenceEqual(input.DisablePrefixOnAttributes)) &&
+        (AllowCompressionOfIntegerArray == input.AllowCompressionOfIntegerArray || AllowCompressionOfIntegerArray.Equals(input.AllowCompressionOfIntegerArray)) &&
+        (NumericAttributesForFiltering == input.NumericAttributesForFiltering || NumericAttributesForFiltering != null && input.NumericAttributesForFiltering != null && NumericAttributesForFiltering.SequenceEqual(input.NumericAttributesForFiltering)) &&
+        (SeparatorsToIndex == input.SeparatorsToIndex || (SeparatorsToIndex != null && SeparatorsToIndex.Equals(input.SeparatorsToIndex))) &&
+        (SearchableAttributes == input.SearchableAttributes || SearchableAttributes != null && input.SearchableAttributes != null && SearchableAttributes.SequenceEqual(input.SearchableAttributes)) &&
+        (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData))) &&
+        (CustomNormalization == input.CustomNormalization || CustomNormalization != null && input.CustomNormalization != null && CustomNormalization.SequenceEqual(input.CustomNormalization)) &&
+        (AttributeForDistinct == input.AttributeForDistinct || (AttributeForDistinct != null && AttributeForDistinct.Equals(input.AttributeForDistinct))) &&
         (AttributesToRetrieve == input.AttributesToRetrieve || AttributesToRetrieve != null && input.AttributesToRetrieve != null && AttributesToRetrieve.SequenceEqual(input.AttributesToRetrieve)) &&
         (Ranking == input.Ranking || Ranking != null && input.Ranking != null && Ranking.SequenceEqual(input.Ranking)) &&
-        (CustomRanking == input.CustomRanking || CustomRanking != null && input.CustomRanking != null && CustomRanking.SequenceEqual(input.CustomRanking)) &&
         (RelevancyStrictness == input.RelevancyStrictness || RelevancyStrictness.Equals(input.RelevancyStrictness)) &&
         (AttributesToHighlight == input.AttributesToHighlight || AttributesToHighlight != null && input.AttributesToHighlight != null && AttributesToHighlight.SequenceEqual(input.AttributesToHighlight)) &&
         (AttributesToSnippet == input.AttributesToSnippet || AttributesToSnippet != null && input.AttributesToSnippet != null && AttributesToSnippet.SequenceEqual(input.AttributesToSnippet)) &&
@@ -690,7 +777,6 @@ public partial class FallbackParams
         (HighlightPostTag == input.HighlightPostTag || (HighlightPostTag != null && HighlightPostTag.Equals(input.HighlightPostTag))) &&
         (SnippetEllipsisText == input.SnippetEllipsisText || (SnippetEllipsisText != null && SnippetEllipsisText.Equals(input.SnippetEllipsisText))) &&
         (RestrictHighlightAndSnippetArrays == input.RestrictHighlightAndSnippetArrays || RestrictHighlightAndSnippetArrays.Equals(input.RestrictHighlightAndSnippetArrays)) &&
-        (HitsPerPage == input.HitsPerPage || HitsPerPage.Equals(input.HitsPerPage)) &&
         (MinWordSizefor1Typo == input.MinWordSizefor1Typo || MinWordSizefor1Typo.Equals(input.MinWordSizefor1Typo)) &&
         (MinWordSizefor2Typos == input.MinWordSizefor2Typos || MinWordSizefor2Typos.Equals(input.MinWordSizefor2Typos)) &&
         (TypoTolerance == input.TypoTolerance || (TypoTolerance != null && TypoTolerance.Equals(input.TypoTolerance))) &&
@@ -698,15 +784,12 @@ public partial class FallbackParams
         (DisableTypoToleranceOnAttributes == input.DisableTypoToleranceOnAttributes || DisableTypoToleranceOnAttributes != null && input.DisableTypoToleranceOnAttributes != null && DisableTypoToleranceOnAttributes.SequenceEqual(input.DisableTypoToleranceOnAttributes)) &&
         (IgnorePlurals == input.IgnorePlurals || (IgnorePlurals != null && IgnorePlurals.Equals(input.IgnorePlurals))) &&
         (RemoveStopWords == input.RemoveStopWords || (RemoveStopWords != null && RemoveStopWords.Equals(input.RemoveStopWords))) &&
-        (KeepDiacriticsOnCharacters == input.KeepDiacriticsOnCharacters || (KeepDiacriticsOnCharacters != null && KeepDiacriticsOnCharacters.Equals(input.KeepDiacriticsOnCharacters))) &&
         (QueryLanguages == input.QueryLanguages || QueryLanguages != null && input.QueryLanguages != null && QueryLanguages.SequenceEqual(input.QueryLanguages)) &&
         (DecompoundQuery == input.DecompoundQuery || DecompoundQuery.Equals(input.DecompoundQuery)) &&
         (EnableRules == input.EnableRules || EnableRules.Equals(input.EnableRules)) &&
         (EnablePersonalization == input.EnablePersonalization || EnablePersonalization.Equals(input.EnablePersonalization)) &&
         (QueryType == input.QueryType || QueryType.Equals(input.QueryType)) &&
         (RemoveWordsIfNoResults == input.RemoveWordsIfNoResults || RemoveWordsIfNoResults.Equals(input.RemoveWordsIfNoResults)) &&
-        (Mode == input.Mode || Mode.Equals(input.Mode)) &&
-        (SemanticSearch == input.SemanticSearch || (SemanticSearch != null && SemanticSearch.Equals(input.SemanticSearch))) &&
         (AdvancedSyntax == input.AdvancedSyntax || AdvancedSyntax.Equals(input.AdvancedSyntax)) &&
         (OptionalWords == input.OptionalWords || OptionalWords != null && input.OptionalWords != null && OptionalWords.SequenceEqual(input.OptionalWords)) &&
         (DisableExactOnAttributes == input.DisableExactOnAttributes || DisableExactOnAttributes != null && input.DisableExactOnAttributes != null && DisableExactOnAttributes.SequenceEqual(input.DisableExactOnAttributes)) &&
@@ -735,10 +818,6 @@ public partial class FallbackParams
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (Query != null)
-      {
-        hashCode = (hashCode * 59) + Query.GetHashCode();
-      }
       if (SimilarQuery != null)
       {
         hashCode = (hashCode * 59) + SimilarQuery.GetHashCode();
@@ -773,9 +852,6 @@ public partial class FallbackParams
         hashCode = (hashCode * 59) + Facets.GetHashCode();
       }
       hashCode = (hashCode * 59) + FacetingAfterDistinct.GetHashCode();
-      hashCode = (hashCode * 59) + Page.GetHashCode();
-      hashCode = (hashCode * 59) + Offset.GetHashCode();
-      hashCode = (hashCode * 59) + Length.GetHashCode();
       if (AroundLatLng != null)
       {
         hashCode = (hashCode * 59) + AroundLatLng.GetHashCode();
@@ -821,6 +897,72 @@ public partial class FallbackParams
       }
       hashCode = (hashCode * 59) + PercentileComputation.GetHashCode();
       hashCode = (hashCode * 59) + EnableABTest.GetHashCode();
+      if (Query != null)
+      {
+        hashCode = (hashCode * 59) + Query.GetHashCode();
+      }
+      if (AttributesForFaceting != null)
+      {
+        hashCode = (hashCode * 59) + AttributesForFaceting.GetHashCode();
+      }
+      if (Replicas != null)
+      {
+        hashCode = (hashCode * 59) + Replicas.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + PaginationLimitedTo.GetHashCode();
+      if (UnretrievableAttributes != null)
+      {
+        hashCode = (hashCode * 59) + UnretrievableAttributes.GetHashCode();
+      }
+      if (DisableTypoToleranceOnWords != null)
+      {
+        hashCode = (hashCode * 59) + DisableTypoToleranceOnWords.GetHashCode();
+      }
+      if (AttributesToTransliterate != null)
+      {
+        hashCode = (hashCode * 59) + AttributesToTransliterate.GetHashCode();
+      }
+      if (CamelCaseAttributes != null)
+      {
+        hashCode = (hashCode * 59) + CamelCaseAttributes.GetHashCode();
+      }
+      if (DecompoundedAttributes != null)
+      {
+        hashCode = (hashCode * 59) + DecompoundedAttributes.GetHashCode();
+      }
+      if (IndexLanguages != null)
+      {
+        hashCode = (hashCode * 59) + IndexLanguages.GetHashCode();
+      }
+      if (DisablePrefixOnAttributes != null)
+      {
+        hashCode = (hashCode * 59) + DisablePrefixOnAttributes.GetHashCode();
+      }
+      hashCode = (hashCode * 59) + AllowCompressionOfIntegerArray.GetHashCode();
+      if (NumericAttributesForFiltering != null)
+      {
+        hashCode = (hashCode * 59) + NumericAttributesForFiltering.GetHashCode();
+      }
+      if (SeparatorsToIndex != null)
+      {
+        hashCode = (hashCode * 59) + SeparatorsToIndex.GetHashCode();
+      }
+      if (SearchableAttributes != null)
+      {
+        hashCode = (hashCode * 59) + SearchableAttributes.GetHashCode();
+      }
+      if (UserData != null)
+      {
+        hashCode = (hashCode * 59) + UserData.GetHashCode();
+      }
+      if (CustomNormalization != null)
+      {
+        hashCode = (hashCode * 59) + CustomNormalization.GetHashCode();
+      }
+      if (AttributeForDistinct != null)
+      {
+        hashCode = (hashCode * 59) + AttributeForDistinct.GetHashCode();
+      }
       if (AttributesToRetrieve != null)
       {
         hashCode = (hashCode * 59) + AttributesToRetrieve.GetHashCode();
@@ -828,10 +970,6 @@ public partial class FallbackParams
       if (Ranking != null)
       {
         hashCode = (hashCode * 59) + Ranking.GetHashCode();
-      }
-      if (CustomRanking != null)
-      {
-        hashCode = (hashCode * 59) + CustomRanking.GetHashCode();
       }
       hashCode = (hashCode * 59) + RelevancyStrictness.GetHashCode();
       if (AttributesToHighlight != null)
@@ -855,7 +993,6 @@ public partial class FallbackParams
         hashCode = (hashCode * 59) + SnippetEllipsisText.GetHashCode();
       }
       hashCode = (hashCode * 59) + RestrictHighlightAndSnippetArrays.GetHashCode();
-      hashCode = (hashCode * 59) + HitsPerPage.GetHashCode();
       hashCode = (hashCode * 59) + MinWordSizefor1Typo.GetHashCode();
       hashCode = (hashCode * 59) + MinWordSizefor2Typos.GetHashCode();
       if (TypoTolerance != null)
@@ -875,10 +1012,6 @@ public partial class FallbackParams
       {
         hashCode = (hashCode * 59) + RemoveStopWords.GetHashCode();
       }
-      if (KeepDiacriticsOnCharacters != null)
-      {
-        hashCode = (hashCode * 59) + KeepDiacriticsOnCharacters.GetHashCode();
-      }
       if (QueryLanguages != null)
       {
         hashCode = (hashCode * 59) + QueryLanguages.GetHashCode();
@@ -888,11 +1021,6 @@ public partial class FallbackParams
       hashCode = (hashCode * 59) + EnablePersonalization.GetHashCode();
       hashCode = (hashCode * 59) + QueryType.GetHashCode();
       hashCode = (hashCode * 59) + RemoveWordsIfNoResults.GetHashCode();
-      hashCode = (hashCode * 59) + Mode.GetHashCode();
-      if (SemanticSearch != null)
-      {
-        hashCode = (hashCode * 59) + SemanticSearch.GetHashCode();
-      }
       hashCode = (hashCode * 59) + AdvancedSyntax.GetHashCode();
       if (OptionalWords != null)
       {

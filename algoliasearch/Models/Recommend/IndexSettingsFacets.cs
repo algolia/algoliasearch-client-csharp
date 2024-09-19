@@ -12,23 +12,23 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Settings for the semantic search part of NeuralSearch. Only used when `mode` is `neuralSearch`. 
+/// Order of facet names.
 /// </summary>
-public partial class SemanticSearch
+public partial class IndexSettingsFacets
 {
   /// <summary>
-  /// Initializes a new instance of the SemanticSearch class.
+  /// Initializes a new instance of the IndexSettingsFacets class.
   /// </summary>
-  public SemanticSearch()
+  public IndexSettingsFacets()
   {
   }
 
   /// <summary>
-  /// Indices from which to collect click and conversion events.  If null, the current index and all its replicas are used. 
+  /// Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list. 
   /// </summary>
-  /// <value>Indices from which to collect click and conversion events.  If null, the current index and all its replicas are used. </value>
-  [JsonPropertyName("eventSources")]
-  public List<string> EventSources { get; set; }
+  /// <value>Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list. </value>
+  [JsonPropertyName("order")]
+  public List<string> Order { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -37,8 +37,8 @@ public partial class SemanticSearch
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SemanticSearch {\n");
-    sb.Append("  EventSources: ").Append(EventSources).Append("\n");
+    sb.Append("class IndexSettingsFacets {\n");
+    sb.Append("  Order: ").Append(Order).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -59,13 +59,13 @@ public partial class SemanticSearch
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SemanticSearch input)
+    if (obj is not IndexSettingsFacets input)
     {
       return false;
     }
 
     return
-        (EventSources == input.EventSources || EventSources != null && input.EventSources != null && EventSources.SequenceEqual(input.EventSources));
+        (Order == input.Order || Order != null && input.Order != null && Order.SequenceEqual(input.Order));
   }
 
   /// <summary>
@@ -77,9 +77,9 @@ public partial class SemanticSearch
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (EventSources != null)
+      if (Order != null)
       {
-        hashCode = (hashCode * 59) + EventSources.GetHashCode();
+        hashCode = (hashCode * 59) + Order.GetHashCode();
       }
       return hashCode;
     }
