@@ -1,3 +1,8 @@
+## [7.4.1](https://github.com/algolia/algoliasearch-client-csharp/compare/7.4.0...7.4.1)
+
+- [1a73994ff](https://github.com/algolia/api-clients-automation/commit/1a73994ff) fix(specs): recommend remove unsupported query parameters [RECO-2345] [skip-bc] ([#3692](https://github.com/algolia/api-clients-automation/pull/3692)) by [@raed667](https://github.com/raed667/)
+- [92438873c](https://github.com/algolia/api-clients-automation/commit/92438873c) fix(specs): remove models from ingestion specs [skip-bc] ([#3774](https://github.com/algolia/api-clients-automation/pull/3774)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [7.4.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.3.2...7.4.0)
 
 - [e74af8d71](https://github.com/algolia/api-clients-automation/commit/e74af8d71) fix(csharp): remove global enum converter ([#3765](https://github.com/algolia/api-clients-automation/pull/3765)) by [@morganleroi](https://github.com/morganleroi/)
