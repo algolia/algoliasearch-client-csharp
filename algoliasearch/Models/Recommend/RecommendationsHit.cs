@@ -22,20 +22,20 @@ public partial class RecommendationsHit : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the RecommendationsHit class
-  /// with a RecommendHit
+  /// with a TrendingFacetHit
   /// </summary>
-  /// <param name="actualInstance">An instance of RecommendHit.</param>
-  public RecommendationsHit(RecommendHit actualInstance)
+  /// <param name="actualInstance">An instance of TrendingFacetHit.</param>
+  public RecommendationsHit(TrendingFacetHit actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
   /// Initializes a new instance of the RecommendationsHit class
-  /// with a TrendingFacetHit
+  /// with a RecommendHit
   /// </summary>
-  /// <param name="actualInstance">An instance of TrendingFacetHit.</param>
-  public RecommendationsHit(TrendingFacetHit actualInstance)
+  /// <param name="actualInstance">An instance of RecommendHit.</param>
+  public RecommendationsHit(RecommendHit actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -47,16 +47,6 @@ public partial class RecommendationsHit : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `RecommendHit`. If the actual instance is not `RecommendHit`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of RecommendHit</returns>
-  public RecommendHit AsRecommendHit()
-  {
-    return (RecommendHit)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `TrendingFacetHit`. If the actual instance is not `TrendingFacetHit`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -66,15 +56,16 @@ public partial class RecommendationsHit : AbstractSchema
     return (TrendingFacetHit)ActualInstance;
   }
 
-
   /// <summary>
-  /// Check if the actual instance is of `RecommendHit` type.
+  /// Get the actual instance of `RecommendHit`. If the actual instance is not `RecommendHit`,
+  /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsRecommendHit()
+  /// <returns>An instance of RecommendHit</returns>
+  public RecommendHit AsRecommendHit()
   {
-    return ActualInstance.GetType() == typeof(RecommendHit);
+    return (RecommendHit)ActualInstance;
   }
+
 
   /// <summary>
   /// Check if the actual instance is of `TrendingFacetHit` type.
@@ -83,6 +74,15 @@ public partial class RecommendationsHit : AbstractSchema
   public bool IsTrendingFacetHit()
   {
     return ActualInstance.GetType() == typeof(TrendingFacetHit);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `RecommendHit` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsRecommendHit()
+  {
+    return ActualInstance.GetType() == typeof(RecommendHit);
   }
 
   /// <summary>
@@ -169,6 +169,18 @@ public class RecommendationsHitJsonConverter : JsonConverter<RecommendationsHit>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("facetName", out _) && root.TryGetProperty("facetValue", out _))
+    {
+      try
+      {
+        return new RecommendationsHit(jsonDocument.Deserialize<TrendingFacetHit>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into TrendingFacetHit: {exception}");
+      }
+    }
     if (root.ValueKind == JsonValueKind.Object)
     {
       try
@@ -179,18 +191,6 @@ public class RecommendationsHitJsonConverter : JsonConverter<RecommendationsHit>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into RecommendHit: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new RecommendationsHit(jsonDocument.Deserialize<TrendingFacetHit>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into TrendingFacetHit: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");
