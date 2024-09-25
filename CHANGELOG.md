@@ -1,3 +1,7 @@
+## [7.4.3](https://github.com/algolia/algoliasearch-client-csharp/compare/7.4.2...7.4.3)
+
+- [022131871](https://github.com/algolia/api-clients-automation/commit/022131871) fix(specs): correct query params for ingestion [skip-bc] ([#3830](https://github.com/algolia/api-clients-automation/pull/3830)) by [@millotp](https://github.com/millotp/)
+
 ## [7.4.2](https://github.com/algolia/algoliasearch-client-csharp/compare/7.4.1...7.4.2)
 
 - [1939114e1](https://github.com/algolia/api-clients-automation/commit/1939114e1) chore(deps): dependencies 2024-09-23 ([#3790](https://github.com/algolia/api-clients-automation/pull/3790)) by [@algolia-bot](https://github.com/algolia-bot/)
