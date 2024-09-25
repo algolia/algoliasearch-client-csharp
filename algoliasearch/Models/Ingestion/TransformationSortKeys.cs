@@ -12,11 +12,11 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Property by which to sort the list.
+/// Property by which to sort the list of transformations.
 /// </summary>
-/// <value>Property by which to sort the list.</value>
-[JsonConverter(typeof(Serializer.JsonStringEnumConverter<SortKeys>))]
-public enum SortKeys
+/// <value>Property by which to sort the list of transformations.</value>
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<TransformationSortKeys>))]
+public enum TransformationSortKeys
 {
   /// <summary>
   /// Enum Name for value: name
@@ -25,21 +25,15 @@ public enum SortKeys
   Name = 1,
 
   /// <summary>
-  /// Enum Type for value: type
-  /// </summary>
-  [JsonPropertyName("type")]
-  Type = 2,
-
-  /// <summary>
   /// Enum UpdatedAt for value: updatedAt
   /// </summary>
   [JsonPropertyName("updatedAt")]
-  UpdatedAt = 3,
+  UpdatedAt = 2,
 
   /// <summary>
   /// Enum CreatedAt for value: createdAt
   /// </summary>
   [JsonPropertyName("createdAt")]
-  CreatedAt = 4
+  CreatedAt = 3
 }
 

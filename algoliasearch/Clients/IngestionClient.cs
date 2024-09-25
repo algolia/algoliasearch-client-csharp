@@ -900,8 +900,8 @@ public interface IIngestionClient
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="type">Type of authentication resource to retrieve. (optional)</param>
-  /// <param name="platform">Ecommerce platform for which to retrieve authentication resources. (optional)</param>
-  /// <param name="sort">Property by which to sort the list of authentication resources. (optional)</param>
+  /// <param name="platform">Ecommerce platform for which to retrieve authentications. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of authentications. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -922,8 +922,8 @@ public interface IIngestionClient
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="type">Type of authentication resource to retrieve. (optional)</param>
-  /// <param name="platform">Ecommerce platform for which to retrieve authentication resources. (optional)</param>
-  /// <param name="sort">Property by which to sort the list of authentication resources. (optional)</param>
+  /// <param name="platform">Ecommerce platform for which to retrieve authentications. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of authentications. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -945,6 +945,7 @@ public interface IIngestionClient
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="type">Destination type. (optional)</param>
   /// <param name="authenticationID">Authentication ID used by destinations. (optional)</param>
+  /// <param name="transformationID">Get the list of destinations used by a transformation. (optional)</param>
   /// <param name="sort">Property by which to sort the destinations. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -953,7 +954,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListDestinationsResponse</returns>
-  Task<ListDestinationsResponse> ListDestinationsAsync(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListDestinationsResponse> ListDestinationsAsync(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, string transformationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves a list of destinations. (Synchronous version)
@@ -967,6 +968,7 @@ public interface IIngestionClient
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="type">Destination type. (optional)</param>
   /// <param name="authenticationID">Authentication ID used by destinations. (optional)</param>
+  /// <param name="transformationID">Get the list of destinations used by a transformation. (optional)</param>
   /// <param name="sort">Property by which to sort the destinations. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -975,7 +977,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListDestinationsResponse</returns>
-  ListDestinationsResponse ListDestinations(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListDestinationsResponse ListDestinations(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, string transformationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves a list of events for a task run, identified by it's ID.
@@ -1088,7 +1090,7 @@ public interface IIngestionClient
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="type">Source type. Some sources require authentication. (optional)</param>
-  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication resource.  (optional)</param>
+  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.  (optional)</param>
   /// <param name="sort">Property by which to sort the list of sources. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1110,7 +1112,7 @@ public interface IIngestionClient
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
   /// <param name="type">Source type. Some sources require authentication. (optional)</param>
-  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication resource.  (optional)</param>
+  /// <param name="authenticationID">Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.  (optional)</param>
   /// <param name="sort">Property by which to sort the list of sources. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1231,7 +1233,7 @@ public interface IIngestionClient
   ///   - editSettings
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
-  /// <param name="sort">Property by which to sort the list. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of transformations. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1239,7 +1241,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListTransformationsResponse</returns>
-  Task<ListTransformationsResponse> ListTransformationsAsync(int? itemsPerPage = default, int? page = default, SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListTransformationsResponse> ListTransformationsAsync(int? itemsPerPage = default, int? page = default, TransformationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves a list of transformations. (Synchronous version)
@@ -1251,7 +1253,7 @@ public interface IIngestionClient
   ///   - editSettings
   /// <param name="itemsPerPage">Number of items per page. (optional, default to 10)</param>
   /// <param name="page">Page number of the paginated API response. (optional)</param>
-  /// <param name="sort">Property by which to sort the list. (optional)</param>
+  /// <param name="sort">Property by which to sort the list of transformations. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1259,7 +1261,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListTransformationsResponse</returns>
-  ListTransformationsResponse ListTransformations(int? itemsPerPage = default, int? page = default, SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListTransformationsResponse ListTransformations(int? itemsPerPage = default, int? page = default, TransformationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints.
@@ -2635,7 +2637,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <inheritdoc />
-  public async Task<ListDestinationsResponse> ListDestinationsAsync(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListDestinationsResponse> ListDestinationsAsync(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, string transformationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
 
@@ -2644,6 +2646,7 @@ public partial class IngestionClient : IIngestionClient
     requestOptions.AddQueryParameter("page", page);
     requestOptions.AddQueryParameter("type", type);
     requestOptions.AddQueryParameter("authenticationID", authenticationID);
+    requestOptions.AddQueryParameter("transformationID", transformationID);
     requestOptions.AddQueryParameter("sort", sort);
     requestOptions.AddQueryParameter("order", order);
     return await _transport.ExecuteRequestAsync<ListDestinationsResponse>(new HttpMethod("GET"), "/1/destinations", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2651,8 +2654,8 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <inheritdoc />
-  public ListDestinationsResponse ListDestinations(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListDestinationsAsync(itemsPerPage, page, type, authenticationID, sort, order, options, cancellationToken));
+  public ListDestinationsResponse ListDestinations(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, string transformationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => ListDestinationsAsync(itemsPerPage, page, type, authenticationID, transformationID, sort, order, options, cancellationToken));
 
 
   /// <inheritdoc />
@@ -2777,7 +2780,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <inheritdoc />
-  public async Task<ListTransformationsResponse> ListTransformationsAsync(int? itemsPerPage = default, int? page = default, SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListTransformationsResponse> ListTransformationsAsync(int? itemsPerPage = default, int? page = default, TransformationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
 
@@ -2791,7 +2794,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <inheritdoc />
-  public ListTransformationsResponse ListTransformations(int? itemsPerPage = default, int? page = default, SortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public ListTransformationsResponse ListTransformations(int? itemsPerPage = default, int? page = default, TransformationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => ListTransformationsAsync(itemsPerPage, page, sort, order, options, cancellationToken));
 
 

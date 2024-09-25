@@ -12,9 +12,9 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// Property by which to sort the list of authentication resources.
+/// Property by which to sort the list of authentications.
 /// </summary>
-/// <value>Property by which to sort the list of authentication resources.</value>
+/// <value>Property by which to sort the list of authentications.</value>
 [JsonConverter(typeof(Serializer.JsonStringEnumConverter<AuthenticationSortKeys>))]
 public enum AuthenticationSortKeys
 {
@@ -25,10 +25,10 @@ public enum AuthenticationSortKeys
   Name = 1,
 
   /// <summary>
-  /// Enum AuthType for value: auth_type
+  /// Enum Type for value: type
   /// </summary>
-  [JsonPropertyName("auth_type")]
-  AuthType = 2,
+  [JsonPropertyName("type")]
+  Type = 2,
 
   /// <summary>
   /// Enum Platform for value: platform
