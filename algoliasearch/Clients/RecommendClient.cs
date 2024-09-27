@@ -22,6 +22,40 @@ namespace Algolia.Search.Clients;
 public interface IRecommendClient
 {
   /// <summary>
+  /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead). 
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
+  /// <param name="model">[Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="recommendRule"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of RecommendUpdatedAtResponse</returns>
+  Task<RecommendUpdatedAtResponse> BatchRecommendRulesAsync(string indexName, RecommendModels model, List<RecommendRule> recommendRule = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).  (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - editSettings
+  /// <param name="indexName">Name of the index on which to perform the operation.</param>
+  /// <param name="model">[Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). </param>
+  /// <param name="recommendRule"> (optional)</param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>RecommendUpdatedAtResponse</returns>
+  RecommendUpdatedAtResponse BatchRecommendRules(string indexName, RecommendModels model, List<RecommendRule> recommendRule = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// This method allow you to send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
@@ -372,6 +406,29 @@ public partial class RecommendClient : IRecommendClient
     _transport._algoliaConfig.SetClientApiKey(apiKey);
   }
 
+
+
+  /// <inheritdoc />
+  public async Task<RecommendUpdatedAtResponse> BatchRecommendRulesAsync(string indexName, RecommendModels model, List<RecommendRule> recommendRule = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  {
+
+    if (indexName == null)
+      throw new ArgumentException("Parameter `indexName` is required when calling `BatchRecommendRules`.");
+
+
+    var requestOptions = new InternalRequestOptions(options);
+
+    requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
+    requestOptions.PathParameters.Add("model", QueryStringHelper.ParameterToString(model));
+
+    requestOptions.Data = recommendRule;
+    return await _transport.ExecuteRequestAsync<RecommendUpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/{model}/recommend/rules/batch", requestOptions, cancellationToken).ConfigureAwait(false);
+  }
+
+
+  /// <inheritdoc />
+  public RecommendUpdatedAtResponse BatchRecommendRules(string indexName, RecommendModels model, List<RecommendRule> recommendRule = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => BatchRecommendRulesAsync(indexName, model, recommendRule, options, cancellationToken));
 
 
   /// <inheritdoc />

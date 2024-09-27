@@ -63,6 +63,13 @@ public partial class RecommendRule
   public bool? Enabled { get; set; }
 
   /// <summary>
+  /// Time periods when the rule is active.
+  /// </summary>
+  /// <value>Time periods when the rule is active.</value>
+  [JsonPropertyName("validity")]
+  public List<TimeRange> Validity { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -76,6 +83,7 @@ public partial class RecommendRule
     sb.Append("  Consequence: ").Append(Consequence).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
+    sb.Append("  Validity: ").Append(Validity).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -107,7 +115,8 @@ public partial class RecommendRule
         (Condition == input.Condition || (Condition != null && Condition.Equals(input.Condition))) &&
         (Consequence == input.Consequence || (Consequence != null && Consequence.Equals(input.Consequence))) &&
         (Description == input.Description || (Description != null && Description.Equals(input.Description))) &&
-        (Enabled == input.Enabled || Enabled.Equals(input.Enabled));
+        (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
+        (Validity == input.Validity || Validity != null && input.Validity != null && Validity.SequenceEqual(input.Validity));
   }
 
   /// <summary>
@@ -140,6 +149,10 @@ public partial class RecommendRule
         hashCode = (hashCode * 59) + Description.GetHashCode();
       }
       hashCode = (hashCode * 59) + Enabled.GetHashCode();
+      if (Validity != null)
+      {
+        hashCode = (hashCode * 59) + Validity.GetHashCode();
+      }
       return hashCode;
     }
   }
