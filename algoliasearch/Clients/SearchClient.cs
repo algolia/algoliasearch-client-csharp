@@ -694,7 +694,7 @@ public partial interface ISearchClient
   DeletedAtResponse DeleteSynonym(string indexName, string objectID, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key. 
+  /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key, with the description replaced by `<redacted>`. 
   /// </summary>
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -706,7 +706,7 @@ public partial interface ISearchClient
   Task<GetApiKeyResponse> GetApiKeyAsync(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key.  (Synchronous version)
+  /// Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key, with the description replaced by `<redacted>`.  (Synchronous version)
   /// </summary>
   /// <param name="key">API key.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
