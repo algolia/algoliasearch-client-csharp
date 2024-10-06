@@ -12,34 +12,28 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Extra data that can be used in the search UI.  You can use this to control aspects of your search UI, such as, the order of facet names and values without changing your frontend code. 
+/// a search banner with image and url.
 /// </summary>
-public partial class RenderingContent
+public partial class Banner
 {
   /// <summary>
-  /// Initializes a new instance of the RenderingContent class.
+  /// Initializes a new instance of the Banner class.
   /// </summary>
-  public RenderingContent()
+  public Banner()
   {
   }
 
   /// <summary>
-  /// Gets or Sets FacetOrdering
+  /// Gets or Sets Image
   /// </summary>
-  [JsonPropertyName("facetOrdering")]
-  public FacetOrdering FacetOrdering { get; set; }
+  [JsonPropertyName("image")]
+  public BannerImage Image { get; set; }
 
   /// <summary>
-  /// Gets or Sets Redirect
+  /// Gets or Sets Link
   /// </summary>
-  [JsonPropertyName("redirect")]
-  public RedirectURL Redirect { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Widgets
-  /// </summary>
-  [JsonPropertyName("widgets")]
-  public Widgets Widgets { get; set; }
+  [JsonPropertyName("link")]
+  public BannerLink Link { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -48,10 +42,9 @@ public partial class RenderingContent
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RenderingContent {\n");
-    sb.Append("  FacetOrdering: ").Append(FacetOrdering).Append("\n");
-    sb.Append("  Redirect: ").Append(Redirect).Append("\n");
-    sb.Append("  Widgets: ").Append(Widgets).Append("\n");
+    sb.Append("class Banner {\n");
+    sb.Append("  Image: ").Append(Image).Append("\n");
+    sb.Append("  Link: ").Append(Link).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -72,15 +65,14 @@ public partial class RenderingContent
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RenderingContent input)
+    if (obj is not Banner input)
     {
       return false;
     }
 
     return
-        (FacetOrdering == input.FacetOrdering || (FacetOrdering != null && FacetOrdering.Equals(input.FacetOrdering))) &&
-        (Redirect == input.Redirect || (Redirect != null && Redirect.Equals(input.Redirect))) &&
-        (Widgets == input.Widgets || (Widgets != null && Widgets.Equals(input.Widgets)));
+        (Image == input.Image || (Image != null && Image.Equals(input.Image))) &&
+        (Link == input.Link || (Link != null && Link.Equals(input.Link)));
   }
 
   /// <summary>
@@ -92,17 +84,13 @@ public partial class RenderingContent
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (FacetOrdering != null)
+      if (Image != null)
       {
-        hashCode = (hashCode * 59) + FacetOrdering.GetHashCode();
+        hashCode = (hashCode * 59) + Image.GetHashCode();
       }
-      if (Redirect != null)
+      if (Link != null)
       {
-        hashCode = (hashCode * 59) + Redirect.GetHashCode();
-      }
-      if (Widgets != null)
-      {
-        hashCode = (hashCode * 59) + Widgets.GetHashCode();
+        hashCode = (hashCode * 59) + Link.GetHashCode();
       }
       return hashCode;
     }

@@ -12,34 +12,28 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// Extra data that can be used in the search UI.  You can use this to control aspects of your search UI, such as, the order of facet names and values without changing your frontend code. 
+/// image of a search banner.
 /// </summary>
-public partial class RenderingContent
+public partial class BannerImage
 {
   /// <summary>
-  /// Initializes a new instance of the RenderingContent class.
+  /// Initializes a new instance of the BannerImage class.
   /// </summary>
-  public RenderingContent()
+  public BannerImage()
   {
   }
 
   /// <summary>
-  /// Gets or Sets FacetOrdering
+  /// Gets or Sets Urls
   /// </summary>
-  [JsonPropertyName("facetOrdering")]
-  public FacetOrdering FacetOrdering { get; set; }
+  [JsonPropertyName("urls")]
+  public BannerImageUrl Urls { get; set; }
 
   /// <summary>
-  /// Gets or Sets Redirect
+  /// Gets or Sets Title
   /// </summary>
-  [JsonPropertyName("redirect")]
-  public RedirectURL Redirect { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Widgets
-  /// </summary>
-  [JsonPropertyName("widgets")]
-  public Widgets Widgets { get; set; }
+  [JsonPropertyName("title")]
+  public string Title { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -48,10 +42,9 @@ public partial class RenderingContent
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class RenderingContent {\n");
-    sb.Append("  FacetOrdering: ").Append(FacetOrdering).Append("\n");
-    sb.Append("  Redirect: ").Append(Redirect).Append("\n");
-    sb.Append("  Widgets: ").Append(Widgets).Append("\n");
+    sb.Append("class BannerImage {\n");
+    sb.Append("  Urls: ").Append(Urls).Append("\n");
+    sb.Append("  Title: ").Append(Title).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -72,15 +65,14 @@ public partial class RenderingContent
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not RenderingContent input)
+    if (obj is not BannerImage input)
     {
       return false;
     }
 
     return
-        (FacetOrdering == input.FacetOrdering || (FacetOrdering != null && FacetOrdering.Equals(input.FacetOrdering))) &&
-        (Redirect == input.Redirect || (Redirect != null && Redirect.Equals(input.Redirect))) &&
-        (Widgets == input.Widgets || (Widgets != null && Widgets.Equals(input.Widgets)));
+        (Urls == input.Urls || (Urls != null && Urls.Equals(input.Urls))) &&
+        (Title == input.Title || (Title != null && Title.Equals(input.Title)));
   }
 
   /// <summary>
@@ -92,17 +84,13 @@ public partial class RenderingContent
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (FacetOrdering != null)
+      if (Urls != null)
       {
-        hashCode = (hashCode * 59) + FacetOrdering.GetHashCode();
+        hashCode = (hashCode * 59) + Urls.GetHashCode();
       }
-      if (Redirect != null)
+      if (Title != null)
       {
-        hashCode = (hashCode * 59) + Redirect.GetHashCode();
-      }
-      if (Widgets != null)
-      {
-        hashCode = (hashCode * 59) + Widgets.GetHashCode();
+        hashCode = (hashCode * 59) + Title.GetHashCode();
       }
       return hashCode;
     }
