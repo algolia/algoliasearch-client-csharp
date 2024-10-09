@@ -44,9 +44,9 @@ public partial class Transformation
   public string TransformationID { get; set; }
 
   /// <summary>
-  /// The authentications associated for the current transformation.
+  /// The authentications associated with the current transformation.
   /// </summary>
-  /// <value>The authentications associated for the current transformation.</value>
+  /// <value>The authentications associated with the current transformation.</value>
   [JsonPropertyName("authenticationIDs")]
   public List<string> AuthenticationIDs { get; set; }
 

@@ -980,7 +980,7 @@ public interface IIngestionClient
   ListDestinationsResponse ListDestinations(int? itemsPerPage = default, int? page = default, List<DestinationType> type = default, List<string> authenticationID = default, string transformationID = default, DestinationSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Retrieves a list of events for a task run, identified by it's ID.
+  /// Retrieves a list of events for a task run, identified by its ID.
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1005,7 +1005,7 @@ public interface IIngestionClient
   Task<ListEventsResponse> ListEventsAsync(string runID, int? itemsPerPage = default, int? page = default, List<EventStatus> status = default, List<EventType> type = default, EventSortKeys? sort = default, OrderKeys? order = default, string startDate = default, string endDate = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Retrieves a list of events for a task run, identified by it's ID. (Synchronous version)
+  /// Retrieves a list of events for a task run, identified by its ID. (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

@@ -132,7 +132,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Retrieves known incidents for the selected clusters.
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -144,7 +144,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Retrieves known incidents for the selected clusters. (Synchronous version)
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -156,7 +156,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Retrieves the status of selected clusters.
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -168,7 +168,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Retrieves the status of selected clusters. (Synchronous version)
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -202,7 +202,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Retrieves average times for indexing operations for selected clusters.
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -214,7 +214,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Retrieves average times for indexing operations for selected clusters. (Synchronous version)
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -226,7 +226,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Retrieves the average latency for search requests for selected clusters.
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -238,7 +238,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Retrieves the average latency for search requests for selected clusters. (Synchronous version)
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -276,7 +276,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Test whether clusters are reachable or not.
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
@@ -288,7 +288,7 @@ public interface IMonitoringClient
   /// <summary>
   /// Test whether clusters are reachable or not. (Synchronous version)
   /// </summary>
-  /// <param name="clusters">Subset of clusters, separated by comma.</param>
+  /// <param name="clusters">Subset of clusters, separated by commas.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
