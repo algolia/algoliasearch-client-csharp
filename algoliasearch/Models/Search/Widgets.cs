@@ -24,10 +24,11 @@ public partial class Widgets
   }
 
   /// <summary>
-  /// Gets or Sets Banners
+  /// banners defined in the merchandising studio for the given search.
   /// </summary>
+  /// <value>banners defined in the merchandising studio for the given search.</value>
   [JsonPropertyName("banners")]
-  public Banners Banners { get; set; }
+  public List<Banner> Banners { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -64,7 +65,7 @@ public partial class Widgets
     }
 
     return
-        (Banners == input.Banners || (Banners != null && Banners.Equals(input.Banners)));
+        (Banners == input.Banners || Banners != null && input.Banners != null && Banners.SequenceEqual(input.Banners));
   }
 
   /// <summary>

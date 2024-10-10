@@ -27,7 +27,7 @@ public partial class BannerImage
   /// Gets or Sets Urls
   /// </summary>
   [JsonPropertyName("urls")]
-  public BannerImageUrl Urls { get; set; }
+  public List<BannerImageUrl> Urls { get; set; }
 
   /// <summary>
   /// Gets or Sets Title
@@ -71,7 +71,7 @@ public partial class BannerImage
     }
 
     return
-        (Urls == input.Urls || (Urls != null && Urls.Equals(input.Urls))) &&
+        (Urls == input.Urls || Urls != null && input.Urls != null && Urls.SequenceEqual(input.Urls)) &&
         (Title == input.Title || (Title != null && Title.Equals(input.Title)));
   }
 
