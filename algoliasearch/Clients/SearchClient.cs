@@ -2199,6 +2199,7 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = browseParams;
+    requestOptions.UseReadTransporter = true;
     return await _transport.ExecuteRequestAsync<BrowseResponse<T>>(new HttpMethod("POST"), "/1/indexes/{indexName}/browse", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
