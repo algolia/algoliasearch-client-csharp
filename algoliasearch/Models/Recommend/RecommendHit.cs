@@ -28,11 +28,9 @@ public partial class RecommendHit
   /// Initializes a new instance of the RecommendHit class.
   /// </summary>
   /// <param name="objectID">Unique record identifier. (required).</param>
-  /// <param name="score">Recommendation score. (required).</param>
-  public RecommendHit(string objectID, double score)
+  public RecommendHit(string objectID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
-    Score = score;
     AdditionalProperties = new Dictionary<string, object>();
   }
 
@@ -74,7 +72,7 @@ public partial class RecommendHit
   /// </summary>
   /// <value>Recommendation score.</value>
   [JsonPropertyName("_score")]
-  public double Score { get; set; }
+  public double? Score { get; set; }
 
   /// <summary>
   /// Gets or Sets additional properties

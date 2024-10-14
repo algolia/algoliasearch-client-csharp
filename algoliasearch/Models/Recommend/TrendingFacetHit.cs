@@ -24,12 +24,10 @@ public partial class TrendingFacetHit
   /// <summary>
   /// Initializes a new instance of the TrendingFacetHit class.
   /// </summary>
-  /// <param name="score">Recommendation score. (required).</param>
   /// <param name="facetName">Facet attribute. To be used in combination with &#x60;facetValue&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
   /// <param name="facetValue">Facet value. To be used in combination with &#x60;facetName&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
-  public TrendingFacetHit(double score, string facetName, string facetValue)
+  public TrendingFacetHit(string facetName, string facetValue)
   {
-    Score = score;
     FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
     FacetValue = facetValue ?? throw new ArgumentNullException(nameof(facetValue));
   }
@@ -39,7 +37,7 @@ public partial class TrendingFacetHit
   /// </summary>
   /// <value>Recommendation score.</value>
   [JsonPropertyName("_score")]
-  public double Score { get; set; }
+  public double? Score { get; set; }
 
   /// <summary>
   /// Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned. 
