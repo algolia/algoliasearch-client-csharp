@@ -30,11 +30,11 @@ public partial class ViewedFilters
   /// <summary>
   /// Initializes a new instance of the ViewedFilters class.
   /// </summary>
-  /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
+  /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
   /// <param name="eventType">eventType (required).</param>
-  /// <param name="index">Index name (case-sensitive) to which the event&#39;s items belong. (required).</param>
-  /// <param name="filters">Applied facet filters.  Facet filters are &#x60;facet:value&#x60; pairs. Facet values must be URL-encoded, such as, &#x60;discount:10%25&#x60;.  (required).</param>
-  /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don&#39;t use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
+  /// <param name="index">Index name (case-sensitive) to which the event's items belong. (required).</param>
+  /// <param name="filters">Applied facet filters.  Facet filters are `facet:value` pairs. Facet values must be URL-encoded, such as, `discount:10%25`.  (required).</param>
+  /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
   public ViewedFilters(string eventName, ViewEvent? eventType, string index, List<string> filters, string userToken)
   {
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));

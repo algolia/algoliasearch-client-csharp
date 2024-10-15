@@ -25,7 +25,7 @@ public partial class AuthBasic
   /// Initializes a new instance of the AuthBasic class.
   /// </summary>
   /// <param name="username">Username. (required).</param>
-  /// <param name="password">Password. This field is &#x60;null&#x60; in the API response. (required).</param>
+  /// <param name="password">Password. This field is `null` in the API response. (required).</param>
   public AuthBasic(string username, string password)
   {
     Username = username ?? throw new ArgumentNullException(nameof(username));

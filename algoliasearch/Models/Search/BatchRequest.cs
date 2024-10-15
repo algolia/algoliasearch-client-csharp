@@ -31,7 +31,7 @@ public partial class BatchRequest
   /// Initializes a new instance of the BatchRequest class.
   /// </summary>
   /// <param name="action">action (required).</param>
-  /// <param name="body">Operation arguments (varies with specified &#x60;action&#x60;). (required).</param>
+  /// <param name="body">Operation arguments (varies with specified `action`). (required).</param>
   public BatchRequest(Action? action, object body)
   {
     Action = action;

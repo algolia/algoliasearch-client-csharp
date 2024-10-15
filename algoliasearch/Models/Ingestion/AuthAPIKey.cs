@@ -24,7 +24,7 @@ public partial class AuthAPIKey
   /// <summary>
   /// Initializes a new instance of the AuthAPIKey class.
   /// </summary>
-  /// <param name="key">API key. This field is &#x60;null&#x60; in the API response. (required).</param>
+  /// <param name="key">API key. This field is `null` in the API response. (required).</param>
   public AuthAPIKey(string key)
   {
     Key = key ?? throw new ArgumentNullException(nameof(key));

@@ -25,7 +25,7 @@ public partial class DeleteUserProfileResponse
   /// Initializes a new instance of the DeleteUserProfileResponse class.
   /// </summary>
   /// <param name="userToken">Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
-  /// <param name="deletedUntil">Date and time when the user profile can be safely considered to be deleted. Any events received after the &#x60;deletedUntil&#x60; date start a new user profile.  (required).</param>
+  /// <param name="deletedUntil">Date and time when the user profile can be safely considered to be deleted. Any events received after the `deletedUntil` date start a new user profile.  (required).</param>
   public DeleteUserProfileResponse(string userToken, string deletedUntil)
   {
     UserToken = userToken ?? throw new ArgumentNullException(nameof(userToken));

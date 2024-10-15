@@ -25,7 +25,7 @@ public partial class AuthAlgoliaInsights
   /// Initializes a new instance of the AuthAlgoliaInsights class.
   /// </summary>
   /// <param name="appID">Algolia application ID. (required).</param>
-  /// <param name="apiKey">Algolia API key with the ACL: &#x60;search&#x60;. This field is &#x60;null&#x60; in the API response.  (required).</param>
+  /// <param name="apiKey">Algolia API key with the ACL: `search`. This field is `null` in the API response.  (required).</param>
   public AuthAlgoliaInsights(string appID, string apiKey)
   {
     AppID = appID ?? throw new ArgumentNullException(nameof(appID));

@@ -25,7 +25,7 @@ public partial class GetNoClickRateResponse
   /// Initializes a new instance of the GetNoClickRateResponse class.
   /// </summary>
   /// <param name="rate">No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches. (required).</param>
-  /// <param name="count">Number of tracked searches. Tracked searches are search requests where the &#x60;clickAnalytics&#x60; parameter is true. (required) (default to 0).</param>
+  /// <param name="count">Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. (required) (default to 0).</param>
   /// <param name="noClickCount">Number of times this search was returned as a result without any click. (required).</param>
   /// <param name="dates">Daily no click rates. (required).</param>
   public GetNoClickRateResponse(double rate, int count, int noClickCount, List<DailyNoClickRates> dates)

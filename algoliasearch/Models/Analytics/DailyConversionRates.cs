@@ -24,8 +24,8 @@ public partial class DailyConversionRates
   /// <summary>
   /// Initializes a new instance of the DailyConversionRates class.
   /// </summary>
-  /// <param name="rate">Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
-  /// <param name="trackedSearchCount">Number of tracked searches. Tracked searches are search requests where the &#x60;clickAnalytics&#x60; parameter is true. (required) (default to 0).</param>
+  /// <param name="rate">Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
+  /// <param name="trackedSearchCount">Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. (required) (default to 0).</param>
   /// <param name="conversionCount">Number of conversions from this search. (required) (default to 0).</param>
   /// <param name="date">Date in the format YYYY-MM-DD. (required).</param>
   public DailyConversionRates(double? rate, int trackedSearchCount, int conversionCount, string date)

@@ -25,7 +25,7 @@ public partial class ReplaceAllObjectsResponse
   /// Initializes a new instance of the ReplaceAllObjectsResponse class.
   /// </summary>
   /// <param name="copyOperationResponse">copyOperationResponse (required).</param>
-  /// <param name="batchResponses">The response of the &#x60;batch&#x60; request(s). (required).</param>
+  /// <param name="batchResponses">The response of the `batch` request(s). (required).</param>
   /// <param name="moveOperationResponse">moveOperationResponse (required).</param>
   public ReplaceAllObjectsResponse(UpdatedAtResponse copyOperationResponse, List<BatchResponse> batchResponses, UpdatedAtResponse moveOperationResponse)
   {

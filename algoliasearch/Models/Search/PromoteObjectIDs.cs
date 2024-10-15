@@ -24,7 +24,7 @@ public partial class PromoteObjectIDs
   /// <summary>
   /// Initializes a new instance of the PromoteObjectIDs class.
   /// </summary>
-  /// <param name="objectIDs">Object IDs of the records you want to promote.  The records are placed as a group at the &#x60;position&#x60;. For example, if you want to promote four records to position &#x60;0&#x60;, they will be the first four search results.  (required).</param>
+  /// <param name="objectIDs">Object IDs of the records you want to promote.  The records are placed as a group at the `position`. For example, if you want to promote four records to position `0`, they will be the first four search results.  (required).</param>
   /// <param name="position">Position in the search results where you want to show the promoted records. (required).</param>
   public PromoteObjectIDs(List<string> objectIDs, int position)
   {

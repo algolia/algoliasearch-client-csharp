@@ -25,37 +25,37 @@ public enum Operator
   Colon = 1,
 
   /// <summary>
-  /// Enum LessThan for value: &lt;
+  /// Enum LessThan for value: <
   /// </summary>
   [JsonPropertyName("<")]
   LessThan = 2,
 
   /// <summary>
-  /// Enum LessThanOrEqualTo for value: &lt;&#x3D;
+  /// Enum LessThanOrEqualTo for value: <=
   /// </summary>
   [JsonPropertyName("<=")]
   LessThanOrEqualTo = 3,
 
   /// <summary>
-  /// Enum Equal for value: &#x3D;
+  /// Enum Equal for value: =
   /// </summary>
   [JsonPropertyName("=")]
   Equal = 4,
 
   /// <summary>
-  /// Enum NotEqual for value: !&#x3D;
+  /// Enum NotEqual for value: !=
   /// </summary>
   [JsonPropertyName("!=")]
   NotEqual = 5,
 
   /// <summary>
-  /// Enum GreaterThan for value: &gt;
+  /// Enum GreaterThan for value: >
   /// </summary>
   [JsonPropertyName(">")]
   GreaterThan = 6,
 
   /// <summary>
-  /// Enum GreaterThanOrEqualTo for value: &gt;&#x3D;
+  /// Enum GreaterThanOrEqualTo for value: >=
   /// </summary>
   [JsonPropertyName(">=")]
   GreaterThanOrEqualTo = 7

@@ -30,7 +30,7 @@ public partial class SearchDictionaryEntriesParams
   /// <summary>
   /// Initializes a new instance of the SearchDictionaryEntriesParams class.
   /// </summary>
-  /// <param name="query">Search query. (required) (default to &quot;&quot;).</param>
+  /// <param name="query">Search query. (required) (default to "").</param>
   public SearchDictionaryEntriesParams(string query)
   {
     Query = query ?? throw new ArgumentNullException(nameof(query));

@@ -26,7 +26,7 @@ public partial class UpdatedRuleResponse
   /// </summary>
   /// <param name="objectID">Unique identifier of a rule object. (required).</param>
   /// <param name="updatedAt">Date and time when the object was updated, in RFC 3339 format. (required).</param>
-  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the [&#x60;task&#x60; operation](#tag/Indices/operation/getTask) and this &#x60;taskID&#x60;.  (required).</param>
+  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.  (required).</param>
   public UpdatedRuleResponse(string objectID, string updatedAt, long taskID)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));

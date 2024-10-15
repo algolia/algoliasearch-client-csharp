@@ -25,7 +25,7 @@ public partial class SaveObjectResponse
   /// Initializes a new instance of the SaveObjectResponse class.
   /// </summary>
   /// <param name="createdAt">Date and time when the object was created, in RFC 3339 format. (required).</param>
-  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task&#39;s progress with the [&#x60;task&#x60; operation](#tag/Indices/operation/getTask) and this &#x60;taskID&#x60;.  (required).</param>
+  /// <param name="taskID">Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.  (required).</param>
   public SaveObjectResponse(string createdAt, long taskID)
   {
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));

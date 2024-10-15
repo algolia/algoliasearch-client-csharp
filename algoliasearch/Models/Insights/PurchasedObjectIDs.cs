@@ -36,12 +36,12 @@ public partial class PurchasedObjectIDs
   /// <summary>
   /// Initializes a new instance of the PurchasedObjectIDs class.
   /// </summary>
-  /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
+  /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
   /// <param name="eventType">eventType (required).</param>
   /// <param name="eventSubtype">eventSubtype (required).</param>
-  /// <param name="index">Index name (case-sensitive) to which the event&#39;s items belong. (required).</param>
+  /// <param name="index">Index name (case-sensitive) to which the event's items belong. (required).</param>
   /// <param name="objectIDs">Object IDs of the records that are part of the event. (required).</param>
-  /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don&#39;t use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
+  /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
   public PurchasedObjectIDs(string eventName, ConversionEvent? eventType, PurchaseEvent? eventSubtype, string index, List<string> objectIDs, string userToken)
   {
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));

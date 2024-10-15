@@ -30,12 +30,12 @@ public partial class ConvertedObjectIDsAfterSearch
   /// <summary>
   /// Initializes a new instance of the ConvertedObjectIDsAfterSearch class.
   /// </summary>
-  /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment&#39;s [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
+  /// <param name="eventName">Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  (required).</param>
   /// <param name="eventType">eventType (required).</param>
-  /// <param name="index">Index name (case-sensitive) to which the event&#39;s items belong. (required).</param>
+  /// <param name="index">Index name (case-sensitive) to which the event's items belong. (required).</param>
   /// <param name="objectIDs">Object IDs of the records that are part of the event. (required).</param>
-  /// <param name="queryID">Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add &#x60;clickAnalytics: true&#x60; as a search request parameter, the query ID is included in the API response.  (required).</param>
-  /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don&#39;t use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
+  /// <param name="queryID">Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response.  (required).</param>
+  /// <param name="userToken">Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  (required).</param>
   public ConvertedObjectIDsAfterSearch(string eventName, ConversionEvent? eventType, string index, List<string> objectIDs, string queryID, string userToken)
   {
     EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));

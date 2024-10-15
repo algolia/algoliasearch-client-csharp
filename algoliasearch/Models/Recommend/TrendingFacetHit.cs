@@ -24,8 +24,8 @@ public partial class TrendingFacetHit
   /// <summary>
   /// Initializes a new instance of the TrendingFacetHit class.
   /// </summary>
-  /// <param name="facetName">Facet attribute. To be used in combination with &#x60;facetValue&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
-  /// <param name="facetValue">Facet value. To be used in combination with &#x60;facetName&#x60;. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
+  /// <param name="facetName">Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
+  /// <param name="facetValue">Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.  (required).</param>
   public TrendingFacetHit(string facetName, string facetValue)
   {
     FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));

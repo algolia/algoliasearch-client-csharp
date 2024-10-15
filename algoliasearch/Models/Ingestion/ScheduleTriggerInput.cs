@@ -31,7 +31,7 @@ public partial class ScheduleTriggerInput
   /// Initializes a new instance of the ScheduleTriggerInput class.
   /// </summary>
   /// <param name="type">type (required).</param>
-  /// <param name="cron">Cron expression for the task&#39;s schedule. (required).</param>
+  /// <param name="cron">Cron expression for the task's schedule. (required).</param>
   public ScheduleTriggerInput(ScheduleTriggerType? type, string cron)
   {
     Type = type;

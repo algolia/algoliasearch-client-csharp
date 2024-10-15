@@ -34,7 +34,7 @@ public partial class Log
   /// <param name="queryHeaders">Request headers (API keys are obfuscated). (required).</param>
   /// <param name="sha1">SHA1 signature of the log entry. (required).</param>
   /// <param name="nbApiCalls">Number of API requests. (required).</param>
-  /// <param name="processingTimeMs">Processing time for the query in milliseconds. This doesn&#39;t include latency due to the network.  (required).</param>
+  /// <param name="processingTimeMs">Processing time for the query in milliseconds. This doesn't include latency due to the network.  (required).</param>
   public Log(string timestamp, string method, string answerCode, string queryBody, string answer, string url, string ip, string queryHeaders, string sha1, string nbApiCalls, string processingTimeMs)
   {
     Timestamp = timestamp ?? throw new ArgumentNullException(nameof(timestamp));

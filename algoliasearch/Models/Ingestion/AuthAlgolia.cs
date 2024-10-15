@@ -25,7 +25,7 @@ public partial class AuthAlgolia
   /// Initializes a new instance of the AuthAlgolia class.
   /// </summary>
   /// <param name="appID">Algolia application ID. (required).</param>
-  /// <param name="apiKey">Algolia API key with the ACL: &#x60;addObject&#x60;, &#x60;deleteObject&#x60;, &#x60;settings&#x60;, &#x60;editSettings&#x60;, &#x60;listIndexes&#x60;, &#x60;deleteIndex&#x60;. This field is &#x60;null&#x60; in the API response.  (required).</param>
+  /// <param name="apiKey">Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response.  (required).</param>
   public AuthAlgolia(string appID, string apiKey)
   {
     AppID = appID ?? throw new ArgumentNullException(nameof(appID));

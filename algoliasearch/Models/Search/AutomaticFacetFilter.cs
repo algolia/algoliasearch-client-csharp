@@ -24,7 +24,7 @@ public partial class AutomaticFacetFilter
   /// <summary>
   /// Initializes a new instance of the AutomaticFacetFilter class.
   /// </summary>
-  /// <param name="facet">Facet name to be applied as filter. The name must match placeholders in the &#x60;pattern&#x60; parameter. For example, with &#x60;pattern: {facet:genre}&#x60;, &#x60;automaticFacetFilters&#x60; must be &#x60;genre&#x60;.  (required).</param>
+  /// <param name="facet">Facet name to be applied as filter. The name must match placeholders in the `pattern` parameter. For example, with `pattern: {facet:genre}`, `automaticFacetFilters` must be `genre`.  (required).</param>
   public AutomaticFacetFilter(string facet)
   {
     Facet = facet ?? throw new ArgumentNullException(nameof(facet));

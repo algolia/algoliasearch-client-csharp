@@ -31,7 +31,7 @@ public partial class ScheduleTrigger
   /// Initializes a new instance of the ScheduleTrigger class.
   /// </summary>
   /// <param name="type">type (required).</param>
-  /// <param name="cron">Cron expression for the task&#39;s schedule. (required).</param>
+  /// <param name="cron">Cron expression for the task's schedule. (required).</param>
   /// <param name="nextRun">The next scheduled run of the task in RFC 3339 format. (required).</param>
   public ScheduleTrigger(ScheduleTriggerType? type, string cron, string nextRun)
   {

@@ -26,7 +26,7 @@ public partial class AuthOAuth
   /// </summary>
   /// <param name="url">URL for the OAuth endpoint. (required).</param>
   /// <param name="clientId">Client ID. (required).</param>
-  /// <param name="clientSecret">Client secret. This field is &#x60;null&#x60; in the API response. (required).</param>
+  /// <param name="clientSecret">Client secret. This field is `null` in the API response. (required).</param>
   public AuthOAuth(string url, string clientId, string clientSecret)
   {
     Url = url ?? throw new ArgumentNullException(nameof(url));

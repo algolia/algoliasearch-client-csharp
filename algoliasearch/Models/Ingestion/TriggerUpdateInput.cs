@@ -24,7 +24,7 @@ public partial class TriggerUpdateInput
   /// <summary>
   /// Initializes a new instance of the TriggerUpdateInput class.
   /// </summary>
-  /// <param name="cron">Cron expression for the task&#39;s schedule. (required).</param>
+  /// <param name="cron">Cron expression for the task's schedule. (required).</param>
   public TriggerUpdateInput(string cron)
   {
     Cron = cron ?? throw new ArgumentNullException(nameof(cron));

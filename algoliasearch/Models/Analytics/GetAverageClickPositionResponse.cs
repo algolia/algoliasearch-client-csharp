@@ -24,7 +24,7 @@ public partial class GetAverageClickPositionResponse
   /// <summary>
   /// Initializes a new instance of the GetAverageClickPositionResponse class.
   /// </summary>
-  /// <param name="average">Average position of a clicked search result in the list of search results. If null, Algolia didn&#39;t receive any search requests with &#x60;clickAnalytics&#x60; set to true.  (required).</param>
+  /// <param name="average">Average position of a clicked search result in the list of search results. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
   /// <param name="clickCount">Number of clicks associated with this search. (required) (default to 0).</param>
   /// <param name="dates">Daily average click positions. (required).</param>
   public GetAverageClickPositionResponse(double? average, int clickCount, List<DailyAverageClicks> dates)

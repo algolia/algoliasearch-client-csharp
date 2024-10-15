@@ -25,7 +25,7 @@ public partial class AuthGoogleServiceAccount
   /// Initializes a new instance of the AuthGoogleServiceAccount class.
   /// </summary>
   /// <param name="clientEmail">Email address of the Google service account. (required).</param>
-  /// <param name="privateKey">Private key of the Google service account. This field is &#x60;null&#x60; in the API response. (required).</param>
+  /// <param name="privateKey">Private key of the Google service account. This field is `null` in the API response. (required).</param>
   public AuthGoogleServiceAccount(string clientEmail, string privateKey)
   {
     ClientEmail = clientEmail ?? throw new ArgumentNullException(nameof(clientEmail));

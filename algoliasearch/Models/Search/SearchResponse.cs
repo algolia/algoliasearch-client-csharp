@@ -29,7 +29,7 @@ public partial class SearchResponse<T>
   /// </summary>
   /// <param name="processingTimeMS">Time the server took to process the request, in milliseconds. (required).</param>
   /// <param name="hits">Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  (required).</param>
-  /// <param name="query">Search query. (required) (default to &quot;&quot;).</param>
+  /// <param name="query">Search query. (required) (default to "").</param>
   /// <param name="varParams">URL-encoded string of all search parameters. (required).</param>
   public SearchResponse(int processingTimeMS, List<T> hits, string query, string varParams)
   {

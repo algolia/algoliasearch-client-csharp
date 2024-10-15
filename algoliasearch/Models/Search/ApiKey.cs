@@ -24,7 +24,7 @@ public partial class ApiKey
   /// <summary>
   /// Initializes a new instance of the ApiKey class.
   /// </summary>
-  /// <param name="acl">Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint&#39;s reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  (required).</param>
+  /// <param name="acl">Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  (required).</param>
   public ApiKey(List<Acl> acl)
   {
     Acl = acl ?? throw new ArgumentNullException(nameof(acl));
