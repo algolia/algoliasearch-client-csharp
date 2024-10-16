@@ -67,6 +67,13 @@ public partial class RecommendationsResults
   public Exhaustive Exhaustive { get; set; }
 
   /// <summary>
+  /// Rules applied to the query.
+  /// </summary>
+  /// <value>Rules applied to the query.</value>
+  [JsonPropertyName("appliedRules")]
+  public List<object> AppliedRules { get; set; }
+
+  /// <summary>
   /// See the `facetsCount` field of the `exhaustive` object in the response.
   /// </summary>
   /// <value>See the `facetsCount` field of the `exhaustive` object in the response.</value>
@@ -254,6 +261,7 @@ public partial class RecommendationsResults
     sb.Append("  AroundLatLng: ").Append(AroundLatLng).Append("\n");
     sb.Append("  AutomaticRadius: ").Append(AutomaticRadius).Append("\n");
     sb.Append("  Exhaustive: ").Append(Exhaustive).Append("\n");
+    sb.Append("  AppliedRules: ").Append(AppliedRules).Append("\n");
     sb.Append("  ExhaustiveFacetsCount: ").Append(ExhaustiveFacetsCount).Append("\n");
     sb.Append("  ExhaustiveNbHits: ").Append(ExhaustiveNbHits).Append("\n");
     sb.Append("  ExhaustiveTypo: ").Append(ExhaustiveTypo).Append("\n");
@@ -310,6 +318,7 @@ public partial class RecommendationsResults
         (AroundLatLng == input.AroundLatLng || (AroundLatLng != null && AroundLatLng.Equals(input.AroundLatLng))) &&
         (AutomaticRadius == input.AutomaticRadius || (AutomaticRadius != null && AutomaticRadius.Equals(input.AutomaticRadius))) &&
         (Exhaustive == input.Exhaustive || (Exhaustive != null && Exhaustive.Equals(input.Exhaustive))) &&
+        (AppliedRules == input.AppliedRules || AppliedRules != null && input.AppliedRules != null && AppliedRules.SequenceEqual(input.AppliedRules)) &&
         (ExhaustiveFacetsCount == input.ExhaustiveFacetsCount || ExhaustiveFacetsCount.Equals(input.ExhaustiveFacetsCount)) &&
         (ExhaustiveNbHits == input.ExhaustiveNbHits || ExhaustiveNbHits.Equals(input.ExhaustiveNbHits)) &&
         (ExhaustiveTypo == input.ExhaustiveTypo || ExhaustiveTypo.Equals(input.ExhaustiveTypo)) &&
@@ -359,6 +368,10 @@ public partial class RecommendationsResults
       if (Exhaustive != null)
       {
         hashCode = (hashCode * 59) + Exhaustive.GetHashCode();
+      }
+      if (AppliedRules != null)
+      {
+        hashCode = (hashCode * 59) + AppliedRules.GetHashCode();
       }
       hashCode = (hashCode * 59) + ExhaustiveFacetsCount.GetHashCode();
       hashCode = (hashCode * 59) + ExhaustiveNbHits.GetHashCode();

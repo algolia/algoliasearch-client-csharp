@@ -19,15 +19,8 @@ public partial class ABTestConfiguration
   /// <summary>
   /// Initializes a new instance of the ABTestConfiguration class.
   /// </summary>
-  [JsonConstructor]
-  public ABTestConfiguration() { }
-  /// <summary>
-  /// Initializes a new instance of the ABTestConfiguration class.
-  /// </summary>
-  /// <param name="outliers">outliers (required).</param>
-  public ABTestConfiguration(Outliers outliers)
+  public ABTestConfiguration()
   {
-    Outliers = outliers ?? throw new ArgumentNullException(nameof(outliers));
   }
 
   /// <summary>

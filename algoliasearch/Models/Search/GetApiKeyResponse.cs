@@ -24,10 +24,12 @@ public partial class GetApiKeyResponse
   /// <summary>
   /// Initializes a new instance of the GetApiKeyResponse class.
   /// </summary>
+  /// <param name="value">API key. (required).</param>
   /// <param name="createdAt">Timestamp when the object was created, in milliseconds since the Unix epoch. (required).</param>
   /// <param name="acl">Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  (required).</param>
-  public GetApiKeyResponse(long createdAt, List<Acl> acl)
+  public GetApiKeyResponse(string value, long createdAt, List<Acl> acl)
   {
+    Value = value ?? throw new ArgumentNullException(nameof(value));
     CreatedAt = createdAt;
     Acl = acl ?? throw new ArgumentNullException(nameof(acl));
   }

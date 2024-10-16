@@ -27,7 +27,6 @@ public partial class Variant
   /// <param name="addToCartCount">Number of add-to-cart events for this variant. (required).</param>
   /// <param name="clickCount">Number of click events for this variant. (required).</param>
   /// <param name="conversionCount">Number of click events for this variant. (required).</param>
-  /// <param name="description">Description for this variant. (required).</param>
   /// <param name="index">Index name of the A/B test variant (case-sensitive). (required).</param>
   /// <param name="noResultCount">Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant. (required).</param>
   /// <param name="purchaseCount">Number of purchase events for this variant. (required).</param>
@@ -35,12 +34,11 @@ public partial class Variant
   /// <param name="trafficPercentage">Percentage of search requests each variant receives. (required).</param>
   /// <param name="userCount">Number of users that made searches to this variant. (required).</param>
   /// <param name="trackedUserCount">Number of users that made tracked searches to this variant. (required).</param>
-  public Variant(int addToCartCount, int clickCount, int conversionCount, string description, string index, int? noResultCount, int purchaseCount, int? searchCount, int trafficPercentage, int? userCount, int? trackedUserCount)
+  public Variant(int addToCartCount, int clickCount, int conversionCount, string index, int? noResultCount, int purchaseCount, int? searchCount, int trafficPercentage, int? userCount, int? trackedUserCount)
   {
     AddToCartCount = addToCartCount;
     ClickCount = clickCount;
     ConversionCount = conversionCount;
-    Description = description ?? throw new ArgumentNullException(nameof(description));
     Index = index ?? throw new ArgumentNullException(nameof(index));
     NoResultCount = noResultCount ?? throw new ArgumentNullException(nameof(noResultCount));
     PurchaseCount = purchaseCount;

@@ -19,15 +19,8 @@ public partial class GetObjectsResponse<T>
   /// <summary>
   /// Initializes a new instance of the GetObjectsResponse class.
   /// </summary>
-  [JsonConstructor]
-  public GetObjectsResponse() { }
-  /// <summary>
-  /// Initializes a new instance of the GetObjectsResponse class.
-  /// </summary>
-  /// <param name="results">Retrieved records. (required).</param>
-  public GetObjectsResponse(List<T> results)
+  public GetObjectsResponse()
   {
-    Results = results ?? throw new ArgumentNullException(nameof(results));
   }
 
   /// <summary>
