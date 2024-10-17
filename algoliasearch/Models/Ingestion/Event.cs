@@ -67,13 +67,6 @@ public partial class Event
   public string RunID { get; set; }
 
   /// <summary>
-  /// The parent event, the cause of this event.
-  /// </summary>
-  /// <value>The parent event, the cause of this event.</value>
-  [JsonPropertyName("parentID")]
-  public string ParentID { get; set; }
-
-  /// <summary>
   /// The extracted record batch size.
   /// </summary>
   /// <value>The extracted record batch size.</value>
@@ -103,7 +96,6 @@ public partial class Event
     sb.Append("class Event {\n");
     sb.Append("  EventID: ").Append(EventID).Append("\n");
     sb.Append("  RunID: ").Append(RunID).Append("\n");
-    sb.Append("  ParentID: ").Append(ParentID).Append("\n");
     sb.Append("  Status: ").Append(Status).Append("\n");
     sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("  BatchSize: ").Append(BatchSize).Append("\n");
@@ -137,7 +129,6 @@ public partial class Event
     return
         (EventID == input.EventID || (EventID != null && EventID.Equals(input.EventID))) &&
         (RunID == input.RunID || (RunID != null && RunID.Equals(input.RunID))) &&
-        (ParentID == input.ParentID || (ParentID != null && ParentID.Equals(input.ParentID))) &&
         (Status == input.Status || Status.Equals(input.Status)) &&
         (Type == input.Type || Type.Equals(input.Type)) &&
         (BatchSize == input.BatchSize || BatchSize.Equals(input.BatchSize)) &&
@@ -161,10 +152,6 @@ public partial class Event
       if (RunID != null)
       {
         hashCode = (hashCode * 59) + RunID.GetHashCode();
-      }
-      if (ParentID != null)
-      {
-        hashCode = (hashCode * 59) + ParentID.GetHashCode();
       }
       hashCode = (hashCode * 59) + Status.GetHashCode();
       hashCode = (hashCode * 59) + Type.GetHashCode();
