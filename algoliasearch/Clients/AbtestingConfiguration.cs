@@ -28,7 +28,7 @@ public sealed class AbtestingConfig : AlgoliaConfig
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
   /// <param name="region">Targeted region (optional)</param>
-  public AbtestingConfig(string appId, string apiKey, string region = null) : base(appId, apiKey, "Abtesting", "7.6.1")
+  public AbtestingConfig(string appId, string apiKey, string region = null) : base(appId, apiKey, "Abtesting", "7.6.2")
   {
     DefaultHosts = GetDefaultHosts(region);
     Compression = CompressionType.None;
