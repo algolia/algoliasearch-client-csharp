@@ -26,7 +26,7 @@ public partial class TimeRange
   /// </summary>
   /// <param name="from">When the rule should start to be active, in Unix epoch time. (required).</param>
   /// <param name="until">When the rule should stop to be active, in Unix epoch time. (required).</param>
-  public TimeRange(int from, int until)
+  public TimeRange(long from, long until)
   {
     From = from;
     Until = until;
@@ -37,14 +37,14 @@ public partial class TimeRange
   /// </summary>
   /// <value>When the rule should start to be active, in Unix epoch time.</value>
   [JsonPropertyName("from")]
-  public int From { get; set; }
+  public long From { get; set; }
 
   /// <summary>
   /// When the rule should stop to be active, in Unix epoch time.
   /// </summary>
   /// <value>When the rule should stop to be active, in Unix epoch time.</value>
   [JsonPropertyName("until")]
-  public int Until { get; set; }
+  public long Until { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
