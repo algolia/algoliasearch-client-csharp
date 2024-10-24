@@ -31,6 +31,13 @@ public partial class GetObjectsResponse<T>
   }
 
   /// <summary>
+  /// An optional status message.
+  /// </summary>
+  /// <value>An optional status message.</value>
+  [JsonPropertyName("message")]
+  public string Message { get; set; }
+
+  /// <summary>
   /// Retrieved records.
   /// </summary>
   /// <value>Retrieved records.</value>
@@ -45,6 +52,7 @@ public partial class GetObjectsResponse<T>
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class GetObjectsResponse {\n");
+    sb.Append("  Message: ").Append(Message).Append("\n");
     sb.Append("  Results: ").Append(Results).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -72,6 +80,7 @@ public partial class GetObjectsResponse<T>
     }
 
     return
+        (Message == input.Message || (Message != null && Message.Equals(input.Message))) &&
         (Results == input.Results || Results != null && input.Results != null && Results.SequenceEqual(input.Results));
   }
 
@@ -84,6 +93,10 @@ public partial class GetObjectsResponse<T>
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
+      if (Message != null)
+      {
+        hashCode = (hashCode * 59) + Message.GetHashCode();
+      }
       if (Results != null)
       {
         hashCode = (hashCode * 59) + Results.GetHashCode();
