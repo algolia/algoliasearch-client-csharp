@@ -46,6 +46,24 @@ public enum SynonymType
   /// Enum Placeholder for value: placeholder
   /// </summary>
   [JsonPropertyName("placeholder")]
-  Placeholder = 5
+  Placeholder = 5,
+
+  /// <summary>
+  /// Enum OneWaySynonym for value: oneWaySynonym
+  /// </summary>
+  [JsonPropertyName("oneWaySynonym")]
+  OneWaySynonym = 6,
+
+  /// <summary>
+  /// Enum AltCorrection1 for value: altCorrection1
+  /// </summary>
+  [JsonPropertyName("altCorrection1")]
+  AltCorrection1 = 7,
+
+  /// <summary>
+  /// Enum AltCorrection2 for value: altCorrection2
+  /// </summary>
+  [JsonPropertyName("altCorrection2")]
+  AltCorrection2 = 8
 }
 
