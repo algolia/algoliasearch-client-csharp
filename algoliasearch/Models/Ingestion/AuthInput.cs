@@ -80,6 +80,16 @@ public partial class AuthInput : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
+  /// <summary>
+  /// Initializes a new instance of the AuthInput class
+  /// with a Dictionary{string, string}
+  /// </summary>
+  /// <param name="actualInstance">An instance of Dictionary&lt;string, string&gt;.</param>
+  public AuthInput(Dictionary<string, string> actualInstance)
+  {
+    ActualInstance = actualInstance;
+  }
+
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -146,6 +156,16 @@ public partial class AuthInput : AbstractSchema
     return (AuthAlgoliaInsights)ActualInstance;
   }
 
+  /// <summary>
+  /// Get the actual instance of `Dictionary{string, string}`. If the actual instance is not `Dictionary{string, string}`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of Dictionary&lt;string, string&gt;</returns>
+  public Dictionary<string, string> AsDictionaryString()
+  {
+    return (Dictionary<string, string>)ActualInstance;
+  }
+
 
   /// <summary>
   /// Check if the actual instance is of `AuthOAuth` type.
@@ -199,6 +219,15 @@ public partial class AuthInput : AbstractSchema
   public bool IsAuthAlgoliaInsights()
   {
     return ActualInstance.GetType() == typeof(AuthAlgoliaInsights);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `Dictionary{string, string}` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsDictionaryString()
+  {
+    return ActualInstance.GetType() == typeof(Dictionary<string, string>);
   }
 
   /// <summary>
@@ -355,6 +384,18 @@ public class AuthInputJsonConverter : JsonConverter<AuthInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into AuthAlgoliaInsights: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object)
+    {
+      try
+      {
+        return new AuthInput(jsonDocument.Deserialize<Dictionary<string, string>>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into Dictionary<string, string>: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");
