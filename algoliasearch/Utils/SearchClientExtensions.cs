@@ -344,7 +344,7 @@ public partial class SearchClient : ISearchClient
       var page = prevResp?.Item2 ?? 0;
       var searchSynonymsResponse = await SearchRulesAsync(indexName, searchRulesParams, requestOptions);
       return new Tuple<SearchRulesResponse, int>(searchSynonymsResponse, page + 1);
-    }, resp => resp?.Item1 is { NbHits: < hitsPerPage }).ConfigureAwait(false);
+    }, resp => resp?.Item1 is { Hits.Count: < hitsPerPage }).ConfigureAwait(false);
 
     return all.SelectMany(u => u.Item1.Hits);
   }
@@ -367,7 +367,7 @@ public partial class SearchClient : ISearchClient
       var searchSynonymsResponse = await SearchSynonymsAsync(indexName, synonymsParams, requestOptions);
       page = page + 1;
       return new Tuple<SearchSynonymsResponse, int>(searchSynonymsResponse, page);
-    }, resp => resp?.Item1 is { NbHits: < hitsPerPage }).ConfigureAwait(false);
+    }, resp => resp?.Item1 is { Hits.Count: < hitsPerPage }).ConfigureAwait(false);
 
     return all.SelectMany(u => u.Item1.Hits);
   }
