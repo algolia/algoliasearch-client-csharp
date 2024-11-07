@@ -15,8 +15,8 @@ namespace Algolia.Search.Models.Abtesting;
 /// Metric for which you want to detect the smallest relative difference.
 /// </summary>
 /// <value>Metric for which you want to detect the smallest relative difference.</value>
-[JsonConverter(typeof(Serializer.JsonStringEnumConverter<Effect>))]
-public enum Effect
+[JsonConverter(typeof(Serializer.JsonStringEnumConverter<EffectMetric>))]
+public enum EffectMetric
 {
   /// <summary>
   /// Enum AddToCartRate for value: addToCartRate

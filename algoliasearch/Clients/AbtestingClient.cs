@@ -190,6 +190,36 @@ public interface IAbtestingClient
   ABTestResponse DeleteABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
+  /// Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="estimateABTestRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>Task of EstimateABTestResponse</returns>
+  Task<EstimateABTestResponse> EstimateABTestAsync(EstimateABTestRequest estimateABTestRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
+  /// Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic. (Synchronous version)
+  /// </summary>
+  ///
+  /// Required API Key ACLs:
+  ///   - analytics
+  /// <param name="estimateABTestRequest"></param>
+  /// <param name="options">Add extra http header or query parameters to Algolia.</param>
+  /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+  /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
+  /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
+  /// <returns>EstimateABTestResponse</returns>
+  EstimateABTestResponse EstimateABTest(EstimateABTestRequest estimateABTestRequest, RequestOptions options = null, CancellationToken cancellationToken = default);
+
+  /// <summary>
   /// Retrieves the details for an A/B test by its ID.
   /// </summary>
   ///
@@ -511,6 +541,26 @@ public partial class AbtestingClient : IAbtestingClient
   /// <inheritdoc />
   public ABTestResponse DeleteABTest(int id, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => DeleteABTestAsync(id, options, cancellationToken));
+
+
+  /// <inheritdoc />
+  public async Task<EstimateABTestResponse> EstimateABTestAsync(EstimateABTestRequest estimateABTestRequest, RequestOptions options = null, CancellationToken cancellationToken = default)
+  {
+
+    if (estimateABTestRequest == null)
+      throw new ArgumentException("Parameter `estimateABTestRequest` is required when calling `EstimateABTest`.");
+
+    var requestOptions = new InternalRequestOptions(options);
+
+
+    requestOptions.Data = estimateABTestRequest;
+    return await _transport.ExecuteRequestAsync<EstimateABTestResponse>(new HttpMethod("POST"), "/2/abtests/estimate", requestOptions, cancellationToken).ConfigureAwait(false);
+  }
+
+
+  /// <inheritdoc />
+  public EstimateABTestResponse EstimateABTest(EstimateABTestRequest estimateABTestRequest, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => EstimateABTestAsync(estimateABTestRequest, options, cancellationToken));
 
 
   /// <inheritdoc />

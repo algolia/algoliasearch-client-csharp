@@ -18,15 +18,24 @@ public partial class MinimumDetectableEffect
 {
 
   /// <summary>
-  /// Gets or Sets Effect
+  /// Gets or Sets Metric
   /// </summary>
-  [JsonPropertyName("effect")]
-  public Effect? Effect { get; set; }
+  [JsonPropertyName("metric")]
+  public EffectMetric? Metric { get; set; }
   /// <summary>
   /// Initializes a new instance of the MinimumDetectableEffect class.
   /// </summary>
-  public MinimumDetectableEffect()
+  [JsonConstructor]
+  public MinimumDetectableEffect() { }
+  /// <summary>
+  /// Initializes a new instance of the MinimumDetectableEffect class.
+  /// </summary>
+  /// <param name="size">Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.  (required).</param>
+  /// <param name="metric">metric (required).</param>
+  public MinimumDetectableEffect(double size, EffectMetric? metric)
   {
+    Size = size;
+    Metric = metric;
   }
 
   /// <summary>
@@ -34,7 +43,7 @@ public partial class MinimumDetectableEffect
   /// </summary>
   /// <value>Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1. </value>
   [JsonPropertyName("size")]
-  public double? Size { get; set; }
+  public double Size { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -45,7 +54,7 @@ public partial class MinimumDetectableEffect
     StringBuilder sb = new StringBuilder();
     sb.Append("class MinimumDetectableEffect {\n");
     sb.Append("  Size: ").Append(Size).Append("\n");
-    sb.Append("  Effect: ").Append(Effect).Append("\n");
+    sb.Append("  Metric: ").Append(Metric).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -73,7 +82,7 @@ public partial class MinimumDetectableEffect
 
     return
         (Size == input.Size || Size.Equals(input.Size)) &&
-        (Effect == input.Effect || Effect.Equals(input.Effect));
+        (Metric == input.Metric || Metric.Equals(input.Metric));
   }
 
   /// <summary>
@@ -86,7 +95,7 @@ public partial class MinimumDetectableEffect
     {
       int hashCode = 41;
       hashCode = (hashCode * 59) + Size.GetHashCode();
-      hashCode = (hashCode * 59) + Effect.GetHashCode();
+      hashCode = (hashCode * 59) + Metric.GetHashCode();
       return hashCode;
     }
   }
