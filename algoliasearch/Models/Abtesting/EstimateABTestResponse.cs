@@ -31,18 +31,11 @@ public partial class EstimateABTestResponse
   public long? DurationDays { get; set; }
 
   /// <summary>
-  /// Number of tracked searches needed to be able to detect the configured effect for the control variant.
+  /// Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches required to achieve the desired statistical significance. 
   /// </summary>
-  /// <value>Number of tracked searches needed to be able to detect the configured effect for the control variant.</value>
-  [JsonPropertyName("controlSampleSize")]
-  public long? ControlSampleSize { get; set; }
-
-  /// <summary>
-  /// Number of tracked searches needed to be able to detect the configured effect for the experiment variant.
-  /// </summary>
-  /// <value>Number of tracked searches needed to be able to detect the configured effect for the experiment variant.</value>
-  [JsonPropertyName("experimentSampleSize")]
-  public long? ExperimentSampleSize { get; set; }
+  /// <value>Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches required to achieve the desired statistical significance. </value>
+  [JsonPropertyName("sampleSizes")]
+  public List<long> SampleSizes { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -53,8 +46,7 @@ public partial class EstimateABTestResponse
     StringBuilder sb = new StringBuilder();
     sb.Append("class EstimateABTestResponse {\n");
     sb.Append("  DurationDays: ").Append(DurationDays).Append("\n");
-    sb.Append("  ControlSampleSize: ").Append(ControlSampleSize).Append("\n");
-    sb.Append("  ExperimentSampleSize: ").Append(ExperimentSampleSize).Append("\n");
+    sb.Append("  SampleSizes: ").Append(SampleSizes).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -82,8 +74,7 @@ public partial class EstimateABTestResponse
 
     return
         (DurationDays == input.DurationDays || DurationDays.Equals(input.DurationDays)) &&
-        (ControlSampleSize == input.ControlSampleSize || ControlSampleSize.Equals(input.ControlSampleSize)) &&
-        (ExperimentSampleSize == input.ExperimentSampleSize || ExperimentSampleSize.Equals(input.ExperimentSampleSize));
+        (SampleSizes == input.SampleSizes || SampleSizes != null && input.SampleSizes != null && SampleSizes.SequenceEqual(input.SampleSizes));
   }
 
   /// <summary>
@@ -96,8 +87,10 @@ public partial class EstimateABTestResponse
     {
       int hashCode = 41;
       hashCode = (hashCode * 59) + DurationDays.GetHashCode();
-      hashCode = (hashCode * 59) + ControlSampleSize.GetHashCode();
-      hashCode = (hashCode * 59) + ExperimentSampleSize.GetHashCode();
+      if (SampleSizes != null)
+      {
+        hashCode = (hashCode * 59) + SampleSizes.GetHashCode();
+      }
       return hashCode;
     }
   }
