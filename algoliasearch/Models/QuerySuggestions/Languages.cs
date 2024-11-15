@@ -24,7 +24,7 @@ public partial class Languages : AbstractSchema
   /// Initializes a new instance of the Languages class
   /// with a List{String}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;string&gt;.</param>
+  /// <param name="actualInstance">An instance of List<string>.</param>
   public Languages(List<string> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

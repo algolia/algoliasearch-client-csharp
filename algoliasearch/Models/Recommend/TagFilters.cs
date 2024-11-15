@@ -24,7 +24,7 @@ public partial class TagFilters : AbstractSchema
   /// Initializes a new instance of the TagFilters class
   /// with a List{TagFilters}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;TagFilters&gt;.</param>
+  /// <param name="actualInstance">An instance of List<TagFilters>.</param>
   public TagFilters(List<TagFilters> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

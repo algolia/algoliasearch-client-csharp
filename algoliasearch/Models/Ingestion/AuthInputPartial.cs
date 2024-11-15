@@ -84,7 +84,7 @@ public partial class AuthInputPartial : AbstractSchema
   /// Initializes a new instance of the AuthInputPartial class
   /// with a Dictionary{string, string}
   /// </summary>
-  /// <param name="actualInstance">An instance of Dictionary&lt;string, string&gt;.</param>
+  /// <param name="actualInstance">An instance of Dictionary<string, string>.</param>
   public AuthInputPartial(Dictionary<string, string> actualInstance)
   {
     ActualInstance = actualInstance;

@@ -24,7 +24,7 @@ public partial class NumericFilters : AbstractSchema
   /// Initializes a new instance of the NumericFilters class
   /// with a List{NumericFilters}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;NumericFilters&gt;.</param>
+  /// <param name="actualInstance">An instance of List<NumericFilters>.</param>
   public NumericFilters(List<NumericFilters> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

@@ -24,7 +24,7 @@ public partial class IgnorePlurals : AbstractSchema
   /// Initializes a new instance of the IgnorePlurals class
   /// with a List{SupportedLanguage}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;SupportedLanguage&gt;.</param>
+  /// <param name="actualInstance">An instance of List<SupportedLanguage>.</param>
   public IgnorePlurals(List<SupportedLanguage> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

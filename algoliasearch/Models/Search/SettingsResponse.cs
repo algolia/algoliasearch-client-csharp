@@ -167,6 +167,13 @@ public partial class SettingsResponse
   public string AttributeForDistinct { get; set; }
 
   /// <summary>
+  /// Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+  /// </summary>
+  /// <value>Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
+  [JsonPropertyName("maxFacetHits")]
+  public int? MaxFacetHits { get; set; }
+
+  /// <summary>
   /// Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes. Attribute names are case-sensitive.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. 
   /// </summary>
   /// <value>Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes. Attribute names are case-sensitive.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. </value>
@@ -338,11 +345,10 @@ public partial class SettingsResponse
   public bool? AdvancedSyntax { get; set; }
 
   /// <summary>
-  /// Words that should be considered optional when found in the query.  By default, records must match all words in the search query to be included in the search results. Adding optional words can help to increase the number of search results by running an additional search query that doesn't include the optional words. For example, if the search query is \"action video\" and \"video\" is an optional word, the search engine runs two queries. One for \"action video\" and one for \"action\". Records that match all words are ranked higher.  For a search query with 4 or more words **and** all its words are optional, the number of matched words required for a record to be included in the search results increases for every 1,000 records:  - If `optionalWords` has less than 10 words, the required number of matched words increases by 1:   results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 2 matched words. - If `optionalWords` has 10 or more words, the number of required matched words increases by the number of optional words divided by 5 (rounded down).   For example, with 18 optional words: results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 4 matched words.  For more information, see [Optional words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words). 
+  /// Gets or Sets OptionalWords
   /// </summary>
-  /// <value>Words that should be considered optional when found in the query.  By default, records must match all words in the search query to be included in the search results. Adding optional words can help to increase the number of search results by running an additional search query that doesn't include the optional words. For example, if the search query is \"action video\" and \"video\" is an optional word, the search engine runs two queries. One for \"action video\" and one for \"action\". Records that match all words are ranked higher.  For a search query with 4 or more words **and** all its words are optional, the number of matched words required for a record to be included in the search results increases for every 1,000 records:  - If `optionalWords` has less than 10 words, the required number of matched words increases by 1:   results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 2 matched words. - If `optionalWords` has 10 or more words, the number of required matched words increases by the number of optional words divided by 5 (rounded down).   For example, with 18 optional words: results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 4 matched words.  For more information, see [Optional words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words). </value>
   [JsonPropertyName("optionalWords")]
-  public List<string> OptionalWords { get; set; }
+  public OptionalWords OptionalWords { get; set; }
 
   /// <summary>
   /// Searchable attributes for which you want to [turn off the Exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes). Attribute names are case-sensitive.  This can be useful for attributes with long values, where the likelihood of an exact match is high, such as product descriptions. Turning off the Exact ranking criterion for these attributes favors exact matching on other attributes. This reduces the impact of individual attributes with a lot of content on ranking. 
@@ -391,13 +397,6 @@ public partial class SettingsResponse
   /// <value>Properties to include in the API response of `search` and `browse` requests.  By default, all response properties are included. To reduce the response size, you can select, which attributes should be included.  You can't exclude these properties: `message`, `warning`, `cursor`, `serverUsed`, `indexUsed`, `abTestVariantID`, `parsedQuery`, or any property triggered by the `getRankingInfo` parameter.  Don't exclude properties that you might need in your search UI. </value>
   [JsonPropertyName("responseFields")]
   public List<string> ResponseFields { get; set; }
-
-  /// <summary>
-  /// Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
-  /// </summary>
-  /// <value>Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).</value>
-  [JsonPropertyName("maxFacetHits")]
-  public int? MaxFacetHits { get; set; }
 
   /// <summary>
   /// Maximum number of facet values to return for each facet.
@@ -471,6 +470,7 @@ public partial class SettingsResponse
     sb.Append("  UserData: ").Append(UserData).Append("\n");
     sb.Append("  CustomNormalization: ").Append(CustomNormalization).Append("\n");
     sb.Append("  AttributeForDistinct: ").Append(AttributeForDistinct).Append("\n");
+    sb.Append("  MaxFacetHits: ").Append(MaxFacetHits).Append("\n");
     sb.Append("  AttributesToRetrieve: ").Append(AttributesToRetrieve).Append("\n");
     sb.Append("  Ranking: ").Append(Ranking).Append("\n");
     sb.Append("  CustomRanking: ").Append(CustomRanking).Append("\n");
@@ -508,7 +508,6 @@ public partial class SettingsResponse
     sb.Append("  ReplaceSynonymsInHighlight: ").Append(ReplaceSynonymsInHighlight).Append("\n");
     sb.Append("  MinProximity: ").Append(MinProximity).Append("\n");
     sb.Append("  ResponseFields: ").Append(ResponseFields).Append("\n");
-    sb.Append("  MaxFacetHits: ").Append(MaxFacetHits).Append("\n");
     sb.Append("  MaxValuesPerFacet: ").Append(MaxValuesPerFacet).Append("\n");
     sb.Append("  SortFacetValuesBy: ").Append(SortFacetValuesBy).Append("\n");
     sb.Append("  AttributeCriteriaComputedByMinProximity: ").Append(AttributeCriteriaComputedByMinProximity).Append("\n");
@@ -559,6 +558,7 @@ public partial class SettingsResponse
         (UserData == input.UserData || (UserData != null && UserData.Equals(input.UserData))) &&
         (CustomNormalization == input.CustomNormalization || CustomNormalization != null && input.CustomNormalization != null && CustomNormalization.SequenceEqual(input.CustomNormalization)) &&
         (AttributeForDistinct == input.AttributeForDistinct || (AttributeForDistinct != null && AttributeForDistinct.Equals(input.AttributeForDistinct))) &&
+        (MaxFacetHits == input.MaxFacetHits || MaxFacetHits.Equals(input.MaxFacetHits)) &&
         (AttributesToRetrieve == input.AttributesToRetrieve || AttributesToRetrieve != null && input.AttributesToRetrieve != null && AttributesToRetrieve.SequenceEqual(input.AttributesToRetrieve)) &&
         (Ranking == input.Ranking || Ranking != null && input.Ranking != null && Ranking.SequenceEqual(input.Ranking)) &&
         (CustomRanking == input.CustomRanking || CustomRanking != null && input.CustomRanking != null && CustomRanking.SequenceEqual(input.CustomRanking)) &&
@@ -587,7 +587,7 @@ public partial class SettingsResponse
         (Mode == input.Mode || Mode.Equals(input.Mode)) &&
         (SemanticSearch == input.SemanticSearch || (SemanticSearch != null && SemanticSearch.Equals(input.SemanticSearch))) &&
         (AdvancedSyntax == input.AdvancedSyntax || AdvancedSyntax.Equals(input.AdvancedSyntax)) &&
-        (OptionalWords == input.OptionalWords || OptionalWords != null && input.OptionalWords != null && OptionalWords.SequenceEqual(input.OptionalWords)) &&
+        (OptionalWords == input.OptionalWords || (OptionalWords != null && OptionalWords.Equals(input.OptionalWords))) &&
         (DisableExactOnAttributes == input.DisableExactOnAttributes || DisableExactOnAttributes != null && input.DisableExactOnAttributes != null && DisableExactOnAttributes.SequenceEqual(input.DisableExactOnAttributes)) &&
         (ExactOnSingleWordQuery == input.ExactOnSingleWordQuery || ExactOnSingleWordQuery.Equals(input.ExactOnSingleWordQuery)) &&
         (AlternativesAsExact == input.AlternativesAsExact || AlternativesAsExact != null && input.AlternativesAsExact != null && AlternativesAsExact.SequenceEqual(input.AlternativesAsExact)) &&
@@ -596,7 +596,6 @@ public partial class SettingsResponse
         (ReplaceSynonymsInHighlight == input.ReplaceSynonymsInHighlight || ReplaceSynonymsInHighlight.Equals(input.ReplaceSynonymsInHighlight)) &&
         (MinProximity == input.MinProximity || MinProximity.Equals(input.MinProximity)) &&
         (ResponseFields == input.ResponseFields || ResponseFields != null && input.ResponseFields != null && ResponseFields.SequenceEqual(input.ResponseFields)) &&
-        (MaxFacetHits == input.MaxFacetHits || MaxFacetHits.Equals(input.MaxFacetHits)) &&
         (MaxValuesPerFacet == input.MaxValuesPerFacet || MaxValuesPerFacet.Equals(input.MaxValuesPerFacet)) &&
         (SortFacetValuesBy == input.SortFacetValuesBy || (SortFacetValuesBy != null && SortFacetValuesBy.Equals(input.SortFacetValuesBy))) &&
         (AttributeCriteriaComputedByMinProximity == input.AttributeCriteriaComputedByMinProximity || AttributeCriteriaComputedByMinProximity.Equals(input.AttributeCriteriaComputedByMinProximity)) &&
@@ -677,6 +676,7 @@ public partial class SettingsResponse
       {
         hashCode = (hashCode * 59) + AttributeForDistinct.GetHashCode();
       }
+      hashCode = (hashCode * 59) + MaxFacetHits.GetHashCode();
       if (AttributesToRetrieve != null)
       {
         hashCode = (hashCode * 59) + AttributesToRetrieve.GetHashCode();
@@ -777,7 +777,6 @@ public partial class SettingsResponse
       {
         hashCode = (hashCode * 59) + ResponseFields.GetHashCode();
       }
-      hashCode = (hashCode * 59) + MaxFacetHits.GetHashCode();
       hashCode = (hashCode * 59) + MaxValuesPerFacet.GetHashCode();
       if (SortFacetValuesBy != null)
       {

@@ -62,11 +62,10 @@ public partial class DeleteByParams
   public AroundRadius AroundRadius { get; set; }
 
   /// <summary>
-  /// Coordinates for a rectangular area in which to search.  Each bounding box is defined by the two opposite points of its diagonal, and expressed as latitude and longitude pair: `[p1 lat, p1 long, p2 lat, p2 long]`. Provide multiple bounding boxes as nested arrays. For more information, see [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). 
+  /// Gets or Sets InsideBoundingBox
   /// </summary>
-  /// <value>Coordinates for a rectangular area in which to search.  Each bounding box is defined by the two opposite points of its diagonal, and expressed as latitude and longitude pair: `[p1 lat, p1 long, p2 lat, p2 long]`. Provide multiple bounding boxes as nested arrays. For more information, see [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). </value>
   [JsonPropertyName("insideBoundingBox")]
-  public List<List<double>> InsideBoundingBox { get; set; }
+  public InsideBoundingBox InsideBoundingBox { get; set; }
 
   /// <summary>
   /// Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored if you also specify `insideBoundingBox`. 
@@ -123,7 +122,7 @@ public partial class DeleteByParams
         (TagFilters == input.TagFilters || (TagFilters != null && TagFilters.Equals(input.TagFilters))) &&
         (AroundLatLng == input.AroundLatLng || (AroundLatLng != null && AroundLatLng.Equals(input.AroundLatLng))) &&
         (AroundRadius == input.AroundRadius || (AroundRadius != null && AroundRadius.Equals(input.AroundRadius))) &&
-        (InsideBoundingBox == input.InsideBoundingBox || InsideBoundingBox != null && input.InsideBoundingBox != null && InsideBoundingBox.SequenceEqual(input.InsideBoundingBox)) &&
+        (InsideBoundingBox == input.InsideBoundingBox || (InsideBoundingBox != null && InsideBoundingBox.Equals(input.InsideBoundingBox))) &&
         (InsidePolygon == input.InsidePolygon || InsidePolygon != null && input.InsidePolygon != null && InsidePolygon.SequenceEqual(input.InsidePolygon));
   }
 

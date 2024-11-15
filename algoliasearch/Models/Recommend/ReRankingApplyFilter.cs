@@ -24,7 +24,7 @@ public partial class ReRankingApplyFilter : AbstractSchema
   /// Initializes a new instance of the ReRankingApplyFilter class
   /// with a List{ReRankingApplyFilter}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;ReRankingApplyFilter&gt;.</param>
+  /// <param name="actualInstance">An instance of List<ReRankingApplyFilter>.</param>
   public ReRankingApplyFilter(List<ReRankingApplyFilter> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

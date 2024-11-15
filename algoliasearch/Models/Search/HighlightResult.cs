@@ -34,7 +34,7 @@ public partial class HighlightResult : AbstractSchema
   /// Initializes a new instance of the HighlightResult class
   /// with a Dictionary{string, HighlightResult}
   /// </summary>
-  /// <param name="actualInstance">An instance of Dictionary&lt;string, HighlightResult&gt;.</param>
+  /// <param name="actualInstance">An instance of Dictionary<string, HighlightResult>.</param>
   public HighlightResult(Dictionary<string, HighlightResult> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -44,7 +44,7 @@ public partial class HighlightResult : AbstractSchema
   /// Initializes a new instance of the HighlightResult class
   /// with a List{HighlightResult}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;HighlightResult&gt;.</param>
+  /// <param name="actualInstance">An instance of List<HighlightResult>.</param>
   public HighlightResult(List<HighlightResult> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

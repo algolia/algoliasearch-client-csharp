@@ -34,7 +34,7 @@ public partial class AroundPrecision : AbstractSchema
   /// Initializes a new instance of the AroundPrecision class
   /// with a List{Range}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;Range&gt;.</param>
+  /// <param name="actualInstance">An instance of List<Range>.</param>
   public AroundPrecision(List<Range> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

@@ -24,7 +24,7 @@ public partial class FacetFilters : AbstractSchema
   /// Initializes a new instance of the FacetFilters class
   /// with a List{FacetFilters}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;FacetFilters&gt;.</param>
+  /// <param name="actualInstance">An instance of List<FacetFilters>.</param>
   public FacetFilters(List<FacetFilters> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

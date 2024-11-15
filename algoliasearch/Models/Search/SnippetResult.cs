@@ -34,7 +34,7 @@ public partial class SnippetResult : AbstractSchema
   /// Initializes a new instance of the SnippetResult class
   /// with a Dictionary{string, SnippetResult}
   /// </summary>
-  /// <param name="actualInstance">An instance of Dictionary&lt;string, SnippetResult&gt;.</param>
+  /// <param name="actualInstance">An instance of Dictionary<string, SnippetResult>.</param>
   public SnippetResult(Dictionary<string, SnippetResult> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
@@ -44,7 +44,7 @@ public partial class SnippetResult : AbstractSchema
   /// Initializes a new instance of the SnippetResult class
   /// with a List{SnippetResult}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;SnippetResult&gt;.</param>
+  /// <param name="actualInstance">An instance of List<SnippetResult>.</param>
   public SnippetResult(List<SnippetResult> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

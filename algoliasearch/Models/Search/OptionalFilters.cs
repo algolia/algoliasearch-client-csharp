@@ -24,7 +24,7 @@ public partial class OptionalFilters : AbstractSchema
   /// Initializes a new instance of the OptionalFilters class
   /// with a List{OptionalFilters}
   /// </summary>
-  /// <param name="actualInstance">An instance of List&lt;OptionalFilters&gt;.</param>
+  /// <param name="actualInstance">An instance of List<OptionalFilters>.</param>
   public OptionalFilters(List<OptionalFilters> actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");

@@ -12,32 +12,39 @@ using System.IO;
 using System.Reflection;
 using Algolia.Search.Models.Common;
 
-namespace Algolia.Search.Models.Recommend;
+namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// Precision of a coordinate-based search in meters to group results with similar distances.  The Geo ranking criterion considers all matches within the same range of distances to be equal. 
+/// InsideBoundingBox
 /// </summary>
-[JsonConverter(typeof(AroundPrecisionJsonConverter))]
-public partial class AroundPrecision : AbstractSchema
+[JsonConverter(typeof(InsideBoundingBoxJsonConverter))]
+public partial class InsideBoundingBox : AbstractSchema
 {
   /// <summary>
-  /// Initializes a new instance of the AroundPrecision class
-  /// with a int
+  /// Initializes a new instance of the InsideBoundingBox class.
   /// </summary>
-  /// <param name="actualInstance">An instance of int.</param>
-  public AroundPrecision(int actualInstance)
+  public InsideBoundingBox()
+  {
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the InsideBoundingBox class
+  /// with a string
+  /// </summary>
+  /// <param name="actualInstance">An instance of string.</param>
+  public InsideBoundingBox(string actualInstance)
   {
     ActualInstance = actualInstance;
   }
 
   /// <summary>
-  /// Initializes a new instance of the AroundPrecision class
-  /// with a List{Range}
+  /// Initializes a new instance of the InsideBoundingBox class
+  /// with a List{List{double}}
   /// </summary>
-  /// <param name="actualInstance">An instance of List<Range>.</param>
-  public AroundPrecision(List<Range> actualInstance)
+  /// <param name="actualInstance">An instance of List<List<double>>.</param>
+  public InsideBoundingBox(List<List<double>> actualInstance)
   {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+    ActualInstance = actualInstance;
   }
 
 
@@ -47,42 +54,42 @@ public partial class AroundPrecision : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `int`. If the actual instance is not `int`,
+  /// Get the actual instance of `string`. If the actual instance is not `string`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of int</returns>
-  public int AsInt()
+  /// <returns>An instance of string</returns>
+  public string AsString()
   {
-    return (int)ActualInstance;
+    return (string)ActualInstance;
   }
 
   /// <summary>
-  /// Get the actual instance of `List{Range}`. If the actual instance is not `List{Range}`,
+  /// Get the actual instance of `List{List{double}}`. If the actual instance is not `List{List{double}}`,
   /// the InvalidClassException will be thrown
   /// </summary>
-  /// <returns>An instance of List&lt;Range&gt;</returns>
-  public List<Range> AsListRange()
+  /// <returns>An instance of List&lt;List&lt;double&gt;&gt;</returns>
+  public List<List<double>> AsListListDouble()
   {
-    return (List<Range>)ActualInstance;
+    return (List<List<double>>)ActualInstance;
   }
 
 
   /// <summary>
-  /// Check if the actual instance is of `int` type.
+  /// Check if the actual instance is of `string` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsInt()
+  public bool IsString()
   {
-    return ActualInstance.GetType() == typeof(int);
+    return ActualInstance.GetType() == typeof(string);
   }
 
   /// <summary>
-  /// Check if the actual instance is of `List{Range}` type.
+  /// Check if the actual instance is of `List{List{double}}` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
-  public bool IsListRange()
+  public bool IsListListDouble()
   {
-    return ActualInstance.GetType() == typeof(List<Range>);
+    return ActualInstance.GetType() == typeof(List<List<double>>);
   }
 
   /// <summary>
@@ -92,7 +99,7 @@ public partial class AroundPrecision : AbstractSchema
   public override string ToString()
   {
     var sb = new StringBuilder();
-    sb.Append("class AroundPrecision {\n");
+    sb.Append("class InsideBoundingBox {\n");
     sb.Append("  ActualInstance: ").Append(ActualInstance).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -114,7 +121,7 @@ public partial class AroundPrecision : AbstractSchema
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not AroundPrecision input)
+    if (obj is not InsideBoundingBox input)
     {
       return false;
     }
@@ -143,9 +150,9 @@ public partial class AroundPrecision : AbstractSchema
 
 
 /// <summary>
-/// Custom JSON converter for AroundPrecision
+/// Custom JSON converter for InsideBoundingBox
 /// </summary>
-public class AroundPrecisionJsonConverter : JsonConverter<AroundPrecision>
+public class InsideBoundingBoxJsonConverter : JsonConverter<InsideBoundingBox>
 {
 
   /// <summary>
@@ -155,7 +162,7 @@ public class AroundPrecisionJsonConverter : JsonConverter<AroundPrecision>
   /// <returns>True if the object can be converted</returns>
   public override bool CanConvert(Type objectType)
   {
-    return objectType == typeof(AroundPrecision);
+    return objectType == typeof(InsideBoundingBox);
   }
 
   /// <summary>
@@ -165,32 +172,32 @@ public class AroundPrecisionJsonConverter : JsonConverter<AroundPrecision>
   /// <param name="typeToConvert">Object type</param>
   /// <param name="options">Serializer options</param>
   /// <returns>The object converted from the JSON string</returns>
-  public override AroundPrecision Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override InsideBoundingBox Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Number)
+    if (root.ValueKind == JsonValueKind.String)
     {
       try
       {
-        return new AroundPrecision(jsonDocument.Deserialize<int>(JsonConfig.Options));
+        return new InsideBoundingBox(jsonDocument.Deserialize<string>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into int: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into string: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Array)
     {
       try
       {
-        return new AroundPrecision(jsonDocument.Deserialize<List<Range>>(JsonConfig.Options));
+        return new InsideBoundingBox(jsonDocument.Deserialize<List<List<double>>>(JsonConfig.Options));
       }
       catch (Exception exception)
       {
         // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<Range>: {exception}");
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into List<List<double>>: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");
@@ -200,9 +207,9 @@ public class AroundPrecisionJsonConverter : JsonConverter<AroundPrecision>
   /// To write the JSON string
   /// </summary>
   /// <param name="writer">JSON writer</param>
-  /// <param name="value">AroundPrecision to be converted into a JSON string</param>
+  /// <param name="value">InsideBoundingBox to be converted into a JSON string</param>
   /// <param name="options">JSON Serializer options</param>
-  public override void Write(Utf8JsonWriter writer, AroundPrecision value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, InsideBoundingBox value, JsonSerializerOptions options)
   {
     writer.WriteRawValue(value.ToJson());
   }
