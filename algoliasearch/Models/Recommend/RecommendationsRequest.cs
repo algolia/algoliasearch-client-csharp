@@ -70,16 +70,6 @@ public partial class RecommendationsRequest : AbstractSchema
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
-  /// <summary>
-  /// Initializes a new instance of the RecommendationsRequest class
-  /// with a RecommendedForYouQuery
-  /// </summary>
-  /// <param name="actualInstance">An instance of RecommendedForYouQuery.</param>
-  public RecommendationsRequest(RecommendedForYouQuery actualInstance)
-  {
-    ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
-  }
-
 
   /// <summary>
   /// Gets or Sets ActualInstance
@@ -136,16 +126,6 @@ public partial class RecommendationsRequest : AbstractSchema
     return (LookingSimilarQuery)ActualInstance;
   }
 
-  /// <summary>
-  /// Get the actual instance of `RecommendedForYouQuery`. If the actual instance is not `RecommendedForYouQuery`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of RecommendedForYouQuery</returns>
-  public RecommendedForYouQuery AsRecommendedForYouQuery()
-  {
-    return (RecommendedForYouQuery)ActualInstance;
-  }
-
 
   /// <summary>
   /// Check if the actual instance is of `BoughtTogetherQuery` type.
@@ -190,15 +170,6 @@ public partial class RecommendationsRequest : AbstractSchema
   public bool IsLookingSimilarQuery()
   {
     return ActualInstance.GetType() == typeof(LookingSimilarQuery);
-  }
-
-  /// <summary>
-  /// Check if the actual instance is of `RecommendedForYouQuery` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsRecommendedForYouQuery()
-  {
-    return ActualInstance.GetType() == typeof(RecommendedForYouQuery);
   }
 
   /// <summary>
@@ -343,18 +314,6 @@ public class RecommendationsRequestJsonConverter : JsonConverter<Recommendations
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into LookingSimilarQuery: {exception}");
-      }
-    }
-    if (root.ValueKind == JsonValueKind.Object)
-    {
-      try
-      {
-        return new RecommendationsRequest(jsonDocument.Deserialize<RecommendedForYouQuery>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into RecommendedForYouQuery: {exception}");
       }
     }
     throw new InvalidDataException($"The JSON string cannot be deserialized into any schema defined.");
