@@ -514,8 +514,8 @@ public partial interface ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of DeletedAtResponse</returns>
-  Task<DeletedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of UpdatedAtResponse</returns>
+  Task<UpdatedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
@@ -530,8 +530,8 @@ public partial interface ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>DeletedAtResponse</returns>
-  DeletedAtResponse DeleteBy(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>UpdatedAtResponse</returns>
+  UpdatedAtResponse DeleteBy(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Deletes an index and all its settings.  - Deleting an index doesn't delete its analytics data. - If you try to delete a non-existing index, the operation is ignored without warning. - If the index you want to delete has replica indices, the replicas become independent indices. - If the index you want to delete is a replica index, you must first unlink it from its primary index before you can delete it.   For more information, see [Delete replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/deleting-replicas/). 
@@ -2374,7 +2374,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
-  public async Task<DeletedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> DeleteByAsync(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (indexName == null)
@@ -2389,12 +2389,12 @@ public partial class SearchClient : ISearchClient
     requestOptions.PathParameters.Add("indexName", QueryStringHelper.ParameterToString(indexName));
 
     requestOptions.Data = deleteByParams;
-    return await _transport.ExecuteRequestAsync<DeletedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/deleteByQuery", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("POST"), "/1/indexes/{indexName}/deleteByQuery", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
   /// <inheritdoc />
-  public DeletedAtResponse DeleteBy(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public UpdatedAtResponse DeleteBy(string indexName, DeleteByParams deleteByParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => DeleteByAsync(indexName, deleteByParams, options, cancellationToken));
 
 
