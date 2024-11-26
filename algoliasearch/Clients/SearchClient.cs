@@ -1494,8 +1494,8 @@ public partial interface ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>Task of UpdatedRuleResponse</returns>
-  Task<UpdatedRuleResponse> SaveRuleAsync(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>Task of UpdatedAtResponse</returns>
+  Task<UpdatedAtResponse> SaveRuleAsync(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// If a rule with the specified object ID doesn't exist, it's created. Otherwise, the existing rule is replaced.  To create or update more than one rule, use the [`batch` operation](#tag/Rules/operation/saveRules).  (Synchronous version)
@@ -1512,8 +1512,8 @@ public partial interface ISearchClient
   /// <exception cref="ArgumentException">Thrown when arguments are not correct</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
-  /// <returns>UpdatedRuleResponse</returns>
-  UpdatedRuleResponse SaveRule(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  /// <returns>UpdatedAtResponse</returns>
+  UpdatedAtResponse SaveRule(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Create or update multiple rules.  If a rule with the specified object ID doesn't exist, Algolia creates a new one. Otherwise, existing rules are replaced.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
@@ -3032,7 +3032,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
-  public async Task<UpdatedRuleResponse> SaveRuleAsync(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<UpdatedAtResponse> SaveRuleAsync(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
     if (indexName == null)
@@ -3053,12 +3053,12 @@ public partial class SearchClient : ISearchClient
 
     requestOptions.AddQueryParameter("forwardToReplicas", forwardToReplicas);
     requestOptions.Data = rule;
-    return await _transport.ExecuteRequestAsync<UpdatedRuleResponse>(new HttpMethod("PUT"), "/1/indexes/{indexName}/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
+    return await _transport.ExecuteRequestAsync<UpdatedAtResponse>(new HttpMethod("PUT"), "/1/indexes/{indexName}/rules/{objectID}", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
 
   /// <inheritdoc />
-  public UpdatedRuleResponse SaveRule(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+  public UpdatedAtResponse SaveRule(string indexName, string objectID, Rule rule, bool? forwardToReplicas = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => SaveRuleAsync(indexName, objectID, rule, forwardToReplicas, options, cancellationToken));
 
 
