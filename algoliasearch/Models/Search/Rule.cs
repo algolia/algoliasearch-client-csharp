@@ -25,9 +25,11 @@ public partial class Rule
   /// Initializes a new instance of the Rule class.
   /// </summary>
   /// <param name="objectID">Unique identifier of a rule object. (required).</param>
-  public Rule(string objectID)
+  /// <param name="consequence">consequence (required).</param>
+  public Rule(string objectID, Consequence consequence)
   {
     ObjectID = objectID ?? throw new ArgumentNullException(nameof(objectID));
+    Consequence = consequence ?? throw new ArgumentNullException(nameof(consequence));
   }
 
   /// <summary>
