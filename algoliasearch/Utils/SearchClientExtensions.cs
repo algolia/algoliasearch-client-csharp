@@ -167,12 +167,13 @@ public partial interface ISearchClient
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
   /// <param name="waitForTasks">Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable..</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
   /// <typeparam name="T"></typeparam>
-  Task<List<BatchResponse>> SaveObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  Task<List<BatchResponse>> SaveObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
   /// <inheritdoc cref="SaveObjectsAsync{T}(string, IEnumerable{T}, RequestOptions, CancellationToken)"/>
-  List<BatchResponse> SaveObjects<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  List<BatchResponse> SaveObjects<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
 
   /// <summary>
   /// Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
@@ -180,11 +181,12 @@ public partial interface ISearchClient
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="objectIDs">The list of `objectIDs` to remove from the given Algolia `indexName`.</param>
   /// <param name="waitForTasks">Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable..</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  Task<List<BatchResponse>> DeleteObjectsAsync(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<List<BatchResponse>> DeleteObjectsAsync(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default);
   /// <inheritdoc cref="DeleteObjectsAsync(string, IEnumerable{String}, RequestOptions, CancellationToken)"/>
-  List<BatchResponse> DeleteObjects(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, RequestOptions options = null, CancellationToken cancellationToken = default);
+  List<BatchResponse> DeleteObjects(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Helper: Replaces object content of all the given objects according to their respective `objectID` field. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
@@ -193,11 +195,12 @@ public partial interface ISearchClient
   /// <param name="objects">The list of `objects` to update in the given Algolia `indexName`.</param>
   /// <param name="createIfNotExists">To be provided if non-existing objects are passed, otherwise, the call will fail.</param>
   /// <param name="waitForTasks">Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable..</param>
+  /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  Task<List<BatchResponse>> PartialUpdateObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  Task<List<BatchResponse>> PartialUpdateObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
   /// <inheritdoc cref="PartialUpdateObjectsAsync{T}(string, IEnumerable{T}, bool, RequestOptions, CancellationToken)"/>
-  List<BatchResponse> PartialUpdateObjects<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  List<BatchResponse> PartialUpdateObjects<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
 
   /// <summary>
   /// Helper: Check if an index exists.
@@ -568,43 +571,45 @@ public partial class SearchClient : ISearchClient
   /// <inheritdoc/>
   public async Task<List<BatchResponse>> SaveObjectsAsync<T>(string indexName, IEnumerable<T> objects,
     bool waitForTasks = false,
+    int batchSize = 1000,
     RequestOptions options = null,
     CancellationToken cancellationToken = default) where T : class
   {
-    return await ChunkedBatchAsync(indexName, objects, Action.AddObject, waitForTasks, 1000, options, cancellationToken).ConfigureAwait(false);
+    return await ChunkedBatchAsync(indexName, objects, Action.AddObject, waitForTasks, batchSize, options, cancellationToken).ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public List<BatchResponse> SaveObjects<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, RequestOptions options = null,
+  public List<BatchResponse> SaveObjects<T>(string indexName, IEnumerable<T> objects, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null,
     CancellationToken cancellationToken = default) where T : class =>
-    AsyncHelper.RunSync(() => SaveObjectsAsync(indexName, objects, waitForTasks, options, cancellationToken));
+    AsyncHelper.RunSync(() => SaveObjectsAsync(indexName, objects, waitForTasks, batchSize, options, cancellationToken));
 
   /// <inheritdoc/>
   public async Task<List<BatchResponse>> DeleteObjectsAsync(string indexName, IEnumerable<String> objectIDs,
     bool waitForTasks = false,
+    int batchSize = 1000,
     RequestOptions options = null,
     CancellationToken cancellationToken = default)
   {
-    return await ChunkedBatchAsync(indexName, objectIDs.Select(id => new { objectID = id }), Action.DeleteObject, waitForTasks, 1000, options, cancellationToken).ConfigureAwait(false);
+    return await ChunkedBatchAsync(indexName, objectIDs.Select(id => new { objectID = id }), Action.DeleteObject, waitForTasks, batchSize, options, cancellationToken).ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public List<BatchResponse> DeleteObjects(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, RequestOptions options = null,
+  public List<BatchResponse> DeleteObjects(string indexName, IEnumerable<String> objectIDs, bool waitForTasks = false, int batchSize = 1000, RequestOptions options = null,
     CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => DeleteObjectsAsync(indexName, objectIDs, waitForTasks, options, cancellationToken));
+    AsyncHelper.RunSync(() => DeleteObjectsAsync(indexName, objectIDs, waitForTasks, batchSize, options, cancellationToken));
 
   /// <inheritdoc/>
-  public async Task<List<BatchResponse>> PartialUpdateObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false,
+  public async Task<List<BatchResponse>> PartialUpdateObjectsAsync<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, int batchSize = 1000,
     RequestOptions options = null,
     CancellationToken cancellationToken = default) where T : class
   {
-    return await ChunkedBatchAsync(indexName, objects, createIfNotExists ? Action.PartialUpdateObject : Action.PartialUpdateObjectNoCreate, waitForTasks, 1000, options, cancellationToken).ConfigureAwait(false);
+    return await ChunkedBatchAsync(indexName, objects, createIfNotExists ? Action.PartialUpdateObject : Action.PartialUpdateObjectNoCreate, waitForTasks, batchSize, options, cancellationToken).ConfigureAwait(false);
   }
 
   /// <inheritdoc/>
-  public List<BatchResponse> PartialUpdateObjects<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false,
+  public List<BatchResponse> PartialUpdateObjects<T>(string indexName, IEnumerable<T> objects, bool createIfNotExists, bool waitForTasks = false, int batchSize = 1000,
     RequestOptions options = null, CancellationToken cancellationToken = default) where T : class =>
-    AsyncHelper.RunSync(() => PartialUpdateObjectsAsync(indexName, objects, createIfNotExists, waitForTasks, options, cancellationToken));
+    AsyncHelper.RunSync(() => PartialUpdateObjectsAsync(indexName, objects, createIfNotExists, waitForTasks, batchSize, options, cancellationToken));
 
   private static async Task<List<TU>> CreateIterable<TU>(Func<TU, Task<TU>> executeQuery,
     Func<TU, bool> stopCondition)
