@@ -66,15 +66,9 @@ public enum SourceType
   Shopify = 8,
 
   /// <summary>
-  /// Enum Sfcc for value: sfcc
-  /// </summary>
-  [JsonPropertyName("sfcc")]
-  Sfcc = 9,
-
-  /// <summary>
   /// Enum Push for value: push
   /// </summary>
   [JsonPropertyName("push")]
-  Push = 10
+  Push = 9
 }
 
