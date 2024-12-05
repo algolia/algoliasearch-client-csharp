@@ -32,6 +32,9 @@ public sealed class AnalyticsConfig : AlgoliaConfig
   {
     DefaultHosts = GetDefaultHosts(region);
     Compression = CompressionType.None;
+    ReadTimeout = TimeSpan.FromSeconds(5);
+    WriteTimeout = TimeSpan.FromSeconds(30);
+    ConnectTimeout = TimeSpan.FromSeconds(2);
   }
   private static List<StatefulHost> GetDefaultHosts(string region)
   {

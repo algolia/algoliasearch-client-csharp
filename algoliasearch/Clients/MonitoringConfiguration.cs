@@ -31,6 +31,9 @@ public sealed class MonitoringConfig : AlgoliaConfig
   {
     DefaultHosts = GetDefaultHosts();
     Compression = CompressionType.None;
+    ReadTimeout = TimeSpan.FromSeconds(5);
+    WriteTimeout = TimeSpan.FromSeconds(30);
+    ConnectTimeout = TimeSpan.FromSeconds(2);
   }
   private static List<StatefulHost> GetDefaultHosts()
   {

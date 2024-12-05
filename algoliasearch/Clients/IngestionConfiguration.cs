@@ -32,6 +32,9 @@ public sealed class IngestionConfig : AlgoliaConfig
   {
     DefaultHosts = GetDefaultHosts(region);
     Compression = CompressionType.None;
+    ReadTimeout = TimeSpan.FromSeconds(25);
+    WriteTimeout = TimeSpan.FromSeconds(25);
+    ConnectTimeout = TimeSpan.FromSeconds(25);
   }
   private static List<StatefulHost> GetDefaultHosts(string region)
   {
