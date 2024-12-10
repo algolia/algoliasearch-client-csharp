@@ -52,7 +52,7 @@ public partial interface ISearchClient
   AddApiKeyResponse AddApiKey(ApiKey apiKey, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// If a record with the specified object ID exists, the existing record is replaced. Otherwise, a new record is added to the index.  To update _some_ attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead. To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch). 
+  /// If a record with the specified object ID exists, the existing record is replaced. Otherwise, a new record is added to the index.  If you want to use auto-generated object IDs, use the [`saveObject` operation](#tag/Records/operation/saveObject). To update _some_ attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead. To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch). 
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -69,7 +69,7 @@ public partial interface ISearchClient
   Task<UpdatedAtWithObjectIdResponse> AddOrUpdateObjectAsync(string indexName, string objectID, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// If a record with the specified object ID exists, the existing record is replaced. Otherwise, a new record is added to the index.  To update _some_ attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead. To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
+  /// If a record with the specified object ID exists, the existing record is replaced. Otherwise, a new record is added to the index.  If you want to use auto-generated object IDs, use the [`saveObject` operation](#tag/Records/operation/saveObject). To update _some_ attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead. To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1448,7 +1448,7 @@ public partial interface ISearchClient
   AddApiKeyResponse RestoreApiKey(string key, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
+  /// Adds a record to an index or replaces it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia). 
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1464,7 +1464,7 @@ public partial interface ISearchClient
   Task<SaveObjectResponse> SaveObjectAsync(string indexName, object body, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
+  /// Adds a record to an index or replaces it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:
