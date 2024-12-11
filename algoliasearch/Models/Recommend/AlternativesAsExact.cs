@@ -33,6 +33,12 @@ public enum AlternativesAsExact
   /// Enum MultiWordsSynonym for value: multiWordsSynonym
   /// </summary>
   [JsonPropertyName("multiWordsSynonym")]
-  MultiWordsSynonym = 3
+  MultiWordsSynonym = 3,
+
+  /// <summary>
+  /// Enum IgnoreConjugations for value: ignoreConjugations
+  /// </summary>
+  [JsonPropertyName("ignoreConjugations")]
+  IgnoreConjugations = 4
 }
 
