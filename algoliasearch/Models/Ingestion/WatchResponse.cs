@@ -12,20 +12,20 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Ingestion;
 
 /// <summary>
-/// SourceWatchResponse
+/// WatchResponse
 /// </summary>
-public partial class SourceWatchResponse
+public partial class WatchResponse
 {
   /// <summary>
-  /// Initializes a new instance of the SourceWatchResponse class.
+  /// Initializes a new instance of the WatchResponse class.
   /// </summary>
   [JsonConstructor]
-  public SourceWatchResponse() { }
+  public WatchResponse() { }
   /// <summary>
-  /// Initializes a new instance of the SourceWatchResponse class.
+  /// Initializes a new instance of the WatchResponse class.
   /// </summary>
   /// <param name="message">a message describing the outcome of a validate run. (required).</param>
-  public SourceWatchResponse(string message)
+  public WatchResponse(string message)
   {
     Message = message ?? throw new ArgumentNullException(nameof(message));
   }
@@ -38,9 +38,9 @@ public partial class SourceWatchResponse
   public string RunID { get; set; }
 
   /// <summary>
-  /// depending on the source type, the validation returns sampling data of your source (JSON, CSV, BigQuery).
+  /// when used with discovering or validating sources, the sampled data of your source is returned.
   /// </summary>
-  /// <value>depending on the source type, the validation returns sampling data of your source (JSON, CSV, BigQuery).</value>
+  /// <value>when used with discovering or validating sources, the sampled data of your source is returned.</value>
   [JsonPropertyName("data")]
   public List<object> Data { get; set; }
 
@@ -65,7 +65,7 @@ public partial class SourceWatchResponse
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class SourceWatchResponse {\n");
+    sb.Append("class WatchResponse {\n");
     sb.Append("  RunID: ").Append(RunID).Append("\n");
     sb.Append("  Data: ").Append(Data).Append("\n");
     sb.Append("  Events: ").Append(Events).Append("\n");
@@ -90,7 +90,7 @@ public partial class SourceWatchResponse
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not SourceWatchResponse input)
+    if (obj is not WatchResponse input)
     {
       return false;
     }
