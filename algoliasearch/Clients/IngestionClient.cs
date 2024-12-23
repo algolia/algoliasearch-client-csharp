@@ -1612,7 +1612,7 @@ public interface IIngestionClient
   List<Transformation> SearchTransformations(TransformationSearch transformationSearch, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`. 
+  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: airbyte`. 
   /// </summary>
   ///
   /// Required API Key ACLs:
@@ -1629,7 +1629,7 @@ public interface IIngestionClient
   Task<WatchResponse> TriggerDockerSourceDiscoverAsync(string sourceID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`.  (Synchronous version)
+  /// Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: airbyte`.  (Synchronous version)
   /// </summary>
   ///
   /// Required API Key ACLs:

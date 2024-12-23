@@ -19,21 +19,15 @@ namespace Algolia.Search.Models.Ingestion;
 public enum DockerImageType
 {
   /// <summary>
-  /// Enum Singer for value: singer
-  /// </summary>
-  [JsonPropertyName("singer")]
-  Singer = 1,
-
-  /// <summary>
   /// Enum Custom for value: custom
   /// </summary>
   [JsonPropertyName("custom")]
-  Custom = 2,
+  Custom = 1,
 
   /// <summary>
   /// Enum Airbyte for value: airbyte
   /// </summary>
   [JsonPropertyName("airbyte")]
-  Airbyte = 3
+  Airbyte = 2
 }
 
