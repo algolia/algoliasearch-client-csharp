@@ -494,37 +494,46 @@ public partial class SearchClient : ISearchClient
     var rnd = new Random();
     var tmpIndexName = $"{indexName}_tmp_{rnd.Next(100)}";
 
-    var copyResponse = await OperationIndexAsync(indexName,
-        new OperationIndexParams(OperationType.Copy, tmpIndexName)
-        { Scope = [ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms] }, options, cancellationToken)
-      .ConfigureAwait(false);
-
-    var batchResponse = await ChunkedBatchAsync(tmpIndexName, objects, Action.AddObject, true, batchSize,
-      options, cancellationToken).ConfigureAwait(false);
-
-    await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
-      .ConfigureAwait(false);
-
-    copyResponse = await OperationIndexAsync(indexName,
-        new OperationIndexParams(OperationType.Copy, tmpIndexName)
-        { Scope = [ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms] }, options, cancellationToken)
-      .ConfigureAwait(false);
-    await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
-      .ConfigureAwait(false);
-
-    var moveResponse = await OperationIndexAsync(tmpIndexName,
-        new OperationIndexParams(OperationType.Move, indexName), options, cancellationToken)
-      .ConfigureAwait(false);
-
-    await WaitForTaskAsync(tmpIndexName, moveResponse.TaskID, requestOptions: options, ct: cancellationToken)
-      .ConfigureAwait(false);
-
-    return new ReplaceAllObjectsResponse
+    try
     {
-      CopyOperationResponse = copyResponse,
-      MoveOperationResponse = moveResponse,
-      BatchResponses = batchResponse
-    };
+      var copyResponse = await OperationIndexAsync(indexName,
+          new OperationIndexParams(OperationType.Copy, tmpIndexName)
+          { Scope = [ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms] }, options, cancellationToken)
+        .ConfigureAwait(false);
+
+      var batchResponse = await ChunkedBatchAsync(tmpIndexName, objects, Action.AddObject, true, batchSize,
+        options, cancellationToken).ConfigureAwait(false);
+
+      await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
+        .ConfigureAwait(false);
+
+      copyResponse = await OperationIndexAsync(indexName,
+          new OperationIndexParams(OperationType.Copy, tmpIndexName)
+          { Scope = [ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms] }, options, cancellationToken)
+        .ConfigureAwait(false);
+      await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
+        .ConfigureAwait(false);
+
+      var moveResponse = await OperationIndexAsync(tmpIndexName,
+          new OperationIndexParams(OperationType.Move, indexName), options, cancellationToken)
+        .ConfigureAwait(false);
+
+      await WaitForTaskAsync(tmpIndexName, moveResponse.TaskID, requestOptions: options, ct: cancellationToken)
+        .ConfigureAwait(false);
+
+      return new ReplaceAllObjectsResponse
+      {
+        CopyOperationResponse = copyResponse,
+        MoveOperationResponse = moveResponse,
+        BatchResponses = batchResponse
+      };
+    }
+    catch (Exception ex)
+    {
+      await DeleteIndexAsync(tmpIndexName, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+      throw ex;
+    }
   }
 
   /// <inheritdoc/>
