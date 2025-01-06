@@ -101,6 +101,18 @@ public partial class TaskV1
   public string Cursor { get; set; }
 
   /// <summary>
+  /// Gets or Sets Notifications
+  /// </summary>
+  [JsonPropertyName("notifications")]
+  public Notifications Notifications { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Policies
+  /// </summary>
+  [JsonPropertyName("policies")]
+  public Policies Policies { get; set; }
+
+  /// <summary>
   /// Date of creation in RFC 3339 format.
   /// </summary>
   /// <value>Date of creation in RFC 3339 format.</value>
@@ -131,6 +143,8 @@ public partial class TaskV1
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
     sb.Append("  Action: ").Append(Action).Append("\n");
     sb.Append("  Cursor: ").Append(Cursor).Append("\n");
+    sb.Append("  Notifications: ").Append(Notifications).Append("\n");
+    sb.Append("  Policies: ").Append(Policies).Append("\n");
     sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
     sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
     sb.Append("}\n");
@@ -168,6 +182,8 @@ public partial class TaskV1
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
         (Action == input.Action || Action.Equals(input.Action)) &&
         (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor))) &&
+        (Notifications == input.Notifications || (Notifications != null && Notifications.Equals(input.Notifications))) &&
+        (Policies == input.Policies || (Policies != null && Policies.Equals(input.Policies))) &&
         (CreatedAt == input.CreatedAt || (CreatedAt != null && CreatedAt.Equals(input.CreatedAt))) &&
         (UpdatedAt == input.UpdatedAt || (UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)));
   }
@@ -207,6 +223,14 @@ public partial class TaskV1
       if (Cursor != null)
       {
         hashCode = (hashCode * 59) + Cursor.GetHashCode();
+      }
+      if (Notifications != null)
+      {
+        hashCode = (hashCode * 59) + Notifications.GetHashCode();
+      }
+      if (Policies != null)
+      {
+        hashCode = (hashCode * 59) + Policies.GetHashCode();
       }
       if (CreatedAt != null)
       {

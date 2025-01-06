@@ -58,6 +58,18 @@ public partial class TaskUpdate
   public int? FailureThreshold { get; set; }
 
   /// <summary>
+  /// Gets or Sets Notifications
+  /// </summary>
+  [JsonPropertyName("notifications")]
+  public Notifications Notifications { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Policies
+  /// </summary>
+  [JsonPropertyName("policies")]
+  public Policies Policies { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -70,6 +82,8 @@ public partial class TaskUpdate
     sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
+    sb.Append("  Notifications: ").Append(Notifications).Append("\n");
+    sb.Append("  Policies: ").Append(Policies).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -100,7 +114,9 @@ public partial class TaskUpdate
         (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron))) &&
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
-        (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold));
+        (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
+        (Notifications == input.Notifications || (Notifications != null && Notifications.Equals(input.Notifications))) &&
+        (Policies == input.Policies || (Policies != null && Policies.Equals(input.Policies)));
   }
 
   /// <summary>
@@ -126,6 +142,14 @@ public partial class TaskUpdate
       }
       hashCode = (hashCode * 59) + Enabled.GetHashCode();
       hashCode = (hashCode * 59) + FailureThreshold.GetHashCode();
+      if (Notifications != null)
+      {
+        hashCode = (hashCode * 59) + Notifications.GetHashCode();
+      }
+      if (Policies != null)
+      {
+        hashCode = (hashCode * 59) + Policies.GetHashCode();
+      }
       return hashCode;
     }
   }

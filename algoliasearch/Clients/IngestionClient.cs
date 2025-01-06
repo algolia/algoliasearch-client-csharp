@@ -1139,6 +1139,7 @@ public interface IIngestionClient
   /// <param name="sourceType">Filters the tasks with the specified source type. (optional)</param>
   /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
   /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="withEmailNotifications">If specified, the response only includes tasks with notifications.email.enabled set to this value. (optional)</param>
   /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1147,7 +1148,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListTasksResponse</returns>
-  Task<ListTasksResponse> ListTasksAsync(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<SourceType> sourceType = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  Task<ListTasksResponse> ListTasksAsync(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<SourceType> sourceType = default, List<string> destinationID = default, List<TriggerType> triggerType = default, bool? withEmailNotifications = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves a list of tasks. (Synchronous version)
@@ -1165,6 +1166,7 @@ public interface IIngestionClient
   /// <param name="sourceType">Filters the tasks with the specified source type. (optional)</param>
   /// <param name="destinationID">Destination IDs for filtering the list of tasks. (optional)</param>
   /// <param name="triggerType">Type of task trigger for filtering the list of tasks. (optional)</param>
+  /// <param name="withEmailNotifications">If specified, the response only includes tasks with notifications.email.enabled set to this value. (optional)</param>
   /// <param name="sort">Property by which to sort the list of tasks. (optional)</param>
   /// <param name="order">Sort order of the response, ascending or descending. (optional)</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
@@ -1173,7 +1175,7 @@ public interface IIngestionClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListTasksResponse</returns>
-  ListTasksResponse ListTasks(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<SourceType> sourceType = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
+  ListTasksResponse ListTasks(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<SourceType> sourceType = default, List<string> destinationID = default, List<TriggerType> triggerType = default, bool? withEmailNotifications = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
   /// Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
@@ -2736,7 +2738,7 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <inheritdoc />
-  public async Task<ListTasksResponse> ListTasksAsync(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<SourceType> sourceType = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
+  public async Task<ListTasksResponse> ListTasksAsync(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<SourceType> sourceType = default, List<string> destinationID = default, List<TriggerType> triggerType = default, bool? withEmailNotifications = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
 
@@ -2749,6 +2751,7 @@ public partial class IngestionClient : IIngestionClient
     requestOptions.AddQueryParameter("sourceType", sourceType);
     requestOptions.AddQueryParameter("destinationID", destinationID);
     requestOptions.AddQueryParameter("triggerType", triggerType);
+    requestOptions.AddQueryParameter("withEmailNotifications", withEmailNotifications);
     requestOptions.AddQueryParameter("sort", sort);
     requestOptions.AddQueryParameter("order", order);
     return await _transport.ExecuteRequestAsync<ListTasksResponse>(new HttpMethod("GET"), "/2/tasks", requestOptions, cancellationToken).ConfigureAwait(false);
@@ -2756,8 +2759,8 @@ public partial class IngestionClient : IIngestionClient
 
 
   /// <inheritdoc />
-  public ListTasksResponse ListTasks(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<SourceType> sourceType = default, List<string> destinationID = default, List<TriggerType> triggerType = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
-    AsyncHelper.RunSync(() => ListTasksAsync(itemsPerPage, page, action, enabled, sourceID, sourceType, destinationID, triggerType, sort, order, options, cancellationToken));
+  public ListTasksResponse ListTasks(int? itemsPerPage = default, int? page = default, List<ActionType> action = default, bool? enabled = default, List<string> sourceID = default, List<SourceType> sourceType = default, List<string> destinationID = default, List<TriggerType> triggerType = default, bool? withEmailNotifications = default, TaskSortKeys? sort = default, OrderKeys? order = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
+    AsyncHelper.RunSync(() => ListTasksAsync(itemsPerPage, page, action, enabled, sourceID, sourceType, destinationID, triggerType, withEmailNotifications, sort, order, options, cancellationToken));
 
 
   /// <inheritdoc />

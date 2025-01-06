@@ -89,6 +89,18 @@ public partial class TaskCreate
   public string Cursor { get; set; }
 
   /// <summary>
+  /// Gets or Sets Notifications
+  /// </summary>
+  [JsonPropertyName("notifications")]
+  public Notifications Notifications { get; set; }
+
+  /// <summary>
+  /// Gets or Sets Policies
+  /// </summary>
+  [JsonPropertyName("policies")]
+  public Policies Policies { get; set; }
+
+  /// <summary>
   /// Returns the string presentation of the object
   /// </summary>
   /// <returns>String presentation of the object</returns>
@@ -104,6 +116,8 @@ public partial class TaskCreate
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Cursor: ").Append(Cursor).Append("\n");
+    sb.Append("  Notifications: ").Append(Notifications).Append("\n");
+    sb.Append("  Policies: ").Append(Policies).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -137,7 +151,9 @@ public partial class TaskCreate
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
-        (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor)));
+        (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor))) &&
+        (Notifications == input.Notifications || (Notifications != null && Notifications.Equals(input.Notifications))) &&
+        (Policies == input.Policies || (Policies != null && Policies.Equals(input.Policies)));
   }
 
   /// <summary>
@@ -171,6 +187,14 @@ public partial class TaskCreate
       if (Cursor != null)
       {
         hashCode = (hashCode * 59) + Cursor.GetHashCode();
+      }
+      if (Notifications != null)
+      {
+        hashCode = (hashCode * 59) + Notifications.GetHashCode();
+      }
+      if (Policies != null)
+      {
+        hashCode = (hashCode * 59) + Policies.GetHashCode();
       }
       return hashCode;
     }
