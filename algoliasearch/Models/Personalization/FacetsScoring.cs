@@ -12,32 +12,24 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Personalization;
 
 /// <summary>
-/// EventScoring
+/// FacetsScoring
 /// </summary>
-public partial class EventScoring
+public partial class FacetsScoring
 {
-
   /// <summary>
-  /// Gets or Sets EventType
-  /// </summary>
-  [JsonPropertyName("eventType")]
-  public EventType? EventType { get; set; }
-  /// <summary>
-  /// Initializes a new instance of the EventScoring class.
+  /// Initializes a new instance of the FacetsScoring class.
   /// </summary>
   [JsonConstructor]
-  public EventScoring() { }
+  public FacetsScoring() { }
   /// <summary>
-  /// Initializes a new instance of the EventScoring class.
+  /// Initializes a new instance of the FacetsScoring class.
   /// </summary>
   /// <param name="score">Event score. (required).</param>
-  /// <param name="eventName">Event name. (required).</param>
-  /// <param name="eventType">eventType (required).</param>
-  public EventScoring(int score, string eventName, EventType? eventType)
+  /// <param name="facetName">Facet attribute name. (required).</param>
+  public FacetsScoring(int score, string facetName)
   {
     Score = score;
-    EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
-    EventType = eventType;
+    FacetName = facetName ?? throw new ArgumentNullException(nameof(facetName));
   }
 
   /// <summary>
@@ -48,11 +40,11 @@ public partial class EventScoring
   public int Score { get; set; }
 
   /// <summary>
-  /// Event name.
+  /// Facet attribute name.
   /// </summary>
-  /// <value>Event name.</value>
-  [JsonPropertyName("eventName")]
-  public string EventName { get; set; }
+  /// <value>Facet attribute name.</value>
+  [JsonPropertyName("facetName")]
+  public string FacetName { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
@@ -61,10 +53,9 @@ public partial class EventScoring
   public override string ToString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.Append("class EventScoring {\n");
+    sb.Append("class FacetsScoring {\n");
     sb.Append("  Score: ").Append(Score).Append("\n");
-    sb.Append("  EventName: ").Append(EventName).Append("\n");
-    sb.Append("  EventType: ").Append(EventType).Append("\n");
+    sb.Append("  FacetName: ").Append(FacetName).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
   }
@@ -85,15 +76,14 @@ public partial class EventScoring
   /// <returns>Boolean</returns>
   public override bool Equals(object obj)
   {
-    if (obj is not EventScoring input)
+    if (obj is not FacetsScoring input)
     {
       return false;
     }
 
     return
         (Score == input.Score || Score.Equals(input.Score)) &&
-        (EventName == input.EventName || (EventName != null && EventName.Equals(input.EventName))) &&
-        (EventType == input.EventType || EventType.Equals(input.EventType));
+        (FacetName == input.FacetName || (FacetName != null && FacetName.Equals(input.FacetName)));
   }
 
   /// <summary>
@@ -106,11 +96,10 @@ public partial class EventScoring
     {
       int hashCode = 41;
       hashCode = (hashCode * 59) + Score.GetHashCode();
-      if (EventName != null)
+      if (FacetName != null)
       {
-        hashCode = (hashCode * 59) + EventName.GetHashCode();
+        hashCode = (hashCode * 59) + FacetName.GetHashCode();
       }
-      hashCode = (hashCode * 59) + EventType.GetHashCode();
       return hashCode;
     }
   }

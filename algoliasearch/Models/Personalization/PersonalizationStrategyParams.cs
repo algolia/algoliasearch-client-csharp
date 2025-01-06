@@ -24,13 +24,13 @@ public partial class PersonalizationStrategyParams
   /// <summary>
   /// Initializes a new instance of the PersonalizationStrategyParams class.
   /// </summary>
-  /// <param name="eventScoring">Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.  (required).</param>
-  /// <param name="facetScoring">Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.  (required).</param>
+  /// <param name="eventsScoring">Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.  (required).</param>
+  /// <param name="facetsScoring">Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.  (required).</param>
   /// <param name="personalizationImpact">Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results.  (required).</param>
-  public PersonalizationStrategyParams(List<EventScoring> eventScoring, List<FacetScoring> facetScoring, int personalizationImpact)
+  public PersonalizationStrategyParams(List<EventsScoring> eventsScoring, List<FacetsScoring> facetsScoring, int personalizationImpact)
   {
-    EventScoring = eventScoring ?? throw new ArgumentNullException(nameof(eventScoring));
-    FacetScoring = facetScoring ?? throw new ArgumentNullException(nameof(facetScoring));
+    EventsScoring = eventsScoring ?? throw new ArgumentNullException(nameof(eventsScoring));
+    FacetsScoring = facetsScoring ?? throw new ArgumentNullException(nameof(facetsScoring));
     PersonalizationImpact = personalizationImpact;
   }
 
@@ -38,15 +38,15 @@ public partial class PersonalizationStrategyParams
   /// Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. 
   /// </summary>
   /// <value>Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. </value>
-  [JsonPropertyName("eventScoring")]
-  public List<EventScoring> EventScoring { get; set; }
+  [JsonPropertyName("eventsScoring")]
+  public List<EventsScoring> EventsScoring { get; set; }
 
   /// <summary>
   /// Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. 
   /// </summary>
   /// <value>Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. </value>
-  [JsonPropertyName("facetScoring")]
-  public List<FacetScoring> FacetScoring { get; set; }
+  [JsonPropertyName("facetsScoring")]
+  public List<FacetsScoring> FacetsScoring { get; set; }
 
   /// <summary>
   /// Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. 
@@ -63,8 +63,8 @@ public partial class PersonalizationStrategyParams
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class PersonalizationStrategyParams {\n");
-    sb.Append("  EventScoring: ").Append(EventScoring).Append("\n");
-    sb.Append("  FacetScoring: ").Append(FacetScoring).Append("\n");
+    sb.Append("  EventsScoring: ").Append(EventsScoring).Append("\n");
+    sb.Append("  FacetsScoring: ").Append(FacetsScoring).Append("\n");
     sb.Append("  PersonalizationImpact: ").Append(PersonalizationImpact).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -92,8 +92,8 @@ public partial class PersonalizationStrategyParams
     }
 
     return
-        (EventScoring == input.EventScoring || EventScoring != null && input.EventScoring != null && EventScoring.SequenceEqual(input.EventScoring)) &&
-        (FacetScoring == input.FacetScoring || FacetScoring != null && input.FacetScoring != null && FacetScoring.SequenceEqual(input.FacetScoring)) &&
+        (EventsScoring == input.EventsScoring || EventsScoring != null && input.EventsScoring != null && EventsScoring.SequenceEqual(input.EventsScoring)) &&
+        (FacetsScoring == input.FacetsScoring || FacetsScoring != null && input.FacetsScoring != null && FacetsScoring.SequenceEqual(input.FacetsScoring)) &&
         (PersonalizationImpact == input.PersonalizationImpact || PersonalizationImpact.Equals(input.PersonalizationImpact));
   }
 
@@ -106,13 +106,13 @@ public partial class PersonalizationStrategyParams
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      if (EventScoring != null)
+      if (EventsScoring != null)
       {
-        hashCode = (hashCode * 59) + EventScoring.GetHashCode();
+        hashCode = (hashCode * 59) + EventsScoring.GetHashCode();
       }
-      if (FacetScoring != null)
+      if (FacetsScoring != null)
       {
-        hashCode = (hashCode * 59) + FacetScoring.GetHashCode();
+        hashCode = (hashCode * 59) + FacetsScoring.GetHashCode();
       }
       hashCode = (hashCode * 59) + PersonalizationImpact.GetHashCode();
       return hashCode;
