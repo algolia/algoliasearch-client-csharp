@@ -140,11 +140,12 @@ public partial interface ISearchClient
   /// <param name="indexName">The index in which to perform the request.</param>
   /// <param name="objects">The list of `objects` to store in the given Algolia `indexName`.</param>
   /// <param name="batchSize">The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.</param>
+  /// <param name="scopes"> The `scopes` to keep from the index. Defaults to ['settings', 'rules', 'synonyms'].</param>
   /// <param name="options">Add extra http header or query parameters to Algolia.</param>
   /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-  Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000, List<ScopeType> scopes = null, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
   /// <inheritdoc cref="ReplaceAllObjectsAsync{T}(string, IEnumerable{T}, int, RequestOptions, CancellationToken)"/>
-  ReplaceAllObjectsResponse ReplaceAllObjects<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
+  ReplaceAllObjectsResponse ReplaceAllObjects<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000, List<ScopeType> scopes = null, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class;
 
   /// <summary>
   /// Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests.
@@ -484,11 +485,16 @@ public partial class SearchClient : ISearchClient
 
   /// <inheritdoc/>
   public async Task<ReplaceAllObjectsResponse> ReplaceAllObjectsAsync<T>(string indexName, IEnumerable<T> objects,
-    int batchSize = 1000, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class
+    int batchSize = 1000, List<ScopeType> scopes = null, RequestOptions options = null, CancellationToken cancellationToken = default) where T : class
   {
     if (objects == null)
     {
       throw new ArgumentNullException(nameof(objects));
+    }
+
+    if (scopes == null)
+    {
+      scopes = new List<ScopeType> { ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms };
     }
 
     var rnd = new Random();
@@ -498,7 +504,7 @@ public partial class SearchClient : ISearchClient
     {
       var copyResponse = await OperationIndexAsync(indexName,
           new OperationIndexParams(OperationType.Copy, tmpIndexName)
-          { Scope = [ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms] }, options, cancellationToken)
+          { Scope = scopes }, options, cancellationToken)
         .ConfigureAwait(false);
 
       var batchResponse = await ChunkedBatchAsync(tmpIndexName, objects, Action.AddObject, true, batchSize,
@@ -509,7 +515,7 @@ public partial class SearchClient : ISearchClient
 
       copyResponse = await OperationIndexAsync(indexName,
           new OperationIndexParams(OperationType.Copy, tmpIndexName)
-          { Scope = [ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms] }, options, cancellationToken)
+          { Scope = scopes }, options, cancellationToken)
         .ConfigureAwait(false);
       await WaitForTaskAsync(tmpIndexName, copyResponse.TaskID, requestOptions: options, ct: cancellationToken)
         .ConfigureAwait(false);
@@ -537,9 +543,9 @@ public partial class SearchClient : ISearchClient
   }
 
   /// <inheritdoc/>
-  public ReplaceAllObjectsResponse ReplaceAllObjects<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000,
+  public ReplaceAllObjectsResponse ReplaceAllObjects<T>(string indexName, IEnumerable<T> objects, int batchSize = 1000, List<ScopeType> scopes = null,
     RequestOptions options = null, CancellationToken cancellationToken = default) where T : class =>
-    AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(indexName, objects, batchSize, options, cancellationToken));
+    AsyncHelper.RunSync(() => ReplaceAllObjectsAsync(indexName, objects, batchSize, scopes, options, cancellationToken));
 
   /// <inheritdoc/>
   public async Task<List<BatchResponse>> ChunkedBatchAsync<T>(string indexName, IEnumerable<T> objects,
