@@ -16,12 +16,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// </summary>
 public partial class SourceUpdateDocker
 {
-
-  /// <summary>
-  /// Gets or Sets Registry
-  /// </summary>
-  [JsonPropertyName("registry")]
-  public DockerRegistry? Registry { get; set; }
   /// <summary>
   /// Initializes a new instance of the SourceUpdateDocker class.
   /// </summary>
@@ -35,20 +29,6 @@ public partial class SourceUpdateDocker
   {
     Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
   }
-
-  /// <summary>
-  /// Docker image name.
-  /// </summary>
-  /// <value>Docker image name.</value>
-  [JsonPropertyName("image")]
-  public string Image { get; set; }
-
-  /// <summary>
-  /// Docker image version.
-  /// </summary>
-  /// <value>Docker image version.</value>
-  [JsonPropertyName("version")]
-  public string VarVersion { get; set; }
 
   /// <summary>
   /// Configuration of the spec.
@@ -65,9 +45,6 @@ public partial class SourceUpdateDocker
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class SourceUpdateDocker {\n");
-    sb.Append("  Registry: ").Append(Registry).Append("\n");
-    sb.Append("  Image: ").Append(Image).Append("\n");
-    sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
     sb.Append("  Configuration: ").Append(Configuration).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -95,9 +72,6 @@ public partial class SourceUpdateDocker
     }
 
     return
-        (Registry == input.Registry || Registry.Equals(input.Registry)) &&
-        (Image == input.Image || (Image != null && Image.Equals(input.Image))) &&
-        (VarVersion == input.VarVersion || (VarVersion != null && VarVersion.Equals(input.VarVersion))) &&
         (Configuration == input.Configuration || (Configuration != null && Configuration.Equals(input.Configuration)));
   }
 
@@ -110,15 +84,6 @@ public partial class SourceUpdateDocker
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + Registry.GetHashCode();
-      if (Image != null)
-      {
-        hashCode = (hashCode * 59) + Image.GetHashCode();
-      }
-      if (VarVersion != null)
-      {
-        hashCode = (hashCode * 59) + VarVersion.GetHashCode();
-      }
       if (Configuration != null)
       {
         hashCode = (hashCode * 59) + Configuration.GetHashCode();

@@ -16,18 +16,6 @@ namespace Algolia.Search.Models.Ingestion;
 /// </summary>
 public partial class SourceDocker
 {
-
-  /// <summary>
-  /// Gets or Sets ImageType
-  /// </summary>
-  [JsonPropertyName("imageType")]
-  public DockerImageType? ImageType { get; set; }
-
-  /// <summary>
-  /// Gets or Sets Registry
-  /// </summary>
-  [JsonPropertyName("registry")]
-  public DockerRegistry? Registry { get; set; }
   /// <summary>
   /// Initializes a new instance of the SourceDocker class.
   /// </summary>
@@ -36,31 +24,20 @@ public partial class SourceDocker
   /// <summary>
   /// Initializes a new instance of the SourceDocker class.
   /// </summary>
-  /// <param name="imageType">imageType (required).</param>
-  /// <param name="registry">registry (required).</param>
-  /// <param name="image">Docker image name. (required).</param>
+  /// <param name="image">Shortname of the image, as returned by the referential. (required).</param>
   /// <param name="configuration">Configuration of the spec. (required).</param>
-  public SourceDocker(DockerImageType? imageType, DockerRegistry? registry, string image, object configuration)
+  public SourceDocker(string image, object configuration)
   {
-    ImageType = imageType;
-    Registry = registry;
     Image = image ?? throw new ArgumentNullException(nameof(image));
     Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
   }
 
   /// <summary>
-  /// Docker image name.
+  /// Shortname of the image, as returned by the referential.
   /// </summary>
-  /// <value>Docker image name.</value>
+  /// <value>Shortname of the image, as returned by the referential.</value>
   [JsonPropertyName("image")]
   public string Image { get; set; }
-
-  /// <summary>
-  /// Docker image version.
-  /// </summary>
-  /// <value>Docker image version.</value>
-  [JsonPropertyName("version")]
-  public string VarVersion { get; set; }
 
   /// <summary>
   /// Configuration of the spec.
@@ -77,10 +54,7 @@ public partial class SourceDocker
   {
     StringBuilder sb = new StringBuilder();
     sb.Append("class SourceDocker {\n");
-    sb.Append("  ImageType: ").Append(ImageType).Append("\n");
-    sb.Append("  Registry: ").Append(Registry).Append("\n");
     sb.Append("  Image: ").Append(Image).Append("\n");
-    sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
     sb.Append("  Configuration: ").Append(Configuration).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -108,10 +82,7 @@ public partial class SourceDocker
     }
 
     return
-        (ImageType == input.ImageType || ImageType.Equals(input.ImageType)) &&
-        (Registry == input.Registry || Registry.Equals(input.Registry)) &&
         (Image == input.Image || (Image != null && Image.Equals(input.Image))) &&
-        (VarVersion == input.VarVersion || (VarVersion != null && VarVersion.Equals(input.VarVersion))) &&
         (Configuration == input.Configuration || (Configuration != null && Configuration.Equals(input.Configuration)));
   }
 
@@ -124,15 +95,9 @@ public partial class SourceDocker
     unchecked // Overflow is fine, just wrap
     {
       int hashCode = 41;
-      hashCode = (hashCode * 59) + ImageType.GetHashCode();
-      hashCode = (hashCode * 59) + Registry.GetHashCode();
       if (Image != null)
       {
         hashCode = (hashCode * 59) + Image.GetHashCode();
-      }
-      if (VarVersion != null)
-      {
-        hashCode = (hashCode * 59) + VarVersion.GetHashCode();
       }
       if (Configuration != null)
       {

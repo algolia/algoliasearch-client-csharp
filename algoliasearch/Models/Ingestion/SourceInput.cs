@@ -22,20 +22,20 @@ public partial class SourceInput : AbstractSchema
 {
   /// <summary>
   /// Initializes a new instance of the SourceInput class
-  /// with a SourceDocker
+  /// with a SourceGA4BigQueryExport
   /// </summary>
-  /// <param name="actualInstance">An instance of SourceDocker.</param>
-  public SourceInput(SourceDocker actualInstance)
+  /// <param name="actualInstance">An instance of SourceGA4BigQueryExport.</param>
+  public SourceInput(SourceGA4BigQueryExport actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
 
   /// <summary>
   /// Initializes a new instance of the SourceInput class
-  /// with a SourceGA4BigQueryExport
+  /// with a SourceDocker
   /// </summary>
-  /// <param name="actualInstance">An instance of SourceGA4BigQueryExport.</param>
-  public SourceInput(SourceGA4BigQueryExport actualInstance)
+  /// <param name="actualInstance">An instance of SourceDocker.</param>
+  public SourceInput(SourceDocker actualInstance)
   {
     ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
   }
@@ -107,16 +107,6 @@ public partial class SourceInput : AbstractSchema
   public sealed override object ActualInstance { get; set; }
 
   /// <summary>
-  /// Get the actual instance of `SourceDocker`. If the actual instance is not `SourceDocker`,
-  /// the InvalidClassException will be thrown
-  /// </summary>
-  /// <returns>An instance of SourceDocker</returns>
-  public SourceDocker AsSourceDocker()
-  {
-    return (SourceDocker)ActualInstance;
-  }
-
-  /// <summary>
   /// Get the actual instance of `SourceGA4BigQueryExport`. If the actual instance is not `SourceGA4BigQueryExport`,
   /// the InvalidClassException will be thrown
   /// </summary>
@@ -124,6 +114,16 @@ public partial class SourceInput : AbstractSchema
   public SourceGA4BigQueryExport AsSourceGA4BigQueryExport()
   {
     return (SourceGA4BigQueryExport)ActualInstance;
+  }
+
+  /// <summary>
+  /// Get the actual instance of `SourceDocker`. If the actual instance is not `SourceDocker`,
+  /// the InvalidClassException will be thrown
+  /// </summary>
+  /// <returns>An instance of SourceDocker</returns>
+  public SourceDocker AsSourceDocker()
+  {
+    return (SourceDocker)ActualInstance;
   }
 
   /// <summary>
@@ -188,21 +188,21 @@ public partial class SourceInput : AbstractSchema
 
 
   /// <summary>
-  /// Check if the actual instance is of `SourceDocker` type.
-  /// </summary>
-  /// <returns>Whether or not the instance is the type</returns>
-  public bool IsSourceDocker()
-  {
-    return ActualInstance.GetType() == typeof(SourceDocker);
-  }
-
-  /// <summary>
   /// Check if the actual instance is of `SourceGA4BigQueryExport` type.
   /// </summary>
   /// <returns>Whether or not the instance is the type</returns>
   public bool IsSourceGA4BigQueryExport()
   {
     return ActualInstance.GetType() == typeof(SourceGA4BigQueryExport);
+  }
+
+  /// <summary>
+  /// Check if the actual instance is of `SourceDocker` type.
+  /// </summary>
+  /// <returns>Whether or not the instance is the type</returns>
+  public bool IsSourceDocker()
+  {
+    return ActualInstance.GetType() == typeof(SourceDocker);
   }
 
   /// <summary>
@@ -343,18 +343,6 @@ public class SourceInputJsonConverter : JsonConverter<SourceInput>
   {
     var jsonDocument = JsonDocument.ParseValue(ref reader);
     var root = jsonDocument.RootElement;
-    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("registry", out _) && root.TryGetProperty("image", out _) && root.TryGetProperty("imageType", out _) && root.TryGetProperty("configuration", out _))
-    {
-      try
-      {
-        return new SourceInput(jsonDocument.Deserialize<SourceDocker>(JsonConfig.Options));
-      }
-      catch (Exception exception)
-      {
-        // deserialization failed, try the next one
-        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceDocker: {exception}");
-      }
-    }
     if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectID", out _) && root.TryGetProperty("datasetID", out _) && root.TryGetProperty("tablePrefix", out _))
     {
       try
@@ -365,6 +353,18 @@ public class SourceInputJsonConverter : JsonConverter<SourceInput>
       {
         // deserialization failed, try the next one
         System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceGA4BigQueryExport: {exception}");
+      }
+    }
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("image", out _) && root.TryGetProperty("configuration", out _))
+    {
+      try
+      {
+        return new SourceInput(jsonDocument.Deserialize<SourceDocker>(JsonConfig.Options));
+      }
+      catch (Exception exception)
+      {
+        // deserialization failed, try the next one
+        System.Diagnostics.Debug.WriteLine($"Failed to deserialize into SourceDocker: {exception}");
       }
     }
     if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("projectKey", out _))
