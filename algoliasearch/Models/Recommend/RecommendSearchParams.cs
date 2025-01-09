@@ -364,6 +364,20 @@ public partial class RecommendSearchParams
   public int? MaxFacetHits { get; set; }
 
   /// <summary>
+  /// Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. 
+  /// </summary>
+  /// <value>Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. </value>
+  [JsonPropertyName("keepDiacriticsOnCharacters")]
+  public string KeepDiacriticsOnCharacters { get; set; }
+
+  /// <summary>
+  /// Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. 
+  /// </summary>
+  /// <value>Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. </value>
+  [JsonPropertyName("customRanking")]
+  public List<string> CustomRanking { get; set; }
+
+  /// <summary>
   /// Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes. Attribute names are case-sensitive.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. 
   /// </summary>
   /// <value>Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes. Attribute names are case-sensitive.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. </value>
@@ -656,6 +670,8 @@ public partial class RecommendSearchParams
     sb.Append("  CustomNormalization: ").Append(CustomNormalization).Append("\n");
     sb.Append("  AttributeForDistinct: ").Append(AttributeForDistinct).Append("\n");
     sb.Append("  MaxFacetHits: ").Append(MaxFacetHits).Append("\n");
+    sb.Append("  KeepDiacriticsOnCharacters: ").Append(KeepDiacriticsOnCharacters).Append("\n");
+    sb.Append("  CustomRanking: ").Append(CustomRanking).Append("\n");
     sb.Append("  AttributesToRetrieve: ").Append(AttributesToRetrieve).Append("\n");
     sb.Append("  Ranking: ").Append(Ranking).Append("\n");
     sb.Append("  RelevancyStrictness: ").Append(RelevancyStrictness).Append("\n");
@@ -767,6 +783,8 @@ public partial class RecommendSearchParams
         (CustomNormalization == input.CustomNormalization || CustomNormalization != null && input.CustomNormalization != null && CustomNormalization.SequenceEqual(input.CustomNormalization)) &&
         (AttributeForDistinct == input.AttributeForDistinct || (AttributeForDistinct != null && AttributeForDistinct.Equals(input.AttributeForDistinct))) &&
         (MaxFacetHits == input.MaxFacetHits || MaxFacetHits.Equals(input.MaxFacetHits)) &&
+        (KeepDiacriticsOnCharacters == input.KeepDiacriticsOnCharacters || (KeepDiacriticsOnCharacters != null && KeepDiacriticsOnCharacters.Equals(input.KeepDiacriticsOnCharacters))) &&
+        (CustomRanking == input.CustomRanking || CustomRanking != null && input.CustomRanking != null && CustomRanking.SequenceEqual(input.CustomRanking)) &&
         (AttributesToRetrieve == input.AttributesToRetrieve || AttributesToRetrieve != null && input.AttributesToRetrieve != null && AttributesToRetrieve.SequenceEqual(input.AttributesToRetrieve)) &&
         (Ranking == input.Ranking || Ranking != null && input.Ranking != null && Ranking.SequenceEqual(input.Ranking)) &&
         (RelevancyStrictness == input.RelevancyStrictness || RelevancyStrictness.Equals(input.RelevancyStrictness)) &&
@@ -962,6 +980,14 @@ public partial class RecommendSearchParams
         hashCode = (hashCode * 59) + AttributeForDistinct.GetHashCode();
       }
       hashCode = (hashCode * 59) + MaxFacetHits.GetHashCode();
+      if (KeepDiacriticsOnCharacters != null)
+      {
+        hashCode = (hashCode * 59) + KeepDiacriticsOnCharacters.GetHashCode();
+      }
+      if (CustomRanking != null)
+      {
+        hashCode = (hashCode * 59) + CustomRanking.GetHashCode();
+      }
       if (AttributesToRetrieve != null)
       {
         hashCode = (hashCode * 59) + AttributesToRetrieve.GetHashCode();

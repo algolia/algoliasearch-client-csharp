@@ -174,6 +174,20 @@ public partial class IndexSettings
   public int? MaxFacetHits { get; set; }
 
   /// <summary>
+  /// Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. 
+  /// </summary>
+  /// <value>Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. </value>
+  [JsonPropertyName("keepDiacriticsOnCharacters")]
+  public string KeepDiacriticsOnCharacters { get; set; }
+
+  /// <summary>
+  /// Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. 
+  /// </summary>
+  /// <value>Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. </value>
+  [JsonPropertyName("customRanking")]
+  public List<string> CustomRanking { get; set; }
+
+  /// <summary>
   /// Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes. Attribute names are case-sensitive.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. 
   /// </summary>
   /// <value>Attributes to include in the API response.  To reduce the size of your response, you can retrieve only some of the attributes. Attribute names are case-sensitive.  - `*` retrieves all attributes, except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included. </value>
@@ -186,13 +200,6 @@ public partial class IndexSettings
   /// <value>Determines the order in which Algolia returns your results.  By default, each entry corresponds to a [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/). The tie-breaking algorithm sequentially applies each criterion in the order they're specified. If you configure a replica index for [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute/), you put the sorting attribute at the top of the list.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order. - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  Before you modify the default setting, you should test your changes in the dashboard, and by [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/). </value>
   [JsonPropertyName("ranking")]
   public List<string> Ranking { get; set; }
-
-  /// <summary>
-  /// Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. 
-  /// </summary>
-  /// <value>Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied. </value>
-  [JsonPropertyName("customRanking")]
-  public List<string> CustomRanking { get; set; }
 
   /// <summary>
   /// Relevancy threshold below which less relevant results aren't included in the results.  You can only set `relevancyStrictness` on [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas). Use this setting to strike a balance between the relevance and number of returned results. 
@@ -295,13 +302,6 @@ public partial class IndexSettings
   /// </summary>
   [JsonPropertyName("removeStopWords")]
   public RemoveStopWords RemoveStopWords { get; set; }
-
-  /// <summary>
-  /// Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. 
-  /// </summary>
-  /// <value>Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics. </value>
-  [JsonPropertyName("keepDiacriticsOnCharacters")]
-  public string KeepDiacriticsOnCharacters { get; set; }
 
   /// <summary>
   /// Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/). 
@@ -464,9 +464,10 @@ public partial class IndexSettings
     sb.Append("  CustomNormalization: ").Append(CustomNormalization).Append("\n");
     sb.Append("  AttributeForDistinct: ").Append(AttributeForDistinct).Append("\n");
     sb.Append("  MaxFacetHits: ").Append(MaxFacetHits).Append("\n");
+    sb.Append("  KeepDiacriticsOnCharacters: ").Append(KeepDiacriticsOnCharacters).Append("\n");
+    sb.Append("  CustomRanking: ").Append(CustomRanking).Append("\n");
     sb.Append("  AttributesToRetrieve: ").Append(AttributesToRetrieve).Append("\n");
     sb.Append("  Ranking: ").Append(Ranking).Append("\n");
-    sb.Append("  CustomRanking: ").Append(CustomRanking).Append("\n");
     sb.Append("  RelevancyStrictness: ").Append(RelevancyStrictness).Append("\n");
     sb.Append("  AttributesToHighlight: ").Append(AttributesToHighlight).Append("\n");
     sb.Append("  AttributesToSnippet: ").Append(AttributesToSnippet).Append("\n");
@@ -482,7 +483,6 @@ public partial class IndexSettings
     sb.Append("  DisableTypoToleranceOnAttributes: ").Append(DisableTypoToleranceOnAttributes).Append("\n");
     sb.Append("  IgnorePlurals: ").Append(IgnorePlurals).Append("\n");
     sb.Append("  RemoveStopWords: ").Append(RemoveStopWords).Append("\n");
-    sb.Append("  KeepDiacriticsOnCharacters: ").Append(KeepDiacriticsOnCharacters).Append("\n");
     sb.Append("  QueryLanguages: ").Append(QueryLanguages).Append("\n");
     sb.Append("  DecompoundQuery: ").Append(DecompoundQuery).Append("\n");
     sb.Append("  EnableRules: ").Append(EnableRules).Append("\n");
@@ -551,9 +551,10 @@ public partial class IndexSettings
         (CustomNormalization == input.CustomNormalization || CustomNormalization != null && input.CustomNormalization != null && CustomNormalization.SequenceEqual(input.CustomNormalization)) &&
         (AttributeForDistinct == input.AttributeForDistinct || (AttributeForDistinct != null && AttributeForDistinct.Equals(input.AttributeForDistinct))) &&
         (MaxFacetHits == input.MaxFacetHits || MaxFacetHits.Equals(input.MaxFacetHits)) &&
+        (KeepDiacriticsOnCharacters == input.KeepDiacriticsOnCharacters || (KeepDiacriticsOnCharacters != null && KeepDiacriticsOnCharacters.Equals(input.KeepDiacriticsOnCharacters))) &&
+        (CustomRanking == input.CustomRanking || CustomRanking != null && input.CustomRanking != null && CustomRanking.SequenceEqual(input.CustomRanking)) &&
         (AttributesToRetrieve == input.AttributesToRetrieve || AttributesToRetrieve != null && input.AttributesToRetrieve != null && AttributesToRetrieve.SequenceEqual(input.AttributesToRetrieve)) &&
         (Ranking == input.Ranking || Ranking != null && input.Ranking != null && Ranking.SequenceEqual(input.Ranking)) &&
-        (CustomRanking == input.CustomRanking || CustomRanking != null && input.CustomRanking != null && CustomRanking.SequenceEqual(input.CustomRanking)) &&
         (RelevancyStrictness == input.RelevancyStrictness || RelevancyStrictness.Equals(input.RelevancyStrictness)) &&
         (AttributesToHighlight == input.AttributesToHighlight || AttributesToHighlight != null && input.AttributesToHighlight != null && AttributesToHighlight.SequenceEqual(input.AttributesToHighlight)) &&
         (AttributesToSnippet == input.AttributesToSnippet || AttributesToSnippet != null && input.AttributesToSnippet != null && AttributesToSnippet.SequenceEqual(input.AttributesToSnippet)) &&
@@ -569,7 +570,6 @@ public partial class IndexSettings
         (DisableTypoToleranceOnAttributes == input.DisableTypoToleranceOnAttributes || DisableTypoToleranceOnAttributes != null && input.DisableTypoToleranceOnAttributes != null && DisableTypoToleranceOnAttributes.SequenceEqual(input.DisableTypoToleranceOnAttributes)) &&
         (IgnorePlurals == input.IgnorePlurals || (IgnorePlurals != null && IgnorePlurals.Equals(input.IgnorePlurals))) &&
         (RemoveStopWords == input.RemoveStopWords || (RemoveStopWords != null && RemoveStopWords.Equals(input.RemoveStopWords))) &&
-        (KeepDiacriticsOnCharacters == input.KeepDiacriticsOnCharacters || (KeepDiacriticsOnCharacters != null && KeepDiacriticsOnCharacters.Equals(input.KeepDiacriticsOnCharacters))) &&
         (QueryLanguages == input.QueryLanguages || QueryLanguages != null && input.QueryLanguages != null && QueryLanguages.SequenceEqual(input.QueryLanguages)) &&
         (DecompoundQuery == input.DecompoundQuery || DecompoundQuery.Equals(input.DecompoundQuery)) &&
         (EnableRules == input.EnableRules || EnableRules.Equals(input.EnableRules)) &&
@@ -668,6 +668,14 @@ public partial class IndexSettings
         hashCode = (hashCode * 59) + AttributeForDistinct.GetHashCode();
       }
       hashCode = (hashCode * 59) + MaxFacetHits.GetHashCode();
+      if (KeepDiacriticsOnCharacters != null)
+      {
+        hashCode = (hashCode * 59) + KeepDiacriticsOnCharacters.GetHashCode();
+      }
+      if (CustomRanking != null)
+      {
+        hashCode = (hashCode * 59) + CustomRanking.GetHashCode();
+      }
       if (AttributesToRetrieve != null)
       {
         hashCode = (hashCode * 59) + AttributesToRetrieve.GetHashCode();
@@ -675,10 +683,6 @@ public partial class IndexSettings
       if (Ranking != null)
       {
         hashCode = (hashCode * 59) + Ranking.GetHashCode();
-      }
-      if (CustomRanking != null)
-      {
-        hashCode = (hashCode * 59) + CustomRanking.GetHashCode();
       }
       hashCode = (hashCode * 59) + RelevancyStrictness.GetHashCode();
       if (AttributesToHighlight != null)
@@ -721,10 +725,6 @@ public partial class IndexSettings
       if (RemoveStopWords != null)
       {
         hashCode = (hashCode * 59) + RemoveStopWords.GetHashCode();
-      }
-      if (KeepDiacriticsOnCharacters != null)
-      {
-        hashCode = (hashCode * 59) + KeepDiacriticsOnCharacters.GetHashCode();
       }
       if (QueryLanguages != null)
       {
