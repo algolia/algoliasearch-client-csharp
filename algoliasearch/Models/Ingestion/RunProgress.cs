@@ -19,21 +19,30 @@ public partial class RunProgress
   /// <summary>
   /// Initializes a new instance of the RunProgress class.
   /// </summary>
-  public RunProgress()
+  [JsonConstructor]
+  public RunProgress() { }
+  /// <summary>
+  /// Initializes a new instance of the RunProgress class.
+  /// </summary>
+  /// <param name="expectedNbOfEvents">expectedNbOfEvents (required).</param>
+  /// <param name="receivedNbOfEvents">receivedNbOfEvents (required).</param>
+  public RunProgress(int expectedNbOfEvents, int receivedNbOfEvents)
   {
+    ExpectedNbOfEvents = expectedNbOfEvents;
+    ReceivedNbOfEvents = receivedNbOfEvents;
   }
 
   /// <summary>
   /// Gets or Sets ExpectedNbOfEvents
   /// </summary>
   [JsonPropertyName("expectedNbOfEvents")]
-  public int? ExpectedNbOfEvents { get; set; }
+  public int ExpectedNbOfEvents { get; set; }
 
   /// <summary>
   /// Gets or Sets ReceivedNbOfEvents
   /// </summary>
   [JsonPropertyName("receivedNbOfEvents")]
-  public int? ReceivedNbOfEvents { get; set; }
+  public int ReceivedNbOfEvents { get; set; }
 
   /// <summary>
   /// Returns the string presentation of the object
