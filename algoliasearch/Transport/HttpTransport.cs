@@ -119,7 +119,7 @@ internal class HttpTransport
       request.Uri = BuildUri(host, uri, requestOptions?.CustomPathParameters, requestOptions?.PathParameters,
         requestOptions?.QueryParameters);
       var requestTimeout =
-        TimeSpan.FromTicks((requestOptions?.Timeout ?? GetTimeOut(callType)).Ticks * (host.RetryCount + 1));
+        TimeSpan.FromTicks((GetTimeOut(callType, requestOptions)).Ticks * (host.RetryCount + 1));
 
       if (request.Body == null && (method == HttpMethod.Post || method == HttpMethod.Put))
       {
@@ -137,7 +137,7 @@ internal class HttpTransport
       }
 
       var response = await _httpClient
-        .SendRequestAsync(request, requestTimeout, _algoliaConfig.ConnectTimeout ?? Defaults.ConnectTimeout, ct)
+        .SendRequestAsync(request, requestTimeout, requestOptions?.ConnectTimeout ?? _algoliaConfig.ConnectTimeout ?? Defaults.ConnectTimeout, ct)
         .ConfigureAwait(false);
 
       _errorMessage = response.Error;
@@ -280,13 +280,14 @@ internal class HttpTransport
   /// Compute the request timeout with the given call type and configuration
   /// </summary>
   /// <param name="callType"></param>
+  /// <param name="requestOptions"></param>
   /// <returns></returns>
-  private TimeSpan GetTimeOut(CallType callType)
+  private TimeSpan GetTimeOut(CallType callType, InternalRequestOptions requestOptions = null)
   {
     return callType switch
     {
-      CallType.Read => _algoliaConfig.ReadTimeout ?? Defaults.ReadTimeout,
-      CallType.Write => _algoliaConfig.WriteTimeout ?? Defaults.WriteTimeout,
+      CallType.Read => requestOptions?.ReadTimeout ?? _algoliaConfig.ReadTimeout ?? Defaults.ReadTimeout,
+      CallType.Write => requestOptions?.WriteTimeout ?? _algoliaConfig.WriteTimeout ?? Defaults.WriteTimeout,
       _ => Defaults.WriteTimeout
     };
   }

@@ -20,9 +20,19 @@ public class RequestOptions
   public IDictionary<string, object> QueryParameters { get; set; }
 
   /// <summary>
-  /// Request timeout in seconds
+  /// Request timeout
   /// </summary>
-  public TimeSpan? Timeout { get; set; }
+  public TimeSpan? ReadTimeout { get; set; }
+
+  /// <summary>
+  /// Request timeout
+  /// </summary>
+  public TimeSpan? WriteTimeout { get; set; }
+
+  /// <summary>
+  /// Request timeout
+  /// </summary>
+  public TimeSpan? ConnectTimeout { get; set; }
 
   /// <summary>
   /// Constructs a new instance of <see cref="RequestOptions"/>

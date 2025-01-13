@@ -31,9 +31,9 @@ public sealed class SearchConfig : AlgoliaConfig
   {
     DefaultHosts = GetDefaultHosts(appId);
     Compression = CompressionType.None;
-    ReadTimeout = TimeSpan.FromSeconds(5);
-    WriteTimeout = TimeSpan.FromSeconds(30);
-    ConnectTimeout = TimeSpan.FromSeconds(2);
+    ReadTimeout = TimeSpan.FromMilliseconds(5000);
+    WriteTimeout = TimeSpan.FromMilliseconds(30000);
+    ConnectTimeout = TimeSpan.FromMilliseconds(2000);
   }
   private static List<StatefulHost> GetDefaultHosts(string appId)
   {

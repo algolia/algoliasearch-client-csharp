@@ -25,7 +25,9 @@ internal class InternalRequestOptions
 
     CustomPathParameters = new Dictionary<string, string>();
     PathParameters = new Dictionary<string, string>();
-    Timeout = options?.Timeout;
+    ConnectTimeout = options?.ConnectTimeout;
+    ReadTimeout = options?.ReadTimeout;
+    WriteTimeout = options?.WriteTimeout;
   }
 
   public void AddQueryParameter(string key, object value)
@@ -76,9 +78,19 @@ internal class InternalRequestOptions
   public object Data { get; set; }
 
   /// <summary>
-  /// Request timeout
+  /// Request read timeout
   /// </summary>
-  public TimeSpan? Timeout { get; set; }
+  public TimeSpan? ReadTimeout { get; set; }
+
+  /// <summary>
+  /// Request write timeout
+  /// </summary>
+  public TimeSpan? WriteTimeout { get; set; }
+
+  /// <summary>
+  /// Request connect timeout
+  /// </summary>
+  public TimeSpan? ConnectTimeout { get; set; }
 
   /// <summary>
   /// Enforce the Read Transporter

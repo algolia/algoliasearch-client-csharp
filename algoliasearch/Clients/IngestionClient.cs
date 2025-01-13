@@ -2823,6 +2823,9 @@ public partial class IngestionClient : IIngestionClient
 
     requestOptions.AddQueryParameter("watch", watch);
     requestOptions.Data = pushTaskPayload;
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
     return await _transport.ExecuteRequestAsync<WatchResponse>(new HttpMethod("POST"), "/2/tasks/{taskID}/push", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
@@ -3024,6 +3027,9 @@ public partial class IngestionClient : IIngestionClient
 
     requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
     return await _transport.ExecuteRequestAsync<WatchResponse>(new HttpMethod("POST"), "/1/sources/{sourceID}/discover", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
@@ -3235,6 +3241,9 @@ public partial class IngestionClient : IIngestionClient
 
 
     requestOptions.Data = sourceCreate;
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
     return await _transport.ExecuteRequestAsync<WatchResponse>(new HttpMethod("POST"), "/1/sources/validate", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 
@@ -3260,6 +3269,9 @@ public partial class IngestionClient : IIngestionClient
     requestOptions.PathParameters.Add("sourceID", QueryStringHelper.ParameterToString(sourceID));
 
     requestOptions.Data = sourceUpdate;
+    requestOptions.ReadTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.WriteTimeout ??= TimeSpan.FromMilliseconds(180000);
+    requestOptions.ConnectTimeout ??= TimeSpan.FromMilliseconds(180000);
     return await _transport.ExecuteRequestAsync<WatchResponse>(new HttpMethod("POST"), "/1/sources/{sourceID}/validate", requestOptions, cancellationToken).ConfigureAwait(false);
   }
 

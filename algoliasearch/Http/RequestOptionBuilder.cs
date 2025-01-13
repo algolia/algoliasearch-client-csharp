@@ -47,13 +47,35 @@ public class RequestOptionBuilder
   }
 
   /// <summary>
-  /// Set the request timeout
+  /// Set the request read timeout
   /// </summary>
   /// <param name="timeout"></param>
   /// <returns></returns>
-  public RequestOptionBuilder SetTimeout(TimeSpan timeout)
+  public RequestOptionBuilder SetReadTimeout(TimeSpan timeout)
   {
-    _options.Timeout = timeout;
+    _options.ReadTimeout = timeout;
+    return this;
+  }
+
+  /// <summary>
+  /// Set the request write timeout
+  /// </summary>
+  /// <param name="timeout"></param>
+  /// <returns></returns>
+  public RequestOptionBuilder SetWriteTimeout(TimeSpan timeout)
+  {
+    _options.WriteTimeout = timeout;
+    return this;
+  }
+
+  /// <summary>
+  /// Set the request connect timeout
+  /// </summary>
+  /// <param name="timeout"></param>
+  /// <returns></returns>
+  public RequestOptionBuilder SetConnectTimeout(TimeSpan timeout)
+  {
+    _options.ConnectTimeout = timeout;
     return this;
   }
 
