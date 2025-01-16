@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Search;
 
 /// <summary>
-/// link for a banner defined in merchandising studio.
+/// Link for a banner defined in the Merchandising Studio.
 /// </summary>
 public partial class BannerLink
 {

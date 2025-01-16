@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// widgets returned from any rules that are applied to the current search.
+/// Widgets returned from any rules that are applied to the current search.
 /// </summary>
 public partial class Widgets
 {
@@ -24,9 +24,9 @@ public partial class Widgets
   }
 
   /// <summary>
-  /// banners defined in the merchandising studio for the given search.
+  /// Banners defined in the Merchandising Studio for a given search.
   /// </summary>
-  /// <value>banners defined in the merchandising studio for the given search.</value>
+  /// <value>Banners defined in the Merchandising Studio for a given search.</value>
   [JsonPropertyName("banners")]
   public List<Banner> Banners { get; set; }
 

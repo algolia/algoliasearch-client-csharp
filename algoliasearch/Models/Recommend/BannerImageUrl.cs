@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Algolia.Search.Models.Recommend;
 
 /// <summary>
-/// url for a search banner image.
+/// URL for an image to show inside a banner.
 /// </summary>
 public partial class BannerImageUrl
 {
