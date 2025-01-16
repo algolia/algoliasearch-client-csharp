@@ -24,7 +24,7 @@ public partial class GetNoClickRateResponse
   /// <summary>
   /// Initializes a new instance of the GetNoClickRateResponse class.
   /// </summary>
-  /// <param name="rate">No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches. (required).</param>
+  /// <param name="rate">No click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches.  (required).</param>
   /// <param name="count">Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. (required) (default to 0).</param>
   /// <param name="noClickCount">Number of times this search was returned as a result without any click. (required).</param>
   /// <param name="dates">Daily no click rates. (required).</param>
@@ -37,9 +37,9 @@ public partial class GetNoClickRateResponse
   }
 
   /// <summary>
-  /// No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches.
+  /// No click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches. 
   /// </summary>
-  /// <value>No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches.</value>
+  /// <value>No click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches. </value>
   [JsonPropertyName("rate")]
   public double Rate { get; set; }
 

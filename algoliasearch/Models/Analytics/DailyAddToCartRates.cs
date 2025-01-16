@@ -24,7 +24,7 @@ public partial class DailyAddToCartRates
   /// <summary>
   /// Initializes a new instance of the DailyAddToCartRates class.
   /// </summary>
-  /// <param name="rate">Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
+  /// <param name="rate">Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
   /// <param name="trackedSearchCount">Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. (required) (default to 0).</param>
   /// <param name="addToCartCount">Number of add-to-cart events from this search. (required) (default to 0).</param>
   /// <param name="date">Date in the format YYYY-MM-DD. (required).</param>
@@ -37,9 +37,9 @@ public partial class DailyAddToCartRates
   }
 
   /// <summary>
-  /// Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("rate")]
   public double? Rate { get; set; }
 

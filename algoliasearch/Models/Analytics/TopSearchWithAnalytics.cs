@@ -26,10 +26,10 @@ public partial class TopSearchWithAnalytics
   /// </summary>
   /// <param name="search">Search query. (required).</param>
   /// <param name="count">Number of searches. (required).</param>
-  /// <param name="clickThroughRate">Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
+  /// <param name="clickThroughRate">Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
   /// <param name="averageClickPosition">Average position of a clicked search result in the list of search results. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
   /// <param name="clickPositions">List of positions in the search results and clicks associated with this search. (required).</param>
-  /// <param name="conversionRate">Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
+  /// <param name="conversionRate">Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
   /// <param name="trackedSearchCount">Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. (required) (default to 0).</param>
   /// <param name="clickCount">Number of clicks associated with this search. (required) (default to 0).</param>
   /// <param name="conversionCount">Number of conversions from this search. (required) (default to 0).</param>
@@ -63,9 +63,9 @@ public partial class TopSearchWithAnalytics
   public int Count { get; set; }
 
   /// <summary>
-  /// Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("clickThroughRate")]
   public double? ClickThroughRate { get; set; }
 
@@ -84,9 +84,9 @@ public partial class TopSearchWithAnalytics
   public List<ClickPosition> ClickPositions { get; set; }
 
   /// <summary>
-  /// Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("conversionRate")]
   public double? ConversionRate { get; set; }
 

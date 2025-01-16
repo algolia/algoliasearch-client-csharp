@@ -24,7 +24,7 @@ public partial class GetRevenue
   /// <summary>
   /// Initializes a new instance of the GetRevenue class.
   /// </summary>
-  /// <param name="currencies">Revenue associated with this search, broken-down by currencies. (required).</param>
+  /// <param name="currencies">Revenue associated with this search: broken down by currency.  (required).</param>
   /// <param name="dates">Daily revenue. (required).</param>
   public GetRevenue(Dictionary<string, CurrencyCode> currencies, List<DailyRevenue> dates)
   {
@@ -33,9 +33,9 @@ public partial class GetRevenue
   }
 
   /// <summary>
-  /// Revenue associated with this search, broken-down by currencies.
+  /// Revenue associated with this search: broken down by currency. 
   /// </summary>
-  /// <value>Revenue associated with this search, broken-down by currencies.</value>
+  /// <value>Revenue associated with this search: broken down by currency. </value>
   [JsonPropertyName("currencies")]
   public Dictionary<string, CurrencyCode> Currencies { get; set; }
 

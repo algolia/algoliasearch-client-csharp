@@ -24,7 +24,7 @@ public partial class TopHit
   /// <summary>
   /// Initializes a new instance of the TopHit class.
   /// </summary>
-  /// <param name="hit">Object ID of a record that's returned as a search result. (required).</param>
+  /// <param name="hit">Object ID of a record returned as a search result. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
   public TopHit(string hit, int count)
   {
@@ -33,9 +33,9 @@ public partial class TopHit
   }
 
   /// <summary>
-  /// Object ID of a record that's returned as a search result.
+  /// Object ID of a record returned as a search result.
   /// </summary>
-  /// <value>Object ID of a record that's returned as a search result.</value>
+  /// <value>Object ID of a record returned as a search result.</value>
   [JsonPropertyName("hit")]
   public string Hit { get; set; }
 

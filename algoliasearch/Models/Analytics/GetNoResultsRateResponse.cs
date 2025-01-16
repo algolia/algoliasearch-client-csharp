@@ -24,7 +24,7 @@ public partial class GetNoResultsRateResponse
   /// <summary>
   /// Initializes a new instance of the GetNoResultsRateResponse class.
   /// </summary>
-  /// <param name="rate">No results rate, calculated as number of searches with zero results divided by the total number of searches. (required).</param>
+  /// <param name="rate">No results rate: calculated as the number of searches with zero results divided by the total number of searches.  (required).</param>
   /// <param name="count">Number of searches. (required).</param>
   /// <param name="noResultCount">Number of searches without any results. (required).</param>
   /// <param name="dates">Daily no results rates. (required).</param>
@@ -37,9 +37,9 @@ public partial class GetNoResultsRateResponse
   }
 
   /// <summary>
-  /// No results rate, calculated as number of searches with zero results divided by the total number of searches.
+  /// No results rate: calculated as the number of searches with zero results divided by the total number of searches. 
   /// </summary>
-  /// <value>No results rate, calculated as number of searches with zero results divided by the total number of searches.</value>
+  /// <value>No results rate: calculated as the number of searches with zero results divided by the total number of searches. </value>
   [JsonPropertyName("rate")]
   public double Rate { get; set; }
 

@@ -24,16 +24,16 @@ public partial class GetTopFiltersNoResultsResponse
   /// <summary>
   /// Initializes a new instance of the GetTopFiltersNoResultsResponse class.
   /// </summary>
-  /// <param name="values">Filters for searches without any results. If null, the search term specified with the `search` parameter is not a search without results, or the `search` parameter is absent from the request.  (required).</param>
+  /// <param name="values">Filters for searches without any results. If null, the search term specified with the `search` parameter isn't a search without results, or the `search` parameter is absent from the request.  (required).</param>
   public GetTopFiltersNoResultsResponse(List<GetTopFiltersNoResultsValues> values)
   {
     Values = values ?? throw new ArgumentNullException(nameof(values));
   }
 
   /// <summary>
-  /// Filters for searches without any results. If null, the search term specified with the `search` parameter is not a search without results, or the `search` parameter is absent from the request. 
+  /// Filters for searches without any results. If null, the search term specified with the `search` parameter isn't a search without results, or the `search` parameter is absent from the request. 
   /// </summary>
-  /// <value>Filters for searches without any results. If null, the search term specified with the `search` parameter is not a search without results, or the `search` parameter is absent from the request. </value>
+  /// <value>Filters for searches without any results. If null, the search term specified with the `search` parameter isn't a search without results, or the `search` parameter is absent from the request. </value>
   [JsonPropertyName("values")]
   public List<GetTopFiltersNoResultsValues> Values { get; set; }
 

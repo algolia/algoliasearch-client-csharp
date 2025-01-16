@@ -24,18 +24,18 @@ public partial class TopHitWithRevenueAnalytics
   /// <summary>
   /// Initializes a new instance of the TopHitWithRevenueAnalytics class.
   /// </summary>
-  /// <param name="hit">Object ID of a record that's returned as a search result. (required).</param>
+  /// <param name="hit">Object ID of a record returned as a search result. (required).</param>
   /// <param name="count">Number of occurrences. (required).</param>
-  /// <param name="clickThroughRate">Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
-  /// <param name="conversionRate">Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
+  /// <param name="clickThroughRate">Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
+  /// <param name="conversionRate">Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
   /// <param name="trackedHitCount">Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. (required) (default to 0).</param>
   /// <param name="clickCount">Number of clicks associated with this search. (required) (default to 0).</param>
   /// <param name="conversionCount">Number of conversions from this search. (required) (default to 0).</param>
-  /// <param name="addToCartRate">Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
+  /// <param name="addToCartRate">Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
   /// <param name="addToCartCount">Number of add-to-cart events from this search. (required) (default to 0).</param>
-  /// <param name="purchaseRate">Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
+  /// <param name="purchaseRate">Purchase rate: calculated as the number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  (required).</param>
   /// <param name="purchaseCount">Number of purchase events from this search. (required) (default to 0).</param>
-  /// <param name="currencies">Revenue associated with this search, broken-down by currencies. (required).</param>
+  /// <param name="currencies">Revenue associated with this search: broken down by currency.  (required).</param>
   public TopHitWithRevenueAnalytics(string hit, int count, double? clickThroughRate, double? conversionRate, int trackedHitCount, int clickCount, int conversionCount, double? addToCartRate, int addToCartCount, double? purchaseRate, int purchaseCount, Dictionary<string, CurrencyCode> currencies)
   {
     Hit = hit ?? throw new ArgumentNullException(nameof(hit));
@@ -53,9 +53,9 @@ public partial class TopHitWithRevenueAnalytics
   }
 
   /// <summary>
-  /// Object ID of a record that's returned as a search result.
+  /// Object ID of a record returned as a search result.
   /// </summary>
-  /// <value>Object ID of a record that's returned as a search result.</value>
+  /// <value>Object ID of a record returned as a search result.</value>
   [JsonPropertyName("hit")]
   public string Hit { get; set; }
 
@@ -67,16 +67,16 @@ public partial class TopHitWithRevenueAnalytics
   public int Count { get; set; }
 
   /// <summary>
-  /// Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("clickThroughRate")]
   public double? ClickThroughRate { get; set; }
 
   /// <summary>
-  /// Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("conversionRate")]
   public double? ConversionRate { get; set; }
 
@@ -102,9 +102,9 @@ public partial class TopHitWithRevenueAnalytics
   public int ConversionCount { get; set; }
 
   /// <summary>
-  /// Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("addToCartRate")]
   public double? AddToCartRate { get; set; }
 
@@ -116,9 +116,9 @@ public partial class TopHitWithRevenueAnalytics
   public int AddToCartCount { get; set; }
 
   /// <summary>
-  /// Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
+  /// Purchase rate: calculated as the number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. 
   /// </summary>
-  /// <value>Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
+  /// <value>Purchase rate: calculated as the number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true. </value>
   [JsonPropertyName("purchaseRate")]
   public double? PurchaseRate { get; set; }
 
@@ -130,9 +130,9 @@ public partial class TopHitWithRevenueAnalytics
   public int PurchaseCount { get; set; }
 
   /// <summary>
-  /// Revenue associated with this search, broken-down by currencies.
+  /// Revenue associated with this search: broken down by currency. 
   /// </summary>
-  /// <value>Revenue associated with this search, broken-down by currencies.</value>
+  /// <value>Revenue associated with this search: broken down by currency. </value>
   [JsonPropertyName("currencies")]
   public Dictionary<string, CurrencyCode> Currencies { get; set; }
 
