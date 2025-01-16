@@ -28,12 +28,6 @@ public enum RunOutcome
   /// Enum Failure for value: failure
   /// </summary>
   [JsonPropertyName("failure")]
-  Failure = 2,
-
-  /// <summary>
-  /// Enum Processing for value: processing
-  /// </summary>
-  [JsonPropertyName("processing")]
-  Processing = 3
+  Failure = 2
 }
 
