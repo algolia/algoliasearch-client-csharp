@@ -34,7 +34,7 @@ public partial class TrendingFacetsQuery
   /// <param name="threshold">Minimum score a recommendation must have to be included in the response. (required).</param>
   /// <param name="facetName">Facet attribute for which to retrieve trending facet values. (required).</param>
   /// <param name="model">model (required).</param>
-  public TrendingFacetsQuery(string indexName, double threshold, object facetName, TrendingFacetsModel? model)
+  public TrendingFacetsQuery(string indexName, double threshold, string facetName, TrendingFacetsModel? model)
   {
     IndexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
     Threshold = threshold;
@@ -74,7 +74,7 @@ public partial class TrendingFacetsQuery
   /// </summary>
   /// <value>Facet attribute for which to retrieve trending facet values.</value>
   [JsonPropertyName("facetName")]
-  public object FacetName { get; set; }
+  public string FacetName { get; set; }
 
   /// <summary>
   /// Gets or Sets FallbackParameters
