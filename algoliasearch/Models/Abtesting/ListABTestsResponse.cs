@@ -24,7 +24,7 @@ public partial class ListABTestsResponse
   /// <summary>
   /// Initializes a new instance of the ListABTestsResponse class.
   /// </summary>
-  /// <param name="abtests">A/B tests. (required).</param>
+  /// <param name="abtests">The list of A/B tests, null if no A/B tests are configured for this application. (required).</param>
   /// <param name="count">Number of A/B tests. (required).</param>
   /// <param name="total">Number of retrievable A/B tests. (required).</param>
   public ListABTestsResponse(List<ABTest> abtests, int count, int total)
@@ -35,9 +35,9 @@ public partial class ListABTestsResponse
   }
 
   /// <summary>
-  /// A/B tests.
+  /// The list of A/B tests, null if no A/B tests are configured for this application.
   /// </summary>
-  /// <value>A/B tests.</value>
+  /// <value>The list of A/B tests, null if no A/B tests are configured for this application.</value>
   [JsonPropertyName("abtests")]
   public List<ABTest> Abtests { get; set; }
 

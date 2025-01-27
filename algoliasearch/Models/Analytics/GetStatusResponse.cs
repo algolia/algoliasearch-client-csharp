@@ -24,16 +24,16 @@ public partial class GetStatusResponse
   /// <summary>
   /// Initializes a new instance of the GetStatusResponse class.
   /// </summary>
-  /// <param name="updatedAt">Date and time when the object was updated, in RFC 3339 format.  (required).</param>
+  /// <param name="updatedAt">Date and time when the object was updated, in RFC 3339 format. (required).</param>
   public GetStatusResponse(string updatedAt)
   {
     UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
   }
 
   /// <summary>
-  /// Date and time when the object was updated, in RFC 3339 format. 
+  /// Date and time when the object was updated, in RFC 3339 format.
   /// </summary>
-  /// <value>Date and time when the object was updated, in RFC 3339 format. </value>
+  /// <value>Date and time when the object was updated, in RFC 3339 format.</value>
   [JsonPropertyName("updatedAt")]
   public string UpdatedAt { get; set; }
 
