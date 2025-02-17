@@ -1,3 +1,8 @@
+## [7.13.3](https://github.com/algolia/algoliasearch-client-csharp/compare/7.13.2...7.13.3)
+
+- [dafa519689](https://github.com/algolia/api-clients-automation/commit/dafa519689) chore: more composition API update for docs ([#4453](https://github.com/algolia/api-clients-automation/pull/4453)) by [@e-krebs](https://github.com/e-krebs/)
+- [ecd6bc4fed](https://github.com/algolia/api-clients-automation/commit/ecd6bc4fed) chore(deps): dependencies 2025-02-17 ([#4459](https://github.com/algolia/api-clients-automation/pull/4459)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [7.13.2](https://github.com/algolia/algoliasearch-client-csharp/compare/7.13.1...7.13.2)
 
 - [5e18968d10](https://github.com/algolia/api-clients-automation/commit/5e18968d10) chore(specs): update composition specs for the doc website ([#4450](https://github.com/algolia/api-clients-automation/pull/4450)) by [@e-krebs](https://github.com/e-krebs/)
