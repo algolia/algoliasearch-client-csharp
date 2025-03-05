@@ -22,7 +22,7 @@ namespace Algolia.Search.Clients;
 public interface IAnalyticsClient
 {
   /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
+  /// This method lets you send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -35,7 +35,7 @@ public interface IAnalyticsClient
   Task<object> CustomDeleteAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -48,7 +48,7 @@ public interface IAnalyticsClient
   object CustomDelete(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
+  /// This method lets you send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -61,7 +61,7 @@ public interface IAnalyticsClient
   Task<object> CustomGetAsync(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -74,7 +74,7 @@ public interface IAnalyticsClient
   object CustomGet(string path, Dictionary<string, object> parameters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
+  /// This method lets you send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -88,7 +88,7 @@ public interface IAnalyticsClient
   Task<object> CustomPostAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -102,7 +102,7 @@ public interface IAnalyticsClient
   object CustomPost(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This method allow you to send requests to the Algolia REST API.
+  /// This method lets you send requests to the Algolia REST API.
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
@@ -116,7 +116,7 @@ public interface IAnalyticsClient
   Task<object> CustomPutAsync(string path, Dictionary<string, object> parameters = default, object body = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
-  /// This method allow you to send requests to the Algolia REST API. (Synchronous version)
+  /// This method lets you send requests to the Algolia REST API. (Synchronous version)
   /// </summary>
   /// <param name="path">Path of the endpoint, anything after \"/1\" must be specified.</param>
   /// <param name="parameters">Query parameters to apply to the current query. (optional)</param>
