@@ -27,7 +27,7 @@ public sealed class RecommendConfig : AlgoliaConfig
   /// </summary>
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
-  public RecommendConfig(string appId, string apiKey) : base(appId, apiKey, "Recommend", "7.13.3")
+  public RecommendConfig(string appId, string apiKey) : base(appId, apiKey, "Recommend", "7.13.4")
   {
     DefaultHosts = GetDefaultHosts(appId);
     Compression = CompressionType.None;

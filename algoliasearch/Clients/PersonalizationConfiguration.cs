@@ -28,7 +28,7 @@ public sealed class PersonalizationConfig : AlgoliaConfig
   /// <param name="appId">Your application ID</param>
   /// <param name="apiKey">Your API Key</param>
   /// <param name="region">Targeted region </param>
-  public PersonalizationConfig(string appId, string apiKey, string region) : base(appId, apiKey, "Personalization", "7.13.3")
+  public PersonalizationConfig(string appId, string apiKey, string region) : base(appId, apiKey, "Personalization", "7.13.4")
   {
     DefaultHosts = GetDefaultHosts(region);
     Compression = CompressionType.None;

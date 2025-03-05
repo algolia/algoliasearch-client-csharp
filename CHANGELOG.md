@@ -1,3 +1,9 @@
+## [7.13.4](https://github.com/algolia/algoliasearch-client-csharp/compare/7.13.3...7.13.4)
+
+- [b7fe926c16](https://github.com/algolia/api-clients-automation/commit/b7fe926c16) fix(csharp): remove specific minor version for System deps ([#4479](https://github.com/algolia/api-clients-automation/pull/4479)) by [@morganleroi](https://github.com/morganleroi/)
+- [92bd911848](https://github.com/algolia/api-clients-automation/commit/92bd911848) chore(scripts): point jira issues to another epic ([#4505](https://github.com/algolia/api-clients-automation/pull/4505)) by [@millotp](https://github.com/millotp/)
+- [97d2722bc9](https://github.com/algolia/api-clients-automation/commit/97d2722bc9) fix(specs): Increase optionalWords visibility in docs ([#4559](https://github.com/algolia/api-clients-automation/pull/4559)) by [@gazconroy](https://github.com/gazconroy/)
+
 ## [7.13.3](https://github.com/algolia/algoliasearch-client-csharp/compare/7.13.2...7.13.3)
 
 - [dafa519689](https://github.com/algolia/api-clients-automation/commit/dafa519689) chore: more composition API update for docs ([#4453](https://github.com/algolia/api-clients-automation/pull/4453)) by [@e-krebs](https://github.com/e-krebs/)
