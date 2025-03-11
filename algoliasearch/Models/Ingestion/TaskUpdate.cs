@@ -16,6 +16,12 @@ namespace Algolia.Search.Models.Ingestion;
 /// </summary>
 public partial class TaskUpdate
 {
+
+  /// <summary>
+  /// Gets or Sets SubscriptionAction
+  /// </summary>
+  [JsonPropertyName("subscriptionAction")]
+  public ActionType? SubscriptionAction { get; set; }
   /// <summary>
   /// Initializes a new instance of the TaskUpdate class.
   /// </summary>
@@ -81,6 +87,7 @@ public partial class TaskUpdate
     sb.Append("  Cron: ").Append(Cron).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
+    sb.Append("  SubscriptionAction: ").Append(SubscriptionAction).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
     sb.Append("  Notifications: ").Append(Notifications).Append("\n");
     sb.Append("  Policies: ").Append(Policies).Append("\n");
@@ -114,6 +121,7 @@ public partial class TaskUpdate
         (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron))) &&
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
+        (SubscriptionAction == input.SubscriptionAction || SubscriptionAction.Equals(input.SubscriptionAction)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
         (Notifications == input.Notifications || (Notifications != null && Notifications.Equals(input.Notifications))) &&
         (Policies == input.Policies || (Policies != null && Policies.Equals(input.Policies)));
@@ -141,6 +149,7 @@ public partial class TaskUpdate
         hashCode = (hashCode * 59) + Input.GetHashCode();
       }
       hashCode = (hashCode * 59) + Enabled.GetHashCode();
+      hashCode = (hashCode * 59) + SubscriptionAction.GetHashCode();
       hashCode = (hashCode * 59) + FailureThreshold.GetHashCode();
       if (Notifications != null)
       {

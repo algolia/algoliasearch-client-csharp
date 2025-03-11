@@ -22,6 +22,12 @@ public partial class TaskCreate
   /// </summary>
   [JsonPropertyName("action")]
   public ActionType? Action { get; set; }
+
+  /// <summary>
+  /// Gets or Sets SubscriptionAction
+  /// </summary>
+  [JsonPropertyName("subscriptionAction")]
+  public ActionType? SubscriptionAction { get; set; }
   /// <summary>
   /// Initializes a new instance of the TaskCreate class.
   /// </summary>
@@ -111,6 +117,7 @@ public partial class TaskCreate
     sb.Append("  SourceID: ").Append(SourceID).Append("\n");
     sb.Append("  DestinationID: ").Append(DestinationID).Append("\n");
     sb.Append("  Action: ").Append(Action).Append("\n");
+    sb.Append("  SubscriptionAction: ").Append(SubscriptionAction).Append("\n");
     sb.Append("  Cron: ").Append(Cron).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
@@ -147,6 +154,7 @@ public partial class TaskCreate
         (SourceID == input.SourceID || (SourceID != null && SourceID.Equals(input.SourceID))) &&
         (DestinationID == input.DestinationID || (DestinationID != null && DestinationID.Equals(input.DestinationID))) &&
         (Action == input.Action || Action.Equals(input.Action)) &&
+        (SubscriptionAction == input.SubscriptionAction || SubscriptionAction.Equals(input.SubscriptionAction)) &&
         (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
@@ -174,6 +182,7 @@ public partial class TaskCreate
         hashCode = (hashCode * 59) + DestinationID.GetHashCode();
       }
       hashCode = (hashCode * 59) + Action.GetHashCode();
+      hashCode = (hashCode * 59) + SubscriptionAction.GetHashCode();
       if (Cron != null)
       {
         hashCode = (hashCode * 59) + Cron.GetHashCode();

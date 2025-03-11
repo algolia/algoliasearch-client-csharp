@@ -22,6 +22,12 @@ public partial class IngestionTask
   /// </summary>
   [JsonPropertyName("action")]
   public ActionType? Action { get; set; }
+
+  /// <summary>
+  /// Gets or Sets SubscriptionAction
+  /// </summary>
+  [JsonPropertyName("subscriptionAction")]
+  public ActionType? SubscriptionAction { get; set; }
   /// <summary>
   /// Initializes a new instance of the IngestionTask class.
   /// </summary>
@@ -157,6 +163,7 @@ public partial class IngestionTask
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
     sb.Append("  Action: ").Append(Action).Append("\n");
+    sb.Append("  SubscriptionAction: ").Append(SubscriptionAction).Append("\n");
     sb.Append("  Cursor: ").Append(Cursor).Append("\n");
     sb.Append("  Notifications: ").Append(Notifications).Append("\n");
     sb.Append("  Policies: ").Append(Policies).Append("\n");
@@ -198,6 +205,7 @@ public partial class IngestionTask
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
         (Action == input.Action || Action.Equals(input.Action)) &&
+        (SubscriptionAction == input.SubscriptionAction || SubscriptionAction.Equals(input.SubscriptionAction)) &&
         (Cursor == input.Cursor || (Cursor != null && Cursor.Equals(input.Cursor))) &&
         (Notifications == input.Notifications || (Notifications != null && Notifications.Equals(input.Notifications))) &&
         (Policies == input.Policies || (Policies != null && Policies.Equals(input.Policies))) &&
@@ -245,6 +253,7 @@ public partial class IngestionTask
       hashCode = (hashCode * 59) + Enabled.GetHashCode();
       hashCode = (hashCode * 59) + FailureThreshold.GetHashCode();
       hashCode = (hashCode * 59) + Action.GetHashCode();
+      hashCode = (hashCode * 59) + SubscriptionAction.GetHashCode();
       if (Cursor != null)
       {
         hashCode = (hashCode * 59) + Cursor.GetHashCode();
