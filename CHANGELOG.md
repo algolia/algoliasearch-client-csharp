@@ -1,3 +1,7 @@
+## [7.14.0](https://github.com/algolia/algoliasearch-client-csharp/compare/7.13.4...7.14.0)
+
+- [ab623194e](https://github.com/algolia/api-clients-automation/commit/ab623194e) feat(specs): add `subscriptionAction` to ingestion specs ([#4587](https://github.com/algolia/api-clients-automation/pull/4587)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [7.13.4](https://github.com/algolia/algoliasearch-client-csharp/compare/7.13.3...7.13.4)
 
 - [b7fe926c16](https://github.com/algolia/api-clients-automation/commit/b7fe926c16) fix(csharp): remove specific minor version for System deps ([#4479](https://github.com/algolia/api-clients-automation/pull/4479)) by [@morganleroi](https://github.com/morganleroi/)
