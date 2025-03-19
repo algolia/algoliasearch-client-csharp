@@ -93,6 +93,13 @@ public partial class IngestionTask
   public string NextRun { get; set; }
 
   /// <summary>
+  /// Owner of the resource.
+  /// </summary>
+  /// <value>Owner of the resource.</value>
+  [JsonPropertyName("owner")]
+  public string Owner { get; set; }
+
+  /// <summary>
   /// Gets or Sets Input
   /// </summary>
   [JsonPropertyName("input")]
@@ -159,6 +166,7 @@ public partial class IngestionTask
     sb.Append("  Cron: ").Append(Cron).Append("\n");
     sb.Append("  LastRun: ").Append(LastRun).Append("\n");
     sb.Append("  NextRun: ").Append(NextRun).Append("\n");
+    sb.Append("  Owner: ").Append(Owner).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  Enabled: ").Append(Enabled).Append("\n");
     sb.Append("  FailureThreshold: ").Append(FailureThreshold).Append("\n");
@@ -201,6 +209,7 @@ public partial class IngestionTask
         (Cron == input.Cron || (Cron != null && Cron.Equals(input.Cron))) &&
         (LastRun == input.LastRun || (LastRun != null && LastRun.Equals(input.LastRun))) &&
         (NextRun == input.NextRun || (NextRun != null && NextRun.Equals(input.NextRun))) &&
+        (Owner == input.Owner || (Owner != null && Owner.Equals(input.Owner))) &&
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
         (Enabled == input.Enabled || Enabled.Equals(input.Enabled)) &&
         (FailureThreshold == input.FailureThreshold || FailureThreshold.Equals(input.FailureThreshold)) &&
@@ -245,6 +254,10 @@ public partial class IngestionTask
       if (NextRun != null)
       {
         hashCode = (hashCode * 59) + NextRun.GetHashCode();
+      }
+      if (Owner != null)
+      {
+        hashCode = (hashCode * 59) + Owner.GetHashCode();
       }
       if (Input != null)
       {

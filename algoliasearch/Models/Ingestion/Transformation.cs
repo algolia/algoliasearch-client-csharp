@@ -72,6 +72,13 @@ public partial class Transformation
   public string Description { get; set; }
 
   /// <summary>
+  /// Owner of the resource.
+  /// </summary>
+  /// <value>Owner of the resource.</value>
+  [JsonPropertyName("owner")]
+  public string Owner { get; set; }
+
+  /// <summary>
   /// Date of creation in RFC 3339 format.
   /// </summary>
   /// <value>Date of creation in RFC 3339 format.</value>
@@ -98,6 +105,7 @@ public partial class Transformation
     sb.Append("  Code: ").Append(Code).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Description: ").Append(Description).Append("\n");
+    sb.Append("  Owner: ").Append(Owner).Append("\n");
     sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
     sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
     sb.Append("}\n");
@@ -131,6 +139,7 @@ public partial class Transformation
         (Code == input.Code || (Code != null && Code.Equals(input.Code))) &&
         (Name == input.Name || (Name != null && Name.Equals(input.Name))) &&
         (Description == input.Description || (Description != null && Description.Equals(input.Description))) &&
+        (Owner == input.Owner || (Owner != null && Owner.Equals(input.Owner))) &&
         (CreatedAt == input.CreatedAt || (CreatedAt != null && CreatedAt.Equals(input.CreatedAt))) &&
         (UpdatedAt == input.UpdatedAt || (UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)));
   }
@@ -163,6 +172,10 @@ public partial class Transformation
       if (Description != null)
       {
         hashCode = (hashCode * 59) + Description.GetHashCode();
+      }
+      if (Owner != null)
+      {
+        hashCode = (hashCode * 59) + Owner.GetHashCode();
       }
       if (CreatedAt != null)
       {

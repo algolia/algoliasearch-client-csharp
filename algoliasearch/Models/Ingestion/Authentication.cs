@@ -65,6 +65,13 @@ public partial class Authentication
   public string Name { get; set; }
 
   /// <summary>
+  /// Owner of the resource.
+  /// </summary>
+  /// <value>Owner of the resource.</value>
+  [JsonPropertyName("owner")]
+  public string Owner { get; set; }
+
+  /// <summary>
   /// Gets or Sets Input
   /// </summary>
   [JsonPropertyName("input")]
@@ -96,6 +103,7 @@ public partial class Authentication
     sb.Append("  Type: ").Append(Type).Append("\n");
     sb.Append("  Name: ").Append(Name).Append("\n");
     sb.Append("  Platform: ").Append(Platform).Append("\n");
+    sb.Append("  Owner: ").Append(Owner).Append("\n");
     sb.Append("  Input: ").Append(Input).Append("\n");
     sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
     sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
@@ -129,6 +137,7 @@ public partial class Authentication
         (Type == input.Type || Type.Equals(input.Type)) &&
         (Name == input.Name || (Name != null && Name.Equals(input.Name))) &&
         (Platform == input.Platform || Platform.Equals(input.Platform)) &&
+        (Owner == input.Owner || (Owner != null && Owner.Equals(input.Owner))) &&
         (Input == input.Input || (Input != null && Input.Equals(input.Input))) &&
         (CreatedAt == input.CreatedAt || (CreatedAt != null && CreatedAt.Equals(input.CreatedAt))) &&
         (UpdatedAt == input.UpdatedAt || (UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)));
@@ -153,6 +162,10 @@ public partial class Authentication
         hashCode = (hashCode * 59) + Name.GetHashCode();
       }
       hashCode = (hashCode * 59) + Platform.GetHashCode();
+      if (Owner != null)
+      {
+        hashCode = (hashCode * 59) + Owner.GetHashCode();
+      }
       if (Input != null)
       {
         hashCode = (hashCode * 59) + Input.GetHashCode();
