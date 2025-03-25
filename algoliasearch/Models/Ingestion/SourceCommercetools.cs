@@ -65,6 +65,13 @@ public partial class SourceCommercetools
   public bool? FallbackIsInStockValue { get; set; }
 
   /// <summary>
+  /// Predicate to filter out specific products when indexing. For more information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query). 
+  /// </summary>
+  /// <value>Predicate to filter out specific products when indexing. For more information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query). </value>
+  [JsonPropertyName("productQueryPredicate")]
+  public string ProductQueryPredicate { get; set; }
+
+  /// <summary>
   /// Gets or Sets CustomFields
   /// </summary>
   [JsonPropertyName("customFields")]
@@ -83,6 +90,7 @@ public partial class SourceCommercetools
     sb.Append("  Url: ").Append(Url).Append("\n");
     sb.Append("  ProjectKey: ").Append(ProjectKey).Append("\n");
     sb.Append("  FallbackIsInStockValue: ").Append(FallbackIsInStockValue).Append("\n");
+    sb.Append("  ProductQueryPredicate: ").Append(ProductQueryPredicate).Append("\n");
     sb.Append("  CustomFields: ").Append(CustomFields).Append("\n");
     sb.Append("}\n");
     return sb.ToString();
@@ -115,6 +123,7 @@ public partial class SourceCommercetools
         (Url == input.Url || (Url != null && Url.Equals(input.Url))) &&
         (ProjectKey == input.ProjectKey || (ProjectKey != null && ProjectKey.Equals(input.ProjectKey))) &&
         (FallbackIsInStockValue == input.FallbackIsInStockValue || FallbackIsInStockValue.Equals(input.FallbackIsInStockValue)) &&
+        (ProductQueryPredicate == input.ProductQueryPredicate || (ProductQueryPredicate != null && ProductQueryPredicate.Equals(input.ProductQueryPredicate))) &&
         (CustomFields == input.CustomFields || (CustomFields != null && CustomFields.Equals(input.CustomFields)));
   }
 
@@ -144,6 +153,10 @@ public partial class SourceCommercetools
         hashCode = (hashCode * 59) + ProjectKey.GetHashCode();
       }
       hashCode = (hashCode * 59) + FallbackIsInStockValue.GetHashCode();
+      if (ProductQueryPredicate != null)
+      {
+        hashCode = (hashCode * 59) + ProductQueryPredicate.GetHashCode();
+      }
       if (CustomFields != null)
       {
         hashCode = (hashCode * 59) + CustomFields.GetHashCode();
