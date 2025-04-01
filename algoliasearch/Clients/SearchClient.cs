@@ -129,6 +129,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of CreatedAtResponse</returns>
+  [Obsolete]
   Task<CreatedAtResponse> AssignUserIdAsync(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -145,6 +146,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>CreatedAtResponse</returns>
+  [Obsolete]
   CreatedAtResponse AssignUserId(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -187,6 +189,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of CreatedAtResponse</returns>
+  [Obsolete]
   Task<CreatedAtResponse> BatchAssignUserIdsAsync(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -203,6 +206,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>CreatedAtResponse</returns>
+  [Obsolete]
   CreatedAtResponse BatchAssignUserIds(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1069,6 +1073,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of GetTopUserIdsResponse</returns>
+  [Obsolete]
   Task<GetTopUserIdsResponse> GetTopUserIdsAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1083,6 +1088,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>GetTopUserIdsResponse</returns>
+  [Obsolete]
   GetTopUserIdsResponse GetTopUserIds(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1098,6 +1104,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of UserId</returns>
+  [Obsolete]
   Task<UserId> GetUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1113,6 +1120,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>UserId</returns>
+  [Obsolete]
   UserId GetUserId(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1128,6 +1136,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of HasPendingMappingsResponse</returns>
+  [Obsolete]
   Task<HasPendingMappingsResponse> HasPendingMappingsAsync(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1143,6 +1152,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>HasPendingMappingsResponse</returns>
+  [Obsolete]
   HasPendingMappingsResponse HasPendingMappings(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1185,6 +1195,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListClustersResponse</returns>
+  [Obsolete]
   Task<ListClustersResponse> ListClustersAsync(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1199,6 +1210,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListClustersResponse</returns>
+  [Obsolete]
   ListClustersResponse ListClusters(RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1247,6 +1259,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of ListUserIdsResponse</returns>
+  [Obsolete]
   Task<ListUserIdsResponse> ListUserIdsAsync(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1263,6 +1276,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>ListUserIdsResponse</returns>
+  [Obsolete]
   ListUserIdsResponse ListUserIds(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1370,6 +1384,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of RemoveUserIdResponse</returns>
+  [Obsolete]
   Task<RemoveUserIdResponse> RemoveUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1385,6 +1400,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>RemoveUserIdResponse</returns>
+  [Obsolete]
   RemoveUserIdResponse RemoveUserId(string userID, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1828,6 +1844,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>Task of SearchUserIdsResponse</returns>
+  [Obsolete]
   Task<SearchUserIdsResponse> SearchUserIdsAsync(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -1843,6 +1860,7 @@ public partial interface ISearchClient
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaApiException">Thrown when the API call was rejected by Algolia</exception>
   /// <exception cref="Algolia.Search.Exceptions.AlgoliaUnreachableHostException">Thrown when the client failed to call the endpoint</exception>
   /// <returns>SearchUserIdsResponse</returns>
+  [Obsolete]
   SearchUserIdsResponse SearchUserIds(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default);
 
   /// <summary>
@@ -2091,6 +2109,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<CreatedAtResponse> AssignUserIdAsync(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -2111,6 +2130,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public CreatedAtResponse AssignUserId(string xAlgoliaUserID, AssignUserIdParams assignUserIdParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => AssignUserIdAsync(xAlgoliaUserID, assignUserIdParams, options, cancellationToken));
 
@@ -2141,6 +2161,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<CreatedAtResponse> BatchAssignUserIdsAsync(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -2161,6 +2182,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public CreatedAtResponse BatchAssignUserIds(string xAlgoliaUserID, BatchAssignUserIdsParams batchAssignUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => BatchAssignUserIdsAsync(xAlgoliaUserID, batchAssignUserIdsParams, options, cancellationToken));
 
@@ -2756,6 +2778,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<GetTopUserIdsResponse> GetTopUserIdsAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
@@ -2766,11 +2789,13 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public GetTopUserIdsResponse GetTopUserIds(RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetTopUserIdsAsync(options, cancellationToken));
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<UserId> GetUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -2786,11 +2811,13 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public UserId GetUserId(string userID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => GetUserIdAsync(userID, options, cancellationToken));
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<HasPendingMappingsResponse> HasPendingMappingsAsync(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
@@ -2802,6 +2829,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public HasPendingMappingsResponse HasPendingMappings(bool? getClusters = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => HasPendingMappingsAsync(getClusters, options, cancellationToken));
 
@@ -2822,6 +2850,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<ListClustersResponse> ListClustersAsync(RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
@@ -2832,6 +2861,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public ListClustersResponse ListClusters(RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => ListClustersAsync(options, cancellationToken));
 
@@ -2854,6 +2884,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<ListUserIdsResponse> ListUserIdsAsync(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
     var requestOptions = new InternalRequestOptions(options);
@@ -2866,6 +2897,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public ListUserIdsResponse ListUserIds(int? page = default, int? hitsPerPage = default, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => ListUserIdsAsync(page, hitsPerPage, options, cancellationToken));
 
@@ -2947,6 +2979,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<RemoveUserIdResponse> RemoveUserIdAsync(string userID, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -2962,6 +2995,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public RemoveUserIdResponse RemoveUserId(string userID, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => RemoveUserIdAsync(userID, options, cancellationToken));
 
@@ -3285,6 +3319,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public async Task<SearchUserIdsResponse> SearchUserIdsAsync(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default)
   {
 
@@ -3301,6 +3336,7 @@ public partial class SearchClient : ISearchClient
 
 
   /// <inheritdoc />
+  [Obsolete]
   public SearchUserIdsResponse SearchUserIds(SearchUserIdsParams searchUserIdsParams, RequestOptions options = null, CancellationToken cancellationToken = default) =>
     AsyncHelper.RunSync(() => SearchUserIdsAsync(searchUserIdsParams, options, cancellationToken));
 
