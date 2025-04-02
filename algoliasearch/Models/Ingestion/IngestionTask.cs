@@ -41,13 +41,15 @@ public partial class IngestionTask
   /// <param name="destinationID">Universally unique identifier (UUID) of a destination resource. (required).</param>
   /// <param name="enabled">Whether the task is enabled. (required) (default to true).</param>
   /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  public IngestionTask(string taskID, string sourceID, string destinationID, bool enabled, string createdAt)
+  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  public IngestionTask(string taskID, string sourceID, string destinationID, bool enabled, string createdAt, string updatedAt)
   {
     TaskID = taskID ?? throw new ArgumentNullException(nameof(taskID));
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
     DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
     Enabled = enabled;
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
+    UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
   }
 
   /// <summary>

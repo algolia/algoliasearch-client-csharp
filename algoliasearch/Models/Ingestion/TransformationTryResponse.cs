@@ -24,18 +24,18 @@ public partial class TransformationTryResponse
   /// <summary>
   /// Initializes a new instance of the TransformationTryResponse class.
   /// </summary>
-  /// <param name="payloads">The array of records returned by the transformation service. (required).</param>
-  public TransformationTryResponse(List<object> payloads)
+  /// <param name="payloads">The array of stringified records returned by the transformation service. (required).</param>
+  public TransformationTryResponse(List<string> payloads)
   {
     Payloads = payloads ?? throw new ArgumentNullException(nameof(payloads));
   }
 
   /// <summary>
-  /// The array of records returned by the transformation service.
+  /// The array of stringified records returned by the transformation service.
   /// </summary>
-  /// <value>The array of records returned by the transformation service.</value>
+  /// <value>The array of stringified records returned by the transformation service.</value>
   [JsonPropertyName("payloads")]
-  public List<object> Payloads { get; set; }
+  public List<string> Payloads { get; set; }
 
   /// <summary>
   /// Gets or Sets Error

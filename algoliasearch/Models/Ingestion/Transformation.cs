@@ -28,12 +28,14 @@ public partial class Transformation
   /// <param name="code">The source code of the transformation. (required).</param>
   /// <param name="name">The uniquely identified name of your transformation. (required).</param>
   /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  public Transformation(string transformationID, string code, string name, string createdAt)
+  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  public Transformation(string transformationID, string code, string name, string createdAt, string updatedAt)
   {
     TransformationID = transformationID ?? throw new ArgumentNullException(nameof(transformationID));
     Code = code ?? throw new ArgumentNullException(nameof(code));
     Name = name ?? throw new ArgumentNullException(nameof(name));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
+    UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
   }
 
   /// <summary>

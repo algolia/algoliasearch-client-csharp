@@ -35,13 +35,15 @@ public partial class Destination
   /// <param name="name">Descriptive name for the resource. (required).</param>
   /// <param name="input">input (required).</param>
   /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  public Destination(string destinationID, DestinationType? type, string name, DestinationInput input, string createdAt)
+  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  public Destination(string destinationID, DestinationType? type, string name, DestinationInput input, string createdAt, string updatedAt)
   {
     DestinationID = destinationID ?? throw new ArgumentNullException(nameof(destinationID));
     Type = type;
     Name = name ?? throw new ArgumentNullException(nameof(name));
     Input = input ?? throw new ArgumentNullException(nameof(input));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
+    UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
   }
 
   /// <summary>

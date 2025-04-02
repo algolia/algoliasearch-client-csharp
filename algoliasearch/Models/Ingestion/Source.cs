@@ -34,12 +34,14 @@ public partial class Source
   /// <param name="type">type (required).</param>
   /// <param name="name">name (required).</param>
   /// <param name="createdAt">Date of creation in RFC 3339 format. (required).</param>
-  public Source(string sourceID, SourceType? type, string name, string createdAt)
+  /// <param name="updatedAt">Date of last update in RFC 3339 format. (required).</param>
+  public Source(string sourceID, SourceType? type, string name, string createdAt, string updatedAt)
   {
     SourceID = sourceID ?? throw new ArgumentNullException(nameof(sourceID));
     Type = type;
     Name = name ?? throw new ArgumentNullException(nameof(name));
     CreatedAt = createdAt ?? throw new ArgumentNullException(nameof(createdAt));
+    UpdatedAt = updatedAt ?? throw new ArgumentNullException(nameof(updatedAt));
   }
 
   /// <summary>
