@@ -24,10 +24,10 @@ public partial class WatchResponse
   /// <summary>
   /// Initializes a new instance of the WatchResponse class.
   /// </summary>
-  /// <param name="message">a message describing the outcome of a validate run. (required).</param>
-  public WatchResponse(string message)
+  /// <param name="runID">Universally unique identifier (UUID) of a task run. (required).</param>
+  public WatchResponse(string runID)
   {
-    Message = message ?? throw new ArgumentNullException(nameof(message));
+    RunID = runID ?? throw new ArgumentNullException(nameof(runID));
   }
 
   /// <summary>
