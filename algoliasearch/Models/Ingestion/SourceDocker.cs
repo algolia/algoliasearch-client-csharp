@@ -24,7 +24,7 @@ public partial class SourceDocker
   /// <summary>
   /// Initializes a new instance of the SourceDocker class.
   /// </summary>
-  /// <param name="image">Shortname of the image, as returned by the referential. (required).</param>
+  /// <param name="image">Name of the connector. (required).</param>
   /// <param name="configuration">Configuration of the spec. (required).</param>
   public SourceDocker(string image, object configuration)
   {
@@ -33,9 +33,9 @@ public partial class SourceDocker
   }
 
   /// <summary>
-  /// Shortname of the image, as returned by the referential.
+  /// Name of the connector.
   /// </summary>
-  /// <value>Shortname of the image, as returned by the referential.</value>
+  /// <value>Name of the connector.</value>
   [JsonPropertyName("image")]
   public string Image { get; set; }
 
