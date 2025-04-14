@@ -28,6 +28,12 @@ public enum RecordType
   /// Enum Variant for value: variant
   /// </summary>
   [JsonPropertyName("variant")]
-  Variant = 2
+  Variant = 2,
+
+  /// <summary>
+  /// Enum Collection for value: collection
+  /// </summary>
+  [JsonPropertyName("collection")]
+  Collection = 3
 }
 
